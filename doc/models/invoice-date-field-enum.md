@@ -1,0 +1,23 @@
+
+# Invoice Date Field Enum
+
+## Enumeration
+
+`InvoiceDateFieldEnum`
+
+## Fields
+
+| Name |
+|  --- |
+| `CREATED_AT` |
+| `DUE_DATE` |
+| `ISSUE_DATE` |
+| `UPDATED_AT` |
+| `PAID_DATE` |
+
+## Example
+
+```
+issue_date
+```
+

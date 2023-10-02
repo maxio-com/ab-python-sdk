@@ -1,0 +1,41 @@
+
+# Subscription Group Bank Account
+
+## Structure
+
+`SubscriptionGroupBankAccount`
+
+## Fields
+
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `bank_name` | `str` | Optional | (Required when creating a subscription with ACH or GoCardless) The name of the bank where the customer’s account resides |
+| `bank_account_number` | `str` | Optional | (Required when creating a subscription with ACH. Required when creating a subscription with GoCardless and bank_iban is blank) The customerʼs bank account number |
+| `bank_routing_number` | `str` | Optional | (Required when creating a subscription with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API |
+| `bank_iban` | `str` | Optional | (Optional when creating a subscription with GoCardless). International Bank Account Number. Alternatively, local bank details can be provided |
+| `bank_branch_code` | `str` | Optional | (Optional when creating a subscription with GoCardless) Branch code. Alternatively, an IBAN can be provided |
+| `bank_account_type` | [`BankAccountTypeEnum`](../../doc/models/bank-account-type-enum.md) | Optional | **Default**: `'checking'` |
+| `bank_account_holder_type` | [`HolderTypeEnum`](../../doc/models/holder-type-enum.md) | Optional | - |
+| `payment_type` | `str` | Optional | - |
+| `billing_address` | `str` | Optional | - |
+| `billing_city` | `str` | Optional | - |
+| `billing_state` | `str` | Optional | - |
+| `billing_zip` | `str` | Optional | - |
+| `billing_country` | `str` | Optional | - |
+| `chargify_token` | `str` | Optional | - |
+| `current_vault` | `str` | Optional | - |
+| `gateway_handle` | `str` | Optional | - |
+
+## Example (as JSON)
+
+```json
+{
+  "bank_account_type": "checking",
+  "bank_name": "bank_name2",
+  "bank_account_number": "bank_account_number4",
+  "bank_routing_number": "bank_routing_number8",
+  "bank_iban": "bank_iban6",
+  "bank_branch_code": "bank_branch_code6"
+}
+```
+
