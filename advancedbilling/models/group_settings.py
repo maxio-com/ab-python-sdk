@@ -1,0 +1,92 @@
+# -*- coding: utf-8 -*-
+
+"""
+advanced_billing
+
+This file was automatically generated for Maxio by APIMATIC v3.0 (
+ https://www.apimatic.io ).
+"""
+from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.group_billing import GroupBilling
+from advancedbilling.models.group_target import GroupTarget
+
+
+class GroupSettings(object):
+
+    """Implementation of the 'Group Settings' model.
+
+    TODO: type model description here.
+
+    Attributes:
+        target (GroupTarget): Attributes of the target customer who will be
+            the responsible payer of the created subscription. Required.
+        billing (GroupBilling): Optional attributes related to billing date
+            and accrual. Note: Only applicable for new subscriptions.
+
+    """
+
+    # Create a mapping from Model property names to API property names
+    _names = {
+        "target": 'target',
+        "billing": 'billing'
+    }
+
+    _optionals = [
+        'billing',
+    ]
+
+    def __init__(self,
+                 target=None,
+                 billing=APIHelper.SKIP):
+        """Constructor for the GroupSettings class"""
+
+        # Initialize members of the class
+        self.target = target 
+        if billing is not APIHelper.SKIP:
+            self.billing = billing 
+
+    @classmethod
+    def from_dictionary(cls,
+                        dictionary):
+        """Creates an instance of this model from a dictionary
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            object: An instance of this structure class.
+
+        """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+        if dictionary is None:
+            return None
+
+        # Extract variables from the dictionary
+        target = GroupTarget.from_dictionary(dictionary.get('target')) if dictionary.get('target') else None
+        billing = GroupBilling.from_dictionary(dictionary.get('billing')) if 'billing' in dictionary.keys() else APIHelper.SKIP
+        # Return an object of this model
+        return cls(target,
+                   billing)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        if isinstance(dictionary, cls):
+            return APIHelper.is_valid_type(value=dictionary.target, type_callable=lambda value: GroupTarget.validate(value))
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return APIHelper.is_valid_type(value=dictionary.get('target'), type_callable=lambda value: GroupTarget.validate(value))

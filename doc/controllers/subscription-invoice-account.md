@@ -84,7 +84,7 @@ body = CreatePrepaymentRequest(
         amount=100,
         details='John Doe signup for $100',
         memo='Signup for $100',
-        method=PrepaymentMethodEnum.CHECK
+        method=PrepaymentMethod.CHECK
     )
 )
 
@@ -133,13 +133,13 @@ def list_prepayments(self,
 | `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `filter_date_field` | [`BasicDateFieldEnum`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice. Use in query `filter[date_field]=created_at`. |
+| `filter_date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. created_at - Time when prepayment was created. application_at - Time when prepayment was applied to invoice. Use in query `filter[date_field]=created_at`. |
 | `filter_start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-15`. |
 | `filter_end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns prepayments with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `filter[end_date]=2011-12-15`. |
 
 ## Response Type
 
-[`SubscriptionsPrepaymentsJsonResponse`](../../doc/models/subscriptions-prepayments-json-response.md)
+[`PrepaymentsResponse`](../../doc/models/prepayments-response.md)
 
 ## Example Usage
 
@@ -164,17 +164,16 @@ print(result)
 {
   "prepayments": [
     {
-      "prepayment": {
-        "id": 17,
-        "subscription_id": 3558750,
-        "amount_in_cents": 2000,
-        "remaining_amount_in_cents": 1100,
-        "external": true,
-        "memo": "test",
-        "details": "test details",
-        "payment_type": "cash",
-        "created_at": "2022-01-18T22:45:41+11:00"
-      }
+      "id": 17,
+      "subscription_id": 3558750,
+      "amount_in_cents": 2000,
+      "remaining_amount_in_cents": 1100,
+      "refunded_amount_in_cents": 0,
+      "external": true,
+      "memo": "test",
+      "details": "test details",
+      "payment_type": "cash",
+      "created_at": "2022-01-18T22:45:41+11:00"
     }
   ]
 }
@@ -332,7 +331,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`SubscriptionsPrepaymentsRefundsJson400ErrorException`](../../doc/models/subscriptions-prepayments-refunds-json-400-error-exception.md) |
+| 400 | Bad Request | [`RefundPrepaymentBaseErrorsResponseException`](../../doc/models/refund-prepayment-base-errors-response-exception.md) |
 | 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionsPrepaymentsRefundsJson422ErrorException`](../../doc/models/subscriptions-prepayments-refunds-json-422-error-exception.md) |
+| 422 | Unprocessable Entity | [`RefundPrepaymentAggregatedErrorsResponseException`](../../doc/models/refund-prepayment-aggregated-errors-response-exception.md) |
 

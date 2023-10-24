@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `int` | Optional | - |
-| `event_type` | [`InvoiceEventTypeEnum`](../../doc/models/invoice-event-type-enum.md) | Optional | Invoice Event Type |
-| `event_data` | [Apply Payment Event Data](../../doc/models/apply-payment-event-data.md) \| None | Optional | This is a container for any-of cases. |
+| `event_type` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Optional | Invoice Event Type |
+| `event_data` | [Apply Credit Note Event Data](../../doc/models/apply-credit-note-event-data.md) \| [Apply Debit Note Event Data](../../doc/models/apply-debit-note-event-data.md) \| [Apply Payment Event Data](../../doc/models/apply-payment-event-data.md) \| [Change Invoice Collection Method Event Data](../../doc/models/change-invoice-collection-method-event-data.md) \| [Issue Invoice Event Data](../../doc/models/issue-invoice-event-data.md) \| [Refund Invoice Event Data](../../doc/models/refund-invoice-event-data.md) \| [Remove Payment Event Data](../../doc/models/remove-payment-event-data.md) \| [Void Invoice Event Data](../../doc/models/void-invoice-event-data.md) \| [Void Invoice Event Data_AnyOf8](../../doc/models/void-invoice-event-data-any-of-8.md) \| None | Optional | This is a container for any-of cases. |
 | `timestamp` | `str` | Optional | - |
 | `invoice` | [`Invoice`](../../doc/models/invoice.md) | Optional | - |
 
@@ -20,16 +20,13 @@
 ```json
 {
   "id": 78,
-  "event_type": "issue_invoice",
+  "event_type": "remove_payment",
   "event_data": {
-    "memo": "memo8",
-    "original_amount": "original_amount8",
-    "applied_amount": "applied_amount4",
-    "transaction_time": "transaction_time6",
-    "payment_method": {
-      "key1": "val1",
-      "key2": "val2"
-    }
+    "uid": "uid2",
+    "credit_note_number": "credit_note_number4",
+    "credit_note_uid": "credit_note_uid4",
+    "original_amount": "original_amount6",
+    "applied_amount": "applied_amount6"
   },
   "timestamp": "timestamp8",
   "invoice": {

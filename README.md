@@ -1,5 +1,5 @@
 
-# Getting Started with Maxio Advanced Billing formerly Chargify API
+# Getting Started with Maxio Advanced Billing
 
 ## Introduction
 
@@ -7,7 +7,7 @@
 
 #### API Integration
 
-Maxio Advanced Billing can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
+Maxio Advanced Billing (formerly Chargify API) can be integrated with many environments and programming languages via our REST API. Some of our users have contributed their API wrappers in various programming languages. Check out the [API Code Overview](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI2-api-code-samples) doc for an introduction to the wrappers and available code samples.
 
 #### Testing Guide
 
@@ -37,10 +37,6 @@ But don’t worry! There are quite a few options to help you get the answers you
 - Explore the endpoints of our API Documentation
 - [Watch our videos and tutorials](https://chargify.com/tutorials)
 - [Check out the Chargify tag on Stack Overflow](http://stackoverflow.com/questions/tagged/chargify)
-
-#### Available Consultants
-
-Check out the list of [Chargify Consultants](http://chargify.com/consultants) if you require deeper technical expertise for your integration.
 
 ### API Overview
 
@@ -165,7 +161,7 @@ Those scenarios are as follows:
 - The site you're making a request for has been deleted.
   - _Note: any API request for another site that is in a good state will NOT be blocked_
 
-Read more about your Chargify subscription [here](https://chargify.zendesk.com/hc/en-us/articles/4407747017115)
+Read more about your Chargify subscription [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405430043149-Advanced-Billing-Subscription#advanced-billing-subscription-0-0)
 
 #### What happens when an API request is blocked
 
@@ -237,7 +233,7 @@ This is an error message indicating that Cross-Origin Resource Sharing (CORS) is
 
 #### API Compatibility for Relationship Invoicing
 
-This section describes the API for the new, [Relationship Invoicing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) style of invoices introduced in January 2018.
+This section describes the API for the new, [Relationship Invoicing](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405078794253) style of invoices introduced in January 2018.
 
 If you are an existing customer from prior to January 2018 or have not otherwise explicitly opted into this new style of invoices, you are probably looking for the legacy "Invoices" section that describes [invoice-billing legacy-style invoices](./b3A6MTQxMDgzNjQ-read-invoice).
 
@@ -279,51 +275,51 @@ Python and PIP executables should be defined in your PATH. Open command prompt a
 * Using command line, navigate to the directory containing the generated files (including `requirements.txt`) for the SDK.
 * Run the command `pip install -r requirements.txt`. This should install all the required dependencies.
 
-![Building SDK - Step 1](https://apidocs.io/illustration/python?workspaceFolder=Maxioadvancedbillingformerlychargifyapi-Python&step=installDependencies)
+![Building SDK - Step 1](https://apidocs.io/illustration/python?workspaceFolder=AdvancedBilling-Python&step=installDependencies)
 
 ## Installation
 
-The following section explains how to use the maxioadvancedbillingformerlychargifyapi library in a new project.
+The following section explains how to use the advanced_billing library in a new project.
 
 ### 1. Open Project in an IDE
 
 Open up a Python IDE like PyCharm. The basic workflow presented here is also applicable if you prefer using a different editor or IDE.
 
-![Open project in PyCharm - Step 1](https://apidocs.io/illustration/python?workspaceFolder=Maxioadvancedbillingformerlychargifyapi-Python&step=pyCharm)
+![Open project in PyCharm - Step 1](https://apidocs.io/illustration/python?workspaceFolder=AdvancedBilling-Python&step=pyCharm)
 
 Click on `Open` in PyCharm to browse to your generated SDK directory and then click `OK`.
 
-![Open project in PyCharm - Step 2](https://apidocs.io/illustration/python?workspaceFolder=Maxioadvancedbillingformerlychargifyapi-Python&step=openProject0)
+![Open project in PyCharm - Step 2](https://apidocs.io/illustration/python?workspaceFolder=AdvancedBilling-Python&step=openProject0)
 
 The project files will be displayed in the side bar as follows:
 
-![Open project in PyCharm - Step 3](https://apidocs.io/illustration/python?workspaceFolder=Maxioadvancedbillingformerlychargifyapi-Python&projectName=maxioadvancedbillingformerlychargifyapi&step=openProject1)
+![Open project in PyCharm - Step 3](https://apidocs.io/illustration/python?workspaceFolder=AdvancedBilling-Python&projectName=advanced_billing&step=openProject1)
 
 ### 2. Add a new Test Project
 
 Create a new directory by right clicking on the solution name as shown below:
 
-![Add a new project in PyCharm - Step 1](https://apidocs.io/illustration/python?workspaceFolder=Maxioadvancedbillingformerlychargifyapi-Python&projectName=maxioadvancedbillingformerlychargifyapi&step=createDirectory)
+![Add a new project in PyCharm - Step 1](https://apidocs.io/illustration/python?workspaceFolder=AdvancedBilling-Python&projectName=advanced_billing&step=createDirectory)
 
 Name the directory as "test".
 
-![Add a new project in PyCharm - Step 2](https://apidocs.io/illustration/python?workspaceFolder=Maxioadvancedbillingformerlychargifyapi-Python&step=nameDirectory)
+![Add a new project in PyCharm - Step 2](https://apidocs.io/illustration/python?workspaceFolder=AdvancedBilling-Python&step=nameDirectory)
 
 Add a python file to this project.
 
-![Add a new project in PyCharm - Step 3](https://apidocs.io/illustration/python?workspaceFolder=Maxioadvancedbillingformerlychargifyapi-Python&projectName=maxioadvancedbillingformerlychargifyapi&step=createFile)
+![Add a new project in PyCharm - Step 3](https://apidocs.io/illustration/python?workspaceFolder=AdvancedBilling-Python&projectName=advanced_billing&step=createFile)
 
 Name it "testSDK".
 
-![Add a new project in PyCharm - Step 4](https://apidocs.io/illustration/python?workspaceFolder=Maxioadvancedbillingformerlychargifyapi-Python&projectName=maxioadvancedbillingformerlychargifyapi&step=nameFile)
+![Add a new project in PyCharm - Step 4](https://apidocs.io/illustration/python?workspaceFolder=AdvancedBilling-Python&projectName=advanced_billing&step=nameFile)
 
 In your python file you will be required to import the generated python library using the following code lines
 
 ```python
-from maxioadvancedbillingformerlychargifyapi.maxioadvancedbillingformerlychargifyapi_client import MaxioadvancedbillingformerlychargifyapiClient
+from advanced_billing.advanced_billing_client import AdvancedBillingClient
 ```
 
-![Add a new project in PyCharm - Step 5](https://apidocs.io/illustration/python?workspaceFolder=Maxioadvancedbillingformerlychargifyapi-Python&projectName=maxioadvancedbillingformerlychargifyapi&libraryName=maxioadvancedbillingformerlychargifyapi.maxioadvancedbillingformerlychargifyapi_client&className=MaxioadvancedbillingformerlychargifyapiClient&step=projectFiles)
+![Add a new project in PyCharm - Step 5](https://apidocs.io/illustration/python?workspaceFolder=AdvancedBilling-Python&projectName=advanced_billing&libraryName=advanced_billing.advanced_billing_client&className=AdvancedBillingClient&step=projectFiles)
 
 After this you can write code to instantiate an API client object, get a controller object and  make API calls. Sample code is given in the subsequent sections.
 
@@ -331,18 +327,7 @@ After this you can write code to instantiate an API client object, get a control
 
 To run the file within your test project, right click on your Python file inside your Test project and click on `Run`
 
-![Run Test Project - Step 1](https://apidocs.io/illustration/python?workspaceFolder=Maxioadvancedbillingformerlychargifyapi-Python&projectName=maxioadvancedbillingformerlychargifyapi&libraryName=maxioadvancedbillingformerlychargifyapi.maxioadvancedbillingformerlychargifyapi_client&className=MaxioadvancedbillingformerlychargifyapiClient&step=runProject)
-
-## Test the SDK
-
-You can test the generated SDK and the server with test cases. `unittest` is used as the testing framework and `pytest` is used as the test runner. You can run the tests as follows:
-
-Navigate to the root directory of the SDK and run the following commands
-
-```
-pip install -r test-requirements.txt
-pytest
-```
+![Run Test Project - Step 1](https://apidocs.io/illustration/python?workspaceFolder=AdvancedBilling-Python&projectName=advanced_billing&libraryName=advanced_billing.advanced_billing_client&className=AdvancedBillingClient&step=runProject)
 
 ## Initialize the API Client
 
@@ -352,12 +337,13 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `subdomain` | `str` | The subdomain for your Chargify site<br>*Default*: `'subdomain'` |
+| `subdomain` | `str` | The subdomain for your Chargify site.<br>*Default*: `'subdomain'` |
+| `domain` | `str` | The Chargify server domain.<br>*Default*: `'chargify.com'` |
 | `environment` | Environment | The API environment. <br> **Default: `Environment.PRODUCTION`** |
 | `http_client_instance` | `HttpClient` | The Http Client passed from the sdk user for making requests |
 | `override_http_client_configuration` | `bool` | The value which determines to override properties of the passed Http Client from the sdk user |
 | `http_call_back` | `HttpCallBack` | The callback value that is invoked before and after an HTTP call is made to an endpoint |
-| `timeout` | `float` | The value to use for connection timeout. <br> **Default: 60** |
+| `timeout` | `float` | The value to use for connection timeout. <br> **Default: 30** |
 | `max_retries` | `int` | The number of times to retry an endpoint call if it fails. <br> **Default: 0** |
 | `backoff_factor` | `float` | A backoff factor to apply between attempts after the second try. <br> **Default: 2** |
 | `retry_statuses` | `Array of int` | The http statuses on which retry is to be done. <br> **Default: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524]** |
@@ -368,10 +354,10 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```python
-from maxioadvancedbillingformerlychargifyapi.maxioadvancedbillingformerlychargifyapi_client import MaxioadvancedbillingformerlychargifyapiClient
-from maxioadvancedbillingformerlychargifyapi.configuration import Environment
+from advancedbilling.advanced_billing_client import AdvancedBillingClient
+from advancedbilling.configuration import Environment
 
-client = MaxioadvancedbillingformerlychargifyapiClient(
+client = AdvancedBillingClient(
     basic_auth_user_name='BasicAuthUserName',
     basic_auth_password='BasicAuthPassword'
 )

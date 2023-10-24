@@ -12,7 +12,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `snap_day` | int \| str \| None | Optional | This is a container for one-of cases. |
-| `calendar_billing_first_charge` | [`FirstChargeTypeEnum`](../../doc/models/first-charge-type-enum.md) | Optional | - |
+| `calendar_billing_first_charge` | [`FirstChargeType`](../../doc/models/first-charge-type.md) | Optional | - |
 
 ## Example (as JSON)
 

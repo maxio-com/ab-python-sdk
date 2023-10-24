@@ -3,12 +3,12 @@
 
 ## Data Type
 
-`SnapDayEnum | int`
+`SnapDayOneOf0 | int`
 
 ## Cases
 
 | Type |
 |  --- |
-| [`SnapDayEnum`](../../../doc/models/snap-day-enum.md) |
+| [`SnapDayOneOf0`](../../../doc/models/snap-day-one-of-0.md) |
 | `int` |
 

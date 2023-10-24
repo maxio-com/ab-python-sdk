@@ -110,7 +110,7 @@ def clear_site(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cleanup_scope` | [`CleanupScopeEnum`](../../doc/models/cleanup-scope-enum.md) | Query, Optional | `all`: Will clear all products, customers, and related subscriptions from the site.<br>`customers`: Will clear only customers and related subscriptions (leaving the products untouched) for the site.<br>Revenue will also be reset to 0.<br>Use in query `cleanup_scope=all`.<br>**Default**: `'all'` |
+| `cleanup_scope` | [`CleanupScope`](../../doc/models/cleanup-scope.md) | Query, Optional | `all`: Will clear all products, customers, and related subscriptions from the site.<br>`customers`: Will clear only customers and related subscriptions (leaving the products untouched) for the site.<br>Revenue will also be reset to 0.<br>Use in query `cleanup_scope=all`.<br>**Default**: `'all'` |
 
 ## Response Type
 
@@ -119,7 +119,7 @@ def clear_site(self,
 ## Example Usage
 
 ```python
-cleanup_scope = CleanupScopeEnum.ALL
+cleanup_scope = CleanupScope.ALL
 
 result = sites_controller.clear_site(
     cleanup_scope=cleanup_scope

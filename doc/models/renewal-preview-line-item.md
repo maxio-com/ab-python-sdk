@@ -16,6 +16,7 @@
 | `discount_amount_in_cents` | `int` | Optional | - |
 | `taxable_amount_in_cents` | `int` | Optional | - |
 | `product_id` | `int` | Optional | - |
+| `product_name` | `str` | Optional | - |
 | `component_id` | `int` | Optional | - |
 | `component_handle` | `str` | Optional | - |
 | `component_name` | `str` | Optional | - |

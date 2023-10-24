@@ -3,11 +3,11 @@
 
 ## Data Type
 
-`IntervalUnitEnum`
+`IntervalUnit`
 
 ## Cases
 
 | Type |
 |  --- |
-| [`IntervalUnitEnum`](../../../doc/models/containers/product-trial-interval-unit-case-0.md) |
+| [`IntervalUnitOneOf0`](../../../doc/models/containers/product-trial-interval-unit-case-0.md) |
 

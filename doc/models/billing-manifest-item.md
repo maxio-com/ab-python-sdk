@@ -16,6 +16,13 @@
 | `discount_amount_in_cents` | `int` | Optional | - |
 | `taxable_amount_in_cents` | `int` | Optional | - |
 | `component_id` | `int` | Optional | - |
+| `component_handle` | `str` | Optional | - |
+| `component_name` | `str` | Optional | - |
+| `product_id` | `int` | Optional | - |
+| `product_handle` | `str` | Optional | - |
+| `product_name` | `str` | Optional | - |
+| `period_range_start` | `str` | Optional | - |
+| `period_range_end` | `str` | Optional | - |
 
 ## Example (as JSON)
 

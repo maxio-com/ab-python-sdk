@@ -15,7 +15,7 @@
 | `product_change_delayed` | `bool` | Optional | **Default**: `False` |
 | `next_product_id` | `str` | Optional | Set to an empty string to cancel a delayed product change. |
 | `next_product_price_point_id` | `str` | Optional | - |
-| `snap_day` | [SnapDay](../../doc/models/snap-day-enum.md) \| int \| None | Optional | This is a container for one-of cases. |
+| `snap_day` | [SnapDay_OneOf0](../../doc/models/snap-day-one-of-0.md) \| int \| None | Optional | This is a container for one-of cases. |
 | `next_billing_at` | `str` | Optional | - |
 | `payment_collection_method` | `str` | Optional | - |
 | `receives_invoice_emails` | `bool` | Optional | - |

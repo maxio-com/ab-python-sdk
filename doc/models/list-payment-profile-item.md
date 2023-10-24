@@ -13,7 +13,7 @@
 | `first_name` | `str` | Optional | - |
 | `last_name` | `str` | Optional | - |
 | `customer_id` | `int` | Optional | - |
-| `current_vault` | `str` | Optional | - |
+| `current_vault` | [`CurrentVault`](../../doc/models/current-vault.md) | Optional | The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. |
 | `vault_token` | `str` | Optional | - |
 | `billing_address` | `str` | Optional | - |
 | `billing_city` | `str` | Optional | - |
@@ -39,7 +39,7 @@
   "first_name": "first_name6",
   "last_name": "last_name4",
   "customer_id": 94,
-  "current_vault": "current_vault6"
+  "current_vault": "bogus"
 }
 ```
 

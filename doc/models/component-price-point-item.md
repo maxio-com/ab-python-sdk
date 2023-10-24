@@ -12,7 +12,7 @@
 | `name` | `str` | Optional | - |
 | `handle` | `str` | Optional | - |
 | `pricing_scheme` | `str` | Optional | - |
-| `prices` | [`List[CreateComponentPrice]`](../../doc/models/create-component-price.md) | Optional | - |
+| `prices` | [`List[Price]`](../../doc/models/price.md) | Optional | - |
 
 ## Example (as JSON)
 
@@ -23,16 +23,19 @@
   "pricing_scheme": "pricing_scheme2",
   "prices": [
     {
-      "starting_quantity": 64,
-      "unit_price": "String3"
+      "starting_quantity": 242,
+      "ending_quantity": 40,
+      "unit_price": 23.26
     },
     {
-      "starting_quantity": 64,
-      "unit_price": "String3"
+      "starting_quantity": 242,
+      "ending_quantity": 40,
+      "unit_price": 23.26
     },
     {
-      "starting_quantity": 64,
-      "unit_price": "String3"
+      "starting_quantity": 242,
+      "ending_quantity": 40,
+      "unit_price": 23.26
     }
   ]
 }

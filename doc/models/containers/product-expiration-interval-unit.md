@@ -3,11 +3,11 @@
 
 ## Data Type
 
-`ExtendedIntervalUnitEnum`
+`ExtendedIntervalUnit`
 
 ## Cases
 
 | Type |
 |  --- |
-| [`ExtendedIntervalUnitEnum`](../../../doc/models/containers/product-expiration-interval-unit-case-0.md) |
+| [`ExtendedIntervalUnitOneOf0`](../../../doc/models/containers/product-expiration-interval-unit-case-0.md) |
 

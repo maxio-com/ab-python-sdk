@@ -14,7 +14,7 @@
 | `expiration_year` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `chargify_token` | `str` | Optional | - |
 | `vault_token` | `str` | Optional | - |
-| `current_vault` | `str` | Optional | - |
+| `current_vault` | [`CurrentVault`](../../doc/models/current-vault.md) | Optional | The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. |
 | `gateway_handle` | `str` | Optional | - |
 | `first_name` | `str` | Optional | - |
 | `last_name` | `str` | Optional | - |

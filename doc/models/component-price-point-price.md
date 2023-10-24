@@ -14,6 +14,9 @@
 | `starting_quantity` | `int` | Optional | - |
 | `ending_quantity` | `int` | Optional | - |
 | `unit_price` | `str` | Optional | - |
+| `price_point_id` | `int` | Optional | - |
+| `formatted_unit_price` | `str` | Optional | - |
+| `segment_id` | `int` | Optional | - |
 
 ## Example (as JSON)
 

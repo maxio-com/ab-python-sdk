@@ -210,10 +210,10 @@ def list_proforma_invoices(self,
 | `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
 | `start_date` | `str` | Query, Optional | The beginning date range for the invoice's Due Date, in the YYYY-MM-DD format. |
 | `end_date` | `str` | Query, Optional | The ending date range for the invoice's Due Date, in the YYYY-MM-DD format. |
-| `status` | [`StatusEnum`](../../doc/models/status-enum.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
+| `status` | [`Status`](../../doc/models/status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `direction` | [`DirectionEnum`](../../doc/models/direction-enum.md) | Query, Optional | The sort direction of the returned invoices.<br>**Default**: `'desc'` |
+| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned invoices.<br>**Default**: `'desc'` |
 | `line_items` | `bool` | Query, Optional | Include line items data<br>**Default**: `False` |
 | `discounts` | `bool` | Query, Optional | Include discounts data<br>**Default**: `False` |
 | `taxes` | `bool` | Query, Optional | Include taxes data<br>**Default**: `False` |
@@ -234,7 +234,7 @@ page = 2
 
 per_page = 50
 
-direction = DirectionEnum.DESC
+direction = Direction.DESC
 
 line_items = False
 
@@ -403,7 +403,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`SubscriptionsProformaInvoicesJson400ErrorException`](../../doc/models/subscriptions-proforma-invoices-json-400-error-exception.md) |
+| 400 | Bad Request | [`ProformaBadRequestErrorResponseException`](../../doc/models/proforma-bad-request-error-response-exception.md) |
 | 403 | Forbidden | `APIException` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseException`](../../doc/models/error-map-response-exception.md) |
 
@@ -459,7 +459,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`SubscriptionsProformaInvoicesPreviewJson400ErrorException`](../../doc/models/subscriptions-proforma-invoices-preview-json-400-error-exception.md) |
+| 400 | Bad Request | [`ProformaBadRequestErrorResponseException`](../../doc/models/proforma-bad-request-error-response-exception.md) |
 | 403 | Forbidden | `APIException` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseException`](../../doc/models/error-map-response-exception.md) |
 

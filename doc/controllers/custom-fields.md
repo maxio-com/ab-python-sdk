@@ -58,7 +58,7 @@ def create_metafields(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resource_type` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `body` | [`CreateMetafieldsRequest`](../../doc/models/create-metafields-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -68,16 +68,16 @@ def create_metafields(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceTypeEnum.SUBSCRIPTIONS
+resource_type = ResourceType.SUBSCRIPTIONS
 
 body = CreateMetafieldsRequest(
     metafields=CreateMetafield(
         name='Dropdown field',
         scope=MetafieldScope(
-            public_show=IncludeOptionEnum.INCLUDE,
-            public_edit=IncludeOptionEnum.INCLUDE
+            public_show=IncludeOption.INCLUDE,
+            public_edit=IncludeOption.INCLUDE
         ),
-        input_type=MetafieldInputEnum.DROPDOWN,
+        input_type=MetafieldInput.DROPDOWN,
         enum=[
             'option 1',
             'option 2'
@@ -90,39 +90,6 @@ result = custom_fields_controller.create_metafields(
     body=body
 )
 print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "name": "Color",
-    "scope": {
-      "hosted": [],
-      "csv": "0",
-      "statements": "0",
-      "invoices": "0",
-      "portal": "0"
-    },
-    "data_count": 0,
-    "input_type": "text",
-    "enum": null
-  },
-  {
-    "name": "Brand",
-    "scope": {
-      "hosted": [],
-      "csv": "0",
-      "statements": "0",
-      "invoices": "0",
-      "portal": "0"
-    },
-    "data_count": 0,
-    "input_type": "text",
-    "enum": null
-  }
-]
 ```
 
 
@@ -143,11 +110,11 @@ def list_metafields(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resource_type` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `name` | `str` | Query, Optional | filter by the name of the metafield |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `direction` | [Sorting direction](../../doc/models/sorting-direction-enum.md) \| None | Query, Optional | This is a container for one-of cases. |
+| `direction` | [Sorting direction](../../doc/models/sorting-direction.md) \| None | Query, Optional | This is a container for one-of cases. |
 
 ## Response Type
 
@@ -156,7 +123,7 @@ def list_metafields(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceTypeEnum.SUBSCRIPTIONS
+resource_type = ResourceType.SUBSCRIPTIONS
 
 page = 2
 
@@ -168,34 +135,6 @@ result = custom_fields_controller.list_metafields(
     per_page=per_page
 )
 print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "total_count": 0,
-  "current_page": 0,
-  "total_pages": 0,
-  "per_page": 0,
-  "metafields": [
-    {
-      "id": 0,
-      "name": "string",
-      "scope": {
-        "csv": "0",
-        "statements": "0",
-        "invoices": "0",
-        "portal": "0",
-        "public_show": "0",
-        "public_edit": "0"
-      },
-      "data_count": 0,
-      "input_type": "string",
-      "enum": null
-    }
-  ]
-}
 ```
 
 
@@ -215,8 +154,8 @@ def update_metafield(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resource_type` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
-| `name` | `str` | Query, Required | - |
+| `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
+| `name` | `str` | Query, Required | Name of the custom field. |
 | `current_name` | `str` | Query, Optional | This only applies when you are updating an existing record and you wish to rename the field. Note you must supply name and current_name to rename the field |
 | `body` | [`UpdateMetafieldsRequest`](../../doc/models/update-metafields-request.md) | Body, Optional | - |
 
@@ -227,7 +166,7 @@ def update_metafield(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceTypeEnum.SUBSCRIPTIONS
+resource_type = ResourceType.SUBSCRIPTIONS
 
 name = 'name0'
 
@@ -255,7 +194,7 @@ def delete_metafield(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resource_type` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `name` | `str` | Query, Optional | The name of the metafield to be deleted |
 
 ## Response Type
@@ -265,7 +204,7 @@ def delete_metafield(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceTypeEnum.SUBSCRIPTIONS
+resource_type = ResourceType.SUBSCRIPTIONS
 
 result = custom_fields_controller.delete_metafield(resource_type)
 print(result)
@@ -315,7 +254,7 @@ def create_metadata(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resource_type` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resource_id` | `str` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
 | `value` | `str` | Query, Optional | Can be a single item or a list of metadata |
 | `body` | [`CreateMetadataRequest`](../../doc/models/create-metadata-request.md) | Body, Optional | - |
@@ -327,7 +266,7 @@ def create_metadata(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceTypeEnum.SUBSCRIPTIONS
+resource_type = ResourceType.SUBSCRIPTIONS
 
 resource_id = 'resource_id4'
 
@@ -373,7 +312,7 @@ def read_metadata(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resource_type` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resource_id` | `str` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
@@ -385,7 +324,7 @@ def read_metadata(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceTypeEnum.SUBSCRIPTIONS
+resource_type = ResourceType.SUBSCRIPTIONS
 
 resource_id = 'resource_id4'
 
@@ -419,7 +358,7 @@ def update_metadata(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resource_type` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resource_id` | `str` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
 | `value` | `str` | Query, Optional | Can be a single item or a list of metadata |
 | `body` | [`UpdateMetadataRequest`](../../doc/models/update-metadata-request.md) | Body, Optional | - |
@@ -431,7 +370,7 @@ def update_metadata(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceTypeEnum.SUBSCRIPTIONS
+resource_type = ResourceType.SUBSCRIPTIONS
 
 resource_id = 'resource_id4'
 
@@ -481,10 +420,10 @@ def delete_metadata(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resource_type` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resource_id` | `str` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
-| `name` | `str` | Query, Optional | - |
-| `names` | `List[str]` | Query, Optional | - |
+| `name` | `str` | Query, Optional | Name of field to be removed. |
+| `names` | `List[str]` | Query, Optional | Names of fields to be removed. Use in query: `names[]=field1&names[]=my-field&names[]=another-field`. |
 
 ## Response Type
 
@@ -493,7 +432,7 @@ def delete_metadata(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceTypeEnum.SUBSCRIPTIONS
+resource_type = ResourceType.SUBSCRIPTIONS
 
 resource_id = 'resource_id4'
 
@@ -546,17 +485,17 @@ def list_metadata(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `resource_type` | [`ResourceTypeEnum`](../../doc/models/resource-type-enum.md) | Template, Required | the resource type to which the metafields belong |
+| `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `date_field` | [`BasicDateFieldEnum`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. |
+| `date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns metadata with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns metadata with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns metadata with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
 | `end_datetime` | `str` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns metadata with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
 | `with_deleted` | `bool` | Query, Optional | Allow to fetch deleted metadata. |
-| `resource_ids` | `List[int]` | Query, Optional | Allow to fetch metadata for multiple records based on provided ids.<br>**Constraints**: *Maximum Items*: `50` |
-| `direction` | [Sorting direction](../../doc/models/sorting-direction-enum.md) \| None | Query, Optional | This is a container for one-of cases. |
+| `resource_ids` | `List[int]` | Query, Optional | Allow to fetch metadata for multiple records based on provided ids. Use in query: `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`.<br>**Constraints**: *Maximum Items*: `50` |
+| `direction` | [Sorting direction](../../doc/models/sorting-direction.md) \| None | Query, Optional | This is a container for one-of cases. |
 
 ## Response Type
 
@@ -565,13 +504,13 @@ def list_metadata(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceTypeEnum.SUBSCRIPTIONS
+resource_type = ResourceType.SUBSCRIPTIONS
 
 page = 2
 
 per_page = 50
 
-date_field = BasicDateFieldEnum.UPDATED_AT
+date_field = BasicDateField.UPDATED_AT
 
 Liquid error: Value cannot be null. (Parameter 'key')result = custom_fields_controller.list_metadata(Liquid error: Value cannot be null. (Parameter 'key')
     resource_type,

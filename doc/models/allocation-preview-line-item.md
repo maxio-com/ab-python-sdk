@@ -16,6 +16,7 @@
 | `discount_amount_in_cents` | `int` | Optional | - |
 | `taxable_amount_in_cents` | `int` | Optional | - |
 | `component_id` | `int` | Optional | - |
+| `component_handle` | `str` | Optional | - |
 | `direction` | `str` | Optional | - |
 
 ## Example (as JSON)

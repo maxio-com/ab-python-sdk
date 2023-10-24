@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+
+"""
+advanced_billing
+
+This file was automatically generated for Maxio by APIMATIC v3.0 (
+ https://www.apimatic.io ).
+"""
+
+
+class SegmentProperty3Value(object):
+
+    """Implementation of the 'SegmentProperty3Value' model.
+
+    A value that will occur in your events that you want to bill upon. The
+    type of the value depends on the property type in the related event based
+    billing metric.
+
+    """
+
+    # Create a mapping from Model property names to API property names
+    _names = {
+
+    }
+
+    def __init__(self,
+                 ):
+        """Constructor for the SegmentProperty3Value class"""
+
+        # Initialize members of the class
+
+    @classmethod
+    def from_dictionary(cls,
+                        dictionary):
+        """Creates an instance of this model from a dictionary
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            object: An instance of this structure class.
+
+        """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+        if dictionary is None:
+            return None
+
+        # Extract variables from the dictionary
+        # Return an object of this model
+        return cls()
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        if isinstance(dictionary, cls):
+            return True
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return True

@@ -16,7 +16,7 @@
 | `component_unit_price` | `str` | Optional | - |
 | `component_name` | `str` | Optional | - |
 | `price_point_name` | `str` | Optional | - |
-| `currency_prices` | `List[object]` | Optional | - |
+| `currency_prices` | [`List[CurrencyPrice]`](../../doc/models/currency-price.md) | Optional | - |
 
 ## Example (as JSON)
 

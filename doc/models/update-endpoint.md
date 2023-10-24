@@ -12,7 +12,7 @@ Used to Create or Update Endpoint
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `url` | `str` | Required | - |
-| `webhook_subscriptions` | [`List[WebhookSubscriptionEnum]`](../../doc/models/webhook-subscription-enum.md) | Required | - |
+| `webhook_subscriptions` | [`List[WebhookSubscription]`](../../doc/models/webhook-subscription.md) | Required | - |
 
 ## Example (as JSON)
 

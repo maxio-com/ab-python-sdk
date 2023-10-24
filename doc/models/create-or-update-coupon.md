@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `coupon` | [Create or Update Percentage Coupon](../../doc/models/create-or-update-percentage-coupon.md) \| [Create or Update Flat Amount Coupon](../../doc/models/create-or-update-flat-amount-coupon.md) \| None | Optional | This is a container for one-of cases. |
-| `restricted_products` | Dict[str, Dict[str, bool]] \| None | Optional | This is Dictionary of a container for one-of cases. |
-| `restricted_components` | Dict[str, Dict[str, bool]] \| None | Optional | This is Dictionary of a container for one-of cases. |
+| `restricted_products` | `Dict[str, bool]` | Optional | An object where the keys are product_ids and the values are booleans indicating if the coupon should be applicable to the product |
+| `restricted_components` | `Dict[str, bool]` | Optional | An object where the keys are component_ids and the values are booleans indicating if the coupon should be applicable to the component |
 
 ## Example (as JSON)
 
@@ -28,16 +28,10 @@
     "product_family_id": "product_family_id6"
   },
   "restricted_products": {
-    "key0": {
-      "key0": true,
-      "key1": false
-    }
+    "key0": true
   },
   "restricted_components": {
-    "key0": {
-      "key0": true,
-      "key1": false
-    }
+    "key0": true
   }
 }
 ```

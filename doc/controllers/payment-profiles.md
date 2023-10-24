@@ -291,11 +291,13 @@ def create_payment_profile(self,
 ```python
 body = CreatePaymentProfileRequest(
     payment_profile=CreatePaymentProfile(
-        payment_type=PaymentTypeEnum.BANK_ACCOUNT,
+        payment_type=PaymentType.BANK_ACCOUNT,
         customer_id=123,
         bank_name='Best Bank',
         bank_routing_number='021000089',
-        bank_account_number='111111111111'
+        bank_account_number='111111111111',
+        bank_account_type='checking',
+        bank_account_holder_type='business'
     )
 )
 
@@ -312,7 +314,6 @@ print(result)
   "payment_profile": {
     "first_name": "Jessica",
     "last_name": "Test",
-    "last_four": "1111",
     "card_type": "visa",
     "expiration_month": 10,
     "expiration_year": 2018,
@@ -591,10 +592,10 @@ body = UpdatePaymentProfileRequest(
         first_name='Graham',
         last_name='Test',
         full_number='4111111111111111',
-        card_type='master',
+        card_type=CardType.MASTER,
         expiration_month='04',
         expiration_year='2030',
-        current_vault='bogus',
+        current_vault=CurrentVault.BOGUS,
         billing_address='456 Juniper Court',
         billing_city='Boulder',
         billing_state='CO',
@@ -732,7 +733,7 @@ def verify_bank_account(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bank_account_id` | `int` | Template, Required | - |
+| `bank_account_id` | `int` | Template, Required | Identifier of the bank account in the system. |
 | `body` | [`BankAccountVerificationRequest`](../../doc/models/bank-account-verification-request.md) | Body, Optional | - |
 
 ## Response Type

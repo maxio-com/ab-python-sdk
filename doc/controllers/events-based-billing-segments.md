@@ -84,7 +84,7 @@ print(result)
 | 401 | Unauthorized | `APIException` |
 | 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ComponentsPricePointsSegmentsJson422ErrorException`](../../doc/models/components-price-points-segments-json-422-error-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentErrorsException`](../../doc/models/event-based-billing-segment-errors-exception.md) |
 
 
 # List Segments for Price Point
@@ -151,7 +151,7 @@ print(result)
 | 401 | Unauthorized | `APIException` |
 | 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ComponentsPricePointsSegmentsJson422Error2Exception`](../../doc/models/components-price-points-segments-json-422-error-2-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingListSegmentsErrorsException`](../../doc/models/event-based-billing-list-segments-errors-exception.md) |
 
 
 # Update Segment
@@ -205,7 +205,7 @@ print(result)
 | 401 | Unauthorized | `APIException` |
 | 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ComponentsPricePointsSegmentsIdJson422ErrorException`](../../doc/models/components-price-points-segments-id-json-422-error-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentErrorsException`](../../doc/models/event-based-billing-segment-errors-exception.md) |
 
 
 # Delete Segment
@@ -308,7 +308,7 @@ print(result)
 | 401 | Unauthorized | `APIException` |
 | 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ComponentsPricePointsSegmentsBulkJson422ErrorException`](../../doc/models/components-price-points-segments-bulk-json-422-error-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentException`](../../doc/models/event-based-billing-segment-exception.md) |
 
 
 # Update Segments
@@ -359,5 +359,5 @@ print(result)
 | 401 | Unauthorized | `APIException` |
 | 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ComponentsPricePointsSegmentsBulkJson422Error2Exception`](../../doc/models/components-price-points-segments-bulk-json-422-error-2-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`EventBasedBillingSegmentException`](../../doc/models/event-based-billing-segment-exception.md) |
 

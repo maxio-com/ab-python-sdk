@@ -120,16 +120,16 @@ def list_subscription_components(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
-| `date_field` | [`ListSubscriptionComponentsDateFieldEnum`](../../doc/models/list-subscription-components-date-field-enum.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
-| `direction` | [Sorting direction](../../doc/models/sorting-direction-enum.md) \| None | Query, Optional | This is a container for one-of cases. |
+| `date_field` | [`ListSubscriptionComponentsDateField`](../../doc/models/list-subscription-components-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
+| `direction` | [Sorting direction](../../doc/models/sorting-direction.md) \| None | Query, Optional | This is a container for one-of cases. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `end_datetime` | `str` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. |
-| `price_point_ids` | [`IncludeNotNullEnum`](../../doc/models/include-not-null-enum.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
+| `price_point_ids` | [`IncludeNotNull`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
 | `product_family_ids` | `List[int]` | Query, Optional | Allows fetching components allocation with matching product family id based on provided ids. Use in query `product_family_ids=1,2,3`. |
-| `sort` | [`ListSubscriptionComponentsSortEnum`](../../doc/models/list-subscription-components-sort-enum.md) | Query, Optional | The attribute by which to sort. Use in query `sort=updated_at`. |
+| `sort` | [`ListSubscriptionComponentsSort`](../../doc/models/list-subscription-components-sort.md) | Query, Optional | The attribute by which to sort. Use in query `sort=updated_at`. |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. |
-| `include` | [`ListSubscriptionComponentsIncludeEnum`](../../doc/models/list-subscription-components-include-enum.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
+| `include` | [`ListSubscriptionComponentsInclude`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
 | `filter_use_site_exchange_rate` | `bool` | Query, Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 | `filter_currencies` | `List[str]` | Query, Optional | Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=EUR,USD`. |
 
@@ -142,9 +142,9 @@ def list_subscription_components(self,
 ```python
 subscription_id = 'subscription_id0'
 
-date_field = ListSubscriptionComponentsDateFieldEnum.UPDATED_AT
+date_field = ListSubscriptionComponentsDateField.UPDATED_AT
 
-price_point_ids = IncludeNotNullEnum.NOT_NULL
+price_point_ids = IncludeNotNull.NOT_NULL
 
 product_family_ids = [
     1,
@@ -152,9 +152,9 @@ product_family_ids = [
     3
 ]
 
-sort = ListSubscriptionComponentsSortEnum.UPDATED_AT
+sort = ListSubscriptionComponentsSort.UPDATED_AT
 
-include = ListSubscriptionComponentsIncludeEnum.SUBSCRIPTION
+include = ListSubscriptionComponentsInclude.SUBSCRIPTION
 
 Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = subscription_components_controller.list_subscription_components(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
     subscription_id,
@@ -259,7 +259,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionsPricePointsJson422ErrorException`](../../doc/models/subscriptions-price-points-json-422-error-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`ComponentPricePointErrorException`](../../doc/models/component-price-point-error-exception.md) |
 
 
 # Reset Subscription Components Price Points
@@ -472,9 +472,17 @@ subscription_id = 'subscription_id0'
 
 component_id = 222
 
+body = CreateAllocationRequest(
+    allocation=CreateAllocation(
+        quantity=5,
+        memo='Recoding component purchase of Acme Support'
+    )
+)
+
 result = subscription_components_controller.allocate_component(
     subscription_id,
-    component_id
+    component_id,
+    body=body
 )
 print(result)
 ```
@@ -486,8 +494,8 @@ print(result)
   "allocation": {
     "component_id": 4034995,
     "subscription_id": 23737320,
-    "quantity": -96752223,
-    "previous_quantity": 3010509,
+    "quantity": 3,
+    "previous_quantity": 2,
     "memo": "dolore cupidatat elit",
     "timestamp": "ex proident dolor i",
     "proration_upgrade_scheme": "laboris ipsum dolore",
@@ -499,7 +507,7 @@ print(result)
     "downgrade_credit": "full",
     "payment": {
       "id": -44566528,
-      "amout_in_cents": "labore in minim ad",
+      "amount_in_cents": 123,
       "success": false,
       "memo": "aliqua"
     }
@@ -638,8 +646,24 @@ def allocate_components(self,
 subscription_id = 'subscription_id0'
 
 body = AllocateComponents(
-    proration_upgrade_scheme='no-prorate',
-    proration_downgrade_scheme='no-prorate'
+    proration_upgrade_scheme='prorate-attempt-capture',
+    proration_downgrade_scheme='no-prorate',
+    allocations=[
+        CreateAllocationRequest(
+            allocation=CreateAllocation(
+                quantity=10,
+                component_id=123,
+                memo='foo'
+            )
+        ),
+        CreateAllocationRequest(
+            allocation=CreateAllocation(
+                quantity=5,
+                component_id=456,
+                memo='bar'
+            )
+        )
+    ]
 )
 
 result = subscription_components_controller.allocate_components(
@@ -722,7 +746,7 @@ def preview_allocations(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
-| `body` | [`CreateAllocationRequest`](../../doc/models/create-allocation-request.md) | Body, Optional | - |
+| `body` | [`PreviewAllocationsRequest`](../../doc/models/preview-allocations-request.md) | Body, Optional | - |
 
 ## Response Type
 
@@ -733,15 +757,134 @@ def preview_allocations(self,
 ```python
 subscription_id = 'subscription_id0'
 
-result = subscription_components_controller.preview_allocations(subscription_id)
+body = PreviewAllocationsRequest(
+    allocations=[
+        CreateAllocation(
+            quantity=10,
+            component_id=554108,
+            memo='NOW',
+            proration_downgrade_scheme='prorate',
+            proration_upgrade_scheme='prorate-attempt-capture',
+            price_point_id=325826
+        )
+    ]
+)
+
+result = subscription_components_controller.preview_allocations(
+    subscription_id,
+    body=body
+)
 print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "allocation_preview": {
+    "start_date": "2019-05-02T15:26:46Z",
+    "end_date": "2019-05-08T15:26:46Z",
+    "period_type": "prorated",
+    "total_in_cents": 150,
+    "total_discount_in_cents": 0,
+    "total_tax_in_cents": 0,
+    "subtotal_in_cents": 150,
+    "existing_balance_in_cents": 0,
+    "accrue_charge": true,
+    "line_items": [
+      {
+        "direction": "upgrade",
+        "transaction_type": "charge",
+        "kind": "quantity_based_component",
+        "amount_in_cents": 100,
+        "taxable_amount_in_cents": 0,
+        "discount_amount_in_cents": 0,
+        "memo": "Foo: 0 to 10 foo",
+        "component_id": 123,
+        "component_handle": "foo"
+      },
+      {
+        "direction": "downgrade",
+        "transaction_type": "credit",
+        "kind": "quantity_based_component",
+        "amount_in_cents": -20,
+        "taxable_amount_in_cents": 0,
+        "discount_amount_in_cents": 0,
+        "memo": "Foo: 10 to 5 bar",
+        "component_id": 456,
+        "component_handle": "bar"
+      },
+      {
+        "direction": "upgrade",
+        "transaction_type": "credit",
+        "kind": "quantity_based_component",
+        "amount_in_cents": 70,
+        "taxable_amount_in_cents": 0,
+        "discount_amount_in_cents": 0,
+        "memo": "Foo: 0 to 10 baz",
+        "component_id": 789,
+        "component_handle": "baz"
+      }
+    ],
+    "allocations": [
+      {
+        "accrue_charge": true,
+        "upgrade_charge": "prorated",
+        "downgrade_credit": "full",
+        "component_handle": "foo",
+        "component_id": 123,
+        "memo": "foo",
+        "previous_price_point_id": 123,
+        "previous_quantity": 0,
+        "price_point_id": 123,
+        "proration_downgrade_scheme": "full",
+        "proration_upgrade_scheme": "prorate-delay-capture",
+        "quantity": 10,
+        "subscription_id": 123456,
+        "timestamp": null
+      },
+      {
+        "accrue_charge": true,
+        "upgrade_charge": "full",
+        "downgrade_credit": "prorated",
+        "component_handle": "bar",
+        "component_id": 456,
+        "memo": "foo",
+        "previous_price_point_id": 456,
+        "previous_quantity": 10,
+        "price_point_id": 456,
+        "proration_downgrade_scheme": "prorate",
+        "proration_upgrade_scheme": "full-price-delay-capture",
+        "quantity": 5,
+        "subscription_id": 123456,
+        "timestamp": null
+      },
+      {
+        "accrue_charge": true,
+        "upgrade_charge": "full",
+        "downgrade_credit": "none",
+        "component_handle": "baz",
+        "component_id": 789,
+        "memo": "foo",
+        "previous_price_point_id": 789,
+        "previous_quantity": 0,
+        "price_point_id": 789,
+        "proration_downgrade_scheme": "no-prorate",
+        "proration_upgrade_scheme": "full-price-delay-capture",
+        "quantity": 10,
+        "subscription_id": 123456,
+        "timestamp": null
+      }
+    ]
+  }
+}
 ```
 
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionsAllocationsPreviewJson422ErrorException`](../../doc/models/subscriptions-allocations-preview-json-422-error-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`ComponentAllocationErrorException`](../../doc/models/component-allocation-error-exception.md) |
 
 
 # Update Prepaid Usage Allocation
@@ -807,7 +950,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionsComponentsAllocationsAllocationIdJson422ErrorException`](../../doc/models/subscriptions-components-allocations-allocation-id-json-422-error-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionComponentAllocationErrorException`](../../doc/models/subscription-component-allocation-error-exception.md) |
 
 
 # Delete Prepaid Usage Allocation
@@ -853,7 +996,7 @@ component_id = 222
 allocation_id = 24
 
 body = CreditSchemeRequest(
-    credit_scheme=CreditSchemeEnum.NONE
+    credit_scheme=CreditScheme.NONE
 )
 
 result = subscription_components_controller.delete_prepaid_usage_allocation(
@@ -869,7 +1012,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionsComponentsAllocationsAllocationIdJson422ErrorException`](../../doc/models/subscriptions-components-allocations-allocation-id-json-422-error-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionComponentAllocationErrorException`](../../doc/models/subscription-component-allocation-error-exception.md) |
 
 
 # Create Usage
@@ -957,9 +1100,18 @@ subscription_id = 'subscription_id0'
 
 component_id = 222
 
+body = CreateUsageRequest(
+    usage=CreateUsage(
+        quantity=1000,
+        price_point_id='149416',
+        memo='My memo'
+    )
+)
+
 result = subscription_components_controller.create_usage(
     subscription_id,
-    component_id
+    component_id,
+    body=body
 )
 print(result)
 ```
@@ -1217,7 +1369,8 @@ api_handle = 'api_handle6'
 
 body = EBBEvent(
     chargify=ChargifyEBB(
-        timestamp='2020-02-27T17:45:50-05:00'
+        timestamp='2020-02-27T17:45:50-05:00',
+        subscription_id=1
     )
 )
 
@@ -1250,8 +1403,8 @@ def record_events(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subdomain` | `str` | Template, Required | - |
-| `api_handle` | `str` | Template, Required | - |
+| `subdomain` | `str` | Template, Required | Your site's subdomain |
+| `api_handle` | `str` | Template, Required | Identifies the Stream for which the events should be published. |
 | `store_uid` | `str` | Query, Optional | If you've attached your own Keen project as a Chargify event data-store, use this parameter to indicate the data-store. |
 | `body` | [`List[EBBEvent]`](../../doc/models/ebb-event.md) | Body, Optional | - |
 
@@ -1269,7 +1422,8 @@ api_handle = 'api_handle6'
 body = [
     EBBEvent(
         chargify=ChargifyEBB(
-            timestamp='2020-02-27T17:45:50-05:00'
+            timestamp='2020-02-27T17:45:50-05:00',
+            subscription_id=1
         )
     )
 ]
@@ -1318,21 +1472,21 @@ def list_subscription_components_for_site(self,
 |  --- | --- | --- | --- |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `sort` | [`ListSubscriptionComponentsSortEnum`](../../doc/models/list-subscription-components-sort-enum.md) | Query, Optional | The attribute by which to sort. Use in query: `sort=updated_at`. |
-| `direction` | [Sorting direction](../../doc/models/sorting-direction-enum.md) \| None | Query, Optional | This is a container for one-of cases. |
-| `date_field` | [`ListSubscriptionComponentsDateFieldEnum`](../../doc/models/list-subscription-components-date-field-enum.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query: `date_field=updated_at`. |
+| `sort` | [`ListSubscriptionComponentsSort`](../../doc/models/list-subscription-components-sort.md) | Query, Optional | The attribute by which to sort. Use in query: `sort=updated_at`. |
+| `direction` | [Sorting direction](../../doc/models/sorting-direction.md) \| None | Query, Optional | This is a container for one-of cases. |
+| `date_field` | [`ListSubscriptionComponentsDateField`](../../doc/models/list-subscription-components-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query: `date_field=updated_at`. |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `start_date=2011-12-15`. |
 | `start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `start_datetime=2022-07-01 09:00:05`. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `end_date=2011-12-16`. |
 | `end_datetime` | `str` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `end_datetime=2022-07-01 09:00:05`. |
 | `subscription_ids` | `List[int]` | Query, Optional | Allows fetching components allocation with matching subscription id based on provided ids. Use in query `subscription_ids=1,2,3`.<br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `200` |
-| `price_point_ids` | [`IncludeNotNullEnum`](../../doc/models/include-not-null-enum.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
+| `price_point_ids` | [`IncludeNotNull`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching components allocation only if price point id is present. Use in query `price_point_ids=not_null`. |
 | `product_family_ids` | `List[int]` | Query, Optional | Allows fetching components allocation with matching product family id based on provided ids. Use in query `product_family_ids=1,2,3`. |
-| `include` | [`ListSubscriptionComponentsIncludeEnum`](../../doc/models/list-subscription-components-include-enum.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
+| `include` | [`ListSubscriptionComponentsInclude`](../../doc/models/list-subscription-components-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=subscription`. |
 | `filter_use_site_exchange_rate` | `bool` | Query, Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 | `filter_currencies` | `List[str]` | Query, Optional | Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=USD,EUR`. |
-| `filter_subscription_states` | [`List[SubscriptionStateEnum]`](../../doc/models/subscription-state-enum.md) | Query, Optional | Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`. Use in query `filter[subscription][states]=active,canceled&include=subscription`. |
-| `filter_subscription_date_field` | [`ListSubscriptionComponentsSubscriptionDateFieldEnum`](../../doc/models/list-subscription-components-subscription-date-field-enum.md) | Query, Optional | The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `filter_subscription_states` | [`List[SubscriptionState]`](../../doc/models/subscription-state.md) | Query, Optional | Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`. Use in query `filter[subscription][states]=active,canceled&include=subscription`. |
+| `filter_subscription_date_field` | [`ListSubscriptionComponentsSubscriptionDateField`](../../doc/models/list-subscription-components-subscription-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`. |
 | `filter_subscription_start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
 | `filter_subscription_start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. To use this filter you also have to include the following param in the request `include=subscription`. |
 | `filter_subscription_end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
@@ -1349,9 +1503,9 @@ page = 2
 
 per_page = 50
 
-sort = ListSubscriptionComponentsSortEnum.UPDATED_AT
+sort = ListSubscriptionComponentsSort.UPDATED_AT
 
-date_field = ListSubscriptionComponentsDateFieldEnum.UPDATED_AT
+date_field = ListSubscriptionComponentsDateField.UPDATED_AT
 
 subscription_ids = [
     1,
@@ -1359,7 +1513,7 @@ subscription_ids = [
     3
 ]
 
-price_point_ids = IncludeNotNullEnum.NOT_NULL
+price_point_ids = IncludeNotNull.NOT_NULL
 
 product_family_ids = [
     1,
@@ -1367,7 +1521,7 @@ product_family_ids = [
     3
 ]
 
-include = ListSubscriptionComponentsIncludeEnum.SUBSCRIPTION
+include = ListSubscriptionComponentsInclude.SUBSCRIPTION
 
 Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = subscription_components_controller.list_subscription_components_for_site(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
     page=page,

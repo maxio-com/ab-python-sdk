@@ -14,7 +14,7 @@
 | `scope` | [`MetafieldScope`](../../doc/models/metafield-scope.md) | Optional | Warning: When updating a metafield's scope attribute, all scope attributes must be passed. Partially complete scope attributes will override the existing settings. |
 | `data_count` | `int` | Optional | the amount of subscriptions this metafield has been applied to in Chargify |
 | `input_type` | `str` | Optional | - |
-| `enum` | List[List[str]] \| None | Optional | This is List of a container for one-of cases. |
+| `enum` | List[str] \| None | Optional | This is a container for one-of cases. |
 
 ## Example (as JSON)
 

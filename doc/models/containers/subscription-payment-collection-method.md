@@ -3,11 +3,11 @@
 
 ## Data Type
 
-`PaymentCollectionMethodForSubscriptionEnum`
+`PaymentCollectionMethod`
 
 ## Cases
 
 | Type |
 |  --- |
-| [`PaymentCollectionMethodForSubscriptionEnum`](../../../doc/models/payment-collection-method-for-subscription-enum.md) |
+| [`PaymentCollectionMethod`](../../../doc/models/payment-collection-method.md) |
 

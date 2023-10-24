@@ -15,9 +15,9 @@
 | `accounting_code` | `str` | Optional | - |
 | `taxable` | `bool` | Optional | Boolean flag describing whether a component is taxable or not. |
 | `tax_code` | `str` | Optional | A string representing the tax code related to the component type. This is especially important when using the Avalara service to tax based on locale. This attribute has a max length of 10 characters. |
-| `item_category` | [`ItemCategoryEnum`](../../doc/models/item-category-enum.md) | Optional | One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other |
+| `item_category` | [`ItemCategory`](../../doc/models/item-category.md) | Optional | One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other |
 | `display_on_hosted_page` | `bool` | Optional | - |
-| `upgrade_charge` | [`CreditTypeEnum`](../../doc/models/credit-type-enum.md) | Optional | The type of charge to be applied when a component is upgraded. Valid values are: `prorated`, `full`, `none`. |
+| `upgrade_charge` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of charge to be applied when a component is upgraded. Valid values are: `prorated`, `full`, `none`. |
 
 ## Example (as JSON)
 

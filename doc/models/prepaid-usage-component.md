@@ -14,8 +14,8 @@
 | `description` | `str` | Optional | A description for the component that will be displayed to the user on the hosted signup page. |
 | `handle` | `str` | Optional | A unique identifier for your use that can be used to retrieve this component is subsequent requests.  Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'.<br>**Constraints**: *Pattern*: `^[a-z0-9][a-z0-9\-_:.]*$` |
 | `taxable` | `bool` | Optional | Boolean flag describing whether a component is taxable or not. |
-| `pricing_scheme` | [Pricing Scheme](../../doc/models/pricing-scheme-enum.md) \| None | Optional | This is a container for one-of cases. |
-| `prices` | [`List[CreateComponentPrice]`](../../doc/models/create-component-price.md) | Optional | (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes. |
+| `pricing_scheme` | [Pricing Scheme](../../doc/models/pricing-scheme.md) \| None | Optional | This is a container for one-of cases. |
+| `prices` | [`List[Price]`](../../doc/models/price.md) | Optional | (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883#general-price-bracket-rules) for an overview of how price brackets work for different pricing schemes. |
 | `upgrade_charge` | `str` | Optional | - |
 | `downgrade_credit` | `str` | Optional | - |
 | `price_points` | [`List[PrepaidComponentPricePoint]`](../../doc/models/prepaid-component-price-point.md) | Optional | - |
@@ -27,7 +27,10 @@
 | `rollover_prepaid_remainder` | `bool` | Optional | Boolean which controls whether or not remaining units should be rolled over to the next period |
 | `renew_prepaid_allocation` | `bool` | Optional | Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period |
 | `expiration_interval` | `float` | Optional | (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire |
-| `expiration_interval_unit` | [Interval Unit](../../doc/models/interval-unit-enum.md) \| None | Optional | This is a container for one-of cases. |
+| `expiration_interval_unit` | [Interval Unit](../../doc/models/interval-unit.md) \| None | Optional | This is a container for one-of cases. |
+| `display_on_hosted_page` | `bool` | Optional | - |
+| `allow_fractional_quantities` | `bool` | Optional | - |
+| `public_signup_page_ids` | `List[int]` | Optional | - |
 
 ## Example (as JSON)
 

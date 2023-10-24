@@ -3,11 +3,11 @@
 
 ## Data Type
 
-`PricingSchemeEnum`
+`PricingScheme`
 
 ## Cases
 
 | Type |
 |  --- |
-| [`PricingSchemeEnum`](../../../doc/models/pricing-scheme-enum.md) |
+| [`PricingScheme`](../../../doc/models/pricing-scheme.md) |
 

@@ -61,7 +61,7 @@ def create_component(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the component belongs |
-| `component_kind` | [`ComponentKindPathEnum`](../../doc/models/component-kind-path-enum.md) | Template, Required | The component kind |
+| `component_kind` | [`ComponentKindPath`](../../doc/models/component-kind-path.md) | Template, Required | The component kind |
 | `body` | [Create Metered Component](../../doc/models/create-metered-component.md) \| [Create Quantity Based Component](../../doc/models/create-quantity-based-component.md) \| [Create On/Off Component](../../doc/models/create-on-off-component.md) \| [Create Prepaid Component](../../doc/models/create-prepaid-component.md) \| [Create EBB Component](../../doc/models/create-ebb-component.md) \| None | Body, Optional | This is a container for one-of cases. |
 
 ## Response Type
@@ -73,16 +73,16 @@ def create_component(self,
 ```python
 product_family_id = 140
 
-component_kind = ComponentKindPathEnum.ON_OFF_COMPONENTS
+component_kind = ComponentKindPath.ON_OFF_COMPONENTS
 
 body = CreateMeteredComponent(
     metered_component=MeteredComponent(
         name='Text messages',
         unit_name='text message',
-        pricing_scheme=PricingSchemeEnum.STAIRSTEP,
+        pricing_scheme=PricingScheme.STAIRSTEP,
         taxable=False,
         prices=[
-            CreateComponentPrice(
+            Price(
                 starting_quantity=1,
                 unit_price=1
             )
@@ -299,7 +299,7 @@ component_id = 'component_id8'
 
 body = UpdateComponentRequest(
     component=UpdateComponent(
-        item_category=ItemCategoryEnum.ENUM_BUSINESS_SOFTWARE
+        item_category=ItemCategory.ENUM_BUSINESS_SOFTWARE
     )
 )
 
@@ -345,7 +345,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Archive Component
@@ -440,7 +440,7 @@ def list_components(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `date_field` | [`BasicDateFieldEnum`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. |
+| `date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
@@ -458,7 +458,7 @@ def list_components(self,
 ## Example Usage
 
 ```python
-date_field = BasicDateFieldEnum.UPDATED_AT
+date_field = BasicDateField.UPDATED_AT
 
 page = 2
 
@@ -599,7 +599,7 @@ component_id = 'component_id8'
 
 body = UpdateComponentRequest(
     component=UpdateComponent(
-        item_category=ItemCategoryEnum.ENUM_BUSINESS_SOFTWARE
+        item_category=ItemCategory.ENUM_BUSINESS_SOFTWARE
     )
 )
 
@@ -679,7 +679,7 @@ def list_components_for_product_family(self,
 | `filter_ids` | `List[int]` | Query, Optional | Allows fetching components with matching id based on provided value. Use in query `filter[ids]=1,2`. |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `date_field` | [`BasicDateFieldEnum`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `date_field=created_at`. |
+| `date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `date_field=created_at`. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `end_datetime` | `str` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. optional. |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
@@ -699,7 +699,7 @@ Liquid error: Value cannot be null. (Parameter 'key')page = 2
 
 per_page = 50
 
-date_field = BasicDateFieldEnum.UPDATED_AT
+date_field = BasicDateField.UPDATED_AT
 
 Liquid error: Value cannot be null. (Parameter 'key')result = components_controller.list_components_for_product_family(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
     product_family_id,
@@ -835,20 +835,15 @@ component_id = 222
 
 body = CreateComponentPricePointRequest(
     price_point=CreateComponentPricePoint(
-        name='Wholesale',
-        pricing_scheme='stairstep',
+        name='Special Pricing',
+        pricing_scheme='per_unit',
         prices=[
             Price(
-                starting_quantity='1',
-                unit_price='5.00',
-                ending_quantity='100'
-            ),
-            Price(
-                starting_quantity='101',
-                unit_price='4.00'
+                starting_quantity=1,
+                unit_price=5
             )
         ],
-        handle='wholesale-handle'
+        handle='special'
     )
 )
 
@@ -887,7 +882,7 @@ def list_component_price_points(self,
 | `currency_prices` | `bool` | Query, Optional | Include an array of currency price data |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `filter_type` | [`List[PricePointTypeEnum]`](../../doc/models/price-point-type-enum.md) | Query, Optional | Use in query: `filter[type]=catalog,default`. |
+| `filter_type` | [`List[PricePointType]`](../../doc/models/price-point-type.md) | Query, Optional | Use in query: `filter[type]=catalog,default`. |
 
 ## Response Type
 
@@ -974,7 +969,7 @@ def create_component_price_points(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `component_id` | `str` | Template, Required | - |
+| `component_id` | `str` | Template, Required | The Chargify id of the component for which you want to fetch price points. |
 | `body` | [`CreateComponentPricePointsRequest`](../../doc/models/create-component-price-points-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -1413,18 +1408,18 @@ def list_all_component_price_points(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `filter_date_field` | [`BasicDateFieldEnum`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`. |
+| `filter_date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`. |
 | `filter_end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `filter_end_datetime` | `str` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
-| `include` | [`ListComponentsPricePointsIncludeEnum`](../../doc/models/list-components-price-points-include-enum.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
+| `include` | [`ListComponentsPricePointsInclude`](../../doc/models/list-components-price-points-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
 | `filter_start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `filter_start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
-| `filter_type` | [`List[PricePointTypeEnum]`](../../doc/models/price-point-type-enum.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=custom,catalog`. |
-| `direction` | [Sorting direction](../../doc/models/sorting-direction-enum.md) \| None | Query, Optional | This is a container for one-of cases. |
+| `filter_type` | [`PricePointType`](../../doc/models/price-point-type.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=custom,catalog`. |
+| `direction` | [Sorting direction](../../doc/models/sorting-direction.md) \| None | Query, Optional | This is a container for one-of cases. |
 | `filter_ids` | `List[int]` | Query, Optional | Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`. |
-| `filter_archived_at` | [`IncludeNotNullEnum`](../../doc/models/include-not-null-enum.md) | Query, Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
+| `filter_archived_at` | [`IncludeNotNull`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
 
 ## Response Type
 
@@ -1433,7 +1428,7 @@ def list_all_component_price_points(self,
 ## Example Usage
 
 ```python
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')include = ListComponentsPricePointsIncludeEnum.CURRENCY_PRICES
+Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')include = ListComponentsPricePointsInclude.CURRENCY_PRICES
 
 page = 2
 
@@ -1453,27 +1448,28 @@ print(result)
 {
   "price_points": [
     {
-      "price_point": {
-        "id": 1,
-        "name": "Auto-created",
-        "type": "default",
-        "component_id": 2,
-        "handle": "auto-created",
-        "created_at": "2021-02-21T11:05:57-05:00",
-        "updated_at": "2021-02-21T11:05:57-05:00",
-        "prices": [
-          {
-            "id": 3,
-            "component_id": 2,
-            "starting_quantity": 0,
-            "ending_quantity": null,
-            "unit_price": "1.0",
-            "price_point_id": 1,
-            "formatted_unit_price": "$1.00",
-            "segment_id": null
-          }
-        ]
-      }
+      "id": 1,
+      "name": "Auto-created",
+      "type": "default",
+      "pricing_scheme": "per_unit",
+      "component_id": 2,
+      "handle": "auto-created",
+      "archived_at": null,
+      "created_at": "2021-02-21T11:05:57-05:00",
+      "updated_at": "2021-02-21T11:05:57-05:00",
+      "prices": [
+        {
+          "id": 3,
+          "component_id": 2,
+          "starting_quantity": 0,
+          "ending_quantity": null,
+          "unit_price": "1.0",
+          "price_point_id": 1,
+          "formatted_unit_price": "$1.00",
+          "segment_id": null
+        }
+      ],
+      "tax_included": false
     }
   ]
 }

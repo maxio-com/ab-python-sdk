@@ -3,11 +3,11 @@
 
 ## Data Type
 
-`ExtendedIntervalUnitEnum`
+`ExtendedIntervalUnit`
 
 ## Cases
 
 | Type |
 |  --- |
-| [`ExtendedIntervalUnitEnum`](../../../doc/models/extended-interval-unit-enum.md) |
+| [`ExtendedIntervalUnit`](../../../doc/models/extended-interval-unit.md) |
 

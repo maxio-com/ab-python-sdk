@@ -16,7 +16,7 @@ object Product Price Point Currency Price:
 | `price` | `int` | Optional | - |
 | `formatted_price` | `str` | Optional | - |
 | `product_price_point_id` | `int` | Optional | - |
-| `role` | [`CurrencyPriceRoleEnum`](../../doc/models/currency-price-role-enum.md) | Optional | Role for the price. |
+| `role` | [`CurrencyPriceRole`](../../doc/models/currency-price-role.md) | Optional | Role for the price. |
 
 ## Example (as JSON)
 

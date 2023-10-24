@@ -69,55 +69,6 @@ result = products_controller.create_product(
 print(result)
 ```
 
-## Example Response *(as JSON)*
-
-```json
-{
-  "product": {
-    "id": 4364984,
-    "name": "Gold Plan",
-    "handle": "gold",
-    "description": "This is our gold plan.",
-    "accounting_code": "123",
-    "request_credit_card": true,
-    "created_at": "2016-11-04T16:31:15-04:00",
-    "updated_at": "2016-11-04T16:31:15-04:00",
-    "price_in_cents": 1000,
-    "interval": 1,
-    "interval_unit": "month",
-    "expiration_interval_unit": null,
-    "initial_charge_in_cents": null,
-    "trial_price_in_cents": null,
-    "trial_interval": null,
-    "trial_interval_unit": null,
-    "archived_at": null,
-    "require_credit_card": true,
-    "return_params": null,
-    "taxable": false,
-    "update_return_url": null,
-    "initial_charge_after_trial": false,
-    "version_number": 1,
-    "update_return_params": null,
-    "product_family": {
-      "id": 527890,
-      "name": "Acme Projects",
-      "description": "",
-      "handle": "billing-plans",
-      "accounting_code": null
-    },
-    "public_signup_pages": [
-      {
-        "id": 301078,
-        "return_url": null,
-        "return_params": null,
-        "url": "https://general-goods.chargify.com/subscribe/ftgbpq7f5qpr/gold"
-      }
-    ],
-    "product_price_point_name": "Default"
-  }
-}
-```
-
 
 # Read Product
 
@@ -228,54 +179,6 @@ product_id = 202
 
 result = products_controller.update_product(product_id)
 print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "product": {
-    "id": 4365034,
-    "name": "Platinum Plan",
-    "handle": "platinum",
-    "description": "This is our platinum plan.",
-    "accounting_code": "123",
-    "request_credit_card": true,
-    "created_at": "2016-11-04T16:34:29-04:00",
-    "updated_at": "2016-11-04T16:37:11-04:00",
-    "price_in_cents": 1000,
-    "interval": 1,
-    "interval_unit": "month",
-    "initial_charge_in_cents": null,
-    "trial_price_in_cents": null,
-    "trial_interval": null,
-    "trial_interval_unit": null,
-    "archived_at": null,
-    "require_credit_card": true,
-    "return_params": null,
-    "taxable": false,
-    "update_return_url": null,
-    "initial_charge_after_trial": false,
-    "version_number": 1,
-    "update_return_params": null,
-    "product_family": {
-      "id": 527890,
-      "name": "Acme Projects",
-      "description": "",
-      "handle": "billing-plans",
-      "accounting_code": null
-    },
-    "public_signup_pages": [
-      {
-        "id": 301079,
-        "return_url": null,
-        "return_params": null,
-        "url": "https://general-goods.chargify.com/subscribe/wgyd96tb5pj9/platinum"
-      }
-    ],
-    "product_price_point_name": "Original"
-  }
-}
 ```
 
 ## Errors
@@ -480,7 +383,7 @@ def list_products(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `date_field` | [`BasicDateFieldEnum`](../../doc/models/basic-date-field-enum.md) | Query, Optional | The type of filter you would like to apply to your search.<br>Use in query: `date_field=created_at`. |
+| `date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search.<br>Use in query: `date_field=created_at`. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `end_datetime` | `str` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
@@ -488,8 +391,8 @@ def list_products(self,
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
 | `include_archived` | `bool` | Query, Optional | Include archived products. Use in query: `include_archived=true`. |
-| `include` | [`ListProductsIncludeEnum`](../../doc/models/list-products-include-enum.md) | Query, Optional | Allows including additional data in the response. Use in query `include=prepaid_product_price_point`. |
-| `filter_prepaid_product_price_point_product_price_point_id` | [`IncludeNotNullEnum`](../../doc/models/include-not-null-enum.md) | Query, Optional | Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`. Use in query `filter[prepaid_product_price_point][product_price_point_id]=not_null`. |
+| `include` | [`ListProductsInclude`](../../doc/models/list-products-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=prepaid_product_price_point`. |
+| `filter_prepaid_product_price_point_product_price_point_id` | [`IncludeNotNull`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching products only if a prepaid product price point is present or not. To use this filter you also have to include the following param in the request `include=prepaid_product_price_point`. Use in query `filter[prepaid_product_price_point][product_price_point_id]=not_null`. |
 | `filter_use_site_exchange_rate` | `bool` | Query, Optional | Allows fetching products with matching use_site_exchange_rate based on provided value (refers to default price point). Use in query `filter[use_site_exchange_rate]=true`. |
 
 ## Response Type
@@ -499,7 +402,7 @@ def list_products(self,
 ## Example Usage
 
 ```python
-date_field = BasicDateFieldEnum.UPDATED_AT
+date_field = BasicDateField.UPDATED_AT
 
 page = 2
 
@@ -507,7 +410,7 @@ per_page = 50
 
 include_archived = True
 
-include = ListProductsIncludeEnum.PREPAID_PRODUCT_PRICE_POINT
+include = ListProductsInclude.PREPAID_PRODUCT_PRICE_POINT
 
 Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = products_controller.list_products(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
     date_field=date_field,

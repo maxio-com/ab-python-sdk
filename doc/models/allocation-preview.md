@@ -20,6 +20,8 @@
 | `line_items` | [`List[AllocationPreviewLineItem]`](../../doc/models/allocation-preview-line-item.md) | Optional | - |
 | `accrue_charge` | `bool` | Optional | - |
 | `allocations` | [`List[AllocationPreviewItem]`](../../doc/models/allocation-preview-item.md) | Optional | - |
+| `period_type` | `str` | Optional | - |
+| `existing_balance_in_cents` | `int` | Optional | An integer representing the amount of the subscription's current balance |
 
 ## Example (as JSON)
 

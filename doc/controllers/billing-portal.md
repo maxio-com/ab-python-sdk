@@ -45,7 +45,7 @@ def enable_billing_portal_for_customer(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `customer_id` | `int` | Template, Required | The Chargify id of the customer |
-| `auto_invite` | [`AutoInviteEnum`](../../doc/models/auto-invite-enum.md) | Query, Optional | When set to 1, an Invitation email will be sent to the Customer.<br>When set to 0, or not sent, an email will not be sent.<br>Use in query: `auto_invite=1`. |
+| `auto_invite` | [`AutoInvite`](../../doc/models/auto-invite.md) | Query, Optional | When set to 1, an Invitation email will be sent to the Customer.<br>When set to 0, or not sent, an email will not be sent.<br>Use in query: `auto_invite=1`. |
 
 ## Response Type
 
@@ -121,7 +121,7 @@ print(result)
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-| 429 | Too Many Requests | [`PortalCustomersManagementLinkJson429ErrorException`](../../doc/models/portal-customers-management-link-json-429-error-exception.md) |
+| 429 | Too Many Requests | [`TooManyManagementLinkRequestsErrorException`](../../doc/models/too-many-management-link-requests-error-exception.md) |
 
 
 # Resend Billing Portal Invitation

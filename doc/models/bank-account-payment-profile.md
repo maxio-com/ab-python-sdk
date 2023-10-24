@@ -13,7 +13,7 @@
 | `first_name` | `str` | Optional | - |
 | `last_name` | `str` | Optional | - |
 | `customer_id` | `int` | Optional | - |
-| `current_vault` | `str` | Optional | - |
+| `current_vault` | [`BankAccountVault`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. |
 | `vault_token` | `str` | Optional | - |
 | `billing_address` | `str` | Optional | - |
 | `billing_city` | `str` | Optional | - |
@@ -23,8 +23,8 @@
 | `customer_vault_token` | `str` | Optional | - |
 | `billing_address_2` | `str` | Optional | - |
 | `bank_name` | `str` | Optional | - |
-| `masked_bank_routing_number` | `str` | Optional | - |
-| `masked_bank_account_number` | `str` | Optional | - |
+| `masked_bank_routing_number` | `str` | Required | - |
+| `masked_bank_account_number` | `str` | Required | - |
 | `bank_account_type` | `str` | Optional | - |
 | `bank_account_holder_type` | `str` | Optional | - |
 | `payment_type` | `str` | Optional | - |
@@ -36,12 +36,14 @@
 
 ```json
 {
+  "masked_bank_routing_number": "masked_bank_routing_number8",
+  "masked_bank_account_number": "masked_bank_account_number8",
   "verified": false,
   "id": 188,
   "first_name": "first_name6",
   "last_name": "last_name4",
   "customer_id": 226,
-  "current_vault": "current_vault6"
+  "current_vault": "authorizenet"
 }
 ```
 

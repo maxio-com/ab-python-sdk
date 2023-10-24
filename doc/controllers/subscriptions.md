@@ -671,6 +671,20 @@ body = CreateSubscriptionRequest(
             zip='02120',
             country='US',
             phone='(617) 111 - 0000'
+        ),
+        credit_card_attributes=PaymentProfileAttributes(
+            first_name='Joe',
+            last_name='Smith',
+            full_number='4111111111111111',
+            card_type=CardType.VISA,
+            expiration_month='1',
+            expiration_year='2021',
+            billing_address='123 Mass Ave.',
+            billing_address_2='billing_address_22',
+            billing_city='Boston',
+            billing_state='MA',
+            billing_country='US',
+            billing_zip='02120'
         )
     )
 )
@@ -850,18 +864,18 @@ def list_subscriptions(self,
 |  --- | --- | --- | --- |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
-| `state` | [`SubscriptionStateEnum`](../../doc/models/subscription-state-enum.md) | Query, Optional | The current state of the subscription |
+| `state` | [`SubscriptionState`](../../doc/models/subscription-state.md) | Query, Optional | The current state of the subscription |
 | `product` | `int` | Query, Optional | The product id of the subscription. (Note that the product handle cannot be used.) |
 | `product_price_point_id` | `int` | Query, Optional | The ID of the product price point. If supplied, product is required |
 | `coupon` | `int` | Query, Optional | The numeric id of the coupon currently applied to the subscription. (This can be found in the URL when editing a coupon. Note that the coupon code cannot be used.) |
-| `date_field` | [`SubscriptionDateFieldEnum`](../../doc/models/subscription-date-field-enum.md) | Query, Optional | The type of filter you'd like to apply to your search.  Allowed Values: , current_period_ends_at, current_period_starts_at, created_at, activated_at, canceled_at, expires_at, trial_started_at, trial_ended_at, updated_at |
+| `date_field` | [`SubscriptionDateField`](../../doc/models/subscription-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search.  Allowed Values: , current_period_ends_at, current_period_starts_at, created_at, activated_at, canceled_at, expires_at, trial_started_at, trial_ended_at, updated_at |
 | `start_date` | `date` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `start_date=2022-07-01`. |
 | `end_date` | `date` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `end_date=2022-08-01`. |
 | `start_datetime` | `datetime` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `start_datetime=2022-07-01 09:00:05`. |
 | `end_datetime` | `datetime` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `end_datetime=2022-08-01 10:00:05`. |
 | `metadata` | `Dict[str, str]` | Query, Optional | The value of the metadata field specified in the parameter. Use in query `metadata[my-field]=value&metadata[other-field]=another_value`. |
-| `direction` | [Sorting direction](../../doc/models/sorting-direction-enum.md) \| None | Query, Optional | This is a container for one-of cases. |
-| `sort` | [`SubscriptionSortEnum`](../../doc/models/subscription-sort-enum.md) | Query, Optional | The attribute by which to sort<br>**Default**: `'signup_date'` |
+| `direction` | [Sorting direction](../../doc/models/sorting-direction.md) \| None | Query, Optional | This is a container for one-of cases. |
+| `sort` | [`SubscriptionSort`](../../doc/models/subscription-sort.md) | Query, Optional | The attribute by which to sort<br>**Default**: `'signup_date'` |
 
 ## Response Type
 
@@ -877,7 +891,7 @@ collect = {
     'end_date': dateutil.parser.parse('2022-08-01').date(),
     'start_datetime': dateutil.parser.parse('2022-07-01 09:00:05'),
     'end_datetime': dateutil.parser.parse('2022-08-01 10:00:05'),
-    'sort': SubscriptionSortEnum.SIGNUP_DATE
+    'sort': SubscriptionSort.SIGNUP_DATE
 }
 result = subscriptions_controller.list_subscriptions(collect)
 print(result)
@@ -968,116 +982,6 @@ result = subscriptions_controller.update_subscription(
 print(result)
 ```
 
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription": {
-    "id": 18220670,
-    "state": "active",
-    "trial_started_at": null,
-    "trial_ended_at": null,
-    "activated_at": "2017-06-27T13:45:15-05:00",
-    "created_at": "2017-06-27T13:45:13-05:00",
-    "updated_at": "2017-06-30T09:26:50-05:00",
-    "expires_at": null,
-    "balance_in_cents": 10000,
-    "current_period_ends_at": "2017-06-30T12:00:00-05:00",
-    "next_assessment_at": "2017-06-30T12:00:00-05:00",
-    "canceled_at": null,
-    "cancellation_message": null,
-    "next_product_id": null,
-    "cancel_at_end_of_period": false,
-    "payment_collection_method": "automatic",
-    "snap_day": "end",
-    "cancellation_method": null,
-    "current_period_started_at": "2017-06-27T13:45:13-05:00",
-    "previous_state": "active",
-    "signup_payment_id": 191819284,
-    "signup_revenue": "0.00",
-    "delayed_cancel_at": null,
-    "coupon_code": null,
-    "total_revenue_in_cents": 0,
-    "product_price_in_cents": 0,
-    "product_version_number": 1,
-    "payment_type": null,
-    "referral_code": "d3pw7f",
-    "coupon_use_count": null,
-    "coupon_uses_allowed": null,
-    "reason_code": null,
-    "automatically_resume_at": null,
-    "current_billing_amount_in_cents": 10000,
-    "receives_invoice_emails": false,
-    "customer": {
-      "id": 17780587,
-      "first_name": "Catie",
-      "last_name": "Test",
-      "organization": "Acme, Inc.",
-      "email": "catie@example.com",
-      "created_at": "2017-06-27T13:01:05-05:00",
-      "updated_at": "2017-06-30T09:23:10-05:00",
-      "reference": "123ABC",
-      "address": "123 Anywhere Street",
-      "address_2": "Apartment #10",
-      "city": "Los Angeles",
-      "state": "CA",
-      "zip": "90210",
-      "country": "US",
-      "phone": "555-555-5555",
-      "portal_invite_last_sent_at": "2017-06-27T13:45:16-05:00",
-      "portal_invite_last_accepted_at": null,
-      "verified": true,
-      "portal_customer_created_at": "2017-06-27T13:01:08-05:00",
-      "cc_emails": "support@example.com",
-      "tax_exempt": true
-    },
-    "product": {
-      "id": 4470347,
-      "name": "Zero Dollar Product",
-      "handle": "zero-dollar-product",
-      "description": "",
-      "accounting_code": "",
-      "request_credit_card": true,
-      "expiration_interval": null,
-      "expiration_interval_unit": "never",
-      "created_at": "2017-03-23T10:54:12-05:00",
-      "updated_at": "2017-04-20T15:18:46-05:00",
-      "price_in_cents": 0,
-      "interval": 1,
-      "interval_unit": "month",
-      "initial_charge_in_cents": null,
-      "trial_price_in_cents": null,
-      "trial_interval": null,
-      "trial_interval_unit": "month",
-      "archived_at": null,
-      "require_credit_card": false,
-      "return_params": "",
-      "taxable": false,
-      "update_return_url": "",
-      "tax_code": "",
-      "initial_charge_after_trial": false,
-      "version_number": 1,
-      "update_return_params": "",
-      "product_family": {
-        "id": 997233,
-        "name": "Acme Products",
-        "description": "",
-        "handle": "acme-products",
-        "accounting_code": null
-      },
-      "public_signup_pages": [
-        {
-          "id": 316810,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product"
-        }
-      ]
-    }
-  }
-}
-```
-
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
@@ -1104,7 +1008,7 @@ def read_subscription(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
-| `include` | [`List[SubscriptionIncludeEnum]`](../../doc/models/subscription-include-enum.md) | Query, Optional | Allows including additional data in the response. Use in query: `include[]=coupons&include[]=self_service_page_token`. |
+| `include` | [`List[SubscriptionInclude]`](../../doc/models/subscription-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include[]=coupons&include[]=self_service_page_token`. |
 
 ## Response Type
 
@@ -1117,145 +1021,6 @@ subscription_id = 'subscription_id0'
 
 Liquid error: Value cannot be null. (Parameter 'key')result = subscriptions_controller.read_subscription(Liquid error: Value cannot be null. (Parameter 'key')subscription_id)
 print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription": {
-    "id": 15236915,
-    "state": "active",
-    "balance_in_cents": 0,
-    "total_revenue_in_cents": 14000,
-    "product_price_in_cents": 1000,
-    "product_version_number": 7,
-    "current_period_ends_at": "2016-11-15T14:48:10-05:00",
-    "next_assessment_at": "2016-11-15T14:48:10-05:00",
-    "trial_started_at": null,
-    "trial_ended_at": null,
-    "activated_at": "2016-11-14T14:48:12-05:00",
-    "expires_at": null,
-    "created_at": "2016-11-14T14:48:10-05:00",
-    "updated_at": "2016-11-14T15:24:41-05:00",
-    "cancellation_message": null,
-    "cancellation_method": null,
-    "cancel_at_end_of_period": null,
-    "canceled_at": null,
-    "current_period_started_at": "2016-11-14T14:48:10-05:00",
-    "previous_state": "active",
-    "signup_payment_id": 162269766,
-    "signup_revenue": "260.00",
-    "delayed_cancel_at": null,
-    "coupon_code": "5SNN6HFK3GBH",
-    "payment_collection_method": "automatic",
-    "snap_day": null,
-    "reason_code": null,
-    "receives_invoice_emails": false,
-    "net_terms": 0,
-    "customer": {
-      "first_name": "Curtis",
-      "last_name": "Test",
-      "email": "curtis@example.com",
-      "cc_emails": "jeff@example.com",
-      "organization": "",
-      "reference": null,
-      "id": 14714298,
-      "created_at": "2016-11-14T14:48:10-05:00",
-      "updated_at": "2016-11-14T14:48:13-05:00",
-      "address": "123 Anywhere Street",
-      "address_2": "",
-      "city": "Boulder",
-      "state": "CO",
-      "zip": "80302",
-      "country": "US",
-      "phone": "",
-      "verified": false,
-      "portal_customer_created_at": "2016-11-14T14:48:13-05:00",
-      "portal_invite_last_sent_at": "2016-11-14T14:48:13-05:00",
-      "portal_invite_last_accepted_at": null,
-      "tax_exempt": false,
-      "vat_number": "012345678"
-    },
-    "product": {
-      "id": 3792003,
-      "name": "$10 Basic Plan",
-      "handle": "basic",
-      "description": "lorem ipsum",
-      "accounting_code": "basic",
-      "price_in_cents": 1000,
-      "interval": 1,
-      "interval_unit": "day",
-      "initial_charge_in_cents": null,
-      "expiration_interval": null,
-      "expiration_interval_unit": "never",
-      "trial_price_in_cents": null,
-      "trial_interval": null,
-      "trial_interval_unit": "month",
-      "initial_charge_after_trial": false,
-      "return_params": "",
-      "request_credit_card": false,
-      "require_credit_card": false,
-      "created_at": "2016-03-24T13:38:39-04:00",
-      "updated_at": "2016-11-03T13:03:05-04:00",
-      "archived_at": null,
-      "update_return_url": "",
-      "update_return_params": "",
-      "product_family": {
-        "id": 527890,
-        "name": "Acme Projects",
-        "handle": "billing-plans",
-        "accounting_code": null,
-        "description": ""
-      },
-      "public_signup_pages": [
-        {
-          "id": 281054,
-          "url": "https://general-goods.chargify.com/subscribe/kqvmfrbgd89q/basic"
-        },
-        {
-          "id": 281240,
-          "url": "https://general-goods.chargify.com/subscribe/dkffht5dxfd8/basic"
-        },
-        {
-          "id": 282694,
-          "url": "https://general-goods.chargify.com/subscribe/jwffwgdd95s8/basic"
-        }
-      ],
-      "taxable": false,
-      "version_number": 7,
-      "product_price_point_name": "Default"
-    },
-    "credit_card": {
-      "id": 10191713,
-      "payment_type": "credit_card",
-      "first_name": "Curtis",
-      "last_name": "Test",
-      "masked_card_number": "XXXX-XXXX-XXXX-1",
-      "card_type": "bogus",
-      "expiration_month": 1,
-      "expiration_year": 2026,
-      "billing_address": "123 Anywhere Street",
-      "billing_address_2": "",
-      "billing_city": "Boulder",
-      "billing_state": null,
-      "billing_country": "",
-      "billing_zip": "80302",
-      "current_vault": "bogus",
-      "vault_token": "1",
-      "customer_vault_token": null,
-      "customer_id": 14714298
-    },
-    "payment_type": "credit_card",
-    "referral_code": "w7kjc9",
-    "next_product_id": null,
-    "coupon_use_count": 1,
-    "coupon_uses_allowed": 1,
-    "stored_credential_transaction_id": 166411599220288,
-    "on_hold_at": null,
-    "scheduled_cancellation_at": "2016-11-14T14:48:13-05:00"
-  }
-}
 ```
 
 
@@ -1340,7 +1105,7 @@ def read_subscription_by_reference(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `reference` | `str` | Query, Optional | - |
+| `reference` | `str` | Query, Optional | Subscription reference |
 
 ## Response Type
 
@@ -1369,7 +1134,7 @@ The query params will be: `?ack={customer_id}&cascade[]=customer&cascade[]=payme
 ```python
 def purge_subscription(self,
                       subscription_id,
-                      ack=None,
+                      ack,
                       cascade=None)
 ```
 
@@ -1378,8 +1143,8 @@ def purge_subscription(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
-| `ack` | `int` | Query, Optional | id of the customer. |
-| `cascade` | [`List[SubscriptionPurgeTypeEnum]`](../../doc/models/subscription-purge-type-enum.md) | Query, Optional | Options are "customer" or "payment_profile".<br>Use in query: `cascade[]=customer&cascade[]=payment_profile`. |
+| `ack` | `int` | Query, Required | id of the customer. |
+| `cascade` | [`List[SubscriptionPurgeType]`](../../doc/models/subscription-purge-type.md) | Query, Optional | Options are "customer" or "payment_profile".<br>Use in query: `cascade[]=customer&cascade[]=payment_profile`. |
 
 ## Response Type
 
@@ -1390,7 +1155,12 @@ def purge_subscription(self,
 ```python
 subscription_id = 'subscription_id0'
 
-Liquid error: Value cannot be null. (Parameter 'key')result = subscriptions_controller.purge_subscription(Liquid error: Value cannot be null. (Parameter 'key')subscription_id)
+ack = 252
+
+Liquid error: Value cannot be null. (Parameter 'key')result = subscriptions_controller.purge_subscription(Liquid error: Value cannot be null. (Parameter 'key')
+    subscription_id,
+    ack
+)
 print(result)
 ```
 
@@ -1532,7 +1302,9 @@ print(result)
           "taxable_amount_in_cents": 0,
           "product_id": 1,
           "product_handle": "gold-product",
-          "product_name": "Gold Product"
+          "product_name": "Gold Product",
+          "period_range_start": "13 Oct 2023",
+          "period_range_end": "13 Nov 2023"
         },
         {
           "transaction_type": "charge",
@@ -1657,7 +1429,7 @@ def apply_coupon_to_subscription(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
-| `code` | `str` | Query, Optional | - |
+| `code` | `str` | Query, Optional | A code for the coupon that would be applied to a subscription |
 | `body` | [`AddCouponsRequest`](../../doc/models/add-coupons-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -1681,156 +1453,6 @@ result = subscriptions_controller.apply_coupon_to_subscription(
     body=body
 )
 print(result)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription": {
-    "id": 21607180,
-    "state": "active",
-    "trial_started_at": null,
-    "trial_ended_at": null,
-    "activated_at": "2018-04-20T14:20:57-05:00",
-    "created_at": "2018-04-20T14:20:57-05:00",
-    "updated_at": "2018-05-11T13:53:44-05:00",
-    "expires_at": null,
-    "balance_in_cents": 49000,
-    "current_period_ends_at": "2018-05-12T11:33:03-05:00",
-    "next_assessment_at": "2018-05-12T11:33:03-05:00",
-    "canceled_at": null,
-    "cancellation_message": null,
-    "next_product_id": null,
-    "cancel_at_end_of_period": false,
-    "payment_collection_method": "remittance",
-    "snap_day": null,
-    "cancellation_method": null,
-    "current_period_started_at": "2018-05-11T11:33:03-05:00",
-    "previous_state": "active",
-    "signup_payment_id": 237154761,
-    "signup_revenue": "0.00",
-    "delayed_cancel_at": null,
-    "coupon_code": "COUPONA",
-    "total_revenue_in_cents": 52762,
-    "product_price_in_cents": 100000,
-    "product_version_number": 2,
-    "payment_type": "credit_card",
-    "referral_code": "x45nc8",
-    "coupon_use_count": 0,
-    "coupon_uses_allowed": 1,
-    "reason_code": null,
-    "automatically_resume_at": null,
-    "coupon_codes": [
-      "COUPONA",
-      "COUPONB"
-    ],
-    "customer": {
-      "id": 21259051,
-      "first_name": "K",
-      "last_name": "C",
-      "organization": "",
-      "email": "example@chargify.com",
-      "created_at": "2018-04-20T14:20:57-05:00",
-      "updated_at": "2018-04-23T15:29:28-05:00",
-      "reference": null,
-      "address": "",
-      "address_2": "",
-      "city": "",
-      "state": "",
-      "zip": "",
-      "country": "",
-      "phone": "",
-      "portal_invite_last_sent_at": "2018-04-20T14:20:59-05:00",
-      "portal_invite_last_accepted_at": null,
-      "verified": false,
-      "portal_customer_created_at": "2018-04-20T14:20:59-05:00",
-      "cc_emails": "",
-      "tax_exempt": false
-    },
-    "product": {
-      "id": 4581816,
-      "name": "Basic",
-      "handle": "basic",
-      "description": "",
-      "accounting_code": "",
-      "request_credit_card": true,
-      "expiration_interval": null,
-      "expiration_interval_unit": "never",
-      "created_at": "2017-11-02T15:00:11-05:00",
-      "updated_at": "2018-04-10T09:02:59-05:00",
-      "price_in_cents": 100000,
-      "interval": 1,
-      "interval_unit": "month",
-      "initial_charge_in_cents": 100000,
-      "trial_price_in_cents": 1000,
-      "trial_interval": 10,
-      "trial_interval_unit": "month",
-      "archived_at": null,
-      "require_credit_card": true,
-      "return_params": "",
-      "taxable": false,
-      "update_return_url": "",
-      "tax_code": "",
-      "initial_charge_after_trial": false,
-      "version_number": 2,
-      "update_return_params": "",
-      "product_family": {
-        "id": 1025627,
-        "name": "My Product Family",
-        "description": "",
-        "handle": "acme-products",
-        "accounting_code": null
-      },
-      "public_signup_pages": [
-        {
-          "id": 333589,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargifypay.com/subscribe/hbwtd98j3hk2/basic"
-        },
-        {
-          "id": 335926,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargifypay.com/subscribe/g366zy67c7rm/basic"
-        },
-        {
-          "id": 345555,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargifypay.com/subscribe/txqyyqk7d8rz/basic"
-        },
-        {
-          "id": 345556,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargifypay.com/subscribe/2zss3qpf4249/basic"
-        }
-      ]
-    },
-    "credit_card": {
-      "id": 14839830,
-      "first_name": "John",
-      "last_name": "Doe",
-      "masked_card_number": "XXXX-XXXX-XXXX-1",
-      "card_type": "bogus",
-      "expiration_month": 1,
-      "expiration_year": 2028,
-      "customer_id": 21259051,
-      "current_vault": "bogus",
-      "vault_token": "1",
-      "billing_address": null,
-      "billing_city": null,
-      "billing_state": null,
-      "billing_zip": "99999",
-      "billing_country": null,
-      "customer_vault_token": null,
-      "billing_address_2": null,
-      "payment_type": "credit_card"
-    }
-  }
-}
 ```
 
 ## Errors
@@ -1882,7 +1504,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionsRemoveCouponJson422ErrorException`](../../doc/models/subscriptions-remove-coupon-json-422-error-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionRemoveCouponErrorsException`](../../doc/models/subscription-remove-coupon-errors-exception.md) |
 
 
 # Activate Subscription
@@ -1961,5 +1583,5 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 400 | Bad Request | [`SubscriptionsActivateJson400ErrorException`](../../doc/models/subscriptions-activate-json-400-error-exception.md) |
+| 400 | Bad Request | [`NestedErrorResponseException`](../../doc/models/nested-error-response-exception.md) |
 

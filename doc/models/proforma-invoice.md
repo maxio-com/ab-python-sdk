@@ -26,7 +26,7 @@
 | `product_family_name` | `str` | Optional | - |
 | `role` | `str` | Optional | - |
 | `seller` | [`InvoiceSeller`](../../doc/models/invoice-seller.md) | Optional | Information about the seller (merchant) listed on the masthead of the invoice. |
-| `customer` | [`ProformaCustomer`](../../doc/models/proforma-customer.md) | Optional | - |
+| `customer` | [`InvoiceCustomer`](../../doc/models/invoice-customer.md) | Optional | Information about the customer who is owner or recipient the invoiced subscription. |
 | `memo` | `str` | Optional | - |
 | `billing_address` | [`InvoiceAddress`](../../doc/models/invoice-address.md) | Optional | - |
 | `shipping_address` | [`InvoiceAddress`](../../doc/models/invoice-address.md) | Optional | - |
@@ -38,12 +38,12 @@
 | `paid_amount` | `str` | Optional | - |
 | `refund_amount` | `str` | Optional | - |
 | `due_amount` | `str` | Optional | - |
-| `line_items` | [`List[ProformaInvoiceLineItem]`](../../doc/models/proforma-invoice-line-item.md) | Optional | - |
-| `discounts` | `List[object]` | Optional | - |
-| `taxes` | `List[object]` | Optional | - |
-| `credits` | `List[object]` | Optional | - |
-| `payments` | `List[object]` | Optional | - |
-| `custom_fields` | `List[object]` | Optional | - |
+| `line_items` | [`List[InvoiceLineItem]`](../../doc/models/invoice-line-item.md) | Optional | - |
+| `discounts` | [`List[ProformaInvoiceDiscount]`](../../doc/models/proforma-invoice-discount.md) | Optional | - |
+| `taxes` | [`List[ProformaInvoiceTax]`](../../doc/models/proforma-invoice-tax.md) | Optional | - |
+| `credits` | [`List[ProformaInvoiceCredit]`](../../doc/models/proforma-invoice-credit.md) | Optional | - |
+| `payments` | [`List[ProformaInvoicePayment]`](../../doc/models/proforma-invoice-payment.md) | Optional | - |
+| `custom_fields` | [`List[ProformaCustomField]`](../../doc/models/proforma-custom-field.md) | Optional | - |
 | `public_url` | `str` | Optional | - |
 
 ## Example (as JSON)
