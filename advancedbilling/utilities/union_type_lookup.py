@@ -782,7 +782,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'AllocationPayment': AnyOf(
+        'AllocationPayment': OneOf(
             [
                 LeafType(AllocationPayment)
             ],

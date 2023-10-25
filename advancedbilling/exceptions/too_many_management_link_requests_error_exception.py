@@ -36,4 +36,4 @@ class TooManyManagementLinkRequestsErrorException(advancedbilling.exceptions.api
             MUST match property names in the API description.
 
         """
-        self.errors = TooManyManagementLinkRequests.from_dictionary(dictionary.get('errors')) if 'errors' in dictionary.keys() else None
+        self.errors = TooManyManagementLinkRequests.from_dictionary(dictionary.get('errors')) if dictionary.get('errors') else None

@@ -27,21 +27,14 @@ class TooManyManagementLinkRequests(object):
         "new_link_available_at": 'new_link_available_at'
     }
 
-    _optionals = [
-        'error',
-        'new_link_available_at',
-    ]
-
     def __init__(self,
-                 error=APIHelper.SKIP,
-                 new_link_available_at=APIHelper.SKIP):
+                 error=None,
+                 new_link_available_at=None):
         """Constructor for the TooManyManagementLinkRequests class"""
 
         # Initialize members of the class
-        if error is not APIHelper.SKIP:
-            self.error = error 
-        if new_link_available_at is not APIHelper.SKIP:
-            self.new_link_available_at = APIHelper.apply_datetime_converter(new_link_available_at, APIHelper.RFC3339DateTime) if new_link_available_at else None 
+        self.error = error 
+        self.new_link_available_at = APIHelper.apply_datetime_converter(new_link_available_at, APIHelper.RFC3339DateTime) if new_link_available_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -61,8 +54,8 @@ class TooManyManagementLinkRequests(object):
             return None
 
         # Extract variables from the dictionary
-        error = dictionary.get("error") if dictionary.get("error") else APIHelper.SKIP
-        new_link_available_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("new_link_available_at")).datetime if dictionary.get("new_link_available_at") else APIHelper.SKIP
+        error = dictionary.get("error") if dictionary.get("error") else None
+        new_link_available_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("new_link_available_at")).datetime if dictionary.get("new_link_available_at") else None
         # Return an object of this model
         return cls(error,
                    new_link_available_at)
