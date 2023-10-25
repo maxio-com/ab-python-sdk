@@ -74,6 +74,7 @@ class InvoiceLineItem(object):
             For periodic charges paid in arrears (e.g. metered charges), this
             date will be the date of the current billing date. * For
             non-periodic charges, this date and the start date will match.
+        transaction_id (int): TODO: type description here.
         product_id (int): The ID of the product subscribed when the charge was
             made.  This may be set even for component charges, so true
             product-only (non-component) charges will also have a nil
@@ -84,6 +85,9 @@ class InvoiceLineItem(object):
             `nil` for non-component charges.
         price_point_id (int): The price point ID of the component being
             billed. Will be `nil` for non-component charges.
+        hide (bool): TODO: type description here.
+        component_cost_data (InvoiceLineItemComponentCostData | None): TODO:
+            type description here.
         product_price_point_id (int): The price point ID of the line item's
             product
         custom_item (bool): TODO: type description here.
@@ -104,10 +108,13 @@ class InvoiceLineItem(object):
         "tiered_unit_price": 'tiered_unit_price',
         "period_range_start": 'period_range_start',
         "period_range_end": 'period_range_end',
+        "transaction_id": 'transaction_id',
         "product_id": 'product_id',
         "product_version": 'product_version',
         "component_id": 'component_id',
         "price_point_id": 'price_point_id',
+        "hide": 'hide',
+        "component_cost_data": 'component_cost_data',
         "product_price_point_id": 'product_price_point_id',
         "custom_item": 'custom_item'
     }
@@ -125,10 +132,13 @@ class InvoiceLineItem(object):
         'tiered_unit_price',
         'period_range_start',
         'period_range_end',
+        'transaction_id',
         'product_id',
         'product_version',
         'component_id',
         'price_point_id',
+        'hide',
+        'component_cost_data',
         'product_price_point_id',
         'custom_item',
     ]
@@ -138,6 +148,7 @@ class InvoiceLineItem(object):
         'product_version',
         'component_id',
         'price_point_id',
+        'component_cost_data',
         'product_price_point_id',
     ]
 
@@ -154,10 +165,13 @@ class InvoiceLineItem(object):
                  tiered_unit_price=APIHelper.SKIP,
                  period_range_start=APIHelper.SKIP,
                  period_range_end=APIHelper.SKIP,
+                 transaction_id=APIHelper.SKIP,
                  product_id=APIHelper.SKIP,
                  product_version=APIHelper.SKIP,
                  component_id=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
+                 hide=APIHelper.SKIP,
+                 component_cost_data=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
                  custom_item=APIHelper.SKIP):
         """Constructor for the InvoiceLineItem class"""
@@ -187,6 +201,8 @@ class InvoiceLineItem(object):
             self.period_range_start = period_range_start 
         if period_range_end is not APIHelper.SKIP:
             self.period_range_end = period_range_end 
+        if transaction_id is not APIHelper.SKIP:
+            self.transaction_id = transaction_id 
         if product_id is not APIHelper.SKIP:
             self.product_id = product_id 
         if product_version is not APIHelper.SKIP:
@@ -195,6 +211,10 @@ class InvoiceLineItem(object):
             self.component_id = component_id 
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id 
+        if hide is not APIHelper.SKIP:
+            self.hide = hide 
+        if component_cost_data is not APIHelper.SKIP:
+            self.component_cost_data = component_cost_data 
         if product_price_point_id is not APIHelper.SKIP:
             self.product_price_point_id = product_price_point_id 
         if custom_item is not APIHelper.SKIP:
@@ -230,10 +250,16 @@ class InvoiceLineItem(object):
         tiered_unit_price = dictionary.get("tiered_unit_price") if "tiered_unit_price" in dictionary.keys() else APIHelper.SKIP
         period_range_start = dictionary.get("period_range_start") if dictionary.get("period_range_start") else APIHelper.SKIP
         period_range_end = dictionary.get("period_range_end") if dictionary.get("period_range_end") else APIHelper.SKIP
+        transaction_id = dictionary.get("transaction_id") if dictionary.get("transaction_id") else APIHelper.SKIP
         product_id = dictionary.get("product_id") if "product_id" in dictionary.keys() else APIHelper.SKIP
         product_version = dictionary.get("product_version") if "product_version" in dictionary.keys() else APIHelper.SKIP
         component_id = dictionary.get("component_id") if "component_id" in dictionary.keys() else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if "price_point_id" in dictionary.keys() else APIHelper.SKIP
+        hide = dictionary.get("hide") if "hide" in dictionary.keys() else APIHelper.SKIP
+        if 'component_cost_data' in dictionary.keys():
+            component_cost_data = APIHelper.deserialize_union_type(UnionTypeLookUp.get('InvoiceLineItemComponentCostData'), dictionary.get('component_cost_data'), False) if dictionary.get('component_cost_data') is not None else None
+        else:
+            component_cost_data = APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if "product_price_point_id" in dictionary.keys() else APIHelper.SKIP
         custom_item = dictionary.get("custom_item") if "custom_item" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
@@ -249,9 +275,12 @@ class InvoiceLineItem(object):
                    tiered_unit_price,
                    period_range_start,
                    period_range_end,
+                   transaction_id,
                    product_id,
                    product_version,
                    component_id,
                    price_point_id,
+                   hide,
+                   component_cost_data,
                    product_price_point_id,
                    custom_item)

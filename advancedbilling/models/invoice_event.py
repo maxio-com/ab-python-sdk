@@ -23,9 +23,9 @@ class InvoiceEvent(object):
             ApplyPaymentEventData | ChangeInvoiceCollectionMethodEventData |
             IssueInvoiceEventData | RefundInvoiceEventData |
             RemovePaymentEventData | VoidInvoiceEventData |
-            VoidInvoiceEventDataAnyOf8 | None): The event data is the data
-            that, when combined with the command, results in the output
-            invoice found in the invoice field.
+            VoidInvoiceEventData1 | None): The event data is the data that,
+            when combined with the command, results in the output invoice
+            found in the invoice field.
         timestamp (str): TODO: type description here.
         invoice (Invoice): TODO: type description here.
 

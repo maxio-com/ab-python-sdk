@@ -25,7 +25,7 @@ class Metafield(object):
         data_count (int): the amount of subscriptions this metafield has been
             applied to in Chargify
         input_type (str): TODO: type description here.
-        enum (List[str] | None): TODO: type description here.
+        enum (List[List[str]] | None): TODO: type description here.
 
     """
 
@@ -45,6 +45,10 @@ class Metafield(object):
         'scope',
         'data_count',
         'input_type',
+        'enum',
+    ]
+
+    _nullables = [
         'enum',
     ]
 
@@ -94,7 +98,10 @@ class Metafield(object):
         scope = MetafieldScope.from_dictionary(dictionary.get('scope')) if 'scope' in dictionary.keys() else APIHelper.SKIP
         data_count = dictionary.get("data_count") if dictionary.get("data_count") else APIHelper.SKIP
         input_type = dictionary.get("input_type") if dictionary.get("input_type") else APIHelper.SKIP
-        enum = APIHelper.deserialize_union_type(UnionTypeLookUp.get('MetafieldEnum'), dictionary.get('enum'), False) if dictionary.get('enum') is not None else APIHelper.SKIP
+        if 'enum' in dictionary.keys():
+            enum = APIHelper.deserialize_union_type(UnionTypeLookUp.get('MetafieldEnum'), dictionary.get('enum'), False) if dictionary.get('enum') is not None else None
+        else:
+            enum = APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    name,

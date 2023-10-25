@@ -835,15 +835,20 @@ component_id = 222
 
 body = CreateComponentPricePointRequest(
     price_point=CreateComponentPricePoint(
-        name='Special Pricing',
-        pricing_scheme='per_unit',
+        name='Wholesale',
+        pricing_scheme='stairstep',
         prices=[
             Price(
-                starting_quantity=1,
-                unit_price=5
+                starting_quantity='1',
+                unit_price='5.00',
+                ending_quantity='100'
+            ),
+            Price(
+                starting_quantity='101',
+                unit_price='4.00'
             )
         ],
-        handle='special'
+        handle='wholesale-handle'
     )
 )
 

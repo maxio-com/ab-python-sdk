@@ -24,9 +24,9 @@ class AllocateComponents(object):
         accrue_charge (bool): TODO: type description here.
         upgrade_charge (str): TODO: type description here.
         downgrade_credit (str): TODO: type description here.
-        payment_collection_method (PaymentCollectionMethodAllocateComponents):
-            (Optional) If not passed, the allocation(s) will use the payment
-            collection method on the subscription
+        payment_collection_method (PaymentCollectionMethod1): (Optional) If
+            not passed, the allocation(s) will use the payment collection
+            method on the subscription
 
     """
 

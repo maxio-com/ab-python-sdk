@@ -7,7 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.coupon_coupon_response import CouponCouponResponse
+from advancedbilling.models.coupon import Coupon
 
 
 class CouponResponse(object):
@@ -17,7 +17,7 @@ class CouponResponse(object):
     TODO: type model description here.
 
     Attributes:
-        coupon (CouponCouponResponse): TODO: type description here.
+        coupon (Coupon): TODO: type description here.
 
     """
 
@@ -56,6 +56,6 @@ class CouponResponse(object):
             return None
 
         # Extract variables from the dictionary
-        coupon = CouponCouponResponse.from_dictionary(dictionary.get('coupon')) if 'coupon' in dictionary.keys() else APIHelper.SKIP
+        coupon = Coupon.from_dictionary(dictionary.get('coupon')) if 'coupon' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(coupon)

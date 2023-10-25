@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `id` | `int` | Optional | - |
 | `event_type` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Optional | Invoice Event Type |
-| `event_data` | [Apply Credit Note Event Data](../../doc/models/apply-credit-note-event-data.md) \| [Apply Debit Note Event Data](../../doc/models/apply-debit-note-event-data.md) \| [Apply Payment Event Data](../../doc/models/apply-payment-event-data.md) \| [Change Invoice Collection Method Event Data](../../doc/models/change-invoice-collection-method-event-data.md) \| [Issue Invoice Event Data](../../doc/models/issue-invoice-event-data.md) \| [Refund Invoice Event Data](../../doc/models/refund-invoice-event-data.md) \| [Remove Payment Event Data](../../doc/models/remove-payment-event-data.md) \| [Void Invoice Event Data](../../doc/models/void-invoice-event-data.md) \| [Void Invoice Event Data_AnyOf8](../../doc/models/void-invoice-event-data-any-of-8.md) \| None | Optional | This is a container for any-of cases. |
+| `event_data` | [Apply Credit Note Event Data](../../doc/models/apply-credit-note-event-data.md) \| [Apply Debit Note Event Data](../../doc/models/apply-debit-note-event-data.md) \| [Apply Payment Event Data](../../doc/models/apply-payment-event-data.md) \| [Change Invoice Collection Method Event Data](../../doc/models/change-invoice-collection-method-event-data.md) \| [Issue Invoice Event Data](../../doc/models/issue-invoice-event-data.md) \| [Refund Invoice Event Data](../../doc/models/refund-invoice-event-data.md) \| [Remove Payment Event Data](../../doc/models/remove-payment-event-data.md) \| [Void Invoice Event Data](../../doc/models/void-invoice-event-data.md) \| [Void Invoice Event Data1](../../doc/models/void-invoice-event-data-1.md) \| None | Optional | This is a container for any-of cases. |
 | `timestamp` | `str` | Optional | - |
 | `invoice` | [`Invoice`](../../doc/models/invoice.md) | Optional | - |
 
@@ -30,11 +30,11 @@
   },
   "timestamp": "timestamp8",
   "invoice": {
+    "id": 166,
     "uid": "uid6",
     "site_id": 92,
     "customer_id": 204,
-    "subscription_id": 20,
-    "number": "number6"
+    "subscription_id": 20
   }
 }
 ```

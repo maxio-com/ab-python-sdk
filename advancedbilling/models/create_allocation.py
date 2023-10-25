@@ -32,12 +32,12 @@ class CreateAllocation(object):
             determines if the charge should accrue to the next renewal or if
             capture should be attempted immediately. Defaults to the site
             setting if one is not provided.
-        downgrade_credit (CreditTypeCreateAllocation): The type of credit to
-            be created if the change in cost is a downgrade. Defaults to the
-            component and then site setting if one is not provided.
-        upgrade_charge (CreditTypeCreateAllocation): The type of charge to be
-            created if the change in cost is an upgrade. Defaults to the
-            component and then site setting if one is not provided.
+        downgrade_credit (CreditType1): The type of credit to be created if
+            the change in cost is a downgrade. Defaults to the component and
+            then site setting if one is not provided.
+        upgrade_charge (CreditType1): The type of charge to be created if the
+            change in cost is an upgrade. Defaults to the component and then
+            site setting if one is not provided.
         price_point_id (str | int | None): Price point that the allocation
             should be charged at. Accepts either the price point's id
             (integer) or handle (string). When not specified, the default
@@ -66,6 +66,10 @@ class CreateAllocation(object):
         'accrue_charge',
         'downgrade_credit',
         'upgrade_charge',
+        'price_point_id',
+    ]
+
+    _nullables = [
         'price_point_id',
     ]
 
@@ -126,7 +130,10 @@ class CreateAllocation(object):
         accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if dictionary.get("downgrade_credit") else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
-        price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateAllocationPricePointId'), dictionary.get('price_point_id'), False) if dictionary.get('price_point_id') is not None else APIHelper.SKIP
+        if 'price_point_id' in dictionary.keys():
+            price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateAllocationPricePointId'), dictionary.get('price_point_id'), False) if dictionary.get('price_point_id') is not None else None
+        else:
+            price_point_id = APIHelper.SKIP
         # Return an object of this model
         return cls(quantity,
                    component_id,

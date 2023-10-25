@@ -38,8 +38,8 @@ class SubscriptionComponent(object):
         archived_at (str): TODO: type description here.
         price_point_id (int): TODO: type description here.
         price_point_handle (str): TODO: type description here.
-        price_point_type (PricePointTypeOneOf0 | PricePointType | None): TODO:
-            type description here.
+        price_point_type (PricePointType | None): TODO: type description
+            here.
         price_point_name (str): TODO: type description here.
         product_family_id (int): TODO: type description here.
         product_family_handle (str): TODO: type description here.

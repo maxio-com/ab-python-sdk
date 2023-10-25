@@ -19,6 +19,7 @@ class InvoiceDiscount(object):
     Attributes:
         uid (str): TODO: type description here.
         title (str): TODO: type description here.
+        description (str): TODO: type description here.
         code (str): TODO: type description here.
         source_type (str): TODO: type description here.
         source_id (int): TODO: type description here.
@@ -26,6 +27,7 @@ class InvoiceDiscount(object):
         percentage (str): TODO: type description here.
         eligible_amount (str): TODO: type description here.
         discount_amount (str): TODO: type description here.
+        transaction_id (int): TODO: type description here.
         line_item_breakouts (List[InvoiceDiscountBreakout]): TODO: type
             description here.
 
@@ -35,6 +37,7 @@ class InvoiceDiscount(object):
     _names = {
         "uid": 'uid',
         "title": 'title',
+        "description": 'description',
         "code": 'code',
         "source_type": 'source_type',
         "source_id": 'source_id',
@@ -42,12 +45,14 @@ class InvoiceDiscount(object):
         "percentage": 'percentage',
         "eligible_amount": 'eligible_amount',
         "discount_amount": 'discount_amount',
+        "transaction_id": 'transaction_id',
         "line_item_breakouts": 'line_item_breakouts'
     }
 
     _optionals = [
         'uid',
         'title',
+        'description',
         'code',
         'source_type',
         'source_id',
@@ -55,12 +60,18 @@ class InvoiceDiscount(object):
         'percentage',
         'eligible_amount',
         'discount_amount',
+        'transaction_id',
         'line_item_breakouts',
+    ]
+
+    _nullables = [
+        'description',
     ]
 
     def __init__(self,
                  uid=APIHelper.SKIP,
                  title=APIHelper.SKIP,
+                 description=APIHelper.SKIP,
                  code=APIHelper.SKIP,
                  source_type=APIHelper.SKIP,
                  source_id=APIHelper.SKIP,
@@ -68,6 +79,7 @@ class InvoiceDiscount(object):
                  percentage=APIHelper.SKIP,
                  eligible_amount=APIHelper.SKIP,
                  discount_amount=APIHelper.SKIP,
+                 transaction_id=APIHelper.SKIP,
                  line_item_breakouts=APIHelper.SKIP):
         """Constructor for the InvoiceDiscount class"""
 
@@ -76,6 +88,8 @@ class InvoiceDiscount(object):
             self.uid = uid 
         if title is not APIHelper.SKIP:
             self.title = title 
+        if description is not APIHelper.SKIP:
+            self.description = description 
         if code is not APIHelper.SKIP:
             self.code = code 
         if source_type is not APIHelper.SKIP:
@@ -90,6 +104,8 @@ class InvoiceDiscount(object):
             self.eligible_amount = eligible_amount 
         if discount_amount is not APIHelper.SKIP:
             self.discount_amount = discount_amount 
+        if transaction_id is not APIHelper.SKIP:
+            self.transaction_id = transaction_id 
         if line_item_breakouts is not APIHelper.SKIP:
             self.line_item_breakouts = line_item_breakouts 
 
@@ -113,6 +129,7 @@ class InvoiceDiscount(object):
         # Extract variables from the dictionary
         uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
         title = dictionary.get("title") if dictionary.get("title") else APIHelper.SKIP
+        description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
         code = dictionary.get("code") if dictionary.get("code") else APIHelper.SKIP
         source_type = dictionary.get("source_type") if dictionary.get("source_type") else APIHelper.SKIP
         source_id = dictionary.get("source_id") if dictionary.get("source_id") else APIHelper.SKIP
@@ -120,6 +137,7 @@ class InvoiceDiscount(object):
         percentage = dictionary.get("percentage") if dictionary.get("percentage") else APIHelper.SKIP
         eligible_amount = dictionary.get("eligible_amount") if dictionary.get("eligible_amount") else APIHelper.SKIP
         discount_amount = dictionary.get("discount_amount") if dictionary.get("discount_amount") else APIHelper.SKIP
+        transaction_id = dictionary.get("transaction_id") if dictionary.get("transaction_id") else APIHelper.SKIP
         line_item_breakouts = None
         if dictionary.get('line_item_breakouts') is not None:
             line_item_breakouts = [InvoiceDiscountBreakout.from_dictionary(x) for x in dictionary.get('line_item_breakouts')]
@@ -128,6 +146,7 @@ class InvoiceDiscount(object):
         # Return an object of this model
         return cls(uid,
                    title,
+                   description,
                    code,
                    source_type,
                    source_id,
@@ -135,4 +154,5 @@ class InvoiceDiscount(object):
                    percentage,
                    eligible_amount,
                    discount_amount,
+                   transaction_id,
                    line_item_breakouts)

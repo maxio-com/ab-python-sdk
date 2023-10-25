@@ -6,7 +6,7 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.models.prepayment_prepayment_response import PrepaymentPrepaymentResponse
+from advancedbilling.models.prepayment_1 import Prepayment1
 
 
 class PrepaymentResponse(object):
@@ -16,8 +16,7 @@ class PrepaymentResponse(object):
     TODO: type model description here.
 
     Attributes:
-        prepayment (PrepaymentPrepaymentResponse): TODO: type description
-            here.
+        prepayment (Prepayment1): TODO: type description here.
 
     """
 
@@ -51,6 +50,6 @@ class PrepaymentResponse(object):
             return None
 
         # Extract variables from the dictionary
-        prepayment = PrepaymentPrepaymentResponse.from_dictionary(dictionary.get('prepayment')) if dictionary.get('prepayment') else None
+        prepayment = Prepayment1.from_dictionary(dictionary.get('prepayment')) if dictionary.get('prepayment') else None
         # Return an object of this model
         return cls(prepayment)

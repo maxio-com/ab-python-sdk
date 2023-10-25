@@ -92,6 +92,39 @@ result = custom_fields_controller.create_metafields(
 print(result)
 ```
 
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "name": "Color",
+    "scope": {
+      "hosted": [],
+      "csv": "0",
+      "statements": "0",
+      "invoices": "0",
+      "portal": "0"
+    },
+    "data_count": 0,
+    "input_type": "text",
+    "enum": null
+  },
+  {
+    "name": "Brand",
+    "scope": {
+      "hosted": [],
+      "csv": "0",
+      "statements": "0",
+      "invoices": "0",
+      "portal": "0"
+    },
+    "data_count": 0,
+    "input_type": "text",
+    "enum": null
+  }
+]
+```
+
 
 # List Metafields
 
@@ -135,6 +168,34 @@ result = custom_fields_controller.list_metafields(
     per_page=per_page
 )
 print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "total_count": 0,
+  "current_page": 0,
+  "total_pages": 0,
+  "per_page": 0,
+  "metafields": [
+    {
+      "id": 0,
+      "name": "string",
+      "scope": {
+        "csv": "0",
+        "statements": "0",
+        "invoices": "0",
+        "portal": "0",
+        "public_show": "0",
+        "public_edit": "0"
+      },
+      "data_count": 0,
+      "input_type": "string",
+      "enum": null
+    }
+  ]
+}
 ```
 
 

@@ -178,9 +178,11 @@ class Product(object):
         'handle',
         'accounting_code',
         'expiration_interval',
+        'expiration_interval_unit',
         'initial_charge_in_cents',
         'trial_price_in_cents',
         'trial_interval',
+        'trial_interval_unit',
         'archived_at',
         'return_params',
         'update_return_url',
@@ -332,7 +334,10 @@ class Product(object):
         accounting_code = dictionary.get("accounting_code") if "accounting_code" in dictionary.keys() else APIHelper.SKIP
         request_credit_card = dictionary.get("request_credit_card") if "request_credit_card" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if "expiration_interval" in dictionary.keys() else APIHelper.SKIP
-        expiration_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ProductExpirationIntervalUnit'), dictionary.get('expiration_interval_unit'), False) if dictionary.get('expiration_interval_unit') is not None else APIHelper.SKIP
+        if 'expiration_interval_unit' in dictionary.keys():
+            expiration_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ProductExpirationIntervalUnit'), dictionary.get('expiration_interval_unit'), False) if dictionary.get('expiration_interval_unit') is not None else None
+        else:
+            expiration_interval_unit = APIHelper.SKIP
         created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
         price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
@@ -341,7 +346,10 @@ class Product(object):
         initial_charge_in_cents = dictionary.get("initial_charge_in_cents") if "initial_charge_in_cents" in dictionary.keys() else APIHelper.SKIP
         trial_price_in_cents = dictionary.get("trial_price_in_cents") if "trial_price_in_cents" in dictionary.keys() else APIHelper.SKIP
         trial_interval = dictionary.get("trial_interval") if "trial_interval" in dictionary.keys() else APIHelper.SKIP
-        trial_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ProductTrialIntervalUnit'), dictionary.get('trial_interval_unit'), False) if dictionary.get('trial_interval_unit') is not None else APIHelper.SKIP
+        if 'trial_interval_unit' in dictionary.keys():
+            trial_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ProductTrialIntervalUnit'), dictionary.get('trial_interval_unit'), False) if dictionary.get('trial_interval_unit') is not None else None
+        else:
+            trial_interval_unit = APIHelper.SKIP
         archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP
         require_credit_card = dictionary.get("require_credit_card") if "require_credit_card" in dictionary.keys() else APIHelper.SKIP
         return_params = dictionary.get("return_params") if "return_params" in dictionary.keys() else APIHelper.SKIP

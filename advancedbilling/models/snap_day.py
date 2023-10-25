@@ -10,63 +10,27 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 
 class SnapDay(object):
 
-    """Implementation of the 'SnapDay' model.
+    """Implementation of the 'SnapDay' enum.
 
-    A day of month that subscription will be processed on. Can be 1 up to 28
-    or 'end'.
+    Use for subscriptions with product eligible for calendar billing only.
+    Value can be 1-28 or 'end'.
+
+    Attributes:
+        END: TODO: type description here.
 
     """
-
-    # Create a mapping from Model property names to API property names
-    _names = {
-
-    }
-
-    def __init__(self,
-                 ):
-        """Constructor for the SnapDay class"""
-
-        # Initialize members of the class
+    _all_values = ['end']
+    END = 'end'
 
     @classmethod
-    def from_dictionary(cls,
-                        dictionary):
-        """Creates an instance of this model from a dictionary
+    def validate(cls, value):
+        """Validates value contains in enum
 
         Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
+            value: the value to be validated
 
         Returns:
-            object: An instance of this structure class.
+            boolean : if value is valid enum values.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
-        if dictionary is None:
-            return None
-
-        # Extract variables from the dictionary
-        # Return an object of this model
-        return cls()
-
-    @classmethod
-    def validate(cls, dictionary):
-        """Validates dictionary against class required properties
-
-        Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
-
-        Returns:
-            boolean : if dictionary is valid contains required properties.
-
-        """
-        if isinstance(dictionary, cls):
-            return True
-
-        if not isinstance(dictionary, dict):
-            return False
-
-        return True
+        return value in cls._all_values

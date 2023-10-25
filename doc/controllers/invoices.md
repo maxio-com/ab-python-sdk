@@ -272,7 +272,8 @@ print(result)
       "credit_amount": "0.0",
       "paid_amount": "100.0",
       "refund_amount": "0.0",
-      "due_amount": "0.0"
+      "due_amount": "0.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8htcd29wcq3q6?token=n9fr5fxff5v74c7h9srg3cwd"
     },
     {
       "uid": "inv_8hr3546xp4h8n",
@@ -337,7 +338,8 @@ print(result)
       "credit_amount": "0.0",
       "paid_amount": "0.0",
       "refund_amount": "0.0",
-      "due_amount": "100.0"
+      "due_amount": "100.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8hr3546xp4h8n?token=n9fr5fxff5v74c7h9srg3cwd"
     },
     {
       "uid": "inv_8hr3546wdwxkr",
@@ -402,7 +404,8 @@ print(result)
       "credit_amount": "0.0",
       "paid_amount": "0.0",
       "refund_amount": "0.0",
-      "due_amount": "0.0"
+      "due_amount": "0.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8hr3546wdwxkr?token=n9fr5fxff5v74c7h9srg3cwd"
     },
     {
       "uid": "inv_8hjtk8bz56bbp",
@@ -467,10 +470,10 @@ print(result)
       "credit_amount": "0.0",
       "paid_amount": "0.0",
       "refund_amount": "0.0",
-      "due_amount": "0.0"
+      "due_amount": "0.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8hjtk8bz56bbp?token=fb6kpjz5rcr2vttyjs4rcv6y"
     }
-  ],
-  "public_url": "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
+  ]
 }
 ```
 
@@ -701,9 +704,7 @@ print(result)
           "masked_card_number": "XXXX-XXXX-XXXX-1111",
           "type": "credit_card"
         },
-        "transaction_id": 126,
-        "consolidation_level": "none",
-        "parent_invoice_number": null
+        "consolidation_level": "none"
       },
       "timestamp": "2018-08-01T16:00:00Z",
       "invoice": {
@@ -759,7 +760,7 @@ print(result)
           "email": "evan4@example.com"
         },
         "recipient_emails": [],
-        "terms": "due_on_receipt",
+        "net_terms": 0,
         "memo": "Thanks for your business! If you have any questions, please contact your account manager.",
         "billing_address": {
           "street": "200 Billing Rd.",
@@ -796,8 +797,7 @@ print(result)
             "product_version": 1,
             "component_id": null,
             "price_point_id": null,
-            "hide": false,
-            "component_cost_data": null
+            "hide": false
           },
           {
             "uid": "li_8gk5bwkct3gqm",
@@ -2185,7 +2185,8 @@ print(result)
       "credit_amount": "0.0",
       "paid_amount": "100.0",
       "refund_amount": "0.0",
-      "due_amount": "0.0"
+      "due_amount": "0.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8htcd29wcq3q6?token=fb6kpjz5rcr2vttyjs4rcv6y"
     },
     {
       "uid": "inv_8hr3546xp4h8n",
@@ -2250,7 +2251,8 @@ print(result)
       "credit_amount": "0.0",
       "paid_amount": "0.0",
       "refund_amount": "0.0",
-      "due_amount": "100.0"
+      "due_amount": "100.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8hr3546xp4h8n?token=fb6kpjz5rcr2vttyjs4rcv6y"
     },
     {
       "uid": "inv_8hr3546wdwxkr",
@@ -2315,7 +2317,8 @@ print(result)
       "credit_amount": "0.0",
       "paid_amount": "0.0",
       "refund_amount": "0.0",
-      "due_amount": "0.0"
+      "due_amount": "0.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8hr3546wdwxkr?token=fb6kpjz5rcr2vttyjs4rcv6y"
     },
     {
       "uid": "inv_8hjtk8bz56bbp",
@@ -2380,10 +2383,10 @@ print(result)
       "credit_amount": "0.0",
       "paid_amount": "0.0",
       "refund_amount": "0.0",
-      "due_amount": "0.0"
+      "due_amount": "0.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
     }
-  ],
-  "public_url": "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
+  ]
 }
 ```
 

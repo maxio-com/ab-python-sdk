@@ -36,6 +36,7 @@ from advancedbilling.models.extended_interval_unit import ExtendedIntervalUnit
 from advancedbilling.models.group_settings import GroupSettings
 from advancedbilling.models.interval_unit import IntervalUnit
 from advancedbilling.models.invoice_issued import InvoiceIssued
+from advancedbilling.models.invoice_line_item_component_cost_data import InvoiceLineItemComponentCostData
 from advancedbilling.models.issue_invoice_event_data import IssueInvoiceEventData
 from advancedbilling.models.item_price_point_changed import ItemPricePointChanged
 from advancedbilling.models.metered_usage import MeteredUsage
@@ -52,7 +53,6 @@ from advancedbilling.models.prepaid_subscription_balance_changed import PrepaidS
 from advancedbilling.models.prepaid_usage import PrepaidUsage
 from advancedbilling.models.prepayment_account_balance_changed import PrepaymentAccountBalanceChanged
 from advancedbilling.models.price_point_type import PricePointType
-from advancedbilling.models.price_point_type_one_of_0 import PricePointTypeOneOf0
 from advancedbilling.models.pricing_scheme import PricingScheme
 from advancedbilling.models.proforma_invoice_issued import ProformaInvoiceIssued
 from advancedbilling.models.refund_consolidated_invoice import RefundConsolidatedInvoice
@@ -61,7 +61,7 @@ from advancedbilling.models.refund_invoice_event_data import RefundInvoiceEventD
 from advancedbilling.models.refund_success import RefundSuccess
 from advancedbilling.models.remove_payment_event_data import RemovePaymentEventData
 from advancedbilling.models.resume_options import ResumeOptions
-from advancedbilling.models.snap_day_one_of_0 import SnapDayOneOf0
+from advancedbilling.models.snap_day import SnapDay
 from advancedbilling.models.sorting_direction import SortingDirection
 from advancedbilling.models.subscription_group_inlined import SubscriptionGroupInlined
 from advancedbilling.models.subscription_group_signup_failure import SubscriptionGroupSignupFailure
@@ -70,7 +70,7 @@ from advancedbilling.models.subscription_product_change import SubscriptionProdu
 from advancedbilling.models.subscription_state_change import SubscriptionStateChange
 from advancedbilling.models.update_metafield import UpdateMetafield
 from advancedbilling.models.void_invoice_event_data import VoidInvoiceEventData
-from advancedbilling.models.void_invoice_event_data_any_of_8 import VoidInvoiceEventDataAnyOf8
+from advancedbilling.models.void_invoice_event_data_1 import VoidInvoiceEventData1
 from apimatic_core.types.union_types.any_of import AnyOf
 from apimatic_core.types.union_types.leaf_type import LeafType
 from apimatic_core.types.union_types.one_of import OneOf
@@ -190,7 +190,8 @@ class UnionTypeLookUp:
                 LeafType(CancellationMethod)
             ],
             Context.create(
-               is_optional=True
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'SubscriptionPaymentCollectionMethod': OneOf(
@@ -198,7 +199,8 @@ class UnionTypeLookUp:
                 LeafType(PaymentCollectionMethod)
             ],
             Context.create(
-               is_optional=True
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'SubscriptionGroup': OneOf(
@@ -206,7 +208,8 @@ class UnionTypeLookUp:
                 LeafType(SubscriptionGroupInlined)
             ],
             Context.create(
-               is_optional=True
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'SubscriptionPrepaidDunning': OneOf(
@@ -231,7 +234,8 @@ class UnionTypeLookUp:
                 )
             ],
             Context.create(
-               is_optional=True
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'ProductIntervalUnit': OneOf(
@@ -256,7 +260,8 @@ class UnionTypeLookUp:
                 )
             ],
             Context.create(
-               is_optional=True
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'CreateMetafieldsRequestMetafields': AnyOf(
@@ -276,7 +281,9 @@ class UnionTypeLookUp:
                          ))
             ],
             Context.create(
-               is_optional=True
+               is_array=True,
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'UpdateMetafieldsRequestMetafields': AnyOf(
@@ -322,6 +329,23 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
+        'CouponCompoundingStrategyCase0': OneOf(
+            [
+                LeafType(CompoundingStrategy)
+            ]
+        ),
+        'CouponCompoundingStrategy': AnyOf(
+            [
+                OneOf(
+                    [
+                        LeafType(CompoundingStrategy)
+                    ]
+                )
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
         'EventEventSpecificData': OneOf(
             [
                 LeafType(SubscriptionProductChange),
@@ -343,7 +367,10 @@ class UnionTypeLookUp:
                 LeafType(PaymentCollectionMethodChanged),
                 LeafType(ItemPricePointChanged),
                 LeafType(CustomFieldValueChange)
-            ]
+            ],
+            Context.create(
+               is_nullable=True
+            )
         ),
         'SubscriptionGroupCreditCardFullNumber': OneOf(
             [
@@ -428,7 +455,8 @@ class UnionTypeLookUp:
                 LeafType(str)
             ],
             Context.create(
-               is_optional=True
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'PriceUnitPrice': OneOf(
@@ -700,6 +728,23 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
+        'InvoiceLineItemComponentCostData': OneOf(
+            [
+                LeafType(InvoiceLineItemComponentCostData)
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
+            )
+        ),
+        'ComponentCostDataPricingScheme': OneOf(
+            [
+                LeafType(PricingScheme)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
         'InvoiceEventEventData': AnyOf(
             [
                 LeafType(ApplyCreditNoteEventData),
@@ -710,7 +755,7 @@ class UnionTypeLookUp:
                 LeafType(RefundInvoiceEventData),
                 LeafType(RemovePaymentEventData),
                 LeafType(VoidInvoiceEventData),
-                LeafType(VoidInvoiceEventDataAnyOf8)
+                LeafType(VoidInvoiceEventData1)
             ],
             Context.create(
                is_optional=True
@@ -740,6 +785,18 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
+        'InvoiceEvent1PaymentMethod': OneOf(
+            [
+                LeafType(PaymentMethodApplePayType),
+                LeafType(PaymentMethodBankAccountType),
+                LeafType(PaymentMethodCreditCardType),
+                LeafType(PaymentMethodExternalType),
+                LeafType(PaymentMethodPaypalType)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
         'CreateInvoicePaymentAmount': OneOf(
             [
                 LeafType(str),
@@ -757,7 +814,6 @@ class UnionTypeLookUp:
         ),
         'SubscriptionComponentPricePointType': OneOf(
             [
-                LeafType(PricePointTypeOneOf0),
                 LeafType(PricePointType)
             ],
             Context.create(
@@ -779,7 +835,8 @@ class UnionTypeLookUp:
                 LeafType(int)
             ],
             Context.create(
-               is_optional=True
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'AllocationPayment': OneOf(
@@ -787,7 +844,8 @@ class UnionTypeLookUp:
                 LeafType(AllocationPayment)
             ],
             Context.create(
-               is_optional=True
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'UsageQuantity': OneOf(
@@ -864,7 +922,7 @@ class UnionTypeLookUp:
         ),
         'UpdateSubscriptionSnapDay': OneOf(
             [
-                LeafType(SnapDayOneOf0),
+                LeafType(SnapDay),
                 LeafType(int)
             ],
             Context.create(
@@ -1122,35 +1180,6 @@ class UnionTypeLookUp:
                 LeafType(str),
                 LeafType(float)
             ]
-        ),
-        'CouponCouponResponseCompoundingStrategyCase0': OneOf(
-            [
-                LeafType(CompoundingStrategy)
-            ]
-        ),
-        'CouponCouponResponseCompoundingStrategy': AnyOf(
-            [
-                OneOf(
-                    [
-                        LeafType(CompoundingStrategy)
-                    ]
-                )
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'InvoiceEventInvoiceEventPaymentMethod': OneOf(
-            [
-                LeafType(PaymentMethodApplePayType),
-                LeafType(PaymentMethodBankAccountType),
-                LeafType(PaymentMethodCreditCardType),
-                LeafType(PaymentMethodExternalType),
-                LeafType(PaymentMethodPaypalType)
-            ],
-            Context.create(
-               is_optional=True
-            )
         )
     }
 

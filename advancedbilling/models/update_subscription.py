@@ -29,9 +29,8 @@ class UpdateSubscription(object):
         next_product_id (str): Set to an empty string to cancel a delayed
             product change.
         next_product_price_point_id (str): TODO: type description here.
-        snap_day (SnapDayOneOf0 | int | None): Use for subscriptions with
-            product eligible for calendar billing only. Value can be 1-28 or
-            'end'.
+        snap_day (SnapDay | int | None): Use for subscriptions with product
+            eligible for calendar billing only. Value can be 1-28 or 'end'.
         next_billing_at (str): TODO: type description here.
         payment_collection_method (str): TODO: type description here.
         receives_invoice_emails (bool): TODO: type description here.

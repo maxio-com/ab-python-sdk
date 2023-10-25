@@ -90,6 +90,7 @@ class Allocation(object):
 
     _nullables = [
         'memo',
+        'payment',
     ]
 
     def __init__(self,
@@ -178,7 +179,10 @@ class Allocation(object):
         accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if dictionary.get("downgrade_credit") else APIHelper.SKIP
-        payment = APIHelper.deserialize_union_type(UnionTypeLookUp.get('AllocationPayment'), dictionary.get('payment'), False) if dictionary.get('payment') is not None else APIHelper.SKIP
+        if 'payment' in dictionary.keys():
+            payment = APIHelper.deserialize_union_type(UnionTypeLookUp.get('AllocationPayment'), dictionary.get('payment'), False) if dictionary.get('payment') is not None else None
+        else:
+            payment = APIHelper.SKIP
         # Return an object of this model
         return cls(component_id,
                    subscription_id,

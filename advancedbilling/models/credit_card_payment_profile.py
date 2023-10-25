@@ -20,8 +20,7 @@ class CreditCardPaymentProfile(object):
         first_name (str): TODO: type description here.
         last_name (str): TODO: type description here.
         masked_card_number (str): TODO: type description here.
-        card_type (CardTypeCreditCardPaymentProfile): TODO: type description
-            here.
+        card_type (CardType1): TODO: type description here.
         expiration_month (int): TODO: type description here.
         expiration_year (int): TODO: type description here.
         customer_id (int): TODO: type description here.

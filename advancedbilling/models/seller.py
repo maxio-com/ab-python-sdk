@@ -20,6 +20,7 @@ class Seller(object):
         name (str): TODO: type description here.
         address (InvoiceAddress): TODO: type description here.
         phone (str): TODO: type description here.
+        logo_url (str): TODO: type description here.
 
     """
 
@@ -27,19 +28,26 @@ class Seller(object):
     _names = {
         "name": 'name',
         "address": 'address',
-        "phone": 'phone'
+        "phone": 'phone',
+        "logo_url": 'logo_url'
     }
 
     _optionals = [
         'name',
         'address',
         'phone',
+        'logo_url',
+    ]
+
+    _nullables = [
+        'logo_url',
     ]
 
     def __init__(self,
                  name=APIHelper.SKIP,
                  address=APIHelper.SKIP,
-                 phone=APIHelper.SKIP):
+                 phone=APIHelper.SKIP,
+                 logo_url=APIHelper.SKIP):
         """Constructor for the Seller class"""
 
         # Initialize members of the class
@@ -49,6 +57,8 @@ class Seller(object):
             self.address = address 
         if phone is not APIHelper.SKIP:
             self.phone = phone 
+        if logo_url is not APIHelper.SKIP:
+            self.logo_url = logo_url 
 
     @classmethod
     def from_dictionary(cls,
@@ -71,7 +81,9 @@ class Seller(object):
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         address = InvoiceAddress.from_dictionary(dictionary.get('address')) if 'address' in dictionary.keys() else APIHelper.SKIP
         phone = dictionary.get("phone") if dictionary.get("phone") else APIHelper.SKIP
+        logo_url = dictionary.get("logo_url") if "logo_url" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(name,
                    address,
-                   phone)
+                   phone,
+                   logo_url)

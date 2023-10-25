@@ -290,11 +290,14 @@ class Subscription(object):
         'trial_ended_at',
         'expires_at',
         'cancellation_message',
+        'cancellation_method',
         'cancel_at_end_of_period',
         'canceled_at',
         'delayed_cancel_at',
         'coupon_code',
         'snap_day',
+        'payment_collection_method',
+        'group',
         'payment_type',
         'referral_code',
         'next_product_id',
@@ -532,7 +535,10 @@ class Subscription(object):
         created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
         cancellation_message = dictionary.get("cancellation_message") if "cancellation_message" in dictionary.keys() else APIHelper.SKIP
-        cancellation_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCancellationMethod'), dictionary.get('cancellation_method'), False) if dictionary.get('cancellation_method') is not None else APIHelper.SKIP
+        if 'cancellation_method' in dictionary.keys():
+            cancellation_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCancellationMethod'), dictionary.get('cancellation_method'), False) if dictionary.get('cancellation_method') is not None else None
+        else:
+            cancellation_method = APIHelper.SKIP
         cancel_at_end_of_period = dictionary.get("cancel_at_end_of_period") if "cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
         canceled_at = dictionary.get("canceled_at") if "canceled_at" in dictionary.keys() else APIHelper.SKIP
         current_period_started_at = dictionary.get("current_period_started_at") if dictionary.get("current_period_started_at") else APIHelper.SKIP
@@ -542,11 +548,17 @@ class Subscription(object):
         delayed_cancel_at = dictionary.get("delayed_cancel_at") if "delayed_cancel_at" in dictionary.keys() else APIHelper.SKIP
         coupon_code = dictionary.get("coupon_code") if "coupon_code" in dictionary.keys() else APIHelper.SKIP
         snap_day = dictionary.get("snap_day") if "snap_day" in dictionary.keys() else APIHelper.SKIP
-        payment_collection_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionPaymentCollectionMethod'), dictionary.get('payment_collection_method'), False) if dictionary.get('payment_collection_method') is not None else APIHelper.SKIP
+        if 'payment_collection_method' in dictionary.keys():
+            payment_collection_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionPaymentCollectionMethod'), dictionary.get('payment_collection_method'), False) if dictionary.get('payment_collection_method') is not None else None
+        else:
+            payment_collection_method = APIHelper.SKIP
         customer = Customer.from_dictionary(dictionary.get('customer')) if 'customer' in dictionary.keys() else APIHelper.SKIP
         product = Product.from_dictionary(dictionary.get('product')) if 'product' in dictionary.keys() else APIHelper.SKIP
         credit_card = PaymentProfile.from_dictionary(dictionary.get('credit_card')) if 'credit_card' in dictionary.keys() else APIHelper.SKIP
-        group = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionGroup'), dictionary.get('group'), False) if dictionary.get('group') is not None else APIHelper.SKIP
+        if 'group' in dictionary.keys():
+            group = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionGroup'), dictionary.get('group'), False) if dictionary.get('group') is not None else None
+        else:
+            group = APIHelper.SKIP
         bank_account = SubscriptionBankAccount.from_dictionary(dictionary.get('bank_account')) if 'bank_account' in dictionary.keys() else APIHelper.SKIP
         payment_type = dictionary.get("payment_type") if "payment_type" in dictionary.keys() else APIHelper.SKIP
         referral_code = dictionary.get("referral_code") if "referral_code" in dictionary.keys() else APIHelper.SKIP

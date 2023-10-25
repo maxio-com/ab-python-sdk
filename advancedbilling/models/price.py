@@ -7,8 +7,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.starting_quantity import StartingQuantity
-from advancedbilling.models.unit_price import UnitPrice
 
 
 class Price(object):
@@ -33,6 +31,10 @@ class Price(object):
     }
 
     _optionals = [
+        'ending_quantity',
+    ]
+
+    _nullables = [
         'ending_quantity',
     ]
 
@@ -69,7 +71,10 @@ class Price(object):
         # Extract variables from the dictionary
         starting_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PriceStartingQuantity'), dictionary.get('starting_quantity'), False) if dictionary.get('starting_quantity') is not None else None
         unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PriceUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else None
-        ending_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PriceEndingQuantity'), dictionary.get('ending_quantity'), False) if dictionary.get('ending_quantity') is not None else APIHelper.SKIP
+        if 'ending_quantity' in dictionary.keys():
+            ending_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PriceEndingQuantity'), dictionary.get('ending_quantity'), False) if dictionary.get('ending_quantity') is not None else None
+        else:
+            ending_quantity = APIHelper.SKIP
         # Return an object of this model
         return cls(starting_quantity,
                    unit_price,

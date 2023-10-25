@@ -12,7 +12,9 @@ from advancedbilling.models.invoice_credit import InvoiceCredit
 from advancedbilling.models.invoice_custom_field import InvoiceCustomField
 from advancedbilling.models.invoice_customer import InvoiceCustomer
 from advancedbilling.models.invoice_discount import InvoiceDiscount
+from advancedbilling.models.invoice_display_settings import InvoiceDisplaySettings
 from advancedbilling.models.invoice_line_item import InvoiceLineItem
+from advancedbilling.models.invoice_payer import InvoicePayer
 from advancedbilling.models.invoice_payment import InvoicePayment
 from advancedbilling.models.invoice_previous_balance import InvoicePreviousBalance
 from advancedbilling.models.invoice_refund import InvoiceRefund
@@ -27,6 +29,7 @@ class Invoice(object):
     TODO: type model description here.
 
     Attributes:
+        id (int): TODO: type description here.
         uid (str): Unique identifier for the invoice. It is generated
             automatically by Chargify and has the prefix "inv_" followed by
             alphanumeric characters.
@@ -41,6 +44,9 @@ class Invoice(object):
         sequence_number (int): A monotonically increasing number assigned to
             invoices as they are created.  This number is unique within a site
             and can be used to sort and order invoices.
+        transaction_time (datetime): TODO: type description here.
+        created_at (datetime): TODO: type description here.
+        updated_at (datetime): TODO: type description here.
         issue_date (str): Date the invoice was issued to the customer.  This
             is the date that the invoice was made available for payment.  The
             format is `"YYYY-MM-DD"`.
@@ -53,6 +59,8 @@ class Invoice(object):
         status (Status): The current status of the invoice. See [Invoice
             Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
             171#line-item-breakdowns) for more.
+        role (str): TODO: type description here.
+        parent_invoice_id (int): TODO: type description here.
         collection_method (str): The collection method of the invoice, which
             is either "automatic" (tried and retried on an existing payment
             method by Chargify) or "remittance" (payment must be remitted by
@@ -77,6 +85,7 @@ class Invoice(object):
         parent_invoice_uid (str): For invoices with `consolidation_level` of
             `child`, this specifies the UID of the parent (consolidated)
             invoice.
+        subscription_group_id (int): TODO: type description here.
         parent_invoice_number (int): For invoices with `consolidation_level`
             of `child`, this specifies the number of the parent (consolidated)
             invoice.
@@ -92,6 +101,9 @@ class Invoice(object):
             on the masthead of the invoice.
         customer (InvoiceCustomer): Information about the customer who is
             owner or recipient the invoiced subscription.
+        payer (InvoicePayer): TODO: type description here.
+        recipient_emails (List[str]): TODO: type description here.
+        net_terms (int): TODO: type description here.
         memo (str): The memo printed on invoices of any collection type.  This
             message is in control of the merchant.
         billing_address (InvoiceAddress): The invoice billing address.
@@ -117,6 +129,8 @@ class Invoice(object):
         payments (List[InvoicePayment]): TODO: type description here.
         custom_fields (List[InvoiceCustomField]): TODO: type description
             here.
+        display_settings (InvoiceDisplaySettings): TODO: type description
+            here.
         public_url (str): The public URL of the invoice
         previous_balance_data (InvoicePreviousBalance): TODO: type description
             here.
@@ -125,27 +139,37 @@ class Invoice(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
+        "id": 'id',
         "uid": 'uid',
         "site_id": 'site_id',
         "customer_id": 'customer_id',
         "subscription_id": 'subscription_id',
         "number": 'number',
         "sequence_number": 'sequence_number',
+        "transaction_time": 'transaction_time',
+        "created_at": 'created_at',
+        "updated_at": 'updated_at',
         "issue_date": 'issue_date',
         "due_date": 'due_date',
         "paid_date": 'paid_date',
         "status": 'status',
+        "role": 'role',
+        "parent_invoice_id": 'parent_invoice_id',
         "collection_method": 'collection_method',
         "payment_instructions": 'payment_instructions',
         "currency": 'currency',
         "consolidation_level": 'consolidation_level',
         "parent_invoice_uid": 'parent_invoice_uid',
+        "subscription_group_id": 'subscription_group_id',
         "parent_invoice_number": 'parent_invoice_number',
         "group_primary_subscription_id": 'group_primary_subscription_id',
         "product_name": 'product_name',
         "product_family_name": 'product_family_name',
         "seller": 'seller',
         "customer": 'customer',
+        "payer": 'payer',
+        "recipient_emails": 'recipient_emails',
+        "net_terms": 'net_terms',
         "memo": 'memo',
         "billing_address": 'billing_address',
         "shipping_address": 'shipping_address',
@@ -164,32 +188,43 @@ class Invoice(object):
         "refunds": 'refunds',
         "payments": 'payments',
         "custom_fields": 'custom_fields',
+        "display_settings": 'display_settings',
         "public_url": 'public_url',
         "previous_balance_data": 'previous_balance_data'
     }
 
     _optionals = [
+        'id',
         'uid',
         'site_id',
         'customer_id',
         'subscription_id',
         'number',
         'sequence_number',
+        'transaction_time',
+        'created_at',
+        'updated_at',
         'issue_date',
         'due_date',
         'paid_date',
         'status',
+        'role',
+        'parent_invoice_id',
         'collection_method',
         'payment_instructions',
         'currency',
         'consolidation_level',
         'parent_invoice_uid',
+        'subscription_group_id',
         'parent_invoice_number',
         'group_primary_subscription_id',
         'product_name',
         'product_family_name',
         'seller',
         'customer',
+        'payer',
+        'recipient_emails',
+        'net_terms',
         'memo',
         'billing_address',
         'shipping_address',
@@ -208,39 +243,52 @@ class Invoice(object):
         'refunds',
         'payments',
         'custom_fields',
+        'display_settings',
         'public_url',
         'previous_balance_data',
     ]
 
     _nullables = [
         'paid_date',
+        'parent_invoice_id',
         'parent_invoice_uid',
+        'subscription_group_id',
         'parent_invoice_number',
         'group_primary_subscription_id',
     ]
 
     def __init__(self,
+                 id=APIHelper.SKIP,
                  uid=APIHelper.SKIP,
                  site_id=APIHelper.SKIP,
                  customer_id=APIHelper.SKIP,
                  subscription_id=APIHelper.SKIP,
                  number=APIHelper.SKIP,
                  sequence_number=APIHelper.SKIP,
+                 transaction_time=APIHelper.SKIP,
+                 created_at=APIHelper.SKIP,
+                 updated_at=APIHelper.SKIP,
                  issue_date=APIHelper.SKIP,
                  due_date=APIHelper.SKIP,
                  paid_date=APIHelper.SKIP,
                  status=APIHelper.SKIP,
+                 role=APIHelper.SKIP,
+                 parent_invoice_id=APIHelper.SKIP,
                  collection_method=APIHelper.SKIP,
                  payment_instructions=APIHelper.SKIP,
                  currency=APIHelper.SKIP,
                  consolidation_level=APIHelper.SKIP,
                  parent_invoice_uid=APIHelper.SKIP,
+                 subscription_group_id=APIHelper.SKIP,
                  parent_invoice_number=APIHelper.SKIP,
                  group_primary_subscription_id=APIHelper.SKIP,
                  product_name=APIHelper.SKIP,
                  product_family_name=APIHelper.SKIP,
                  seller=APIHelper.SKIP,
                  customer=APIHelper.SKIP,
+                 payer=APIHelper.SKIP,
+                 recipient_emails=APIHelper.SKIP,
+                 net_terms=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
                  billing_address=APIHelper.SKIP,
                  shipping_address=APIHelper.SKIP,
@@ -259,11 +307,14 @@ class Invoice(object):
                  refunds=APIHelper.SKIP,
                  payments=APIHelper.SKIP,
                  custom_fields=APIHelper.SKIP,
+                 display_settings=APIHelper.SKIP,
                  public_url=APIHelper.SKIP,
                  previous_balance_data=APIHelper.SKIP):
         """Constructor for the Invoice class"""
 
         # Initialize members of the class
+        if id is not APIHelper.SKIP:
+            self.id = id 
         if uid is not APIHelper.SKIP:
             self.uid = uid 
         if site_id is not APIHelper.SKIP:
@@ -276,6 +327,12 @@ class Invoice(object):
             self.number = number 
         if sequence_number is not APIHelper.SKIP:
             self.sequence_number = sequence_number 
+        if transaction_time is not APIHelper.SKIP:
+            self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
+        if created_at is not APIHelper.SKIP:
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
+        if updated_at is not APIHelper.SKIP:
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if issue_date is not APIHelper.SKIP:
             self.issue_date = issue_date 
         if due_date is not APIHelper.SKIP:
@@ -284,6 +341,10 @@ class Invoice(object):
             self.paid_date = paid_date 
         if status is not APIHelper.SKIP:
             self.status = status 
+        if role is not APIHelper.SKIP:
+            self.role = role 
+        if parent_invoice_id is not APIHelper.SKIP:
+            self.parent_invoice_id = parent_invoice_id 
         if collection_method is not APIHelper.SKIP:
             self.collection_method = collection_method 
         if payment_instructions is not APIHelper.SKIP:
@@ -294,6 +355,8 @@ class Invoice(object):
             self.consolidation_level = consolidation_level 
         if parent_invoice_uid is not APIHelper.SKIP:
             self.parent_invoice_uid = parent_invoice_uid 
+        if subscription_group_id is not APIHelper.SKIP:
+            self.subscription_group_id = subscription_group_id 
         if parent_invoice_number is not APIHelper.SKIP:
             self.parent_invoice_number = parent_invoice_number 
         if group_primary_subscription_id is not APIHelper.SKIP:
@@ -306,6 +369,12 @@ class Invoice(object):
             self.seller = seller 
         if customer is not APIHelper.SKIP:
             self.customer = customer 
+        if payer is not APIHelper.SKIP:
+            self.payer = payer 
+        if recipient_emails is not APIHelper.SKIP:
+            self.recipient_emails = recipient_emails 
+        if net_terms is not APIHelper.SKIP:
+            self.net_terms = net_terms 
         if memo is not APIHelper.SKIP:
             self.memo = memo 
         if billing_address is not APIHelper.SKIP:
@@ -342,6 +411,8 @@ class Invoice(object):
             self.payments = payments 
         if custom_fields is not APIHelper.SKIP:
             self.custom_fields = custom_fields 
+        if display_settings is not APIHelper.SKIP:
+            self.display_settings = display_settings 
         if public_url is not APIHelper.SKIP:
             self.public_url = public_url 
         if previous_balance_data is not APIHelper.SKIP:
@@ -365,27 +436,37 @@ class Invoice(object):
             return None
 
         # Extract variables from the dictionary
+        id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
         site_id = dictionary.get("site_id") if dictionary.get("site_id") else APIHelper.SKIP
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         number = dictionary.get("number") if dictionary.get("number") else APIHelper.SKIP
         sequence_number = dictionary.get("sequence_number") if dictionary.get("sequence_number") else APIHelper.SKIP
+        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         issue_date = dictionary.get("issue_date") if dictionary.get("issue_date") else APIHelper.SKIP
         due_date = dictionary.get("due_date") if dictionary.get("due_date") else APIHelper.SKIP
         paid_date = dictionary.get("paid_date") if "paid_date" in dictionary.keys() else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
+        role = dictionary.get("role") if dictionary.get("role") else APIHelper.SKIP
+        parent_invoice_id = dictionary.get("parent_invoice_id") if "parent_invoice_id" in dictionary.keys() else APIHelper.SKIP
         collection_method = dictionary.get("collection_method") if dictionary.get("collection_method") else APIHelper.SKIP
         payment_instructions = dictionary.get("payment_instructions") if dictionary.get("payment_instructions") else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP
         parent_invoice_uid = dictionary.get("parent_invoice_uid") if "parent_invoice_uid" in dictionary.keys() else APIHelper.SKIP
+        subscription_group_id = dictionary.get("subscription_group_id") if "subscription_group_id" in dictionary.keys() else APIHelper.SKIP
         parent_invoice_number = dictionary.get("parent_invoice_number") if "parent_invoice_number" in dictionary.keys() else APIHelper.SKIP
         group_primary_subscription_id = dictionary.get("group_primary_subscription_id") if "group_primary_subscription_id" in dictionary.keys() else APIHelper.SKIP
         product_name = dictionary.get("product_name") if dictionary.get("product_name") else APIHelper.SKIP
         product_family_name = dictionary.get("product_family_name") if dictionary.get("product_family_name") else APIHelper.SKIP
         seller = InvoiceSeller.from_dictionary(dictionary.get('seller')) if 'seller' in dictionary.keys() else APIHelper.SKIP
         customer = InvoiceCustomer.from_dictionary(dictionary.get('customer')) if 'customer' in dictionary.keys() else APIHelper.SKIP
+        payer = InvoicePayer.from_dictionary(dictionary.get('payer')) if 'payer' in dictionary.keys() else APIHelper.SKIP
+        recipient_emails = dictionary.get("recipient_emails") if dictionary.get("recipient_emails") else APIHelper.SKIP
+        net_terms = dictionary.get("net_terms") if dictionary.get("net_terms") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         billing_address = InvoiceAddress.from_dictionary(dictionary.get('billing_address')) if 'billing_address' in dictionary.keys() else APIHelper.SKIP
         shipping_address = InvoiceAddress.from_dictionary(dictionary.get('shipping_address')) if 'shipping_address' in dictionary.keys() else APIHelper.SKIP
@@ -432,30 +513,41 @@ class Invoice(object):
             custom_fields = [InvoiceCustomField.from_dictionary(x) for x in dictionary.get('custom_fields')]
         else:
             custom_fields = APIHelper.SKIP
+        display_settings = InvoiceDisplaySettings.from_dictionary(dictionary.get('display_settings')) if 'display_settings' in dictionary.keys() else APIHelper.SKIP
         public_url = dictionary.get("public_url") if dictionary.get("public_url") else APIHelper.SKIP
         previous_balance_data = InvoicePreviousBalance.from_dictionary(dictionary.get('previous_balance_data')) if 'previous_balance_data' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
-        return cls(uid,
+        return cls(id,
+                   uid,
                    site_id,
                    customer_id,
                    subscription_id,
                    number,
                    sequence_number,
+                   transaction_time,
+                   created_at,
+                   updated_at,
                    issue_date,
                    due_date,
                    paid_date,
                    status,
+                   role,
+                   parent_invoice_id,
                    collection_method,
                    payment_instructions,
                    currency,
                    consolidation_level,
                    parent_invoice_uid,
+                   subscription_group_id,
                    parent_invoice_number,
                    group_primary_subscription_id,
                    product_name,
                    product_family_name,
                    seller,
                    customer,
+                   payer,
+                   recipient_emails,
+                   net_terms,
                    memo,
                    billing_address,
                    shipping_address,
@@ -474,5 +566,6 @@ class Invoice(object):
                    refunds,
                    payments,
                    custom_fields,
+                   display_settings,
                    public_url,
                    previous_balance_data)

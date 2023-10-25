@@ -34,7 +34,7 @@ class CreateInvoice(object):
         shipping_address (CreateInvoiceAddress): Overrides the default for the
             customer
         coupons (List[CreateInvoiceCoupon]): TODO: type description here.
-        status (StatusCreateInvoice): TODO: type description here.
+        status (Status1): TODO: type description here.
 
     """
 

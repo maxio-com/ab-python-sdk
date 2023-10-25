@@ -15,8 +15,8 @@
 | `proration_downgrade_scheme` | `str` | Optional | The scheme used if the proration is a downgrade. Defaults to the site setting if one is not provided. |
 | `proration_upgrade_scheme` | `str` | Optional | The scheme used if the proration is an upgrade. Defaults to the site setting if one is not provided. |
 | `accrue_charge` | `bool` | Optional | If the change in cost is an upgrade, this determines if the charge should accrue to the next renewal or if capture should be attempted immediately. Defaults to the site setting if one is not provided. |
-| `downgrade_credit` | [`CreditTypeCreateAllocation`](../../doc/models/credit-type-create-allocation.md) | Optional | The type of credit to be created if the change in cost is a downgrade. Defaults to the component and then site setting if one is not provided. |
-| `upgrade_charge` | [`CreditTypeCreateAllocation`](../../doc/models/credit-type-create-allocation.md) | Optional | The type of charge to be created if the change in cost is an upgrade. Defaults to the component and then site setting if one is not provided. |
+| `downgrade_credit` | [`CreditType1`](../../doc/models/credit-type-1.md) | Optional | The type of credit to be created if the change in cost is a downgrade. Defaults to the component and then site setting if one is not provided. |
+| `upgrade_charge` | [`CreditType1`](../../doc/models/credit-type-1.md) | Optional | The type of charge to be created if the change in cost is an upgrade. Defaults to the component and then site setting if one is not provided. |
 | `price_point_id` | str \| int \| None | Optional | This is a container for one-of cases. |
 
 ## Example (as JSON)
