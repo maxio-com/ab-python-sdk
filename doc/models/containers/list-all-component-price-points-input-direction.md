@@ -1,5 +1,5 @@
 
-# List All Product Price Points Direction
+# List All Component Price Points Input Direction
 
 ## Data Type
 

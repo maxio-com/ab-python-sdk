@@ -16,10 +16,11 @@ class UpsertPrepaidConfiguration(object):
     TODO: type model description here.
 
     Attributes:
-        initial_funding_amount_in_cents (int): TODO: type description here.
-        replenish_to_amount_in_cents (int): TODO: type description here.
+        initial_funding_amount_in_cents (long|int): TODO: type description
+            here.
+        replenish_to_amount_in_cents (long|int): TODO: type description here.
         auto_replenish (bool): TODO: type description here.
-        replenish_threshold_amount_in_cents (int): TODO: type description
+        replenish_threshold_amount_in_cents (long|int): TODO: type description
             here.
 
     """

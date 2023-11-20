@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `timestamp` | `str` | Optional | - |
-| `amount_in_cents` | `int` | Optional | - |
+| `amount_in_cents` | `long\|int` | Optional | - |
 | `amount_formatted` | `str` | Optional | - |
 | `description` | `str` | Optional | - |
 | `category` | `str` | Optional | - |

@@ -1,5 +1,5 @@
 
-# Read Mrr Movements Direction
+# List Metadata Input Direction
 
 ## Data Type
 

@@ -188,19 +188,7 @@ By default, proforma invoices returned on the index will only include totals, no
 
 ```python
 def list_proforma_invoices(self,
-                          subscription_id,
-                          start_date=None,
-                          end_date=None,
-                          status=None,
-                          page=1,
-                          per_page=20,
-                          direction='desc',
-                          line_items=False,
-                          discounts=False,
-                          taxes=False,
-                          credits=False,
-                          payments=False,
-                          custom_fields=False)
+                          options=dict())
 ```
 
 ## Parameters
@@ -228,38 +216,19 @@ def list_proforma_invoices(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
-
-page = 2
-
-per_page = 50
-
-direction = Direction.DESC
-
-line_items = False
-
-discounts = False
-
-taxes = False
-
-credits = False
-
-payments = False
-
-custom_fields = False
-
-result = proforma_invoices_controller.list_proforma_invoices(
-    subscription_id,
-    page=page,
-    per_page=per_page,
-    direction=direction,
-    line_items=line_items,
-    discounts=discounts,
-    taxes=taxes,
-    credits=credits,
-    payments=payments,
-    custom_fields=custom_fields
-)
+collect = {
+    'subscription_id': 'subscription_id0',
+    'page': 2,
+    'per_page': 50,
+    'direction': Direction.DESC,
+    'line_items': False,
+    'discounts': False,
+    'taxes': False,
+    'credits': False,
+    'payments': False,
+    'custom_fields': False
+}
+result = proforma_invoices_controller.list_proforma_invoices(collect)
 print(result)
 ```
 

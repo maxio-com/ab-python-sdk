@@ -134,9 +134,7 @@ class SubscriptionGroupsController(BaseController):
         ).execute()
 
     def list_subscription_groups(self,
-                                 page=1,
-                                 per_page=20,
-                                 include=None):
+                                 options=dict()):
         """Does a GET request to /subscription_groups.json.
 
         Returns an array of subscription groups for the site. The response is
@@ -148,23 +146,31 @@ class SubscriptionGroupsController(BaseController):
         request.
 
         Args:
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            include (str, optional): A list of additional information to
-                include in the response. The following values are supported: 
-                - `account_balances`: Account balance information for the
-                subscription groups. Use in query:
-                `include[]=account_balances`
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    include -- str -- A list of additional information to
+                        include in the response. The following values are
+                        supported:  - `account_balances`: Account balance
+                        information for the subscription groups. Use in query:
+                        `include[]=account_balances`
 
         Returns:
             ListSubscriptionGroupsResponse: Response from the API. OK
@@ -183,13 +189,13 @@ class SubscriptionGroupsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('include')
-                         .value(include))
+                         .value(options.get('include', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

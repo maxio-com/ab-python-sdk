@@ -107,9 +107,7 @@ Use this method to retrieve a list of Notes associated with a Subscription. The 
 
 ```python
 def list_subscription_notes(self,
-                           subscription_id,
-                           page=1,
-                           per_page=20)
+                           options=dict())
 ```
 
 ## Parameters
@@ -127,17 +125,12 @@ def list_subscription_notes(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
-
-page = 2
-
-per_page = 50
-
-result = subscription_notes_controller.list_subscription_notes(
-    subscription_id,
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'subscription_id': 'subscription_id0',
+    'page': 2,
+    'per_page': 50
+}
+result = subscription_notes_controller.list_subscription_notes(collect)
 print(result)
 ```
 

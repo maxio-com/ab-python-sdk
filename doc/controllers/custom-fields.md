@@ -132,11 +132,7 @@ This endpoint lists metafields associated with a site. The metafield description
 
 ```python
 def list_metafields(self,
-                   resource_type,
-                   name=None,
-                   page=1,
-                   per_page=20,
-                   direction=None)
+                   options=dict())
 ```
 
 ## Parameters
@@ -156,17 +152,12 @@ def list_metafields(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceType.SUBSCRIPTIONS
-
-page = 2
-
-per_page = 50
-
-result = custom_fields_controller.list_metafields(
-    resource_type,
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'resource_type': ResourceType.SUBSCRIPTIONS,
+    'page': 2,
+    'per_page': 50
+}
+result = custom_fields_controller.list_metafields(collect)
 print(result)
 ```
 
@@ -363,10 +354,7 @@ This endpoint will also display the current stats of your metadata to use as a t
 
 ```python
 def read_metadata(self,
-                 resource_type,
-                 resource_id,
-                 page=1,
-                 per_page=20)
+                 options=dict())
 ```
 
 ## Parameters
@@ -385,20 +373,13 @@ def read_metadata(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceType.SUBSCRIPTIONS
-
-resource_id = 'resource_id4'
-
-page = 2
-
-per_page = 50
-
-result = custom_fields_controller.read_metadata(
-    resource_type,
-    resource_id,
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'resource_type': ResourceType.SUBSCRIPTIONS,
+    'resource_id': 'resource_id4',
+    'page': 2,
+    'per_page': 50
+}
+result = custom_fields_controller.read_metadata(collect)
 print(result)
 ```
 
@@ -529,17 +510,7 @@ This endpoint will list the number of pages of metadata information that are con
 
 ```python
 def list_metadata(self,
-                 resource_type,
-                 page=1,
-                 per_page=20,
-                 date_field=None,
-                 start_date=None,
-                 end_date=None,
-                 start_datetime=None,
-                 end_datetime=None,
-                 with_deleted=None,
-                 resource_ids=None,
-                 direction=None)
+                 options=dict())
 ```
 
 ## Parameters
@@ -565,20 +536,13 @@ def list_metadata(self,
 ## Example Usage
 
 ```python
-resource_type = ResourceType.SUBSCRIPTIONS
-
-page = 2
-
-per_page = 50
-
-date_field = BasicDateField.UPDATED_AT
-
-Liquid error: Value cannot be null. (Parameter 'key')result = custom_fields_controller.list_metadata(Liquid error: Value cannot be null. (Parameter 'key')
-    resource_type,
-    page=page,
-    per_page=per_page,
-    date_field=date_field
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')
+    'resource_type': ResourceType.SUBSCRIPTIONS,
+    'page': 2,
+    'per_page': 50,
+    'date_field': BasicDateField.UPDATED_AT
+}
+result = custom_fields_controller.list_metadata(collect)
 print(result)
 ```
 

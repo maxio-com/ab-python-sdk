@@ -8,9 +8,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 
-class ListSubscriptionComponentsDateField(object):
+class SubscriptionListDateField(object):
 
-    """Implementation of the 'List Subscription Components Date Field' enum.
+    """Implementation of the 'Subscription List Date Field' enum.
 
     TODO: type enum description here.
 

@@ -10,9 +10,9 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
-| `site_id` | `float` | Optional | - |
-| `customer_id` | `float` | Optional | - |
-| `subscription_id` | `float` | Optional | - |
+| `site_id` | `int` | Optional | - |
+| `customer_id` | `int` | Optional | - |
+| `subscription_id` | `int` | Optional | - |
 | `number` | `str` | Optional | - |
 | `sequence_number` | `int` | Optional | - |
 | `created_at` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
@@ -51,9 +51,9 @@
 ```json
 {
   "uid": "uid2",
-  "site_id": 127.58,
-  "customer_id": 51.9,
-  "subscription_id": 206.22,
+  "site_id": 214,
+  "customer_id": 70,
+  "subscription_id": 142,
   "number": "number0"
 }
 ```

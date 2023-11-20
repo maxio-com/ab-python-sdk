@@ -24,8 +24,8 @@ class SubscriptionGroupItem(object):
         product_price_point_handle (str): TODO: type description here.
         currency (str): TODO: type description here.
         coupon_code (str): TODO: type description here.
-        total_revenue_in_cents (int): TODO: type description here.
-        balance_in_cents (int): TODO: type description here.
+        total_revenue_in_cents (long|int): TODO: type description here.
+        balance_in_cents (long|int): TODO: type description here.
 
     """
 

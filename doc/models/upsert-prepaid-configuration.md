@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `initial_funding_amount_in_cents` | `int` | Optional | - |
-| `replenish_to_amount_in_cents` | `int` | Optional | - |
+| `initial_funding_amount_in_cents` | `long\|int` | Optional | - |
+| `replenish_to_amount_in_cents` | `long\|int` | Optional | - |
 | `auto_replenish` | `bool` | Optional | - |
-| `replenish_threshold_amount_in_cents` | `int` | Optional | - |
+| `replenish_threshold_amount_in_cents` | `long\|int` | Optional | - |
 
 ## Example (as JSON)
 

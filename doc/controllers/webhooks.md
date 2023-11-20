@@ -37,13 +37,7 @@ This method allows you to fetch data about webhooks. You can pass query paramete
 
 ```python
 def list_webhooks(self,
-                 status=None,
-                 since_date=None,
-                 until_date=None,
-                 page=1,
-                 per_page=20,
-                 order=None,
-                 subscription=None)
+                 options=dict())
 ```
 
 ## Parameters
@@ -65,14 +59,11 @@ def list_webhooks(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-result = webhooks_controller.list_webhooks(
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'page': 2,
+    'per_page': 50
+}
+result = webhooks_controller.list_webhooks(collect)
 print(result)
 ```
 

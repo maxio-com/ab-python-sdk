@@ -463,17 +463,7 @@ This method allows to retrieve a list of Products belonging to a Site.
 
 ```python
 def list_products(self,
-                 date_field=None,
-                 end_date=None,
-                 end_datetime=None,
-                 start_date=None,
-                 start_datetime=None,
-                 page=1,
-                 per_page=20,
-                 include_archived=None,
-                 include=None,
-                 filter_prepaid_product_price_point_product_price_point_id=None,
-                 filter_use_site_exchange_rate=None)
+                 options=dict())
 ```
 
 ## Parameters
@@ -499,23 +489,14 @@ def list_products(self,
 ## Example Usage
 
 ```python
-date_field = BasicDateField.UPDATED_AT
-
-page = 2
-
-per_page = 50
-
-include_archived = True
-
-include = ListProductsInclude.PREPAID_PRODUCT_PRICE_POINT
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = products_controller.list_products(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    date_field=date_field,
-    page=page,
-    per_page=per_page,
-    include_archived=include_archived,
-    include=include
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'date_field': BasicDateField.UPDATED_AT,
+    'page': 2,
+    'per_page': 50,
+    'include_archived': True,
+    'include': ListProductsInclude.PREPAID_PRODUCT_PRICE_POINT
+}
+result = products_controller.list_products(collect)
 print(result)
 ```
 

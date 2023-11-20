@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `reason` | `str` | Required | - |
-| `service_credit_account_balance_in_cents` | `int` | Required | - |
-| `service_credit_balance_change_in_cents` | `int` | Required | - |
+| `service_credit_account_balance_in_cents` | `long\|int` | Required | - |
+| `service_credit_balance_change_in_cents` | `long\|int` | Required | - |
 | `currency_code` | `str` | Required | - |
 | `at_time` | `str` | Required | - |
 

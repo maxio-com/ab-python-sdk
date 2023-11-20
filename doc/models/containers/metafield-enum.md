@@ -3,11 +3,12 @@
 
 ## Data Type
 
-`List[str]`
+`str | List[str]`
 
 ## Cases
 
 | Type |
 |  --- |
+| `str` |
 | `List[str]` |
 

@@ -118,34 +118,39 @@ class CustomFieldsController(BaseController):
         ).execute()
 
     def list_metafields(self,
-                        resource_type,
-                        name=None,
-                        page=1,
-                        per_page=20,
-                        direction=None):
+                        options=dict()):
         """Does a GET request to /{resource_type}/metafields.json.
 
         This endpoint lists metafields associated with a site. The metafield
         description and usage is contained in the response.
 
         Args:
-            resource_type (ResourceType): the resource type to which the
-                metafields belong
-            name (str, optional): filter by the name of the metafield
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            direction (SortingDirection | None, optional): Controls the order
-                in which results are returned. Use in query `direction=asc`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    resource_type -- ResourceType -- the resource type to
+                        which the metafields belong
+                    name -- str -- filter by the name of the metafield
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    direction -- SortingDirection | None -- Controls the order
+                        in which results are returned. Use in query
+                        `direction=asc`.
 
         Returns:
             ListMetafieldsResponse: Response from the API. OK
@@ -164,22 +169,22 @@ class CustomFieldsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('resource_type')
-                            .value(resource_type)
+                            .value(options.get('resource_type', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('name')
-                         .value(name))
+                         .value(options.get('name', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction)
-                         .validator(lambda value: UnionTypeLookUp.get('ListMetafieldsDirection').validate(value)))
+                         .value(options.get('direction', None))
+                         .validator(lambda value: UnionTypeLookUp.get('ListMetafieldsInputDirection').validate(value)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -392,10 +397,7 @@ class CustomFieldsController(BaseController):
         ).execute()
 
     def read_metadata(self,
-                      resource_type,
-                      resource_id,
-                      page=1,
-                      per_page=20):
+                      options=dict()):
         """Does a GET request to /{resource_type}/{resource_id}/metadata.json.
 
         This request will list all of the metadata belonging to a particular
@@ -405,22 +407,30 @@ class CustomFieldsController(BaseController):
         use as a tool for pagination.
 
         Args:
-            resource_type (ResourceType): the resource type to which the
-                metafields belong
-            resource_id (str): The Chargify id of the customer or the
-                subscription for which the metadata applies
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    resource_type -- ResourceType -- the resource type to
+                        which the metafields belong
+                    resource_id -- str -- The Chargify id of the customer or
+                        the subscription for which the metadata applies
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
 
         Returns:
             PaginatedMetadata: Response from the API. OK
@@ -439,20 +449,20 @@ class CustomFieldsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('resource_type')
-                            .value(resource_type)
+                            .value(options.get('resource_type', None))
                             .is_required(True)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('resource_id')
-                            .value(resource_id)
+                            .value(options.get('resource_id', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -605,17 +615,7 @@ class CustomFieldsController(BaseController):
         ).execute()
 
     def list_metadata(self,
-                      resource_type,
-                      page=1,
-                      per_page=20,
-                      date_field=None,
-                      start_date=None,
-                      end_date=None,
-                      start_datetime=None,
-                      end_datetime=None,
-                      with_deleted=None,
-                      resource_ids=None,
-                      direction=None):
+                      options=dict()):
         """Does a GET request to /{resource_type}/metadata.json.
 
         This method will provide you information on usage of metadata across
@@ -631,48 +631,60 @@ class CustomFieldsController(BaseController):
         that are contained within a site.
 
         Args:
-            resource_type (ResourceType): the resource type to which the
-                metafields belong
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            date_field (BasicDateField, optional): The type of filter you
-                would like to apply to your search.
-            start_date (str, optional): The start date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns metadata with a
-                timestamp at or after midnight (12:00:00 AM) in your site’s
-                time zone on the date specified.
-            end_date (str, optional): The end date (format YYYY-MM-DD) with
-                which to filter the date_field. Returns metadata with a
-                timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified.
-            start_datetime (str, optional): The start date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns metadata with a timestamp at or after exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of start_date.
-            end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns metadata with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of end_date.
-            with_deleted (bool, optional): Allow to fetch deleted metadata.
-            resource_ids (List[int], optional): Allow to fetch metadata for
-                multiple records based on provided ids. Use in query:
-                `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`.
-            direction (SortingDirection | None, optional): Controls the order
-                in which results are returned. Use in query `direction=asc`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    resource_type -- ResourceType -- the resource type to
+                        which the metafields belong
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    date_field -- BasicDateField -- The type of filter you
+                        would like to apply to your search.
+                    start_date -- str -- The start date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns metadata
+                        with a timestamp at or after midnight (12:00:00 AM) in
+                        your site’s time zone on the date specified.
+                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns metadata with
+                        a timestamp up to and including 11:59:59PM in your
+                        site’s time zone on the date specified.
+                    start_datetime -- str -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns metadata with a timestamp at or
+                        after exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date.
+                    end_datetime -- str -- The end date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns metadata with a timestamp at or
+                        before exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of end_date.
+                    with_deleted -- bool -- Allow to fetch deleted metadata.
+                    resource_ids -- List[int] -- Allow to fetch metadata for
+                        multiple records based on provided ids. Use in query:
+                        `resource_ids[]=122&resource_ids[]=123&resource_ids[]=1
+                        24`.
+                    direction -- SortingDirection | None -- Controls the order
+                        in which results are returned. Use in query
+                        `direction=asc`.
 
         Returns:
             PaginatedMetadata: Response from the API. OK
@@ -691,40 +703,40 @@ class CustomFieldsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('resource_type')
-                            .value(resource_type)
+                            .value(options.get('resource_type', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('date_field')
-                         .value(date_field))
+                         .value(options.get('date_field', None)))
             .query_param(Parameter()
                          .key('start_date')
-                         .value(start_date))
+                         .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('end_date')
-                         .value(end_date))
+                         .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(start_datetime))
+                         .value(options.get('start_datetime', None)))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(end_datetime))
+                         .value(options.get('end_datetime', None)))
             .query_param(Parameter()
                          .key('with_deleted')
-                         .value(with_deleted))
+                         .value(options.get('with_deleted', None)))
             .query_param(Parameter()
                          .key('resource_ids[]')
-                         .value(resource_ids))
+                         .value(options.get('resource_ids', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction)
-                         .validator(lambda value: UnionTypeLookUp.get('ListMetadataDirection').validate(value)))
+                         .value(options.get('direction', None))
+                         .validator(lambda value: UnionTypeLookUp.get('ListMetadataInputDirection').validate(value)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

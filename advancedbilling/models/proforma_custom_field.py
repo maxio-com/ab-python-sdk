@@ -16,11 +16,11 @@ class ProformaCustomField(object):
     TODO: type model description here.
 
     Attributes:
-        owner_id (float): TODO: type description here.
+        owner_id (int): TODO: type description here.
         owner_type (str): TODO: type description here.
         name (str): TODO: type description here.
         value (str): TODO: type description here.
-        metadatum_id (float): TODO: type description here.
+        metadatum_id (int): TODO: type description here.
 
     """
 

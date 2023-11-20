@@ -13,13 +13,13 @@
 |  --- | --- | --- | --- |
 | `name` | `str` | Optional | (Optional) |
 | `handle` | `str` | Optional | (Optional) |
-| `price_in_cents` | str \| int \| None | Optional | This is a container for one-of cases. |
+| `price_in_cents` | str \| long \| int \| None | Optional | This is a container for one-of cases. |
 | `interval` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `interval_unit` | [Interval Unit](../../doc/models/interval-unit.md) \| None | Optional | This is a container for one-of cases. |
-| `trial_price_in_cents` | str \| int \| None | Optional | This is a container for one-of cases. |
+| `trial_price_in_cents` | str \| long \| int \| None | Optional | This is a container for one-of cases. |
 | `trial_interval` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `trial_interval_unit` | [Interval Unit](../../doc/models/interval-unit.md) \| None | Optional | This is a container for one-of cases. |
-| `initial_charge_in_cents` | str \| int \| None | Optional | This is a container for one-of cases. |
+| `initial_charge_in_cents` | str \| long \| int \| None | Optional | This is a container for one-of cases. |
 | `initial_charge_after_trial` | `bool` | Optional | (Optional) |
 | `expiration_interval` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `expiration_interval_unit` | [Interval Unit](../../doc/models/interval-unit.md) \| None | Optional | This is a container for one-of cases. |

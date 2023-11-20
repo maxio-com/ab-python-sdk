@@ -29,11 +29,7 @@ class SalesCommissionsController(BaseController):
         super(SalesCommissionsController, self).__init__(config)
 
     def list_sales_commission_settings(self,
-                                       seller_id,
-                                       authorization='Bearer <<apiKey>>',
-                                       live_mode=None,
-                                       page=1,
-                                       per_page=100):
+                                       options=dict()):
         """Does a GET request to /sellers/{seller_id}/sales_commission_settings.json.
 
         Endpoint returns subscriptions with associated sales reps
@@ -55,24 +51,34 @@ class SalesCommissionsController(BaseController):
         variable will be replaced by `app`
 
         Args:
-            seller_id (str): The Chargify id of your seller account
-            authorization (str, optional): For authorization use user API key.
-                See details
-                [here](https://developers.chargify.com/docs/developer-docs/ZG9j
-                OjMyNzk5NTg0-2020-04-20-new-api-authentication).
-            live_mode (bool, optional): This parameter indicates if records
-                should be fetched from live mode sites. Default value is
-                true.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 100.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    seller_id -- str -- The Chargify id of your seller
+                        account
+                    authorization -- str -- For authorization use user API
+                        key. See details
+                        [here](https://developers.chargify.com/docs/developer-d
+                        ocs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication)
+                        .
+                    live_mode -- bool -- This parameter indicates if records
+                        should be fetched from live mode sites. Default value
+                        is true.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is
+                        100.
 
         Returns:
             List[SaleRepSettings]: Response from the API. OK
@@ -91,21 +97,21 @@ class SalesCommissionsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('seller_id')
-                            .value(seller_id)
+                            .value(options.get('seller_id', None))
                             .is_required(True)
                             .should_encode(True))
             .header_param(Parameter()
                           .key('Authorization')
-                          .value(authorization))
+                          .value(options.get('authorization', None)))
             .query_param(Parameter()
                          .key('live_mode')
-                         .value(live_mode))
+                         .value(options.get('live_mode', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -118,11 +124,7 @@ class SalesCommissionsController(BaseController):
         ).execute()
 
     def list_sales_reps(self,
-                        seller_id,
-                        authorization='Bearer <<apiKey>>',
-                        live_mode=None,
-                        page=1,
-                        per_page=100):
+                        options=dict()):
         """Does a GET request to /sellers/{seller_id}/sales_reps.json.
 
         Endpoint returns sales rep list with details
@@ -144,24 +146,34 @@ class SalesCommissionsController(BaseController):
         variable will be replaced by `app`
 
         Args:
-            seller_id (str): The Chargify id of your seller account
-            authorization (str, optional): For authorization use user API key.
-                See details
-                [here](https://developers.chargify.com/docs/developer-docs/ZG9j
-                OjMyNzk5NTg0-2020-04-20-new-api-authentication).
-            live_mode (bool, optional): This parameter indicates if records
-                should be fetched from live mode sites. Default value is
-                true.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 100.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    seller_id -- str -- The Chargify id of your seller
+                        account
+                    authorization -- str -- For authorization use user API
+                        key. See details
+                        [here](https://developers.chargify.com/docs/developer-d
+                        ocs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication)
+                        .
+                    live_mode -- bool -- This parameter indicates if records
+                        should be fetched from live mode sites. Default value
+                        is true.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is
+                        100.
 
         Returns:
             List[ListSaleRepItem]: Response from the API. OK
@@ -180,21 +192,21 @@ class SalesCommissionsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('seller_id')
-                            .value(seller_id)
+                            .value(options.get('seller_id', None))
                             .is_required(True)
                             .should_encode(True))
             .header_param(Parameter()
                           .key('Authorization')
-                          .value(authorization))
+                          .value(options.get('authorization', None)))
             .query_param(Parameter()
                          .key('live_mode')
-                         .value(live_mode))
+                         .value(options.get('live_mode', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

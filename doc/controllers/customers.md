@@ -128,7 +128,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`CustomersJson422ErrorException`](../../doc/models/customers-json-422-error-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`CustomerErrorResponseException`](../../doc/models/customer-error-response-exception.md) |
 
 
 # List Customers
@@ -151,15 +151,7 @@ To retrieve a single, exact match by reference, please use the [lookup endpoint]
 
 ```python
 def list_customers(self,
-                  direction=None,
-                  page=1,
-                  per_page=50,
-                  date_field=None,
-                  start_date=None,
-                  end_date=None,
-                  start_datetime=None,
-                  end_datetime=None,
-                  q=None)
+                  options=dict())
 ```
 
 ## Parameters
@@ -183,17 +175,12 @@ def list_customers(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 30
-
-date_field = BasicDateField.UPDATED_AT
-
-result = customers_controller.list_customers(
-    page=page,
-    per_page=per_page,
-    date_field=date_field
-)
+collect = {
+    'page': 2,
+    'per_page': 30,
+    'date_field': BasicDateField.UPDATED_AT
+}
+result = customers_controller.list_customers(collect)
 print(result)
 ```
 
@@ -388,7 +375,7 @@ print(result)
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`CustomerErrorResponseException`](../../doc/models/customer-error-response-exception.md) |
 
 
 # Delete Customer

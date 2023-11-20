@@ -16,11 +16,11 @@ class Event(object):
     TODO: type model description here.
 
     Attributes:
-        id (float): TODO: type description here.
+        id (int): TODO: type description here.
         key (str): TODO: type description here.
         message (str): TODO: type description here.
-        subscription_id (float): TODO: type description here.
-        customer_id (float): TODO: type description here.
+        subscription_id (int): TODO: type description here.
+        customer_id (int): TODO: type description here.
         created_at (str): TODO: type description here.
         event_specific_data (SubscriptionProductChange |
             SubscriptionStateChange | PaymentRelatedEvents | RefundSuccess |
@@ -118,21 +118,21 @@ class Event(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.id, type_callable=lambda value: isinstance(value, float)) \
+            return APIHelper.is_valid_type(value=dictionary.id, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.key, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.message, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.subscription_id, type_callable=lambda value: isinstance(value, float)) \
-                and APIHelper.is_valid_type(value=dictionary.customer_id, type_callable=lambda value: isinstance(value, float)) \
+                and APIHelper.is_valid_type(value=dictionary.subscription_id, type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.customer_id, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.created_at, type_callable=lambda value: isinstance(value, str)) \
                 and UnionTypeLookUp.get('EventEventSpecificData').validate(dictionary.event_specific_data)
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('id'), type_callable=lambda value: isinstance(value, float)) \
+        return APIHelper.is_valid_type(value=dictionary.get('id'), type_callable=lambda value: isinstance(value, int)) \
             and APIHelper.is_valid_type(value=dictionary.get('key'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('message'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('subscription_id'), type_callable=lambda value: isinstance(value, float)) \
-            and APIHelper.is_valid_type(value=dictionary.get('customer_id'), type_callable=lambda value: isinstance(value, float)) \
+            and APIHelper.is_valid_type(value=dictionary.get('subscription_id'), type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('customer_id'), type_callable=lambda value: isinstance(value, int)) \
             and APIHelper.is_valid_type(value=dictionary.get('created_at'), type_callable=lambda value: isinstance(value, str)) \
             and UnionTypeLookUp.get('EventEventSpecificData').validate(dictionary.get('event_specific_data'))

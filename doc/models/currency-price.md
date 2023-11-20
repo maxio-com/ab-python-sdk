@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `id` | `int` | Optional | - |
 | `currency` | `str` | Optional | - |
-| `price` | `int` | Optional | - |
+| `price` | `float` | Optional | - |
 | `formatted_price` | `str` | Optional | - |
 | `price_id` | `int` | Optional | - |
 | `price_point_id` | `int` | Optional | - |
@@ -22,7 +22,7 @@
 {
   "id": 88,
   "currency": "currency6",
-  "price": 40,
+  "price": 41.36,
   "formatted_price": "formatted_price4",
   "price_id": 178
 }

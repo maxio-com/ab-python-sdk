@@ -224,19 +224,7 @@ class ProformaInvoicesController(BaseController):
         ).execute()
 
     def list_proforma_invoices(self,
-                               subscription_id,
-                               start_date=None,
-                               end_date=None,
-                               status=None,
-                               page=1,
-                               per_page=20,
-                               direction='desc',
-                               line_items=False,
-                               discounts=False,
-                               taxes=False,
-                               credits=False,
-                               payments=False,
-                               custom_fields=False):
+                               options=dict()):
         """Does a GET request to /subscriptions/{subscription_id}/proforma_invoices.json.
 
         By default, proforma invoices returned on the index will only include
@@ -246,33 +234,42 @@ class ProformaInvoicesController(BaseController):
         set to `true`.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
-            start_date (str, optional): The beginning date range for the
-                invoice's Due Date, in the YYYY-MM-DD format.
-            end_date (str, optional): The ending date range for the invoice's
-                Due Date, in the YYYY-MM-DD format.
-            status (Status, optional): The current status of the invoice. 
-                Allowed Values: draft, open, paid, pending, voided
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            direction (Direction, optional): The sort direction of the
-                returned invoices.
-            line_items (bool, optional): Include line items data
-            discounts (bool, optional): Include discounts data
-            taxes (bool, optional): Include taxes data
-            credits (bool, optional): Include credits data
-            payments (bool, optional): Include payments data
-            custom_fields (bool, optional): Include custom fields data
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    subscription_id -- str -- The Chargify id of the
+                        subscription
+                    start_date -- str -- The beginning date range for the
+                        invoice's Due Date, in the YYYY-MM-DD format.
+                    end_date -- str -- The ending date range for the invoice's
+                        Due Date, in the YYYY-MM-DD format.
+                    status -- Status -- The current status of the invoice. 
+                        Allowed Values: draft, open, paid, pending, voided
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    direction -- Direction -- The sort direction of the
+                        returned invoices.
+                    line_items -- bool -- Include line items data
+                    discounts -- bool -- Include discounts data
+                    taxes -- bool -- Include taxes data
+                    credits -- bool -- Include credits data
+                    payments -- bool -- Include payments data
+                    custom_fields -- bool -- Include custom fields data
 
         Returns:
             List[ProformaInvoice]: Response from the API. OK
@@ -291,45 +288,45 @@ class ProformaInvoicesController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('subscription_id')
-                            .value(subscription_id)
+                            .value(options.get('subscription_id', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('start_date')
-                         .value(start_date))
+                         .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('end_date')
-                         .value(end_date))
+                         .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('status')
-                         .value(status))
+                         .value(options.get('status', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('line_items')
-                         .value(line_items))
+                         .value(options.get('line_items', None)))
             .query_param(Parameter()
                          .key('discounts')
-                         .value(discounts))
+                         .value(options.get('discounts', None)))
             .query_param(Parameter()
                          .key('taxes')
-                         .value(taxes))
+                         .value(options.get('taxes', None)))
             .query_param(Parameter()
                          .key('credits')
-                         .value(credits))
+                         .value(options.get('credits', None)))
             .query_param(Parameter()
                          .key('payments')
-                         .value(payments))
+                         .value(options.get('payments', None)))
             .query_param(Parameter()
                          .key('custom_fields')
-                         .value(custom_fields))
+                         .value(options.get('custom_fields', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

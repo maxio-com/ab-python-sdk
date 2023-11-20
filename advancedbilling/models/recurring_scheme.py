@@ -17,9 +17,12 @@ class RecurringScheme(object):
     Attributes:
         DO_NOT_RECUR: TODO: type description here.
         RECUR_INDEFINITELY: TODO: type description here.
+        RECUR_WITH_DURATION: TODO: type description here.
 
     """
     DO_NOT_RECUR = 'do_not_recur'
 
     RECUR_INDEFINITELY = 'recur_indefinitely'
+
+    RECUR_WITH_DURATION = 'recur_with_duration'
 

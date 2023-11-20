@@ -21,12 +21,12 @@ class CouponUsage(object):
         signups (int): Number of times the coupon has been applied
         savings (int): Dollar amount of customer savings as a result of the
             coupon.
-        savings_in_cents (int): Dollar amount of customer savings as a result
-            of the coupon.
+        savings_in_cents (long|int): Dollar amount of customer savings as a
+            result of the coupon.
         revenue (int): Total revenue of the all subscriptions that have
             received a discount from this coupon.
-        revenue_in_cents (int): Total revenue of the all subscriptions that
-            have received a discount from this coupon.
+        revenue_in_cents (long|int): Total revenue of the all subscriptions
+            that have received a discount from this coupon.
 
     """
 

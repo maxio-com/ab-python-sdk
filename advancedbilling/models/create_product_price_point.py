@@ -18,14 +18,14 @@ class CreateProductPricePoint(object):
     Attributes:
         name (str): TODO: type description here.
         handle (str): TODO: type description here.
-        price_in_cents (int): TODO: type description here.
+        price_in_cents (long|int): TODO: type description here.
         interval (int): TODO: type description here.
         interval_unit (str): TODO: type description here.
-        trial_price_in_cents (int): TODO: type description here.
+        trial_price_in_cents (long|int): TODO: type description here.
         trial_interval (int): TODO: type description here.
         trial_interval_unit (str): TODO: type description here.
         trial_type (str): TODO: type description here.
-        initial_charge_in_cents (int): TODO: type description here.
+        initial_charge_in_cents (long|int): TODO: type description here.
         initial_charge_after_trial (bool): TODO: type description here.
         expiration_interval (int): TODO: type description here.
         expiration_interval_unit (str): TODO: type description here.

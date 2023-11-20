@@ -26,15 +26,15 @@ class Subscription(object):
             documentation for [Subscription
             States](https://help.chargify.com/subscriptions/subscription-states
             .html)
-        balance_in_cents (int): Gives the current outstanding subscription
-            balance in the number of cents.
-        total_revenue_in_cents (int): Gives the total revenue from the
+        balance_in_cents (long|int): Gives the current outstanding
+            subscription balance in the number of cents.
+        total_revenue_in_cents (long|int): Gives the total revenue from the
             subscription in the number of cents.
-        product_price_in_cents (int): (Added Nov 5 2013) The recurring amount
-            of the product (and version),currently subscribed. NOTE: this may
-            differ from the current price of,the product, if you’ve changed
-            the price of the product but haven’t,moved this subscription to a
-            newer version.
+        product_price_in_cents (long|int): (Added Nov 5 2013) The recurring
+            amount of the product (and version),currently subscribed. NOTE:
+            this may differ from the current price of,the product, if you’ve
+            changed the price of the product but haven’t,moved this
+            subscription to a newer version.
         product_version_number (int): The version of the product for the
             subscription. Note that this is a deprecated field kept for
             backwards-compatibility.
@@ -119,8 +119,8 @@ class Subscription(object):
         payer_id (int): On Relationship Invoicing, the ID of the individual
             paying for the subscription. Defaults to the Customer ID unless
             the 'Customer Hierarchies & WhoPays' feature is enabled.
-        current_billing_amount_in_cents (int): The balance in cents plus the
-            estimated renewal amount in cents.
+        current_billing_amount_in_cents (long|int): The balance in cents plus
+            the estimated renewal amount in cents.
         product_price_point_id (int): The product price point currently
             subscribed to.
         product_price_point_type (str): One of the following: custom, default,
@@ -137,9 +137,9 @@ class Subscription(object):
         reference (str): The reference value (provided by your app) for the
             subscription itelf.
         on_hold_at (str): The timestamp of the most recent on hold action.
-        prepaid_dunning (bool | None): Boolean representing whether the
-            subscription is prepaid and currently in dunning. Only returned
-            for Relationship Invoicing sites with the feature enabled
+        prepaid_dunning (bool): Boolean representing whether the subscription
+            is prepaid and currently in dunning. Only returned for
+            Relationship Invoicing sites with the feature enabled
         coupons (List[SubscriptionIncludedCoupon]): Additional coupon data. To
             use this data you also have to include the following param in the
             request`include[]=coupons`. Only in Read Subscription Endpoint.
@@ -153,8 +153,8 @@ class Subscription(object):
         locale (str): TODO: type description here.
         currency (str): TODO: type description here.
         scheduled_cancellation_at (str): TODO: type description here.
-        credit_balance_in_cents (int): TODO: type description here.
-        prepayment_balance_in_cents (int): TODO: type description here.
+        credit_balance_in_cents (long|int): TODO: type description here.
+        prepayment_balance_in_cents (long|int): TODO: type description here.
 
     """
 
@@ -556,7 +556,7 @@ class Subscription(object):
         product = Product.from_dictionary(dictionary.get('product')) if 'product' in dictionary.keys() else APIHelper.SKIP
         credit_card = PaymentProfile.from_dictionary(dictionary.get('credit_card')) if 'credit_card' in dictionary.keys() else APIHelper.SKIP
         if 'group' in dictionary.keys():
-            group = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionGroup'), dictionary.get('group'), False) if dictionary.get('group') is not None else None
+            group = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionGroup2'), dictionary.get('group'), False) if dictionary.get('group') is not None else None
         else:
             group = APIHelper.SKIP
         bank_account = SubscriptionBankAccount.from_dictionary(dictionary.get('bank_account')) if 'bank_account' in dictionary.keys() else APIHelper.SKIP
@@ -579,7 +579,7 @@ class Subscription(object):
         stored_credential_transaction_id = dictionary.get("stored_credential_transaction_id") if "stored_credential_transaction_id" in dictionary.keys() else APIHelper.SKIP
         reference = dictionary.get("reference") if "reference" in dictionary.keys() else APIHelper.SKIP
         on_hold_at = dictionary.get("on_hold_at") if "on_hold_at" in dictionary.keys() else APIHelper.SKIP
-        prepaid_dunning = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionPrepaidDunning'), dictionary.get('prepaid_dunning'), False) if dictionary.get('prepaid_dunning') is not None else APIHelper.SKIP
+        prepaid_dunning = dictionary.get("prepaid_dunning") if "prepaid_dunning" in dictionary.keys() else APIHelper.SKIP
         coupons = None
         if dictionary.get('coupons') is not None:
             coupons = [SubscriptionIncludedCoupon.from_dictionary(x) for x in dictionary.get('coupons')]

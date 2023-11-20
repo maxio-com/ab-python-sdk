@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `amount_in_cents` | `int` | Optional | - |
+| `amount_in_cents` | `long\|int` | Optional | - |
 | `amount_formatted` | `str` | Optional | - |
 | `currency` | `str` | Optional | - |
 | `currency_symbol` | `str` | Optional | - |

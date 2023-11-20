@@ -14,7 +14,7 @@
 | `description` | `str` | Required | - |
 | `accounting_code` | `str` | Optional | - |
 | `require_credit_card` | `bool` | Optional | - |
-| `price_in_cents` | `int` | Required | - |
+| `price_in_cents` | `long\|int` | Required | - |
 | `interval` | `int` | Required | - |
 | `interval_unit` | `str` | Required | - |
 | `auto_create_signup_page` | `bool` | Optional | - |

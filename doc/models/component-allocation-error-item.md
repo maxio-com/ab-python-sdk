@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `component_id` | `float` | Optional | - |
+| `component_id` | `int` | Optional | - |
 | `message` | `str` | Optional | - |
 | `kind` | `str` | Optional | - |
 | `on` | `str` | Optional | - |
@@ -18,7 +18,7 @@
 
 ```json
 {
-  "component_id": 40.28,
+  "component_id": 188,
   "message": "message0",
   "kind": "kind8",
   "on": "on0"

@@ -17,8 +17,8 @@ class SubscriptionGroupPrepaymentResponse(object):
 
     Attributes:
         id (int): TODO: type description here.
-        amount_in_cents (int): The amount in cents of the entry.
-        ending_balance_in_cents (int): The ending balance in cents of the
+        amount_in_cents (long|int): The amount in cents of the entry.
+        ending_balance_in_cents (long|int): The ending balance in cents of the
             account.
         entry_type (ServiceCreditType): The type of entry
         memo (str): A memo attached to the entry.

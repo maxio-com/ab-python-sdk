@@ -26,9 +26,9 @@ class ProformaInvoicePreview(object):
 
     Attributes:
         uid (str): TODO: type description here.
-        site_id (float): TODO: type description here.
-        customer_id (float): TODO: type description here.
-        subscription_id (float): TODO: type description here.
+        site_id (int): TODO: type description here.
+        customer_id (int): TODO: type description here.
+        subscription_id (int): TODO: type description here.
         number (str): TODO: type description here.
         sequence_number (int): TODO: type description here.
         created_at (str): TODO: type description here.

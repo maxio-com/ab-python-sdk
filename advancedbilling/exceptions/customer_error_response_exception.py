@@ -11,9 +11,9 @@ from advancedbilling.api_helper import APIHelper
 import advancedbilling.exceptions.api_exception
 
 
-class SubscriptionsAddCouponJson422ErrorException(advancedbilling.exceptions.api_exception.APIException):
+class CustomerErrorResponseException(advancedbilling.exceptions.api_exception.APIException):
     def __init__(self, reason, response):
-        """Constructor for the SubscriptionsAddCouponJson422ErrorException class
+        """Constructor for the CustomerErrorResponseException class
 
         Args:
             reason (string): The reason (or error message) for the Exception
@@ -21,7 +21,7 @@ class SubscriptionsAddCouponJson422ErrorException(advancedbilling.exceptions.api
             response (HttpResponse): The HttpResponse of the API call.
 
         """
-        super(SubscriptionsAddCouponJson422ErrorException, self).__init__(reason, response)
+        super(CustomerErrorResponseException, self).__init__(reason, response)
         dictionary = APIHelper.json_deserialize(self.response.text)
         if isinstance(dictionary, dict):
             self.unbox(dictionary)
@@ -35,6 +35,4 @@ class SubscriptionsAddCouponJson422ErrorException(advancedbilling.exceptions.api
             MUST match property names in the API description.
 
         """
-        self.codes = dictionary.get("codes") if dictionary.get("codes") else None
-        self.subscription = dictionary.get("subscription") if dictionary.get("subscription") else None
-        self.coupon_codes = dictionary.get("coupon_codes") if dictionary.get("coupon_codes") else None
+        self.errors = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomerErrorResponseErrors'), dictionary.get('errors'), False) if dictionary.get('errors') is not None else None

@@ -507,7 +507,7 @@ class CreateSubscription(object):
         calendar_billing = CalendarBilling.from_dictionary(dictionary.get('calendar_billing')) if 'calendar_billing' in dictionary.keys() else APIHelper.SKIP
         metafields = dictionary.get("metafields") if dictionary.get("metafields") else APIHelper.SKIP
         customer_reference = dictionary.get("customer_reference") if dictionary.get("customer_reference") else APIHelper.SKIP
-        group = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionGroup'), dictionary.get('group'), False) if dictionary.get('group') is not None else APIHelper.SKIP
+        group = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionGroup2'), dictionary.get('group'), False) if dictionary.get('group') is not None else APIHelper.SKIP
         ref = dictionary.get("ref") if dictionary.get("ref") else APIHelper.SKIP
         cancellation_message = dictionary.get("cancellation_message") if dictionary.get("cancellation_message") else APIHelper.SKIP
         cancellation_method = dictionary.get("cancellation_method") if dictionary.get("cancellation_method") else APIHelper.SKIP

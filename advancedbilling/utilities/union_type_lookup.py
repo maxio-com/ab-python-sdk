@@ -31,6 +31,7 @@ from advancedbilling.models.create_subscription_component import CreateSubscript
 from advancedbilling.models.credit_account_balance_changed import CreditAccountBalanceChanged
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
 from advancedbilling.models.custom_field_value_change import CustomFieldValueChange
+from advancedbilling.models.customer_error import CustomerError
 from advancedbilling.models.dunning_step_reached import DunningStepReached
 from advancedbilling.models.extended_interval_unit import ExtendedIntervalUnit
 from advancedbilling.models.group_settings import GroupSettings
@@ -113,7 +114,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ListAllComponentPricePointsDirection': OneOf(
+        'ListAllComponentPricePointsInputDirection': OneOf(
             [
                 LeafType(SortingDirection)
             ],
@@ -121,7 +122,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ListCustomersDirection': OneOf(
+        'ListCustomersInputDirection': OneOf(
             [
                 LeafType(SortingDirection)
             ],
@@ -129,7 +130,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ListMetafieldsDirection': OneOf(
+        'ListMetafieldsInputDirection': OneOf(
             [
                 LeafType(SortingDirection)
             ],
@@ -137,7 +138,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ListMetadataDirection': OneOf(
+        'ListMetadataInputDirection': OneOf(
             [
                 LeafType(SortingDirection)
             ],
@@ -145,7 +146,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ReadMrrMovementsDirection': OneOf(
+        'ReadMrrMovementsInputDirection': OneOf(
             [
                 LeafType(SortingDirection)
             ],
@@ -153,7 +154,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ListAllProductPricePointsDirection': OneOf(
+        'ListAllProductPricePointsInputDirection': OneOf(
             [
                 LeafType(SortingDirection)
             ],
@@ -169,7 +170,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ListSubscriptionComponentsDirection': OneOf(
+        'ListSubscriptionComponentsInputDirection': OneOf(
             [
                 LeafType(SortingDirection)
             ],
@@ -177,9 +178,21 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ListSubscriptionComponentsForSiteDirection': OneOf(
+        'ListSubscriptionComponentsForSiteInputDirection': OneOf(
             [
                 LeafType(SortingDirection)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'CustomerErrorResponseErrors': OneOf(
+            [
+                LeafType(CustomerError),
+                LeafType(str,
+                         Context.create(
+                             is_array=True
+                         ))
             ],
             Context.create(
                is_optional=True
@@ -203,21 +216,13 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
-        'SubscriptionGroup': OneOf(
+        'SubscriptionGroup2': OneOf(
             [
                 LeafType(SubscriptionGroupInlined)
             ],
             Context.create(
                is_optional=True,
                is_nullable=True
-            )
-        ),
-        'SubscriptionPrepaidDunning': OneOf(
-            [
-                LeafType(bool)
-            ],
-            Context.create(
-               is_optional=True
             )
         ),
         'ProductExpirationIntervalUnitCase0': OneOf(
@@ -275,13 +280,13 @@ class UnionTypeLookUp:
         ),
         'MetafieldEnum': OneOf(
             [
+                LeafType(str),
                 LeafType(str,
                          Context.create(
                              is_array=True
                          ))
             ],
             Context.create(
-               is_array=True,
                is_optional=True,
                is_nullable=True
             )
@@ -728,7 +733,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'InvoiceLineItemComponentCostData': OneOf(
+        'InvoiceLineItemComponentCostData2': OneOf(
             [
                 LeafType(InvoiceLineItemComponentCostData)
             ],
@@ -839,7 +844,7 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
-        'AllocationPayment': OneOf(
+        'AllocationPayment2': OneOf(
             [
                 LeafType(AllocationPayment)
             ],
@@ -866,7 +871,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSubscriptionGroup': OneOf(
+        'CreateSubscriptionGroup2': OneOf(
             [
                 LeafType(GroupSettings),
                 LeafType(bool)

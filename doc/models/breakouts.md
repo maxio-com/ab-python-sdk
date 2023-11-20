@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `plan_amount_in_cents` | `int` | Optional | - |
+| `plan_amount_in_cents` | `long\|int` | Optional | - |
 | `plan_amount_formatted` | `str` | Optional | - |
-| `usage_amount_in_cents` | `int` | Optional | - |
+| `usage_amount_in_cents` | `long\|int` | Optional | - |
 | `usage_amount_formatted` | `str` | Optional | - |
 
 ## Example (as JSON)

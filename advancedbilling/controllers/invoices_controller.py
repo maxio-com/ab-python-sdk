@@ -96,28 +96,7 @@ class InvoicesController(BaseController):
         ).execute()
 
     def list_invoices(self,
-                      start_date=None,
-                      end_date=None,
-                      status=None,
-                      subscription_id=None,
-                      subscription_group_uid=None,
-                      page=1,
-                      per_page=20,
-                      direction='desc',
-                      line_items=False,
-                      discounts=False,
-                      taxes=False,
-                      credits=False,
-                      payments=False,
-                      custom_fields=False,
-                      refunds=False,
-                      date_field='due_date',
-                      start_datetime=None,
-                      end_datetime=None,
-                      customer_ids=None,
-                      number=None,
-                      product_ids=None,
-                      sort='number'):
+                      options=dict()):
         """Does a GET request to /invoices.json.
 
         By default, invoices returned on the index will only include totals,
@@ -127,72 +106,81 @@ class InvoicesController(BaseController):
         set to `true`.
 
         Args:
-            start_date (str, optional): The start date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns invoices with a
-                timestamp at or after midnight (12:00:00 AM) in your site’s
-                time zone on the date specified.
-            end_date (str, optional): The end date (format YYYY-MM-DD) with
-                which to filter the date_field. Returns invoices with a
-                timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified.
-            status (Status, optional): The current status of the invoice. 
-                Allowed Values: draft, open, paid, pending, voided
-            subscription_id (int, optional): The subscription's ID.
-            subscription_group_uid (str, optional): The UID of the
-                subscription group you want to fetch consolidated invoices
-                for. This will return a paginated list of consolidated
-                invoices for the specified group.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            direction (Direction, optional): The sort direction of the
-                returned invoices.
-            line_items (bool, optional): Include line items data
-            discounts (bool, optional): Include discounts data
-            taxes (bool, optional): Include taxes data
-            credits (bool, optional): Include credits data
-            payments (bool, optional): Include payments data
-            custom_fields (bool, optional): Include custom fields data
-            refunds (bool, optional): Include refunds data
-            date_field (InvoiceDateField, optional): The type of filter you
-                would like to apply to your search. Use in query
-                `date_field=issue_date`.
-            start_datetime (str, optional): The start date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns invoices with a timestamp at or after exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of start_date. Allowed to
-                be used only along with date_field set to created_at or
-                updated_at.
-            end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns invoices with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of end_date. Allowed to be
-                used only along with date_field set to created_at or
-                updated_at.
-            customer_ids (List[int], optional): Allows fetching invoices with
-                matching customer id based on provided values. Use in query
-                `customer_ids=1,2,3`.
-            number (List[str], optional): Allows fetching invoices with
-                matching invoice number based on provided values. Use in query
-                `number=1234,1235`.
-            product_ids (List[int], optional): Allows fetching invoices with
-                matching line items product ids based on provided values. Use
-                in query `product_ids=23,34`.
-            sort (InvoiceSortField, optional): Allows specification of the
-                order of the returned list. Use in query `sort=total_amount`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    start_date -- str -- The start date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns invoices
+                        with a timestamp at or after midnight (12:00:00 AM) in
+                        your site’s time zone on the date specified.
+                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns invoices with
+                        a timestamp up to and including 11:59:59PM in your
+                        site’s time zone on the date specified.
+                    status -- Status -- The current status of the invoice. 
+                        Allowed Values: draft, open, paid, pending, voided
+                    subscription_id -- int -- The subscription's ID.
+                    subscription_group_uid -- str -- The UID of the
+                        subscription group you want to fetch consolidated
+                        invoices for. This will return a paginated list of
+                        consolidated invoices for the specified group.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    direction -- Direction -- The sort direction of the
+                        returned invoices.
+                    line_items -- bool -- Include line items data
+                    discounts -- bool -- Include discounts data
+                    taxes -- bool -- Include taxes data
+                    credits -- bool -- Include credits data
+                    payments -- bool -- Include payments data
+                    custom_fields -- bool -- Include custom fields data
+                    refunds -- bool -- Include refunds data
+                    date_field -- InvoiceDateField -- The type of filter you
+                        would like to apply to your search. Use in query
+                        `date_field=issue_date`.
+                    start_datetime -- str -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns invoices with a timestamp at or
+                        after exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date. Allowed to be used only along
+                        with date_field set to created_at or updated_at.
+                    end_datetime -- str -- The end date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns invoices with a timestamp at or
+                        before exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of end_date. Allowed to be used only along
+                        with date_field set to created_at or updated_at.
+                    customer_ids -- List[int] -- Allows fetching invoices with
+                        matching customer id based on provided values. Use in
+                        query `customer_ids=1,2,3`.
+                    number -- List[str] -- Allows fetching invoices with
+                        matching invoice number based on provided values. Use
+                        in query `number=1234,1235`.
+                    product_ids -- List[int] -- Allows fetching invoices with
+                        matching line items product ids based on provided
+                        values. Use in query `product_ids=23,34`.
+                    sort -- InvoiceSortField -- Allows specification of the
+                        order of the returned list. Use in query
+                        `sort=total_amount`.
 
         Returns:
             ListInvoicesResponse: Response from the API. OK
@@ -211,70 +199,70 @@ class InvoicesController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('start_date')
-                         .value(start_date))
+                         .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('end_date')
-                         .value(end_date))
+                         .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('status')
-                         .value(status))
+                         .value(options.get('status', None)))
             .query_param(Parameter()
                          .key('subscription_id')
-                         .value(subscription_id))
+                         .value(options.get('subscription_id', None)))
             .query_param(Parameter()
                          .key('subscription_group_uid')
-                         .value(subscription_group_uid))
+                         .value(options.get('subscription_group_uid', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('line_items')
-                         .value(line_items))
+                         .value(options.get('line_items', None)))
             .query_param(Parameter()
                          .key('discounts')
-                         .value(discounts))
+                         .value(options.get('discounts', None)))
             .query_param(Parameter()
                          .key('taxes')
-                         .value(taxes))
+                         .value(options.get('taxes', None)))
             .query_param(Parameter()
                          .key('credits')
-                         .value(credits))
+                         .value(options.get('credits', None)))
             .query_param(Parameter()
                          .key('payments')
-                         .value(payments))
+                         .value(options.get('payments', None)))
             .query_param(Parameter()
                          .key('custom_fields')
-                         .value(custom_fields))
+                         .value(options.get('custom_fields', None)))
             .query_param(Parameter()
                          .key('refunds')
-                         .value(refunds))
+                         .value(options.get('refunds', None)))
             .query_param(Parameter()
                          .key('date_field')
-                         .value(date_field))
+                         .value(options.get('date_field', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(start_datetime))
+                         .value(options.get('start_datetime', None)))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(end_datetime))
+                         .value(options.get('end_datetime', None)))
             .query_param(Parameter()
                          .key('customer_ids')
-                         .value(customer_ids))
+                         .value(options.get('customer_ids', None)))
             .query_param(Parameter()
                          .key('number')
-                         .value(number))
+                         .value(options.get('number', None)))
             .query_param(Parameter()
                          .key('product_ids')
-                         .value(product_ids))
+                         .value(options.get('product_ids', None)))
             .query_param(Parameter()
                          .key('sort')
-                         .value(sort))
+                         .value(options.get('sort', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -329,13 +317,7 @@ class InvoicesController(BaseController):
         ).execute()
 
     def list_invoice_events(self,
-                            since_date=None,
-                            since_id=None,
-                            page=1,
-                            per_page=100,
-                            invoice_uid=None,
-                            with_change_invoice_status=None,
-                            event_types=None):
+                            options=dict()):
         """Does a GET request to /invoices/events.json.
 
         This endpoint returns a list of invoice events. Each event contains
@@ -359,37 +341,46 @@ class InvoicesController(BaseController):
         contain an `invoice` snapshot.
 
         Args:
-            since_date (str, optional): The timestamp in a format `YYYY-MM-DD
-                T HH:MM:SS Z`, or `YYYY-MM-DD`(in this case, it returns data
-                from the beginning of the day). of the event from which you
-                want to start the search. All the events before the
-                `since_date` timestamp are not returned in the response.
-            since_id (int, optional): The ID of the event from which you want
-                to start the search(ID is not included. e.g. if ID is set to
-                2, then all events with ID 3 and more will be shown) This
-                parameter is not used if since_date is defined.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 100. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200.
-            invoice_uid (str, optional): Providing an invoice_uid allows for
-                scoping of the invoice events to a single invoice or credit
-                note.
-            with_change_invoice_status (str, optional): Use this parameter if
-                you want to fetch also invoice events with
-                change_invoice_status type.
-            event_types (List[InvoiceEventType], optional): Filter results by
-                event_type. Supply a comma separated list of event types
-                (listed above). Use in query:
-                `event_types=void_invoice,void_remainder`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    since_date -- str -- The timestamp in a format `YYYY-MM-DD
+                        T HH:MM:SS Z`, or `YYYY-MM-DD`(in this case, it
+                        returns data from the beginning of the day). of the
+                        event from which you want to start the search. All the
+                        events before the `since_date` timestamp are not
+                        returned in the response.
+                    since_id -- int -- The ID of the event from which you want
+                        to start the search(ID is not included. e.g. if ID is
+                        set to 2, then all events with ID 3 and more will be
+                        shown) This parameter is not used if since_date is
+                        defined.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is
+                        100. The maximum allowed values is 200; any per_page
+                        value over 200 will be changed to 200.
+                    invoice_uid -- str -- Providing an invoice_uid allows for
+                        scoping of the invoice events to a single invoice or
+                        credit note.
+                    with_change_invoice_status -- str -- Use this parameter if
+                        you want to fetch also invoice events with
+                        change_invoice_status type.
+                    event_types -- List[InvoiceEventType] -- Filter results by
+                        event_type. Supply a comma separated list of event
+                        types (listed above). Use in query:
+                        `event_types=void_invoice,void_remainder`.
 
         Returns:
             ListInvoiceEventsResponse: Response from the API. OK
@@ -408,25 +399,25 @@ class InvoicesController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('since_date')
-                         .value(since_date))
+                         .value(options.get('since_date', None)))
             .query_param(Parameter()
                          .key('since_id')
-                         .value(since_id))
+                         .value(options.get('since_id', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('invoice_uid')
-                         .value(invoice_uid))
+                         .value(options.get('invoice_uid', None)))
             .query_param(Parameter()
                          .key('with_change_invoice_status')
-                         .value(with_change_invoice_status))
+                         .value(options.get('with_change_invoice_status', None)))
             .query_param(Parameter()
                          .key('event_types')
-                         .value(event_types))
+                         .value(options.get('event_types', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -606,14 +597,7 @@ class InvoicesController(BaseController):
         ).execute()
 
     def list_credit_notes(self,
-                          subscription_id=None,
-                          page=1,
-                          per_page=20,
-                          line_items=False,
-                          discounts=False,
-                          taxes=False,
-                          refunds=False,
-                          applications=False):
+                          options=dict()):
         """Does a GET request to /credit_notes.json.
 
         Credit Notes are like inverse invoices. They reduce the amount a
@@ -624,24 +608,32 @@ class InvoicesController(BaseController):
         in the query with a value set to `true`.
 
         Args:
-            subscription_id (int, optional): The subscription's Chargify id
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            line_items (bool, optional): Include line items data
-            discounts (bool, optional): Include discounts data
-            taxes (bool, optional): Include taxes data
-            refunds (bool, optional): Include refunds data
-            applications (bool, optional): Include applications data
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    subscription_id -- int -- The subscription's Chargify id
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    line_items -- bool -- Include line items data
+                    discounts -- bool -- Include discounts data
+                    taxes -- bool -- Include taxes data
+                    refunds -- bool -- Include refunds data
+                    applications -- bool -- Include applications data
 
         Returns:
             ListCreditNotesResponse: Response from the API. OK
@@ -660,28 +652,28 @@ class InvoicesController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('subscription_id')
-                         .value(subscription_id))
+                         .value(options.get('subscription_id', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('line_items')
-                         .value(line_items))
+                         .value(options.get('line_items', None)))
             .query_param(Parameter()
                          .key('discounts')
-                         .value(discounts))
+                         .value(options.get('discounts', None)))
             .query_param(Parameter()
                          .key('taxes')
-                         .value(taxes))
+                         .value(options.get('taxes', None)))
             .query_param(Parameter()
                          .key('refunds')
-                         .value(refunds))
+                         .value(options.get('refunds', None)))
             .query_param(Parameter()
                          .key('applications')
-                         .value(applications))
+                         .value(options.get('applications', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -905,10 +897,7 @@ class InvoicesController(BaseController):
         ).execute()
 
     def list_invoice_segments(self,
-                              invoice_uid,
-                              page=1,
-                              per_page=20,
-                              direction='asc'):
+                              options=dict()):
         """Does a GET request to /invoices/{invoice_uid}/segments.json.
 
         Invoice segments returned on the index will only include totals, not
@@ -916,22 +905,30 @@ class InvoicesController(BaseController):
         `payments`, or `custom_fields`.
 
         Args:
-            invoice_uid (str): The unique identifier of the consolidated
-                invoice
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            direction (Direction, optional): Sort direction of the returned
-                segments.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    invoice_uid -- str -- The unique identifier of the
+                        consolidated invoice
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    direction -- Direction -- Sort direction of the returned
+                        segments.
 
         Returns:
             ConsolidatedInvoice: Response from the API. OK
@@ -950,18 +947,18 @@ class InvoicesController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('invoice_uid')
-                            .value(invoice_uid)
+                            .value(options.get('invoice_uid', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction))
+                         .value(options.get('direction', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

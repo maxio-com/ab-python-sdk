@@ -1,5 +1,5 @@
 
-# List Subscription Components Direction
+# List Customers Input Direction
 
 ## Data Type
 

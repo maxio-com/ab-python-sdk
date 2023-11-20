@@ -30,6 +30,7 @@ class MetafieldScope(object):
             from being viewable by your ecosystem.
         public_edit (IncludeOption): Include (1) or exclude (0) metafields
             from being edited by your ecosystem.
+        hosted (List[str]): TODO: type description here.
 
     """
 
@@ -40,7 +41,8 @@ class MetafieldScope(object):
         "statements": 'statements',
         "portal": 'portal',
         "public_show": 'public_show',
-        "public_edit": 'public_edit'
+        "public_edit": 'public_edit',
+        "hosted": 'hosted'
     }
 
     _optionals = [
@@ -50,6 +52,7 @@ class MetafieldScope(object):
         'portal',
         'public_show',
         'public_edit',
+        'hosted',
     ]
 
     def __init__(self,
@@ -58,7 +61,8 @@ class MetafieldScope(object):
                  statements=APIHelper.SKIP,
                  portal=APIHelper.SKIP,
                  public_show=APIHelper.SKIP,
-                 public_edit=APIHelper.SKIP):
+                 public_edit=APIHelper.SKIP,
+                 hosted=APIHelper.SKIP):
         """Constructor for the MetafieldScope class"""
 
         # Initialize members of the class
@@ -74,6 +78,8 @@ class MetafieldScope(object):
             self.public_show = public_show 
         if public_edit is not APIHelper.SKIP:
             self.public_edit = public_edit 
+        if hosted is not APIHelper.SKIP:
+            self.hosted = hosted 
 
     @classmethod
     def from_dictionary(cls,
@@ -100,13 +106,15 @@ class MetafieldScope(object):
         portal = dictionary.get("portal") if dictionary.get("portal") else APIHelper.SKIP
         public_show = dictionary.get("public_show") if dictionary.get("public_show") else APIHelper.SKIP
         public_edit = dictionary.get("public_edit") if dictionary.get("public_edit") else APIHelper.SKIP
+        hosted = dictionary.get("hosted") if dictionary.get("hosted") else APIHelper.SKIP
         # Return an object of this model
         return cls(csv,
                    invoices,
                    statements,
                    portal,
                    public_show,
-                   public_edit)
+                   public_edit,
+                   hosted)
 
     @classmethod
     def validate(cls, dictionary):

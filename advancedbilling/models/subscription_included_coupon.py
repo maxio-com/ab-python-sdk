@@ -21,7 +21,7 @@ class SubscriptionIncludedCoupon(object):
         uses_allowed (int): TODO: type description here.
         expires_at (str): TODO: type description here.
         recurring (bool): TODO: type description here.
-        amount_in_cents (int): TODO: type description here.
+        amount_in_cents (long|int): TODO: type description here.
         percentage (str): TODO: type description here.
 
     """

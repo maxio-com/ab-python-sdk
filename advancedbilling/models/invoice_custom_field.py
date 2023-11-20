@@ -18,7 +18,7 @@ class InvoiceCustomField(object):
     Attributes:
         name (str): TODO: type description here.
         value (str): TODO: type description here.
-        owner_id (float): TODO: type description here.
+        owner_id (int): TODO: type description here.
         owner_type (str): TODO: type description here.
 
     """

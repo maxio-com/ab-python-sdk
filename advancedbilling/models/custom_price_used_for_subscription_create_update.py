@@ -19,16 +19,16 @@ class CustomPriceUsedForSubscriptionCreateUpdate(object):
     Attributes:
         name (str): (Optional)
         handle (str): (Optional)
-        price_in_cents (str | int | None): Required if using `custom_price`
-            attribute.
+        price_in_cents (str | long | int | None): Required if using
+            `custom_price` attribute.
         interval (str | int | None): Required if using `custom_price`
             attribute.
         interval_unit (IntervalUnit | None): Required if using `custom_price`
             attribute.
-        trial_price_in_cents (str | int | None): (Optional)
+        trial_price_in_cents (str | long | int | None): (Optional)
         trial_interval (str | int | None): (Optional)
         trial_interval_unit (IntervalUnit | None): (Optional)
-        initial_charge_in_cents (str | int | None): (Optional)
+        initial_charge_in_cents (str | long | int | None): (Optional)
         initial_charge_after_trial (bool): (Optional)
         expiration_interval (str | int | None): (Optional)
         expiration_interval_unit (IntervalUnit | None): (Optional)

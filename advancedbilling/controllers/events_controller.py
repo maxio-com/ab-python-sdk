@@ -19,7 +19,7 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.event_response import EventResponse
-from advancedbilling.models.count import Count
+from advancedbilling.models.count_response import CountResponse
 
 
 class EventsController(BaseController):
@@ -29,17 +29,7 @@ class EventsController(BaseController):
         super(EventsController, self).__init__(config)
 
     def list_events(self,
-                    page=1,
-                    per_page=20,
-                    since_id=None,
-                    max_id=None,
-                    direction='desc',
-                    filter=None,
-                    date_field=None,
-                    start_date=None,
-                    end_date=None,
-                    start_datetime=None,
-                    end_datetime=None):
+                    options=dict()):
         """Does a GET request to /events.json.
 
         ## Events Intro
@@ -103,49 +93,60 @@ class EventsController(BaseController):
         ```
 
         Args:
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            since_id (int, optional): Returns events with an id greater than
-                or equal to the one specified
-            max_id (int, optional): Returns events with an id less than or
-                equal to the one specified
-            direction (Direction, optional): The sort direction of the
-                returned events.
-            filter (List[EventType], optional): You can pass multiple event
-                keys after comma. Use in query
-                `filter=signup_success,payment_success`.
-            date_field (ListEventsDateField, optional): The type of filter you
-                would like to apply to your search.
-            start_date (str, optional): The start date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns components with a
-                timestamp at or after midnight (12:00:00 AM) in your site’s
-                time zone on the date specified.
-            end_date (str, optional): The end date (format YYYY-MM-DD) with
-                which to filter the date_field. Returns components with a
-                timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified.
-            start_datetime (str, optional): The start date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns components with a timestamp at or after exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of start_date.
-            end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns components with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of end_date.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    since_id -- int -- Returns events with an id greater than
+                        or equal to the one specified
+                    max_id -- int -- Returns events with an id less than or
+                        equal to the one specified
+                    direction -- Direction -- The sort direction of the
+                        returned events.
+                    filter -- List[EventType] -- You can pass multiple event
+                        keys after comma. Use in query
+                        `filter=signup_success,payment_success`.
+                    date_field -- ListEventsDateField -- The type of filter
+                        you would like to apply to your search.
+                    start_date -- str -- The start date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns
+                        components with a timestamp at or after midnight
+                        (12:00:00 AM) in your site’s time zone on the date
+                        specified.
+                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns components
+                        with a timestamp up to and including 11:59:59PM in
+                        your site’s time zone on the date specified.
+                    start_datetime -- str -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns components with a timestamp at or
+                        after exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date.
+                    end_datetime -- str -- The end date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns components with a timestamp at or
+                        before exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of end_date.
 
         Returns:
             List[EventResponse]: Response from the API. OK
@@ -164,37 +165,37 @@ class EventsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('since_id')
-                         .value(since_id))
+                         .value(options.get('since_id', None)))
             .query_param(Parameter()
                          .key('max_id')
-                         .value(max_id))
+                         .value(options.get('max_id', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('filter')
-                         .value(filter))
+                         .value(options.get('filter', None)))
             .query_param(Parameter()
                          .key('date_field')
-                         .value(date_field))
+                         .value(options.get('date_field', None)))
             .query_param(Parameter()
                          .key('start_date')
-                         .value(start_date))
+                         .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('end_date')
-                         .value(end_date))
+                         .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(start_datetime))
+                         .value(options.get('start_datetime', None)))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(end_datetime))
+                         .value(options.get('end_datetime', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -208,13 +209,7 @@ class EventsController(BaseController):
         ).execute()
 
     def list_subscription_events(self,
-                                 subscription_id,
-                                 page=1,
-                                 per_page=20,
-                                 since_id=None,
-                                 max_id=None,
-                                 direction='desc',
-                                 filter=None):
+                                 options=dict()):
         """Does a GET request to /subscriptions/{subscription_id}/events.json.
 
         The following request will return a list of events for a
@@ -222,28 +217,37 @@ class EventsController(BaseController):
         Each event type has its own `event_specific_data` specified.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            since_id (int, optional): Returns events with an id greater than
-                or equal to the one specified
-            max_id (int, optional): Returns events with an id less than or
-                equal to the one specified
-            direction (Direction, optional): The sort direction of the
-                returned events.
-            filter (List[EventType], optional): You can pass multiple event
-                keys after comma. Use in query
-                `filter=signup_success,payment_success`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    subscription_id -- str -- The Chargify id of the
+                        subscription
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    since_id -- int -- Returns events with an id greater than
+                        or equal to the one specified
+                    max_id -- int -- Returns events with an id less than or
+                        equal to the one specified
+                    direction -- Direction -- The sort direction of the
+                        returned events.
+                    filter -- List[EventType] -- You can pass multiple event
+                        keys after comma. Use in query
+                        `filter=signup_success,payment_success`.
 
         Returns:
             List[EventResponse]: Response from the API. OK
@@ -262,27 +266,27 @@ class EventsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('subscription_id')
-                            .value(subscription_id)
+                            .value(options.get('subscription_id', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('since_id')
-                         .value(since_id))
+                         .value(options.get('since_id', None)))
             .query_param(Parameter()
                          .key('max_id')
-                         .value(max_id))
+                         .value(options.get('max_id', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('filter')
-                         .value(filter))
+                         .value(options.get('filter', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -296,41 +300,44 @@ class EventsController(BaseController):
         ).execute()
 
     def read_events_count(self,
-                          page=1,
-                          per_page=20,
-                          since_id=None,
-                          max_id=None,
-                          direction='desc',
-                          filter=None):
+                          options=dict()):
         """Does a GET request to /events/count.json.
 
         Get a count of all the events for a given site by using this method.
 
         Args:
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            since_id (int, optional): Returns events with an id greater than
-                or equal to the one specified
-            max_id (int, optional): Returns events with an id less than or
-                equal to the one specified
-            direction (Direction, optional): The sort direction of the
-                returned events.
-            filter (List[EventType], optional): You can pass multiple event
-                keys after comma. Use in query
-                `filter=signup_success,payment_success`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    since_id -- int -- Returns events with an id greater than
+                        or equal to the one specified
+                    max_id -- int -- Returns events with an id less than or
+                        equal to the one specified
+                    direction -- Direction -- The sort direction of the
+                        returned events.
+                    filter -- List[EventType] -- You can pass multiple event
+                        keys after comma. Use in query
+                        `filter=signup_success,payment_success`.
 
         Returns:
-            Count: Response from the API. OK
+            CountResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -346,22 +353,22 @@ class EventsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('since_id')
-                         .value(since_id))
+                         .value(options.get('since_id', None)))
             .query_param(Parameter()
                          .key('max_id')
-                         .value(max_id))
+                         .value(options.get('max_id', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('filter')
-                         .value(filter))
+                         .value(options.get('filter', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -371,5 +378,5 @@ class EventsController(BaseController):
             ResponseHandler()
             .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Count.from_dictionary)
+            .deserialize_into(CountResponse.from_dictionary)
         ).execute()

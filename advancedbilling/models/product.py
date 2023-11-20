@@ -36,15 +36,15 @@ class Product(object):
         created_at (str): Timestamp indicating when this product was created
         updated_at (str): Timestamp indicating when this product was last
             updated
-        price_in_cents (int): The product price, in integer cents
+        price_in_cents (long|int): The product price, in integer cents
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this product would
             renew every 30 days
         interval_unit (IntervalUnit | None): A string representing the
             interval unit for this product, either month or day
-        initial_charge_in_cents (int): The up front charge you have
+        initial_charge_in_cents (long|int): The up front charge you have
             specified.
-        trial_price_in_cents (int): The price of the trial period for a
+        trial_price_in_cents (long|int): The price of the trial period for a
             subscription to this product, in integer cents.
         trial_interval (int): A numerical interval for the length of the trial
             period of a subscription to this product. See the description of

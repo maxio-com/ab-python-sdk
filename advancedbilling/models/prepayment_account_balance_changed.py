@@ -17,9 +17,9 @@ class PrepaymentAccountBalanceChanged(object):
 
     Attributes:
         reason (str): TODO: type description here.
-        prepayment_account_balance_in_cents (int): TODO: type description
+        prepayment_account_balance_in_cents (long|int): TODO: type description
             here.
-        prepayment_balance_change_in_cents (int): TODO: type description
+        prepayment_balance_change_in_cents (long|int): TODO: type description
             here.
         currency_code (str): TODO: type description here.
 

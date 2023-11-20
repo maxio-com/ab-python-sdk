@@ -9,21 +9,21 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `owner_id` | `float` | Optional | - |
+| `owner_id` | `int` | Optional | - |
 | `owner_type` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `name` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `value` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
-| `metadatum_id` | `float` | Optional | - |
+| `metadatum_id` | `int` | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "owner_id": 86.72,
+  "owner_id": 224,
   "owner_type": "owner_type0",
   "name": "name8",
   "value": "value0",
-  "metadatum_id": 32.96
+  "metadatum_id": 224
 }
 ```
 

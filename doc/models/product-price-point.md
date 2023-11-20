@@ -12,15 +12,15 @@
 | `id` | `int` | Optional | - |
 | `name` | `str` | Optional | - |
 | `handle` | `str` | Optional | - |
-| `price_in_cents` | `int` | Optional | - |
+| `price_in_cents` | `long\|int` | Optional | - |
 | `interval` | `int` | Optional | - |
 | `interval_unit` | `str` | Optional | - |
-| `trial_price_in_cents` | `int` | Optional | - |
+| `trial_price_in_cents` | `long\|int` | Optional | - |
 | `trial_interval` | `int` | Optional | - |
 | `trial_interval_unit` | `str` | Optional | - |
 | `trial_type` | `str` | Optional | - |
 | `introductory_offer` | `bool` | Optional | reserved for future use |
-| `initial_charge_in_cents` | `int` | Optional | - |
+| `initial_charge_in_cents` | `long\|int` | Optional | - |
 | `initial_charge_after_trial` | `bool` | Optional | - |
 | `expiration_interval` | `int` | Optional | - |
 | `expiration_interval_unit` | `str` | Optional | - |

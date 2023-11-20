@@ -347,9 +347,7 @@ This method will return all of the active `payment_profiles` for a Site, or for 
 
 ```python
 def list_payment_profiles(self,
-                         page=1,
-                         per_page=20,
-                         customer_id=None)
+                         options=dict())
 ```
 
 ## Parameters
@@ -367,14 +365,11 @@ def list_payment_profiles(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-result = payment_profiles_controller.list_payment_profiles(
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'page': 2,
+    'per_page': 50
+}
+result = payment_profiles_controller.list_payment_profiles(collect)
 print(result)
 ```
 

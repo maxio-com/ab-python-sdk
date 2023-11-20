@@ -23,6 +23,8 @@ from advancedbilling.models.product_price_point_response import ProductPricePoin
 from advancedbilling.models.list_product_price_points_response import ListProductPricePointsResponse
 from advancedbilling.models.bulk_create_product_price_points_response import BulkCreateProductPricePointsResponse
 from advancedbilling.models.product_price_point_currency_price import ProductPricePointCurrencyPrice
+from advancedbilling.exceptions.product_price_point_error_response_exception import ProductPricePointErrorResponseException
+from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.exceptions.error_map_response_exception import ErrorMapResponseException
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 
@@ -83,43 +85,48 @@ class ProductPricePointsController(BaseController):
             .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointResponse.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', ProductPricePointErrorResponseException)
         ).execute()
 
     def list_product_price_points(self,
-                                  product_id,
-                                  page=1,
-                                  per_page=10,
-                                  currency_prices=None,
-                                  filter_type=None):
+                                  options=dict()):
         """Does a GET request to /products/{product_id}/price_points.json.
 
         Use this endpoint to retrieve a list of product price points.
 
         Args:
-            product_id (int): The id or handle of the product. When using the
-                handle, it must be prefixed with `handle:`
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 10. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200.
-            currency_prices (bool, optional): When fetching a product's price
-                points, if you have defined multiple currencies at the site
-                level, you can optionally pass the ?currency_prices=true query
-                param to include an array of currency price data in the
-                response. If the product price point is set to
-                use_site_exchange_rate: true, it will return pricing based on
-                the current exchange rate. If the flag is set to false, it
-                will return all of the defined prices for each currency.
-            filter_type (List[PricePointType], optional): Use in query:
-                `filter[type]=catalog,default`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    product_id -- int -- The id or handle of the product. When
+                        using the handle, it must be prefixed with `handle:`
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 10.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200.
+                    currency_prices -- bool -- When fetching a product's price
+                        points, if you have defined multiple currencies at the
+                        site level, you can optionally pass the
+                        ?currency_prices=true query param to include an array
+                        of currency price data in the response. If the product
+                        price point is set to use_site_exchange_rate: true, it
+                        will return pricing based on the current exchange
+                        rate. If the flag is set to false, it will return all
+                        of the defined prices for each currency.
+                    filter_type -- List[PricePointType] -- Use in query:
+                        `filter[type]=catalog,default`.
 
         Returns:
             ListProductPricePointsResponse: Response from the API. OK
@@ -138,21 +145,21 @@ class ProductPricePointsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('product_id')
-                            .value(product_id)
+                            .value(options.get('product_id', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('currency_prices')
-                         .value(currency_prices))
+                         .value(options.get('currency_prices', None)))
             .query_param(Parameter()
                          .key('filter[type]')
-                         .value(filter_type))
+                         .value(options.get('filter_type', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -483,6 +490,7 @@ class ProductPricePointsController(BaseController):
             .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BulkCreateProductPricePointsResponse.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', APIException)
         ).execute()
 
     def create_product_currency_prices(self,
@@ -600,73 +608,74 @@ class ProductPricePointsController(BaseController):
         ).execute()
 
     def list_all_product_price_points(self,
-                                      direction=None,
-                                      filter_archived_at=None,
-                                      filter_date_field=None,
-                                      filter_end_date=None,
-                                      filter_end_datetime=None,
-                                      filter_ids=None,
-                                      filter_start_date=None,
-                                      filter_start_datetime=None,
-                                      filter_type=None,
-                                      include=None,
-                                      page=1,
-                                      per_page=20):
+                                      options=dict()):
         """Does a GET request to /products_price_points.json.
 
         This method allows retrieval of a list of Products Price Points
         belonging to a Site.
 
         Args:
-            direction (SortingDirection | None, optional): Controls the order
-                in which results are returned. Use in query `direction=asc`.
-            filter_archived_at (IncludeNotNull, optional): Allows fetching
-                price points only if archived_at is present or not. Use in
-                query: `filter[archived_at]=not_null`.
-            filter_date_field (BasicDateField, optional): The type of filter
-                you would like to apply to your search. Use in query:
-                `filter[date_field]=created_at`.
-            filter_end_date (str, optional): The end date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns price points with
-                a timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified.
-            filter_end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns price points with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of end_date.
-            filter_ids (List[int], optional): Allows fetching price points
-                with matching id based on provided values. Use in query:
-                `filter[ids]=1,2,3`.
-            filter_start_date (str, optional): The start date (format
-                YYYY-MM-DD) with which to filter the date_field. Returns price
-                points with a timestamp at or after midnight (12:00:00 AM) in
-                your site’s time zone on the date specified.
-            filter_start_datetime (str, optional): The start date and time
-                (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                date_field. Returns price points with a timestamp at or after
-                exact time provided in query. You can specify timezone in
-                query - otherwise your site's time zone will be used. If
-                provided, this parameter will be used instead of start_date.
-            filter_type (PricePointType, optional): Allows fetching price
-                points with matching type. Use in query:
-                `filter[type]=catalog,custom`.
-            include (ListProductsPricePointsInclude, optional): Allows
-                including additional data in the response. Use in query:
-                `include=currency_prices`.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    direction -- SortingDirection | None -- Controls the order
+                        in which results are returned. Use in query
+                        `direction=asc`.
+                    filter_archived_at -- IncludeNotNull -- Allows fetching
+                        price points only if archived_at is present or not.
+                        Use in query: `filter[archived_at]=not_null`.
+                    filter_date_field -- BasicDateField -- The type of filter
+                        you would like to apply to your search. Use in query:
+                        `filter[date_field]=created_at`.
+                    filter_end_date -- str -- The end date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns price
+                        points with a timestamp up to and including 11:59:59PM
+                        in your site’s time zone on the date specified.
+                    filter_end_datetime -- str -- The end date and time
+                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns price points with a timestamp at
+                        or before exact time provided in query. You can
+                        specify timezone in query - otherwise your site's time
+                        zone will be used. If provided, this parameter will be
+                        used instead of end_date.
+                    filter_ids -- List[int] -- Allows fetching price points
+                        with matching id based on provided values. Use in
+                        query: `filter[ids]=1,2,3`.
+                    filter_start_date -- str -- The start date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns price points with a timestamp at or after
+                        midnight (12:00:00 AM) in your site’s time zone on the
+                        date specified.
+                    filter_start_datetime -- str -- The start date and time
+                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns price points with a timestamp at
+                        or after exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date.
+                    filter_type -- PricePointType -- Allows fetching price
+                        points with matching type. Use in query:
+                        `filter[type]=catalog,custom`.
+                    include -- ListProductsPricePointsInclude -- Allows
+                        including additional data in the response. Use in
+                        query: `include=currency_prices`.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
 
         Returns:
             ListProductPricePointsResponse: Response from the API. OK
@@ -685,41 +694,41 @@ class ProductPricePointsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction)
-                         .validator(lambda value: UnionTypeLookUp.get('ListAllProductPricePointsDirection').validate(value)))
+                         .value(options.get('direction', None))
+                         .validator(lambda value: UnionTypeLookUp.get('ListAllProductPricePointsInputDirection').validate(value)))
             .query_param(Parameter()
                          .key('filter[archived_at]')
-                         .value(filter_archived_at))
+                         .value(options.get('filter_archived_at', None)))
             .query_param(Parameter()
                          .key('filter[date_field]')
-                         .value(filter_date_field))
+                         .value(options.get('filter_date_field', None)))
             .query_param(Parameter()
                          .key('filter[end_date]')
-                         .value(filter_end_date))
+                         .value(options.get('filter_end_date', None)))
             .query_param(Parameter()
                          .key('filter[end_datetime]')
-                         .value(filter_end_datetime))
+                         .value(options.get('filter_end_datetime', None)))
             .query_param(Parameter()
                          .key('filter[ids]')
-                         .value(filter_ids))
+                         .value(options.get('filter_ids', None)))
             .query_param(Parameter()
                          .key('filter[start_date]')
-                         .value(filter_start_date))
+                         .value(options.get('filter_start_date', None)))
             .query_param(Parameter()
                          .key('filter[start_datetime]')
-                         .value(filter_start_datetime))
+                         .value(options.get('filter_start_datetime', None)))
             .query_param(Parameter()
                          .key('filter[type]')
-                         .value(filter_type))
+                         .value(options.get('filter_type', None)))
             .query_param(Parameter()
                          .key('include')
-                         .value(include))
+                         .value(options.get('include', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

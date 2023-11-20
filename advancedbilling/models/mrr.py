@@ -17,7 +17,7 @@ class MRR(object):
     TODO: type model description here.
 
     Attributes:
-        amount_in_cents (int): TODO: type description here.
+        amount_in_cents (long|int): TODO: type description here.
         amount_formatted (str): TODO: type description here.
         currency (str): TODO: type description here.
         currency_symbol (str): TODO: type description here.

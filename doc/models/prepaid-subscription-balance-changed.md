@@ -10,9 +10,9 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `reason` | `str` | Required | - |
-| `current_account_balance_in_cents` | `int` | Required | - |
-| `prepayment_account_balance_in_cents` | `int` | Required | - |
-| `current_usage_amount_in_cents` | `int` | Required | - |
+| `current_account_balance_in_cents` | `long\|int` | Required | - |
+| `prepayment_account_balance_in_cents` | `long\|int` | Required | - |
+| `current_usage_amount_in_cents` | `long\|int` | Required | - |
 
 ## Example (as JSON)
 

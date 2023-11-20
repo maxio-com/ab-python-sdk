@@ -17,8 +17,9 @@ class ServiceCredit(object):
 
     Attributes:
         id (int): TODO: type description here.
-        amount_in_cents (int): The amount in cents of the entry
-        ending_balance_in_cents (int): The new balance for the credit account
+        amount_in_cents (long|int): The amount in cents of the entry
+        ending_balance_in_cents (long|int): The new balance for the credit
+            account
         entry_type (ServiceCreditType): The type of entry
         memo (str): The memo attached to the entry
 

@@ -11,10 +11,10 @@
 |  --- | --- | --- | --- |
 | `transaction_type` | `str` | Optional | - |
 | `kind` | `str` | Optional | - |
-| `amount_in_cents` | `int` | Optional | - |
+| `amount_in_cents` | `long\|int` | Optional | - |
 | `memo` | `str` | Optional | - |
-| `discount_amount_in_cents` | `int` | Optional | - |
-| `taxable_amount_in_cents` | `int` | Optional | - |
+| `discount_amount_in_cents` | `long\|int` | Optional | - |
+| `taxable_amount_in_cents` | `long\|int` | Optional | - |
 | `component_id` | `int` | Optional | - |
 | `component_handle` | `str` | Optional | - |
 | `component_name` | `str` | Optional | - |

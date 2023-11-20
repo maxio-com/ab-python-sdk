@@ -3,12 +3,12 @@
 
 ## Data Type
 
-`str | int`
+`str | long | int`
 
 ## Cases
 
 | Type |
 |  --- |
 | `str` |
-| `int` |
+| `long\|int` |
 

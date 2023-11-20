@@ -31,42 +31,36 @@ class CreateOffer(object):
     _names = {
         "name": 'name',
         "handle": 'handle',
-        "description": 'description',
         "product_id": 'product_id',
+        "description": 'description',
         "product_price_point_id": 'product_price_point_id',
         "components": 'components',
         "coupons": 'coupons'
     }
 
     _optionals = [
-        'name',
-        'handle',
         'description',
-        'product_id',
         'product_price_point_id',
         'components',
         'coupons',
     ]
 
     def __init__(self,
-                 name=APIHelper.SKIP,
-                 handle=APIHelper.SKIP,
+                 name=None,
+                 handle=None,
+                 product_id=None,
                  description=APIHelper.SKIP,
-                 product_id=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
                  components=APIHelper.SKIP,
                  coupons=APIHelper.SKIP):
         """Constructor for the CreateOffer class"""
 
         # Initialize members of the class
-        if name is not APIHelper.SKIP:
-            self.name = name 
-        if handle is not APIHelper.SKIP:
-            self.handle = handle 
+        self.name = name 
+        self.handle = handle 
         if description is not APIHelper.SKIP:
             self.description = description 
-        if product_id is not APIHelper.SKIP:
-            self.product_id = product_id 
+        self.product_id = product_id 
         if product_price_point_id is not APIHelper.SKIP:
             self.product_price_point_id = product_price_point_id 
         if components is not APIHelper.SKIP:
@@ -92,10 +86,10 @@ class CreateOffer(object):
             return None
 
         # Extract variables from the dictionary
-        name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
-        handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
+        name = dictionary.get("name") if dictionary.get("name") else None
+        handle = dictionary.get("handle") if dictionary.get("handle") else None
+        product_id = dictionary.get("product_id") if dictionary.get("product_id") else None
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
-        product_id = dictionary.get("product_id") if dictionary.get("product_id") else APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
         components = None
         if dictionary.get('components') is not None:
@@ -106,8 +100,8 @@ class CreateOffer(object):
         # Return an object of this model
         return cls(name,
                    handle,
-                   description,
                    product_id,
+                   description,
                    product_price_point_id,
                    components,
                    coupons)

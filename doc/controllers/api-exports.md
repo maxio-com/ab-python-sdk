@@ -29,9 +29,7 @@ Example: `GET https://{subdomain}.chargify.com/api_exports/proforma_invoices/123
 
 ```python
 def list_exported_proforma_invoices(self,
-                                   batch_id,
-                                   per_page=100,
-                                   page=1)
+                                   options=dict())
 ```
 
 ## Parameters
@@ -49,17 +47,12 @@ def list_exported_proforma_invoices(self,
 ## Example Usage
 
 ```python
-batch_id = 'batch_id8'
-
-per_page = 100
-
-page = 2
-
-result = api_exports_controller.list_exported_proforma_invoices(
-    batch_id,
-    per_page=per_page,
-    page=page
-)
+collect = {
+    'batch_id': 'batch_id8',
+    'per_page': 100,
+    'page': 2
+}
+result = api_exports_controller.list_exported_proforma_invoices(collect)
 print(result)
 ```
 
@@ -78,9 +71,7 @@ Example: `GET https://{subdomain}.chargify.com/api_exports/invoices/123/rows?per
 
 ```python
 def list_exported_invoices(self,
-                          batch_id,
-                          per_page=100,
-                          page=1)
+                          options=dict())
 ```
 
 ## Parameters
@@ -98,17 +89,12 @@ def list_exported_invoices(self,
 ## Example Usage
 
 ```python
-batch_id = 'batch_id8'
-
-per_page = 100
-
-page = 2
-
-result = api_exports_controller.list_exported_invoices(
-    batch_id,
-    per_page=per_page,
-    page=page
-)
+collect = {
+    'batch_id': 'batch_id8',
+    'per_page': 100,
+    'page': 2
+}
+result = api_exports_controller.list_exported_invoices(collect)
 print(result)
 ```
 
@@ -127,9 +113,7 @@ Example: `GET https://{subdomain}.chargify.com/api_exports/subscriptions/123/row
 
 ```python
 def list_exported_subscriptions(self,
-                               batch_id,
-                               per_page=100,
-                               page=1)
+                               options=dict())
 ```
 
 ## Parameters
@@ -147,17 +131,12 @@ def list_exported_subscriptions(self,
 ## Example Usage
 
 ```python
-batch_id = 'batch_id8'
-
-per_page = 100
-
-page = 2
-
-result = api_exports_controller.list_exported_subscriptions(
-    batch_id,
-    per_page=per_page,
-    page=page
-)
+collect = {
+    'batch_id': 'batch_id8',
+    'per_page': 100,
+    'page': 2
+}
+result = api_exports_controller.list_exported_subscriptions(collect)
 print(result)
 ```
 

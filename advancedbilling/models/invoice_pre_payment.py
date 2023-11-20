@@ -9,9 +9,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class PrePayment(object):
+class InvoicePrePayment(object):
 
-    """Implementation of the 'Pre-Payment' model.
+    """Implementation of the 'Invoice PrePayment' model.
 
     TODO: type model description here.
 
@@ -41,7 +41,7 @@ class PrePayment(object):
                  subscription_id=APIHelper.SKIP,
                  amount_in_cents=APIHelper.SKIP,
                  ending_balance_in_cents=APIHelper.SKIP):
-        """Constructor for the PrePayment class"""
+        """Constructor for the InvoicePrePayment class"""
 
         # Initialize members of the class
         if subscription_id is not APIHelper.SKIP:

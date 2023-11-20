@@ -16,9 +16,9 @@ class NetTerms(object):
     TODO: type model description here.
 
     Attributes:
-        default_net_terms (float): TODO: type description here.
-        automatic_net_terms (float): TODO: type description here.
-        remittance_net_terms (float): TODO: type description here.
+        default_net_terms (int): TODO: type description here.
+        automatic_net_terms (int): TODO: type description here.
+        remittance_net_terms (int): TODO: type description here.
         net_terms_on_remittance_signups_enabled (bool): TODO: type description
             here.
         custom_net_terms_enabled (bool): TODO: type description here.

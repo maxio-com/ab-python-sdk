@@ -85,10 +85,35 @@ class OffersController(BaseController):
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorMapResponseException)
         ).execute()
 
-    def list_offers(self):
+    def list_offers(self,
+                    options=dict()):
         """Does a GET request to /offers.json.
 
         This endpoint will list offers for a site.
+
+        Args:
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    include_archived -- bool -- Include archived products. Use
+                        in query: `include_archived=true`.
 
         Returns:
             ListOffersResponse: Response from the API. OK
@@ -105,6 +130,15 @@ class OffersController(BaseController):
             RequestBuilder().server(Server.DEFAULT)
             .path('/offers.json')
             .http_method(HttpMethodEnum.GET)
+            .query_param(Parameter()
+                         .key('page')
+                         .value(options.get('page', None)))
+            .query_param(Parameter()
+                         .key('per_page')
+                         .value(options.get('per_page', None)))
+            .query_param(Parameter()
+                         .key('include_archived')
+                         .value(options.get('include_archived', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

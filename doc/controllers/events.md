@@ -82,17 +82,7 @@ Here’s an example event for the `subscription_state_change` event:
 
 ```python
 def list_events(self,
-               page=1,
-               per_page=20,
-               since_id=None,
-               max_id=None,
-               direction='desc',
-               filter=None,
-               date_field=None,
-               start_date=None,
-               end_date=None,
-               start_datetime=None,
-               end_datetime=None)
+               options=dict())
 ```
 
 ## Parameters
@@ -118,26 +108,17 @@ def list_events(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-direction = Direction.DESC
-
-filter = [
-    EventType.CUSTOM_FIELD_VALUE_CHANGE,
-    EventType.PAYMENT_SUCCESS
-]
-
-date_field = ListEventsDateField.CREATED_AT
-
-result = events_controller.list_events(
-    page=page,
-    per_page=per_page,
-    direction=direction,
-    filter=filter,
-    date_field=date_field
-)
+collect = {
+    'page': 2,
+    'per_page': 50,
+    'direction': Direction.DESC,
+    'filter': [
+        EventType.CUSTOM_FIELD_VALUE_CHANGE,
+        EventType.PAYMENT_SUCCESS
+    ],
+    'date_field': ListEventsDateField.CREATED_AT
+}
+result = events_controller.list_events(collect)
 print(result)
 ```
 
@@ -212,13 +193,7 @@ Each event type has its own `event_specific_data` specified.
 
 ```python
 def list_subscription_events(self,
-                            subscription_id,
-                            page=1,
-                            per_page=20,
-                            since_id=None,
-                            max_id=None,
-                            direction='desc',
-                            filter=None)
+                            options=dict())
 ```
 
 ## Parameters
@@ -240,26 +215,17 @@ def list_subscription_events(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
-
-page = 2
-
-per_page = 50
-
-direction = Direction.DESC
-
-filter = [
-    EventType.CUSTOM_FIELD_VALUE_CHANGE,
-    EventType.PAYMENT_SUCCESS
-]
-
-result = events_controller.list_subscription_events(
-    subscription_id,
-    page=page,
-    per_page=per_page,
-    direction=direction,
-    filter=filter
-)
+collect = {
+    'subscription_id': 'subscription_id0',
+    'page': 2,
+    'per_page': 50,
+    'direction': Direction.DESC,
+    'filter': [
+        EventType.CUSTOM_FIELD_VALUE_CHANGE,
+        EventType.PAYMENT_SUCCESS
+    ]
+}
+result = events_controller.list_subscription_events(collect)
 print(result)
 ```
 
@@ -313,12 +279,7 @@ Get a count of all the events for a given site by using this method.
 
 ```python
 def read_events_count(self,
-                     page=1,
-                     per_page=20,
-                     since_id=None,
-                     max_id=None,
-                     direction='desc',
-                     filter=None)
+                     options=dict())
 ```
 
 ## Parameters
@@ -334,28 +295,21 @@ def read_events_count(self,
 
 ## Response Type
 
-[`Count`](../../doc/models/count.md)
+[`CountResponse`](../../doc/models/count-response.md)
 
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-direction = Direction.DESC
-
-filter = [
-    EventType.CUSTOM_FIELD_VALUE_CHANGE,
-    EventType.PAYMENT_SUCCESS
-]
-
-result = events_controller.read_events_count(
-    page=page,
-    per_page=per_page,
-    direction=direction,
-    filter=filter
-)
+collect = {
+    'page': 2,
+    'per_page': 50,
+    'direction': Direction.DESC,
+    'filter': [
+        EventType.CUSTOM_FIELD_VALUE_CHANGE,
+        EventType.PAYMENT_SUCCESS
+    ]
+}
+result = events_controller.read_events_count(collect)
 print(result)
 ```
 

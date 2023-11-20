@@ -17,7 +17,7 @@ class Coupon(object):
     TODO: type model description here.
 
     Attributes:
-        id (float): TODO: type description here.
+        id (int): TODO: type description here.
         name (str): TODO: type description here.
         code (str): TODO: type description here.
         description (str): TODO: type description here.

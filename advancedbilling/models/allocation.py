@@ -180,7 +180,7 @@ class Allocation(object):
         upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if dictionary.get("downgrade_credit") else APIHelper.SKIP
         if 'payment' in dictionary.keys():
-            payment = APIHelper.deserialize_union_type(UnionTypeLookUp.get('AllocationPayment'), dictionary.get('payment'), False) if dictionary.get('payment') is not None else None
+            payment = APIHelper.deserialize_union_type(UnionTypeLookUp.get('AllocationPayment2'), dictionary.get('payment'), False) if dictionary.get('payment') is not None else None
         else:
             payment = APIHelper.SKIP
         # Return an object of this model

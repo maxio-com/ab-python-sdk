@@ -24,7 +24,7 @@ from advancedbilling.models.prepaid_configuration_response import PrepaidConfigu
 from advancedbilling.models.subscription_preview_response import SubscriptionPreviewResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.api_exception import APIException
-from advancedbilling.exceptions.subscriptions_add_coupon_json_422_error_exception import SubscriptionsAddCouponJson422ErrorException
+from advancedbilling.exceptions.subscription_add_coupon_error_exception import SubscriptionAddCouponErrorException
 from advancedbilling.exceptions.subscription_remove_coupon_errors_exception import SubscriptionRemoveCouponErrorsException
 from advancedbilling.exceptions.nested_error_response_exception import NestedErrorResponseException
 
@@ -1544,7 +1544,7 @@ class SubscriptionsController(BaseController):
             .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', SubscriptionsAddCouponJson422ErrorException)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', SubscriptionAddCouponErrorException)
         ).execute()
 
     def delete_coupon_from_subscription(self,

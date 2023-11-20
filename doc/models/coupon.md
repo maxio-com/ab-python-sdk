@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `float` | Optional | - |
+| `id` | `int` | Optional | - |
 | `name` | `str` | Optional | - |
 | `code` | `str` | Optional | - |
 | `description` | `str` | Optional | - |
@@ -43,7 +43,7 @@
 
 ```json
 {
-  "id": 179.42,
+  "id": 22,
   "name": "name2",
   "code": "code0",
   "description": "description2",

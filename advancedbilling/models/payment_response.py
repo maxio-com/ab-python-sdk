@@ -7,8 +7,8 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.invoice_pre_payment import InvoicePrePayment
 from advancedbilling.models.payment import Payment
-from advancedbilling.models.pre_payment import PrePayment
 
 
 class PaymentResponse(object):
@@ -19,7 +19,7 @@ class PaymentResponse(object):
 
     Attributes:
         paid_invoices (List[Payment]): TODO: type description here.
-        prepayment (PrePayment): TODO: type description here.
+        prepayment (InvoicePrePayment): TODO: type description here.
 
     """
 
@@ -68,7 +68,7 @@ class PaymentResponse(object):
             paid_invoices = [Payment.from_dictionary(x) for x in dictionary.get('paid_invoices')]
         else:
             paid_invoices = APIHelper.SKIP
-        prepayment = PrePayment.from_dictionary(dictionary.get('prepayment')) if 'prepayment' in dictionary.keys() else APIHelper.SKIP
+        prepayment = InvoicePrePayment.from_dictionary(dictionary.get('prepayment')) if 'prepayment' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(paid_invoices,
                    prepayment)

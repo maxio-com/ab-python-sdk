@@ -36,7 +36,7 @@ class Offer(object):
         product_family_name (str): TODO: type description here.
         product_name (str): TODO: type description here.
         product_price_point_name (str): TODO: type description here.
-        product_price_in_cents (int): TODO: type description here.
+        product_price_in_cents (long|int): TODO: type description here.
         offer_signup_pages (List[OfferSignupPage]): TODO: type description
             here.
 
@@ -88,6 +88,7 @@ class Offer(object):
     ]
 
     _nullables = [
+        'description',
         'archived_at',
     ]
 
@@ -179,7 +180,7 @@ class Offer(object):
         product_revisable_number = dictionary.get("product_revisable_number") if dictionary.get("product_revisable_number") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
-        description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
+        description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
         created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
         archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP

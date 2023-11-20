@@ -9,9 +9,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class Count(object):
+class CountResponse(object):
 
-    """Implementation of the 'Count' model.
+    """Implementation of the 'Count Response' model.
 
     TODO: type model description here.
 
@@ -31,7 +31,7 @@ class Count(object):
 
     def __init__(self,
                  count=APIHelper.SKIP):
-        """Constructor for the Count class"""
+        """Constructor for the CountResponse class"""
 
         # Initialize members of the class
         if count is not APIHelper.SKIP:

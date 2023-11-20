@@ -16,7 +16,7 @@ class AccountBalance(object):
     TODO: type model description here.
 
     Attributes:
-        balance_in_cents (int): The balance in cents.
+        balance_in_cents (long|int): The balance in cents.
 
     """
 

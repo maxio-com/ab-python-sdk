@@ -17,7 +17,7 @@ class Metafield(object):
     TODO: type model description here.
 
     Attributes:
-        id (float): TODO: type description here.
+        id (int): TODO: type description here.
         name (str): TODO: type description here.
         scope (MetafieldScope): Warning: When updating a metafield's scope
             attribute, all scope attributes must be passed. Partially complete
@@ -25,7 +25,7 @@ class Metafield(object):
         data_count (int): the amount of subscriptions this metafield has been
             applied to in Chargify
         input_type (str): TODO: type description here.
-        enum (List[List[str]] | None): TODO: type description here.
+        enum (str | List[str] | None): TODO: type description here.
 
     """
 

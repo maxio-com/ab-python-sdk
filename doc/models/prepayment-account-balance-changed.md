@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `reason` | `str` | Required | - |
-| `prepayment_account_balance_in_cents` | `int` | Required | - |
-| `prepayment_balance_change_in_cents` | `int` | Required | - |
+| `prepayment_account_balance_in_cents` | `long\|int` | Required | - |
+| `prepayment_balance_change_in_cents` | `long\|int` | Required | - |
 | `currency_code` | `str` | Required | - |
 
 ## Example (as JSON)

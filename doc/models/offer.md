@@ -26,7 +26,7 @@
 | `product_family_name` | `str` | Optional | - |
 | `product_name` | `str` | Optional | - |
 | `product_price_point_name` | `str` | Optional | - |
-| `product_price_in_cents` | `int` | Optional | - |
+| `product_price_in_cents` | `long\|int` | Optional | - |
 | `offer_signup_pages` | [`List[OfferSignupPage]`](../../doc/models/offer-signup-page.md) | Optional | - |
 
 ## Example (as JSON)

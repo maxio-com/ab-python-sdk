@@ -11,9 +11,9 @@
 |  --- | --- | --- | --- |
 | `id` | `int` | Optional | The subscription unique id within Chargify. |
 | `state` | `str` | Optional | The current state of the subscription. Please see the documentation for [Subscription States](https://help.chargify.com/subscriptions/subscription-states.html) |
-| `balance_in_cents` | `int` | Optional | Gives the current outstanding subscription balance in the number of cents. |
-| `total_revenue_in_cents` | `int` | Optional | Gives the total revenue from the subscription in the number of cents. |
-| `product_price_in_cents` | `int` | Optional | (Added Nov 5 2013) The recurring amount of the product (and version),currently subscribed. NOTE: this may differ from the current price of,the product, if you’ve changed the price of the product but haven’t,moved this subscription to a newer version. |
+| `balance_in_cents` | `long\|int` | Optional | Gives the current outstanding subscription balance in the number of cents. |
+| `total_revenue_in_cents` | `long\|int` | Optional | Gives the total revenue from the subscription in the number of cents. |
+| `product_price_in_cents` | `long\|int` | Optional | (Added Nov 5 2013) The recurring amount of the product (and version),currently subscribed. NOTE: this may differ from the current price of,the product, if you’ve changed the price of the product but haven’t,moved this subscription to a newer version. |
 | `product_version_number` | `int` | Optional | The version of the product for the subscription. Note that this is a deprecated field kept for backwards-compatibility. |
 | `current_period_ends_at` | `str` | Optional | Timestamp relating to the end of the current (recurring) period (i.e.,when the next regularly scheduled attempted charge will occur) |
 | `next_assessment_at` | `str` | Optional | Timestamp that indicates when capture of payment will be tried or,retried. This value will usually track the current_period_ends_at, but,will diverge if a renewal payment fails and must be retried. In that,case, the current_period_ends_at will advance to the end of the next,period (time doesn’t stop because a payment was missed) but the,next_assessment_at will be scheduled for the auto-retry time (i.e. 24,hours in the future, in some cases) |
@@ -51,7 +51,7 @@
 | `coupon_codes` | `List[str]` | Optional | An array for all the coupons attached to the subscription. |
 | `offer_id` | `int` | Optional | The ID of the offer associated with the subscription. |
 | `payer_id` | `int` | Optional | On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. |
-| `current_billing_amount_in_cents` | `int` | Optional | The balance in cents plus the estimated renewal amount in cents. |
+| `current_billing_amount_in_cents` | `long\|int` | Optional | The balance in cents plus the estimated renewal amount in cents. |
 | `product_price_point_id` | `int` | Optional | The product price point currently subscribed to. |
 | `product_price_point_type` | `str` | Optional | One of the following: custom, default, catalog. |
 | `next_product_price_point_id` | `int` | Optional | If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal. |
@@ -59,7 +59,7 @@
 | `stored_credential_transaction_id` | `int` | Optional | For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal. |
 | `reference` | `str` | Optional | The reference value (provided by your app) for the subscription itelf. |
 | `on_hold_at` | `str` | Optional | The timestamp of the most recent on hold action. |
-| `prepaid_dunning` | bool \| None | Optional | This is a container for one-of cases. |
+| `prepaid_dunning` | `bool` | Optional | Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled |
 | `coupons` | [`List[SubscriptionIncludedCoupon]`](../../doc/models/subscription-included-coupon.md) | Optional | Additional coupon data. To use this data you also have to include the following param in the request`include[]=coupons`.<br>Only in Read Subscription Endpoint. |
 | `dunning_communication_delay_enabled` | `bool` | Optional | Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.<br>**Default**: `False` |
 | `dunning_communication_delay_time_zone` | `str` | Optional | Time zone for the Dunning Communication Delay feature. |
@@ -67,8 +67,8 @@
 | `locale` | `str` | Optional | - |
 | `currency` | `str` | Optional | - |
 | `scheduled_cancellation_at` | `str` | Optional | - |
-| `credit_balance_in_cents` | `int` | Optional | - |
-| `prepayment_balance_in_cents` | `int` | Optional | - |
+| `credit_balance_in_cents` | `long\|int` | Optional | - |
+| `prepayment_balance_in_cents` | `long\|int` | Optional | - |
 
 ## Example (as JSON)
 

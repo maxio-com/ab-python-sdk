@@ -101,6 +101,12 @@ print(result)
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ProductPricePointErrorResponseException`](../../doc/models/product-price-point-error-response-exception.md) |
+
 
 # List Product Price Points
 
@@ -108,11 +114,7 @@ Use this endpoint to retrieve a list of product price points.
 
 ```python
 def list_product_price_points(self,
-                             product_id,
-                             page=1,
-                             per_page=10,
-                             currency_prices=None,
-                             filter_type=None)
+                             options=dict())
 ```
 
 ## Parameters
@@ -132,17 +134,12 @@ def list_product_price_points(self,
 ## Example Usage
 
 ```python
-product_id = 202
-
-page = 2
-
-per_page = 10
-
-Liquid error: Value cannot be null. (Parameter 'key')result = product_price_points_controller.list_product_price_points(Liquid error: Value cannot be null. (Parameter 'key')
-    product_id,
-    page=page,
-    per_page=per_page
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')
+    'product_id': 202,
+    'page': 2,
+    'per_page': 10
+}
+result = product_price_points_controller.list_product_price_points(collect)
 print(result)
 ```
 
@@ -604,6 +601,12 @@ print(result)
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | `APIException` |
+
 
 # Create Product Currency Prices
 
@@ -741,18 +744,7 @@ This method allows retrieval of a list of Products Price Points belonging to a S
 
 ```python
 def list_all_product_price_points(self,
-                                 direction=None,
-                                 filter_archived_at=None,
-                                 filter_date_field=None,
-                                 filter_end_date=None,
-                                 filter_end_datetime=None,
-                                 filter_ids=None,
-                                 filter_start_date=None,
-                                 filter_start_datetime=None,
-                                 filter_type=None,
-                                 include=None,
-                                 page=1,
-                                 per_page=20)
+                                 options=dict())
 ```
 
 ## Parameters
@@ -779,17 +771,12 @@ def list_all_product_price_points(self,
 ## Example Usage
 
 ```python
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')include = ListProductsPricePointsInclude.CURRENCY_PRICES
-
-page = 2
-
-per_page = 50
-
-result = product_price_points_controller.list_all_product_price_points(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    include=include,
-    page=page,
-    per_page=per_page
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'include': ListProductsPricePointsInclude.CURRENCY_PRICES,
+    'page': 2,
+    'per_page': 50
+}
+result = product_price_points_controller.list_all_product_price_points(collect)
 print(result)
 ```
 

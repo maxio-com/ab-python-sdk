@@ -140,8 +140,7 @@ This endpoint returns public keys used for Chargify.js.
 
 ```python
 def list_chargify_js_public_keys(self,
-                                page=1,
-                                per_page=20)
+                                options=dict())
 ```
 
 ## Parameters
@@ -158,14 +157,11 @@ def list_chargify_js_public_keys(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-result = sites_controller.list_chargify_js_public_keys(
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'page': 2,
+    'per_page': 50
+}
+result = sites_controller.list_chargify_js_public_keys(collect)
 print(result)
 ```
 

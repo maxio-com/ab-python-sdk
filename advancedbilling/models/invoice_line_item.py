@@ -257,7 +257,7 @@ class InvoiceLineItem(object):
         price_point_id = dictionary.get("price_point_id") if "price_point_id" in dictionary.keys() else APIHelper.SKIP
         hide = dictionary.get("hide") if "hide" in dictionary.keys() else APIHelper.SKIP
         if 'component_cost_data' in dictionary.keys():
-            component_cost_data = APIHelper.deserialize_union_type(UnionTypeLookUp.get('InvoiceLineItemComponentCostData'), dictionary.get('component_cost_data'), False) if dictionary.get('component_cost_data') is not None else None
+            component_cost_data = APIHelper.deserialize_union_type(UnionTypeLookUp.get('InvoiceLineItemComponentCostData2'), dictionary.get('component_cost_data'), False) if dictionary.get('component_cost_data') is not None else None
         else:
             component_cost_data = APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if "product_price_point_id" in dictionary.keys() else APIHelper.SKIP

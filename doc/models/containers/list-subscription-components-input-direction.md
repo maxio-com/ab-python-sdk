@@ -1,5 +1,5 @@
 
-# List All Component Price Points Direction
+# List Subscription Components Input Direction
 
 ## Data Type
 

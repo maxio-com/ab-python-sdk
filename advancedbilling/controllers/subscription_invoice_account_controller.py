@@ -133,45 +133,51 @@ class SubscriptionInvoiceAccountController(BaseController):
         ).execute()
 
     def list_prepayments(self,
-                         subscription_id,
-                         page=1,
-                         per_page=20,
-                         filter_date_field=None,
-                         filter_start_date=None,
-                         filter_end_date=None):
+                         options=dict()):
         """Does a GET request to /subscriptions/{subscription_id}/prepayments.json.
 
         This request will list a subscription's prepayments.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            filter_date_field (BasicDateField, optional): The type of filter
-                you would like to apply to your search. created_at - Time when
-                prepayment was created. application_at - Time when prepayment
-                was applied to invoice. Use in query
-                `filter[date_field]=created_at`.
-            filter_start_date (str, optional): The start date (format
-                YYYY-MM-DD) with which to filter the date_field. Returns
-                prepayments with a timestamp at or after midnight (12:00:00
-                AM) in your site’s time zone on the date specified. Use in
-                query `filter[start_date]=2011-12-15`.
-            filter_end_date (str, optional): The end date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns prepayments with
-                a timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified. Use in query
-                `filter[end_date]=2011-12-15`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    subscription_id -- str -- The Chargify id of the
+                        subscription
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    filter_date_field -- BasicDateField -- The type of filter
+                        you would like to apply to your search. created_at -
+                        Time when prepayment was created. application_at -
+                        Time when prepayment was applied to invoice. Use in
+                        query `filter[date_field]=created_at`.
+                    filter_start_date -- str -- The start date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns prepayments with a timestamp at or after
+                        midnight (12:00:00 AM) in your site’s time zone on the
+                        date specified. Use in query
+                        `filter[start_date]=2011-12-15`.
+                    filter_end_date -- str -- The end date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns
+                        prepayments with a timestamp up to and including
+                        11:59:59PM in your site’s time zone on the date
+                        specified. Use in query
+                        `filter[end_date]=2011-12-15`.
 
         Returns:
             PrepaymentsResponse: Response from the API. OK
@@ -190,24 +196,24 @@ class SubscriptionInvoiceAccountController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('subscription_id')
-                            .value(subscription_id)
+                            .value(options.get('subscription_id', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('filter[date_field]')
-                         .value(filter_date_field))
+                         .value(options.get('filter_date_field', None)))
             .query_param(Parameter()
                          .key('filter[start_date]')
-                         .value(filter_start_date))
+                         .value(options.get('filter_start_date', None)))
             .query_param(Parameter()
                          .key('filter[end_date]')
-                         .value(filter_end_date))
+                         .value(options.get('filter_end_date', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

@@ -18,7 +18,7 @@ class DunnerData(object):
     Attributes:
         state (str): TODO: type description here.
         subscription_id (int): TODO: type description here.
-        revenue_at_risk_in_cents (int): TODO: type description here.
+        revenue_at_risk_in_cents (long|int): TODO: type description here.
         created_at (str): TODO: type description here.
         attempts (int): TODO: type description here.
         last_attempted_at (str): TODO: type description here.

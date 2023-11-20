@@ -1,5 +1,5 @@
 
-# List Metafields Direction
+# List Subscription Components for Site Input Direction
 
 ## Data Type
 

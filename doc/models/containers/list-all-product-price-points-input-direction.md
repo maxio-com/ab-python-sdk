@@ -1,5 +1,5 @@
 
-# List Metadata Direction
+# List All Product Price Points Input Direction
 
 ## Data Type
 

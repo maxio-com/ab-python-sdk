@@ -18,10 +18,10 @@ class RenewalPreviewLineItem(object):
     Attributes:
         transaction_type (str): TODO: type description here.
         kind (str): TODO: type description here.
-        amount_in_cents (int): TODO: type description here.
+        amount_in_cents (long|int): TODO: type description here.
         memo (str): TODO: type description here.
-        discount_amount_in_cents (int): TODO: type description here.
-        taxable_amount_in_cents (int): TODO: type description here.
+        discount_amount_in_cents (long|int): TODO: type description here.
+        taxable_amount_in_cents (long|int): TODO: type description here.
         product_id (int): TODO: type description here.
         product_name (str): TODO: type description here.
         component_id (int): TODO: type description here.

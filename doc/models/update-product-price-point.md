@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `handle` | `str` | Optional | - |
-| `price_in_cents` | `int` | Optional | - |
+| `price_in_cents` | `long\|int` | Optional | - |
 
 ## Example (as JSON)
 

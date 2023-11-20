@@ -16,7 +16,7 @@ class ComponentAllocationErrorItem(object):
     TODO: type model description here.
 
     Attributes:
-        component_id (float): TODO: type description here.
+        component_id (int): TODO: type description here.
         message (str): TODO: type description here.
         kind (str): TODO: type description here.
         on (str): TODO: type description here.

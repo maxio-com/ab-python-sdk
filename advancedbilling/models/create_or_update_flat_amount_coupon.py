@@ -21,7 +21,7 @@ class CreateOrUpdateFlatAmountCoupon(object):
             special characters (which allow for email addresses to be used):
             “%”, “@”, “+”, “-”, “_”, and “.”
         description (str): TODO: type description here.
-        amount_in_cents (int): TODO: type description here.
+        amount_in_cents (long|int): TODO: type description here.
         allow_negative_balance (str): TODO: type description here.
         recurring (str): TODO: type description here.
         end_date (str): TODO: type description here.

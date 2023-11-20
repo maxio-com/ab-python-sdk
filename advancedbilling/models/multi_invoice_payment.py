@@ -17,7 +17,7 @@ class MultiInvoicePayment(object):
     TODO: type model description here.
 
     Attributes:
-        transaction_id (float): The numeric ID of the transaction.
+        transaction_id (int): The numeric ID of the transaction.
         total_amount (str): Dollar amount of the sum of the paid invoices.
         currency_code (str): The ISO 4217 currency code (3 character string)
             representing the currency of invoice transaction.

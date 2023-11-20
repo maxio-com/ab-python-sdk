@@ -161,9 +161,7 @@ Account balance information for the subscription groups is not returned by defau
 
 ```python
 def list_subscription_groups(self,
-                            page=1,
-                            per_page=20,
-                            include=None)
+                            options=dict())
 ```
 
 ## Parameters
@@ -181,14 +179,11 @@ def list_subscription_groups(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-result = subscription_groups_controller.list_subscription_groups(
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'page': 2,
+    'per_page': 50
+}
+result = subscription_groups_controller.list_subscription_groups(collect)
 print(result)
 ```
 

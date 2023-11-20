@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `balance_in_cents` | `int` | Optional | The balance in cents. |
+| `balance_in_cents` | `long\|int` | Optional | The balance in cents. |
 
 ## Example (as JSON)
 

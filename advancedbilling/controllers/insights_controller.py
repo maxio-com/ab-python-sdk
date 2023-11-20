@@ -122,10 +122,7 @@ class InsightsController(BaseController):
 
     @deprecated()
     def read_mrr_movements(self,
-                           subscription_id=None,
-                           page=1,
-                           per_page=10,
-                           direction=None):
+                           options=dict()):
         """Does a GET request to /mrr_movements.json.
 
         This endpoint returns your site's MRR movements.
@@ -153,22 +150,31 @@ class InsightsController(BaseController):
         * Prepaid Usage Components
 
         Args:
-            subscription_id (int, optional): optionally filter results by
-                subscription
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 10. The
-                maximum allowed values is 50; any per_page value over 50 will
-                be changed to 50. Use in query `per_page=20`.
-            direction (SortingDirection | None, optional): Controls the order
-                in which results are returned. Use in query `direction=asc`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    subscription_id -- int -- optionally filter results by
+                        subscription
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 10.
+                        The maximum allowed values is 50; any per_page value
+                        over 50 will be changed to 50. Use in query
+                        `per_page=20`.
+                    direction -- SortingDirection | None -- Controls the order
+                        in which results are returned. Use in query
+                        `direction=asc`.
 
         Returns:
             ListMRRResponse: Response from the API. OK
@@ -187,17 +193,17 @@ class InsightsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('subscription_id')
-                         .value(subscription_id))
+                         .value(options.get('subscription_id', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction)
-                         .validator(lambda value: UnionTypeLookUp.get('ReadMrrMovementsDirection').validate(value)))
+                         .value(options.get('direction', None))
+                         .validator(lambda value: UnionTypeLookUp.get('ReadMrrMovementsInputDirection').validate(value)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -211,38 +217,43 @@ class InsightsController(BaseController):
 
     @deprecated()
     def list_mrr_per_subscription(self,
-                                  filter_subscription_ids=None,
-                                  at_time=None,
-                                  page=1,
-                                  per_page=20,
-                                  direction=None):
+                                  options=dict()):
         """Does a GET request to /subscriptions_mrr.json.
 
         This endpoint returns your site's current MRR, including plan and
         usage breakouts split per subscription.
 
         Args:
-            filter_subscription_ids (List[int], optional): Submit ids in order
-                to limit results. Use in query:
-                `filter[subscription_ids]=1,2,3`.
-            at_time (str, optional): Submit a timestamp in ISO8601 format to
-                request MRR for a historic time. Use in query:
-                `at_time=2022-01-10T10:00:00-05:00`.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            direction (Direction, optional): Controls the order in which
-                results are returned. Records are ordered by subscription_id
-                in ascending order by default. Use in query `direction=desc`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    filter_subscription_ids -- List[int] -- Submit ids in
+                        order to limit results. Use in query:
+                        `filter[subscription_ids]=1,2,3`.
+                    at_time -- str -- Submit a timestamp in ISO8601 format to
+                        request MRR for a historic time. Use in query:
+                        `at_time=2022-01-10T10:00:00-05:00`.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    direction -- Direction -- Controls the order in which
+                        results are returned. Records are ordered by
+                        subscription_id in ascending order by default. Use in
+                        query `direction=desc`.
 
         Returns:
             SubscriptionMRRResponse: Response from the API. OK
@@ -261,19 +272,19 @@ class InsightsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('filter[subscription_ids]')
-                         .value(filter_subscription_ids))
+                         .value(options.get('filter_subscription_ids', None)))
             .query_param(Parameter()
                          .key('at_time')
-                         .value(at_time))
+                         .value(options.get('at_time', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction))
+                         .value(options.get('direction', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

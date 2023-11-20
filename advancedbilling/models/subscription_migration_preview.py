@@ -16,15 +16,15 @@ class SubscriptionMigrationPreview(object):
     TODO: type model description here.
 
     Attributes:
-        prorated_adjustment_in_cents (int): The amount of the prorated
+        prorated_adjustment_in_cents (long|int): The amount of the prorated
             adjustment that would be issued for the current subscription.
-        charge_in_cents (int): The amount of the charge that would be created
-            for the new product.
-        payment_due_in_cents (int): The amount of the payment due in the case
-            of an upgrade.
-        credit_applied_in_cents (int): Represents a credit in cents that is
-            applied to your subscription as part of a migration process for a
-            specific product, which reduces the amount owed for the
+        charge_in_cents (long|int): The amount of the charge that would be
+            created for the new product.
+        payment_due_in_cents (long|int): The amount of the payment due in the
+            case of an upgrade.
+        credit_applied_in_cents (long|int): Represents a credit in cents that
+            is applied to your subscription as part of a migration process for
+            a specific product, which reduces the amount owed for the
             subscription.
 
     """

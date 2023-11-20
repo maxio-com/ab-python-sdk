@@ -90,19 +90,7 @@ class SubscriptionComponentsController(BaseController):
         ).execute()
 
     def list_subscription_components(self,
-                                     subscription_id,
-                                     date_field=None,
-                                     direction=None,
-                                     end_date=None,
-                                     end_datetime=None,
-                                     price_point_ids=None,
-                                     product_family_ids=None,
-                                     sort=None,
-                                     start_date=None,
-                                     start_datetime=None,
-                                     include=None,
-                                     filter_use_site_exchange_rate=None,
-                                     filter_currencies=None):
+                                     options=dict()):
         """Does a GET request to /subscriptions/{subscription_id}/components.json.
 
         This request will list a subscription's applied components.
@@ -112,50 +100,63 @@ class SubscriptionComponentsController(BaseController):
         the server response.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
-            date_field (ListSubscriptionComponentsDateField, optional): The
-                type of filter you'd like to apply to your search. Use in
-                query `date_field=updated_at`.
-            direction (SortingDirection | None, optional): Controls the order
-                in which results are returned. Use in query `direction=asc`.
-            end_date (str, optional): The end date (format YYYY-MM-DD) with
-                which to filter the date_field. Returns components with a
-                timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified.
-            end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns components with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site''s time zone will be used. If provided,
-                this parameter will be used instead of end_date.
-            price_point_ids (IncludeNotNull, optional): Allows fetching
-                components allocation only if price point id is present. Use
-                in query `price_point_ids=not_null`.
-            product_family_ids (List[int], optional): Allows fetching
-                components allocation with matching product family id based on
-                provided ids. Use in query `product_family_ids=1,2,3`.
-            sort (ListSubscriptionComponentsSort, optional): The attribute by
-                which to sort. Use in query `sort=updated_at`.
-            start_date (str, optional): The start date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns components with a
-                timestamp at or after midnight (12:00:00 AM) in your site’s
-                time zone on the date specified.
-            start_datetime (str, optional): The start date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns components with a timestamp at or after exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site''s time zone will be used. If provided,
-                this parameter will be used instead of start_date.
-            include (ListSubscriptionComponentsInclude, optional): Allows
-                including additional data in the response. Use in query
-                `include=subscription`.
-            filter_use_site_exchange_rate (bool, optional): Allows fetching
-                components allocation with matching use_site_exchange_rate
-                based on provided value. Use in query
-                `filter[use_site_exchange_rate]=true`.
-            filter_currencies (List[str], optional): Allows fetching
-                components allocation with matching currency based on provided
-                values. Use in query `filter[currencies]=EUR,USD`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    subscription_id -- str -- The Chargify id of the
+                        subscription
+                    date_field -- SubscriptionListDateField -- The type of
+                        filter you'd like to apply to your search. Use in
+                        query `date_field=updated_at`.
+                    direction -- SortingDirection | None -- Controls the order
+                        in which results are returned. Use in query
+                        `direction=asc`.
+                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns components
+                        with a timestamp up to and including 11:59:59PM in
+                        your site’s time zone on the date specified.
+                    end_datetime -- str -- The end date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns components with a timestamp at or
+                        before exact time provided in query. You can specify
+                        timezone in query - otherwise your site''s time zone
+                        will be used. If provided, this parameter will be used
+                        instead of end_date.
+                    price_point_ids -- IncludeNotNull -- Allows fetching
+                        components allocation only if price point id is
+                        present. Use in query `price_point_ids=not_null`.
+                    product_family_ids -- List[int] -- Allows fetching
+                        components allocation with matching product family id
+                        based on provided ids. Use in query
+                        `product_family_ids=1,2,3`.
+                    sort -- ListSubscriptionComponentsSort -- The attribute by
+                        which to sort. Use in query `sort=updated_at`.
+                    start_date -- str -- The start date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns
+                        components with a timestamp at or after midnight
+                        (12:00:00 AM) in your site’s time zone on the date
+                        specified.
+                    start_datetime -- str -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns components with a timestamp at or
+                        after exact time provided in query. You can specify
+                        timezone in query - otherwise your site''s time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date.
+                    include -- ListSubscriptionComponentsInclude -- Allows
+                        including additional data in the response. Use in
+                        query `include=subscription`.
+                    filter_use_site_exchange_rate -- bool -- Allows fetching
+                        components allocation with matching
+                        use_site_exchange_rate based on provided value. Use in
+                        query `filter[use_site_exchange_rate]=true`.
+                    filter_currencies -- List[str] -- Allows fetching
+                        components allocation with matching currency based on
+                        provided values. Use in query
+                        `filter[currencies]=EUR,USD`.
 
         Returns:
             List[SubscriptionComponentResponse]: Response from the API. OK
@@ -174,46 +175,46 @@ class SubscriptionComponentsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('subscription_id')
-                            .value(subscription_id)
+                            .value(options.get('subscription_id', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('date_field')
-                         .value(date_field))
+                         .value(options.get('date_field', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction)
-                         .validator(lambda value: UnionTypeLookUp.get('ListSubscriptionComponentsDirection').validate(value)))
+                         .value(options.get('direction', None))
+                         .validator(lambda value: UnionTypeLookUp.get('ListSubscriptionComponentsInputDirection').validate(value)))
             .query_param(Parameter()
                          .key('end_date')
-                         .value(end_date))
+                         .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(end_datetime))
+                         .value(options.get('end_datetime', None)))
             .query_param(Parameter()
                          .key('price_point_ids')
-                         .value(price_point_ids))
+                         .value(options.get('price_point_ids', None)))
             .query_param(Parameter()
                          .key('product_family_ids')
-                         .value(product_family_ids))
+                         .value(options.get('product_family_ids', None)))
             .query_param(Parameter()
                          .key('sort')
-                         .value(sort))
+                         .value(options.get('sort', None)))
             .query_param(Parameter()
                          .key('start_date')
-                         .value(start_date))
+                         .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(start_datetime))
+                         .value(options.get('start_datetime', None)))
             .query_param(Parameter()
                          .key('include')
-                         .value(include))
+                         .value(options.get('include', None)))
             .query_param(Parameter()
                          .key('filter[use_site_exchange_rate]')
-                         .value(filter_use_site_exchange_rate))
+                         .value(options.get('filter_use_site_exchange_rate', None)))
             .query_param(Parameter()
                          .key('filter[currencies]')
-                         .value(filter_currencies))
+                         .value(options.get('filter_currencies', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -927,14 +928,7 @@ class SubscriptionComponentsController(BaseController):
         ).execute()
 
     def list_usages(self,
-                    subscription_id,
-                    component_id,
-                    since_id=None,
-                    max_id=None,
-                    since_date=None,
-                    until_date=None,
-                    page=1,
-                    per_page=20):
+                    options=dict()):
         """Does a GET request to /subscriptions/{subscription_id}/components/{component_id}/usages.json.
 
         This request will return a list of the usages associated with a
@@ -955,31 +949,41 @@ class SubscriptionComponentsController(BaseController):
         identifier for the component you are working with.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
-            component_id (int): Either the Chargify id for the component or
-                the component's handle prefixed by `handle:`
-            since_id (int, optional): Returns usages with an id greater than
-                or equal to the one specified
-            max_id (int, optional): Returns usages with an id less than or
-                equal to the one specified
-            since_date (str, optional): Returns usages with a created_at date
-                greater than or equal to midnight (12:00 AM) on the date
-                specified.
-            until_date (str, optional): Returns usages with a created_at date
-                less than or equal to midnight (12:00 AM) on the date
-                specified.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    subscription_id -- str -- The Chargify id of the
+                        subscription
+                    component_id -- int -- Either the Chargify id for the
+                        component or the component's handle prefixed by
+                        `handle:`
+                    since_id -- int -- Returns usages with an id greater than
+                        or equal to the one specified
+                    max_id -- int -- Returns usages with an id less than or
+                        equal to the one specified
+                    since_date -- str -- Returns usages with a created_at date
+                        greater than or equal to midnight (12:00 AM) on the
+                        date specified.
+                    until_date -- str -- Returns usages with a created_at date
+                        less than or equal to midnight (12:00 AM) on the date
+                        specified.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
 
         Returns:
             List[UsageResponse]: Response from the API. OK
@@ -998,32 +1002,32 @@ class SubscriptionComponentsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('subscription_id')
-                            .value(subscription_id)
+                            .value(options.get('subscription_id', None))
                             .is_required(True)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('component_id')
-                            .value(component_id)
+                            .value(options.get('component_id', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('since_id')
-                         .value(since_id))
+                         .value(options.get('since_id', None)))
             .query_param(Parameter()
                          .key('max_id')
-                         .value(max_id))
+                         .value(options.get('max_id', None)))
             .query_param(Parameter()
                          .key('since_date')
-                         .value(since_date))
+                         .value(options.get('since_date', None)))
             .query_param(Parameter()
                          .key('until_date')
-                         .value(until_date))
+                         .value(options.get('until_date', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -1274,137 +1278,137 @@ class SubscriptionComponentsController(BaseController):
         ).execute()
 
     def list_subscription_components_for_site(self,
-                                              page=1,
-                                              per_page=20,
-                                              sort=None,
-                                              direction=None,
-                                              date_field=None,
-                                              start_date=None,
-                                              start_datetime=None,
-                                              end_date=None,
-                                              end_datetime=None,
-                                              subscription_ids=None,
-                                              price_point_ids=None,
-                                              product_family_ids=None,
-                                              include=None,
-                                              filter_use_site_exchange_rate=None,
-                                              filter_currencies=None,
-                                              filter_subscription_states=None,
-                                              filter_subscription_date_field=None,
-                                              filter_subscription_start_date=None,
-                                              filter_subscription_start_datetime=None,
-                                              filter_subscription_end_date=None,
-                                              filter_subscription_end_datetime=None):
+                                              options=dict()):
         """Does a GET request to /subscriptions_components.json.
 
         This request will list components applied to each subscription.
 
         Args:
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            sort (ListSubscriptionComponentsSort, optional): The attribute by
-                which to sort. Use in query: `sort=updated_at`.
-            direction (SortingDirection | None, optional): Controls the order
-                in which results are returned. Use in query `direction=asc`.
-            date_field (ListSubscriptionComponentsDateField, optional): The
-                type of filter you'd like to apply to your search. Use in
-                query: `date_field=updated_at`.
-            start_date (str, optional): The start date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns components with a
-                timestamp at or after midnight (12:00:00 AM) in your site’s
-                time zone on the date specified. Use in query
-                `start_date=2011-12-15`.
-            start_datetime (str, optional): The start date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns components with a timestamp at or after exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site''s time zone will be used. If provided,
-                this parameter will be used instead of start_date. Use in
-                query `start_datetime=2022-07-01 09:00:05`.
-            end_date (str, optional): The end date (format YYYY-MM-DD) with
-                which to filter the date_field. Returns components with a
-                timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified. Use in query
-                `end_date=2011-12-16`.
-            end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns components with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site''s time zone will be used. If provided,
-                this parameter will be used instead of end_date. Use in query
-                `end_datetime=2022-07-01 09:00:05`.
-            subscription_ids (List[int], optional): Allows fetching components
-                allocation with matching subscription id based on provided
-                ids. Use in query `subscription_ids=1,2,3`.
-            price_point_ids (IncludeNotNull, optional): Allows fetching
-                components allocation only if price point id is present. Use
-                in query `price_point_ids=not_null`.
-            product_family_ids (List[int], optional): Allows fetching
-                components allocation with matching product family id based on
-                provided ids. Use in query `product_family_ids=1,2,3`.
-            include (ListSubscriptionComponentsInclude, optional): Allows
-                including additional data in the response. Use in query
-                `include=subscription`.
-            filter_use_site_exchange_rate (bool, optional): Allows fetching
-                components allocation with matching use_site_exchange_rate
-                based on provided value. Use in query
-                `filter[use_site_exchange_rate]=true`.
-            filter_currencies (List[str], optional): Allows fetching
-                components allocation with matching currency based on provided
-                values. Use in query `filter[currencies]=USD,EUR`.
-            filter_subscription_states (List[SubscriptionState], optional):
-                Allows fetching components allocations that belong to the
-                subscription with matching states based on provided values. To
-                use this filter you also have to include the following param
-                in the request `include=subscription`. Use in query
-                `filter[subscription][states]=active,canceled&include=subscript
-                ion`.
-            filter_subscription_date_field
-                (ListSubscriptionComponentsSubscriptionDateField, optional):
-                The type of filter you'd like to apply to your search. To use
-                this filter you also have to include the following param in
-                the request `include=subscription`.
-            filter_subscription_start_date (str, optional): The start date
-                (format YYYY-MM-DD) with which to filter the date_field.
-                Returns components that belong to the subscription with a
-                timestamp at or after midnight (12:00:00 AM) in your site’s
-                time zone on the date specified. To use this filter you also
-                have to include the following param in the request
-                `include=subscription`.
-            filter_subscription_start_datetime (str, optional): The start date
-                and time (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                date_field. Returns components that belong to the subscription
-                with a timestamp at or after exact time provided in query. You
-                can specify timezone in query - otherwise your site''s time
-                zone will be used. If provided, this parameter will be used
-                instead of start_date. To use this filter you also have to
-                include the following param in the request
-                `include=subscription`.
-            filter_subscription_end_date (str, optional): The end date (format
-                YYYY-MM-DD) with which to filter the date_field. Returns
-                components that belong to the subscription with a timestamp up
-                to and including 11:59:59PM in your site’s time zone on the
-                date specified. To use this filter you also have to include
-                the following param in the request `include=subscription`.
-            filter_subscription_end_datetime (str, optional): The end date and
-                time (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                date_field. Returns components that belong to the subscription
-                with a timestamp at or before exact time provided in query.
-                You can specify timezone in query - otherwise your site''s
-                time zone will be used. If provided, this parameter will be
-                used instead of end_date. To use this filter you also have to
-                include the following param in the request
-                `include=subscription`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    sort -- ListSubscriptionComponentsSort -- The attribute by
+                        which to sort. Use in query: `sort=updated_at`.
+                    direction -- SortingDirection | None -- Controls the order
+                        in which results are returned. Use in query
+                        `direction=asc`.
+                    date_field -- SubscriptionListDateField -- The type of
+                        filter you'd like to apply to your search. Use in
+                        query: `date_field=updated_at`.
+                    start_date -- str -- The start date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns
+                        components with a timestamp at or after midnight
+                        (12:00:00 AM) in your site’s time zone on the date
+                        specified. Use in query `start_date=2011-12-15`.
+                    start_datetime -- str -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns components with a timestamp at or
+                        after exact time provided in query. You can specify
+                        timezone in query - otherwise your site''s time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date. Use in query
+                        `start_datetime=2022-07-01 09:00:05`.
+                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns components
+                        with a timestamp up to and including 11:59:59PM in
+                        your site’s time zone on the date specified. Use in
+                        query `end_date=2011-12-16`.
+                    end_datetime -- str -- The end date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns components with a timestamp at or
+                        before exact time provided in query. You can specify
+                        timezone in query - otherwise your site''s time zone
+                        will be used. If provided, this parameter will be used
+                        instead of end_date. Use in query
+                        `end_datetime=2022-07-01 09:00:05`.
+                    subscription_ids -- List[int] -- Allows fetching
+                        components allocation with matching subscription id
+                        based on provided ids. Use in query
+                        `subscription_ids=1,2,3`.
+                    price_point_ids -- IncludeNotNull -- Allows fetching
+                        components allocation only if price point id is
+                        present. Use in query `price_point_ids=not_null`.
+                    product_family_ids -- List[int] -- Allows fetching
+                        components allocation with matching product family id
+                        based on provided ids. Use in query
+                        `product_family_ids=1,2,3`.
+                    include -- ListSubscriptionComponentsInclude -- Allows
+                        including additional data in the response. Use in
+                        query `include=subscription`.
+                    filter_use_site_exchange_rate -- bool -- Allows fetching
+                        components allocation with matching
+                        use_site_exchange_rate based on provided value. Use in
+                        query `filter[use_site_exchange_rate]=true`.
+                    filter_currencies -- List[str] -- Allows fetching
+                        components allocation with matching currency based on
+                        provided values. Use in query
+                        `filter[currencies]=USD,EUR`.
+                    filter_subscription_states -- List[SubscriptionState] --
+                        Allows fetching components allocations that belong to
+                        the subscription with matching states based on
+                        provided values. To use this filter you also have to
+                        include the following param in the request
+                        `include=subscription`. Use in query
+                        `filter[subscription][states]=active,canceled&include=s
+                        ubscription`.
+                    filter_subscription_date_field --
+                        SubscriptionListDateField -- The type of filter you'd
+                        like to apply to your search. To use this filter you
+                        also have to include the following param in the
+                        request `include=subscription`.
+                    filter_subscription_start_date -- str -- The start date
+                        (format YYYY-MM-DD) with which to filter the
+                        date_field. Returns components that belong to the
+                        subscription with a timestamp at or after midnight
+                        (12:00:00 AM) in your site’s time zone on the date
+                        specified. To use this filter you also have to include
+                        the following param in the request
+                        `include=subscription`.
+                    filter_subscription_start_datetime -- str -- The start
+                        date and time (format YYYY-MM-DD HH:MM:SS) with which
+                        to filter the date_field. Returns components that
+                        belong to the subscription with a timestamp at or
+                        after exact time provided in query. You can specify
+                        timezone in query - otherwise your site''s time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date. To use this filter you also
+                        have to include the following param in the request
+                        `include=subscription`.
+                    filter_subscription_end_date -- str -- The end date
+                        (format YYYY-MM-DD) with which to filter the
+                        date_field. Returns components that belong to the
+                        subscription with a timestamp up to and including
+                        11:59:59PM in your site’s time zone on the date
+                        specified. To use this filter you also have to include
+                        the following param in the request
+                        `include=subscription`.
+                    filter_subscription_end_datetime -- str -- The end date
+                        and time (format YYYY-MM-DD HH:MM:SS) with which to
+                        filter the date_field. Returns components that belong
+                        to the subscription with a timestamp at or before
+                        exact time provided in query. You can specify timezone
+                        in query - otherwise your site''s time zone will be
+                        used. If provided, this parameter will be used instead
+                        of end_date. To use this filter you also have to
+                        include the following param in the request
+                        `include=subscription`.
 
         Returns:
             ListSubscriptionComponentsResponse: Response from the API. OK
@@ -1423,68 +1427,68 @@ class SubscriptionComponentsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('sort')
-                         .value(sort))
+                         .value(options.get('sort', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction)
-                         .validator(lambda value: UnionTypeLookUp.get('ListSubscriptionComponentsForSiteDirection').validate(value)))
+                         .value(options.get('direction', None))
+                         .validator(lambda value: UnionTypeLookUp.get('ListSubscriptionComponentsForSiteInputDirection').validate(value)))
             .query_param(Parameter()
                          .key('date_field')
-                         .value(date_field))
+                         .value(options.get('date_field', None)))
             .query_param(Parameter()
                          .key('start_date')
-                         .value(start_date))
+                         .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(start_datetime))
+                         .value(options.get('start_datetime', None)))
             .query_param(Parameter()
                          .key('end_date')
-                         .value(end_date))
+                         .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(end_datetime))
+                         .value(options.get('end_datetime', None)))
             .query_param(Parameter()
                          .key('subscription_ids')
-                         .value(subscription_ids))
+                         .value(options.get('subscription_ids', None)))
             .query_param(Parameter()
                          .key('price_point_ids')
-                         .value(price_point_ids))
+                         .value(options.get('price_point_ids', None)))
             .query_param(Parameter()
                          .key('product_family_ids')
-                         .value(product_family_ids))
+                         .value(options.get('product_family_ids', None)))
             .query_param(Parameter()
                          .key('include')
-                         .value(include))
+                         .value(options.get('include', None)))
             .query_param(Parameter()
                          .key('filter[use_site_exchange_rate]')
-                         .value(filter_use_site_exchange_rate))
+                         .value(options.get('filter_use_site_exchange_rate', None)))
             .query_param(Parameter()
                          .key('filter[currencies]')
-                         .value(filter_currencies))
+                         .value(options.get('filter_currencies', None)))
             .query_param(Parameter()
                          .key('filter[subscription][states]')
-                         .value(filter_subscription_states))
+                         .value(options.get('filter_subscription_states', None)))
             .query_param(Parameter()
                          .key('filter[subscription][date_field]')
-                         .value(filter_subscription_date_field))
+                         .value(options.get('filter_subscription_date_field', None)))
             .query_param(Parameter()
                          .key('filter[subscription][start_date]')
-                         .value(filter_subscription_start_date))
+                         .value(options.get('filter_subscription_start_date', None)))
             .query_param(Parameter()
                          .key('filter[subscription][start_datetime]')
-                         .value(filter_subscription_start_datetime))
+                         .value(options.get('filter_subscription_start_datetime', None)))
             .query_param(Parameter()
                          .key('filter[subscription][end_date]')
-                         .value(filter_subscription_end_date))
+                         .value(options.get('filter_subscription_end_date', None)))
             .query_param(Parameter()
                          .key('filter[subscription][end_datetime]')
-                         .value(filter_subscription_end_datetime))
+                         .value(options.get('filter_subscription_end_datetime', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

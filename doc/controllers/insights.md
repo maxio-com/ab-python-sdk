@@ -145,10 +145,7 @@ Usage includes revenue from:
 
 ```python
 def read_mrr_movements(self,
-                      subscription_id=None,
-                      page=1,
-                      per_page=10,
-                      direction=None)
+                      options=dict())
 ```
 
 ## Parameters
@@ -167,14 +164,11 @@ def read_mrr_movements(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 20
-
-result = insights_controller.read_mrr_movements(
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'page': 2,
+    'per_page': 20
+}
+result = insights_controller.read_mrr_movements(collect)
 print(result)
 ```
 
@@ -239,11 +233,7 @@ This endpoint returns your site's current MRR, including plan and usage breakout
 
 ```python
 def list_mrr_per_subscription(self,
-                             filter_subscription_ids=None,
-                             at_time=None,
-                             page=1,
-                             per_page=20,
-                             direction=None)
+                             options=dict())
 ```
 
 ## Parameters
@@ -263,20 +253,13 @@ def list_mrr_per_subscription(self,
 ## Example Usage
 
 ```python
-Liquid error: Value cannot be null. (Parameter 'key')at_time = 'at_time=2022-01-10T10:00:00-05:00'
-
-page = 2
-
-per_page = 50
-
-direction = Direction.DESC
-
-result = insights_controller.list_mrr_per_subscription(Liquid error: Value cannot be null. (Parameter 'key')
-    at_time=at_time,
-    page=page,
-    per_page=per_page,
-    direction=direction
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')
+    'at_time': 'at_time=2022-01-10T10:00:00-05:00',
+    'page': 2,
+    'per_page': 50,
+    'direction': Direction.DESC
+}
+result = insights_controller.list_mrr_per_subscription(collect)
 print(result)
 ```
 

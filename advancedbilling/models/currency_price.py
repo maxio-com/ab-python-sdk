@@ -18,7 +18,7 @@ class CurrencyPrice(object):
     Attributes:
         id (int): TODO: type description here.
         currency (str): TODO: type description here.
-        price (int): TODO: type description here.
+        price (float): TODO: type description here.
         formatted_price (str): TODO: type description here.
         price_id (int): TODO: type description here.
         price_point_id (int): TODO: type description here.

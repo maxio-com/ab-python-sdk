@@ -33,13 +33,7 @@ class WebhooksController(BaseController):
         super(WebhooksController, self).__init__(config)
 
     def list_webhooks(self,
-                      status=None,
-                      since_date=None,
-                      until_date=None,
-                      page=1,
-                      per_page=20,
-                      order=None,
-                      subscription=None):
+                      options=dict()):
         """Does a GET request to /webhooks.json.
 
         ## Webhooks Intro
@@ -68,30 +62,38 @@ class WebhooksController(BaseController):
         query parameters if you want to filter webhooks.
 
         Args:
-            status (WebhookStatus, optional): Webhooks with matching status
-                would be returned.
-            since_date (str, optional): Format YYYY-MM-DD. Returns Webhooks
-                with the created_at date greater than or equal to the one
-                specified.
-            until_date (str, optional): Format YYYY-MM-DD. Returns Webhooks
-                with the created_at date less than or equal to the one
-                specified.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            order (WebhookOrder, optional): The order in which the Webhooks
-                are returned.
-            subscription (int, optional): The Chargify id of a subscription
-                you'd like to filter for
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    status -- WebhookStatus -- Webhooks with matching status
+                        would be returned.
+                    since_date -- str -- Format YYYY-MM-DD. Returns Webhooks
+                        with the created_at date greater than or equal to the
+                        one specified.
+                    until_date -- str -- Format YYYY-MM-DD. Returns Webhooks
+                        with the created_at date less than or equal to the one
+                        specified.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    order -- WebhookOrder -- The order in which the Webhooks
+                        are returned.
+                    subscription -- int -- The Chargify id of a subscription
+                        you'd like to filter for
 
         Returns:
             List[WebhookResponse]: Response from the API. OK
@@ -110,25 +112,25 @@ class WebhooksController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('status')
-                         .value(status))
+                         .value(options.get('status', None)))
             .query_param(Parameter()
                          .key('since_date')
-                         .value(since_date))
+                         .value(options.get('since_date', None)))
             .query_param(Parameter()
                          .key('until_date')
-                         .value(until_date))
+                         .value(options.get('until_date', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('order')
-                         .value(order))
+                         .value(options.get('order', None)))
             .query_param(Parameter()
                          .key('subscription')
-                         .value(subscription))
+                         .value(options.get('subscription', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

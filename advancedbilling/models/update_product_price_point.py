@@ -17,7 +17,7 @@ class UpdateProductPricePoint(object):
 
     Attributes:
         handle (str): TODO: type description here.
-        price_in_cents (int): TODO: type description here.
+        price_in_cents (long|int): TODO: type description here.
 
     """
 

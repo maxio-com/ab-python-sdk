@@ -16,9 +16,9 @@ class ComponentPricePointErrorItem(object):
     TODO: type model description here.
 
     Attributes:
-        component_id (float): TODO: type description here.
+        component_id (int): TODO: type description here.
         message (str): TODO: type description here.
-        price_point (float): TODO: type description here.
+        price_point (int): TODO: type description here.
 
     """
 

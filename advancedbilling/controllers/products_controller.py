@@ -268,74 +268,75 @@ class ProductsController(BaseController):
         ).execute()
 
     def list_products(self,
-                      date_field=None,
-                      end_date=None,
-                      end_datetime=None,
-                      start_date=None,
-                      start_datetime=None,
-                      page=1,
-                      per_page=20,
-                      include_archived=None,
-                      include=None,
-                      filter_prepaid_product_price_point_product_price_point_id=None,
-                      filter_use_site_exchange_rate=None):
+                      options=dict()):
         """Does a GET request to /products.json.
 
         This method allows to retrieve a list of Products belonging to a
         Site.
 
         Args:
-            date_field (BasicDateField, optional): The type of filter you
-                would like to apply to your search. Use in query:
-                `date_field=created_at`.
-            end_date (str, optional): The end date (format YYYY-MM-DD) with
-                which to filter the date_field. Returns products with a
-                timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified.
-            end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns products with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site''s time zone will be used. If provided,
-                this parameter will be used instead of end_date.
-            start_date (str, optional): The start date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns products with a
-                timestamp at or after midnight (12:00:00 AM) in your site’s
-                time zone on the date specified.
-            start_datetime (str, optional): The start date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns products with a timestamp at or after exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site''s time zone will be used. If provided,
-                this parameter will be used instead of start_date.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            include_archived (bool, optional): Include archived products. Use
-                in query: `include_archived=true`.
-            include (ListProductsInclude, optional): Allows including
-                additional data in the response. Use in query
-                `include=prepaid_product_price_point`.
-            filter_prepaid_product_price_point_product_price_point_id
-                (IncludeNotNull, optional): Allows fetching products only if a
-                prepaid product price point is present or not. To use this
-                filter you also have to include the following param in the
-                request `include=prepaid_product_price_point`. Use in query
-                `filter[prepaid_product_price_point][product_price_point_id]=no
-                t_null`.
-            filter_use_site_exchange_rate (bool, optional): Allows fetching
-                products with matching use_site_exchange_rate based on
-                provided value (refers to default price point). Use in query
-                `filter[use_site_exchange_rate]=true`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    date_field -- BasicDateField -- The type of filter you
+                        would like to apply to your search. Use in query:
+                        `date_field=created_at`.
+                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns products with
+                        a timestamp up to and including 11:59:59PM in your
+                        site’s time zone on the date specified.
+                    end_datetime -- str -- The end date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns products with a timestamp at or
+                        before exact time provided in query. You can specify
+                        timezone in query - otherwise your site''s time zone
+                        will be used. If provided, this parameter will be used
+                        instead of end_date.
+                    start_date -- str -- The start date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns products
+                        with a timestamp at or after midnight (12:00:00 AM) in
+                        your site’s time zone on the date specified.
+                    start_datetime -- str -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns products with a timestamp at or
+                        after exact time provided in query. You can specify
+                        timezone in query - otherwise your site''s time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    include_archived -- bool -- Include archived products. Use
+                        in query: `include_archived=true`.
+                    include -- ListProductsInclude -- Allows including
+                        additional data in the response. Use in query
+                        `include=prepaid_product_price_point`.
+                    filter_prepaid_product_price_point_product_price_point_id
+                        -- IncludeNotNull -- Allows fetching products only if
+                        a prepaid product price point is present or not. To
+                        use this filter you also have to include the following
+                        param in the request
+                        `include=prepaid_product_price_point`. Use in query
+                        `filter[prepaid_product_price_point][product_price_poin
+                        t_id]=not_null`.
+                    filter_use_site_exchange_rate -- bool -- Allows fetching
+                        products with matching use_site_exchange_rate based on
+                        provided value (refers to default price point). Use in
+                        query `filter[use_site_exchange_rate]=true`.
 
         Returns:
             List[ProductResponse]: Response from the API. OK
@@ -354,37 +355,37 @@ class ProductsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('date_field')
-                         .value(date_field))
+                         .value(options.get('date_field', None)))
             .query_param(Parameter()
                          .key('end_date')
-                         .value(end_date))
+                         .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(end_datetime))
+                         .value(options.get('end_datetime', None)))
             .query_param(Parameter()
                          .key('start_date')
-                         .value(start_date))
+                         .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(start_datetime))
+                         .value(options.get('start_datetime', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('include_archived')
-                         .value(include_archived))
+                         .value(options.get('include_archived', None)))
             .query_param(Parameter()
                          .key('include')
-                         .value(include))
+                         .value(options.get('include', None)))
             .query_param(Parameter()
                          .key('filter[prepaid_product_price_point][product_price_point_id]')
-                         .value(filter_prepaid_product_price_point_product_price_point_id))
+                         .value(options.get('filter_prepaid_product_price_point_product_price_point_id', None)))
             .query_param(Parameter()
                          .key('filter[use_site_exchange_rate]')
-                         .value(filter_use_site_exchange_rate))
+                         .value(options.get('filter_use_site_exchange_rate', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `paid_invoices` | [`List[Payment]`](../../doc/models/payment.md) | Optional | - |
-| `prepayment` | [`PrePayment`](../../doc/models/pre-payment.md) | Optional | - |
+| `prepayment` | [`InvoicePrePayment`](../../doc/models/invoice-pre-payment.md) | Optional | - |
 
 ## Example (as JSON)
 

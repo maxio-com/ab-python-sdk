@@ -1,5 +1,5 @@
 
-# Subscription Group
+# Subscription Group 2
 
 ## Data Type
 

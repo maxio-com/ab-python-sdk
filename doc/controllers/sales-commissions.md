@@ -29,11 +29,7 @@ Access to the Sales Commission API endpoints is available to users with financia
 
 ```python
 def list_sales_commission_settings(self,
-                                  seller_id,
-                                  authorization='Bearer <<apiKey>>',
-                                  live_mode=None,
-                                  page=1,
-                                  per_page=100)
+                                  options=dict())
 ```
 
 ## Parameters
@@ -53,20 +49,13 @@ def list_sales_commission_settings(self,
 ## Example Usage
 
 ```python
-seller_id = 'seller_id8'
-
-authorization = 'Bearer <<apiKey>>'
-
-page = 2
-
-per_page = 100
-
-result = sales_commissions_controller.list_sales_commission_settings(
-    seller_id,
-    authorization=authorization,
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'seller_id': 'seller_id8',
+    'authorization': 'Bearer <<apiKey>>',
+    'page': 2,
+    'per_page': 100
+}
+result = sales_commissions_controller.list_sales_commission_settings(collect)
 print(result)
 ```
 
@@ -119,11 +108,7 @@ Access to the Sales Commission API endpoints is available to users with financia
 
 ```python
 def list_sales_reps(self,
-                   seller_id,
-                   authorization='Bearer <<apiKey>>',
-                   live_mode=None,
-                   page=1,
-                   per_page=100)
+                   options=dict())
 ```
 
 ## Parameters
@@ -143,20 +128,13 @@ def list_sales_reps(self,
 ## Example Usage
 
 ```python
-seller_id = 'seller_id8'
-
-authorization = 'Bearer <<apiKey>>'
-
-page = 2
-
-per_page = 100
-
-result = sales_commissions_controller.list_sales_reps(
-    seller_id,
-    authorization=authorization,
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'seller_id': 'seller_id8',
+    'authorization': 'Bearer <<apiKey>>',
+    'page': 2,
+    'per_page': 100
+}
+result = sales_commissions_controller.list_sales_reps(collect)
 print(result)
 ```
 

@@ -100,19 +100,7 @@ When requesting to list components for a given subscription, if the subscription
 
 ```python
 def list_subscription_components(self,
-                                subscription_id,
-                                date_field=None,
-                                direction=None,
-                                end_date=None,
-                                end_datetime=None,
-                                price_point_ids=None,
-                                product_family_ids=None,
-                                sort=None,
-                                start_date=None,
-                                start_datetime=None,
-                                include=None,
-                                filter_use_site_exchange_rate=None,
-                                filter_currencies=None)
+                                options=dict())
 ```
 
 ## Parameters
@@ -120,7 +108,7 @@ def list_subscription_components(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
-| `date_field` | [`ListSubscriptionComponentsDateField`](../../doc/models/list-subscription-components-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
+| `date_field` | [`SubscriptionListDateField`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
 | `direction` | [Sorting direction](../../doc/models/sorting-direction.md) \| None | Query, Optional | This is a container for one-of cases. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `end_datetime` | `str` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of end_date. |
@@ -140,30 +128,19 @@ def list_subscription_components(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
-
-date_field = ListSubscriptionComponentsDateField.UPDATED_AT
-
-price_point_ids = IncludeNotNull.NOT_NULL
-
-product_family_ids = [
-    1,
-    2,
-    3
-]
-
-sort = ListSubscriptionComponentsSort.UPDATED_AT
-
-include = ListSubscriptionComponentsInclude.SUBSCRIPTION
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = subscription_components_controller.list_subscription_components(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    subscription_id,
-    date_field=date_field,
-    price_point_ids=price_point_ids,
-    product_family_ids=product_family_ids,
-    sort=sort,
-    include=include
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'subscription_id': 'subscription_id0',
+    'date_field': SubscriptionListDateField.UPDATED_AT,
+    'price_point_ids': IncludeNotNull.NOT_NULL,
+    'product_family_ids': [
+        1,
+        2,
+        3
+    ],
+    'sort': ListSubscriptionComponentsSort.UPDATED_AT,
+    'include': ListSubscriptionComponentsInclude.SUBSCRIPTION
+}
+result = subscription_components_controller.list_subscription_components(collect)
 print(result)
 ```
 
@@ -229,7 +206,22 @@ def update_subscription_components_price_points(self,
 ```python
 subscription_id = 'subscription_id0'
 
-body = Liquid error: KeyNotFound
+body = BulkComponentSPricePointAssignment(
+    components=[
+        ComponentSPricePointAssignment(
+            component_id=997,
+            price_point=1022
+        ),
+        ComponentSPricePointAssignment(
+            component_id=998,
+            price_point='wholesale-handle'
+        ),
+        ComponentSPricePointAssignment(
+            component_id=999,
+            price_point='_default'
+        )
+    ]
+)
 
 result = subscription_components_controller.update_subscription_components_price_points(
     subscription_id,
@@ -767,7 +759,8 @@ body = PreviewAllocationsRequest(
             proration_upgrade_scheme='prorate-attempt-capture',
             price_point_id=325826
         )
-    ]
+    ],
+    effective_proration_date='2023-11-01'
 )
 
 result = subscription_components_controller.preview_allocations(
@@ -1160,14 +1153,7 @@ Use this endpoint to read the previously recorded components for a subscription.
 
 ```python
 def list_usages(self,
-               subscription_id,
-               component_id,
-               since_id=None,
-               max_id=None,
-               since_date=None,
-               until_date=None,
-               page=1,
-               per_page=20)
+               options=dict())
 ```
 
 ## Parameters
@@ -1190,20 +1176,13 @@ def list_usages(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
-
-component_id = 222
-
-page = 2
-
-per_page = 50
-
-result = subscription_components_controller.list_usages(
-    subscription_id,
-    component_id,
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'subscription_id': 'subscription_id0',
+    'component_id': 222,
+    'page': 2,
+    'per_page': 50
+}
+result = subscription_components_controller.list_usages(collect)
 print(result)
 ```
 
@@ -1443,27 +1422,7 @@ This request will list components applied to each subscription.
 
 ```python
 def list_subscription_components_for_site(self,
-                                         page=1,
-                                         per_page=20,
-                                         sort=None,
-                                         direction=None,
-                                         date_field=None,
-                                         start_date=None,
-                                         start_datetime=None,
-                                         end_date=None,
-                                         end_datetime=None,
-                                         subscription_ids=None,
-                                         price_point_ids=None,
-                                         product_family_ids=None,
-                                         include=None,
-                                         filter_use_site_exchange_rate=None,
-                                         filter_currencies=None,
-                                         filter_subscription_states=None,
-                                         filter_subscription_date_field=None,
-                                         filter_subscription_start_date=None,
-                                         filter_subscription_start_datetime=None,
-                                         filter_subscription_end_date=None,
-                                         filter_subscription_end_datetime=None)
+                                         options=dict())
 ```
 
 ## Parameters
@@ -1474,7 +1433,7 @@ def list_subscription_components_for_site(self,
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
 | `sort` | [`ListSubscriptionComponentsSort`](../../doc/models/list-subscription-components-sort.md) | Query, Optional | The attribute by which to sort. Use in query: `sort=updated_at`. |
 | `direction` | [Sorting direction](../../doc/models/sorting-direction.md) \| None | Query, Optional | This is a container for one-of cases. |
-| `date_field` | [`ListSubscriptionComponentsDateField`](../../doc/models/list-subscription-components-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query: `date_field=updated_at`. |
+| `date_field` | [`SubscriptionListDateField`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query: `date_field=updated_at`. |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `start_date=2011-12-15`. |
 | `start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `start_datetime=2022-07-01 09:00:05`. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `end_date=2011-12-16`. |
@@ -1486,7 +1445,7 @@ def list_subscription_components_for_site(self,
 | `filter_use_site_exchange_rate` | `bool` | Query, Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 | `filter_currencies` | `List[str]` | Query, Optional | Allows fetching components allocation with matching currency based on provided values. Use in query `filter[currencies]=USD,EUR`. |
 | `filter_subscription_states` | [`List[SubscriptionState]`](../../doc/models/subscription-state.md) | Query, Optional | Allows fetching components allocations that belong to the subscription with matching states based on provided values. To use this filter you also have to include the following param in the request `include=subscription`. Use in query `filter[subscription][states]=active,canceled&include=subscription`. |
-| `filter_subscription_date_field` | [`ListSubscriptionComponentsSubscriptionDateField`](../../doc/models/list-subscription-components-subscription-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`. |
+| `filter_subscription_date_field` | [`SubscriptionListDateField`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. To use this filter you also have to include the following param in the request `include=subscription`. |
 | `filter_subscription_start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
 | `filter_subscription_start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components that belong to the subscription with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site''s time zone will be used. If provided, this parameter will be used instead of start_date. To use this filter you also have to include the following param in the request `include=subscription`. |
 | `filter_subscription_end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns components that belong to the subscription with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. To use this filter you also have to include the following param in the request `include=subscription`. |
@@ -1499,40 +1458,25 @@ def list_subscription_components_for_site(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-sort = ListSubscriptionComponentsSort.UPDATED_AT
-
-date_field = ListSubscriptionComponentsDateField.UPDATED_AT
-
-subscription_ids = [
-    1,
-    2,
-    3
-]
-
-price_point_ids = IncludeNotNull.NOT_NULL
-
-product_family_ids = [
-    1,
-    2,
-    3
-]
-
-include = ListSubscriptionComponentsInclude.SUBSCRIPTION
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = subscription_components_controller.list_subscription_components_for_site(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    page=page,
-    per_page=per_page,
-    sort=sort,
-    date_field=date_field,
-    subscription_ids=subscription_ids,
-    price_point_ids=price_point_ids,
-    product_family_ids=product_family_ids,
-    include=include
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'page': 2,
+    'per_page': 50,
+    'sort': ListSubscriptionComponentsSort.UPDATED_AT,
+    'date_field': SubscriptionListDateField.UPDATED_AT,
+    'subscription_ids': [
+        1,
+        2,
+        3
+    ],
+    'price_point_ids': IncludeNotNull.NOT_NULL,
+    'product_family_ids': [
+        1,
+        2,
+        3
+    ],
+    'include': ListSubscriptionComponentsInclude.SUBSCRIPTION
+}
+result = subscription_components_controller.list_subscription_components_for_site(collect)
 print(result)
 ```
 

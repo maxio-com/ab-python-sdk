@@ -97,14 +97,7 @@ You may specify component and/or price point by using either the numeric ID or t
 
 ```python
 def list_segments_for_price_point(self,
-                                 component_id,
-                                 price_point_id,
-                                 page=1,
-                                 per_page=30,
-                                 filter_segment_property_1_value=None,
-                                 filter_segment_property_2_value=None,
-                                 filter_segment_property_3_value=None,
-                                 filter_segment_property_4_value=None)
+                                 options=dict())
 ```
 
 ## Parameters
@@ -127,20 +120,13 @@ def list_segments_for_price_point(self,
 ## Example Usage
 
 ```python
-component_id = 'component_id8'
-
-price_point_id = 'price_point_id8'
-
-page = 2
-
-per_page = 50
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = events_based_billing_segments_controller.list_segments_for_price_point(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    component_id,
-    price_point_id,
-    page=page,
-    per_page=per_page
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'component_id': 'component_id8',
+    'price_point_id': 'price_point_id8',
+    'page': 2,
+    'per_page': 50
+}
+result = events_based_billing_segments_controller.list_segments_for_price_point(collect)
 print(result)
 ```
 

@@ -16,10 +16,10 @@ class ListSubcriptionGroupPrepaymentItem(object):
     TODO: type model description here.
 
     Attributes:
-        id (float): TODO: type description here.
+        id (int): TODO: type description here.
         subscription_group_uid (str): TODO: type description here.
-        amount_in_cents (float): TODO: type description here.
-        remaining_amount_in_cents (float): TODO: type description here.
+        amount_in_cents (long|int): TODO: type description here.
+        remaining_amount_in_cents (long|int): TODO: type description here.
         details (str): TODO: type description here.
         external (bool): TODO: type description here.
         memo (str): TODO: type description here.

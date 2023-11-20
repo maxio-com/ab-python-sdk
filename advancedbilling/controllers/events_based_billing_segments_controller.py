@@ -98,14 +98,7 @@ class EventsBasedBillingSegmentsController(BaseController):
         ).execute()
 
     def list_segments_for_price_point(self,
-                                      component_id,
-                                      price_point_id,
-                                      page=1,
-                                      per_page=30,
-                                      filter_segment_property_1_value=None,
-                                      filter_segment_property_2_value=None,
-                                      filter_segment_property_3_value=None,
-                                      filter_segment_property_4_value=None):
+                                      options=dict()):
         """Does a GET request to /components/{component_id}/price_points/{price_point_id}/segments.json.
 
         This endpoint allows you to fetch Segments created for a given Price
@@ -117,38 +110,49 @@ class EventsBasedBillingSegmentsController(BaseController):
         numeric ID or the `handle:gold` syntax.
 
         Args:
-            component_id (str): ID or Handle for the Component
-            price_point_id (str): ID or Handle for the Price Point belonging
-                to the Component
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 30. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            filter_segment_property_1_value (str, optional): The value passed
-                here would be used to filter segments. Pass a value related to
-                `segment_property_1` on attached Metric. If empty string is
-                passed, this filter would be rejected. Use in query
-                `filter[segment_property_1_value]=EU`.
-            filter_segment_property_2_value (str, optional): The value passed
-                here would be used to filter segments. Pass a value related to
-                `segment_property_2` on attached Metric. If empty string is
-                passed, this filter would be rejected.
-            filter_segment_property_3_value (str, optional): The value passed
-                here would be used to filter segments. Pass a value related to
-                `segment_property_3` on attached Metric. If empty string is
-                passed, this filter would be rejected.
-            filter_segment_property_4_value (str, optional): The value passed
-                here would be used to filter segments. Pass a value related to
-                `segment_property_4` on attached Metric. If empty string is
-                passed, this filter would be rejected.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    component_id -- str -- ID or Handle for the Component
+                    price_point_id -- str -- ID or Handle for the Price Point
+                        belonging to the Component
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 30.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    filter_segment_property_1_value -- str -- The value passed
+                        here would be used to filter segments. Pass a value
+                        related to `segment_property_1` on attached Metric. If
+                        empty string is passed, this filter would be rejected.
+                        Use in query `filter[segment_property_1_value]=EU`.
+                    filter_segment_property_2_value -- str -- The value passed
+                        here would be used to filter segments. Pass a value
+                        related to `segment_property_2` on attached Metric. If
+                        empty string is passed, this filter would be
+                        rejected.
+                    filter_segment_property_3_value -- str -- The value passed
+                        here would be used to filter segments. Pass a value
+                        related to `segment_property_3` on attached Metric. If
+                        empty string is passed, this filter would be
+                        rejected.
+                    filter_segment_property_4_value -- str -- The value passed
+                        here would be used to filter segments. Pass a value
+                        related to `segment_property_4` on attached Metric. If
+                        empty string is passed, this filter would be
+                        rejected.
 
         Returns:
             ListSegmentsResponse: Response from the API. OK
@@ -167,32 +171,32 @@ class EventsBasedBillingSegmentsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('component_id')
-                            .value(component_id)
+                            .value(options.get('component_id', None))
                             .is_required(True)
                             .should_encode(True))
             .template_param(Parameter()
                             .key('price_point_id')
-                            .value(price_point_id)
+                            .value(options.get('price_point_id', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('filter[segment_property_1_value]')
-                         .value(filter_segment_property_1_value))
+                         .value(options.get('filter_segment_property_1_value', None)))
             .query_param(Parameter()
                          .key('filter[segment_property_2_value]')
-                         .value(filter_segment_property_2_value))
+                         .value(options.get('filter_segment_property_2_value', None)))
             .query_param(Parameter()
                          .key('filter[segment_property_3_value]')
-                         .value(filter_segment_property_3_value))
+                         .value(options.get('filter_segment_property_3_value', None)))
             .query_param(Parameter()
                          .key('filter[segment_property_4_value]')
-                         .value(filter_segment_property_4_value))
+                         .value(options.get('filter_segment_property_4_value', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

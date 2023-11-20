@@ -9,12 +9,12 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 
 from advancedbilling.api_helper import APIHelper
 import advancedbilling.exceptions.api_exception
-from advancedbilling.models.customer_error import CustomerError
+from advancedbilling.models.product_price_point_errors import ProductPricePointErrors
 
 
-class CustomersJson422ErrorException(advancedbilling.exceptions.api_exception.APIException):
+class ProductPricePointErrorResponseException(advancedbilling.exceptions.api_exception.APIException):
     def __init__(self, reason, response):
-        """Constructor for the CustomersJson422ErrorException class
+        """Constructor for the ProductPricePointErrorResponseException class
 
         Args:
             reason (string): The reason (or error message) for the Exception
@@ -22,7 +22,7 @@ class CustomersJson422ErrorException(advancedbilling.exceptions.api_exception.AP
             response (HttpResponse): The HttpResponse of the API call.
 
         """
-        super(CustomersJson422ErrorException, self).__init__(reason, response)
+        super(ProductPricePointErrorResponseException, self).__init__(reason, response)
         dictionary = APIHelper.json_deserialize(self.response.text)
         if isinstance(dictionary, dict):
             self.unbox(dictionary)
@@ -36,4 +36,4 @@ class CustomersJson422ErrorException(advancedbilling.exceptions.api_exception.AP
             MUST match property names in the API description.
 
         """
-        self.errors = CustomerError.from_dictionary(dictionary.get('errors')) if 'errors' in dictionary.keys() else None
+        self.errors = ProductPricePointErrors.from_dictionary(dictionary.get('errors')) if dictionary.get('errors') else None

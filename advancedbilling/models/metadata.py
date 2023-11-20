@@ -21,7 +21,7 @@ class Metadata(object):
         resource_id (int): TODO: type description here.
         name (str): TODO: type description here.
         deleted_at (str): TODO: type description here.
-        metafield_id (float): TODO: type description here.
+        metafield_id (int): TODO: type description here.
 
     """
 

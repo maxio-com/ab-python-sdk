@@ -11,17 +11,17 @@
 |  --- | --- | --- | --- |
 | `start_date` | `str` | Optional | - |
 | `end_date` | `str` | Optional | - |
-| `subtotal_in_cents` | `int` | Optional | - |
-| `total_tax_in_cents` | `int` | Optional | - |
-| `total_discount_in_cents` | `int` | Optional | - |
-| `total_in_cents` | `int` | Optional | - |
+| `subtotal_in_cents` | `long\|int` | Optional | - |
+| `total_tax_in_cents` | `long\|int` | Optional | - |
+| `total_discount_in_cents` | `long\|int` | Optional | - |
+| `total_in_cents` | `long\|int` | Optional | - |
 | `direction` | `str` | Optional | - |
 | `proration_scheme` | `str` | Optional | - |
 | `line_items` | [`List[AllocationPreviewLineItem]`](../../doc/models/allocation-preview-line-item.md) | Optional | - |
 | `accrue_charge` | `bool` | Optional | - |
 | `allocations` | [`List[AllocationPreviewItem]`](../../doc/models/allocation-preview-item.md) | Optional | - |
 | `period_type` | `str` | Optional | - |
-| `existing_balance_in_cents` | `int` | Optional | An integer representing the amount of the subscription's current balance |
+| `existing_balance_in_cents` | `long\|int` | Optional | An integer representing the amount of the subscription's current balance |
 
 ## Example (as JSON)
 

@@ -1,5 +1,5 @@
 
-# Create Subscription Group
+# Create Subscription Group 2
 
 ## Data Type
 

@@ -18,14 +18,14 @@ class BillingManifest(object):
 
     Attributes:
         line_items (List[BillingManifestItem]): TODO: type description here.
-        total_in_cents (int): TODO: type description here.
-        total_discount_in_cents (int): TODO: type description here.
-        total_tax_in_cents (int): TODO: type description here.
-        subtotal_in_cents (int): TODO: type description here.
+        total_in_cents (long|int): TODO: type description here.
+        total_discount_in_cents (long|int): TODO: type description here.
+        total_tax_in_cents (long|int): TODO: type description here.
+        subtotal_in_cents (long|int): TODO: type description here.
         start_date (str): TODO: type description here.
         end_date (str): TODO: type description here.
         period_type (str): TODO: type description here.
-        existing_balance_in_cents (int): TODO: type description here.
+        existing_balance_in_cents (long|int): TODO: type description here.
 
     """
 

@@ -15,8 +15,8 @@ class SubscriptionMRRBreakout(object):
     TODO: type model description here.
 
     Attributes:
-        plan_amount_in_cents (float): TODO: type description here.
-        usage_amount_in_cents (float): TODO: type description here.
+        plan_amount_in_cents (long|int): TODO: type description here.
+        usage_amount_in_cents (long|int): TODO: type description here.
 
     """
 

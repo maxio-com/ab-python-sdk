@@ -20,9 +20,8 @@ from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.customer_response import CustomerResponse
 from advancedbilling.models.subscription_response import SubscriptionResponse
-from advancedbilling.exceptions.customers_json_422_error_exception import CustomersJson422ErrorException
+from advancedbilling.exceptions.customer_error_response_exception import CustomerErrorResponseException
 from advancedbilling.exceptions.api_exception import APIException
-from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 
 
 class CustomersController(BaseController):
@@ -105,19 +104,11 @@ class CustomersController(BaseController):
             .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', CustomersJson422ErrorException)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', CustomerErrorResponseException)
         ).execute()
 
     def list_customers(self,
-                       direction=None,
-                       page=1,
-                       per_page=50,
-                       date_field=None,
-                       start_date=None,
-                       end_date=None,
-                       start_datetime=None,
-                       end_datetime=None,
-                       q=None):
+                       options=dict()):
         """Does a GET request to /customers.json.
 
         This request will by default list all customers associated with your
@@ -136,45 +127,56 @@ class CustomersController(BaseController):
         ead-customer-by-reference).
 
         Args:
-            direction (SortingDirection | None, optional): Direction to sort
-                customers by time of creation
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 50. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            date_field (BasicDateField, optional): The type of filter you
-                would like to apply to your search. Use in query:
-                `date_field=created_at`.
-            start_date (str, optional): The start date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns subscriptions
-                with a timestamp at or after midnight (12:00:00 AM) in your
-                site’s time zone on the date specified.
-            end_date (str, optional): The end date (format YYYY-MM-DD) with
-                which to filter the date_field. Returns subscriptions with a
-                timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified.
-            start_datetime (str, optional): The start date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns subscriptions with a timestamp at or after exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of start_date.
-            end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns subscriptions with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of end_date.
-            q (str, optional): A search query by which to filter customers
-                (can be an email, an ID, a reference, organization)
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    direction -- SortingDirection | None -- Direction to sort
+                        customers by time of creation
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 50.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    date_field -- BasicDateField -- The type of filter you
+                        would like to apply to your search. Use in query:
+                        `date_field=created_at`.
+                    start_date -- str -- The start date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns
+                        subscriptions with a timestamp at or after midnight
+                        (12:00:00 AM) in your site’s time zone on the date
+                        specified.
+                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns subscriptions
+                        with a timestamp up to and including 11:59:59PM in
+                        your site’s time zone on the date specified.
+                    start_datetime -- str -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns subscriptions with a timestamp at
+                        or after exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date.
+                    end_datetime -- str -- The end date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns subscriptions with a timestamp at
+                        or before exact time provided in query. You can
+                        specify timezone in query - otherwise your site's time
+                        zone will be used. If provided, this parameter will be
+                        used instead of end_date.
+                    q -- str -- A search query by which to filter customers
+                        (can be an email, an ID, a reference, organization)
 
         Returns:
             List[CustomerResponse]: Response from the API. OK
@@ -193,32 +195,32 @@ class CustomersController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction)
-                         .validator(lambda value: UnionTypeLookUp.get('ListCustomersDirection').validate(value)))
+                         .value(options.get('direction', None))
+                         .validator(lambda value: UnionTypeLookUp.get('ListCustomersInputDirection').validate(value)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('date_field')
-                         .value(date_field))
+                         .value(options.get('date_field', None)))
             .query_param(Parameter()
                          .key('start_date')
-                         .value(start_date))
+                         .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('end_date')
-                         .value(end_date))
+                         .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(start_datetime))
+                         .value(options.get('start_datetime', None)))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(end_datetime))
+                         .value(options.get('end_datetime', None)))
             .query_param(Parameter()
                          .key('q')
-                         .value(q))
+                         .value(options.get('q', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -319,7 +321,7 @@ class CustomersController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', CustomerErrorResponseException)
         ).execute()
 
     def delete_customer(self,

@@ -424,16 +424,7 @@ This request will return a list of components for a site.
 
 ```python
 def list_components(self,
-                   date_field=None,
-                   start_date=None,
-                   end_date=None,
-                   start_datetime=None,
-                   end_datetime=None,
-                   include_archived=None,
-                   page=1,
-                   per_page=20,
-                   filter_ids=None,
-                   filter_use_site_exchange_rate=None)
+                   options=dict())
 ```
 
 ## Parameters
@@ -458,17 +449,12 @@ def list_components(self,
 ## Example Usage
 
 ```python
-date_field = BasicDateField.UPDATED_AT
-
-page = 2
-
-per_page = 50
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = components_controller.list_components(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    date_field=date_field,
-    page=page,
-    per_page=per_page
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'date_field': BasicDateField.UPDATED_AT,
+    'page': 2,
+    'per_page': 50
+}
+result = components_controller.list_components(collect)
 print(result)
 ```
 
@@ -657,17 +643,7 @@ This request will return a list of components for a particular product family.
 
 ```python
 def list_components_for_product_family(self,
-                                      product_family_id,
-                                      include_archived=None,
-                                      filter_ids=None,
-                                      page=1,
-                                      per_page=20,
-                                      date_field=None,
-                                      end_date=None,
-                                      end_datetime=None,
-                                      start_date=None,
-                                      start_datetime=None,
-                                      filter_use_site_exchange_rate=None)
+                                      options=dict())
 ```
 
 ## Parameters
@@ -693,20 +669,13 @@ def list_components_for_product_family(self,
 ## Example Usage
 
 ```python
-product_family_id = 140
-
-Liquid error: Value cannot be null. (Parameter 'key')page = 2
-
-per_page = 50
-
-date_field = BasicDateField.UPDATED_AT
-
-Liquid error: Value cannot be null. (Parameter 'key')result = components_controller.list_components_for_product_family(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    product_family_id,
-    page=page,
-    per_page=per_page,
-    date_field=date_field
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'product_family_id': 140,
+    'page': 2,
+    'per_page': 50,
+    'date_field': BasicDateField.UPDATED_AT
+}
+result = components_controller.list_components_for_product_family(collect)
 print(result)
 ```
 
@@ -872,11 +841,7 @@ If the price point is set to `use_site_exchange_rate: true`, it will return pric
 
 ```python
 def list_component_price_points(self,
-                               component_id,
-                               currency_prices=None,
-                               page=1,
-                               per_page=20,
-                               filter_type=None)
+                               options=dict())
 ```
 
 ## Parameters
@@ -896,17 +861,12 @@ def list_component_price_points(self,
 ## Example Usage
 
 ```python
-component_id = 222
-
-page = 2
-
-per_page = 50
-
-Liquid error: Value cannot be null. (Parameter 'key')result = components_controller.list_component_price_points(Liquid error: Value cannot be null. (Parameter 'key')
-    component_id,
-    page=page,
-    per_page=per_page
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')
+    'component_id': 222,
+    'page': 2,
+    'per_page': 50
+}
+result = components_controller.list_component_price_points(collect)
 print(result)
 ```
 
@@ -1395,18 +1355,7 @@ This method allows to retrieve a list of Components Price Points belonging to a 
 
 ```python
 def list_all_component_price_points(self,
-                                   filter_date_field=None,
-                                   filter_end_date=None,
-                                   filter_end_datetime=None,
-                                   include=None,
-                                   page=1,
-                                   per_page=20,
-                                   filter_start_date=None,
-                                   filter_start_datetime=None,
-                                   filter_type=None,
-                                   direction=None,
-                                   filter_ids=None,
-                                   filter_archived_at=None)
+                                   options=dict())
 ```
 
 ## Parameters
@@ -1433,17 +1382,12 @@ def list_all_component_price_points(self,
 ## Example Usage
 
 ```python
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')include = ListComponentsPricePointsInclude.CURRENCY_PRICES
-
-page = 2
-
-per_page = 50
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = components_controller.list_all_component_price_points(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    include=include,
-    page=page,
-    per_page=per_page
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'include': ListComponentsPricePointsInclude.CURRENCY_PRICES,
+    'page': 2,
+    'per_page': 50
+}
+result = components_controller.list_all_component_price_points(collect)
 print(result)
 ```
 

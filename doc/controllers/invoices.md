@@ -86,28 +86,7 @@ By default, invoices returned on the index will only include totals, not detaile
 
 ```python
 def list_invoices(self,
-                 start_date=None,
-                 end_date=None,
-                 status=None,
-                 subscription_id=None,
-                 subscription_group_uid=None,
-                 page=1,
-                 per_page=20,
-                 direction='desc',
-                 line_items=False,
-                 discounts=False,
-                 taxes=False,
-                 credits=False,
-                 payments=False,
-                 custom_fields=False,
-                 refunds=False,
-                 date_field='due_date',
-                 start_datetime=None,
-                 end_datetime=None,
-                 customer_ids=None,
-                 number=None,
-                 product_ids=None,
-                 sort='number')
+                 options=dict())
 ```
 
 ## Parameters
@@ -144,63 +123,34 @@ def list_invoices(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-direction = Direction.DESC
-
-line_items = False
-
-discounts = False
-
-taxes = False
-
-credits = False
-
-payments = False
-
-custom_fields = False
-
-refunds = False
-
-date_field = InvoiceDateField.ISSUE_DATE
-
-customer_ids = [
-    1,
-    2,
-    3
-]
-
-number = [
-    '1234',
-    '1235'
-]
-
-product_ids = [
-    23,
-    34
-]
-
-sort = InvoiceSortField.TOTAL_AMOUNT
-
-result = invoices_controller.list_invoices(
-    page=page,
-    per_page=per_page,
-    direction=direction,
-    line_items=line_items,
-    discounts=discounts,
-    taxes=taxes,
-    credits=credits,
-    payments=payments,
-    custom_fields=custom_fields,
-    refunds=refunds,
-    date_field=date_field,
-    customer_ids=customer_ids,
-    number=number,
-    product_ids=product_ids,
-    sort=sort
-)
+collect = {
+    'page': 2,
+    'per_page': 50,
+    'direction': Direction.DESC,
+    'line_items': False,
+    'discounts': False,
+    'taxes': False,
+    'credits': False,
+    'payments': False,
+    'custom_fields': False,
+    'refunds': False,
+    'date_field': InvoiceDateField.ISSUE_DATE,
+    'customer_ids': [
+        1,
+        2,
+        3
+    ],
+    'number': [
+        '1234',
+        '1235'
+    ],
+    'product_ids': [
+        23,
+        34
+    ],
+    'sort': InvoiceSortField.TOTAL_AMOUNT
+}
+result = invoices_controller.list_invoices(collect)
 print(result)
 ```
 
@@ -645,13 +595,7 @@ Note - invoice events that occurred prior to 09/05/2018 __will not__ contain an 
 
 ```python
 def list_invoice_events(self,
-                       since_date=None,
-                       since_id=None,
-                       page=1,
-                       per_page=100,
-                       invoice_uid=None,
-                       with_change_invoice_status=None,
-                       event_types=None)
+                       options=dict())
 ```
 
 ## Parameters
@@ -673,14 +617,11 @@ def list_invoice_events(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 100
-
-result = invoices_controller.list_invoice_events(
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'page': 2,
+    'per_page': 100
+}
+result = invoices_controller.list_invoice_events(collect)
 print(result)
 ```
 
@@ -1132,7 +1073,9 @@ uid = 'uid0'
 body = CreateInvoicePaymentRequest(
     payment=CreateInvoicePayment(
         amount=124.33,
-        memo='for John Smith'
+        memo='for John Smith',
+        method=InvoicePaymentMethodType.CHECK,
+        details='#0102'
     )
 )
 
@@ -1255,14 +1198,7 @@ By default, the credit notes returned by this endpoint will exclude the arrays o
 
 ```python
 def list_credit_notes(self,
-                     subscription_id=None,
-                     page=1,
-                     per_page=20,
-                     line_items=False,
-                     discounts=False,
-                     taxes=False,
-                     refunds=False,
-                     applications=False)
+                     options=dict())
 ```
 
 ## Parameters
@@ -1285,29 +1221,16 @@ def list_credit_notes(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-line_items = False
-
-discounts = False
-
-taxes = False
-
-refunds = False
-
-applications = False
-
-result = invoices_controller.list_credit_notes(
-    page=page,
-    per_page=per_page,
-    line_items=line_items,
-    discounts=discounts,
-    taxes=taxes,
-    refunds=refunds,
-    applications=applications
-)
+collect = {
+    'page': 2,
+    'per_page': 50,
+    'line_items': False,
+    'discounts': False,
+    'taxes': False,
+    'refunds': False,
+    'applications': False
+}
+result = invoices_controller.list_credit_notes(collect)
 print(result)
 ```
 
@@ -2078,10 +2001,7 @@ Invoice segments returned on the index will only include totals, not detailed br
 
 ```python
 def list_invoice_segments(self,
-                         invoice_uid,
-                         page=1,
-                         per_page=20,
-                         direction='asc')
+                         options=dict())
 ```
 
 ## Parameters
@@ -2100,20 +2020,13 @@ def list_invoice_segments(self,
 ## Example Usage
 
 ```python
-invoice_uid = 'invoice_uid0'
-
-page = 2
-
-per_page = 50
-
-direction = Direction.ASC
-
-result = invoices_controller.list_invoice_segments(
-    invoice_uid,
-    page=page,
-    per_page=per_page,
-    direction=direction
-)
+collect = {
+    'invoice_uid': 'invoice_uid0',
+    'page': 2,
+    'per_page': 50,
+    'direction': Direction.ASC
+}
+result = invoices_controller.list_invoice_segments(collect)
 print(result)
 ```
 
@@ -2749,6 +2662,9 @@ body = SendInvoiceRequest(
     ],
     cc_recipient_emails=[
         'user1@example.com'
+    ],
+    bcc_recipient_emails=[
+        'user2@example.com'
     ]
 )
 

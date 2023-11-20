@@ -323,63 +323,65 @@ class ComponentsController(BaseController):
         ).execute()
 
     def list_components(self,
-                        date_field=None,
-                        start_date=None,
-                        end_date=None,
-                        start_datetime=None,
-                        end_datetime=None,
-                        include_archived=None,
-                        page=1,
-                        per_page=20,
-                        filter_ids=None,
-                        filter_use_site_exchange_rate=None):
+                        options=dict()):
         """Does a GET request to /components.json.
 
         This request will return a list of components for a site.
 
         Args:
-            date_field (BasicDateField, optional): The type of filter you
-                would like to apply to your search.
-            start_date (str, optional): The start date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns components with a
-                timestamp at or after midnight (12:00:00 AM) in your site’s
-                time zone on the date specified.
-            end_date (str, optional): The end date (format YYYY-MM-DD) with
-                which to filter the date_field. Returns components with a
-                timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified.
-            start_datetime (str, optional): The start date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns components with a timestamp at or after exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of start_date.
-            end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns components with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of end_date.  optional
-            include_archived (bool, optional): Include archived items
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            filter_ids (List[str], optional): Allows fetching components with
-                matching id based on provided value. Use in query
-                `filter[ids]=1,2,3`.
-            filter_use_site_exchange_rate (bool, optional): Allows fetching
-                components with matching use_site_exchange_rate based on
-                provided value (refers to default price point). Use in query
-                `filter[use_site_exchange_rate]=true`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    date_field -- BasicDateField -- The type of filter you
+                        would like to apply to your search.
+                    start_date -- str -- The start date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns
+                        components with a timestamp at or after midnight
+                        (12:00:00 AM) in your site’s time zone on the date
+                        specified.
+                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns components
+                        with a timestamp up to and including 11:59:59PM in
+                        your site’s time zone on the date specified.
+                    start_datetime -- str -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns components with a timestamp at or
+                        after exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date.
+                    end_datetime -- str -- The end date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns components with a timestamp at or
+                        before exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of end_date.  optional
+                    include_archived -- bool -- Include archived items
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    filter_ids -- List[str] -- Allows fetching components with
+                        matching id based on provided value. Use in query
+                        `filter[ids]=1,2,3`.
+                    filter_use_site_exchange_rate -- bool -- Allows fetching
+                        components with matching use_site_exchange_rate based
+                        on provided value (refers to default price point). Use
+                        in query `filter[use_site_exchange_rate]=true`.
 
         Returns:
             List[ComponentResponse]: Response from the API. OK
@@ -398,34 +400,34 @@ class ComponentsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('date_field')
-                         .value(date_field))
+                         .value(options.get('date_field', None)))
             .query_param(Parameter()
                          .key('start_date')
-                         .value(start_date))
+                         .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('end_date')
-                         .value(end_date))
+                         .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(start_datetime))
+                         .value(options.get('start_datetime', None)))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(end_datetime))
+                         .value(options.get('end_datetime', None)))
             .query_param(Parameter()
                          .key('include_archived')
-                         .value(include_archived))
+                         .value(options.get('include_archived', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('filter[ids]')
-                         .value(filter_ids))
+                         .value(options.get('filter_ids', None)))
             .query_param(Parameter()
                          .key('filter[use_site_exchange_rate]')
-                         .value(filter_use_site_exchange_rate))
+                         .value(options.get('filter_use_site_exchange_rate', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -536,67 +538,69 @@ class ComponentsController(BaseController):
         ).execute()
 
     def list_components_for_product_family(self,
-                                           product_family_id,
-                                           include_archived=None,
-                                           filter_ids=None,
-                                           page=1,
-                                           per_page=20,
-                                           date_field=None,
-                                           end_date=None,
-                                           end_datetime=None,
-                                           start_date=None,
-                                           start_datetime=None,
-                                           filter_use_site_exchange_rate=None):
+                                           options=dict()):
         """Does a GET request to /product_families/{product_family_id}/components.json.
 
         This request will return a list of components for a particular product
         family.
 
         Args:
-            product_family_id (int): The Chargify id of the product family
-            include_archived (bool, optional): Include archived items.
-            filter_ids (List[int], optional): Allows fetching components with
-                matching id based on provided value. Use in query
-                `filter[ids]=1,2`.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            date_field (BasicDateField, optional): The type of filter you
-                would like to apply to your search. Use in query
-                `date_field=created_at`.
-            end_date (str, optional): The end date (format YYYY-MM-DD) with
-                which to filter the date_field. Returns components with a
-                timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified.
-            end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns components with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of end_date. optional.
-            start_date (str, optional): The start date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns components with a
-                timestamp at or after midnight (12:00:00 AM) in your site’s
-                time zone on the date specified.
-            start_datetime (str, optional): The start date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns components with a timestamp at or after exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of start_date.
-            filter_use_site_exchange_rate (bool, optional): Allows fetching
-                components with matching use_site_exchange_rate based on
-                provided value (refers to default price point). Use in query
-                `filter[use_site_exchange_rate]=true`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    product_family_id -- int -- The Chargify id of the product
+                        family
+                    include_archived -- bool -- Include archived items.
+                    filter_ids -- List[int] -- Allows fetching components with
+                        matching id based on provided value. Use in query
+                        `filter[ids]=1,2`.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    date_field -- BasicDateField -- The type of filter you
+                        would like to apply to your search. Use in query
+                        `date_field=created_at`.
+                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns components
+                        with a timestamp up to and including 11:59:59PM in
+                        your site’s time zone on the date specified.
+                    end_datetime -- str -- The end date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns components with a timestamp at or
+                        before exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of end_date. optional.
+                    start_date -- str -- The start date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns
+                        components with a timestamp at or after midnight
+                        (12:00:00 AM) in your site’s time zone on the date
+                        specified.
+                    start_datetime -- str -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns components with a timestamp at or
+                        after exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date.
+                    filter_use_site_exchange_rate -- bool -- Allows fetching
+                        components with matching use_site_exchange_rate based
+                        on provided value (refers to default price point). Use
+                        in query `filter[use_site_exchange_rate]=true`.
 
         Returns:
             List[ComponentResponse]: Response from the API. OK
@@ -615,39 +619,39 @@ class ComponentsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('product_family_id')
-                            .value(product_family_id)
+                            .value(options.get('product_family_id', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('include_archived')
-                         .value(include_archived))
+                         .value(options.get('include_archived', None)))
             .query_param(Parameter()
                          .key('filter[ids]')
-                         .value(filter_ids))
+                         .value(options.get('filter_ids', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('date_field')
-                         .value(date_field))
+                         .value(options.get('date_field', None)))
             .query_param(Parameter()
                          .key('end_date')
-                         .value(end_date))
+                         .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(end_datetime))
+                         .value(options.get('end_datetime', None)))
             .query_param(Parameter()
                          .key('start_date')
-                         .value(start_date))
+                         .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(start_datetime))
+                         .value(options.get('start_datetime', None)))
             .query_param(Parameter()
                          .key('filter[use_site_exchange_rate]')
-                         .value(filter_use_site_exchange_rate))
+                         .value(options.get('filter_use_site_exchange_rate', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -711,11 +715,7 @@ class ComponentsController(BaseController):
         ).execute()
 
     def list_component_price_points(self,
-                                    component_id,
-                                    currency_prices=None,
-                                    page=1,
-                                    per_page=20,
-                                    filter_type=None):
+                                    options=dict()):
         """Does a GET request to /components/{component_id}/price_points.json.
 
         Use this endpoint to read current price points that are associated
@@ -731,23 +731,31 @@ class ComponentsController(BaseController):
         to false, it will return all of the defined prices for each currency.
 
         Args:
-            component_id (int): The Chargify id of the component
-            currency_prices (bool, optional): Include an array of currency
-                price data
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            filter_type (List[PricePointType], optional): Use in query:
-                `filter[type]=catalog,default`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    component_id -- int -- The Chargify id of the component
+                    currency_prices -- bool -- Include an array of currency
+                        price data
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    filter_type -- List[PricePointType] -- Use in query:
+                        `filter[type]=catalog,default`.
 
         Returns:
             ComponentPricePointsResponse: Response from the API. Created
@@ -766,21 +774,21 @@ class ComponentsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('component_id')
-                            .value(component_id)
+                            .value(options.get('component_id', None))
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
                          .key('currency_prices')
-                         .value(currency_prices))
+                         .value(options.get('currency_prices', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('filter[type]')
-                         .value(filter_type))
+                         .value(options.get('filter_type', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -1116,73 +1124,74 @@ class ComponentsController(BaseController):
         ).execute()
 
     def list_all_component_price_points(self,
-                                        filter_date_field=None,
-                                        filter_end_date=None,
-                                        filter_end_datetime=None,
-                                        include=None,
-                                        page=1,
-                                        per_page=20,
-                                        filter_start_date=None,
-                                        filter_start_datetime=None,
-                                        filter_type=None,
-                                        direction=None,
-                                        filter_ids=None,
-                                        filter_archived_at=None):
+                                        options=dict()):
         """Does a GET request to /components_price_points.json.
 
         This method allows to retrieve a list of Components Price Points
         belonging to a Site.
 
         Args:
-            filter_date_field (BasicDateField, optional): The type of filter
-                you would like to apply to your search. Use in query:
-                `filter[date_field]=created_at`.
-            filter_end_date (str, optional): The end date (format YYYY-MM-DD)
-                with which to filter the date_field. Returns price points with
-                a timestamp up to and including 11:59:59PM in your site’s time
-                zone on the date specified.
-            filter_end_datetime (str, optional): The end date and time (format
-                YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
-                Returns price points with a timestamp at or before exact time
-                provided in query. You can specify timezone in query -
-                otherwise your site's time zone will be used. If provided,
-                this parameter will be used instead of end_date.
-            include (ListComponentsPricePointsInclude, optional): Allows
-                including additional data in the response. Use in query:
-                `include=currency_prices`.
-            page (int, optional): Result records are organized in pages. By
-                default, the first page of results is displayed. The page
-                parameter specifies a page number of results to fetch. You can
-                start navigating through the pages to consume the results. You
-                do this by passing in a page parameter. Retrieve the next page
-                by adding ?page=2 to the query string. If there are no results
-                to return, then an empty result set will be returned. Use in
-                query `page=1`.
-            per_page (int, optional): This parameter indicates how many
-                records to fetch in each request. Default value is 20. The
-                maximum allowed values is 200; any per_page value over 200
-                will be changed to 200. Use in query `per_page=200`.
-            filter_start_date (str, optional): The start date (format
-                YYYY-MM-DD) with which to filter the date_field. Returns price
-                points with a timestamp at or after midnight (12:00:00 AM) in
-                your site’s time zone on the date specified.
-            filter_start_datetime (str, optional): The start date and time
-                (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                date_field. Returns price points with a timestamp at or after
-                exact time provided in query. You can specify timezone in
-                query - otherwise your site's time zone will be used. If
-                provided, this parameter will be used instead of start_date.
-            filter_type (PricePointType, optional): Allows fetching price
-                points with matching type. Use in query:
-                `filter[type]=custom,catalog`.
-            direction (SortingDirection | None, optional): Controls the order
-                in which results are returned. Use in query `direction=asc`.
-            filter_ids (List[int], optional): Allows fetching price points
-                with matching id based on provided values. Use in query:
-                `filter[ids]=1,2,3`.
-            filter_archived_at (IncludeNotNull, optional): Allows fetching
-                price points only if archived_at is present or not. Use in
-                query: `filter[archived_at]=not_null`.
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    filter_date_field -- BasicDateField -- The type of filter
+                        you would like to apply to your search. Use in query:
+                        `filter[date_field]=created_at`.
+                    filter_end_date -- str -- The end date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns price
+                        points with a timestamp up to and including 11:59:59PM
+                        in your site’s time zone on the date specified.
+                    filter_end_datetime -- str -- The end date and time
+                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns price points with a timestamp at
+                        or before exact time provided in query. You can
+                        specify timezone in query - otherwise your site's time
+                        zone will be used. If provided, this parameter will be
+                        used instead of end_date.
+                    include -- ListComponentsPricePointsInclude -- Allows
+                        including additional data in the response. Use in
+                        query: `include=currency_prices`.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    filter_start_date -- str -- The start date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns price points with a timestamp at or after
+                        midnight (12:00:00 AM) in your site’s time zone on the
+                        date specified.
+                    filter_start_datetime -- str -- The start date and time
+                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns price points with a timestamp at
+                        or after exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date.
+                    filter_type -- PricePointType -- Allows fetching price
+                        points with matching type. Use in query:
+                        `filter[type]=custom,catalog`.
+                    direction -- SortingDirection | None -- Controls the order
+                        in which results are returned. Use in query
+                        `direction=asc`.
+                    filter_ids -- List[int] -- Allows fetching price points
+                        with matching id based on provided values. Use in
+                        query: `filter[ids]=1,2,3`.
+                    filter_archived_at -- IncludeNotNull -- Allows fetching
+                        price points only if archived_at is present or not.
+                        Use in query: `filter[archived_at]=not_null`.
 
         Returns:
             ListComponentsPricePointsResponse: Response from the API. OK
@@ -1201,41 +1210,41 @@ class ComponentsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('filter[date_field]')
-                         .value(filter_date_field))
+                         .value(options.get('filter_date_field', None)))
             .query_param(Parameter()
                          .key('filter[end_date]')
-                         .value(filter_end_date))
+                         .value(options.get('filter_end_date', None)))
             .query_param(Parameter()
                          .key('filter[end_datetime]')
-                         .value(filter_end_datetime))
+                         .value(options.get('filter_end_datetime', None)))
             .query_param(Parameter()
                          .key('include')
-                         .value(include))
+                         .value(options.get('include', None)))
             .query_param(Parameter()
                          .key('page')
-                         .value(page))
+                         .value(options.get('page', None)))
             .query_param(Parameter()
                          .key('per_page')
-                         .value(per_page))
+                         .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('filter[start_date]')
-                         .value(filter_start_date))
+                         .value(options.get('filter_start_date', None)))
             .query_param(Parameter()
                          .key('filter[start_datetime]')
-                         .value(filter_start_datetime))
+                         .value(options.get('filter_start_datetime', None)))
             .query_param(Parameter()
                          .key('filter[type]')
-                         .value(filter_type))
+                         .value(options.get('filter_type', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(direction)
-                         .validator(lambda value: UnionTypeLookUp.get('ListAllComponentPricePointsDirection').validate(value)))
+                         .value(options.get('direction', None))
+                         .validator(lambda value: UnionTypeLookUp.get('ListAllComponentPricePointsInputDirection').validate(value)))
             .query_param(Parameter()
                          .key('filter[ids]')
-                         .value(filter_ids))
+                         .value(options.get('filter_ids', None)))
             .query_param(Parameter()
                          .key('filter[archived_at]')
-                         .value(filter_archived_at))
+                         .value(options.get('filter_archived_at', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

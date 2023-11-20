@@ -80,8 +80,7 @@ This method gives a merchant the option to retrieve a list of all of the current
 
 ```python
 def list_reason_codes(self,
-                     page=1,
-                     per_page=20)
+                     options=dict())
 ```
 
 ## Parameters
@@ -98,14 +97,11 @@ def list_reason_codes(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-result = reason_codes_controller.list_reason_codes(
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'page': 2,
+    'per_page': 50
+}
+result = reason_codes_controller.list_reason_codes(collect)
 print(result)
 ```
 

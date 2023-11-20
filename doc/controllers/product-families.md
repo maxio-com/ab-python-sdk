@@ -22,18 +22,7 @@ This method allows to retrieve a list of Products belonging to a Product Family.
 
 ```python
 def list_products_for_product_family(self,
-                                    product_family_id,
-                                    page=1,
-                                    per_page=20,
-                                    date_field=None,
-                                    start_date=None,
-                                    end_date=None,
-                                    start_datetime=None,
-                                    end_datetime=None,
-                                    include_archived=None,
-                                    include=None,
-                                    filter_prepaid_product_price_point_product_price_point_id=None,
-                                    filter_use_site_exchange_rate=None)
+                                    options=dict())
 ```
 
 ## Parameters
@@ -60,23 +49,14 @@ def list_products_for_product_family(self,
 ## Example Usage
 
 ```python
-product_family_id = 140
-
-page = 2
-
-per_page = 50
-
-date_field = BasicDateField.UPDATED_AT
-
-include = ListProductsInclude.PREPAID_PRODUCT_PRICE_POINT
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = product_families_controller.list_products_for_product_family(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    product_family_id,
-    page=page,
-    per_page=per_page,
-    date_field=date_field,
-    include=include
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'product_family_id': 140,
+    'page': 2,
+    'per_page': 50,
+    'date_field': BasicDateField.UPDATED_AT,
+    'include': ListProductsInclude.PREPAID_PRODUCT_PRICE_POINT
+}
+result = product_families_controller.list_products_for_product_family(collect)
 print(result)
 ```
 
@@ -244,11 +224,7 @@ This method allows to retrieve a list of Product Families for a site.
 
 ```python
 def list_product_families(self,
-                         date_field=None,
-                         start_date=None,
-                         end_date=None,
-                         start_datetime=None,
-                         end_datetime=None)
+                         options=dict())
 ```
 
 ## Parameters
@@ -268,11 +244,10 @@ def list_product_families(self,
 ## Example Usage
 
 ```python
-date_field = BasicDateField.UPDATED_AT
-
-result = product_families_controller.list_product_families(
-    date_field=date_field
-)
+collect = {
+    'date_field': BasicDateField.UPDATED_AT
+}
+result = product_families_controller.list_product_families(collect)
 print(result)
 ```
 

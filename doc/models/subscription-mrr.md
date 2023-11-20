@@ -9,19 +9,19 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `float` | Required | - |
-| `mrr_amount_in_cents` | `float` | Required | - |
+| `subscription_id` | `int` | Required | - |
+| `mrr_amount_in_cents` | `long\|int` | Required | - |
 | `breakouts` | [`SubscriptionMRRBreakout`](../../doc/models/subscription-mrr-breakout.md) | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "subscription_id": 58.92,
-  "mrr_amount_in_cents": 133.34,
+  "subscription_id": 4,
+  "mrr_amount_in_cents": 22,
   "breakouts": {
-    "plan_amount_in_cents": 138.22,
-    "usage_amount_in_cents": 236.58
+    "plan_amount_in_cents": 254,
+    "usage_amount_in_cents": 106
   }
 }
 ```

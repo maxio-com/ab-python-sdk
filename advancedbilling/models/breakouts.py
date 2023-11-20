@@ -16,9 +16,9 @@ class Breakouts(object):
     TODO: type model description here.
 
     Attributes:
-        plan_amount_in_cents (int): TODO: type description here.
+        plan_amount_in_cents (long|int): TODO: type description here.
         plan_amount_formatted (str): TODO: type description here.
-        usage_amount_in_cents (int): TODO: type description here.
+        usage_amount_in_cents (long|int): TODO: type description here.
         usage_amount_formatted (str): TODO: type description here.
 
     """

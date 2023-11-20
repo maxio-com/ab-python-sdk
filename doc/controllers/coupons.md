@@ -111,18 +111,7 @@ If the coupon is set to `use_site_exchange_rate: true`, it will return pricing b
 
 ```python
 def list_coupons_for_product_family(self,
-                                   product_family_id,
-                                   page=1,
-                                   per_page=30,
-                                   filter_date_field=None,
-                                   filter_end_date=None,
-                                   filter_end_datetime=None,
-                                   filter_start_date=None,
-                                   filter_start_datetime=None,
-                                   filter_ids=None,
-                                   filter_codes=None,
-                                   currency_prices=None,
-                                   filter_use_site_exchange_rate=None)
+                                   options=dict())
 ```
 
 ## Parameters
@@ -149,20 +138,13 @@ def list_coupons_for_product_family(self,
 ## Example Usage
 
 ```python
-product_family_id = 140
-
-page = 2
-
-per_page = 50
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')currency_prices = True
-
-Liquid error: Value cannot be null. (Parameter 'key')result = coupons_controller.list_coupons_for_product_family(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    product_family_id,
-    page=page,
-    per_page=per_page,
-    currency_prices=currency_prices
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'product_family_id': 140,
+    'page': 2,
+    'per_page': 50,
+    'currency_prices': True
+}
+result = coupons_controller.list_coupons_for_product_family(collect)
 print(result)
 ```
 
@@ -534,22 +516,7 @@ If the coupon is set to `use_site_exchange_rate: true`, it will return pricing b
 
 ```python
 def list_coupons(self,
-                page=1,
-                per_page=30,
-                date_field=None,
-                start_date=None,
-                end_date=None,
-                start_datetime=None,
-                end_datetime=None,
-                filter_ids=None,
-                filter_codes=None,
-                currency_prices=None,
-                filter_end_date=None,
-                filter_end_datetime=None,
-                filter_start_date=None,
-                filter_start_datetime=None,
-                filter_date_field=None,
-                filter_use_site_exchange_rate=None)
+                options=dict())
 ```
 
 ## Parameters
@@ -580,20 +547,13 @@ def list_coupons(self,
 ## Example Usage
 
 ```python
-page = 2
-
-per_page = 50
-
-date_field = BasicDateField.UPDATED_AT
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')currency_prices = True
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')result = coupons_controller.list_coupons(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    page=page,
-    per_page=per_page,
-    date_field=date_field,
-    currency_prices=currency_prices
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'page': 2,
+    'per_page': 50,
+    'date_field': BasicDateField.UPDATED_AT,
+    'currency_prices': True
+}
+result = coupons_controller.list_coupons(collect)
 print(result)
 ```
 
@@ -953,9 +913,7 @@ This request allows you to request the subcodes that are attached to a coupon.
 
 ```python
 def list_coupon_subcodes(self,
-                        coupon_id,
-                        page=1,
-                        per_page=20)
+                        options=dict())
 ```
 
 ## Parameters
@@ -973,17 +931,12 @@ def list_coupon_subcodes(self,
 ## Example Usage
 
 ```python
-coupon_id = 162
-
-page = 2
-
-per_page = 50
-
-result = coupons_controller.list_coupon_subcodes(
-    coupon_id,
-    page=page,
-    per_page=per_page
-)
+collect = {
+    'coupon_id': 162,
+    'page': 2,
+    'per_page': 50
+}
+result = coupons_controller.list_coupon_subcodes(collect)
 print(result)
 ```
 

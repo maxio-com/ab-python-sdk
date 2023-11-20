@@ -18,10 +18,10 @@ class BillingManifestItem(object):
     Attributes:
         transaction_type (str): TODO: type description here.
         kind (str): TODO: type description here.
-        amount_in_cents (int): TODO: type description here.
+        amount_in_cents (long|int): TODO: type description here.
         memo (str): TODO: type description here.
-        discount_amount_in_cents (int): TODO: type description here.
-        taxable_amount_in_cents (int): TODO: type description here.
+        discount_amount_in_cents (long|int): TODO: type description here.
+        taxable_amount_in_cents (long|int): TODO: type description here.
         component_id (int): TODO: type description here.
         component_handle (str): TODO: type description here.
         component_name (str): TODO: type description here.

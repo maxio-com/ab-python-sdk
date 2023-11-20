@@ -9,18 +9,18 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class Prepayment1(object):
+class Prepayment(object):
 
-    """Implementation of the 'Prepayment1' model.
+    """Implementation of the 'Prepayment' model.
 
     TODO: type model description here.
 
     Attributes:
-        id (float): TODO: type description here.
-        subscription_id (float): TODO: type description here.
-        amount_in_cents (float): TODO: type description here.
-        remaining_amount_in_cents (float): TODO: type description here.
-        refunded_amount_in_cents (float): TODO: type description here.
+        id (int): TODO: type description here.
+        subscription_id (int): TODO: type description here.
+        amount_in_cents (long|int): TODO: type description here.
+        remaining_amount_in_cents (long|int): TODO: type description here.
+        refunded_amount_in_cents (long|int): TODO: type description here.
         details (str): TODO: type description here.
         external (bool): TODO: type description here.
         memo (str): TODO: type description here.
@@ -60,7 +60,7 @@ class Prepayment1(object):
                  refunded_amount_in_cents=APIHelper.SKIP,
                  details=APIHelper.SKIP,
                  payment_type=APIHelper.SKIP):
-        """Constructor for the Prepayment1 class"""
+        """Constructor for the Prepayment class"""
 
         # Initialize members of the class
         self.id = id 

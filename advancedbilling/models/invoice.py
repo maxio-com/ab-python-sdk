@@ -29,7 +29,7 @@ class Invoice(object):
     TODO: type model description here.
 
     Attributes:
-        id (int): TODO: type description here.
+        id (long|int): TODO: type description here.
         uid (str): Unique identifier for the invoice. It is generated
             automatically by Chargify and has the prefix "inv_" followed by
             alphanumeric characters.

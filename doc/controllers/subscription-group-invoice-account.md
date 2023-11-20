@@ -71,12 +71,7 @@ This request will list a subscription group's prepayments.
 
 ```python
 def list_prepayments_for_subscription_group(self,
-                                           uid,
-                                           filter_date_field=None,
-                                           filter_end_date=None,
-                                           filter_start_date=None,
-                                           page=1,
-                                           per_page=20)
+                                           options=dict())
 ```
 
 ## Parameters
@@ -97,17 +92,12 @@ def list_prepayments_for_subscription_group(self,
 ## Example Usage
 
 ```python
-uid = 'uid0'
-
-Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')page = 2
-
-per_page = 50
-
-result = subscription_group_invoice_account_controller.list_prepayments_for_subscription_group(Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
-    uid,
-    page=page,
-    per_page=per_page
-)
+collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+    'uid': 'uid0',
+    'page': 2,
+    'per_page': 50
+}
+result = subscription_group_invoice_account_controller.list_prepayments_for_subscription_group(collect)
 print(result)
 ```
 

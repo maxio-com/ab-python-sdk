@@ -17,8 +17,8 @@ class SubscriptionMRR(object):
     TODO: type model description here.
 
     Attributes:
-        subscription_id (float): TODO: type description here.
-        mrr_amount_in_cents (float): TODO: type description here.
+        subscription_id (int): TODO: type description here.
+        mrr_amount_in_cents (long|int): TODO: type description here.
         breakouts (SubscriptionMRRBreakout): TODO: type description here.
 
     """

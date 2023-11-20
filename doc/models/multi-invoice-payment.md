@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `transaction_id` | `float` | Optional | The numeric ID of the transaction. |
+| `transaction_id` | `int` | Optional | The numeric ID of the transaction. |
 | `total_amount` | `str` | Optional | Dollar amount of the sum of the paid invoices. |
 | `currency_code` | `str` | Optional | The ISO 4217 currency code (3 character string) representing the currency of invoice transaction. |
 | `applications` | [`List[InvoicePaymentApplication]`](../../doc/models/invoice-payment-application.md) | Optional | - |
@@ -18,7 +18,7 @@
 
 ```json
 {
-  "transaction_id": 244.64,
+  "transaction_id": 144,
   "total_amount": "total_amount2",
   "currency_code": "currency_code2",
   "applications": [

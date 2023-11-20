@@ -11,11 +11,11 @@
 |  --- | --- | --- | --- |
 | `id` | `int` | Optional | - |
 | `subscription_id` | `int` | Optional | - |
-| `amount_in_cents` | `int` | Optional | - |
+| `amount_in_cents` | `long\|int` | Optional | - |
 | `memo` | `str` | Optional | - |
 | `created_at` | `str` | Optional | - |
-| `starting_balance_in_cents` | `int` | Optional | - |
-| `ending_balance_in_cents` | `int` | Optional | - |
+| `starting_balance_in_cents` | `long\|int` | Optional | - |
+| `ending_balance_in_cents` | `long\|int` | Optional | - |
 
 ## Example (as JSON)
 

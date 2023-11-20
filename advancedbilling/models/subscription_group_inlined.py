@@ -21,7 +21,7 @@ class SubscriptionGroupInlined(object):
             subscription for billing. At this time, it will always be 1.
         primary_subscription_id (str): The subscription ID of the primary
             within the group. Applicable to scheme 1.
-        primary (str): A boolean indicating whether the subscription is the
+        primary (bool): A boolean indicating whether the subscription is the
             primary in the group. Applicable to scheme 1.
 
     """
@@ -80,7 +80,7 @@ class SubscriptionGroupInlined(object):
         uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
         scheme = dictionary.get("scheme") if dictionary.get("scheme") else APIHelper.SKIP
         primary_subscription_id = dictionary.get("primary_subscription_id") if dictionary.get("primary_subscription_id") else APIHelper.SKIP
-        primary = dictionary.get("primary") if dictionary.get("primary") else APIHelper.SKIP
+        primary = dictionary.get("primary") if "primary" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(uid,
                    scheme,
