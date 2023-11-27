@@ -33,8 +33,8 @@ class PrepaidUsageComponent(object):
             or the characters '.', ':', '-', or '_'.
         taxable (bool): Boolean flag describing whether a component is taxable
             or not.
-        pricing_scheme (PricingScheme | None): The identifier for the pricing
-            scheme. See [Product
+        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
+            See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
         prices (List[Price]): (Not required for ‘per_unit’ pricing schemes)
@@ -70,8 +70,7 @@ class PrepaidUsageComponent(object):
             rollover_prepaid_remainder is true) The number of
             `expiration_interval_unit`s after which rollover amounts should
             expire
-        expiration_interval_unit (IntervalUnit | None): TODO: type description
-            here.
+        expiration_interval_unit (IntervalUnit): TODO: type description here.
         display_on_hosted_page (bool): TODO: type description here.
         allow_fractional_quantities (bool): TODO: type description here.
         public_signup_page_ids (List[int]): TODO: type description here.
@@ -224,7 +223,7 @@ class PrepaidUsageComponent(object):
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
-        pricing_scheme = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PrepaidUsageComponentPricingScheme'), dictionary.get('pricing_scheme'), False) if dictionary.get('pricing_scheme') is not None else APIHelper.SKIP
+        pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else APIHelper.SKIP
         prices = None
         if dictionary.get('prices') is not None:
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
@@ -245,7 +244,7 @@ class PrepaidUsageComponent(object):
         rollover_prepaid_remainder = dictionary.get("rollover_prepaid_remainder") if "rollover_prepaid_remainder" in dictionary.keys() else APIHelper.SKIP
         renew_prepaid_allocation = dictionary.get("renew_prepaid_allocation") if "renew_prepaid_allocation" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
-        expiration_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PrepaidUsageComponentExpirationIntervalUnit'), dictionary.get('expiration_interval_unit'), False) if dictionary.get('expiration_interval_unit') is not None else APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
         public_signup_page_ids = dictionary.get("public_signup_page_ids") if dictionary.get("public_signup_page_ids") else APIHelper.SKIP

@@ -10,7 +10,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.configuration import Server
 from advancedbilling.controllers.base_controller import BaseController
-from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
@@ -101,7 +100,6 @@ class CustomersController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', CustomerErrorResponseException)
@@ -133,7 +131,7 @@ class CustomersController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    direction -- SortingDirection | None -- Direction to sort
+                    direction -- SortingDirection -- Direction to sort
                         customers by time of creation
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
@@ -195,8 +193,7 @@ class CustomersController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('direction')
-                         .value(options.get('direction', None))
-                         .validator(lambda value: UnionTypeLookUp.get('ListCustomersInputDirection').validate(value)))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('page')
                          .value(options.get('page', None)))
@@ -227,7 +224,6 @@ class CustomersController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerResponse.from_dictionary)
         ).execute()
@@ -268,7 +264,6 @@ class CustomersController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerResponse.from_dictionary)
         ).execute()
@@ -317,7 +312,6 @@ class CustomersController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -354,9 +348,6 @@ class CustomersController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
         ).execute()
 
     def read_customer_by_reference(self,
@@ -395,7 +386,6 @@ class CustomersController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerResponse.from_dictionary)
         ).execute()
@@ -435,7 +425,6 @@ class CustomersController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
         ).execute()

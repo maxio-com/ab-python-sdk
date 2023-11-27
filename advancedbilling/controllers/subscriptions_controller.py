@@ -10,7 +10,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.configuration import Server
 from advancedbilling.controllers.base_controller import BaseController
-from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
@@ -846,7 +845,6 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -889,8 +887,8 @@ class SubscriptionsController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    state -- SubscriptionState -- The current state of the
-                        subscription
+                    state -- SubscriptionStateFilter -- The current state of
+                        the subscription
                     product -- int -- The product id of the subscription.
                         (Note that the product handle cannot be used.)
                     product_price_point_id -- int -- The ID of the product
@@ -934,8 +932,8 @@ class SubscriptionsController(BaseController):
                         field specified in the parameter. Use in query
                         `metadata[my-field]=value&metadata[other-field]=another
                         _value`.
-                    direction -- SortingDirection | None -- Controls the order
-                        in which results are returned. Use in query
+                    direction -- SortingDirection -- Controls the order in
+                        which results are returned. Use in query
                         `direction=asc`.
                     sort -- SubscriptionSort -- The attribute by which to
                         sort
@@ -993,8 +991,7 @@ class SubscriptionsController(BaseController):
                          .value(options.get('metadata', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(options.get('direction', None))
-                         .validator(lambda value: UnionTypeLookUp.get('ListSubscriptionsInputDirection').validate(value)))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('sort')
                          .value(options.get('sort', None)))
@@ -1005,7 +1002,6 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
         ).execute()
@@ -1118,7 +1114,6 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -1172,7 +1167,6 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
         ).execute()
@@ -1248,11 +1242,6 @@ class SubscriptionsController(BaseController):
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('400', 'Bad Request', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', APIException)
         ).execute()
 
     def read_subscription_by_reference(self,
@@ -1288,7 +1277,6 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
         ).execute()
@@ -1347,10 +1335,6 @@ class SubscriptionsController(BaseController):
                          .value(cascade))
             .array_serialization_format(SerializationFormats.CSV)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('400', 'Bad Request', APIException)
         ).execute()
 
     def create_prepaid_subscription(self,
@@ -1397,7 +1381,6 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PrepaidConfigurationResponse.from_dictionary)
         ).execute()
@@ -1474,7 +1457,6 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionPreviewResponse.from_dictionary)
         ).execute()
@@ -1541,7 +1523,6 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', SubscriptionAddCouponErrorException)
@@ -1588,7 +1569,6 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .local_error('422', 'Unprocessable Entity (WebDAV)', SubscriptionRemoveCouponErrorsException)
         ).execute()
@@ -1687,7 +1667,6 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
             .local_error('400', 'Bad Request', NestedErrorResponseException)

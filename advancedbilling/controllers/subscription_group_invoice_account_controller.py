@@ -78,7 +78,6 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionGroupPrepaymentResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -171,7 +170,6 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListSubscriptionGroupPrepaymentResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)
@@ -226,7 +224,6 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ServiceCreditResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -278,7 +275,6 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ServiceCredit.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)

@@ -80,7 +80,6 @@ class SubscriptionNotesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionNoteResponse.from_dictionary)
         ).execute()
@@ -115,10 +114,6 @@ class SubscriptionNotesController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', APIException)
         ).execute()
 
     def list_subscription_notes(self,
@@ -184,7 +179,6 @@ class SubscriptionNotesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionNoteResponse.from_dictionary)
         ).execute()
@@ -232,7 +226,6 @@ class SubscriptionNotesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionNoteResponse.from_dictionary)
         ).execute()
@@ -288,7 +281,6 @@ class SubscriptionNotesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionNoteResponse.from_dictionary)
         ).execute()

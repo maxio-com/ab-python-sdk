@@ -78,9 +78,9 @@ class ProductsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
     def read_product(self,
@@ -119,7 +119,6 @@ class ProductsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
         ).execute()
@@ -176,7 +175,6 @@ class ProductsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -222,9 +220,9 @@ class ProductsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
     def read_product_by_handle(self,
@@ -262,7 +260,6 @@ class ProductsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
         ).execute()
@@ -284,23 +281,23 @@ class ProductsController(BaseController):
                     date_field -- BasicDateField -- The type of filter you
                         would like to apply to your search. Use in query:
                         `date_field=created_at`.
-                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                    end_date -- date -- The end date (format YYYY-MM-DD) with
                         which to filter the date_field. Returns products with
                         a timestamp up to and including 11:59:59PM in your
                         site’s time zone on the date specified.
-                    end_datetime -- str -- The end date and time (format
+                    end_datetime -- datetime -- The end date and time (format
                         YYYY-MM-DD HH:MM:SS) with which to filter the
                         date_field. Returns products with a timestamp at or
                         before exact time provided in query. You can specify
                         timezone in query - otherwise your site''s time zone
                         will be used. If provided, this parameter will be used
                         instead of end_date.
-                    start_date -- str -- The start date (format YYYY-MM-DD)
+                    start_date -- date -- The start date (format YYYY-MM-DD)
                         with which to filter the date_field. Returns products
                         with a timestamp at or after midnight (12:00:00 AM) in
                         your site’s time zone on the date specified.
-                    start_datetime -- str -- The start date and time (format
-                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                    start_datetime -- datetime -- The start date and time
+                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
                         date_field. Returns products with a timestamp at or
                         after exact time provided in query. You can specify
                         timezone in query - otherwise your site''s time zone
@@ -361,13 +358,13 @@ class ProductsController(BaseController):
                          .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(options.get('end_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('end_datetime', None))))
             .query_param(Parameter()
                          .key('start_date')
                          .value(options.get('start_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(options.get('start_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('start_datetime', None))))
             .query_param(Parameter()
                          .key('page')
                          .value(options.get('page', None)))
@@ -392,7 +389,6 @@ class ProductsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
         ).execute()

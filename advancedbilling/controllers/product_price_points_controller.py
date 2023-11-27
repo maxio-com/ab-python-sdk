@@ -10,7 +10,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.configuration import Server
 from advancedbilling.controllers.base_controller import BaseController
-from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
@@ -82,7 +81,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ProductPricePointErrorResponseException)
@@ -167,7 +165,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListProductPricePointsResponse.from_dictionary)
         ).execute()
@@ -226,7 +223,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointResponse.from_dictionary)
         ).execute()
@@ -288,7 +284,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointResponse.from_dictionary)
         ).execute()
@@ -337,7 +332,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointResponse.from_dictionary)
         ).execute()
@@ -385,7 +379,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointResponse.from_dictionary)
         ).execute()
@@ -436,7 +429,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointResponse.from_dictionary)
         ).execute()
@@ -487,7 +479,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BulkCreateProductPricePointsResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', APIException)
@@ -545,7 +536,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointCurrencyPrice.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorMapResponseException)
@@ -602,7 +592,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointCurrencyPrice.from_dictionary)
         ).execute()
@@ -621,8 +610,8 @@ class ProductPricePointsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    direction -- SortingDirection | None -- Controls the order
-                        in which results are returned. Use in query
+                    direction -- SortingDirection -- Controls the order in
+                        which results are returned. Use in query
                         `direction=asc`.
                     filter_archived_at -- IncludeNotNull -- Allows fetching
                         price points only if archived_at is present or not.
@@ -656,8 +645,8 @@ class ProductPricePointsController(BaseController):
                         timezone in query - otherwise your site's time zone
                         will be used. If provided, this parameter will be used
                         instead of start_date.
-                    filter_type -- PricePointType -- Allows fetching price
-                        points with matching type. Use in query:
+                    filter_type -- List[PricePointType] -- Allows fetching
+                        price points with matching type. Use in query:
                         `filter[type]=catalog,custom`.
                     include -- ListProductsPricePointsInclude -- Allows
                         including additional data in the response. Use in
@@ -694,8 +683,7 @@ class ProductPricePointsController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
                          .key('direction')
-                         .value(options.get('direction', None))
-                         .validator(lambda value: UnionTypeLookUp.get('ListAllProductPricePointsInputDirection').validate(value)))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('filter[archived_at]')
                          .value(options.get('filter_archived_at', None)))
@@ -736,7 +724,6 @@ class ProductPricePointsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListProductPricePointsResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)

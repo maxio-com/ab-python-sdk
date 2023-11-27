@@ -10,7 +10,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.configuration import Server
 from advancedbilling.controllers.base_controller import BaseController
-from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
@@ -83,7 +82,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionComponentResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -111,8 +109,8 @@ class SubscriptionComponentsController(BaseController):
                     date_field -- SubscriptionListDateField -- The type of
                         filter you'd like to apply to your search. Use in
                         query `date_field=updated_at`.
-                    direction -- SortingDirection | None -- Controls the order
-                        in which results are returned. Use in query
+                    direction -- SortingDirection -- Controls the order in
+                        which results are returned. Use in query
                         `direction=asc`.
                     end_date -- str -- The end date (format YYYY-MM-DD) with
                         which to filter the date_field. Returns components
@@ -183,8 +181,7 @@ class SubscriptionComponentsController(BaseController):
                          .value(options.get('date_field', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(options.get('direction', None))
-                         .validator(lambda value: UnionTypeLookUp.get('ListSubscriptionComponentsInputDirection').validate(value)))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('end_date')
                          .value(options.get('end_date', None)))
@@ -222,7 +219,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionComponentResponse.from_dictionary)
         ).execute()
@@ -277,7 +273,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BulkComponentSPricePointAssignment.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ComponentPricePointErrorException)
@@ -321,7 +316,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
         ).execute()
@@ -448,7 +442,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AllocationResponse.from_dictionary)
         ).execute()
@@ -524,7 +517,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AllocationResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)
@@ -582,7 +574,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AllocationResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)
@@ -647,7 +638,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AllocationPreviewResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ComponentAllocationErrorException)
@@ -722,10 +712,6 @@ class SubscriptionComponentsController(BaseController):
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', SubscriptionComponentAllocationErrorException)
         ).execute()
 
     def delete_prepaid_usage_allocation(self,
@@ -795,10 +781,6 @@ class SubscriptionComponentsController(BaseController):
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', SubscriptionComponentAllocationErrorException)
         ).execute()
 
     def create_usage(self,
@@ -921,7 +903,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(UsageResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -1034,7 +1015,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(UsageResponse.from_dictionary)
         ).execute()
@@ -1088,9 +1068,6 @@ class SubscriptionComponentsController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
         ).execute()
 
     def deactivate_event_based_component(self,
@@ -1132,9 +1109,6 @@ class SubscriptionComponentsController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
         ).execute()
 
     def record_event(self,
@@ -1209,9 +1183,6 @@ class SubscriptionComponentsController(BaseController):
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
         ).execute()
 
     def record_events(self,
@@ -1272,9 +1243,6 @@ class SubscriptionComponentsController(BaseController):
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
         ).execute()
 
     def list_subscription_components_for_site(self,
@@ -1306,8 +1274,8 @@ class SubscriptionComponentsController(BaseController):
                         `per_page=200`.
                     sort -- ListSubscriptionComponentsSort -- The attribute by
                         which to sort. Use in query: `sort=updated_at`.
-                    direction -- SortingDirection | None -- Controls the order
-                        in which results are returned. Use in query
+                    direction -- SortingDirection -- Controls the order in
+                        which results are returned. Use in query
                         `direction=asc`.
                     date_field -- SubscriptionListDateField -- The type of
                         filter you'd like to apply to your search. Use in
@@ -1360,12 +1328,13 @@ class SubscriptionComponentsController(BaseController):
                         components allocation with matching currency based on
                         provided values. Use in query
                         `filter[currencies]=USD,EUR`.
-                    filter_subscription_states -- List[SubscriptionState] --
-                        Allows fetching components allocations that belong to
-                        the subscription with matching states based on
-                        provided values. To use this filter you also have to
-                        include the following param in the request
-                        `include=subscription`. Use in query
+                    filter_subscription_states --
+                        List[SubscriptionStateFilter] -- Allows fetching
+                        components allocations that belong to the subscription
+                        with matching states based on provided values. To use
+                        this filter you also have to include the following
+                        param in the request `include=subscription`. Use in
+                        query
                         `filter[subscription][states]=active,canceled&include=s
                         ubscription`.
                     filter_subscription_date_field --
@@ -1436,8 +1405,7 @@ class SubscriptionComponentsController(BaseController):
                          .value(options.get('sort', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(options.get('direction', None))
-                         .validator(lambda value: UnionTypeLookUp.get('ListSubscriptionComponentsForSiteInputDirection').validate(value)))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('date_field')
                          .value(options.get('date_field', None)))
@@ -1496,7 +1464,6 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListSubscriptionComponentsResponse.from_dictionary)
         ).execute()

@@ -163,7 +163,7 @@ class EBBComponent(object):
         # Extract variables from the dictionary
         name = dictionary.get("name") if dictionary.get("name") else None
         unit_name = dictionary.get("unit_name") if dictionary.get("unit_name") else None
-        pricing_scheme = APIHelper.deserialize_union_type(UnionTypeLookUp.get('EBBComponentPricingScheme'), dictionary.get('pricing_scheme'), False) if dictionary.get('pricing_scheme') is not None else None
+        pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else None
         event_based_billing_metric_id = dictionary.get("event_based_billing_metric_id") if dictionary.get("event_based_billing_metric_id") else None
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
@@ -214,11 +214,10 @@ class EBBComponent(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.name, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.unit_name, type_callable=lambda value: isinstance(value, str)) \
-                and UnionTypeLookUp.get('EBBComponentPricingScheme').validate(dictionary.pricing_scheme) \
+                and APIHelper.is_valid_type(value=dictionary.pricing_scheme, type_callable=lambda value: PricingScheme.validate(value)) \
                 and APIHelper.is_valid_type(value=dictionary.event_based_billing_metric_id, type_callable=lambda value: isinstance(value, int))
 
         if not isinstance(dictionary, dict):
@@ -226,5 +225,5 @@ class EBBComponent(object):
 
         return APIHelper.is_valid_type(value=dictionary.get('name'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('unit_name'), type_callable=lambda value: isinstance(value, str)) \
-            and UnionTypeLookUp.get('EBBComponentPricingScheme').validate(dictionary.get('pricing_scheme')) \
+            and APIHelper.is_valid_type(value=dictionary.get('pricing_scheme'), type_callable=lambda value: PricingScheme.validate(value)) \
             and APIHelper.is_valid_type(value=dictionary.get('event_based_billing_metric_id'), type_callable=lambda value: isinstance(value, int))

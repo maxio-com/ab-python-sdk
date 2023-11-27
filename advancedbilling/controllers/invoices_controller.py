@@ -90,7 +90,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
         ).execute()
@@ -270,7 +269,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListInvoicesResponse.from_dictionary)
         ).execute()
@@ -311,7 +309,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
         ).execute()
@@ -425,7 +422,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListInvoiceEventsResponse.from_dictionary)
         ).execute()
@@ -522,7 +518,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
         ).execute()
@@ -590,7 +585,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(MultiInvoicePaymentResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity', ErrorListResponseException)
@@ -680,7 +674,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListCreditNotesResponse.from_dictionary)
         ).execute()
@@ -720,7 +713,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CreditNote.from_dictionary)
         ).execute()
@@ -777,7 +769,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaymentResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -836,7 +827,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -889,7 +879,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -965,7 +954,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ConsolidatedInvoice.from_dictionary)
         ).execute()
@@ -1182,7 +1170,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(InvoiceResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)
@@ -1243,10 +1230,6 @@ class InvoicesController(BaseController):
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
     def preview_customer_information_changes(self,
@@ -1290,7 +1273,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerChangesPreviewResponse.from_dictionary)
             .local_error('404', 'Not Found', ErrorListResponseException)
@@ -1338,7 +1320,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
             .local_error('404', 'Not Found', ErrorListResponseException)
@@ -1417,7 +1398,6 @@ class InvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)

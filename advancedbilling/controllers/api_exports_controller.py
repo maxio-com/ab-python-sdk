@@ -96,7 +96,6 @@ class APIExportsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -167,7 +166,6 @@ class APIExportsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -238,7 +236,6 @@ class APIExportsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Subscription.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -272,7 +269,6 @@ class APIExportsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -305,7 +301,6 @@ class APIExportsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -339,7 +334,6 @@ class APIExportsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
             .local_error('409', 'Conflict', SingleErrorResponseException)
@@ -380,7 +374,6 @@ class APIExportsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -421,7 +414,6 @@ class APIExportsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -462,7 +454,6 @@ class APIExportsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
