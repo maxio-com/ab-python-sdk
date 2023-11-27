@@ -17,34 +17,48 @@ class ProductPricePoint(object):
 
     Attributes:
         id (int): TODO: type description here.
-        name (str): TODO: type description here.
-        handle (str): TODO: type description here.
-        price_in_cents (long|int): TODO: type description here.
-        interval (int): TODO: type description here.
-        interval_unit (str): TODO: type description here.
-        trial_price_in_cents (long|int): TODO: type description here.
-        trial_interval (int): TODO: type description here.
-        trial_interval_unit (str): TODO: type description here.
+        name (str): The product price point name
+        handle (str): The product price point API handle
+        price_in_cents (long|int): The product price point price, in integer
+            cents
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this product price
+            point would renew every 30 days
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this product price point, either month or day
+        trial_price_in_cents (long|int): The product price point trial price,
+            in integer cents
+        trial_interval (int): The numerical trial interval. i.e. an interval
+            of ‘30’ coupled with an trial_interval_unit of day would mean this
+            product price point would renew every 30 days
+        trial_interval_unit (IntervalUnit): A string representing the trial
+            interval unit for this product price point, either month or day
         trial_type (str): TODO: type description here.
         introductory_offer (bool): reserved for future use
-        initial_charge_in_cents (long|int): TODO: type description here.
+        initial_charge_in_cents (long|int): The product price point initial
+            charge, in integer cents
         initial_charge_after_trial (bool): TODO: type description here.
-        expiration_interval (int): TODO: type description here.
-        expiration_interval_unit (str): TODO: type description here.
-        product_id (int): TODO: type description here.
-        archived_at (str): TODO: type description here.
-        created_at (str): TODO: type description here.
-        updated_at (str): TODO: type description here.
+        expiration_interval (int): The numerical expiration interval. i.e. an
+            expiration_interval of ‘30’ coupled with an
+            expiration_interval_unit of day would mean this product price
+            point would expire every 30 days
+        expiration_interval_unit (IntervalUnit): A string representing the
+            expiration interval unit for this product price point, either
+            month or day
+        product_id (int): The product id this price point belongs to
+        archived_at (datetime): Timestamp indicating when this price point was
+            archived
+        created_at (datetime): Timestamp indicating when this price point was
+            created
+        updated_at (datetime): Timestamp indicating when this price point was
+            last updated
         use_site_exchange_rate (bool): Whether or not to use the site's
             exchange rate or define your own pricing when your site has
             multiple currencies defined.
-        mtype (PricePointType): Price point type. We expose the following
-            types: 1. **default**: a price point that is marked as a default
-            price for a certain product. 2. **custom**: a custom price point.
-            3. **catalog**: a price point that is **not** marked as a default
-            price for a certain product and is **not** a custom one.
-        tax_included (bool): TODO: type description here.
-        subscription_id (int): TODO: type description here.
+        mtype (PricePointType): The type of price point
+        tax_included (bool): Whether or not the price point includes tax
+        subscription_id (int): The subscription id this price point belongs
+            to
 
     """
 
@@ -102,6 +116,7 @@ class ProductPricePoint(object):
     ]
 
     _nullables = [
+        'archived_at',
         'subscription_id',
     ]
 
@@ -165,11 +180,11 @@ class ProductPricePoint(object):
         if product_id is not APIHelper.SKIP:
             self.product_id = product_id 
         if archived_at is not APIHelper.SKIP:
-            self.archived_at = archived_at 
+            self.archived_at = APIHelper.apply_datetime_converter(archived_at, APIHelper.RFC3339DateTime) if archived_at else None 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if use_site_exchange_rate is not APIHelper.SKIP:
             self.use_site_exchange_rate = use_site_exchange_rate 
         if mtype is not APIHelper.SKIP:
@@ -213,9 +228,12 @@ class ProductPricePoint(object):
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
         expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
         product_id = dictionary.get("product_id") if dictionary.get("product_id") else APIHelper.SKIP
-        archived_at = dictionary.get("archived_at") if dictionary.get("archived_at") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        if 'archived_at' in dictionary.keys():
+            archived_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("archived_at")).datetime if dictionary.get("archived_at") else None
+        else:
+            archived_at = APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
         mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP

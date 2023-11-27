@@ -99,7 +99,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -243,7 +242,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponResponse.from_dictionary)
         ).execute()
@@ -293,7 +291,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponResponse.from_dictionary)
         ).execute()
@@ -351,7 +348,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponResponse.from_dictionary)
         ).execute()
@@ -415,7 +411,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponResponse.from_dictionary)
         ).execute()
@@ -467,7 +462,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponResponse.from_dictionary)
         ).execute()
@@ -657,7 +651,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponResponse.from_dictionary)
         ).execute()
@@ -706,7 +699,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponUsage.from_dictionary)
         ).execute()
@@ -776,7 +768,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponResponse.from_dictionary)
             .local_error('404', 'Not Found', SingleStringErrorResponseException)
@@ -833,7 +824,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponCurrency.from_dictionary)
         ).execute()
@@ -920,7 +910,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponSubcodesResponse.from_dictionary)
         ).execute()
@@ -987,7 +976,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponSubcodes.from_dictionary)
         ).execute()
@@ -1043,7 +1031,6 @@ class CouponsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponSubcodesResponse.from_dictionary)
         ).execute()
@@ -1106,8 +1093,4 @@ class CouponsController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('404', 'Not Found', APIException)
         ).execute()

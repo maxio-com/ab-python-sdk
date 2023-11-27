@@ -71,7 +71,6 @@ class SubscriptionInvoiceAccountController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AccountBalances.from_dictionary)
         ).execute()
@@ -127,7 +126,6 @@ class SubscriptionInvoiceAccountController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CreatePrepaymentResponse.from_dictionary)
         ).execute()
@@ -220,7 +218,6 @@ class SubscriptionInvoiceAccountController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PrepaymentsResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)
@@ -274,7 +271,6 @@ class SubscriptionInvoiceAccountController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ServiceCredit.from_dictionary)
         ).execute()
@@ -320,10 +316,6 @@ class SubscriptionInvoiceAccountController(BaseController):
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
     def refund_prepayment(self,
@@ -382,7 +374,6 @@ class SubscriptionInvoiceAccountController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PrepaymentResponse.from_dictionary)
             .local_error('400', 'Bad Request', RefundPrepaymentBaseErrorsResponseException)

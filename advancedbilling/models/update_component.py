@@ -64,6 +64,7 @@ class UpdateComponent(object):
     _nullables = [
         'description',
         'tax_code',
+        'item_category',
     ]
 
     def __init__(self,
@@ -122,7 +123,7 @@ class UpdateComponent(object):
         accounting_code = dictionary.get("accounting_code") if dictionary.get("accounting_code") else APIHelper.SKIP
         taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if "tax_code" in dictionary.keys() else APIHelper.SKIP
-        item_category = dictionary.get("item_category") if dictionary.get("item_category") else APIHelper.SKIP
+        item_category = dictionary.get("item_category") if "item_category" in dictionary.keys() else APIHelper.SKIP
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
         # Return an object of this model

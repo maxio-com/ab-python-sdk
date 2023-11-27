@@ -71,7 +71,6 @@ class ReferralCodesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReferralValidationResponse.from_dictionary)
             .local_error('404', 'Not Found', SingleStringErrorResponseException)

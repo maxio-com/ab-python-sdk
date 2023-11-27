@@ -9,5 +9,5 @@
 
 | Type |
 |  --- |
-| [`ExtendedIntervalUnit`](../../../doc/models/containers/product-expiration-interval-unit-case-0.md) |
+| [`ExtendedIntervalUnit`](../../../doc/models/extended-interval-unit.md) |
 

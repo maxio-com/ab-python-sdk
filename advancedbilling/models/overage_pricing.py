@@ -65,7 +65,7 @@ class OveragePricing(object):
             return None
 
         # Extract variables from the dictionary
-        pricing_scheme = APIHelper.deserialize_union_type(UnionTypeLookUp.get('OveragePricingPricingScheme'), dictionary.get('pricing_scheme'), False) if dictionary.get('pricing_scheme') is not None else None
+        pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else None
         prices = None
         if dictionary.get('prices') is not None:
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
@@ -88,11 +88,10 @@ class OveragePricing(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('OveragePricingPricingScheme').validate(dictionary.pricing_scheme)
+            return APIHelper.is_valid_type(value=dictionary.pricing_scheme, type_callable=lambda value: PricingScheme.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('OveragePricingPricingScheme').validate(dictionary.get('pricing_scheme'))
+        return APIHelper.is_valid_type(value=dictionary.get('pricing_scheme'), type_callable=lambda value: PricingScheme.validate(value))

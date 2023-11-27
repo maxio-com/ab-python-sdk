@@ -22,10 +22,71 @@ class Subscription(object):
 
     Attributes:
         id (int): The subscription unique id within Chargify.
-        state (str): The current state of the subscription. Please see the
-            documentation for [Subscription
-            States](https://help.chargify.com/subscriptions/subscription-states
-            .html)
+        state (SubscriptionState): The state of a subscription. * **Live
+            States**     * `active` - A normal, active subscription. It is not
+            in a trial and is paid and up to date.     * `assessing` - An
+            internal (transient) state that indicates a subscription is in the
+            middle of periodic assessment. Do not base any access decisions in
+            your app on this state, as it may not always be exposed.     *
+            `pending` - An internal (transient) state that indicates a
+            subscription is in the creation process. Do not base any access
+            decisions in your app on this state, as it may not always be
+            exposed.     * `trialing` - A subscription in trialing state has a
+            valid trial subscription. This type of subscription may transition
+            to active once payment is received when the trial has ended.
+            Otherwise, it may go to a Problem or End of Life state.     *
+            `paused` - An internal state that indicates that your account with
+            Advanced Billing is in arrears. * **Problem States**     *
+            `past_due` - Indicates that the most recent payment has failed,
+            and payment is past due for this subscription. If you have enabled
+            our automated dunning, this subscription will be in the dunning
+            process (additional status and callbacks from the dunning process
+            will be available in the future). If you are handling dunning and
+            payment updates yourself, you will want to use this state to
+            initiate a payment update from your customers.     *
+            `soft_failure` - Indicates that normal assessment/processing of
+            the subscription has failed for a reason that cannot be fixed by
+            the Customer. For example, a Soft Fail may result from a timeout
+            at the gateway or incorrect credentials on your part. The
+            subscriptions should be retried automatically. An interface is
+            being built for you to review problems resulting from these events
+            to take manual action when needed.     * `unpaid` - Indicates an
+            unpaid subscription. A subscription is marked unpaid if the retry
+            period expires and you have configured your
+            [Dunning](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
+            505141005) settings to have a Final Action of `mark the
+            subscription unpaid`. * **End of Life States**     * `canceled` -
+            Indicates a canceled subscription. This may happen at your request
+            (via the API or the web interface) or due to the expiration of the
+            [Dunning](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
+            505141005) process without payment. See the
+            [Reactivation](https://maxio-chargify.zendesk.com/hc/en-us/articles
+            /5404559291021) documentation for info on how to restart a
+            canceled subscription.     While a subscription is canceled, its
+            period will not advance, it will not accrue any new charges, and
+            Advanced Billing will not attempt to collect the overdue balance. 
+            * `expired` - Indicates a subscription that has expired due to
+            running its normal life cycle. Some products may be configured to
+            have an expiration period. An expired subscription then is one
+            that stayed active until it fulfilled its full period.     *
+            `failed_to_create` - Indicates that signup has failed. (You may
+            see this state in a signup_failure webhook.)     * `on_hold` -
+            Indicates that a subscription’s billing has been temporarily
+            stopped. While it is expected that the subscription will resume
+            and return to active status, this is still treated as an “End of
+            Life” state because the customer is not paying for services during
+            this time.     * `suspended` - Indicates that a prepaid
+            subscription has used up all their prepayment balance. If a
+            prepayment is applied, it will return to an active state.     *
+            `trial_ended` - A subscription in a trial_ended state is a
+            subscription that completed a no-obligation trial and did not have
+            a card on file at the expiration of the trial period. See [Product
+            Pricing – No Obligation
+            Trials](https://maxio-chargify.zendesk.com/hc/en-us/articles/540524
+            6782221) for more details.  See [Subscription
+            States](https://maxio-chargify.zendesk.com/hc/en-us/articles/540422
+            2005773) for more info about subscription states and state
+            transitions.
         balance_in_cents (long|int): Gives the current outstanding
             subscription balance in the number of cents.
         total_revenue_in_cents (long|int): Gives the total revenue from the
@@ -38,28 +99,28 @@ class Subscription(object):
         product_version_number (int): The version of the product for the
             subscription. Note that this is a deprecated field kept for
             backwards-compatibility.
-        current_period_ends_at (str): Timestamp relating to the end of the
-            current (recurring) period (i.e.,when the next regularly scheduled
-            attempted charge will occur)
-        next_assessment_at (str): Timestamp that indicates when capture of
-            payment will be tried or,retried. This value will usually track
+        current_period_ends_at (datetime): Timestamp relating to the end of
+            the current (recurring) period (i.e.,when the next regularly
+            scheduled attempted charge will occur)
+        next_assessment_at (datetime): Timestamp that indicates when capture
+            of payment will be tried or,retried. This value will usually track
             the current_period_ends_at, but,will diverge if a renewal payment
             fails and must be retried. In that,case, the
             current_period_ends_at will advance to the end of the next,period
             (time doesn’t stop because a payment was missed) but
             the,next_assessment_at will be scheduled for the auto-retry time
             (i.e. 24,hours in the future, in some cases)
-        trial_started_at (str): Timestamp for when the trial period (if any)
-            began
-        trial_ended_at (str): Timestamp for when the trial period (if any)
-            ended
-        activated_at (str): Timestamp for when the subscription began (i.e.
-            when it came out of trial, or when it began in the case of no
-            trial)
-        expires_at (str): Timestamp giving the expiration date of this
+        trial_started_at (datetime): Timestamp for when the trial period (if
+            any) began
+        trial_ended_at (datetime): Timestamp for when the trial period (if
+            any) ended
+        activated_at (datetime): Timestamp for when the subscription began
+            (i.e. when it came out of trial, or when it began in the case of
+            no trial)
+        expires_at (datetime): Timestamp giving the expiration date of this
             subscription (if any)
-        created_at (str): The creation date for this subscription
-        updated_at (str): The date of last update for this subscription
+        created_at (datetime): The creation date for this subscription
+        updated_at (datetime): The date of last update for this subscription
         cancellation_message (str): Seller-provided reason for, or note about,
             the cancellation.
         cancellation_method (CancellationMethod | None): The process used to
@@ -67,9 +128,9 @@ class Subscription(object):
             is nil if the subscription's state is not canceled.
         cancel_at_end_of_period (bool): Whether or not the subscription will
             (or has) canceled at the end of the period.
-        canceled_at (str): The timestamp of the most recent cancellation
-        current_period_started_at (str): Timestamp relating to the start of
-            the current (recurring) period
+        canceled_at (datetime): The timestamp of the most recent cancellation
+        current_period_started_at (datetime): Timestamp relating to the start
+            of the current (recurring) period
         previous_state (str): Only valid for webhook payloads The previous
             state for webhooks that have indicated a change in state. For
             normal API calls, this will always be the same as the state
@@ -79,7 +140,7 @@ class Subscription(object):
         signup_revenue (str): The revenue, formatted as a string of decimal
             separated dollars and,cents, from the subscription signup ($50.00
             would be formatted as,50.00)
-        delayed_cancel_at (str): Timestamp for when the subscription is
+        delayed_cancel_at (datetime): Timestamp for when the subscription is
             currently set to cancel.
         coupon_code (str): (deprecated) The coupon code of the single coupon
             currently applied to the subscription. See coupon_codes instead as
@@ -152,7 +213,7 @@ class Subscription(object):
         receives_invoice_emails (bool): TODO: type description here.
         locale (str): TODO: type description here.
         currency (str): TODO: type description here.
-        scheduled_cancellation_at (str): TODO: type description here.
+        scheduled_cancellation_at (datetime): TODO: type description here.
         credit_balance_in_cents (long|int): TODO: type description here.
         prepayment_balance_in_cents (long|int): TODO: type description here.
 
@@ -307,6 +368,7 @@ class Subscription(object):
         'reason_code',
         'automatically_resume_at',
         'offer_id',
+        'payer_id',
         'next_product_price_point_id',
         'net_terms',
         'stored_credential_transaction_id',
@@ -395,21 +457,21 @@ class Subscription(object):
         if product_version_number is not APIHelper.SKIP:
             self.product_version_number = product_version_number 
         if current_period_ends_at is not APIHelper.SKIP:
-            self.current_period_ends_at = current_period_ends_at 
+            self.current_period_ends_at = APIHelper.apply_datetime_converter(current_period_ends_at, APIHelper.RFC3339DateTime) if current_period_ends_at else None 
         if next_assessment_at is not APIHelper.SKIP:
-            self.next_assessment_at = next_assessment_at 
+            self.next_assessment_at = APIHelper.apply_datetime_converter(next_assessment_at, APIHelper.RFC3339DateTime) if next_assessment_at else None 
         if trial_started_at is not APIHelper.SKIP:
-            self.trial_started_at = trial_started_at 
+            self.trial_started_at = APIHelper.apply_datetime_converter(trial_started_at, APIHelper.RFC3339DateTime) if trial_started_at else None 
         if trial_ended_at is not APIHelper.SKIP:
-            self.trial_ended_at = trial_ended_at 
+            self.trial_ended_at = APIHelper.apply_datetime_converter(trial_ended_at, APIHelper.RFC3339DateTime) if trial_ended_at else None 
         if activated_at is not APIHelper.SKIP:
-            self.activated_at = activated_at 
+            self.activated_at = APIHelper.apply_datetime_converter(activated_at, APIHelper.RFC3339DateTime) if activated_at else None 
         if expires_at is not APIHelper.SKIP:
-            self.expires_at = expires_at 
+            self.expires_at = APIHelper.apply_datetime_converter(expires_at, APIHelper.RFC3339DateTime) if expires_at else None 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if cancellation_message is not APIHelper.SKIP:
             self.cancellation_message = cancellation_message 
         if cancellation_method is not APIHelper.SKIP:
@@ -417,9 +479,9 @@ class Subscription(object):
         if cancel_at_end_of_period is not APIHelper.SKIP:
             self.cancel_at_end_of_period = cancel_at_end_of_period 
         if canceled_at is not APIHelper.SKIP:
-            self.canceled_at = canceled_at 
+            self.canceled_at = APIHelper.apply_datetime_converter(canceled_at, APIHelper.RFC3339DateTime) if canceled_at else None 
         if current_period_started_at is not APIHelper.SKIP:
-            self.current_period_started_at = current_period_started_at 
+            self.current_period_started_at = APIHelper.apply_datetime_converter(current_period_started_at, APIHelper.RFC3339DateTime) if current_period_started_at else None 
         if previous_state is not APIHelper.SKIP:
             self.previous_state = previous_state 
         if signup_payment_id is not APIHelper.SKIP:
@@ -427,7 +489,7 @@ class Subscription(object):
         if signup_revenue is not APIHelper.SKIP:
             self.signup_revenue = signup_revenue 
         if delayed_cancel_at is not APIHelper.SKIP:
-            self.delayed_cancel_at = delayed_cancel_at 
+            self.delayed_cancel_at = APIHelper.apply_datetime_converter(delayed_cancel_at, APIHelper.RFC3339DateTime) if delayed_cancel_at else None 
         if coupon_code is not APIHelper.SKIP:
             self.coupon_code = coupon_code 
         if snap_day is not APIHelper.SKIP:
@@ -496,7 +558,7 @@ class Subscription(object):
         if currency is not APIHelper.SKIP:
             self.currency = currency 
         if scheduled_cancellation_at is not APIHelper.SKIP:
-            self.scheduled_cancellation_at = scheduled_cancellation_at 
+            self.scheduled_cancellation_at = APIHelper.apply_datetime_converter(scheduled_cancellation_at, APIHelper.RFC3339DateTime) if scheduled_cancellation_at else None 
         if credit_balance_in_cents is not APIHelper.SKIP:
             self.credit_balance_in_cents = credit_balance_in_cents 
         if prepayment_balance_in_cents is not APIHelper.SKIP:
@@ -526,26 +588,41 @@ class Subscription(object):
         total_revenue_in_cents = dictionary.get("total_revenue_in_cents") if dictionary.get("total_revenue_in_cents") else APIHelper.SKIP
         product_price_in_cents = dictionary.get("product_price_in_cents") if dictionary.get("product_price_in_cents") else APIHelper.SKIP
         product_version_number = dictionary.get("product_version_number") if dictionary.get("product_version_number") else APIHelper.SKIP
-        current_period_ends_at = dictionary.get("current_period_ends_at") if dictionary.get("current_period_ends_at") else APIHelper.SKIP
-        next_assessment_at = dictionary.get("next_assessment_at") if dictionary.get("next_assessment_at") else APIHelper.SKIP
-        trial_started_at = dictionary.get("trial_started_at") if "trial_started_at" in dictionary.keys() else APIHelper.SKIP
-        trial_ended_at = dictionary.get("trial_ended_at") if "trial_ended_at" in dictionary.keys() else APIHelper.SKIP
-        activated_at = dictionary.get("activated_at") if dictionary.get("activated_at") else APIHelper.SKIP
-        expires_at = dictionary.get("expires_at") if "expires_at" in dictionary.keys() else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        current_period_ends_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("current_period_ends_at")).datetime if dictionary.get("current_period_ends_at") else APIHelper.SKIP
+        next_assessment_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_assessment_at")).datetime if dictionary.get("next_assessment_at") else APIHelper.SKIP
+        if 'trial_started_at' in dictionary.keys():
+            trial_started_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("trial_started_at")).datetime if dictionary.get("trial_started_at") else None
+        else:
+            trial_started_at = APIHelper.SKIP
+        if 'trial_ended_at' in dictionary.keys():
+            trial_ended_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("trial_ended_at")).datetime if dictionary.get("trial_ended_at") else None
+        else:
+            trial_ended_at = APIHelper.SKIP
+        activated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("activated_at")).datetime if dictionary.get("activated_at") else APIHelper.SKIP
+        if 'expires_at' in dictionary.keys():
+            expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else None
+        else:
+            expires_at = APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         cancellation_message = dictionary.get("cancellation_message") if "cancellation_message" in dictionary.keys() else APIHelper.SKIP
         if 'cancellation_method' in dictionary.keys():
             cancellation_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCancellationMethod'), dictionary.get('cancellation_method'), False) if dictionary.get('cancellation_method') is not None else None
         else:
             cancellation_method = APIHelper.SKIP
         cancel_at_end_of_period = dictionary.get("cancel_at_end_of_period") if "cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
-        canceled_at = dictionary.get("canceled_at") if "canceled_at" in dictionary.keys() else APIHelper.SKIP
-        current_period_started_at = dictionary.get("current_period_started_at") if dictionary.get("current_period_started_at") else APIHelper.SKIP
+        if 'canceled_at' in dictionary.keys():
+            canceled_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("canceled_at")).datetime if dictionary.get("canceled_at") else None
+        else:
+            canceled_at = APIHelper.SKIP
+        current_period_started_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("current_period_started_at")).datetime if dictionary.get("current_period_started_at") else APIHelper.SKIP
         previous_state = dictionary.get("previous_state") if dictionary.get("previous_state") else APIHelper.SKIP
         signup_payment_id = dictionary.get("signup_payment_id") if dictionary.get("signup_payment_id") else APIHelper.SKIP
         signup_revenue = dictionary.get("signup_revenue") if dictionary.get("signup_revenue") else APIHelper.SKIP
-        delayed_cancel_at = dictionary.get("delayed_cancel_at") if "delayed_cancel_at" in dictionary.keys() else APIHelper.SKIP
+        if 'delayed_cancel_at' in dictionary.keys():
+            delayed_cancel_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("delayed_cancel_at")).datetime if dictionary.get("delayed_cancel_at") else None
+        else:
+            delayed_cancel_at = APIHelper.SKIP
         coupon_code = dictionary.get("coupon_code") if "coupon_code" in dictionary.keys() else APIHelper.SKIP
         snap_day = dictionary.get("snap_day") if "snap_day" in dictionary.keys() else APIHelper.SKIP
         if 'payment_collection_method' in dictionary.keys():
@@ -570,7 +647,7 @@ class Subscription(object):
         automatically_resume_at = dictionary.get("automatically_resume_at") if "automatically_resume_at" in dictionary.keys() else APIHelper.SKIP
         coupon_codes = dictionary.get("coupon_codes") if dictionary.get("coupon_codes") else APIHelper.SKIP
         offer_id = dictionary.get("offer_id") if "offer_id" in dictionary.keys() else APIHelper.SKIP
-        payer_id = dictionary.get("payer_id") if dictionary.get("payer_id") else APIHelper.SKIP
+        payer_id = dictionary.get("payer_id") if "payer_id" in dictionary.keys() else APIHelper.SKIP
         current_billing_amount_in_cents = dictionary.get("current_billing_amount_in_cents") if dictionary.get("current_billing_amount_in_cents") else APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
         product_price_point_type = dictionary.get("product_price_point_type") if dictionary.get("product_price_point_type") else APIHelper.SKIP
@@ -590,7 +667,10 @@ class Subscription(object):
         receives_invoice_emails = dictionary.get("receives_invoice_emails") if "receives_invoice_emails" in dictionary.keys() else APIHelper.SKIP
         locale = dictionary.get("locale") if "locale" in dictionary.keys() else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
-        scheduled_cancellation_at = dictionary.get("scheduled_cancellation_at") if "scheduled_cancellation_at" in dictionary.keys() else APIHelper.SKIP
+        if 'scheduled_cancellation_at' in dictionary.keys():
+            scheduled_cancellation_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("scheduled_cancellation_at")).datetime if dictionary.get("scheduled_cancellation_at") else None
+        else:
+            scheduled_cancellation_at = APIHelper.SKIP
         credit_balance_in_cents = dictionary.get("credit_balance_in_cents") if dictionary.get("credit_balance_in_cents") else APIHelper.SKIP
         prepayment_balance_in_cents = dictionary.get("prepayment_balance_in_cents") if dictionary.get("prepayment_balance_in_cents") else APIHelper.SKIP
         # Return an object of this model

@@ -21,8 +21,8 @@ class CreateInvoiceCoupon(object):
         amount (str | float | None): TODO: type description here.
         description (str): TODO: type description here.
         product_family_id (str | int | None): TODO: type description here.
-        compounding_strategy (CompoundingStrategy | None): TODO: type
-            description here.
+        compounding_strategy (CompoundingStrategy): TODO: type description
+            here.
 
     """
 
@@ -91,7 +91,7 @@ class CreateInvoiceCoupon(object):
         amount = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceCouponAmount'), dictionary.get('amount'), False) if dictionary.get('amount') is not None else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         product_family_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceCouponProductFamilyId'), dictionary.get('product_family_id'), False) if dictionary.get('product_family_id') is not None else APIHelper.SKIP
-        compounding_strategy = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceCouponCompoundingStrategy'), dictionary.get('compounding_strategy'), False) if dictionary.get('compounding_strategy') is not None else APIHelper.SKIP
+        compounding_strategy = dictionary.get("compounding_strategy") if dictionary.get("compounding_strategy") else APIHelper.SKIP
         # Return an object of this model
         return cls(code,
                    percentage,

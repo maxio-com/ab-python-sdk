@@ -14,7 +14,7 @@
 | `product_id` | `int` | Optional | - |
 | `quantity` | `str` | Optional | - |
 | `amount` | `str` | Optional | - |
-| `pricing_scheme` | [Pricing Scheme](../../doc/models/pricing-scheme.md) \| None | Optional | This is a container for one-of cases. |
+| `pricing_scheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Optional | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `tiers` | [`List[ComponentCostDataRateTier]`](../../doc/models/component-cost-data-rate-tier.md) | Optional | - |
 
 ## Example (as JSON)

@@ -73,10 +73,6 @@ class ProformaInvoicesController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
     def list_subscription_group_proforma_invoices(self,
@@ -120,7 +116,6 @@ class ProformaInvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
             .local_error('403', 'Forbidden', APIException)
@@ -165,7 +160,6 @@ class ProformaInvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
             .local_error('403', 'Forbidden', APIException)
@@ -216,7 +210,6 @@ class ProformaInvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
             .local_error('403', 'Forbidden', APIException)
@@ -333,7 +326,6 @@ class ProformaInvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
         ).execute()
@@ -391,7 +383,6 @@ class ProformaInvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
             .local_error('403', 'Forbidden', APIException)
@@ -450,7 +441,6 @@ class ProformaInvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoicePreview.from_dictionary)
             .local_error('403', 'Forbidden', APIException)
@@ -508,7 +498,6 @@ class ProformaInvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
             .local_error('400', 'Bad Request', ProformaBadRequestErrorResponseException)
@@ -571,7 +560,6 @@ class ProformaInvoicesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SignupProformaPreviewResponse.from_dictionary)
             .local_error('400', 'Bad Request', ProformaBadRequestErrorResponseException)

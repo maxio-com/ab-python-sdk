@@ -79,7 +79,6 @@ class OffersController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(OfferResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorMapResponseException)
@@ -145,7 +144,6 @@ class OffersController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListOffersResponse.from_dictionary)
         ).execute()
@@ -187,7 +185,6 @@ class OffersController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(OfferResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)
@@ -224,10 +221,6 @@ class OffersController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('401', 'Unauthorized', APIException)
         ).execute()
 
     def unarchive_offer(self,
@@ -261,8 +254,4 @@ class OffersController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('401', 'Unauthorized', APIException)
         ).execute()

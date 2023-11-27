@@ -88,7 +88,6 @@ class EventsBasedBillingSegmentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SegmentResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)
@@ -203,7 +202,6 @@ class EventsBasedBillingSegmentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListSegmentsResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)
@@ -275,7 +273,6 @@ class EventsBasedBillingSegmentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SegmentResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)
@@ -331,13 +328,6 @@ class EventsBasedBillingSegmentsController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('401', 'Unauthorized', APIException)
-            .local_error('403', 'Forbidden', APIException)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', APIException)
         ).execute()
 
     def create_segments(self,
@@ -398,7 +388,6 @@ class EventsBasedBillingSegmentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListSegmentsResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)
@@ -465,7 +454,6 @@ class EventsBasedBillingSegmentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListSegmentsResponse.from_dictionary)
             .local_error('401', 'Unauthorized', APIException)

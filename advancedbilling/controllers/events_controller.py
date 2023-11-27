@@ -203,7 +203,6 @@ class EventsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(EventResponse.from_dictionary)
         ).execute()
@@ -294,7 +293,6 @@ class EventsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(EventResponse.from_dictionary)
         ).execute()
@@ -376,7 +374,6 @@ class EventsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CountResponse.from_dictionary)
         ).execute()

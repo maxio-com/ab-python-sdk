@@ -10,7 +10,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.configuration import Server
 from advancedbilling.controllers.base_controller import BaseController
-from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
@@ -112,7 +111,6 @@ class CustomFieldsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Metafield.from_dictionary)
         ).execute()
@@ -148,8 +146,8 @@ class CustomFieldsController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    direction -- SortingDirection | None -- Controls the order
-                        in which results are returned. Use in query
+                    direction -- SortingDirection -- Controls the order in
+                        which results are returned. Use in query
                         `direction=asc`.
 
         Returns:
@@ -183,15 +181,13 @@ class CustomFieldsController(BaseController):
                          .value(options.get('per_page', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(options.get('direction', None))
-                         .validator(lambda value: UnionTypeLookUp.get('ListMetafieldsInputDirection').validate(value)))
+                         .value(options.get('direction', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListMetafieldsResponse.from_dictionary)
         ).execute()
@@ -256,7 +252,6 @@ class CustomFieldsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Metafield.from_dictionary)
         ).execute()
@@ -300,10 +295,6 @@ class CustomFieldsController(BaseController):
                          .key('name')
                          .value(name))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('404', 'Not Found', APIException)
         ).execute()
 
     def create_metadata(self,
@@ -391,7 +382,6 @@ class CustomFieldsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Metadata.from_dictionary)
         ).execute()
@@ -469,7 +459,6 @@ class CustomFieldsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaginatedMetadata.from_dictionary)
         ).execute()
@@ -533,7 +522,6 @@ class CustomFieldsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Metadata.from_dictionary)
         ).execute()
@@ -608,10 +596,6 @@ class CustomFieldsController(BaseController):
                          .value(names))
             .array_serialization_format(SerializationFormats.CSV)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('404', 'Not Found', APIException)
         ).execute()
 
     def list_metadata(self,
@@ -682,8 +666,8 @@ class CustomFieldsController(BaseController):
                         multiple records based on provided ids. Use in query:
                         `resource_ids[]=122&resource_ids[]=123&resource_ids[]=1
                         24`.
-                    direction -- SortingDirection | None -- Controls the order
-                        in which results are returned. Use in query
+                    direction -- SortingDirection -- Controls the order in
+                        which results are returned. Use in query
                         `direction=asc`.
 
         Returns:
@@ -735,8 +719,7 @@ class CustomFieldsController(BaseController):
                          .value(options.get('resource_ids', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(options.get('direction', None))
-                         .validator(lambda value: UnionTypeLookUp.get('ListMetadataInputDirection').validate(value)))
+                         .value(options.get('direction', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -744,7 +727,6 @@ class CustomFieldsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaginatedMetadata.from_dictionary)
         ).execute()

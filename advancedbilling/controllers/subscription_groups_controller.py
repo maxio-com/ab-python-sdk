@@ -84,7 +84,6 @@ class SubscriptionGroupsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionGroupSignupResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', SubscriptionGroupSignupErrorResponseException)
@@ -127,7 +126,6 @@ class SubscriptionGroupsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionGroupResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', SingleStringErrorResponseException)
@@ -202,7 +200,6 @@ class SubscriptionGroupsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListSubscriptionGroupsResponse.from_dictionary)
         ).execute()
@@ -247,7 +244,6 @@ class SubscriptionGroupsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(FullSubscriptionGroupResponse.from_dictionary)
         ).execute()
@@ -300,7 +296,6 @@ class SubscriptionGroupsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionGroupResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', SubscriptionGroupUpdateErrorResponseException)
@@ -342,7 +337,6 @@ class SubscriptionGroupsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(DeleteSubscriptionGroupResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -385,7 +379,6 @@ class SubscriptionGroupsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(FullSubscriptionGroupResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -464,7 +457,6 @@ class SubscriptionGroupsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionGroupResponse.from_dictionary)
         ).execute()
@@ -504,9 +496,4 @@ class SubscriptionGroupsController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()

@@ -27,8 +27,8 @@ class CreateOrUpdateFlatAmountCoupon(object):
         end_date (str): TODO: type description here.
         product_family_id (str): TODO: type description here.
         stackable (str): TODO: type description here.
-        compounding_strategy (CompoundingStrategy | None): TODO: type
-            description here.
+        compounding_strategy (CompoundingStrategy): TODO: type description
+            here.
         exclude_mid_period_allocations (bool): TODO: type description here.
         apply_on_cancel_at_end_of_period (bool): TODO: type description here.
 
@@ -128,7 +128,7 @@ class CreateOrUpdateFlatAmountCoupon(object):
         end_date = dictionary.get("end_date") if dictionary.get("end_date") else APIHelper.SKIP
         product_family_id = dictionary.get("product_family_id") if dictionary.get("product_family_id") else APIHelper.SKIP
         stackable = dictionary.get("stackable") if dictionary.get("stackable") else APIHelper.SKIP
-        compounding_strategy = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateOrUpdateFlatAmountCouponCompoundingStrategy'), dictionary.get('compounding_strategy'), False) if dictionary.get('compounding_strategy') is not None else APIHelper.SKIP
+        compounding_strategy = dictionary.get("compounding_strategy") if dictionary.get("compounding_strategy") else APIHelper.SKIP
         exclude_mid_period_allocations = dictionary.get("exclude_mid_period_allocations") if "exclude_mid_period_allocations" in dictionary.keys() else APIHelper.SKIP
         apply_on_cancel_at_end_of_period = dictionary.get("apply_on_cancel_at_end_of_period") if "apply_on_cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model

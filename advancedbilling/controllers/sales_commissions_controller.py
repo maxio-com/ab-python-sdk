@@ -118,7 +118,6 @@ class SalesCommissionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SaleRepSettings.from_dictionary)
         ).execute()
@@ -213,7 +212,6 @@ class SalesCommissionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListSaleRepItem.from_dictionary)
         ).execute()
@@ -309,7 +307,6 @@ class SalesCommissionsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SaleRep.from_dictionary)
         ).execute()

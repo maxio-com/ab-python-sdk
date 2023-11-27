@@ -149,6 +149,7 @@ class Component(object):
     ]
 
     _nullables = [
+        'handle',
         'pricing_scheme',
         'unit_price',
         'price_per_unit_in_cents',
@@ -158,6 +159,7 @@ class Component(object):
         'upgrade_charge',
         'downgrade_credit',
         'archived_at',
+        'item_category',
         'use_site_exchange_rate',
         'accounting_code',
     ]
@@ -280,7 +282,7 @@ class Component(object):
         # Extract variables from the dictionary
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
-        handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
+        handle = dictionary.get("handle") if "handle" in dictionary.keys() else APIHelper.SKIP
         pricing_scheme = dictionary.get("pricing_scheme") if "pricing_scheme" in dictionary.keys() else APIHelper.SKIP
         unit_name = dictionary.get("unit_name") if dictionary.get("unit_name") else APIHelper.SKIP
         unit_price = dictionary.get("unit_price") if "unit_price" in dictionary.keys() else APIHelper.SKIP
@@ -308,7 +310,7 @@ class Component(object):
         archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP
         hide_date_range_on_invoice = dictionary.get("hide_date_range_on_invoice") if "hide_date_range_on_invoice" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
-        item_category = dictionary.get("item_category") if dictionary.get("item_category") else APIHelper.SKIP
+        item_category = dictionary.get("item_category") if "item_category" in dictionary.keys() else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
         accounting_code = dictionary.get("accounting_code") if "accounting_code" in dictionary.keys() else APIHelper.SKIP
         event_based_billing_metric_id = dictionary.get("event_based_billing_metric_id") if dictionary.get("event_based_billing_metric_id") else APIHelper.SKIP

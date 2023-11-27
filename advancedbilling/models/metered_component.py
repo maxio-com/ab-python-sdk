@@ -178,7 +178,7 @@ class MeteredComponent(object):
         # Extract variables from the dictionary
         name = dictionary.get("name") if dictionary.get("name") else None
         unit_name = dictionary.get("unit_name") if dictionary.get("unit_name") else None
-        pricing_scheme = APIHelper.deserialize_union_type(UnionTypeLookUp.get('MeteredComponentPricingScheme'), dictionary.get('pricing_scheme'), False) if dictionary.get('pricing_scheme') is not None else None
+        pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else None
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
@@ -233,15 +233,14 @@ class MeteredComponent(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.name, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.unit_name, type_callable=lambda value: isinstance(value, str)) \
-                and UnionTypeLookUp.get('MeteredComponentPricingScheme').validate(dictionary.pricing_scheme)
+                and APIHelper.is_valid_type(value=dictionary.pricing_scheme, type_callable=lambda value: PricingScheme.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
         return APIHelper.is_valid_type(value=dictionary.get('name'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('unit_name'), type_callable=lambda value: isinstance(value, str)) \
-            and UnionTypeLookUp.get('MeteredComponentPricingScheme').validate(dictionary.get('pricing_scheme'))
+            and APIHelper.is_valid_type(value=dictionary.get('pricing_scheme'), type_callable=lambda value: PricingScheme.validate(value))

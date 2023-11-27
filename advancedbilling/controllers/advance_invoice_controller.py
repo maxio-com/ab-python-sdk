@@ -88,7 +88,6 @@ class AdvanceInvoiceController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
             .local_error('403', 'Forbidden', APIException)
@@ -133,7 +132,6 @@ class AdvanceInvoiceController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
             .local_error('403', 'Forbidden', APIException)
@@ -189,7 +187,6 @@ class AdvanceInvoiceController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
             .local_error('403', 'Forbidden', APIException)

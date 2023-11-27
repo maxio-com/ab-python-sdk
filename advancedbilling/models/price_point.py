@@ -35,8 +35,7 @@ class PricePoint(object):
             rollover_prepaid_remainder is true) The number of
             `expiration_interval_unit`s after which rollover amounts should
             expire
-        expiration_interval_unit (IntervalUnit | None): TODO: type description
-            here.
+        expiration_interval_unit (IntervalUnit): TODO: type description here.
 
     """
 
@@ -132,7 +131,7 @@ class PricePoint(object):
         rollover_prepaid_remainder = dictionary.get("rollover_prepaid_remainder") if "rollover_prepaid_remainder" in dictionary.keys() else APIHelper.SKIP
         renew_prepaid_allocation = dictionary.get("renew_prepaid_allocation") if "renew_prepaid_allocation" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
-        expiration_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PricePointExpirationIntervalUnit'), dictionary.get('expiration_interval_unit'), False) if dictionary.get('expiration_interval_unit') is not None else APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
         # Return an object of this model
         return cls(name,
                    handle,

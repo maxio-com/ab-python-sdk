@@ -110,7 +110,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -152,7 +151,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
         ).execute()
@@ -204,7 +202,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
         ).execute()
@@ -264,7 +261,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -316,7 +312,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -435,7 +430,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
         ).execute()
@@ -481,9 +475,6 @@ class ComponentsController(BaseController):
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
         ).execute()
 
     def update_default_price_point_for_component(self,
@@ -532,9 +523,6 @@ class ComponentsController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
         ).execute()
 
     def list_components_for_product_family(self,
@@ -659,7 +647,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
         ).execute()
@@ -709,7 +696,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentPricePointResponse.from_dictionary)
         ).execute()
@@ -796,7 +782,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentPricePointsResponse.from_dictionary)
         ).execute()
@@ -847,7 +832,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentPricePointsResponse.from_dictionary)
         ).execute()
@@ -912,7 +896,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentPricePointResponse.from_dictionary)
         ).execute()
@@ -962,7 +945,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentPricePointResponse.from_dictionary)
         ).execute()
@@ -1010,7 +992,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentPricePointResponse.from_dictionary)
         ).execute()
@@ -1066,7 +1047,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CurrencyPrice.from_dictionary)
         ).execute()
@@ -1118,7 +1098,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CurrencyPrice.from_dictionary)
         ).execute()
@@ -1180,11 +1159,11 @@ class ComponentsController(BaseController):
                         timezone in query - otherwise your site's time zone
                         will be used. If provided, this parameter will be used
                         instead of start_date.
-                    filter_type -- PricePointType -- Allows fetching price
-                        points with matching type. Use in query:
+                    filter_type -- List[PricePointType] -- Allows fetching
+                        price points with matching type. Use in query:
                         `filter[type]=custom,catalog`.
-                    direction -- SortingDirection | None -- Controls the order
-                        in which results are returned. Use in query
+                    direction -- SortingDirection -- Controls the order in
+                        which results are returned. Use in query
                         `direction=asc`.
                     filter_ids -- List[int] -- Allows fetching price points
                         with matching id based on provided values. Use in
@@ -1237,8 +1216,7 @@ class ComponentsController(BaseController):
                          .value(options.get('filter_type', None)))
             .query_param(Parameter()
                          .key('direction')
-                         .value(options.get('direction', None))
-                         .validator(lambda value: UnionTypeLookUp.get('ListAllComponentPricePointsInputDirection').validate(value)))
+                         .value(options.get('direction', None)))
             .query_param(Parameter()
                          .key('filter[ids]')
                          .value(options.get('filter_ids', None)))
@@ -1252,7 +1230,6 @@ class ComponentsController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListComponentsPricePointsResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)

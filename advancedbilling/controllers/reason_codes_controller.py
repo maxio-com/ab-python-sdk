@@ -80,7 +80,6 @@ class ReasonCodesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReasonCodeResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -142,7 +141,6 @@ class ReasonCodesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReasonCodeResponse.from_dictionary)
         ).execute()
@@ -184,7 +182,6 @@ class ReasonCodesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReasonCodeResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -235,7 +232,6 @@ class ReasonCodesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReasonCodeResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -278,7 +274,6 @@ class ReasonCodesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReasonCodesJsonResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
