@@ -27,12 +27,12 @@ class CreateSubscription(object):
         product_handle (str): The API Handle of the product for which you are
             creating a subscription. Required, unless a `product_id` is given
             instead.
-        product_id (str): The Product ID of the product for which you are
+        product_id (int): The Product ID of the product for which you are
             creating a subscription. The product ID is not currently
             published, so we recommend using the API Handle instead.
         product_price_point_handle (str): The user-friendly API handle of a
             product's particular price point.
-        product_price_point_id (str): The ID of the particular price point on
+        product_price_point_id (int): The ID of the particular price point on
             the product.
         custom_price (CustomPriceUsedForSubscriptionCreateUpdate): (Optional)
             Used in place of `product_price_point_id` to define a custom price
@@ -56,7 +56,7 @@ class CreateSubscription(object):
         customer_id (int): The ID of an existing customer within Chargify.
             Required, unless a `customer_reference` or a set of
             `customer_attributes` is given.
-        next_billing_at (str): (Optional) Set this attribute to a future
+        next_billing_at (datetime): (Optional) Set this attribute to a future
             date/time to sync imported subscriptions to your existing renewal
             schedule. See the notes on “Date/Time Format” in our [subscription
             import
@@ -72,10 +72,10 @@ class CreateSubscription(object):
             cannot be successfully charged, the subscription will not be
             created. See further notes in the section on Importing
             Subscriptions.
-        initial_billing_at (str): (Optional) Set this attribute to a future
-            date/time to create a subscription in the "Awaiting Signup" state,
-            rather than "Active" or "Trialing". See the notes on “Date/Time
-            Format” in our [subscription import
+        initial_billing_at (datetime): (Optional) Set this attribute to a
+            future date/time to create a subscription in the "Awaiting Signup"
+            state, rather than "Active" or "Trialing". See the notes on
+            “Date/Time Format” in our [subscription import
             documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles
             /5404863655821#date-format). In the "Awaiting Signup" state, a
             subscription behaves like any other. It can be canceled, allocated
@@ -142,7 +142,7 @@ class CreateSubscription(object):
             currency is configured in Chargify, pass it at signup to create a
             subscription on a non-default currency. Note that you cannot
             update the currency of an existing subscription.
-        expires_at (str): Timestamp giving the expiration date of this
+        expires_at (datetime): Timestamp giving the expiration date of this
             subscription (if any). You may manually change the expiration date
             at any point during a subscription period.
         expiration_tracks_next_billing_change (str): (Optional, default false)
@@ -175,8 +175,8 @@ class CreateSubscription(object):
             prefixed with `handle:`.er
         prepaid_subscription_configuration (UpsertPrepaidConfiguration): TODO:
             type description here.
-        previous_billing_at (str): Providing a previous_billing_at that is in
-            the past will set the current_period_starts_at when the
+        previous_billing_at (datetime): Providing a previous_billing_at that
+            is in the past will set the current_period_starts_at when the
             subscription is created. It will also set activated_at if not
             explicitly passed during the subscription import. Can only be used
             if next_billing_at is also passed. Using this option will allow
@@ -188,7 +188,7 @@ class CreateSubscription(object):
             and set to a future date. This key/value will not be returned in
             the subscription response body.
         canceled_at (str): TODO: type description here.
-        activated_at (str): TODO: type description here.
+        activated_at (datetime): TODO: type description here.
         agreement_acceptance (AgreementAcceptance): Required when creating a
             subscription with Maxio Payments.
         ach_agreement (ACHAgreement): (Optional) If passed, the proof of the
@@ -390,9 +390,9 @@ class CreateSubscription(object):
         if customer_id is not APIHelper.SKIP:
             self.customer_id = customer_id 
         if next_billing_at is not APIHelper.SKIP:
-            self.next_billing_at = next_billing_at 
+            self.next_billing_at = APIHelper.apply_datetime_converter(next_billing_at, APIHelper.RFC3339DateTime) if next_billing_at else None 
         if initial_billing_at is not APIHelper.SKIP:
-            self.initial_billing_at = initial_billing_at 
+            self.initial_billing_at = APIHelper.apply_datetime_converter(initial_billing_at, APIHelper.RFC3339DateTime) if initial_billing_at else None 
         if stored_credential_transaction_id is not APIHelper.SKIP:
             self.stored_credential_transaction_id = stored_credential_transaction_id 
         if sales_rep_id is not APIHelper.SKIP:
@@ -428,7 +428,7 @@ class CreateSubscription(object):
         if currency is not APIHelper.SKIP:
             self.currency = currency 
         if expires_at is not APIHelper.SKIP:
-            self.expires_at = expires_at 
+            self.expires_at = APIHelper.apply_datetime_converter(expires_at, APIHelper.RFC3339DateTime) if expires_at else None 
         if expiration_tracks_next_billing_change is not APIHelper.SKIP:
             self.expiration_tracks_next_billing_change = expiration_tracks_next_billing_change 
         if agreement_terms is not APIHelper.SKIP:
@@ -448,13 +448,13 @@ class CreateSubscription(object):
         if prepaid_subscription_configuration is not APIHelper.SKIP:
             self.prepaid_subscription_configuration = prepaid_subscription_configuration 
         if previous_billing_at is not APIHelper.SKIP:
-            self.previous_billing_at = previous_billing_at 
+            self.previous_billing_at = APIHelper.apply_datetime_converter(previous_billing_at, APIHelper.RFC3339DateTime) if previous_billing_at else None 
         if import_mrr is not APIHelper.SKIP:
             self.import_mrr = import_mrr 
         if canceled_at is not APIHelper.SKIP:
             self.canceled_at = canceled_at 
         if activated_at is not APIHelper.SKIP:
-            self.activated_at = activated_at 
+            self.activated_at = APIHelper.apply_datetime_converter(activated_at, APIHelper.RFC3339DateTime) if activated_at else None 
         if agreement_acceptance is not APIHelper.SKIP:
             self.agreement_acceptance = agreement_acceptance 
         if ach_agreement is not APIHelper.SKIP:
@@ -493,8 +493,8 @@ class CreateSubscription(object):
         receives_invoice_emails = dictionary.get("receives_invoice_emails") if dictionary.get("receives_invoice_emails") else APIHelper.SKIP
         net_terms = dictionary.get("net_terms") if dictionary.get("net_terms") else APIHelper.SKIP
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
-        next_billing_at = dictionary.get("next_billing_at") if dictionary.get("next_billing_at") else APIHelper.SKIP
-        initial_billing_at = dictionary.get("initial_billing_at") if dictionary.get("initial_billing_at") else APIHelper.SKIP
+        next_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_billing_at")).datetime if dictionary.get("next_billing_at") else APIHelper.SKIP
+        initial_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("initial_billing_at")).datetime if dictionary.get("initial_billing_at") else APIHelper.SKIP
         stored_credential_transaction_id = dictionary.get("stored_credential_transaction_id") if dictionary.get("stored_credential_transaction_id") else APIHelper.SKIP
         sales_rep_id = dictionary.get("sales_rep_id") if dictionary.get("sales_rep_id") else APIHelper.SKIP
         payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP
@@ -512,7 +512,7 @@ class CreateSubscription(object):
         cancellation_message = dictionary.get("cancellation_message") if dictionary.get("cancellation_message") else APIHelper.SKIP
         cancellation_method = dictionary.get("cancellation_method") if dictionary.get("cancellation_method") else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
-        expires_at = dictionary.get("expires_at") if dictionary.get("expires_at") else APIHelper.SKIP
+        expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else APIHelper.SKIP
         expiration_tracks_next_billing_change = dictionary.get("expiration_tracks_next_billing_change") if dictionary.get("expiration_tracks_next_billing_change") else APIHelper.SKIP
         agreement_terms = dictionary.get("agreement_terms") if dictionary.get("agreement_terms") else APIHelper.SKIP
         authorizer_first_name = dictionary.get("authorizer_first_name") if dictionary.get("authorizer_first_name") else APIHelper.SKIP
@@ -522,10 +522,10 @@ class CreateSubscription(object):
         product_change_delayed = dictionary.get("product_change_delayed") if "product_change_delayed" in dictionary.keys() else APIHelper.SKIP
         offer_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionOfferId'), dictionary.get('offer_id'), False) if dictionary.get('offer_id') is not None else APIHelper.SKIP
         prepaid_subscription_configuration = UpsertPrepaidConfiguration.from_dictionary(dictionary.get('prepaid_subscription_configuration')) if 'prepaid_subscription_configuration' in dictionary.keys() else APIHelper.SKIP
-        previous_billing_at = dictionary.get("previous_billing_at") if dictionary.get("previous_billing_at") else APIHelper.SKIP
+        previous_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("previous_billing_at")).datetime if dictionary.get("previous_billing_at") else APIHelper.SKIP
         import_mrr = dictionary.get("import_mrr") if "import_mrr" in dictionary.keys() else APIHelper.SKIP
         canceled_at = dictionary.get("canceled_at") if dictionary.get("canceled_at") else APIHelper.SKIP
-        activated_at = dictionary.get("activated_at") if dictionary.get("activated_at") else APIHelper.SKIP
+        activated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("activated_at")).datetime if dictionary.get("activated_at") else APIHelper.SKIP
         agreement_acceptance = AgreementAcceptance.from_dictionary(dictionary.get('agreement_acceptance')) if 'agreement_acceptance' in dictionary.keys() else APIHelper.SKIP
         ach_agreement = ACHAgreement.from_dictionary(dictionary.get('ach_agreement')) if 'ach_agreement' in dictionary.keys() else APIHelper.SKIP
         dunning_communication_delay_enabled = dictionary.get("dunning_communication_delay_enabled") if dictionary.get("dunning_communication_delay_enabled") else False

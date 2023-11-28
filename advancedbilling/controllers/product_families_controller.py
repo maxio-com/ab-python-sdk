@@ -159,7 +159,6 @@ class ProductFamiliesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -208,7 +207,6 @@ class ProductFamiliesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductFamilyResponse.from_dictionary)
         ).execute()
@@ -288,7 +286,6 @@ class ProductFamiliesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductFamilyResponse.from_dictionary)
         ).execute()
@@ -332,7 +329,6 @@ class ProductFamiliesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductFamilyResponse.from_dictionary)
         ).execute()

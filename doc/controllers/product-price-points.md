@@ -54,16 +54,16 @@ body = CreateProductPricePointRequest(
         name='Educational',
         price_in_cents=1000,
         interval=1,
-        interval_unit='month',
+        interval_unit=IntervalUnit.MONTH,
         handle='educational',
         trial_price_in_cents=4900,
         trial_interval=1,
-        trial_interval_unit='month',
+        trial_interval_unit=IntervalUnit.MONTH,
         trial_type='payment_expected',
         initial_charge_in_cents=120000,
         initial_charge_after_trial=False,
         expiration_interval=12,
-        expiration_interval_unit='month'
+        expiration_interval_unit=IntervalUnit.MONTH
     )
 )
 
@@ -94,9 +94,9 @@ print(result)
     "expiration_interval": 12,
     "expiration_interval_unit": "month",
     "product_id": 901,
-    "archived_at": "Tue, 30 Oct 2018 18:49:47 EDT -04:00",
-    "created_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00",
-    "updated_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+    "archived_at": "2023-11-30T06:37:20-05:00",
+    "created_at": "2023-11-27T06:37:20-05:00",
+    "updated_at": "2023-11-27T06:37:20-05:00"
   }
 }
 ```
@@ -164,9 +164,9 @@ print(result)
       "expiration_interval": 12,
       "expiration_interval_unit": "month",
       "product_id": 901,
-      "archived_at": "Tue, 30 Oct 2018 18:49:47 EDT -04:00",
-      "created_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00",
-      "updated_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+      "archived_at": "2023-11-30T06:37:20-05:00",
+      "created_at": "2023-11-27T06:37:20-05:00",
+      "updated_at": "2023-11-27T06:37:20-05:00"
     }
   ]
 }
@@ -240,9 +240,9 @@ print(result)
     "expiration_interval": 12,
     "expiration_interval_unit": "month",
     "product_id": 901,
-    "archived_at": "Tue, 30 Oct 2018 18:49:47 EDT -04:00",
-    "created_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00",
-    "updated_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+    "archived_at": "2023-11-30T06:37:20-05:00",
+    "created_at": "2023-11-27T06:37:20-05:00",
+    "updated_at": "2023-11-27T06:37:20-05:00"
   }
 }
 ```
@@ -305,9 +305,9 @@ print(result)
     "expiration_interval": 12,
     "expiration_interval_unit": "month",
     "product_id": 901,
-    "archived_at": "Tue, 30 Oct 2018 18:49:47 EDT -04:00",
-    "created_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00",
-    "updated_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+    "archived_at": "2023-11-30T06:37:20-05:00",
+    "created_at": "2023-11-27T06:37:20-05:00",
+    "updated_at": "2023-11-27T06:37:20-05:00"
   }
 }
 ```
@@ -368,9 +368,9 @@ print(result)
     "expiration_interval": 12,
     "expiration_interval_unit": "month",
     "product_id": 901,
-    "archived_at": "Tue, 30 Oct 2018 18:49:47 EDT -04:00",
-    "created_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00",
-    "updated_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+    "archived_at": "2023-11-30T06:37:20-05:00",
+    "created_at": "2023-11-27T06:37:20-05:00",
+    "updated_at": "2023-11-27T06:37:20-05:00"
   }
 }
 ```
@@ -431,9 +431,9 @@ print(result)
     "expiration_interval": 12,
     "expiration_interval_unit": "month",
     "product_id": 901,
-    "archived_at": "Tue, 30 Oct 2018 18:49:47 EDT -04:00",
-    "created_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00",
-    "updated_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+    "archived_at": "2023-11-30T06:37:20-05:00",
+    "created_at": "2023-11-27T06:37:20-05:00",
+    "updated_at": "2023-11-27T06:37:20-05:00"
   }
 }
 ```
@@ -496,9 +496,9 @@ print(result)
     "expiration_interval": 12,
     "expiration_interval_unit": "month",
     "product_id": 901,
-    "archived_at": "Tue, 30 Oct 2018 18:49:47 EDT -04:00",
-    "created_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00",
-    "updated_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+    "archived_at": "2023-11-30T06:37:20-05:00",
+    "created_at": "2023-11-27T06:37:20-05:00",
+    "updated_at": "2023-11-27T06:37:20-05:00"
   }
 }
 ```
@@ -536,31 +536,31 @@ body = BulkCreateProductPricePointsRequest(
             name='Educational',
             price_in_cents=1000,
             interval=1,
-            interval_unit='month',
+            interval_unit=IntervalUnit.MONTH,
             handle='educational',
             trial_price_in_cents=4900,
             trial_interval=1,
-            trial_interval_unit='month',
+            trial_interval_unit=IntervalUnit.MONTH,
             trial_type='payment_expected',
             initial_charge_in_cents=120000,
             initial_charge_after_trial=False,
             expiration_interval=12,
-            expiration_interval_unit='month'
+            expiration_interval_unit=IntervalUnit.MONTH
         ),
         CreateProductPricePoint(
             name='More Educational',
             price_in_cents=2000,
             interval=1,
-            interval_unit='month',
+            interval_unit=IntervalUnit.MONTH,
             handle='more-educational',
             trial_price_in_cents=4900,
             trial_interval=1,
-            trial_interval_unit='month',
+            trial_interval_unit=IntervalUnit.MONTH,
             trial_type='payment_expected',
             initial_charge_in_cents=120000,
             initial_charge_after_trial=False,
             expiration_interval=12,
-            expiration_interval_unit='month'
+            expiration_interval_unit=IntervalUnit.MONTH
         )
     ]
 )
@@ -593,9 +593,9 @@ print(result)
       "expiration_interval": 12,
       "expiration_interval_unit": "month",
       "product_id": 901,
-      "archived_at": "Tue, 30 Oct 2018 18:49:47 EDT -04:00",
-      "created_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00",
-      "updated_at": "Tue, 23 Oct 2018 18:49:47 EDT -04:00"
+      "archived_at": "2023-11-30T06:37:20-05:00",
+      "created_at": "2023-11-27T06:37:20-05:00",
+      "updated_at": "2023-11-27T06:37:20-05:00"
     }
   ]
 }
@@ -751,7 +751,7 @@ def list_all_product_price_points(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `direction` | [Sorting direction](../../doc/models/sorting-direction.md) \| None | Query, Optional | This is a container for one-of cases. |
+| `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 | `filter_archived_at` | [`IncludeNotNull`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
 | `filter_date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`. |
 | `filter_end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
@@ -759,7 +759,7 @@ def list_all_product_price_points(self,
 | `filter_ids` | `List[int]` | Query, Optional | Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`. |
 | `filter_start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `filter_start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
-| `filter_type` | [`PricePointType`](../../doc/models/price-point-type.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=catalog,custom`. |
+| `filter_type` | [`List[PricePointType]`](../../doc/models/price-point-type.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=catalog,custom`. |
 | `include` | [`ListProductsPricePointsInclude`](../../doc/models/list-products-price-points-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |

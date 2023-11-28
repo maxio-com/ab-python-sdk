@@ -117,6 +117,7 @@ class PaymentProfile(object):
         'billing_country',
         'customer_vault_token',
         'billing_address_2',
+        'site_gateway_setting_id',
         'gateway_handle',
     ]
 
@@ -228,7 +229,7 @@ class PaymentProfile(object):
         payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else 'credit_card'
         disabled = dictionary.get("disabled") if "disabled" in dictionary.keys() else APIHelper.SKIP
         chargify_token = dictionary.get("chargify_token") if dictionary.get("chargify_token") else APIHelper.SKIP
-        site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if dictionary.get("site_gateway_setting_id") else APIHelper.SKIP
+        site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if "site_gateway_setting_id" in dictionary.keys() else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(id,

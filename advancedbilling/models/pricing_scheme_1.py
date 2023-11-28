@@ -8,13 +8,11 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 
-class PricingScheme(object):
+class PricingScheme1(object):
 
-    """Implementation of the 'Pricing Scheme' enum.
+    """Implementation of the 'Pricing Scheme1' enum.
 
-    The identifier for the pricing scheme. See [Product
-    Components](https://help.chargify.com/products/product-components.html)
-    for an overview of pricing schemes.
+    Omit for On/Off components
 
     Attributes:
         STAIRSTEP: TODO: type description here.

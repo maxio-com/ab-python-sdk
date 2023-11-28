@@ -22,8 +22,8 @@ class ComponentCostData(object):
         product_id (int): TODO: type description here.
         quantity (str): TODO: type description here.
         amount (str): TODO: type description here.
-        pricing_scheme (PricingScheme | None): The identifier for the pricing
-            scheme. See [Product
+        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
+            See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
         tiers (List[ComponentCostDataRateTier]): TODO: type description here.
@@ -105,7 +105,7 @@ class ComponentCostData(object):
         product_id = dictionary.get("product_id") if dictionary.get("product_id") else APIHelper.SKIP
         quantity = dictionary.get("quantity") if dictionary.get("quantity") else APIHelper.SKIP
         amount = dictionary.get("amount") if dictionary.get("amount") else APIHelper.SKIP
-        pricing_scheme = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ComponentCostDataPricingScheme'), dictionary.get('pricing_scheme'), False) if dictionary.get('pricing_scheme') is not None else APIHelper.SKIP
+        pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else APIHelper.SKIP
         tiers = None
         if dictionary.get('tiers') is not None:
             tiers = [ComponentCostDataRateTier.from_dictionary(x) for x in dictionary.get('tiers')]

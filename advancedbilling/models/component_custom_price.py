@@ -18,7 +18,7 @@ class ComponentCustomPrice(object):
     of `price_point_id`.
 
     Attributes:
-        pricing_scheme (PricingScheme | None): Omit for On/Off components
+        pricing_scheme (PricingScheme1): Omit for On/Off components
         prices (List[Price]): On/off components only need one price bracket
             starting at 1
 
@@ -65,7 +65,7 @@ class ComponentCustomPrice(object):
             return None
 
         # Extract variables from the dictionary
-        pricing_scheme = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ComponentCustomPricePricingScheme'), dictionary.get('pricing_scheme'), False) if dictionary.get('pricing_scheme') is not None else APIHelper.SKIP
+        pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else APIHelper.SKIP
         prices = None
         if dictionary.get('prices') is not None:
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]

@@ -373,7 +373,6 @@ class PaymentProfilesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CreatePaymentProfileResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -441,7 +440,6 @@ class PaymentProfilesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListPaymentProfilesResponse.from_dictionary)
         ).execute()
@@ -513,7 +511,6 @@ class PaymentProfilesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReadPaymentProfileResponse.from_dictionary)
         ).execute()
@@ -603,7 +600,6 @@ class PaymentProfilesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(UpdatePaymentProfileResponse.from_dictionary)
         ).execute()
@@ -640,10 +636,6 @@ class PaymentProfilesController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
     def delete_subscriptions_payment_profile(self,
@@ -693,9 +685,6 @@ class PaymentProfilesController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
         ).execute()
 
     def verify_bank_account(self,
@@ -744,7 +733,6 @@ class PaymentProfilesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BankAccountResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
@@ -790,9 +778,6 @@ class PaymentProfilesController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
         ).execute()
 
     def update_subscription_default_payment_profile(self,
@@ -841,7 +826,6 @@ class PaymentProfilesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaymentProfileResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -895,7 +879,6 @@ class PaymentProfilesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaymentProfileResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -943,7 +926,6 @@ class PaymentProfilesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(GetOneTimeTokenRequest.from_dictionary)
             .local_error('404', 'Not Found', ErrorListResponseException)
@@ -993,9 +975,4 @@ class PaymentProfilesController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()

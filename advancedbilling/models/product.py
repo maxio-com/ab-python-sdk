@@ -33,15 +33,16 @@ class Product(object):
         expiration_interval_unit (ExtendedIntervalUnit | None): A string
             representing the trial interval unit for this product, either
             month or day
-        created_at (str): Timestamp indicating when this product was created
-        updated_at (str): Timestamp indicating when this product was last
+        created_at (datetime): Timestamp indicating when this product was
+            created
+        updated_at (datetime): Timestamp indicating when this product was last
             updated
         price_in_cents (long|int): The product price, in integer cents
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this product would
             renew every 30 days
-        interval_unit (IntervalUnit | None): A string representing the
-            interval unit for this product, either month or day
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this product, either month or day
         initial_charge_in_cents (long|int): The up front charge you have
             specified.
         trial_price_in_cents (long|int): The price of the trial period for a
@@ -52,7 +53,7 @@ class Product(object):
             interval unit to calculate the full interval
         trial_interval_unit (IntervalUnit | None): A string representing the
             trial interval unit for this product, either month or day
-        archived_at (str): Timestamp indicating when this product was
+        archived_at (datetime): Timestamp indicating when this product was
             archived
         require_credit_card (bool): Boolean that controls whether a payment
             profile is required to be entered for customers wishing to sign up
@@ -251,9 +252,9 @@ class Product(object):
         if expiration_interval_unit is not APIHelper.SKIP:
             self.expiration_interval_unit = expiration_interval_unit 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if price_in_cents is not APIHelper.SKIP:
             self.price_in_cents = price_in_cents 
         if interval is not APIHelper.SKIP:
@@ -269,7 +270,7 @@ class Product(object):
         if trial_interval_unit is not APIHelper.SKIP:
             self.trial_interval_unit = trial_interval_unit 
         if archived_at is not APIHelper.SKIP:
-            self.archived_at = archived_at 
+            self.archived_at = APIHelper.apply_datetime_converter(archived_at, APIHelper.RFC3339DateTime) if archived_at else None 
         if require_credit_card is not APIHelper.SKIP:
             self.require_credit_card = require_credit_card 
         if return_params is not APIHelper.SKIP:
@@ -338,11 +339,11 @@ class Product(object):
             expiration_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ProductExpirationIntervalUnit'), dictionary.get('expiration_interval_unit'), False) if dictionary.get('expiration_interval_unit') is not None else None
         else:
             expiration_interval_unit = APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
-        interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ProductIntervalUnit'), dictionary.get('interval_unit'), False) if dictionary.get('interval_unit') is not None else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         initial_charge_in_cents = dictionary.get("initial_charge_in_cents") if "initial_charge_in_cents" in dictionary.keys() else APIHelper.SKIP
         trial_price_in_cents = dictionary.get("trial_price_in_cents") if "trial_price_in_cents" in dictionary.keys() else APIHelper.SKIP
         trial_interval = dictionary.get("trial_interval") if "trial_interval" in dictionary.keys() else APIHelper.SKIP
@@ -350,7 +351,10 @@ class Product(object):
             trial_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ProductTrialIntervalUnit'), dictionary.get('trial_interval_unit'), False) if dictionary.get('trial_interval_unit') is not None else None
         else:
             trial_interval_unit = APIHelper.SKIP
-        archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP
+        if 'archived_at' in dictionary.keys():
+            archived_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("archived_at")).datetime if dictionary.get("archived_at") else None
+        else:
+            archived_at = APIHelper.SKIP
         require_credit_card = dictionary.get("require_credit_card") if "require_credit_card" in dictionary.keys() else APIHelper.SKIP
         return_params = dictionary.get("return_params") if "return_params" in dictionary.keys() else APIHelper.SKIP
         taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP

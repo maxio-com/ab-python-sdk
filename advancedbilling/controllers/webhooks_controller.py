@@ -137,7 +137,6 @@ class WebhooksController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(WebhookResponse.from_dictionary)
         ).execute()
@@ -179,7 +178,6 @@ class WebhooksController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(EnableWebhooksResponse.from_dictionary)
         ).execute()
@@ -225,7 +223,6 @@ class WebhooksController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReplayWebhooksResponse.from_dictionary)
         ).execute()
@@ -272,7 +269,6 @@ class WebhooksController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(EndpointResponse.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
@@ -304,7 +300,6 @@ class WebhooksController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Endpoint.from_dictionary)
         ).execute()
@@ -365,7 +360,6 @@ class WebhooksController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(EndpointResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)

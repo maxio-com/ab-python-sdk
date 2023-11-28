@@ -16,16 +16,24 @@ class CreateOrUpdateProduct(object):
     TODO: type model description here.
 
     Attributes:
-        name (str): TODO: type description here.
-        handle (str): TODO: type description here.
-        description (str): TODO: type description here.
-        accounting_code (str): TODO: type description here.
-        require_credit_card (bool): TODO: type description here.
-        price_in_cents (long|int): TODO: type description here.
-        interval (int): TODO: type description here.
-        interval_unit (str): TODO: type description here.
+        name (str): The product name
+        handle (str): The product API handle
+        description (str): The product description
+        accounting_code (str): E.g. Internal ID or SKU Number
+        require_credit_card (bool): Deprecated value that can be ignored
+            unless you have legacy hosted pages. For Public Signup Page users,
+            please read this attribute from under the signup page.
+        price_in_cents (long|int): The product price, in integer cents
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this product would
+            renew every 30 days
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this product, either month or day
         auto_create_signup_page (bool): TODO: type description here.
-        tax_code (str): TODO: type description here.
+        tax_code (str): A string representing the tax code related to the
+            product type. This is especially important when using the Avalara
+            service to tax based on locale. This attribute has a max length of
+            10 characters.
 
     """
 

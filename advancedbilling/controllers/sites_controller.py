@@ -68,7 +68,6 @@ class SitesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SiteResponse.from_dictionary)
         ).execute()
@@ -112,10 +111,6 @@ class SitesController(BaseController):
                          .key('cleanup_scope')
                          .value(cleanup_scope))
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .is_nullify404(True)
-            .local_error('403', 'Forbidden', APIException)
         ).execute()
 
     def list_chargify_js_public_keys(self,
@@ -173,7 +168,6 @@ class SitesController(BaseController):
             .auth(Single('global'))
         ).response(
             ResponseHandler()
-            .is_nullify404(True)
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListPublicKeysResponse.from_dictionary)
         ).execute()

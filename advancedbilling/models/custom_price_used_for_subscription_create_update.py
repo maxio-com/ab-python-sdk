@@ -23,15 +23,15 @@ class CustomPriceUsedForSubscriptionCreateUpdate(object):
             `custom_price` attribute.
         interval (str | int | None): Required if using `custom_price`
             attribute.
-        interval_unit (IntervalUnit | None): Required if using `custom_price`
+        interval_unit (IntervalUnit): Required if using `custom_price`
             attribute.
         trial_price_in_cents (str | long | int | None): (Optional)
         trial_interval (str | int | None): (Optional)
-        trial_interval_unit (IntervalUnit | None): (Optional)
+        trial_interval_unit (IntervalUnit): (Optional)
         initial_charge_in_cents (str | long | int | None): (Optional)
         initial_charge_after_trial (bool): (Optional)
         expiration_interval (str | int | None): (Optional)
-        expiration_interval_unit (IntervalUnit | None): (Optional)
+        expiration_interval_unit (IntervalUnit): (Optional)
         tax_included (bool): (Optional)
 
     """
@@ -135,14 +135,14 @@ class CustomPriceUsedForSubscriptionCreateUpdate(object):
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         price_in_cents = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomPriceUsedForSubscriptionCreateUpdatePriceInCents'), dictionary.get('price_in_cents'), False) if dictionary.get('price_in_cents') is not None else APIHelper.SKIP
         interval = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomPriceUsedForSubscriptionCreateUpdateInterval'), dictionary.get('interval'), False) if dictionary.get('interval') is not None else APIHelper.SKIP
-        interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomPriceUsedForSubscriptionCreateUpdateIntervalUnit'), dictionary.get('interval_unit'), False) if dictionary.get('interval_unit') is not None else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         trial_price_in_cents = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomPriceUsedForSubscriptionCreateUpdateTrialPriceInCents'), dictionary.get('trial_price_in_cents'), False) if dictionary.get('trial_price_in_cents') is not None else APIHelper.SKIP
         trial_interval = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomPriceUsedForSubscriptionCreateUpdateTrialInterval'), dictionary.get('trial_interval'), False) if dictionary.get('trial_interval') is not None else APIHelper.SKIP
-        trial_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomPriceUsedForSubscriptionCreateUpdateTrialIntervalUnit'), dictionary.get('trial_interval_unit'), False) if dictionary.get('trial_interval_unit') is not None else APIHelper.SKIP
+        trial_interval_unit = dictionary.get("trial_interval_unit") if dictionary.get("trial_interval_unit") else APIHelper.SKIP
         initial_charge_in_cents = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomPriceUsedForSubscriptionCreateUpdateInitialChargeInCents'), dictionary.get('initial_charge_in_cents'), False) if dictionary.get('initial_charge_in_cents') is not None else APIHelper.SKIP
         initial_charge_after_trial = dictionary.get("initial_charge_after_trial") if "initial_charge_after_trial" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomPriceUsedForSubscriptionCreateUpdateExpirationInterval'), dictionary.get('expiration_interval'), False) if dictionary.get('expiration_interval') is not None else APIHelper.SKIP
-        expiration_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomPriceUsedForSubscriptionCreateUpdateExpirationIntervalUnit'), dictionary.get('expiration_interval_unit'), False) if dictionary.get('expiration_interval_unit') is not None else APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(name,

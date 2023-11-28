@@ -19,8 +19,8 @@ class SubscriptionGroupComponentCustomPrice(object):
     the subscription. You still need to provide `component_id`.
 
     Attributes:
-        pricing_scheme (PricingScheme | None): The identifier for the pricing
-            scheme. See [Product
+        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
+            See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
         prices (List[Price]): TODO: type description here.
@@ -74,7 +74,7 @@ class SubscriptionGroupComponentCustomPrice(object):
             return None
 
         # Extract variables from the dictionary
-        pricing_scheme = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionGroupComponentCustomPricePricingScheme'), dictionary.get('pricing_scheme'), False) if dictionary.get('pricing_scheme') is not None else APIHelper.SKIP
+        pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else APIHelper.SKIP
         prices = None
         if dictionary.get('prices') is not None:
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
