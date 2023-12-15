@@ -16,7 +16,7 @@ product_price_points_controller = client.product_price_points
 * [Read Product Price Point](../../doc/controllers/product-price-points.md#read-product-price-point)
 * [Archive Product Price Point](../../doc/controllers/product-price-points.md#archive-product-price-point)
 * [Unarchive Product Price Point](../../doc/controllers/product-price-points.md#unarchive-product-price-point)
-* [Set Default Price Point for Product](../../doc/controllers/product-price-points.md#set-default-price-point-for-product)
+* [Promote Product Price Point to Default](../../doc/controllers/product-price-points.md#promote-product-price-point-to-default)
 * [Create Product Price Points](../../doc/controllers/product-price-points.md#create-product-price-points)
 * [Create Product Currency Prices](../../doc/controllers/product-price-points.md#create-product-currency-prices)
 * [Update Product Currency Prices](../../doc/controllers/product-price-points.md#update-product-currency-prices)
@@ -37,7 +37,7 @@ def create_product_price_point(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The id or handle of the product. When using the handle, it must be prefixed with `handle:` |
+| `product_id` | int \| str | Template, Required | This is a container for one-of cases. |
 | `body` | [`CreateProductPricePointRequest`](../../doc/models/create-product-price-point-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -47,7 +47,7 @@ def create_product_price_point(self,
 ## Example Usage
 
 ```python
-product_id = 202
+product_id = 124
 
 body = CreateProductPricePointRequest(
     price_point=CreateProductPricePoint(
@@ -121,7 +121,7 @@ def list_product_price_points(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The id or handle of the product. When using the handle, it must be prefixed with `handle:` |
+| `product_id` | int \| str | Template, Required | This is a container for one-of cases. |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 10. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>**Default**: `10`<br>**Constraints**: `<= 200` |
 | `currency_prices` | `bool` | Query, Optional | When fetching a product's price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency. |
@@ -135,7 +135,7 @@ def list_product_price_points(self,
 
 ```python
 collect = {Liquid error: Value cannot be null. (Parameter 'key')
-    'product_id': 202,
+    'product_id': 124,
     'page': 2,
     'per_page': 10
 }
@@ -190,8 +190,8 @@ def update_product_price_point(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The id or handle of the product. When using the handle, it must be prefixed with `handle:` |
-| `price_point_id` | `int` | Template, Required | The id or handle of the price point. When using the handle, it must be prefixed with `handle:` |
+| `product_id` | int \| str | Template, Required | This is a container for one-of cases. |
+| `price_point_id` | int \| str | Template, Required | This is a container for one-of cases. |
 | `body` | [`UpdateProductPricePointRequest`](../../doc/models/update-product-price-point-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -201,9 +201,9 @@ def update_product_price_point(self,
 ## Example Usage
 
 ```python
-product_id = 202
+product_id = 124
 
-price_point_id = 10
+price_point_id = 188
 
 body = UpdateProductPricePointRequest(
     price_point=UpdateProductPricePoint(
@@ -263,8 +263,8 @@ def read_product_price_point(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The id or handle of the product. When using the handle, it must be prefixed with `handle:` |
-| `price_point_id` | `int` | Template, Required | The id or handle of the price point. When using the handle, it must be prefixed with `handle:` |
+| `product_id` | int \| str | Template, Required | This is a container for one-of cases. |
+| `price_point_id` | int \| str | Template, Required | This is a container for one-of cases. |
 | `currency_prices` | `bool` | Query, Optional | When fetching a product's price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency. |
 
 ## Response Type
@@ -274,9 +274,9 @@ def read_product_price_point(self,
 ## Example Usage
 
 ```python
-product_id = 202
+product_id = 124
 
-price_point_id = 10
+price_point_id = 188
 
 result = product_price_points_controller.read_product_price_point(
     product_id,
@@ -327,8 +327,8 @@ def archive_product_price_point(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The id or handle of the product. When using the handle, it must be prefixed with `handle:` |
-| `price_point_id` | `int` | Template, Required | The id or handle of the price point. When using the handle, it must be prefixed with `handle:` |
+| `product_id` | int \| str | Template, Required | This is a container for one-of cases. |
+| `price_point_id` | int \| str | Template, Required | This is a container for one-of cases. |
 
 ## Response Type
 
@@ -337,9 +337,9 @@ def archive_product_price_point(self,
 ## Example Usage
 
 ```python
-product_id = 202
+product_id = 124
 
-price_point_id = 10
+price_point_id = 188
 
 result = product_price_points_controller.archive_product_price_point(
     product_id,
@@ -374,6 +374,12 @@ print(result)
   }
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Unarchive Product Price Point
@@ -439,16 +445,16 @@ print(result)
 ```
 
 
-# Set Default Price Point for Product
+# Promote Product Price Point to Default
 
 Use this endpoint to make a product price point the default for the product.
 
 Note: Custom product price points are not able to be set as the default for a product.
 
 ```python
-def set_default_price_point_for_product(self,
-                                       product_id,
-                                       price_point_id)
+def promote_product_price_point_to_default(self,
+                                          product_id,
+                                          price_point_id)
 ```
 
 ## Parameters
@@ -460,7 +466,7 @@ def set_default_price_point_for_product(self,
 
 ## Response Type
 
-[`ProductPricePointResponse`](../../doc/models/product-price-point-response.md)
+[`ProductResponse`](../../doc/models/product-response.md)
 
 ## Example Usage
 
@@ -469,7 +475,7 @@ product_id = 202
 
 price_point_id = 10
 
-result = product_price_points_controller.set_default_price_point_for_product(
+result = product_price_points_controller.promote_product_price_point_to_default(
     product_id,
     price_point_id
 )
@@ -480,25 +486,52 @@ print(result)
 
 ```json
 {
-  "price_point": {
-    "id": 283,
+  "product": {
+    "id": 29778,
     "name": "Educational",
     "handle": "educational",
-    "price_in_cents": 1000,
-    "interval": 1,
+    "description": null,
+    "accounting_code": null,
+    "request_credit_card": true,
+    "expiration_interval": 12,
+    "expiration_interval_unit": "month",
+    "created_at": "2023-12-01T06:56:12-05:00",
+    "updated_at": "2023-12-01T06:56:26-05:00",
+    "price_in_cents": 100,
+    "interval": 2,
     "interval_unit": "month",
+    "initial_charge_in_cents": 120000,
     "trial_price_in_cents": 4900,
     "trial_interval": 1,
     "trial_interval_unit": "month",
-    "trial_type": "payment_expected",
-    "initial_charge_in_cents": 120000,
+    "archived_at": null,
+    "require_credit_card": true,
+    "return_params": null,
+    "taxable": false,
+    "update_return_url": null,
+    "tax_code": null,
     "initial_charge_after_trial": false,
-    "expiration_interval": 12,
-    "expiration_interval_unit": "month",
-    "product_id": 901,
-    "archived_at": "2023-11-30T06:37:20-05:00",
-    "created_at": "2023-11-27T06:37:20-05:00",
-    "updated_at": "2023-11-27T06:37:20-05:00"
+    "version_number": 1,
+    "update_return_params": null,
+    "default_product_price_point_id": 32395,
+    "request_billing_address": false,
+    "require_billing_address": false,
+    "require_shipping_address": false,
+    "use_site_exchange_rate": true,
+    "item_category": null,
+    "product_price_point_id": 32395,
+    "product_price_point_name": "Default",
+    "product_price_point_handle": "uuid:8c878f50-726e-013c-c71b-0286551bb34f",
+    "product_family": {
+      "id": 933860,
+      "name": "Acme Projects",
+      "description": "Amazing project management tool",
+      "handle": "acme-projects",
+      "accounting_code": null,
+      "created_at": "2023-12-01T06:56:12-05:00",
+      "updated_at": "2023-12-01T06:56:12-05:00"
+    },
+    "public_signup_pages": []
   }
 }
 ```
@@ -665,6 +698,23 @@ result = product_price_points_controller.create_product_currency_prices(
 print(result)
 ```
 
+## Example Response *(as JSON)*
+
+```json
+{
+  "currency_prices": [
+    {
+      "id": 123,
+      "currency": "EUR",
+      "price": 100,
+      "formatted_price": "€123,00",
+      "product_price_point_id": 32669,
+      "role": "baseline"
+    }
+  ]
+}
+```
+
 ## Errors
 
 | HTTP Status Code | Error Description | Exception Class |
@@ -695,7 +745,7 @@ def update_product_currency_prices(self,
 
 ## Response Type
 
-[`List[ProductPricePointCurrencyPrice]`](../../doc/models/product-price-point-currency-price.md)
+[`ProductPricePointCurrencyPrice`](../../doc/models/product-price-point-currency-price.md)
 
 ## Example Usage
 
@@ -725,17 +775,25 @@ print(result)
 ## Example Response *(as JSON)*
 
 ```json
-[
-  {
-    "id": 0,
-    "currency": "string",
-    "price": 0,
-    "formatted_price": "string",
-    "product_price_point_id": 0,
-    "role": "baseline"
-  }
-]
+{
+  "currency_prices": [
+    {
+      "id": 123,
+      "currency": "EUR",
+      "price": 100,
+      "formatted_price": "€123,00",
+      "product_price_point_id": 32669,
+      "role": "baseline"
+    }
+  ]
+}
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseException`](../../doc/models/error-map-response-exception.md) |
 
 
 # List All Product Price Points
@@ -754,11 +812,11 @@ def list_all_product_price_points(self,
 | `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 | `filter_archived_at` | [`IncludeNotNull`](../../doc/models/include-not-null.md) | Query, Optional | Allows fetching price points only if archived_at is present or not. Use in query: `filter[archived_at]=not_null`. |
 | `filter_date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query: `filter[date_field]=created_at`. |
-| `filter_end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
-| `filter_end_datetime` | `str` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
+| `filter_end_date` | `date` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
+| `filter_end_datetime` | `datetime` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
 | `filter_ids` | `List[int]` | Query, Optional | Allows fetching price points with matching id based on provided values. Use in query: `filter[ids]=1,2,3`. |
-| `filter_start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
-| `filter_start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
+| `filter_start_date` | `date` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns price points with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
+| `filter_start_datetime` | `datetime` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns price points with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
 | `filter_type` | [`List[PricePointType]`](../../doc/models/price-point-type.md) | Query, Optional | Allows fetching price points with matching type. Use in query: `filter[type]=catalog,custom`. |
 | `include` | [`ListProductsPricePointsInclude`](../../doc/models/list-products-price-points-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |

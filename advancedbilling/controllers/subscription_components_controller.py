@@ -10,6 +10,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.configuration import Server
 from advancedbilling.controllers.base_controller import BaseController
+from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
@@ -47,7 +48,7 @@ class SubscriptionComponentsController(BaseController):
         owned by a subscription.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             component_id (int): The Chargify id of the component.
                 Alternatively, the component's handle prefixed by `handle:`
 
@@ -104,7 +105,7 @@ class SubscriptionComponentsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    subscription_id -- str -- The Chargify id of the
+                    subscription_id -- int -- The Chargify id of the
                         subscription
                     date_field -- SubscriptionListDateField -- The type of
                         filter you'd like to apply to your search. Use in
@@ -237,7 +238,7 @@ class SubscriptionComponentsController(BaseController):
         component's current default price point.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (BulkComponentSPricePointAssignment, optional): TODO: type
                 description here.
 
@@ -288,7 +289,7 @@ class SubscriptionComponentsController(BaseController):
         yet.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -400,7 +401,7 @@ class SubscriptionComponentsController(BaseController):
         charge/credit to be wrong.**
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             component_id (int): The Chargify id of the component
             body (CreateAllocationRequest, optional): TODO: type description
                 here.
@@ -472,7 +473,7 @@ class SubscriptionComponentsController(BaseController):
         ```
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             component_id (int): The Chargify id of the component
             page (int, optional): Result records are organized in pages. By
                 default, the first page of results is displayed. The page
@@ -539,7 +540,7 @@ class SubscriptionComponentsController(BaseController):
         This endpoint only responds to JSON. It is not available for XML.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (AllocateComponents, optional): TODO: type description here.
 
         Returns:
@@ -602,7 +603,7 @@ class SubscriptionComponentsController(BaseController):
         See example below for Fine-Grained Component Control response.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (PreviewAllocationsRequest, optional): TODO: type description
                 here.
 
@@ -669,7 +670,7 @@ class SubscriptionComponentsController(BaseController):
         expiring it) up to the subscription's current period beginning date.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             component_id (int): The Chargify id of the component
             allocation_id (int): The Chargify id of the allocation
             body (UpdateAllocationExpirationDate, optional): TODO: type
@@ -738,7 +739,7 @@ class SubscriptionComponentsController(BaseController):
         updated and a refund will be issued along with a Credit Note.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             component_id (int): The Chargify id of the component
             allocation_id (int): The Chargify id of the allocation
             body (CreditSchemeRequest, optional): TODO: type description
@@ -861,9 +862,9 @@ class SubscriptionComponentsController(BaseController):
         both an SMS Message and an Email, send an API call for each.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
-            component_id (int): Either the Chargify id for the component or
-                the component's handle prefixed by `handle:`
+            subscription_id (int): The Chargify id of the subscription
+            component_id (int | str): Either the Chargify id for the component
+                or the component's handle prefixed by `handle:`
             body (CreateUsageRequest, optional): TODO: type description here.
 
         Returns:
@@ -890,7 +891,8 @@ class SubscriptionComponentsController(BaseController):
                             .key('component_id')
                             .value(component_id)
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('CreateUsageComponentId').validate(value)))
             .header_param(Parameter()
                           .key('Content-Type')
                           .value('application/json'))
@@ -936,21 +938,21 @@ class SubscriptionComponentsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    subscription_id -- str -- The Chargify id of the
+                    subscription_id -- int -- The Chargify id of the
                         subscription
-                    component_id -- int -- Either the Chargify id for the
-                        component or the component's handle prefixed by
+                    component_id -- int | str -- Either the Chargify id for
+                        the component or the component's handle prefixed by
                         `handle:`
                     since_id -- int -- Returns usages with an id greater than
                         or equal to the one specified
                     max_id -- int -- Returns usages with an id less than or
                         equal to the one specified
-                    since_date -- str -- Returns usages with a created_at date
-                        greater than or equal to midnight (12:00 AM) on the
+                    since_date -- date -- Returns usages with a created_at
+                        date greater than or equal to midnight (12:00 AM) on
+                        the date specified.
+                    until_date -- date -- Returns usages with a created_at
+                        date less than or equal to midnight (12:00 AM) on the
                         date specified.
-                    until_date -- str -- Returns usages with a created_at date
-                        less than or equal to midnight (12:00 AM) on the date
-                        specified.
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to
@@ -990,7 +992,8 @@ class SubscriptionComponentsController(BaseController):
                             .key('component_id')
                             .value(options.get('component_id', None))
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('ListUsagesInputComponentId').validate(value)))
             .query_param(Parameter()
                          .key('since_id')
                          .value(options.get('since_id', None)))

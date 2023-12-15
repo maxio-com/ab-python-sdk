@@ -83,7 +83,7 @@ def migrate_subscription_product(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`SubscriptionProductMigrationRequest`](../../doc/models/subscription-product-migration-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -93,7 +93,7 @@ def migrate_subscription_product(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 body = SubscriptionProductMigrationRequest(
     migration=SubscriptionProductMigration(
@@ -261,7 +261,7 @@ def preview_subscription_product_migration(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`SubscriptionMigrationPreviewRequest`](../../doc/models/subscription-migration-preview-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -271,7 +271,7 @@ def preview_subscription_product_migration(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 body = SubscriptionMigrationPreviewRequest(
     migration=SubscriptionMigrationPreviewOptions(

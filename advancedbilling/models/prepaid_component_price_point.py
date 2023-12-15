@@ -20,7 +20,10 @@ class PrepaidComponentPricePoint(object):
     Attributes:
         name (str): TODO: type description here.
         handle (str): TODO: type description here.
-        pricing_scheme (str): TODO: type description here.
+        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
+            See [Product
+            Components](https://help.chargify.com/products/product-components.h
+            tml) for an overview of pricing schemes.
         prices (List[Price]): TODO: type description here.
         overage_pricing (OveragePricing): TODO: type description here.
 

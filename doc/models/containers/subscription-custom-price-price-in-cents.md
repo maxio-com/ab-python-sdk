@@ -1,5 +1,5 @@
 
-# Custom Price Used for Subscription Create Update Initial Charge in Cents
+# Subscription Custom Price Price in Cents
 
 ## Data Type
 

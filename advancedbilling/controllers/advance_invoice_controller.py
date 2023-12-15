@@ -52,7 +52,7 @@ class AdvanceInvoiceController(BaseController):
         generate it.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (IssueAdvanceInvoiceRequest, optional): TODO: type
                 description here.
 
@@ -104,7 +104,7 @@ class AdvanceInvoiceController(BaseController):
         only be one advance invoice per subscription per billing cycle.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
 
         Returns:
             Invoice: Response from the API. OK
@@ -152,7 +152,7 @@ class AdvanceInvoiceController(BaseController):
         docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice).
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (VoidInvoiceRequest, optional): TODO: type description here.
 
         Returns:

@@ -11,19 +11,19 @@
 |  --- | --- | --- | --- |
 | `id` | `int` | Optional | - |
 | `name` | `str` | Optional | - |
-| `kind` | `str` | Optional | - |
+| `kind` | [`ComponentKind`](../../doc/models/component-kind.md) | Optional | A handle for the component type |
 | `unit_name` | `str` | Optional | - |
 | `enabled` | `bool` | Optional | (for on/off components) indicates if the component is enabled for the subscription |
 | `unit_balance` | `int` | Optional | - |
 | `currency` | `str` | Optional | - |
-| `allocated_quantity` | `int` | Optional | For Quantity-based components: The current allocation for the component on the given subscription. For On/Off components: Use 1 for on. Use 0 for off. |
-| `pricing_scheme` | `str` | Optional | - |
+| `allocated_quantity` | int \| str \| None | Optional | This is a container for one-of cases. |
+| `pricing_scheme` | [Pricing Scheme](../../doc/models/pricing-scheme.md) \| None | Optional | This is a container for one-of cases. |
 | `component_id` | `int` | Optional | - |
 | `component_handle` | `str` | Optional | - |
 | `subscription_id` | `int` | Optional | - |
 | `recurring` | `bool` | Optional | - |
-| `upgrade_charge` | `str` | Optional | - |
-| `downgrade_credit` | `str` | Optional | - |
+| `upgrade_charge` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
+| `downgrade_credit` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `archived_at` | `str` | Optional | - |
 | `price_point_id` | `int` | Optional | - |
 | `price_point_handle` | `str` | Optional | - |
@@ -31,8 +31,8 @@
 | `price_point_name` | `str` | Optional | - |
 | `product_family_id` | `int` | Optional | - |
 | `product_family_handle` | `str` | Optional | - |
-| `created_at` | `str` | Optional | - |
-| `updated_at` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | - |
+| `updated_at` | `datetime` | Optional | - |
 | `use_site_exchange_rate` | `bool` | Optional | - |
 | `description` | `str` | Optional | - |
 | `allow_fractional_quantities` | `bool` | Optional | - |
@@ -45,7 +45,7 @@
 {
   "id": 20,
   "name": "name8",
-  "kind": "kind6",
+  "kind": "quantity_based_component",
   "unit_name": "unit_name0",
   "enabled": false
 }

@@ -22,8 +22,14 @@ class AllocateComponents(object):
         allocations (List[CreateAllocationRequest]): TODO: type description
             here.
         accrue_charge (bool): TODO: type description here.
-        upgrade_charge (str): TODO: type description here.
-        downgrade_credit (str): TODO: type description here.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
+        downgrade_credit (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
         payment_collection_method (PaymentCollectionMethod1): (Optional) If
             not passed, the allocation(s) will use the payment collection
             method on the subscription
@@ -49,6 +55,11 @@ class AllocateComponents(object):
         'upgrade_charge',
         'downgrade_credit',
         'payment_collection_method',
+    ]
+
+    _nullables = [
+        'upgrade_charge',
+        'downgrade_credit',
     ]
 
     def __init__(self,
@@ -100,8 +111,8 @@ class AllocateComponents(object):
         else:
             allocations = APIHelper.SKIP
         accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
-        upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
-        downgrade_credit = dictionary.get("downgrade_credit") if dictionary.get("downgrade_credit") else APIHelper.SKIP
+        upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
+        downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
         # Return an object of this model
         return cls(proration_upgrade_scheme,

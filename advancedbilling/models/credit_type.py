@@ -12,8 +12,9 @@ class CreditType(object):
 
     """Implementation of the 'Credit Type' enum.
 
-    The type of charge to be applied when a component is upgraded. Valid
-    values are: `prorated`, `full`, `none`.
+    The type of credit to be created when upgrading/downgrading. Defaults to
+    the component and then site setting if one is not provided.
+    Available values: `full`, `prorated`, `none`.
 
     Attributes:
         FULL: TODO: type description here.

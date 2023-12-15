@@ -33,10 +33,10 @@ class CreateSegment(object):
             that will occur in your events that you want to bill upon. The
             type of the value depends on the property type in the related
             event based billing metric.
-        pricing_scheme (str): The handle for the pricing scheme. Available
-            options: per_unit, volume, tiered, stairstep. See [Price Bracket
-            Rules](https://help.chargify.com/products/product-components.html#p
-            rice-bracket-rules) for an overview of pricing schemes.
+        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
+            See [Product
+            Components](https://help.chargify.com/products/product-components.h
+            tml) for an overview of pricing schemes.
         prices (List[CreateOrUpdateSegmentPrice]): TODO: type description
             here.
 

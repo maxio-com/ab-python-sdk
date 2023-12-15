@@ -16,8 +16,14 @@ class AllocationSettings(object):
     TODO: type model description here.
 
     Attributes:
-        upgrade_charge (str): TODO: type description here.
-        downgrade_credit (str): TODO: type description here.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
+        downgrade_credit (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
         accrue_charge (bool): TODO: type description here.
 
     """

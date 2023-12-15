@@ -9,6 +9,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.customer import Customer
 from advancedbilling.models.payment_profile import PaymentProfile
+from advancedbilling.models.prepaid_configuration import PrepaidConfiguration
 from advancedbilling.models.product import Product
 from advancedbilling.models.subscription_bank_account import SubscriptionBankAccount
 from advancedbilling.models.subscription_included_coupon import SubscriptionIncludedCoupon
@@ -123,18 +124,18 @@ class Subscription(object):
         updated_at (datetime): The date of last update for this subscription
         cancellation_message (str): Seller-provided reason for, or note about,
             the cancellation.
-        cancellation_method (CancellationMethod | None): The process used to
-            cancel the subscription, if the subscription has been canceled. It
-            is nil if the subscription's state is not canceled.
+        cancellation_method (CancellationMethod): The process used to cancel
+            the subscription, if the subscription has been canceled. It is nil
+            if the subscription's state is not canceled.
         cancel_at_end_of_period (bool): Whether or not the subscription will
             (or has) canceled at the end of the period.
         canceled_at (datetime): The timestamp of the most recent cancellation
         current_period_started_at (datetime): Timestamp relating to the start
             of the current (recurring) period
-        previous_state (str): Only valid for webhook payloads The previous
-            state for webhooks that have indicated a change in state. For
-            normal API calls, this will always be the same as the state
-            (current state)
+        previous_state (SubscriptionState): Only valid for webhook payloads
+            The previous state for webhooks that have indicated a change in
+            state. For normal API calls, this will always be the same as the
+            state (current state)
         signup_payment_id (int): The ID of the transaction that generated the
             revenue
         signup_revenue (str): The revenue, formatted as a string of decimal
@@ -147,12 +148,15 @@ class Subscription(object):
             subscriptions can now have more than one coupon.
         snap_day (str): The day of the month that the subscription will charge
             according to calendar billing rules, if used.
-        payment_collection_method (PaymentCollectionMethod | None): TODO: type
-            description here.
+        payment_collection_method (PaymentCollectionMethod): The type of
+            payment collection to be used in the subscription. For legacy
+            Statements Architecture valid options are - `invoice`,
+            `automatic`. For current Relationship Invoicing Architecture valid
+            options are - `remittance`, `automatic`, `prepaid`.
         customer (Customer): TODO: type description here.
         product (Product): TODO: type description here.
         credit_card (PaymentProfile): TODO: type description here.
-        group (SubscriptionGroupInlined | None): TODO: type description here.
+        group (NestedSubscriptionGroup | None): TODO: type description here.
         bank_account (SubscriptionBankAccount): TODO: type description here.
         payment_type (str): The payment profile type for the active profile on
             file.
@@ -172,8 +176,8 @@ class Subscription(object):
             replacement for multiple coupons.
         reason_code (str): If the subscription is canceled, this is their
             churn code.
-        automatically_resume_at (str): The date the subscription is scheduled
-            to automatically resume from the on_hold state.
+        automatically_resume_at (datetime): The date the subscription is
+            scheduled to automatically resume from the on_hold state.
         coupon_codes (List[str]): An array for all the coupons attached to the
             subscription.
         offer_id (int): The ID of the offer associated with the subscription.
@@ -184,8 +188,12 @@ class Subscription(object):
             the estimated renewal amount in cents.
         product_price_point_id (int): The product price point currently
             subscribed to.
-        product_price_point_type (str): One of the following: custom, default,
-            catalog.
+        product_price_point_type (PricePointType): Price point type. We expose
+            the following types: 1. **default**: a price point that is marked
+            as a default price for a certain product. 2. **custom**: a custom
+            price point. 3. **catalog**: a price point that is **not** marked
+            as a default price for a certain product and is **not** a custom
+            one.
         next_product_price_point_id (int): If a delayed product change is
             scheduled, the ID of the product price point that the subscription
             will be changed to at the next renewal.
@@ -197,7 +205,8 @@ class Subscription(object):
             charged successfully at renewal.
         reference (str): The reference value (provided by your app) for the
             subscription itelf.
-        on_hold_at (str): The timestamp of the most recent on hold action.
+        on_hold_at (datetime): The timestamp of the most recent on hold
+            action.
         prepaid_dunning (bool): Boolean representing whether the subscription
             is prepaid and currently in dunning. Only returned for
             Relationship Invoicing sites with the feature enabled
@@ -216,6 +225,11 @@ class Subscription(object):
         scheduled_cancellation_at (datetime): TODO: type description here.
         credit_balance_in_cents (long|int): TODO: type description here.
         prepayment_balance_in_cents (long|int): TODO: type description here.
+        prepaid_configuration (PrepaidConfiguration): TODO: type description
+            here.
+        self_service_page_token (str): Returned only for list/read
+            Subscription operation when `include[]=self_service_page_token`
+            parameter is provided.
 
     """
 
@@ -280,7 +294,9 @@ class Subscription(object):
         "currency": 'currency',
         "scheduled_cancellation_at": 'scheduled_cancellation_at',
         "credit_balance_in_cents": 'credit_balance_in_cents',
-        "prepayment_balance_in_cents": 'prepayment_balance_in_cents'
+        "prepayment_balance_in_cents": 'prepayment_balance_in_cents',
+        "prepaid_configuration": 'prepaid_configuration',
+        "self_service_page_token": 'self_service_page_token'
     }
 
     _optionals = [
@@ -344,6 +360,8 @@ class Subscription(object):
         'scheduled_cancellation_at',
         'credit_balance_in_cents',
         'prepayment_balance_in_cents',
+        'prepaid_configuration',
+        'self_service_page_token',
     ]
 
     _nullables = [
@@ -357,7 +375,6 @@ class Subscription(object):
         'delayed_cancel_at',
         'coupon_code',
         'snap_day',
-        'payment_collection_method',
         'group',
         'payment_type',
         'referral_code',
@@ -406,7 +423,7 @@ class Subscription(object):
                  delayed_cancel_at=APIHelper.SKIP,
                  coupon_code=APIHelper.SKIP,
                  snap_day=APIHelper.SKIP,
-                 payment_collection_method=APIHelper.SKIP,
+                 payment_collection_method='automatic',
                  customer=APIHelper.SKIP,
                  product=APIHelper.SKIP,
                  credit_card=APIHelper.SKIP,
@@ -440,7 +457,9 @@ class Subscription(object):
                  currency=APIHelper.SKIP,
                  scheduled_cancellation_at=APIHelper.SKIP,
                  credit_balance_in_cents=APIHelper.SKIP,
-                 prepayment_balance_in_cents=APIHelper.SKIP):
+                 prepayment_balance_in_cents=APIHelper.SKIP,
+                 prepaid_configuration=APIHelper.SKIP,
+                 self_service_page_token=APIHelper.SKIP):
         """Constructor for the Subscription class"""
 
         # Initialize members of the class
@@ -494,8 +513,7 @@ class Subscription(object):
             self.coupon_code = coupon_code 
         if snap_day is not APIHelper.SKIP:
             self.snap_day = snap_day 
-        if payment_collection_method is not APIHelper.SKIP:
-            self.payment_collection_method = payment_collection_method 
+        self.payment_collection_method = payment_collection_method 
         if customer is not APIHelper.SKIP:
             self.customer = customer 
         if product is not APIHelper.SKIP:
@@ -521,7 +539,7 @@ class Subscription(object):
         if reason_code is not APIHelper.SKIP:
             self.reason_code = reason_code 
         if automatically_resume_at is not APIHelper.SKIP:
-            self.automatically_resume_at = automatically_resume_at 
+            self.automatically_resume_at = APIHelper.apply_datetime_converter(automatically_resume_at, APIHelper.RFC3339DateTime) if automatically_resume_at else None 
         if coupon_codes is not APIHelper.SKIP:
             self.coupon_codes = coupon_codes 
         if offer_id is not APIHelper.SKIP:
@@ -543,7 +561,7 @@ class Subscription(object):
         if reference is not APIHelper.SKIP:
             self.reference = reference 
         if on_hold_at is not APIHelper.SKIP:
-            self.on_hold_at = on_hold_at 
+            self.on_hold_at = APIHelper.apply_datetime_converter(on_hold_at, APIHelper.RFC3339DateTime) if on_hold_at else None 
         if prepaid_dunning is not APIHelper.SKIP:
             self.prepaid_dunning = prepaid_dunning 
         if coupons is not APIHelper.SKIP:
@@ -563,6 +581,10 @@ class Subscription(object):
             self.credit_balance_in_cents = credit_balance_in_cents 
         if prepayment_balance_in_cents is not APIHelper.SKIP:
             self.prepayment_balance_in_cents = prepayment_balance_in_cents 
+        if prepaid_configuration is not APIHelper.SKIP:
+            self.prepaid_configuration = prepaid_configuration 
+        if self_service_page_token is not APIHelper.SKIP:
+            self.self_service_page_token = self_service_page_token 
 
     @classmethod
     def from_dictionary(cls,
@@ -606,10 +628,7 @@ class Subscription(object):
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         cancellation_message = dictionary.get("cancellation_message") if "cancellation_message" in dictionary.keys() else APIHelper.SKIP
-        if 'cancellation_method' in dictionary.keys():
-            cancellation_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCancellationMethod'), dictionary.get('cancellation_method'), False) if dictionary.get('cancellation_method') is not None else None
-        else:
-            cancellation_method = APIHelper.SKIP
+        cancellation_method = dictionary.get("cancellation_method") if "cancellation_method" in dictionary.keys() else APIHelper.SKIP
         cancel_at_end_of_period = dictionary.get("cancel_at_end_of_period") if "cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
         if 'canceled_at' in dictionary.keys():
             canceled_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("canceled_at")).datetime if dictionary.get("canceled_at") else None
@@ -625,10 +644,7 @@ class Subscription(object):
             delayed_cancel_at = APIHelper.SKIP
         coupon_code = dictionary.get("coupon_code") if "coupon_code" in dictionary.keys() else APIHelper.SKIP
         snap_day = dictionary.get("snap_day") if "snap_day" in dictionary.keys() else APIHelper.SKIP
-        if 'payment_collection_method' in dictionary.keys():
-            payment_collection_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionPaymentCollectionMethod'), dictionary.get('payment_collection_method'), False) if dictionary.get('payment_collection_method') is not None else None
-        else:
-            payment_collection_method = APIHelper.SKIP
+        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
         customer = Customer.from_dictionary(dictionary.get('customer')) if 'customer' in dictionary.keys() else APIHelper.SKIP
         product = Product.from_dictionary(dictionary.get('product')) if 'product' in dictionary.keys() else APIHelper.SKIP
         credit_card = PaymentProfile.from_dictionary(dictionary.get('credit_card')) if 'credit_card' in dictionary.keys() else APIHelper.SKIP
@@ -644,7 +660,10 @@ class Subscription(object):
         coupon_use_count = dictionary.get("coupon_use_count") if "coupon_use_count" in dictionary.keys() else APIHelper.SKIP
         coupon_uses_allowed = dictionary.get("coupon_uses_allowed") if "coupon_uses_allowed" in dictionary.keys() else APIHelper.SKIP
         reason_code = dictionary.get("reason_code") if "reason_code" in dictionary.keys() else APIHelper.SKIP
-        automatically_resume_at = dictionary.get("automatically_resume_at") if "automatically_resume_at" in dictionary.keys() else APIHelper.SKIP
+        if 'automatically_resume_at' in dictionary.keys():
+            automatically_resume_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("automatically_resume_at")).datetime if dictionary.get("automatically_resume_at") else None
+        else:
+            automatically_resume_at = APIHelper.SKIP
         coupon_codes = dictionary.get("coupon_codes") if dictionary.get("coupon_codes") else APIHelper.SKIP
         offer_id = dictionary.get("offer_id") if "offer_id" in dictionary.keys() else APIHelper.SKIP
         payer_id = dictionary.get("payer_id") if "payer_id" in dictionary.keys() else APIHelper.SKIP
@@ -655,7 +674,10 @@ class Subscription(object):
         net_terms = dictionary.get("net_terms") if "net_terms" in dictionary.keys() else APIHelper.SKIP
         stored_credential_transaction_id = dictionary.get("stored_credential_transaction_id") if "stored_credential_transaction_id" in dictionary.keys() else APIHelper.SKIP
         reference = dictionary.get("reference") if "reference" in dictionary.keys() else APIHelper.SKIP
-        on_hold_at = dictionary.get("on_hold_at") if "on_hold_at" in dictionary.keys() else APIHelper.SKIP
+        if 'on_hold_at' in dictionary.keys():
+            on_hold_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("on_hold_at")).datetime if dictionary.get("on_hold_at") else None
+        else:
+            on_hold_at = APIHelper.SKIP
         prepaid_dunning = dictionary.get("prepaid_dunning") if "prepaid_dunning" in dictionary.keys() else APIHelper.SKIP
         coupons = None
         if dictionary.get('coupons') is not None:
@@ -673,6 +695,8 @@ class Subscription(object):
             scheduled_cancellation_at = APIHelper.SKIP
         credit_balance_in_cents = dictionary.get("credit_balance_in_cents") if dictionary.get("credit_balance_in_cents") else APIHelper.SKIP
         prepayment_balance_in_cents = dictionary.get("prepayment_balance_in_cents") if dictionary.get("prepayment_balance_in_cents") else APIHelper.SKIP
+        prepaid_configuration = PrepaidConfiguration.from_dictionary(dictionary.get('prepaid_configuration')) if 'prepaid_configuration' in dictionary.keys() else APIHelper.SKIP
+        self_service_page_token = dictionary.get("self_service_page_token") if dictionary.get("self_service_page_token") else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    state,
@@ -733,4 +757,6 @@ class Subscription(object):
                    currency,
                    scheduled_cancellation_at,
                    credit_balance_in_cents,
-                   prepayment_balance_in_cents)
+                   prepayment_balance_in_cents,
+                   prepaid_configuration,
+                   self_service_page_token)

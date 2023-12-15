@@ -182,7 +182,7 @@ class ProformaInvoicesController(BaseController):
         must not be prepaid, and must be in a live state.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
 
         Returns:
             ProformaInvoice: Response from the API. OK
@@ -233,14 +233,15 @@ class ProformaInvoicesController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    subscription_id -- str -- The Chargify id of the
+                    subscription_id -- int -- The Chargify id of the
                         subscription
                     start_date -- str -- The beginning date range for the
                         invoice's Due Date, in the YYYY-MM-DD format.
                     end_date -- str -- The ending date range for the invoice's
                         Due Date, in the YYYY-MM-DD format.
-                    status -- Status -- The current status of the invoice. 
-                        Allowed Values: draft, open, paid, pending, voided
+                    status -- InvoiceStatus -- The current status of the
+                        invoice.  Allowed Values: draft, open, paid, pending,
+                        voided
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to
@@ -413,7 +414,7 @@ class ProformaInvoicesController(BaseController):
         the subscription's upcoming renewal has changed.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
 
         Returns:
             ProformaInvoicePreview: Response from the API. OK

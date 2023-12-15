@@ -16,23 +16,26 @@ class OverrideSubscription(object):
     TODO: type model description here.
 
     Attributes:
-        activated_at (str): Can be used to record an external signup date.
-            Chargify uses this field to record when a subscription first goes
-            active (either at signup or at trial end)
-        canceled_at (str): Can be used to record an external cancellation
+        activated_at (datetime): Can be used to record an external signup
+            date. Chargify uses this field to record when a subscription first
+            goes active (either at signup or at trial end). Only ISO8601
+            format is supported.
+        canceled_at (datetime): Can be used to record an external cancellation
             date. Chargify sets this field automatically when a subscription
-            is canceled, whether by request or via dunning.
+            is canceled, whether by request or via dunning. Only ISO8601
+            format is supported.
         cancellation_message (str): Can be used to record a reason for the
             original cancellation.
-        expires_at (str): Can be used to record an external expiration date.
-            Chargify sets this field automatically when a subscription expires
-            (ceases billing) after a prescribed amount of time.
-        current_period_starts_at (str): Can only be used when a subscription
-            is unbilled, which happens when a future initial billing date is
-            passed at subscription creation. The value passed must be before
-            the current date and time. Allows you to set when the period
-            started so mid period component allocations have the correct
-            proration.
+        expires_at (datetime): Can be used to record an external expiration
+            date. Chargify sets this field automatically when a subscription
+            expires (ceases billing) after a prescribed amount of time. Only
+            ISO8601 format is supported.
+        current_period_starts_at (datetime): Can only be used when a
+            subscription is unbilled, which happens when a future initial
+            billing date is passed at subscription creation. The value passed
+            must be before the current date and time. Allows you to set when
+            the period started so mid period component allocations have the
+            correct proration. Only ISO8601 format is supported.
 
     """
 
@@ -63,15 +66,15 @@ class OverrideSubscription(object):
 
         # Initialize members of the class
         if activated_at is not APIHelper.SKIP:
-            self.activated_at = activated_at 
+            self.activated_at = APIHelper.apply_datetime_converter(activated_at, APIHelper.RFC3339DateTime) if activated_at else None 
         if canceled_at is not APIHelper.SKIP:
-            self.canceled_at = canceled_at 
+            self.canceled_at = APIHelper.apply_datetime_converter(canceled_at, APIHelper.RFC3339DateTime) if canceled_at else None 
         if cancellation_message is not APIHelper.SKIP:
             self.cancellation_message = cancellation_message 
         if expires_at is not APIHelper.SKIP:
-            self.expires_at = expires_at 
+            self.expires_at = APIHelper.apply_datetime_converter(expires_at, APIHelper.RFC3339DateTime) if expires_at else None 
         if current_period_starts_at is not APIHelper.SKIP:
-            self.current_period_starts_at = current_period_starts_at 
+            self.current_period_starts_at = APIHelper.apply_datetime_converter(current_period_starts_at, APIHelper.RFC3339DateTime) if current_period_starts_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -91,11 +94,11 @@ class OverrideSubscription(object):
             return None
 
         # Extract variables from the dictionary
-        activated_at = dictionary.get("activated_at") if dictionary.get("activated_at") else APIHelper.SKIP
-        canceled_at = dictionary.get("canceled_at") if dictionary.get("canceled_at") else APIHelper.SKIP
+        activated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("activated_at")).datetime if dictionary.get("activated_at") else APIHelper.SKIP
+        canceled_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("canceled_at")).datetime if dictionary.get("canceled_at") else APIHelper.SKIP
         cancellation_message = dictionary.get("cancellation_message") if dictionary.get("cancellation_message") else APIHelper.SKIP
-        expires_at = dictionary.get("expires_at") if dictionary.get("expires_at") else APIHelper.SKIP
-        current_period_starts_at = dictionary.get("current_period_starts_at") if dictionary.get("current_period_starts_at") else APIHelper.SKIP
+        expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else APIHelper.SKIP
+        current_period_starts_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("current_period_starts_at")).datetime if dictionary.get("current_period_starts_at") else APIHelper.SKIP
         # Return an object of this model
         return cls(activated_at,
                    canceled_at,

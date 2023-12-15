@@ -18,7 +18,7 @@ class ComponentCustomPrice(object):
     of `price_point_id`.
 
     Attributes:
-        pricing_scheme (PricingScheme1): Omit for On/Off components
+        pricing_scheme (PricingScheme): Omit for On/Off components
         prices (List[Price]): On/off components only need one price bracket
             starting at 1
 
@@ -60,7 +60,6 @@ class ComponentCustomPrice(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
@@ -74,24 +73,3 @@ class ComponentCustomPrice(object):
         # Return an object of this model
         return cls(pricing_scheme,
                    prices)
-
-    @classmethod
-    def validate(cls, dictionary):
-        """Validates dictionary against class required properties
-
-        Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
-
-        Returns:
-            boolean : if dictionary is valid contains required properties.
-
-        """
-        if isinstance(dictionary, cls):
-            return True
-
-        if not isinstance(dictionary, dict):
-            return False
-
-        return True

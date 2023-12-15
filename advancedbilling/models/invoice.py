@@ -6,6 +6,8 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.invoice_address import InvoiceAddress
 from advancedbilling.models.invoice_credit import InvoiceCredit
@@ -47,16 +49,17 @@ class Invoice(object):
         transaction_time (datetime): TODO: type description here.
         created_at (datetime): TODO: type description here.
         updated_at (datetime): TODO: type description here.
-        issue_date (str): Date the invoice was issued to the customer.  This
+        issue_date (date): Date the invoice was issued to the customer.  This
             is the date that the invoice was made available for payment.  The
             format is `"YYYY-MM-DD"`.
-        due_date (str): Date the invoice is due.  The format is
+        due_date (date): Date the invoice is due.  The format is
             `"YYYY-MM-DD"`.
-        paid_date (str): Date the invoice became fully paid.  If partial
+        paid_date (date): Date the invoice became fully paid.  If partial
             payments are applied to the invoice, this date will not be present
             until payment has been made in full.  The format is
             `"YYYY-MM-DD"`.
-        status (Status): The current status of the invoice. See [Invoice
+        status (InvoiceStatus): The current status of the invoice. See
+            [Invoice
             Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
             171#line-item-breakdowns) for more.
         role (str): TODO: type description here.
@@ -446,9 +449,12 @@ class Invoice(object):
         transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
-        issue_date = dictionary.get("issue_date") if dictionary.get("issue_date") else APIHelper.SKIP
-        due_date = dictionary.get("due_date") if dictionary.get("due_date") else APIHelper.SKIP
-        paid_date = dictionary.get("paid_date") if "paid_date" in dictionary.keys() else APIHelper.SKIP
+        issue_date = dateutil.parser.parse(dictionary.get('issue_date')).date() if dictionary.get('issue_date') else APIHelper.SKIP
+        due_date = dateutil.parser.parse(dictionary.get('due_date')).date() if dictionary.get('due_date') else APIHelper.SKIP
+        if 'paid_date' in dictionary.keys():
+            paid_date = dateutil.parser.parse(dictionary.get('paid_date')).date() if dictionary.get('paid_date') else None
+        else:
+            paid_date = APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         role = dictionary.get("role") if dictionary.get("role") else APIHelper.SKIP
         parent_invoice_id = dictionary.get("parent_invoice_id") if "parent_invoice_id" in dictionary.keys() else APIHelper.SKIP

@@ -20,7 +20,8 @@ class CreateSubscriptionComponent(object):
         component_id (int | str | None): TODO: type description here.
         enabled (bool): Used for on/off components only.
         unit_balance (int): Used for metered and events based components.
-        allocated_quantity (int): Used for quantity based components.
+        allocated_quantity (int | str | None): Used for quantity based
+            components.
         quantity (int): Deprecated. Use `allocated_quantity` instead.
         price_point_id (int | str | None): TODO: type description here.
         custom_price (ComponentCustomPrice): Create or update custom pricing
@@ -89,7 +90,6 @@ class CreateSubscriptionComponent(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
@@ -97,7 +97,7 @@ class CreateSubscriptionComponent(object):
         component_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionComponentComponentId'), dictionary.get('component_id'), False) if dictionary.get('component_id') is not None else APIHelper.SKIP
         enabled = dictionary.get("enabled") if "enabled" in dictionary.keys() else APIHelper.SKIP
         unit_balance = dictionary.get("unit_balance") if dictionary.get("unit_balance") else APIHelper.SKIP
-        allocated_quantity = dictionary.get("allocated_quantity") if dictionary.get("allocated_quantity") else APIHelper.SKIP
+        allocated_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionComponentAllocatedQuantity'), dictionary.get('allocated_quantity'), False) if dictionary.get('allocated_quantity') is not None else APIHelper.SKIP
         quantity = dictionary.get("quantity") if dictionary.get("quantity") else APIHelper.SKIP
         price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionComponentPricePointId'), dictionary.get('price_point_id'), False) if dictionary.get('price_point_id') is not None else APIHelper.SKIP
         custom_price = ComponentCustomPrice.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
@@ -109,24 +109,3 @@ class CreateSubscriptionComponent(object):
                    quantity,
                    price_point_id,
                    custom_price)
-
-    @classmethod
-    def validate(cls, dictionary):
-        """Validates dictionary against class required properties
-
-        Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
-
-        Returns:
-            boolean : if dictionary is valid contains required properties.
-
-        """
-        if isinstance(dictionary, cls):
-            return True
-
-        if not isinstance(dictionary, dict):
-            return False
-
-        return True

@@ -15,7 +15,7 @@
 | `component_handle` | `str` | Required | - |
 | `memo` | `str` | Required | - |
 | `allocation_id` | `int` | Required | - |
-| `allocated_quantity` | `int` | Optional | - |
+| `allocated_quantity` | int \| str \| None | Optional | This is a container for one-of cases. |
 
 ## Example (as JSON)
 
@@ -27,7 +27,7 @@
   "component_handle": "component_handle8",
   "memo": "memo2",
   "allocation_id": 158,
-  "allocated_quantity": 182
+  "allocated_quantity": 104
 }
 ```
 

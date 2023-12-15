@@ -8,9 +8,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 
-class Status(object):
+class InvoiceStatus(object):
 
-    """Implementation of the 'Status' enum.
+    """Implementation of the 'Invoice Status' enum.
 
     The current status of the invoice. See [Invoice
     Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line

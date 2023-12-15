@@ -17,6 +17,7 @@ class InvoiceEventType(object):
     Attributes:
         ISSUE_INVOICE: TODO: type description here.
         APPLY_CREDIT_NOTE: TODO: type description here.
+        CREATE_CREDIT_NOTE: TODO: type description here.
         APPLY_PAYMENT: TODO: type description here.
         APPLY_DEBIT_NOTE: TODO: type description here.
         REFUND_INVOICE: TODO: type description here.
@@ -26,11 +27,15 @@ class InvoiceEventType(object):
         CHANGE_INVOICE_STATUS: TODO: type description here.
         CHANGE_INVOICE_COLLECTION_METHOD: TODO: type description here.
         REMOVE_PAYMENT: TODO: type description here.
+        FAILED_PAYMENT: TODO: type description here.
+        CHANGE_CHARGEBACK_STATUS: TODO: type description here.
 
     """
     ISSUE_INVOICE = 'issue_invoice'
 
     APPLY_CREDIT_NOTE = 'apply_credit_note'
+
+    CREATE_CREDIT_NOTE = 'create_credit_note'
 
     APPLY_PAYMENT = 'apply_payment'
 
@@ -49,4 +54,8 @@ class InvoiceEventType(object):
     CHANGE_INVOICE_COLLECTION_METHOD = 'change_invoice_collection_method'
 
     REMOVE_PAYMENT = 'remove_payment'
+
+    FAILED_PAYMENT = 'failed_payment'
+
+    CHANGE_CHARGEBACK_STATUS = 'change_chargeback_status'
 

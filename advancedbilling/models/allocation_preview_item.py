@@ -25,8 +25,14 @@ class AllocationPreviewItem(object):
         proration_upgrade_scheme (str): TODO: type description here.
         proration_downgrade_scheme (str): TODO: type description here.
         accrue_charge (bool): TODO: type description here.
-        upgrade_charge (str): TODO: type description here.
-        downgrade_credit (str): TODO: type description here.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
+        downgrade_credit (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
         price_point_id (int): TODO: type description here.
         previous_price_point_id (int): TODO: type description here.
         component_handle (str): TODO: type description here.
@@ -70,6 +76,8 @@ class AllocationPreviewItem(object):
 
     _nullables = [
         'timestamp',
+        'upgrade_charge',
+        'downgrade_credit',
     ]
 
     def __init__(self,
@@ -146,8 +154,8 @@ class AllocationPreviewItem(object):
         proration_upgrade_scheme = dictionary.get("proration_upgrade_scheme") if dictionary.get("proration_upgrade_scheme") else APIHelper.SKIP
         proration_downgrade_scheme = dictionary.get("proration_downgrade_scheme") if dictionary.get("proration_downgrade_scheme") else APIHelper.SKIP
         accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
-        upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
-        downgrade_credit = dictionary.get("downgrade_credit") if dictionary.get("downgrade_credit") else APIHelper.SKIP
+        upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
+        downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         previous_price_point_id = dictionary.get("previous_price_point_id") if dictionary.get("previous_price_point_id") else APIHelper.SKIP
         component_handle = dictionary.get("component_handle") if dictionary.get("component_handle") else APIHelper.SKIP

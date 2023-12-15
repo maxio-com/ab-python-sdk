@@ -19,22 +19,28 @@ class SubscriptionComponent(object):
     Attributes:
         id (int): TODO: type description here.
         name (str): TODO: type description here.
-        kind (str): TODO: type description here.
+        kind (ComponentKind): A handle for the component type
         unit_name (str): TODO: type description here.
         enabled (bool): (for on/off components) indicates if the component is
             enabled for the subscription
         unit_balance (int): TODO: type description here.
         currency (str): TODO: type description here.
-        allocated_quantity (int): For Quantity-based components: The current
-            allocation for the component on the given subscription. For On/Off
-            components: Use 1 for on. Use 0 for off.
-        pricing_scheme (str): TODO: type description here.
+        allocated_quantity (int | str | None): For Quantity-based components:
+            The current allocation for the component on the given
+            subscription. For On/Off components: Use 1 for on. Use 0 for off.
+        pricing_scheme (PricingScheme | None): TODO: type description here.
         component_id (int): TODO: type description here.
         component_handle (str): TODO: type description here.
         subscription_id (int): TODO: type description here.
         recurring (bool): TODO: type description here.
-        upgrade_charge (str): TODO: type description here.
-        downgrade_credit (str): TODO: type description here.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
+        downgrade_credit (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
         archived_at (str): TODO: type description here.
         price_point_id (int): TODO: type description here.
         price_point_handle (str): TODO: type description here.
@@ -43,8 +49,8 @@ class SubscriptionComponent(object):
         price_point_name (str): TODO: type description here.
         product_family_id (int): TODO: type description here.
         product_family_handle (str): TODO: type description here.
-        created_at (str): TODO: type description here.
-        updated_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
+        updated_at (datetime): TODO: type description here.
         use_site_exchange_rate (bool): TODO: type description here.
         description (str): TODO: type description here.
         allow_fractional_quantities (bool): TODO: type description here.
@@ -210,9 +216,9 @@ class SubscriptionComponent(object):
         if product_family_handle is not APIHelper.SKIP:
             self.product_family_handle = product_family_handle 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if use_site_exchange_rate is not APIHelper.SKIP:
             self.use_site_exchange_rate = use_site_exchange_rate 
         if description is not APIHelper.SKIP:
@@ -249,8 +255,11 @@ class SubscriptionComponent(object):
         enabled = dictionary.get("enabled") if "enabled" in dictionary.keys() else APIHelper.SKIP
         unit_balance = dictionary.get("unit_balance") if dictionary.get("unit_balance") else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
-        allocated_quantity = dictionary.get("allocated_quantity") if dictionary.get("allocated_quantity") else APIHelper.SKIP
-        pricing_scheme = dictionary.get("pricing_scheme") if "pricing_scheme" in dictionary.keys() else APIHelper.SKIP
+        allocated_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionComponentAllocatedQuantity'), dictionary.get('allocated_quantity'), False) if dictionary.get('allocated_quantity') is not None else APIHelper.SKIP
+        if 'pricing_scheme' in dictionary.keys():
+            pricing_scheme = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionComponentPricingScheme'), dictionary.get('pricing_scheme'), False) if dictionary.get('pricing_scheme') is not None else None
+        else:
+            pricing_scheme = APIHelper.SKIP
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
         component_handle = dictionary.get("component_handle") if "component_handle" in dictionary.keys() else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
@@ -264,8 +273,8 @@ class SubscriptionComponent(object):
         price_point_name = dictionary.get("price_point_name") if "price_point_name" in dictionary.keys() else APIHelper.SKIP
         product_family_id = dictionary.get("product_family_id") if dictionary.get("product_family_id") else APIHelper.SKIP
         product_family_handle = dictionary.get("product_family_handle") if dictionary.get("product_family_handle") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
         description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP

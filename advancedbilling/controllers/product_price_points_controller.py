@@ -10,6 +10,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.configuration import Server
 from advancedbilling.controllers.base_controller import BaseController
+from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
@@ -20,12 +21,13 @@ from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.product_price_point_response import ProductPricePointResponse
 from advancedbilling.models.list_product_price_points_response import ListProductPricePointsResponse
+from advancedbilling.models.product_response import ProductResponse
 from advancedbilling.models.bulk_create_product_price_points_response import BulkCreateProductPricePointsResponse
 from advancedbilling.models.product_price_point_currency_price import ProductPricePointCurrencyPrice
 from advancedbilling.exceptions.product_price_point_error_response_exception import ProductPricePointErrorResponseException
+from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.exceptions.error_map_response_exception import ErrorMapResponseException
-from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 
 
 class ProductPricePointsController(BaseController):
@@ -44,13 +46,13 @@ class ProductPricePointsController(BaseController):
         4155)
 
         Args:
-            product_id (int): The id or handle of the product. When using the
-                handle, it must be prefixed with `handle:`
+            product_id (int | str): The id or handle of the product. When
+                using the handle, it must be prefixed with `handle:`
             body (CreateProductPricePointRequest, optional): TODO: type
                 description here.
 
         Returns:
-            ProductPricePointResponse: Response from the API. OK
+            ProductPricePointResponse: Response from the API. Created
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -68,7 +70,8 @@ class ProductPricePointsController(BaseController):
                             .key('product_id')
                             .value(product_id)
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('CreateProductPricePointProductId').validate(value)))
             .header_param(Parameter()
                           .key('Content-Type')
                           .value('application/json'))
@@ -99,8 +102,9 @@ class ProductPricePointsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    product_id -- int -- The id or handle of the product. When
-                        using the handle, it must be prefixed with `handle:`
+                    product_id -- int | str -- The id or handle of the
+                        product. When using the handle, it must be prefixed
+                        with `handle:`
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to
@@ -145,7 +149,8 @@ class ProductPricePointsController(BaseController):
                             .key('product_id')
                             .value(options.get('product_id', None))
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('ListProductPricePointsInputProductId').validate(value)))
             .query_param(Parameter()
                          .key('page')
                          .value(options.get('page', None)))
@@ -179,10 +184,10 @@ class ProductPricePointsController(BaseController):
         Note: Custom product price points are not able to be updated.
 
         Args:
-            product_id (int): The id or handle of the product. When using the
-                handle, it must be prefixed with `handle:`
-            price_point_id (int): The id or handle of the price point. When
+            product_id (int | str): The id or handle of the product. When
                 using the handle, it must be prefixed with `handle:`
+            price_point_id (int | str): The id or handle of the price point.
+                When using the handle, it must be prefixed with `handle:`
             body (UpdateProductPricePointRequest, optional): TODO: type
                 description here.
 
@@ -205,12 +210,14 @@ class ProductPricePointsController(BaseController):
                             .key('product_id')
                             .value(product_id)
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('UpdateProductPricePointProductId').validate(value)))
             .template_param(Parameter()
                             .key('price_point_id')
                             .value(price_point_id)
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('UpdateProductPricePointPricePointId').validate(value)))
             .header_param(Parameter()
                           .key('Content-Type')
                           .value('application/json'))
@@ -237,10 +244,10 @@ class ProductPricePointsController(BaseController):
         point.
 
         Args:
-            product_id (int): The id or handle of the product. When using the
-                handle, it must be prefixed with `handle:`
-            price_point_id (int): The id or handle of the price point. When
+            product_id (int | str): The id or handle of the product. When
                 using the handle, it must be prefixed with `handle:`
+            price_point_id (int | str): The id or handle of the price point.
+                When using the handle, it must be prefixed with `handle:`
             currency_prices (bool, optional): When fetching a product's price
                 points, if you have defined multiple currencies at the site
                 level, you can optionally pass the ?currency_prices=true query
@@ -269,12 +276,14 @@ class ProductPricePointsController(BaseController):
                             .key('product_id')
                             .value(product_id)
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('ReadProductPricePointProductId').validate(value)))
             .template_param(Parameter()
                             .key('price_point_id')
                             .value(price_point_id)
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('ReadProductPricePointPricePointId').validate(value)))
             .query_param(Parameter()
                          .key('currency_prices')
                          .value(currency_prices))
@@ -296,10 +305,10 @@ class ProductPricePointsController(BaseController):
         Use this endpoint to archive a product price point.
 
         Args:
-            product_id (int): The id or handle of the product. When using the
-                handle, it must be prefixed with `handle:`
-            price_point_id (int): The id or handle of the price point. When
+            product_id (int | str): The id or handle of the product. When
                 using the handle, it must be prefixed with `handle:`
+            price_point_id (int | str): The id or handle of the price point.
+                When using the handle, it must be prefixed with `handle:`
 
         Returns:
             ProductPricePointResponse: Response from the API. OK
@@ -320,12 +329,14 @@ class ProductPricePointsController(BaseController):
                             .key('product_id')
                             .value(product_id)
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('ArchiveProductPricePointProductId').validate(value)))
             .template_param(Parameter()
                             .key('price_point_id')
                             .value(price_point_id)
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('ArchiveProductPricePointPricePointId').validate(value)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -334,6 +345,7 @@ class ProductPricePointsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointResponse.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
     def unarchive_product_price_point(self,
@@ -383,9 +395,9 @@ class ProductPricePointsController(BaseController):
             .deserialize_into(ProductPricePointResponse.from_dictionary)
         ).execute()
 
-    def set_default_price_point_for_product(self,
-                                            product_id,
-                                            price_point_id):
+    def promote_product_price_point_to_default(self,
+                                               product_id,
+                                               price_point_id):
         """Does a PATCH request to /products/{product_id}/price_points/{price_point_id}/default.json.
 
         Use this endpoint to make a product price point the default for the
@@ -399,7 +411,7 @@ class ProductPricePointsController(BaseController):
             price_point_id (int): The Chargify id of the product price point
 
         Returns:
-            ProductPricePointResponse: Response from the API. OK
+            ProductResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -430,7 +442,7 @@ class ProductPricePointsController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProductPricePointResponse.from_dictionary)
+            .deserialize_into(ProductResponse.from_dictionary)
         ).execute()
 
     def create_product_price_points(self,
@@ -448,7 +460,8 @@ class ProductPricePointsController(BaseController):
                 description here.
 
         Returns:
-            BulkCreateProductPricePointsResponse: Response from the API. OK
+            BulkCreateProductPricePointsResponse: Response from the API.
+                Created
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -561,7 +574,7 @@ class ProductPricePointsController(BaseController):
                 description here.
 
         Returns:
-            List[ProductPricePointCurrencyPrice]: Response from the API. OK
+            ProductPricePointCurrencyPrice: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -594,6 +607,7 @@ class ProductPricePointsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductPricePointCurrencyPrice.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorMapResponseException)
         ).execute()
 
     def list_all_product_price_points(self,
@@ -619,11 +633,12 @@ class ProductPricePointsController(BaseController):
                     filter_date_field -- BasicDateField -- The type of filter
                         you would like to apply to your search. Use in query:
                         `filter[date_field]=created_at`.
-                    filter_end_date -- str -- The end date (format YYYY-MM-DD)
-                        with which to filter the date_field. Returns price
-                        points with a timestamp up to and including 11:59:59PM
-                        in your site’s time zone on the date specified.
-                    filter_end_datetime -- str -- The end date and time
+                    filter_end_date -- date -- The end date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns price points with a timestamp up to and
+                        including 11:59:59PM in your site’s time zone on the
+                        date specified.
+                    filter_end_datetime -- datetime -- The end date and time
                         (format YYYY-MM-DD HH:MM:SS) with which to filter the
                         date_field. Returns price points with a timestamp at
                         or before exact time provided in query. You can
@@ -633,18 +648,18 @@ class ProductPricePointsController(BaseController):
                     filter_ids -- List[int] -- Allows fetching price points
                         with matching id based on provided values. Use in
                         query: `filter[ids]=1,2,3`.
-                    filter_start_date -- str -- The start date (format
+                    filter_start_date -- date -- The start date (format
                         YYYY-MM-DD) with which to filter the date_field.
                         Returns price points with a timestamp at or after
                         midnight (12:00:00 AM) in your site’s time zone on the
                         date specified.
-                    filter_start_datetime -- str -- The start date and time
-                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns price points with a timestamp at
-                        or after exact time provided in query. You can specify
-                        timezone in query - otherwise your site's time zone
-                        will be used. If provided, this parameter will be used
-                        instead of start_date.
+                    filter_start_datetime -- datetime -- The start date and
+                        time (format YYYY-MM-DD HH:MM:SS) with which to filter
+                        the date_field. Returns price points with a timestamp
+                        at or after exact time provided in query. You can
+                        specify timezone in query - otherwise your site's time
+                        zone will be used. If provided, this parameter will be
+                        used instead of start_date.
                     filter_type -- List[PricePointType] -- Allows fetching
                         price points with matching type. Use in query:
                         `filter[type]=catalog,custom`.
@@ -695,7 +710,7 @@ class ProductPricePointsController(BaseController):
                          .value(options.get('filter_end_date', None)))
             .query_param(Parameter()
                          .key('filter[end_datetime]')
-                         .value(options.get('filter_end_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_end_datetime', None))))
             .query_param(Parameter()
                          .key('filter[ids]')
                          .value(options.get('filter_ids', None)))
@@ -704,7 +719,7 @@ class ProductPricePointsController(BaseController):
                          .value(options.get('filter_start_date', None)))
             .query_param(Parameter()
                          .key('filter[start_datetime]')
-                         .value(options.get('filter_start_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_start_datetime', None))))
             .query_param(Parameter()
                          .key('filter[type]')
                          .value(options.get('filter_type', None)))

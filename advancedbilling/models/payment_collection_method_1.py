@@ -22,7 +22,6 @@ class PaymentCollectionMethod1(object):
         INVOICE: TODO: type description here.
 
     """
-    _all_values = ['automatic', 'remittance', 'prepaid', 'invoice']
     AUTOMATIC = 'automatic'
 
     REMITTANCE = 'remittance'
@@ -31,15 +30,3 @@ class PaymentCollectionMethod1(object):
 
     INVOICE = 'invoice'
 
-    @classmethod
-    def validate(cls, value):
-        """Validates value contains in enum
-
-        Args:
-            value: the value to be validated
-
-        Returns:
-            boolean : if value is valid enum values.
-
-        """
-        return value in cls._all_values

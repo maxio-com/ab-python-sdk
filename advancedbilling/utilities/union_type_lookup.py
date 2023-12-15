@@ -12,7 +12,6 @@ from advancedbilling.models.apply_credit_note_event_data import ApplyCreditNoteE
 from advancedbilling.models.apply_debit_note_event_data import ApplyDebitNoteEventData
 from advancedbilling.models.apply_payment_event_data import ApplyPaymentEventData
 from advancedbilling.models.bank_account_payment_profile import BankAccountPaymentProfile
-from advancedbilling.models.cancellation_method import CancellationMethod
 from advancedbilling.models.change_invoice_collection_method_event_data import ChangeInvoiceCollectionMethodEventData
 from advancedbilling.models.component_allocation_change import ComponentAllocationChange
 from advancedbilling.models.compounding_strategy import CompoundingStrategy
@@ -21,13 +20,11 @@ from advancedbilling.models.create_ebb_component import CreateEBBComponent
 from advancedbilling.models.create_metafield import CreateMetafield
 from advancedbilling.models.create_metered_component import CreateMeteredComponent
 from advancedbilling.models.create_on_off_component import CreateOnOffComponent
-from advancedbilling.models.create_or_update_coupon import CreateOrUpdateCoupon
 from advancedbilling.models.create_or_update_flat_amount_coupon import CreateOrUpdateFlatAmountCoupon
 from advancedbilling.models.create_or_update_percentage_coupon import CreateOrUpdatePercentageCoupon
 from advancedbilling.models.create_prepaid_component import CreatePrepaidComponent
 from advancedbilling.models.create_prepaid_usage_component_price_point import CreatePrepaidUsageComponentPricePoint
 from advancedbilling.models.create_quantity_based_component import CreateQuantityBasedComponent
-from advancedbilling.models.create_subscription_component import CreateSubscriptionComponent
 from advancedbilling.models.credit_account_balance_changed import CreditAccountBalanceChanged
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
 from advancedbilling.models.custom_field_value_change import CustomFieldValueChange
@@ -41,7 +38,7 @@ from advancedbilling.models.invoice_line_item_component_cost_data import Invoice
 from advancedbilling.models.issue_invoice_event_data import IssueInvoiceEventData
 from advancedbilling.models.item_price_point_changed import ItemPricePointChanged
 from advancedbilling.models.metered_usage import MeteredUsage
-from advancedbilling.models.payment_collection_method import PaymentCollectionMethod
+from advancedbilling.models.nested_subscription_group import NestedSubscriptionGroup
 from advancedbilling.models.payment_collection_method_changed import PaymentCollectionMethodChanged
 from advancedbilling.models.payment_method_apple_pay_type import PaymentMethodApplePayType
 from advancedbilling.models.payment_method_bank_account_type import PaymentMethodBankAccountType
@@ -54,6 +51,7 @@ from advancedbilling.models.prepaid_subscription_balance_changed import PrepaidS
 from advancedbilling.models.prepaid_usage import PrepaidUsage
 from advancedbilling.models.prepayment_account_balance_changed import PrepaymentAccountBalanceChanged
 from advancedbilling.models.price_point_type import PricePointType
+from advancedbilling.models.pricing_scheme import PricingScheme
 from advancedbilling.models.proforma_invoice_issued import ProformaInvoiceIssued
 from advancedbilling.models.refund_consolidated_invoice import RefundConsolidatedInvoice
 from advancedbilling.models.refund_invoice import RefundInvoice
@@ -62,7 +60,6 @@ from advancedbilling.models.refund_success import RefundSuccess
 from advancedbilling.models.remove_payment_event_data import RemovePaymentEventData
 from advancedbilling.models.resume_options import ResumeOptions
 from advancedbilling.models.snap_day import SnapDay
-from advancedbilling.models.subscription_group_inlined import SubscriptionGroupInlined
 from advancedbilling.models.subscription_group_signup_failure import SubscriptionGroupSignupFailure
 from advancedbilling.models.subscription_group_signup_success import SubscriptionGroupSignupSuccess
 from advancedbilling.models.subscription_product_change import SubscriptionProductChange
@@ -84,22 +81,6 @@ class UnionTypeLookUp:
 
     """
     _templates = {
-        'CreateCouponBody': OneOf(
-            [
-                LeafType(CreateOrUpdateCoupon)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'UpdateCouponBody': OneOf(
-            [
-                LeafType(CreateOrUpdateCoupon)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
         'CreateComponentBody': OneOf(
             [
                 LeafType(CreateMeteredComponent),
@@ -111,6 +92,66 @@ class UnionTypeLookUp:
             Context.create(
                is_optional=True
             )
+        ),
+        'CreateProductPricePointProductId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ListProductPricePointsInputProductId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'UpdateProductPricePointProductId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'UpdateProductPricePointPricePointId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ReadProductPricePointProductId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ReadProductPricePointPricePointId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ArchiveProductPricePointProductId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ArchiveProductPricePointPricePointId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'CreateUsageComponentId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ListUsagesInputComponentId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
         ),
         'CustomerErrorResponseErrors': OneOf(
             [
@@ -124,27 +165,9 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionCancellationMethod': OneOf(
-            [
-                LeafType(CancellationMethod)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
-        'SubscriptionPaymentCollectionMethod': OneOf(
-            [
-                LeafType(PaymentCollectionMethod)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
         'SubscriptionGroup2': OneOf(
             [
-                LeafType(SubscriptionGroupInlined)
+                LeafType(NestedSubscriptionGroup)
             ],
             Context.create(
                is_optional=True,
@@ -252,6 +275,15 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
+        'ComponentAllocationChangeAllocatedQuantity': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
         'SubscriptionGroupCreditCardFullNumber': OneOf(
             [
                 LeafType(str),
@@ -337,7 +369,19 @@ class UnionTypeLookUp:
                 LeafType(str)
             ]
         ),
-        'CustomPriceUsedForSubscriptionCreateUpdatePriceInCents': OneOf(
+        'SubscriptionCustomPricePriceInCents': OneOf(
+            [
+                LeafType(str),
+                LeafType(int)
+            ]
+        ),
+        'SubscriptionCustomPriceInterval': OneOf(
+            [
+                LeafType(str),
+                LeafType(int)
+            ]
+        ),
+        'SubscriptionCustomPriceTrialPriceInCents': OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -346,7 +390,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CustomPriceUsedForSubscriptionCreateUpdateInterval': OneOf(
+        'SubscriptionCustomPriceTrialInterval': OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -355,7 +399,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CustomPriceUsedForSubscriptionCreateUpdateTrialPriceInCents': OneOf(
+        'SubscriptionCustomPriceInitialChargeInCents': OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -364,25 +408,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CustomPriceUsedForSubscriptionCreateUpdateTrialInterval': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'CustomPriceUsedForSubscriptionCreateUpdateInitialChargeInCents': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'CustomPriceUsedForSubscriptionCreateUpdateExpirationInterval': OneOf(
+        'SubscriptionCustomPriceExpirationInterval': OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -443,6 +469,15 @@ class UnionTypeLookUp:
             ],
             Context.create(
                is_optional=True
+            )
+        ),
+        'ComponentPricingScheme': OneOf(
+            [
+                LeafType(PricingScheme)
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'CreateComponentPricePointRequestPricePoint': AnyOf(
@@ -587,6 +622,24 @@ class UnionTypeLookUp:
                 LeafType(float)
             ]
         ),
+        'SubscriptionComponentAllocatedQuantity': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'SubscriptionComponentPricingScheme': OneOf(
+            [
+                LeafType(PricingScheme)
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
+            )
+        ),
         'SubscriptionComponentPricePointType': OneOf(
             [
                 LeafType(PricePointType)
@@ -632,24 +685,6 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSubscriptionComponents': OneOf(
-            [
-                LeafType(CreateSubscriptionComponent)
-            ],
-            Context.create(
-               is_array=True,
-               is_optional=True
-            )
-        ),
-        'CreateSubscriptionGroup2': OneOf(
-            [
-                LeafType(GroupSettings),
-                LeafType(bool)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
         'CreateSubscriptionOfferId': OneOf(
             [
                 LeafType(str),
@@ -678,6 +713,15 @@ class UnionTypeLookUp:
             )
         ),
         'CreateSubscriptionComponentComponentId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'CreateSubscriptionComponentAllocatedQuantity': OneOf(
             [
                 LeafType(int),
                 LeafType(str)

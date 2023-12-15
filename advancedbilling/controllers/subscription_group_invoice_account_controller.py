@@ -101,13 +101,13 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
                         ListSubscriptionGroupPrepaymentDateField -- The type
                         of filter you would like to apply to your search. Use
                         in query: `filter[date_field]=created_at`.
-                    filter_end_date -- str -- The end date (format YYYY-MM-DD)
-                        with which to filter the date_field. Returns
-                        prepayments with a timestamp up to and including
-                        11:59:59PM in your site's time zone on the date
-                        specified. Use in query:
+                    filter_end_date -- date -- The end date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns prepayments with a timestamp up to and
+                        including 11:59:59PM in your site's time zone on the
+                        date specified. Use in query:
                         `filter[end_date]=2011-12-15`.
-                    filter_start_date -- str -- The start date (format
+                    filter_start_date -- date -- The start date (format
                         YYYY-MM-DD) with which to filter the date_field.
                         Returns prepayments with a timestamp at or after
                         midnight (12:00:00 AM) in your site's time zone on the

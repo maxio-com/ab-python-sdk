@@ -41,10 +41,14 @@ class Allocation(object):
         accrue_charge (bool): If the change in cost is an upgrade, this
             determines if the charge should accrue to the next renewal or if
             capture should be attempted immediately.
-        upgrade_charge (str): The type of charge to be created if the change
-            in cost is an upgrade.
-        downgrade_credit (str): The type of credit to be created if the change
-            in cost is a downgrade.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
+        downgrade_credit (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
         payment (AllocationPayment | None): TODO: type description here.
 
     """
@@ -90,6 +94,8 @@ class Allocation(object):
 
     _nullables = [
         'memo',
+        'upgrade_charge',
+        'downgrade_credit',
         'payment',
     ]
 
@@ -177,8 +183,8 @@ class Allocation(object):
         price_point_handle = dictionary.get("price_point_handle") if dictionary.get("price_point_handle") else APIHelper.SKIP
         previous_price_point_id = dictionary.get("previous_price_point_id") if dictionary.get("previous_price_point_id") else APIHelper.SKIP
         accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
-        upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
-        downgrade_credit = dictionary.get("downgrade_credit") if dictionary.get("downgrade_credit") else APIHelper.SKIP
+        upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
+        downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         if 'payment' in dictionary.keys():
             payment = APIHelper.deserialize_union_type(UnionTypeLookUp.get('AllocationPayment2'), dictionary.get('payment'), False) if dictionary.get('payment') is not None else None
         else:

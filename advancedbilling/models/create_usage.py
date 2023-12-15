@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.billing_schedule import BillingSchedule
 
 
 class CreateUsage(object):
@@ -20,6 +21,10 @@ class CreateUsage(object):
             quantities are enabled for the component
         price_point_id (str): TODO: type description here.
         memo (str): TODO: type description here.
+        billing_schedule (BillingSchedule): This attribute is particularly
+            useful when you need to align billing events for different
+            components on distinct schedules within a subscription. Please
+            note this only works for site with Multifrequency enabled
 
     """
 
@@ -27,19 +32,22 @@ class CreateUsage(object):
     _names = {
         "quantity": 'quantity',
         "price_point_id": 'price_point_id',
-        "memo": 'memo'
+        "memo": 'memo',
+        "billing_schedule": 'billing_schedule'
     }
 
     _optionals = [
         'quantity',
         'price_point_id',
         'memo',
+        'billing_schedule',
     ]
 
     def __init__(self,
                  quantity=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
-                 memo=APIHelper.SKIP):
+                 memo=APIHelper.SKIP,
+                 billing_schedule=APIHelper.SKIP):
         """Constructor for the CreateUsage class"""
 
         # Initialize members of the class
@@ -49,6 +57,8 @@ class CreateUsage(object):
             self.price_point_id = price_point_id 
         if memo is not APIHelper.SKIP:
             self.memo = memo 
+        if billing_schedule is not APIHelper.SKIP:
+            self.billing_schedule = billing_schedule 
 
     @classmethod
     def from_dictionary(cls,
@@ -71,7 +81,9 @@ class CreateUsage(object):
         quantity = dictionary.get("quantity") if dictionary.get("quantity") else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
+        billing_schedule = BillingSchedule.from_dictionary(dictionary.get('billing_schedule')) if 'billing_schedule' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(quantity,
                    price_point_id,
-                   memo)
+                   memo,
+                   billing_schedule)

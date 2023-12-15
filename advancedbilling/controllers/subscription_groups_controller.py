@@ -421,7 +421,7 @@ class SubscriptionGroupsController(BaseController):
         te-subscription#subscription-in-a-subscription-group)
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (AddSubscriptionToAGroup, optional): TODO: type description
                 here.
 
@@ -473,7 +473,7 @@ class SubscriptionGroupsController(BaseController):
         subscription group.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
 
         Returns:
             void: Response from the API. No Content

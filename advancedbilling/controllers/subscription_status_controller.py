@@ -42,7 +42,7 @@ class SubscriptionStatusController(BaseController):
         The response will be `422 "Unprocessable Entity`.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -84,7 +84,7 @@ class SubscriptionStatusController(BaseController):
         means, the method sets the Subscription state to "canceled".
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (CancellationRequest, optional): TODO: type description
                 here.
 
@@ -123,7 +123,7 @@ class SubscriptionStatusController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', APIException)
         ).execute()
 
     def resume_subscription(self,
@@ -137,7 +137,7 @@ class SubscriptionStatusController(BaseController):
         setting the billing date to 'now' and charging the subscriber.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             calendar_billing_resumption_charge (ResumptionCharge, optional):
                 (For calendar billing subscriptions only) The way that the
                 resumed subscription's charge should be handled
@@ -173,6 +173,7 @@ class SubscriptionStatusController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
     def pause_subscription(self,
@@ -187,7 +188,7 @@ class SubscriptionStatusController(BaseController):
         within 24 hours.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (PauseRequest, optional): TODO: type description here.
 
         Returns:
@@ -241,7 +242,7 @@ class SubscriptionStatusController(BaseController):
         you would like the subscription to not have a resume date.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (PauseRequest, optional): TODO: type description here.
 
         Returns:
@@ -278,6 +279,7 @@ class SubscriptionStatusController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
     def reactivate_subscription(self,
@@ -428,7 +430,7 @@ class SubscriptionStatusController(BaseController):
         + Any product-related charges should have been collected
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (ReactivateSubscriptionRequest, optional): TODO: type
                 description here.
 
@@ -482,7 +484,7 @@ class SubscriptionStatusController(BaseController):
         creation, or if the subscription is past due.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (CancellationRequest, optional): TODO: type description
                 here.
 
@@ -535,7 +537,7 @@ class SubscriptionStatusController(BaseController):
         call will be successful.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
 
         Returns:
             DelayedCancellationResponse: Response from the API. OK
@@ -576,7 +578,7 @@ class SubscriptionStatusController(BaseController):
         set to active and the active Dunner will be resolved.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -647,7 +649,7 @@ class SubscriptionStatusController(BaseController):
         any changes against a subscription.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (RenewalPreviewRequest, optional): TODO: type description
                 here.
 
@@ -685,4 +687,5 @@ class SubscriptionStatusController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(RenewalPreviewResponse.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()

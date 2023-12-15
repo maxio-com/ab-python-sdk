@@ -17,7 +17,8 @@ class Payment(object):
 
     Attributes:
         invoice_uid (str): The uid of the paid invoice
-        status (Status): The current status of the invoice. See [Invoice
+        status (InvoiceStatus): The current status of the invoice. See
+            [Invoice
             Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
             171#line-item-breakdowns) for more.
         due_amount (str): The remaining due amount on the invoice

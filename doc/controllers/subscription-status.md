@@ -43,7 +43,7 @@ def retry_subscription(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 
 ## Response Type
 
@@ -52,7 +52,7 @@ def retry_subscription(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 result = subscription_status_controller.retry_subscription(subscription_id)
 print(result)
@@ -216,7 +216,7 @@ def cancel_subscription(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`CancellationRequest`](../../doc/models/cancellation-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -226,7 +226,7 @@ def cancel_subscription(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 result = subscription_status_controller.cancel_subscription(subscription_id)
 print(result)
@@ -373,7 +373,7 @@ print(result)
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | `APIException` |
 
 
 # Resume Subscription
@@ -390,7 +390,7 @@ def resume_subscription(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `calendar_billing_resumption_charge` | [`ResumptionCharge`](../../doc/models/resumption-charge.md) | Query, Optional | (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled<br>**Default**: `'prorated'` |
 
 ## Response Type
@@ -400,7 +400,7 @@ def resume_subscription(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 Liquid error: Value cannot be null. (Parameter 'key')result = subscription_status_controller.resume_subscription(Liquid error: Value cannot be null. (Parameter 'key')subscription_id)
 print(result)
@@ -515,6 +515,12 @@ print(result)
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
 
 # Pause Subscription
 
@@ -534,7 +540,7 @@ def pause_subscription(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`PauseRequest`](../../doc/models/pause-request.md) | Body, Optional | Allows to pause a Subscription |
 
 ## Response Type
@@ -544,11 +550,11 @@ def pause_subscription(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 body = PauseRequest(
     hold=AutoResume(
-        automatically_resume_at='2017-05-25T11:25:00Z'
+        automatically_resume_at=dateutil.parser.parse('2017-05-25T11:25:00Z')
     )
 )
 
@@ -695,7 +701,7 @@ def update_automatic_subscription_resumption(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`PauseRequest`](../../doc/models/pause-request.md) | Body, Optional | Allows to pause a Subscription |
 
 ## Response Type
@@ -705,11 +711,11 @@ def update_automatic_subscription_resumption(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 body = PauseRequest(
     hold=AutoResume(
-        automatically_resume_at='2019-01-20'
+        automatically_resume_at=dateutil.parser.parse('2019-01-20T00:00:00')
     )
 )
 
@@ -841,6 +847,12 @@ print(result)
   }
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Reactivate Subscription
@@ -1015,7 +1027,7 @@ def reactivate_subscription(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`ReactivateSubscriptionRequest`](../../doc/models/reactivate-subscription-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -1025,7 +1037,7 @@ def reactivate_subscription(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 body = ReactivateSubscriptionRequest(
     calendar_billing=ReactivationBilling(
@@ -1180,7 +1192,7 @@ def initiate_delayed_cancellation(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`CancellationRequest`](../../doc/models/cancellation-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -1190,7 +1202,7 @@ def initiate_delayed_cancellation(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 result = subscription_status_controller.initiate_delayed_cancellation(subscription_id)
 print(result)
@@ -1218,7 +1230,7 @@ def stop_delayed_cancellation(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 
 ## Response Type
 
@@ -1227,7 +1239,7 @@ def stop_delayed_cancellation(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 result = subscription_status_controller.stop_delayed_cancellation(subscription_id)
 print(result)
@@ -1261,7 +1273,7 @@ def cancel_dunning(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 
 ## Response Type
 
@@ -1270,7 +1282,7 @@ def cancel_dunning(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 result = subscription_status_controller.cancel_dunning(subscription_id)
 print(result)
@@ -1312,7 +1324,7 @@ def preview_renewal(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`RenewalPreviewRequest`](../../doc/models/renewal-preview-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -1322,7 +1334,7 @@ def preview_renewal(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 body = RenewalPreviewRequest(
     components=[
@@ -1373,7 +1385,9 @@ print(result)
         "taxable_amount_in_cents": 0,
         "product_id": 1,
         "product_handle": "gold-product",
-        "product_name": "Gold Product"
+        "product_name": "Gold Product",
+        "period_range_start": "01/10/2024",
+        "period_range_end": "02/10/2024"
       },
       {
         "transaction_type": "charge",
@@ -1384,10 +1398,18 @@ print(result)
         "taxable_amount_in_cents": 0,
         "component_id": 104,
         "component_handle": "quantity-component",
-        "component_name": "Quantity Component"
+        "component_name": "Quantity Component",
+        "period_range_start": "01/10/2024",
+        "period_range_end": "02/10/2024"
       }
     ]
   }
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 

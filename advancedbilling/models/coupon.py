@@ -119,11 +119,13 @@ class Coupon(object):
     _nullables = [
         'amount',
         'amount_in_cents',
+        'product_family_name',
         'end_date',
         'percentage',
         'duration_period_count',
         'duration_interval',
         'duration_interval_unit',
+        'duration_interval_span',
         'archived_at',
         'conversion_limit',
     ]
@@ -245,7 +247,7 @@ class Coupon(object):
         amount = dictionary.get("amount") if "amount" in dictionary.keys() else APIHelper.SKIP
         amount_in_cents = dictionary.get("amount_in_cents") if "amount_in_cents" in dictionary.keys() else APIHelper.SKIP
         product_family_id = dictionary.get("product_family_id") if dictionary.get("product_family_id") else APIHelper.SKIP
-        product_family_name = dictionary.get("product_family_name") if dictionary.get("product_family_name") else APIHelper.SKIP
+        product_family_name = dictionary.get("product_family_name") if "product_family_name" in dictionary.keys() else APIHelper.SKIP
         start_date = dictionary.get("start_date") if dictionary.get("start_date") else APIHelper.SKIP
         end_date = dictionary.get("end_date") if "end_date" in dictionary.keys() else APIHelper.SKIP
         percentage = dictionary.get("percentage") if "percentage" in dictionary.keys() else APIHelper.SKIP
@@ -254,7 +256,7 @@ class Coupon(object):
         duration_period_count = dictionary.get("duration_period_count") if "duration_period_count" in dictionary.keys() else APIHelper.SKIP
         duration_interval = dictionary.get("duration_interval") if "duration_interval" in dictionary.keys() else APIHelper.SKIP
         duration_interval_unit = dictionary.get("duration_interval_unit") if "duration_interval_unit" in dictionary.keys() else APIHelper.SKIP
-        duration_interval_span = dictionary.get("duration_interval_span") if dictionary.get("duration_interval_span") else APIHelper.SKIP
+        duration_interval_span = dictionary.get("duration_interval_span") if "duration_interval_span" in dictionary.keys() else APIHelper.SKIP
         allow_negative_balance = dictionary.get("allow_negative_balance") if "allow_negative_balance" in dictionary.keys() else APIHelper.SKIP
         archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP
         conversion_limit = dictionary.get("conversion_limit") if "conversion_limit" in dictionary.keys() else APIHelper.SKIP

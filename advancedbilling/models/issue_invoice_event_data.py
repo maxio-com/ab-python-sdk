@@ -27,12 +27,12 @@ class IssueInvoiceEventData(object):
             segments.  See also the [invoice consolidation
             documentation](https://chargify.zendesk.com/hc/en-us/articles/44077
             46391835).
-        from_status (Status): The status of the invoice before event
+        from_status (InvoiceStatus): The status of the invoice before event
             occurence. See [Invoice
             Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
             171#line-item-breakdowns) for more.
-        to_status (Status): The status of the invoice after event occurence.
-            See [Invoice
+        to_status (InvoiceStatus): The status of the invoice after event
+            occurence. See [Invoice
             Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
             171#line-item-breakdowns) for more.
         due_amount (str): Amount due on the invoice, which is `total_amount -

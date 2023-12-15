@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `name` | `str` | Required | - |
 | `handle` | `str` | Optional | - |
-| `pricing_scheme` | `str` | Required | - |
+| `pricing_scheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `prices` | [`List[Price]`](../../doc/models/price.md) | Required | - |
 | `use_site_exchange_rate` | `bool` | Optional | Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.<br>**Default**: `True` |
 
@@ -20,7 +20,7 @@
 ```json
 {
   "name": "name0",
-  "pricing_scheme": "pricing_scheme8",
+  "pricing_scheme": "per_unit",
   "prices": [
     {
       "starting_quantity": 242,

@@ -23,6 +23,7 @@ from advancedbilling.models.prepaid_configuration_response import PrepaidConfigu
 from advancedbilling.models.subscription_preview_response import SubscriptionPreviewResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.api_exception import APIException
+from advancedbilling.exceptions.single_error_response_error_exception import SingleErrorResponseErrorException
 from advancedbilling.exceptions.subscription_add_coupon_error_exception import SubscriptionAddCouponErrorException
 from advancedbilling.exceptions.subscription_remove_coupon_errors_exception import SubscriptionRemoveCouponErrorsException
 from advancedbilling.exceptions.nested_error_response_exception import NestedErrorResponseException
@@ -142,7 +143,7 @@ class SubscriptionsController(BaseController):
         A prepaid subscription can be created with the usual subscription
         creation parameters, specifying `prepaid` as the
         `payment_collection_method` and including a nested
-        `prepaid_subscription_configuration`.
+        `prepaid_configuration`.
         After a prepaid subscription has been created, additional funds can be
         manually added to the prepayment account through the [Create
         Prepayment
@@ -937,6 +938,9 @@ class SubscriptionsController(BaseController):
                         `direction=asc`.
                     sort -- SubscriptionSort -- The attribute by which to
                         sort
+                    include -- List[SubscriptionListInclude] -- Allows
+                        including additional data in the response. Use in
+                        query: `include[]=self_service_page_token`.
 
         Returns:
             List[SubscriptionResponse]: Response from the API. OK
@@ -995,6 +999,9 @@ class SubscriptionsController(BaseController):
             .query_param(Parameter()
                          .key('sort')
                          .value(options.get('sort', None)))
+            .query_param(Parameter()
+                         .key('include[]')
+                         .value(options.get('include', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -1078,7 +1085,7 @@ class SubscriptionsController(BaseController):
         before the `snap_date` will reset to `null`.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (UpdateSubscriptionRequest, optional): TODO: type description
                 here.
 
@@ -1132,7 +1139,7 @@ class SubscriptionsController(BaseController):
         request.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             include (List[SubscriptionInclude], optional): Allows including
                 additional data in the response. Use in query:
                 `include[]=coupons&include[]=self_service_page_token`.
@@ -1211,7 +1218,7 @@ class SubscriptionsController(BaseController):
         with a string giving the reason for the problem.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (OverrideSubscriptionRequest, optional): Only these fields
                 are available to be set.
 
@@ -1300,7 +1307,7 @@ class SubscriptionsController(BaseController):
         `?ack={customer_id}&cascade[]=customer&cascade[]=payment_profile`
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             ack (int): id of the customer.
             cascade (List[SubscriptionPurgeType], optional): Options are
                 "customer" or "payment_profile". Use in query:
@@ -1345,7 +1352,7 @@ class SubscriptionsController(BaseController):
         Use this endpoint to update a subscription's prepaid configuration.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (UpsertPrepaidConfigurationRequest, optional): TODO: type
                 description here.
 
@@ -1483,7 +1490,7 @@ class SubscriptionsController(BaseController):
         subscription.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             code (str, optional): A code for the coupon that would be applied
                 to a subscription
             body (AddCouponsRequest, optional): TODO: type description here.
@@ -1540,7 +1547,7 @@ class SubscriptionsController(BaseController):
         moving-a-coupon)
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             coupon_code (str, optional): The coupon code
 
         Returns:
@@ -1631,7 +1638,7 @@ class SubscriptionsController(BaseController):
         invoice back to the subscription.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (ActivateSubscriptionRequest, optional): TODO: type
                 description here.
 

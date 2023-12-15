@@ -1,21 +1,21 @@
 
-# Single Error Response Exception
+# Single Error Response Error Exception
 
 ## Structure
 
-`SingleErrorResponseException`
+`SingleErrorResponseErrorException`
 
 ## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `error` | `str` | Optional | - |
+| `error` | `str` | Required | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "error": "error2"
+  "error": "error8"
 }
 ```
 

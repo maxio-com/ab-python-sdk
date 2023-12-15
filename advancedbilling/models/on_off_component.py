@@ -9,7 +9,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.component_price_point_item import ComponentPricePointItem
 from advancedbilling.models.price import Price
-from advancedbilling.models.pricing_scheme import PricingScheme
 
 
 class OnOffComponent(object):
@@ -33,17 +32,19 @@ class OnOffComponent(object):
             or the characters '.', ':', '-', or '_'.
         taxable (bool): Boolean flag describing whether a component is taxable
             or not.
-        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
-            See [Product
-            Components](https://help.chargify.com/products/product-components.h
-            tml) for an overview of pricing schemes.
         prices (List[Price]): (Not required for ‘per_unit’ pricing schemes)
             One or more price brackets. See [Price Bracket
             Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883
             #price-bracket-rules) for an overview of how price brackets work
             for different pricing schemes.
-        upgrade_charge (str): TODO: type description here.
-        downgrade_credit (str): TODO: type description here.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
+        downgrade_credit (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
         price_points (List[ComponentPricePointItem]): TODO: type description
             here.
         unit_price (str | float | None): The amount the customer will be
@@ -69,7 +70,6 @@ class OnOffComponent(object):
     # Create a mapping from Model property names to API property names
     _names = {
         "name": 'name',
-        "pricing_scheme": 'pricing_scheme',
         "unit_name": 'unit_name',
         "description": 'description',
         "handle": 'handle',
@@ -105,9 +105,13 @@ class OnOffComponent(object):
         'public_signup_page_ids',
     ]
 
+    _nullables = [
+        'upgrade_charge',
+        'downgrade_credit',
+    ]
+
     def __init__(self,
                  name=None,
-                 pricing_scheme=None,
                  unit_name=APIHelper.SKIP,
                  description=APIHelper.SKIP,
                  handle=APIHelper.SKIP,
@@ -135,7 +139,6 @@ class OnOffComponent(object):
             self.handle = handle 
         if taxable is not APIHelper.SKIP:
             self.taxable = taxable 
-        self.pricing_scheme = pricing_scheme 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
         if upgrade_charge is not APIHelper.SKIP:
@@ -179,7 +182,6 @@ class OnOffComponent(object):
 
         # Extract variables from the dictionary
         name = dictionary.get("name") if dictionary.get("name") else None
-        pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else None
         unit_name = dictionary.get("unit_name") if dictionary.get("unit_name") else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
@@ -189,8 +191,8 @@ class OnOffComponent(object):
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
         else:
             prices = APIHelper.SKIP
-        upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
-        downgrade_credit = dictionary.get("downgrade_credit") if dictionary.get("downgrade_credit") else APIHelper.SKIP
+        upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
+        downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         price_points = None
         if dictionary.get('price_points') is not None:
             price_points = [ComponentPricePointItem.from_dictionary(x) for x in dictionary.get('price_points')]
@@ -205,7 +207,6 @@ class OnOffComponent(object):
         public_signup_page_ids = dictionary.get("public_signup_page_ids") if dictionary.get("public_signup_page_ids") else APIHelper.SKIP
         # Return an object of this model
         return cls(name,
-                   pricing_scheme,
                    unit_name,
                    description,
                    handle,
@@ -236,11 +237,9 @@ class OnOffComponent(object):
 
         """
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.name, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.pricing_scheme, type_callable=lambda value: PricingScheme.validate(value))
+            return APIHelper.is_valid_type(value=dictionary.name, type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('name'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('pricing_scheme'), type_callable=lambda value: PricingScheme.validate(value))
+        return APIHelper.is_valid_type(value=dictionary.get('name'), type_callable=lambda value: isinstance(value, str))

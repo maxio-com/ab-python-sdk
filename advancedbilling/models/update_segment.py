@@ -17,10 +17,10 @@ class UpdateSegment(object):
     TODO: type model description here.
 
     Attributes:
-        pricing_scheme (str): The handle for the pricing scheme. Available
-            options: per_unit, volume, tiered, stairstep. See [Price Bracket
-            Rules](https://help.chargify.com/products/product-components.html#p
-            rice-bracket-rules) for an overview of pricing schemes.
+        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
+            See [Product
+            Components](https://help.chargify.com/products/product-components.h
+            tml) for an overview of pricing schemes.
         prices (List[CreateOrUpdateSegmentPrice]): TODO: type description
             here.
 

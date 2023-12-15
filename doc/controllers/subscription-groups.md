@@ -523,7 +523,7 @@ def create_subscription_group_hierarchy(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`AddSubscriptionToAGroup`](../../doc/models/add-subscription-to-a-group.md) | Body, Optional | - |
 
 ## Response Type
@@ -533,7 +533,7 @@ def create_subscription_group_hierarchy(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 body = AddSubscriptionToAGroup(
     group=GroupSettings(
@@ -592,7 +592,7 @@ def remove_subscription_from_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 
 ## Response Type
 
@@ -601,7 +601,7 @@ def remove_subscription_from_group(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 result = subscription_groups_controller.remove_subscription_from_group(subscription_id)
 print(result)

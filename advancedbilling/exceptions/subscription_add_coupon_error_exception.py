@@ -36,5 +36,6 @@ class SubscriptionAddCouponErrorException(advancedbilling.exceptions.api_excepti
 
         """
         self.codes = dictionary.get("codes") if dictionary.get("codes") else None
+        self.coupon_code = dictionary.get("coupon_code") if dictionary.get("coupon_code") else None
         self.coupon_codes = dictionary.get("coupon_codes") if dictionary.get("coupon_codes") else None
         self.subscription = dictionary.get("subscription") if dictionary.get("subscription") else None

@@ -119,8 +119,9 @@ class InvoicesController(BaseController):
                         which to filter the date_field. Returns invoices with
                         a timestamp up to and including 11:59:59PM in your
                         site’s time zone on the date specified.
-                    status -- Status -- The current status of the invoice. 
-                        Allowed Values: draft, open, paid, pending, voided
+                    status -- InvoiceStatus -- The current status of the
+                        invoice.  Allowed Values: draft, open, paid, pending,
+                        voided
                     subscription_id -- int -- The subscription's ID.
                     subscription_group_uid -- str -- The UID of the
                         subscription group you want to fetch consolidated
@@ -331,6 +332,10 @@ class InvoicesController(BaseController):
         + change_invoice_status
         + change_invoice_collection_method
         + remove_payment
+        + failed_payment
+        + apply_debit_note
+        + create_debit_note
+        + change_chargeback_status
         Invoice events are returned in ascending order.
         If both a `since_date` and `since_id` are provided in request
         parameters, the `since_date` will be used.
@@ -733,7 +738,7 @@ class InvoicesController(BaseController):
         payment request.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (RecordPaymentRequest, optional): TODO: type description
                 here.
 
@@ -1134,7 +1139,7 @@ class InvoicesController(BaseController):
         alternative is `draft`.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (CreateInvoiceRequest, optional): TODO: type description
                 here.
 

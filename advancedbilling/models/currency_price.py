@@ -20,8 +20,8 @@ class CurrencyPrice(object):
         currency (str): TODO: type description here.
         price (float): TODO: type description here.
         formatted_price (str): TODO: type description here.
-        price_id (int): TODO: type description here.
-        price_point_id (int): TODO: type description here.
+        product_price_point_id (int): TODO: type description here.
+        role (CurrencyPriceRole): Role for the price.
 
     """
 
@@ -31,8 +31,8 @@ class CurrencyPrice(object):
         "currency": 'currency',
         "price": 'price',
         "formatted_price": 'formatted_price',
-        "price_id": 'price_id',
-        "price_point_id": 'price_point_id'
+        "product_price_point_id": 'product_price_point_id',
+        "role": 'role'
     }
 
     _optionals = [
@@ -40,8 +40,8 @@ class CurrencyPrice(object):
         'currency',
         'price',
         'formatted_price',
-        'price_id',
-        'price_point_id',
+        'product_price_point_id',
+        'role',
     ]
 
     def __init__(self,
@@ -49,8 +49,8 @@ class CurrencyPrice(object):
                  currency=APIHelper.SKIP,
                  price=APIHelper.SKIP,
                  formatted_price=APIHelper.SKIP,
-                 price_id=APIHelper.SKIP,
-                 price_point_id=APIHelper.SKIP):
+                 product_price_point_id=APIHelper.SKIP,
+                 role=APIHelper.SKIP):
         """Constructor for the CurrencyPrice class"""
 
         # Initialize members of the class
@@ -62,10 +62,10 @@ class CurrencyPrice(object):
             self.price = price 
         if formatted_price is not APIHelper.SKIP:
             self.formatted_price = formatted_price 
-        if price_id is not APIHelper.SKIP:
-            self.price_id = price_id 
-        if price_point_id is not APIHelper.SKIP:
-            self.price_point_id = price_point_id 
+        if product_price_point_id is not APIHelper.SKIP:
+            self.product_price_point_id = product_price_point_id 
+        if role is not APIHelper.SKIP:
+            self.role = role 
 
     @classmethod
     def from_dictionary(cls,
@@ -89,12 +89,12 @@ class CurrencyPrice(object):
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         price = dictionary.get("price") if dictionary.get("price") else APIHelper.SKIP
         formatted_price = dictionary.get("formatted_price") if dictionary.get("formatted_price") else APIHelper.SKIP
-        price_id = dictionary.get("price_id") if dictionary.get("price_id") else APIHelper.SKIP
-        price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
+        product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
+        role = dictionary.get("role") if dictionary.get("role") else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    currency,
                    price,
                    formatted_price,
-                   price_id,
-                   price_point_id)
+                   product_price_point_id,
+                   role)
