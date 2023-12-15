@@ -95,7 +95,7 @@ def list_invoices(self,
 |  --- | --- | --- | --- |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns invoices with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns invoices with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
-| `status` | [`Status`](../../doc/models/status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
+| `status` | [`InvoiceStatus`](../../doc/models/invoice-status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
 | `subscription_id` | `int` | Query, Optional | The subscription's ID. |
 | `subscription_group_uid` | `str` | Query, Optional | The UID of the subscription group you want to fetch consolidated invoices for. This will return a paginated list of consolidated invoices for the specified group. |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
@@ -586,6 +586,10 @@ Exposed event types are:
 + change_invoice_status
 + change_invoice_collection_method
 + remove_payment
++ failed_payment
++ apply_debit_note
++ create_debit_note
++ change_chargeback_status
 
 Invoice events are returned in ascending order.
 
@@ -1840,7 +1844,7 @@ def record_payment_for_subscription(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`RecordPaymentRequest`](../../doc/models/record-payment-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -1850,7 +1854,7 @@ def record_payment_for_subscription(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 body = RecordPaymentRequest(
     payment=CreatePayment(
@@ -2484,7 +2488,7 @@ def create_invoice(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`CreateInvoiceRequest`](../../doc/models/create-invoice-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -2494,7 +2498,7 @@ def create_invoice(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 body = CreateInvoiceRequest(
     invoice=CreateInvoice(
@@ -2813,9 +2817,9 @@ print(result)
   "subscription_id": 12801726,
   "number": "dolore et ut",
   "sequence_number": -84210096,
-  "issue_date": "in e",
-  "due_date": "magna elit tempor occaecat amet",
-  "paid_date": "consectetur elit culpa magna sint",
+  "issue_date": "2017-01-01",
+  "due_date": "2017-01-30",
+  "paid_date": "2017-01-28",
   "status": "open",
   "collection_method": "Excepteur",
   "payment_instructions": "enim officia",

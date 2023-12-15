@@ -13,7 +13,7 @@
 | `product_id` | `int` | Optional | The Product ID of the product for which you are creating a subscription. The product ID is not currently published, so we recommend using the API Handle instead. |
 | `product_price_point_handle` | `str` | Optional | The user-friendly API handle of a product's particular price point. |
 | `product_price_point_id` | `int` | Optional | The ID of the particular price point on the product. |
-| `custom_price` | [`CustomPriceUsedForSubscriptionCreateUpdate`](../../doc/models/custom-price-used-for-subscription-create-update.md) | Optional | (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription |
+| `custom_price` | [`SubscriptionCustomPrice`](../../doc/models/subscription-custom-price.md) | Optional | (Optional) Used in place of `product_price_point_id` to define a custom price point unique to the subscription |
 | `coupon_code` | `str` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
 | `coupon_codes` | `List[str]` | Optional | An array for all the coupons attached to the subscription. |
 | `payment_collection_method` | [`PaymentCollectionMethod`](../../doc/models/payment-collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `'automatic'` |
@@ -30,11 +30,11 @@
 | `payment_profile_attributes` | [`PaymentProfileAttributes`](../../doc/models/payment-profile-attributes.md) | Optional | alias to credit_card_attributes |
 | `credit_card_attributes` | [`PaymentProfileAttributes`](../../doc/models/payment-profile-attributes.md) | Optional | Credit Card data to create a new Subscription. Interchangeable with `payment_profile_attributes` property. |
 | `bank_account_attributes` | [`BankAccountAttributes`](../../doc/models/bank-account-attributes.md) | Optional | - |
-| `components` | List[[Create Subscription Component](../../doc/models/create-subscription-component.md)] \| None | Optional | This is List of a container for one-of cases. |
+| `components` | [`List[CreateSubscriptionComponent]`](../../doc/models/create-subscription-component.md) | Optional | (Optional) An array of component ids and quantities to be added to the subscription. See [Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677) for more information. |
 | `calendar_billing` | [`CalendarBilling`](../../doc/models/calendar-billing.md) | Optional | (Optional). Cannot be used when also specifying next_billing_at |
 | `metafields` | `Dict[str, str]` | Optional | (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |
 | `customer_reference` | `str` | Optional | The reference value (provided by your app) of an existing customer within Chargify. Required, unless a `customer_id` or a set of `customer_attributes` is given. |
-| `group` | [Group Settings](../../doc/models/group-settings.md) \| bool \| None | Optional | This is a container for one-of cases. |
+| `group` | [`GroupSettings`](../../doc/models/group-settings.md) | Optional | - |
 | `ref` | `str` | Optional | A valid referral code. (optional, see [Referrals](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405420204045-Referrals-Reference#how-to-obtain-referral-codes) for more details). If supplied, must be valid, or else subscription creation will fail. |
 | `cancellation_message` | `str` | Optional | (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to make a note about the reason for cancellation. |
 | `cancellation_method` | `str` | Optional | (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to make a note about how the subscription was canceled. |
@@ -48,7 +48,7 @@
 | `reason_code` | `str` | Optional | (Optional) Can be used when canceling a subscription (via the HTTP DELETE method) to indicate why a subscription was canceled. |
 | `product_change_delayed` | `bool` | Optional | (Optional, used only for Delayed Product Change When set to true, indicates that a changed value for product_handle should schedule the product change to the next subscription renewal. |
 | `offer_id` | str \| int \| None | Optional | This is a container for one-of cases. |
-| `prepaid_subscription_configuration` | [`UpsertPrepaidConfiguration`](../../doc/models/upsert-prepaid-configuration.md) | Optional | - |
+| `prepaid_configuration` | [`UpsertPrepaidConfiguration`](../../doc/models/upsert-prepaid-configuration.md) | Optional | - |
 | `previous_billing_at` | `datetime` | Optional | Providing a previous_billing_at that is in the past will set the current_period_starts_at when the subscription is created. It will also set activated_at if not explicitly passed during the subscription import. Can only be used if next_billing_at is also passed. Using this option will allow you to set the period start for the subscription so mid period component allocations have the correct prorated amount. |
 | `import_mrr` | `bool` | Optional | Setting this attribute to true will cause the subscription's MRR to be added to your MRR analytics immediately. For this value to be honored, a next_billing_at must be present and set to a future date. This key/value will not be returned in the subscription response body. |
 | `canceled_at` | `str` | Optional | - |
@@ -80,7 +80,10 @@
     "handle": "handle0",
     "price_in_cents": "String3",
     "interval": "String3",
-    "interval_unit": "day"
+    "interval_unit": "day",
+    "trial_price_in_cents": "String3",
+    "trial_interval": "String5",
+    "trial_interval_unit": "day"
   }
 }
 ```

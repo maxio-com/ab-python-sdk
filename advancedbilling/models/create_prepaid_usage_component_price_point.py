@@ -9,6 +9,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.overage_pricing import OveragePricing
 from advancedbilling.models.price import Price
+from advancedbilling.models.pricing_scheme import PricingScheme
 
 
 class CreatePrepaidUsageComponentPricePoint(object):
@@ -20,7 +21,10 @@ class CreatePrepaidUsageComponentPricePoint(object):
     Attributes:
         name (str): TODO: type description here.
         handle (str): TODO: type description here.
-        pricing_scheme (str): TODO: type description here.
+        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
+            See [Product
+            Components](https://help.chargify.com/products/product-components.h
+            tml) for an overview of pricing schemes.
         prices (List[Price]): TODO: type description here.
         overage_pricing (OveragePricing): TODO: type description here.
         use_site_exchange_rate (bool): Whether to use the site level exchange
@@ -150,7 +154,7 @@ class CreatePrepaidUsageComponentPricePoint(object):
         """
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.name, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.pricing_scheme, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.pricing_scheme, type_callable=lambda value: PricingScheme.validate(value)) \
                 and APIHelper.is_valid_type(value=dictionary.prices, type_callable=lambda value: Price.validate(value)) \
                 and APIHelper.is_valid_type(value=dictionary.overage_pricing, type_callable=lambda value: OveragePricing.validate(value))
 
@@ -158,6 +162,6 @@ class CreatePrepaidUsageComponentPricePoint(object):
             return False
 
         return APIHelper.is_valid_type(value=dictionary.get('name'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('pricing_scheme'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('pricing_scheme'), type_callable=lambda value: PricingScheme.validate(value)) \
             and APIHelper.is_valid_type(value=dictionary.get('prices'), type_callable=lambda value: Price.validate(value)) \
             and APIHelper.is_valid_type(value=dictionary.get('overage_pricing'), type_callable=lambda value: OveragePricing.validate(value))

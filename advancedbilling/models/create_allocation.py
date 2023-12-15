@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.billing_schedule import BillingSchedule
 
 
 class CreateAllocation(object):
@@ -32,16 +33,22 @@ class CreateAllocation(object):
             determines if the charge should accrue to the next renewal or if
             capture should be attempted immediately. Defaults to the site
             setting if one is not provided.
-        downgrade_credit (CreditType1): The type of credit to be created if
-            the change in cost is a downgrade. Defaults to the component and
-            then site setting if one is not provided.
-        upgrade_charge (CreditType1): The type of charge to be created if the
-            change in cost is an upgrade. Defaults to the component and then
-            site setting if one is not provided.
+        downgrade_credit (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
         price_point_id (str | int | None): Price point that the allocation
             should be charged at. Accepts either the price point's id
             (integer) or handle (string). When not specified, the default
             price point will be used.
+        billing_schedule (BillingSchedule): This attribute is particularly
+            useful when you need to align billing events for different
+            components on distinct schedules within a subscription. Please
+            note this only works for site with Multifrequency enabled
 
     """
 
@@ -55,7 +62,8 @@ class CreateAllocation(object):
         "accrue_charge": 'accrue_charge',
         "downgrade_credit": 'downgrade_credit',
         "upgrade_charge": 'upgrade_charge',
-        "price_point_id": 'price_point_id'
+        "price_point_id": 'price_point_id',
+        "billing_schedule": 'billing_schedule'
     }
 
     _optionals = [
@@ -67,9 +75,12 @@ class CreateAllocation(object):
         'downgrade_credit',
         'upgrade_charge',
         'price_point_id',
+        'billing_schedule',
     ]
 
     _nullables = [
+        'downgrade_credit',
+        'upgrade_charge',
         'price_point_id',
     ]
 
@@ -82,7 +93,8 @@ class CreateAllocation(object):
                  accrue_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
                  upgrade_charge=APIHelper.SKIP,
-                 price_point_id=APIHelper.SKIP):
+                 price_point_id=APIHelper.SKIP,
+                 billing_schedule=APIHelper.SKIP):
         """Constructor for the CreateAllocation class"""
 
         # Initialize members of the class
@@ -103,6 +115,8 @@ class CreateAllocation(object):
             self.upgrade_charge = upgrade_charge 
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id 
+        if billing_schedule is not APIHelper.SKIP:
+            self.billing_schedule = billing_schedule 
 
     @classmethod
     def from_dictionary(cls,
@@ -128,12 +142,13 @@ class CreateAllocation(object):
         proration_downgrade_scheme = dictionary.get("proration_downgrade_scheme") if dictionary.get("proration_downgrade_scheme") else APIHelper.SKIP
         proration_upgrade_scheme = dictionary.get("proration_upgrade_scheme") if dictionary.get("proration_upgrade_scheme") else APIHelper.SKIP
         accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
-        downgrade_credit = dictionary.get("downgrade_credit") if dictionary.get("downgrade_credit") else APIHelper.SKIP
-        upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
+        downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
+        upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         if 'price_point_id' in dictionary.keys():
             price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateAllocationPricePointId'), dictionary.get('price_point_id'), False) if dictionary.get('price_point_id') is not None else None
         else:
             price_point_id = APIHelper.SKIP
+        billing_schedule = BillingSchedule.from_dictionary(dictionary.get('billing_schedule')) if 'billing_schedule' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(quantity,
                    component_id,
@@ -143,4 +158,5 @@ class CreateAllocation(object):
                    accrue_charge,
                    downgrade_credit,
                    upgrade_charge,
-                   price_point_id)
+                   price_point_id,
+                   billing_schedule)

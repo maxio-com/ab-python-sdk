@@ -177,6 +177,7 @@ class Product(object):
 
     _nullables = [
         'handle',
+        'description',
         'accounting_code',
         'expiration_interval',
         'expiration_interval_unit',
@@ -331,7 +332,7 @@ class Product(object):
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         handle = dictionary.get("handle") if "handle" in dictionary.keys() else APIHelper.SKIP
-        description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
+        description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
         accounting_code = dictionary.get("accounting_code") if "accounting_code" in dictionary.keys() else APIHelper.SKIP
         request_credit_card = dictionary.get("request_credit_card") if "request_credit_card" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if "expiration_interval" in dictionary.keys() else APIHelper.SKIP

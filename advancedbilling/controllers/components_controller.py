@@ -20,6 +20,7 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.component_response import ComponentResponse
+from advancedbilling.models.component import Component
 from advancedbilling.models.component_price_point_response import ComponentPricePointResponse
 from advancedbilling.models.component_price_points_response import ComponentPricePointsResponse
 from advancedbilling.models.currency_price import CurrencyPrice
@@ -282,7 +283,7 @@ class ComponentsController(BaseController):
                 handle for the component prefixed with `handle:`
 
         Returns:
-            ComponentResponse: Response from the API. OK
+            Component: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -313,7 +314,7 @@ class ComponentsController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ComponentResponse.from_dictionary)
+            .deserialize_into(Component.from_dictionary)
             .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
@@ -449,7 +450,7 @@ class ComponentsController(BaseController):
                 here.
 
         Returns:
-            void: Response from the API. Updated
+            ComponentResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -473,8 +474,16 @@ class ComponentsController(BaseController):
                           .value('application/json'))
             .body_param(Parameter()
                         .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ComponentResponse.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
         ).execute()
 
     def update_default_price_point_for_component(self,
@@ -498,7 +507,7 @@ class ComponentsController(BaseController):
             price_point_id (int): The Chargify id of the price point
 
         Returns:
-            void: Response from the API. Created
+            ComponentResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -522,7 +531,14 @@ class ComponentsController(BaseController):
                             .value(price_point_id)
                             .is_required(True)
                             .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
             .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ComponentResponse.from_dictionary)
         ).execute()
 
     def list_components_for_product_family(self,
@@ -1119,11 +1135,12 @@ class ComponentsController(BaseController):
                     filter_date_field -- BasicDateField -- The type of filter
                         you would like to apply to your search. Use in query:
                         `filter[date_field]=created_at`.
-                    filter_end_date -- str -- The end date (format YYYY-MM-DD)
-                        with which to filter the date_field. Returns price
-                        points with a timestamp up to and including 11:59:59PM
-                        in your site’s time zone on the date specified.
-                    filter_end_datetime -- str -- The end date and time
+                    filter_end_date -- date -- The end date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns price points with a timestamp up to and
+                        including 11:59:59PM in your site’s time zone on the
+                        date specified.
+                    filter_end_datetime -- datetime -- The end date and time
                         (format YYYY-MM-DD HH:MM:SS) with which to filter the
                         date_field. Returns price points with a timestamp at
                         or before exact time provided in query. You can
@@ -1147,18 +1164,18 @@ class ComponentsController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    filter_start_date -- str -- The start date (format
+                    filter_start_date -- date -- The start date (format
                         YYYY-MM-DD) with which to filter the date_field.
                         Returns price points with a timestamp at or after
                         midnight (12:00:00 AM) in your site’s time zone on the
                         date specified.
-                    filter_start_datetime -- str -- The start date and time
-                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns price points with a timestamp at
-                        or after exact time provided in query. You can specify
-                        timezone in query - otherwise your site's time zone
-                        will be used. If provided, this parameter will be used
-                        instead of start_date.
+                    filter_start_datetime -- datetime -- The start date and
+                        time (format YYYY-MM-DD HH:MM:SS) with which to filter
+                        the date_field. Returns price points with a timestamp
+                        at or after exact time provided in query. You can
+                        specify timezone in query - otherwise your site's time
+                        zone will be used. If provided, this parameter will be
+                        used instead of start_date.
                     filter_type -- List[PricePointType] -- Allows fetching
                         price points with matching type. Use in query:
                         `filter[type]=custom,catalog`.
@@ -1195,7 +1212,7 @@ class ComponentsController(BaseController):
                          .value(options.get('filter_end_date', None)))
             .query_param(Parameter()
                          .key('filter[end_datetime]')
-                         .value(options.get('filter_end_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_end_datetime', None))))
             .query_param(Parameter()
                          .key('include')
                          .value(options.get('include', None)))
@@ -1210,7 +1227,7 @@ class ComponentsController(BaseController):
                          .value(options.get('filter_start_date', None)))
             .query_param(Parameter()
                          .key('filter[start_datetime]')
-                         .value(options.get('filter_start_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_start_datetime', None))))
             .query_param(Parameter()
                          .key('filter[type]')
                          .value(options.get('filter_type', None)))

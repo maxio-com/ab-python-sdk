@@ -129,7 +129,7 @@ class SubscriptionProductsController(BaseController):
         `redirect_url` to determine whether it was successful or not.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (SubscriptionProductMigrationRequest, optional): TODO: type
                 description here.
 
@@ -185,7 +185,7 @@ class SubscriptionProductsController(BaseController):
         the future as opposed to right now.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (SubscriptionMigrationPreviewRequest, optional): TODO: type
                 description here.
 

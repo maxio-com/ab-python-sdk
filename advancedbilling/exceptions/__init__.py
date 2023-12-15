@@ -9,6 +9,7 @@ __all__ = [
     'component_price_point_error_exception',
     'component_allocation_error_exception',
     'subscription_component_allocation_error_exception',
+    'single_error_response_error_exception',
     'nested_error_response_exception',
     'subscription_group_signup_error_response_exception',
     'subscription_group_update_error_response_exception',
@@ -21,5 +22,4 @@ __all__ = [
     'refund_prepayment_base_errors_response_exception',
     'refund_prepayment_aggregated_errors_response_exception',
     'proforma_bad_request_error_response_exception',
-    'single_error_response_exception',
 ]

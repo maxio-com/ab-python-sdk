@@ -42,8 +42,14 @@ class EBBComponent(object):
             Rules](https://help.chargify.com/products/product-components.html#g
             eneral-price-bracket-rules) for an overview of how price brackets
             work for different pricing schemes.
-        upgrade_charge (str): TODO: type description here.
-        downgrade_credit (str): TODO: type description here.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
+        downgrade_credit (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
         price_points (List[ComponentPricePointItem]): TODO: type description
             here.
         unit_price (str | float | None): The amount the customer will be
@@ -94,6 +100,11 @@ class EBBComponent(object):
         'tax_code',
         'hide_date_range_on_invoice',
         'price_in_cents',
+    ]
+
+    _nullables = [
+        'upgrade_charge',
+        'downgrade_credit',
     ]
 
     def __init__(self,
@@ -173,8 +184,8 @@ class EBBComponent(object):
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
         else:
             prices = APIHelper.SKIP
-        upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
-        downgrade_credit = dictionary.get("downgrade_credit") if dictionary.get("downgrade_credit") else APIHelper.SKIP
+        upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
+        downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         price_points = None
         if dictionary.get('price_points') is not None:
             price_points = [ComponentPricePointItem.from_dictionary(x) for x in dictionary.get('price_points')]

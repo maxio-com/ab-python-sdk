@@ -11,10 +11,10 @@ subscription_notes_controller = client.subscription_notes
 ## Methods
 
 * [Create Subscription Note](../../doc/controllers/subscription-notes.md#create-subscription-note)
-* [Delete Subscription Note](../../doc/controllers/subscription-notes.md#delete-subscription-note)
 * [List Subscription Notes](../../doc/controllers/subscription-notes.md#list-subscription-notes)
 * [Read Subscription Note](../../doc/controllers/subscription-notes.md#read-subscription-note)
 * [Update Subscription Note](../../doc/controllers/subscription-notes.md#update-subscription-note)
+* [Delete Subscription Note](../../doc/controllers/subscription-notes.md#delete-subscription-note)
 
 
 # Create Subscription Note
@@ -39,7 +39,7 @@ def create_subscription_note(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `body` | [`UpdateSubscriptionNoteRequest`](../../doc/models/update-subscription-note-request.md) | Body, Optional | Updatable fields for Subscription Note |
 
 ## Response Type
@@ -49,7 +49,7 @@ def create_subscription_note(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
 body = UpdateSubscriptionNoteRequest(
     note=UpdateSubscriptionNote(
@@ -66,41 +66,6 @@ print(result)
 ```
 
 
-# Delete Subscription Note
-
-Use the following method to delete a note for a Subscription.
-
-```python
-def delete_subscription_note(self,
-                            subscription_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-subscription_id = 'subscription_id0'
-
-result = subscription_notes_controller.delete_subscription_note(subscription_id)
-print(result)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | `APIException` |
-
-
 # List Subscription Notes
 
 Use this method to retrieve a list of Notes associated with a Subscription. The response will be an array of Notes.
@@ -114,7 +79,7 @@ def list_subscription_notes(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
 
@@ -126,7 +91,7 @@ def list_subscription_notes(self,
 
 ```python
 collect = {
-    'subscription_id': 'subscription_id0',
+    'subscription_id': 222,
     'page': 2,
     'per_page': 50
 }
@@ -176,8 +141,8 @@ def read_subscription_note(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
-| `note_id` | `str` | Template, Required | The Chargify id of the note |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `note_id` | `int` | Template, Required | The Chargify id of the note |
 
 ## Response Type
 
@@ -186,9 +151,9 @@ def read_subscription_note(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
-note_id = 'note_id8'
+note_id = 66
 
 result = subscription_notes_controller.read_subscription_note(
     subscription_id,
@@ -228,8 +193,8 @@ def update_subscription_note(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Template, Required | The Chargify id of the subscription |
-| `note_id` | `str` | Template, Required | The Chargify id of the note |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `note_id` | `int` | Template, Required | The Chargify id of the note |
 | `body` | [`UpdateSubscriptionNoteRequest`](../../doc/models/update-subscription-note-request.md) | Body, Optional | Updatable fields for Subscription Note |
 
 ## Response Type
@@ -239,9 +204,9 @@ def update_subscription_note(self,
 ## Example Usage
 
 ```python
-subscription_id = 'subscription_id0'
+subscription_id = 222
 
-note_id = 'note_id8'
+note_id = 66
 
 body = UpdateSubscriptionNoteRequest(
     note=UpdateSubscriptionNote(
@@ -257,4 +222,46 @@ result = subscription_notes_controller.update_subscription_note(
 )
 print(result)
 ```
+
+
+# Delete Subscription Note
+
+Use the following method to delete a note for a Subscription.
+
+```python
+def delete_subscription_note(self,
+                            subscription_id,
+                            note_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `note_id` | `int` | Template, Required | The Chargify id of the note |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+note_id = 66
+
+result = subscription_notes_controller.delete_subscription_note(
+    subscription_id,
+    note_id
+)
+print(result)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | `APIException` |
 

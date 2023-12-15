@@ -9,13 +9,13 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `automatically_resume_at` | `str` | Optional | - |
+| `automatically_resume_at` | `datetime` | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "automatically_resume_at": "automatically_resume_at0"
+  "automatically_resume_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

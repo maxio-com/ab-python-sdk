@@ -43,7 +43,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         Subscription's open, payable invoices.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
 
         Returns:
             AccountBalances: Response from the API. OK
@@ -90,7 +90,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         Please note that you **can't** pass `amount_in_cents`.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (CreatePrepaymentRequest, optional): TODO: type description
                 here.
 
@@ -143,7 +143,7 @@ class SubscriptionInvoiceAccountController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    subscription_id -- str -- The Chargify id of the
+                    subscription_id -- int -- The Chargify id of the
                         subscription
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
@@ -164,17 +164,17 @@ class SubscriptionInvoiceAccountController(BaseController):
                         Time when prepayment was created. application_at -
                         Time when prepayment was applied to invoice. Use in
                         query `filter[date_field]=created_at`.
-                    filter_start_date -- str -- The start date (format
+                    filter_start_date -- date -- The start date (format
                         YYYY-MM-DD) with which to filter the date_field.
                         Returns prepayments with a timestamp at or after
                         midnight (12:00:00 AM) in your site’s time zone on the
                         date specified. Use in query
                         `filter[start_date]=2011-12-15`.
-                    filter_end_date -- str -- The end date (format YYYY-MM-DD)
-                        with which to filter the date_field. Returns
-                        prepayments with a timestamp up to and including
-                        11:59:59PM in your site’s time zone on the date
-                        specified. Use in query
+                    filter_end_date -- date -- The end date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns prepayments with a timestamp up to and
+                        including 11:59:59PM in your site’s time zone on the
+                        date specified. Use in query
                         `filter[end_date]=2011-12-15`.
 
         Returns:
@@ -235,7 +235,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         generated invoice.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (IssueServiceCreditRequest, optional): TODO: type description
                 here.
 
@@ -285,7 +285,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         or less than the current credit balance.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             body (DeductServiceCreditRequest, optional): TODO: type
                 description here.
 
@@ -332,7 +332,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         integer in cents, with `amount_in_cents`.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             prepayment_id (str): id of prepayment
             body (RefundPrepaymentRequest, optional): TODO: type description
                 here.

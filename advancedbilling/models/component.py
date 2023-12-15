@@ -22,10 +22,7 @@ class Component(object):
         name (str): The name of the Component, suitable for display on
             statements. i.e. Text Messages.
         handle (str): The component API handle
-        pricing_scheme (str): The handle for the pricing scheme. Available
-            options: per_unit, volume, tiered, stairstep. See [Price Bracket
-            Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883
-            #price-bracket-rules) for an overview of pricing schemes.
+        pricing_scheme (PricingScheme | None): TODO: type description here.
         unit_name (str): The name of the unit that the component’s usage is
             measured in. i.e. message
         unit_price (str): The amount the customer will be charged per unit.
@@ -57,8 +54,14 @@ class Component(object):
             Avalara service to tax based on locale. This attribute has a max
             length of 10 characters.
         recurring (bool): TODO: type description here.
-        upgrade_charge (str): TODO: type description here.
-        downgrade_credit (str): TODO: type description here.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
+        downgrade_credit (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
         created_at (str): Timestamp indicating when this component was
             created
         updated_at (str): Timestamp indicating when this component was
@@ -283,7 +286,10 @@ class Component(object):
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         handle = dictionary.get("handle") if "handle" in dictionary.keys() else APIHelper.SKIP
-        pricing_scheme = dictionary.get("pricing_scheme") if "pricing_scheme" in dictionary.keys() else APIHelper.SKIP
+        if 'pricing_scheme' in dictionary.keys():
+            pricing_scheme = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ComponentPricingScheme'), dictionary.get('pricing_scheme'), False) if dictionary.get('pricing_scheme') is not None else None
+        else:
+            pricing_scheme = APIHelper.SKIP
         unit_name = dictionary.get("unit_name") if dictionary.get("unit_name") else APIHelper.SKIP
         unit_price = dictionary.get("unit_price") if "unit_price" in dictionary.keys() else APIHelper.SKIP
         product_family_id = dictionary.get("product_family_id") if dictionary.get("product_family_id") else APIHelper.SKIP

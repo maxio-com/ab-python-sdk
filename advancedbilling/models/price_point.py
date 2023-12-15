@@ -20,7 +20,10 @@ class PricePoint(object):
     Attributes:
         name (str): TODO: type description here.
         handle (str): TODO: type description here.
-        pricing_scheme (str): TODO: type description here.
+        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
+            See [Product
+            Components](https://help.chargify.com/products/product-components.h
+            tml) for an overview of pricing schemes.
         prices (List[Price]): TODO: type description here.
         use_site_exchange_rate (bool): Whether to use the site level exchange
             rate or define your own prices for each currency if you have

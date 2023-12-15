@@ -9,17 +9,17 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class SubscriptionGroupInlined(object):
+class NestedSubscriptionGroup(object):
 
-    """Implementation of the 'Subscription Group Inlined' model.
+    """Implementation of the 'Nested Subscription Group' model.
 
     TODO: type model description here.
 
     Attributes:
         uid (str): The UID for the group
-        scheme (str): Whether the group is configured to rely on a primary
+        scheme (int): Whether the group is configured to rely on a primary
             subscription for billing. At this time, it will always be 1.
-        primary_subscription_id (str): The subscription ID of the primary
+        primary_subscription_id (int): The subscription ID of the primary
             within the group. Applicable to scheme 1.
         primary (bool): A boolean indicating whether the subscription is the
             primary in the group. Applicable to scheme 1.
@@ -46,7 +46,7 @@ class SubscriptionGroupInlined(object):
                  scheme=APIHelper.SKIP,
                  primary_subscription_id=APIHelper.SKIP,
                  primary=APIHelper.SKIP):
-        """Constructor for the SubscriptionGroupInlined class"""
+        """Constructor for the NestedSubscriptionGroup class"""
 
         # Initialize members of the class
         if uid is not APIHelper.SKIP:

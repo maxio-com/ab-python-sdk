@@ -30,9 +30,10 @@ class UpdateComponent(object):
         item_category (ItemCategory): One of the following: Business Software,
             Consumer Software, Digital Services, Physical Goods, Other
         display_on_hosted_page (bool): TODO: type description here.
-        upgrade_charge (CreditType): The type of charge to be applied when a
-            component is upgraded. Valid values are: `prorated`, `full`,
-            `none`.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site
+            setting if one is not provided. Available values: `full`,
+            `prorated`, `none`.
 
     """
 
@@ -63,8 +64,10 @@ class UpdateComponent(object):
 
     _nullables = [
         'description',
+        'accounting_code',
         'tax_code',
         'item_category',
+        'upgrade_charge',
     ]
 
     def __init__(self,
@@ -120,12 +123,12 @@ class UpdateComponent(object):
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
-        accounting_code = dictionary.get("accounting_code") if dictionary.get("accounting_code") else APIHelper.SKIP
+        accounting_code = dictionary.get("accounting_code") if "accounting_code" in dictionary.keys() else APIHelper.SKIP
         taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if "tax_code" in dictionary.keys() else APIHelper.SKIP
         item_category = dictionary.get("item_category") if "item_category" in dictionary.keys() else APIHelper.SKIP
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
-        upgrade_charge = dictionary.get("upgrade_charge") if dictionary.get("upgrade_charge") else APIHelper.SKIP
+        upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(handle,
                    name,

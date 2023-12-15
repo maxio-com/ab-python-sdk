@@ -52,7 +52,7 @@ price_point_id = 'price_point_id8'
 
 body = CreateSegmentRequest(
     segment=CreateSegment(
-        pricing_scheme='volume',
+        pricing_scheme=PricingScheme.VOLUME,
         segment_property_1_value='France',
         segment_property_2_value='Spain',
         prices=[

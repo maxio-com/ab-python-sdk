@@ -8,7 +8,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.credit_card_attributes import CreditCardAttributes
-from advancedbilling.models.custom_price_used_for_subscription_create_update import CustomPriceUsedForSubscriptionCreateUpdate
+from advancedbilling.models.subscription_custom_price import SubscriptionCustomPrice
 from advancedbilling.models.update_subscription_component import UpdateSubscriptionComponent
 
 
@@ -37,9 +37,9 @@ class UpdateSubscription(object):
         net_terms (str | int | None): TODO: type description here.
         stored_credential_transaction_id (int): TODO: type description here.
         reference (str): TODO: type description here.
-        custom_price (CustomPriceUsedForSubscriptionCreateUpdate): (Optional)
-            Used in place of `product_price_point_id` to define a custom price
-            point unique to the subscription
+        custom_price (SubscriptionCustomPrice): (Optional) Used in place of
+            `product_price_point_id` to define a custom price point unique to
+            the subscription
         components (List[UpdateSubscriptionComponent]): (Optional) An array of
             component ids and custom prices to be added to the subscription.
         dunning_communication_delay_enabled (bool): Enable Communication Delay
@@ -182,7 +182,7 @@ class UpdateSubscription(object):
         net_terms = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdateSubscriptionNetTerms'), dictionary.get('net_terms'), False) if dictionary.get('net_terms') is not None else APIHelper.SKIP
         stored_credential_transaction_id = dictionary.get("stored_credential_transaction_id") if dictionary.get("stored_credential_transaction_id") else APIHelper.SKIP
         reference = dictionary.get("reference") if dictionary.get("reference") else APIHelper.SKIP
-        custom_price = CustomPriceUsedForSubscriptionCreateUpdate.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
+        custom_price = SubscriptionCustomPrice.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
         components = None
         if dictionary.get('components') is not None:
             components = [UpdateSubscriptionComponent.from_dictionary(x) for x in dictionary.get('components')]

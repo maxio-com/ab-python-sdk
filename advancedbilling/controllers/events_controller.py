@@ -222,7 +222,7 @@ class EventsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    subscription_id -- str -- The Chargify id of the
+                    subscription_id -- int -- The Chargify id of the
                         subscription
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The

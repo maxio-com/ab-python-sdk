@@ -28,6 +28,8 @@ class RenewalPreviewLineItem(object):
         component_handle (str): TODO: type description here.
         component_name (str): TODO: type description here.
         product_handle (str): TODO: type description here.
+        period_range_start (str): TODO: type description here.
+        period_range_end (str): TODO: type description here.
 
     """
 
@@ -44,7 +46,9 @@ class RenewalPreviewLineItem(object):
         "component_id": 'component_id',
         "component_handle": 'component_handle',
         "component_name": 'component_name',
-        "product_handle": 'product_handle'
+        "product_handle": 'product_handle',
+        "period_range_start": 'period_range_start',
+        "period_range_end": 'period_range_end'
     }
 
     _optionals = [
@@ -60,6 +64,8 @@ class RenewalPreviewLineItem(object):
         'component_handle',
         'component_name',
         'product_handle',
+        'period_range_start',
+        'period_range_end',
     ]
 
     def __init__(self,
@@ -74,7 +80,9 @@ class RenewalPreviewLineItem(object):
                  component_id=APIHelper.SKIP,
                  component_handle=APIHelper.SKIP,
                  component_name=APIHelper.SKIP,
-                 product_handle=APIHelper.SKIP):
+                 product_handle=APIHelper.SKIP,
+                 period_range_start=APIHelper.SKIP,
+                 period_range_end=APIHelper.SKIP):
         """Constructor for the RenewalPreviewLineItem class"""
 
         # Initialize members of the class
@@ -102,6 +110,10 @@ class RenewalPreviewLineItem(object):
             self.component_name = component_name 
         if product_handle is not APIHelper.SKIP:
             self.product_handle = product_handle 
+        if period_range_start is not APIHelper.SKIP:
+            self.period_range_start = period_range_start 
+        if period_range_end is not APIHelper.SKIP:
+            self.period_range_end = period_range_end 
 
     @classmethod
     def from_dictionary(cls,
@@ -133,6 +145,8 @@ class RenewalPreviewLineItem(object):
         component_handle = dictionary.get("component_handle") if dictionary.get("component_handle") else APIHelper.SKIP
         component_name = dictionary.get("component_name") if dictionary.get("component_name") else APIHelper.SKIP
         product_handle = dictionary.get("product_handle") if dictionary.get("product_handle") else APIHelper.SKIP
+        period_range_start = dictionary.get("period_range_start") if dictionary.get("period_range_start") else APIHelper.SKIP
+        period_range_end = dictionary.get("period_range_end") if dictionary.get("period_range_end") else APIHelper.SKIP
         # Return an object of this model
         return cls(transaction_type,
                    kind,
@@ -145,4 +159,6 @@ class RenewalPreviewLineItem(object):
                    component_id,
                    component_handle,
                    component_name,
-                   product_handle)
+                   product_handle,
+                   period_range_start,
+                   period_range_end)

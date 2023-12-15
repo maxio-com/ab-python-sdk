@@ -11,9 +11,11 @@ from advancedbilling.models.ach_agreement import ACHAgreement
 from advancedbilling.models.agreement_acceptance import AgreementAcceptance
 from advancedbilling.models.bank_account_attributes import BankAccountAttributes
 from advancedbilling.models.calendar_billing import CalendarBilling
-from advancedbilling.models.custom_price_used_for_subscription_create_update import CustomPriceUsedForSubscriptionCreateUpdate
+from advancedbilling.models.create_subscription_component import CreateSubscriptionComponent
 from advancedbilling.models.customer_attributes import CustomerAttributes
+from advancedbilling.models.group_settings import GroupSettings
 from advancedbilling.models.payment_profile_attributes import PaymentProfileAttributes
+from advancedbilling.models.subscription_custom_price import SubscriptionCustomPrice
 from advancedbilling.models.upsert_prepaid_configuration import UpsertPrepaidConfiguration
 
 
@@ -34,9 +36,9 @@ class CreateSubscription(object):
             product's particular price point.
         product_price_point_id (int): The ID of the particular price point on
             the product.
-        custom_price (CustomPriceUsedForSubscriptionCreateUpdate): (Optional)
-            Used in place of `product_price_point_id` to define a custom price
-            point unique to the subscription
+        custom_price (SubscriptionCustomPrice): (Optional) Used in place of
+            `product_price_point_id` to define a custom price point unique to
+            the subscription
         coupon_code (str): (deprecated) The coupon code of the single coupon
             currently applied to the subscription. See coupon_codes instead as
             subscriptions can now have more than one coupon.
@@ -112,9 +114,8 @@ class CreateSubscription(object):
             `payment_profile_attributes` property.
         bank_account_attributes (BankAccountAttributes): TODO: type
             description here.
-        components (List[CreateSubscriptionComponent] | None): (Optional) An
-            array of component ids and quantities to be added to the
-            subscription. See
+        components (List[CreateSubscriptionComponent]): (Optional) An array of
+            component ids and quantities to be added to the subscription. See
             [Components](https://maxio-chargify.zendesk.com/hc/en-us/articles/5
             405020625677) for more information.
         calendar_billing (CalendarBilling): (Optional). Cannot be used when
@@ -126,7 +127,7 @@ class CreateSubscription(object):
         customer_reference (str): The reference value (provided by your app)
             of an existing customer within Chargify. Required, unless a
             `customer_id` or a set of `customer_attributes` is given.
-        group (GroupSettings | bool | None): TODO: type description here.
+        group (GroupSettings): TODO: type description here.
         ref (str): A valid referral code. (optional, see
             [Referrals](https://maxio-chargify.zendesk.com/hc/en-us/articles/54
             05420204045-Referrals-Reference#how-to-obtain-referral-codes) for
@@ -173,8 +174,8 @@ class CreateSubscription(object):
             component information to set up the subscription with an existing
             offer. May be either the Chargify id of the offer or its handle
             prefixed with `handle:`.er
-        prepaid_subscription_configuration (UpsertPrepaidConfiguration): TODO:
-            type description here.
+        prepaid_configuration (UpsertPrepaidConfiguration): TODO: type
+            description here.
         previous_billing_at (datetime): Providing a previous_billing_at that
             is in the past will set the current_period_starts_at when the
             subscription is created. It will also set activated_at if not
@@ -246,7 +247,7 @@ class CreateSubscription(object):
         "reason_code": 'reason_code',
         "product_change_delayed": 'product_change_delayed',
         "offer_id": 'offer_id',
-        "prepaid_subscription_configuration": 'prepaid_subscription_configuration',
+        "prepaid_configuration": 'prepaid_configuration',
         "previous_billing_at": 'previous_billing_at',
         "import_mrr": 'import_mrr',
         "canceled_at": 'canceled_at',
@@ -298,7 +299,7 @@ class CreateSubscription(object):
         'reason_code',
         'product_change_delayed',
         'offer_id',
-        'prepaid_subscription_configuration',
+        'prepaid_configuration',
         'previous_billing_at',
         'import_mrr',
         'canceled_at',
@@ -355,7 +356,7 @@ class CreateSubscription(object):
                  reason_code=APIHelper.SKIP,
                  product_change_delayed=APIHelper.SKIP,
                  offer_id=APIHelper.SKIP,
-                 prepaid_subscription_configuration=APIHelper.SKIP,
+                 prepaid_configuration=APIHelper.SKIP,
                  previous_billing_at=APIHelper.SKIP,
                  import_mrr=APIHelper.SKIP,
                  canceled_at=APIHelper.SKIP,
@@ -445,8 +446,8 @@ class CreateSubscription(object):
             self.product_change_delayed = product_change_delayed 
         if offer_id is not APIHelper.SKIP:
             self.offer_id = offer_id 
-        if prepaid_subscription_configuration is not APIHelper.SKIP:
-            self.prepaid_subscription_configuration = prepaid_subscription_configuration 
+        if prepaid_configuration is not APIHelper.SKIP:
+            self.prepaid_configuration = prepaid_configuration 
         if previous_billing_at is not APIHelper.SKIP:
             self.previous_billing_at = APIHelper.apply_datetime_converter(previous_billing_at, APIHelper.RFC3339DateTime) if previous_billing_at else None 
         if import_mrr is not APIHelper.SKIP:
@@ -486,7 +487,7 @@ class CreateSubscription(object):
         product_id = dictionary.get("product_id") if dictionary.get("product_id") else APIHelper.SKIP
         product_price_point_handle = dictionary.get("product_price_point_handle") if dictionary.get("product_price_point_handle") else APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
-        custom_price = CustomPriceUsedForSubscriptionCreateUpdate.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
+        custom_price = SubscriptionCustomPrice.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
         coupon_code = dictionary.get("coupon_code") if dictionary.get("coupon_code") else APIHelper.SKIP
         coupon_codes = dictionary.get("coupon_codes") if dictionary.get("coupon_codes") else APIHelper.SKIP
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
@@ -503,11 +504,15 @@ class CreateSubscription(object):
         payment_profile_attributes = PaymentProfileAttributes.from_dictionary(dictionary.get('payment_profile_attributes')) if 'payment_profile_attributes' in dictionary.keys() else APIHelper.SKIP
         credit_card_attributes = PaymentProfileAttributes.from_dictionary(dictionary.get('credit_card_attributes')) if 'credit_card_attributes' in dictionary.keys() else APIHelper.SKIP
         bank_account_attributes = BankAccountAttributes.from_dictionary(dictionary.get('bank_account_attributes')) if 'bank_account_attributes' in dictionary.keys() else APIHelper.SKIP
-        components = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionComponents'), dictionary.get('components'), False) if dictionary.get('components') is not None else APIHelper.SKIP
+        components = None
+        if dictionary.get('components') is not None:
+            components = [CreateSubscriptionComponent.from_dictionary(x) for x in dictionary.get('components')]
+        else:
+            components = APIHelper.SKIP
         calendar_billing = CalendarBilling.from_dictionary(dictionary.get('calendar_billing')) if 'calendar_billing' in dictionary.keys() else APIHelper.SKIP
         metafields = dictionary.get("metafields") if dictionary.get("metafields") else APIHelper.SKIP
         customer_reference = dictionary.get("customer_reference") if dictionary.get("customer_reference") else APIHelper.SKIP
-        group = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionGroup2'), dictionary.get('group'), False) if dictionary.get('group') is not None else APIHelper.SKIP
+        group = GroupSettings.from_dictionary(dictionary.get('group')) if 'group' in dictionary.keys() else APIHelper.SKIP
         ref = dictionary.get("ref") if dictionary.get("ref") else APIHelper.SKIP
         cancellation_message = dictionary.get("cancellation_message") if dictionary.get("cancellation_message") else APIHelper.SKIP
         cancellation_method = dictionary.get("cancellation_method") if dictionary.get("cancellation_method") else APIHelper.SKIP
@@ -521,7 +526,7 @@ class CreateSubscription(object):
         reason_code = dictionary.get("reason_code") if dictionary.get("reason_code") else APIHelper.SKIP
         product_change_delayed = dictionary.get("product_change_delayed") if "product_change_delayed" in dictionary.keys() else APIHelper.SKIP
         offer_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionOfferId'), dictionary.get('offer_id'), False) if dictionary.get('offer_id') is not None else APIHelper.SKIP
-        prepaid_subscription_configuration = UpsertPrepaidConfiguration.from_dictionary(dictionary.get('prepaid_subscription_configuration')) if 'prepaid_subscription_configuration' in dictionary.keys() else APIHelper.SKIP
+        prepaid_configuration = UpsertPrepaidConfiguration.from_dictionary(dictionary.get('prepaid_configuration')) if 'prepaid_configuration' in dictionary.keys() else APIHelper.SKIP
         previous_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("previous_billing_at")).datetime if dictionary.get("previous_billing_at") else APIHelper.SKIP
         import_mrr = dictionary.get("import_mrr") if "import_mrr" in dictionary.keys() else APIHelper.SKIP
         canceled_at = dictionary.get("canceled_at") if dictionary.get("canceled_at") else APIHelper.SKIP
@@ -571,7 +576,7 @@ class CreateSubscription(object):
                    reason_code,
                    product_change_delayed,
                    offer_id,
-                   prepaid_subscription_configuration,
+                   prepaid_configuration,
                    previous_billing_at,
                    import_mrr,
                    canceled_at,

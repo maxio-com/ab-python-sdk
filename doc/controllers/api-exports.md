@@ -173,7 +173,7 @@ print(result)
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `APIException` |
-| 409 | Conflict | [`SingleErrorResponseException`](../../doc/models/single-error-response-exception.md) |
+| 409 | Conflict | [`SingleErrorResponseErrorException`](../../doc/models/single-error-response-error-exception.md) |
 
 
 # Export Invoices
@@ -200,7 +200,7 @@ print(result)
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `APIException` |
-| 409 | Conflict | [`SingleErrorResponseException`](../../doc/models/single-error-response-exception.md) |
+| 409 | Conflict | [`SingleErrorResponseErrorException`](../../doc/models/single-error-response-error-exception.md) |
 
 
 # Export Subscriptions
@@ -226,7 +226,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 409 | Conflict | [`SingleErrorResponseException`](../../doc/models/single-error-response-exception.md) |
+| 409 | Conflict | [`SingleErrorResponseErrorException`](../../doc/models/single-error-response-error-exception.md) |
 
 
 # Read Proforma Invoices Export

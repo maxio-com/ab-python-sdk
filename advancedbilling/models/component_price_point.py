@@ -25,7 +25,10 @@ class ComponentPricePoint(object):
             price for a certain product and is **not** a custom one.
         default (bool): Note: Refer to type attribute instead
         name (str): TODO: type description here.
-        pricing_scheme (str): TODO: type description here.
+        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
+            See [Product
+            Components](https://help.chargify.com/products/product-components.h
+            tml) for an overview of pricing schemes.
         component_id (int): TODO: type description here.
         handle (str): TODO: type description here.
         archived_at (str): TODO: type description here.

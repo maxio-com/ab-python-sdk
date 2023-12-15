@@ -22,7 +22,7 @@ class ComponentAllocationChange(object):
         component_handle (str): TODO: type description here.
         memo (str): TODO: type description here.
         allocation_id (int): TODO: type description here.
-        allocated_quantity (int): TODO: type description here.
+        allocated_quantity (int | str | None): TODO: type description here.
 
     """
 
@@ -86,7 +86,7 @@ class ComponentAllocationChange(object):
         component_handle = dictionary.get("component_handle") if dictionary.get("component_handle") else None
         memo = dictionary.get("memo") if dictionary.get("memo") else None
         allocation_id = dictionary.get("allocation_id") if dictionary.get("allocation_id") else None
-        allocated_quantity = dictionary.get("allocated_quantity") if dictionary.get("allocated_quantity") else APIHelper.SKIP
+        allocated_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ComponentAllocationChangeAllocatedQuantity'), dictionary.get('allocated_quantity'), False) if dictionary.get('allocated_quantity') is not None else APIHelper.SKIP
         # Return an object of this model
         return cls(previous_allocation,
                    new_allocation,

@@ -656,7 +656,7 @@ class PaymentProfilesController(BaseController):
         other cards present).
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             payment_profile_id (str): The Chargify id of the payment profile
 
         Returns:
@@ -792,7 +792,7 @@ class PaymentProfilesController(BaseController):
         endpoint.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
             payment_profile_id (int): The Chargify id of the payment profile
 
         Returns:
@@ -952,7 +952,7 @@ class PaymentProfilesController(BaseController):
         encounter errors during the request process.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription
 
         Returns:
             void: Response from the API. Created

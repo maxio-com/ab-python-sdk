@@ -24,21 +24,21 @@
 | `created_at` | `datetime` | Optional | The creation date for this subscription |
 | `updated_at` | `datetime` | Optional | The date of last update for this subscription |
 | `cancellation_message` | `str` | Optional | Seller-provided reason for, or note about, the cancellation. |
-| `cancellation_method` | [Cancellation Method](../../doc/models/cancellation-method.md) \| None | Optional | This is a container for one-of cases. |
+| `cancellation_method` | [`CancellationMethod`](../../doc/models/cancellation-method.md) | Optional | The process used to cancel the subscription, if the subscription has been canceled. It is nil if the subscription's state is not canceled. |
 | `cancel_at_end_of_period` | `bool` | Optional | Whether or not the subscription will (or has) canceled at the end of the period. |
 | `canceled_at` | `datetime` | Optional | The timestamp of the most recent cancellation |
 | `current_period_started_at` | `datetime` | Optional | Timestamp relating to the start of the current (recurring) period |
-| `previous_state` | `str` | Optional | Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state) |
+| `previous_state` | [`SubscriptionState`](../../doc/models/subscription-state.md) | Optional | Only valid for webhook payloads The previous state for webhooks that have indicated a change in state. For normal API calls, this will always be the same as the state (current state) |
 | `signup_payment_id` | `int` | Optional | The ID of the transaction that generated the revenue |
 | `signup_revenue` | `str` | Optional | The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00) |
 | `delayed_cancel_at` | `datetime` | Optional | Timestamp for when the subscription is currently set to cancel. |
 | `coupon_code` | `str` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
 | `snap_day` | `str` | Optional | The day of the month that the subscription will charge according to calendar billing rules, if used. |
-| `payment_collection_method` | [Payment Collection Method](../../doc/models/payment-collection-method.md) \| None | Optional | This is a container for one-of cases. |
+| `payment_collection_method` | [`PaymentCollectionMethod`](../../doc/models/payment-collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `'automatic'` |
 | `customer` | [`Customer`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product`](../../doc/models/product.md) | Optional | - |
 | `credit_card` | [`PaymentProfile`](../../doc/models/payment-profile.md) | Optional | - |
-| `group` | [Subscription Group Inlined](../../doc/models/subscription-group-inlined.md) \| None | Optional | This is a container for one-of cases. |
+| `group` | [Nested Subscription Group](../../doc/models/nested-subscription-group.md) \| None | Optional | This is a container for one-of cases. |
 | `bank_account` | [`SubscriptionBankAccount`](../../doc/models/subscription-bank-account.md) | Optional | - |
 | `payment_type` | `str` | Optional | The payment profile type for the active profile on file. |
 | `referral_code` | `str` | Optional | The subscription's unique code that can be given to referrals. |
@@ -47,18 +47,18 @@
 | `coupon_use_count` | `int` | Optional | (deprecated) How many times the subscription's single coupon has been used. This field has no replacement for multiple coupons. |
 | `coupon_uses_allowed` | `int` | Optional | (deprecated) How many times the subscription's single coupon may be used. This field has no replacement for multiple coupons. |
 | `reason_code` | `str` | Optional | If the subscription is canceled, this is their churn code. |
-| `automatically_resume_at` | `str` | Optional | The date the subscription is scheduled to automatically resume from the on_hold state. |
+| `automatically_resume_at` | `datetime` | Optional | The date the subscription is scheduled to automatically resume from the on_hold state. |
 | `coupon_codes` | `List[str]` | Optional | An array for all the coupons attached to the subscription. |
 | `offer_id` | `int` | Optional | The ID of the offer associated with the subscription. |
 | `payer_id` | `int` | Optional | On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. |
 | `current_billing_amount_in_cents` | `long\|int` | Optional | The balance in cents plus the estimated renewal amount in cents. |
 | `product_price_point_id` | `int` | Optional | The product price point currently subscribed to. |
-| `product_price_point_type` | `str` | Optional | One of the following: custom, default, catalog. |
+| `product_price_point_type` | [`PricePointType`](../../doc/models/price-point-type.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
 | `next_product_price_point_id` | `int` | Optional | If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal. |
 | `net_terms` | `int` | Optional | On Relationship Invoicing, the number of days before a renewal invoice is due. |
 | `stored_credential_transaction_id` | `int` | Optional | For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal. |
 | `reference` | `str` | Optional | The reference value (provided by your app) for the subscription itelf. |
-| `on_hold_at` | `str` | Optional | The timestamp of the most recent on hold action. |
+| `on_hold_at` | `datetime` | Optional | The timestamp of the most recent on hold action. |
 | `prepaid_dunning` | `bool` | Optional | Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled |
 | `coupons` | [`List[SubscriptionIncludedCoupon]`](../../doc/models/subscription-included-coupon.md) | Optional | Additional coupon data. To use this data you also have to include the following param in the request`include[]=coupons`.<br>Only in Read Subscription Endpoint. |
 | `dunning_communication_delay_enabled` | `bool` | Optional | Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.<br>**Default**: `False` |
@@ -69,11 +69,14 @@
 | `scheduled_cancellation_at` | `datetime` | Optional | - |
 | `credit_balance_in_cents` | `long\|int` | Optional | - |
 | `prepayment_balance_in_cents` | `long\|int` | Optional | - |
+| `prepaid_configuration` | [`PrepaidConfiguration`](../../doc/models/prepaid-configuration.md) | Optional | - |
+| `self_service_page_token` | `str` | Optional | Returned only for list/read Subscription operation when `include[]=self_service_page_token` parameter is provided. |
 
 ## Example (as JSON)
 
 ```json
 {
+  "payment_collection_method": "automatic",
   "credit_card": {
     "id": 10088716,
     "first_name": "Test",

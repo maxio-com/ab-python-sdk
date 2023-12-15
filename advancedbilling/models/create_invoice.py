@@ -6,6 +6,8 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.create_invoice_address import CreateInvoiceAddress
 from advancedbilling.models.create_invoice_coupon import CreateInvoiceCoupon
@@ -20,7 +22,7 @@ class CreateInvoice(object):
 
     Attributes:
         line_items (List[CreateInvoiceItem]): TODO: type description here.
-        issue_date (str): TODO: type description here.
+        issue_date (date): TODO: type description here.
         net_terms (int): By default, invoices will be created with a due date
             matching the date of invoice creation. If a different due date is
             desired, the net_terms parameter can be sent indicating the number
@@ -34,7 +36,7 @@ class CreateInvoice(object):
         shipping_address (CreateInvoiceAddress): Overrides the default for the
             customer
         coupons (List[CreateInvoiceCoupon]): TODO: type description here.
-        status (Status1): TODO: type description here.
+        status (CreateInvoiceStatus): TODO: type description here.
 
     """
 
@@ -122,7 +124,7 @@ class CreateInvoice(object):
             line_items = [CreateInvoiceItem.from_dictionary(x) for x in dictionary.get('line_items')]
         else:
             line_items = APIHelper.SKIP
-        issue_date = dictionary.get("issue_date") if dictionary.get("issue_date") else APIHelper.SKIP
+        issue_date = dateutil.parser.parse(dictionary.get('issue_date')).date() if dictionary.get('issue_date') else APIHelper.SKIP
         net_terms = dictionary.get("net_terms") if dictionary.get("net_terms") else APIHelper.SKIP
         payment_instructions = dictionary.get("payment_instructions") if dictionary.get("payment_instructions") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP

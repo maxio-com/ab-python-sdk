@@ -21,7 +21,10 @@ class Segment(object):
         component_id (int): TODO: type description here.
         price_point_id (int): TODO: type description here.
         event_based_billing_metric_id (int): TODO: type description here.
-        pricing_scheme (str): TODO: type description here.
+        pricing_scheme (PricingScheme): The identifier for the pricing scheme.
+            See [Product
+            Components](https://help.chargify.com/products/product-components.h
+            tml) for an overview of pricing schemes.
         segment_property_1_value (str | float | int | bool | None): TODO: type
             description here.
         segment_property_2_value (str | float | int | bool | None): TODO: type

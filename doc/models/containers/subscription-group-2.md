@@ -3,11 +3,11 @@
 
 ## Data Type
 
-`SubscriptionGroupInlined`
+`NestedSubscriptionGroup`
 
 ## Cases
 
 | Type |
 |  --- |
-| [`SubscriptionGroupInlined`](../../../doc/models/subscription-group-inlined.md) |
+| [`NestedSubscriptionGroup`](../../../doc/models/nested-subscription-group.md) |
 

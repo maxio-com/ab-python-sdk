@@ -8,9 +8,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 
-class Status1(object):
+class CreateInvoiceStatus(object):
 
-    """Implementation of the 'Status1' enum.
+    """Implementation of the 'Create Invoice Status' enum.
 
     TODO: type enum description here.
 

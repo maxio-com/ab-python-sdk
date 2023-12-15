@@ -10,7 +10,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.configuration import Server
 from advancedbilling.controllers.base_controller import BaseController
-from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
@@ -63,8 +62,8 @@ class CouponsController(BaseController):
         Args:
             product_family_id (int): The Chargify id of the product family to
                 which the coupon belongs
-            body (CreateOrUpdateCoupon | None, optional): TODO: type
-                description here.
+            body (CreateOrUpdateCoupon, optional): TODO: type description
+                here.
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -90,8 +89,7 @@ class CouponsController(BaseController):
                           .key('Content-Type')
                           .value('application/json'))
             .body_param(Parameter()
-                        .value(body)
-                        .validator(lambda value: UnionTypeLookUp.get('CreateCouponBody').validate(value)))
+                        .value(body))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -139,12 +137,13 @@ class CouponsController(BaseController):
                     filter_date_field -- BasicDateField -- The type of filter
                         you would like to apply to your search. Use in query
                         `filter[date_field]=created_at`.
-                    filter_end_date -- str -- The end date (format YYYY-MM-DD)
-                        with which to filter the date_field. Returns coupons
-                        with a timestamp up to and including 11:59:59PM in
-                        your site’s time zone on the date specified. Use in
-                        query `filter[date_field]=2011-12-15`.
-                    filter_end_datetime -- str -- The end date and time
+                    filter_end_date -- date -- The end date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns coupons with a timestamp up to and including
+                        11:59:59PM in your site’s time zone on the date
+                        specified. Use in query
+                        `filter[date_field]=2011-12-15`.
+                    filter_end_datetime -- datetime -- The end date and time
                         (format YYYY-MM-DD HH:MM:SS) with which to filter the
                         date_field. Returns coupons with a timestamp at or
                         before exact time provided in query. You can specify
@@ -152,15 +151,15 @@ class CouponsController(BaseController):
                         will be used. If provided, this parameter will be used
                         instead of end_date. Use in query
                         `?filter[end_datetime]=2011-12-1T10:15:30+01:00`.
-                    filter_start_date -- str -- The start date (format
+                    filter_start_date -- date -- The start date (format
                         YYYY-MM-DD) with which to filter the date_field.
                         Returns coupons with a timestamp at or after midnight
                         (12:00:00 AM) in your site’s time zone on the date
                         specified. Use in query
                         `filter[start_date]=2011-12-17`.
-                    filter_start_datetime -- str -- The start date and time
-                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns coupons with a timestamp at or
+                    filter_start_datetime -- datetime -- The start date and
+                        time (format YYYY-MM-DD HH:MM:SS) with which to filter
+                        the date_field. Returns coupons with a timestamp at or
                         after exact time provided in query. You can specify
                         timezone in query - otherwise your site's time zone
                         will be used. If provided, this parameter will be used
@@ -216,13 +215,13 @@ class CouponsController(BaseController):
                          .value(options.get('filter_end_date', None)))
             .query_param(Parameter()
                          .key('filter[end_datetime]')
-                         .value(options.get('filter_end_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_end_datetime', None))))
             .query_param(Parameter()
                          .key('filter[start_date]')
                          .value(options.get('filter_start_date', None)))
             .query_param(Parameter()
                          .key('filter[start_datetime]')
-                         .value(options.get('filter_start_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_start_datetime', None))))
             .query_param(Parameter()
                          .key('filter[ids]')
                          .value(options.get('filter_ids', None)))
@@ -370,8 +369,8 @@ class CouponsController(BaseController):
             product_family_id (int): The Chargify id of the product family to
                 which the coupon belongs
             coupon_id (int): The Chargify id of the coupon
-            body (CreateOrUpdateCoupon | None, optional): TODO: type
-                description here.
+            body (CreateOrUpdateCoupon, optional): TODO: type description
+                here.
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -402,8 +401,7 @@ class CouponsController(BaseController):
                           .key('Content-Type')
                           .value('application/json'))
             .body_param(Parameter()
-                        .value(body)
-                        .validator(lambda value: UnionTypeLookUp.get('UpdateCouponBody').validate(value)))
+                        .value(body))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -501,21 +499,21 @@ class CouponsController(BaseController):
                         filter[date_field] instead to achieve the same result.
                         The type of filter you would like to apply to your
                         search.
-                    start_date -- str -- The field was deprecated: on January
+                    start_date -- date -- The field was deprecated: on January
                         20, 2022. We recommend using filter[start_date]
                         instead to achieve the same result. The start date
                         (format YYYY-MM-DD) with which to filter the
                         date_field. Returns coupons with a timestamp at or
                         after midnight (12:00:00 AM) in your site’s time zone
                         on the date specified.
-                    end_date -- str -- The field was deprecated: on January
+                    end_date -- date -- The field was deprecated: on January
                         20, 2022. We recommend using filter[end_date] instead
                         to achieve the same result. The end date (format
                         YYYY-MM-DD) with which to filter the date_field.
                         Returns coupons with a timestamp up to and including
                         11:59:59PM in your site’s time zone on the date
                         specified.
-                    start_datetime -- str -- The field was deprecated: on
+                    start_datetime -- datetime -- The field was deprecated: on
                         January 20, 2022. We recommend using
                         filter[start_datetime] instead to achieve the same
                         result. The start date and time (format YYYY-MM-DD
@@ -525,7 +523,7 @@ class CouponsController(BaseController):
                         otherwise your site's time zone will be used. If
                         provided, this parameter will be used instead of
                         start_date.
-                    end_datetime -- str -- The field was deprecated: on
+                    end_datetime -- datetime -- The field was deprecated: on
                         January 20, 2022. We recommend using
                         filter[end_datetime] instead to achieve the same
                         result. The end date and time (format YYYY-MM-DD
@@ -546,12 +544,13 @@ class CouponsController(BaseController):
                         you can optionally pass the `?currency_prices=true`
                         query param to include an array of currency price data
                         in the response. Use in query `currency_prices=true`.
-                    filter_end_date -- str -- The end date (format YYYY-MM-DD)
-                        with which to filter the date_field. Returns coupons
-                        with a timestamp up to and including 11:59:59PM in
-                        your site’s time zone on the date specified. Use in
-                        query `filter[end_date]=2011-12-17`.
-                    filter_end_datetime -- str -- The end date and time
+                    filter_end_date -- date -- The end date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns coupons with a timestamp up to and including
+                        11:59:59PM in your site’s time zone on the date
+                        specified. Use in query
+                        `filter[end_date]=2011-12-17`.
+                    filter_end_datetime -- datetime -- The end date and time
                         (format YYYY-MM-DD HH:MM:SS) with which to filter the
                         date_field. Returns coupons with a timestamp at or
                         before exact time provided in query. You can specify
@@ -559,15 +558,15 @@ class CouponsController(BaseController):
                         will be used. If provided, this parameter will be used
                         instead of end_date. Use in query
                         `filter[end_datetime]=2011-12-19T10:15:30+01:00`.
-                    filter_start_date -- str -- The start date (format
+                    filter_start_date -- date -- The start date (format
                         YYYY-MM-DD) with which to filter the date_field.
                         Returns coupons with a timestamp at or after midnight
                         (12:00:00 AM) in your site’s time zone on the date
                         specified. Use in query
                         `filter[start_date]=2011-12-19`.
-                    filter_start_datetime -- str -- The start date and time
-                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns coupons with a timestamp at or
+                    filter_start_datetime -- datetime -- The start date and
+                        time (format YYYY-MM-DD HH:MM:SS) with which to filter
+                        the date_field. Returns coupons with a timestamp at or
                         after exact time provided in query. You can specify
                         timezone in query - otherwise your site's time zone
                         will be used. If provided, this parameter will be used
@@ -613,10 +612,10 @@ class CouponsController(BaseController):
                          .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(options.get('start_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('start_datetime', None))))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(options.get('end_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('end_datetime', None))))
             .query_param(Parameter()
                          .key('filter[ids]')
                          .value(options.get('filter_ids', None)))
@@ -631,13 +630,13 @@ class CouponsController(BaseController):
                          .value(options.get('filter_end_date', None)))
             .query_param(Parameter()
                          .key('filter[end_datetime]')
-                         .value(options.get('filter_end_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_end_datetime', None))))
             .query_param(Parameter()
                          .key('filter[start_date]')
                          .value(options.get('filter_start_date', None)))
             .query_param(Parameter()
                          .key('filter[start_datetime]')
-                         .value(options.get('filter_start_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_start_datetime', None))))
             .query_param(Parameter()
                          .key('filter[date_field]')
                          .value(options.get('filter_date_field', None)))

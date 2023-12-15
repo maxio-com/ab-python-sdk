@@ -8,7 +8,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.calendar_billing import CalendarBilling
-from advancedbilling.models.custom_price_used_for_subscription_create_update import CustomPriceUsedForSubscriptionCreateUpdate
+from advancedbilling.models.subscription_custom_price import SubscriptionCustomPrice
 from advancedbilling.models.subscription_group_signup_component import SubscriptionGroupSignupComponent
 
 
@@ -45,9 +45,9 @@ class SubscriptionGroupSignupItem(object):
             subscription.
         components (List[SubscriptionGroupSignupComponent]): TODO: type
             description here.
-        custom_price (CustomPriceUsedForSubscriptionCreateUpdate): (Optional)
-            Used in place of `product_price_point_id` to define a custom price
-            point unique to the subscription
+        custom_price (SubscriptionCustomPrice): (Optional) Used in place of
+            `product_price_point_id` to define a custom price point unique to
+            the subscription
         calendar_billing (CalendarBilling): (Optional). Cannot be used when
             also specifying next_billing_at
         metafields (Dict[str, str]): (Optional) A set of key/value pairs
@@ -166,7 +166,7 @@ class SubscriptionGroupSignupItem(object):
             components = [SubscriptionGroupSignupComponent.from_dictionary(x) for x in dictionary.get('components')]
         else:
             components = APIHelper.SKIP
-        custom_price = CustomPriceUsedForSubscriptionCreateUpdate.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
+        custom_price = SubscriptionCustomPrice.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
         calendar_billing = CalendarBilling.from_dictionary(dictionary.get('calendar_billing')) if 'calendar_billing' in dictionary.keys() else APIHelper.SKIP
         metafields = dictionary.get("metafields") if dictionary.get("metafields") else APIHelper.SKIP
         # Return an object of this model

@@ -16,7 +16,7 @@ class AutoResume(object):
     TODO: type model description here.
 
     Attributes:
-        automatically_resume_at (str): TODO: type description here.
+        automatically_resume_at (datetime): TODO: type description here.
 
     """
 
@@ -29,13 +29,17 @@ class AutoResume(object):
         'automatically_resume_at',
     ]
 
+    _nullables = [
+        'automatically_resume_at',
+    ]
+
     def __init__(self,
                  automatically_resume_at=APIHelper.SKIP):
         """Constructor for the AutoResume class"""
 
         # Initialize members of the class
         if automatically_resume_at is not APIHelper.SKIP:
-            self.automatically_resume_at = automatically_resume_at 
+            self.automatically_resume_at = APIHelper.apply_datetime_converter(automatically_resume_at, APIHelper.RFC3339DateTime) if automatically_resume_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -55,6 +59,9 @@ class AutoResume(object):
             return None
 
         # Extract variables from the dictionary
-        automatically_resume_at = dictionary.get("automatically_resume_at") if dictionary.get("automatically_resume_at") else APIHelper.SKIP
+        if 'automatically_resume_at' in dictionary.keys():
+            automatically_resume_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("automatically_resume_at")).datetime if dictionary.get("automatically_resume_at") else None
+        else:
+            automatically_resume_at = APIHelper.SKIP
         # Return an object of this model
         return cls(automatically_resume_at)

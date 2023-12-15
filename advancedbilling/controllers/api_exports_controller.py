@@ -22,7 +22,7 @@ from advancedbilling.models.invoice import Invoice
 from advancedbilling.models.subscription import Subscription
 from advancedbilling.models.batch_job_response import BatchJobResponse
 from advancedbilling.exceptions.api_exception import APIException
-from advancedbilling.exceptions.single_error_response_exception import SingleErrorResponseException
+from advancedbilling.exceptions.single_error_response_error_exception import SingleErrorResponseErrorException
 
 
 class APIExportsController(BaseController):
@@ -272,7 +272,7 @@ class APIExportsController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
-            .local_error('409', 'Conflict', SingleErrorResponseException)
+            .local_error('409', 'Conflict', SingleErrorResponseErrorException)
         ).execute()
 
     def export_invoices(self):
@@ -304,7 +304,7 @@ class APIExportsController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
-            .local_error('409', 'Conflict', SingleErrorResponseException)
+            .local_error('409', 'Conflict', SingleErrorResponseErrorException)
         ).execute()
 
     def export_subscriptions(self):
@@ -336,7 +336,7 @@ class APIExportsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
-            .local_error('409', 'Conflict', SingleErrorResponseException)
+            .local_error('409', 'Conflict', SingleErrorResponseErrorException)
         ).execute()
 
     def read_proforma_invoices_export(self,

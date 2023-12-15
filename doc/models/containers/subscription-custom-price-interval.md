@@ -1,5 +1,5 @@
 
-# Custom Price Used for Subscription Create Update Interval
+# Subscription Custom Price Interval
 
 ## Data Type
 
