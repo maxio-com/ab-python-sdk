@@ -118,3 +118,24 @@ class InvoicePaymentMethod(object):
                    card_expiration,
                    last_four,
                    masked_card_number)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        if isinstance(dictionary, cls):
+            return True
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return True

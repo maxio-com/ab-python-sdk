@@ -28,6 +28,13 @@ class PricePoint(object):
         use_site_exchange_rate (bool): Whether to use the site level exchange
             rate or define your own prices for each currency if you have
             multiple currencies defined on the site.
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this price point
+            would renew every 30 days. This property is only available for
+            sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this price point, either month or day. This property is only
+            available for sites with Multifrequency enabled.
         overage_pricing (OveragePricing): TODO: type description here.
         rollover_prepaid_remainder (bool): Boolean which controls whether or
             not remaining units should be rolled over to the next period
@@ -49,6 +56,8 @@ class PricePoint(object):
         "pricing_scheme": 'pricing_scheme',
         "prices": 'prices',
         "use_site_exchange_rate": 'use_site_exchange_rate',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit',
         "overage_pricing": 'overage_pricing',
         "rollover_prepaid_remainder": 'rollover_prepaid_remainder',
         "renew_prepaid_allocation": 'renew_prepaid_allocation',
@@ -62,6 +71,8 @@ class PricePoint(object):
         'pricing_scheme',
         'prices',
         'use_site_exchange_rate',
+        'interval',
+        'interval_unit',
         'overage_pricing',
         'rollover_prepaid_remainder',
         'renew_prepaid_allocation',
@@ -75,6 +86,8 @@ class PricePoint(object):
                  pricing_scheme=APIHelper.SKIP,
                  prices=APIHelper.SKIP,
                  use_site_exchange_rate=True,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP,
                  overage_pricing=APIHelper.SKIP,
                  rollover_prepaid_remainder=APIHelper.SKIP,
                  renew_prepaid_allocation=APIHelper.SKIP,
@@ -92,6 +105,10 @@ class PricePoint(object):
         if prices is not APIHelper.SKIP:
             self.prices = prices 
         self.use_site_exchange_rate = use_site_exchange_rate 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
         if overage_pricing is not APIHelper.SKIP:
             self.overage_pricing = overage_pricing 
         if rollover_prepaid_remainder is not APIHelper.SKIP:
@@ -130,6 +147,8 @@ class PricePoint(object):
         else:
             prices = APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if dictionary.get("use_site_exchange_rate") else True
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         overage_pricing = OveragePricing.from_dictionary(dictionary.get('overage_pricing')) if 'overage_pricing' in dictionary.keys() else APIHelper.SKIP
         rollover_prepaid_remainder = dictionary.get("rollover_prepaid_remainder") if "rollover_prepaid_remainder" in dictionary.keys() else APIHelper.SKIP
         renew_prepaid_allocation = dictionary.get("renew_prepaid_allocation") if "renew_prepaid_allocation" in dictionary.keys() else APIHelper.SKIP
@@ -141,6 +160,8 @@ class PricePoint(object):
                    pricing_scheme,
                    prices,
                    use_site_exchange_rate,
+                   interval,
+                   interval_unit,
                    overage_pricing,
                    rollover_prepaid_remainder,
                    renew_prepaid_allocation,

@@ -75,6 +75,7 @@ __all__ = [
     'coupon_usage',
     'coupon_currency_request',
     'update_coupon_currency',
+    'coupon_currency_response',
     'coupon_currency',
     'coupon_subcodes',
     'coupon_subcodes_response',

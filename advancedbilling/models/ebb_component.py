@@ -66,6 +66,14 @@ class EBBComponent(object):
         price_in_cents (str): deprecated May 2011 - use unit_price instead
         event_based_billing_metric_id (int): The ID of an event based billing
             metric that will be attached to this component.
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this component's
+            default price point would renew every 30 days. This property is
+            only available for sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this component's default price point, either month or day.
+            This property is only available for sites with Multifrequency
+            enabled.
 
     """
 
@@ -85,7 +93,9 @@ class EBBComponent(object):
         "unit_price": 'unit_price',
         "tax_code": 'tax_code',
         "hide_date_range_on_invoice": 'hide_date_range_on_invoice',
-        "price_in_cents": 'price_in_cents'
+        "price_in_cents": 'price_in_cents',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit'
     }
 
     _optionals = [
@@ -100,6 +110,8 @@ class EBBComponent(object):
         'tax_code',
         'hide_date_range_on_invoice',
         'price_in_cents',
+        'interval',
+        'interval_unit',
     ]
 
     _nullables = [
@@ -122,7 +134,9 @@ class EBBComponent(object):
                  unit_price=APIHelper.SKIP,
                  tax_code=APIHelper.SKIP,
                  hide_date_range_on_invoice=APIHelper.SKIP,
-                 price_in_cents=APIHelper.SKIP):
+                 price_in_cents=APIHelper.SKIP,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP):
         """Constructor for the EBBComponent class"""
 
         # Initialize members of the class
@@ -152,6 +166,10 @@ class EBBComponent(object):
         if price_in_cents is not APIHelper.SKIP:
             self.price_in_cents = price_in_cents 
         self.event_based_billing_metric_id = event_based_billing_metric_id 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
 
     @classmethod
     def from_dictionary(cls,
@@ -195,6 +213,8 @@ class EBBComponent(object):
         tax_code = dictionary.get("tax_code") if dictionary.get("tax_code") else APIHelper.SKIP
         hide_date_range_on_invoice = dictionary.get("hide_date_range_on_invoice") if "hide_date_range_on_invoice" in dictionary.keys() else APIHelper.SKIP
         price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         # Return an object of this model
         return cls(name,
                    unit_name,
@@ -210,7 +230,9 @@ class EBBComponent(object):
                    unit_price,
                    tax_code,
                    hide_date_range_on_invoice,
-                   price_in_cents)
+                   price_in_cents,
+                   interval,
+                   interval_unit)
 
     @classmethod
     def validate(cls, dictionary):

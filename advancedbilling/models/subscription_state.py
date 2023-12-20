@@ -103,6 +103,7 @@ class SubscriptionState(object):
         AWAITING_SIGNUP: TODO: type description here.
 
     """
+    _all_values = ['pending', 'failed_to_create', 'trialing', 'assessing', 'active', 'soft_failure', 'past_due', 'suspended', 'canceled', 'expired', 'paused', 'unpaid', 'trial_ended', 'on_hold', 'awaiting_signup']
     PENDING = 'pending'
 
     FAILED_TO_CREATE = 'failed_to_create'
@@ -133,3 +134,15 @@ class SubscriptionState(object):
 
     AWAITING_SIGNUP = 'awaiting_signup'
 
+    @classmethod
+    def validate(cls, value):
+        """Validates value contains in enum
+
+        Args:
+            value: the value to be validated
+
+        Returns:
+            boolean : if value is valid enum values.
+
+        """
+        return value in cls._all_values

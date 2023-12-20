@@ -79,6 +79,14 @@ class Component(object):
         event_based_billing_metric_id (int): (Only for Event Based Components)
             This is an ID of a metric attached to the component. This metric
             is used to bill upon collected events.
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this component's
+            default price point would renew every 30 days. This property is
+            only available for sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this component's default price point, either month or day.
+            This property is only available for sites with Multifrequency
+            enabled.
 
     """
 
@@ -114,7 +122,9 @@ class Component(object):
         "item_category": 'item_category',
         "use_site_exchange_rate": 'use_site_exchange_rate',
         "accounting_code": 'accounting_code',
-        "event_based_billing_metric_id": 'event_based_billing_metric_id'
+        "event_based_billing_metric_id": 'event_based_billing_metric_id',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit'
     }
 
     _optionals = [
@@ -149,6 +159,8 @@ class Component(object):
         'use_site_exchange_rate',
         'accounting_code',
         'event_based_billing_metric_id',
+        'interval',
+        'interval_unit',
     ]
 
     _nullables = [
@@ -198,7 +210,9 @@ class Component(object):
                  item_category=APIHelper.SKIP,
                  use_site_exchange_rate=APIHelper.SKIP,
                  accounting_code=APIHelper.SKIP,
-                 event_based_billing_metric_id=APIHelper.SKIP):
+                 event_based_billing_metric_id=APIHelper.SKIP,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP):
         """Constructor for the Component class"""
 
         # Initialize members of the class
@@ -264,6 +278,10 @@ class Component(object):
             self.accounting_code = accounting_code 
         if event_based_billing_metric_id is not APIHelper.SKIP:
             self.event_based_billing_metric_id = event_based_billing_metric_id 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
 
     @classmethod
     def from_dictionary(cls,
@@ -279,6 +297,7 @@ class Component(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
@@ -320,6 +339,8 @@ class Component(object):
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
         accounting_code = dictionary.get("accounting_code") if "accounting_code" in dictionary.keys() else APIHelper.SKIP
         event_based_billing_metric_id = dictionary.get("event_based_billing_metric_id") if dictionary.get("event_based_billing_metric_id") else APIHelper.SKIP
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    name,
@@ -351,4 +372,6 @@ class Component(object):
                    item_category,
                    use_site_exchange_rate,
                    accounting_code,
-                   event_based_billing_metric_id)
+                   event_based_billing_metric_id,
+                   interval,
+                   interval_unit)

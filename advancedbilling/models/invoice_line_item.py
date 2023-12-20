@@ -234,6 +234,7 @@ class InvoiceLineItem(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
@@ -284,3 +285,24 @@ class InvoiceLineItem(object):
                    component_cost_data,
                    product_price_point_id,
                    custom_item)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        if isinstance(dictionary, cls):
+            return True
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return True

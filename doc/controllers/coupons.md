@@ -787,7 +787,7 @@ def update_coupon_currency_prices(self,
 
 ## Response Type
 
-[`List[CouponCurrency]`](../../doc/models/coupon-currency.md)
+[`CouponCurrencyResponse`](../../doc/models/coupon-currency-response.md)
 
 ## Example Usage
 
