@@ -1,0 +1,32 @@
+name: python
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+
+    - name: Install deps
+      run: |
+        pip install -r requirements.txt
+        pip install -r test-requirements.txt
+
+    - name: Tests
+      run: pytest tests/
+      env:
+        BASIC_AUTH_USERNAME: ${{ secrets.BASIC_AUTH_USERNAME }}
+        BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
+        SUBDOMAIN: ${{ secrets.SUBDOMAIN }}
+        DOMAIN: ${{ secrets.DOMAIN }}
