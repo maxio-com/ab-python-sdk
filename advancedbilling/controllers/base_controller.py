@@ -25,13 +25,12 @@ class BaseController(object):
         http_call_back (HttpCallBack): An object which holds call back
             methods to be called before and after the execution of an HttpRequest.
         new_api_call_builder (APICall): Returns the API Call builder instance.
-        auth_managers (dict): A dictionary which holds the instances of authentication managers.
 
     """
 
     @staticmethod
     def user_agent():
-        return 'AB SDK Python:0.0.3 on OS {os-info}'
+        return 'AB SDK Python:0.0.4 on OS {os-info}'
 
     @staticmethod
     def user_agent_parameters():
@@ -46,8 +45,7 @@ class BaseController(object):
         }
 
     def __init__(self, config):
-        self._global_config = config
-        self._config = self._global_config.get_http_client_configuration()
+        self._config = config.get_http_client_configuration()
         self._http_call_back = self.config.http_callback
         self.api_call = ApiCall(config)
 
@@ -62,7 +60,3 @@ class BaseController(object):
     @property
     def new_api_call_builder(self):
         return self.api_call.new_builder
-
-    @property
-    def auth_managers(self):
-        return self._global_config.get_auth_managers()

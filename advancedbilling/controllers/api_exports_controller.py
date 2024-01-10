@@ -22,7 +22,7 @@ from advancedbilling.models.invoice import Invoice
 from advancedbilling.models.subscription import Subscription
 from advancedbilling.models.batch_job_response import BatchJobResponse
 from advancedbilling.exceptions.api_exception import APIException
-from advancedbilling.exceptions.single_error_response_error_exception import SingleErrorResponseErrorException
+from advancedbilling.exceptions.single_error_response_exception import SingleErrorResponseException
 
 
 class APIExportsController(BaseController):
@@ -93,7 +93,7 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -163,7 +163,7 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -233,7 +233,7 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -266,13 +266,13 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
-            .local_error('409', 'Conflict', SingleErrorResponseErrorException)
+            .local_error('409', 'Conflict', SingleErrorResponseException)
         ).execute()
 
     def export_invoices(self):
@@ -298,13 +298,13 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
-            .local_error('409', 'Conflict', SingleErrorResponseErrorException)
+            .local_error('409', 'Conflict', SingleErrorResponseException)
         ).execute()
 
     def export_subscriptions(self):
@@ -331,12 +331,12 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
-            .local_error('409', 'Conflict', SingleErrorResponseErrorException)
+            .local_error('409', 'Conflict', SingleErrorResponseException)
         ).execute()
 
     def read_proforma_invoices_export(self,
@@ -371,7 +371,7 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -411,7 +411,7 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -451,7 +451,7 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

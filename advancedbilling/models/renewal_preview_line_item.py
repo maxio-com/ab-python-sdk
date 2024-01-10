@@ -16,8 +16,9 @@ class RenewalPreviewLineItem(object):
     TODO: type model description here.
 
     Attributes:
-        transaction_type (str): TODO: type description here.
-        kind (str): TODO: type description here.
+        transaction_type (LineItemTransactionType): A handle for the line item
+            transaction type
+        kind (LineItemKind): A handle for the line item kind
         amount_in_cents (long|int): TODO: type description here.
         memo (str): TODO: type description here.
         discount_amount_in_cents (long|int): TODO: type description here.

@@ -23,7 +23,7 @@ from advancedbilling.models.prepaid_configuration_response import PrepaidConfigu
 from advancedbilling.models.subscription_preview_response import SubscriptionPreviewResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.api_exception import APIException
-from advancedbilling.exceptions.single_error_response_error_exception import SingleErrorResponseErrorException
+from advancedbilling.exceptions.single_error_response_exception import SingleErrorResponseException
 from advancedbilling.exceptions.subscription_add_coupon_error_exception import SubscriptionAddCouponErrorException
 from advancedbilling.exceptions.subscription_remove_coupon_errors_exception import SubscriptionRemoveCouponErrorsException
 from advancedbilling.exceptions.nested_error_response_exception import NestedErrorResponseException
@@ -843,7 +843,7 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1006,7 +1006,7 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1118,7 +1118,7 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1170,8 +1170,8 @@ class SubscriptionsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
+            .array_serialization_format(SerializationFormats.PLAIN)
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1248,7 +1248,7 @@ class SubscriptionsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def read_subscription_by_reference(self,
@@ -1281,7 +1281,7 @@ class SubscriptionsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1340,8 +1340,8 @@ class SubscriptionsController(BaseController):
             .query_param(Parameter()
                          .key('cascade[]')
                          .value(cascade))
-            .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
+            .array_serialization_format(SerializationFormats.PLAIN)
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def create_prepaid_subscription(self,
@@ -1385,7 +1385,7 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1461,7 +1461,7 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1527,7 +1527,7 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1573,7 +1573,7 @@ class SubscriptionsController(BaseController):
             .query_param(Parameter()
                          .key('coupon_code')
                          .value(coupon_code))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1671,7 +1671,7 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

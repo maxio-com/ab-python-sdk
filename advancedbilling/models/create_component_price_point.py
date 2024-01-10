@@ -28,6 +28,13 @@ class CreateComponentPricePoint(object):
         use_site_exchange_rate (bool): Whether to use the site level exchange
             rate or define your own prices for each currency if you have
             multiple currencies defined on the site.
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this price point
+            would renew every 30 days. This property is only available for
+            sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this price point, either month or day. This property is only
+            available for sites with Multifrequency enabled.
 
     """
 
@@ -37,12 +44,16 @@ class CreateComponentPricePoint(object):
         "pricing_scheme": 'pricing_scheme',
         "prices": 'prices',
         "handle": 'handle',
-        "use_site_exchange_rate": 'use_site_exchange_rate'
+        "use_site_exchange_rate": 'use_site_exchange_rate',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit'
     }
 
     _optionals = [
         'handle',
         'use_site_exchange_rate',
+        'interval',
+        'interval_unit',
     ]
 
     def __init__(self,
@@ -50,7 +61,9 @@ class CreateComponentPricePoint(object):
                  pricing_scheme=None,
                  prices=None,
                  handle=APIHelper.SKIP,
-                 use_site_exchange_rate=True):
+                 use_site_exchange_rate=True,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP):
         """Constructor for the CreateComponentPricePoint class"""
 
         # Initialize members of the class
@@ -60,6 +73,10 @@ class CreateComponentPricePoint(object):
         self.pricing_scheme = pricing_scheme 
         self.prices = prices 
         self.use_site_exchange_rate = use_site_exchange_rate 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
 
     @classmethod
     def from_dictionary(cls,
@@ -75,7 +92,6 @@ class CreateComponentPricePoint(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
@@ -87,12 +103,16 @@ class CreateComponentPricePoint(object):
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if dictionary.get("use_site_exchange_rate") else True
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         # Return an object of this model
         return cls(name,
                    pricing_scheme,
                    prices,
                    handle,
-                   use_site_exchange_rate)
+                   use_site_exchange_rate,
+                   interval,
+                   interval_unit)
 
     @classmethod
     def validate(cls, dictionary):

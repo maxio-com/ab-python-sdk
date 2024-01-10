@@ -9,9 +9,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class AllocationPayment(object):
+class PaymentForAllocation(object):
 
-    """Implementation of the 'Allocation Payment' model.
+    """Implementation of the 'Payment for Allocation' model.
 
     Information for captured payment, if applicable
 
@@ -43,7 +43,7 @@ class AllocationPayment(object):
                  amount_in_cents=APIHelper.SKIP,
                  success=APIHelper.SKIP,
                  memo=APIHelper.SKIP):
-        """Constructor for the AllocationPayment class"""
+        """Constructor for the PaymentForAllocation class"""
 
         # Initialize members of the class
         if id is not APIHelper.SKIP:
@@ -69,7 +69,6 @@ class AllocationPayment(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 

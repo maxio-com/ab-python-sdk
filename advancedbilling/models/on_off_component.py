@@ -64,6 +64,14 @@ class OnOffComponent(object):
         display_on_hosted_page (bool): TODO: type description here.
         allow_fractional_quantities (bool): TODO: type description here.
         public_signup_page_ids (List[int]): TODO: type description here.
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this component's
+            default price point would renew every 30 days. This property is
+            only available for sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this component's default price point, either month or day.
+            This property is only available for sites with Multifrequency
+            enabled.
 
     """
 
@@ -84,7 +92,9 @@ class OnOffComponent(object):
         "price_in_cents": 'price_in_cents',
         "display_on_hosted_page": 'display_on_hosted_page',
         "allow_fractional_quantities": 'allow_fractional_quantities',
-        "public_signup_page_ids": 'public_signup_page_ids'
+        "public_signup_page_ids": 'public_signup_page_ids',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit'
     }
 
     _optionals = [
@@ -103,6 +113,8 @@ class OnOffComponent(object):
         'display_on_hosted_page',
         'allow_fractional_quantities',
         'public_signup_page_ids',
+        'interval',
+        'interval_unit',
     ]
 
     _nullables = [
@@ -126,7 +138,9 @@ class OnOffComponent(object):
                  price_in_cents=APIHelper.SKIP,
                  display_on_hosted_page=APIHelper.SKIP,
                  allow_fractional_quantities=APIHelper.SKIP,
-                 public_signup_page_ids=APIHelper.SKIP):
+                 public_signup_page_ids=APIHelper.SKIP,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP):
         """Constructor for the OnOffComponent class"""
 
         # Initialize members of the class
@@ -161,6 +175,10 @@ class OnOffComponent(object):
             self.allow_fractional_quantities = allow_fractional_quantities 
         if public_signup_page_ids is not APIHelper.SKIP:
             self.public_signup_page_ids = public_signup_page_ids 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
 
     @classmethod
     def from_dictionary(cls,
@@ -205,6 +223,8 @@ class OnOffComponent(object):
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
         public_signup_page_ids = dictionary.get("public_signup_page_ids") if dictionary.get("public_signup_page_ids") else APIHelper.SKIP
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         # Return an object of this model
         return cls(name,
                    unit_name,
@@ -221,7 +241,9 @@ class OnOffComponent(object):
                    price_in_cents,
                    display_on_hosted_page,
                    allow_fractional_quantities,
-                   public_signup_page_ids)
+                   public_signup_page_ids,
+                   interval,
+                   interval_unit)
 
     @classmethod
     def validate(cls, dictionary):

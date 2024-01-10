@@ -23,6 +23,13 @@ class ComponentPricePointItem(object):
             See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this component
+            price point would renew every 30 days. This property is only
+            available for sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this component price point, either month or day. This property
+            is only available for sites with Multifrequency enabled.
         prices (List[Price]): TODO: type description here.
 
     """
@@ -32,6 +39,8 @@ class ComponentPricePointItem(object):
         "name": 'name',
         "handle": 'handle',
         "pricing_scheme": 'pricing_scheme',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit',
         "prices": 'prices'
     }
 
@@ -39,6 +48,8 @@ class ComponentPricePointItem(object):
         'name',
         'handle',
         'pricing_scheme',
+        'interval',
+        'interval_unit',
         'prices',
     ]
 
@@ -46,6 +57,8 @@ class ComponentPricePointItem(object):
                  name=APIHelper.SKIP,
                  handle=APIHelper.SKIP,
                  pricing_scheme=APIHelper.SKIP,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP,
                  prices=APIHelper.SKIP):
         """Constructor for the ComponentPricePointItem class"""
 
@@ -56,6 +69,10 @@ class ComponentPricePointItem(object):
             self.handle = handle 
         if pricing_scheme is not APIHelper.SKIP:
             self.pricing_scheme = pricing_scheme 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
 
@@ -80,6 +97,8 @@ class ComponentPricePointItem(object):
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else APIHelper.SKIP
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         prices = None
         if dictionary.get('prices') is not None:
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
@@ -89,4 +108,27 @@ class ComponentPricePointItem(object):
         return cls(name,
                    handle,
                    pricing_scheme,
+                   interval,
+                   interval_unit,
                    prices)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        if isinstance(dictionary, cls):
+            return True
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return True

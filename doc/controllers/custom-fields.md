@@ -15,10 +15,10 @@ custom_fields_controller = client.custom_fields
 * [Update Metafield](../../doc/controllers/custom-fields.md#update-metafield)
 * [Delete Metafield](../../doc/controllers/custom-fields.md#delete-metafield)
 * [Create Metadata](../../doc/controllers/custom-fields.md#create-metadata)
-* [Read Metadata](../../doc/controllers/custom-fields.md#read-metadata)
+* [List Metadata](../../doc/controllers/custom-fields.md#list-metadata)
 * [Update Metadata](../../doc/controllers/custom-fields.md#update-metadata)
 * [Delete Metadata](../../doc/controllers/custom-fields.md#delete-metadata)
-* [List Metadata](../../doc/controllers/custom-fields.md#list-metadata)
+* [List Metadata for Resource Type](../../doc/controllers/custom-fields.md#list-metadata-for-resource-type)
 
 
 # Create Metafields
@@ -125,6 +125,12 @@ print(result)
 ]
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`SingleErrorResponseException`](../../doc/models/single-error-response-exception.md) |
+
 
 # List Metafields
 
@@ -141,8 +147,8 @@ def list_metafields(self,
 |  --- | --- | --- | --- |
 | `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `name` | `str` | Query, Optional | filter by the name of the metafield |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 | `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 
 ## Response Type
@@ -298,7 +304,6 @@ Please pay special attention to the resource you use when creating metadata.
 def create_metadata(self,
                    resource_type,
                    resource_id,
-                   value=None,
                    body=None)
 ```
 
@@ -308,7 +313,6 @@ def create_metadata(self,
 |  --- | --- | --- | --- |
 | `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resource_id` | `str` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
-| `value` | `str` | Query, Optional | Can be a single item or a list of metadata |
 | `body` | [`CreateMetadataRequest`](../../doc/models/create-metadata-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -343,8 +347,14 @@ result = custom_fields_controller.create_metadata(
 print(result)
 ```
 
+## Errors
 
-# Read Metadata
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`SingleErrorResponseException`](../../doc/models/single-error-response-exception.md) |
+
+
+# List Metadata
 
 This request will list all of the metadata belonging to a particular resource (ie. subscription, customer) that is specified.
 
@@ -353,7 +363,7 @@ This request will list all of the metadata belonging to a particular resource (i
 This endpoint will also display the current stats of your metadata to use as a tool for pagination.
 
 ```python
-def read_metadata(self,
+def list_metadata(self,
                  options=dict())
 ```
 
@@ -363,8 +373,8 @@ def read_metadata(self,
 |  --- | --- | --- | --- |
 | `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resource_id` | `str` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 
 ## Response Type
 
@@ -379,7 +389,7 @@ collect = {
     'page': 2,
     'per_page': 50
 }
-result = custom_fields_controller.read_metadata(collect)
+result = custom_fields_controller.list_metadata(collect)
 print(result)
 ```
 
@@ -392,7 +402,6 @@ This method allows you to update the existing metadata associated with a subscri
 def update_metadata(self,
                    resource_type,
                    resource_id,
-                   value=None,
                    body=None)
 ```
 
@@ -402,7 +411,6 @@ def update_metadata(self,
 |  --- | --- | --- | --- |
 | `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
 | `resource_id` | `str` | Template, Required | The Chargify id of the customer or the subscription for which the metadata applies |
-| `value` | `str` | Query, Optional | Can be a single item or a list of metadata |
 | `body` | [`UpdateMetadataRequest`](../../doc/models/update-metadata-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -492,7 +500,7 @@ print(result)
 | 404 | Not Found | `APIException` |
 
 
-# List Metadata
+# List Metadata for Resource Type
 
 This method will provide you information on usage of metadata across your selected resource (ie. subscriptions, customers)
 
@@ -509,8 +517,8 @@ This endpoint will also display the current stats of your metadata to use as a t
 This endpoint will list the number of pages of metadata information that are contained within a site.
 
 ```python
-def list_metadata(self,
-                 options=dict())
+def list_metadata_for_resource_type(self,
+                                   options=dict())
 ```
 
 ## Parameters
@@ -518,15 +526,15 @@ def list_metadata(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `resource_type` | [`ResourceType`](../../doc/models/resource-type.md) | Template, Required | the resource type to which the metafields belong |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 | `date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns metadata with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns metadata with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns metadata with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
 | `end_datetime` | `str` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns metadata with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
 | `with_deleted` | `bool` | Query, Optional | Allow to fetch deleted metadata. |
-| `resource_ids` | `List[int]` | Query, Optional | Allow to fetch metadata for multiple records based on provided ids. Use in query: `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`.<br>**Constraints**: *Maximum Items*: `50` |
+| `resource_ids` | `List[int]` | Query, Optional | Allow to fetch metadata for multiple records based on provided ids. Use in query: `resource_ids[]=122&resource_ids[]=123&resource_ids[]=124`. |
 | `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 
 ## Response Type
@@ -542,7 +550,7 @@ collect = {Liquid error: Value cannot be null. (Parameter 'key')
     'per_page': 50,
     'date_field': BasicDateField.UPDATED_AT
 }
-result = custom_fields_controller.list_metadata(collect)
+result = custom_fields_controller.list_metadata_for_resource_type(collect)
 print(result)
 ```
 

@@ -16,15 +16,18 @@ class AllocationPreviewLineItem(object):
     TODO: type model description here.
 
     Attributes:
-        transaction_type (str): TODO: type description here.
-        kind (str): TODO: type description here.
+        transaction_type (LineItemTransactionType): A handle for the line item
+            transaction type
+        kind (AllocationPreviewLineItemKind): A handle for the line item kind
+            for allocation preview
         amount_in_cents (long|int): TODO: type description here.
         memo (str): TODO: type description here.
         discount_amount_in_cents (long|int): TODO: type description here.
         taxable_amount_in_cents (long|int): TODO: type description here.
         component_id (int): TODO: type description here.
         component_handle (str): TODO: type description here.
-        direction (str): TODO: type description here.
+        direction (AllocationPreviewDirection): Visible when using
+            Fine-grained Component Control
 
     """
 

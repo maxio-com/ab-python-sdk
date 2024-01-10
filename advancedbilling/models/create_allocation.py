@@ -41,6 +41,10 @@ class CreateAllocation(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
+        initiate_dunning (bool): If set to true, if the immediate component
+            payment fails, initiate dunning for the subscription.  Otherwise,
+            leave the charges on the subscription to pay for at renewal.
+            Defaults to false.
         price_point_id (str | int | None): Price point that the allocation
             should be charged at. Accepts either the price point's id
             (integer) or handle (string). When not specified, the default
@@ -62,6 +66,7 @@ class CreateAllocation(object):
         "accrue_charge": 'accrue_charge',
         "downgrade_credit": 'downgrade_credit',
         "upgrade_charge": 'upgrade_charge',
+        "initiate_dunning": 'initiate_dunning',
         "price_point_id": 'price_point_id',
         "billing_schedule": 'billing_schedule'
     }
@@ -74,6 +79,7 @@ class CreateAllocation(object):
         'accrue_charge',
         'downgrade_credit',
         'upgrade_charge',
+        'initiate_dunning',
         'price_point_id',
         'billing_schedule',
     ]
@@ -93,6 +99,7 @@ class CreateAllocation(object):
                  accrue_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
                  upgrade_charge=APIHelper.SKIP,
+                 initiate_dunning=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
                  billing_schedule=APIHelper.SKIP):
         """Constructor for the CreateAllocation class"""
@@ -113,6 +120,8 @@ class CreateAllocation(object):
             self.downgrade_credit = downgrade_credit 
         if upgrade_charge is not APIHelper.SKIP:
             self.upgrade_charge = upgrade_charge 
+        if initiate_dunning is not APIHelper.SKIP:
+            self.initiate_dunning = initiate_dunning 
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id 
         if billing_schedule is not APIHelper.SKIP:
@@ -132,6 +141,7 @@ class CreateAllocation(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
@@ -144,6 +154,7 @@ class CreateAllocation(object):
         accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
+        initiate_dunning = dictionary.get("initiate_dunning") if "initiate_dunning" in dictionary.keys() else APIHelper.SKIP
         if 'price_point_id' in dictionary.keys():
             price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateAllocationPricePointId'), dictionary.get('price_point_id'), False) if dictionary.get('price_point_id') is not None else None
         else:
@@ -158,5 +169,6 @@ class CreateAllocation(object):
                    accrue_charge,
                    downgrade_credit,
                    upgrade_charge,
+                   initiate_dunning,
                    price_point_id,
                    billing_schedule)

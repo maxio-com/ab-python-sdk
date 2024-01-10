@@ -17,7 +17,6 @@ class Metafields(object):
     TODO: type model description here.
 
     Attributes:
-        id (int): TODO: type description here.
         name (str): TODO: type description here.
         scope (MetafieldScope): Warning: When updating a metafield's scope
             attribute, all scope attributes must be passed. Partially complete
@@ -34,7 +33,6 @@ class Metafields(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "id": 'id',
         "name": 'name',
         "scope": 'scope',
         "input_type": 'input_type',
@@ -42,7 +40,6 @@ class Metafields(object):
     }
 
     _optionals = [
-        'id',
         'name',
         'scope',
         'input_type',
@@ -50,7 +47,6 @@ class Metafields(object):
     ]
 
     def __init__(self,
-                 id=APIHelper.SKIP,
                  name=APIHelper.SKIP,
                  scope=APIHelper.SKIP,
                  input_type='text',
@@ -58,8 +54,6 @@ class Metafields(object):
         """Constructor for the Metafields class"""
 
         # Initialize members of the class
-        if id is not APIHelper.SKIP:
-            self.id = id 
         if name is not APIHelper.SKIP:
             self.name = name 
         if scope is not APIHelper.SKIP:
@@ -82,19 +76,16 @@ class Metafields(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         scope = MetafieldScope.from_dictionary(dictionary.get('scope')) if 'scope' in dictionary.keys() else APIHelper.SKIP
         input_type = dictionary.get("input_type") if dictionary.get("input_type") else 'text'
         enum = dictionary.get("enum") if dictionary.get("enum") else APIHelper.SKIP
         # Return an object of this model
-        return cls(id,
-                   name,
+        return cls(name,
                    scope,
                    input_type,
                    enum)

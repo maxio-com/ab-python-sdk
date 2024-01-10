@@ -46,6 +46,7 @@ class Event(object):
     }
 
     _nullables = [
+        'subscription_id',
         'event_specific_data',
     ]
 

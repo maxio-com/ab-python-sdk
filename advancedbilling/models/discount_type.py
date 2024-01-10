@@ -19,7 +19,20 @@ class DiscountType(object):
         PERCENT: TODO: type description here.
 
     """
+    _all_values = ['amount', 'percent']
     AMOUNT = 'amount'
 
     PERCENT = 'percent'
 
+    @classmethod
+    def validate(cls, value):
+        """Validates value contains in enum
+
+        Args:
+            value: the value to be validated
+
+        Returns:
+            boolean : if value is valid enum values.
+
+        """
+        return value in cls._all_values

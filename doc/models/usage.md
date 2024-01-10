@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `id` | `int` | Optional | - |
 | `memo` | `str` | Optional | - |
-| `created_at` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | - |
 | `price_point_id` | `int` | Optional | - |
 | `quantity` | int \| str \| None | Optional | This is a container for one-of cases. |
 | `overage_quantity` | `int` | Optional | - |
@@ -25,7 +25,7 @@
 {
   "id": 252,
   "memo": "memo8",
-  "created_at": "created_at2",
+  "created_at": "2016-03-13T12:52:32.123Z",
   "price_point_id": 126,
   "quantity": 130
 }

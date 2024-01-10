@@ -20,7 +20,7 @@ from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.coupon_response import CouponResponse
 from advancedbilling.models.coupon_usage import CouponUsage
-from advancedbilling.models.coupon_currency import CouponCurrency
+from advancedbilling.models.coupon_currency_response import CouponCurrencyResponse
 from advancedbilling.models.coupon_subcodes_response import CouponSubcodesResponse
 from advancedbilling.models.coupon_subcodes import CouponSubcodes
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
@@ -94,7 +94,7 @@ class CouponsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -238,7 +238,7 @@ class CouponsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -287,7 +287,7 @@ class CouponsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -344,7 +344,7 @@ class CouponsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -406,7 +406,7 @@ class CouponsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -457,7 +457,7 @@ class CouponsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -647,7 +647,7 @@ class CouponsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -695,7 +695,7 @@ class CouponsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -764,7 +764,7 @@ class CouponsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -775,7 +775,7 @@ class CouponsController(BaseController):
     def update_coupon_currency_prices(self,
                                       coupon_id,
                                       body=None):
-        """Does a PUT request to /coupon/{coupon_id}/currency_prices.json.
+        """Does a PUT request to /coupons/{coupon_id}/currency_prices.json.
 
         This endpoint allows you to create and/or update currency prices for
         an existing coupon. Multiple prices can be created or updated in a
@@ -792,7 +792,7 @@ class CouponsController(BaseController):
                 here.
 
         Returns:
-            List[CouponCurrency]: Response from the API. OK
+            CouponCurrencyResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -804,7 +804,7 @@ class CouponsController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEFAULT)
-            .path('/coupon/{coupon_id}/currency_prices.json')
+            .path('/coupons/{coupon_id}/currency_prices.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
                             .key('coupon_id')
@@ -820,11 +820,11 @@ class CouponsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CouponCurrency.from_dictionary)
+            .deserialize_into(CouponCurrencyResponse.from_dictionary)
         ).execute()
 
     def create_coupon_subcodes(self,
@@ -906,7 +906,7 @@ class CouponsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -972,7 +972,7 @@ class CouponsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1027,7 +1027,7 @@ class CouponsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1091,5 +1091,5 @@ class CouponsController(BaseController):
                             .value(subcode)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()

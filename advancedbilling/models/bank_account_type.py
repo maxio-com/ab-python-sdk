@@ -19,7 +19,20 @@ class BankAccountType(object):
         SAVINGS: TODO: type description here.
 
     """
+    _all_values = ['checking', 'savings']
     CHECKING = 'checking'
 
     SAVINGS = 'savings'
 
+    @classmethod
+    def validate(cls, value):
+        """Validates value contains in enum
+
+        Args:
+            value: the value to be validated
+
+        Returns:
+            boolean : if value is valid enum values.
+
+        """
+        return value in cls._all_values

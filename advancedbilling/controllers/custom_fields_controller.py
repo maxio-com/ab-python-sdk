@@ -22,6 +22,7 @@ from advancedbilling.models.metafield import Metafield
 from advancedbilling.models.list_metafields_response import ListMetafieldsResponse
 from advancedbilling.models.metadata import Metadata
 from advancedbilling.models.paginated_metadata import PaginatedMetadata
+from advancedbilling.exceptions.single_error_response_exception import SingleErrorResponseException
 from advancedbilling.exceptions.api_exception import APIException
 
 
@@ -108,11 +109,12 @@ class CustomFieldsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Metafield.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', SingleErrorResponseException)
         ).execute()
 
     def list_metafields(self,
@@ -185,7 +187,7 @@ class CustomFieldsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -249,7 +251,7 @@ class CustomFieldsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -294,13 +296,12 @@ class CustomFieldsController(BaseController):
             .query_param(Parameter()
                          .key('name')
                          .value(name))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def create_metadata(self,
                         resource_type,
                         resource_id,
-                        value=None,
                         body=None):
         """Does a POST request to /{resource_type}/{resource_id}/metadata.json.
 
@@ -338,7 +339,6 @@ class CustomFieldsController(BaseController):
                 metafields belong
             resource_id (str): The Chargify id of the customer or the
                 subscription for which the metadata applies
-            value (str, optional): Can be a single item or a list of metadata
             body (CreateMetadataRequest, optional): TODO: type description
                 here.
 
@@ -370,23 +370,21 @@ class CustomFieldsController(BaseController):
             .header_param(Parameter()
                           .key('Content-Type')
                           .value('application/json'))
-            .query_param(Parameter()
-                         .key('value')
-                         .value(value))
             .body_param(Parameter()
                         .value(body))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Metadata.from_dictionary)
+            .local_error('422', 'Unprocessable Entity (WebDAV)', SingleErrorResponseException)
         ).execute()
 
-    def read_metadata(self,
+    def list_metadata(self,
                       options=dict()):
         """Does a GET request to /{resource_type}/{resource_id}/metadata.json.
 
@@ -456,7 +454,7 @@ class CustomFieldsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -466,7 +464,6 @@ class CustomFieldsController(BaseController):
     def update_metadata(self,
                         resource_type,
                         resource_id,
-                        value=None,
                         body=None):
         """Does a PUT request to /{resource_type}/{resource_id}/metadata.json.
 
@@ -478,7 +475,6 @@ class CustomFieldsController(BaseController):
                 metafields belong
             resource_id (str): The Chargify id of the customer or the
                 subscription for which the metadata applies
-            value (str, optional): Can be a single item or a list of metadata
             body (UpdateMetadataRequest, optional): TODO: type description
                 here.
 
@@ -510,16 +506,13 @@ class CustomFieldsController(BaseController):
             .header_param(Parameter()
                           .key('Content-Type')
                           .value('application/json'))
-            .query_param(Parameter()
-                         .key('value')
-                         .value(value))
             .body_param(Parameter()
                         .value(body))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -594,12 +587,12 @@ class CustomFieldsController(BaseController):
             .query_param(Parameter()
                          .key('names[]')
                          .value(names))
-            .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
+            .array_serialization_format(SerializationFormats.PLAIN)
+            .auth(Single('BasicAuth'))
         ).execute()
 
-    def list_metadata(self,
-                      options=dict()):
+    def list_metadata_for_resource_type(self,
+                                        options=dict()):
         """Does a GET request to /{resource_type}/metadata.json.
 
         This method will provide you information on usage of metadata across
@@ -724,7 +717,7 @@ class CustomFieldsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

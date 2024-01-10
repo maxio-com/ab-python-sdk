@@ -17,30 +17,30 @@ class InvoicePreviousBalance(object):
     TODO: type model description here.
 
     Attributes:
-        capture_date (str): TODO: type description here.
+        captured_at (datetime): TODO: type description here.
         invoices (List[InvoiceBalanceItem]): TODO: type description here.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "capture_date": 'capture_date',
+        "captured_at": 'captured_at',
         "invoices": 'invoices'
     }
 
     _optionals = [
-        'capture_date',
+        'captured_at',
         'invoices',
     ]
 
     def __init__(self,
-                 capture_date=APIHelper.SKIP,
+                 captured_at=APIHelper.SKIP,
                  invoices=APIHelper.SKIP):
         """Constructor for the InvoicePreviousBalance class"""
 
         # Initialize members of the class
-        if capture_date is not APIHelper.SKIP:
-            self.capture_date = capture_date 
+        if captured_at is not APIHelper.SKIP:
+            self.captured_at = APIHelper.apply_datetime_converter(captured_at, APIHelper.RFC3339DateTime) if captured_at else None 
         if invoices is not APIHelper.SKIP:
             self.invoices = invoices 
 
@@ -62,12 +62,33 @@ class InvoicePreviousBalance(object):
             return None
 
         # Extract variables from the dictionary
-        capture_date = dictionary.get("capture_date") if dictionary.get("capture_date") else APIHelper.SKIP
+        captured_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("captured_at")).datetime if dictionary.get("captured_at") else APIHelper.SKIP
         invoices = None
         if dictionary.get('invoices') is not None:
             invoices = [InvoiceBalanceItem.from_dictionary(x) for x in dictionary.get('invoices')]
         else:
             invoices = APIHelper.SKIP
         # Return an object of this model
-        return cls(capture_date,
+        return cls(captured_at,
                    invoices)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        if isinstance(dictionary, cls):
+            return True
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return True

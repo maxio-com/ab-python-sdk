@@ -30,6 +30,7 @@ class CardType(object):
         FORBRUGSFORENINGEN: TODO: type description here.
 
     """
+    _all_values = ['bogus', 'visa', 'master', 'discover', 'american_express', 'diners_club', 'jcb', 'switch', 'solo', 'dankort', 'maestro', 'laser', 'forbrugsforeningen']
     BOGUS = 'bogus'
 
     VISA = 'visa'
@@ -56,3 +57,15 @@ class CardType(object):
 
     FORBRUGSFORENINGEN = 'forbrugsforeningen'
 
+    @classmethod
+    def validate(cls, value):
+        """Validates value contains in enum
+
+        Args:
+            value: the value to be validated
+
+        Returns:
+            boolean : if value is valid enum values.
+
+        """
+        return value in cls._all_values
