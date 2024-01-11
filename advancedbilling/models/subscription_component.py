@@ -57,6 +57,13 @@ class SubscriptionComponent(object):
         subscription (SubscriptionComponentSubscription): An optional object,
             will be returned if provided `include=subscription` query param.
         display_on_hosted_page (bool): TODO: type description here.
+        interval (int): The numerical interval. i.e. an interval of '30'
+            coupled with an interval_unit of day would mean this component
+            price point would renew every 30 days. This property is only
+            available for sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this component price point, either month or day. This property
+            is only available for sites with Multifrequency enabled.
 
     """
 
@@ -90,7 +97,9 @@ class SubscriptionComponent(object):
         "description": 'description',
         "allow_fractional_quantities": 'allow_fractional_quantities',
         "subscription": 'subscription',
-        "display_on_hosted_page": 'display_on_hosted_page'
+        "display_on_hosted_page": 'display_on_hosted_page',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit'
     }
 
     _optionals = [
@@ -123,6 +132,8 @@ class SubscriptionComponent(object):
         'allow_fractional_quantities',
         'subscription',
         'display_on_hosted_page',
+        'interval',
+        'interval_unit',
     ]
 
     _nullables = [
@@ -167,7 +178,9 @@ class SubscriptionComponent(object):
                  description=APIHelper.SKIP,
                  allow_fractional_quantities=APIHelper.SKIP,
                  subscription=APIHelper.SKIP,
-                 display_on_hosted_page=APIHelper.SKIP):
+                 display_on_hosted_page=APIHelper.SKIP,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP):
         """Constructor for the SubscriptionComponent class"""
 
         # Initialize members of the class
@@ -229,6 +242,10 @@ class SubscriptionComponent(object):
             self.subscription = subscription 
         if display_on_hosted_page is not APIHelper.SKIP:
             self.display_on_hosted_page = display_on_hosted_page 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
 
     @classmethod
     def from_dictionary(cls,
@@ -244,6 +261,7 @@ class SubscriptionComponent(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
@@ -280,6 +298,8 @@ class SubscriptionComponent(object):
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
         subscription = SubscriptionComponentSubscription.from_dictionary(dictionary.get('subscription')) if 'subscription' in dictionary.keys() else APIHelper.SKIP
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    name,
@@ -309,4 +329,6 @@ class SubscriptionComponent(object):
                    description,
                    allow_fractional_quantities,
                    subscription,
-                   display_on_hosted_page)
+                   display_on_hosted_page,
+                   interval,
+                   interval_unit)

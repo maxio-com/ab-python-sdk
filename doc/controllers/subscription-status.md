@@ -391,7 +391,7 @@ def resume_subscription(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `calendar_billing_resumption_charge` | [`ResumptionCharge`](../../doc/models/resumption-charge.md) | Query, Optional | (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled<br>**Default**: `'prorated'` |
+| `calendar_billing_resumption_charge` | [`ResumptionCharge`](../../doc/models/resumption-charge.md) | Query, Optional | (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled |
 
 ## Response Type
 

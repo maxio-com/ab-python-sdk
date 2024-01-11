@@ -68,7 +68,7 @@ class ReferralCodesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

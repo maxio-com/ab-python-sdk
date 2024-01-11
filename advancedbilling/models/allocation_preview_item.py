@@ -18,8 +18,8 @@ class AllocationPreviewItem(object):
     Attributes:
         component_id (int): TODO: type description here.
         subscription_id (int): TODO: type description here.
-        quantity (float): TODO: type description here.
-        previous_quantity (int): TODO: type description here.
+        quantity (int | str | None): TODO: type description here.
+        previous_quantity (int | str | None): TODO: type description here.
         memo (str): TODO: type description here.
         timestamp (str): TODO: type description here.
         proration_upgrade_scheme (str): TODO: type description here.
@@ -35,6 +35,8 @@ class AllocationPreviewItem(object):
             `prorated`, `none`.
         price_point_id (int): TODO: type description here.
         previous_price_point_id (int): TODO: type description here.
+        price_point_handle (str): TODO: type description here.
+        price_point_name (str): TODO: type description here.
         component_handle (str): TODO: type description here.
 
     """
@@ -54,6 +56,8 @@ class AllocationPreviewItem(object):
         "downgrade_credit": 'downgrade_credit',
         "price_point_id": 'price_point_id',
         "previous_price_point_id": 'previous_price_point_id',
+        "price_point_handle": 'price_point_handle',
+        "price_point_name": 'price_point_name',
         "component_handle": 'component_handle'
     }
 
@@ -71,13 +75,17 @@ class AllocationPreviewItem(object):
         'downgrade_credit',
         'price_point_id',
         'previous_price_point_id',
+        'price_point_handle',
+        'price_point_name',
         'component_handle',
     ]
 
     _nullables = [
+        'memo',
         'timestamp',
         'upgrade_charge',
         'downgrade_credit',
+        'component_handle',
     ]
 
     def __init__(self,
@@ -94,6 +102,8 @@ class AllocationPreviewItem(object):
                  downgrade_credit=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
                  previous_price_point_id=APIHelper.SKIP,
+                 price_point_handle=APIHelper.SKIP,
+                 price_point_name=APIHelper.SKIP,
                  component_handle=APIHelper.SKIP):
         """Constructor for the AllocationPreviewItem class"""
 
@@ -124,6 +134,10 @@ class AllocationPreviewItem(object):
             self.price_point_id = price_point_id 
         if previous_price_point_id is not APIHelper.SKIP:
             self.previous_price_point_id = previous_price_point_id 
+        if price_point_handle is not APIHelper.SKIP:
+            self.price_point_handle = price_point_handle 
+        if price_point_name is not APIHelper.SKIP:
+            self.price_point_name = price_point_name 
         if component_handle is not APIHelper.SKIP:
             self.component_handle = component_handle 
 
@@ -141,15 +155,16 @@ class AllocationPreviewItem(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
-        quantity = dictionary.get("quantity") if dictionary.get("quantity") else APIHelper.SKIP
-        previous_quantity = dictionary.get("previous_quantity") if dictionary.get("previous_quantity") else APIHelper.SKIP
-        memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
+        quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('AllocationPreviewItemQuantity'), dictionary.get('quantity'), False) if dictionary.get('quantity') is not None else APIHelper.SKIP
+        previous_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('AllocationPreviewItemPreviousQuantity'), dictionary.get('previous_quantity'), False) if dictionary.get('previous_quantity') is not None else APIHelper.SKIP
+        memo = dictionary.get("memo") if "memo" in dictionary.keys() else APIHelper.SKIP
         timestamp = dictionary.get("timestamp") if "timestamp" in dictionary.keys() else APIHelper.SKIP
         proration_upgrade_scheme = dictionary.get("proration_upgrade_scheme") if dictionary.get("proration_upgrade_scheme") else APIHelper.SKIP
         proration_downgrade_scheme = dictionary.get("proration_downgrade_scheme") if dictionary.get("proration_downgrade_scheme") else APIHelper.SKIP
@@ -158,7 +173,9 @@ class AllocationPreviewItem(object):
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         previous_price_point_id = dictionary.get("previous_price_point_id") if dictionary.get("previous_price_point_id") else APIHelper.SKIP
-        component_handle = dictionary.get("component_handle") if dictionary.get("component_handle") else APIHelper.SKIP
+        price_point_handle = dictionary.get("price_point_handle") if dictionary.get("price_point_handle") else APIHelper.SKIP
+        price_point_name = dictionary.get("price_point_name") if dictionary.get("price_point_name") else APIHelper.SKIP
+        component_handle = dictionary.get("component_handle") if "component_handle" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(component_id,
                    subscription_id,
@@ -173,4 +190,6 @@ class AllocationPreviewItem(object):
                    downgrade_credit,
                    price_point_id,
                    previous_price_point_id,
+                   price_point_handle,
+                   price_point_name,
                    component_handle)

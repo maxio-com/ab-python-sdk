@@ -22,11 +22,11 @@ class CreateOrUpdatePercentageCoupon(object):
             “%”, “@”, “+”, “-”, “_”, and “.”
         description (str): TODO: type description here.
         percentage (float | str): TODO: type description here.
-        allow_negative_balance (str): TODO: type description here.
-        recurring (str): TODO: type description here.
-        end_date (str): TODO: type description here.
+        allow_negative_balance (bool): TODO: type description here.
+        recurring (bool): TODO: type description here.
+        end_date (datetime): TODO: type description here.
         product_family_id (str): TODO: type description here.
-        stackable (str): TODO: type description here.
+        stackable (bool): TODO: type description here.
         compounding_strategy (CompoundingStrategy): TODO: type description
             here.
         exclude_mid_period_allocations (bool): TODO: type description here.
@@ -88,7 +88,7 @@ class CreateOrUpdatePercentageCoupon(object):
         if recurring is not APIHelper.SKIP:
             self.recurring = recurring 
         if end_date is not APIHelper.SKIP:
-            self.end_date = end_date 
+            self.end_date = APIHelper.apply_datetime_converter(end_date, APIHelper.RFC3339DateTime) if end_date else None 
         if product_family_id is not APIHelper.SKIP:
             self.product_family_id = product_family_id 
         if stackable is not APIHelper.SKIP:
@@ -123,11 +123,11 @@ class CreateOrUpdatePercentageCoupon(object):
         code = dictionary.get("code") if dictionary.get("code") else None
         percentage = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateOrUpdatePercentageCouponPercentage'), dictionary.get('percentage'), False) if dictionary.get('percentage') is not None else None
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
-        allow_negative_balance = dictionary.get("allow_negative_balance") if dictionary.get("allow_negative_balance") else APIHelper.SKIP
-        recurring = dictionary.get("recurring") if dictionary.get("recurring") else APIHelper.SKIP
-        end_date = dictionary.get("end_date") if dictionary.get("end_date") else APIHelper.SKIP
+        allow_negative_balance = dictionary.get("allow_negative_balance") if "allow_negative_balance" in dictionary.keys() else APIHelper.SKIP
+        recurring = dictionary.get("recurring") if "recurring" in dictionary.keys() else APIHelper.SKIP
+        end_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("end_date")).datetime if dictionary.get("end_date") else APIHelper.SKIP
         product_family_id = dictionary.get("product_family_id") if dictionary.get("product_family_id") else APIHelper.SKIP
-        stackable = dictionary.get("stackable") if dictionary.get("stackable") else APIHelper.SKIP
+        stackable = dictionary.get("stackable") if "stackable" in dictionary.keys() else APIHelper.SKIP
         compounding_strategy = dictionary.get("compounding_strategy") if dictionary.get("compounding_strategy") else APIHelper.SKIP
         exclude_mid_period_allocations = dictionary.get("exclude_mid_period_allocations") if "exclude_mid_period_allocations" in dictionary.keys() else APIHelper.SKIP
         apply_on_cancel_at_end_of_period = dictionary.get("apply_on_cancel_at_end_of_period") if "apply_on_cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP

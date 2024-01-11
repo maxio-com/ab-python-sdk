@@ -42,6 +42,13 @@ class ComponentPricePoint(object):
             price point's type is `custom`) The id of the subscription that
             the custom price point is for.
         tax_included (bool): TODO: type description here.
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this component
+            price point would renew every 30 days. This property is only
+            available for sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this component price point, either month or day. This property
+            is only available for sites with Multifrequency enabled.
 
     """
 
@@ -60,7 +67,9 @@ class ComponentPricePoint(object):
         "prices": 'prices',
         "use_site_exchange_rate": 'use_site_exchange_rate',
         "subscription_id": 'subscription_id',
-        "tax_included": 'tax_included'
+        "tax_included": 'tax_included',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit'
     }
 
     _optionals = [
@@ -78,6 +87,8 @@ class ComponentPricePoint(object):
         'use_site_exchange_rate',
         'subscription_id',
         'tax_included',
+        'interval',
+        'interval_unit',
     ]
 
     _nullables = [
@@ -98,7 +109,9 @@ class ComponentPricePoint(object):
                  prices=APIHelper.SKIP,
                  use_site_exchange_rate=True,
                  subscription_id=APIHelper.SKIP,
-                 tax_included=APIHelper.SKIP):
+                 tax_included=APIHelper.SKIP,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP):
         """Constructor for the ComponentPricePoint class"""
 
         # Initialize members of the class
@@ -129,6 +142,10 @@ class ComponentPricePoint(object):
             self.subscription_id = subscription_id 
         if tax_included is not APIHelper.SKIP:
             self.tax_included = tax_included 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
 
     @classmethod
     def from_dictionary(cls,
@@ -166,6 +183,8 @@ class ComponentPricePoint(object):
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if dictionary.get("use_site_exchange_rate") else True
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    mtype,
@@ -180,4 +199,6 @@ class ComponentPricePoint(object):
                    prices,
                    use_site_exchange_rate,
                    subscription_id,
-                   tax_included)
+                   tax_included,
+                   interval,
+                   interval_unit)

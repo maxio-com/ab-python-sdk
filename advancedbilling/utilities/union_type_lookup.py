@@ -7,7 +7,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
-from advancedbilling.models.allocation_payment import AllocationPayment
 from advancedbilling.models.apply_credit_note_event_data import ApplyCreditNoteEventData
 from advancedbilling.models.apply_debit_note_event_data import ApplyDebitNoteEventData
 from advancedbilling.models.apply_payment_event_data import ApplyPaymentEventData
@@ -40,6 +39,7 @@ from advancedbilling.models.item_price_point_changed import ItemPricePointChange
 from advancedbilling.models.metered_usage import MeteredUsage
 from advancedbilling.models.nested_subscription_group import NestedSubscriptionGroup
 from advancedbilling.models.payment_collection_method_changed import PaymentCollectionMethodChanged
+from advancedbilling.models.payment_for_allocation import PaymentForAllocation
 from advancedbilling.models.payment_method_apple_pay_type import PaymentMethodApplePayType
 from advancedbilling.models.payment_method_bank_account_type import PaymentMethodBankAccountType
 from advancedbilling.models.payment_method_credit_card_type import PaymentMethodCreditCardType
@@ -667,13 +667,49 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
-        'AllocationPayment2': OneOf(
+        'AllocationQuantity': OneOf(
             [
-                LeafType(AllocationPayment)
+                LeafType(int),
+                LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'AllocationPreviousQuantity': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'AllocationPayment': OneOf(
+            [
+                LeafType(PaymentForAllocation)
             ],
             Context.create(
                is_optional=True,
                is_nullable=True
+            )
+        ),
+        'AllocationPreviewItemQuantity': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'AllocationPreviewItemPreviousQuantity': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
             )
         ),
         'UsageQuantity': OneOf(

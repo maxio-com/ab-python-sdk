@@ -7,7 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.create_allocation_request import CreateAllocationRequest
+from advancedbilling.models.create_allocation import CreateAllocation
 
 
 class AllocateComponents(object):
@@ -19,8 +19,7 @@ class AllocateComponents(object):
     Attributes:
         proration_upgrade_scheme (str): TODO: type description here.
         proration_downgrade_scheme (str): TODO: type description here.
-        allocations (List[CreateAllocationRequest]): TODO: type description
-            here.
+        allocations (List[CreateAllocation]): TODO: type description here.
         accrue_charge (bool): TODO: type description here.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
@@ -33,6 +32,9 @@ class AllocateComponents(object):
         payment_collection_method (PaymentCollectionMethod1): (Optional) If
             not passed, the allocation(s) will use the payment collection
             method on the subscription
+        initiate_dunning (bool): If true, if the immediate component payment
+            fails, initiate dunning for the subscription.  Otherwise, leave
+            the charges on the subscription to pay for at renewal.
 
     """
 
@@ -44,7 +46,8 @@ class AllocateComponents(object):
         "accrue_charge": 'accrue_charge',
         "upgrade_charge": 'upgrade_charge',
         "downgrade_credit": 'downgrade_credit',
-        "payment_collection_method": 'payment_collection_method'
+        "payment_collection_method": 'payment_collection_method',
+        "initiate_dunning": 'initiate_dunning'
     }
 
     _optionals = [
@@ -55,6 +58,7 @@ class AllocateComponents(object):
         'upgrade_charge',
         'downgrade_credit',
         'payment_collection_method',
+        'initiate_dunning',
     ]
 
     _nullables = [
@@ -63,18 +67,21 @@ class AllocateComponents(object):
     ]
 
     def __init__(self,
-                 proration_upgrade_scheme='no-prorate',
-                 proration_downgrade_scheme='no-prorate',
+                 proration_upgrade_scheme=APIHelper.SKIP,
+                 proration_downgrade_scheme=APIHelper.SKIP,
                  allocations=APIHelper.SKIP,
                  accrue_charge=APIHelper.SKIP,
                  upgrade_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
-                 payment_collection_method='automatic'):
+                 payment_collection_method='automatic',
+                 initiate_dunning=APIHelper.SKIP):
         """Constructor for the AllocateComponents class"""
 
         # Initialize members of the class
-        self.proration_upgrade_scheme = proration_upgrade_scheme 
-        self.proration_downgrade_scheme = proration_downgrade_scheme 
+        if proration_upgrade_scheme is not APIHelper.SKIP:
+            self.proration_upgrade_scheme = proration_upgrade_scheme 
+        if proration_downgrade_scheme is not APIHelper.SKIP:
+            self.proration_downgrade_scheme = proration_downgrade_scheme 
         if allocations is not APIHelper.SKIP:
             self.allocations = allocations 
         if accrue_charge is not APIHelper.SKIP:
@@ -84,6 +91,8 @@ class AllocateComponents(object):
         if downgrade_credit is not APIHelper.SKIP:
             self.downgrade_credit = downgrade_credit 
         self.payment_collection_method = payment_collection_method 
+        if initiate_dunning is not APIHelper.SKIP:
+            self.initiate_dunning = initiate_dunning 
 
     @classmethod
     def from_dictionary(cls,
@@ -103,17 +112,18 @@ class AllocateComponents(object):
             return None
 
         # Extract variables from the dictionary
-        proration_upgrade_scheme = dictionary.get("proration_upgrade_scheme") if dictionary.get("proration_upgrade_scheme") else 'no-prorate'
-        proration_downgrade_scheme = dictionary.get("proration_downgrade_scheme") if dictionary.get("proration_downgrade_scheme") else 'no-prorate'
+        proration_upgrade_scheme = dictionary.get("proration_upgrade_scheme") if dictionary.get("proration_upgrade_scheme") else APIHelper.SKIP
+        proration_downgrade_scheme = dictionary.get("proration_downgrade_scheme") if dictionary.get("proration_downgrade_scheme") else APIHelper.SKIP
         allocations = None
         if dictionary.get('allocations') is not None:
-            allocations = [CreateAllocationRequest.from_dictionary(x) for x in dictionary.get('allocations')]
+            allocations = [CreateAllocation.from_dictionary(x) for x in dictionary.get('allocations')]
         else:
             allocations = APIHelper.SKIP
         accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
+        initiate_dunning = dictionary.get("initiate_dunning") if "initiate_dunning" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(proration_upgrade_scheme,
                    proration_downgrade_scheme,
@@ -121,4 +131,5 @@ class AllocateComponents(object):
                    accrue_charge,
                    upgrade_charge,
                    downgrade_credit,
-                   payment_collection_method)
+                   payment_collection_method,
+                   initiate_dunning)

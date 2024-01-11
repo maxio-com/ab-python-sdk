@@ -31,6 +31,7 @@ class InvoiceEventType(object):
         CHANGE_CHARGEBACK_STATUS: TODO: type description here.
 
     """
+    _all_values = ['issue_invoice', 'apply_credit_note', 'create_credit_note', 'apply_payment', 'apply_debit_note', 'refund_invoice', 'void_invoice', 'void_remainder', 'backport_invoice', 'change_invoice_status', 'change_invoice_collection_method', 'remove_payment', 'failed_payment', 'change_chargeback_status']
     ISSUE_INVOICE = 'issue_invoice'
 
     APPLY_CREDIT_NOTE = 'apply_credit_note'
@@ -59,3 +60,15 @@ class InvoiceEventType(object):
 
     CHANGE_CHARGEBACK_STATUS = 'change_chargeback_status'
 
+    @classmethod
+    def validate(cls, value):
+        """Validates value contains in enum
+
+        Args:
+            value: the value to be validated
+
+        Returns:
+            boolean : if value is valid enum values.
+
+        """
+        return value in cls._all_values

@@ -22,13 +22,26 @@ class GroupTargetType(object):
         ELDEST: TODO: type description here.
 
     """
+    _all_values = ['customer', 'subscription', 'self', 'parent', 'eldest']
     CUSTOMER = 'customer'
 
     SUBSCRIPTION = 'subscription'
 
-    SELF = 'self'
+    ENUM_SELF = 'self'
 
     PARENT = 'parent'
 
     ELDEST = 'eldest'
 
+    @classmethod
+    def validate(cls, value):
+        """Validates value contains in enum
+
+        Args:
+            value: the value to be validated
+
+        Returns:
+            boolean : if value is valid enum values.
+
+        """
+        return value in cls._all_values

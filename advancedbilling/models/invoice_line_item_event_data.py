@@ -91,9 +91,12 @@ class InvoiceLineItemEventData(object):
     _nullables = [
         'quantity_delta',
         'pricing_details_index',
+        'tax_code',
+        'product_price_point_id',
         'price_point_id',
         'component_id',
         'billing_schedule_item_id',
+        'custom_item',
     ]
 
     def __init__(self,
@@ -175,7 +178,6 @@ class InvoiceLineItemEventData(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
@@ -196,10 +198,10 @@ class InvoiceLineItemEventData(object):
             pricing_details = [InvoiceLineItemPricingDetail.from_dictionary(x) for x in dictionary.get('pricing_details')]
         else:
             pricing_details = APIHelper.SKIP
-        tax_code = dictionary.get("tax_code") if dictionary.get("tax_code") else APIHelper.SKIP
+        tax_code = dictionary.get("tax_code") if "tax_code" in dictionary.keys() else APIHelper.SKIP
         tax_amount = dictionary.get("tax_amount") if dictionary.get("tax_amount") else APIHelper.SKIP
         product_id = dictionary.get("product_id") if dictionary.get("product_id") else APIHelper.SKIP
-        product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
+        product_price_point_id = dictionary.get("product_price_point_id") if "product_price_point_id" in dictionary.keys() else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if "price_point_id" in dictionary.keys() else APIHelper.SKIP
         component_id = dictionary.get("component_id") if "component_id" in dictionary.keys() else APIHelper.SKIP
         billing_schedule_item_id = dictionary.get("billing_schedule_item_id") if "billing_schedule_item_id" in dictionary.keys() else APIHelper.SKIP

@@ -25,6 +25,13 @@ class OfferItem(object):
         component_name (str): TODO: type description here.
         price_point_name (str): TODO: type description here.
         currency_prices (List[CurrencyPrice]): TODO: type description here.
+        interval (int): The numerical interval. i.e. an interval of '30'
+            coupled with an interval_unit of day would mean this component
+            price point would renew every 30 days. This property is only
+            available for sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this component price point, either month or day. This property
+            is only available for sites with Multifrequency enabled.
 
     """
 
@@ -37,7 +44,9 @@ class OfferItem(object):
         "component_unit_price": 'component_unit_price',
         "component_name": 'component_name',
         "price_point_name": 'price_point_name',
-        "currency_prices": 'currency_prices'
+        "currency_prices": 'currency_prices',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit'
     }
 
     _optionals = [
@@ -49,6 +58,8 @@ class OfferItem(object):
         'component_name',
         'price_point_name',
         'currency_prices',
+        'interval',
+        'interval_unit',
     ]
 
     def __init__(self,
@@ -59,7 +70,9 @@ class OfferItem(object):
                  component_unit_price=APIHelper.SKIP,
                  component_name=APIHelper.SKIP,
                  price_point_name=APIHelper.SKIP,
-                 currency_prices=APIHelper.SKIP):
+                 currency_prices=APIHelper.SKIP,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP):
         """Constructor for the OfferItem class"""
 
         # Initialize members of the class
@@ -79,6 +92,10 @@ class OfferItem(object):
             self.price_point_name = price_point_name 
         if currency_prices is not APIHelper.SKIP:
             self.currency_prices = currency_prices 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
 
     @classmethod
     def from_dictionary(cls,
@@ -110,6 +127,8 @@ class OfferItem(object):
             currency_prices = [CurrencyPrice.from_dictionary(x) for x in dictionary.get('currency_prices')]
         else:
             currency_prices = APIHelper.SKIP
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         # Return an object of this model
         return cls(component_id,
                    price_point_id,
@@ -118,4 +137,6 @@ class OfferItem(object):
                    component_unit_price,
                    component_name,
                    price_point_name,
-                   currency_prices)
+                   currency_prices,
+                   interval,
+                   interval_unit)

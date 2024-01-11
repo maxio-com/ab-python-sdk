@@ -18,7 +18,7 @@ class Usage(object):
     Attributes:
         id (int): TODO: type description here.
         memo (str): TODO: type description here.
-        created_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
         price_point_id (int): TODO: type description here.
         quantity (int | str | None): TODO: type description here.
         overage_quantity (int): TODO: type description here.
@@ -71,7 +71,7 @@ class Usage(object):
         if memo is not APIHelper.SKIP:
             self.memo = memo 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id 
         if quantity is not APIHelper.SKIP:
@@ -99,13 +99,14 @@ class Usage(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UsageQuantity'), dictionary.get('quantity'), False) if dictionary.get('quantity') is not None else APIHelper.SKIP
         overage_quantity = dictionary.get("overage_quantity") if dictionary.get("overage_quantity") else APIHelper.SKIP

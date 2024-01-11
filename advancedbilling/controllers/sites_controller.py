@@ -65,7 +65,7 @@ class SitesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -110,7 +110,7 @@ class SitesController(BaseController):
             .query_param(Parameter()
                          .key('cleanup_scope')
                          .value(cleanup_scope))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def list_chargify_js_public_keys(self,
@@ -165,7 +165,7 @@ class SitesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

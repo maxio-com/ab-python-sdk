@@ -77,7 +77,7 @@ class SubscriptionNotesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -144,7 +144,7 @@ class SubscriptionNotesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -191,7 +191,7 @@ class SubscriptionNotesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -246,7 +246,7 @@ class SubscriptionNotesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -289,5 +289,5 @@ class SubscriptionNotesController(BaseController):
                             .value(note_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()

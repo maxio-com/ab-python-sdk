@@ -23,6 +23,7 @@ class InvoicePaymentMethodType(object):
         OTHER: TODO: type description here.
 
     """
+    _all_values = ['credit_card', 'check', 'cash', 'money_order', 'ach', 'other']
     CREDIT_CARD = 'credit_card'
 
     CHECK = 'check'
@@ -35,3 +36,15 @@ class InvoicePaymentMethodType(object):
 
     OTHER = 'other'
 
+    @classmethod
+    def validate(cls, value):
+        """Validates value contains in enum
+
+        Args:
+            value: the value to be validated
+
+        Returns:
+            boolean : if value is valid enum values.
+
+        """
+        return value in cls._all_values
