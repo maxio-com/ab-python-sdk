@@ -80,12 +80,12 @@ class SubscriptionComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionComponentResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def list_subscription_components(self,
@@ -217,7 +217,7 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -271,12 +271,12 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BulkComponentSPricePointAssignment.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ComponentPricePointErrorException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ComponentPricePointErrorException)
         ).execute()
 
     def reset_subscription_components_price_points(self,
@@ -314,7 +314,7 @@ class SubscriptionComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -440,12 +440,12 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AllocationResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def list_allocations(self,
@@ -516,14 +516,13 @@ class SubscriptionComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AllocationResponse.from_dictionary)
-            .local_error('401', 'Unauthorized', APIException)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def allocate_components(self,
@@ -573,14 +572,13 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AllocationResponse.from_dictionary)
-            .local_error('401', 'Unauthorized', APIException)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def preview_allocations(self,
@@ -637,12 +635,12 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(AllocationPreviewResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ComponentAllocationErrorException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ComponentAllocationErrorException)
         ).execute()
 
     def update_prepaid_usage_allocation(self,
@@ -713,7 +711,7 @@ class SubscriptionComponentsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def delete_prepaid_usage_allocation(self,
@@ -782,7 +780,7 @@ class SubscriptionComponentsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def create_usage(self,
@@ -903,12 +901,12 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(UsageResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def list_usages(self,
@@ -1016,7 +1014,7 @@ class SubscriptionComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1071,7 +1069,7 @@ class SubscriptionComponentsController(BaseController):
                             .value(component_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def deactivate_event_based_component(self,
@@ -1112,7 +1110,7 @@ class SubscriptionComponentsController(BaseController):
                             .value(component_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def record_event(self,
@@ -1186,7 +1184,7 @@ class SubscriptionComponentsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def record_events(self,
@@ -1246,7 +1244,7 @@ class SubscriptionComponentsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def list_subscription_components_for_site(self,
@@ -1465,7 +1463,7 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

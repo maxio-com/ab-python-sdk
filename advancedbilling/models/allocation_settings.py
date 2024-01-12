@@ -24,7 +24,7 @@ class AllocationSettings(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        accrue_charge (bool): TODO: type description here.
+        accrue_charge (str): Either "true" or "false".
 
     """
 
@@ -80,7 +80,7 @@ class AllocationSettings(object):
         # Extract variables from the dictionary
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
-        accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
+        accrue_charge = dictionary.get("accrue_charge") if dictionary.get("accrue_charge") else APIHelper.SKIP
         # Return an object of this model
         return cls(upgrade_charge,
                    downgrade_credit,

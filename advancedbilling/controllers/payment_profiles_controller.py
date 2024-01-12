@@ -370,12 +370,13 @@ class PaymentProfilesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CreatePaymentProfileResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def list_payment_profiles(self,
@@ -437,7 +438,7 @@ class PaymentProfilesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -508,7 +509,7 @@ class PaymentProfilesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -597,7 +598,7 @@ class PaymentProfilesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -635,7 +636,7 @@ class PaymentProfilesController(BaseController):
                             .value(payment_profile_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def delete_subscriptions_payment_profile(self,
@@ -684,7 +685,7 @@ class PaymentProfilesController(BaseController):
                             .value(payment_profile_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def verify_bank_account(self,
@@ -730,13 +731,13 @@ class PaymentProfilesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BankAccountResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def delete_subscription_group_payment_profile(self,
@@ -777,7 +778,7 @@ class PaymentProfilesController(BaseController):
                             .value(payment_profile_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def update_subscription_default_payment_profile(self,
@@ -823,12 +824,12 @@ class PaymentProfilesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaymentProfileResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def update_subscription_group_default_payment_profile(self,
@@ -876,12 +877,12 @@ class PaymentProfilesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaymentProfileResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def read_one_time_token(self,
@@ -923,12 +924,12 @@ class PaymentProfilesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(GetOneTimeTokenRequest.from_dictionary)
-            .local_error('404', 'Not Found', ErrorListResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', ErrorListResponseException)
         ).execute()
 
     def send_request_update_payment_email(self,
@@ -974,5 +975,5 @@ class PaymentProfilesController(BaseController):
                             .value(subscription_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()

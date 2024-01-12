@@ -68,10 +68,10 @@ class ReferralCodesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReferralValidationResponse.from_dictionary)
-            .local_error('404', 'Not Found', SingleStringErrorResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', SingleStringErrorResponseException)
         ).execute()

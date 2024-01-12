@@ -20,7 +20,6 @@ from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.offer_response import OfferResponse
 from advancedbilling.models.list_offers_response import ListOffersResponse
 from advancedbilling.exceptions.error_map_response_exception import ErrorMapResponseException
-from advancedbilling.exceptions.api_exception import APIException
 
 
 class OffersController(BaseController):
@@ -76,12 +75,12 @@ class OffersController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(OfferResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorMapResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorMapResponseException)
         ).execute()
 
     def list_offers(self,
@@ -141,7 +140,7 @@ class OffersController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -182,12 +181,11 @@ class OffersController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(OfferResponse.from_dictionary)
-            .local_error('401', 'Unauthorized', APIException)
         ).execute()
 
     def archive_offer(self,
@@ -220,7 +218,7 @@ class OffersController(BaseController):
                             .value(offer_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def unarchive_offer(self,
@@ -253,5 +251,5 @@ class OffersController(BaseController):
                             .value(offer_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()

@@ -192,7 +192,7 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
-        'CreateMetafieldsRequestMetafields': AnyOf(
+        'CreateMetafieldsRequestMetafields': OneOf(
             [
                 LeafType(CreateMetafield),
                 LeafType(CreateMetafield,
@@ -214,7 +214,7 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
-        'UpdateMetafieldsRequestMetafields': AnyOf(
+        'UpdateMetafieldsRequestMetafields': OneOf(
             [
                 LeafType(UpdateMetafield),
                 LeafType(UpdateMetafield,

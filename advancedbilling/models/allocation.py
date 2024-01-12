@@ -44,6 +44,13 @@ class Allocation(object):
         price_point_id (int): TODO: type description here.
         price_point_name (str): TODO: type description here.
         price_point_handle (str): TODO: type description here.
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this component
+            price point would renew every 30 days. This property is only
+            available for sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this component price point, either month or day. This property
+            is only available for sites with Multifrequency enabled.
         previous_price_point_id (int): TODO: type description here.
         accrue_charge (bool): If the change in cost is an upgrade, this
             determines if the charge should accrue to the next renewal or if
@@ -79,6 +86,8 @@ class Allocation(object):
         "price_point_id": 'price_point_id',
         "price_point_name": 'price_point_name',
         "price_point_handle": 'price_point_handle',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit',
         "previous_price_point_id": 'previous_price_point_id',
         "accrue_charge": 'accrue_charge',
         "initiate_dunning": 'initiate_dunning',
@@ -102,6 +111,8 @@ class Allocation(object):
         'price_point_id',
         'price_point_name',
         'price_point_handle',
+        'interval',
+        'interval_unit',
         'previous_price_point_id',
         'accrue_charge',
         'initiate_dunning',
@@ -133,6 +144,8 @@ class Allocation(object):
                  price_point_id=APIHelper.SKIP,
                  price_point_name=APIHelper.SKIP,
                  price_point_handle=APIHelper.SKIP,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP,
                  previous_price_point_id=APIHelper.SKIP,
                  accrue_charge=APIHelper.SKIP,
                  initiate_dunning=APIHelper.SKIP,
@@ -170,6 +183,10 @@ class Allocation(object):
             self.price_point_name = price_point_name 
         if price_point_handle is not APIHelper.SKIP:
             self.price_point_handle = price_point_handle 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
         if previous_price_point_id is not APIHelper.SKIP:
             self.previous_price_point_id = previous_price_point_id 
         if accrue_charge is not APIHelper.SKIP:
@@ -216,6 +233,8 @@ class Allocation(object):
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         price_point_name = dictionary.get("price_point_name") if dictionary.get("price_point_name") else APIHelper.SKIP
         price_point_handle = dictionary.get("price_point_handle") if dictionary.get("price_point_handle") else APIHelper.SKIP
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         previous_price_point_id = dictionary.get("previous_price_point_id") if dictionary.get("previous_price_point_id") else APIHelper.SKIP
         accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
         initiate_dunning = dictionary.get("initiate_dunning") if "initiate_dunning" in dictionary.keys() else APIHelper.SKIP
@@ -240,6 +259,8 @@ class Allocation(object):
                    price_point_id,
                    price_point_name,
                    price_point_handle,
+                   interval,
+                   interval_unit,
                    previous_price_point_id,
                    accrue_charge,
                    initiate_dunning,

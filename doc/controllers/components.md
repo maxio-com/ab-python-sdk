@@ -884,7 +884,8 @@ body = CreateComponentPricePointRequest(
                 unit_price='4.00'
             )
         ],
-        handle='wholesale-handle'
+        handle='wholesale-handle',
+        use_site_exchange_rate=False
     )
 )
 

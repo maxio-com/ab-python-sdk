@@ -34,6 +34,13 @@ class AllocationPreviewItem(object):
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
         price_point_id (int): TODO: type description here.
+        interval (int): The numerical interval. i.e. an interval of ‘30’
+            coupled with an interval_unit of day would mean this component
+            price point would renew every 30 days. This property is only
+            available for sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this component price point, either month or day. This property
+            is only available for sites with Multifrequency enabled.
         previous_price_point_id (int): TODO: type description here.
         price_point_handle (str): TODO: type description here.
         price_point_name (str): TODO: type description here.
@@ -55,6 +62,8 @@ class AllocationPreviewItem(object):
         "upgrade_charge": 'upgrade_charge',
         "downgrade_credit": 'downgrade_credit',
         "price_point_id": 'price_point_id',
+        "interval": 'interval',
+        "interval_unit": 'interval_unit',
         "previous_price_point_id": 'previous_price_point_id',
         "price_point_handle": 'price_point_handle',
         "price_point_name": 'price_point_name',
@@ -74,6 +83,8 @@ class AllocationPreviewItem(object):
         'upgrade_charge',
         'downgrade_credit',
         'price_point_id',
+        'interval',
+        'interval_unit',
         'previous_price_point_id',
         'price_point_handle',
         'price_point_name',
@@ -101,6 +112,8 @@ class AllocationPreviewItem(object):
                  upgrade_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
+                 interval=APIHelper.SKIP,
+                 interval_unit=APIHelper.SKIP,
                  previous_price_point_id=APIHelper.SKIP,
                  price_point_handle=APIHelper.SKIP,
                  price_point_name=APIHelper.SKIP,
@@ -132,6 +145,10 @@ class AllocationPreviewItem(object):
             self.downgrade_credit = downgrade_credit 
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id 
+        if interval is not APIHelper.SKIP:
+            self.interval = interval 
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit 
         if previous_price_point_id is not APIHelper.SKIP:
             self.previous_price_point_id = previous_price_point_id 
         if price_point_handle is not APIHelper.SKIP:
@@ -172,6 +189,8 @@ class AllocationPreviewItem(object):
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
+        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         previous_price_point_id = dictionary.get("previous_price_point_id") if dictionary.get("previous_price_point_id") else APIHelper.SKIP
         price_point_handle = dictionary.get("price_point_handle") if dictionary.get("price_point_handle") else APIHelper.SKIP
         price_point_name = dictionary.get("price_point_name") if dictionary.get("price_point_name") else APIHelper.SKIP
@@ -189,6 +208,8 @@ class AllocationPreviewItem(object):
                    upgrade_charge,
                    downgrade_credit,
                    price_point_id,
+                   interval,
+                   interval_unit,
                    previous_price_point_id,
                    price_point_handle,
                    price_point_name,

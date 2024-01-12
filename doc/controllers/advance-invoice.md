@@ -59,7 +59,6 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
@@ -96,7 +95,6 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
 
 
@@ -135,6 +133,5 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
 

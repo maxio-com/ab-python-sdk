@@ -20,10 +20,6 @@ class OnOffComponent(object):
     Attributes:
         name (str): A name for this component that is suitable for showing
             customers and displaying on billing statements, ie. "Minutes".
-        unit_name (str): The name of the unit of measurement for the
-            component. It should be singular since it will be automatically
-            pluralized when necessary. i.e. “message”, which may then be shown
-            as “5 messages” on a subscription’s component line-item
         description (str): A description for the component that will be
             displayed to the user on the hosted signup page.
         handle (str): A unique identifier for your use that can be used to
@@ -78,7 +74,6 @@ class OnOffComponent(object):
     # Create a mapping from Model property names to API property names
     _names = {
         "name": 'name',
-        "unit_name": 'unit_name',
         "description": 'description',
         "handle": 'handle',
         "taxable": 'taxable',
@@ -98,7 +93,6 @@ class OnOffComponent(object):
     }
 
     _optionals = [
-        'unit_name',
         'description',
         'handle',
         'taxable',
@@ -124,7 +118,6 @@ class OnOffComponent(object):
 
     def __init__(self,
                  name=None,
-                 unit_name=APIHelper.SKIP,
                  description=APIHelper.SKIP,
                  handle=APIHelper.SKIP,
                  taxable=APIHelper.SKIP,
@@ -145,8 +138,6 @@ class OnOffComponent(object):
 
         # Initialize members of the class
         self.name = name 
-        if unit_name is not APIHelper.SKIP:
-            self.unit_name = unit_name 
         if description is not APIHelper.SKIP:
             self.description = description 
         if handle is not APIHelper.SKIP:
@@ -200,7 +191,6 @@ class OnOffComponent(object):
 
         # Extract variables from the dictionary
         name = dictionary.get("name") if dictionary.get("name") else None
-        unit_name = dictionary.get("unit_name") if dictionary.get("unit_name") else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
@@ -227,7 +217,6 @@ class OnOffComponent(object):
         interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         # Return an object of this model
         return cls(name,
-                   unit_name,
                    description,
                    handle,
                    taxable,

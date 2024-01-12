@@ -259,9 +259,3 @@ result = subscription_notes_controller.delete_subscription_note(
 print(result)
 ```
 
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | `APIException` |
-

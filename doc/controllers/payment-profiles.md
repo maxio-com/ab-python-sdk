@@ -329,7 +329,8 @@ print(result)
     "billing_address_2": null,
     "payment_type": "credit_card",
     "site_gateway_setting_id": 1,
-    "gateway_handle": "handle"
+    "gateway_handle": "handle",
+    "disabled": false
   }
 }
 ```
@@ -339,6 +340,7 @@ print(result)
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # List Payment Profiles

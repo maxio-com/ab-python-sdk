@@ -22,7 +22,6 @@ from advancedbilling.models.subscription_response import SubscriptionResponse
 from advancedbilling.models.prepaid_configuration_response import PrepaidConfigurationResponse
 from advancedbilling.models.subscription_preview_response import SubscriptionPreviewResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
-from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.exceptions.single_error_response_exception import SingleErrorResponseException
 from advancedbilling.exceptions.subscription_add_coupon_error_exception import SubscriptionAddCouponErrorException
 from advancedbilling.exceptions.subscription_remove_coupon_errors_exception import SubscriptionRemoveCouponErrorsException
@@ -843,12 +842,12 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def list_subscriptions(self,
@@ -1006,7 +1005,7 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1118,12 +1117,12 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def read_subscription(self,
@@ -1170,8 +1169,8 @@ class SubscriptionsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .array_serialization_format(SerializationFormats.PLAIN)
-            .auth(Single('BasicAuth'))
+            .array_serialization_format(SerializationFormats.CSV)
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1248,7 +1247,7 @@ class SubscriptionsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def read_subscription_by_reference(self,
@@ -1281,7 +1280,7 @@ class SubscriptionsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1340,8 +1339,8 @@ class SubscriptionsController(BaseController):
             .query_param(Parameter()
                          .key('cascade[]')
                          .value(cascade))
-            .array_serialization_format(SerializationFormats.PLAIN)
-            .auth(Single('BasicAuth'))
+            .array_serialization_format(SerializationFormats.CSV)
+            .auth(Single('global'))
         ).execute()
 
     def create_prepaid_subscription(self,
@@ -1385,7 +1384,7 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1461,7 +1460,7 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1527,12 +1526,12 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', SubscriptionAddCouponErrorException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SubscriptionAddCouponErrorException)
         ).execute()
 
     def delete_coupon_from_subscription(self,
@@ -1573,11 +1572,11 @@ class SubscriptionsController(BaseController):
             .query_param(Parameter()
                          .key('coupon_code')
                          .value(coupon_code))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', SubscriptionRemoveCouponErrorsException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SubscriptionRemoveCouponErrorsException)
         ).execute()
 
     def activate_subscription(self,
@@ -1671,10 +1670,10 @@ class SubscriptionsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
-            .local_error('400', 'Bad Request', NestedErrorResponseException)
+            .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', NestedErrorResponseException)
         ).execute()

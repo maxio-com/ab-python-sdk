@@ -25,6 +25,7 @@ class BaseController(object):
         http_call_back (HttpCallBack): An object which holds call back
             methods to be called before and after the execution of an HttpRequest.
         new_api_call_builder (APICall): Returns the API Call builder instance.
+        auth_managers (dict): A dictionary which holds the instances of authentication managers.
 
     """
 
@@ -41,11 +42,13 @@ class BaseController(object):
     @staticmethod
     def global_errors():
         return {
-            'default': ErrorCase().error_message('HTTP response not OK.').exception_type(APIException),
+            'default': ErrorCase().error_message_template('HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.').exception_type(APIException),
+            '404': ErrorCase().error_message_template('Not Found:\'{$response.body}\'').exception_type(APIException),
         }
 
     def __init__(self, config):
-        self._config = config.get_http_client_configuration()
+        self._global_config = config
+        self._config = self._global_config.get_http_client_configuration()
         self._http_call_back = self.config.http_callback
         self.api_call = ApiCall(config)
 
@@ -60,3 +63,7 @@ class BaseController(object):
     @property
     def new_api_call_builder(self):
         return self.api_call.new_builder
+
+    @property
+    def auth_managers(self):
+        return self._global_config.get_auth_managers()
