@@ -243,12 +243,6 @@ result = offers_controller.read_offers(offer_id)
 print(result)
 ```
 
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 401 | Unauthorized | `APIException` |
-
 
 # Archive Offer
 
@@ -278,12 +272,6 @@ result = offers_controller.archive_offer(offer_id)
 print(result)
 ```
 
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 401 | Unauthorized | `APIException` |
-
 
 # Unarchive Offer
 
@@ -312,10 +300,4 @@ offer_id = 130
 result = offers_controller.unarchive_offer(offer_id)
 print(result)
 ```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 401 | Unauthorized | `APIException` |
 

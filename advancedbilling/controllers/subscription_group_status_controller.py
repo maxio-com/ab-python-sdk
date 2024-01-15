@@ -73,7 +73,7 @@ class SubscriptionGroupStatusController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def initiate_delayed_cancellation_for_group(self,
@@ -110,7 +110,7 @@ class SubscriptionGroupStatusController(BaseController):
                             .value(uid)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def stop_delayed_cancellation_for_group(self,
@@ -145,7 +145,7 @@ class SubscriptionGroupStatusController(BaseController):
                             .value(uid)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def reactivate_subscription_group(self,
@@ -224,10 +224,10 @@ class SubscriptionGroupStatusController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReactivateSubscriptionGroupResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()

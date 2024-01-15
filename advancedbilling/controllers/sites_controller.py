@@ -19,7 +19,6 @@ from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.site_response import SiteResponse
 from advancedbilling.models.list_public_keys_response import ListPublicKeysResponse
-from advancedbilling.exceptions.api_exception import APIException
 
 
 class SitesController(BaseController):
@@ -65,7 +64,7 @@ class SitesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -110,7 +109,7 @@ class SitesController(BaseController):
             .query_param(Parameter()
                          .key('cleanup_scope')
                          .value(cleanup_scope))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def list_chargify_js_public_keys(self,
@@ -165,7 +164,7 @@ class SitesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

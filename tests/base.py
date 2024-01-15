@@ -1,7 +1,6 @@
 from os import getenv
 
 from advancedbilling.advanced_billing_client import AdvancedBillingClient
-from advancedbilling.http.auth.basic_auth import BasicAuthCredentials
 
 
 class TestBase():
@@ -9,8 +8,6 @@ class TestBase():
         self.client = AdvancedBillingClient(
             subdomain=getenv("SUBDOMAIN"),
             domain=getenv("DOMAIN"),
-            basic_auth_credentials=BasicAuthCredentials(
-                username=getenv("BASIC_AUTH_USERNAME"),
-                password=getenv("BASIC_AUTH_PASSWORD")
-            )
+            basic_auth_user_name=getenv("BASIC_AUTH_USERNAME"),
+            basic_auth_password=getenv("BASIC_AUTH_PASSWORD")
         )

@@ -93,12 +93,12 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def list_exported_invoices(self,
@@ -163,12 +163,12 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def list_exported_subscriptions(self,
@@ -233,12 +233,12 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Subscription.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def export_proforma_invoices(self):
@@ -266,13 +266,13 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('409', 'Conflict', SingleErrorResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('409', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SingleErrorResponseException)
         ).execute()
 
     def export_invoices(self):
@@ -298,13 +298,13 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('409', 'Conflict', SingleErrorResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('409', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SingleErrorResponseException)
         ).execute()
 
     def export_subscriptions(self):
@@ -331,12 +331,12 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
-            .local_error('409', 'Conflict', SingleErrorResponseException)
+            .local_error_template('409', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SingleErrorResponseException)
         ).execute()
 
     def read_proforma_invoices_export(self,
@@ -371,12 +371,12 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def read_invoices_export(self,
@@ -411,12 +411,12 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def read_subscriptions_export(self,
@@ -451,10 +451,10 @@ class APIExportsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BatchJobResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()

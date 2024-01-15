@@ -109,12 +109,12 @@ class CustomFieldsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Metafield.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', SingleErrorResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SingleErrorResponseException)
         ).execute()
 
     def list_metafields(self,
@@ -187,7 +187,7 @@ class CustomFieldsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -251,7 +251,7 @@ class CustomFieldsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -296,7 +296,7 @@ class CustomFieldsController(BaseController):
             .query_param(Parameter()
                          .key('name')
                          .value(name))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def create_metadata(self,
@@ -376,7 +376,7 @@ class CustomFieldsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -454,7 +454,7 @@ class CustomFieldsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -512,7 +512,7 @@ class CustomFieldsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -587,8 +587,8 @@ class CustomFieldsController(BaseController):
             .query_param(Parameter()
                          .key('names[]')
                          .value(names))
-            .array_serialization_format(SerializationFormats.PLAIN)
-            .auth(Single('BasicAuth'))
+            .array_serialization_format(SerializationFormats.CSV)
+            .auth(Single('global'))
         ).execute()
 
     def list_metadata_for_resource_type(self,
@@ -717,7 +717,7 @@ class CustomFieldsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

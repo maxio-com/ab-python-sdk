@@ -72,7 +72,7 @@ class ProformaInvoicesController(BaseController):
                             .value(uid)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def list_subscription_group_proforma_invoices(self,
@@ -113,13 +113,12 @@ class ProformaInvoicesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
-            .local_error('403', 'Forbidden', APIException)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def read_proforma_invoice(self,
@@ -157,13 +156,12 @@ class ProformaInvoicesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
-            .local_error('403', 'Forbidden', APIException)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def create_proforma_invoice(self,
@@ -207,13 +205,12 @@ class ProformaInvoicesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
-            .local_error('403', 'Forbidden', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def list_proforma_invoices(self,
@@ -324,7 +321,7 @@ class ProformaInvoicesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -381,14 +378,13 @@ class ProformaInvoicesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
-            .local_error('403', 'Forbidden', APIException)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def preview_proforma_invoice(self,
@@ -439,14 +435,13 @@ class ProformaInvoicesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoicePreview.from_dictionary)
-            .local_error('403', 'Forbidden', APIException)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def create_signup_proforma_invoice(self,
@@ -496,14 +491,13 @@ class ProformaInvoicesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
-            .local_error('400', 'Bad Request', ProformaBadRequestErrorResponseException)
-            .local_error('403', 'Forbidden', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorMapResponseException)
+            .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ProformaBadRequestErrorResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorMapResponseException)
         ).execute()
 
     def preview_signup_proforma_invoice(self,
@@ -558,12 +552,11 @@ class ProformaInvoicesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SignupProformaPreviewResponse.from_dictionary)
-            .local_error('400', 'Bad Request', ProformaBadRequestErrorResponseException)
-            .local_error('403', 'Forbidden', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorMapResponseException)
+            .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ProformaBadRequestErrorResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorMapResponseException)
         ).execute()

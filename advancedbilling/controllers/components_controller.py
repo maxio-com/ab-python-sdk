@@ -108,12 +108,12 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def read_component_by_handle(self,
@@ -149,7 +149,7 @@ class ComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -200,7 +200,7 @@ class ComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -259,12 +259,12 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def archive_component(self,
@@ -310,12 +310,12 @@ class ComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Component.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def list_components(self,
@@ -428,7 +428,7 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -478,12 +478,12 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def update_default_price_point_for_component(self,
@@ -534,7 +534,7 @@ class ComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -660,7 +660,7 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -709,7 +709,7 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -795,7 +795,7 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -845,7 +845,7 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -909,7 +909,7 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -958,7 +958,7 @@ class ComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1005,7 +1005,7 @@ class ComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1060,7 +1060,7 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1111,7 +1111,7 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1244,10 +1244,10 @@ class ComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListComponentsPricePointsResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()

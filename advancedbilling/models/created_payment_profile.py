@@ -43,6 +43,7 @@ class CreatedPaymentProfile(object):
         verified (bool): TODO: type description here.
         site_gateway_setting_id (int): TODO: type description here.
         gateway_handle (str): TODO: type description here.
+        disabled (bool): TODO: type description here.
 
     """
 
@@ -73,7 +74,8 @@ class CreatedPaymentProfile(object):
         "bank_account_holder_type": 'bank_account_holder_type',
         "verified": 'verified',
         "site_gateway_setting_id": 'site_gateway_setting_id',
-        "gateway_handle": 'gateway_handle'
+        "gateway_handle": 'gateway_handle',
+        "disabled": 'disabled'
     }
 
     _optionals = [
@@ -103,6 +105,7 @@ class CreatedPaymentProfile(object):
         'verified',
         'site_gateway_setting_id',
         'gateway_handle',
+        'disabled',
     ]
 
     _nullables = [
@@ -137,7 +140,8 @@ class CreatedPaymentProfile(object):
                  bank_account_holder_type=APIHelper.SKIP,
                  verified=APIHelper.SKIP,
                  site_gateway_setting_id=APIHelper.SKIP,
-                 gateway_handle=APIHelper.SKIP):
+                 gateway_handle=APIHelper.SKIP,
+                 disabled=APIHelper.SKIP):
         """Constructor for the CreatedPaymentProfile class"""
 
         # Initialize members of the class
@@ -193,6 +197,8 @@ class CreatedPaymentProfile(object):
             self.site_gateway_setting_id = site_gateway_setting_id 
         if gateway_handle is not APIHelper.SKIP:
             self.gateway_handle = gateway_handle 
+        if disabled is not APIHelper.SKIP:
+            self.disabled = disabled 
 
     @classmethod
     def from_dictionary(cls,
@@ -238,6 +244,7 @@ class CreatedPaymentProfile(object):
         verified = dictionary.get("verified") if "verified" in dictionary.keys() else APIHelper.SKIP
         site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if dictionary.get("site_gateway_setting_id") else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if dictionary.get("gateway_handle") else APIHelper.SKIP
+        disabled = dictionary.get("disabled") if "disabled" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    first_name,
@@ -264,4 +271,5 @@ class CreatedPaymentProfile(object):
                    bank_account_holder_type,
                    verified,
                    site_gateway_setting_id,
-                   gateway_handle)
+                   gateway_handle,
+                   disabled)

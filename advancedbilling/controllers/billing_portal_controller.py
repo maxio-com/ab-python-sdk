@@ -96,12 +96,12 @@ class BillingPortalController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def read_billing_portal_link(self,
@@ -147,13 +147,13 @@ class BillingPortalController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PortalManagementLink.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
-            .local_error('429', 'Too Many Requests', TooManyManagementLinkRequestsErrorException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+            .local_error_template('429', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', TooManyManagementLinkRequestsErrorException)
         ).execute()
 
     def resend_billing_portal_invitation(self,
@@ -200,13 +200,13 @@ class BillingPortalController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ResentInvitation.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorListResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def revoke_billing_portal_access(self,
@@ -246,10 +246,9 @@ class BillingPortalController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(RevokedInvitation.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', APIException)
         ).execute()

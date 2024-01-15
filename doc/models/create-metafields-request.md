@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `metafields` | [Create Metafield](../../doc/models/create-metafield.md) \| List[[Create Metafield](../../doc/models/create-metafield.md)] | Required | This is a container for any-of cases. |
+| `metafields` | [Create Metafield](../../doc/models/create-metafield.md) \| List[[Create Metafield](../../doc/models/create-metafield.md)] | Required | This is a container for one-of cases. |
 
 ## Example (as JSON)
 

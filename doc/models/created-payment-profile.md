@@ -35,6 +35,7 @@
 | `verified` | `bool` | Optional | - |
 | `site_gateway_setting_id` | `int` | Optional | - |
 | `gateway_handle` | `str` | Optional | - |
+| `disabled` | `bool` | Optional | - |
 
 ## Example (as JSON)
 

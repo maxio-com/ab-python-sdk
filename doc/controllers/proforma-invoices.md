@@ -96,7 +96,6 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
 
 
@@ -136,7 +135,6 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
 
 
@@ -178,7 +176,6 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 403 | Forbidden | `APIException` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
@@ -275,7 +272,6 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
@@ -318,7 +314,6 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 403 | Forbidden | `APIException` |
 | 404 | Not Found | `APIException` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
@@ -373,7 +368,6 @@ print(result)
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 400 | Bad Request | [`ProformaBadRequestErrorResponseException`](../../doc/models/proforma-bad-request-error-response-exception.md) |
-| 403 | Forbidden | `APIException` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseException`](../../doc/models/error-map-response-exception.md) |
 
 
@@ -429,6 +423,5 @@ print(result)
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 400 | Bad Request | [`ProformaBadRequestErrorResponseException`](../../doc/models/proforma-bad-request-error-response-exception.md) |
-| 403 | Forbidden | `APIException` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseException`](../../doc/models/error-map-response-exception.md) |
 

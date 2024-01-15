@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `metafields` | [Update Metafield](../../doc/models/update-metafield.md) \| List[[Update Metafield](../../doc/models/update-metafield.md)] \| None | Optional | This is a container for any-of cases. |
+| `metafields` | [Update Metafield](../../doc/models/update-metafield.md) \| List[[Update Metafield](../../doc/models/update-metafield.md)] \| None | Optional | This is a container for one-of cases. |
 
 ## Example (as JSON)
 

@@ -68,7 +68,7 @@ class SubscriptionInvoiceAccountController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -123,7 +123,7 @@ class SubscriptionInvoiceAccountController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -215,14 +215,12 @@ class SubscriptionInvoiceAccountController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PrepaymentsResponse.from_dictionary)
-            .local_error('401', 'Unauthorized', APIException)
-            .local_error('403', 'Forbidden', APIException)
-            .local_error('404', 'Not Found', APIException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def issue_service_credit(self,
@@ -268,7 +266,7 @@ class SubscriptionInvoiceAccountController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -315,7 +313,7 @@ class SubscriptionInvoiceAccountController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).execute()
 
     def refund_prepayment(self,
@@ -371,12 +369,12 @@ class SubscriptionInvoiceAccountController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single('global'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PrepaymentResponse.from_dictionary)
-            .local_error('400', 'Bad Request', RefundPrepaymentBaseErrorsResponseException)
-            .local_error('404', 'Not Found', APIException)
-            .local_error('422', 'Unprocessable Entity', RefundPrepaymentAggregatedErrorsResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', RefundPrepaymentBaseErrorsResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', RefundPrepaymentAggregatedErrorsResponseException)
         ).execute()
