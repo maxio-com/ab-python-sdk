@@ -17,10 +17,11 @@ class UpdatePrice(object):
 
     Attributes:
         id (int): TODO: type description here.
-        ending_quantity (int): TODO: type description here.
-        unit_price (int): TODO: type description here.
-        destroy (str): TODO: type description here.
-        starting_quantity (int): TODO: type description here.
+        ending_quantity (int | str | None): TODO: type description here.
+        unit_price (float | str | None): The price can contain up to 8 decimal
+            places. i.e. 1.00 or 0.0012 or 0.00000065
+        destroy (bool): TODO: type description here.
+        starting_quantity (int | str | None): TODO: type description here.
 
     """
 
@@ -75,15 +76,16 @@ class UpdatePrice(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        ending_quantity = dictionary.get("ending_quantity") if dictionary.get("ending_quantity") else APIHelper.SKIP
-        unit_price = dictionary.get("unit_price") if dictionary.get("unit_price") else APIHelper.SKIP
-        destroy = dictionary.get("_destroy") if dictionary.get("_destroy") else APIHelper.SKIP
-        starting_quantity = dictionary.get("starting_quantity") if dictionary.get("starting_quantity") else APIHelper.SKIP
+        ending_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdatePriceEndingQuantity'), dictionary.get('ending_quantity'), False) if dictionary.get('ending_quantity') is not None else APIHelper.SKIP
+        unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdatePriceUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else APIHelper.SKIP
+        destroy = dictionary.get("_destroy") if "_destroy" in dictionary.keys() else APIHelper.SKIP
+        starting_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdatePriceStartingQuantity'), dictionary.get('starting_quantity'), False) if dictionary.get('starting_quantity') is not None else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    ending_quantity,

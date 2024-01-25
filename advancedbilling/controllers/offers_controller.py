@@ -19,7 +19,7 @@ from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.offer_response import OfferResponse
 from advancedbilling.models.list_offers_response import ListOffersResponse
-from advancedbilling.exceptions.error_map_response_exception import ErrorMapResponseException
+from advancedbilling.exceptions.error_array_map_response_exception import ErrorArrayMapResponseException
 
 
 class OffersController(BaseController):
@@ -27,6 +27,113 @@ class OffersController(BaseController):
     """A Controller to access Endpoints in the advancedbilling API."""
     def __init__(self, config):
         super(OffersController, self).__init__(config)
+
+    def read_offers(self,
+                    offer_id):
+        """Does a GET request to /offers/{offer_id}.json.
+
+        This method allows you to list a specific offer's attributes. This is
+        different than list all offers for a site, as it requires an
+        `offer_id`.
+
+        Args:
+            offer_id (int): The Chargify id of the offer
+
+        Returns:
+            OfferResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/offers/{offer_id}.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('offer_id')
+                            .value(offer_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(OfferResponse.from_dictionary)
+        ).execute()
+
+    def unarchive_offer(self,
+                        offer_id):
+        """Does a PUT request to /offers/{offer_id}/unarchive.json.
+
+        Unarchive a previously archived offer. Please provide an `offer_id` in
+        order to un-archive the correct item.
+
+        Args:
+            offer_id (int): The Chargify id of the offer
+
+        Returns:
+            void: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/offers/{offer_id}/unarchive.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('offer_id')
+                            .value(offer_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('global'))
+        ).execute()
+
+    def archive_offer(self,
+                      offer_id):
+        """Does a PUT request to /offers/{offer_id}/archive.json.
+
+        Archive an existing offer. Please provide an `offer_id` in order to
+        archive the correct item.
+
+        Args:
+            offer_id (int): The Chargify id of the offer
+
+        Returns:
+            void: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/offers/{offer_id}/archive.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('offer_id')
+                            .value(offer_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('global'))
+        ).execute()
 
     def create_offer(self,
                      body=None):
@@ -80,7 +187,7 @@ class OffersController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(OfferResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorMapResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorArrayMapResponseException)
         ).execute()
 
     def list_offers(self,
@@ -145,111 +252,4 @@ class OffersController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListOffersResponse.from_dictionary)
-        ).execute()
-
-    def read_offers(self,
-                    offer_id):
-        """Does a GET request to /offers/{offer_id}.json.
-
-        This method allows you to list a specific offer's attributes. This is
-        different than list all offers for a site, as it requires an
-        `offer_id`.
-
-        Args:
-            offer_id (int): The Chargify id of the offer
-
-        Returns:
-            OfferResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/offers/{offer_id}.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('offer_id')
-                            .value(offer_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(OfferResponse.from_dictionary)
-        ).execute()
-
-    def archive_offer(self,
-                      offer_id):
-        """Does a PUT request to /offers/{offer_id}/archive.json.
-
-        Archive an existing offer. Please provide an `offer_id` in order to
-        archive the correct item.
-
-        Args:
-            offer_id (int): The Chargify id of the offer
-
-        Returns:
-            void: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/offers/{offer_id}/archive.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('offer_id')
-                            .value(offer_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('global'))
-        ).execute()
-
-    def unarchive_offer(self,
-                        offer_id):
-        """Does a PUT request to /offers/{offer_id}/unarchive.json.
-
-        Unarchive a previously archived offer. Please provide an `offer_id` in
-        order to un-archive the correct item.
-
-        Args:
-            offer_id (int): The Chargify id of the offer
-
-        Returns:
-            void: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/offers/{offer_id}/unarchive.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('offer_id')
-                            .value(offer_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('global'))
         ).execute()

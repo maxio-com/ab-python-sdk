@@ -7,7 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.applied_credit_note import AppliedCreditNote
+from advancedbilling.models.applied_credit_note_data import AppliedCreditNoteData
 from advancedbilling.models.credit_note_1 import CreditNote1
 
 
@@ -36,8 +36,8 @@ class InvoiceEvent1(object):
         role (str): The role of the credit note (e.g. 'general')
         consolidated_invoice (bool): Shows whether it was applied to
             consolidated invoice or not
-        applied_credit_notes (List[AppliedCreditNote]): List of credit notes
-            applied to children invoices (if consolidated invoice)
+        applied_credit_notes (List[AppliedCreditNoteData]): List of credit
+            notes applied to children invoices (if consolidated invoice)
         debit_note_number (str): A unique, identifying string that appears on
             the debit note and in places it is referenced.
         debit_note_uid (str): Unique identifier for the debit note. It is
@@ -269,7 +269,7 @@ class InvoiceEvent1(object):
         consolidated_invoice = dictionary.get("consolidated_invoice") if "consolidated_invoice" in dictionary.keys() else APIHelper.SKIP
         applied_credit_notes = None
         if dictionary.get('applied_credit_notes') is not None:
-            applied_credit_notes = [AppliedCreditNote.from_dictionary(x) for x in dictionary.get('applied_credit_notes')]
+            applied_credit_notes = [AppliedCreditNoteData.from_dictionary(x) for x in dictionary.get('applied_credit_notes')]
         else:
             applied_credit_notes = APIHelper.SKIP
         debit_note_number = dictionary.get("debit_note_number") if dictionary.get("debit_note_number") else APIHelper.SKIP

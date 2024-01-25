@@ -31,9 +31,10 @@ class SubscriptionGroupBankAccount(object):
             local bank details can be provided
         bank_branch_code (str): (Optional when creating a subscription with
             GoCardless) Branch code. Alternatively, an IBAN can be provided
-        bank_account_type (BankAccountType): TODO: type description here.
-        bank_account_holder_type (HolderType): TODO: type description here.
-        payment_type (str): TODO: type description here.
+        bank_account_type (BankAccountType): Defaults to checking
+        bank_account_holder_type (BankAccountHolderType): Defaults to
+            personal
+        payment_type (PaymentType): TODO: type description here.
         billing_address (str): TODO: type description here.
         billing_city (str): TODO: type description here.
         billing_state (str): TODO: type description here.
@@ -93,7 +94,7 @@ class SubscriptionGroupBankAccount(object):
                  bank_branch_code=APIHelper.SKIP,
                  bank_account_type='checking',
                  bank_account_holder_type=APIHelper.SKIP,
-                 payment_type=APIHelper.SKIP,
+                 payment_type='credit_card',
                  billing_address=APIHelper.SKIP,
                  billing_city=APIHelper.SKIP,
                  billing_state=APIHelper.SKIP,
@@ -118,8 +119,7 @@ class SubscriptionGroupBankAccount(object):
         self.bank_account_type = bank_account_type 
         if bank_account_holder_type is not APIHelper.SKIP:
             self.bank_account_holder_type = bank_account_holder_type 
-        if payment_type is not APIHelper.SKIP:
-            self.payment_type = payment_type 
+        self.payment_type = payment_type 
         if billing_address is not APIHelper.SKIP:
             self.billing_address = billing_address 
         if billing_city is not APIHelper.SKIP:
@@ -162,7 +162,7 @@ class SubscriptionGroupBankAccount(object):
         bank_branch_code = dictionary.get("bank_branch_code") if dictionary.get("bank_branch_code") else APIHelper.SKIP
         bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else 'checking'
         bank_account_holder_type = dictionary.get("bank_account_holder_type") if dictionary.get("bank_account_holder_type") else APIHelper.SKIP
-        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
+        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else 'credit_card'
         billing_address = dictionary.get("billing_address") if dictionary.get("billing_address") else APIHelper.SKIP
         billing_city = dictionary.get("billing_city") if dictionary.get("billing_city") else APIHelper.SKIP
         billing_state = dictionary.get("billing_state") if dictionary.get("billing_state") else APIHelper.SKIP

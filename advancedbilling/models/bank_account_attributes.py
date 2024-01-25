@@ -27,14 +27,15 @@ class BankAccountAttributes(object):
         bank_account_number (str): (Required when creating a subscription with
             ACH. Required when creating a subscription with GoCardless and
             bank_iban is blank) The customerʼs bank account number
-        bank_account_type (str): TODO: type description here.
+        bank_account_type (BankAccountType): Defaults to checking
         bank_branch_code (str): (Optional when creating a subscription with
             GoCardless) Branch code. Alternatively, an IBAN can be provided
         bank_iban (str): (Optional when creating a subscription with
             GoCardless). International Bank Account Number. Alternatively,
             local bank details can be provided
-        bank_account_holder_type (str): TODO: type description here.
-        payment_type (str): TODO: type description here.
+        bank_account_holder_type (BankAccountHolderType): Defaults to
+            personal
+        payment_type (PaymentType): TODO: type description here.
         current_vault (BankAccountVault): The vault that stores the payment
             profile with the provided vault_token.
         vault_token (str): TODO: type description here.
@@ -80,11 +81,11 @@ class BankAccountAttributes(object):
                  bank_name=APIHelper.SKIP,
                  bank_routing_number=APIHelper.SKIP,
                  bank_account_number=APIHelper.SKIP,
-                 bank_account_type=APIHelper.SKIP,
+                 bank_account_type='checking',
                  bank_branch_code=APIHelper.SKIP,
                  bank_iban=APIHelper.SKIP,
                  bank_account_holder_type=APIHelper.SKIP,
-                 payment_type=APIHelper.SKIP,
+                 payment_type='credit_card',
                  current_vault=APIHelper.SKIP,
                  vault_token=APIHelper.SKIP,
                  customer_vault_token=APIHelper.SKIP):
@@ -99,16 +100,14 @@ class BankAccountAttributes(object):
             self.bank_routing_number = bank_routing_number 
         if bank_account_number is not APIHelper.SKIP:
             self.bank_account_number = bank_account_number 
-        if bank_account_type is not APIHelper.SKIP:
-            self.bank_account_type = bank_account_type 
+        self.bank_account_type = bank_account_type 
         if bank_branch_code is not APIHelper.SKIP:
             self.bank_branch_code = bank_branch_code 
         if bank_iban is not APIHelper.SKIP:
             self.bank_iban = bank_iban 
         if bank_account_holder_type is not APIHelper.SKIP:
             self.bank_account_holder_type = bank_account_holder_type 
-        if payment_type is not APIHelper.SKIP:
-            self.payment_type = payment_type 
+        self.payment_type = payment_type 
         if current_vault is not APIHelper.SKIP:
             self.current_vault = current_vault 
         if vault_token is not APIHelper.SKIP:
@@ -138,11 +137,11 @@ class BankAccountAttributes(object):
         bank_name = dictionary.get("bank_name") if dictionary.get("bank_name") else APIHelper.SKIP
         bank_routing_number = dictionary.get("bank_routing_number") if dictionary.get("bank_routing_number") else APIHelper.SKIP
         bank_account_number = dictionary.get("bank_account_number") if dictionary.get("bank_account_number") else APIHelper.SKIP
-        bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else APIHelper.SKIP
+        bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else 'checking'
         bank_branch_code = dictionary.get("bank_branch_code") if dictionary.get("bank_branch_code") else APIHelper.SKIP
         bank_iban = dictionary.get("bank_iban") if dictionary.get("bank_iban") else APIHelper.SKIP
         bank_account_holder_type = dictionary.get("bank_account_holder_type") if dictionary.get("bank_account_holder_type") else APIHelper.SKIP
-        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
+        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else 'credit_card'
         current_vault = dictionary.get("current_vault") if dictionary.get("current_vault") else APIHelper.SKIP
         vault_token = dictionary.get("vault_token") if dictionary.get("vault_token") else APIHelper.SKIP
         customer_vault_token = dictionary.get("customer_vault_token") if dictionary.get("customer_vault_token") else APIHelper.SKIP

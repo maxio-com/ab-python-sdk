@@ -9,7 +9,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.component_price_point_item import ComponentPricePointItem
 from advancedbilling.models.price import Price
-from advancedbilling.models.pricing_scheme import PricingScheme
 
 
 class EBBComponent(object):
@@ -233,30 +232,3 @@ class EBBComponent(object):
                    price_in_cents,
                    interval,
                    interval_unit)
-
-    @classmethod
-    def validate(cls, dictionary):
-        """Validates dictionary against class required properties
-
-        Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
-
-        Returns:
-            boolean : if dictionary is valid contains required properties.
-
-        """
-        if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.name, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.unit_name, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.pricing_scheme, type_callable=lambda value: PricingScheme.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.event_based_billing_metric_id, type_callable=lambda value: isinstance(value, int))
-
-        if not isinstance(dictionary, dict):
-            return False
-
-        return APIHelper.is_valid_type(value=dictionary.get('name'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('unit_name'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('pricing_scheme'), type_callable=lambda value: PricingScheme.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('event_based_billing_metric_id'), type_callable=lambda value: isinstance(value, int))

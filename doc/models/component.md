@@ -23,6 +23,7 @@
 | `taxable` | `bool` | Optional | Boolean flag describing whether a component is taxable or not. |
 | `description` | `str` | Optional | The description of the component. |
 | `default_price_point_id` | `int` | Optional | - |
+| `overage_prices` | [`List[ComponentPrice]`](../../doc/models/component-price.md) | Optional | An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. |
 | `prices` | [`List[ComponentPrice]`](../../doc/models/component-price.md) | Optional | An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. |
 | `price_point_count` | `int` | Optional | Count for the number of price points associated with the component |
 | `price_points_url` | `str` | Optional | URL that points to the location to read the existing price points via GET request |
@@ -31,8 +32,8 @@
 | `recurring` | `bool` | Optional | - |
 | `upgrade_charge` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `downgrade_credit` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
-| `created_at` | `str` | Optional | Timestamp indicating when this component was created |
-| `updated_at` | `str` | Optional | Timestamp indicating when this component was updated |
+| `created_at` | `datetime` | Optional | Timestamp indicating when this component was created |
+| `updated_at` | `datetime` | Optional | Timestamp indicating when this component was updated |
 | `archived_at` | `str` | Optional | Timestamp indicating when this component was archived |
 | `hide_date_range_on_invoice` | `bool` | Optional | (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices. |
 | `allow_fractional_quantities` | `bool` | Optional | - |

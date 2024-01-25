@@ -1,15 +1,15 @@
 
-# Product Price Point Currency Price
+# Component Currency Prices Response
 
 ## Structure
 
-`ProductPricePointCurrencyPrice`
+`ComponentCurrencyPricesResponse`
 
 ## Fields
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `currency_prices` | [`List[CurrencyPrice]`](../../doc/models/currency-price.md) | Required | - |
+| `currency_prices` | [`List[ComponentCurrencyPrice]`](../../doc/models/component-currency-price.md) | Required | - |
 
 ## Example (as JSON)
 
@@ -19,9 +19,9 @@
     {
       "id": 50,
       "currency": "currency8",
-      "price": 233.74,
+      "price": "price4",
       "formatted_price": "formatted_price6",
-      "product_price_point_id": 172
+      "price_id": 116
     }
   ]
 }

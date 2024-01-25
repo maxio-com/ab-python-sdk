@@ -33,7 +33,7 @@ class SubscriptionGroupCreditCard(object):
         billing_zip (str): TODO: type description here.
         billing_country (str): TODO: type description here.
         last_four (str): TODO: type description here.
-        card_type (str): TODO: type description here.
+        card_type (CardType): The type of card used.
         customer_vault_token (str): TODO: type description here.
         cvv (str): TODO: type description here.
         payment_type (str): TODO: type description here.

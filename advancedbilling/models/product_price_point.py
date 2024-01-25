@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.currency_price import CurrencyPrice
 
 
 class ProductPricePoint(object):
@@ -59,6 +60,11 @@ class ProductPricePoint(object):
         tax_included (bool): Whether or not the price point includes tax
         subscription_id (int): The subscription id this price point belongs
             to
+        currency_prices (List[CurrencyPrice]): An array of currency pricing
+            data is available when multiple currencies are defined for the
+            site. It varies based on the use_site_exchange_rate setting for
+            the price point. This parameter is present only in the response of
+            read endpoints, after including the appropriate query parameter.
 
     """
 
@@ -86,7 +92,8 @@ class ProductPricePoint(object):
         "use_site_exchange_rate": 'use_site_exchange_rate',
         "mtype": 'type',
         "tax_included": 'tax_included',
-        "subscription_id": 'subscription_id'
+        "subscription_id": 'subscription_id',
+        "currency_prices": 'currency_prices'
     }
 
     _optionals = [
@@ -113,6 +120,7 @@ class ProductPricePoint(object):
         'mtype',
         'tax_included',
         'subscription_id',
+        'currency_prices',
     ]
 
     _nullables = [
@@ -143,7 +151,8 @@ class ProductPricePoint(object):
                  use_site_exchange_rate=APIHelper.SKIP,
                  mtype=APIHelper.SKIP,
                  tax_included=APIHelper.SKIP,
-                 subscription_id=APIHelper.SKIP):
+                 subscription_id=APIHelper.SKIP,
+                 currency_prices=APIHelper.SKIP):
         """Constructor for the ProductPricePoint class"""
 
         # Initialize members of the class
@@ -193,6 +202,8 @@ class ProductPricePoint(object):
             self.tax_included = tax_included 
         if subscription_id is not APIHelper.SKIP:
             self.subscription_id = subscription_id 
+        if currency_prices is not APIHelper.SKIP:
+            self.currency_prices = currency_prices 
 
     @classmethod
     def from_dictionary(cls,
@@ -238,6 +249,11 @@ class ProductPricePoint(object):
         mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if "subscription_id" in dictionary.keys() else APIHelper.SKIP
+        currency_prices = None
+        if dictionary.get('currency_prices') is not None:
+            currency_prices = [CurrencyPrice.from_dictionary(x) for x in dictionary.get('currency_prices')]
+        else:
+            currency_prices = APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    name,
@@ -261,4 +277,5 @@ class ProductPricePoint(object):
                    use_site_exchange_rate,
                    mtype,
                    tax_included,
-                   subscription_id)
+                   subscription_id,
+                   currency_prices)

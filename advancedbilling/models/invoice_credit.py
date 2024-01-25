@@ -19,7 +19,7 @@ class InvoiceCredit(object):
         uid (str): TODO: type description here.
         credit_note_number (str): TODO: type description here.
         credit_note_uid (str): TODO: type description here.
-        transaction_time (str): TODO: type description here.
+        transaction_time (datetime): TODO: type description here.
         memo (str): TODO: type description here.
         original_amount (str): TODO: type description here.
         applied_amount (str): TODO: type description here.
@@ -65,7 +65,7 @@ class InvoiceCredit(object):
         if credit_note_uid is not APIHelper.SKIP:
             self.credit_note_uid = credit_note_uid 
         if transaction_time is not APIHelper.SKIP:
-            self.transaction_time = transaction_time 
+            self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
         if memo is not APIHelper.SKIP:
             self.memo = memo 
         if original_amount is not APIHelper.SKIP:
@@ -94,7 +94,7 @@ class InvoiceCredit(object):
         uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
         credit_note_number = dictionary.get("credit_note_number") if dictionary.get("credit_note_number") else APIHelper.SKIP
         credit_note_uid = dictionary.get("credit_note_uid") if dictionary.get("credit_note_uid") else APIHelper.SKIP
-        transaction_time = dictionary.get("transaction_time") if dictionary.get("transaction_time") else APIHelper.SKIP
+        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP

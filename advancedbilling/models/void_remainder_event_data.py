@@ -10,11 +10,11 @@ from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.credit_note import CreditNote
 
 
-class VoidInvoiceEventData1(object):
+class VoidRemainderEventData(object):
 
-    """Implementation of the 'Void Invoice Event Data1' model.
+    """Implementation of the 'Void Remainder Event Data' model.
 
-    Example schema for an `void_invoice` event
+    Example schema for an `void_remainder` event
 
     Attributes:
         credit_note_attributes (CreditNote): TODO: type description here.
@@ -45,7 +45,7 @@ class VoidInvoiceEventData1(object):
                  memo=APIHelper.SKIP,
                  applied_amount=APIHelper.SKIP,
                  transaction_time=APIHelper.SKIP):
-        """Constructor for the VoidInvoiceEventData1 class"""
+        """Constructor for the VoidRemainderEventData class"""
 
         # Initialize members of the class
         if credit_note_attributes is not APIHelper.SKIP:

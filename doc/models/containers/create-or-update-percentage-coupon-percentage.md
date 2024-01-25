@@ -3,12 +3,12 @@
 
 ## Data Type
 
-`float | str`
+`str | float`
 
 ## Cases
 
 | Type |
 |  --- |
-| `float` |
 | `str` |
+| `float` |
 

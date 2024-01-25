@@ -8,11 +8,11 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 
-class HolderType(object):
+class BankAccountHolderType(object):
 
-    """Implementation of the 'Holder Type' enum.
+    """Implementation of the 'Bank Account Holder Type' enum.
 
-    TODO: type enum description here.
+    Defaults to personal
 
     Attributes:
         PERSONAL: TODO: type description here.

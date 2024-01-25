@@ -6,38 +6,31 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.list_payment_profile_item import ListPaymentProfileItem
+from advancedbilling.models.currency_price import CurrencyPrice
 
 
-class ListPaymentProfilesResponse(object):
+class CurrencyPricesResponse(object):
 
-    """Implementation of the 'List Payment Profiles Response' model.
+    """Implementation of the 'Currency Prices Response' model.
 
     TODO: type model description here.
 
     Attributes:
-        payment_profile (ListPaymentProfileItem): TODO: type description
-            here.
+        currency_prices (List[CurrencyPrice]): TODO: type description here.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "payment_profile": 'payment_profile'
+        "currency_prices": 'currency_prices'
     }
 
-    _optionals = [
-        'payment_profile',
-    ]
-
     def __init__(self,
-                 payment_profile=APIHelper.SKIP):
-        """Constructor for the ListPaymentProfilesResponse class"""
+                 currency_prices=None):
+        """Constructor for the CurrencyPricesResponse class"""
 
         # Initialize members of the class
-        if payment_profile is not APIHelper.SKIP:
-            self.payment_profile = payment_profile 
+        self.currency_prices = currency_prices 
 
     @classmethod
     def from_dictionary(cls,
@@ -57,6 +50,8 @@ class ListPaymentProfilesResponse(object):
             return None
 
         # Extract variables from the dictionary
-        payment_profile = ListPaymentProfileItem.from_dictionary(dictionary.get('payment_profile')) if 'payment_profile' in dictionary.keys() else APIHelper.SKIP
+        currency_prices = None
+        if dictionary.get('currency_prices') is not None:
+            currency_prices = [CurrencyPrice.from_dictionary(x) for x in dictionary.get('currency_prices')]
         # Return an object of this model
-        return cls(payment_profile)
+        return cls(currency_prices)

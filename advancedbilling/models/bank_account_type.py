@@ -12,7 +12,7 @@ class BankAccountType(object):
 
     """Implementation of the 'Bank Account Type' enum.
 
-    TODO: type enum description here.
+    Defaults to checking
 
     Attributes:
         CHECKING: TODO: type description here.

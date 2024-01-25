@@ -12,7 +12,7 @@
 | `name` | `str` | Required | the name of the coupon |
 | `code` | `str` | Required | may contain uppercase alphanumeric characters and these special characters (which allow for email addresses to be used): “%”, “@”, “+”, “-”, “_”, and “.” |
 | `description` | `str` | Optional | - |
-| `percentage` | float \| str | Required | This is a container for one-of cases. |
+| `percentage` | str \| float | Required | This is a container for one-of cases. |
 | `allow_negative_balance` | `bool` | Optional | - |
 | `recurring` | `bool` | Optional | - |
 | `end_date` | `datetime` | Optional | - |
@@ -29,7 +29,7 @@
   "name": "name0",
   "code": "code8",
   "description": "description0",
-  "percentage": 11.02,
+  "percentage": "String9",
   "allow_negative_balance": false,
   "recurring": false,
   "end_date": "2016-03-13T12:52:32.123Z",

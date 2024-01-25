@@ -7,7 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.applied_credit_note import AppliedCreditNote
+from advancedbilling.models.applied_credit_note_data import AppliedCreditNoteData
 
 
 class ApplyCreditNoteEventData(object):
@@ -34,8 +34,8 @@ class ApplyCreditNoteEventData(object):
         role (str): The role of the credit note (e.g. 'general')
         consolidated_invoice (bool): Shows whether it was applied to
             consolidated invoice or not
-        applied_credit_notes (List[AppliedCreditNote]): List of credit notes
-            applied to children invoices (if consolidated invoice)
+        applied_credit_notes (List[AppliedCreditNoteData]): List of credit
+            notes applied to children invoices (if consolidated invoice)
 
     """
 
@@ -130,7 +130,7 @@ class ApplyCreditNoteEventData(object):
         consolidated_invoice = dictionary.get("consolidated_invoice") if "consolidated_invoice" in dictionary.keys() else APIHelper.SKIP
         applied_credit_notes = None
         if dictionary.get('applied_credit_notes') is not None:
-            applied_credit_notes = [AppliedCreditNote.from_dictionary(x) for x in dictionary.get('applied_credit_notes')]
+            applied_credit_notes = [AppliedCreditNoteData.from_dictionary(x) for x in dictionary.get('applied_credit_notes')]
         else:
             applied_credit_notes = APIHelper.SKIP
         # Return an object of this model

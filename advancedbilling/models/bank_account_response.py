@@ -6,7 +6,7 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.models.bank_account import BankAccount
+from advancedbilling.models.bank_account_payment_profile import BankAccountPaymentProfile
 
 
 class BankAccountResponse(object):
@@ -16,7 +16,8 @@ class BankAccountResponse(object):
     TODO: type model description here.
 
     Attributes:
-        payment_profile (BankAccount): TODO: type description here.
+        payment_profile (BankAccountPaymentProfile): TODO: type description
+            here.
 
     """
 
@@ -50,6 +51,6 @@ class BankAccountResponse(object):
             return None
 
         # Extract variables from the dictionary
-        payment_profile = BankAccount.from_dictionary(dictionary.get('payment_profile')) if dictionary.get('payment_profile') else None
+        payment_profile = BankAccountPaymentProfile.from_dictionary(dictionary.get('payment_profile')) if dictionary.get('payment_profile') else None
         # Return an object of this model
         return cls(payment_profile)

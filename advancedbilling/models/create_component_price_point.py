@@ -28,6 +28,7 @@ class CreateComponentPricePoint(object):
         use_site_exchange_rate (bool): Whether to use the site level exchange
             rate or define your own prices for each currency if you have
             multiple currencies defined on the site.
+        tax_included (bool): Whether or not the price point includes tax
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this price point
             would renew every 30 days. This property is only available for
@@ -45,6 +46,7 @@ class CreateComponentPricePoint(object):
         "prices": 'prices',
         "handle": 'handle',
         "use_site_exchange_rate": 'use_site_exchange_rate',
+        "tax_included": 'tax_included',
         "interval": 'interval',
         "interval_unit": 'interval_unit'
     }
@@ -52,6 +54,7 @@ class CreateComponentPricePoint(object):
     _optionals = [
         'handle',
         'use_site_exchange_rate',
+        'tax_included',
         'interval',
         'interval_unit',
     ]
@@ -62,6 +65,7 @@ class CreateComponentPricePoint(object):
                  prices=None,
                  handle=APIHelper.SKIP,
                  use_site_exchange_rate=True,
+                 tax_included=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
                  interval_unit=APIHelper.SKIP):
         """Constructor for the CreateComponentPricePoint class"""
@@ -73,6 +77,8 @@ class CreateComponentPricePoint(object):
         self.pricing_scheme = pricing_scheme 
         self.prices = prices 
         self.use_site_exchange_rate = use_site_exchange_rate 
+        if tax_included is not APIHelper.SKIP:
+            self.tax_included = tax_included 
         if interval is not APIHelper.SKIP:
             self.interval = interval 
         if interval_unit is not APIHelper.SKIP:
@@ -103,6 +109,7 @@ class CreateComponentPricePoint(object):
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if dictionary.get("use_site_exchange_rate") else True
+        tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
         # Return an object of this model
@@ -111,6 +118,7 @@ class CreateComponentPricePoint(object):
                    prices,
                    handle,
                    use_site_exchange_rate,
+                   tax_included,
                    interval,
                    interval_unit)
 
