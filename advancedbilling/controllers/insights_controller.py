@@ -20,9 +20,9 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.site_summary import SiteSummary
+from advancedbilling.models.subscription_mrr_response import SubscriptionMRRResponse
 from advancedbilling.models.mrr_response import MRRResponse
 from advancedbilling.models.list_mrr_response import ListMRRResponse
-from advancedbilling.models.subscription_mrr_response import SubscriptionMRRResponse
 from advancedbilling.exceptions.subscriptions_mrr_error_response_exception import SubscriptionsMrrErrorResponseException
 
 
@@ -69,6 +69,88 @@ class InsightsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SiteSummary.from_dictionary)
+        ).execute()
+
+    @deprecated()
+    def list_mrr_per_subscription(self,
+                                  options=dict()):
+        """Does a GET request to /subscriptions_mrr.json.
+
+        This endpoint returns your site's current MRR, including plan and
+        usage breakouts split per subscription.
+
+        Args:
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    filter_subscription_ids -- List[int] -- Submit ids in
+                        order to limit results. Use in query:
+                        `filter[subscription_ids]=1,2,3`.
+                    at_time -- str -- Submit a timestamp in ISO8601 format to
+                        request MRR for a historic time. Use in query:
+                        `at_time=2022-01-10T10:00:00-05:00`.
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    direction -- Direction -- Controls the order in which
+                        results are returned. Records are ordered by
+                        subscription_id in ascending order by default. Use in
+                        query `direction=desc`.
+
+        Returns:
+            SubscriptionMRRResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions_mrr.json')
+            .http_method(HttpMethodEnum.GET)
+            .query_param(Parameter()
+                         .key('filter[subscription_ids]')
+                         .value(options.get('filter_subscription_ids', None)))
+            .query_param(Parameter()
+                         .key('at_time')
+                         .value(options.get('at_time', None)))
+            .query_param(Parameter()
+                         .key('page')
+                         .value(options.get('page', None)))
+            .query_param(Parameter()
+                         .key('per_page')
+                         .value(options.get('per_page', None)))
+            .query_param(Parameter()
+                         .key('direction')
+                         .value(options.get('direction', None)))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .array_serialization_format(SerializationFormats.CSV)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SubscriptionMRRResponse.from_dictionary)
+            .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SubscriptionsMrrErrorResponseException)
         ).execute()
 
     @deprecated()
@@ -208,86 +290,4 @@ class InsightsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListMRRResponse.from_dictionary)
-        ).execute()
-
-    @deprecated()
-    def list_mrr_per_subscription(self,
-                                  options=dict()):
-        """Does a GET request to /subscriptions_mrr.json.
-
-        This endpoint returns your site's current MRR, including plan and
-        usage breakouts split per subscription.
-
-        Args:
-            options (dict, optional): Key-value pairs for any of the
-                parameters to this API Endpoint. All parameters to the
-                endpoint are supplied through the dictionary with their names
-                being the key and their desired values being the value. A list
-                of parameters that can be used are::
-
-                    filter_subscription_ids -- List[int] -- Submit ids in
-                        order to limit results. Use in query:
-                        `filter[subscription_ids]=1,2,3`.
-                    at_time -- str -- Submit a timestamp in ISO8601 format to
-                        request MRR for a historic time. Use in query:
-                        `at_time=2022-01-10T10:00:00-05:00`.
-                    page -- int -- Result records are organized in pages. By
-                        default, the first page of results is displayed. The
-                        page parameter specifies a page number of results to
-                        fetch. You can start navigating through the pages to
-                        consume the results. You do this by passing in a page
-                        parameter. Retrieve the next page by adding ?page=2 to
-                        the query string. If there are no results to return,
-                        then an empty result set will be returned. Use in
-                        query `page=1`.
-                    per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is 20.
-                        The maximum allowed values is 200; any per_page value
-                        over 200 will be changed to 200. Use in query
-                        `per_page=200`.
-                    direction -- Direction -- Controls the order in which
-                        results are returned. Records are ordered by
-                        subscription_id in ascending order by default. Use in
-                        query `direction=desc`.
-
-        Returns:
-            SubscriptionMRRResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions_mrr.json')
-            .http_method(HttpMethodEnum.GET)
-            .query_param(Parameter()
-                         .key('filter[subscription_ids]')
-                         .value(options.get('filter_subscription_ids', None)))
-            .query_param(Parameter()
-                         .key('at_time')
-                         .value(options.get('at_time', None)))
-            .query_param(Parameter()
-                         .key('page')
-                         .value(options.get('page', None)))
-            .query_param(Parameter()
-                         .key('per_page')
-                         .value(options.get('per_page', None)))
-            .query_param(Parameter()
-                         .key('direction')
-                         .value(options.get('direction', None)))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SubscriptionMRRResponse.from_dictionary)
-            .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SubscriptionsMrrErrorResponseException)
         ).execute()

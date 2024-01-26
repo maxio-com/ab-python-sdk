@@ -19,11 +19,11 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.metafield import Metafield
-from advancedbilling.models.list_metafields_response import ListMetafieldsResponse
 from advancedbilling.models.metadata import Metadata
+from advancedbilling.models.list_metafields_response import ListMetafieldsResponse
 from advancedbilling.models.paginated_metadata import PaginatedMetadata
-from advancedbilling.exceptions.single_error_response_exception import SingleErrorResponseException
 from advancedbilling.exceptions.api_exception import APIException
+from advancedbilling.exceptions.single_error_response_exception import SingleErrorResponseException
 
 
 class CustomFieldsController(BaseController):
@@ -31,6 +31,309 @@ class CustomFieldsController(BaseController):
     """A Controller to access Endpoints in the advancedbilling API."""
     def __init__(self, config):
         super(CustomFieldsController, self).__init__(config)
+
+    def update_metafield(self,
+                         resource_type,
+                         body=None):
+        """Does a PUT request to /{resource_type}/metafields.json.
+
+        Use the following method to update metafields for your Site.
+        Metafields can be populated with metadata after the fact.
+
+        Args:
+            resource_type (ResourceType): the resource type to which the
+                metafields belong
+            body (UpdateMetafieldsRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            List[Metafield]: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/{resource_type}/metafields.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('resource_type')
+                            .value(resource_type)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Metafield.from_dictionary)
+        ).execute()
+
+    def update_metadata(self,
+                        resource_type,
+                        resource_id,
+                        body=None):
+        """Does a PUT request to /{resource_type}/{resource_id}/metadata.json.
+
+        This method allows you to update the existing metadata associated with
+        a subscription or customer.
+
+        Args:
+            resource_type (ResourceType): the resource type to which the
+                metafields belong
+            resource_id (str): The Chargify id of the customer or the
+                subscription for which the metadata applies
+            body (UpdateMetadataRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            List[Metadata]: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/{resource_type}/{resource_id}/metadata.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('resource_type')
+                            .value(resource_type)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('resource_id')
+                            .value(resource_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Metadata.from_dictionary)
+        ).execute()
+
+    def list_metafields(self,
+                        options=dict()):
+        """Does a GET request to /{resource_type}/metafields.json.
+
+        This endpoint lists metafields associated with a site. The metafield
+        description and usage is contained in the response.
+
+        Args:
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    resource_type -- ResourceType -- the resource type to
+                        which the metafields belong
+                    name -- str -- filter by the name of the metafield
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    direction -- SortingDirection -- Controls the order in
+                        which results are returned. Use in query
+                        `direction=asc`.
+
+        Returns:
+            ListMetafieldsResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/{resource_type}/metafields.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('resource_type')
+                            .value(options.get('resource_type', None))
+                            .is_required(True)
+                            .should_encode(True))
+            .query_param(Parameter()
+                         .key('name')
+                         .value(options.get('name', None)))
+            .query_param(Parameter()
+                         .key('page')
+                         .value(options.get('page', None)))
+            .query_param(Parameter()
+                         .key('per_page')
+                         .value(options.get('per_page', None)))
+            .query_param(Parameter()
+                         .key('direction')
+                         .value(options.get('direction', None)))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ListMetafieldsResponse.from_dictionary)
+        ).execute()
+
+    def delete_metafield(self,
+                         resource_type,
+                         name=None):
+        """Does a DELETE request to /{resource_type}/metafields.json.
+
+        Use the following method to delete a metafield. This will remove the
+        metafield from the Site.
+        Additionally, this will remove the metafield and associated metadata
+        with all Subscriptions on the Site.
+
+        Args:
+            resource_type (ResourceType): the resource type to which the
+                metafields belong
+            name (str, optional): The name of the metafield to be deleted
+
+        Returns:
+            void: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/{resource_type}/metafields.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('resource_type')
+                            .value(resource_type)
+                            .is_required(True)
+                            .should_encode(True))
+            .query_param(Parameter()
+                         .key('name')
+                         .value(name))
+            .auth(Single('global'))
+        ).execute()
+
+    def list_metadata(self,
+                      options=dict()):
+        """Does a GET request to /{resource_type}/{resource_id}/metadata.json.
+
+        This request will list all of the metadata belonging to a particular
+        resource (ie. subscription, customer) that is specified.
+        ## Metadata Data
+        This endpoint will also display the current stats of your metadata to
+        use as a tool for pagination.
+
+        Args:
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    resource_type -- ResourceType -- the resource type to
+                        which the metafields belong
+                    resource_id -- str -- The Chargify id of the customer or
+                        the subscription for which the metadata applies
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+
+        Returns:
+            PaginatedMetadata: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/{resource_type}/{resource_id}/metadata.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('resource_type')
+                            .value(options.get('resource_type', None))
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('resource_id')
+                            .value(options.get('resource_id', None))
+                            .is_required(True)
+                            .should_encode(True))
+            .query_param(Parameter()
+                         .key('page')
+                         .value(options.get('page', None)))
+            .query_param(Parameter()
+                         .key('per_page')
+                         .value(options.get('per_page', None)))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(PaginatedMetadata.from_dictionary)
+        ).execute()
 
     def create_metafields(self,
                           resource_type,
@@ -117,188 +420,6 @@ class CustomFieldsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SingleErrorResponseException)
         ).execute()
 
-    def list_metafields(self,
-                        options=dict()):
-        """Does a GET request to /{resource_type}/metafields.json.
-
-        This endpoint lists metafields associated with a site. The metafield
-        description and usage is contained in the response.
-
-        Args:
-            options (dict, optional): Key-value pairs for any of the
-                parameters to this API Endpoint. All parameters to the
-                endpoint are supplied through the dictionary with their names
-                being the key and their desired values being the value. A list
-                of parameters that can be used are::
-
-                    resource_type -- ResourceType -- the resource type to
-                        which the metafields belong
-                    name -- str -- filter by the name of the metafield
-                    page -- int -- Result records are organized in pages. By
-                        default, the first page of results is displayed. The
-                        page parameter specifies a page number of results to
-                        fetch. You can start navigating through the pages to
-                        consume the results. You do this by passing in a page
-                        parameter. Retrieve the next page by adding ?page=2 to
-                        the query string. If there are no results to return,
-                        then an empty result set will be returned. Use in
-                        query `page=1`.
-                    per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is 20.
-                        The maximum allowed values is 200; any per_page value
-                        over 200 will be changed to 200. Use in query
-                        `per_page=200`.
-                    direction -- SortingDirection -- Controls the order in
-                        which results are returned. Use in query
-                        `direction=asc`.
-
-        Returns:
-            ListMetafieldsResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/{resource_type}/metafields.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('resource_type')
-                            .value(options.get('resource_type', None))
-                            .is_required(True)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('name')
-                         .value(options.get('name', None)))
-            .query_param(Parameter()
-                         .key('page')
-                         .value(options.get('page', None)))
-            .query_param(Parameter()
-                         .key('per_page')
-                         .value(options.get('per_page', None)))
-            .query_param(Parameter()
-                         .key('direction')
-                         .value(options.get('direction', None)))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ListMetafieldsResponse.from_dictionary)
-        ).execute()
-
-    def update_metafield(self,
-                         resource_type,
-                         name,
-                         current_name=None,
-                         body=None):
-        """Does a PUT request to /{resource_type}/metafields.json.
-
-        Use the following method to update metafields for your Site.
-        Metafields can be populated with metadata after the fact.
-
-        Args:
-            resource_type (ResourceType): the resource type to which the
-                metafields belong
-            name (str): Name of the custom field.
-            current_name (str, optional): This only applies when you are
-                updating an existing record and you wish to rename the field.
-                Note you must supply name and current_name to rename the
-                field
-            body (UpdateMetafieldsRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            List[Metafield]: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/{resource_type}/metafields.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('resource_type')
-                            .value(resource_type)
-                            .is_required(True)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('name')
-                         .value(name)
-                         .is_required(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .query_param(Parameter()
-                         .key('current_name')
-                         .value(current_name))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Metafield.from_dictionary)
-        ).execute()
-
-    def delete_metafield(self,
-                         resource_type,
-                         name=None):
-        """Does a DELETE request to /{resource_type}/metafields.json.
-
-        Use the following method to delete a metafield. This will remove the
-        metafield from the Site.
-        Additionally, this will remove the metafield and associated metadata
-        with all Subscriptions on the Site.
-
-        Args:
-            resource_type (ResourceType): the resource type to which the
-                metafields belong
-            name (str, optional): The name of the metafield to be deleted
-
-        Returns:
-            void: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/{resource_type}/metafields.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('resource_type')
-                            .value(resource_type)
-                            .is_required(True)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('name')
-                         .value(name))
-            .auth(Single('global'))
-        ).execute()
-
     def create_metadata(self,
                         resource_type,
                         resource_id,
@@ -381,142 +502,7 @@ class CustomFieldsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Metadata.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', SingleErrorResponseException)
-        ).execute()
-
-    def list_metadata(self,
-                      options=dict()):
-        """Does a GET request to /{resource_type}/{resource_id}/metadata.json.
-
-        This request will list all of the metadata belonging to a particular
-        resource (ie. subscription, customer) that is specified.
-        ## Metadata Data
-        This endpoint will also display the current stats of your metadata to
-        use as a tool for pagination.
-
-        Args:
-            options (dict, optional): Key-value pairs for any of the
-                parameters to this API Endpoint. All parameters to the
-                endpoint are supplied through the dictionary with their names
-                being the key and their desired values being the value. A list
-                of parameters that can be used are::
-
-                    resource_type -- ResourceType -- the resource type to
-                        which the metafields belong
-                    resource_id -- str -- The Chargify id of the customer or
-                        the subscription for which the metadata applies
-                    page -- int -- Result records are organized in pages. By
-                        default, the first page of results is displayed. The
-                        page parameter specifies a page number of results to
-                        fetch. You can start navigating through the pages to
-                        consume the results. You do this by passing in a page
-                        parameter. Retrieve the next page by adding ?page=2 to
-                        the query string. If there are no results to return,
-                        then an empty result set will be returned. Use in
-                        query `page=1`.
-                    per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is 20.
-                        The maximum allowed values is 200; any per_page value
-                        over 200 will be changed to 200. Use in query
-                        `per_page=200`.
-
-        Returns:
-            PaginatedMetadata: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/{resource_type}/{resource_id}/metadata.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('resource_type')
-                            .value(options.get('resource_type', None))
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('resource_id')
-                            .value(options.get('resource_id', None))
-                            .is_required(True)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('page')
-                         .value(options.get('page', None)))
-            .query_param(Parameter()
-                         .key('per_page')
-                         .value(options.get('per_page', None)))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(PaginatedMetadata.from_dictionary)
-        ).execute()
-
-    def update_metadata(self,
-                        resource_type,
-                        resource_id,
-                        body=None):
-        """Does a PUT request to /{resource_type}/{resource_id}/metadata.json.
-
-        This method allows you to update the existing metadata associated with
-        a subscription or customer.
-
-        Args:
-            resource_type (ResourceType): the resource type to which the
-                metafields belong
-            resource_id (str): The Chargify id of the customer or the
-                subscription for which the metadata applies
-            body (UpdateMetadataRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            List[Metadata]: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/{resource_type}/{resource_id}/metadata.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('resource_type')
-                            .value(resource_type)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('resource_id')
-                            .value(resource_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Metadata.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SingleErrorResponseException)
         ).execute()
 
     def delete_metadata(self,
@@ -587,7 +573,7 @@ class CustomFieldsController(BaseController):
             .query_param(Parameter()
                          .key('names[]')
                          .value(names))
-            .array_serialization_format(SerializationFormats.CSV)
+            .array_serialization_format(SerializationFormats.PLAIN)
             .auth(Single('global'))
         ).execute()
 

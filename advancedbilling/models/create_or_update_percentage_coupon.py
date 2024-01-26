@@ -21,7 +21,7 @@ class CreateOrUpdatePercentageCoupon(object):
             special characters (which allow for email addresses to be used):
             “%”, “@”, “+”, “-”, “_”, and “.”
         description (str): TODO: type description here.
-        percentage (float | str): TODO: type description here.
+        percentage (str | float): TODO: type description here.
         allow_negative_balance (bool): TODO: type description here.
         recurring (bool): TODO: type description here.
         end_date (datetime): TODO: type description here.

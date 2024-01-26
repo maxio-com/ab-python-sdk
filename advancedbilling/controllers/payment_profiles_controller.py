@@ -17,14 +17,11 @@ from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from advancedbilling.models.create_payment_profile_response import CreatePaymentProfileResponse
-from advancedbilling.models.list_payment_profiles_response import ListPaymentProfilesResponse
-from advancedbilling.models.read_payment_profile_response import ReadPaymentProfileResponse
-from advancedbilling.models.update_payment_profile_response import UpdatePaymentProfileResponse
-from advancedbilling.models.bank_account_response import BankAccountResponse
 from advancedbilling.models.payment_profile_response import PaymentProfileResponse
+from advancedbilling.models.bank_account_response import BankAccountResponse
 from advancedbilling.models.get_one_time_token_request import GetOneTimeTokenRequest
 from advancedbilling.exceptions.api_exception import APIException
+from advancedbilling.exceptions.error_string_map_response_exception import ErrorStringMapResponseException
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 
 
@@ -33,6 +30,184 @@ class PaymentProfilesController(BaseController):
     """A Controller to access Endpoints in the advancedbilling API."""
     def __init__(self, config):
         super(PaymentProfilesController, self).__init__(config)
+
+    def update_payment_profile(self,
+                               payment_profile_id,
+                               body=None):
+        """Does a PUT request to /payment_profiles/{payment_profile_id}.json.
+
+        ## Partial Card Updates
+        In the event that you are using the Authorize.net, Stripe,
+        Cybersource, Forte or Braintree Blue payment gateways, you can update
+        just the billing and contact information for a payment method. Note
+        the lack of credit-card related data contained in the JSON payload.
+        In this case, the following JSON is acceptable:
+        ```
+        {
+          "payment_profile": {
+            "first_name": "Kelly",
+            "last_name": "Test",
+            "billing_address": "789 Juniper Court",
+            "billing_city": "Boulder",
+            "billing_state": "CO",
+            "billing_zip": "80302",
+            "billing_country": "US",
+            "billing_address_2": null
+          }
+        }
+        ```
+        The result will be that you have updated the billing information for
+        the card, yet retained the original card number data.
+        ## Specific notes on updating payment profiles
+        - Merchants with **Authorize.net**, **Cybersource**, **Forte**,
+        **Braintree Blue** or **Stripe** as their payment gateway can update
+        their Customer’s credit cards without passing in the full credit card
+        number and CVV.
+        - If you are using **Authorize.net**, **Cybersource**, **Forte**,
+        **Braintree Blue** or **Stripe**, Chargify will ignore the credit card
+        number and CVV when processing an update via the API, and attempt a
+        partial update instead. If you wish to change the card number on a
+        payment profile, you will need to create a new payment profile for the
+        given customer.
+        - A Payment Profile cannot be updated with the attributes of another
+        type of Payment Profile. For example, if the payment profile you are
+        attempting to update is a credit card, you cannot pass in bank account
+        attributes (like `bank_account_number`), and vice versa.
+        - Updating a payment profile directly will not trigger an attempt to
+        capture a past-due balance. If this is the intent, update the card
+        details via the Subscription instead.
+        - If you are using Authorize.net or Stripe, you may elect to manually
+        trigger a retry for a past due subscription after a partial update.
+
+        Args:
+            payment_profile_id (int): The Chargify id of the payment profile
+            body (UpdatePaymentProfileRequest, optional): TODO: type
+                description here.
+
+        Returns:
+            PaymentProfileResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/payment_profiles/{payment_profile_id}.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('payment_profile_id')
+                            .value(payment_profile_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(PaymentProfileResponse.from_dictionary)
+            .local_error('404', 'Not Found', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorStringMapResponseException)
+        ).execute()
+
+    def delete_subscription_group_payment_profile(self,
+                                                  uid,
+                                                  payment_profile_id):
+        """Does a DELETE request to /subscription_groups/{uid}/payment_profiles/{payment_profile_id}.json.
+
+        This will delete a Payment Profile belonging to a Subscription Group.
+        **Note**: If the Payment Profile belongs to multiple Subscription
+        Groups and/or Subscriptions, it will be removed from all of them.
+
+        Args:
+            uid (str): The uid of the subscription group
+            payment_profile_id (int): The Chargify id of the payment profile
+
+        Returns:
+            void: Response from the API. No Content
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscription_groups/{uid}/payment_profiles/{payment_profile_id}.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('uid')
+                            .value(uid)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('payment_profile_id')
+                            .value(payment_profile_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('global'))
+        ).execute()
+
+    def send_request_update_payment_email(self,
+                                          subscription_id):
+        """Does a POST request to /subscriptions/{subscription_id}/request_payment_profiles_update.json.
+
+        You can send a "request payment update" email to the customer
+        associated with the subscription.
+        If you attempt to send a "request payment update" email more than five
+        times within a 30-minute period, you will receive a `422` response
+        with an error message in the body. This error message will indicate
+        that the request has been rejected due to excessive attempts, and will
+        provide instructions on how to resubmit the request.
+        Additionally, if you attempt to send a "request payment update" email
+        for a subscription that does not exist, you will receive a `404` error
+        response. This error message will indicate that the subscription could
+        not be found, and will provide instructions on how to correct the
+        error and resubmit the request.
+        These error responses are designed to prevent excessive or invalid
+        requests, and to provide clear and helpful information to users who
+        encounter errors during the request process.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+
+        Returns:
+            void: Response from the API. Created
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/request_payment_profiles_update.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('global'))
+        ).execute()
 
     def create_payment_profile(self,
                                body=None):
@@ -347,7 +522,7 @@ class PaymentProfilesController(BaseController):
                 into Chargify.
 
         Returns:
-            CreatePaymentProfileResponse: Response from the API. OK
+            PaymentProfileResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -374,7 +549,7 @@ class PaymentProfilesController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CreatePaymentProfileResponse.from_dictionary)
+            .deserialize_into(PaymentProfileResponse.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
@@ -412,7 +587,7 @@ class PaymentProfilesController(BaseController):
                         wish to list payment profiles
 
         Returns:
-            List[ListPaymentProfilesResponse]: Response from the API. OK
+            List[PaymentProfileResponse]: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -442,7 +617,7 @@ class PaymentProfilesController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ListPaymentProfilesResponse.from_dictionary)
+            .deserialize_into(PaymentProfileResponse.from_dictionary)
         ).execute()
 
     def read_payment_profile(self,
@@ -484,10 +659,10 @@ class PaymentProfilesController(BaseController):
         ```
 
         Args:
-            payment_profile_id (str): The Chargify id of the payment profile
+            payment_profile_id (int): The Chargify id of the payment profile
 
         Returns:
-            ReadPaymentProfileResponse: Response from the API. OK
+            PaymentProfileResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -513,130 +688,8 @@ class PaymentProfilesController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ReadPaymentProfileResponse.from_dictionary)
-        ).execute()
-
-    def update_payment_profile(self,
-                               payment_profile_id,
-                               body=None):
-        """Does a PUT request to /payment_profiles/{payment_profile_id}.json.
-
-        ## Partial Card Updates
-        In the event that you are using the Authorize.net, Stripe,
-        Cybersource, Forte or Braintree Blue payment gateways, you can update
-        just the billing and contact information for a payment method. Note
-        the lack of credit-card related data contained in the JSON payload.
-        In this case, the following JSON is acceptable:
-        ```
-        {
-          "payment_profile": {
-            "first_name": "Kelly",
-            "last_name": "Test",
-            "billing_address": "789 Juniper Court",
-            "billing_city": "Boulder",
-            "billing_state": "CO",
-            "billing_zip": "80302",
-            "billing_country": "US",
-            "billing_address_2": null
-          }
-        }
-        ```
-        The result will be that you have updated the billing information for
-        the card, yet retained the original card number data.
-        ## Specific notes on updating payment profiles
-        - Merchants with **Authorize.net**, **Cybersource**, **Forte**,
-        **Braintree Blue** or **Stripe** as their payment gateway can update
-        their Customer’s credit cards without passing in the full credit card
-        number and CVV.
-        - If you are using **Authorize.net**, **Cybersource**, **Forte**,
-        **Braintree Blue** or **Stripe**, Chargify will ignore the credit card
-        number and CVV when processing an update via the API, and attempt a
-        partial update instead. If you wish to change the card number on a
-        payment profile, you will need to create a new payment profile for the
-        given customer.
-        - A Payment Profile cannot be updated with the attributes of another
-        type of Payment Profile. For example, if the payment profile you are
-        attempting to update is a credit card, you cannot pass in bank account
-        attributes (like `bank_account_number`), and vice versa.
-        - Updating a payment profile directly will not trigger an attempt to
-        capture a past-due balance. If this is the intent, update the card
-        details via the Subscription instead.
-        - If you are using Authorize.net or Stripe, you may elect to manually
-        trigger a retry for a past due subscription after a partial update.
-
-        Args:
-            payment_profile_id (str): The Chargify id of the payment profile
-            body (UpdatePaymentProfileRequest, optional): TODO: type
-                description here.
-
-        Returns:
-            UpdatePaymentProfileResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/payment_profiles/{payment_profile_id}.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(UpdatePaymentProfileResponse.from_dictionary)
-        ).execute()
-
-    def delete_unused_payment_profile(self,
-                                      payment_profile_id):
-        """Does a DELETE request to /payment_profiles/{payment_profile_id}.json.
-
-        Deletes an unused payment profile.
-        If the payment profile is in use by one or more subscriptions or
-        groups, a 422 and error message will be returned.
-
-        Args:
-            payment_profile_id (str): The Chargify id of the payment profile
-
-        Returns:
-            void: Response from the API. No Content
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/payment_profiles/{payment_profile_id}.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('global'))
+            .deserialize_into(PaymentProfileResponse.from_dictionary)
+            .local_error('404', 'Not Found', APIException)
         ).execute()
 
     def delete_subscriptions_payment_profile(self,
@@ -658,7 +711,7 @@ class PaymentProfilesController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            payment_profile_id (str): The Chargify id of the payment profile
+            payment_profile_id (int): The Chargify id of the payment profile
 
         Returns:
             void: Response from the API. No Content
@@ -680,6 +733,92 @@ class PaymentProfilesController(BaseController):
                             .value(subscription_id)
                             .is_required(True)
                             .should_encode(True))
+            .template_param(Parameter()
+                            .key('payment_profile_id')
+                            .value(payment_profile_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('global'))
+        ).execute()
+
+    def update_subscription_default_payment_profile(self,
+                                                    subscription_id,
+                                                    payment_profile_id):
+        """Does a POST request to /subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json.
+
+        This will change the default payment profile on the subscription to
+        the existing payment profile with the id specified.
+        You must elect to change the existing payment profile to a new payment
+        profile ID in order to receive a satisfactory response from this
+        endpoint.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            payment_profile_id (int): The Chargify id of the payment profile
+
+        Returns:
+            PaymentProfileResponse: Response from the API. Created
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('payment_profile_id')
+                            .value(payment_profile_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(PaymentProfileResponse.from_dictionary)
+            .local_error('404', 'Not Found', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def delete_unused_payment_profile(self,
+                                      payment_profile_id):
+        """Does a DELETE request to /payment_profiles/{payment_profile_id}.json.
+
+        Deletes an unused payment profile.
+        If the payment profile is in use by one or more subscriptions or
+        groups, a 422 and error message will be returned.
+
+        Args:
+            payment_profile_id (int): The Chargify id of the payment profile
+
+        Returns:
+            void: Response from the API. No Content
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/payment_profiles/{payment_profile_id}.json')
+            .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
                             .key('payment_profile_id')
                             .value(payment_profile_id)
@@ -740,98 +879,6 @@ class PaymentProfilesController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def delete_subscription_group_payment_profile(self,
-                                                  uid,
-                                                  payment_profile_id):
-        """Does a DELETE request to /subscription_groups/{uid}/payment_profiles/{payment_profile_id}.json.
-
-        This will delete a Payment Profile belonging to a Subscription Group.
-        **Note**: If the Payment Profile belongs to multiple Subscription
-        Groups and/or Subscriptions, it will be removed from all of them.
-
-        Args:
-            uid (str): The uid of the subscription group
-            payment_profile_id (str): The Chargify id of the payment profile
-
-        Returns:
-            void: Response from the API. No Content
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscription_groups/{uid}/payment_profiles/{payment_profile_id}.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('global'))
-        ).execute()
-
-    def update_subscription_default_payment_profile(self,
-                                                    subscription_id,
-                                                    payment_profile_id):
-        """Does a POST request to /subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json.
-
-        This will change the default payment profile on the subscription to
-        the existing payment profile with the id specified.
-        You must elect to change the existing payment profile to a new payment
-        profile ID in order to receive a satisfactory response from this
-        endpoint.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            payment_profile_id (int): The Chargify id of the payment profile
-
-        Returns:
-            PaymentProfileResponse: Response from the API. Created
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(PaymentProfileResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
     def update_subscription_group_default_payment_profile(self,
                                                           uid,
                                                           payment_profile_id):
@@ -847,7 +894,7 @@ class PaymentProfilesController(BaseController):
 
         Args:
             uid (str): The uid of the subscription group
-            payment_profile_id (str): The Chargify id of the payment profile
+            payment_profile_id (int): The Chargify id of the payment profile
 
         Returns:
             PaymentProfileResponse: Response from the API. Created
@@ -930,50 +977,4 @@ class PaymentProfilesController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(GetOneTimeTokenRequest.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', ErrorListResponseException)
-        ).execute()
-
-    def send_request_update_payment_email(self,
-                                          subscription_id):
-        """Does a POST request to /subscriptions/{subscription_id}/request_payment_profiles_update.json.
-
-        You can send a "request payment update" email to the customer
-        associated with the subscription.
-        If you attempt to send a "request payment update" email more than five
-        times within a 30-minute period, you will receive a `422` response
-        with an error message in the body. This error message will indicate
-        that the request has been rejected due to excessive attempts, and will
-        provide instructions on how to resubmit the request.
-        Additionally, if you attempt to send a "request payment update" email
-        for a subscription that does not exist, you will receive a `404` error
-        response. This error message will indicate that the subscription could
-        not be found, and will provide instructions on how to correct the
-        error and resubmit the request.
-        These error responses are designed to prevent excessive or invalid
-        requests, and to provide clear and helpful information to users who
-        encounter errors during the request process.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-
-        Returns:
-            void: Response from the API. Created
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/request_payment_profiles_update.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('global'))
         ).execute()

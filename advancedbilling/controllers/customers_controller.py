@@ -105,6 +105,168 @@ class CustomersController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', CustomerErrorResponseException)
         ).execute()
 
+    def update_customer(self,
+                        id,
+                        body=None):
+        """Does a PUT request to /customers/{id}.json.
+
+        This method allows to update the Customer.
+
+        Args:
+            id (int): The Chargify id of the customer
+            body (UpdateCustomerRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            CustomerResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/customers/{id}.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('id')
+                            .value(id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CustomerResponse.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', CustomerErrorResponseException)
+        ).execute()
+
+    def read_customer_by_reference(self,
+                                   reference):
+        """Does a GET request to /customers/lookup.json.
+
+        Use this method to return the customer object if you have the unique
+        **Reference ID (Your App)** value handy. It will return a single
+        match.
+
+        Args:
+            reference (str): Customer reference
+
+        Returns:
+            CustomerResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/customers/lookup.json')
+            .http_method(HttpMethodEnum.GET)
+            .query_param(Parameter()
+                         .key('reference')
+                         .value(reference)
+                         .is_required(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CustomerResponse.from_dictionary)
+        ).execute()
+
+    def read_customer(self,
+                      id):
+        """Does a GET request to /customers/{id}.json.
+
+        This method allows to retrieve the Customer properties by
+        Chargify-generated Customer ID.
+
+        Args:
+            id (int): The Chargify id of the customer
+
+        Returns:
+            CustomerResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/customers/{id}.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('id')
+                            .value(id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CustomerResponse.from_dictionary)
+        ).execute()
+
+    def delete_customer(self,
+                        id):
+        """Does a DELETE request to /customers/{id}.json.
+
+        This method allows you to delete the Customer.
+
+        Args:
+            id (int): The Chargify id of the customer
+
+        Returns:
+            void: Response from the API. No Content
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/customers/{id}.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('id')
+                            .value(id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('global'))
+        ).execute()
+
     def list_customers(self,
                        options=dict()):
         """Does a GET request to /customers.json.
@@ -218,168 +380,6 @@ class CustomersController(BaseController):
             .query_param(Parameter()
                          .key('q')
                          .value(options.get('q', None)))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CustomerResponse.from_dictionary)
-        ).execute()
-
-    def read_customer(self,
-                      id):
-        """Does a GET request to /customers/{id}.json.
-
-        This method allows to retrieve the Customer properties by
-        Chargify-generated Customer ID.
-
-        Args:
-            id (int): The Chargify id of the customer
-
-        Returns:
-            CustomerResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/customers/{id}.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('id')
-                            .value(id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CustomerResponse.from_dictionary)
-        ).execute()
-
-    def update_customer(self,
-                        id,
-                        body=None):
-        """Does a PUT request to /customers/{id}.json.
-
-        This method allows to update the Customer.
-
-        Args:
-            id (int): The Chargify id of the customer
-            body (UpdateCustomerRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            CustomerResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/customers/{id}.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('id')
-                            .value(id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CustomerResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', CustomerErrorResponseException)
-        ).execute()
-
-    def delete_customer(self,
-                        id):
-        """Does a DELETE request to /customers/{id}.json.
-
-        This method allows you to delete the Customer.
-
-        Args:
-            id (int): The Chargify id of the customer
-
-        Returns:
-            void: Response from the API. No Content
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/customers/{id}.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('id')
-                            .value(id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('global'))
-        ).execute()
-
-    def read_customer_by_reference(self,
-                                   reference):
-        """Does a GET request to /customers/lookup.json.
-
-        Use this method to return the customer object if you have the unique
-        **Reference ID (Your App)** value handy. It will return a single
-        match.
-
-        Args:
-            reference (str): Customer reference
-
-        Returns:
-            CustomerResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/customers/lookup.json')
-            .http_method(HttpMethodEnum.GET)
-            .query_param(Parameter()
-                         .key('reference')
-                         .value(reference)
-                         .is_required(True))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

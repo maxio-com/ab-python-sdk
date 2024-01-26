@@ -6,7 +6,6 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.metered_component import MeteredComponent
 
 
@@ -54,24 +53,3 @@ class CreateMeteredComponent(object):
         metered_component = MeteredComponent.from_dictionary(dictionary.get('metered_component')) if dictionary.get('metered_component') else None
         # Return an object of this model
         return cls(metered_component)
-
-    @classmethod
-    def validate(cls, dictionary):
-        """Validates dictionary against class required properties
-
-        Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
-
-        Returns:
-            boolean : if dictionary is valid contains required properties.
-
-        """
-        if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.metered_component, type_callable=lambda value: MeteredComponent.validate(value))
-
-        if not isinstance(dictionary, dict):
-            return False
-
-        return APIHelper.is_valid_type(value=dictionary.get('metered_component'), type_callable=lambda value: MeteredComponent.validate(value))

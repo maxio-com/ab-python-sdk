@@ -27,7 +27,7 @@ class Coupon(object):
         product_family_name (str): TODO: type description here.
         start_date (str): TODO: type description here.
         end_date (str): TODO: type description here.
-        percentage (float): TODO: type description here.
+        percentage (str): TODO: type description here.
         recurring (bool): TODO: type description here.
         recurring_scheme (RecurringScheme): TODO: type description here.
         duration_period_count (int): TODO: type description here.

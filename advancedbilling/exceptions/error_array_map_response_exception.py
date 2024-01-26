@@ -11,9 +11,9 @@ from advancedbilling.api_helper import APIHelper
 import advancedbilling.exceptions.api_exception
 
 
-class NestedErrorResponseException(advancedbilling.exceptions.api_exception.APIException):
+class ErrorArrayMapResponseException(advancedbilling.exceptions.api_exception.APIException):
     def __init__(self, reason, response):
-        """Constructor for the NestedErrorResponseException class
+        """Constructor for the ErrorArrayMapResponseException class
 
         Args:
             reason (string): The reason (or error message) for the Exception
@@ -21,7 +21,7 @@ class NestedErrorResponseException(advancedbilling.exceptions.api_exception.APIE
             response (HttpResponse): The HttpResponse of the API call.
 
         """
-        super(NestedErrorResponseException, self).__init__(reason, response)
+        super(ErrorArrayMapResponseException, self).__init__(reason, response)
         dictionary = APIHelper.json_deserialize(self.response.text)
         if isinstance(dictionary, dict):
             self.unbox(dictionary)

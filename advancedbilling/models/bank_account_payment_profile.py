@@ -16,26 +16,44 @@ class BankAccountPaymentProfile(object):
     TODO: type model description here.
 
     Attributes:
-        id (int): TODO: type description here.
-        first_name (str): TODO: type description here.
-        last_name (str): TODO: type description here.
-        customer_id (int): TODO: type description here.
+        id (int): The Chargify-assigned ID of the stored bank account. This
+            value can be used as an input to payment_profile_id when creating
+            a subscription, in order to re-use a stored payment profile for
+            the same customer
+        first_name (str): The first name of the bank account holder
+        last_name (str): The last name of the bank account holder
+        customer_id (int): The Chargify-assigned id for the customer record to
+            which the bank account belongs
         current_vault (BankAccountVault): The vault that stores the payment
             profile with the provided vault_token.
-        vault_token (str): TODO: type description here.
-        billing_address (str): TODO: type description here.
-        billing_city (str): TODO: type description here.
-        billing_state (str): TODO: type description here.
-        billing_zip (str): TODO: type description here.
-        billing_country (str): TODO: type description here.
-        customer_vault_token (str): TODO: type description here.
-        billing_address_2 (str): TODO: type description here.
-        bank_name (str): TODO: type description here.
-        masked_bank_routing_number (str): TODO: type description here.
-        masked_bank_account_number (str): TODO: type description here.
-        bank_account_type (str): TODO: type description here.
-        bank_account_holder_type (str): TODO: type description here.
-        payment_type (str): TODO: type description here.
+        vault_token (str): The “token” provided by your vault storage for an
+            already stored payment profile
+        billing_address (str): The current billing street address for the bank
+            account
+        billing_city (str): The current billing address city for the bank
+            account
+        billing_state (str): The current billing address state for the bank
+            account
+        billing_zip (str): The current billing address zip code for the bank
+            account
+        billing_country (str): The current billing address country for the
+            bank account
+        customer_vault_token (str): (only for Authorize.Net CIM storage): the
+            customerProfileId for the owner of the customerPaymentProfileId
+            provided as the vault_token.
+        billing_address_2 (str): The current billing street address, second
+            line, for the bank account
+        bank_name (str): The bank where the account resides
+        masked_bank_routing_number (str): A string representation of the
+            stored bank routing number with all but the last 4 digits marked
+            with X’s (i.e. ‘XXXXXXX1111’). payment_type will be bank_account
+        masked_bank_account_number (str): A string representation of the
+            stored bank account number with all but the last 4 digits marked
+            with X’s (i.e. ‘XXXXXXX1111’)
+        bank_account_type (BankAccountType): Defaults to checking
+        bank_account_holder_type (BankAccountHolderType): Defaults to
+            personal
+        payment_type (PaymentType): TODO: type description here.
         verified (bool): denotes whether a bank account has been verified by
             providing the amounts of two small deposits made into the account
         site_gateway_setting_id (int): TODO: type description here.
@@ -93,7 +111,13 @@ class BankAccountPaymentProfile(object):
     ]
 
     _nullables = [
+        'billing_address',
+        'billing_city',
+        'billing_state',
+        'billing_zip',
+        'billing_country',
         'customer_vault_token',
+        'billing_address_2',
         'gateway_handle',
     ]
 
@@ -114,9 +138,9 @@ class BankAccountPaymentProfile(object):
                  customer_vault_token=APIHelper.SKIP,
                  billing_address_2=APIHelper.SKIP,
                  bank_name=APIHelper.SKIP,
-                 bank_account_type=APIHelper.SKIP,
+                 bank_account_type='checking',
                  bank_account_holder_type=APIHelper.SKIP,
-                 payment_type=APIHelper.SKIP,
+                 payment_type='credit_card',
                  verified=False,
                  site_gateway_setting_id=APIHelper.SKIP,
                  gateway_handle=APIHelper.SKIP):
@@ -153,12 +177,10 @@ class BankAccountPaymentProfile(object):
             self.bank_name = bank_name 
         self.masked_bank_routing_number = masked_bank_routing_number 
         self.masked_bank_account_number = masked_bank_account_number 
-        if bank_account_type is not APIHelper.SKIP:
-            self.bank_account_type = bank_account_type 
+        self.bank_account_type = bank_account_type 
         if bank_account_holder_type is not APIHelper.SKIP:
             self.bank_account_holder_type = bank_account_holder_type 
-        if payment_type is not APIHelper.SKIP:
-            self.payment_type = payment_type 
+        self.payment_type = payment_type 
         self.verified = verified 
         if site_gateway_setting_id is not APIHelper.SKIP:
             self.site_gateway_setting_id = site_gateway_setting_id 
@@ -191,17 +213,17 @@ class BankAccountPaymentProfile(object):
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
         current_vault = dictionary.get("current_vault") if dictionary.get("current_vault") else APIHelper.SKIP
         vault_token = dictionary.get("vault_token") if dictionary.get("vault_token") else APIHelper.SKIP
-        billing_address = dictionary.get("billing_address") if dictionary.get("billing_address") else APIHelper.SKIP
-        billing_city = dictionary.get("billing_city") if dictionary.get("billing_city") else APIHelper.SKIP
-        billing_state = dictionary.get("billing_state") if dictionary.get("billing_state") else APIHelper.SKIP
-        billing_zip = dictionary.get("billing_zip") if dictionary.get("billing_zip") else APIHelper.SKIP
-        billing_country = dictionary.get("billing_country") if dictionary.get("billing_country") else APIHelper.SKIP
+        billing_address = dictionary.get("billing_address") if "billing_address" in dictionary.keys() else APIHelper.SKIP
+        billing_city = dictionary.get("billing_city") if "billing_city" in dictionary.keys() else APIHelper.SKIP
+        billing_state = dictionary.get("billing_state") if "billing_state" in dictionary.keys() else APIHelper.SKIP
+        billing_zip = dictionary.get("billing_zip") if "billing_zip" in dictionary.keys() else APIHelper.SKIP
+        billing_country = dictionary.get("billing_country") if "billing_country" in dictionary.keys() else APIHelper.SKIP
         customer_vault_token = dictionary.get("customer_vault_token") if "customer_vault_token" in dictionary.keys() else APIHelper.SKIP
-        billing_address_2 = dictionary.get("billing_address_2") if dictionary.get("billing_address_2") else APIHelper.SKIP
+        billing_address_2 = dictionary.get("billing_address_2") if "billing_address_2" in dictionary.keys() else APIHelper.SKIP
         bank_name = dictionary.get("bank_name") if dictionary.get("bank_name") else APIHelper.SKIP
-        bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else APIHelper.SKIP
+        bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else 'checking'
         bank_account_holder_type = dictionary.get("bank_account_holder_type") if dictionary.get("bank_account_holder_type") else APIHelper.SKIP
-        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
+        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else 'credit_card'
         verified = dictionary.get("verified") if dictionary.get("verified") else False
         site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if dictionary.get("site_gateway_setting_id") else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP

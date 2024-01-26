@@ -17,7 +17,7 @@ class InvoicePayment(object):
     TODO: type model description here.
 
     Attributes:
-        transaction_time (str): TODO: type description here.
+        transaction_time (datetime): TODO: type description here.
         memo (str): TODO: type description here.
         original_amount (str): TODO: type description here.
         applied_amount (str): TODO: type description here.
@@ -78,7 +78,7 @@ class InvoicePayment(object):
 
         # Initialize members of the class
         if transaction_time is not APIHelper.SKIP:
-            self.transaction_time = transaction_time 
+            self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
         if memo is not APIHelper.SKIP:
             self.memo = memo 
         if original_amount is not APIHelper.SKIP:
@@ -116,7 +116,7 @@ class InvoicePayment(object):
             return None
 
         # Extract variables from the dictionary
-        transaction_time = dictionary.get("transaction_time") if dictionary.get("transaction_time") else APIHelper.SKIP
+        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP

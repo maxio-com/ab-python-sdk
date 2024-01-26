@@ -8,6 +8,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.component_price_point import ComponentPricePoint
+from advancedbilling.models.list_public_keys_meta import ListPublicKeysMeta
 
 
 class ComponentPricePointsResponse(object):
@@ -19,25 +20,31 @@ class ComponentPricePointsResponse(object):
     Attributes:
         price_points (List[ComponentPricePoint]): TODO: type description
             here.
+        meta (ListPublicKeysMeta): TODO: type description here.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "price_points": 'price_points'
+        "price_points": 'price_points',
+        "meta": 'meta'
     }
 
     _optionals = [
         'price_points',
+        'meta',
     ]
 
     def __init__(self,
-                 price_points=APIHelper.SKIP):
+                 price_points=APIHelper.SKIP,
+                 meta=APIHelper.SKIP):
         """Constructor for the ComponentPricePointsResponse class"""
 
         # Initialize members of the class
         if price_points is not APIHelper.SKIP:
             self.price_points = price_points 
+        if meta is not APIHelper.SKIP:
+            self.meta = meta 
 
     @classmethod
     def from_dictionary(cls,
@@ -62,5 +69,7 @@ class ComponentPricePointsResponse(object):
             price_points = [ComponentPricePoint.from_dictionary(x) for x in dictionary.get('price_points')]
         else:
             price_points = APIHelper.SKIP
+        meta = ListPublicKeysMeta.from_dictionary(dictionary.get('meta')) if 'meta' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
-        return cls(price_points)
+        return cls(price_points,
+                   meta)

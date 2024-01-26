@@ -6,6 +6,8 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 
 
@@ -61,14 +63,14 @@ class InvoiceLineItem(object):
         tiered_unit_price (bool): When `true`, indicates that the actual
             pricing scheme for the line was tiered, so the `unit_price` shown
             is the blended average for all units.
-        period_range_start (str): Start date for the period covered by this
+        period_range_start (date): Start date for the period covered by this
             line. The format is `"YYYY-MM-DD"`.  * For periodic charges paid
             in advance, this date will match the billing date, and the end
             date will be in the future. * For periodic charges paid in arrears
             (e.g. metered charges), this date will be the date of the previous
             billing, and the end date will be the current billing date. * For
             non-periodic charges, this date and the end date will match.
-        period_range_end (str): End date for the period covered by this line.
+        period_range_end (date): End date for the period covered by this line.
             The format is `"YYYY-MM-DD"`.  * For periodic charges paid in
             advance, this date will match the next (future) billing date. *
             For periodic charges paid in arrears (e.g. metered charges), this
@@ -249,8 +251,8 @@ class InvoiceLineItem(object):
         tax_amount = dictionary.get("tax_amount") if dictionary.get("tax_amount") else APIHelper.SKIP
         total_amount = dictionary.get("total_amount") if dictionary.get("total_amount") else APIHelper.SKIP
         tiered_unit_price = dictionary.get("tiered_unit_price") if "tiered_unit_price" in dictionary.keys() else APIHelper.SKIP
-        period_range_start = dictionary.get("period_range_start") if dictionary.get("period_range_start") else APIHelper.SKIP
-        period_range_end = dictionary.get("period_range_end") if dictionary.get("period_range_end") else APIHelper.SKIP
+        period_range_start = dateutil.parser.parse(dictionary.get('period_range_start')).date() if dictionary.get('period_range_start') else APIHelper.SKIP
+        period_range_end = dateutil.parser.parse(dictionary.get('period_range_end')).date() if dictionary.get('period_range_end') else APIHelper.SKIP
         transaction_id = dictionary.get("transaction_id") if dictionary.get("transaction_id") else APIHelper.SKIP
         product_id = dictionary.get("product_id") if "product_id" in dictionary.keys() else APIHelper.SKIP
         product_version = dictionary.get("product_version") if "product_version" in dictionary.keys() else APIHelper.SKIP

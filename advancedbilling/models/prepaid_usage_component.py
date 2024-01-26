@@ -110,7 +110,6 @@ class PrepaidUsageComponent(object):
     }
 
     _optionals = [
-        'name',
         'unit_name',
         'description',
         'handle',
@@ -140,7 +139,7 @@ class PrepaidUsageComponent(object):
     ]
 
     def __init__(self,
-                 name=APIHelper.SKIP,
+                 name=None,
                  unit_name=APIHelper.SKIP,
                  description=APIHelper.SKIP,
                  handle=APIHelper.SKIP,
@@ -165,8 +164,7 @@ class PrepaidUsageComponent(object):
         """Constructor for the PrepaidUsageComponent class"""
 
         # Initialize members of the class
-        if name is not APIHelper.SKIP:
-            self.name = name 
+        self.name = name 
         if unit_name is not APIHelper.SKIP:
             self.unit_name = unit_name 
         if description is not APIHelper.SKIP:
@@ -229,7 +227,7 @@ class PrepaidUsageComponent(object):
             return None
 
         # Extract variables from the dictionary
-        name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
+        name = dictionary.get("name") if dictionary.get("name") else None
         unit_name = dictionary.get("unit_name") if dictionary.get("unit_name") else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
@@ -282,24 +280,3 @@ class PrepaidUsageComponent(object):
                    display_on_hosted_page,
                    allow_fractional_quantities,
                    public_signup_page_ids)
-
-    @classmethod
-    def validate(cls, dictionary):
-        """Validates dictionary against class required properties
-
-        Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
-
-        Returns:
-            boolean : if dictionary is valid contains required properties.
-
-        """
-        if isinstance(dictionary, cls):
-            return True
-
-        if not isinstance(dictionary, dict):
-            return False
-
-        return True

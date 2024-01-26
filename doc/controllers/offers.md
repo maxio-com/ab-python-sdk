@@ -10,11 +10,98 @@ offers_controller = client.offers
 
 ## Methods
 
+* [Read Offers](../../doc/controllers/offers.md#read-offers)
+* [Unarchive Offer](../../doc/controllers/offers.md#unarchive-offer)
+* [Archive Offer](../../doc/controllers/offers.md#archive-offer)
 * [Create Offer](../../doc/controllers/offers.md#create-offer)
 * [List Offers](../../doc/controllers/offers.md#list-offers)
-* [Read Offers](../../doc/controllers/offers.md#read-offers)
-* [Archive Offer](../../doc/controllers/offers.md#archive-offer)
-* [Unarchive Offer](../../doc/controllers/offers.md#unarchive-offer)
+
+
+# Read Offers
+
+This method allows you to list a specific offer's attributes. This is different than list all offers for a site, as it requires an `offer_id`.
+
+```python
+def read_offers(self,
+               offer_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `offer_id` | `int` | Template, Required | The Chargify id of the offer |
+
+## Response Type
+
+[`OfferResponse`](../../doc/models/offer-response.md)
+
+## Example Usage
+
+```python
+offer_id = 130
+
+result = offers_controller.read_offers(offer_id)
+print(result)
+```
+
+
+# Unarchive Offer
+
+Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the correct item.
+
+```python
+def unarchive_offer(self,
+                   offer_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `offer_id` | `int` | Template, Required | The Chargify id of the offer |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+offer_id = 130
+
+result = offers_controller.unarchive_offer(offer_id)
+print(result)
+```
+
+
+# Archive Offer
+
+Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
+
+```python
+def archive_offer(self,
+                 offer_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `offer_id` | `int` | Template, Required | The Chargify id of the offer |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+offer_id = 130
+
+result = offers_controller.archive_offer(offer_id)
+print(result)
+```
 
 
 # Create Offer
@@ -122,7 +209,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorMapResponseException`](../../doc/models/error-map-response-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorArrayMapResponseException`](../../doc/models/error-array-map-response-exception.md) |
 
 
 # List Offers
@@ -212,92 +299,5 @@ print(result)
     }
   ]
 }
-```
-
-
-# Read Offers
-
-This method allows you to list a specific offer's attributes. This is different than list all offers for a site, as it requires an `offer_id`.
-
-```python
-def read_offers(self,
-               offer_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `offer_id` | `int` | Template, Required | The Chargify id of the offer |
-
-## Response Type
-
-[`OfferResponse`](../../doc/models/offer-response.md)
-
-## Example Usage
-
-```python
-offer_id = 130
-
-result = offers_controller.read_offers(offer_id)
-print(result)
-```
-
-
-# Archive Offer
-
-Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
-
-```python
-def archive_offer(self,
-                 offer_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `offer_id` | `int` | Template, Required | The Chargify id of the offer |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-offer_id = 130
-
-result = offers_controller.archive_offer(offer_id)
-print(result)
-```
-
-
-# Unarchive Offer
-
-Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the correct item.
-
-```python
-def unarchive_offer(self,
-                   offer_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `offer_id` | `int` | Template, Required | The Chargify id of the offer |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-offer_id = 130
-
-result = offers_controller.unarchive_offer(offer_id)
-print(result)
 ```
 

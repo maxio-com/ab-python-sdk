@@ -6,17 +6,18 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.models.currency_price import CurrencyPrice
+from advancedbilling.models.component_currency_price import ComponentCurrencyPrice
 
 
-class ProductPricePointCurrencyPrice(object):
+class ComponentCurrencyPricesResponse(object):
 
-    """Implementation of the 'Product Price Point Currency Price' model.
+    """Implementation of the 'Component Currency Prices Response' model.
 
     TODO: type model description here.
 
     Attributes:
-        currency_prices (List[CurrencyPrice]): TODO: type description here.
+        currency_prices (List[ComponentCurrencyPrice]): TODO: type description
+            here.
 
     """
 
@@ -27,7 +28,7 @@ class ProductPricePointCurrencyPrice(object):
 
     def __init__(self,
                  currency_prices=None):
-        """Constructor for the ProductPricePointCurrencyPrice class"""
+        """Constructor for the ComponentCurrencyPricesResponse class"""
 
         # Initialize members of the class
         self.currency_prices = currency_prices 
@@ -52,6 +53,6 @@ class ProductPricePointCurrencyPrice(object):
         # Extract variables from the dictionary
         currency_prices = None
         if dictionary.get('currency_prices') is not None:
-            currency_prices = [CurrencyPrice.from_dictionary(x) for x in dictionary.get('currency_prices')]
+            currency_prices = [ComponentCurrencyPrice.from_dictionary(x) for x in dictionary.get('currency_prices')]
         # Return an object of this model
         return cls(currency_prices)

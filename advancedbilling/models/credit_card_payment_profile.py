@@ -16,28 +16,46 @@ class CreditCardPaymentProfile(object):
     TODO: type model description here.
 
     Attributes:
-        id (int): TODO: type description here.
-        first_name (str): TODO: type description here.
-        last_name (str): TODO: type description here.
-        masked_card_number (str): TODO: type description here.
-        card_type (CardType1): TODO: type description here.
-        expiration_month (int): TODO: type description here.
-        expiration_year (int): TODO: type description here.
-        customer_id (int): TODO: type description here.
+        id (int): The Chargify-assigned ID of the stored card. This value can
+            be used as an input to payment_profile_id when creating a
+            subscription, in order to re-use a stored payment profile for the
+            same customer.
+        first_name (str): The first name of the card holder.
+        last_name (str): The last name of the card holder.
+        masked_card_number (str): A string representation of the credit card
+            number with all but the last 4 digits masked with X’s (i.e.
+            ‘XXXX-XXXX-XXXX-1234’).
+        card_type (CardType): The type of card used.
+        expiration_month (int): An integer representing the expiration month
+            of the card(1 – 12).
+        expiration_year (int): An integer representing the 4-digit expiration
+            year of the card(i.e. ‘2012’).
+        customer_id (int): The Chargify-assigned id for the customer record to
+            which the card belongs.
         current_vault (CurrentVault): The vault that stores the payment
             profile with the provided `vault_token`. Use `bogus` for testing.
-        vault_token (str): TODO: type description here.
-        billing_address (str): TODO: type description here.
-        billing_city (str): TODO: type description here.
-        billing_state (str): TODO: type description here.
-        billing_zip (str): TODO: type description here.
-        billing_country (str): TODO: type description here.
-        customer_vault_token (str): TODO: type description here.
-        billing_address_2 (str): TODO: type description here.
-        payment_type (str): TODO: type description here.
+        vault_token (str): The “token” provided by your vault storage for an
+            already stored payment profile.
+        billing_address (str): The current billing street address for the
+            card.
+        billing_city (str): The current billing address city for the card.
+        billing_state (str): The current billing address state for the card.
+        billing_zip (str): The current billing address zip code for the card.
+        billing_country (str): The current billing address country for the
+            card.
+        customer_vault_token (str): (only for Authorize.Net CIM storage): the
+            customerProfileId for the owner of the customerPaymentProfileId
+            provided as the vault_token.
+        billing_address_2 (str): The current billing street address, second
+            line, for the card.
+        payment_type (PaymentType): TODO: type description here.
         disabled (bool): TODO: type description here.
+        chargify_token (str): Token received after sending billing information
+            using chargify.js. This token will only be received if passed as a
+            sole attribute of credit_card_attributes (i.e.
+            tok_9g6hw85pnpt6knmskpwp4ttt)
         site_gateway_setting_id (int): TODO: type description here.
-        gateway_handle (str): TODO: type description here.
+        gateway_handle (str): An identifier of connected gateway.
 
     """
 
@@ -62,6 +80,7 @@ class CreditCardPaymentProfile(object):
         "billing_address_2": 'billing_address_2',
         "payment_type": 'payment_type',
         "disabled": 'disabled',
+        "chargify_token": 'chargify_token',
         "site_gateway_setting_id": 'site_gateway_setting_id',
         "gateway_handle": 'gateway_handle'
     }
@@ -85,12 +104,21 @@ class CreditCardPaymentProfile(object):
         'billing_address_2',
         'payment_type',
         'disabled',
+        'chargify_token',
         'site_gateway_setting_id',
         'gateway_handle',
     ]
 
     _nullables = [
+        'vault_token',
+        'billing_address',
+        'billing_city',
+        'billing_state',
+        'billing_zip',
+        'billing_country',
         'customer_vault_token',
+        'billing_address_2',
+        'site_gateway_setting_id',
         'gateway_handle',
     ]
 
@@ -112,8 +140,9 @@ class CreditCardPaymentProfile(object):
                  billing_country=APIHelper.SKIP,
                  customer_vault_token=APIHelper.SKIP,
                  billing_address_2=APIHelper.SKIP,
-                 payment_type=APIHelper.SKIP,
+                 payment_type='credit_card',
                  disabled=APIHelper.SKIP,
+                 chargify_token=APIHelper.SKIP,
                  site_gateway_setting_id=APIHelper.SKIP,
                  gateway_handle=APIHelper.SKIP):
         """Constructor for the CreditCardPaymentProfile class"""
@@ -152,10 +181,11 @@ class CreditCardPaymentProfile(object):
             self.customer_vault_token = customer_vault_token 
         if billing_address_2 is not APIHelper.SKIP:
             self.billing_address_2 = billing_address_2 
-        if payment_type is not APIHelper.SKIP:
-            self.payment_type = payment_type 
+        self.payment_type = payment_type 
         if disabled is not APIHelper.SKIP:
             self.disabled = disabled 
+        if chargify_token is not APIHelper.SKIP:
+            self.chargify_token = chargify_token 
         if site_gateway_setting_id is not APIHelper.SKIP:
             self.site_gateway_setting_id = site_gateway_setting_id 
         if gateway_handle is not APIHelper.SKIP:
@@ -188,17 +218,18 @@ class CreditCardPaymentProfile(object):
         expiration_year = dictionary.get("expiration_year") if dictionary.get("expiration_year") else APIHelper.SKIP
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
         current_vault = dictionary.get("current_vault") if dictionary.get("current_vault") else APIHelper.SKIP
-        vault_token = dictionary.get("vault_token") if dictionary.get("vault_token") else APIHelper.SKIP
-        billing_address = dictionary.get("billing_address") if dictionary.get("billing_address") else APIHelper.SKIP
-        billing_city = dictionary.get("billing_city") if dictionary.get("billing_city") else APIHelper.SKIP
-        billing_state = dictionary.get("billing_state") if dictionary.get("billing_state") else APIHelper.SKIP
-        billing_zip = dictionary.get("billing_zip") if dictionary.get("billing_zip") else APIHelper.SKIP
-        billing_country = dictionary.get("billing_country") if dictionary.get("billing_country") else APIHelper.SKIP
+        vault_token = dictionary.get("vault_token") if "vault_token" in dictionary.keys() else APIHelper.SKIP
+        billing_address = dictionary.get("billing_address") if "billing_address" in dictionary.keys() else APIHelper.SKIP
+        billing_city = dictionary.get("billing_city") if "billing_city" in dictionary.keys() else APIHelper.SKIP
+        billing_state = dictionary.get("billing_state") if "billing_state" in dictionary.keys() else APIHelper.SKIP
+        billing_zip = dictionary.get("billing_zip") if "billing_zip" in dictionary.keys() else APIHelper.SKIP
+        billing_country = dictionary.get("billing_country") if "billing_country" in dictionary.keys() else APIHelper.SKIP
         customer_vault_token = dictionary.get("customer_vault_token") if "customer_vault_token" in dictionary.keys() else APIHelper.SKIP
-        billing_address_2 = dictionary.get("billing_address_2") if dictionary.get("billing_address_2") else APIHelper.SKIP
-        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
+        billing_address_2 = dictionary.get("billing_address_2") if "billing_address_2" in dictionary.keys() else APIHelper.SKIP
+        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else 'credit_card'
         disabled = dictionary.get("disabled") if "disabled" in dictionary.keys() else APIHelper.SKIP
-        site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if dictionary.get("site_gateway_setting_id") else APIHelper.SKIP
+        chargify_token = dictionary.get("chargify_token") if dictionary.get("chargify_token") else APIHelper.SKIP
+        site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if "site_gateway_setting_id" in dictionary.keys() else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(masked_card_number,
@@ -220,6 +251,7 @@ class CreditCardPaymentProfile(object):
                    billing_address_2,
                    payment_type,
                    disabled,
+                   chargify_token,
                    site_gateway_setting_id,
                    gateway_handle)
 

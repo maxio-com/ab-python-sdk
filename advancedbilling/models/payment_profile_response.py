@@ -6,7 +6,7 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.models.payment_profile import PaymentProfile
+from advancedbilling.api_helper import APIHelper
 
 
 class PaymentProfileResponse(object):
@@ -16,7 +16,8 @@ class PaymentProfileResponse(object):
     TODO: type model description here.
 
     Attributes:
-        payment_profile (PaymentProfile): TODO: type description here.
+        payment_profile (BankAccountPaymentProfile |
+            CreditCardPaymentProfile): TODO: type description here.
 
     """
 
@@ -46,10 +47,33 @@ class PaymentProfileResponse(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        payment_profile = PaymentProfile.from_dictionary(dictionary.get('payment_profile')) if dictionary.get('payment_profile') else None
+        payment_profile = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile'), dictionary.get('payment_profile'), False) if dictionary.get('payment_profile') is not None else None
         # Return an object of this model
         return cls(payment_profile)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+        if isinstance(dictionary, cls):
+            return UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile').validate(dictionary.payment_profile)
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile').validate(dictionary.get('payment_profile'))

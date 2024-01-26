@@ -41,6 +41,9 @@ class Component(object):
             or not.
         description (str): The description of the component.
         default_price_point_id (int): TODO: type description here.
+        overage_prices (List[ComponentPrice]): An array of price brackets. If
+            the component uses the ‘per_unit’ pricing scheme, this array will
+            be empty.
         prices (List[ComponentPrice]): An array of price brackets. If the
             component uses the ‘per_unit’ pricing scheme, this array will be
             empty.
@@ -62,9 +65,9 @@ class Component(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        created_at (str): Timestamp indicating when this component was
+        created_at (datetime): Timestamp indicating when this component was
             created
-        updated_at (str): Timestamp indicating when this component was
+        updated_at (datetime): Timestamp indicating when this component was
             updated
         archived_at (str): Timestamp indicating when this component was
             archived
@@ -106,6 +109,7 @@ class Component(object):
         "taxable": 'taxable',
         "description": 'description',
         "default_price_point_id": 'default_price_point_id',
+        "overage_prices": 'overage_prices',
         "prices": 'prices',
         "price_point_count": 'price_point_count',
         "price_points_url": 'price_points_url',
@@ -142,6 +146,7 @@ class Component(object):
         'taxable',
         'description',
         'default_price_point_id',
+        'overage_prices',
         'prices',
         'price_point_count',
         'price_points_url',
@@ -169,6 +174,8 @@ class Component(object):
         'unit_price',
         'price_per_unit_in_cents',
         'description',
+        'default_price_point_id',
+        'overage_prices',
         'prices',
         'tax_code',
         'upgrade_charge',
@@ -194,6 +201,7 @@ class Component(object):
                  taxable=APIHelper.SKIP,
                  description=APIHelper.SKIP,
                  default_price_point_id=APIHelper.SKIP,
+                 overage_prices=APIHelper.SKIP,
                  prices=APIHelper.SKIP,
                  price_point_count=APIHelper.SKIP,
                  price_points_url=APIHelper.SKIP,
@@ -244,6 +252,8 @@ class Component(object):
             self.description = description 
         if default_price_point_id is not APIHelper.SKIP:
             self.default_price_point_id = default_price_point_id 
+        if overage_prices is not APIHelper.SKIP:
+            self.overage_prices = overage_prices 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
         if price_point_count is not APIHelper.SKIP:
@@ -261,9 +271,9 @@ class Component(object):
         if downgrade_credit is not APIHelper.SKIP:
             self.downgrade_credit = downgrade_credit 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if archived_at is not APIHelper.SKIP:
             self.archived_at = archived_at 
         if hide_date_range_on_invoice is not APIHelper.SKIP:
@@ -318,7 +328,11 @@ class Component(object):
         archived = dictionary.get("archived") if "archived" in dictionary.keys() else APIHelper.SKIP
         taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
         description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
-        default_price_point_id = dictionary.get("default_price_point_id") if dictionary.get("default_price_point_id") else APIHelper.SKIP
+        default_price_point_id = dictionary.get("default_price_point_id") if "default_price_point_id" in dictionary.keys() else APIHelper.SKIP
+        if 'overage_prices' in dictionary.keys():
+            overage_prices = [ComponentPrice.from_dictionary(x) for x in dictionary.get('overage_prices')] if dictionary.get('overage_prices') else None
+        else:
+            overage_prices = APIHelper.SKIP
         if 'prices' in dictionary.keys():
             prices = [ComponentPrice.from_dictionary(x) for x in dictionary.get('prices')] if dictionary.get('prices') else None
         else:
@@ -330,8 +344,8 @@ class Component(object):
         recurring = dictionary.get("recurring") if "recurring" in dictionary.keys() else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP
         hide_date_range_on_invoice = dictionary.get("hide_date_range_on_invoice") if "hide_date_range_on_invoice" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
@@ -356,6 +370,7 @@ class Component(object):
                    taxable,
                    description,
                    default_price_point_id,
+                   overage_prices,
                    prices,
                    price_point_count,
                    price_points_url,

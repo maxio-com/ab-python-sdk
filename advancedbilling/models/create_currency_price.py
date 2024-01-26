@@ -17,7 +17,7 @@ class CreateCurrencyPrice(object):
 
     Attributes:
         currency (str): ISO code for a currency defined on the site level
-        price (int): Price for the price level in this currency
+        price (float): Price for the price level in this currency
         price_id (int): ID of the price that this corresponds with
 
     """

@@ -9,29 +9,39 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class ReadPaymentProfileResponse(object):
+class AppliedCreditNoteData(object):
 
-    """Implementation of the 'Read Payment Profile Response' model.
+    """Implementation of the 'Applied Credit Note Data' model.
 
     TODO: type model description here.
 
     Attributes:
-        payment_profile (BankAccountPaymentProfile |
-            CreditCardPaymentProfile): TODO: type description here.
+        uid (str): The UID of the credit note
+        number (str): The number of the credit note
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "payment_profile": 'payment_profile'
+        "uid": 'uid',
+        "number": 'number'
     }
 
+    _optionals = [
+        'uid',
+        'number',
+    ]
+
     def __init__(self,
-                 payment_profile=None):
-        """Constructor for the ReadPaymentProfileResponse class"""
+                 uid=APIHelper.SKIP,
+                 number=APIHelper.SKIP):
+        """Constructor for the AppliedCreditNoteData class"""
 
         # Initialize members of the class
-        self.payment_profile = payment_profile 
+        if uid is not APIHelper.SKIP:
+            self.uid = uid 
+        if number is not APIHelper.SKIP:
+            self.number = number 
 
     @classmethod
     def from_dictionary(cls,
@@ -47,14 +57,15 @@ class ReadPaymentProfileResponse(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        payment_profile = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ReadPaymentProfileResponsePaymentProfile'), dictionary.get('payment_profile'), False) if dictionary.get('payment_profile') is not None else None
+        uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
+        number = dictionary.get("number") if dictionary.get("number") else APIHelper.SKIP
         # Return an object of this model
-        return cls(payment_profile)
+        return cls(uid,
+                   number)
 
     @classmethod
     def validate(cls, dictionary):
@@ -69,11 +80,10 @@ class ReadPaymentProfileResponse(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('ReadPaymentProfileResponsePaymentProfile').validate(dictionary.payment_profile)
+            return True
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('ReadPaymentProfileResponsePaymentProfile').validate(dictionary.get('payment_profile'))
+        return True

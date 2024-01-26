@@ -20,7 +20,7 @@ class GetOneTimeTokenPaymentProfile(object):
         first_name (str): TODO: type description here.
         last_name (str): TODO: type description here.
         masked_card_number (str): TODO: type description here.
-        card_type (str): TODO: type description here.
+        card_type (CardType): The type of card used.
         expiration_month (float): TODO: type description here.
         expiration_year (float): TODO: type description here.
         customer_id (str): TODO: type description here.

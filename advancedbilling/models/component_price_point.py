@@ -7,7 +7,8 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.component_price_point_price import ComponentPricePointPrice
+from advancedbilling.models.component_currency_price import ComponentCurrencyPrice
+from advancedbilling.models.component_price import ComponentPrice
 
 
 class ComponentPricePoint(object):
@@ -31,10 +32,10 @@ class ComponentPricePoint(object):
             tml) for an overview of pricing schemes.
         component_id (int): TODO: type description here.
         handle (str): TODO: type description here.
-        archived_at (str): TODO: type description here.
-        created_at (str): TODO: type description here.
-        updated_at (str): TODO: type description here.
-        prices (List[ComponentPricePointPrice]): TODO: type description here.
+        archived_at (datetime): TODO: type description here.
+        created_at (datetime): TODO: type description here.
+        updated_at (datetime): TODO: type description here.
+        prices (List[ComponentPrice]): TODO: type description here.
         use_site_exchange_rate (bool): Whether to use the site level exchange
             rate or define your own prices for each currency if you have
             multiple currencies defined on the site.
@@ -46,9 +47,16 @@ class ComponentPricePoint(object):
             coupled with an interval_unit of day would mean this component
             price point would renew every 30 days. This property is only
             available for sites with Multifrequency enabled.
-        interval_unit (IntervalUnit): A string representing the interval unit
-            for this component price point, either month or day. This property
-            is only available for sites with Multifrequency enabled.
+        interval_unit (IntervalUnit | None): A string representing the
+            interval unit for this component price point, either month or day.
+            This property is only available for sites with Multifrequency
+            enabled.
+        currency_prices (List[ComponentCurrencyPrice]): An array of currency
+            pricing data is available when multiple currencies are defined for
+            the site. It varies based on the use_site_exchange_rate setting
+            for the price point. This parameter is present only in the
+            response of read endpoints, after including the appropriate query
+            parameter.
 
     """
 
@@ -69,7 +77,8 @@ class ComponentPricePoint(object):
         "subscription_id": 'subscription_id',
         "tax_included": 'tax_included',
         "interval": 'interval',
-        "interval_unit": 'interval_unit'
+        "interval_unit": 'interval_unit',
+        "currency_prices": 'currency_prices'
     }
 
     _optionals = [
@@ -89,10 +98,13 @@ class ComponentPricePoint(object):
         'tax_included',
         'interval',
         'interval_unit',
+        'currency_prices',
     ]
 
     _nullables = [
         'archived_at',
+        'interval',
+        'interval_unit',
     ]
 
     def __init__(self,
@@ -111,7 +123,8 @@ class ComponentPricePoint(object):
                  subscription_id=APIHelper.SKIP,
                  tax_included=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
-                 interval_unit=APIHelper.SKIP):
+                 interval_unit=APIHelper.SKIP,
+                 currency_prices=APIHelper.SKIP):
         """Constructor for the ComponentPricePoint class"""
 
         # Initialize members of the class
@@ -130,11 +143,11 @@ class ComponentPricePoint(object):
         if handle is not APIHelper.SKIP:
             self.handle = handle 
         if archived_at is not APIHelper.SKIP:
-            self.archived_at = archived_at 
+            self.archived_at = APIHelper.apply_datetime_converter(archived_at, APIHelper.RFC3339DateTime) if archived_at else None 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
         self.use_site_exchange_rate = use_site_exchange_rate 
@@ -146,6 +159,8 @@ class ComponentPricePoint(object):
             self.interval = interval 
         if interval_unit is not APIHelper.SKIP:
             self.interval_unit = interval_unit 
+        if currency_prices is not APIHelper.SKIP:
+            self.currency_prices = currency_prices 
 
     @classmethod
     def from_dictionary(cls,
@@ -161,6 +176,7 @@ class ComponentPricePoint(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         if dictionary is None:
             return None
 
@@ -172,19 +188,30 @@ class ComponentPricePoint(object):
         pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else APIHelper.SKIP
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
-        archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        if 'archived_at' in dictionary.keys():
+            archived_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("archived_at")).datetime if dictionary.get("archived_at") else None
+        else:
+            archived_at = APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         prices = None
         if dictionary.get('prices') is not None:
-            prices = [ComponentPricePointPrice.from_dictionary(x) for x in dictionary.get('prices')]
+            prices = [ComponentPrice.from_dictionary(x) for x in dictionary.get('prices')]
         else:
             prices = APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if dictionary.get("use_site_exchange_rate") else True
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
-        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
-        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        interval = dictionary.get("interval") if "interval" in dictionary.keys() else APIHelper.SKIP
+        if 'interval_unit' in dictionary.keys():
+            interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ComponentPricePointIntervalUnit'), dictionary.get('interval_unit'), False) if dictionary.get('interval_unit') is not None else None
+        else:
+            interval_unit = APIHelper.SKIP
+        currency_prices = None
+        if dictionary.get('currency_prices') is not None:
+            currency_prices = [ComponentCurrencyPrice.from_dictionary(x) for x in dictionary.get('currency_prices')]
+        else:
+            currency_prices = APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    mtype,
@@ -201,4 +228,5 @@ class ComponentPricePoint(object):
                    subscription_id,
                    tax_included,
                    interval,
-                   interval_unit)
+                   interval_unit,
+                   currency_prices)

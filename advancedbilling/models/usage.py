@@ -16,7 +16,7 @@ class Usage(object):
     TODO: type model description here.
 
     Attributes:
-        id (int): TODO: type description here.
+        id (long|int): TODO: type description here.
         memo (str): TODO: type description here.
         created_at (datetime): TODO: type description here.
         price_point_id (int): TODO: type description here.

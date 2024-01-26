@@ -20,9 +20,9 @@ from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.coupon_response import CouponResponse
 from advancedbilling.models.coupon_usage import CouponUsage
-from advancedbilling.models.coupon_currency_response import CouponCurrencyResponse
 from advancedbilling.models.coupon_subcodes_response import CouponSubcodesResponse
 from advancedbilling.models.coupon_subcodes import CouponSubcodes
+from advancedbilling.models.coupon_currency_response import CouponCurrencyResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.single_string_error_response_exception import SingleStringErrorResponseException
 from advancedbilling.exceptions.api_exception import APIException
@@ -102,255 +102,6 @@ class CouponsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def list_coupons_for_product_family(self,
-                                        options=dict()):
-        """Does a GET request to /product_families/{product_family_id}/coupons.json.
-
-        List coupons for a specific Product Family in a Site.
-        If the coupon is set to `use_site_exchange_rate: true`, it will return
-        pricing based on the current exchange rate. If the flag is set to
-        false, it will return all of the defined prices for each currency.
-
-        Args:
-            options (dict, optional): Key-value pairs for any of the
-                parameters to this API Endpoint. All parameters to the
-                endpoint are supplied through the dictionary with their names
-                being the key and their desired values being the value. A list
-                of parameters that can be used are::
-
-                    product_family_id -- int -- The Chargify id of the product
-                        family to which the coupon belongs
-                    page -- int -- Result records are organized in pages. By
-                        default, the first page of results is displayed. The
-                        page parameter specifies a page number of results to
-                        fetch. You can start navigating through the pages to
-                        consume the results. You do this by passing in a page
-                        parameter. Retrieve the next page by adding ?page=2 to
-                        the query string. If there are no results to return,
-                        then an empty result set will be returned. Use in
-                        query `page=1`.
-                    per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is 30.
-                        The maximum allowed values is 200; any per_page value
-                        over 200 will be changed to 200. Use in query
-                        `per_page=200`.
-                    filter_date_field -- BasicDateField -- The type of filter
-                        you would like to apply to your search. Use in query
-                        `filter[date_field]=created_at`.
-                    filter_end_date -- date -- The end date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns coupons with a timestamp up to and including
-                        11:59:59PM in your site’s time zone on the date
-                        specified. Use in query
-                        `filter[date_field]=2011-12-15`.
-                    filter_end_datetime -- datetime -- The end date and time
-                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns coupons with a timestamp at or
-                        before exact time provided in query. You can specify
-                        timezone in query - otherwise your site's time zone
-                        will be used. If provided, this parameter will be used
-                        instead of end_date. Use in query
-                        `?filter[end_datetime]=2011-12-1T10:15:30+01:00`.
-                    filter_start_date -- date -- The start date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns coupons with a timestamp at or after midnight
-                        (12:00:00 AM) in your site’s time zone on the date
-                        specified. Use in query
-                        `filter[start_date]=2011-12-17`.
-                    filter_start_datetime -- datetime -- The start date and
-                        time (format YYYY-MM-DD HH:MM:SS) with which to filter
-                        the date_field. Returns coupons with a timestamp at or
-                        after exact time provided in query. You can specify
-                        timezone in query - otherwise your site's time zone
-                        will be used. If provided, this parameter will be used
-                        instead of start_date. Use in query
-                        `filter[start_datetime]=2011-12-19T10:15:30+01:00`.
-                    filter_ids -- List[int] -- Allows fetching coupons with
-                        matching id based on provided values. Use in query
-                        `filter[ids]=1,2,3`.
-                    filter_codes -- List[str] -- Allows fetching coupons with
-                        matching codes based on provided values. Use in query
-                        `filter[codes]=free,free_trial`.
-                    currency_prices -- bool -- When fetching coupons, if you
-                        have defined multiple currencies at the site level,
-                        you can optionally pass the `?currency_prices=true`
-                        query param to include an array of currency price data
-                        in the response. Use in query `currency_prices=true`.
-                    filter_use_site_exchange_rate -- bool -- Allows fetching
-                        coupons with matching use_site_exchange_rate based on
-                        provided value. Use in query
-                        `filter[use_site_exchange_rate]=true`.
-
-        Returns:
-            List[CouponResponse]: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/product_families/{product_family_id}/coupons.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('product_family_id')
-                            .value(options.get('product_family_id', None))
-                            .is_required(True)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('page')
-                         .value(options.get('page', None)))
-            .query_param(Parameter()
-                         .key('per_page')
-                         .value(options.get('per_page', None)))
-            .query_param(Parameter()
-                         .key('filter[date_field]')
-                         .value(options.get('filter_date_field', None)))
-            .query_param(Parameter()
-                         .key('filter[end_date]')
-                         .value(options.get('filter_end_date', None)))
-            .query_param(Parameter()
-                         .key('filter[end_datetime]')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_end_datetime', None))))
-            .query_param(Parameter()
-                         .key('filter[start_date]')
-                         .value(options.get('filter_start_date', None)))
-            .query_param(Parameter()
-                         .key('filter[start_datetime]')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_start_datetime', None))))
-            .query_param(Parameter()
-                         .key('filter[ids]')
-                         .value(options.get('filter_ids', None)))
-            .query_param(Parameter()
-                         .key('filter[codes]')
-                         .value(options.get('filter_codes', None)))
-            .query_param(Parameter()
-                         .key('currency_prices')
-                         .value(options.get('currency_prices', None)))
-            .query_param(Parameter()
-                         .key('filter[use_site_exchange_rate]')
-                         .value(options.get('filter_use_site_exchange_rate', None)))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CouponResponse.from_dictionary)
-        ).execute()
-
-    def read_coupon_by_code(self,
-                            product_family_id=None,
-                            code=None):
-        """Does a GET request to /coupons/find.json.
-
-        You can search for a coupon via the API with the find method. By
-        passing a code parameter, the find will attempt to locate a coupon
-        that matches that code. If no coupon is found, a 404 is returned.
-        If you have more than one product family and if the coupon you are
-        trying to find does not belong to the default product family in your
-        site, then you will need to specify (either in the url or as a query
-        string param) the product family id.
-
-        Args:
-            product_family_id (int, optional): The Chargify id of the product
-                family to which the coupon belongs
-            code (str, optional): The code of the coupon
-
-        Returns:
-            CouponResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/coupons/find.json')
-            .http_method(HttpMethodEnum.GET)
-            .query_param(Parameter()
-                         .key('product_family_id')
-                         .value(product_family_id))
-            .query_param(Parameter()
-                         .key('code')
-                         .value(code))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CouponResponse.from_dictionary)
-        ).execute()
-
-    def read_coupon(self,
-                    product_family_id,
-                    coupon_id):
-        """Does a GET request to /product_families/{product_family_id}/coupons/{coupon_id}.json.
-
-        You can retrieve the Coupon via the API with the Show method. You must
-        identify the Coupon in this call by the ID parameter that Chargify
-        assigns.
-        If instead you would like to find a Coupon using a Coupon code, see
-        the Coupon Find method.
-        When fetching a coupon, if you have defined multiple currencies at the
-        site level, you can optionally pass the `?currency_prices=true` query
-        param to include an array of currency price data in the response.
-        If the coupon is set to `use_site_exchange_rate: true`, it will return
-        pricing based on the current exchange rate. If the flag is set to
-        false, it will return all of the defined prices for each currency.
-
-        Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the coupon belongs
-            coupon_id (int): The Chargify id of the coupon
-
-        Returns:
-            CouponResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/product_families/{product_family_id}/coupons/{coupon_id}.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('product_family_id')
-                            .value(product_family_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('coupon_id')
-                            .value(coupon_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CouponResponse.from_dictionary)
-        ).execute()
-
     def update_coupon(self,
                       product_family_id,
                       coupon_id,
@@ -406,57 +157,6 @@ class CouponsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CouponResponse.from_dictionary)
-        ).execute()
-
-    def archive_coupon(self,
-                       product_family_id,
-                       coupon_id):
-        """Does a DELETE request to /product_families/{product_family_id}/coupons/{coupon_id}.json.
-
-        You can archive a Coupon via the API with the archive method.
-        Archiving makes that Coupon unavailable for future use, but allows it
-        to remain attached and functional on existing Subscriptions that are
-        using it.
-        The `archived_at` date and time will be assigned.
-
-        Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the coupon belongs
-            coupon_id (int): The Chargify id of the coupon
-
-        Returns:
-            CouponResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/product_families/{product_family_id}/coupons/{coupon_id}.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('product_family_id')
-                            .value(product_family_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('coupon_id')
-                            .value(coupon_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
             .auth(Single('global'))
         ).response(
             ResponseHandler()
@@ -702,131 +402,6 @@ class CouponsController(BaseController):
             .deserialize_into(CouponUsage.from_dictionary)
         ).execute()
 
-    def validate_coupon(self,
-                        code,
-                        product_family_id=None):
-        """Does a GET request to /coupons/validate.json.
-
-        You can verify if a specific coupon code is valid using the `validate`
-        method. This method is useful for validating coupon codes that are
-        entered by a customer. If the coupon is found and is valid, the coupon
-        will be returned with a 200 status code.
-        If the coupon is invalid, the status code will be 404 and the response
-        will say why it is invalid. If the coupon is valid, the status code
-        will be 200 and the coupon will be returned. The following reasons for
-        invalidity are supported:
-        + Coupon not found
-        + Coupon is invalid
-        + Coupon expired
-        If you have more than one product family and if the coupon you are
-        validating does not belong to the first product family in your site,
-        then you will need to specify the product family, either in the url or
-        as a query string param. This can be done by supplying the id or the
-        handle in the `handle:my-family` format.
-        Eg.
-        ```
-        https://<subdomain>.chargify.com/product_families/handle:<product_famil
-        y_handle>/coupons/validate.<format>?code=<coupon_code>
-        ```
-        Or:
-        ```
-        https://<subdomain>.chargify.com/coupons/validate.<format>?code=<coupon
-        _code>&product_family_id=<id>
-        ```
-
-        Args:
-            code (str): The code of the coupon
-            product_family_id (int, optional): The Chargify id of the product
-                family to which the coupon belongs
-
-        Returns:
-            CouponResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/coupons/validate.json')
-            .http_method(HttpMethodEnum.GET)
-            .query_param(Parameter()
-                         .key('code')
-                         .value(code)
-                         .is_required(True))
-            .query_param(Parameter()
-                         .key('product_family_id')
-                         .value(product_family_id))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CouponResponse.from_dictionary)
-            .local_error('404', 'Not Found', SingleStringErrorResponseException)
-        ).execute()
-
-    def update_coupon_currency_prices(self,
-                                      coupon_id,
-                                      body=None):
-        """Does a PUT request to /coupons/{coupon_id}/currency_prices.json.
-
-        This endpoint allows you to create and/or update currency prices for
-        an existing coupon. Multiple prices can be created or updated in a
-        single request but each of the currencies must be defined on the site
-        level already and the coupon must be an amount-based coupon, not
-        percentage.
-        Currency pricing for coupons must mirror the setup of the primary
-        coupon pricing - if the primary coupon is percentage based, you will
-        not be able to define pricing in non-primary currencies.
-
-        Args:
-            coupon_id (int): The Chargify id of the coupon
-            body (CouponCurrencyRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            CouponCurrencyResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/coupons/{coupon_id}/currency_prices.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('coupon_id')
-                            .value(coupon_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CouponCurrencyResponse.from_dictionary)
-        ).execute()
-
     def create_coupon_subcodes(self,
                                coupon_id,
                                body=None):
@@ -913,6 +488,106 @@ class CouponsController(BaseController):
             .deserialize_into(CouponSubcodesResponse.from_dictionary)
         ).execute()
 
+    def read_coupon_by_code(self,
+                            product_family_id=None,
+                            code=None):
+        """Does a GET request to /coupons/find.json.
+
+        You can search for a coupon via the API with the find method. By
+        passing a code parameter, the find will attempt to locate a coupon
+        that matches that code. If no coupon is found, a 404 is returned.
+        If you have more than one product family and if the coupon you are
+        trying to find does not belong to the default product family in your
+        site, then you will need to specify (either in the url or as a query
+        string param) the product family id.
+
+        Args:
+            product_family_id (int, optional): The Chargify id of the product
+                family to which the coupon belongs
+            code (str, optional): The code of the coupon
+
+        Returns:
+            CouponResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/coupons/find.json')
+            .http_method(HttpMethodEnum.GET)
+            .query_param(Parameter()
+                         .key('product_family_id')
+                         .value(product_family_id))
+            .query_param(Parameter()
+                         .key('code')
+                         .value(code))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CouponResponse.from_dictionary)
+        ).execute()
+
+    def archive_coupon(self,
+                       product_family_id,
+                       coupon_id):
+        """Does a DELETE request to /product_families/{product_family_id}/coupons/{coupon_id}.json.
+
+        You can archive a Coupon via the API with the archive method.
+        Archiving makes that Coupon unavailable for future use, but allows it
+        to remain attached and functional on existing Subscriptions that are
+        using it.
+        The `archived_at` date and time will be assigned.
+
+        Args:
+            product_family_id (int): The Chargify id of the product family to
+                which the coupon belongs
+            coupon_id (int): The Chargify id of the coupon
+
+        Returns:
+            CouponResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/product_families/{product_family_id}/coupons/{coupon_id}.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('product_family_id')
+                            .value(product_family_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('coupon_id')
+                            .value(coupon_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CouponResponse.from_dictionary)
+        ).execute()
+
     def list_coupon_subcodes(self,
                              options=dict()):
         """Does a GET request to /coupons/{coupon_id}/codes.json.
@@ -979,6 +654,133 @@ class CouponsController(BaseController):
             .deserialize_into(CouponSubcodes.from_dictionary)
         ).execute()
 
+    def read_coupon(self,
+                    product_family_id,
+                    coupon_id):
+        """Does a GET request to /product_families/{product_family_id}/coupons/{coupon_id}.json.
+
+        You can retrieve the Coupon via the API with the Show method. You must
+        identify the Coupon in this call by the ID parameter that Chargify
+        assigns.
+        If instead you would like to find a Coupon using a Coupon code, see
+        the Coupon Find method.
+        When fetching a coupon, if you have defined multiple currencies at the
+        site level, you can optionally pass the `?currency_prices=true` query
+        param to include an array of currency price data in the response.
+        If the coupon is set to `use_site_exchange_rate: true`, it will return
+        pricing based on the current exchange rate. If the flag is set to
+        false, it will return all of the defined prices for each currency.
+
+        Args:
+            product_family_id (int): The Chargify id of the product family to
+                which the coupon belongs
+            coupon_id (int): The Chargify id of the coupon
+
+        Returns:
+            CouponResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/product_families/{product_family_id}/coupons/{coupon_id}.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('product_family_id')
+                            .value(product_family_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('coupon_id')
+                            .value(coupon_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CouponResponse.from_dictionary)
+        ).execute()
+
+    def validate_coupon(self,
+                        code,
+                        product_family_id=None):
+        """Does a GET request to /coupons/validate.json.
+
+        You can verify if a specific coupon code is valid using the `validate`
+        method. This method is useful for validating coupon codes that are
+        entered by a customer. If the coupon is found and is valid, the coupon
+        will be returned with a 200 status code.
+        If the coupon is invalid, the status code will be 404 and the response
+        will say why it is invalid. If the coupon is valid, the status code
+        will be 200 and the coupon will be returned. The following reasons for
+        invalidity are supported:
+        + Coupon not found
+        + Coupon is invalid
+        + Coupon expired
+        If you have more than one product family and if the coupon you are
+        validating does not belong to the first product family in your site,
+        then you will need to specify the product family, either in the url or
+        as a query string param. This can be done by supplying the id or the
+        handle in the `handle:my-family` format.
+        Eg.
+        ```
+        https://<subdomain>.chargify.com/product_families/handle:<product_famil
+        y_handle>/coupons/validate.<format>?code=<coupon_code>
+        ```
+        Or:
+        ```
+        https://<subdomain>.chargify.com/coupons/validate.<format>?code=<coupon
+        _code>&product_family_id=<id>
+        ```
+
+        Args:
+            code (str): The code of the coupon
+            product_family_id (int, optional): The Chargify id of the product
+                family to which the coupon belongs
+
+        Returns:
+            CouponResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/coupons/validate.json')
+            .http_method(HttpMethodEnum.GET)
+            .query_param(Parameter()
+                         .key('code')
+                         .value(code)
+                         .is_required(True))
+            .query_param(Parameter()
+                         .key('product_family_id')
+                         .value(product_family_id))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CouponResponse.from_dictionary)
+            .local_error('404', 'Not Found', SingleStringErrorResponseException)
+        ).execute()
+
     def update_coupon_subcodes(self,
                                coupon_id,
                                body=None):
@@ -1032,6 +834,204 @@ class CouponsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponSubcodesResponse.from_dictionary)
+        ).execute()
+
+    def list_coupons_for_product_family(self,
+                                        options=dict()):
+        """Does a GET request to /product_families/{product_family_id}/coupons.json.
+
+        List coupons for a specific Product Family in a Site.
+        If the coupon is set to `use_site_exchange_rate: true`, it will return
+        pricing based on the current exchange rate. If the flag is set to
+        false, it will return all of the defined prices for each currency.
+
+        Args:
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    product_family_id -- int -- The Chargify id of the product
+                        family to which the coupon belongs
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 30.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    filter_date_field -- BasicDateField -- The type of filter
+                        you would like to apply to your search. Use in query
+                        `filter[date_field]=created_at`.
+                    filter_end_date -- date -- The end date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns coupons with a timestamp up to and including
+                        11:59:59PM in your site’s time zone on the date
+                        specified. Use in query
+                        `filter[date_field]=2011-12-15`.
+                    filter_end_datetime -- datetime -- The end date and time
+                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns coupons with a timestamp at or
+                        before exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of end_date. Use in query
+                        `?filter[end_datetime]=2011-12-1T10:15:30+01:00`.
+                    filter_start_date -- date -- The start date (format
+                        YYYY-MM-DD) with which to filter the date_field.
+                        Returns coupons with a timestamp at or after midnight
+                        (12:00:00 AM) in your site’s time zone on the date
+                        specified. Use in query
+                        `filter[start_date]=2011-12-17`.
+                    filter_start_datetime -- datetime -- The start date and
+                        time (format YYYY-MM-DD HH:MM:SS) with which to filter
+                        the date_field. Returns coupons with a timestamp at or
+                        after exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date. Use in query
+                        `filter[start_datetime]=2011-12-19T10:15:30+01:00`.
+                    filter_ids -- List[int] -- Allows fetching coupons with
+                        matching id based on provided values. Use in query
+                        `filter[ids]=1,2,3`.
+                    filter_codes -- List[str] -- Allows fetching coupons with
+                        matching codes based on provided values. Use in query
+                        `filter[codes]=free,free_trial`.
+                    currency_prices -- bool -- When fetching coupons, if you
+                        have defined multiple currencies at the site level,
+                        you can optionally pass the `?currency_prices=true`
+                        query param to include an array of currency price data
+                        in the response. Use in query `currency_prices=true`.
+                    filter_use_site_exchange_rate -- bool -- Allows fetching
+                        coupons with matching use_site_exchange_rate based on
+                        provided value. Use in query
+                        `filter[use_site_exchange_rate]=true`.
+
+        Returns:
+            List[CouponResponse]: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/product_families/{product_family_id}/coupons.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('product_family_id')
+                            .value(options.get('product_family_id', None))
+                            .is_required(True)
+                            .should_encode(True))
+            .query_param(Parameter()
+                         .key('page')
+                         .value(options.get('page', None)))
+            .query_param(Parameter()
+                         .key('per_page')
+                         .value(options.get('per_page', None)))
+            .query_param(Parameter()
+                         .key('filter[date_field]')
+                         .value(options.get('filter_date_field', None)))
+            .query_param(Parameter()
+                         .key('filter[end_date]')
+                         .value(options.get('filter_end_date', None)))
+            .query_param(Parameter()
+                         .key('filter[end_datetime]')
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_end_datetime', None))))
+            .query_param(Parameter()
+                         .key('filter[start_date]')
+                         .value(options.get('filter_start_date', None)))
+            .query_param(Parameter()
+                         .key('filter[start_datetime]')
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_start_datetime', None))))
+            .query_param(Parameter()
+                         .key('filter[ids]')
+                         .value(options.get('filter_ids', None)))
+            .query_param(Parameter()
+                         .key('filter[codes]')
+                         .value(options.get('filter_codes', None)))
+            .query_param(Parameter()
+                         .key('currency_prices')
+                         .value(options.get('currency_prices', None)))
+            .query_param(Parameter()
+                         .key('filter[use_site_exchange_rate]')
+                         .value(options.get('filter_use_site_exchange_rate', None)))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .array_serialization_format(SerializationFormats.CSV)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CouponResponse.from_dictionary)
+        ).execute()
+
+    def update_coupon_currency_prices(self,
+                                      coupon_id,
+                                      body=None):
+        """Does a PUT request to /coupons/{coupon_id}/currency_prices.json.
+
+        This endpoint allows you to create and/or update currency prices for
+        an existing coupon. Multiple prices can be created or updated in a
+        single request but each of the currencies must be defined on the site
+        level already and the coupon must be an amount-based coupon, not
+        percentage.
+        Currency pricing for coupons must mirror the setup of the primary
+        coupon pricing - if the primary coupon is percentage based, you will
+        not be able to define pricing in non-primary currencies.
+
+        Args:
+            coupon_id (int): The Chargify id of the coupon
+            body (CouponCurrencyRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            CouponCurrencyResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/coupons/{coupon_id}/currency_prices.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('coupon_id')
+                            .value(coupon_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CouponCurrencyResponse.from_dictionary)
         ).execute()
 
     def delete_coupon_subcode(self,

@@ -11,9 +11,9 @@ from advancedbilling.api_helper import APIHelper
 import advancedbilling.exceptions.api_exception
 
 
-class ErrorMapResponseException(advancedbilling.exceptions.api_exception.APIException):
+class ErrorStringMapResponseException(advancedbilling.exceptions.api_exception.APIException):
     def __init__(self, reason, response):
-        """Constructor for the ErrorMapResponseException class
+        """Constructor for the ErrorStringMapResponseException class
 
         Args:
             reason (string): The reason (or error message) for the Exception
@@ -21,7 +21,7 @@ class ErrorMapResponseException(advancedbilling.exceptions.api_exception.APIExce
             response (HttpResponse): The HttpResponse of the API call.
 
         """
-        super(ErrorMapResponseException, self).__init__(reason, response)
+        super(ErrorStringMapResponseException, self).__init__(reason, response)
         dictionary = APIHelper.json_deserialize(self.response.text)
         if isinstance(dictionary, dict):
             self.unbox(dictionary)

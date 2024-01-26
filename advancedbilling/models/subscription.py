@@ -7,11 +7,11 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.bank_account_payment_profile import BankAccountPaymentProfile
+from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
 from advancedbilling.models.customer import Customer
-from advancedbilling.models.payment_profile import PaymentProfile
 from advancedbilling.models.prepaid_configuration import PrepaidConfiguration
 from advancedbilling.models.product import Product
-from advancedbilling.models.subscription_bank_account import SubscriptionBankAccount
 from advancedbilling.models.subscription_included_coupon import SubscriptionIncludedCoupon
 
 
@@ -155,9 +155,10 @@ class Subscription(object):
             options are - `remittance`, `automatic`, `prepaid`.
         customer (Customer): TODO: type description here.
         product (Product): TODO: type description here.
-        credit_card (PaymentProfile): TODO: type description here.
+        credit_card (CreditCardPaymentProfile): TODO: type description here.
         group (NestedSubscriptionGroup | None): TODO: type description here.
-        bank_account (SubscriptionBankAccount): TODO: type description here.
+        bank_account (BankAccountPaymentProfile): TODO: type description
+            here.
         payment_type (str): The payment profile type for the active profile on
             file.
         referral_code (str): The subscription's unique code that can be given
@@ -648,12 +649,12 @@ class Subscription(object):
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
         customer = Customer.from_dictionary(dictionary.get('customer')) if 'customer' in dictionary.keys() else APIHelper.SKIP
         product = Product.from_dictionary(dictionary.get('product')) if 'product' in dictionary.keys() else APIHelper.SKIP
-        credit_card = PaymentProfile.from_dictionary(dictionary.get('credit_card')) if 'credit_card' in dictionary.keys() else APIHelper.SKIP
+        credit_card = CreditCardPaymentProfile.from_dictionary(dictionary.get('credit_card')) if 'credit_card' in dictionary.keys() else APIHelper.SKIP
         if 'group' in dictionary.keys():
             group = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionGroup2'), dictionary.get('group'), False) if dictionary.get('group') is not None else None
         else:
             group = APIHelper.SKIP
-        bank_account = SubscriptionBankAccount.from_dictionary(dictionary.get('bank_account')) if 'bank_account' in dictionary.keys() else APIHelper.SKIP
+        bank_account = BankAccountPaymentProfile.from_dictionary(dictionary.get('bank_account')) if 'bank_account' in dictionary.keys() else APIHelper.SKIP
         payment_type = dictionary.get("payment_type") if "payment_type" in dictionary.keys() else APIHelper.SKIP
         referral_code = dictionary.get("referral_code") if "referral_code" in dictionary.keys() else APIHelper.SKIP
         next_product_id = dictionary.get("next_product_id") if "next_product_id" in dictionary.keys() else APIHelper.SKIP
