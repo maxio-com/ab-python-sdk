@@ -1,12 +1,11 @@
-import pytest
 from os import getenv
 
+import pytest
 from apimatic_core.exceptions.auth_validation_exception import AuthValidationException
 
 from advancedbilling.advanced_billing_client import AdvancedBillingClient
 from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.models.site_response import SiteResponse
-
 from tests.base import TestBase
 
 
@@ -41,3 +40,10 @@ class TestAuthorization(TestBase):
         result = self.client.sites.read_site()
 
         assert isinstance(result, SiteResponse)
+        site = result.site
+        assert 'python-sdk' == site.subdomain
+        assert 'Python SDK Env' == site.name
+        assert 'USD' == site.currency
+        assert True == site.test
+        assert 4502 == site.id
+        assert 722159 == site.seller_id

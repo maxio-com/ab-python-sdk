@@ -2,7 +2,20 @@ version: "3.4"
 
 services:
   ab:
-    build: .
-    env_file: .env
+    env_file:
+      - ./.env
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - SUBDOMAIN=${SUBDOMAIN}
+        - DOMAIN=${DOMAIN}
+        - BASIC_AUTH_USERNAME=${BASIC_AUTH_USERNAME}
+        - BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD}
     volumes:
       - .:/app
+    environment:
+      - SUBDOMAIN=${SUBDOMAIN}
+      - DOMAIN=${DOMAIN}
+      - BASIC_AUTH_USERNAME=${BASIC_AUTH_USERNAME}
+      - BASIC_AUTH_PASSWORD=${BASIC_AUTH_PASSWORD}
