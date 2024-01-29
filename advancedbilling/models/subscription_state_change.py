@@ -50,6 +50,7 @@ class SubscriptionStateChange(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -73,6 +74,7 @@ class SubscriptionStateChange(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.previous_subscription_state, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.new_subscription_state, type_callable=lambda value: isinstance(value, str))

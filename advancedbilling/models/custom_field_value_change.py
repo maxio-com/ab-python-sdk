@@ -75,6 +75,7 @@ class CustomFieldValueChange(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -108,6 +109,7 @@ class CustomFieldValueChange(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.event_type, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.metafield_name, type_callable=lambda value: isinstance(value, str)) \

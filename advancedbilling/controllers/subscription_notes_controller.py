@@ -83,45 +83,6 @@ class SubscriptionNotesController(BaseController):
             .deserialize_into(SubscriptionNoteResponse.from_dictionary)
         ).execute()
 
-    def delete_subscription_note(self,
-                                 subscription_id,
-                                 note_id):
-        """Does a DELETE request to /subscriptions/{subscription_id}/notes/{note_id}.json.
-
-        Use the following method to delete a note for a Subscription.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            note_id (int): The Chargify id of the note
-
-        Returns:
-            void: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/notes/{note_id}.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('note_id')
-                            .value(note_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('global'))
-        ).execute()
-
     def list_subscription_notes(self,
                                 options=dict()):
         """Does a GET request to /subscriptions/{subscription_id}/notes.json.
@@ -289,4 +250,43 @@ class SubscriptionNotesController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionNoteResponse.from_dictionary)
+        ).execute()
+
+    def delete_subscription_note(self,
+                                 subscription_id,
+                                 note_id):
+        """Does a DELETE request to /subscriptions/{subscription_id}/notes/{note_id}.json.
+
+        Use the following method to delete a note for a Subscription.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            note_id (int): The Chargify id of the note
+
+        Returns:
+            void: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/notes/{note_id}.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('note_id')
+                            .value(note_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('global'))
         ).execute()

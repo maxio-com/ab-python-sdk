@@ -148,11 +148,11 @@ class Subscription(object):
             subscriptions can now have more than one coupon.
         snap_day (str): The day of the month that the subscription will charge
             according to calendar billing rules, if used.
-        payment_collection_method (PaymentCollectionMethod): The type of
-            payment collection to be used in the subscription. For legacy
-            Statements Architecture valid options are - `invoice`,
-            `automatic`. For current Relationship Invoicing Architecture valid
-            options are - `remittance`, `automatic`, `prepaid`.
+        payment_collection_method (CollectionMethod): The type of payment
+            collection to be used in the subscription. For legacy Statements
+            Architecture valid options are - `invoice`, `automatic`. For
+            current Relationship Invoicing Architecture valid options are -
+            `remittance`, `automatic`, `prepaid`.
         customer (Customer): TODO: type description here.
         product (Product): TODO: type description here.
         credit_card (CreditCardPaymentProfile): TODO: type description here.
@@ -602,6 +602,7 @@ class Subscription(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 

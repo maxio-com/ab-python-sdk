@@ -24,7 +24,12 @@ class Metafield(object):
             scope attributes will override the existing settings.
         data_count (int): the amount of subscriptions this metafield has been
             applied to in Chargify
-        input_type (str): TODO: type description here.
+        input_type (MetafieldInput): Indicates how data should be added to the
+            metafield. For example, a text type is just a string, so a given
+            metafield of this type can have any value attached. On the other
+            hand, dropdown and radio have a set of allowed values that can be
+            input, and appear differently on a Public Signup Page. Defaults to
+            'text'
         enum (str | List[str] | None): TODO: type description here.
 
     """
@@ -90,6 +95,7 @@ class Metafield(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 

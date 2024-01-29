@@ -140,7 +140,7 @@ class BankAccountPaymentProfile(object):
                  bank_name=APIHelper.SKIP,
                  bank_account_type='checking',
                  bank_account_holder_type=APIHelper.SKIP,
-                 payment_type='credit_card',
+                 payment_type=APIHelper.SKIP,
                  verified=False,
                  site_gateway_setting_id=APIHelper.SKIP,
                  gateway_handle=APIHelper.SKIP):
@@ -180,7 +180,8 @@ class BankAccountPaymentProfile(object):
         self.bank_account_type = bank_account_type 
         if bank_account_holder_type is not APIHelper.SKIP:
             self.bank_account_holder_type = bank_account_holder_type 
-        self.payment_type = payment_type 
+        if payment_type is not APIHelper.SKIP:
+            self.payment_type = payment_type 
         self.verified = verified 
         if site_gateway_setting_id is not APIHelper.SKIP:
             self.site_gateway_setting_id = site_gateway_setting_id 
@@ -201,6 +202,7 @@ class BankAccountPaymentProfile(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -223,7 +225,7 @@ class BankAccountPaymentProfile(object):
         bank_name = dictionary.get("bank_name") if dictionary.get("bank_name") else APIHelper.SKIP
         bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else 'checking'
         bank_account_holder_type = dictionary.get("bank_account_holder_type") if dictionary.get("bank_account_holder_type") else APIHelper.SKIP
-        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else 'credit_card'
+        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         verified = dictionary.get("verified") if dictionary.get("verified") else False
         site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if dictionary.get("site_gateway_setting_id") else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
@@ -264,6 +266,7 @@ class BankAccountPaymentProfile(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.masked_bank_routing_number, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.masked_bank_account_number, type_callable=lambda value: isinstance(value, str))

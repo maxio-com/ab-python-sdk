@@ -54,11 +54,6 @@ class ApplyCreditNoteEventData(object):
     }
 
     _optionals = [
-        'uid',
-        'credit_note_number',
-        'credit_note_uid',
-        'original_amount',
-        'applied_amount',
         'transaction_time',
         'memo',
         'role',
@@ -67,11 +62,11 @@ class ApplyCreditNoteEventData(object):
     ]
 
     def __init__(self,
-                 uid=APIHelper.SKIP,
-                 credit_note_number=APIHelper.SKIP,
-                 credit_note_uid=APIHelper.SKIP,
-                 original_amount=APIHelper.SKIP,
-                 applied_amount=APIHelper.SKIP,
+                 uid=None,
+                 credit_note_number=None,
+                 credit_note_uid=None,
+                 original_amount=None,
+                 applied_amount=None,
                  transaction_time=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
                  role=APIHelper.SKIP,
@@ -80,16 +75,11 @@ class ApplyCreditNoteEventData(object):
         """Constructor for the ApplyCreditNoteEventData class"""
 
         # Initialize members of the class
-        if uid is not APIHelper.SKIP:
-            self.uid = uid 
-        if credit_note_number is not APIHelper.SKIP:
-            self.credit_note_number = credit_note_number 
-        if credit_note_uid is not APIHelper.SKIP:
-            self.credit_note_uid = credit_note_uid 
-        if original_amount is not APIHelper.SKIP:
-            self.original_amount = original_amount 
-        if applied_amount is not APIHelper.SKIP:
-            self.applied_amount = applied_amount 
+        self.uid = uid 
+        self.credit_note_number = credit_note_number 
+        self.credit_note_uid = credit_note_uid 
+        self.original_amount = original_amount 
+        self.applied_amount = applied_amount 
         if transaction_time is not APIHelper.SKIP:
             self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
         if memo is not APIHelper.SKIP:
@@ -115,15 +105,16 @@ class ApplyCreditNoteEventData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
-        credit_note_number = dictionary.get("credit_note_number") if dictionary.get("credit_note_number") else APIHelper.SKIP
-        credit_note_uid = dictionary.get("credit_note_uid") if dictionary.get("credit_note_uid") else APIHelper.SKIP
-        original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
-        applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
+        uid = dictionary.get("uid") if dictionary.get("uid") else None
+        credit_note_number = dictionary.get("credit_note_number") if dictionary.get("credit_note_number") else None
+        credit_note_uid = dictionary.get("credit_note_uid") if dictionary.get("credit_note_uid") else None
+        original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else None
+        applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
         transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         role = dictionary.get("role") if dictionary.get("role") else APIHelper.SKIP
@@ -158,10 +149,19 @@ class ApplyCreditNoteEventData(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.uid, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.credit_note_number, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.credit_note_uid, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.original_amount, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('uid'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('credit_note_number'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('credit_note_uid'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('original_amount'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str))

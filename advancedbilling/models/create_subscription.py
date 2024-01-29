@@ -44,11 +44,11 @@ class CreateSubscription(object):
             subscriptions can now have more than one coupon.
         coupon_codes (List[str]): An array for all the coupons attached to the
             subscription.
-        payment_collection_method (PaymentCollectionMethod): The type of
-            payment collection to be used in the subscription. For legacy
-            Statements Architecture valid options are - `invoice`,
-            `automatic`. For current Relationship Invoicing Architecture valid
-            options are - `remittance`, `automatic`, `prepaid`.
+        payment_collection_method (CollectionMethod): The type of payment
+            collection to be used in the subscription. For legacy Statements
+            Architecture valid options are - `invoice`, `automatic`. For
+            current Relationship Invoicing Architecture valid options are -
+            `remittance`, `automatic`, `prepaid`.
         receives_invoice_emails (str): (Optional) Default: True - Whether or
             not this subscription is set to receive emails related to this
             subscription.
@@ -480,6 +480,7 @@ class CreateSubscription(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 

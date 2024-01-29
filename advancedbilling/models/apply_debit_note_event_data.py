@@ -35,29 +35,18 @@ class ApplyDebitNoteEventData(object):
         "applied_amount": 'applied_amount'
     }
 
-    _optionals = [
-        'debit_note_number',
-        'debit_note_uid',
-        'original_amount',
-        'applied_amount',
-    ]
-
     def __init__(self,
-                 debit_note_number=APIHelper.SKIP,
-                 debit_note_uid=APIHelper.SKIP,
-                 original_amount=APIHelper.SKIP,
-                 applied_amount=APIHelper.SKIP):
+                 debit_note_number=None,
+                 debit_note_uid=None,
+                 original_amount=None,
+                 applied_amount=None):
         """Constructor for the ApplyDebitNoteEventData class"""
 
         # Initialize members of the class
-        if debit_note_number is not APIHelper.SKIP:
-            self.debit_note_number = debit_note_number 
-        if debit_note_uid is not APIHelper.SKIP:
-            self.debit_note_uid = debit_note_uid 
-        if original_amount is not APIHelper.SKIP:
-            self.original_amount = original_amount 
-        if applied_amount is not APIHelper.SKIP:
-            self.applied_amount = applied_amount 
+        self.debit_note_number = debit_note_number 
+        self.debit_note_uid = debit_note_uid 
+        self.original_amount = original_amount 
+        self.applied_amount = applied_amount 
 
     @classmethod
     def from_dictionary(cls,
@@ -73,14 +62,15 @@ class ApplyDebitNoteEventData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        debit_note_number = dictionary.get("debit_note_number") if dictionary.get("debit_note_number") else APIHelper.SKIP
-        debit_note_uid = dictionary.get("debit_note_uid") if dictionary.get("debit_note_uid") else APIHelper.SKIP
-        original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
-        applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
+        debit_note_number = dictionary.get("debit_note_number") if dictionary.get("debit_note_number") else None
+        debit_note_uid = dictionary.get("debit_note_uid") if dictionary.get("debit_note_uid") else None
+        original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else None
+        applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
         # Return an object of this model
         return cls(debit_note_number,
                    debit_note_uid,
@@ -100,10 +90,17 @@ class ApplyDebitNoteEventData(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.debit_note_number, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.debit_note_uid, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.original_amount, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('debit_note_number'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('debit_note_uid'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('original_amount'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str))

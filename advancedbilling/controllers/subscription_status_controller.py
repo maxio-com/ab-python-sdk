@@ -20,8 +20,8 @@ from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.subscription_response import SubscriptionResponse
 from advancedbilling.models.delayed_cancellation_response import DelayedCancellationResponse
 from advancedbilling.models.renewal_preview_response import RenewalPreviewResponse
-from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
+from advancedbilling.exceptions.api_exception import APIException
 
 
 class SubscriptionStatusController(BaseController):
@@ -29,6 +29,51 @@ class SubscriptionStatusController(BaseController):
     """A Controller to access Endpoints in the advancedbilling API."""
     def __init__(self, config):
         super(SubscriptionStatusController, self).__init__(config)
+
+    def retry_subscription(self,
+                           subscription_id):
+        """Does a PUT request to /subscriptions/{subscription_id}/retry.json.
+
+        Chargify offers the ability to retry collecting the balance due on a
+        past due Subscription without waiting for the next scheduled attempt.
+        ## Successful Reactivation
+        The response will be `200 OK` with the updated Subscription.
+        ## Failed Reactivation
+        The response will be `422 "Unprocessable Entity`.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+
+        Returns:
+            SubscriptionResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/retry.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SubscriptionResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
 
     def cancel_subscription(self,
                             subscription_id,
@@ -175,150 +220,6 @@ class SubscriptionStatusController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SubscriptionResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def initiate_delayed_cancellation(self,
-                                      subscription_id,
-                                      body=None):
-        """Does a POST request to /subscriptions/{subscription_id}/delayed_cancel.json.
-
-        Chargify offers the ability to cancel a subscription at the end of the
-        current billing period. This period is set by its current product.
-        Requesting to cancel the subscription at the end of the period sets
-        the `cancel_at_end_of_period` flag to true.
-        Note that you cannot set `cancel_at_end_of_period` at subscription
-        creation, or if the subscription is past due.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            body (CancellationRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            DelayedCancellationResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/delayed_cancel.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DelayedCancellationResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-        ).execute()
-
-    def stop_delayed_cancellation(self,
-                                  subscription_id):
-        """Does a DELETE request to /subscriptions/{subscription_id}/delayed_cancel.json.
-
-        Removing the delayed cancellation on a subscription will ensure that
-        it doesn't get canceled at the end of the period that it is in. The
-        request will reset the `cancel_at_end_of_period` flag to `false`.
-        This endpoint is idempotent. If the subscription was not set to cancel
-        in the future, removing the delayed cancellation has no effect and the
-        call will be successful.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-
-        Returns:
-            DelayedCancellationResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/delayed_cancel.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DelayedCancellationResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-        ).execute()
-
-    def retry_subscription(self,
-                           subscription_id):
-        """Does a PUT request to /subscriptions/{subscription_id}/retry.json.
-
-        Chargify offers the ability to retry collecting the balance due on a
-        past due Subscription without waiting for the next scheduled attempt.
-        ## Successful Reactivation
-        The response will be `200 OK` with the updated Subscription.
-        ## Failed Reactivation
-        The response will be `422 "Unprocessable Entity`.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-
-        Returns:
-            SubscriptionResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/retry.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
             .auth(Single('global'))
         ).response(
             ResponseHandler()
@@ -568,6 +469,105 @@ class SubscriptionStatusController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def initiate_delayed_cancellation(self,
+                                      subscription_id,
+                                      body=None):
+        """Does a POST request to /subscriptions/{subscription_id}/delayed_cancel.json.
+
+        Chargify offers the ability to cancel a subscription at the end of the
+        current billing period. This period is set by its current product.
+        Requesting to cancel the subscription at the end of the period sets
+        the `cancel_at_end_of_period` flag to true.
+        Note that you cannot set `cancel_at_end_of_period` at subscription
+        creation, or if the subscription is past due.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            body (CancellationRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            DelayedCancellationResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/delayed_cancel.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DelayedCancellationResponse.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+        ).execute()
+
+    def stop_delayed_cancellation(self,
+                                  subscription_id):
+        """Does a DELETE request to /subscriptions/{subscription_id}/delayed_cancel.json.
+
+        Removing the delayed cancellation on a subscription will ensure that
+        it doesn't get canceled at the end of the period that it is in. The
+        request will reset the `cancel_at_end_of_period` flag to `false`.
+        This endpoint is idempotent. If the subscription was not set to cancel
+        in the future, removing the delayed cancellation has no effect and the
+        call will be successful.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+
+        Returns:
+            DelayedCancellationResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/delayed_cancel.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DelayedCancellationResponse.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def cancel_dunning(self,

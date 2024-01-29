@@ -237,6 +237,7 @@ class InvoiceLineItem(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 
@@ -301,6 +302,7 @@ class InvoiceLineItem(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return True
 

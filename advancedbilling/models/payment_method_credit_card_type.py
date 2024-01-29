@@ -27,18 +27,15 @@ class PaymentMethodCreditCardType(object):
     # Create a mapping from Model property names to API property names
     _names = {
         "card_brand": 'card_brand',
-        "card_expiration": 'card_expiration',
-        "last_four": 'last_four',
         "masked_card_number": 'masked_card_number',
-        "mtype": 'type'
+        "mtype": 'type',
+        "card_expiration": 'card_expiration',
+        "last_four": 'last_four'
     }
 
     _optionals = [
-        'card_brand',
         'card_expiration',
         'last_four',
-        'masked_card_number',
-        'mtype',
     ]
 
     _nullables = [
@@ -46,22 +43,20 @@ class PaymentMethodCreditCardType(object):
     ]
 
     def __init__(self,
-                 card_brand=APIHelper.SKIP,
+                 card_brand=None,
+                 masked_card_number=None,
+                 mtype='credit_card',
                  card_expiration=APIHelper.SKIP,
-                 last_four=APIHelper.SKIP,
-                 masked_card_number=APIHelper.SKIP,
-                 mtype='credit_card'):
+                 last_four=APIHelper.SKIP):
         """Constructor for the PaymentMethodCreditCardType class"""
 
         # Initialize members of the class
-        if card_brand is not APIHelper.SKIP:
-            self.card_brand = card_brand 
+        self.card_brand = card_brand 
         if card_expiration is not APIHelper.SKIP:
             self.card_expiration = card_expiration 
         if last_four is not APIHelper.SKIP:
             self.last_four = last_four 
-        if masked_card_number is not APIHelper.SKIP:
-            self.masked_card_number = masked_card_number 
+        self.masked_card_number = masked_card_number 
         self.mtype = mtype 
 
     @classmethod
@@ -78,21 +73,22 @@ class PaymentMethodCreditCardType(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        card_brand = dictionary.get("card_brand") if dictionary.get("card_brand") else APIHelper.SKIP
+        card_brand = dictionary.get("card_brand") if dictionary.get("card_brand") else None
+        masked_card_number = dictionary.get("masked_card_number") if dictionary.get("masked_card_number") else None
+        mtype = dictionary.get("type") if dictionary.get("type") else 'credit_card'
         card_expiration = dictionary.get("card_expiration") if dictionary.get("card_expiration") else APIHelper.SKIP
         last_four = dictionary.get("last_four") if "last_four" in dictionary.keys() else APIHelper.SKIP
-        masked_card_number = dictionary.get("masked_card_number") if dictionary.get("masked_card_number") else APIHelper.SKIP
-        mtype = dictionary.get("type") if dictionary.get("type") else 'credit_card'
         # Return an object of this model
         return cls(card_brand,
-                   card_expiration,
-                   last_four,
                    masked_card_number,
-                   mtype)
+                   mtype,
+                   card_expiration,
+                   last_four)
 
     @classmethod
     def validate(cls, dictionary):
@@ -107,10 +103,15 @@ class PaymentMethodCreditCardType(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.card_brand, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.masked_card_number, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.mtype, type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('card_brand'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('masked_card_number'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('type'), type_callable=lambda value: isinstance(value, str))

@@ -56,6 +56,7 @@ class DunningStepReached(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -81,6 +82,7 @@ class DunningStepReached(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.dunner, type_callable=lambda value: DunnerData.validate(value)) \
                 and APIHelper.is_valid_type(value=dictionary.current_step, type_callable=lambda value: DunningStepData.validate(value)) \

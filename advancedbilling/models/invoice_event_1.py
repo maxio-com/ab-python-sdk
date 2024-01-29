@@ -84,6 +84,7 @@ class InvoiceEvent1(object):
             was a prepayment or not
         is_advance_invoice (bool): If true, the invoice is an advance
             invoice.
+        reason (str): The reason for the void.
 
     """
 
@@ -116,7 +117,8 @@ class InvoiceEvent1(object):
         "refund_amount": 'refund_amount',
         "refund_id": 'refund_id',
         "prepayment": 'prepayment',
-        "is_advance_invoice": 'is_advance_invoice'
+        "is_advance_invoice": 'is_advance_invoice',
+        "reason": 'reason'
     }
 
     _optionals = [
@@ -148,6 +150,7 @@ class InvoiceEvent1(object):
         'refund_id',
         'prepayment',
         'is_advance_invoice',
+        'reason',
     ]
 
     def __init__(self,
@@ -178,7 +181,8 @@ class InvoiceEvent1(object):
                  refund_amount=APIHelper.SKIP,
                  refund_id=APIHelper.SKIP,
                  prepayment=APIHelper.SKIP,
-                 is_advance_invoice=APIHelper.SKIP):
+                 is_advance_invoice=APIHelper.SKIP,
+                 reason=APIHelper.SKIP):
         """Constructor for the InvoiceEvent1 class"""
 
         # Initialize members of the class
@@ -238,6 +242,8 @@ class InvoiceEvent1(object):
             self.prepayment = prepayment 
         if is_advance_invoice is not APIHelper.SKIP:
             self.is_advance_invoice = is_advance_invoice 
+        if reason is not APIHelper.SKIP:
+            self.reason = reason 
 
     @classmethod
     def from_dictionary(cls,
@@ -254,6 +260,7 @@ class InvoiceEvent1(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 
@@ -290,6 +297,7 @@ class InvoiceEvent1(object):
         refund_id = dictionary.get("refund_id") if dictionary.get("refund_id") else APIHelper.SKIP
         prepayment = dictionary.get("prepayment") if "prepayment" in dictionary.keys() else APIHelper.SKIP
         is_advance_invoice = dictionary.get("is_advance_invoice") if "is_advance_invoice" in dictionary.keys() else APIHelper.SKIP
+        reason = dictionary.get("reason") if dictionary.get("reason") else APIHelper.SKIP
         # Return an object of this model
         return cls(uid,
                    credit_note_number,
@@ -318,4 +326,5 @@ class InvoiceEvent1(object):
                    refund_amount,
                    refund_id,
                    prepayment,
-                   is_advance_invoice)
+                   is_advance_invoice,
+                   reason)

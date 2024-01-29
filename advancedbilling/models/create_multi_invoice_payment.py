@@ -82,6 +82,7 @@ class CreateMultiInvoicePayment(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 
@@ -116,6 +117,7 @@ class CreateMultiInvoicePayment(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if isinstance(dictionary, cls):
             return UnionTypeLookUp.get('CreateMultiInvoicePaymentAmount').validate(dictionary.amount) \
                 and APIHelper.is_valid_type(value=dictionary.applications, type_callable=lambda value: CreateInvoicePaymentApplication.validate(value))

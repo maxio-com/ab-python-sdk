@@ -33,29 +33,18 @@ class VoidRemainderEventData(object):
         "transaction_time": 'transaction_time'
     }
 
-    _optionals = [
-        'credit_note_attributes',
-        'memo',
-        'applied_amount',
-        'transaction_time',
-    ]
-
     def __init__(self,
-                 credit_note_attributes=APIHelper.SKIP,
-                 memo=APIHelper.SKIP,
-                 applied_amount=APIHelper.SKIP,
-                 transaction_time=APIHelper.SKIP):
+                 credit_note_attributes=None,
+                 memo=None,
+                 applied_amount=None,
+                 transaction_time=None):
         """Constructor for the VoidRemainderEventData class"""
 
         # Initialize members of the class
-        if credit_note_attributes is not APIHelper.SKIP:
-            self.credit_note_attributes = credit_note_attributes 
-        if memo is not APIHelper.SKIP:
-            self.memo = memo 
-        if applied_amount is not APIHelper.SKIP:
-            self.applied_amount = applied_amount 
-        if transaction_time is not APIHelper.SKIP:
-            self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
+        self.credit_note_attributes = credit_note_attributes 
+        self.memo = memo 
+        self.applied_amount = applied_amount 
+        self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -71,14 +60,15 @@ class VoidRemainderEventData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        credit_note_attributes = CreditNote.from_dictionary(dictionary.get('credit_note_attributes')) if 'credit_note_attributes' in dictionary.keys() else APIHelper.SKIP
-        memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
-        applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
-        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else APIHelper.SKIP
+        credit_note_attributes = CreditNote.from_dictionary(dictionary.get('credit_note_attributes')) if dictionary.get('credit_note_attributes') else None
+        memo = dictionary.get("memo") if dictionary.get("memo") else None
+        applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
+        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else None
         # Return an object of this model
         return cls(credit_note_attributes,
                    memo,
@@ -98,10 +88,17 @@ class VoidRemainderEventData(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.credit_note_attributes, type_callable=lambda value: CreditNote.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.transaction_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('credit_note_attributes'), type_callable=lambda value: CreditNote.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('transaction_time'), type_callable=lambda value: isinstance(value, str))

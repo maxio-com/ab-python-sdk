@@ -50,8 +50,7 @@ class CreditNote(object):
             credit note has been partially applied, this field will not have a
             value until it has been fully applied.  The format is
             `"YYYY-MM-DD"`.
-        status (str): Current status of the credit note. Valid values:  * open
-            * applied
+        status (CreditNoteStatus): Current status of the credit note.
         currency (str): The ISO 4217 currency code (3 character string)
             representing the currency of the credit note amount fields.
         memo (str): The memo printed on credit note, which is a description of
@@ -260,6 +259,7 @@ class CreditNote(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -357,6 +357,7 @@ class CreditNote(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return True
 

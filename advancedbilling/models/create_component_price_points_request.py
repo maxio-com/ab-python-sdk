@@ -49,6 +49,7 @@ class CreateComponentPricePointsRequest(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 
@@ -71,6 +72,7 @@ class CreateComponentPricePointsRequest(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if isinstance(dictionary, cls):
             return UnionTypeLookUp.get('CreateComponentPricePointsRequestPricePoints').validate(dictionary.price_points)
 

@@ -60,6 +60,7 @@ class GroupTarget(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -83,6 +84,7 @@ class GroupTarget(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.mtype, type_callable=lambda value: GroupTargetType.validate(value))
 

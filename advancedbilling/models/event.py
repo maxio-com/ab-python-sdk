@@ -84,6 +84,7 @@ class Event(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 
@@ -118,6 +119,7 @@ class Event(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.id, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.key, type_callable=lambda value: isinstance(value, str)) \

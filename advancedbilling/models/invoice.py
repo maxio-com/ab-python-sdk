@@ -62,12 +62,13 @@ class Invoice(object):
             [Invoice
             Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
             171#line-item-breakdowns) for more.
-        role (str): TODO: type description here.
+        role (InvoiceRole): TODO: type description here.
         parent_invoice_id (int): TODO: type description here.
-        collection_method (str): The collection method of the invoice, which
-            is either "automatic" (tried and retried on an existing payment
-            method by Chargify) or "remittance" (payment must be remitted by
-            the customer or keyed in by the merchant).
+        collection_method (CollectionMethod): The type of payment collection
+            to be used in the subscription. For legacy Statements Architecture
+            valid options are - `invoice`, `automatic`. For current
+            Relationship Invoicing Architecture valid options are -
+            `remittance`, `automatic`, `prepaid`.
         payment_instructions (str): A message that is printed on the invoice
             when it is marked for remittance collection. It is intended to
             describe to the customer how they may make payment, and is
@@ -277,7 +278,7 @@ class Invoice(object):
                  status=APIHelper.SKIP,
                  role=APIHelper.SKIP,
                  parent_invoice_id=APIHelper.SKIP,
-                 collection_method=APIHelper.SKIP,
+                 collection_method='automatic',
                  payment_instructions=APIHelper.SKIP,
                  currency=APIHelper.SKIP,
                  consolidation_level=APIHelper.SKIP,
@@ -348,8 +349,7 @@ class Invoice(object):
             self.role = role 
         if parent_invoice_id is not APIHelper.SKIP:
             self.parent_invoice_id = parent_invoice_id 
-        if collection_method is not APIHelper.SKIP:
-            self.collection_method = collection_method 
+        self.collection_method = collection_method 
         if payment_instructions is not APIHelper.SKIP:
             self.payment_instructions = payment_instructions 
         if currency is not APIHelper.SKIP:
@@ -435,6 +435,7 @@ class Invoice(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -458,7 +459,7 @@ class Invoice(object):
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         role = dictionary.get("role") if dictionary.get("role") else APIHelper.SKIP
         parent_invoice_id = dictionary.get("parent_invoice_id") if "parent_invoice_id" in dictionary.keys() else APIHelper.SKIP
-        collection_method = dictionary.get("collection_method") if dictionary.get("collection_method") else APIHelper.SKIP
+        collection_method = dictionary.get("collection_method") if dictionary.get("collection_method") else 'automatic'
         payment_instructions = dictionary.get("payment_instructions") if dictionary.get("payment_instructions") else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP
@@ -589,6 +590,7 @@ class Invoice(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return True
 

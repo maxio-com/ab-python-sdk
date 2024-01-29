@@ -186,7 +186,7 @@ class CreatePaymentProfile(object):
     def __init__(self,
                  chargify_token=APIHelper.SKIP,
                  id=APIHelper.SKIP,
-                 payment_type='credit_card',
+                 payment_type=APIHelper.SKIP,
                  first_name=APIHelper.SKIP,
                  last_name=APIHelper.SKIP,
                  masked_card_number=APIHelper.SKIP,
@@ -223,7 +223,8 @@ class CreatePaymentProfile(object):
             self.chargify_token = chargify_token 
         if id is not APIHelper.SKIP:
             self.id = id 
-        self.payment_type = payment_type 
+        if payment_type is not APIHelper.SKIP:
+            self.payment_type = payment_type 
         if first_name is not APIHelper.SKIP:
             self.first_name = first_name 
         if last_name is not APIHelper.SKIP:
@@ -297,13 +298,14 @@ class CreatePaymentProfile(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
         chargify_token = dictionary.get("chargify_token") if dictionary.get("chargify_token") else APIHelper.SKIP
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else 'credit_card'
+        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         first_name = dictionary.get("first_name") if dictionary.get("first_name") else APIHelper.SKIP
         last_name = dictionary.get("last_name") if dictionary.get("last_name") else APIHelper.SKIP
         masked_card_number = dictionary.get("masked_card_number") if dictionary.get("masked_card_number") else APIHelper.SKIP

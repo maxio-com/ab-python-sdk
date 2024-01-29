@@ -64,7 +64,7 @@ class PaymentMethodNestedData(object):
     ]
 
     def __init__(self,
-                 mtype='apple_pay',
+                 mtype='Payment Method Nested Data',
                  masked_account_number=APIHelper.SKIP,
                  masked_routing_number=APIHelper.SKIP,
                  card_brand=APIHelper.SKIP,
@@ -114,11 +114,12 @@ class PaymentMethodNestedData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        mtype = dictionary.get("type") if dictionary.get("type") else 'apple_pay'
+        mtype = dictionary.get("type") if dictionary.get("type") else 'Payment Method Nested Data'
         masked_account_number = dictionary.get("masked_account_number") if dictionary.get("masked_account_number") else APIHelper.SKIP
         masked_routing_number = dictionary.get("masked_routing_number") if dictionary.get("masked_routing_number") else APIHelper.SKIP
         card_brand = dictionary.get("card_brand") if dictionary.get("card_brand") else APIHelper.SKIP

@@ -50,6 +50,7 @@ class PaymentRelatedEvents(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -73,6 +74,7 @@ class PaymentRelatedEvents(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.product_id, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.account_transaction_id, type_callable=lambda value: isinstance(value, int))

@@ -25,7 +25,8 @@ class CreateMetafield(object):
             metafield. For example, a text type is just a string, so a given
             metafield of this type can have any value attached. On the other
             hand, dropdown and radio have a set of allowed values that can be
-            input, and appear differently on a Public Signup Page.
+            input, and appear differently on a Public Signup Page. Defaults to
+            'text'
         enum (List[str]): Only applicable when input_type is radio or
             dropdown
 
@@ -49,7 +50,7 @@ class CreateMetafield(object):
     def __init__(self,
                  name=APIHelper.SKIP,
                  scope=APIHelper.SKIP,
-                 input_type='text',
+                 input_type=APIHelper.SKIP,
                  enum=APIHelper.SKIP):
         """Constructor for the CreateMetafield class"""
 
@@ -58,7 +59,8 @@ class CreateMetafield(object):
             self.name = name 
         if scope is not APIHelper.SKIP:
             self.scope = scope 
-        self.input_type = input_type 
+        if input_type is not APIHelper.SKIP:
+            self.input_type = input_type 
         if enum is not APIHelper.SKIP:
             self.enum = enum 
 
@@ -76,13 +78,14 @@ class CreateMetafield(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         scope = MetafieldScope.from_dictionary(dictionary.get('scope')) if 'scope' in dictionary.keys() else APIHelper.SKIP
-        input_type = dictionary.get("input_type") if dictionary.get("input_type") else 'text'
+        input_type = dictionary.get("input_type") if dictionary.get("input_type") else APIHelper.SKIP
         enum = dictionary.get("enum") if dictionary.get("enum") else APIHelper.SKIP
         # Return an object of this model
         return cls(name,
@@ -103,6 +106,7 @@ class CreateMetafield(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return True
 

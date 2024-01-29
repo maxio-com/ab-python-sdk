@@ -84,6 +84,7 @@ class PrepaidUsage(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -125,6 +126,7 @@ class PrepaidUsage(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.previous_unit_balance, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.previous_overage_unit_balance, type_callable=lambda value: isinstance(value, str)) \
