@@ -140,7 +140,7 @@ class CreditCardPaymentProfile(object):
                  billing_country=APIHelper.SKIP,
                  customer_vault_token=APIHelper.SKIP,
                  billing_address_2=APIHelper.SKIP,
-                 payment_type='credit_card',
+                 payment_type=APIHelper.SKIP,
                  disabled=APIHelper.SKIP,
                  chargify_token=APIHelper.SKIP,
                  site_gateway_setting_id=APIHelper.SKIP,
@@ -181,7 +181,8 @@ class CreditCardPaymentProfile(object):
             self.customer_vault_token = customer_vault_token 
         if billing_address_2 is not APIHelper.SKIP:
             self.billing_address_2 = billing_address_2 
-        self.payment_type = payment_type 
+        if payment_type is not APIHelper.SKIP:
+            self.payment_type = payment_type 
         if disabled is not APIHelper.SKIP:
             self.disabled = disabled 
         if chargify_token is not APIHelper.SKIP:
@@ -205,6 +206,7 @@ class CreditCardPaymentProfile(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -226,7 +228,7 @@ class CreditCardPaymentProfile(object):
         billing_country = dictionary.get("billing_country") if "billing_country" in dictionary.keys() else APIHelper.SKIP
         customer_vault_token = dictionary.get("customer_vault_token") if "customer_vault_token" in dictionary.keys() else APIHelper.SKIP
         billing_address_2 = dictionary.get("billing_address_2") if "billing_address_2" in dictionary.keys() else APIHelper.SKIP
-        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else 'credit_card'
+        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         disabled = dictionary.get("disabled") if "disabled" in dictionary.keys() else APIHelper.SKIP
         chargify_token = dictionary.get("chargify_token") if dictionary.get("chargify_token") else APIHelper.SKIP
         site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if "site_gateway_setting_id" in dictionary.keys() else APIHelper.SKIP
@@ -268,6 +270,7 @@ class CreditCardPaymentProfile(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.masked_card_number, type_callable=lambda value: isinstance(value, str))
 

@@ -56,6 +56,7 @@ class CreateSubscriptionGroup(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 
@@ -80,6 +81,7 @@ class CreateSubscriptionGroup(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if isinstance(dictionary, cls):
             return UnionTypeLookUp.get('CreateSubscriptionGroupSubscriptionId').validate(dictionary.subscription_id)
 

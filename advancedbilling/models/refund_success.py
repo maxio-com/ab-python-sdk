@@ -54,6 +54,7 @@ class RefundSuccess(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -79,6 +80,7 @@ class RefundSuccess(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.refund_id, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.gateway_transaction_id, type_callable=lambda value: isinstance(value, int)) \

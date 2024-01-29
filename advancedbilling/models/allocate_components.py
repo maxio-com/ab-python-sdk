@@ -29,9 +29,9 @@ class AllocateComponents(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        payment_collection_method (PaymentCollectionMethod1): (Optional) If
-            not passed, the allocation(s) will use the payment collection
-            method on the subscription
+        payment_collection_method (CollectionMethod): (Optional) If not
+            passed, the allocation(s) will use the payment collection method
+            on the subscription
         initiate_dunning (bool): If true, if the immediate component payment
             fails, initiate dunning for the subscription.  Otherwise, leave
             the charges on the subscription to pay for at renewal.
@@ -73,7 +73,7 @@ class AllocateComponents(object):
                  accrue_charge=APIHelper.SKIP,
                  upgrade_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
-                 payment_collection_method='automatic',
+                 payment_collection_method=APIHelper.SKIP,
                  initiate_dunning=APIHelper.SKIP):
         """Constructor for the AllocateComponents class"""
 
@@ -90,7 +90,8 @@ class AllocateComponents(object):
             self.upgrade_charge = upgrade_charge 
         if downgrade_credit is not APIHelper.SKIP:
             self.downgrade_credit = downgrade_credit 
-        self.payment_collection_method = payment_collection_method 
+        if payment_collection_method is not APIHelper.SKIP:
+            self.payment_collection_method = payment_collection_method 
         if initiate_dunning is not APIHelper.SKIP:
             self.initiate_dunning = initiate_dunning 
 
@@ -108,6 +109,7 @@ class AllocateComponents(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -122,7 +124,7 @@ class AllocateComponents(object):
         accrue_charge = dictionary.get("accrue_charge") if "accrue_charge" in dictionary.keys() else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
-        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
+        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         initiate_dunning = dictionary.get("initiate_dunning") if "initiate_dunning" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(proration_upgrade_scheme,

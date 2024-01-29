@@ -26,7 +26,8 @@ class UpdateMetafield(object):
             metafield. For example, a text type is just a string, so a given
             metafield of this type can have any value attached. On the other
             hand, dropdown and radio have a set of allowed values that can be
-            input, and appear differently on a Public Signup Page.
+            input, and appear differently on a Public Signup Page. Defaults to
+            'text'
         enum (List[str]): Only applicable when input_type is radio or
             dropdown
 
@@ -53,7 +54,7 @@ class UpdateMetafield(object):
                  current_name=APIHelper.SKIP,
                  name=APIHelper.SKIP,
                  scope=APIHelper.SKIP,
-                 input_type='text',
+                 input_type=APIHelper.SKIP,
                  enum=APIHelper.SKIP):
         """Constructor for the UpdateMetafield class"""
 
@@ -64,7 +65,8 @@ class UpdateMetafield(object):
             self.name = name 
         if scope is not APIHelper.SKIP:
             self.scope = scope 
-        self.input_type = input_type 
+        if input_type is not APIHelper.SKIP:
+            self.input_type = input_type 
         if enum is not APIHelper.SKIP:
             self.enum = enum 
 
@@ -82,6 +84,7 @@ class UpdateMetafield(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -89,7 +92,7 @@ class UpdateMetafield(object):
         current_name = dictionary.get("current_name") if dictionary.get("current_name") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         scope = MetafieldScope.from_dictionary(dictionary.get('scope')) if 'scope' in dictionary.keys() else APIHelper.SKIP
-        input_type = dictionary.get("input_type") if dictionary.get("input_type") else 'text'
+        input_type = dictionary.get("input_type") if dictionary.get("input_type") else APIHelper.SKIP
         enum = dictionary.get("enum") if dictionary.get("enum") else APIHelper.SKIP
         # Return an object of this model
         return cls(current_name,
@@ -111,6 +114,7 @@ class UpdateMetafield(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return True
 

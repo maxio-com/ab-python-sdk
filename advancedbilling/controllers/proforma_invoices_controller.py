@@ -20,8 +20,8 @@ from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.proforma_invoice import ProformaInvoice
 from advancedbilling.models.proforma_invoice_preview import ProformaInvoicePreview
 from advancedbilling.models.signup_proforma_preview_response import SignupProformaPreviewResponse
-from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
+from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.exceptions.proforma_bad_request_error_response_exception import ProformaBadRequestErrorResponseException
 from advancedbilling.exceptions.error_array_map_response_exception import ErrorArrayMapResponseException
 
@@ -32,29 +32,28 @@ class ProformaInvoicesController(BaseController):
     def __init__(self, config):
         super(ProformaInvoicesController, self).__init__(config)
 
-    def void_proforma_invoice(self,
-                              proforma_invoice_uid,
-                              body=None):
-        """Does a POST request to /proforma_invoices/{proforma_invoice_uid}/void.json.
+    def create_consolidated_proforma_invoice(self,
+                                             uid):
+        """Does a POST request to /subscription_groups/{uid}/proforma_invoices.json.
 
-        This endpoint will void a proforma invoice that has the status
-        "draft".
+        This endpoint will trigger the creation of a consolidated proforma
+        invoice asynchronously. It will return a 201 with no message, or a 422
+        with any errors. To find and view the new consolidated proforma
+        invoice, you may poll the subscription group listing for proforma
+        invoices; only one consolidated proforma invoice may be created per
+        group at a time.
+        If the information becomes outdated, simply void the old consolidated
+        proforma invoice and generate a new one.
         ## Restrictions
         Proforma invoices are only available on Relationship Invoicing sites.
-        Only proforma invoices that have the appropriate status may be
-        reopened. If the invoice identified by {uid} does not have the
-        appropriate status, the response will have HTTP status code 422 and an
-        error message.
-        A reason for the void operation is required to be included in the
-        request body. If one is not provided, the response will have HTTP
-        status code 422 and an error message.
+        To create a proforma invoice, the subscription must not be prepaid,
+        and must be in a live state.
 
         Args:
-            proforma_invoice_uid (str): The uid of the proforma invoice
-            body (VoidInvoiceRequest, optional): TODO: type description here.
+            uid (str): The uid of the subscription group
 
         Returns:
-            ProformaInvoice: Response from the API. OK
+            void: Response from the API. Created
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -66,85 +65,14 @@ class ProformaInvoicesController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEFAULT)
-            .path('/proforma_invoices/{proforma_invoice_uid}/void.json')
+            .path('/subscription_groups/{uid}/proforma_invoices.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
-                            .key('proforma_invoice_uid')
-                            .value(proforma_invoice_uid)
+                            .key('uid')
+                            .value(uid)
                             .is_required(True)
                             .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProformaInvoice.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def create_signup_proforma_invoice(self,
-                                       body=None):
-        """Does a POST request to /subscriptions/proforma_invoices.json.
-
-        This endpoint is only available for Relationship Invoicing sites. It
-        cannot be used to create consolidated proforma invoices or preview
-        prepaid subscriptions.
-        Create a proforma invoice to preview costs before a subscription's
-        signup. Like other proforma invoices, it can be emailed to the
-        customer, voided, and publicly viewed on the chargifypay domain.
-        Pass a payload that resembles a subscription create or signup preview
-        request. For example, you can specify components, coupons/a referral,
-        offers, custom pricing, and an existing customer or payment profile to
-        populate a shipping or billing address.
-        A product and customer first name, last name, and email are the
-        minimum requirements. We recommend associating the proforma invoice
-        with a customer_id to easily find their proforma invoices, since the
-        subscription_id will always be blank.
-
-        Args:
-            body (CreateSubscriptionRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            ProformaInvoice: Response from the API. Created
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/proforma_invoices.json')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProformaInvoice.from_dictionary)
-            .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ProformaBadRequestErrorResponseException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorArrayMapResponseException)
         ).execute()
 
     def list_subscription_group_proforma_invoices(self,
@@ -180,6 +108,49 @@ class ProformaInvoicesController(BaseController):
             .template_param(Parameter()
                             .key('uid')
                             .value(uid)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ProformaInvoice.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+        ).execute()
+
+    def read_proforma_invoice(self,
+                              proforma_invoice_uid):
+        """Does a GET request to /proforma_invoices/{proforma_invoice_uid}.json.
+
+        Use this endpoint to read the details of an existing proforma
+        invoice.
+        ## Restrictions
+        Proforma invoices are only available on Relationship Invoicing sites.
+
+        Args:
+            proforma_invoice_uid (int): The uid of the proforma invoice
+
+        Returns:
+            ProformaInvoice: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/proforma_invoices/{proforma_invoice_uid}.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('proforma_invoice_uid')
+                            .value(proforma_invoice_uid)
                             .is_required(True)
                             .should_encode(True))
             .header_param(Parameter()
@@ -240,49 +211,6 @@ class ProformaInvoicesController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProformaInvoice.from_dictionary)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def read_proforma_invoice(self,
-                              proforma_invoice_uid):
-        """Does a GET request to /proforma_invoices/{proforma_invoice_uid}.json.
-
-        Use this endpoint to read the details of an existing proforma
-        invoice.
-        ## Restrictions
-        Proforma invoices are only available on Relationship Invoicing sites.
-
-        Args:
-            proforma_invoice_uid (int): The uid of the proforma invoice
-
-        Returns:
-            ProformaInvoice: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/proforma_invoices/{proforma_invoice_uid}.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('proforma_invoice_uid')
-                            .value(proforma_invoice_uid)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProformaInvoice.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def list_proforma_invoices(self,
@@ -400,28 +328,29 @@ class ProformaInvoicesController(BaseController):
             .deserialize_into(ProformaInvoice.from_dictionary)
         ).execute()
 
-    def create_consolidated_proforma_invoice(self,
-                                             uid):
-        """Does a POST request to /subscription_groups/{uid}/proforma_invoices.json.
+    def void_proforma_invoice(self,
+                              proforma_invoice_uid,
+                              body=None):
+        """Does a POST request to /proforma_invoices/{proforma_invoice_uid}/void.json.
 
-        This endpoint will trigger the creation of a consolidated proforma
-        invoice asynchronously. It will return a 201 with no message, or a 422
-        with any errors. To find and view the new consolidated proforma
-        invoice, you may poll the subscription group listing for proforma
-        invoices; only one consolidated proforma invoice may be created per
-        group at a time.
-        If the information becomes outdated, simply void the old consolidated
-        proforma invoice and generate a new one.
+        This endpoint will void a proforma invoice that has the status
+        "draft".
         ## Restrictions
         Proforma invoices are only available on Relationship Invoicing sites.
-        To create a proforma invoice, the subscription must not be prepaid,
-        and must be in a live state.
+        Only proforma invoices that have the appropriate status may be
+        reopened. If the invoice identified by {uid} does not have the
+        appropriate status, the response will have HTTP status code 422 and an
+        error message.
+        A reason for the void operation is required to be included in the
+        request body. If one is not provided, the response will have HTTP
+        status code 422 and an error message.
 
         Args:
-            uid (str): The uid of the subscription group
+            proforma_invoice_uid (str): The uid of the proforma invoice
+            body (VoidInvoiceRequest, optional): TODO: type description here.
 
         Returns:
-            void: Response from the API. Created
+            ProformaInvoice: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -433,14 +362,29 @@ class ProformaInvoicesController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEFAULT)
-            .path('/subscription_groups/{uid}/proforma_invoices.json')
+            .path('/proforma_invoices/{proforma_invoice_uid}/void.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
+                            .key('proforma_invoice_uid')
+                            .value(proforma_invoice_uid)
                             .is_required(True)
                             .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
             .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ProformaInvoice.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def preview_proforma_invoice(self,
@@ -498,6 +442,62 @@ class ProformaInvoicesController(BaseController):
             .deserialize_into(ProformaInvoicePreview.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def create_signup_proforma_invoice(self,
+                                       body=None):
+        """Does a POST request to /subscriptions/proforma_invoices.json.
+
+        This endpoint is only available for Relationship Invoicing sites. It
+        cannot be used to create consolidated proforma invoices or preview
+        prepaid subscriptions.
+        Create a proforma invoice to preview costs before a subscription's
+        signup. Like other proforma invoices, it can be emailed to the
+        customer, voided, and publicly viewed on the chargifypay domain.
+        Pass a payload that resembles a subscription create or signup preview
+        request. For example, you can specify components, coupons/a referral,
+        offers, custom pricing, and an existing customer or payment profile to
+        populate a shipping or billing address.
+        A product and customer first name, last name, and email are the
+        minimum requirements. We recommend associating the proforma invoice
+        with a customer_id to easily find their proforma invoices, since the
+        subscription_id will always be blank.
+
+        Args:
+            body (CreateSubscriptionRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            ProformaInvoice: Response from the API. Created
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/proforma_invoices.json')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ProformaInvoice.from_dictionary)
+            .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ProformaBadRequestErrorResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorArrayMapResponseException)
         ).execute()
 
     def preview_signup_proforma_invoice(self,

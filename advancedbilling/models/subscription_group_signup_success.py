@@ -53,6 +53,7 @@ class SubscriptionGroupSignupSuccess(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -76,6 +77,7 @@ class SubscriptionGroupSignupSuccess(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.subscription_group, type_callable=lambda value: SubscriptionGroupSignupSuccessData.validate(value)) \
                 and APIHelper.is_valid_type(value=dictionary.customer, type_callable=lambda value: Customer.validate(value))

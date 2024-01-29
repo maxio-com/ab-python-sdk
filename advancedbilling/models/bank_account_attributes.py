@@ -85,7 +85,7 @@ class BankAccountAttributes(object):
                  bank_branch_code=APIHelper.SKIP,
                  bank_iban=APIHelper.SKIP,
                  bank_account_holder_type=APIHelper.SKIP,
-                 payment_type='credit_card',
+                 payment_type=APIHelper.SKIP,
                  current_vault=APIHelper.SKIP,
                  vault_token=APIHelper.SKIP,
                  customer_vault_token=APIHelper.SKIP):
@@ -107,7 +107,8 @@ class BankAccountAttributes(object):
             self.bank_iban = bank_iban 
         if bank_account_holder_type is not APIHelper.SKIP:
             self.bank_account_holder_type = bank_account_holder_type 
-        self.payment_type = payment_type 
+        if payment_type is not APIHelper.SKIP:
+            self.payment_type = payment_type 
         if current_vault is not APIHelper.SKIP:
             self.current_vault = current_vault 
         if vault_token is not APIHelper.SKIP:
@@ -129,6 +130,7 @@ class BankAccountAttributes(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -141,7 +143,7 @@ class BankAccountAttributes(object):
         bank_branch_code = dictionary.get("bank_branch_code") if dictionary.get("bank_branch_code") else APIHelper.SKIP
         bank_iban = dictionary.get("bank_iban") if dictionary.get("bank_iban") else APIHelper.SKIP
         bank_account_holder_type = dictionary.get("bank_account_holder_type") if dictionary.get("bank_account_holder_type") else APIHelper.SKIP
-        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else 'credit_card'
+        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         current_vault = dictionary.get("current_vault") if dictionary.get("current_vault") else APIHelper.SKIP
         vault_token = dictionary.get("vault_token") if dictionary.get("vault_token") else APIHelper.SKIP
         customer_vault_token = dictionary.get("customer_vault_token") if dictionary.get("customer_vault_token") else APIHelper.SKIP
@@ -172,6 +174,7 @@ class BankAccountAttributes(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return True
 

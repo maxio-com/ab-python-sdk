@@ -23,11 +23,11 @@ class SubscriptionGroupSignup(object):
         payment_profile_id (int): TODO: type description here.
         payer_id (int): TODO: type description here.
         payer_reference (str): TODO: type description here.
-        payment_collection_method (PaymentCollectionMethod): The type of
-            payment collection to be used in the subscription. For legacy
-            Statements Architecture valid options are - `invoice`,
-            `automatic`. For current Relationship Invoicing Architecture valid
-            options are - `remittance`, `automatic`, `prepaid`.
+        payment_collection_method (CollectionMethod): The type of payment
+            collection to be used in the subscription. For legacy Statements
+            Architecture valid options are - `invoice`, `automatic`. For
+            current Relationship Invoicing Architecture valid options are -
+            `remittance`, `automatic`, `prepaid`.
         payer_attributes (PayerAttributes): TODO: type description here.
         credit_card_attributes (SubscriptionGroupCreditCard): TODO: type
             description here.
@@ -101,6 +101,7 @@ class SubscriptionGroupSignup(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 

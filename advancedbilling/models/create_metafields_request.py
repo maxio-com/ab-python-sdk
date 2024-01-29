@@ -48,6 +48,7 @@ class CreateMetafieldsRequest(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 
@@ -70,6 +71,7 @@ class CreateMetafieldsRequest(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if isinstance(dictionary, cls):
             return UnionTypeLookUp.get('CreateMetafieldsRequestMetafields').validate(dictionary.metafields)
 

@@ -10,12 +10,41 @@ subscription_invoice_account_controller = client.subscription_invoice_account
 
 ## Methods
 
-* [Create Prepayment](../../doc/controllers/subscription-invoice-account.md#create-prepayment)
 * [Read Account Balances](../../doc/controllers/subscription-invoice-account.md#read-account-balances)
+* [Create Prepayment](../../doc/controllers/subscription-invoice-account.md#create-prepayment)
 * [List Prepayments](../../doc/controllers/subscription-invoice-account.md#list-prepayments)
 * [Issue Service Credit](../../doc/controllers/subscription-invoice-account.md#issue-service-credit)
 * [Deduct Service Credit](../../doc/controllers/subscription-invoice-account.md#deduct-service-credit)
 * [Refund Prepayment](../../doc/controllers/subscription-invoice-account.md#refund-prepayment)
+
+
+# Read Account Balances
+
+Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
+
+```python
+def read_account_balances(self,
+                         subscription_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+
+## Response Type
+
+[`AccountBalances`](../../doc/models/account-balances.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+result = subscription_invoice_account_controller.read_account_balances(subscription_id)
+print(result)
+```
 
 
 # Create Prepayment
@@ -80,35 +109,6 @@ print(result)
     "ending_balance_in_cents": -10000
   }
 }
-```
-
-
-# Read Account Balances
-
-Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
-
-```python
-def read_account_balances(self,
-                         subscription_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-
-## Response Type
-
-[`AccountBalances`](../../doc/models/account-balances.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-result = subscription_invoice_account_controller.read_account_balances(subscription_id)
-print(result)
 ```
 
 

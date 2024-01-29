@@ -33,8 +33,8 @@ class ApplyPaymentEventData(object):
             8601 format, i.e. "2019-06-07T17:20:06Z"
         payment_method (PaymentMethodApplePayType |
             PaymentMethodBankAccountType | PaymentMethodCreditCardType |
-            PaymentMethodExternalType | PaymentMethodPaypalType | None): A
-            nested data structure detailing the method of payment
+            PaymentMethodExternalType | PaymentMethodPaypalType): A nested
+            data structure detailing the method of payment
         transaction_id (int): The Chargify id of the original payment
 
     """
@@ -50,34 +50,24 @@ class ApplyPaymentEventData(object):
     }
 
     _optionals = [
-        'memo',
-        'original_amount',
-        'applied_amount',
-        'transaction_time',
-        'payment_method',
         'transaction_id',
     ]
 
     def __init__(self,
-                 memo=APIHelper.SKIP,
-                 original_amount=APIHelper.SKIP,
-                 applied_amount=APIHelper.SKIP,
-                 transaction_time=APIHelper.SKIP,
-                 payment_method=APIHelper.SKIP,
+                 memo=None,
+                 original_amount=None,
+                 applied_amount=None,
+                 transaction_time=None,
+                 payment_method=None,
                  transaction_id=APIHelper.SKIP):
         """Constructor for the ApplyPaymentEventData class"""
 
         # Initialize members of the class
-        if memo is not APIHelper.SKIP:
-            self.memo = memo 
-        if original_amount is not APIHelper.SKIP:
-            self.original_amount = original_amount 
-        if applied_amount is not APIHelper.SKIP:
-            self.applied_amount = applied_amount 
-        if transaction_time is not APIHelper.SKIP:
-            self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
-        if payment_method is not APIHelper.SKIP:
-            self.payment_method = payment_method 
+        self.memo = memo 
+        self.original_amount = original_amount 
+        self.applied_amount = applied_amount 
+        self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
+        self.payment_method = payment_method 
         if transaction_id is not APIHelper.SKIP:
             self.transaction_id = transaction_id 
 
@@ -96,15 +86,16 @@ class ApplyPaymentEventData(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
-        original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
-        applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
-        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else APIHelper.SKIP
-        payment_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ApplyPaymentEventDataPaymentMethod'), dictionary.get('payment_method'), False) if dictionary.get('payment_method') is not None else APIHelper.SKIP
+        memo = dictionary.get("memo") if dictionary.get("memo") else None
+        original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else None
+        applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
+        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else None
+        payment_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ApplyPaymentEventDataPaymentMethod'), dictionary.get('payment_method'), False) if dictionary.get('payment_method') is not None else None
         transaction_id = dictionary.get("transaction_id") if dictionary.get("transaction_id") else APIHelper.SKIP
         # Return an object of this model
         return cls(memo,
@@ -127,10 +118,20 @@ class ApplyPaymentEventData(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.original_amount, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.transaction_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
+                and UnionTypeLookUp.get('ApplyPaymentEventDataPaymentMethod').validate(dictionary.payment_method)
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('original_amount'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('transaction_time'), type_callable=lambda value: isinstance(value, str)) \
+            and UnionTypeLookUp.get('ApplyPaymentEventDataPaymentMethod').validate(dictionary.get('payment_method'))

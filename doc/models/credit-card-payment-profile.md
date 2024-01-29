@@ -26,7 +26,7 @@
 | `billing_country` | `str` | Optional | The current billing address country for the card. |
 | `customer_vault_token` | `str` | Optional | (only for Authorize.Net CIM storage): the customerProfileId for the owner of the customerPaymentProfileId provided as the vault_token. |
 | `billing_address_2` | `str` | Optional | The current billing street address, second line, for the card. |
-| `payment_type` | [`PaymentType`](../../doc/models/payment-type.md) | Optional | **Default**: `'credit_card'` |
+| `payment_type` | [`PaymentType`](../../doc/models/payment-type.md) | Optional | - |
 | `disabled` | `bool` | Optional | - |
 | `chargify_token` | `str` | Optional | Token received after sending billing information using chargify.js. This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) |
 | `site_gateway_setting_id` | `int` | Optional | - |

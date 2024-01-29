@@ -19,7 +19,7 @@
 | `state` | `str` | Optional | - |
 | `cancel_at_end_of_period` | `bool` | Optional | - |
 | `subscriptions` | [`List[SubscriptionGroupItem]`](../../doc/models/subscription-group-item.md) | Optional | - |
-| `payment_collection_method` | [`PaymentCollectionMethod`](../../doc/models/payment-collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `'automatic'` |
+| `payment_collection_method` | [`CollectionMethod`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `'automatic'` |
 
 ## Example (as JSON)
 

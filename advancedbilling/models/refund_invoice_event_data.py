@@ -44,59 +44,47 @@ class RefundInvoiceEventData(object):
     # Create a mapping from Model property names to API property names
     _names = {
         "apply_credit": 'apply_credit',
-        "consolidation_level": 'consolidation_level',
         "credit_note_attributes": 'credit_note_attributes',
-        "memo": 'memo',
-        "original_amount": 'original_amount',
         "payment_id": 'payment_id',
         "refund_amount": 'refund_amount',
         "refund_id": 'refund_id',
-        "transaction_time": 'transaction_time'
+        "transaction_time": 'transaction_time',
+        "consolidation_level": 'consolidation_level',
+        "memo": 'memo',
+        "original_amount": 'original_amount'
     }
 
     _optionals = [
-        'apply_credit',
         'consolidation_level',
-        'credit_note_attributes',
         'memo',
         'original_amount',
-        'payment_id',
-        'refund_amount',
-        'refund_id',
-        'transaction_time',
     ]
 
     def __init__(self,
-                 apply_credit=APIHelper.SKIP,
+                 apply_credit=None,
+                 credit_note_attributes=None,
+                 payment_id=None,
+                 refund_amount=None,
+                 refund_id=None,
+                 transaction_time=None,
                  consolidation_level=APIHelper.SKIP,
-                 credit_note_attributes=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
-                 original_amount=APIHelper.SKIP,
-                 payment_id=APIHelper.SKIP,
-                 refund_amount=APIHelper.SKIP,
-                 refund_id=APIHelper.SKIP,
-                 transaction_time=APIHelper.SKIP):
+                 original_amount=APIHelper.SKIP):
         """Constructor for the RefundInvoiceEventData class"""
 
         # Initialize members of the class
-        if apply_credit is not APIHelper.SKIP:
-            self.apply_credit = apply_credit 
+        self.apply_credit = apply_credit 
         if consolidation_level is not APIHelper.SKIP:
             self.consolidation_level = consolidation_level 
-        if credit_note_attributes is not APIHelper.SKIP:
-            self.credit_note_attributes = credit_note_attributes 
+        self.credit_note_attributes = credit_note_attributes 
         if memo is not APIHelper.SKIP:
             self.memo = memo 
         if original_amount is not APIHelper.SKIP:
             self.original_amount = original_amount 
-        if payment_id is not APIHelper.SKIP:
-            self.payment_id = payment_id 
-        if refund_amount is not APIHelper.SKIP:
-            self.refund_amount = refund_amount 
-        if refund_id is not APIHelper.SKIP:
-            self.refund_id = refund_id 
-        if transaction_time is not APIHelper.SKIP:
-            self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
+        self.payment_id = payment_id 
+        self.refund_amount = refund_amount 
+        self.refund_id = refund_id 
+        self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -112,29 +100,30 @@ class RefundInvoiceEventData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        apply_credit = dictionary.get("apply_credit") if "apply_credit" in dictionary.keys() else APIHelper.SKIP
+        apply_credit = dictionary.get("apply_credit") if "apply_credit" in dictionary.keys() else None
+        credit_note_attributes = CreditNote.from_dictionary(dictionary.get('credit_note_attributes')) if dictionary.get('credit_note_attributes') else None
+        payment_id = dictionary.get("payment_id") if dictionary.get("payment_id") else None
+        refund_amount = dictionary.get("refund_amount") if dictionary.get("refund_amount") else None
+        refund_id = dictionary.get("refund_id") if dictionary.get("refund_id") else None
+        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else None
         consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP
-        credit_note_attributes = CreditNote.from_dictionary(dictionary.get('credit_note_attributes')) if 'credit_note_attributes' in dictionary.keys() else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
-        payment_id = dictionary.get("payment_id") if dictionary.get("payment_id") else APIHelper.SKIP
-        refund_amount = dictionary.get("refund_amount") if dictionary.get("refund_amount") else APIHelper.SKIP
-        refund_id = dictionary.get("refund_id") if dictionary.get("refund_id") else APIHelper.SKIP
-        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else APIHelper.SKIP
         # Return an object of this model
         return cls(apply_credit,
-                   consolidation_level,
                    credit_note_attributes,
-                   memo,
-                   original_amount,
                    payment_id,
                    refund_amount,
                    refund_id,
-                   transaction_time)
+                   transaction_time,
+                   consolidation_level,
+                   memo,
+                   original_amount)
 
     @classmethod
     def validate(cls, dictionary):
@@ -149,10 +138,21 @@ class RefundInvoiceEventData(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.apply_credit, type_callable=lambda value: isinstance(value, bool)) \
+                and APIHelper.is_valid_type(value=dictionary.credit_note_attributes, type_callable=lambda value: CreditNote.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.payment_id, type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.refund_amount, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.refund_id, type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.transaction_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('apply_credit'), type_callable=lambda value: isinstance(value, bool)) \
+            and APIHelper.is_valid_type(value=dictionary.get('credit_note_attributes'), type_callable=lambda value: CreditNote.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('payment_id'), type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('refund_amount'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('refund_id'), type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('transaction_time'), type_callable=lambda value: isinstance(value, str))

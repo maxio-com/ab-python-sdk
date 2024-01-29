@@ -7,6 +7,8 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.invoice_consolidation_level import InvoiceConsolidationLevel
+from advancedbilling.models.invoice_status import InvoiceStatus
 
 
 class IssueInvoiceEventData(object):
@@ -51,33 +53,20 @@ class IssueInvoiceEventData(object):
         "total_amount": 'total_amount'
     }
 
-    _optionals = [
-        'consolidation_level',
-        'from_status',
-        'to_status',
-        'due_amount',
-        'total_amount',
-    ]
-
     def __init__(self,
-                 consolidation_level=APIHelper.SKIP,
-                 from_status=APIHelper.SKIP,
-                 to_status=APIHelper.SKIP,
-                 due_amount=APIHelper.SKIP,
-                 total_amount=APIHelper.SKIP):
+                 consolidation_level=None,
+                 from_status=None,
+                 to_status=None,
+                 due_amount=None,
+                 total_amount=None):
         """Constructor for the IssueInvoiceEventData class"""
 
         # Initialize members of the class
-        if consolidation_level is not APIHelper.SKIP:
-            self.consolidation_level = consolidation_level 
-        if from_status is not APIHelper.SKIP:
-            self.from_status = from_status 
-        if to_status is not APIHelper.SKIP:
-            self.to_status = to_status 
-        if due_amount is not APIHelper.SKIP:
-            self.due_amount = due_amount 
-        if total_amount is not APIHelper.SKIP:
-            self.total_amount = total_amount 
+        self.consolidation_level = consolidation_level 
+        self.from_status = from_status 
+        self.to_status = to_status 
+        self.due_amount = due_amount 
+        self.total_amount = total_amount 
 
     @classmethod
     def from_dictionary(cls,
@@ -93,15 +82,16 @@ class IssueInvoiceEventData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP
-        from_status = dictionary.get("from_status") if dictionary.get("from_status") else APIHelper.SKIP
-        to_status = dictionary.get("to_status") if dictionary.get("to_status") else APIHelper.SKIP
-        due_amount = dictionary.get("due_amount") if dictionary.get("due_amount") else APIHelper.SKIP
-        total_amount = dictionary.get("total_amount") if dictionary.get("total_amount") else APIHelper.SKIP
+        consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else None
+        from_status = dictionary.get("from_status") if dictionary.get("from_status") else None
+        to_status = dictionary.get("to_status") if dictionary.get("to_status") else None
+        due_amount = dictionary.get("due_amount") if dictionary.get("due_amount") else None
+        total_amount = dictionary.get("total_amount") if dictionary.get("total_amount") else None
         # Return an object of this model
         return cls(consolidation_level,
                    from_status,
@@ -122,10 +112,19 @@ class IssueInvoiceEventData(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.consolidation_level, type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.from_status, type_callable=lambda value: InvoiceStatus.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.to_status, type_callable=lambda value: InvoiceStatus.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.due_amount, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.total_amount, type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('consolidation_level'), type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('from_status'), type_callable=lambda value: InvoiceStatus.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('to_status'), type_callable=lambda value: InvoiceStatus.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('due_amount'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('total_amount'), type_callable=lambda value: isinstance(value, str))

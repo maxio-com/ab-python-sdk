@@ -17,10 +17,10 @@ from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
-from advancedbilling.models.revoked_invitation import RevokedInvitation
 from advancedbilling.models.customer_response import CustomerResponse
 from advancedbilling.models.portal_management_link import PortalManagementLink
 from advancedbilling.models.resent_invitation import ResentInvitation
+from advancedbilling.models.revoked_invitation import RevokedInvitation
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.too_many_management_link_requests_error_exception import TooManyManagementLinkRequestsErrorException
 from advancedbilling.exceptions.api_exception import APIException
@@ -31,50 +31,6 @@ class BillingPortalController(BaseController):
     """A Controller to access Endpoints in the advancedbilling API."""
     def __init__(self, config):
         super(BillingPortalController, self).__init__(config)
-
-    def revoke_billing_portal_access(self,
-                                     customer_id):
-        """Does a DELETE request to /portal/customers/{customer_id}/invitations/revoke.json.
-
-        You can revoke a customer's Billing Portal invitation.
-        If you attempt to revoke an invitation when the Billing Portal is
-        already disabled for a Customer, you will receive a 422 error
-        response.
-        ## Limitations
-        This endpoint will only return a JSON response.
-
-        Args:
-            customer_id (int): The Chargify id of the customer
-
-        Returns:
-            RevokedInvitation: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/portal/customers/{customer_id}/invitations/revoke.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('customer_id')
-                            .value(customer_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(RevokedInvitation.from_dictionary)
-        ).execute()
 
     def enable_billing_portal_for_customer(self,
                                            customer_id,
@@ -251,4 +207,48 @@ class BillingPortalController(BaseController):
             .deserialize_into(ResentInvitation.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def revoke_billing_portal_access(self,
+                                     customer_id):
+        """Does a DELETE request to /portal/customers/{customer_id}/invitations/revoke.json.
+
+        You can revoke a customer's Billing Portal invitation.
+        If you attempt to revoke an invitation when the Billing Portal is
+        already disabled for a Customer, you will receive a 422 error
+        response.
+        ## Limitations
+        This endpoint will only return a JSON response.
+
+        Args:
+            customer_id (int): The Chargify id of the customer
+
+        Returns:
+            RevokedInvitation: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/portal/customers/{customer_id}/invitations/revoke.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('customer_id')
+                            .value(customer_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(RevokedInvitation.from_dictionary)
         ).execute()

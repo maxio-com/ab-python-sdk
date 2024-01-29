@@ -46,6 +46,7 @@ class UpdateReasonCodeRequest(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 

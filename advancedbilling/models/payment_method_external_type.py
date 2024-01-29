@@ -31,27 +31,17 @@ class PaymentMethodExternalType(object):
         "mtype": 'type'
     }
 
-    _optionals = [
-        'details',
-        'kind',
-        'memo',
-        'mtype',
-    ]
-
     def __init__(self,
-                 details=APIHelper.SKIP,
-                 kind=APIHelper.SKIP,
-                 memo=APIHelper.SKIP,
+                 details=None,
+                 kind=None,
+                 memo=None,
                  mtype='external'):
         """Constructor for the PaymentMethodExternalType class"""
 
         # Initialize members of the class
-        if details is not APIHelper.SKIP:
-            self.details = details 
-        if kind is not APIHelper.SKIP:
-            self.kind = kind 
-        if memo is not APIHelper.SKIP:
-            self.memo = memo 
+        self.details = details 
+        self.kind = kind 
+        self.memo = memo 
         self.mtype = mtype 
 
     @classmethod
@@ -68,13 +58,14 @@ class PaymentMethodExternalType(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
-        kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
-        memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
+        details = dictionary.get("details") if dictionary.get("details") else None
+        kind = dictionary.get("kind") if dictionary.get("kind") else None
+        memo = dictionary.get("memo") if dictionary.get("memo") else None
         mtype = dictionary.get("type") if dictionary.get("type") else 'external'
         # Return an object of this model
         return cls(details,
@@ -95,10 +86,17 @@ class PaymentMethodExternalType(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.details, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.kind, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.mtype, type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('details'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('kind'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('type'), type_callable=lambda value: isinstance(value, str))

@@ -8,9 +8,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 
-class PaymentCollectionMethod(object):
+class CollectionMethod(object):
 
-    """Implementation of the 'Payment Collection Method' enum.
+    """Implementation of the 'Collection Method' enum.
 
     The type of payment collection to be used in the subscription. For legacy
     Statements Architecture valid options are - `invoice`, `automatic`. For

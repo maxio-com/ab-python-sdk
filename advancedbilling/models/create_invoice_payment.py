@@ -71,6 +71,7 @@ class CreateInvoicePayment(object):
 
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
         if dictionary is None:
             return None
 

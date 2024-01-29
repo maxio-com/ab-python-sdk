@@ -28,21 +28,14 @@ class ChangeInvoiceCollectionMethodEventData(object):
         "to_collection_method": 'to_collection_method'
     }
 
-    _optionals = [
-        'from_collection_method',
-        'to_collection_method',
-    ]
-
     def __init__(self,
-                 from_collection_method=APIHelper.SKIP,
-                 to_collection_method=APIHelper.SKIP):
+                 from_collection_method=None,
+                 to_collection_method=None):
         """Constructor for the ChangeInvoiceCollectionMethodEventData class"""
 
         # Initialize members of the class
-        if from_collection_method is not APIHelper.SKIP:
-            self.from_collection_method = from_collection_method 
-        if to_collection_method is not APIHelper.SKIP:
-            self.to_collection_method = to_collection_method 
+        self.from_collection_method = from_collection_method 
+        self.to_collection_method = to_collection_method 
 
     @classmethod
     def from_dictionary(cls,
@@ -58,12 +51,13 @@ class ChangeInvoiceCollectionMethodEventData(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        from_collection_method = dictionary.get("from_collection_method") if dictionary.get("from_collection_method") else APIHelper.SKIP
-        to_collection_method = dictionary.get("to_collection_method") if dictionary.get("to_collection_method") else APIHelper.SKIP
+        from_collection_method = dictionary.get("from_collection_method") if dictionary.get("from_collection_method") else None
+        to_collection_method = dictionary.get("to_collection_method") if dictionary.get("to_collection_method") else None
         # Return an object of this model
         return cls(from_collection_method,
                    to_collection_method)
@@ -81,10 +75,13 @@ class ChangeInvoiceCollectionMethodEventData(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.from_collection_method, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.to_collection_method, type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('from_collection_method'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('to_collection_method'), type_callable=lambda value: isinstance(value, str))

@@ -11,8 +11,8 @@ advance_invoice_controller = client.advance_invoice
 ## Methods
 
 * [Issue Advance Invoice](../../doc/controllers/advance-invoice.md#issue-advance-invoice)
-* [Void Advance Invoice](../../doc/controllers/advance-invoice.md#void-advance-invoice)
 * [Read Advance Invoice](../../doc/controllers/advance-invoice.md#read-advance-invoice)
+* [Void Advance Invoice](../../doc/controllers/advance-invoice.md#void-advance-invoice)
 
 
 # Issue Advance Invoice
@@ -63,6 +63,41 @@ print(result)
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
+# Read Advance Invoice
+
+Once an advance invoice has been generated for a subscription's upcoming renewal, it can be viewed through this endpoint. There can only be one advance invoice per subscription per billing cycle.
+
+```python
+def read_advance_invoice(self,
+                        subscription_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+
+## Response Type
+
+[`Invoice`](../../doc/models/invoice.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+result = advance_invoice_controller.read_advance_invoice(subscription_id)
+print(result)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+
+
 # Void Advance Invoice
 
 Void a subscription's existing advance invoice. Once voided, it can later be regenerated if desired.
@@ -91,41 +126,6 @@ def void_advance_invoice(self,
 subscription_id = 222
 
 result = advance_invoice_controller.void_advance_invoice(subscription_id)
-print(result)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-
-
-# Read Advance Invoice
-
-Once an advance invoice has been generated for a subscription's upcoming renewal, it can be viewed through this endpoint. There can only be one advance invoice per subscription per billing cycle.
-
-```python
-def read_advance_invoice(self,
-                        subscription_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-
-## Response Type
-
-[`Invoice`](../../doc/models/invoice.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-result = advance_invoice_controller.read_advance_invoice(subscription_id)
 print(result)
 ```
 

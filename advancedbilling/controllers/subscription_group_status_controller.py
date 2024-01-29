@@ -76,41 +76,6 @@ class SubscriptionGroupStatusController(BaseController):
             .auth(Single('global'))
         ).execute()
 
-    def stop_delayed_cancellation_for_group(self,
-                                            uid):
-        """Does a DELETE request to /subscription_groups/{uid}/delayed_cancel.json.
-
-        Removing the delayed cancellation on a subscription group will ensure
-        that the subscriptions do not get canceled at the end of the period.
-        The request will reset the `cancel_at_end_of_period` flag to false on
-        each member in the group.
-
-        Args:
-            uid (str): The uid of the subscription group
-
-        Returns:
-            void: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscription_groups/{uid}/delayed_cancel.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('global'))
-        ).execute()
-
     def initiate_delayed_cancellation_for_group(self,
                                                 uid):
         """Does a POST request to /subscription_groups/{uid}/delayed_cancel.json.
@@ -140,6 +105,41 @@ class SubscriptionGroupStatusController(BaseController):
             RequestBuilder().server(Server.DEFAULT)
             .path('/subscription_groups/{uid}/delayed_cancel.json')
             .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('uid')
+                            .value(uid)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('global'))
+        ).execute()
+
+    def stop_delayed_cancellation_for_group(self,
+                                            uid):
+        """Does a DELETE request to /subscription_groups/{uid}/delayed_cancel.json.
+
+        Removing the delayed cancellation on a subscription group will ensure
+        that the subscriptions do not get canceled at the end of the period.
+        The request will reset the `cancel_at_end_of_period` flag to false on
+        each member in the group.
+
+        Args:
+            uid (str): The uid of the subscription group
+
+        Returns:
+            void: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscription_groups/{uid}/delayed_cancel.json')
+            .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
                             .key('uid')
                             .value(uid)

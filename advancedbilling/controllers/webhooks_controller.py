@@ -18,10 +18,10 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from apimatic_core.authentication.multiple.and_auth_group import And
 from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.webhook_response import WebhookResponse
-from advancedbilling.models.endpoint_response import EndpointResponse
-from advancedbilling.models.endpoint import Endpoint
 from advancedbilling.models.enable_webhooks_response import EnableWebhooksResponse
 from advancedbilling.models.replay_webhooks_response import ReplayWebhooksResponse
+from advancedbilling.models.endpoint_response import EndpointResponse
+from advancedbilling.models.endpoint import Endpoint
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.api_exception import APIException
 
@@ -141,145 +141,6 @@ class WebhooksController(BaseController):
             .deserialize_into(WebhookResponse.from_dictionary)
         ).execute()
 
-    def create_endpoint(self,
-                        body=None):
-        """Does a POST request to /endpoints.json.
-
-        The Chargify API allows you to create an endpoint and assign a list of
-        webhooks subscriptions (events) to it.
-        You can check available events here.
-        [Event
-        keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/540535750964
-        5-Webhooks-Reference#example-payloads)
-
-        Args:
-            body (UpdateEndpointRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            EndpointResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/endpoints.json')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(EndpointResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def update_endpoint(self,
-                        endpoint_id,
-                        body=None):
-        """Does a PUT request to /endpoints/{endpoint_id}.json.
-
-        You can update an Endpoint via the API with a PUT request to the
-        resource endpoint.
-        You can change the `url` of your endpoint which consumes webhooks or
-        list of `webhook_subscriptions`.
-        Check available [Event
-        keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/540444845031
-        7-Webhooks#configure-webhook-url).
-        Always send a complete list of events which you want subscribe/watch.
-        Sending an PUT request for existing endpoint with empty list of
-        `webhook_subscriptions` will end with unsubscribe from all events.
-        If you want unsubscribe from specific event, just send a list of
-        `webhook_subscriptions` without the specific event key.
-
-        Args:
-            endpoint_id (int): The Chargify id for the endpoint that should be
-                updated
-            body (UpdateEndpointRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            EndpointResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/endpoints/{endpoint_id}.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('endpoint_id')
-                            .value(endpoint_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(EndpointResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def list_endpoints(self):
-        """Does a GET request to /endpoints.json.
-
-        This method returns created endpoints for site.
-
-        Returns:
-            List[Endpoint]: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/endpoints.json')
-            .http_method(HttpMethodEnum.GET)
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Endpoint.from_dictionary)
-        ).execute()
-
     def enable_webhooks(self,
                         body=None):
         """Does a PUT request to /webhooks/settings.json.
@@ -364,4 +225,143 @@ class WebhooksController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReplayWebhooksResponse.from_dictionary)
+        ).execute()
+
+    def create_endpoint(self,
+                        body=None):
+        """Does a POST request to /endpoints.json.
+
+        The Chargify API allows you to create an endpoint and assign a list of
+        webhooks subscriptions (events) to it.
+        You can check available events here.
+        [Event
+        keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/540535750964
+        5-Webhooks-Reference#example-payloads)
+
+        Args:
+            body (UpdateEndpointRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            EndpointResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/endpoints.json')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(EndpointResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def list_endpoints(self):
+        """Does a GET request to /endpoints.json.
+
+        This method returns created endpoints for site.
+
+        Returns:
+            List[Endpoint]: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/endpoints.json')
+            .http_method(HttpMethodEnum.GET)
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Endpoint.from_dictionary)
+        ).execute()
+
+    def update_endpoint(self,
+                        endpoint_id,
+                        body=None):
+        """Does a PUT request to /endpoints/{endpoint_id}.json.
+
+        You can update an Endpoint via the API with a PUT request to the
+        resource endpoint.
+        You can change the `url` of your endpoint which consumes webhooks or
+        list of `webhook_subscriptions`.
+        Check available [Event
+        keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/540444845031
+        7-Webhooks#configure-webhook-url).
+        Always send a complete list of events which you want subscribe/watch.
+        Sending an PUT request for existing endpoint with empty list of
+        `webhook_subscriptions` will end with unsubscribe from all events.
+        If you want unsubscribe from specific event, just send a list of
+        `webhook_subscriptions` without the specific event key.
+
+        Args:
+            endpoint_id (int): The Chargify id for the endpoint that should be
+                updated
+            body (UpdateEndpointRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            EndpointResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/endpoints/{endpoint_id}.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('endpoint_id')
+                            .value(endpoint_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(EndpointResponse.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()

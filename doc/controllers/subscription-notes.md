@@ -11,10 +11,10 @@ subscription_notes_controller = client.subscription_notes
 ## Methods
 
 * [Create Subscription Note](../../doc/controllers/subscription-notes.md#create-subscription-note)
-* [Delete Subscription Note](../../doc/controllers/subscription-notes.md#delete-subscription-note)
 * [List Subscription Notes](../../doc/controllers/subscription-notes.md#list-subscription-notes)
 * [Read Subscription Note](../../doc/controllers/subscription-notes.md#read-subscription-note)
 * [Update Subscription Note](../../doc/controllers/subscription-notes.md#update-subscription-note)
+* [Delete Subscription Note](../../doc/controllers/subscription-notes.md#delete-subscription-note)
 
 
 # Create Subscription Note
@@ -61,42 +61,6 @@ body = UpdateSubscriptionNoteRequest(
 result = subscription_notes_controller.create_subscription_note(
     subscription_id,
     body=body
-)
-print(result)
-```
-
-
-# Delete Subscription Note
-
-Use the following method to delete a note for a Subscription.
-
-```python
-def delete_subscription_note(self,
-                            subscription_id,
-                            note_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `note_id` | `int` | Template, Required | The Chargify id of the note |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-note_id = 66
-
-result = subscription_notes_controller.delete_subscription_note(
-    subscription_id,
-    note_id
 )
 print(result)
 ```
@@ -255,6 +219,42 @@ result = subscription_notes_controller.update_subscription_note(
     subscription_id,
     note_id,
     body=body
+)
+print(result)
+```
+
+
+# Delete Subscription Note
+
+Use the following method to delete a note for a Subscription.
+
+```python
+def delete_subscription_note(self,
+                            subscription_id,
+                            note_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `note_id` | `int` | Template, Required | The Chargify id of the note |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+note_id = 66
+
+result = subscription_notes_controller.delete_subscription_note(
+    subscription_id,
+    note_id
 )
 print(result)
 ```

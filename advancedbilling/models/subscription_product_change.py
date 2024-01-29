@@ -50,6 +50,7 @@ class SubscriptionProductChange(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -73,6 +74,7 @@ class SubscriptionProductChange(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.previous_product_id, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.new_product_id, type_callable=lambda value: isinstance(value, int))

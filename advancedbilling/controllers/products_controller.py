@@ -27,6 +27,159 @@ class ProductsController(BaseController):
     def __init__(self, config):
         super(ProductsController, self).__init__(config)
 
+    def create_product(self,
+                       product_family_id,
+                       body=None):
+        """Does a POST request to /product_families/{product_family_id}/products.json.
+
+        Use this method to create a product within your Chargify site.
+        + [Products
+        Documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/540
+        5561405709)
+        + [Changing a Subscription's
+        Product](https://maxio-chargify.zendesk.com/hc/en-us/articles/540422533
+        4669-Product-Changes-Migrations)
+
+        Args:
+            product_family_id (int): The Chargify id of the product family to
+                which the product belongs
+            body (CreateOrUpdateProductRequest, optional): TODO: type
+                description here.
+
+        Returns:
+            ProductResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/product_families/{product_family_id}/products.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('product_family_id')
+                            .value(product_family_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ProductResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def read_product(self,
+                     product_id):
+        """Does a GET request to /products/{product_id}.json.
+
+        This endpoint allows you to read the current details of a product that
+        you've created in Chargify.
+
+        Args:
+            product_id (int): The Chargify id of the product
+
+        Returns:
+            ProductResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/products/{product_id}.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('product_id')
+                            .value(product_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ProductResponse.from_dictionary)
+        ).execute()
+
+    def update_product(self,
+                       product_id,
+                       body=None):
+        """Does a PUT request to /products/{product_id}.json.
+
+        Use this method to change aspects of an existing product.
+        ### Input Attributes Update Notes
+        + `update_return_params` The parameters we will append to your
+        `update_return_url`. See Return URLs and Parameters
+        ### Product Price Point
+        Updating a product using this endpoint will create a new price point
+        and set it as the default price point for this product. If you should
+        like to update an existing product price point, that must be done
+        separately.
+
+        Args:
+            product_id (int): The Chargify id of the product
+            body (CreateOrUpdateProductRequest, optional): TODO: type
+                description here.
+
+        Returns:
+            ProductResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/products/{product_id}.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('product_id')
+                            .value(product_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ProductResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
     def archive_product(self,
                         product_id):
         """Does a DELETE request to /products/{product_id}.json.
@@ -238,157 +391,4 @@ class ProductsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
-        ).execute()
-
-    def read_product(self,
-                     product_id):
-        """Does a GET request to /products/{product_id}.json.
-
-        This endpoint allows you to read the current details of a product that
-        you've created in Chargify.
-
-        Args:
-            product_id (int): The Chargify id of the product
-
-        Returns:
-            ProductResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/products/{product_id}.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('product_id')
-                            .value(product_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProductResponse.from_dictionary)
-        ).execute()
-
-    def update_product(self,
-                       product_id,
-                       body=None):
-        """Does a PUT request to /products/{product_id}.json.
-
-        Use this method to change aspects of an existing product.
-        ### Input Attributes Update Notes
-        + `update_return_params` The parameters we will append to your
-        `update_return_url`. See Return URLs and Parameters
-        ### Product Price Point
-        Updating a product using this endpoint will create a new price point
-        and set it as the default price point for this product. If you should
-        like to update an existing product price point, that must be done
-        separately.
-
-        Args:
-            product_id (int): The Chargify id of the product
-            body (CreateOrUpdateProductRequest, optional): TODO: type
-                description here.
-
-        Returns:
-            ProductResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/products/{product_id}.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('product_id')
-                            .value(product_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProductResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def create_product(self,
-                       product_family_id,
-                       body=None):
-        """Does a POST request to /product_families/{product_family_id}/products.json.
-
-        Use this method to create a product within your Chargify site.
-        + [Products
-        Documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/540
-        5561405709)
-        + [Changing a Subscription's
-        Product](https://maxio-chargify.zendesk.com/hc/en-us/articles/540422533
-        4669-Product-Changes-Migrations)
-
-        Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the product belongs
-            body (CreateOrUpdateProductRequest, optional): TODO: type
-                description here.
-
-        Returns:
-            ProductResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/product_families/{product_family_id}/products.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('product_family_id')
-                            .value(product_family_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProductResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()

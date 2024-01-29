@@ -93,6 +93,7 @@ class Customer1(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -126,6 +127,7 @@ class Customer1(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return True
 

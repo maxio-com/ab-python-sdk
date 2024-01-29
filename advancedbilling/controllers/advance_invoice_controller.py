@@ -94,6 +94,48 @@ class AdvanceInvoiceController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
+    def read_advance_invoice(self,
+                             subscription_id):
+        """Does a GET request to /subscriptions/{subscription_id}/advance_invoice.json.
+
+        Once an advance invoice has been generated for a subscription's
+        upcoming renewal, it can be viewed through this endpoint. There can
+        only be one advance invoice per subscription per billing cycle.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+
+        Returns:
+            Invoice: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/advance_invoice.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('global'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Invoice.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+        ).execute()
+
     def void_advance_invoice(self,
                              subscription_id,
                              body=None):
@@ -140,48 +182,6 @@ class AdvanceInvoiceController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Invoice.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-        ).execute()
-
-    def read_advance_invoice(self,
-                             subscription_id):
-        """Does a GET request to /subscriptions/{subscription_id}/advance_invoice.json.
-
-        Once an advance invoice has been generated for a subscription's
-        upcoming renewal, it can be viewed through this endpoint. There can
-        only be one advance invoice per subscription per billing cycle.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-
-        Returns:
-            Invoice: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/advance_invoice.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
             .auth(Single('global'))
         ).response(
             ResponseHandler()

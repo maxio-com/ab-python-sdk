@@ -27,19 +27,13 @@ class PaymentMethodPaypalType(object):
         "mtype": 'type'
     }
 
-    _optionals = [
-        'email',
-        'mtype',
-    ]
-
     def __init__(self,
-                 email=APIHelper.SKIP,
+                 email=None,
                  mtype='paypal_account'):
         """Constructor for the PaymentMethodPaypalType class"""
 
         # Initialize members of the class
-        if email is not APIHelper.SKIP:
-            self.email = email 
+        self.email = email 
         self.mtype = mtype 
 
     @classmethod
@@ -56,11 +50,12 @@ class PaymentMethodPaypalType(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        email = dictionary.get("email") if dictionary.get("email") else APIHelper.SKIP
+        email = dictionary.get("email") if dictionary.get("email") else None
         mtype = dictionary.get("type") if dictionary.get("type") else 'paypal_account'
         # Return an object of this model
         return cls(email,
@@ -79,10 +74,13 @@ class PaymentMethodPaypalType(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.email, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.mtype, type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('email'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('type'), type_callable=lambda value: isinstance(value, str))

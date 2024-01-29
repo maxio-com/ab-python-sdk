@@ -57,6 +57,7 @@ class InvoiceLineItemPricingDetail(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
@@ -80,6 +81,7 @@ class InvoiceLineItemPricingDetail(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
             return True
 

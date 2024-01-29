@@ -29,23 +29,15 @@ class PaymentMethodBankAccountType(object):
         "mtype": 'type'
     }
 
-    _optionals = [
-        'masked_account_number',
-        'masked_routing_number',
-        'mtype',
-    ]
-
     def __init__(self,
-                 masked_account_number=APIHelper.SKIP,
-                 masked_routing_number=APIHelper.SKIP,
+                 masked_account_number=None,
+                 masked_routing_number=None,
                  mtype='bank_account'):
         """Constructor for the PaymentMethodBankAccountType class"""
 
         # Initialize members of the class
-        if masked_account_number is not APIHelper.SKIP:
-            self.masked_account_number = masked_account_number 
-        if masked_routing_number is not APIHelper.SKIP:
-            self.masked_routing_number = masked_routing_number 
+        self.masked_account_number = masked_account_number 
+        self.masked_routing_number = masked_routing_number 
         self.mtype = mtype 
 
     @classmethod
@@ -62,12 +54,13 @@ class PaymentMethodBankAccountType(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        masked_account_number = dictionary.get("masked_account_number") if dictionary.get("masked_account_number") else APIHelper.SKIP
-        masked_routing_number = dictionary.get("masked_routing_number") if dictionary.get("masked_routing_number") else APIHelper.SKIP
+        masked_account_number = dictionary.get("masked_account_number") if dictionary.get("masked_account_number") else None
+        masked_routing_number = dictionary.get("masked_routing_number") if dictionary.get("masked_routing_number") else None
         mtype = dictionary.get("type") if dictionary.get("type") else 'bank_account'
         # Return an object of this model
         return cls(masked_account_number,
@@ -87,10 +80,15 @@ class PaymentMethodBankAccountType(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+
         if isinstance(dictionary, cls):
-            return True
+            return APIHelper.is_valid_type(value=dictionary.masked_account_number, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.masked_routing_number, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.mtype, type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return True
+        return APIHelper.is_valid_type(value=dictionary.get('masked_account_number'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('masked_routing_number'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('type'), type_callable=lambda value: isinstance(value, str))

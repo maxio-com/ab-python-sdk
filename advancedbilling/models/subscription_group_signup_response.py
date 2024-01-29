@@ -28,11 +28,11 @@ class SubscriptionGroupSignupResponse(object):
         cancel_at_end_of_period (bool): TODO: type description here.
         subscriptions (List[SubscriptionGroupItem]): TODO: type description
             here.
-        payment_collection_method (PaymentCollectionMethod): The type of
-            payment collection to be used in the subscription. For legacy
-            Statements Architecture valid options are - `invoice`,
-            `automatic`. For current Relationship Invoicing Architecture valid
-            options are - `remittance`, `automatic`, `prepaid`.
+        payment_collection_method (CollectionMethod): The type of payment
+            collection to be used in the subscription. For legacy Statements
+            Architecture valid options are - `invoice`, `automatic`. For
+            current Relationship Invoicing Architecture valid options are -
+            `remittance`, `automatic`, `prepaid`.
 
     """
 
@@ -116,6 +116,7 @@ class SubscriptionGroupSignupResponse(object):
             object: An instance of this structure class.
 
         """
+
         if dictionary is None:
             return None
 
