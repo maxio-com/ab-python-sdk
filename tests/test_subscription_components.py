@@ -1,8 +1,10 @@
+from advancedbilling.exceptions.component_allocation_error_exception import ComponentAllocationErrorException
 from advancedbilling.models.allocate_components import AllocateComponents
 from advancedbilling.models.allocation import Allocation
 from advancedbilling.models.allocation_preview import AllocationPreview
 from advancedbilling.models.allocation_preview_item import AllocationPreviewItem
 from advancedbilling.models.component import Component
+from advancedbilling.models.component_allocation_error_item import ComponentAllocationErrorItem
 from advancedbilling.models.create_customer_request import CreateCustomerRequest
 from advancedbilling.models.create_on_off_component import CreateOnOffComponent
 from advancedbilling.models.create_or_update_product_request import CreateOrUpdateProductRequest
@@ -187,7 +189,6 @@ class TestSubscriptionComponents(TestBase):
         assert '1.0' == quantity_based_component_two_allocation.quantity
 
         # AND
-
         allocated_components = self.get_subscription_components_controller().allocate_components(
             subscription.id,
             AllocateComponents.from_dictionary({
@@ -226,3 +227,125 @@ class TestSubscriptionComponents(TestBase):
 
         assert quantity_based_component_two.id == allocated_quantity_based_component_two.component_id
         assert allocated_quantity_based_component_two.quantity == allocated_quantity_based_component_two.quantity
+
+        self.get_subscriptions_controller().purge_subscription(subscription.id, customer.id)
+        self.get_customers_controller().delete_customer(customer.id)
+
+    def test_allocate_components_given_on_off_component_with_invalid_quantity_then_raises_exception_with_422_status_code(
+            self):
+        # GIVEN
+        product_family: ProductFamily = self.get_product_families_controller().create_product_family(
+            CreateProductFamilyRequest.from_dictionary(
+                {
+                    "product_family": {
+                        "name": "TestSubscriptionComponents_Product_Family_Name_2",
+                        "description": "TestSubscriptionComponents_Product_Family_Description_2",
+                    }
+                }
+            )
+        ).product_family
+        product: Product = self.get_products_controller().create_product(
+            product_family.id,
+            CreateOrUpdateProductRequest.from_dictionary(
+                {
+                    "product":
+                        {
+                            "name": "TestSubscriptionComponents_Product_Name_2",
+                            "handle": "testsubscriptioncomponents_product_handle_2",
+                            "description": "TestSubscriptionComponents_Product_Description_2",
+                            "interval": 1,
+                            "price_in_cents": 10,
+                            "interval_unit": IntervalUnit.DAY
+                        }
+                }
+            )).product
+        customer: Customer = self.get_customers_controller().create_customer(CreateCustomerRequest.from_dictionary(
+            {
+                "customer": {
+                    "first_name": "TestSubscriptionComponents_Customer_FirstName_2",
+                    "last_name": "TestSubscriptionComponents_Customer_LastName_2",
+                    "email": "tscce1@email.com",
+                    "cc_emails": ["email@email.com"],
+                    "organization": "TestSubscriptionComponents_CustomerOrganization_2",
+                    "reference": "TestSubscriptionComponents_CustomerReference_2",
+                    "address": "test address",
+                    "address_2": "test address two",
+                    "city": "Ohio",
+                    "state": "TX",
+                    "zip": "test zip",
+                    "country": "US",
+                    "phone": "+00 123 456 789",
+                    "tax_exempt": False,
+                    "vat_number": "test vat number",
+                    "parent_id": None,
+                    "locale": None
+                }
+            }
+        )).customer
+        payment_profile: CreditCardPaymentProfile = self.get_payment_profiles_controller().create_payment_profile(
+            CreatePaymentProfileRequest.from_dictionary(
+                {
+                    "payment_profile": {
+                        "customer_id": customer.id,
+                        "payment_type": PaymentType.CREDIT_CARD,
+                        "expiration_month": 12,
+                        "expiration_year": 2027,
+                        "full_number": "4111111111111111"
+                    }
+                }
+            )
+        ).payment_profile
+        on_off_component: Component = self.get_components_controller().create_on_off_component(
+            product_family.id,
+            CreateOnOffComponent.from_dictionary(
+                {
+                    "on_off_component": {
+                        "name": "TestSubscriptionComponents_On_Off_Component_Name_2",
+                        'unit_price': "1.0",
+                        "prices": [
+                            {
+                                "unit_price": "0.10",
+                                "starting_quantity": "0"
+                            }
+                        ],
+                    }
+                }
+            )).component
+        subscription: Subscription = self.get_subscriptions_controller().create_subscription(
+            CreateSubscriptionRequest.from_dictionary(
+                {
+                    "subscription": {
+                        "product_id": product.id,
+                        'customer_id': customer.id,
+                        "dunning_communication_delay_enabled": False,
+                        "payment_collection_method": "automatic",
+                        "skip_billing_manifest_taxes": False,
+                        "payment_profile_id": payment_profile.id,
+                    }
+                }
+            )).subscription
+        # THEN
+        try:
+            self.get_subscription_components_controller().preview_allocations(
+                subscription.id,
+                AllocateComponents.from_dictionary({
+                    "proration_upgrade_scheme": "prorate-attempt-capture",
+                    "proration_downgrade_scheme": "no-prorate",
+                    "allocations": [
+                        {
+                            "component_id": on_off_component.id,
+                            "memo": "TestSubscriptionComponents_On_Off_Component_memo_1",
+                            "quantity": "20"
+                        },
+                    ]
+                }))
+        except ComponentAllocationErrorException as e:
+            assert 422 == e.response_code
+            error: ComponentAllocationErrorItem = e.errors[0]
+            assert on_off_component.id == error.component_id
+            assert "allocation" == error.kind
+            assert "Quantity: must be either 1 (on) or 0 (off)." == error.message
+            assert 'quantity' == error.on
+
+        self.get_subscriptions_controller().purge_subscription(subscription.id, customer.id)
+        self.get_customers_controller().delete_customer(customer.id)
