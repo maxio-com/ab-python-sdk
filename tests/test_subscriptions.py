@@ -1,3 +1,10 @@
+from os import getenv
+
+import pytest
+
+from advancedbilling.advanced_billing_client import AdvancedBillingClient
+from advancedbilling.exceptions.api_exception import APIException
+from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.models.component import Component
 from advancedbilling.models.create_customer_request import CreateCustomerRequest
 from advancedbilling.models.create_on_off_component import CreateOnOffComponent
@@ -217,3 +224,78 @@ class TestSubscriptions(TestBase):
 
         self.get_subscriptions_controller().purge_subscription(subscription.id, customer.id)
         self.get_customers_controller().delete_customer(customer.id)
+
+    def test_create_subscription_given_existing_product_and_not_existing_customer_then_thrown_exception_with_422_status_code(
+            self):
+        # GIVEN
+        not_existing_customer_id = 1234567
+        not_existing_payment_profile_id = 123245612
+        product_family: ProductFamily = self.get_product_families_controller().create_product_family(
+            CreateProductFamilyRequest.from_dictionary(
+                {
+                    "product_family": {
+                        "name": "TestSubscriptions_Product_Family_Name_2",
+                        "description": "TestSubscriptions_Product_Family_Description_2",
+                    }
+                }
+            )
+        ).product_family
+        product: Product = self.get_products_controller().create_product(
+            product_family.id,
+            CreateOrUpdateProductRequest.from_dictionary(
+                {
+                    "product":
+                        {
+                            "name": "TestSubscriptions_Product_Name_2",
+                            "handle": "testsubscriptions_product_handle_2",
+                            "description": "TestSubscriptions_Product_Description_2",
+                            "interval": 1,
+                            "price_in_cents": 10,
+                            "interval_unit": IntervalUnit.DAY
+                        }
+                }
+            )).product
+
+        # THEN
+        with pytest.raises(ErrorListResponseException) as e:
+            self.get_subscriptions_controller().create_subscription(
+                CreateSubscriptionRequest.from_dictionary(
+                    {
+                        "subscription": {
+                            "product_id": product.id,
+                            'customer_id': not_existing_customer_id,
+                            "dunning_communication_delay_enabled": False,
+                            "payment_collection_method": "automatic",
+                            "skip_billing_manifest_taxes": False,
+                            "payment_profile_id": not_existing_payment_profile_id,
+                        }
+                    }
+                ))
+
+            assert 422 == e.value.response_code
+            assert "A Customer must be specified for the subscription to be valid." == e.value.message
+
+    def test_create_subscription_given_invalid_credentials_then_thrown_exception_with_401_status_code(self):
+        client = AdvancedBillingClient(
+            subdomain=getenv("SUBDOMAIN"),
+            domain=getenv("DOMAIN"),
+            basic_auth_user_name="thisiswrongapitokenthisiswrongapitokenV8",
+            basic_auth_password=getenv("BASIC_AUTH_PASSWORD")
+        )
+
+        with pytest.raises(APIException) as e:
+            client.subscriptions.create_subscription(
+                CreateSubscriptionRequest.from_dictionary(
+                    {
+                        "subscription": {
+                            "product_id": 2132441,
+                            'customer_id': 23214,
+                            "dunning_communication_delay_enabled": False,
+                            "payment_collection_method": "automatic",
+                            "skip_billing_manifest_taxes": False,
+                            "payment_profile_id": 213412,
+                        }
+                    }
+                ))
+
+            assert 401 == e.value.response_code
