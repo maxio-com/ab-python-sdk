@@ -7,6 +7,8 @@ from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.models.component import Component
 from advancedbilling.models.create_customer_request import CreateCustomerRequest
+from advancedbilling.models.create_metadata_request import CreateMetadataRequest
+from advancedbilling.models.create_metafields_request import CreateMetafieldsRequest
 from advancedbilling.models.create_on_off_component import CreateOnOffComponent
 from advancedbilling.models.create_or_update_product_request import CreateOrUpdateProductRequest
 from advancedbilling.models.create_payment_profile_request import CreatePaymentProfileRequest
@@ -20,6 +22,7 @@ from advancedbilling.models.payment_type import PaymentType
 from advancedbilling.models.pricing_scheme import PricingScheme
 from advancedbilling.models.product import Product
 from advancedbilling.models.product_family import ProductFamily
+from advancedbilling.models.resource_type import ResourceType
 from advancedbilling.models.subscription import Subscription
 from tests.base import TestBase
 
@@ -299,3 +302,134 @@ class TestSubscriptions(TestBase):
                 ))
 
             assert 401 == e.value.response_code
+
+    def test_list_subscriptions_given_filter_by_metadata_then_return_subscription_having_this_metadata(self):
+        product_family: ProductFamily = self.get_product_families_controller().create_product_family(
+            CreateProductFamilyRequest.from_dictionary(
+                {
+                    "product_family": {
+                        "name": "TestSubscriptions_Product_Family_Name_3",
+                        "description": "TestSubscriptions_Product_Family_Description_3",
+                    }
+                }
+            )
+        ).product_family
+        product: Product = self.get_products_controller().create_product(
+            product_family.id,
+            CreateOrUpdateProductRequest.from_dictionary(
+                {
+                    "product":
+                        {
+                            "name": "TestSubscriptions_Product_Name_3",
+                            "handle": "testsubscriptions_product_handle_3",
+                            "description": "TestSubscriptions_Product_Description_3",
+                            "interval": 1,
+                            "price_in_cents": 10,
+                            "interval_unit": IntervalUnit.DAY
+                        }
+                }
+            )).product
+        customer: Customer = self.get_customers_controller().create_customer(CreateCustomerRequest.from_dictionary(
+            {
+                "customer": {
+                    "first_name": "TestSubscriptions_Customer_FirstName_3",
+                    "last_name": "TestSubscriptions_Customer_LastName_3",
+                    "email": "tsce2@email.com",
+                    "cc_emails": ["email@email.com"],
+                    "organization": "TestSubscriptions_CustomerOrganization_3",
+                    "reference": "TestSubscriptions_CustomerReference_3",
+                    "address": "test address",
+                    "address_2": "test address two",
+                    "city": "Ohio",
+                    "state": "TX",
+                    "zip": "test zip",
+                    "country": "US",
+                    "phone": "+00 123 456 789",
+                    "tax_exempt": False,
+                    "vat_number": "test vat number",
+                    "parent_id": None,
+                    "locale": None
+                }
+            }
+        )).customer
+        payment_profile: CreditCardPaymentProfile = self.get_payment_profiles_controller().create_payment_profile(
+            CreatePaymentProfileRequest.from_dictionary(
+                {
+                    "payment_profile": {
+                        "customer_id": customer.id,
+                        "payment_type": PaymentType.CREDIT_CARD,
+                        "expiration_month": 12,
+                        "expiration_year": 2027,
+                        "full_number": "4111111111111111"
+                    }
+                }
+            )
+        ).payment_profile
+
+        # THEN
+        subscription: Subscription = self.get_subscriptions_controller().create_subscription(
+            CreateSubscriptionRequest.from_dictionary(
+                {
+                    "subscription": {
+                        "product_id": product.id,
+                        'customer_id': customer.id,
+                        "dunning_communication_delay_enabled": False,
+                        "payment_collection_method": "automatic",
+                        "skip_billing_manifest_taxes": False,
+                        "payment_profile_id": payment_profile.id,
+                    }
+                }
+            )).subscription
+
+        self.get_custom_fields_controller().create_metafields(
+            ResourceType.SUBSCRIPTIONS,
+            CreateMetafieldsRequest.from_dictionary(
+                {
+                    "metafields": [
+                        {
+                            "name": "Dropdown field",
+                            "input_type": "dropdown",
+                            "enum": [
+                                "option 1",
+                                "option 2"
+                            ],
+                            "scope": {
+                                "public_edit": "1",
+                                "public_show": "1"
+                            }
+                        },
+                    ]
+                }
+            )
+        )
+        self.get_custom_fields_controller().create_metadata(
+            ResourceType.SUBSCRIPTIONS,
+            subscription.id,
+            CreateMetadataRequest.from_dictionary(
+                {
+                    "metadata": [
+                        {
+                            "name": "Dropdown field",
+                            "value": "option 1"
+                        },
+                    ]
+                }
+            )
+        )
+
+        # THEN
+        results = self.get_subscriptions_controller().list_subscriptions(
+            {
+                "metadata": {
+                    "Dropdown field": "option 1"
+                }
+            }
+        )
+
+        assert 1 == len(results)
+        found_subscription: Subscription = results[0].subscription
+
+        assert subscription.id == found_subscription.id
+
+        self.get_subscriptions_controller().purge_subscription(subscription.id, customer.id)
+        self.get_customers_controller().delete_customer(customer.id)
