@@ -3,6 +3,7 @@ from datetime import date, timedelta
 
 import pytest
 
+from advancedbilling.exceptions.error_array_map_response_exception import ErrorArrayMapResponseException
 from advancedbilling.models.coupon import Coupon
 from advancedbilling.models.create_customer import CreateCustomer
 from advancedbilling.models.create_customer_request import CreateCustomerRequest
@@ -333,119 +334,103 @@ class TestInvoices(TestBase):
         assert "voided" == response.status
         assert invoice.uid == response.uid
 
+        self.get_subscriptions_controller().purge_subscription(subscription.id, customer.id)
+        self.get_customers_controller().delete_customer(customer.id)
+
     def test_list_invoice_events_given_voided_invoice_then_return_void_invoice_event_and_issue_invoice_event(self):
         pytest.skip("Waiting for sdk update.")
         product_family: ProductFamily = self.get_product_families_controller().create_product_family(
-            CreateProductFamilyRequest.from_dictionary(
-                {
-                    "product_family": {
-                        "name": "TestInvoices_Product_Family_Name_3",
-                        "description": "TestInvoices_Product_Family_Description_3",
-                    }
-                }
-            )
+            CreateProductFamilyRequest(product_family=CreateProductFamily(
+                name="TestInvoices_Product_Family_Name_3",
+                description="TestInvoices_Product_Family_Description_3"
+            ))
         ).product_family
-        product: Product = self.get_products_controller().create_product(
-            product_family.id,
 
-            CreateOrUpdateProductRequest.from_dictionary(
-                {
-                    "product":
-                        {
-                            "name": "TestInvoices_Product_Name_3",
-                            "handle": "testinvoices_product_handle_3",
-                            "description": "TestInvoices_Product_Description_3",
-                            "interval": 1,
-                            "price_in_cents": 10,
-                            "interval_unit": IntervalUnit.DAY
-                        }
-                }
-            )).product
-        customer: Customer = self.get_customers_controller().create_customer(CreateCustomerRequest.from_dictionary(
-            {
-                "customer": {
-                    "first_name": "TestInvoices_Customer_FirstName_3",
-                    "last_name": "TestInvoices_Customer_LastName_3",
-                    "email": "tsce1@email.com",
-                    "cc_emails": ["email@email.com"],
-                    "organization": "TestInvoices_CustomerOrganization_3",
-                    "reference": "TestInvoices_CustomerReference_3",
-                    "address": "test address",
-                    "address_2": "test address two",
-                    "city": "Ohio",
-                    "state": "TX",
-                    "zip": "test zip",
-                    "country": "US",
-                    "phone": "+00 123 456 789",
-                    "tax_exempt": False,
-                    "vat_number": "test vat number",
-                    "parent_id": None,
-                    "locale": None
-                }
-            }
-        )).customer
+        product: Product = self.get_products_controller().create_product(
+            product_family_id=product_family.id,
+            body=CreateOrUpdateProductRequest(product=CreateOrUpdateProduct(
+                name="TestInvoices_Product_Name_3",
+                handle="testinvoices_product_handle_3",
+                description="TestInvoices_Product_Description_3",
+                interval=1,
+                price_in_cents=10,
+                interval_unit=IntervalUnit.DAY
+            ))
+        ).product
+
+        customer: Customer = self.get_customers_controller().create_customer(
+            body=CreateCustomerRequest(customer=CreateCustomer(
+                first_name="TestInvoices_Customer_FirstName_3",
+                last_name="TestInvoices_Customer_LastName_3",
+                email="tsce1@email.com",
+                cc_emails=["email@email.com"],
+                organization="TestInvoices_CustomerOrganization_4",
+                reference="TestInvoices_CustomerReference_4",
+                address="test address",
+                address_2="test address two",
+                city="Ohio",
+                state="TX",
+                zip="test zip",
+                country="US",
+                phone="+00 123 456 789",
+                tax_exempt=False,
+                vat_number="test vat number",
+                parent_id=None,
+                locale=None
+            ))
+        ).customer
         payment_profile: CreditCardPaymentProfile = self.get_payment_profiles_controller().create_payment_profile(
-            CreatePaymentProfileRequest.from_dictionary(
-                {
-                    "payment_profile": {
-                        "customer_id": customer.id,
-                        "payment_type": PaymentType.CREDIT_CARD,
-                        "expiration_month": 12,
-                        "expiration_year": 2027,
-                        "full_number": "4111111111111111"
-                    }
-                }
+            CreatePaymentProfileRequest(
+                CreatePaymentProfile(
+                    customer_id=customer.id,
+                    payment_type=PaymentType.CREDIT_CARD,
+                    expiration_month=12,
+                    expiration_year=2027,
+                    full_number="4111111111111111"
+                )
+
             )
         ).payment_profile
         subscription: Subscription = self.get_subscriptions_controller().create_subscription(
-            CreateSubscriptionRequest.from_dictionary(
-                {
-                    "subscription": {
-                        "product_id": product.id,
-                        'customer_id': customer.id,
-                        "dunning_communication_delay_enabled": False,
-                        "payment_collection_method": "automatic",
-                        "skip_billing_manifest_taxes": False,
-                        "payment_profile_id": payment_profile.id,
-                    }
-                }
-            )).subscription
-        invoice: Invoice = self.get_invoices_controller().create_invoice(
-            subscription.id,
-            CreateInvoiceRequest.from_dictionary(
-                {
-                    "invoice": {
-                        "issue_date": "2024-01-01",
-                        "billing_address": {
-                            "first_name": "Hilario",
-                            "last_name": "Schmidt",
-                            "phone": "282-329-2085",
-                            "address": "65581 Auer Expressway",
-                            "zip": "15217",
-                            "country": "US",
-                            "city": "test City",
-                            "state": "test State"
-                        },
-                        "line_items": [
-                            {
-                                "title": "TestInvoices_Product_Name_1",
-                                "quantity": "12",
-                                "unit_price": "150.00",
-                                "description": "test invoice"
-                            }
-                        ],
-                    }
-                }
-            )).invoice
-        self.get_invoices_controller().void_invoice(
-            invoice.uid,
-            VoidInvoiceRequest.from_dictionary(
-                {
-                    "void": {
-                        "reason": "Duplicate invoice"
-                    }
-                }
+            body=CreateSubscriptionRequest(CreateSubscription(
+                product_id=product.id,
+                customer_id=customer.id,
+                dunning_communication_delay_enabled=False,
+                payment_collection_method="automatic",
+                skip_billing_manifest_taxes=False,
+                payment_profile_id=payment_profile.id,
             ))
+        ).subscription
+        invoice: Invoice = self.get_invoices_controller().create_invoice(
+            subscription_id=subscription.id,
+            body=CreateInvoiceRequest(CreateInvoice(
+                issue_date="2024-01-01",
+                billing_address=CreateInvoiceAddress(
+                    first_name="Hilario",
+                    last_name="Schmidt",
+                    phone="282-329-2085",
+                    address="65581 Auer Expressway",
+                    zip="15217",
+                    country="US",
+                    city="test City",
+                    state="test State"
+                ),
+                line_items=[
+                    CreateInvoiceItem(
+                        title="TestInvoices_Product_Name_1",
+                        quantity="12",
+                        unit_price="150.00",
+                        description="test invoice",
+                    )
+                ]
+            ))
+        ).invoice
+        self.get_invoices_controller().void_invoice(
+            uid=invoice.uid,
+            body=VoidInvoiceRequest(void=VoidInvoice(
+                reason="Duplicate invoice"
+            ))
+        )
         time.sleep(1.0)
 
         # THEN
@@ -461,3 +446,107 @@ class TestInvoices(TestBase):
         event: InvoiceEvent
         for event in events:
             assert InvoiceEventType.ISSUE_INVOICE == event.event_type or InvoiceEventType.VOID_INVOICE == event.event_type
+
+        self.get_subscriptions_controller().purge_subscription(subscription.id, customer.id)
+        self.get_customers_controller().delete_customer(customer.id)
+
+    def test_create_invoice_given_invalid_period_range_end_value_then_should_throw_exception_with_422_status_code(self):
+        product_family: ProductFamily = self.get_product_families_controller().create_product_family(
+            CreateProductFamilyRequest(product_family=CreateProductFamily(
+                name="TestInvoices_Product_Family_Name_4",
+                description="TestInvoices_Product_Family_Description_4"
+            ))
+        ).product_family
+
+        product: Product = self.get_products_controller().create_product(
+            product_family_id=product_family.id,
+            body=CreateOrUpdateProductRequest(product=CreateOrUpdateProduct(
+                name="TestInvoices_Product_Name_4",
+                handle="testinvoices_product_handle_4",
+                description="TestInvoices_Product_Description_4",
+                interval=1,
+                price_in_cents=10,
+                interval_unit=IntervalUnit.DAY
+            ))
+        ).product
+
+        customer: Customer = self.get_customers_controller().create_customer(
+            body=CreateCustomerRequest(customer=CreateCustomer(
+                first_name="TestInvoices_Customer_FirstName_4",
+                last_name="TestInvoices_Customer_LastName_4",
+                email="tsce1@email.com",
+                cc_emails=["email@email.com"],
+                organization="TestInvoices_CustomerOrganization_4",
+                reference="TestInvoices_CustomerReference_4",
+                address="test address",
+                address_2="test address two",
+                city="Ohio",
+                state="TX",
+                zip="test zip",
+                country="US",
+                phone="+00 123 456 789",
+                tax_exempt=False,
+                vat_number="test vat number",
+                parent_id=None,
+                locale=None
+            ))
+        ).customer
+        payment_profile: CreditCardPaymentProfile = self.get_payment_profiles_controller().create_payment_profile(
+            CreatePaymentProfileRequest(
+                CreatePaymentProfile(
+                    customer_id=customer.id,
+                    payment_type=PaymentType.CREDIT_CARD,
+                    expiration_month=12,
+                    expiration_year=2027,
+                    full_number="4111111111111111"
+                )
+
+            )
+        ).payment_profile
+        subscription: Subscription = self.get_subscriptions_controller().create_subscription(
+            body=CreateSubscriptionRequest(CreateSubscription(
+                product_id=product.id,
+                customer_id=customer.id,
+                dunning_communication_delay_enabled=False,
+                payment_collection_method="automatic",
+                skip_billing_manifest_taxes=False,
+                payment_profile_id=payment_profile.id,
+            ))
+        ).subscription
+
+        with pytest.raises(ErrorArrayMapResponseException) as exception_info:
+            self.get_invoices_controller().create_invoice(
+                subscription_id=subscription.id,
+                body=CreateInvoiceRequest(CreateInvoice(
+                    issue_date="2024-01-01",
+                    billing_address=CreateInvoiceAddress(
+                        first_name="Hilario",
+                        last_name="Schmidt",
+                        phone="282-329-2085",
+                        address="65581 Auer Expressway",
+                        zip="15217",
+                        country="US",
+                        city="test City",
+                        state="test State"
+                    ),
+                    line_items=[
+                        CreateInvoiceItem(
+                            title="TestInvoices_Product_Name_1",
+                            quantity="12",
+                            unit_price="150.00",
+                            description="test invoice",
+                            period_range_start="2024-01-01",
+                            period_range_end="2023-01-01"
+                        )
+                    ]
+                ))
+            )
+
+            exception_info.errisinstance(ErrorArrayMapResponseException)
+            assert 422 == exception_info.value.response_code
+            errors = exception_info.value.errors
+            assert 1 == len(errors)
+            assert {"line_items[0].period_range_end": ["Must be greater or equal to period_range_start."]} == errors
+
+        self.get_subscriptions_controller().purge_subscription(subscription.id, customer.id)
+        self.get_customers_controller().delete_customer(customer.id)
