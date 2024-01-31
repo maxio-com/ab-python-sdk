@@ -11,9 +11,9 @@ from advancedbilling.models.applied_credit_note_data import AppliedCreditNoteDat
 from advancedbilling.models.credit_note_1 import CreditNote1
 
 
-class InvoiceEvent1(object):
+class InvoiceEventData(object):
 
-    """Implementation of the 'Invoice Event1' model.
+    """Implementation of the 'Invoice Event Data' model.
 
     The event data is the data that, when combined with the command, results
     in the output invoice found in the invoice field.
@@ -43,11 +43,16 @@ class InvoiceEvent1(object):
         debit_note_uid (str): Unique identifier for the debit note. It is
             generated automatically by Chargify and has the prefix "db_"
             followed by alphanumeric characters.
-        payment_method (PaymentMethodApplePayType |
-            PaymentMethodBankAccountType | PaymentMethodCreditCardType |
-            PaymentMethodExternalType | PaymentMethodPaypalType | None): A
-            nested data structure detailing the method of payment
+        payment_method (PaymentMethodApplePay | PaymentMethodBankAccount |
+            PaymentMethodCreditCard | PaymentMethodExternal |
+            PaymentMethodPaypal | None): A nested data structure detailing the
+            method of payment
         transaction_id (int): The Chargify id of the original payment
+        parent_invoice_number (int): TODO: type description here.
+        remaining_prepayment_amount (str): TODO: type description here.
+        prepayment (bool): The flag that shows whether the original payment
+            was a prepayment or not
+        external (bool): TODO: type description here.
         from_collection_method (str): The previous collection method of the
             invoice.
         to_collection_method (str): The new collection method of the invoice.
@@ -80,8 +85,6 @@ class InvoiceEvent1(object):
         payment_id (int): The ID of the payment transaction to be refunded.
         refund_amount (str): The amount of the refund.
         refund_id (int): The ID of the refund transaction.
-        prepayment (bool): The flag that shows whether the original payment
-            was a prepayment or not
         is_advance_invoice (bool): If true, the invoice is an advance
             invoice.
         reason (str): The reason for the void.
@@ -104,6 +107,10 @@ class InvoiceEvent1(object):
         "debit_note_uid": 'debit_note_uid',
         "payment_method": 'payment_method',
         "transaction_id": 'transaction_id',
+        "parent_invoice_number": 'parent_invoice_number',
+        "remaining_prepayment_amount": 'remaining_prepayment_amount',
+        "prepayment": 'prepayment',
+        "external": 'external',
         "from_collection_method": 'from_collection_method',
         "to_collection_method": 'to_collection_method',
         "consolidation_level": 'consolidation_level',
@@ -116,7 +123,6 @@ class InvoiceEvent1(object):
         "payment_id": 'payment_id',
         "refund_amount": 'refund_amount',
         "refund_id": 'refund_id',
-        "prepayment": 'prepayment',
         "is_advance_invoice": 'is_advance_invoice',
         "reason": 'reason'
     }
@@ -136,6 +142,10 @@ class InvoiceEvent1(object):
         'debit_note_uid',
         'payment_method',
         'transaction_id',
+        'parent_invoice_number',
+        'remaining_prepayment_amount',
+        'prepayment',
+        'external',
         'from_collection_method',
         'to_collection_method',
         'consolidation_level',
@@ -148,9 +158,13 @@ class InvoiceEvent1(object):
         'payment_id',
         'refund_amount',
         'refund_id',
-        'prepayment',
         'is_advance_invoice',
         'reason',
+    ]
+
+    _nullables = [
+        'parent_invoice_number',
+        'remaining_prepayment_amount',
     ]
 
     def __init__(self,
@@ -168,6 +182,10 @@ class InvoiceEvent1(object):
                  debit_note_uid=APIHelper.SKIP,
                  payment_method=APIHelper.SKIP,
                  transaction_id=APIHelper.SKIP,
+                 parent_invoice_number=APIHelper.SKIP,
+                 remaining_prepayment_amount=APIHelper.SKIP,
+                 prepayment=APIHelper.SKIP,
+                 external=APIHelper.SKIP,
                  from_collection_method=APIHelper.SKIP,
                  to_collection_method=APIHelper.SKIP,
                  consolidation_level=APIHelper.SKIP,
@@ -180,10 +198,9 @@ class InvoiceEvent1(object):
                  payment_id=APIHelper.SKIP,
                  refund_amount=APIHelper.SKIP,
                  refund_id=APIHelper.SKIP,
-                 prepayment=APIHelper.SKIP,
                  is_advance_invoice=APIHelper.SKIP,
                  reason=APIHelper.SKIP):
-        """Constructor for the InvoiceEvent1 class"""
+        """Constructor for the InvoiceEventData class"""
 
         # Initialize members of the class
         if uid is not APIHelper.SKIP:
@@ -214,6 +231,14 @@ class InvoiceEvent1(object):
             self.payment_method = payment_method 
         if transaction_id is not APIHelper.SKIP:
             self.transaction_id = transaction_id 
+        if parent_invoice_number is not APIHelper.SKIP:
+            self.parent_invoice_number = parent_invoice_number 
+        if remaining_prepayment_amount is not APIHelper.SKIP:
+            self.remaining_prepayment_amount = remaining_prepayment_amount 
+        if prepayment is not APIHelper.SKIP:
+            self.prepayment = prepayment 
+        if external is not APIHelper.SKIP:
+            self.external = external 
         if from_collection_method is not APIHelper.SKIP:
             self.from_collection_method = from_collection_method 
         if to_collection_method is not APIHelper.SKIP:
@@ -238,8 +263,6 @@ class InvoiceEvent1(object):
             self.refund_amount = refund_amount 
         if refund_id is not APIHelper.SKIP:
             self.refund_id = refund_id 
-        if prepayment is not APIHelper.SKIP:
-            self.prepayment = prepayment 
         if is_advance_invoice is not APIHelper.SKIP:
             self.is_advance_invoice = is_advance_invoice 
         if reason is not APIHelper.SKIP:
@@ -281,8 +304,12 @@ class InvoiceEvent1(object):
             applied_credit_notes = APIHelper.SKIP
         debit_note_number = dictionary.get("debit_note_number") if dictionary.get("debit_note_number") else APIHelper.SKIP
         debit_note_uid = dictionary.get("debit_note_uid") if dictionary.get("debit_note_uid") else APIHelper.SKIP
-        payment_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('InvoiceEvent1PaymentMethod'), dictionary.get('payment_method'), False) if dictionary.get('payment_method') is not None else APIHelper.SKIP
+        payment_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('InvoiceEventDataPaymentMethod'), dictionary.get('payment_method'), False) if dictionary.get('payment_method') is not None else APIHelper.SKIP
         transaction_id = dictionary.get("transaction_id") if dictionary.get("transaction_id") else APIHelper.SKIP
+        parent_invoice_number = dictionary.get("parent_invoice_number") if "parent_invoice_number" in dictionary.keys() else APIHelper.SKIP
+        remaining_prepayment_amount = dictionary.get("remaining_prepayment_amount") if "remaining_prepayment_amount" in dictionary.keys() else APIHelper.SKIP
+        prepayment = dictionary.get("prepayment") if "prepayment" in dictionary.keys() else APIHelper.SKIP
+        external = dictionary.get("external") if "external" in dictionary.keys() else APIHelper.SKIP
         from_collection_method = dictionary.get("from_collection_method") if dictionary.get("from_collection_method") else APIHelper.SKIP
         to_collection_method = dictionary.get("to_collection_method") if dictionary.get("to_collection_method") else APIHelper.SKIP
         consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP
@@ -295,7 +322,6 @@ class InvoiceEvent1(object):
         payment_id = dictionary.get("payment_id") if dictionary.get("payment_id") else APIHelper.SKIP
         refund_amount = dictionary.get("refund_amount") if dictionary.get("refund_amount") else APIHelper.SKIP
         refund_id = dictionary.get("refund_id") if dictionary.get("refund_id") else APIHelper.SKIP
-        prepayment = dictionary.get("prepayment") if "prepayment" in dictionary.keys() else APIHelper.SKIP
         is_advance_invoice = dictionary.get("is_advance_invoice") if "is_advance_invoice" in dictionary.keys() else APIHelper.SKIP
         reason = dictionary.get("reason") if dictionary.get("reason") else APIHelper.SKIP
         # Return an object of this model
@@ -313,6 +339,10 @@ class InvoiceEvent1(object):
                    debit_note_uid,
                    payment_method,
                    transaction_id,
+                   parent_invoice_number,
+                   remaining_prepayment_amount,
+                   prepayment,
+                   external,
                    from_collection_method,
                    to_collection_method,
                    consolidation_level,
@@ -325,6 +355,5 @@ class InvoiceEvent1(object):
                    payment_id,
                    refund_amount,
                    refund_id,
-                   prepayment,
                    is_advance_invoice,
                    reason)

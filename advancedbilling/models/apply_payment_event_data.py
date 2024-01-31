@@ -31,11 +31,15 @@ class ApplyPaymentEventData(object):
             `"40.11"`.
         transaction_time (datetime): The time the payment was applied, in ISO
             8601 format, i.e. "2019-06-07T17:20:06Z"
-        payment_method (PaymentMethodApplePayType |
-            PaymentMethodBankAccountType | PaymentMethodCreditCardType |
-            PaymentMethodExternalType | PaymentMethodPaypalType): A nested
-            data structure detailing the method of payment
+        payment_method (PaymentMethodApplePay | PaymentMethodBankAccount |
+            PaymentMethodCreditCard | PaymentMethodExternal |
+            PaymentMethodPaypal): A nested data structure detailing the method
+            of payment
         transaction_id (int): The Chargify id of the original payment
+        parent_invoice_number (int): TODO: type description here.
+        remaining_prepayment_amount (str): TODO: type description here.
+        prepayment (bool): TODO: type description here.
+        external (bool): TODO: type description here.
 
     """
 
@@ -46,11 +50,24 @@ class ApplyPaymentEventData(object):
         "applied_amount": 'applied_amount',
         "transaction_time": 'transaction_time',
         "payment_method": 'payment_method',
-        "transaction_id": 'transaction_id'
+        "transaction_id": 'transaction_id',
+        "parent_invoice_number": 'parent_invoice_number',
+        "remaining_prepayment_amount": 'remaining_prepayment_amount',
+        "prepayment": 'prepayment',
+        "external": 'external'
     }
 
     _optionals = [
         'transaction_id',
+        'parent_invoice_number',
+        'remaining_prepayment_amount',
+        'prepayment',
+        'external',
+    ]
+
+    _nullables = [
+        'parent_invoice_number',
+        'remaining_prepayment_amount',
     ]
 
     def __init__(self,
@@ -59,7 +76,11 @@ class ApplyPaymentEventData(object):
                  applied_amount=None,
                  transaction_time=None,
                  payment_method=None,
-                 transaction_id=APIHelper.SKIP):
+                 transaction_id=APIHelper.SKIP,
+                 parent_invoice_number=APIHelper.SKIP,
+                 remaining_prepayment_amount=APIHelper.SKIP,
+                 prepayment=APIHelper.SKIP,
+                 external=APIHelper.SKIP):
         """Constructor for the ApplyPaymentEventData class"""
 
         # Initialize members of the class
@@ -70,6 +91,14 @@ class ApplyPaymentEventData(object):
         self.payment_method = payment_method 
         if transaction_id is not APIHelper.SKIP:
             self.transaction_id = transaction_id 
+        if parent_invoice_number is not APIHelper.SKIP:
+            self.parent_invoice_number = parent_invoice_number 
+        if remaining_prepayment_amount is not APIHelper.SKIP:
+            self.remaining_prepayment_amount = remaining_prepayment_amount 
+        if prepayment is not APIHelper.SKIP:
+            self.prepayment = prepayment 
+        if external is not APIHelper.SKIP:
+            self.external = external 
 
     @classmethod
     def from_dictionary(cls,
@@ -95,15 +124,23 @@ class ApplyPaymentEventData(object):
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else None
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
         transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else None
-        payment_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ApplyPaymentEventDataPaymentMethod'), dictionary.get('payment_method'), False) if dictionary.get('payment_method') is not None else None
+        payment_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('Invoice-Event-Payment'), dictionary.get('payment_method'), False) if dictionary.get('payment_method') is not None else None
         transaction_id = dictionary.get("transaction_id") if dictionary.get("transaction_id") else APIHelper.SKIP
+        parent_invoice_number = dictionary.get("parent_invoice_number") if "parent_invoice_number" in dictionary.keys() else APIHelper.SKIP
+        remaining_prepayment_amount = dictionary.get("remaining_prepayment_amount") if "remaining_prepayment_amount" in dictionary.keys() else APIHelper.SKIP
+        prepayment = dictionary.get("prepayment") if "prepayment" in dictionary.keys() else APIHelper.SKIP
+        external = dictionary.get("external") if "external" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(memo,
                    original_amount,
                    applied_amount,
                    transaction_time,
                    payment_method,
-                   transaction_id)
+                   transaction_id,
+                   parent_invoice_number,
+                   remaining_prepayment_amount,
+                   prepayment,
+                   external)
 
     @classmethod
     def validate(cls, dictionary):
@@ -125,7 +162,7 @@ class ApplyPaymentEventData(object):
                 and APIHelper.is_valid_type(value=dictionary.original_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.transaction_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
-                and UnionTypeLookUp.get('ApplyPaymentEventDataPaymentMethod').validate(dictionary.payment_method)
+                and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.payment_method)
 
         if not isinstance(dictionary, dict):
             return False
@@ -134,4 +171,4 @@ class ApplyPaymentEventData(object):
             and APIHelper.is_valid_type(value=dictionary.get('original_amount'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('transaction_time'), type_callable=lambda value: isinstance(value, str)) \
-            and UnionTypeLookUp.get('ApplyPaymentEventDataPaymentMethod').validate(dictionary.get('payment_method'))
+            and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.get('payment_method'))

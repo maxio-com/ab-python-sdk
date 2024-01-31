@@ -6,6 +6,8 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.billing_address import BillingAddress
 from advancedbilling.models.credit_note_application import CreditNoteApplication
@@ -41,11 +43,11 @@ class CreditNote1(object):
         sequence_number (int): A monotonically increasing number assigned to
             credit notes as they are created.  This number is unique within a
             site and can be used to sort and order credit notes.
-        issue_date (str): Date the credit note was issued to the customer. 
+        issue_date (date): Date the credit note was issued to the customer. 
             This is the date that the credit was made available for
             application, and may come before it is fully applied.  The format
             is `"YYYY-MM-DD"`.
-        applied_date (str): Credit notes are applied to invoices to offset
+        applied_date (date): Credit notes are applied to invoices to offset
             invoiced amounts - they reduce the amount due. This field is the
             date the credit note became fully applied to invoices.  If the
             credit note has been partially applied, this field will not have a
@@ -267,8 +269,8 @@ class CreditNote1(object):
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         number = dictionary.get("number") if dictionary.get("number") else APIHelper.SKIP
         sequence_number = dictionary.get("sequence_number") if dictionary.get("sequence_number") else APIHelper.SKIP
-        issue_date = dictionary.get("issue_date") if dictionary.get("issue_date") else APIHelper.SKIP
-        applied_date = dictionary.get("applied_date") if dictionary.get("applied_date") else APIHelper.SKIP
+        issue_date = dateutil.parser.parse(dictionary.get('issue_date')).date() if dictionary.get('issue_date') else APIHelper.SKIP
+        applied_date = dateutil.parser.parse(dictionary.get('applied_date')).date() if dictionary.get('applied_date') else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
