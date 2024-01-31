@@ -2,8 +2,10 @@ from os import getenv
 
 from advancedbilling.advanced_billing_client import AdvancedBillingClient
 from advancedbilling.controllers.components_controller import ComponentsController
+from advancedbilling.controllers.coupons_controller import CouponsController
 from advancedbilling.controllers.custom_fields_controller import CustomFieldsController
 from advancedbilling.controllers.customers_controller import CustomersController
+from advancedbilling.controllers.invoices_controller import InvoicesController
 from advancedbilling.controllers.payment_profiles_controller import PaymentProfilesController
 from advancedbilling.controllers.product_families_controller import ProductFamiliesController
 from advancedbilling.controllers.products_controller import ProductsController
@@ -47,3 +49,9 @@ class TestBase():
 
     def get_custom_fields_controller(self) -> CustomFieldsController:
         return self.client.custom_fields
+
+    def get_invoices_controller(self) -> InvoicesController:
+        return self.client.invoices
+
+    def get_coupons_controller(self) -> CouponsController:
+        return self.client.coupons
