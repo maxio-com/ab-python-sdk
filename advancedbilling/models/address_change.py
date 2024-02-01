@@ -7,17 +7,18 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.invoice_address import InvoiceAddress
 
 
-class CustomerBillingAddressChange(object):
+class AddressChange(object):
 
-    """Implementation of the 'Customer Billing Address Change' model.
+    """Implementation of the 'Address Change' model.
 
     TODO: type model description here.
 
     Attributes:
-        before (object): TODO: type description here.
-        after (object): TODO: type description here.
+        before (InvoiceAddress): TODO: type description here.
+        after (InvoiceAddress): TODO: type description here.
 
     """
 
@@ -35,7 +36,7 @@ class CustomerBillingAddressChange(object):
     def __init__(self,
                  before=APIHelper.SKIP,
                  after=APIHelper.SKIP):
-        """Constructor for the CustomerBillingAddressChange class"""
+        """Constructor for the AddressChange class"""
 
         # Initialize members of the class
         if before is not APIHelper.SKIP:
@@ -62,8 +63,8 @@ class CustomerBillingAddressChange(object):
             return None
 
         # Extract variables from the dictionary
-        before = dictionary.get("before") if dictionary.get("before") else APIHelper.SKIP
-        after = dictionary.get("after") if dictionary.get("after") else APIHelper.SKIP
+        before = InvoiceAddress.from_dictionary(dictionary.get('before')) if 'before' in dictionary.keys() else APIHelper.SKIP
+        after = InvoiceAddress.from_dictionary(dictionary.get('after')) if 'after' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(before,
                    after)

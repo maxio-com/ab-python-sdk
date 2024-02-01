@@ -23,10 +23,10 @@ class RemovePaymentEventData(object):
         applied_amount (str): Applied amount of the original payment
         transaction_time (datetime): Transaction time of the original payment,
             in ISO 8601 format, i.e. "2019-06-07T17:20:06Z"
-        payment_method (PaymentMethodApplePayType |
-            PaymentMethodBankAccountType | PaymentMethodCreditCardType |
-            PaymentMethodExternalType | PaymentMethodPaypalType): A nested
-            data structure detailing the method of payment
+        payment_method (PaymentMethodApplePay | PaymentMethodBankAccount |
+            PaymentMethodCreditCard | PaymentMethodExternal |
+            PaymentMethodPaypal): A nested data structure detailing the method
+            of payment
         prepayment (bool): The flag that shows whether the original payment
             was a prepayment or not
 
@@ -91,7 +91,7 @@ class RemovePaymentEventData(object):
         memo = dictionary.get("memo") if dictionary.get("memo") else None
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
         transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else None
-        payment_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('RemovePaymentEventDataPaymentMethod'), dictionary.get('payment_method'), False) if dictionary.get('payment_method') is not None else None
+        payment_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('Invoice-Event-Payment'), dictionary.get('payment_method'), False) if dictionary.get('payment_method') is not None else None
         prepayment = dictionary.get("prepayment") if "prepayment" in dictionary.keys() else None
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
         # Return an object of this model
@@ -123,7 +123,7 @@ class RemovePaymentEventData(object):
                 and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.transaction_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
-                and UnionTypeLookUp.get('RemovePaymentEventDataPaymentMethod').validate(dictionary.payment_method) \
+                and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.payment_method) \
                 and APIHelper.is_valid_type(value=dictionary.prepayment, type_callable=lambda value: isinstance(value, bool))
 
         if not isinstance(dictionary, dict):
@@ -133,5 +133,5 @@ class RemovePaymentEventData(object):
             and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('transaction_time'), type_callable=lambda value: isinstance(value, str)) \
-            and UnionTypeLookUp.get('RemovePaymentEventDataPaymentMethod').validate(dictionary.get('payment_method')) \
+            and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.get('payment_method')) \
             and APIHelper.is_valid_type(value=dictionary.get('prepayment'), type_callable=lambda value: isinstance(value, bool))

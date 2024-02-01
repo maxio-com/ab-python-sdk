@@ -7,11 +7,12 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.invoice_event_payment_method import InvoiceEventPaymentMethod
 
 
-class PaymentMethodExternalType(object):
+class PaymentMethodExternal(object):
 
-    """Implementation of the 'Payment Method External Type' model.
+    """Implementation of the 'Payment Method External' model.
 
     TODO: type model description here.
 
@@ -19,7 +20,7 @@ class PaymentMethodExternalType(object):
         details (str): TODO: type description here.
         kind (str): TODO: type description here.
         memo (str): TODO: type description here.
-        mtype (str): TODO: type description here.
+        mtype (InvoiceEventPaymentMethod): TODO: type description here.
 
     """
 
@@ -31,12 +32,17 @@ class PaymentMethodExternalType(object):
         "mtype": 'type'
     }
 
+    _nullables = [
+        'details',
+        'memo',
+    ]
+
     def __init__(self,
                  details=None,
                  kind=None,
                  memo=None,
-                 mtype='external'):
-        """Constructor for the PaymentMethodExternalType class"""
+                 mtype=None):
+        """Constructor for the PaymentMethodExternal class"""
 
         # Initialize members of the class
         self.details = details 
@@ -66,7 +72,7 @@ class PaymentMethodExternalType(object):
         details = dictionary.get("details") if dictionary.get("details") else None
         kind = dictionary.get("kind") if dictionary.get("kind") else None
         memo = dictionary.get("memo") if dictionary.get("memo") else None
-        mtype = dictionary.get("type") if dictionary.get("type") else 'external'
+        mtype = dictionary.get("type") if dictionary.get("type") else None
         # Return an object of this model
         return cls(details,
                    kind,
@@ -91,7 +97,7 @@ class PaymentMethodExternalType(object):
             return APIHelper.is_valid_type(value=dictionary.details, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.kind, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.mtype, type_callable=lambda value: isinstance(value, str))
+                and APIHelper.is_valid_type(value=dictionary.mtype, type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
@@ -99,4 +105,4 @@ class PaymentMethodExternalType(object):
         return APIHelper.is_valid_type(value=dictionary.get('details'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('kind'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('type'), type_callable=lambda value: isinstance(value, str))
+            and APIHelper.is_valid_type(value=dictionary.get('type'), type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))

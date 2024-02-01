@@ -45,7 +45,11 @@ class Metadata(object):
     ]
 
     _nullables = [
+        'id',
+        'value',
+        'resource_id',
         'deleted_at',
+        'metafield_id',
     ]
 
     def __init__(self,
@@ -90,12 +94,12 @@ class Metadata(object):
             return None
 
         # Extract variables from the dictionary
-        id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        value = dictionary.get("value") if dictionary.get("value") else APIHelper.SKIP
-        resource_id = dictionary.get("resource_id") if dictionary.get("resource_id") else APIHelper.SKIP
+        id = dictionary.get("id") if "id" in dictionary.keys() else APIHelper.SKIP
+        value = dictionary.get("value") if "value" in dictionary.keys() else APIHelper.SKIP
+        resource_id = dictionary.get("resource_id") if "resource_id" in dictionary.keys() else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         deleted_at = dictionary.get("deleted_at") if "deleted_at" in dictionary.keys() else APIHelper.SKIP
-        metafield_id = dictionary.get("metafield_id") if dictionary.get("metafield_id") else APIHelper.SKIP
+        metafield_id = dictionary.get("metafield_id") if "metafield_id" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    value,

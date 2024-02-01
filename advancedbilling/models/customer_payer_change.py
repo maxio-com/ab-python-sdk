@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.payer_attributes import PayerAttributes
 
 
 class CustomerPayerChange(object):
@@ -16,8 +17,8 @@ class CustomerPayerChange(object):
     TODO: type model description here.
 
     Attributes:
-        before (object): TODO: type description here.
-        after (object): TODO: type description here.
+        before (PayerAttributes): TODO: type description here.
+        after (PayerAttributes): TODO: type description here.
 
     """
 
@@ -62,8 +63,8 @@ class CustomerPayerChange(object):
             return None
 
         # Extract variables from the dictionary
-        before = dictionary.get("before") if dictionary.get("before") else APIHelper.SKIP
-        after = dictionary.get("after") if dictionary.get("after") else APIHelper.SKIP
+        before = PayerAttributes.from_dictionary(dictionary.get('before')) if 'before' in dictionary.keys() else APIHelper.SKIP
+        after = PayerAttributes.from_dictionary(dictionary.get('after')) if 'after' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(before,
                    after)

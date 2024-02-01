@@ -7,10 +7,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.customer_billing_address_change import CustomerBillingAddressChange
+from advancedbilling.models.address_change import AddressChange
 from advancedbilling.models.customer_custom_fields_change import CustomerCustomFieldsChange
 from advancedbilling.models.customer_payer_change import CustomerPayerChange
-from advancedbilling.models.customer_shipping_address_change import CustomerShippingAddressChange
 
 
 class CustomerChange(object):
@@ -21,10 +20,8 @@ class CustomerChange(object):
 
     Attributes:
         payer (CustomerPayerChange): TODO: type description here.
-        shipping_address (CustomerShippingAddressChange): TODO: type
-            description here.
-        billing_address (CustomerBillingAddressChange): TODO: type description
-            here.
+        shipping_address (AddressChange): TODO: type description here.
+        billing_address (AddressChange): TODO: type description here.
         custom_fields (CustomerCustomFieldsChange): TODO: type description
             here.
 
@@ -82,8 +79,8 @@ class CustomerChange(object):
 
         # Extract variables from the dictionary
         payer = CustomerPayerChange.from_dictionary(dictionary.get('payer')) if 'payer' in dictionary.keys() else APIHelper.SKIP
-        shipping_address = CustomerShippingAddressChange.from_dictionary(dictionary.get('shipping_address')) if 'shipping_address' in dictionary.keys() else APIHelper.SKIP
-        billing_address = CustomerBillingAddressChange.from_dictionary(dictionary.get('billing_address')) if 'billing_address' in dictionary.keys() else APIHelper.SKIP
+        shipping_address = AddressChange.from_dictionary(dictionary.get('shipping_address')) if 'shipping_address' in dictionary.keys() else APIHelper.SKIP
+        billing_address = AddressChange.from_dictionary(dictionary.get('billing_address')) if 'billing_address' in dictionary.keys() else APIHelper.SKIP
         custom_fields = CustomerCustomFieldsChange.from_dictionary(dictionary.get('custom_fields')) if 'custom_fields' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(payer,

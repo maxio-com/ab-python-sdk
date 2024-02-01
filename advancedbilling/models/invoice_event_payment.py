@@ -9,9 +9,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class PaymentMethodNestedData(object):
+class InvoiceEventPayment(object):
 
-    """Implementation of the 'Payment Method Nested Data' model.
+    """Implementation of the 'Invoice Event Payment' model.
 
     A nested data structure detailing the method of payment
 
@@ -61,10 +61,12 @@ class PaymentMethodNestedData(object):
 
     _nullables = [
         'last_four',
+        'details',
+        'memo',
     ]
 
     def __init__(self,
-                 mtype='Payment Method Nested Data',
+                 mtype='Invoice Event Payment',
                  masked_account_number=APIHelper.SKIP,
                  masked_routing_number=APIHelper.SKIP,
                  card_brand=APIHelper.SKIP,
@@ -75,7 +77,7 @@ class PaymentMethodNestedData(object):
                  kind=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
                  email=APIHelper.SKIP):
-        """Constructor for the PaymentMethodNestedData class"""
+        """Constructor for the InvoiceEventPayment class"""
 
         # Initialize members of the class
         self.mtype = mtype 
@@ -119,16 +121,16 @@ class PaymentMethodNestedData(object):
             return None
 
         # Extract variables from the dictionary
-        mtype = dictionary.get("type") if dictionary.get("type") else 'Payment Method Nested Data'
+        mtype = dictionary.get("type") if dictionary.get("type") else 'Invoice Event Payment'
         masked_account_number = dictionary.get("masked_account_number") if dictionary.get("masked_account_number") else APIHelper.SKIP
         masked_routing_number = dictionary.get("masked_routing_number") if dictionary.get("masked_routing_number") else APIHelper.SKIP
         card_brand = dictionary.get("card_brand") if dictionary.get("card_brand") else APIHelper.SKIP
         card_expiration = dictionary.get("card_expiration") if dictionary.get("card_expiration") else APIHelper.SKIP
         last_four = dictionary.get("last_four") if "last_four" in dictionary.keys() else APIHelper.SKIP
         masked_card_number = dictionary.get("masked_card_number") if dictionary.get("masked_card_number") else APIHelper.SKIP
-        details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
+        details = dictionary.get("details") if "details" in dictionary.keys() else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
-        memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
+        memo = dictionary.get("memo") if "memo" in dictionary.keys() else APIHelper.SKIP
         email = dictionary.get("email") if dictionary.get("email") else APIHelper.SKIP
         # Return an object of this model
         return cls(mtype,
