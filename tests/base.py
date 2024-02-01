@@ -2,6 +2,7 @@ from os import getenv
 
 from advancedbilling.advanced_billing_client import AdvancedBillingClient
 from advancedbilling.controllers.components_controller import ComponentsController
+from advancedbilling.controllers.custom_fields_controller import CustomFieldsController
 from advancedbilling.controllers.customers_controller import CustomersController
 from advancedbilling.controllers.payment_profiles_controller import PaymentProfilesController
 from advancedbilling.controllers.product_families_controller import ProductFamiliesController
@@ -43,3 +44,6 @@ class TestBase():
 
     def get_subscription_components_controller(self) -> SubscriptionComponentsController:
         return self.client.subscription_components
+
+    def get_custom_fields_controller(self) -> CustomFieldsController:
+        return self.client.custom_fields
