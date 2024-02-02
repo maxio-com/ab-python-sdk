@@ -74,10 +74,10 @@ class CreateSubscription(object):
             cannot be successfully charged, the subscription will not be
             created. See further notes in the section on Importing
             Subscriptions.
-        initial_billing_at (str): (Optional) Set this attribute to a future
-            date/time to create a subscription in the "Awaiting Signup" state,
-            rather than "Active" or "Trialing". See the notes on “Date/Time
-            Format” in our [subscription import
+        initial_billing_at (datetime): (Optional) Set this attribute to a
+            future date/time to create a subscription in the "Awaiting Signup"
+            state, rather than "Active" or "Trialing". See the notes on
+            “Date/Time Format” in our [subscription import
             documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles
             /5404863655821#date-format). In the "Awaiting Signup" state, a
             subscription behaves like any other. It can be canceled, allocated
@@ -393,7 +393,7 @@ class CreateSubscription(object):
         if next_billing_at is not APIHelper.SKIP:
             self.next_billing_at = APIHelper.apply_datetime_converter(next_billing_at, APIHelper.RFC3339DateTime) if next_billing_at else None 
         if initial_billing_at is not APIHelper.SKIP:
-            self.initial_billing_at = initial_billing_at 
+            self.initial_billing_at = APIHelper.apply_datetime_converter(initial_billing_at, APIHelper.RFC3339DateTime) if initial_billing_at else None 
         if stored_credential_transaction_id is not APIHelper.SKIP:
             self.stored_credential_transaction_id = stored_credential_transaction_id 
         if sales_rep_id is not APIHelper.SKIP:
@@ -497,7 +497,7 @@ class CreateSubscription(object):
         net_terms = dictionary.get("net_terms") if dictionary.get("net_terms") else APIHelper.SKIP
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
         next_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_billing_at")).datetime if dictionary.get("next_billing_at") else APIHelper.SKIP
-        initial_billing_at = dictionary.get("initial_billing_at") if dictionary.get("initial_billing_at") else APIHelper.SKIP
+        initial_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("initial_billing_at")).datetime if dictionary.get("initial_billing_at") else APIHelper.SKIP
         stored_credential_transaction_id = dictionary.get("stored_credential_transaction_id") if dictionary.get("stored_credential_transaction_id") else APIHelper.SKIP
         sales_rep_id = dictionary.get("sales_rep_id") if dictionary.get("sales_rep_id") else APIHelper.SKIP
         payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP

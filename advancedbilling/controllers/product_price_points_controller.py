@@ -445,9 +445,9 @@ class ProductPricePointsController(BaseController):
             .deserialize_into(ProductResponse.from_dictionary)
         ).execute()
 
-    def create_product_price_points(self,
-                                    product_id,
-                                    body=None):
+    def bulk_create_product_price_points(self,
+                                         product_id,
+                                         body=None):
         """Does a POST request to /products/{product_id}/price_points/bulk.json.
 
         Use this endpoint to create multiple product price points in one

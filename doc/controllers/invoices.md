@@ -15,13 +15,13 @@ invoices_controller = client.invoices
 * [Read Invoice](../../doc/controllers/invoices.md#read-invoice)
 * [List Invoice Events](../../doc/controllers/invoices.md#list-invoice-events)
 * [Record Payment for Invoice](../../doc/controllers/invoices.md#record-payment-for-invoice)
-* [Record External Payment for Invoices](../../doc/controllers/invoices.md#record-external-payment-for-invoices)
+* [Record Payment for Multiple Invoices](../../doc/controllers/invoices.md#record-payment-for-multiple-invoices)
 * [List Credit Notes](../../doc/controllers/invoices.md#list-credit-notes)
 * [Read Credit Note](../../doc/controllers/invoices.md#read-credit-note)
 * [Record Payment for Subscription](../../doc/controllers/invoices.md#record-payment-for-subscription)
 * [Reopen Invoice](../../doc/controllers/invoices.md#reopen-invoice)
 * [Void Invoice](../../doc/controllers/invoices.md#void-invoice)
-* [List Invoice Segments](../../doc/controllers/invoices.md#list-invoice-segments)
+* [List Consolidated Invoice Segments](../../doc/controllers/invoices.md#list-consolidated-invoice-segments)
 * [Create Invoice](../../doc/controllers/invoices.md#create-invoice)
 * [Send Invoice](../../doc/controllers/invoices.md#send-invoice)
 * [Preview Customer Information Changes](../../doc/controllers/invoices.md#preview-customer-information-changes)
@@ -1097,7 +1097,7 @@ print(result)
 ```
 
 
-# Record External Payment for Invoices
+# Record Payment for Multiple Invoices
 
 This API call should be used when you want to record an external payment against multiple invoices.
 
@@ -1127,7 +1127,7 @@ In order apply a payment to multiple invoices, at minimum, specify the `amount` 
 Note that the invoice payment amounts must be greater than 0. Total amount must be greater or equal to invoices payment amount sum.
 
 ```python
-def record_external_payment_for_invoices(self,
+def record_payment_for_multiple_invoices(self,
                                         body=None)
 ```
 
@@ -1163,7 +1163,7 @@ body = CreateMultiInvoicePaymentRequest(
     )
 )
 
-result = invoices_controller.record_external_payment_for_invoices(
+result = invoices_controller.record_payment_for_multiple_invoices(
     body=body
 )
 print(result)
@@ -2005,13 +2005,13 @@ print(result)
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
-# List Invoice Segments
+# List Consolidated Invoice Segments
 
 Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`.
 
 ```python
-def list_invoice_segments(self,
-                         options=dict())
+def list_consolidated_invoice_segments(self,
+                                      options=dict())
 ```
 
 ## Parameters
@@ -2036,7 +2036,7 @@ collect = {
     'per_page': 50,
     'direction': Direction.ASC
 }
-result = invoices_controller.list_invoice_segments(collect)
+result = invoices_controller.list_consolidated_invoice_segments(collect)
 print(result)
 ```
 
@@ -2968,20 +2968,18 @@ print(result)
   ],
   "custom_fields": [
     {
-      "name": "non nul",
-      "value": "consectetur aliqua",
-      "owner_type": "ad",
-      "owner_id": 18482224
+      "name": "CustomerStatus",
+      "value": "Gold",
+      "owner_type": "Customer",
+      "owner_id": 18482224,
+      "metadatum_id": 13924
     },
     {
-      "value": "anim",
-      "owner_type": "in"
-    },
-    {
-      "owner_id": -13438519
-    },
-    {
-      "name": "ullamco non deserunt in"
+      "name": "SubscriptionTag",
+      "value": "Special Subscriber",
+      "owner_type": "Subscription",
+      "owner_id": 21344,
+      "metadatum_id": 139245
     }
   ],
   "public_url": "dolo",

@@ -113,8 +113,8 @@ class SubscriptionGroupStatusController(BaseController):
             .auth(Single('global'))
         ).execute()
 
-    def stop_delayed_cancellation_for_group(self,
-                                            uid):
+    def cancel_delayed_cancellation_for_group(self,
+                                              uid):
         """Does a DELETE request to /subscription_groups/{uid}/delayed_cancel.json.
 
         Removing the delayed cancellation on a subscription group will ensure

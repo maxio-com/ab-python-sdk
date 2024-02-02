@@ -175,9 +175,9 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
-    def issue_subscription_group_service_credits(self,
-                                                 uid,
-                                                 body=None):
+    def issue_subscription_group_service_credit(self,
+                                                uid,
+                                                body=None):
         """Does a POST request to /subscription_groups/{uid}/service_credits.json.
 
         Credit can be issued for a subscription group identified by the
@@ -227,9 +227,9 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def deduct_subscription_group_service_credits(self,
-                                                  uid,
-                                                  body=None):
+    def deduct_subscription_group_service_credit(self,
+                                                 uid,
+                                                 body=None):
         """Does a POST request to /subscription_groups/{uid}/service_credit_deductions.json.
 
         Credit can be deducted for a subscription group identified by the

@@ -147,8 +147,8 @@ class OffersController(BaseController):
             .deserialize_into(ListOffersResponse.from_dictionary)
         ).execute()
 
-    def read_offers(self,
-                    offer_id):
+    def read_offer(self,
+                   offer_id):
         """Does a GET request to /offers/{offer_id}.json.
 
         This method allows you to list a specific offer's attributes. This is

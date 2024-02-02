@@ -356,8 +356,8 @@ class ComponentsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def read_component_by_handle(self,
-                                 handle):
+    def find_component(self,
+                       handle):
         """Does a GET request to /components/lookup.json.
 
         This request will return information regarding a component having the
@@ -396,9 +396,9 @@ class ComponentsController(BaseController):
             .deserialize_into(ComponentResponse.from_dictionary)
         ).execute()
 
-    def read_component_by_id(self,
-                             product_family_id,
-                             component_id):
+    def read_component(self,
+                       product_family_id,
+                       component_id):
         """Does a GET request to /product_families/{product_family_id}/components/{component_id}.json.
 
         This request will return information regarding a component from a
@@ -726,7 +726,7 @@ class ComponentsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def update_default_price_point_for_component(self,
+    def promote_component_price_point_to_default(self,
                                                  component_id,
                                                  price_point_id):
         """Does a PUT request to /components/{component_id}/price_points/{price_point_id}/default.json.
@@ -1042,9 +1042,9 @@ class ComponentsController(BaseController):
             .deserialize_into(ComponentPricePointsResponse.from_dictionary)
         ).execute()
 
-    def create_component_price_points(self,
-                                      component_id,
-                                      body=None):
+    def bulk_create_component_price_points(self,
+                                           component_id,
+                                           body=None):
         """Does a POST request to /components/{component_id}/price_points/bulk.json.
 
         Use this endpoint to create multiple component price points in one

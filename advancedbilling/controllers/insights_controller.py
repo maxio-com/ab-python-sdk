@@ -118,7 +118,7 @@ class InsightsController(BaseController):
         ).execute()
 
     @deprecated()
-    def read_mrr_movements(self,
+    def list_mrr_movements(self,
                            options=dict()):
         """Does a GET request to /mrr_movements.json.
 
