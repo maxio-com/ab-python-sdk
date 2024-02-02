@@ -5,6 +5,9 @@ from advancedbilling.advanced_billing_client import AdvancedBillingClient
 from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.models.site_response import SiteResponse
 
+from .data import AuthorizeAssertCases
+from .utils import assert_properties
+
 
 class TestAuthorization:
     def test_no_token_or_password_to_client_create(self):
@@ -26,41 +29,16 @@ class TestAuthorization:
         assert isinstance(result, SiteResponse)
 
         site = result.site
-        assert site.id == 4502
-        assert site.name == "Python SDK Env"
-        assert site.subdomain == "python-sdk"
-        assert site.currency == "USD"
-        assert site.seller_id == 722159
-        assert site.relationship_invoicing_enabled is True
-        assert site.customer_hierarchy_enabled is False
-        assert site.whopays_enabled is False
-        assert site.whopays_default_payer == "self-ungrouped"
-        assert site.test is True
-        assert site.default_payment_collection_method == "automatic"
+        assert_properties(site, AuthorizeAssertCases.get_site_data())
 
         allocation_settings = site.allocation_settings
-        assert allocation_settings.accrue_charge == "true"
-        assert allocation_settings.upgrade_charge == "prorated"
-        assert allocation_settings.downgrade_credit == "none"
+        assert_properties(allocation_settings, AuthorizeAssertCases.get_allocation_settings_data())
 
         organization_address = site.organization_address
-        assert organization_address.street == "Asdf Street"
-        assert organization_address.line_2 == "123/444"
-        assert organization_address.city == "San Antonio"
-        assert organization_address.state == "TX"
-        assert organization_address.zip == "78015"
-        assert organization_address.country == "US"
-        assert organization_address.name == "Developer Experience"
-        assert organization_address.phone == "555 111 222"
+        assert_properties(organization_address, AuthorizeAssertCases.get_organization_address_data())
 
         tax_configuration = site.tax_configuration
-        assert tax_configuration.kind == "custom"
-        assert tax_configuration.destination_address == "shipping_then_billing"
-        assert tax_configuration.fully_configured is False
+        assert_properties(tax_configuration, AuthorizeAssertCases.get_tax_configuration_data())
 
         net_terms = site.net_terms
-        assert net_terms.default_net_terms == 0
-        assert net_terms.automatic_net_terms == 0
-        assert net_terms.remittance_net_terms == 0
-        assert net_terms.net_terms_on_remittance_signups_enabled is False
-        assert net_terms.custom_net_terms_enabled is False
+        assert_properties(net_terms, AuthorizeAssertCases.get_net_terms_data())
