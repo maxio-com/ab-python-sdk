@@ -21,15 +21,16 @@ from advancedbilling.models.create_product_family_request import (
 from advancedbilling.models.create_subscription_request import CreateSubscriptionRequest
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
 from advancedbilling.models.customer import Customer
-from advancedbilling.models.interval_unit import IntervalUnit
 from advancedbilling.models.metadata import Metadata
 from advancedbilling.models.metafield import Metafield
 from advancedbilling.models.metafield_scope import MetafieldScope
-from advancedbilling.models.payment_type import PaymentType
 from advancedbilling.models.product import Product
 from advancedbilling.models.product_family import ProductFamily
 from advancedbilling.models.resource_type import ResourceType
 from advancedbilling.models.subscription import Subscription
+
+from .data import CustomFieldsAssertCases, CustomFieldsInitCases
+from .utils import assert_properties
 
 
 class TestCustomFields:
@@ -38,19 +39,7 @@ class TestCustomFields:
     ):
         subscription_metafields: list[Metafield] = custom_fields_controller.create_metafields(
             ResourceType.SUBSCRIPTIONS,
-            CreateMetafieldsRequest.from_dictionary(
-                {
-                    "metafields": [
-                        {
-                            "name": "Dropdown field",
-                            "input_type": "dropdown",
-                            "enum": ["option 1", "option 2"],
-                            "scope": {"public_edit": "1", "public_show": "1"},
-                        },
-                        {"name": "Text Field"},
-                    ]
-                }
-            ),
+            CreateMetafieldsRequest(CustomFieldsInitCases.get_metafields_dropdown_request()),
         )
 
         assert len(subscription_metafields) == 2
@@ -60,48 +49,28 @@ class TestCustomFields:
         text_input_metafield_scope: MetafieldScope = text_input_metafield.scope
 
         assert len(dropdown_metafield.enum) == 2
-        assert dropdown_metafield.enum == ["option 1", "option 2"]
-        assert dropdown_metafield.input_type == "dropdown"
-        assert dropdown_metafield_scope.csv == "0"
-        assert dropdown_metafield_scope.invoices == "0"
-        assert dropdown_metafield_scope.portal == "0"
-        assert dropdown_metafield_scope.public_edit == "1"
-        assert dropdown_metafield_scope.public_show == "1"
-        assert dropdown_metafield_scope.statements == "0"
 
-        assert text_input_metafield.input_type == "text"
-        assert text_input_metafield.enum is None
-        assert text_input_metafield_scope.csv == "0"
-        assert text_input_metafield_scope.invoices == "0"
-        assert text_input_metafield_scope.portal == "0"
-        assert text_input_metafield_scope.public_edit == "0"
-        assert text_input_metafield_scope.public_show == "0"
-        assert text_input_metafield_scope.statements == "0"
+        assert_properties(dropdown_metafield, CustomFieldsAssertCases.get_dropdown_subscriptions_metafield_data())
+        assert_properties(text_input_metafield, CustomFieldsAssertCases.get_text_input_subscriptions_metafield_data())
+        assert_properties(
+            text_input_metafield_scope,
+            CustomFieldsAssertCases.get_text_input_subscriptions_metafield_scope_data(),
+        )
+        assert_properties(dropdown_metafield_scope, CustomFieldsAssertCases.get_dropdown_subscriptions_metafield_scope_data())
 
     def test_create_single_metafields_given_customer_resource_type_and_radio_type_then_radio_has_enum_with_two_options(
         self, custom_fields_controller: CustomFieldsController
     ):
         customer_metafields = custom_fields_controller.create_metafields(
             ResourceType.CUSTOMERS,
-            CreateMetafieldsRequest.from_dictionary(
-                {
-                    "metafields": {
-                        "name": "Radio field",
-                        "input_type": "radio",
-                        "enum": ["option 1", "option 2"],
-                        "scope": {"csv": "1", "invoices": "1", "portal": "1"},
-                    }
-                }
-            ),
+            CreateMetafieldsRequest(CustomFieldsInitCases.get_metafields_radio_request()),
         )
 
-        assert 1 == len(customer_metafields)
+        assert len(customer_metafields) == 1
         dropdown_metafield: Metafield = customer_metafields[0]
+        assert len(dropdown_metafield.enum) == 2
 
-        assert 2 == len(dropdown_metafield.enum)
-        assert ["option 1", "option 2"] == dropdown_metafield.enum
-        assert "radio" == dropdown_metafield.input_type
-        assert "Radio field" == dropdown_metafield.name
+        assert_properties(dropdown_metafield, CustomFieldsAssertCases.get_dropdown_customer_metafield_data())
 
     def test_create_metadata_for_subscription_given_subscription_with_metafields_then_subscription_should_have_added_metadata(
         self,
@@ -114,103 +83,30 @@ class TestCustomFields:
     ):
         # GIVEN
         product_family: ProductFamily = product_families_controller.create_product_family(
-            CreateProductFamilyRequest.from_dictionary(
-                {
-                    "product_family": {
-                        "name": "TestCustomFields_Product_Family_Name_1",
-                        "description": "TestCustomFields_Product_Family_Description_1",
-                    }
-                }
-            )
+            CreateProductFamilyRequest(CustomFieldsInitCases.get_product_family_request())
         ).product_family
 
         product: Product = products_controller.create_product(
             product_family.id,
-            CreateOrUpdateProductRequest.from_dictionary(
-                {
-                    "product": {
-                        "name": "TestCustomFields_Product_Name_1",
-                        "handle": "testcustomfields_product_handle_1",
-                        "description": "TestCustomFields_Product_Description_1",
-                        "interval": 1,
-                        "price_in_cents": 10,
-                        "interval_unit": IntervalUnit.DAY,
-                    }
-                }
-            ),
+            CreateOrUpdateProductRequest(CustomFieldsInitCases.get_product_request()),
         ).product
 
         customer: Customer = customers_controller.create_customer(
-            CreateCustomerRequest.from_dictionary(
-                {
-                    "customer": {
-                        "first_name": "TestCustomFields_Customer_FirstName_1",
-                        "last_name": "TestCustomFields_Customer_LastName_1",
-                        "email": "tsce1@email.com",
-                        "cc_emails": ["email@email.com"],
-                        "organization": "TestCustomFields_CustomerOrganization_1",
-                        "reference": "TestCustomFields_CustomerReference_1",
-                        "address": "test address",
-                        "address_2": "test address two",
-                        "city": "Ohio",
-                        "state": "TX",
-                        "zip": "test zip",
-                        "country": "US",
-                        "phone": "+00 123 456 789",
-                        "tax_exempt": False,
-                        "vat_number": "test vat number",
-                        "parent_id": None,
-                        "locale": None,
-                    }
-                }
-            )
+            CreateCustomerRequest(CustomFieldsInitCases.get_customer_request())
         ).customer
 
         payment_profile: CreditCardPaymentProfile = payment_profiles_controller.create_payment_profile(
-            CreatePaymentProfileRequest.from_dictionary(
-                {
-                    "payment_profile": {
-                        "customer_id": customer.id,
-                        "payment_type": PaymentType.CREDIT_CARD,
-                        "expiration_month": 12,
-                        "expiration_year": 2027,
-                        "full_number": "4111111111111111",
-                    }
-                }
-            )
+            CreatePaymentProfileRequest(CustomFieldsInitCases.get_payment_profile_request(customer))
         ).payment_profile
 
         subscription: Subscription = subscriptions_controller.create_subscription(
-            CreateSubscriptionRequest.from_dictionary(
-                {
-                    "subscription": {
-                        "product_id": product.id,
-                        "customer_id": customer.id,
-                        "dunning_communication_delay_enabled": False,
-                        "payment_collection_method": "automatic",
-                        "skip_billing_manifest_taxes": False,
-                        "payment_profile_id": payment_profile.id,
-                    }
-                }
-            )
+            CreateSubscriptionRequest(CustomFieldsInitCases.get_subscription_request(product, customer, payment_profile))
         ).subscription
 
         # THEN
         metafields: list[Metafield] = custom_fields_controller.create_metafields(
             ResourceType.SUBSCRIPTIONS,
-            CreateMetafieldsRequest.from_dictionary(
-                {
-                    "metafields": [
-                        {
-                            "name": "Dropdown field",
-                            "input_type": "dropdown",
-                            "enum": ["option 1", "option 2"],
-                            "scope": {"public_edit": "1", "public_show": "1"},
-                        },
-                        {"name": "Text Field"},
-                    ]
-                }
-            ),
+            CreateMetafieldsRequest(metafields=CustomFieldsInitCases.get_metafields_dropdown_request()),
         )
 
         assert len(metafields) == 2
@@ -220,28 +116,20 @@ class TestCustomFields:
         metadata: list[Metadata] = custom_fields_controller.create_metadata(
             ResourceType.SUBSCRIPTIONS,
             subscription.id,
-            CreateMetadataRequest.from_dictionary(
-                {
-                    "metadata": [
-                        {"name": "Dropdown field", "value": "option 1"},
-                        {"name": "Text Field", "value": "Text field"},
-                    ]
-                }
-            ),
+            CreateMetadataRequest(CustomFieldsInitCases.get_metadata_dropdown_request()),
         )
 
         assert len(metadata) == 2
         dropdown_metadata, text_field_metadata = metadata
 
-        assert dropdown_metadata.resource_id == subscription.id
-        assert dropdown_metadata.metafield_id == dropdown_metafield.id
-        assert dropdown_metadata.value == "option 1"
-        assert dropdown_metadata.name == "Dropdown field"
-
-        assert text_field_metadata.resource_id == subscription.id
-        assert text_field_metadata.metafield_id == text_input_metafield.id
-        assert text_field_metadata.value == "Text field"
-        assert text_field_metadata.name == "Text Field"
+        assert_properties(
+            dropdown_metadata,
+            CustomFieldsAssertCases.get_dropdown_subscription_metadata_data(subscription, dropdown_metafield),
+        )
+        assert_properties(
+            text_field_metadata,
+            CustomFieldsAssertCases.get_text_field_metadata_data(subscription, text_input_metafield),
+        )
 
         subscriptions_controller.purge_subscription(subscription.id, customer.id)
         customers_controller.delete_customer(customer.id)
@@ -253,44 +141,13 @@ class TestCustomFields:
     ):
         # GIVEN
         customer: Customer = customers_controller.create_customer(
-            CreateCustomerRequest.from_dictionary(
-                {
-                    "customer": {
-                        "first_name": "TestCustomFields_Customer_FirstName_1",
-                        "last_name": "TestCustomFields_Customer_LastName_1",
-                        "email": "tsce1@email.com",
-                        "cc_emails": ["email@email.com"],
-                        "organization": "TestCustomFields_CustomerOrganization_1",
-                        "reference": "TestCustomFields_CustomerReference_1",
-                        "address": "test address",
-                        "address_2": "test address two",
-                        "city": "Ohio",
-                        "state": "TX",
-                        "zip": "test zip",
-                        "country": "US",
-                        "phone": "+00 123 456 789",
-                        "tax_exempt": False,
-                        "vat_number": "test vat number",
-                        "parent_id": None,
-                        "locale": None,
-                    }
-                }
-            )
+            CreateCustomerRequest(CustomFieldsInitCases.get_customer_request())
         ).customer
 
         # THEN
         metafields: list[Metafield] = custom_fields_controller.create_metafields(
             ResourceType.CUSTOMERS,
-            CreateMetafieldsRequest.from_dictionary(
-                {
-                    "metafields": {
-                        "name": "Radio field",
-                        "input_type": "radio",
-                        "enum": ["option 1", "option 2"],
-                        "scope": {"csv": "1", "invoices": "1", "portal": "1"},
-                    }
-                }
-            ),
+            CreateMetafieldsRequest(metafields=CustomFieldsInitCases.get_metafields_radio_request()),
         )
 
         assert len(metafields) == 1
@@ -300,21 +157,14 @@ class TestCustomFields:
         metadata: list[Metadata] = custom_fields_controller.create_metadata(
             ResourceType.CUSTOMERS,
             customer.id,
-            CreateMetadataRequest.from_dictionary(
-                {
-                    "metadata": [
-                        {"name": "Radio field", "value": "option 1"},
-                    ]
-                }
-            ),
+            CreateMetadataRequest(CustomFieldsInitCases.get_metadata_radio_request()),
         )
 
         assert len(metadata) == 1
         (radio_metadata,) = metadata
 
-        assert customer.id == radio_metadata.resource_id
-        assert created_metafield.id == radio_metadata.metafield_id
-        assert radio_metadata.value == "option 1"
-        assert radio_metadata.name == "Radio field"
+        assert_properties(
+            radio_metadata, CustomFieldsAssertCases.get_radio_customers_metadata_data(customer, created_metafield)
+        )
 
         customers_controller.delete_customer(customer.id)
