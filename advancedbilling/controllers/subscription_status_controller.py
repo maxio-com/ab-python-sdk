@@ -525,8 +525,8 @@ class SubscriptionStatusController(BaseController):
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
-    def stop_delayed_cancellation(self,
-                                  subscription_id):
+    def cancel_delayed_cancellation(self,
+                                    subscription_id):
         """Does a DELETE request to /subscriptions/{subscription_id}/delayed_cancel.json.
 
         Removing the delayed cancellation on a subscription will ensure that

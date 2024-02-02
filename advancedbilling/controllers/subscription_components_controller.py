@@ -224,9 +224,9 @@ class SubscriptionComponentsController(BaseController):
             .deserialize_into(SubscriptionComponentResponse.from_dictionary)
         ).execute()
 
-    def update_subscription_components_price_points(self,
-                                                    subscription_id,
-                                                    body=None):
+    def bulk_update_subscription_components_price_points(self,
+                                                         subscription_id,
+                                                         body=None):
         """Does a POST request to /subscriptions/{subscription_id}/price_points.json.
 
         Updates the price points on one or more of a subscription's
@@ -279,8 +279,8 @@ class SubscriptionComponentsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ComponentPricePointErrorException)
         ).execute()
 
-    def reset_subscription_components_price_points(self,
-                                                   subscription_id):
+    def bulk_reset_subscription_components_price_points(self,
+                                                        subscription_id):
         """Does a POST request to /subscriptions/{subscription_id}/price_points/reset.json.
 
         Resets all of a subscription's components to use the current default.
@@ -643,11 +643,11 @@ class SubscriptionComponentsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ComponentAllocationErrorException)
         ).execute()
 
-    def update_prepaid_usage_allocation(self,
-                                        subscription_id,
-                                        component_id,
-                                        allocation_id,
-                                        body=None):
+    def update_prepaid_usage_allocation_expiration_date(self,
+                                                        subscription_id,
+                                                        component_id,
+                                                        allocation_id,
+                                                        body=None):
         """Does a PUT request to /subscriptions/{subscription_id}/components/{component_id}/allocations/{allocation_id}.json.
 
         When the expiration interval options are selected on a prepaid usage
@@ -1187,11 +1187,11 @@ class SubscriptionComponentsController(BaseController):
             .auth(Single('global'))
         ).execute()
 
-    def record_events(self,
-                      subdomain,
-                      api_handle,
-                      store_uid=None,
-                      body=None):
+    def bulk_record_events(self,
+                           subdomain,
+                           api_handle,
+                           store_uid=None,
+                           body=None):
         """Does a POST request to /{subdomain}/events/{api_handle}/bulk.json.
 
         Use this endpoint to record a collection of events.

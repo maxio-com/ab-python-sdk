@@ -15,12 +15,12 @@ subscriptions_controller = client.subscriptions
 * [Update Subscription](../../doc/controllers/subscriptions.md#update-subscription)
 * [Read Subscription](../../doc/controllers/subscriptions.md#read-subscription)
 * [Override Subscription](../../doc/controllers/subscriptions.md#override-subscription)
-* [Read Subscription by Reference](../../doc/controllers/subscriptions.md#read-subscription-by-reference)
+* [Find Subscription](../../doc/controllers/subscriptions.md#find-subscription)
 * [Purge Subscription](../../doc/controllers/subscriptions.md#purge-subscription)
-* [Create Prepaid Subscription](../../doc/controllers/subscriptions.md#create-prepaid-subscription)
+* [Update Prepaid Subscription Configuration](../../doc/controllers/subscriptions.md#update-prepaid-subscription-configuration)
 * [Preview Subscription](../../doc/controllers/subscriptions.md#preview-subscription)
-* [Apply Coupon to Subscription](../../doc/controllers/subscriptions.md#apply-coupon-to-subscription)
-* [Delete Coupon From Subscription](../../doc/controllers/subscriptions.md#delete-coupon-from-subscription)
+* [Apply Coupons to Subscription](../../doc/controllers/subscriptions.md#apply-coupons-to-subscription)
+* [Remove Coupon From Subscription](../../doc/controllers/subscriptions.md#remove-coupon-from-subscription)
 * [Activate Subscription](../../doc/controllers/subscriptions.md#activate-subscription)
 
 
@@ -1341,13 +1341,13 @@ print(result)
 | 422 | Unprocessable Entity (WebDAV) | [`SingleErrorResponseException`](../../doc/models/single-error-response-exception.md) |
 
 
-# Read Subscription by Reference
+# Find Subscription
 
 Use this endpoint to find a subscription by its reference.
 
 ```python
-def read_subscription_by_reference(self,
-                                  reference=None)
+def find_subscription(self,
+                     reference=None)
 ```
 
 ## Parameters
@@ -1363,7 +1363,7 @@ def read_subscription_by_reference(self,
 ## Example Usage
 
 ```python
-result = subscriptions_controller.read_subscription_by_reference()
+result = subscriptions_controller.find_subscription()
 print(result)
 ```
 
@@ -1414,14 +1414,14 @@ print(result)
 ```
 
 
-# Create Prepaid Subscription
+# Update Prepaid Subscription Configuration
 
 Use this endpoint to update a subscription's prepaid configuration.
 
 ```python
-def create_prepaid_subscription(self,
-                               subscription_id,
-                               body=None)
+def update_prepaid_subscription_configuration(self,
+                                             subscription_id,
+                                             body=None)
 ```
 
 ## Parameters
@@ -1449,7 +1449,7 @@ body = UpsertPrepaidConfigurationRequest(
     )
 )
 
-result = subscriptions_controller.create_prepaid_subscription(
+result = subscriptions_controller.update_prepaid_subscription_configuration(
     subscription_id,
     body=body
 )
@@ -1650,7 +1650,7 @@ print(result)
 ```
 
 
-# Apply Coupon to Subscription
+# Apply Coupons to Subscription
 
 An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#stackable-coupons)
 
@@ -1661,10 +1661,10 @@ Passing in a coupon code as a query parameter will add the code to the subscript
 For this reason, using this query parameter on this endpoint has been deprecated in favor of using the request body parameters as described below. When passing in request body parameters, the list of coupon codes will simply be added to any existing list of codes on the subscription.
 
 ```python
-def apply_coupon_to_subscription(self,
-                                subscription_id,
-                                code=None,
-                                body=None)
+def apply_coupons_to_subscription(self,
+                                 subscription_id,
+                                 code=None,
+                                 body=None)
 ```
 
 ## Parameters
@@ -1691,7 +1691,7 @@ body = AddCouponsRequest(
     ]
 )
 
-result = subscriptions_controller.apply_coupon_to_subscription(
+result = subscriptions_controller.apply_coupons_to_subscription(
     subscription_id,
     body=body
 )
@@ -1855,14 +1855,14 @@ print(result)
 | 422 | Unprocessable Entity (WebDAV) | [`SubscriptionAddCouponErrorException`](../../doc/models/subscription-add-coupon-error-exception.md) |
 
 
-# Delete Coupon From Subscription
+# Remove Coupon From Subscription
 
 Use this endpoint to remove a coupon from an existing subscription.
 
 For more information on the expected behaviour of removing a coupon from a subscription, please see our documentation [here.](https://chargify.zendesk.com/hc/en-us/articles/4407896488987#removing-a-coupon)
 
 ```python
-def delete_coupon_from_subscription(self,
+def remove_coupon_from_subscription(self,
                                    subscription_id,
                                    coupon_code=None)
 ```
@@ -1883,7 +1883,7 @@ def delete_coupon_from_subscription(self,
 ```python
 subscription_id = 222
 
-result = subscriptions_controller.delete_coupon_from_subscription(subscription_id)
+result = subscriptions_controller.remove_coupon_from_subscription(subscription_id)
 print(result)
 ```
 

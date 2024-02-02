@@ -1250,8 +1250,8 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).execute()
 
-    def read_subscription_by_reference(self,
-                                       reference=None):
+    def find_subscription(self,
+                          reference=None):
         """Does a GET request to /subscriptions/lookup.json.
 
         Use this endpoint to find a subscription by its reference.
@@ -1343,9 +1343,9 @@ class SubscriptionsController(BaseController):
             .auth(Single('global'))
         ).execute()
 
-    def create_prepaid_subscription(self,
-                                    subscription_id,
-                                    body=None):
+    def update_prepaid_subscription_configuration(self,
+                                                  subscription_id,
+                                                  body=None):
         """Does a POST request to /subscriptions/{subscription_id}/prepaid_configurations.json.
 
         Use this endpoint to update a subscription's prepaid configuration.
@@ -1467,10 +1467,10 @@ class SubscriptionsController(BaseController):
             .deserialize_into(SubscriptionPreviewResponse.from_dictionary)
         ).execute()
 
-    def apply_coupon_to_subscription(self,
-                                     subscription_id,
-                                     code=None,
-                                     body=None):
+    def apply_coupons_to_subscription(self,
+                                      subscription_id,
+                                      code=None,
+                                      body=None):
         """Does a POST request to /subscriptions/{subscription_id}/add_coupon.json.
 
         An existing subscription can accommodate multiple discounts/coupon
@@ -1534,7 +1534,7 @@ class SubscriptionsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SubscriptionAddCouponErrorException)
         ).execute()
 
-    def delete_coupon_from_subscription(self,
+    def remove_coupon_from_subscription(self,
                                         subscription_id,
                                         coupon_code=None):
         """Does a DELETE request to /subscriptions/{subscription_id}/remove_coupon.json.

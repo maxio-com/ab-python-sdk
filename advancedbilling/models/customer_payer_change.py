@@ -7,7 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.payer_attributes import PayerAttributes
+from advancedbilling.models.invoice_payer_change import InvoicePayerChange
 
 
 class CustomerPayerChange(object):
@@ -17,8 +17,8 @@ class CustomerPayerChange(object):
     TODO: type model description here.
 
     Attributes:
-        before (PayerAttributes): TODO: type description here.
-        after (PayerAttributes): TODO: type description here.
+        before (InvoicePayerChange): TODO: type description here.
+        after (InvoicePayerChange): TODO: type description here.
 
     """
 
@@ -28,21 +28,14 @@ class CustomerPayerChange(object):
         "after": 'after'
     }
 
-    _optionals = [
-        'before',
-        'after',
-    ]
-
     def __init__(self,
-                 before=APIHelper.SKIP,
-                 after=APIHelper.SKIP):
+                 before=None,
+                 after=None):
         """Constructor for the CustomerPayerChange class"""
 
         # Initialize members of the class
-        if before is not APIHelper.SKIP:
-            self.before = before 
-        if after is not APIHelper.SKIP:
-            self.after = after 
+        self.before = before 
+        self.after = after 
 
     @classmethod
     def from_dictionary(cls,
@@ -63,8 +56,32 @@ class CustomerPayerChange(object):
             return None
 
         # Extract variables from the dictionary
-        before = PayerAttributes.from_dictionary(dictionary.get('before')) if 'before' in dictionary.keys() else APIHelper.SKIP
-        after = PayerAttributes.from_dictionary(dictionary.get('after')) if 'after' in dictionary.keys() else APIHelper.SKIP
+        before = InvoicePayerChange.from_dictionary(dictionary.get('before')) if dictionary.get('before') else None
+        after = InvoicePayerChange.from_dictionary(dictionary.get('after')) if dictionary.get('after') else None
         # Return an object of this model
         return cls(before,
                    after)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+
+        if isinstance(dictionary, cls):
+            return APIHelper.is_valid_type(value=dictionary.before, type_callable=lambda value: InvoicePayerChange.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.after, type_callable=lambda value: InvoicePayerChange.validate(value))
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return APIHelper.is_valid_type(value=dictionary.get('before'), type_callable=lambda value: InvoicePayerChange.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('after'), type_callable=lambda value: InvoicePayerChange.validate(value))

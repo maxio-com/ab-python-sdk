@@ -528,7 +528,7 @@ class InvoicesController(BaseController):
             .deserialize_into(Invoice.from_dictionary)
         ).execute()
 
-    def record_external_payment_for_invoices(self,
+    def record_payment_for_multiple_invoices(self,
                                              body=None):
         """Does a POST request to /invoices/payments.json.
 
@@ -891,8 +891,8 @@ class InvoicesController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def list_invoice_segments(self,
-                              options=dict()):
+    def list_consolidated_invoice_segments(self,
+                                           options=dict()):
         """Does a GET request to /invoices/{invoice_uid}/segments.json.
 
         Invoice segments returned on the index will only include totals, not

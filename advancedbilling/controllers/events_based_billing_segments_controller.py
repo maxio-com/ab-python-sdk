@@ -324,10 +324,10 @@ class EventsBasedBillingSegmentsController(BaseController):
             .auth(Single('global'))
         ).execute()
 
-    def create_segments(self,
-                        component_id,
-                        price_point_id,
-                        body=None):
+    def bulk_create_segments(self,
+                             component_id,
+                             price_point_id,
+                             body=None):
         """Does a POST request to /components/{component_id}/price_points/{price_point_id}/segments/bulk.json.
 
         This endpoint allows you to create multiple segments in one request.
@@ -388,10 +388,10 @@ class EventsBasedBillingSegmentsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', EventBasedBillingSegmentException)
         ).execute()
 
-    def update_segments(self,
-                        component_id,
-                        price_point_id,
-                        body=None):
+    def bulk_update_segments(self,
+                             component_id,
+                             price_point_id,
+                             body=None):
         """Does a PUT request to /components/{component_id}/price_points/{price_point_id}/segments/bulk.json.
 
         This endpoint allows you to update multiple segments in one request.

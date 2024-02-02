@@ -342,8 +342,8 @@ class SubscriptionGroupsController(BaseController):
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
-    def read_subscription_group_by_subscription_id(self,
-                                                   subscription_id):
+    def find_subscription_group(self,
+                                subscription_id):
         """Does a GET request to /subscription_groups/lookup.json.
 
         Use this endpoint to find subscription group associated with
@@ -384,9 +384,9 @@ class SubscriptionGroupsController(BaseController):
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
-    def create_subscription_group_hierarchy(self,
-                                            subscription_id,
-                                            body=None):
+    def add_subscription_to_group(self,
+                                  subscription_id,
+                                  body=None):
         """Does a POST request to /subscriptions/{subscription_id}/group.json.
 
         For sites making use of the [Relationship

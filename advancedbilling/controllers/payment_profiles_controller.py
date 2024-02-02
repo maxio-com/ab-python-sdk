@@ -781,7 +781,7 @@ class PaymentProfilesController(BaseController):
             .auth(Single('global'))
         ).execute()
 
-    def update_subscription_default_payment_profile(self,
+    def change_subscription_default_payment_profile(self,
                                                     subscription_id,
                                                     payment_profile_id):
         """Does a POST request to /subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json.
@@ -833,7 +833,7 @@ class PaymentProfilesController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def update_subscription_group_default_payment_profile(self,
+    def change_subscription_group_default_payment_profile(self,
                                                           uid,
                                                           payment_profile_id):
         """Does a POST request to /subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json.

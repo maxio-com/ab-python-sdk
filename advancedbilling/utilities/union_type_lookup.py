@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+from advancedbilling.models.address_change import AddressChange
 from advancedbilling.models.apply_credit_note_event_data import ApplyCreditNoteEventData
 from advancedbilling.models.apply_debit_note_event_data import ApplyDebitNoteEventData
 from advancedbilling.models.apply_payment_event_data import ApplyPaymentEventData
@@ -23,7 +24,9 @@ from advancedbilling.models.credit_account_balance_changed import CreditAccountB
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
 from advancedbilling.models.credit_note import CreditNote
 from advancedbilling.models.custom_field_value_change import CustomFieldValueChange
+from advancedbilling.models.customer_custom_fields_change import CustomerCustomFieldsChange
 from advancedbilling.models.customer_error import CustomerError
+from advancedbilling.models.customer_payer_change import CustomerPayerChange
 from advancedbilling.models.dunning_step_reached import DunningStepReached
 from advancedbilling.models.extended_interval_unit import ExtendedIntervalUnit
 from advancedbilling.models.group_settings import GroupSettings
@@ -527,6 +530,42 @@ class UnionTypeLookUp:
                 LeafType(str),
                 LeafType(int)
             ]
+        ),
+        'CustomerChangePayer': OneOf(
+            [
+                LeafType(CustomerPayerChange)
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
+            )
+        ),
+        'CustomerChangeShippingAddress': OneOf(
+            [
+                LeafType(AddressChange)
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
+            )
+        ),
+        'CustomerChangeBillingAddress': OneOf(
+            [
+                LeafType(AddressChange)
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
+            )
+        ),
+        'CustomerChangeCustomFields': OneOf(
+            [
+                LeafType(CustomerCustomFieldsChange)
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
+            )
         ),
         'CustomerErrorResponseErrors': OneOf(
             [
