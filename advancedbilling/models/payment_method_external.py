@@ -94,15 +94,15 @@ class PaymentMethodExternal(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.details, type_callable=lambda value: isinstance(value, str)) \
+            return APIHelper.is_valid_type(value=dictionary.details, type_callable=lambda value: isinstance(value, str), is_value_nullable=True) \
                 and APIHelper.is_valid_type(value=dictionary.kind, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str), is_value_nullable=True) \
                 and APIHelper.is_valid_type(value=dictionary.mtype, type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('details'), type_callable=lambda value: isinstance(value, str)) \
+        return APIHelper.is_valid_type(value=dictionary.get('details'), type_callable=lambda value: isinstance(value, str), is_value_nullable=True) \
             and APIHelper.is_valid_type(value=dictionary.get('kind'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str), is_value_nullable=True) \
             and APIHelper.is_valid_type(value=dictionary.get('type'), type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))

@@ -78,11 +78,11 @@ class DeductServiceCredit(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('DeductServiceCreditAmount').validate(dictionary.amount) \
+            return UnionTypeLookUp.get('DeductServiceCreditAmount').validate(dictionary.amount).is_valid \
                 and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('DeductServiceCreditAmount').validate(dictionary.get('amount')) \
+        return UnionTypeLookUp.get('DeductServiceCreditAmount').validate(dictionary.get('amount')).is_valid \
             and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str))

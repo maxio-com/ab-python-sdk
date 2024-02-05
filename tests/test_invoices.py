@@ -338,7 +338,6 @@ class TestInvoices(TestBase):
         self.get_customers_controller().delete_customer(customer.id)
 
     def test_list_invoice_events_given_voided_invoice_then_return_void_invoice_event_and_issue_invoice_event(self):
-        pytest.skip("Waiting for sdk update.")
         product_family: ProductFamily = self.get_product_families_controller().create_product_family(
             CreateProductFamilyRequest(product_family=CreateProductFamily(
                 name="TestInvoices_Product_Family_Name_3",

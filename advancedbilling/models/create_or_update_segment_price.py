@@ -92,9 +92,9 @@ class CreateOrUpdateSegmentPrice(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('CreateOrUpdateSegmentPriceUnitPrice').validate(dictionary.unit_price)
+            return UnionTypeLookUp.get('CreateOrUpdateSegmentPriceUnitPrice').validate(dictionary.unit_price).is_valid
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('CreateOrUpdateSegmentPriceUnitPrice').validate(dictionary.get('unit_price'))
+        return UnionTypeLookUp.get('CreateOrUpdateSegmentPriceUnitPrice').validate(dictionary.get('unit_price')).is_valid

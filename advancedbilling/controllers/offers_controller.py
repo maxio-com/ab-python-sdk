@@ -15,8 +15,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.offer_response import OfferResponse
 from advancedbilling.models.list_offers_response import ListOffersResponse
 from advancedbilling.exceptions.error_array_map_response_exception import ErrorArrayMapResponseException

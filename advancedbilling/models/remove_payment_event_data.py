@@ -123,7 +123,7 @@ class RemovePaymentEventData(object):
                 and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.transaction_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
-                and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.payment_method) \
+                and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.payment_method).is_valid \
                 and APIHelper.is_valid_type(value=dictionary.prepayment, type_callable=lambda value: isinstance(value, bool))
 
         if not isinstance(dictionary, dict):
@@ -133,5 +133,5 @@ class RemovePaymentEventData(object):
             and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('transaction_time'), type_callable=lambda value: isinstance(value, str)) \
-            and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.get('payment_method')) \
+            and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.get('payment_method')).is_valid \
             and APIHelper.is_valid_type(value=dictionary.get('prepayment'), type_callable=lambda value: isinstance(value, bool))
