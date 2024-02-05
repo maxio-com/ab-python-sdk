@@ -83,9 +83,9 @@ class CreateSubscriptionGroup(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('CreateSubscriptionGroupSubscriptionId').validate(dictionary.subscription_id)
+            return UnionTypeLookUp.get('CreateSubscriptionGroupSubscriptionId').validate(dictionary.subscription_id).is_valid
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('CreateSubscriptionGroupSubscriptionId').validate(dictionary.get('subscription_id'))
+        return UnionTypeLookUp.get('CreateSubscriptionGroupSubscriptionId').validate(dictionary.get('subscription_id')).is_valid
