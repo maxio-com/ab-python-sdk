@@ -27,18 +27,4 @@ class TestAuthorization:
         result = client.sites.read_site()
 
         assert isinstance(result, SiteResponse)
-
-        site = result.site
-        assert_properties(site, AuthorizeAssertCases.get_site_data())
-
-        allocation_settings = site.allocation_settings
-        assert_properties(allocation_settings, AuthorizeAssertCases.get_allocation_settings_data())
-
-        organization_address = site.organization_address
-        assert_properties(organization_address, AuthorizeAssertCases.get_organization_address_data())
-
-        tax_configuration = site.tax_configuration
-        assert_properties(tax_configuration, AuthorizeAssertCases.get_tax_configuration_data())
-
-        net_terms = site.net_terms
-        assert_properties(net_terms, AuthorizeAssertCases.get_net_terms_data())
+        assert_properties(result, AuthorizeAssertCases.get_result_data())
