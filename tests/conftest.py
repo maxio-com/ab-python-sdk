@@ -6,8 +6,10 @@ import pytest
 from advancedbilling.advanced_billing_client import (
     AdvancedBillingClient,
     ComponentsController,
+    CouponsController,
     CustomersController,
     CustomFieldsController,
+    InvoicesController,
     PaymentProfilesController,
     ProductFamiliesController,
     ProductsController,
@@ -106,3 +108,13 @@ def subscription_components_controller(client) -> SubscriptionComponentsControll
 @pytest.fixture(scope="session")
 def custom_fields_controller(client) -> CustomFieldsController:
     return client.custom_fields
+
+
+@pytest.fixture(scope="session")
+def coupons_controller(client) -> CouponsController:
+    return client.coupons
+
+
+@pytest.fixture(scope="session")
+def invoices_controller(client) -> InvoicesController:
+    return client.invoices
