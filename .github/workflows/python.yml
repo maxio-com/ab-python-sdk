@@ -27,15 +27,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v3
-        with:
-          python-version: "3.11"
-
-      - name: Install deps
-        run: |
-          pip install -r requirements.txt
-          pip install -r test-requirements.txt
-
       - name: Tests
         run: pytest tests/
         env:
