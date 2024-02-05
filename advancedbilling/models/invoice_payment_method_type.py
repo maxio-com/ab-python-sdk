@@ -12,7 +12,7 @@ class InvoicePaymentMethodType(object):
 
     """Implementation of the 'Invoice Payment Method Type' enum.
 
-    The type of payment method used.
+    The type of payment method used. Defaults to other.
 
     Attributes:
         CREDIT_CARD: TODO: type description here.

@@ -21,6 +21,7 @@ class CreateMultiInvoicePayment(object):
         details (str): Additional information related to the payment method
             (eg. Check #).
         method (InvoicePaymentMethodType): The type of payment method used.
+            Defaults to other.
         amount (str | float): Dollar amount of the sum of the invoices payment
             (eg. "10.50" => $10.50).
         received_on (str): Date reflecting when the payment was received from
@@ -52,7 +53,7 @@ class CreateMultiInvoicePayment(object):
                  applications=None,
                  memo=APIHelper.SKIP,
                  details=APIHelper.SKIP,
-                 method='other',
+                 method=APIHelper.SKIP,
                  received_on=APIHelper.SKIP):
         """Constructor for the CreateMultiInvoicePayment class"""
 
@@ -61,7 +62,8 @@ class CreateMultiInvoicePayment(object):
             self.memo = memo 
         if details is not APIHelper.SKIP:
             self.details = details 
-        self.method = method 
+        if method is not APIHelper.SKIP:
+            self.method = method 
         self.amount = amount 
         if received_on is not APIHelper.SKIP:
             self.received_on = received_on 
@@ -93,7 +95,7 @@ class CreateMultiInvoicePayment(object):
             applications = [CreateInvoicePaymentApplication.from_dictionary(x) for x in dictionary.get('applications')]
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
-        method = dictionary.get("method") if dictionary.get("method") else 'other'
+        method = dictionary.get("method") if dictionary.get("method") else APIHelper.SKIP
         received_on = dictionary.get("received_on") if dictionary.get("received_on") else APIHelper.SKIP
         # Return an object of this model
         return cls(amount,

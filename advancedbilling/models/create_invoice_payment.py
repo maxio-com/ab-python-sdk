@@ -20,6 +20,7 @@ class CreateInvoicePayment(object):
             refunded (eg. "10.50" => $10.50)
         memo (str): A description to be attached to the payment.
         method (InvoicePaymentMethodType): The type of payment method used.
+            Defaults to other.
         details (str): Additional information related to the payment method
             (eg. Check #)
 
@@ -43,7 +44,7 @@ class CreateInvoicePayment(object):
     def __init__(self,
                  amount=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
-                 method='other',
+                 method=APIHelper.SKIP,
                  details=APIHelper.SKIP):
         """Constructor for the CreateInvoicePayment class"""
 
@@ -52,7 +53,8 @@ class CreateInvoicePayment(object):
             self.amount = amount 
         if memo is not APIHelper.SKIP:
             self.memo = memo 
-        self.method = method 
+        if method is not APIHelper.SKIP:
+            self.method = method 
         if details is not APIHelper.SKIP:
             self.details = details 
 
@@ -78,7 +80,7 @@ class CreateInvoicePayment(object):
         # Extract variables from the dictionary
         amount = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoicePaymentAmount'), dictionary.get('amount'), False) if dictionary.get('amount') is not None else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
-        method = dictionary.get("method") if dictionary.get("method") else 'other'
+        method = dictionary.get("method") if dictionary.get("method") else APIHelper.SKIP
         details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
         # Return an object of this model
         return cls(amount,

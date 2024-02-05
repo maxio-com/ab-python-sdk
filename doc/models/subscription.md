@@ -61,7 +61,7 @@
 | `on_hold_at` | `datetime` | Optional | The timestamp of the most recent on hold action. |
 | `prepaid_dunning` | `bool` | Optional | Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled |
 | `coupons` | [`List[SubscriptionIncludedCoupon]`](../../doc/models/subscription-included-coupon.md) | Optional | Additional coupon data. To use this data you also have to include the following param in the request`include[]=coupons`.<br>Only in Read Subscription Endpoint. |
-| `dunning_communication_delay_enabled` | `bool` | Optional | Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute.<br>**Default**: `False` |
+| `dunning_communication_delay_enabled` | `bool` | Optional | Enable Communication Delay feature, making sure no communication (email or SMS) is sent to the Customer between 9PM and 8AM in time zone set by the `dunning_communication_delay_time_zone` attribute. |
 | `dunning_communication_delay_time_zone` | `str` | Optional | Time zone for the Dunning Communication Delay feature. |
 | `receives_invoice_emails` | `bool` | Optional | - |
 | `locale` | `str` | Optional | - |
@@ -99,7 +99,6 @@
     "site_gateway_setting_id": 1,
     "gateway_handle": null
   },
-  "dunning_communication_delay_enabled": false,
   "dunning_communication_delay_time_zone": "\"Eastern Time (US & Canada)\"",
   "id": 96,
   "state": "soft_failure",

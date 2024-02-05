@@ -451,7 +451,7 @@ class Subscription(object):
                  on_hold_at=APIHelper.SKIP,
                  prepaid_dunning=APIHelper.SKIP,
                  coupons=APIHelper.SKIP,
-                 dunning_communication_delay_enabled=False,
+                 dunning_communication_delay_enabled=APIHelper.SKIP,
                  dunning_communication_delay_time_zone=APIHelper.SKIP,
                  receives_invoice_emails=APIHelper.SKIP,
                  locale=APIHelper.SKIP,
@@ -567,7 +567,8 @@ class Subscription(object):
             self.prepaid_dunning = prepaid_dunning 
         if coupons is not APIHelper.SKIP:
             self.coupons = coupons 
-        self.dunning_communication_delay_enabled = dunning_communication_delay_enabled 
+        if dunning_communication_delay_enabled is not APIHelper.SKIP:
+            self.dunning_communication_delay_enabled = dunning_communication_delay_enabled 
         if dunning_communication_delay_time_zone is not APIHelper.SKIP:
             self.dunning_communication_delay_time_zone = dunning_communication_delay_time_zone 
         if receives_invoice_emails is not APIHelper.SKIP:
@@ -687,7 +688,7 @@ class Subscription(object):
             coupons = [SubscriptionIncludedCoupon.from_dictionary(x) for x in dictionary.get('coupons')]
         else:
             coupons = APIHelper.SKIP
-        dunning_communication_delay_enabled = dictionary.get("dunning_communication_delay_enabled") if dictionary.get("dunning_communication_delay_enabled") else False
+        dunning_communication_delay_enabled = dictionary.get("dunning_communication_delay_enabled") if "dunning_communication_delay_enabled" in dictionary.keys() else APIHelper.SKIP
         dunning_communication_delay_time_zone = dictionary.get("dunning_communication_delay_time_zone") if "dunning_communication_delay_time_zone" in dictionary.keys() else APIHelper.SKIP
         receives_invoice_emails = dictionary.get("receives_invoice_emails") if "receives_invoice_emails" in dictionary.keys() else APIHelper.SKIP
         locale = dictionary.get("locale") if "locale" in dictionary.keys() else APIHelper.SKIP
