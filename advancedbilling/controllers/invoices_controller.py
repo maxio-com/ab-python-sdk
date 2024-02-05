@@ -16,8 +16,6 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.invoice import Invoice
 from advancedbilling.models.list_invoices_response import ListInvoicesResponse
 from advancedbilling.models.list_invoice_events_response import ListInvoiceEventsResponse
@@ -528,7 +526,7 @@ class InvoicesController(BaseController):
             .deserialize_into(Invoice.from_dictionary)
         ).execute()
 
-    def record_external_payment_for_invoices(self,
+    def record_payment_for_multiple_invoices(self,
                                              body=None):
         """Does a POST request to /invoices/payments.json.
 
@@ -891,8 +889,8 @@ class InvoicesController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def list_invoice_segments(self,
-                              options=dict()):
+    def list_consolidated_invoice_segments(self,
+                                           options=dict()):
         """Does a GET request to /invoices/{invoice_uid}/segments.json.
 
         Invoice segments returned on the index will only include totals, not

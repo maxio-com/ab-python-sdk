@@ -16,8 +16,6 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.coupon_response import CouponResponse
 from advancedbilling.models.coupon_usage import CouponUsage
 from advancedbilling.models.coupon_currency_response import CouponCurrencyResponse
@@ -245,9 +243,9 @@ class CouponsController(BaseController):
             .deserialize_into(CouponResponse.from_dictionary)
         ).execute()
 
-    def read_coupon_by_code(self,
-                            product_family_id=None,
-                            code=None):
+    def find_coupon(self,
+                    product_family_id=None,
+                    code=None):
         """Does a GET request to /coupons/find.json.
 
         You can search for a coupon via the API with the find method. By
@@ -772,9 +770,9 @@ class CouponsController(BaseController):
             .local_error('404', 'Not Found', SingleStringErrorResponseException)
         ).execute()
 
-    def update_coupon_currency_prices(self,
-                                      coupon_id,
-                                      body=None):
+    def create_or_update_coupon_currency_prices(self,
+                                                coupon_id,
+                                                body=None):
         """Does a PUT request to /coupons/{coupon_id}/currency_prices.json.
 
         This endpoint allows you to create and/or update currency prices for

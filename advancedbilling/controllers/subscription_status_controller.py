@@ -15,8 +15,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.subscription_response import SubscriptionResponse
 from advancedbilling.models.delayed_cancellation_response import DelayedCancellationResponse
 from advancedbilling.models.renewal_preview_response import RenewalPreviewResponse
@@ -525,8 +523,8 @@ class SubscriptionStatusController(BaseController):
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
-    def stop_delayed_cancellation(self,
-                                  subscription_id):
+    def cancel_delayed_cancellation(self,
+                                    subscription_id):
         """Does a DELETE request to /subscriptions/{subscription_id}/delayed_cancel.json.
 
         Removing the delayed cancellation on a subscription will ensure that

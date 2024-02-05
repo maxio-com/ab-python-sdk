@@ -16,8 +16,8 @@ subscription_groups_controller = client.subscription_groups
 * [Read Subscription Group](../../doc/controllers/subscription-groups.md#read-subscription-group)
 * [Update Subscription Group Members](../../doc/controllers/subscription-groups.md#update-subscription-group-members)
 * [Delete Subscription Group](../../doc/controllers/subscription-groups.md#delete-subscription-group)
-* [Read Subscription Group by Subscription Id](../../doc/controllers/subscription-groups.md#read-subscription-group-by-subscription-id)
-* [Create Subscription Group Hierarchy](../../doc/controllers/subscription-groups.md#create-subscription-group-hierarchy)
+* [Find Subscription Group](../../doc/controllers/subscription-groups.md#find-subscription-group)
+* [Add Subscription to Group](../../doc/controllers/subscription-groups.md#add-subscription-to-group)
 * [Remove Subscription From Group](../../doc/controllers/subscription-groups.md#remove-subscription-from-group)
 
 
@@ -418,15 +418,15 @@ print(result)
 | 404 | Not Found | `APIException` |
 
 
-# Read Subscription Group by Subscription Id
+# Find Subscription Group
 
 Use this endpoint to find subscription group associated with subscription.
 
 If the subscription is not in a group endpoint will return 404 code.
 
 ```python
-def read_subscription_group_by_subscription_id(self,
-                                              subscription_id)
+def find_subscription_group(self,
+                           subscription_id)
 ```
 
 ## Parameters
@@ -444,7 +444,7 @@ def read_subscription_group_by_subscription_id(self,
 ```python
 subscription_id = 'subscription_id0'
 
-result = subscription_groups_controller.read_subscription_group_by_subscription_id(subscription_id)
+result = subscription_groups_controller.find_subscription_group(subscription_id)
 print(result)
 ```
 
@@ -496,7 +496,7 @@ print(result)
 | 404 | Not Found | `APIException` |
 
 
-# Create Subscription Group Hierarchy
+# Add Subscription to Group
 
 For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to add existing subscriptions to subscription groups.
 
@@ -514,9 +514,9 @@ To create a new subscription into a subscription group, please reference the fol
 [Create Subscription in a Subscription Group](https://developers.chargify.com/docs/api-docs/d571659cf0f24-create-subscription#subscription-in-a-subscription-group)
 
 ```python
-def create_subscription_group_hierarchy(self,
-                                       subscription_id,
-                                       body=None)
+def add_subscription_to_group(self,
+                             subscription_id,
+                             body=None)
 ```
 
 ## Parameters
@@ -549,7 +549,7 @@ body = AddSubscriptionToAGroup(
     )
 )
 
-result = subscription_groups_controller.create_subscription_group_hierarchy(
+result = subscription_groups_controller.add_subscription_to_group(
     subscription_id,
     body=body
 )

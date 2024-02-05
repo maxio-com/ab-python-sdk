@@ -16,44 +16,50 @@ class InvoiceCustomField(object):
     TODO: type model description here.
 
     Attributes:
+        owner_id (int): TODO: type description here.
+        owner_type (CustomFieldOwner): TODO: type description here.
         name (str): TODO: type description here.
         value (str): TODO: type description here.
-        owner_id (int): TODO: type description here.
-        owner_type (str): TODO: type description here.
+        metadatum_id (int): TODO: type description here.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
+        "owner_id": 'owner_id',
+        "owner_type": 'owner_type',
         "name": 'name',
         "value": 'value',
-        "owner_id": 'owner_id',
-        "owner_type": 'owner_type'
+        "metadatum_id": 'metadatum_id'
     }
 
     _optionals = [
-        'name',
-        'value',
         'owner_id',
         'owner_type',
+        'name',
+        'value',
+        'metadatum_id',
     ]
 
     def __init__(self,
+                 owner_id=APIHelper.SKIP,
+                 owner_type=APIHelper.SKIP,
                  name=APIHelper.SKIP,
                  value=APIHelper.SKIP,
-                 owner_id=APIHelper.SKIP,
-                 owner_type=APIHelper.SKIP):
+                 metadatum_id=APIHelper.SKIP):
         """Constructor for the InvoiceCustomField class"""
 
         # Initialize members of the class
-        if name is not APIHelper.SKIP:
-            self.name = name 
-        if value is not APIHelper.SKIP:
-            self.value = value 
         if owner_id is not APIHelper.SKIP:
             self.owner_id = owner_id 
         if owner_type is not APIHelper.SKIP:
             self.owner_type = owner_type 
+        if name is not APIHelper.SKIP:
+            self.name = name 
+        if value is not APIHelper.SKIP:
+            self.value = value 
+        if metadatum_id is not APIHelper.SKIP:
+            self.metadatum_id = metadatum_id 
 
     @classmethod
     def from_dictionary(cls,
@@ -74,15 +80,17 @@ class InvoiceCustomField(object):
             return None
 
         # Extract variables from the dictionary
-        name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
-        value = dictionary.get("value") if dictionary.get("value") else APIHelper.SKIP
         owner_id = dictionary.get("owner_id") if dictionary.get("owner_id") else APIHelper.SKIP
         owner_type = dictionary.get("owner_type") if dictionary.get("owner_type") else APIHelper.SKIP
+        name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
+        value = dictionary.get("value") if dictionary.get("value") else APIHelper.SKIP
+        metadatum_id = dictionary.get("metadatum_id") if dictionary.get("metadatum_id") else APIHelper.SKIP
         # Return an object of this model
-        return cls(name,
+        return cls(owner_id,
+                   owner_type,
+                   name,
                    value,
-                   owner_id,
-                   owner_type)
+                   metadatum_id)
 
     @classmethod
     def validate(cls, dictionary):

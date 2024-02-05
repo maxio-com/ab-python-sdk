@@ -15,8 +15,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.subscription_group_prepayment_response import SubscriptionGroupPrepaymentResponse
 from advancedbilling.models.list_subscription_group_prepayment_response import ListSubscriptionGroupPrepaymentResponse
 from advancedbilling.models.service_credit_response import ServiceCreditResponse
@@ -175,9 +173,9 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
-    def issue_subscription_group_service_credits(self,
-                                                 uid,
-                                                 body=None):
+    def issue_subscription_group_service_credit(self,
+                                                uid,
+                                                body=None):
         """Does a POST request to /subscription_groups/{uid}/service_credits.json.
 
         Credit can be issued for a subscription group identified by the
@@ -227,9 +225,9 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def deduct_subscription_group_service_credits(self,
-                                                  uid,
-                                                  body=None):
+    def deduct_subscription_group_service_credit(self,
+                                                 uid,
+                                                 body=None):
         """Does a POST request to /subscription_groups/{uid}/service_credit_deductions.json.
 
         Credit can be deducted for a subscription group identified by the

@@ -73,9 +73,9 @@ class PaymentProfileResponse(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile').validate(dictionary.payment_profile)
+            return UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile').validate(dictionary.payment_profile).is_valid
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile').validate(dictionary.get('payment_profile'))
+        return UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile').validate(dictionary.get('payment_profile')).is_valid

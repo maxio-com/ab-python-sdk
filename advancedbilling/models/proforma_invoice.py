@@ -8,10 +8,10 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.invoice_address import InvoiceAddress
+from advancedbilling.models.invoice_custom_field import InvoiceCustomField
 from advancedbilling.models.invoice_customer import InvoiceCustomer
 from advancedbilling.models.invoice_line_item import InvoiceLineItem
 from advancedbilling.models.invoice_seller import InvoiceSeller
-from advancedbilling.models.proforma_custom_field import ProformaCustomField
 from advancedbilling.models.proforma_invoice_credit import ProformaInvoiceCredit
 from advancedbilling.models.proforma_invoice_discount import ProformaInvoiceDiscount
 from advancedbilling.models.proforma_invoice_payment import ProformaInvoicePayment
@@ -62,7 +62,7 @@ class ProformaInvoice(object):
         taxes (List[ProformaInvoiceTax]): TODO: type description here.
         credits (List[ProformaInvoiceCredit]): TODO: type description here.
         payments (List[ProformaInvoicePayment]): TODO: type description here.
-        custom_fields (List[ProformaCustomField]): TODO: type description
+        custom_fields (List[InvoiceCustomField]): TODO: type description
             here.
         public_url (str): TODO: type description here.
 
@@ -335,7 +335,7 @@ class ProformaInvoice(object):
             payments = APIHelper.SKIP
         custom_fields = None
         if dictionary.get('custom_fields') is not None:
-            custom_fields = [ProformaCustomField.from_dictionary(x) for x in dictionary.get('custom_fields')]
+            custom_fields = [InvoiceCustomField.from_dictionary(x) for x in dictionary.get('custom_fields')]
         else:
             custom_fields = APIHelper.SKIP
         public_url = dictionary.get("public_url") if dictionary.get("public_url") else APIHelper.SKIP

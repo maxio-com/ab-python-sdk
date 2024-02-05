@@ -17,8 +17,6 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.site_summary import SiteSummary
 from advancedbilling.models.mrr_response import MRRResponse
 from advancedbilling.models.list_mrr_response import ListMRRResponse
@@ -118,7 +116,7 @@ class InsightsController(BaseController):
         ).execute()
 
     @deprecated()
-    def read_mrr_movements(self,
+    def list_mrr_movements(self,
                            options=dict()):
         """Does a GET request to /mrr_movements.json.
 

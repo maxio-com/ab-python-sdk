@@ -15,8 +15,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.subscription_group_signup_response import SubscriptionGroupSignupResponse
 from advancedbilling.models.subscription_group_response import SubscriptionGroupResponse
 from advancedbilling.models.list_subscription_groups_response import ListSubscriptionGroupsResponse
@@ -342,8 +340,8 @@ class SubscriptionGroupsController(BaseController):
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
-    def read_subscription_group_by_subscription_id(self,
-                                                   subscription_id):
+    def find_subscription_group(self,
+                                subscription_id):
         """Does a GET request to /subscription_groups/lookup.json.
 
         Use this endpoint to find subscription group associated with
@@ -384,9 +382,9 @@ class SubscriptionGroupsController(BaseController):
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
-    def create_subscription_group_hierarchy(self,
-                                            subscription_id,
-                                            body=None):
+    def add_subscription_to_group(self,
+                                  subscription_id,
+                                  body=None):
         """Does a POST request to /subscriptions/{subscription_id}/group.json.
 
         For sites making use of the [Relationship

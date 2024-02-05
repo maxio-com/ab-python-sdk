@@ -15,8 +15,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.payment_profile_response import PaymentProfileResponse
 from advancedbilling.models.bank_account_response import BankAccountResponse
 from advancedbilling.models.get_one_time_token_request import GetOneTimeTokenRequest
@@ -781,7 +779,7 @@ class PaymentProfilesController(BaseController):
             .auth(Single('global'))
         ).execute()
 
-    def update_subscription_default_payment_profile(self,
+    def change_subscription_default_payment_profile(self,
                                                     subscription_id,
                                                     payment_profile_id):
         """Does a POST request to /subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json.
@@ -833,7 +831,7 @@ class PaymentProfilesController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def update_subscription_group_default_payment_profile(self,
+    def change_subscription_group_default_payment_profile(self,
                                                           uid,
                                                           payment_profile_id):
         """Does a POST request to /subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json.

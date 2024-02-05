@@ -7,7 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.proforma_custom_field import ProformaCustomField
+from advancedbilling.models.invoice_custom_field import InvoiceCustomField
 
 
 class CustomerCustomFieldsChange(object):
@@ -17,8 +17,8 @@ class CustomerCustomFieldsChange(object):
     TODO: type model description here.
 
     Attributes:
-        before (List[ProformaCustomField]): TODO: type description here.
-        after (List[ProformaCustomField]): TODO: type description here.
+        before (List[InvoiceCustomField]): TODO: type description here.
+        after (List[InvoiceCustomField]): TODO: type description here.
 
     """
 
@@ -28,21 +28,14 @@ class CustomerCustomFieldsChange(object):
         "after": 'after'
     }
 
-    _optionals = [
-        'before',
-        'after',
-    ]
-
     def __init__(self,
-                 before=APIHelper.SKIP,
-                 after=APIHelper.SKIP):
+                 before=None,
+                 after=None):
         """Constructor for the CustomerCustomFieldsChange class"""
 
         # Initialize members of the class
-        if before is not APIHelper.SKIP:
-            self.before = before 
-        if after is not APIHelper.SKIP:
-            self.after = after 
+        self.before = before 
+        self.after = after 
 
     @classmethod
     def from_dictionary(cls,
@@ -65,14 +58,34 @@ class CustomerCustomFieldsChange(object):
         # Extract variables from the dictionary
         before = None
         if dictionary.get('before') is not None:
-            before = [ProformaCustomField.from_dictionary(x) for x in dictionary.get('before')]
-        else:
-            before = APIHelper.SKIP
+            before = [InvoiceCustomField.from_dictionary(x) for x in dictionary.get('before')]
         after = None
         if dictionary.get('after') is not None:
-            after = [ProformaCustomField.from_dictionary(x) for x in dictionary.get('after')]
-        else:
-            after = APIHelper.SKIP
+            after = [InvoiceCustomField.from_dictionary(x) for x in dictionary.get('after')]
         # Return an object of this model
         return cls(before,
                    after)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+
+        if isinstance(dictionary, cls):
+            return APIHelper.is_valid_type(value=dictionary.before, type_callable=lambda value: InvoiceCustomField.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.after, type_callable=lambda value: InvoiceCustomField.validate(value))
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return APIHelper.is_valid_type(value=dictionary.get('before'), type_callable=lambda value: InvoiceCustomField.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('after'), type_callable=lambda value: InvoiceCustomField.validate(value))

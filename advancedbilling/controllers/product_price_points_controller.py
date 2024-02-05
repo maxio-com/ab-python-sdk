@@ -17,8 +17,6 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.product_price_point_response import ProductPricePointResponse
 from advancedbilling.models.list_product_price_points_response import ListProductPricePointsResponse
 from advancedbilling.models.product_response import ProductResponse
@@ -445,9 +443,9 @@ class ProductPricePointsController(BaseController):
             .deserialize_into(ProductResponse.from_dictionary)
         ).execute()
 
-    def create_product_price_points(self,
-                                    product_id,
-                                    body=None):
+    def bulk_create_product_price_points(self,
+                                         product_id,
+                                         body=None):
         """Does a POST request to /products/{product_id}/price_points/bulk.json.
 
         Use this endpoint to create multiple product price points in one

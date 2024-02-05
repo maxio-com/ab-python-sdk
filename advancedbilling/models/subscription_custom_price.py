@@ -171,13 +171,13 @@ class SubscriptionCustomPrice(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('SubscriptionCustomPricePriceInCents').validate(dictionary.price_in_cents) \
-                and UnionTypeLookUp.get('SubscriptionCustomPriceInterval').validate(dictionary.interval) \
+            return UnionTypeLookUp.get('SubscriptionCustomPricePriceInCents').validate(dictionary.price_in_cents).is_valid \
+                and UnionTypeLookUp.get('SubscriptionCustomPriceInterval').validate(dictionary.interval).is_valid \
                 and APIHelper.is_valid_type(value=dictionary.interval_unit, type_callable=lambda value: IntervalUnit.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('SubscriptionCustomPricePriceInCents').validate(dictionary.get('price_in_cents')) \
-            and UnionTypeLookUp.get('SubscriptionCustomPriceInterval').validate(dictionary.get('interval')) \
+        return UnionTypeLookUp.get('SubscriptionCustomPricePriceInCents').validate(dictionary.get('price_in_cents')).is_valid \
+            and UnionTypeLookUp.get('SubscriptionCustomPriceInterval').validate(dictionary.get('interval')).is_valid \
             and APIHelper.is_valid_type(value=dictionary.get('interval_unit'), type_callable=lambda value: IntervalUnit.validate(value))

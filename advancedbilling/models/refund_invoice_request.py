@@ -73,9 +73,9 @@ class RefundInvoiceRequest(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('RefundInvoiceRequestRefund').validate(dictionary.refund)
+            return UnionTypeLookUp.get('RefundInvoiceRequestRefund').validate(dictionary.refund).is_valid
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('RefundInvoiceRequestRefund').validate(dictionary.get('refund'))
+        return UnionTypeLookUp.get('RefundInvoiceRequestRefund').validate(dictionary.get('refund')).is_valid

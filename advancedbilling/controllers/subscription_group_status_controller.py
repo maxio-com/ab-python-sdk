@@ -15,8 +15,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.reactivate_subscription_group_response import ReactivateSubscriptionGroupResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 
@@ -113,8 +111,8 @@ class SubscriptionGroupStatusController(BaseController):
             .auth(Single('global'))
         ).execute()
 
-    def stop_delayed_cancellation_for_group(self,
-                                            uid):
+    def cancel_delayed_cancellation_for_group(self,
+                                              uid):
         """Does a DELETE request to /subscription_groups/{uid}/delayed_cancel.json.
 
         Removing the delayed cancellation on a subscription group will ensure

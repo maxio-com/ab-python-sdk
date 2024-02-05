@@ -18,8 +18,8 @@ payment_profiles_controller = client.payment_profiles
 * [Delete Subscriptions Payment Profile](../../doc/controllers/payment-profiles.md#delete-subscriptions-payment-profile)
 * [Verify Bank Account](../../doc/controllers/payment-profiles.md#verify-bank-account)
 * [Delete Subscription Group Payment Profile](../../doc/controllers/payment-profiles.md#delete-subscription-group-payment-profile)
-* [Update Subscription Default Payment Profile](../../doc/controllers/payment-profiles.md#update-subscription-default-payment-profile)
-* [Update Subscription Group Default Payment Profile](../../doc/controllers/payment-profiles.md#update-subscription-group-default-payment-profile)
+* [Change Subscription Default Payment Profile](../../doc/controllers/payment-profiles.md#change-subscription-default-payment-profile)
+* [Change Subscription Group Default Payment Profile](../../doc/controllers/payment-profiles.md#change-subscription-group-default-payment-profile)
 * [Read One Time Token](../../doc/controllers/payment-profiles.md#read-one-time-token)
 * [Send Request Update Payment Email](../../doc/controllers/payment-profiles.md#send-request-update-payment-email)
 
@@ -847,14 +847,14 @@ print(result)
 ```
 
 
-# Update Subscription Default Payment Profile
+# Change Subscription Default Payment Profile
 
 This will change the default payment profile on the subscription to the existing payment profile with the id specified.
 
 You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
 
 ```python
-def update_subscription_default_payment_profile(self,
+def change_subscription_default_payment_profile(self,
                                                subscription_id,
                                                payment_profile_id)
 ```
@@ -877,7 +877,7 @@ subscription_id = 222
 
 payment_profile_id = 198
 
-result = payment_profiles_controller.update_subscription_default_payment_profile(
+result = payment_profiles_controller.change_subscription_default_payment_profile(
     subscription_id,
     payment_profile_id
 )
@@ -921,7 +921,7 @@ print(result)
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
-# Update Subscription Group Default Payment Profile
+# Change Subscription Group Default Payment Profile
 
 This will change the default payment profile on the subscription group to the existing payment profile with the id specified.
 
@@ -930,7 +930,7 @@ You must elect to change the existing payment profile to a new payment profile I
 The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
 
 ```python
-def update_subscription_group_default_payment_profile(self,
+def change_subscription_group_default_payment_profile(self,
                                                      uid,
                                                      payment_profile_id)
 ```
@@ -953,7 +953,7 @@ uid = 'uid0'
 
 payment_profile_id = 198
 
-result = payment_profiles_controller.update_subscription_group_default_payment_profile(
+result = payment_profiles_controller.change_subscription_group_default_payment_profile(
     uid,
     payment_profile_id
 )

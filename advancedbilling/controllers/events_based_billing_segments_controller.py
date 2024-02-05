@@ -15,8 +15,6 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.segment_response import SegmentResponse
 from advancedbilling.models.list_segments_response import ListSegmentsResponse
 from advancedbilling.exceptions.api_exception import APIException
@@ -324,10 +322,10 @@ class EventsBasedBillingSegmentsController(BaseController):
             .auth(Single('global'))
         ).execute()
 
-    def create_segments(self,
-                        component_id,
-                        price_point_id,
-                        body=None):
+    def bulk_create_segments(self,
+                             component_id,
+                             price_point_id,
+                             body=None):
         """Does a POST request to /components/{component_id}/price_points/{price_point_id}/segments/bulk.json.
 
         This endpoint allows you to create multiple segments in one request.
@@ -388,10 +386,10 @@ class EventsBasedBillingSegmentsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', EventBasedBillingSegmentException)
         ).execute()
 
-    def update_segments(self,
-                        component_id,
-                        price_point_id,
-                        body=None):
+    def bulk_update_segments(self,
+                             component_id,
+                             price_point_id,
+                             body=None):
         """Does a PUT request to /components/{component_id}/price_points/{price_point_id}/segments/bulk.json.
 
         This endpoint allows you to update multiple segments in one request.
