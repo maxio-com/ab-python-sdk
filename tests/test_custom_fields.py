@@ -29,7 +29,7 @@ from advancedbilling.models.product_family import ProductFamily
 from advancedbilling.models.resource_type import ResourceType
 from advancedbilling.models.subscription import Subscription
 
-from .data import CustomFieldsAssertCases, CustomFieldsInitCases
+from .data import CustomFieldsAssertCases, InitCases
 from .utils import assert_properties
 
 
@@ -39,7 +39,7 @@ class TestCustomFields:
     ):
         subscription_metafields: list[Metafield] = custom_fields_controller.create_metafields(
             ResourceType.SUBSCRIPTIONS,
-            CreateMetafieldsRequest(CustomFieldsInitCases.get_metafields_dropdown_request()),
+            CreateMetafieldsRequest(InitCases.get_metafields_dropdown_with_text_field_request()),
         )
 
         assert len(subscription_metafields) == 2
@@ -63,7 +63,7 @@ class TestCustomFields:
     ):
         customer_metafields = custom_fields_controller.create_metafields(
             ResourceType.CUSTOMERS,
-            CreateMetafieldsRequest(CustomFieldsInitCases.get_metafields_radio_request()),
+            CreateMetafieldsRequest(InitCases.get_metafields_radio_request()),
         )
 
         assert len(customer_metafields) == 1
@@ -83,30 +83,30 @@ class TestCustomFields:
     ):
         # GIVEN
         product_family: ProductFamily = product_families_controller.create_product_family(
-            CreateProductFamilyRequest(CustomFieldsInitCases.get_product_family_request())
+            CreateProductFamilyRequest(InitCases.get_product_family_request())
         ).product_family
 
         product: Product = products_controller.create_product(
             product_family.id,
-            CreateOrUpdateProductRequest(CustomFieldsInitCases.get_product_request()),
+            CreateOrUpdateProductRequest(InitCases.get_product_request()),
         ).product
 
         customer: Customer = customers_controller.create_customer(
-            CreateCustomerRequest(CustomFieldsInitCases.get_customer_request())
+            CreateCustomerRequest(InitCases.get_customer_request())
         ).customer
 
         payment_profile: CreditCardPaymentProfile = payment_profiles_controller.create_payment_profile(
-            CreatePaymentProfileRequest(CustomFieldsInitCases.get_payment_profile_request(customer))
+            CreatePaymentProfileRequest(InitCases.get_payment_profile_request(customer.id))
         ).payment_profile
 
         subscription: Subscription = subscriptions_controller.create_subscription(
-            CreateSubscriptionRequest(CustomFieldsInitCases.get_subscription_request(product, customer, payment_profile))
+            CreateSubscriptionRequest(InitCases.get_subscription_request(product.id, customer.id, payment_profile.id))
         ).subscription
 
         # THEN
         metafields: list[Metafield] = custom_fields_controller.create_metafields(
             ResourceType.SUBSCRIPTIONS,
-            CreateMetafieldsRequest(metafields=CustomFieldsInitCases.get_metafields_dropdown_request()),
+            CreateMetafieldsRequest(metafields=InitCases.get_metafields_dropdown_with_text_field_request()),
         )
 
         assert len(metafields) == 2
@@ -116,7 +116,7 @@ class TestCustomFields:
         metadata: list[Metadata] = custom_fields_controller.create_metadata(
             ResourceType.SUBSCRIPTIONS,
             subscription.id,
-            CreateMetadataRequest(CustomFieldsInitCases.get_metadata_dropdown_request()),
+            CreateMetadataRequest(InitCases.get_metadata_dropdown_with_text_field_request()),
         )
 
         assert len(metadata) == 2
@@ -141,13 +141,13 @@ class TestCustomFields:
     ):
         # GIVEN
         customer: Customer = customers_controller.create_customer(
-            CreateCustomerRequest(CustomFieldsInitCases.get_customer_request())
+            CreateCustomerRequest(InitCases.get_customer_request())
         ).customer
 
         # THEN
         metafields: list[Metafield] = custom_fields_controller.create_metafields(
             ResourceType.CUSTOMERS,
-            CreateMetafieldsRequest(metafields=CustomFieldsInitCases.get_metafields_radio_request()),
+            CreateMetafieldsRequest(metafields=InitCases.get_metafields_radio_request()),
         )
 
         assert len(metafields) == 1
@@ -157,7 +157,7 @@ class TestCustomFields:
         metadata: list[Metadata] = custom_fields_controller.create_metadata(
             ResourceType.CUSTOMERS,
             customer.id,
-            CreateMetadataRequest(CustomFieldsInitCases.get_metadata_radio_request()),
+            CreateMetadataRequest(InitCases.get_metadata_radio_request()),
         )
 
         assert len(metadata) == 1
