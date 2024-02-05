@@ -1,9 +1,10 @@
 from uuid import uuid4
 
+from advancedbilling.models.component import Component
+from advancedbilling.models.coupon import Coupon
 from advancedbilling.models.interval_unit import IntervalUnit
 from advancedbilling.models.payment_type import PaymentType
 from advancedbilling.models.pricing_scheme import PricingScheme
-from advancedbilling.models.component import Component
 
 
 class InitCases:
@@ -192,3 +193,76 @@ class InitCases:
                 "quantity": 1,
             },
         ]
+
+    @staticmethod
+    def get_coupon_data() -> dict:
+        return {
+            "name": "15% off",
+            "code": "15OFF",
+            "percentage": "15",
+            "description": "15% off for life",
+            "allow_negative_balance": False,
+            "recurring": False,
+            "end_date": "2999-08-29T12:00:00-04:00",
+            "stackable": False,
+            "compounding_strategy": "compound",
+            "exclude_mid_period_allocations": True,
+            "apply_on_cancel_at_end_of_period": True,
+        }
+
+    @classmethod
+    def get_invoice_request(cls) -> dict:
+        return {
+            "issue_date": "2024-01-01",
+            "billing_address": {
+                "first_name": "Hilario",
+                "last_name": "Schmidt",
+                "phone": "282-329-2085",
+                "address": "65581 Auer Expressway",
+                "zip": "15217",
+                "country": "US",
+                "city": "test City",
+                "state": "test State",
+            },
+            "line_items": [
+                {
+                    "title": "TestCase_Product_Name_1",
+                    "quantity": "12",
+                    "unit_price": "150.00",
+                    "description": "test invoice",
+                }
+            ],
+        }
+
+    @classmethod
+    def get_invoice_request_with_coupon(cls, coupon: Coupon) -> dict:
+        invoice_request = cls.get_invoice_request()
+        invoice_request["coupons"] = [{"code": coupon.code, "percentage": coupon.percentage}]
+
+        return invoice_request
+
+    @staticmethod
+    def get_invoice_request_with_invalid_period() -> dict:
+        return {
+            "issue_date": "2024-01-01",
+            "billing_address": {
+                "first_name": "Hilario",
+                "last_name": "Schmidt",
+                "phone": "282-329-2085",
+                "address": "65581 Auer Expressway",
+                "zip": "15217",
+                "country": "US",
+                "city": "test City",
+                "state": "test State",
+            },
+            "line_items": [
+                {
+                    "title": "TestCase_Product_Name_1",
+                    "quantity": "12",
+                    "unit_price": "150.00",
+                    "description": "test invoice",
+                    "period_range_start": "2024-01-01",
+                    "period_range_end": "2023-01-01",
+                }
+            ],
+        }
