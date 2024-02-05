@@ -138,7 +138,7 @@ class BankAccountPaymentProfile(object):
                  customer_vault_token=APIHelper.SKIP,
                  billing_address_2=APIHelper.SKIP,
                  bank_name=APIHelper.SKIP,
-                 bank_account_type='checking',
+                 bank_account_type=APIHelper.SKIP,
                  bank_account_holder_type=APIHelper.SKIP,
                  payment_type=APIHelper.SKIP,
                  verified=False,
@@ -177,7 +177,8 @@ class BankAccountPaymentProfile(object):
             self.bank_name = bank_name 
         self.masked_bank_routing_number = masked_bank_routing_number 
         self.masked_bank_account_number = masked_bank_account_number 
-        self.bank_account_type = bank_account_type 
+        if bank_account_type is not APIHelper.SKIP:
+            self.bank_account_type = bank_account_type 
         if bank_account_holder_type is not APIHelper.SKIP:
             self.bank_account_holder_type = bank_account_holder_type 
         if payment_type is not APIHelper.SKIP:
@@ -223,7 +224,7 @@ class BankAccountPaymentProfile(object):
         customer_vault_token = dictionary.get("customer_vault_token") if "customer_vault_token" in dictionary.keys() else APIHelper.SKIP
         billing_address_2 = dictionary.get("billing_address_2") if "billing_address_2" in dictionary.keys() else APIHelper.SKIP
         bank_name = dictionary.get("bank_name") if dictionary.get("bank_name") else APIHelper.SKIP
-        bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else 'checking'
+        bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else APIHelper.SKIP
         bank_account_holder_type = dictionary.get("bank_account_holder_type") if dictionary.get("bank_account_holder_type") else APIHelper.SKIP
         payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         verified = dictionary.get("verified") if dictionary.get("verified") else False

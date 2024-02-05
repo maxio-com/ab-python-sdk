@@ -213,7 +213,7 @@ class CreatePaymentProfile(object):
                  bank_routing_number=APIHelper.SKIP,
                  bank_account_number=APIHelper.SKIP,
                  bank_branch_code=APIHelper.SKIP,
-                 bank_account_type='checking',
+                 bank_account_type=APIHelper.SKIP,
                  bank_account_holder_type=APIHelper.SKIP,
                  last_four=APIHelper.SKIP):
         """Constructor for the CreatePaymentProfile class"""
@@ -277,7 +277,8 @@ class CreatePaymentProfile(object):
             self.bank_account_number = bank_account_number 
         if bank_branch_code is not APIHelper.SKIP:
             self.bank_branch_code = bank_branch_code 
-        self.bank_account_type = bank_account_type 
+        if bank_account_type is not APIHelper.SKIP:
+            self.bank_account_type = bank_account_type 
         if bank_account_holder_type is not APIHelper.SKIP:
             self.bank_account_holder_type = bank_account_holder_type 
         if last_four is not APIHelper.SKIP:
@@ -332,7 +333,7 @@ class CreatePaymentProfile(object):
         bank_routing_number = dictionary.get("bank_routing_number") if dictionary.get("bank_routing_number") else APIHelper.SKIP
         bank_account_number = dictionary.get("bank_account_number") if dictionary.get("bank_account_number") else APIHelper.SKIP
         bank_branch_code = dictionary.get("bank_branch_code") if dictionary.get("bank_branch_code") else APIHelper.SKIP
-        bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else 'checking'
+        bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else APIHelper.SKIP
         bank_account_holder_type = dictionary.get("bank_account_holder_type") if dictionary.get("bank_account_holder_type") else APIHelper.SKIP
         last_four = dictionary.get("last_four") if dictionary.get("last_four") else APIHelper.SKIP
         # Return an object of this model

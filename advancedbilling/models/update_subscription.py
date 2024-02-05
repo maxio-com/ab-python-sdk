@@ -101,7 +101,7 @@ class UpdateSubscription(object):
                  credit_card_attributes=APIHelper.SKIP,
                  product_handle=APIHelper.SKIP,
                  product_id=APIHelper.SKIP,
-                 product_change_delayed=False,
+                 product_change_delayed=APIHelper.SKIP,
                  next_product_id=APIHelper.SKIP,
                  next_product_price_point_id=APIHelper.SKIP,
                  snap_day=APIHelper.SKIP,
@@ -113,7 +113,7 @@ class UpdateSubscription(object):
                  reference=APIHelper.SKIP,
                  custom_price=APIHelper.SKIP,
                  components=APIHelper.SKIP,
-                 dunning_communication_delay_enabled=False,
+                 dunning_communication_delay_enabled=APIHelper.SKIP,
                  dunning_communication_delay_time_zone=APIHelper.SKIP):
         """Constructor for the UpdateSubscription class"""
 
@@ -124,7 +124,8 @@ class UpdateSubscription(object):
             self.product_handle = product_handle 
         if product_id is not APIHelper.SKIP:
             self.product_id = product_id 
-        self.product_change_delayed = product_change_delayed 
+        if product_change_delayed is not APIHelper.SKIP:
+            self.product_change_delayed = product_change_delayed 
         if next_product_id is not APIHelper.SKIP:
             self.next_product_id = next_product_id 
         if next_product_price_point_id is not APIHelper.SKIP:
@@ -147,7 +148,8 @@ class UpdateSubscription(object):
             self.custom_price = custom_price 
         if components is not APIHelper.SKIP:
             self.components = components 
-        self.dunning_communication_delay_enabled = dunning_communication_delay_enabled 
+        if dunning_communication_delay_enabled is not APIHelper.SKIP:
+            self.dunning_communication_delay_enabled = dunning_communication_delay_enabled 
         if dunning_communication_delay_time_zone is not APIHelper.SKIP:
             self.dunning_communication_delay_time_zone = dunning_communication_delay_time_zone 
 
@@ -174,7 +176,7 @@ class UpdateSubscription(object):
         credit_card_attributes = CreditCardAttributes.from_dictionary(dictionary.get('credit_card_attributes')) if 'credit_card_attributes' in dictionary.keys() else APIHelper.SKIP
         product_handle = dictionary.get("product_handle") if dictionary.get("product_handle") else APIHelper.SKIP
         product_id = dictionary.get("product_id") if dictionary.get("product_id") else APIHelper.SKIP
-        product_change_delayed = dictionary.get("product_change_delayed") if dictionary.get("product_change_delayed") else False
+        product_change_delayed = dictionary.get("product_change_delayed") if "product_change_delayed" in dictionary.keys() else APIHelper.SKIP
         next_product_id = dictionary.get("next_product_id") if dictionary.get("next_product_id") else APIHelper.SKIP
         next_product_price_point_id = dictionary.get("next_product_price_point_id") if dictionary.get("next_product_price_point_id") else APIHelper.SKIP
         snap_day = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdateSubscriptionSnapDay'), dictionary.get('snap_day'), False) if dictionary.get('snap_day') is not None else APIHelper.SKIP
@@ -190,7 +192,7 @@ class UpdateSubscription(object):
             components = [UpdateSubscriptionComponent.from_dictionary(x) for x in dictionary.get('components')]
         else:
             components = APIHelper.SKIP
-        dunning_communication_delay_enabled = dictionary.get("dunning_communication_delay_enabled") if dictionary.get("dunning_communication_delay_enabled") else False
+        dunning_communication_delay_enabled = dictionary.get("dunning_communication_delay_enabled") if "dunning_communication_delay_enabled" in dictionary.keys() else APIHelper.SKIP
         dunning_communication_delay_time_zone = dictionary.get("dunning_communication_delay_time_zone") if "dunning_communication_delay_time_zone" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(credit_card_attributes,

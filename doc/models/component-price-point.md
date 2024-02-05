@@ -20,7 +20,7 @@
 | `created_at` | `datetime` | Optional | - |
 | `updated_at` | `datetime` | Optional | - |
 | `prices` | [`List[ComponentPrice]`](../../doc/models/component-price.md) | Optional | - |
-| `use_site_exchange_rate` | `bool` | Optional | Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.<br>**Default**: `True` |
+| `use_site_exchange_rate` | `bool` | Optional | Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site. Defaults to true during creation. |
 | `subscription_id` | `int` | Optional | (only used for Custom Pricing - ie. when the price point's type is `custom`) The id of the subscription that the custom price point is for. |
 | `tax_included` | `bool` | Optional | - |
 | `interval` | `int` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
@@ -31,7 +31,6 @@
 
 ```json
 {
-  "use_site_exchange_rate": true,
   "id": 190,
   "type": "custom",
   "default": false,

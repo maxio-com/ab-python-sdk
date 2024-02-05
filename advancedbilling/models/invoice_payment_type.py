@@ -12,7 +12,7 @@ class InvoicePaymentType(object):
 
     """Implementation of the 'Invoice Payment Type' enum.
 
-    The type of payment to be applied to an Invoice.
+    The type of payment to be applied to an Invoice. Defaults to external.
 
     Attributes:
         EXTERNAL: TODO: type description here.

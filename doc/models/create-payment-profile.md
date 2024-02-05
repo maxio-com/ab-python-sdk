@@ -38,7 +38,7 @@
 | `bank_routing_number` | `str` | Optional | (Required when creating with ACH. Optional when creating a subscription with GoCardless). The routing number of the bank. It becomes bank_code while passing via GoCardless API |
 | `bank_account_number` | `str` | Optional | (Required when creating with ACH, GoCardless, Stripe BECS Direct Debit and bank_iban is blank) The customerʼs bank account number |
 | `bank_branch_code` | `str` | Optional | (Optional when creating with GoCardless, required with Stripe BECS Direct Debit) Branch code. Alternatively, an IBAN can be provided |
-| `bank_account_type` | [`BankAccountType`](../../doc/models/bank-account-type.md) | Optional | Defaults to checking<br>**Default**: `'checking'` |
+| `bank_account_type` | [`BankAccountType`](../../doc/models/bank-account-type.md) | Optional | Defaults to checking |
 | `bank_account_holder_type` | [`BankAccountHolderType`](../../doc/models/bank-account-holder-type.md) | Optional | Defaults to personal |
 | `last_four` | `str` | Optional | (Optional) Used for creating subscription with payment profile imported using vault_token, for proper display in Advanced Billing UI |
 
@@ -48,7 +48,6 @@
 {
   "chargify_token": "tok_9g6hw85pnpt6knmskpwp4ttt",
   "full_number": "5424000000000015",
-  "bank_account_type": "checking",
   "id": 76,
   "payment_type": "paypal_account",
   "first_name": "first_name8",

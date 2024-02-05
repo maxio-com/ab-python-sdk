@@ -19,7 +19,7 @@ class CreateInvoicePaymentRequest(object):
     Attributes:
         payment (CreateInvoicePayment): TODO: type description here.
         mtype (InvoicePaymentType): The type of payment to be applied to an
-            Invoice.
+            Invoice. Defaults to external.
 
     """
 
@@ -35,12 +35,13 @@ class CreateInvoicePaymentRequest(object):
 
     def __init__(self,
                  payment=None,
-                 mtype='external'):
+                 mtype=APIHelper.SKIP):
         """Constructor for the CreateInvoicePaymentRequest class"""
 
         # Initialize members of the class
         self.payment = payment 
-        self.mtype = mtype 
+        if mtype is not APIHelper.SKIP:
+            self.mtype = mtype 
 
     @classmethod
     def from_dictionary(cls,
@@ -62,7 +63,7 @@ class CreateInvoicePaymentRequest(object):
 
         # Extract variables from the dictionary
         payment = CreateInvoicePayment.from_dictionary(dictionary.get('payment')) if dictionary.get('payment') else None
-        mtype = dictionary.get("type") if dictionary.get("type") else 'external'
+        mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP
         # Return an object of this model
         return cls(payment,
                    mtype)

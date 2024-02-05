@@ -38,7 +38,8 @@ class ComponentPricePoint(object):
         prices (List[ComponentPrice]): TODO: type description here.
         use_site_exchange_rate (bool): Whether to use the site level exchange
             rate or define your own prices for each currency if you have
-            multiple currencies defined on the site.
+            multiple currencies defined on the site. Defaults to true during
+            creation.
         subscription_id (int): (only used for Custom Pricing - ie. when the
             price point's type is `custom`) The id of the subscription that
             the custom price point is for.
@@ -119,7 +120,7 @@ class ComponentPricePoint(object):
                  created_at=APIHelper.SKIP,
                  updated_at=APIHelper.SKIP,
                  prices=APIHelper.SKIP,
-                 use_site_exchange_rate=True,
+                 use_site_exchange_rate=APIHelper.SKIP,
                  subscription_id=APIHelper.SKIP,
                  tax_included=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
@@ -150,7 +151,8 @@ class ComponentPricePoint(object):
             self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
-        self.use_site_exchange_rate = use_site_exchange_rate 
+        if use_site_exchange_rate is not APIHelper.SKIP:
+            self.use_site_exchange_rate = use_site_exchange_rate 
         if subscription_id is not APIHelper.SKIP:
             self.subscription_id = subscription_id 
         if tax_included is not APIHelper.SKIP:
@@ -200,7 +202,7 @@ class ComponentPricePoint(object):
             prices = [ComponentPrice.from_dictionary(x) for x in dictionary.get('prices')]
         else:
             prices = APIHelper.SKIP
-        use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if dictionary.get("use_site_exchange_rate") else True
+        use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
         interval = dictionary.get("interval") if "interval" in dictionary.keys() else APIHelper.SKIP
