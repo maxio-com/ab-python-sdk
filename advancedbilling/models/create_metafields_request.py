@@ -73,9 +73,9 @@ class CreateMetafieldsRequest(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('CreateMetafieldsRequestMetafields').validate(dictionary.metafields)
+            return UnionTypeLookUp.get('CreateMetafieldsRequestMetafields').validate(dictionary.metafields).is_valid
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('CreateMetafieldsRequestMetafields').validate(dictionary.get('metafields'))
+        return UnionTypeLookUp.get('CreateMetafieldsRequestMetafields').validate(dictionary.get('metafields')).is_valid

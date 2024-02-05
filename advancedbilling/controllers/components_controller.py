@@ -16,8 +16,6 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
-from apimatic_core.authentication.multiple.and_auth_group import And
-from apimatic_core.authentication.multiple.or_auth_group import Or
 from advancedbilling.models.component_response import ComponentResponse
 from advancedbilling.models.component import Component
 from advancedbilling.models.component_price_point_response import ComponentPricePointResponse
