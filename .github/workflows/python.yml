@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  setup_and_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,63 +20,10 @@ jobs:
         pip install -r requirements.txt
         pip install -r test-requirements.txt
 
-  cleanup_site_before_tests:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Cleanup Site
-        run: ./cleanupSite.sh
-        env:
-          BASIC_AUTH_USERNAME: ${{ secrets.BASIC_AUTH_USERNAME }}
-          BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
-          SUBDOMAIN: ${{ secrets.SUBDOMAIN }}
-          DOMAIN: ${{ secrets.DOMAIN }}
-
-      - name: Wait 10 seconds to allow site be cleared
-        run: sleep 10
-
-
-  run_tests:
-    runs-on: ubuntu-latest
-    needs: cleanup_site_before_tests
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@v3
-        with:
-          python-version: "3.11"
-
-      - name: Install deps
-        run: |
-          pip install -r requirements.txt
-          pip install -r test-requirements.txt
-
-      - name: Tests
-        run: pytest tests/
-        env:
-          BASIC_AUTH_USERNAME: ${{ secrets.BASIC_AUTH_USERNAME }}
-          BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
-          SUBDOMAIN: ${{ secrets.SUBDOMAIN }}
-          DOMAIN: ${{ secrets.DOMAIN }}
-
-  cleanup_site_after_tests:
-    runs-on: ubuntu-latest
-    needs: run_tests
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Cleanup Site
-        run: ./cleanupSite.sh
-        env:
-          BASIC_AUTH_USERNAME: ${{ secrets.BASIC_AUTH_USERNAME }}
-          BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
-          SUBDOMAIN: ${{ secrets.SUBDOMAIN }}
-          DOMAIN: ${{ secrets.DOMAIN }}
-
-      - name: Wait 10 seconds to allow site be cleared
-        run: sleep 10
+    - name: Run tests
+      run: pytest tests/
+      env:
+        BASIC_AUTH_USERNAME: ${{ secrets.BASIC_AUTH_USERNAME }}
+        BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
+        SUBDOMAIN: ${{ secrets.SUBDOMAIN }}
+        DOMAIN: ${{ secrets.DOMAIN }}

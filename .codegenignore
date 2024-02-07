@@ -4,4 +4,3 @@
 docker-compose.yml
 DockerFile
 tests/**
-cleanupSite.sh
