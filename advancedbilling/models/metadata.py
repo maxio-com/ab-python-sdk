@@ -20,7 +20,7 @@ class Metadata(object):
         value (str): TODO: type description here.
         resource_id (int): TODO: type description here.
         name (str): TODO: type description here.
-        deleted_at (str): TODO: type description here.
+        deleted_at (datetime): TODO: type description here.
         metafield_id (int): TODO: type description here.
 
     """
@@ -71,7 +71,7 @@ class Metadata(object):
         if name is not APIHelper.SKIP:
             self.name = name 
         if deleted_at is not APIHelper.SKIP:
-            self.deleted_at = deleted_at 
+            self.deleted_at = APIHelper.apply_datetime_converter(deleted_at, APIHelper.RFC3339DateTime) if deleted_at else None 
         if metafield_id is not APIHelper.SKIP:
             self.metafield_id = metafield_id 
 
@@ -98,7 +98,10 @@ class Metadata(object):
         value = dictionary.get("value") if "value" in dictionary.keys() else APIHelper.SKIP
         resource_id = dictionary.get("resource_id") if "resource_id" in dictionary.keys() else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
-        deleted_at = dictionary.get("deleted_at") if "deleted_at" in dictionary.keys() else APIHelper.SKIP
+        if 'deleted_at' in dictionary.keys():
+            deleted_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("deleted_at")).datetime if dictionary.get("deleted_at") else None
+        else:
+            deleted_at = APIHelper.SKIP
         metafield_id = dictionary.get("metafield_id") if "metafield_id" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(id,

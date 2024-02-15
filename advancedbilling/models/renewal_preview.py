@@ -17,8 +17,8 @@ class RenewalPreview(object):
     TODO: type model description here.
 
     Attributes:
-        next_assessment_at (str): The timestamp for the subscription’s next
-            renewal
+        next_assessment_at (datetime): The timestamp for the subscription’s
+            next renewal
         subtotal_in_cents (long|int): An integer representing the amount of
             the total pre-tax, pre-discount charges that will be assessed at
             the next renewal
@@ -82,7 +82,7 @@ class RenewalPreview(object):
 
         # Initialize members of the class
         if next_assessment_at is not APIHelper.SKIP:
-            self.next_assessment_at = next_assessment_at 
+            self.next_assessment_at = APIHelper.apply_datetime_converter(next_assessment_at, APIHelper.RFC3339DateTime) if next_assessment_at else None 
         if subtotal_in_cents is not APIHelper.SKIP:
             self.subtotal_in_cents = subtotal_in_cents 
         if total_tax_in_cents is not APIHelper.SKIP:
@@ -119,7 +119,7 @@ class RenewalPreview(object):
             return None
 
         # Extract variables from the dictionary
-        next_assessment_at = dictionary.get("next_assessment_at") if dictionary.get("next_assessment_at") else APIHelper.SKIP
+        next_assessment_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_assessment_at")).datetime if dictionary.get("next_assessment_at") else APIHelper.SKIP
         subtotal_in_cents = dictionary.get("subtotal_in_cents") if dictionary.get("subtotal_in_cents") else APIHelper.SKIP
         total_tax_in_cents = dictionary.get("total_tax_in_cents") if dictionary.get("total_tax_in_cents") else APIHelper.SKIP
         total_discount_in_cents = dictionary.get("total_discount_in_cents") if dictionary.get("total_discount_in_cents") else APIHelper.SKIP

@@ -78,7 +78,7 @@ class SubscriptionComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -215,7 +215,7 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -269,7 +269,7 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -312,7 +312,7 @@ class SubscriptionComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -438,7 +438,7 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -514,7 +514,7 @@ class SubscriptionComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -570,7 +570,7 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -633,7 +633,7 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -709,7 +709,7 @@ class SubscriptionComponentsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def delete_prepaid_usage_allocation(self,
@@ -778,7 +778,7 @@ class SubscriptionComponentsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def create_usage(self,
@@ -899,7 +899,7 @@ class SubscriptionComponentsController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1012,7 +1012,7 @@ class SubscriptionComponentsController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -1067,7 +1067,7 @@ class SubscriptionComponentsController(BaseController):
                             .value(component_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def deactivate_event_based_component(self,
@@ -1108,7 +1108,7 @@ class SubscriptionComponentsController(BaseController):
                             .value(component_id)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def record_event(self,
@@ -1182,7 +1182,7 @@ class SubscriptionComponentsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def bulk_record_events(self,
@@ -1242,7 +1242,7 @@ class SubscriptionComponentsController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def list_subscription_components_for_site(self,
@@ -1342,7 +1342,7 @@ class SubscriptionComponentsController(BaseController):
                         like to apply to your search. To use this filter you
                         also have to include the following param in the
                         request `include=subscription`.
-                    filter_subscription_start_date -- str -- The start date
+                    filter_subscription_start_date -- date -- The start date
                         (format YYYY-MM-DD) with which to filter the
                         date_field. Returns components that belong to the
                         subscription with a timestamp at or after midnight
@@ -1350,17 +1350,17 @@ class SubscriptionComponentsController(BaseController):
                         specified. To use this filter you also have to include
                         the following param in the request
                         `include=subscription`.
-                    filter_subscription_start_datetime -- str -- The start
-                        date and time (format YYYY-MM-DD HH:MM:SS) with which
-                        to filter the date_field. Returns components that
-                        belong to the subscription with a timestamp at or
+                    filter_subscription_start_datetime -- datetime -- The
+                        start date and time (format YYYY-MM-DD HH:MM:SS) with
+                        which to filter the date_field. Returns components
+                        that belong to the subscription with a timestamp at or
                         after exact time provided in query. You can specify
                         timezone in query - otherwise your site''s time zone
                         will be used. If provided, this parameter will be used
                         instead of start_date. To use this filter you also
                         have to include the following param in the request
                         `include=subscription`.
-                    filter_subscription_end_date -- str -- The end date
+                    filter_subscription_end_date -- date -- The end date
                         (format YYYY-MM-DD) with which to filter the
                         date_field. Returns components that belong to the
                         subscription with a timestamp up to and including
@@ -1368,15 +1368,15 @@ class SubscriptionComponentsController(BaseController):
                         specified. To use this filter you also have to include
                         the following param in the request
                         `include=subscription`.
-                    filter_subscription_end_datetime -- str -- The end date
-                        and time (format YYYY-MM-DD HH:MM:SS) with which to
-                        filter the date_field. Returns components that belong
-                        to the subscription with a timestamp at or before
-                        exact time provided in query. You can specify timezone
-                        in query - otherwise your site''s time zone will be
-                        used. If provided, this parameter will be used instead
-                        of end_date. To use this filter you also have to
-                        include the following param in the request
+                    filter_subscription_end_datetime -- datetime -- The end
+                        date and time (format YYYY-MM-DD HH:MM:SS) with which
+                        to filter the date_field. Returns components that
+                        belong to the subscription with a timestamp at or
+                        before exact time provided in query. You can specify
+                        timezone in query - otherwise your site''s time zone
+                        will be used. If provided, this parameter will be used
+                        instead of end_date. To use this filter you also have
+                        to include the following param in the request
                         `include=subscription`.
 
         Returns:
@@ -1450,18 +1450,18 @@ class SubscriptionComponentsController(BaseController):
                          .value(options.get('filter_subscription_start_date', None)))
             .query_param(Parameter()
                          .key('filter[subscription][start_datetime]')
-                         .value(options.get('filter_subscription_start_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_subscription_start_datetime', None))))
             .query_param(Parameter()
                          .key('filter[subscription][end_date]')
                          .value(options.get('filter_subscription_end_date', None)))
             .query_param(Parameter()
                          .key('filter[subscription][end_datetime]')
-                         .value(options.get('filter_subscription_end_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_subscription_end_datetime', None))))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

@@ -14,8 +14,8 @@
 | `total_discount_in_cents` | `long\|int` | Optional | - |
 | `total_tax_in_cents` | `long\|int` | Optional | - |
 | `subtotal_in_cents` | `long\|int` | Optional | - |
-| `start_date` | `str` | Optional | - |
-| `end_date` | `str` | Optional | - |
+| `start_date` | `datetime` | Optional | - |
+| `end_date` | `datetime` | Optional | - |
 | `period_type` | `str` | Optional | - |
 | `existing_balance_in_cents` | `long\|int` | Optional | - |
 

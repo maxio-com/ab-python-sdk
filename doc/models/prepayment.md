@@ -18,7 +18,7 @@
 | `external` | `bool` | Required | - |
 | `memo` | `str` | Required | **Constraints**: *Minimum Length*: `1` |
 | `payment_type` | [`PrepaymentMethod`](../../doc/models/prepayment-method.md) | Optional | The payment type of the prepayment. |
-| `created_at` | `str` | Required | **Constraints**: *Minimum Length*: `1` |
+| `created_at` | `datetime` | Required | - |
 
 ## Example (as JSON)
 
@@ -33,7 +33,7 @@
   "external": false,
   "memo": "memo8",
   "payment_type": "cash",
-  "created_at": "created_at8"
+  "created_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

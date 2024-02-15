@@ -17,7 +17,7 @@ class PendingCancellationChange(object):
 
     Attributes:
         cancellation_state (str): TODO: type description here.
-        cancels_at (str): TODO: type description here.
+        cancels_at (datetime): TODO: type description here.
 
     """
 
@@ -34,7 +34,7 @@ class PendingCancellationChange(object):
 
         # Initialize members of the class
         self.cancellation_state = cancellation_state 
-        self.cancels_at = cancels_at 
+        self.cancels_at = APIHelper.apply_datetime_converter(cancels_at, APIHelper.RFC3339DateTime) if cancels_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -56,7 +56,7 @@ class PendingCancellationChange(object):
 
         # Extract variables from the dictionary
         cancellation_state = dictionary.get("cancellation_state") if dictionary.get("cancellation_state") else None
-        cancels_at = dictionary.get("cancels_at") if dictionary.get("cancels_at") else None
+        cancels_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("cancels_at")).datetime if dictionary.get("cancels_at") else None
         # Return an object of this model
         return cls(cancellation_state,
                    cancels_at)
@@ -77,7 +77,7 @@ class PendingCancellationChange(object):
 
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.cancellation_state, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.cancels_at, type_callable=lambda value: isinstance(value, str))
+                and APIHelper.is_valid_type(value=dictionary.cancels_at, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime))
 
         if not isinstance(dictionary, dict):
             return False

@@ -18,23 +18,24 @@ class Webhook(object):
     Attributes:
         event (str): A string describing which event type produced the given
             webhook
-        id (int): The unique identifier for the webhooks (unique across all of
-            Chargify). This is not changed on a retry/replay of the same
-            webhook, so it may be used to avoid duplicate action for the same
-            event.
-        created_at (str): Timestamp indicating when the webhook was created
+        id (long|int): The unique identifier for the webhooks (unique across
+            all of Chargify). This is not changed on a retry/replay of the
+            same webhook, so it may be used to avoid duplicate action for the
+            same event.
+        created_at (datetime): Timestamp indicating when the webhook was
+            created
         last_error (str): Text describing the status code and/or error from
             the last failed attempt to send the Webhook. When a webhook is
             retried and accepted, this field will be cleared.
-        last_error_at (str): Timestamp indicating when the last non-acceptance
-            occurred. If a webhook is later resent and accepted, this field
-            will be cleared.
-        accepted_at (str): Timestamp indicating when the webhook was accepted
-            by the merchant endpoint. When a webhook is explicitly replayed by
-            the merchant, this value will be cleared until it is accepted
-            again.
-        last_sent_at (str): Timestamp indicating when the most recent attempt
-            was made to send the webhook
+        last_error_at (datetime): Timestamp indicating when the last
+            non-acceptance occurred. If a webhook is later resent and
+            accepted, this field will be cleared.
+        accepted_at (datetime): Timestamp indicating when the webhook was
+            accepted by the merchant endpoint. When a webhook is explicitly
+            replayed by the merchant, this value will be cleared until it is
+            accepted again.
+        last_sent_at (datetime): Timestamp indicating when the most recent
+            attempt was made to send the webhook
         last_sent_url (str): The url that the endpoint was last sent to.
         successful (bool): A boolean flag describing whether the webhook was
             accepted by the webhook endpoint for the most recent attempt.
@@ -103,15 +104,15 @@ class Webhook(object):
         if id is not APIHelper.SKIP:
             self.id = id 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if last_error is not APIHelper.SKIP:
             self.last_error = last_error 
         if last_error_at is not APIHelper.SKIP:
-            self.last_error_at = last_error_at 
+            self.last_error_at = APIHelper.apply_datetime_converter(last_error_at, APIHelper.RFC3339DateTime) if last_error_at else None 
         if accepted_at is not APIHelper.SKIP:
-            self.accepted_at = accepted_at 
+            self.accepted_at = APIHelper.apply_datetime_converter(accepted_at, APIHelper.RFC3339DateTime) if accepted_at else None 
         if last_sent_at is not APIHelper.SKIP:
-            self.last_sent_at = last_sent_at 
+            self.last_sent_at = APIHelper.apply_datetime_converter(last_sent_at, APIHelper.RFC3339DateTime) if last_sent_at else None 
         if last_sent_url is not APIHelper.SKIP:
             self.last_sent_url = last_sent_url 
         if successful is not APIHelper.SKIP:
@@ -144,11 +145,14 @@ class Webhook(object):
         # Extract variables from the dictionary
         event = dictionary.get("event") if dictionary.get("event") else APIHelper.SKIP
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         last_error = dictionary.get("last_error") if dictionary.get("last_error") else APIHelper.SKIP
-        last_error_at = dictionary.get("last_error_at") if dictionary.get("last_error_at") else APIHelper.SKIP
-        accepted_at = dictionary.get("accepted_at") if "accepted_at" in dictionary.keys() else APIHelper.SKIP
-        last_sent_at = dictionary.get("last_sent_at") if dictionary.get("last_sent_at") else APIHelper.SKIP
+        last_error_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("last_error_at")).datetime if dictionary.get("last_error_at") else APIHelper.SKIP
+        if 'accepted_at' in dictionary.keys():
+            accepted_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("accepted_at")).datetime if dictionary.get("accepted_at") else None
+        else:
+            accepted_at = APIHelper.SKIP
+        last_sent_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("last_sent_at")).datetime if dictionary.get("last_sent_at") else APIHelper.SKIP
         last_sent_url = dictionary.get("last_sent_url") if dictionary.get("last_sent_url") else APIHelper.SKIP
         successful = dictionary.get("successful") if "successful" in dictionary.keys() else APIHelper.SKIP
         body = dictionary.get("body") if dictionary.get("body") else APIHelper.SKIP

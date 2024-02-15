@@ -16,17 +16,17 @@ class ChargifyEBB(object):
     TODO: type model description here.
 
     Attributes:
-        timestamp (str): This timestamp determines what billing period the
-            event will be billed in. If your request payload does not include
-            it, Chargify will add `chargify.timestamp` to the event payload
-            and set the value to `now`.
+        timestamp (datetime): This timestamp determines what billing period
+            the event will be billed in. If your request payload does not
+            include it, Chargify will add `chargify.timestamp` to the event
+            payload and set the value to `now`.
         id (str): A unique ID set by Chargify. Please note that this field is
             reserved. If `chargify.id` is present in the request payload, it
             will be overwritten.
-        created_at (str): An ISO-8601 timestamp, set by Chargify at the time
-            each event is recorded. Please note that this field is reserved.
-            If `chargify.created_at` is present in the request payload, it
-            will be overwritten.
+        created_at (datetime): An ISO-8601 timestamp, set by Chargify at the
+            time each event is recorded. Please note that this field is
+            reserved. If `chargify.created_at` is present in the request
+            payload, it will be overwritten.
         uniqueness_token (str): User-defined string scoped per-stream.
             Duplicate events within a stream will be silently ignored. Tokens
             expire after 31 days.
@@ -72,11 +72,11 @@ class ChargifyEBB(object):
 
         # Initialize members of the class
         if timestamp is not APIHelper.SKIP:
-            self.timestamp = timestamp 
+            self.timestamp = APIHelper.apply_datetime_converter(timestamp, APIHelper.RFC3339DateTime) if timestamp else None 
         if id is not APIHelper.SKIP:
             self.id = id 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if uniqueness_token is not APIHelper.SKIP:
             self.uniqueness_token = uniqueness_token 
         if subscription_id is not APIHelper.SKIP:
@@ -103,9 +103,9 @@ class ChargifyEBB(object):
             return None
 
         # Extract variables from the dictionary
-        timestamp = dictionary.get("timestamp") if dictionary.get("timestamp") else APIHelper.SKIP
+        timestamp = APIHelper.RFC3339DateTime.from_value(dictionary.get("timestamp")).datetime if dictionary.get("timestamp") else APIHelper.SKIP
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         uniqueness_token = dictionary.get("uniqueness_token") if dictionary.get("uniqueness_token") else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         subscription_reference = dictionary.get("subscription_reference") if dictionary.get("subscription_reference") else APIHelper.SKIP

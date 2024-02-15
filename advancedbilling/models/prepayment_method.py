@@ -12,10 +12,7 @@ class PrepaymentMethod(object):
 
     """Implementation of the 'Prepayment Method' enum.
 
-    :- When the `method` specified is `"credit_card_on_file"`, the prepayment
-    amount will be collected using the default credit card payment profile and
-    applied to the prepayment account balance. This is especially useful for
-    manual replenishment of prepaid subscriptions.
+    TODO: type enum description here.
 
     Attributes:
         CHECK: TODO: type description here.
@@ -23,7 +20,7 @@ class PrepaymentMethod(object):
         MONEY_ORDER: TODO: type description here.
         ACH: TODO: type description here.
         PAYPAL_ACCOUNT: TODO: type description here.
-        CREDIT_CARD_ON_FILE: TODO: type description here.
+        CREDIT_CARD: TODO: type description here.
         OTHER: TODO: type description here.
 
     """
@@ -37,7 +34,7 @@ class PrepaymentMethod(object):
 
     PAYPAL_ACCOUNT = 'paypal_account'
 
-    CREDIT_CARD_ON_FILE = 'credit_card_on_file'
+    CREDIT_CARD = 'credit_card'
 
     OTHER = 'other'
 

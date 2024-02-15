@@ -6,6 +6,8 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.invoice_address import InvoiceAddress
 from advancedbilling.models.invoice_custom_field import InvoiceCustomField
@@ -31,8 +33,8 @@ class ProformaInvoice(object):
         subscription_id (int): TODO: type description here.
         number (int): TODO: type description here.
         sequence_number (int): TODO: type description here.
-        created_at (str): TODO: type description here.
-        delivery_date (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
+        delivery_date (date): TODO: type description here.
         status (str): TODO: type description here.
         collection_method (str): TODO: type description here.
         payment_instructions (str): TODO: type description here.
@@ -147,6 +149,12 @@ class ProformaInvoice(object):
         'public_url',
     ]
 
+    _nullables = [
+        'number',
+        'sequence_number',
+        'public_url',
+    ]
+
     def __init__(self,
                  uid=APIHelper.SKIP,
                  site_id=APIHelper.SKIP,
@@ -200,7 +208,7 @@ class ProformaInvoice(object):
         if sequence_number is not APIHelper.SKIP:
             self.sequence_number = sequence_number 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if delivery_date is not APIHelper.SKIP:
             self.delivery_date = delivery_date 
         if status is not APIHelper.SKIP:
@@ -283,10 +291,10 @@ class ProformaInvoice(object):
         site_id = dictionary.get("site_id") if dictionary.get("site_id") else APIHelper.SKIP
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
-        number = dictionary.get("number") if dictionary.get("number") else APIHelper.SKIP
-        sequence_number = dictionary.get("sequence_number") if dictionary.get("sequence_number") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        delivery_date = dictionary.get("delivery_date") if dictionary.get("delivery_date") else APIHelper.SKIP
+        number = dictionary.get("number") if "number" in dictionary.keys() else APIHelper.SKIP
+        sequence_number = dictionary.get("sequence_number") if "sequence_number" in dictionary.keys() else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        delivery_date = dateutil.parser.parse(dictionary.get('delivery_date')).date() if dictionary.get('delivery_date') else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         collection_method = dictionary.get("collection_method") if dictionary.get("collection_method") else APIHelper.SKIP
         payment_instructions = dictionary.get("payment_instructions") if dictionary.get("payment_instructions") else APIHelper.SKIP
@@ -338,7 +346,7 @@ class ProformaInvoice(object):
             custom_fields = [InvoiceCustomField.from_dictionary(x) for x in dictionary.get('custom_fields')]
         else:
             custom_fields = APIHelper.SKIP
-        public_url = dictionary.get("public_url") if dictionary.get("public_url") else APIHelper.SKIP
+        public_url = dictionary.get("public_url") if "public_url" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(uid,
                    site_id,

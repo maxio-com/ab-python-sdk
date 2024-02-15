@@ -6,6 +6,8 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 
 
@@ -59,10 +61,10 @@ class CreditNoteLineItem(object):
         tiered_unit_price (bool): When `true`, indicates that the actual
             pricing scheme for the line was tiered, so the `unit_price` shown
             is the blended average for all units.
-        period_range_start (str): Start date for the period credited by this
+        period_range_start (date): Start date for the period credited by this
             line. The format is `"YYYY-MM-DD"`.
-        period_range_end (str): End date for the period credited by this line.
-            The format is `"YYYY-MM-DD"`.
+        period_range_end (date): End date for the period credited by this
+            line. The format is `"YYYY-MM-DD"`.
         product_id (int): The ID of the product being credited.  This may be
             set even for component credits, so true product-only
             (non-component) credits will also have a nil `component_id`.
@@ -71,6 +73,8 @@ class CreditNoteLineItem(object):
             `nil` for non-component credits.
         price_point_id (int): The price point ID of the component being
             credited. Will be `nil` for non-component credits.
+        billing_schedule_item_id (int): TODO: type description here.
+        custom_item (bool): TODO: type description here.
 
     """
 
@@ -91,7 +95,9 @@ class CreditNoteLineItem(object):
         "product_id": 'product_id',
         "product_version": 'product_version',
         "component_id": 'component_id',
-        "price_point_id": 'price_point_id'
+        "price_point_id": 'price_point_id',
+        "billing_schedule_item_id": 'billing_schedule_item_id',
+        "custom_item": 'custom_item'
     }
 
     _optionals = [
@@ -111,11 +117,14 @@ class CreditNoteLineItem(object):
         'product_version',
         'component_id',
         'price_point_id',
+        'billing_schedule_item_id',
+        'custom_item',
     ]
 
     _nullables = [
         'component_id',
         'price_point_id',
+        'billing_schedule_item_id',
     ]
 
     def __init__(self,
@@ -134,7 +143,9 @@ class CreditNoteLineItem(object):
                  product_id=APIHelper.SKIP,
                  product_version=APIHelper.SKIP,
                  component_id=APIHelper.SKIP,
-                 price_point_id=APIHelper.SKIP):
+                 price_point_id=APIHelper.SKIP,
+                 billing_schedule_item_id=APIHelper.SKIP,
+                 custom_item=APIHelper.SKIP):
         """Constructor for the CreditNoteLineItem class"""
 
         # Initialize members of the class
@@ -170,6 +181,10 @@ class CreditNoteLineItem(object):
             self.component_id = component_id 
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id 
+        if billing_schedule_item_id is not APIHelper.SKIP:
+            self.billing_schedule_item_id = billing_schedule_item_id 
+        if custom_item is not APIHelper.SKIP:
+            self.custom_item = custom_item 
 
     @classmethod
     def from_dictionary(cls,
@@ -200,12 +215,14 @@ class CreditNoteLineItem(object):
         tax_amount = dictionary.get("tax_amount") if dictionary.get("tax_amount") else APIHelper.SKIP
         total_amount = dictionary.get("total_amount") if dictionary.get("total_amount") else APIHelper.SKIP
         tiered_unit_price = dictionary.get("tiered_unit_price") if "tiered_unit_price" in dictionary.keys() else APIHelper.SKIP
-        period_range_start = dictionary.get("period_range_start") if dictionary.get("period_range_start") else APIHelper.SKIP
-        period_range_end = dictionary.get("period_range_end") if dictionary.get("period_range_end") else APIHelper.SKIP
+        period_range_start = dateutil.parser.parse(dictionary.get('period_range_start')).date() if dictionary.get('period_range_start') else APIHelper.SKIP
+        period_range_end = dateutil.parser.parse(dictionary.get('period_range_end')).date() if dictionary.get('period_range_end') else APIHelper.SKIP
         product_id = dictionary.get("product_id") if dictionary.get("product_id") else APIHelper.SKIP
         product_version = dictionary.get("product_version") if dictionary.get("product_version") else APIHelper.SKIP
         component_id = dictionary.get("component_id") if "component_id" in dictionary.keys() else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if "price_point_id" in dictionary.keys() else APIHelper.SKIP
+        billing_schedule_item_id = dictionary.get("billing_schedule_item_id") if "billing_schedule_item_id" in dictionary.keys() else APIHelper.SKIP
+        custom_item = dictionary.get("custom_item") if "custom_item" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(uid,
                    title,
@@ -222,7 +239,9 @@ class CreditNoteLineItem(object):
                    product_id,
                    product_version,
                    component_id,
-                   price_point_id)
+                   price_point_id,
+                   billing_schedule_item_id,
+                   custom_item)
 
     @classmethod
     def validate(cls, dictionary):

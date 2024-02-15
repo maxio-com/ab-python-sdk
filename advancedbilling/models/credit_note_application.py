@@ -17,7 +17,7 @@ class CreditNoteApplication(object):
 
     Attributes:
         uid (str): TODO: type description here.
-        transaction_time (str): TODO: type description here.
+        transaction_time (datetime): TODO: type description here.
         invoice_uid (str): TODO: type description here.
         memo (str): TODO: type description here.
         applied_amount (str): TODO: type description here.
@@ -53,7 +53,7 @@ class CreditNoteApplication(object):
         if uid is not APIHelper.SKIP:
             self.uid = uid 
         if transaction_time is not APIHelper.SKIP:
-            self.transaction_time = transaction_time 
+            self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
         if invoice_uid is not APIHelper.SKIP:
             self.invoice_uid = invoice_uid 
         if memo is not APIHelper.SKIP:
@@ -81,7 +81,7 @@ class CreditNoteApplication(object):
 
         # Extract variables from the dictionary
         uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
-        transaction_time = dictionary.get("transaction_time") if dictionary.get("transaction_time") else APIHelper.SKIP
+        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else APIHelper.SKIP
         invoice_uid = dictionary.get("invoice_uid") if dictionary.get("invoice_uid") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP

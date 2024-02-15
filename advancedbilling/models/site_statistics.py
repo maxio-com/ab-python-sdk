@@ -23,10 +23,10 @@ class SiteStatistics(object):
         revenue_this_month (str): TODO: type description here.
         revenue_this_year (str): TODO: type description here.
         total_canceled_subscriptions (int): TODO: type description here.
-        total_active_subscriptions (float): TODO: type description here.
-        total_past_due_subscriptions (float): TODO: type description here.
-        total_unpaid_subscriptions (float): TODO: type description here.
-        total_dunning_subscriptions (float): TODO: type description here.
+        total_active_subscriptions (int): TODO: type description here.
+        total_past_due_subscriptions (int): TODO: type description here.
+        total_unpaid_subscriptions (int): TODO: type description here.
+        total_dunning_subscriptions (int): TODO: type description here.
 
     """
 

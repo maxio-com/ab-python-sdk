@@ -33,6 +33,7 @@ from advancedbilling.models.group_settings import GroupSettings
 from advancedbilling.models.interval_unit import IntervalUnit
 from advancedbilling.models.invoice_issued import InvoiceIssued
 from advancedbilling.models.invoice_line_item_component_cost_data import InvoiceLineItemComponentCostData
+from advancedbilling.models.invoice_pre_payment import InvoicePrePayment
 from advancedbilling.models.issue_invoice_event_data import IssueInvoiceEventData
 from advancedbilling.models.item_price_point_changed import ItemPricePointChanged
 from advancedbilling.models.metered_usage import MeteredUsage
@@ -783,6 +784,15 @@ class UnionTypeLookUp:
             ],
             Context.create(
                is_optional=True
+            )
+        ),
+        'RecordPaymentResponsePrepayment': OneOf(
+            [
+                LeafType(InvoicePrePayment)
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
             )
         ),
         'RefundSegmentUids': OneOf(

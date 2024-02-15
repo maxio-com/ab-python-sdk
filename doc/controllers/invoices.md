@@ -1096,6 +1096,12 @@ result = invoices_controller.record_payment_for_invoice(
 print(result)
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
 
 # Record Payment for Multiple Invoices
 
@@ -1627,7 +1633,9 @@ print(result)
       "product_id": 85,
       "product_version": 1,
       "component_id": 81,
-      "price_point_id": 165
+      "price_point_id": 165,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     },
     {
       "uid": "cnli_8kjttvjcjx8b4",
@@ -1645,7 +1653,9 @@ print(result)
       "product_id": 85,
       "product_version": 1,
       "component_id": null,
-      "price_point_id": null
+      "price_point_id": null,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     },
     {
       "uid": "cnli_8kjttvjknzhx7",
@@ -1663,7 +1673,9 @@ print(result)
       "product_id": 85,
       "product_version": 1,
       "component_id": 78,
-      "price_point_id": null
+      "price_point_id": null,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     },
     {
       "uid": "cnli_8kjttvjnmh25w",
@@ -1681,7 +1693,9 @@ print(result)
       "product_id": 85,
       "product_version": 1,
       "component_id": 79,
-      "price_point_id": null
+      "price_point_id": null,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     },
     {
       "uid": "cnli_8kjttvjqn86kc",
@@ -1699,7 +1713,9 @@ print(result)
       "product_id": 85,
       "product_version": 1,
       "component_id": 80,
-      "price_point_id": null
+      "price_point_id": null,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     },
     {
       "uid": "cnli_8kjttvjtxxbdd",
@@ -1717,7 +1733,9 @@ print(result)
       "product_id": 85,
       "product_version": 1,
       "component_id": 81,
-      "price_point_id": 165
+      "price_point_id": 165,
+      "billing_schedule_item_id": null,
+      "custom_item": false
     }
   ],
   "discounts": [
@@ -1855,7 +1873,7 @@ def record_payment_for_subscription(self,
 
 ## Response Type
 
-[`PaymentResponse`](../../doc/models/payment-response.md)
+[`RecordPaymentResponse`](../../doc/models/record-payment-response.md)
 
 ## Example Usage
 
@@ -1867,7 +1885,7 @@ body = RecordPaymentRequest(
         amount='10.0',
         memo='to pay the bills',
         payment_details='check number 8675309',
-        payment_method='check'
+        payment_method=InvoicePaymentMethodType.CHECK
     )
 )
 
@@ -1884,23 +1902,19 @@ print(result)
 {
   "paid_invoices": [
     {
-      "invoice_uid": "xyz_012345678",
+      "invoice_id": "inv_bchyhr6z5grby",
       "status": "paid",
       "due_amount": "0.0",
       "paid_amount": "50.0"
     },
     {
-      "invoice_uid": "xyz_012345678",
+      "invoice_id": "inv_bchyhrgvyb6vm",
       "status": "paid",
       "due_amount": "0.0",
       "paid_amount": "50.0"
     }
   ],
-  "prepayment": {
-    "subscription_id": "123456",
-    "amount_in_cents": "5000",
-    "ending_balance_in_cents": "5000"
-  }
+  "prepayment": null
 }
 ```
 

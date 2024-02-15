@@ -18,9 +18,9 @@
 | `name` | `str` | Optional | - |
 | `handle` | `str` | Optional | - |
 | `description` | `str` | Optional | - |
-| `created_at` | `str` | Optional | - |
-| `updated_at` | `str` | Optional | - |
-| `archived_at` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | - |
+| `updated_at` | `datetime` | Optional | - |
+| `archived_at` | `datetime` | Optional | - |
 | `offer_items` | [`List[OfferItem]`](../../doc/models/offer-item.md) | Optional | - |
 | `offer_discounts` | [`List[OfferDiscount]`](../../doc/models/offer-discount.md) | Optional | - |
 | `product_family_name` | `str` | Optional | - |

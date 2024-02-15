@@ -31,7 +31,7 @@ class UpdateSubscription(object):
         next_product_price_point_id (str): TODO: type description here.
         snap_day (SnapDay | int | None): Use for subscriptions with product
             eligible for calendar billing only. Value can be 1-28 or 'end'.
-        next_billing_at (str): TODO: type description here.
+        next_billing_at (datetime): TODO: type description here.
         payment_collection_method (str): TODO: type description here.
         receives_invoice_emails (bool): TODO: type description here.
         net_terms (str | int | None): TODO: type description here.
@@ -133,7 +133,7 @@ class UpdateSubscription(object):
         if snap_day is not APIHelper.SKIP:
             self.snap_day = snap_day 
         if next_billing_at is not APIHelper.SKIP:
-            self.next_billing_at = next_billing_at 
+            self.next_billing_at = APIHelper.apply_datetime_converter(next_billing_at, APIHelper.RFC3339DateTime) if next_billing_at else None 
         if payment_collection_method is not APIHelper.SKIP:
             self.payment_collection_method = payment_collection_method 
         if receives_invoice_emails is not APIHelper.SKIP:
@@ -180,7 +180,7 @@ class UpdateSubscription(object):
         next_product_id = dictionary.get("next_product_id") if dictionary.get("next_product_id") else APIHelper.SKIP
         next_product_price_point_id = dictionary.get("next_product_price_point_id") if dictionary.get("next_product_price_point_id") else APIHelper.SKIP
         snap_day = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdateSubscriptionSnapDay'), dictionary.get('snap_day'), False) if dictionary.get('snap_day') is not None else APIHelper.SKIP
-        next_billing_at = dictionary.get("next_billing_at") if dictionary.get("next_billing_at") else APIHelper.SKIP
+        next_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_billing_at")).datetime if dictionary.get("next_billing_at") else APIHelper.SKIP
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         receives_invoice_emails = dictionary.get("receives_invoice_emails") if "receives_invoice_emails" in dictionary.keys() else APIHelper.SKIP
         net_terms = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdateSubscriptionNetTerms'), dictionary.get('net_terms'), False) if dictionary.get('net_terms') is not None else APIHelper.SKIP

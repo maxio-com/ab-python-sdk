@@ -13,7 +13,7 @@
 | `subscription_id` | `int` | Optional | - |
 | `amount_in_cents` | `long\|int` | Optional | - |
 | `memo` | `str` | Optional | - |
-| `created_at` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | - |
 | `starting_balance_in_cents` | `long\|int` | Optional | - |
 | `ending_balance_in_cents` | `long\|int` | Optional | - |
 
@@ -25,7 +25,7 @@
   "subscription_id": 220,
   "amount_in_cents": 196,
   "memo": "memo6",
-  "created_at": "created_at0"
+  "created_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

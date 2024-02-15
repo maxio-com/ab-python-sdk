@@ -18,10 +18,10 @@ class PortalManagementLink(object):
     Attributes:
         url (str): TODO: type description here.
         fetch_count (int): TODO: type description here.
-        created_at (str): TODO: type description here.
-        new_link_available_at (str): TODO: type description here.
-        expires_at (str): TODO: type description here.
-        last_invite_sent_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
+        new_link_available_at (datetime): TODO: type description here.
+        expires_at (datetime): TODO: type description here.
+        last_invite_sent_at (datetime): TODO: type description here.
 
     """
 
@@ -63,13 +63,13 @@ class PortalManagementLink(object):
         if fetch_count is not APIHelper.SKIP:
             self.fetch_count = fetch_count 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if new_link_available_at is not APIHelper.SKIP:
-            self.new_link_available_at = new_link_available_at 
+            self.new_link_available_at = APIHelper.apply_datetime_converter(new_link_available_at, APIHelper.RFC3339DateTime) if new_link_available_at else None 
         if expires_at is not APIHelper.SKIP:
-            self.expires_at = expires_at 
+            self.expires_at = APIHelper.apply_datetime_converter(expires_at, APIHelper.RFC3339DateTime) if expires_at else None 
         if last_invite_sent_at is not APIHelper.SKIP:
-            self.last_invite_sent_at = last_invite_sent_at 
+            self.last_invite_sent_at = APIHelper.apply_datetime_converter(last_invite_sent_at, APIHelper.RFC3339DateTime) if last_invite_sent_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -92,10 +92,13 @@ class PortalManagementLink(object):
         # Extract variables from the dictionary
         url = dictionary.get("url") if dictionary.get("url") else APIHelper.SKIP
         fetch_count = dictionary.get("fetch_count") if dictionary.get("fetch_count") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        new_link_available_at = dictionary.get("new_link_available_at") if dictionary.get("new_link_available_at") else APIHelper.SKIP
-        expires_at = dictionary.get("expires_at") if dictionary.get("expires_at") else APIHelper.SKIP
-        last_invite_sent_at = dictionary.get("last_invite_sent_at") if "last_invite_sent_at" in dictionary.keys() else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        new_link_available_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("new_link_available_at")).datetime if dictionary.get("new_link_available_at") else APIHelper.SKIP
+        expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else APIHelper.SKIP
+        if 'last_invite_sent_at' in dictionary.keys():
+            last_invite_sent_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("last_invite_sent_at")).datetime if dictionary.get("last_invite_sent_at") else None
+        else:
+            last_invite_sent_at = APIHelper.SKIP
         # Return an object of this model
         return cls(url,
                    fetch_count,

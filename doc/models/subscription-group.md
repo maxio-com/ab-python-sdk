@@ -13,7 +13,7 @@
 | `payment_profile` | [`SubscriptionGroupPaymentProfile`](../../doc/models/subscription-group-payment-profile.md) | Optional | - |
 | `payment_collection_method` | `str` | Optional | - |
 | `subscription_ids` | `List[int]` | Optional | - |
-| `created_at` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | - |
 
 ## Example (as JSON)
 
@@ -32,7 +32,7 @@
     147,
     148
   ],
-  "created_at": "created_at2"
+  "created_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

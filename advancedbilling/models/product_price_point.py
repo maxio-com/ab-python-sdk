@@ -30,8 +30,8 @@ class ProductPricePoint(object):
         trial_price_in_cents (long|int): The product price point trial price,
             in integer cents
         trial_interval (int): The numerical trial interval. i.e. an interval
-            of ‘30’ coupled with an trial_interval_unit of day would mean this
-            product price point would renew every 30 days
+            of ‘30’ coupled with a trial_interval_unit of day would mean this
+            product price point trial would last 30 days
         trial_interval_unit (IntervalUnit): A string representing the trial
             interval unit for this product price point, either month or day
         trial_type (str): TODO: type description here.
@@ -42,7 +42,7 @@ class ProductPricePoint(object):
         expiration_interval (int): The numerical expiration interval. i.e. an
             expiration_interval of ‘30’ coupled with an
             expiration_interval_unit of day would mean this product price
-            point would expire every 30 days
+            point would expire after 30 days
         expiration_interval_unit (IntervalUnit): A string representing the
             expiration interval unit for this product price point, either
             month or day

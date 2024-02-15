@@ -25,8 +25,8 @@ class Coupon(object):
         amount_in_cents (int): TODO: type description here.
         product_family_id (int): TODO: type description here.
         product_family_name (str): TODO: type description here.
-        start_date (str): TODO: type description here.
-        end_date (str): TODO: type description here.
+        start_date (datetime): TODO: type description here.
+        end_date (datetime): TODO: type description here.
         percentage (str): TODO: type description here.
         recurring (bool): TODO: type description here.
         recurring_scheme (RecurringScheme): TODO: type description here.
@@ -35,14 +35,14 @@ class Coupon(object):
         duration_interval_unit (str): TODO: type description here.
         duration_interval_span (str): TODO: type description here.
         allow_negative_balance (bool): TODO: type description here.
-        archived_at (str): TODO: type description here.
+        archived_at (datetime): TODO: type description here.
         conversion_limit (str): TODO: type description here.
         stackable (bool): TODO: type description here.
         compounding_strategy (CompoundingStrategy | None): TODO: type
             description here.
         use_site_exchange_rate (bool): TODO: type description here.
-        created_at (str): TODO: type description here.
-        updated_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
+        updated_at (datetime): TODO: type description here.
         discount_type (DiscountType): TODO: type description here.
         exclude_mid_period_allocations (bool): TODO: type description here.
         apply_on_cancel_at_end_of_period (bool): TODO: type description here.
@@ -180,9 +180,9 @@ class Coupon(object):
         if product_family_name is not APIHelper.SKIP:
             self.product_family_name = product_family_name 
         if start_date is not APIHelper.SKIP:
-            self.start_date = start_date 
+            self.start_date = APIHelper.apply_datetime_converter(start_date, APIHelper.RFC3339DateTime) if start_date else None 
         if end_date is not APIHelper.SKIP:
-            self.end_date = end_date 
+            self.end_date = APIHelper.apply_datetime_converter(end_date, APIHelper.RFC3339DateTime) if end_date else None 
         if percentage is not APIHelper.SKIP:
             self.percentage = percentage 
         if recurring is not APIHelper.SKIP:
@@ -200,7 +200,7 @@ class Coupon(object):
         if allow_negative_balance is not APIHelper.SKIP:
             self.allow_negative_balance = allow_negative_balance 
         if archived_at is not APIHelper.SKIP:
-            self.archived_at = archived_at 
+            self.archived_at = APIHelper.apply_datetime_converter(archived_at, APIHelper.RFC3339DateTime) if archived_at else None 
         if conversion_limit is not APIHelper.SKIP:
             self.conversion_limit = conversion_limit 
         if stackable is not APIHelper.SKIP:
@@ -210,9 +210,9 @@ class Coupon(object):
         if use_site_exchange_rate is not APIHelper.SKIP:
             self.use_site_exchange_rate = use_site_exchange_rate 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if discount_type is not APIHelper.SKIP:
             self.discount_type = discount_type 
         if exclude_mid_period_allocations is not APIHelper.SKIP:
@@ -250,8 +250,11 @@ class Coupon(object):
         amount_in_cents = dictionary.get("amount_in_cents") if "amount_in_cents" in dictionary.keys() else APIHelper.SKIP
         product_family_id = dictionary.get("product_family_id") if dictionary.get("product_family_id") else APIHelper.SKIP
         product_family_name = dictionary.get("product_family_name") if "product_family_name" in dictionary.keys() else APIHelper.SKIP
-        start_date = dictionary.get("start_date") if dictionary.get("start_date") else APIHelper.SKIP
-        end_date = dictionary.get("end_date") if "end_date" in dictionary.keys() else APIHelper.SKIP
+        start_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("start_date")).datetime if dictionary.get("start_date") else APIHelper.SKIP
+        if 'end_date' in dictionary.keys():
+            end_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("end_date")).datetime if dictionary.get("end_date") else None
+        else:
+            end_date = APIHelper.SKIP
         percentage = dictionary.get("percentage") if "percentage" in dictionary.keys() else APIHelper.SKIP
         recurring = dictionary.get("recurring") if "recurring" in dictionary.keys() else APIHelper.SKIP
         recurring_scheme = dictionary.get("recurring_scheme") if dictionary.get("recurring_scheme") else APIHelper.SKIP
@@ -260,13 +263,16 @@ class Coupon(object):
         duration_interval_unit = dictionary.get("duration_interval_unit") if "duration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         duration_interval_span = dictionary.get("duration_interval_span") if "duration_interval_span" in dictionary.keys() else APIHelper.SKIP
         allow_negative_balance = dictionary.get("allow_negative_balance") if "allow_negative_balance" in dictionary.keys() else APIHelper.SKIP
-        archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP
+        if 'archived_at' in dictionary.keys():
+            archived_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("archived_at")).datetime if dictionary.get("archived_at") else None
+        else:
+            archived_at = APIHelper.SKIP
         conversion_limit = dictionary.get("conversion_limit") if "conversion_limit" in dictionary.keys() else APIHelper.SKIP
         stackable = dictionary.get("stackable") if "stackable" in dictionary.keys() else APIHelper.SKIP
         compounding_strategy = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CouponCompoundingStrategy'), dictionary.get('compounding_strategy'), False) if dictionary.get('compounding_strategy') is not None else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         discount_type = dictionary.get("discount_type") if dictionary.get("discount_type") else APIHelper.SKIP
         exclude_mid_period_allocations = dictionary.get("exclude_mid_period_allocations") if "exclude_mid_period_allocations" in dictionary.keys() else APIHelper.SKIP
         apply_on_cancel_at_end_of_period = dictionary.get("apply_on_cancel_at_end_of_period") if "apply_on_cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP

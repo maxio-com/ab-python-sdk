@@ -23,12 +23,8 @@ class ListSubcriptionGroupPrepaymentItem(object):
         details (str): TODO: type description here.
         external (bool): TODO: type description here.
         memo (str): TODO: type description here.
-        payment_type (PrepaymentMethod): :- When the `method` specified is
-            `"credit_card_on_file"`, the prepayment amount will be collected
-            using the default credit card payment profile and applied to the
-            prepayment account balance. This is especially useful for manual
-            replenishment of prepaid subscriptions.
-        created_at (str): TODO: type description here.
+        payment_type (PrepaymentMethod): TODO: type description here.
+        created_at (datetime): TODO: type description here.
 
     """
 
@@ -87,7 +83,7 @@ class ListSubcriptionGroupPrepaymentItem(object):
         if payment_type is not APIHelper.SKIP:
             self.payment_type = payment_type 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -116,7 +112,7 @@ class ListSubcriptionGroupPrepaymentItem(object):
         external = dictionary.get("external") if "external" in dictionary.keys() else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    subscription_group_uid,

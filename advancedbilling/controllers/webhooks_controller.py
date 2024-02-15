@@ -132,7 +132,7 @@ class WebhooksController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -173,7 +173,7 @@ class WebhooksController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -218,7 +218,7 @@ class WebhooksController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -237,8 +237,8 @@ class WebhooksController(BaseController):
         5-Webhooks-Reference#example-payloads)
 
         Args:
-            body (UpdateEndpointRequest, optional): TODO: type description
-                here.
+            body (CreateOrUpdateEndpointRequest, optional): TODO: type
+                description here.
 
         Returns:
             EndpointResponse: Response from the API. OK
@@ -264,7 +264,7 @@ class WebhooksController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -295,7 +295,7 @@ class WebhooksController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -323,8 +323,8 @@ class WebhooksController(BaseController):
         Args:
             endpoint_id (int): The Chargify id for the endpoint that should be
                 updated
-            body (UpdateEndpointRequest, optional): TODO: type description
-                here.
+            body (CreateOrUpdateEndpointRequest, optional): TODO: type
+                description here.
 
         Returns:
             EndpointResponse: Response from the API. OK
@@ -355,7 +355,7 @@ class WebhooksController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

@@ -31,7 +31,7 @@ class Product(object):
             description of interval for a description of how this value is
             coupled with an interval unit to calculate the full interval
         expiration_interval_unit (ExtendedIntervalUnit | None): A string
-            representing the trial interval unit for this product, either
+            representing the expiration interval unit for this product, either
             month or day
         created_at (datetime): Timestamp indicating when this product was
             created

@@ -21,7 +21,7 @@ class Event(object):
         message (str): TODO: type description here.
         subscription_id (int): TODO: type description here.
         customer_id (int): TODO: type description here.
-        created_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
         event_specific_data (SubscriptionProductChange |
             SubscriptionStateChange | PaymentRelatedEvents | RefundSuccess |
             ComponentAllocationChange | MeteredUsage | PrepaidUsage |
@@ -66,7 +66,7 @@ class Event(object):
         self.message = message 
         self.subscription_id = subscription_id 
         self.customer_id = customer_id 
-        self.created_at = created_at 
+        self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         self.event_specific_data = event_specific_data 
 
     @classmethod
@@ -94,7 +94,7 @@ class Event(object):
         message = dictionary.get("message") if dictionary.get("message") else None
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else None
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else None
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else None
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else None
         event_specific_data = APIHelper.deserialize_union_type(UnionTypeLookUp.get('EventEventSpecificData'), dictionary.get('event_specific_data'), False) if dictionary.get('event_specific_data') is not None else None
         # Return an object of this model
         return cls(id,
@@ -126,7 +126,7 @@ class Event(object):
                 and APIHelper.is_valid_type(value=dictionary.message, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.subscription_id, type_callable=lambda value: isinstance(value, int), is_value_nullable=True) \
                 and APIHelper.is_valid_type(value=dictionary.customer_id, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.created_at, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.created_at, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
                 and UnionTypeLookUp.get('EventEventSpecificData').validate(dictionary.event_specific_data).is_valid
 
         if not isinstance(dictionary, dict):

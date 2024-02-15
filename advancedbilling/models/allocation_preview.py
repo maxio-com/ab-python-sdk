@@ -18,8 +18,8 @@ class AllocationPreview(object):
     TODO: type model description here.
 
     Attributes:
-        start_date (str): TODO: type description here.
-        end_date (str): TODO: type description here.
+        start_date (datetime): TODO: type description here.
+        end_date (datetime): TODO: type description here.
         subtotal_in_cents (long|int): TODO: type description here.
         total_tax_in_cents (long|int): TODO: type description here.
         total_discount_in_cents (long|int): TODO: type description here.
@@ -88,9 +88,9 @@ class AllocationPreview(object):
 
         # Initialize members of the class
         if start_date is not APIHelper.SKIP:
-            self.start_date = start_date 
+            self.start_date = APIHelper.apply_datetime_converter(start_date, APIHelper.RFC3339DateTime) if start_date else None 
         if end_date is not APIHelper.SKIP:
-            self.end_date = end_date 
+            self.end_date = APIHelper.apply_datetime_converter(end_date, APIHelper.RFC3339DateTime) if end_date else None 
         if subtotal_in_cents is not APIHelper.SKIP:
             self.subtotal_in_cents = subtotal_in_cents 
         if total_tax_in_cents is not APIHelper.SKIP:
@@ -133,8 +133,8 @@ class AllocationPreview(object):
             return None
 
         # Extract variables from the dictionary
-        start_date = dictionary.get("start_date") if dictionary.get("start_date") else APIHelper.SKIP
-        end_date = dictionary.get("end_date") if dictionary.get("end_date") else APIHelper.SKIP
+        start_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("start_date")).datetime if dictionary.get("start_date") else APIHelper.SKIP
+        end_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("end_date")).datetime if dictionary.get("end_date") else APIHelper.SKIP
         subtotal_in_cents = dictionary.get("subtotal_in_cents") if dictionary.get("subtotal_in_cents") else APIHelper.SKIP
         total_tax_in_cents = dictionary.get("total_tax_in_cents") if dictionary.get("total_tax_in_cents") else APIHelper.SKIP
         total_discount_in_cents = dictionary.get("total_discount_in_cents") if dictionary.get("total_discount_in_cents") else APIHelper.SKIP

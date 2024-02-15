@@ -12,8 +12,8 @@
 | `id` | `int` | Optional | - |
 | `body` | `str` | Optional | - |
 | `subscription_id` | `int` | Optional | - |
-| `created_at` | `str` | Optional | - |
-| `updated_at` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | - |
+| `updated_at` | `datetime` | Optional | - |
 | `sticky` | `bool` | Optional | - |
 
 ## Example (as JSON)
@@ -23,8 +23,8 @@
   "id": 36,
   "body": "body4",
   "subscription_id": 146,
-  "created_at": "created_at6",
-  "updated_at": "updated_at4"
+  "created_at": "2016-03-13T12:52:32.123Z",
+  "updated_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

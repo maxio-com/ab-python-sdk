@@ -6,8 +6,11 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.invoice_line_item_event_data import InvoiceLineItemEventData
+from datetime import date
 
 
 class ProformaInvoiceIssued(object):
@@ -20,8 +23,8 @@ class ProformaInvoiceIssued(object):
         uid (str): TODO: type description here.
         number (str): TODO: type description here.
         role (str): TODO: type description here.
-        delivery_date (str): TODO: type description here.
-        created_at (str): TODO: type description here.
+        delivery_date (date): TODO: type description here.
+        created_at (datetime): TODO: type description here.
         due_amount (str): TODO: type description here.
         paid_amount (str): TODO: type description here.
         tax_amount (str): TODO: type description here.
@@ -66,7 +69,7 @@ class ProformaInvoiceIssued(object):
         self.number = number 
         self.role = role 
         self.delivery_date = delivery_date 
-        self.created_at = created_at 
+        self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         self.due_amount = due_amount 
         self.paid_amount = paid_amount 
         self.tax_amount = tax_amount 
@@ -96,8 +99,8 @@ class ProformaInvoiceIssued(object):
         uid = dictionary.get("uid") if dictionary.get("uid") else None
         number = dictionary.get("number") if dictionary.get("number") else None
         role = dictionary.get("role") if dictionary.get("role") else None
-        delivery_date = dictionary.get("delivery_date") if dictionary.get("delivery_date") else None
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else None
+        delivery_date = dateutil.parser.parse(dictionary.get('delivery_date')).date() if dictionary.get('delivery_date') else None
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else None
         due_amount = dictionary.get("due_amount") if dictionary.get("due_amount") else None
         paid_amount = dictionary.get("paid_amount") if dictionary.get("paid_amount") else None
         tax_amount = dictionary.get("tax_amount") if dictionary.get("tax_amount") else None
@@ -137,8 +140,8 @@ class ProformaInvoiceIssued(object):
             return APIHelper.is_valid_type(value=dictionary.uid, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.number, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.role, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.delivery_date, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.created_at, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.delivery_date, type_callable=lambda value: isinstance(value, date)) \
+                and APIHelper.is_valid_type(value=dictionary.created_at, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
                 and APIHelper.is_valid_type(value=dictionary.due_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.paid_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.tax_amount, type_callable=lambda value: isinstance(value, str)) \

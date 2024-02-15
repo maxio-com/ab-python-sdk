@@ -22,7 +22,7 @@ class SubscriptionGroupSignupSuccessData(object):
         payment_profile_id (int): TODO: type description here.
         subscription_ids (List[int]): TODO: type description here.
         primary_subscription_id (int): TODO: type description here.
-        next_assessment_at (str): TODO: type description here.
+        next_assessment_at (datetime): TODO: type description here.
         state (str): TODO: type description here.
         cancel_at_end_of_period (bool): TODO: type description here.
 
@@ -60,7 +60,7 @@ class SubscriptionGroupSignupSuccessData(object):
         self.payment_profile_id = payment_profile_id 
         self.subscription_ids = subscription_ids 
         self.primary_subscription_id = primary_subscription_id 
-        self.next_assessment_at = next_assessment_at 
+        self.next_assessment_at = APIHelper.apply_datetime_converter(next_assessment_at, APIHelper.RFC3339DateTime) if next_assessment_at else None 
         self.state = state 
         self.cancel_at_end_of_period = cancel_at_end_of_period 
 
@@ -89,7 +89,7 @@ class SubscriptionGroupSignupSuccessData(object):
         payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else None
         subscription_ids = dictionary.get("subscription_ids") if dictionary.get("subscription_ids") else None
         primary_subscription_id = dictionary.get("primary_subscription_id") if dictionary.get("primary_subscription_id") else None
-        next_assessment_at = dictionary.get("next_assessment_at") if dictionary.get("next_assessment_at") else None
+        next_assessment_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_assessment_at")).datetime if dictionary.get("next_assessment_at") else None
         state = dictionary.get("state") if dictionary.get("state") else None
         cancel_at_end_of_period = dictionary.get("cancel_at_end_of_period") if "cancel_at_end_of_period" in dictionary.keys() else None
         # Return an object of this model
@@ -124,7 +124,7 @@ class SubscriptionGroupSignupSuccessData(object):
                 and APIHelper.is_valid_type(value=dictionary.payment_profile_id, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.subscription_ids, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.primary_subscription_id, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.next_assessment_at, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.next_assessment_at, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
                 and APIHelper.is_valid_type(value=dictionary.state, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.cancel_at_end_of_period, type_callable=lambda value: isinstance(value, bool))
 

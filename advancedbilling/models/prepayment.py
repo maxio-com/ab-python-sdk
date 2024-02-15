@@ -25,7 +25,7 @@ class Prepayment(object):
         external (bool): TODO: type description here.
         memo (str): TODO: type description here.
         payment_type (PrepaymentMethod): The payment type of the prepayment.
-        created_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
 
     """
 
@@ -75,7 +75,7 @@ class Prepayment(object):
         self.memo = memo 
         if payment_type is not APIHelper.SKIP:
             self.payment_type = payment_type 
-        self.created_at = created_at 
+        self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -102,7 +102,7 @@ class Prepayment(object):
         remaining_amount_in_cents = dictionary.get("remaining_amount_in_cents") if dictionary.get("remaining_amount_in_cents") else None
         external = dictionary.get("external") if "external" in dictionary.keys() else None
         memo = dictionary.get("memo") if dictionary.get("memo") else None
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else None
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else None
         refunded_amount_in_cents = dictionary.get("refunded_amount_in_cents") if dictionary.get("refunded_amount_in_cents") else APIHelper.SKIP
         details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
         payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP

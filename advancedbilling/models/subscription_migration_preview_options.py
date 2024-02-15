@@ -49,8 +49,8 @@ class SubscriptionMigrationPreviewOptions(object):
             product's price point. This can be passed to migrate to a
             non-default price point.
         proration (Proration): TODO: type description here.
-        proration_date (str): The date that the proration is calculated from
-            for the preview
+        proration_date (datetime): The date that the proration is calculated
+            from for the preview
 
     """
 
@@ -110,7 +110,7 @@ class SubscriptionMigrationPreviewOptions(object):
         if proration is not APIHelper.SKIP:
             self.proration = proration 
         if proration_date is not APIHelper.SKIP:
-            self.proration_date = proration_date 
+            self.proration_date = APIHelper.apply_datetime_converter(proration_date, APIHelper.RFC3339DateTime) if proration_date else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -140,7 +140,7 @@ class SubscriptionMigrationPreviewOptions(object):
         product_handle = dictionary.get("product_handle") if dictionary.get("product_handle") else APIHelper.SKIP
         product_price_point_handle = dictionary.get("product_price_point_handle") if dictionary.get("product_price_point_handle") else APIHelper.SKIP
         proration = Proration.from_dictionary(dictionary.get('proration')) if 'proration' in dictionary.keys() else APIHelper.SKIP
-        proration_date = dictionary.get("proration_date") if dictionary.get("proration_date") else APIHelper.SKIP
+        proration_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("proration_date")).datetime if dictionary.get("proration_date") else APIHelper.SKIP
         # Return an object of this model
         return cls(product_id,
                    product_price_point_id,

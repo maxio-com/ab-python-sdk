@@ -33,8 +33,8 @@ class Segment(object):
             description here.
         segment_property_4_value (str | float | int | bool | None): TODO: type
             description here.
-        created_at (str): TODO: type description here.
-        updated_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
+        updated_at (datetime): TODO: type description here.
         prices (List[SegmentPrice]): TODO: type description here.
 
     """
@@ -105,9 +105,9 @@ class Segment(object):
         if segment_property_4_value is not APIHelper.SKIP:
             self.segment_property_4_value = segment_property_4_value 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
 
@@ -140,8 +140,8 @@ class Segment(object):
         segment_property_2_value = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SegmentSegmentProperty2Value'), dictionary.get('segment_property_2_value'), False) if dictionary.get('segment_property_2_value') is not None else APIHelper.SKIP
         segment_property_3_value = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SegmentSegmentProperty3Value'), dictionary.get('segment_property_3_value'), False) if dictionary.get('segment_property_3_value') is not None else APIHelper.SKIP
         segment_property_4_value = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SegmentSegmentProperty4Value'), dictionary.get('segment_property_4_value'), False) if dictionary.get('segment_property_4_value') is not None else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         prices = None
         if dictionary.get('prices') is not None:
             prices = [SegmentPrice.from_dictionary(x) for x in dictionary.get('prices')]

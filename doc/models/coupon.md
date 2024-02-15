@@ -17,8 +17,8 @@
 | `amount_in_cents` | `int` | Optional | - |
 | `product_family_id` | `int` | Optional | - |
 | `product_family_name` | `str` | Optional | - |
-| `start_date` | `str` | Optional | - |
-| `end_date` | `str` | Optional | - |
+| `start_date` | `datetime` | Optional | - |
+| `end_date` | `datetime` | Optional | - |
 | `percentage` | `str` | Optional | - |
 | `recurring` | `bool` | Optional | - |
 | `recurring_scheme` | [`RecurringScheme`](../../doc/models/recurring-scheme.md) | Optional | - |
@@ -27,13 +27,13 @@
 | `duration_interval_unit` | `str` | Optional | - |
 | `duration_interval_span` | `str` | Optional | - |
 | `allow_negative_balance` | `bool` | Optional | - |
-| `archived_at` | `str` | Optional | - |
+| `archived_at` | `datetime` | Optional | - |
 | `conversion_limit` | `str` | Optional | - |
 | `stackable` | `bool` | Optional | - |
 | `compounding_strategy` | [Compounding Strategy](../../doc/models/compounding-strategy.md) \| None | Optional | This is a container for any-of cases. |
 | `use_site_exchange_rate` | `bool` | Optional | - |
-| `created_at` | `str` | Optional | - |
-| `updated_at` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | - |
+| `updated_at` | `datetime` | Optional | - |
 | `discount_type` | [`DiscountType`](../../doc/models/discount-type.md) | Optional | - |
 | `exclude_mid_period_allocations` | `bool` | Optional | - |
 | `apply_on_cancel_at_end_of_period` | `bool` | Optional | - |

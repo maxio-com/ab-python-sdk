@@ -15,7 +15,7 @@ class ReplayWebhooksRequest(object):
     TODO: type model description here.
 
     Attributes:
-        ids (List[int]): TODO: type description here.
+        ids (List[long|int]): TODO: type description here.
 
     """
 

@@ -20,7 +20,7 @@ class CreatedPrepayment(object):
         subscription_id (int): TODO: type description here.
         amount_in_cents (long|int): TODO: type description here.
         memo (str): TODO: type description here.
-        created_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
         starting_balance_in_cents (long|int): TODO: type description here.
         ending_balance_in_cents (long|int): TODO: type description here.
 
@@ -67,7 +67,7 @@ class CreatedPrepayment(object):
         if memo is not APIHelper.SKIP:
             self.memo = memo 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if starting_balance_in_cents is not APIHelper.SKIP:
             self.starting_balance_in_cents = starting_balance_in_cents 
         if ending_balance_in_cents is not APIHelper.SKIP:
@@ -96,7 +96,7 @@ class CreatedPrepayment(object):
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         amount_in_cents = dictionary.get("amount_in_cents") if dictionary.get("amount_in_cents") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         starting_balance_in_cents = dictionary.get("starting_balance_in_cents") if dictionary.get("starting_balance_in_cents") else APIHelper.SKIP
         ending_balance_in_cents = dictionary.get("ending_balance_in_cents") if dictionary.get("ending_balance_in_cents") else APIHelper.SKIP
         # Return an object of this model

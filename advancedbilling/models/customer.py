@@ -26,10 +26,10 @@ class Customer(object):
         reference (str): The unique identifier used within your own
             application for this customer
         id (int): The customer ID in Chargify
-        created_at (str): The timestamp in which the customer object was
+        created_at (datetime): The timestamp in which the customer object was
             created in Chargify
-        updated_at (str): The timestamp in which the customer object was last
-            edited
+        updated_at (datetime): The timestamp in which the customer object was
+            last edited
         address (str): The customer’s shipping street address (i.e. “123 Main
             St.”)
         address_2 (str): Second line of the customer’s shipping address i.e.
@@ -43,11 +43,11 @@ class Customer(object):
         phone (str): The phone number of the customer
         verified (bool): Is the customer verified to use ACH as a payment
             method. Available only on Authorize.Net gateway
-        portal_customer_created_at (str): The timestamp of when the Billing
-            Portal entry was created at for the customer
-        portal_invite_last_sent_at (str): The timestamp of when the Billing
-            Portal invite was last sent at
-        portal_invite_last_accepted_at (str): The timestamp of when the
+        portal_customer_created_at (datetime): The timestamp of when the
+            Billing Portal entry was created at for the customer
+        portal_invite_last_sent_at (datetime): The timestamp of when the
+            Billing Portal invite was last sent at
+        portal_invite_last_accepted_at (datetime): The timestamp of when the
             Billing Portal invite was last accepted
         tax_exempt (bool): The tax exempt status for the customer. Acceptable
             values are true or 1 for true and false or 0 for false.
@@ -193,9 +193,9 @@ class Customer(object):
         if id is not APIHelper.SKIP:
             self.id = id 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if address is not APIHelper.SKIP:
             self.address = address 
         if address_2 is not APIHelper.SKIP:
@@ -217,11 +217,11 @@ class Customer(object):
         if verified is not APIHelper.SKIP:
             self.verified = verified 
         if portal_customer_created_at is not APIHelper.SKIP:
-            self.portal_customer_created_at = portal_customer_created_at 
+            self.portal_customer_created_at = APIHelper.apply_datetime_converter(portal_customer_created_at, APIHelper.RFC3339DateTime) if portal_customer_created_at else None 
         if portal_invite_last_sent_at is not APIHelper.SKIP:
-            self.portal_invite_last_sent_at = portal_invite_last_sent_at 
+            self.portal_invite_last_sent_at = APIHelper.apply_datetime_converter(portal_invite_last_sent_at, APIHelper.RFC3339DateTime) if portal_invite_last_sent_at else None 
         if portal_invite_last_accepted_at is not APIHelper.SKIP:
-            self.portal_invite_last_accepted_at = portal_invite_last_accepted_at 
+            self.portal_invite_last_accepted_at = APIHelper.apply_datetime_converter(portal_invite_last_accepted_at, APIHelper.RFC3339DateTime) if portal_invite_last_accepted_at else None 
         if tax_exempt is not APIHelper.SKIP:
             self.tax_exempt = tax_exempt 
         if vat_number is not APIHelper.SKIP:
@@ -259,8 +259,8 @@ class Customer(object):
         organization = dictionary.get("organization") if "organization" in dictionary.keys() else APIHelper.SKIP
         reference = dictionary.get("reference") if "reference" in dictionary.keys() else APIHelper.SKIP
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         address = dictionary.get("address") if "address" in dictionary.keys() else APIHelper.SKIP
         address_2 = dictionary.get("address_2") if "address_2" in dictionary.keys() else APIHelper.SKIP
         city = dictionary.get("city") if "city" in dictionary.keys() else APIHelper.SKIP
@@ -271,9 +271,18 @@ class Customer(object):
         country_name = dictionary.get("country_name") if "country_name" in dictionary.keys() else APIHelper.SKIP
         phone = dictionary.get("phone") if "phone" in dictionary.keys() else APIHelper.SKIP
         verified = dictionary.get("verified") if "verified" in dictionary.keys() else APIHelper.SKIP
-        portal_customer_created_at = dictionary.get("portal_customer_created_at") if "portal_customer_created_at" in dictionary.keys() else APIHelper.SKIP
-        portal_invite_last_sent_at = dictionary.get("portal_invite_last_sent_at") if "portal_invite_last_sent_at" in dictionary.keys() else APIHelper.SKIP
-        portal_invite_last_accepted_at = dictionary.get("portal_invite_last_accepted_at") if "portal_invite_last_accepted_at" in dictionary.keys() else APIHelper.SKIP
+        if 'portal_customer_created_at' in dictionary.keys():
+            portal_customer_created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("portal_customer_created_at")).datetime if dictionary.get("portal_customer_created_at") else None
+        else:
+            portal_customer_created_at = APIHelper.SKIP
+        if 'portal_invite_last_sent_at' in dictionary.keys():
+            portal_invite_last_sent_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("portal_invite_last_sent_at")).datetime if dictionary.get("portal_invite_last_sent_at") else None
+        else:
+            portal_invite_last_sent_at = APIHelper.SKIP
+        if 'portal_invite_last_accepted_at' in dictionary.keys():
+            portal_invite_last_accepted_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("portal_invite_last_accepted_at")).datetime if dictionary.get("portal_invite_last_accepted_at") else None
+        else:
+            portal_invite_last_accepted_at = APIHelper.SKIP
         tax_exempt = dictionary.get("tax_exempt") if "tax_exempt" in dictionary.keys() else APIHelper.SKIP
         vat_number = dictionary.get("vat_number") if "vat_number" in dictionary.keys() else APIHelper.SKIP
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP

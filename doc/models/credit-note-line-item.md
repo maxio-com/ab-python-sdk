@@ -19,12 +19,14 @@
 | `tax_amount` | `str` | Optional | The approximate tax of just this line.<br><br>The value is approximated in cases where rounding errors make it difficult to apportion exactly a total tax among many lines. Several lines may have been summed prior to applying the tax rate to arrive at `tax_amount` for the invoice - backing that out to the tax on a single line may introduce rounding or precision errors. |
 | `total_amount` | `str` | Optional | The non-canonical total amount for the line.<br><br>`subtotal_amount` is the canonical amount for a line. The invoice `total_amount` is derived from the sum of the line `subtotal_amount`s and discounts or taxes applied thereafter.  Therefore, due to rounding or precision errors, the sum of line `total_amount`s may not equal the invoice `total_amount`. |
 | `tiered_unit_price` | `bool` | Optional | When `true`, indicates that the actual pricing scheme for the line was tiered, so the `unit_price` shown is the blended average for all units. |
-| `period_range_start` | `str` | Optional | Start date for the period credited by this line. The format is `"YYYY-MM-DD"`. |
-| `period_range_end` | `str` | Optional | End date for the period credited by this line. The format is `"YYYY-MM-DD"`. |
+| `period_range_start` | `date` | Optional | Start date for the period credited by this line. The format is `"YYYY-MM-DD"`. |
+| `period_range_end` | `date` | Optional | End date for the period credited by this line. The format is `"YYYY-MM-DD"`. |
 | `product_id` | `int` | Optional | The ID of the product being credited.<br><br>This may be set even for component credits, so true product-only (non-component) credits will also have a nil `component_id`. |
 | `product_version` | `int` | Optional | The version of the product being credited. |
 | `component_id` | `int` | Optional | The ID of the component being credited. Will be `nil` for non-component credits. |
 | `price_point_id` | `int` | Optional | The price point ID of the component being credited. Will be `nil` for non-component credits. |
+| `billing_schedule_item_id` | `int` | Optional | - |
+| `custom_item` | `bool` | Optional | - |
 
 ## Example (as JSON)
 
