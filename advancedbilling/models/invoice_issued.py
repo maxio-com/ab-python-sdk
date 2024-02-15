@@ -6,8 +6,11 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.invoice_line_item_event_data import InvoiceLineItemEventData
+from datetime import date
 
 
 class InvoiceIssued(object):
@@ -20,9 +23,9 @@ class InvoiceIssued(object):
         uid (str): TODO: type description here.
         number (str): TODO: type description here.
         role (str): TODO: type description here.
-        due_date (str): TODO: type description here.
-        issue_date (str): TODO: type description here.
-        paid_date (str): TODO: type description here.
+        due_date (date): TODO: type description here.
+        issue_date (date): TODO: type description here.
+        paid_date (date): TODO: type description here.
         due_amount (str): TODO: type description here.
         paid_amount (str): TODO: type description here.
         tax_amount (str): TODO: type description here.
@@ -112,9 +115,9 @@ class InvoiceIssued(object):
         uid = dictionary.get("uid") if dictionary.get("uid") else None
         number = dictionary.get("number") if dictionary.get("number") else None
         role = dictionary.get("role") if dictionary.get("role") else None
-        due_date = dictionary.get("due_date") if dictionary.get("due_date") else None
-        issue_date = dictionary.get("issue_date") if dictionary.get("issue_date") else None
-        paid_date = dictionary.get("paid_date") if dictionary.get("paid_date") else None
+        due_date = dateutil.parser.parse(dictionary.get('due_date')).date() if dictionary.get('due_date') else None
+        issue_date = dateutil.parser.parse(dictionary.get('issue_date')).date() if dictionary.get('issue_date') else None
+        paid_date = dateutil.parser.parse(dictionary.get('paid_date')).date() if dictionary.get('paid_date') else None
         due_amount = dictionary.get("due_amount") if dictionary.get("due_amount") else None
         paid_amount = dictionary.get("paid_amount") if dictionary.get("paid_amount") else None
         tax_amount = dictionary.get("tax_amount") if dictionary.get("tax_amount") else None
@@ -161,9 +164,9 @@ class InvoiceIssued(object):
             return APIHelper.is_valid_type(value=dictionary.uid, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.number, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.role, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.due_date, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.issue_date, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.paid_date, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.due_date, type_callable=lambda value: isinstance(value, date)) \
+                and APIHelper.is_valid_type(value=dictionary.issue_date, type_callable=lambda value: isinstance(value, date)) \
+                and APIHelper.is_valid_type(value=dictionary.paid_date, type_callable=lambda value: isinstance(value, date)) \
                 and APIHelper.is_valid_type(value=dictionary.due_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.paid_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.tax_amount, type_callable=lambda value: isinstance(value, str)) \

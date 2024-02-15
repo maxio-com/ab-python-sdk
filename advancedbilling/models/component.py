@@ -69,7 +69,7 @@ class Component(object):
             created
         updated_at (datetime): Timestamp indicating when this component was
             updated
-        archived_at (str): Timestamp indicating when this component was
+        archived_at (datetime): Timestamp indicating when this component was
             archived
         hide_date_range_on_invoice (bool): (Only available on Relationship
             Invoicing sites) Boolean flag describing if the service date range
@@ -275,7 +275,7 @@ class Component(object):
         if updated_at is not APIHelper.SKIP:
             self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if archived_at is not APIHelper.SKIP:
-            self.archived_at = archived_at 
+            self.archived_at = APIHelper.apply_datetime_converter(archived_at, APIHelper.RFC3339DateTime) if archived_at else None 
         if hide_date_range_on_invoice is not APIHelper.SKIP:
             self.hide_date_range_on_invoice = hide_date_range_on_invoice 
         if allow_fractional_quantities is not APIHelper.SKIP:
@@ -347,7 +347,10 @@ class Component(object):
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
-        archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP
+        if 'archived_at' in dictionary.keys():
+            archived_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("archived_at")).datetime if dictionary.get("archived_at") else None
+        else:
+            archived_at = APIHelper.SKIP
         hide_date_range_on_invoice = dictionary.get("hide_date_range_on_invoice") if "hide_date_range_on_invoice" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
         item_category = dictionary.get("item_category") if "item_category" in dictionary.keys() else APIHelper.SKIP

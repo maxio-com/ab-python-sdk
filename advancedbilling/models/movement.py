@@ -18,7 +18,7 @@ class Movement(object):
     TODO: type model description here.
 
     Attributes:
-        timestamp (str): TODO: type description here.
+        timestamp (datetime): TODO: type description here.
         amount_in_cents (long|int): TODO: type description here.
         amount_formatted (str): TODO: type description here.
         description (str): TODO: type description here.
@@ -69,7 +69,7 @@ class Movement(object):
 
         # Initialize members of the class
         if timestamp is not APIHelper.SKIP:
-            self.timestamp = timestamp 
+            self.timestamp = APIHelper.apply_datetime_converter(timestamp, APIHelper.RFC3339DateTime) if timestamp else None 
         if amount_in_cents is not APIHelper.SKIP:
             self.amount_in_cents = amount_in_cents 
         if amount_formatted is not APIHelper.SKIP:
@@ -106,7 +106,7 @@ class Movement(object):
             return None
 
         # Extract variables from the dictionary
-        timestamp = dictionary.get("timestamp") if dictionary.get("timestamp") else APIHelper.SKIP
+        timestamp = APIHelper.RFC3339DateTime.from_value(dictionary.get("timestamp")).datetime if dictionary.get("timestamp") else APIHelper.SKIP
         amount_in_cents = dictionary.get("amount_in_cents") if dictionary.get("amount_in_cents") else APIHelper.SKIP
         amount_formatted = dictionary.get("amount_formatted") if dictionary.get("amount_formatted") else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP

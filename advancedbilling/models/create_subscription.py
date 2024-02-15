@@ -188,7 +188,7 @@ class CreateSubscription(object):
             For this value to be honored, a next_billing_at must be present
             and set to a future date. This key/value will not be returned in
             the subscription response body.
-        canceled_at (str): TODO: type description here.
+        canceled_at (datetime): TODO: type description here.
         activated_at (datetime): TODO: type description here.
         agreement_acceptance (AgreementAcceptance): Required when creating a
             subscription with Maxio Payments.
@@ -453,7 +453,7 @@ class CreateSubscription(object):
         if import_mrr is not APIHelper.SKIP:
             self.import_mrr = import_mrr 
         if canceled_at is not APIHelper.SKIP:
-            self.canceled_at = canceled_at 
+            self.canceled_at = APIHelper.apply_datetime_converter(canceled_at, APIHelper.RFC3339DateTime) if canceled_at else None 
         if activated_at is not APIHelper.SKIP:
             self.activated_at = APIHelper.apply_datetime_converter(activated_at, APIHelper.RFC3339DateTime) if activated_at else None 
         if agreement_acceptance is not APIHelper.SKIP:
@@ -531,7 +531,7 @@ class CreateSubscription(object):
         prepaid_configuration = UpsertPrepaidConfiguration.from_dictionary(dictionary.get('prepaid_configuration')) if 'prepaid_configuration' in dictionary.keys() else APIHelper.SKIP
         previous_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("previous_billing_at")).datetime if dictionary.get("previous_billing_at") else APIHelper.SKIP
         import_mrr = dictionary.get("import_mrr") if "import_mrr" in dictionary.keys() else APIHelper.SKIP
-        canceled_at = dictionary.get("canceled_at") if dictionary.get("canceled_at") else APIHelper.SKIP
+        canceled_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("canceled_at")).datetime if dictionary.get("canceled_at") else APIHelper.SKIP
         activated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("activated_at")).datetime if dictionary.get("activated_at") else APIHelper.SKIP
         agreement_acceptance = AgreementAcceptance.from_dictionary(dictionary.get('agreement_acceptance')) if 'agreement_acceptance' in dictionary.keys() else APIHelper.SKIP
         ach_agreement = ACHAgreement.from_dictionary(dictionary.get('ach_agreement')) if 'ach_agreement' in dictionary.keys() else APIHelper.SKIP

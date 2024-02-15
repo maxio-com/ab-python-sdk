@@ -210,7 +210,7 @@ def create_endpoint(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`UpdateEndpointRequest`](../../doc/models/update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
+| `body` | [`CreateOrUpdateEndpointRequest`](../../doc/models/create-or-update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
 
 ## Response Type
 
@@ -219,8 +219,8 @@ def create_endpoint(self,
 ## Example Usage
 
 ```python
-body = UpdateEndpointRequest(
-    endpoint=UpdateEndpoint(
+body = CreateOrUpdateEndpointRequest(
+    endpoint=CreateOrUpdateEndpoint(
         url='https://your.site/webhooks',
         webhook_subscriptions=[
             WebhookSubscription.PAYMENT_SUCCESS,
@@ -330,7 +330,7 @@ def update_endpoint(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `endpoint_id` | `int` | Template, Required | The Chargify id for the endpoint that should be updated |
-| `body` | [`UpdateEndpointRequest`](../../doc/models/update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
+| `body` | [`CreateOrUpdateEndpointRequest`](../../doc/models/create-or-update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
 
 ## Response Type
 
@@ -341,8 +341,8 @@ def update_endpoint(self,
 ```python
 endpoint_id = 42
 
-body = UpdateEndpointRequest(
-    endpoint=UpdateEndpoint(
+body = CreateOrUpdateEndpointRequest(
+    endpoint=CreateOrUpdateEndpoint(
         url='https://yout.site/webhooks/1/json.',
         webhook_subscriptions=[
             WebhookSubscription.PAYMENT_FAILURE,

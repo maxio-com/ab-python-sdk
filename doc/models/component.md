@@ -34,7 +34,7 @@
 | `downgrade_credit` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `created_at` | `datetime` | Optional | Timestamp indicating when this component was created |
 | `updated_at` | `datetime` | Optional | Timestamp indicating when this component was updated |
-| `archived_at` | `str` | Optional | Timestamp indicating when this component was archived |
+| `archived_at` | `datetime` | Optional | Timestamp indicating when this component was archived |
 | `hide_date_range_on_invoice` | `bool` | Optional | (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices. |
 | `allow_fractional_quantities` | `bool` | Optional | - |
 | `item_category` | [`ItemCategory`](../../doc/models/item-category.md) | Optional | One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other |

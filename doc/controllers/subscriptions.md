@@ -972,7 +972,7 @@ body = UpdateSubscriptionRequest(
             expiration_month='10',
             expiration_year='2030'
         ),
-        next_billing_at='2010-08-06T15:34:00Z'
+        next_billing_at=dateutil.parser.parse('2010-08-06T15:34:00Z')
     )
 )
 

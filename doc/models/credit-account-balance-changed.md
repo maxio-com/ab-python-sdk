@@ -13,7 +13,7 @@
 | `service_credit_account_balance_in_cents` | `long\|int` | Required | - |
 | `service_credit_balance_change_in_cents` | `long\|int` | Required | - |
 | `currency_code` | `str` | Required | - |
-| `at_time` | `str` | Required | - |
+| `at_time` | `datetime` | Required | - |
 
 ## Example (as JSON)
 
@@ -23,7 +23,7 @@
   "service_credit_account_balance_in_cents": 10,
   "service_credit_balance_change_in_cents": 116,
   "currency_code": "currency_code8",
-  "at_time": "at_time0"
+  "at_time": "2016-03-13T12:52:32.123Z"
 }
 ```
 

@@ -66,10 +66,10 @@ class ReferralCodesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReferralValidationResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', SingleStringErrorResponseException)
+            .local_error_template('404', 'Invalid referral code.', SingleStringErrorResponseException)
         ).execute()

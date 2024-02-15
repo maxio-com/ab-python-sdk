@@ -16,7 +16,7 @@ class AllocationExpirationDate(object):
     TODO: type model description here.
 
     Attributes:
-        expires_at (str): TODO: type description here.
+        expires_at (datetime): TODO: type description here.
 
     """
 
@@ -35,7 +35,7 @@ class AllocationExpirationDate(object):
 
         # Initialize members of the class
         if expires_at is not APIHelper.SKIP:
-            self.expires_at = expires_at 
+            self.expires_at = APIHelper.apply_datetime_converter(expires_at, APIHelper.RFC3339DateTime) if expires_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -56,6 +56,6 @@ class AllocationExpirationDate(object):
             return None
 
         # Extract variables from the dictionary
-        expires_at = dictionary.get("expires_at") if dictionary.get("expires_at") else APIHelper.SKIP
+        expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else APIHelper.SKIP
         # Return an object of this model
         return cls(expires_at)

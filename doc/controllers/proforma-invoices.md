@@ -116,7 +116,7 @@ def read_proforma_invoice(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `proforma_invoice_uid` | `int` | Template, Required | The uid of the proforma invoice |
+| `proforma_invoice_uid` | `str` | Template, Required | The uid of the proforma invoice |
 
 ## Response Type
 
@@ -125,7 +125,7 @@ def read_proforma_invoice(self,
 ## Example Usage
 
 ```python
-proforma_invoice_uid = 242
+proforma_invoice_uid = 'proforma_invoice_uid4'
 
 result = proforma_invoices_controller.read_proforma_invoice(proforma_invoice_uid)
 print(result)
@@ -208,7 +208,7 @@ def list_proforma_invoices(self,
 
 ## Response Type
 
-[`List[ProformaInvoice]`](../../doc/models/proforma-invoice.md)
+[`ListProformaInvoicesResponse`](../../doc/models/list-proforma-invoices-response.md)
 
 ## Example Usage
 

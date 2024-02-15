@@ -18,7 +18,7 @@ class PublicKey(object):
     Attributes:
         public_key (str): TODO: type description here.
         requires_security_token (bool): TODO: type description here.
-        created_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
 
     """
 
@@ -47,7 +47,7 @@ class PublicKey(object):
         if requires_security_token is not APIHelper.SKIP:
             self.requires_security_token = requires_security_token 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -70,7 +70,7 @@ class PublicKey(object):
         # Extract variables from the dictionary
         public_key = dictionary.get("public_key") if dictionary.get("public_key") else APIHelper.SKIP
         requires_security_token = dictionary.get("requires_security_token") if "requires_security_token" in dictionary.keys() else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         # Return an object of this model
         return cls(public_key,
                    requires_security_token,

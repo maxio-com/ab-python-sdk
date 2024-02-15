@@ -22,7 +22,7 @@ class SubscriptionGroup(object):
             description here.
         payment_collection_method (str): TODO: type description here.
         subscription_ids (List[int]): TODO: type description here.
-        created_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
 
     """
 
@@ -61,7 +61,7 @@ class SubscriptionGroup(object):
         if subscription_ids is not APIHelper.SKIP:
             self.subscription_ids = subscription_ids 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -86,7 +86,7 @@ class SubscriptionGroup(object):
         payment_profile = SubscriptionGroupPaymentProfile.from_dictionary(dictionary.get('payment_profile')) if 'payment_profile' in dictionary.keys() else APIHelper.SKIP
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         subscription_ids = dictionary.get("subscription_ids") if dictionary.get("subscription_ids") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         # Return an object of this model
         return cls(customer_id,
                    payment_profile,

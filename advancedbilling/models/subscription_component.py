@@ -41,7 +41,7 @@ class SubscriptionComponent(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        archived_at (str): TODO: type description here.
+        archived_at (datetime): TODO: type description here.
         price_point_id (int): TODO: type description here.
         price_point_handle (str): TODO: type description here.
         price_point_type (PricePointType | None): TODO: type description
@@ -215,7 +215,7 @@ class SubscriptionComponent(object):
         if downgrade_credit is not APIHelper.SKIP:
             self.downgrade_credit = downgrade_credit 
         if archived_at is not APIHelper.SKIP:
-            self.archived_at = archived_at 
+            self.archived_at = APIHelper.apply_datetime_converter(archived_at, APIHelper.RFC3339DateTime) if archived_at else None 
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id 
         if price_point_handle is not APIHelper.SKIP:
@@ -285,7 +285,10 @@ class SubscriptionComponent(object):
         recurring = dictionary.get("recurring") if "recurring" in dictionary.keys() else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
-        archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP
+        if 'archived_at' in dictionary.keys():
+            archived_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("archived_at")).datetime if dictionary.get("archived_at") else None
+        else:
+            archived_at = APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if "price_point_id" in dictionary.keys() else APIHelper.SKIP
         price_point_handle = dictionary.get("price_point_handle") if "price_point_handle" in dictionary.keys() else APIHelper.SKIP
         price_point_type = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionComponentPricePointType'), dictionary.get('price_point_type'), False) if dictionary.get('price_point_type') is not None else APIHelper.SKIP

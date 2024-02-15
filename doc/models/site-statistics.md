@@ -16,10 +16,10 @@
 | `revenue_this_month` | `str` | Optional | - |
 | `revenue_this_year` | `str` | Optional | - |
 | `total_canceled_subscriptions` | `int` | Optional | - |
-| `total_active_subscriptions` | `float` | Optional | - |
-| `total_past_due_subscriptions` | `float` | Optional | - |
-| `total_unpaid_subscriptions` | `float` | Optional | - |
-| `total_dunning_subscriptions` | `float` | Optional | - |
+| `total_active_subscriptions` | `int` | Optional | - |
+| `total_past_due_subscriptions` | `int` | Optional | - |
+| `total_unpaid_subscriptions` | `int` | Optional | - |
+| `total_dunning_subscriptions` | `int` | Optional | - |
 
 ## Example (as JSON)
 

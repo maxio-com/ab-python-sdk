@@ -18,7 +18,8 @@ class CreatePayment(object):
         amount (str): TODO: type description here.
         memo (str): TODO: type description here.
         payment_details (str): TODO: type description here.
-        payment_method (str): TODO: type description here.
+        payment_method (InvoicePaymentMethodType): The type of payment method
+            used. Defaults to other.
 
     """
 

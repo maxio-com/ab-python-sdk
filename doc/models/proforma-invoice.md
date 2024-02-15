@@ -15,8 +15,8 @@
 | `subscription_id` | `int` | Optional | - |
 | `number` | `int` | Optional | - |
 | `sequence_number` | `int` | Optional | - |
-| `created_at` | `str` | Optional | - |
-| `delivery_date` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | - |
+| `delivery_date` | `date` | Optional | - |
 | `status` | `str` | Optional | - |
 | `collection_method` | `str` | Optional | - |
 | `payment_instructions` | `str` | Optional | - |

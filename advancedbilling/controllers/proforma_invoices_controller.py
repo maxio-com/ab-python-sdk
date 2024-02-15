@@ -16,6 +16,7 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.proforma_invoice import ProformaInvoice
+from advancedbilling.models.list_proforma_invoices_response import ListProformaInvoicesResponse
 from advancedbilling.models.proforma_invoice_preview import ProformaInvoicePreview
 from advancedbilling.models.signup_proforma_preview_response import SignupProformaPreviewResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
@@ -70,7 +71,7 @@ class ProformaInvoicesController(BaseController):
                             .value(uid)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def list_subscription_group_proforma_invoices(self,
@@ -111,7 +112,7 @@ class ProformaInvoicesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -129,7 +130,7 @@ class ProformaInvoicesController(BaseController):
         Proforma invoices are only available on Relationship Invoicing sites.
 
         Args:
-            proforma_invoice_uid (int): The uid of the proforma invoice
+            proforma_invoice_uid (str): The uid of the proforma invoice
 
         Returns:
             ProformaInvoice: Response from the API. OK
@@ -154,7 +155,7 @@ class ProformaInvoicesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -203,7 +204,7 @@ class ProformaInvoicesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -261,7 +262,7 @@ class ProformaInvoicesController(BaseController):
                     custom_fields -- bool -- Include custom fields data
 
         Returns:
-            List[ProformaInvoice]: Response from the API. OK
+            ListProformaInvoicesResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -319,11 +320,11 @@ class ProformaInvoicesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProformaInvoice.from_dictionary)
+            .deserialize_into(ListProformaInvoicesResponse.from_dictionary)
         ).execute()
 
     def void_proforma_invoice(self,
@@ -376,7 +377,7 @@ class ProformaInvoicesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -433,7 +434,7 @@ class ProformaInvoicesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -489,7 +490,7 @@ class ProformaInvoicesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
@@ -550,7 +551,7 @@ class ProformaInvoicesController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

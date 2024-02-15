@@ -18,8 +18,8 @@
 | `segment_property_2_value` | str \| float \| int \| bool \| None | Optional | This is a container for one-of cases. |
 | `segment_property_3_value` | str \| float \| int \| bool \| None | Optional | This is a container for one-of cases. |
 | `segment_property_4_value` | str \| float \| int \| bool \| None | Optional | This is a container for one-of cases. |
-| `created_at` | `str` | Optional | - |
-| `updated_at` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | - |
+| `updated_at` | `datetime` | Optional | - |
 | `prices` | [`List[SegmentPrice]`](../../doc/models/segment-price.md) | Optional | **Constraints**: *Minimum Items*: `1` |
 
 ## Example (as JSON)

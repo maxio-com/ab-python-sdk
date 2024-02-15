@@ -23,6 +23,8 @@ class InvoiceRefund(object):
         applied_amount (str): TODO: type description here.
         gateway_transaction_id (str): The transaction ID for the refund as
             returned from the payment gateway
+        gateway_used (str): TODO: type description here.
+        gateway_handle (str): TODO: type description here.
 
     """
 
@@ -33,7 +35,9 @@ class InvoiceRefund(object):
         "memo": 'memo',
         "original_amount": 'original_amount',
         "applied_amount": 'applied_amount',
-        "gateway_transaction_id": 'gateway_transaction_id'
+        "gateway_transaction_id": 'gateway_transaction_id',
+        "gateway_used": 'gateway_used',
+        "gateway_handle": 'gateway_handle'
     }
 
     _optionals = [
@@ -43,10 +47,13 @@ class InvoiceRefund(object):
         'original_amount',
         'applied_amount',
         'gateway_transaction_id',
+        'gateway_used',
+        'gateway_handle',
     ]
 
     _nullables = [
         'gateway_transaction_id',
+        'gateway_handle',
     ]
 
     def __init__(self,
@@ -55,7 +62,9 @@ class InvoiceRefund(object):
                  memo=APIHelper.SKIP,
                  original_amount=APIHelper.SKIP,
                  applied_amount=APIHelper.SKIP,
-                 gateway_transaction_id=APIHelper.SKIP):
+                 gateway_transaction_id=APIHelper.SKIP,
+                 gateway_used=APIHelper.SKIP,
+                 gateway_handle=APIHelper.SKIP):
         """Constructor for the InvoiceRefund class"""
 
         # Initialize members of the class
@@ -71,6 +80,10 @@ class InvoiceRefund(object):
             self.applied_amount = applied_amount 
         if gateway_transaction_id is not APIHelper.SKIP:
             self.gateway_transaction_id = gateway_transaction_id 
+        if gateway_used is not APIHelper.SKIP:
+            self.gateway_used = gateway_used 
+        if gateway_handle is not APIHelper.SKIP:
+            self.gateway_handle = gateway_handle 
 
     @classmethod
     def from_dictionary(cls,
@@ -97,13 +110,17 @@ class InvoiceRefund(object):
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
         gateway_transaction_id = dictionary.get("gateway_transaction_id") if "gateway_transaction_id" in dictionary.keys() else APIHelper.SKIP
+        gateway_used = dictionary.get("gateway_used") if dictionary.get("gateway_used") else APIHelper.SKIP
+        gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(transaction_id,
                    payment_id,
                    memo,
                    original_amount,
                    applied_amount,
-                   gateway_transaction_id)
+                   gateway_transaction_id,
+                   gateway_used,
+                   gateway_handle)
 
     @classmethod
     def validate(cls, dictionary):

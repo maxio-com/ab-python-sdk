@@ -12,8 +12,8 @@
 | `uid` | `str` | Required | - |
 | `number` | `str` | Required | - |
 | `role` | `str` | Required | - |
-| `delivery_date` | `str` | Required | - |
-| `created_at` | `str` | Required | - |
+| `delivery_date` | `date` | Required | - |
+| `created_at` | `datetime` | Required | - |
 | `due_amount` | `str` | Required | - |
 | `paid_amount` | `str` | Required | - |
 | `tax_amount` | `str` | Required | - |
@@ -28,8 +28,8 @@
   "uid": "uid0",
   "number": "number2",
   "role": "role6",
-  "delivery_date": "delivery_date0",
-  "created_at": "created_at8",
+  "delivery_date": "2016-03-13",
+  "created_at": "2016-03-13T12:52:32.123Z",
   "due_amount": "due_amount2",
   "paid_amount": "paid_amount8",
   "tax_amount": "tax_amount6",

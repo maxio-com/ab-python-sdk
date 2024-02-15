@@ -16,11 +16,12 @@ class InvoicePrePayment(object):
     TODO: type model description here.
 
     Attributes:
-        subscription_id (str): The subscription id for the prepayment account
-        amount_in_cents (str): The amount in cents of the prepayment that was
-            created as a result of this payment.
-        ending_balance_in_cents (str): The total balance of the prepayment
-            account for this subscription including any prior prepayments
+        subscription_id (int): The subscription id for the prepayment account
+        amount_in_cents (long|int): The amount in cents of the prepayment that
+            was created as a result of this payment.
+        ending_balance_in_cents (long|int): The total balance of the
+            prepayment account for this subscription including any prior
+            prepayments
 
     """
 
@@ -77,3 +78,25 @@ class InvoicePrePayment(object):
         return cls(subscription_id,
                    amount_in_cents,
                    ending_balance_in_cents)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+
+        if isinstance(dictionary, cls):
+            return True
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return True

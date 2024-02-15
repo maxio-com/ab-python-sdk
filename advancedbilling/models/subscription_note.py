@@ -19,8 +19,8 @@ class SubscriptionNote(object):
         id (int): TODO: type description here.
         body (str): TODO: type description here.
         subscription_id (int): TODO: type description here.
-        created_at (str): TODO: type description here.
-        updated_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
+        updated_at (datetime): TODO: type description here.
         sticky (bool): TODO: type description here.
 
     """
@@ -61,9 +61,9 @@ class SubscriptionNote(object):
         if subscription_id is not APIHelper.SKIP:
             self.subscription_id = subscription_id 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if sticky is not APIHelper.SKIP:
             self.sticky = sticky 
 
@@ -89,8 +89,8 @@ class SubscriptionNote(object):
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         body = dictionary.get("body") if dictionary.get("body") else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         sticky = dictionary.get("sticky") if "sticky" in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(id,

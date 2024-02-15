@@ -19,7 +19,7 @@ class CreatePrepayment(object):
         amount (float): TODO: type description here.
         details (str): TODO: type description here.
         memo (str): TODO: type description here.
-        method (PrepaymentMethod): :- When the `method` specified is
+        method (CreatePrepaymentMethod): :- When the `method` specified is
             `"credit_card_on_file"`, the prepayment amount will be collected
             using the default credit card payment profile and applied to the
             prepayment account balance. This is especially useful for manual

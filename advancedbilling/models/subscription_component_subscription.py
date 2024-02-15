@@ -82,7 +82,7 @@ class SubscriptionComponentSubscription(object):
             States](https://maxio-chargify.zendesk.com/hc/en-us/articles/540422
             2005773) for more info about subscription states and state
             transitions.
-        updated_at (str): TODO: type description here.
+        updated_at (datetime): TODO: type description here.
 
     """
 
@@ -106,7 +106,7 @@ class SubscriptionComponentSubscription(object):
         if state is not APIHelper.SKIP:
             self.state = state 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -128,7 +128,7 @@ class SubscriptionComponentSubscription(object):
 
         # Extract variables from the dictionary
         state = dictionary.get("state") if dictionary.get("state") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         # Return an object of this model
         return cls(state,
                    updated_at)

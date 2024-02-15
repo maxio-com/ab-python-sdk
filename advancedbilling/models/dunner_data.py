@@ -19,9 +19,9 @@ class DunnerData(object):
         state (str): TODO: type description here.
         subscription_id (int): TODO: type description here.
         revenue_at_risk_in_cents (long|int): TODO: type description here.
-        created_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
         attempts (int): TODO: type description here.
-        last_attempted_at (str): TODO: type description here.
+        last_attempted_at (datetime): TODO: type description here.
 
     """
 
@@ -48,9 +48,9 @@ class DunnerData(object):
         self.state = state 
         self.subscription_id = subscription_id 
         self.revenue_at_risk_in_cents = revenue_at_risk_in_cents 
-        self.created_at = created_at 
+        self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         self.attempts = attempts 
-        self.last_attempted_at = last_attempted_at 
+        self.last_attempted_at = APIHelper.apply_datetime_converter(last_attempted_at, APIHelper.RFC3339DateTime) if last_attempted_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -74,9 +74,9 @@ class DunnerData(object):
         state = dictionary.get("state") if dictionary.get("state") else None
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else None
         revenue_at_risk_in_cents = dictionary.get("revenue_at_risk_in_cents") if dictionary.get("revenue_at_risk_in_cents") else None
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else None
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else None
         attempts = dictionary.get("attempts") if dictionary.get("attempts") else None
-        last_attempted_at = dictionary.get("last_attempted_at") if dictionary.get("last_attempted_at") else None
+        last_attempted_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("last_attempted_at")).datetime if dictionary.get("last_attempted_at") else None
         # Return an object of this model
         return cls(state,
                    subscription_id,
@@ -103,9 +103,9 @@ class DunnerData(object):
             return APIHelper.is_valid_type(value=dictionary.state, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.subscription_id, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.revenue_at_risk_in_cents, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.created_at, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.created_at, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
                 and APIHelper.is_valid_type(value=dictionary.attempts, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.last_attempted_at, type_callable=lambda value: isinstance(value, str))
+                and APIHelper.is_valid_type(value=dictionary.last_attempted_at, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime))
 
         if not isinstance(dictionary, dict):
             return False

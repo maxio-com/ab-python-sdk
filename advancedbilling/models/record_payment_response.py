@@ -7,19 +7,18 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.invoice_pre_payment import InvoicePrePayment
-from advancedbilling.models.payment import Payment
+from advancedbilling.models.paid_invoice import PaidInvoice
 
 
-class PaymentResponse(object):
+class RecordPaymentResponse(object):
 
-    """Implementation of the 'Payment Response' model.
+    """Implementation of the 'Record Payment Response' model.
 
     TODO: type model description here.
 
     Attributes:
-        paid_invoices (List[Payment]): TODO: type description here.
-        prepayment (InvoicePrePayment): TODO: type description here.
+        paid_invoices (List[PaidInvoice]): TODO: type description here.
+        prepayment (InvoicePrePayment | None): TODO: type description here.
 
     """
 
@@ -34,10 +33,14 @@ class PaymentResponse(object):
         'prepayment',
     ]
 
+    _nullables = [
+        'prepayment',
+    ]
+
     def __init__(self,
                  paid_invoices=APIHelper.SKIP,
                  prepayment=APIHelper.SKIP):
-        """Constructor for the PaymentResponse class"""
+        """Constructor for the RecordPaymentResponse class"""
 
         # Initialize members of the class
         if paid_invoices is not APIHelper.SKIP:
@@ -59,6 +62,7 @@ class PaymentResponse(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if dictionary is None:
             return None
@@ -66,10 +70,13 @@ class PaymentResponse(object):
         # Extract variables from the dictionary
         paid_invoices = None
         if dictionary.get('paid_invoices') is not None:
-            paid_invoices = [Payment.from_dictionary(x) for x in dictionary.get('paid_invoices')]
+            paid_invoices = [PaidInvoice.from_dictionary(x) for x in dictionary.get('paid_invoices')]
         else:
             paid_invoices = APIHelper.SKIP
-        prepayment = InvoicePrePayment.from_dictionary(dictionary.get('prepayment')) if 'prepayment' in dictionary.keys() else APIHelper.SKIP
+        if 'prepayment' in dictionary.keys():
+            prepayment = APIHelper.deserialize_union_type(UnionTypeLookUp.get('RecordPaymentResponsePrepayment'), dictionary.get('prepayment'), False) if dictionary.get('prepayment') is not None else None
+        else:
+            prepayment = APIHelper.SKIP
         # Return an object of this model
         return cls(paid_invoices,
                    prepayment)

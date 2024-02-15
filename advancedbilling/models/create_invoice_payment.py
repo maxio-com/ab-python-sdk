@@ -23,6 +23,8 @@ class CreateInvoicePayment(object):
             Defaults to other.
         details (str): Additional information related to the payment method
             (eg. Check #)
+        payment_profile_id (int): The ID of the payment profile to be used for
+            the payment.
 
     """
 
@@ -31,7 +33,8 @@ class CreateInvoicePayment(object):
         "amount": 'amount',
         "memo": 'memo',
         "method": 'method',
-        "details": 'details'
+        "details": 'details',
+        "payment_profile_id": 'payment_profile_id'
     }
 
     _optionals = [
@@ -39,13 +42,15 @@ class CreateInvoicePayment(object):
         'memo',
         'method',
         'details',
+        'payment_profile_id',
     ]
 
     def __init__(self,
                  amount=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
                  method=APIHelper.SKIP,
-                 details=APIHelper.SKIP):
+                 details=APIHelper.SKIP,
+                 payment_profile_id=APIHelper.SKIP):
         """Constructor for the CreateInvoicePayment class"""
 
         # Initialize members of the class
@@ -57,6 +62,8 @@ class CreateInvoicePayment(object):
             self.method = method 
         if details is not APIHelper.SKIP:
             self.details = details 
+        if payment_profile_id is not APIHelper.SKIP:
+            self.payment_profile_id = payment_profile_id 
 
     @classmethod
     def from_dictionary(cls,
@@ -82,8 +89,10 @@ class CreateInvoicePayment(object):
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         method = dictionary.get("method") if dictionary.get("method") else APIHelper.SKIP
         details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
+        payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP
         # Return an object of this model
         return cls(amount,
                    memo,
                    method,
-                   details)
+                   details,
+                   payment_profile_id)

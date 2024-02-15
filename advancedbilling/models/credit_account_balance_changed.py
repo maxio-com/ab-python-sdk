@@ -22,7 +22,7 @@ class CreditAccountBalanceChanged(object):
         service_credit_balance_change_in_cents (long|int): TODO: type
             description here.
         currency_code (str): TODO: type description here.
-        at_time (str): TODO: type description here.
+        at_time (datetime): TODO: type description here.
 
     """
 
@@ -48,7 +48,7 @@ class CreditAccountBalanceChanged(object):
         self.service_credit_account_balance_in_cents = service_credit_account_balance_in_cents 
         self.service_credit_balance_change_in_cents = service_credit_balance_change_in_cents 
         self.currency_code = currency_code 
-        self.at_time = at_time 
+        self.at_time = APIHelper.apply_datetime_converter(at_time, APIHelper.RFC3339DateTime) if at_time else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -73,7 +73,7 @@ class CreditAccountBalanceChanged(object):
         service_credit_account_balance_in_cents = dictionary.get("service_credit_account_balance_in_cents") if dictionary.get("service_credit_account_balance_in_cents") else None
         service_credit_balance_change_in_cents = dictionary.get("service_credit_balance_change_in_cents") if dictionary.get("service_credit_balance_change_in_cents") else None
         currency_code = dictionary.get("currency_code") if dictionary.get("currency_code") else None
-        at_time = dictionary.get("at_time") if dictionary.get("at_time") else None
+        at_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("at_time")).datetime if dictionary.get("at_time") else None
         # Return an object of this model
         return cls(reason,
                    service_credit_account_balance_in_cents,
@@ -100,7 +100,7 @@ class CreditAccountBalanceChanged(object):
                 and APIHelper.is_valid_type(value=dictionary.service_credit_account_balance_in_cents, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.service_credit_balance_change_in_cents, type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.currency_code, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.at_time, type_callable=lambda value: isinstance(value, str))
+                and APIHelper.is_valid_type(value=dictionary.at_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime))
 
         if not isinstance(dictionary, dict):
             return False

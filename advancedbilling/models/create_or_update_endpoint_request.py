@@ -6,17 +6,17 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.models.update_endpoint import UpdateEndpoint
+from advancedbilling.models.create_or_update_endpoint import CreateOrUpdateEndpoint
 
 
-class UpdateEndpointRequest(object):
+class CreateOrUpdateEndpointRequest(object):
 
-    """Implementation of the 'Update Endpoint Request' model.
+    """Implementation of the 'Create or Update Endpoint Request' model.
 
     Used to Create or Update Endpoint
 
     Attributes:
-        endpoint (UpdateEndpoint): Used to Create or Update Endpoint
+        endpoint (CreateOrUpdateEndpoint): Used to Create or Update Endpoint
 
     """
 
@@ -27,7 +27,7 @@ class UpdateEndpointRequest(object):
 
     def __init__(self,
                  endpoint=None):
-        """Constructor for the UpdateEndpointRequest class"""
+        """Constructor for the CreateOrUpdateEndpointRequest class"""
 
         # Initialize members of the class
         self.endpoint = endpoint 
@@ -51,6 +51,6 @@ class UpdateEndpointRequest(object):
             return None
 
         # Extract variables from the dictionary
-        endpoint = UpdateEndpoint.from_dictionary(dictionary.get('endpoint')) if dictionary.get('endpoint') else None
+        endpoint = CreateOrUpdateEndpoint.from_dictionary(dictionary.get('endpoint')) if dictionary.get('endpoint') else None
         # Return an object of this model
         return cls(endpoint)

@@ -22,7 +22,7 @@ class MRR(object):
         currency (str): TODO: type description here.
         currency_symbol (str): TODO: type description here.
         breakouts (Breakouts): TODO: type description here.
-        at_time (str): ISO8601 timestamp
+        at_time (datetime): ISO8601 timestamp
 
     """
 
@@ -66,7 +66,7 @@ class MRR(object):
         if breakouts is not APIHelper.SKIP:
             self.breakouts = breakouts 
         if at_time is not APIHelper.SKIP:
-            self.at_time = at_time 
+            self.at_time = APIHelper.apply_datetime_converter(at_time, APIHelper.RFC3339DateTime) if at_time else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -92,7 +92,7 @@ class MRR(object):
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         currency_symbol = dictionary.get("currency_symbol") if dictionary.get("currency_symbol") else APIHelper.SKIP
         breakouts = Breakouts.from_dictionary(dictionary.get('breakouts')) if 'breakouts' in dictionary.keys() else APIHelper.SKIP
-        at_time = dictionary.get("at_time") if dictionary.get("at_time") else APIHelper.SKIP
+        at_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("at_time")).datetime if dictionary.get("at_time") else APIHelper.SKIP
         # Return an object of this model
         return cls(amount_in_cents,
                    amount_formatted,

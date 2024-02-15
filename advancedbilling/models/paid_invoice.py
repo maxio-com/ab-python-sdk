@@ -9,14 +9,14 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class Payment(object):
+class PaidInvoice(object):
 
-    """Implementation of the 'Payment' model.
+    """Implementation of the 'Paid Invoice' model.
 
     TODO: type model description here.
 
     Attributes:
-        invoice_uid (str): The uid of the paid invoice
+        invoice_id (str): The uid of the paid invoice
         status (InvoiceStatus): The current status of the invoice. See
             [Invoice
             Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
@@ -29,29 +29,29 @@ class Payment(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "invoice_uid": 'invoice_uid',
+        "invoice_id": 'invoice_id',
         "status": 'status',
         "due_amount": 'due_amount',
         "paid_amount": 'paid_amount'
     }
 
     _optionals = [
-        'invoice_uid',
+        'invoice_id',
         'status',
         'due_amount',
         'paid_amount',
     ]
 
     def __init__(self,
-                 invoice_uid=APIHelper.SKIP,
+                 invoice_id=APIHelper.SKIP,
                  status=APIHelper.SKIP,
                  due_amount=APIHelper.SKIP,
                  paid_amount=APIHelper.SKIP):
-        """Constructor for the Payment class"""
+        """Constructor for the PaidInvoice class"""
 
         # Initialize members of the class
-        if invoice_uid is not APIHelper.SKIP:
-            self.invoice_uid = invoice_uid 
+        if invoice_id is not APIHelper.SKIP:
+            self.invoice_id = invoice_id 
         if status is not APIHelper.SKIP:
             self.status = status 
         if due_amount is not APIHelper.SKIP:
@@ -78,12 +78,34 @@ class Payment(object):
             return None
 
         # Extract variables from the dictionary
-        invoice_uid = dictionary.get("invoice_uid") if dictionary.get("invoice_uid") else APIHelper.SKIP
+        invoice_id = dictionary.get("invoice_id") if dictionary.get("invoice_id") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         due_amount = dictionary.get("due_amount") if dictionary.get("due_amount") else APIHelper.SKIP
         paid_amount = dictionary.get("paid_amount") if dictionary.get("paid_amount") else APIHelper.SKIP
         # Return an object of this model
-        return cls(invoice_uid,
+        return cls(invoice_id,
                    status,
                    due_amount,
                    paid_amount)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+
+        if isinstance(dictionary, cls):
+            return True
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return True

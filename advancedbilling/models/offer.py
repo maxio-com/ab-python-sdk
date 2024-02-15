@@ -28,9 +28,9 @@ class Offer(object):
         name (str): TODO: type description here.
         handle (str): TODO: type description here.
         description (str): TODO: type description here.
-        created_at (str): TODO: type description here.
-        updated_at (str): TODO: type description here.
-        archived_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
+        updated_at (datetime): TODO: type description here.
+        archived_at (datetime): TODO: type description here.
         offer_items (List[OfferItem]): TODO: type description here.
         offer_discounts (List[OfferDiscount]): TODO: type description here.
         product_family_name (str): TODO: type description here.
@@ -134,11 +134,11 @@ class Offer(object):
         if description is not APIHelper.SKIP:
             self.description = description 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if archived_at is not APIHelper.SKIP:
-            self.archived_at = archived_at 
+            self.archived_at = APIHelper.apply_datetime_converter(archived_at, APIHelper.RFC3339DateTime) if archived_at else None 
         if offer_items is not APIHelper.SKIP:
             self.offer_items = offer_items 
         if offer_discounts is not APIHelper.SKIP:
@@ -182,9 +182,12 @@ class Offer(object):
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
-        archived_at = dictionary.get("archived_at") if "archived_at" in dictionary.keys() else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
+        if 'archived_at' in dictionary.keys():
+            archived_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("archived_at")).datetime if dictionary.get("archived_at") else None
+        else:
+            archived_at = APIHelper.SKIP
         offer_items = None
         if dictionary.get('offer_items') is not None:
             offer_items = [OfferItem.from_dictionary(x) for x in dictionary.get('offer_items')]

@@ -21,8 +21,8 @@ class ReasonCode(object):
         code (str): TODO: type description here.
         description (str): TODO: type description here.
         position (int): TODO: type description here.
-        created_at (str): TODO: type description here.
-        updated_at (str): TODO: type description here.
+        created_at (datetime): TODO: type description here.
+        updated_at (datetime): TODO: type description here.
 
     """
 
@@ -69,9 +69,9 @@ class ReasonCode(object):
         if position is not APIHelper.SKIP:
             self.position = position 
         if created_at is not APIHelper.SKIP:
-            self.created_at = created_at 
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = updated_at 
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
 
     @classmethod
     def from_dictionary(cls,
@@ -97,8 +97,8 @@ class ReasonCode(object):
         code = dictionary.get("code") if dictionary.get("code") else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         position = dictionary.get("position") if dictionary.get("position") else APIHelper.SKIP
-        created_at = dictionary.get("created_at") if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = dictionary.get("updated_at") if dictionary.get("updated_at") else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         # Return an object of this model
         return cls(id,
                    site_id,

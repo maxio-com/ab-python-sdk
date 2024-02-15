@@ -15,8 +15,8 @@
 | `subscription_id` | `int` | Optional | - |
 | `number` | `str` | Optional | - |
 | `sequence_number` | `int` | Optional | - |
-| `created_at` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
-| `delivery_date` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
+| `created_at` | `datetime` | Optional | - |
+| `delivery_date` | `date` | Optional | - |
 | `status` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `collection_method` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `payment_instructions` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |

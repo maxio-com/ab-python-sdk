@@ -71,7 +71,7 @@ class SubscriptionGroupStatusController(BaseController):
             .body_param(Parameter()
                         .value(body))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def initiate_delayed_cancellation_for_group(self,
@@ -108,7 +108,7 @@ class SubscriptionGroupStatusController(BaseController):
                             .value(uid)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def cancel_delayed_cancellation_for_group(self,
@@ -143,7 +143,7 @@ class SubscriptionGroupStatusController(BaseController):
                             .value(uid)
                             .is_required(True)
                             .should_encode(True))
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def reactivate_subscription_group(self,
@@ -222,7 +222,7 @@ class SubscriptionGroupStatusController(BaseController):
                           .key('accept')
                           .value('application/json'))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('global'))
+            .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)

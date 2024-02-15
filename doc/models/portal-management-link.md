@@ -11,10 +11,10 @@
 |  --- | --- | --- | --- |
 | `url` | `str` | Optional | - |
 | `fetch_count` | `int` | Optional | - |
-| `created_at` | `str` | Optional | - |
-| `new_link_available_at` | `str` | Optional | - |
-| `expires_at` | `str` | Optional | - |
-| `last_invite_sent_at` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | - |
+| `new_link_available_at` | `datetime` | Optional | - |
+| `expires_at` | `datetime` | Optional | - |
+| `last_invite_sent_at` | `datetime` | Optional | - |
 
 ## Example (as JSON)
 
@@ -22,9 +22,9 @@
 {
   "url": "url0",
   "fetch_count": 222,
-  "created_at": "created_at6",
-  "new_link_available_at": "new_link_available_at0",
-  "expires_at": "expires_at0"
+  "created_at": "2016-03-13T12:52:32.123Z",
+  "new_link_available_at": "2016-03-13T12:52:32.123Z",
+  "expires_at": "2016-03-13T12:52:32.123Z"
 }
 ```
 

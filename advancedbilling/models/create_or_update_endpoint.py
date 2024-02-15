@@ -8,9 +8,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 
-class UpdateEndpoint(object):
+class CreateOrUpdateEndpoint(object):
 
-    """Implementation of the 'Update Endpoint' model.
+    """Implementation of the 'Create or Update Endpoint' model.
 
     Used to Create or Update Endpoint
 
@@ -30,7 +30,7 @@ class UpdateEndpoint(object):
     def __init__(self,
                  url=None,
                  webhook_subscriptions=None):
-        """Constructor for the UpdateEndpoint class"""
+        """Constructor for the CreateOrUpdateEndpoint class"""
 
         # Initialize members of the class
         self.url = url 

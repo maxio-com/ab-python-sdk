@@ -23,7 +23,7 @@ class ListSubscriptionGroupsItem(object):
         payment_profile_id (int): TODO: type description here.
         subscription_ids (List[int]): TODO: type description here.
         primary_subscription_id (int): TODO: type description here.
-        next_assessment_at (str): TODO: type description here.
+        next_assessment_at (datetime): TODO: type description here.
         state (str): TODO: type description here.
         cancel_at_end_of_period (bool): TODO: type description here.
         account_balances (SubscriptionGroupBalances): TODO: type description
@@ -85,7 +85,7 @@ class ListSubscriptionGroupsItem(object):
         if primary_subscription_id is not APIHelper.SKIP:
             self.primary_subscription_id = primary_subscription_id 
         if next_assessment_at is not APIHelper.SKIP:
-            self.next_assessment_at = next_assessment_at 
+            self.next_assessment_at = APIHelper.apply_datetime_converter(next_assessment_at, APIHelper.RFC3339DateTime) if next_assessment_at else None 
         if state is not APIHelper.SKIP:
             self.state = state 
         if cancel_at_end_of_period is not APIHelper.SKIP:
@@ -118,7 +118,7 @@ class ListSubscriptionGroupsItem(object):
         payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP
         subscription_ids = dictionary.get("subscription_ids") if dictionary.get("subscription_ids") else APIHelper.SKIP
         primary_subscription_id = dictionary.get("primary_subscription_id") if dictionary.get("primary_subscription_id") else APIHelper.SKIP
-        next_assessment_at = dictionary.get("next_assessment_at") if dictionary.get("next_assessment_at") else APIHelper.SKIP
+        next_assessment_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_assessment_at")).datetime if dictionary.get("next_assessment_at") else APIHelper.SKIP
         state = dictionary.get("state") if dictionary.get("state") else APIHelper.SKIP
         cancel_at_end_of_period = dictionary.get("cancel_at_end_of_period") if "cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
         account_balances = SubscriptionGroupBalances.from_dictionary(dictionary.get('account_balances')) if 'account_balances' in dictionary.keys() else APIHelper.SKIP

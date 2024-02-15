@@ -26,7 +26,7 @@ class InvoiceEvent(object):
             VoidRemainderEventData | None): The event data is the data that,
             when combined with the command, results in the output invoice
             found in the invoice field.
-        timestamp (str): TODO: type description here.
+        timestamp (datetime): TODO: type description here.
         invoice (Invoice): TODO: type description here.
 
     """
@@ -64,7 +64,7 @@ class InvoiceEvent(object):
         if event_data is not APIHelper.SKIP:
             self.event_data = event_data 
         if timestamp is not APIHelper.SKIP:
-            self.timestamp = timestamp 
+            self.timestamp = APIHelper.apply_datetime_converter(timestamp, APIHelper.RFC3339DateTime) if timestamp else None 
         if invoice is not APIHelper.SKIP:
             self.invoice = invoice 
 
@@ -91,7 +91,7 @@ class InvoiceEvent(object):
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         event_type = dictionary.get("event_type") if dictionary.get("event_type") else APIHelper.SKIP
         event_data = APIHelper.deserialize_union_type(UnionTypeLookUp.get('InvoiceEventEventData'), dictionary.get('event_data'), False) if dictionary.get('event_data') is not None else APIHelper.SKIP
-        timestamp = dictionary.get("timestamp") if dictionary.get("timestamp") else APIHelper.SKIP
+        timestamp = APIHelper.RFC3339DateTime.from_value(dictionary.get("timestamp")).datetime if dictionary.get("timestamp") else APIHelper.SKIP
         invoice = Invoice.from_dictionary(dictionary.get('invoice')) if 'invoice' in dictionary.keys() else APIHelper.SKIP
         # Return an object of this model
         return cls(id,

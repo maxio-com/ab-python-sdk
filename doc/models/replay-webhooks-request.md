@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `ids` | `List[int]` | Required | - |
+| `ids` | `List[long\|int]` | Required | - |
 
 ## Example (as JSON)
 

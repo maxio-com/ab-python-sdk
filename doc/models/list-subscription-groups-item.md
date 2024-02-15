@@ -15,7 +15,7 @@
 | `payment_profile_id` | `int` | Optional | - |
 | `subscription_ids` | `List[int]` | Optional | - |
 | `primary_subscription_id` | `int` | Optional | - |
-| `next_assessment_at` | `str` | Optional | - |
+| `next_assessment_at` | `datetime` | Optional | - |
 | `state` | `str` | Optional | - |
 | `cancel_at_end_of_period` | `bool` | Optional | - |
 | `account_balances` | [`SubscriptionGroupBalances`](../../doc/models/subscription-group-balances.md) | Optional | - |
