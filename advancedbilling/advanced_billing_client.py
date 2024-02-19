@@ -199,8 +199,7 @@ class AdvancedBillingClient(object):
                  timeout=30, max_retries=0, backoff_factor=2,
                  retry_statuses=None, retry_methods=None,
                  environment=Environment.PRODUCTION, subdomain='subdomain',
-                 domain='chargify.com', basic_auth_user_name=None,
-                 basic_auth_password=None, basic_auth_credentials=None,
+                 domain='chargify.com', basic_auth_credentials=None,
                  config=None):
         self.config = config or Configuration(
             http_client_instance=http_client_instance,
@@ -209,8 +208,6 @@ class AdvancedBillingClient(object):
             max_retries=max_retries, backoff_factor=backoff_factor,
             retry_statuses=retry_statuses, retry_methods=retry_methods,
             environment=environment, subdomain=subdomain, domain=domain,
-            basic_auth_user_name=basic_auth_user_name,
-            basic_auth_password=basic_auth_password,
             basic_auth_credentials=basic_auth_credentials)
 
         self.global_configuration = GlobalConfiguration(self.config)\
