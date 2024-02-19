@@ -17,6 +17,7 @@ from advancedbilling.advanced_billing_client import (
     SubscriptionComponentsController,
     SubscriptionsController,
 )
+from advancedbilling.http.auth.basic_auth import BasicAuthCredentials
 from advancedbilling.models.resource_type import ResourceType
 
 BASIC_AUTH_USERNAME = os.getenv("BASIC_AUTH_USERNAME")
@@ -42,8 +43,10 @@ def client() -> AdvancedBillingClient:
     client = AdvancedBillingClient(
         subdomain=SUBDOMAIN,
         domain=DOMAIN,
-        basic_auth_user_name=BASIC_AUTH_USERNAME,
-        basic_auth_password=BASIC_AUTH_PASSWORD,
+        basic_auth_credentials=BasicAuthCredentials(
+            username=BASIC_AUTH_USERNAME,
+            password=BASIC_AUTH_PASSWORD
+        )
     )
 
     clean_custom_fields(client)
@@ -60,8 +63,10 @@ def unauthorized_client() -> AdvancedBillingClient:
     return AdvancedBillingClient(
         subdomain=SUBDOMAIN,
         domain=DOMAIN,
-        basic_auth_user_name="thisiswrongapitokenthisiswrongapitokenV8",
-        basic_auth_password=BASIC_AUTH_PASSWORD,
+        basic_auth_credentials=BasicAuthCredentials(
+            username="thisiswrongapitokenthisiswrongapitokenV8",
+            password=BASIC_AUTH_PASSWORD
+        )
     )
 
 

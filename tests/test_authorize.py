@@ -3,6 +3,7 @@ from apimatic_core.exceptions.auth_validation_exception import AuthValidationExc
 
 from advancedbilling.advanced_billing_client import AdvancedBillingClient
 from advancedbilling.exceptions.api_exception import APIException
+from advancedbilling.http.auth.basic_auth import BasicAuthCredentials
 from advancedbilling.models.site_response import SiteResponse
 
 from .data import AuthorizeAssertCases
@@ -12,11 +13,17 @@ from .utils import assert_properties
 class TestAuthorization:
     def test_no_token_or_password_to_client_create(self):
         with pytest.raises(AuthValidationException):
-            client = AdvancedBillingClient(basic_auth_user_name="token", basic_auth_password="")
+            client = AdvancedBillingClient(basic_auth_credentials=BasicAuthCredentials(
+                username="token",
+                password=""
+            ))
             client.sites.read_site()
 
         with pytest.raises(AuthValidationException):
-            client = AdvancedBillingClient(basic_auth_user_name="", basic_auth_password="password")
+            client = AdvancedBillingClient(basic_auth_credentials=BasicAuthCredentials(
+                username="",
+                password="password"
+            ))
             client.sites.read_site()
 
     def test_unauthorized(self, unauthorized_client: AdvancedBillingClient):
