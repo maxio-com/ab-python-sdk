@@ -50,7 +50,7 @@ def client() -> AdvancedBillingClient:
     )
 
     clean_custom_fields(client)
-    client.sites.clear_site()
+    #client.sites.clear_site()
     sleep(10)  # Wait for site to be cleared as it takes some time
 
     yield client
