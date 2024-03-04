@@ -55,8 +55,6 @@ def client() -> AdvancedBillingClient:
 
     yield client
 
-    client.sites.clear_site()
-
 
 @pytest.fixture(scope="session")
 def unauthorized_client() -> AdvancedBillingClient:
