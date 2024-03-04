@@ -57,7 +57,8 @@ class PreviewAllocationsRequest(object):
                  allocations=None,
                  effective_proration_date=APIHelper.SKIP,
                  upgrade_charge=APIHelper.SKIP,
-                 downgrade_credit=APIHelper.SKIP):
+                 downgrade_credit=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PreviewAllocationsRequest class"""
 
         # Initialize members of the class
@@ -68,6 +69,9 @@ class PreviewAllocationsRequest(object):
             self.upgrade_charge = upgrade_charge 
         if downgrade_credit is not APIHelper.SKIP:
             self.downgrade_credit = downgrade_credit 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -94,8 +98,13 @@ class PreviewAllocationsRequest(object):
         effective_proration_date = dateutil.parser.parse(dictionary.get('effective_proration_date')).date() if dictionary.get('effective_proration_date') else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(allocations,
                    effective_proration_date,
                    upgrade_charge,
-                   downgrade_credit)
+                   downgrade_credit,
+                   dictionary)

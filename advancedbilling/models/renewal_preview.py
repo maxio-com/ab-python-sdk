@@ -77,7 +77,8 @@ class RenewalPreview(object):
                  existing_balance_in_cents=APIHelper.SKIP,
                  total_amount_due_in_cents=APIHelper.SKIP,
                  uncalculated_taxes=APIHelper.SKIP,
-                 line_items=APIHelper.SKIP):
+                 line_items=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the RenewalPreview class"""
 
         # Initialize members of the class
@@ -99,6 +100,9 @@ class RenewalPreview(object):
             self.uncalculated_taxes = uncalculated_taxes 
         if line_items is not APIHelper.SKIP:
             self.line_items = line_items 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -132,6 +136,10 @@ class RenewalPreview(object):
             line_items = [RenewalPreviewLineItem.from_dictionary(x) for x in dictionary.get('line_items')]
         else:
             line_items = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(next_assessment_at,
                    subtotal_in_cents,
@@ -141,4 +149,5 @@ class RenewalPreview(object):
                    existing_balance_in_cents,
                    total_amount_due_in_cents,
                    uncalculated_taxes,
-                   line_items)
+                   line_items,
+                   dictionary)

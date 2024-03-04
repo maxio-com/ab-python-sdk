@@ -58,7 +58,8 @@ class IssueInvoiceEventData(object):
                  from_status=None,
                  to_status=None,
                  due_amount=None,
-                 total_amount=None):
+                 total_amount=None,
+                 additional_properties={}):
         """Constructor for the IssueInvoiceEventData class"""
 
         # Initialize members of the class
@@ -67,6 +68,9 @@ class IssueInvoiceEventData(object):
         self.to_status = to_status 
         self.due_amount = due_amount 
         self.total_amount = total_amount 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -92,12 +96,17 @@ class IssueInvoiceEventData(object):
         to_status = dictionary.get("to_status") if dictionary.get("to_status") else None
         due_amount = dictionary.get("due_amount") if dictionary.get("due_amount") else None
         total_amount = dictionary.get("total_amount") if dictionary.get("total_amount") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(consolidation_level,
                    from_status,
                    to_status,
                    due_amount,
-                   total_amount)
+                   total_amount,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

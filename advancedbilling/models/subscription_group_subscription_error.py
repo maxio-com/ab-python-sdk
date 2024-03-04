@@ -43,7 +43,8 @@ class SubscriptionGroupSubscriptionError(object):
                  product=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
                  payment_profile=APIHelper.SKIP,
-                 payment_profile_chargify_token=APIHelper.SKIP):
+                 payment_profile_chargify_token=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupSubscriptionError class"""
 
         # Initialize members of the class
@@ -55,6 +56,9 @@ class SubscriptionGroupSubscriptionError(object):
             self.payment_profile = payment_profile 
         if payment_profile_chargify_token is not APIHelper.SKIP:
             self.payment_profile_chargify_token = payment_profile_chargify_token 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -79,8 +83,13 @@ class SubscriptionGroupSubscriptionError(object):
         product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
         payment_profile = dictionary.get("payment_profile") if dictionary.get("payment_profile") else APIHelper.SKIP
         payment_profile_chargify_token = dictionary.get("payment_profile.chargify_token") if dictionary.get("payment_profile.chargify_token") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(product,
                    product_price_point_id,
                    payment_profile,
-                   payment_profile_chargify_token)
+                   payment_profile_chargify_token,
+                   dictionary)

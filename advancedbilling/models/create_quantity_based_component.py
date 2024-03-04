@@ -27,11 +27,15 @@ class CreateQuantityBasedComponent(object):
     }
 
     def __init__(self,
-                 quantity_based_component=None):
+                 quantity_based_component=None,
+                 additional_properties={}):
         """Constructor for the CreateQuantityBasedComponent class"""
 
         # Initialize members of the class
         self.quantity_based_component = quantity_based_component 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -53,5 +57,10 @@ class CreateQuantityBasedComponent(object):
 
         # Extract variables from the dictionary
         quantity_based_component = QuantityBasedComponent.from_dictionary(dictionary.get('quantity_based_component')) if dictionary.get('quantity_based_component') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(quantity_based_component)
+        return cls(quantity_based_component,
+                   dictionary)

@@ -83,7 +83,8 @@ class RenewalPreviewLineItem(object):
                  component_name=APIHelper.SKIP,
                  product_handle=APIHelper.SKIP,
                  period_range_start=APIHelper.SKIP,
-                 period_range_end=APIHelper.SKIP):
+                 period_range_end=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the RenewalPreviewLineItem class"""
 
         # Initialize members of the class
@@ -115,6 +116,9 @@ class RenewalPreviewLineItem(object):
             self.period_range_start = period_range_start 
         if period_range_end is not APIHelper.SKIP:
             self.period_range_end = period_range_end 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -149,6 +153,10 @@ class RenewalPreviewLineItem(object):
         product_handle = dictionary.get("product_handle") if dictionary.get("product_handle") else APIHelper.SKIP
         period_range_start = dictionary.get("period_range_start") if dictionary.get("period_range_start") else APIHelper.SKIP
         period_range_end = dictionary.get("period_range_end") if dictionary.get("period_range_end") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(transaction_type,
                    kind,
@@ -163,4 +171,5 @@ class RenewalPreviewLineItem(object):
                    component_name,
                    product_handle,
                    period_range_start,
-                   period_range_end)
+                   period_range_end,
+                   dictionary)

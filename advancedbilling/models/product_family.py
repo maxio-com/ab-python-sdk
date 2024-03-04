@@ -59,7 +59,8 @@ class ProductFamily(object):
                  accounting_code=APIHelper.SKIP,
                  description=APIHelper.SKIP,
                  created_at=APIHelper.SKIP,
-                 updated_at=APIHelper.SKIP):
+                 updated_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ProductFamily class"""
 
         # Initialize members of the class
@@ -77,6 +78,9 @@ class ProductFamily(object):
             self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
             self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -104,6 +108,10 @@ class ProductFamily(object):
         description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    name,
@@ -111,7 +119,8 @@ class ProductFamily(object):
                    accounting_code,
                    description,
                    created_at,
-                   updated_at)
+                   updated_at,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -31,12 +31,16 @@ class UpdateMetadataRequest(object):
     ]
 
     def __init__(self,
-                 metadata=APIHelper.SKIP):
+                 metadata=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the UpdateMetadataRequest class"""
 
         # Initialize members of the class
         if metadata is not APIHelper.SKIP:
             self.metadata = metadata 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class UpdateMetadataRequest(object):
 
         # Extract variables from the dictionary
         metadata = UpdateMetadata.from_dictionary(dictionary.get('metadata')) if 'metadata' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(metadata)
+        return cls(metadata,
+                   dictionary)

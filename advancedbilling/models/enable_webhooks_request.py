@@ -25,11 +25,15 @@ class EnableWebhooksRequest(object):
     }
 
     def __init__(self,
-                 webhooks_enabled=None):
+                 webhooks_enabled=None,
+                 additional_properties={}):
         """Constructor for the EnableWebhooksRequest class"""
 
         # Initialize members of the class
         self.webhooks_enabled = webhooks_enabled 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -51,5 +55,10 @@ class EnableWebhooksRequest(object):
 
         # Extract variables from the dictionary
         webhooks_enabled = dictionary.get("webhooks_enabled") if "webhooks_enabled" in dictionary.keys() else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(webhooks_enabled)
+        return cls(webhooks_enabled,
+                   dictionary)

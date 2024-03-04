@@ -30,12 +30,16 @@ class AllocationExpirationDate(object):
     ]
 
     def __init__(self,
-                 expires_at=APIHelper.SKIP):
+                 expires_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AllocationExpirationDate class"""
 
         # Initialize members of the class
         if expires_at is not APIHelper.SKIP:
             self.expires_at = APIHelper.apply_datetime_converter(expires_at, APIHelper.RFC3339DateTime) if expires_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,5 +61,10 @@ class AllocationExpirationDate(object):
 
         # Extract variables from the dictionary
         expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(expires_at)
+        return cls(expires_at,
+                   dictionary)

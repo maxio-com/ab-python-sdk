@@ -39,7 +39,8 @@ class RecordPaymentResponse(object):
 
     def __init__(self,
                  paid_invoices=APIHelper.SKIP,
-                 prepayment=APIHelper.SKIP):
+                 prepayment=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the RecordPaymentResponse class"""
 
         # Initialize members of the class
@@ -47,6 +48,9 @@ class RecordPaymentResponse(object):
             self.paid_invoices = paid_invoices 
         if prepayment is not APIHelper.SKIP:
             self.prepayment = prepayment 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -77,6 +81,11 @@ class RecordPaymentResponse(object):
             prepayment = APIHelper.deserialize_union_type(UnionTypeLookUp.get('RecordPaymentResponsePrepayment'), dictionary.get('prepayment'), False) if dictionary.get('prepayment') is not None else None
         else:
             prepayment = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(paid_invoices,
-                   prepayment)
+                   prepayment,
+                   dictionary)

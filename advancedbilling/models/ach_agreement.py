@@ -49,7 +49,8 @@ class ACHAgreement(object):
                  agreement_terms=APIHelper.SKIP,
                  authorizer_first_name=APIHelper.SKIP,
                  authorizer_last_name=APIHelper.SKIP,
-                 ip_address=APIHelper.SKIP):
+                 ip_address=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ACHAgreement class"""
 
         # Initialize members of the class
@@ -61,6 +62,9 @@ class ACHAgreement(object):
             self.authorizer_last_name = authorizer_last_name 
         if ip_address is not APIHelper.SKIP:
             self.ip_address = ip_address 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -85,11 +89,16 @@ class ACHAgreement(object):
         authorizer_first_name = dictionary.get("authorizer_first_name") if dictionary.get("authorizer_first_name") else APIHelper.SKIP
         authorizer_last_name = dictionary.get("authorizer_last_name") if dictionary.get("authorizer_last_name") else APIHelper.SKIP
         ip_address = dictionary.get("ip_address") if dictionary.get("ip_address") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(agreement_terms,
                    authorizer_first_name,
                    authorizer_last_name,
-                   ip_address)
+                   ip_address,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

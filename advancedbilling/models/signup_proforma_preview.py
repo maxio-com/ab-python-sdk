@@ -36,7 +36,8 @@ class SignupProformaPreview(object):
 
     def __init__(self,
                  current_proforma_invoice=APIHelper.SKIP,
-                 next_proforma_invoice=APIHelper.SKIP):
+                 next_proforma_invoice=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SignupProformaPreview class"""
 
         # Initialize members of the class
@@ -44,6 +45,9 @@ class SignupProformaPreview(object):
             self.current_proforma_invoice = current_proforma_invoice 
         if next_proforma_invoice is not APIHelper.SKIP:
             self.next_proforma_invoice = next_proforma_invoice 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -66,6 +70,11 @@ class SignupProformaPreview(object):
         # Extract variables from the dictionary
         current_proforma_invoice = ProformaInvoice.from_dictionary(dictionary.get('current_proforma_invoice')) if 'current_proforma_invoice' in dictionary.keys() else APIHelper.SKIP
         next_proforma_invoice = ProformaInvoice.from_dictionary(dictionary.get('next_proforma_invoice')) if 'next_proforma_invoice' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(current_proforma_invoice,
-                   next_proforma_invoice)
+                   next_proforma_invoice,
+                   dictionary)

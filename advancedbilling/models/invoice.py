@@ -313,7 +313,8 @@ class Invoice(object):
                  custom_fields=APIHelper.SKIP,
                  display_settings=APIHelper.SKIP,
                  public_url=APIHelper.SKIP,
-                 previous_balance_data=APIHelper.SKIP):
+                 previous_balance_data=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Invoice class"""
 
         # Initialize members of the class
@@ -421,6 +422,9 @@ class Invoice(object):
         if previous_balance_data is not APIHelper.SKIP:
             self.previous_balance_data = previous_balance_data 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -523,6 +527,10 @@ class Invoice(object):
         display_settings = InvoiceDisplaySettings.from_dictionary(dictionary.get('display_settings')) if 'display_settings' in dictionary.keys() else APIHelper.SKIP
         public_url = dictionary.get("public_url") if dictionary.get("public_url") else APIHelper.SKIP
         previous_balance_data = InvoicePreviousBalance.from_dictionary(dictionary.get('previous_balance_data')) if 'previous_balance_data' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    uid,
@@ -575,7 +583,8 @@ class Invoice(object):
                    custom_fields,
                    display_settings,
                    public_url,
-                   previous_balance_data)
+                   previous_balance_data,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

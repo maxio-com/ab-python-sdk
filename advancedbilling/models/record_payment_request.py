@@ -26,11 +26,15 @@ class RecordPaymentRequest(object):
     }
 
     def __init__(self,
-                 payment=None):
+                 payment=None,
+                 additional_properties={}):
         """Constructor for the RecordPaymentRequest class"""
 
         # Initialize members of the class
         self.payment = payment 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class RecordPaymentRequest(object):
 
         # Extract variables from the dictionary
         payment = CreatePayment.from_dictionary(dictionary.get('payment')) if dictionary.get('payment') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(payment)
+        return cls(payment,
+                   dictionary)

@@ -72,7 +72,8 @@ class OfferItem(object):
                  price_point_name=APIHelper.SKIP,
                  currency_prices=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
-                 interval_unit=APIHelper.SKIP):
+                 interval_unit=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the OfferItem class"""
 
         # Initialize members of the class
@@ -96,6 +97,9 @@ class OfferItem(object):
             self.interval = interval 
         if interval_unit is not APIHelper.SKIP:
             self.interval_unit = interval_unit 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -130,6 +134,10 @@ class OfferItem(object):
             currency_prices = APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(component_id,
                    price_point_id,
@@ -140,4 +148,5 @@ class OfferItem(object):
                    price_point_name,
                    currency_prices,
                    interval,
-                   interval_unit)
+                   interval_unit,
+                   dictionary)

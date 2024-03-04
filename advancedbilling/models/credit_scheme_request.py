@@ -25,11 +25,15 @@ class CreditSchemeRequest(object):
     }
 
     def __init__(self,
-                 credit_scheme=None):
+                 credit_scheme=None,
+                 additional_properties={}):
         """Constructor for the CreditSchemeRequest class"""
 
         # Initialize members of the class
         self.credit_scheme = credit_scheme 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -51,5 +55,10 @@ class CreditSchemeRequest(object):
 
         # Extract variables from the dictionary
         credit_scheme = dictionary.get("credit_scheme") if dictionary.get("credit_scheme") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(credit_scheme)
+        return cls(credit_scheme,
+                   dictionary)

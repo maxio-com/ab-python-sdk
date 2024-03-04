@@ -62,7 +62,8 @@ class Usage(object):
                  overage_quantity=APIHelper.SKIP,
                  component_id=APIHelper.SKIP,
                  component_handle=APIHelper.SKIP,
-                 subscription_id=APIHelper.SKIP):
+                 subscription_id=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Usage class"""
 
         # Initialize members of the class
@@ -84,6 +85,9 @@ class Usage(object):
             self.component_handle = component_handle 
         if subscription_id is not APIHelper.SKIP:
             self.subscription_id = subscription_id 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -114,6 +118,10 @@ class Usage(object):
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
         component_handle = dictionary.get("component_handle") if dictionary.get("component_handle") else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    memo,
@@ -123,4 +131,5 @@ class Usage(object):
                    overage_quantity,
                    component_id,
                    component_handle,
-                   subscription_id)
+                   subscription_id,
+                   dictionary)

@@ -26,11 +26,15 @@ class CreateEBBComponent(object):
     }
 
     def __init__(self,
-                 event_based_component=None):
+                 event_based_component=None,
+                 additional_properties={}):
         """Constructor for the CreateEBBComponent class"""
 
         # Initialize members of the class
         self.event_based_component = event_based_component 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class CreateEBBComponent(object):
 
         # Extract variables from the dictionary
         event_based_component = EBBComponent.from_dictionary(dictionary.get('event_based_component')) if dictionary.get('event_based_component') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(event_based_component)
+        return cls(event_based_component,
+                   dictionary)

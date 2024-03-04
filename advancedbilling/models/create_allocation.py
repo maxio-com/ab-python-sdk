@@ -101,7 +101,8 @@ class CreateAllocation(object):
                  upgrade_charge=APIHelper.SKIP,
                  initiate_dunning=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
-                 billing_schedule=APIHelper.SKIP):
+                 billing_schedule=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateAllocation class"""
 
         # Initialize members of the class
@@ -126,6 +127,9 @@ class CreateAllocation(object):
             self.price_point_id = price_point_id 
         if billing_schedule is not APIHelper.SKIP:
             self.billing_schedule = billing_schedule 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -161,6 +165,10 @@ class CreateAllocation(object):
         else:
             price_point_id = APIHelper.SKIP
         billing_schedule = BillingSchedule.from_dictionary(dictionary.get('billing_schedule')) if 'billing_schedule' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(quantity,
                    component_id,
@@ -172,4 +180,5 @@ class CreateAllocation(object):
                    upgrade_charge,
                    initiate_dunning,
                    price_point_id,
-                   billing_schedule)
+                   billing_schedule,
+                   dictionary)

@@ -52,7 +52,8 @@ class CreateOffer(object):
                  description=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
                  components=APIHelper.SKIP,
-                 coupons=APIHelper.SKIP):
+                 coupons=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateOffer class"""
 
         # Initialize members of the class
@@ -67,6 +68,9 @@ class CreateOffer(object):
             self.components = components 
         if coupons is not APIHelper.SKIP:
             self.coupons = coupons 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -98,6 +102,10 @@ class CreateOffer(object):
         else:
             components = APIHelper.SKIP
         coupons = dictionary.get("coupons") if dictionary.get("coupons") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(name,
                    handle,
@@ -105,4 +113,5 @@ class CreateOffer(object):
                    description,
                    product_price_point_id,
                    components,
-                   coupons)
+                   coupons,
+                   dictionary)

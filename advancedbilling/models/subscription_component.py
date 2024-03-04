@@ -180,7 +180,8 @@ class SubscriptionComponent(object):
                  subscription=APIHelper.SKIP,
                  display_on_hosted_page=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
-                 interval_unit=APIHelper.SKIP):
+                 interval_unit=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionComponent class"""
 
         # Initialize members of the class
@@ -247,6 +248,9 @@ class SubscriptionComponent(object):
         if interval_unit is not APIHelper.SKIP:
             self.interval_unit = interval_unit 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -304,6 +308,10 @@ class SubscriptionComponent(object):
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    name,
@@ -335,4 +343,5 @@ class SubscriptionComponent(object):
                    subscription,
                    display_on_hosted_page,
                    interval,
-                   interval_unit)
+                   interval_unit,
+                   dictionary)

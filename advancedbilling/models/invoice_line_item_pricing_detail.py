@@ -34,7 +34,8 @@ class InvoiceLineItemPricingDetail(object):
 
     def __init__(self,
                  label=APIHelper.SKIP,
-                 amount=APIHelper.SKIP):
+                 amount=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceLineItemPricingDetail class"""
 
         # Initialize members of the class
@@ -42,6 +43,9 @@ class InvoiceLineItemPricingDetail(object):
             self.label = label 
         if amount is not APIHelper.SKIP:
             self.amount = amount 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -64,9 +68,14 @@ class InvoiceLineItemPricingDetail(object):
         # Extract variables from the dictionary
         label = dictionary.get("label") if dictionary.get("label") else APIHelper.SKIP
         amount = dictionary.get("amount") if dictionary.get("amount") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(label,
-                   amount)
+                   amount,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

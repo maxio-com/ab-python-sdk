@@ -47,6 +47,7 @@ class Event(object):
 
     _nullables = [
         'subscription_id',
+        'customer_id',
         'event_specific_data',
     ]
 
@@ -57,7 +58,8 @@ class Event(object):
                  subscription_id=None,
                  customer_id=None,
                  created_at=None,
-                 event_specific_data=None):
+                 event_specific_data=None,
+                 additional_properties={}):
         """Constructor for the Event class"""
 
         # Initialize members of the class
@@ -68,6 +70,9 @@ class Event(object):
         self.customer_id = customer_id 
         self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         self.event_specific_data = event_specific_data 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -96,6 +101,10 @@ class Event(object):
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else None
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else None
         event_specific_data = APIHelper.deserialize_union_type(UnionTypeLookUp.get('EventEventSpecificData'), dictionary.get('event_specific_data'), False) if dictionary.get('event_specific_data') is not None else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    key,
@@ -103,7 +112,8 @@ class Event(object):
                    subscription_id,
                    customer_id,
                    created_at,
-                   event_specific_data)
+                   event_specific_data,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):
@@ -125,7 +135,7 @@ class Event(object):
                 and APIHelper.is_valid_type(value=dictionary.key, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.message, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.subscription_id, type_callable=lambda value: isinstance(value, int), is_value_nullable=True) \
-                and APIHelper.is_valid_type(value=dictionary.customer_id, type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.customer_id, type_callable=lambda value: isinstance(value, int), is_value_nullable=True) \
                 and APIHelper.is_valid_type(value=dictionary.created_at, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
                 and UnionTypeLookUp.get('EventEventSpecificData').validate(dictionary.event_specific_data).is_valid
 
@@ -136,6 +146,6 @@ class Event(object):
             and APIHelper.is_valid_type(value=dictionary.get('key'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('message'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('subscription_id'), type_callable=lambda value: isinstance(value, int), is_value_nullable=True) \
-            and APIHelper.is_valid_type(value=dictionary.get('customer_id'), type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('customer_id'), type_callable=lambda value: isinstance(value, int), is_value_nullable=True) \
             and APIHelper.is_valid_type(value=dictionary.get('created_at'), type_callable=lambda value: isinstance(value, str)) \
             and UnionTypeLookUp.get('EventEventSpecificData').validate(dictionary.get('event_specific_data')).is_valid

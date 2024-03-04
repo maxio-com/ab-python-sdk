@@ -27,11 +27,15 @@ class SubscriptionPreviewResponse(object):
     }
 
     def __init__(self,
-                 subscription_preview=None):
+                 subscription_preview=None,
+                 additional_properties={}):
         """Constructor for the SubscriptionPreviewResponse class"""
 
         # Initialize members of the class
         self.subscription_preview = subscription_preview 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -53,5 +57,10 @@ class SubscriptionPreviewResponse(object):
 
         # Extract variables from the dictionary
         subscription_preview = SubscriptionPreview.from_dictionary(dictionary.get('subscription_preview')) if dictionary.get('subscription_preview') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(subscription_preview)
+        return cls(subscription_preview,
+                   dictionary)

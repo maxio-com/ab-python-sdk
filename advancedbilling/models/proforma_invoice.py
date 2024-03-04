@@ -35,14 +35,29 @@ class ProformaInvoice(object):
         sequence_number (int): TODO: type description here.
         created_at (datetime): TODO: type description here.
         delivery_date (date): TODO: type description here.
-        status (str): TODO: type description here.
-        collection_method (str): TODO: type description here.
+        status (ProformaInvoiceStatus): TODO: type description here.
+        collection_method (CollectionMethod): The type of payment collection
+            to be used in the subscription. For legacy Statements Architecture
+            valid options are - `invoice`, `automatic`. For current
+            Relationship Invoicing Architecture valid options are -
+            `remittance`, `automatic`, `prepaid`.
         payment_instructions (str): TODO: type description here.
         currency (str): TODO: type description here.
-        consolidation_level (str): TODO: type description here.
+        consolidation_level (InvoiceConsolidationLevel): Consolidation level
+            of the invoice, which is applicable to invoice consolidation.  It
+            will hold one of the following values:  * "none": A normal invoice
+            with no consolidation. * "child": An invoice segment which has
+            been combined into a consolidated invoice. * "parent": A
+            consolidated invoice, whose contents are composed of invoice
+            segments.  "Parent" invoices do not have lines of their own, but
+            they have subtotals and totals which aggregate the member invoice
+            segments.  See also the [invoice consolidation
+            documentation](https://chargify.zendesk.com/hc/en-us/articles/44077
+            46391835).
         product_name (str): TODO: type description here.
         product_family_name (str): TODO: type description here.
-        role (str): TODO: type description here.
+        role (ProformaInvoiceRole): 'proforma' value is deprecated in favor of
+            proforma_adhoc and proforma_automatic
         seller (InvoiceSeller): Information about the seller (merchant) listed
             on the masthead of the invoice.
         customer (InvoiceCustomer): Information about the customer who is
@@ -150,6 +165,8 @@ class ProformaInvoice(object):
     ]
 
     _nullables = [
+        'customer_id',
+        'subscription_id',
         'number',
         'sequence_number',
         'public_url',
@@ -165,7 +182,7 @@ class ProformaInvoice(object):
                  created_at=APIHelper.SKIP,
                  delivery_date=APIHelper.SKIP,
                  status=APIHelper.SKIP,
-                 collection_method=APIHelper.SKIP,
+                 collection_method='automatic',
                  payment_instructions=APIHelper.SKIP,
                  currency=APIHelper.SKIP,
                  consolidation_level=APIHelper.SKIP,
@@ -191,7 +208,8 @@ class ProformaInvoice(object):
                  credits=APIHelper.SKIP,
                  payments=APIHelper.SKIP,
                  custom_fields=APIHelper.SKIP,
-                 public_url=APIHelper.SKIP):
+                 public_url=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ProformaInvoice class"""
 
         # Initialize members of the class
@@ -213,8 +231,7 @@ class ProformaInvoice(object):
             self.delivery_date = delivery_date 
         if status is not APIHelper.SKIP:
             self.status = status 
-        if collection_method is not APIHelper.SKIP:
-            self.collection_method = collection_method 
+        self.collection_method = collection_method 
         if payment_instructions is not APIHelper.SKIP:
             self.payment_instructions = payment_instructions 
         if currency is not APIHelper.SKIP:
@@ -268,6 +285,9 @@ class ProformaInvoice(object):
         if public_url is not APIHelper.SKIP:
             self.public_url = public_url 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -289,14 +309,14 @@ class ProformaInvoice(object):
         # Extract variables from the dictionary
         uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
         site_id = dictionary.get("site_id") if dictionary.get("site_id") else APIHelper.SKIP
-        customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
-        subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
+        customer_id = dictionary.get("customer_id") if "customer_id" in dictionary.keys() else APIHelper.SKIP
+        subscription_id = dictionary.get("subscription_id") if "subscription_id" in dictionary.keys() else APIHelper.SKIP
         number = dictionary.get("number") if "number" in dictionary.keys() else APIHelper.SKIP
         sequence_number = dictionary.get("sequence_number") if "sequence_number" in dictionary.keys() else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         delivery_date = dateutil.parser.parse(dictionary.get('delivery_date')).date() if dictionary.get('delivery_date') else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
-        collection_method = dictionary.get("collection_method") if dictionary.get("collection_method") else APIHelper.SKIP
+        collection_method = dictionary.get("collection_method") if dictionary.get("collection_method") else 'automatic'
         payment_instructions = dictionary.get("payment_instructions") if dictionary.get("payment_instructions") else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP
@@ -347,6 +367,10 @@ class ProformaInvoice(object):
         else:
             custom_fields = APIHelper.SKIP
         public_url = dictionary.get("public_url") if "public_url" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    site_id,
@@ -383,4 +407,5 @@ class ProformaInvoice(object):
                    credits,
                    payments,
                    custom_fields,
-                   public_url)
+                   public_url,
+                   dictionary)

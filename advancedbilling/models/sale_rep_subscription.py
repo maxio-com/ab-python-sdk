@@ -70,7 +70,8 @@ class SaleRepSubscription(object):
                  usage=APIHelper.SKIP,
                  recurring=APIHelper.SKIP,
                  last_payment=APIHelper.SKIP,
-                 churn_date=APIHelper.SKIP):
+                 churn_date=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SaleRepSubscription class"""
 
         # Initialize members of the class
@@ -94,6 +95,9 @@ class SaleRepSubscription(object):
             self.last_payment = last_payment 
         if churn_date is not APIHelper.SKIP:
             self.churn_date = churn_date 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -124,6 +128,10 @@ class SaleRepSubscription(object):
         recurring = dictionary.get("recurring") if dictionary.get("recurring") else APIHelper.SKIP
         last_payment = dictionary.get("last_payment") if dictionary.get("last_payment") else APIHelper.SKIP
         churn_date = dictionary.get("churn_date") if "churn_date" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    site_name,
@@ -134,4 +142,5 @@ class SaleRepSubscription(object):
                    usage,
                    recurring,
                    last_payment,
-                   churn_date)
+                   churn_date,
+                   dictionary)

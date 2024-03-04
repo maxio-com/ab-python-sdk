@@ -95,7 +95,8 @@ class Webhook(object):
                  successful=APIHelper.SKIP,
                  body=APIHelper.SKIP,
                  signature=APIHelper.SKIP,
-                 signature_hmac_sha_256=APIHelper.SKIP):
+                 signature_hmac_sha_256=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Webhook class"""
 
         # Initialize members of the class
@@ -123,6 +124,9 @@ class Webhook(object):
             self.signature = signature 
         if signature_hmac_sha_256 is not APIHelper.SKIP:
             self.signature_hmac_sha_256 = signature_hmac_sha_256 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -158,6 +162,10 @@ class Webhook(object):
         body = dictionary.get("body") if dictionary.get("body") else APIHelper.SKIP
         signature = dictionary.get("signature") if dictionary.get("signature") else APIHelper.SKIP
         signature_hmac_sha_256 = dictionary.get("signature_hmac_sha_256") if dictionary.get("signature_hmac_sha_256") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(event,
                    id,
@@ -170,4 +178,5 @@ class Webhook(object):
                    successful,
                    body,
                    signature,
-                   signature_hmac_sha_256)
+                   signature_hmac_sha_256,
+                   dictionary)

@@ -17,14 +17,14 @@
 | `sequence_number` | `int` | Optional | - |
 | `created_at` | `datetime` | Optional | - |
 | `delivery_date` | `date` | Optional | - |
-| `status` | `str` | Optional | - |
-| `collection_method` | `str` | Optional | - |
+| `status` | [`ProformaInvoiceStatus`](../../doc/models/proforma-invoice-status.md) | Optional | - |
+| `collection_method` | [`CollectionMethod`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`.<br>**Default**: `'automatic'` |
 | `payment_instructions` | `str` | Optional | - |
 | `currency` | `str` | Optional | - |
-| `consolidation_level` | `str` | Optional | - |
+| `consolidation_level` | [`InvoiceConsolidationLevel`](../../doc/models/invoice-consolidation-level.md) | Optional | Consolidation level of the invoice, which is applicable to invoice consolidation.  It will hold one of the following values:<br><br>* "none": A normal invoice with no consolidation.<br>* "child": An invoice segment which has been combined into a consolidated invoice.<br>* "parent": A consolidated invoice, whose contents are composed of invoice segments.<br><br>"Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.<br><br>See also the [invoice consolidation documentation](https://chargify.zendesk.com/hc/en-us/articles/4407746391835). |
 | `product_name` | `str` | Optional | - |
 | `product_family_name` | `str` | Optional | - |
-| `role` | `str` | Optional | - |
+| `role` | [`ProformaInvoiceRole`](../../doc/models/proforma-invoice-role.md) | Optional | 'proforma' value is deprecated in favor of proforma_adhoc and proforma_automatic |
 | `seller` | [`InvoiceSeller`](../../doc/models/invoice-seller.md) | Optional | Information about the seller (merchant) listed on the masthead of the invoice. |
 | `customer` | [`InvoiceCustomer`](../../doc/models/invoice-customer.md) | Optional | Information about the customer who is owner or recipient the invoiced subscription. |
 | `memo` | `str` | Optional | - |
@@ -50,6 +50,7 @@
 
 ```json
 {
+  "collection_method": "automatic",
   "uid": "uid6",
   "site_id": 196,
   "customer_id": 52,

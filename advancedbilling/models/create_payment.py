@@ -35,7 +35,8 @@ class CreatePayment(object):
                  amount=None,
                  memo=None,
                  payment_details=None,
-                 payment_method=None):
+                 payment_method=None,
+                 additional_properties={}):
         """Constructor for the CreatePayment class"""
 
         # Initialize members of the class
@@ -43,6 +44,9 @@ class CreatePayment(object):
         self.memo = memo 
         self.payment_details = payment_details 
         self.payment_method = payment_method 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -67,8 +71,13 @@ class CreatePayment(object):
         memo = dictionary.get("memo") if dictionary.get("memo") else None
         payment_details = dictionary.get("payment_details") if dictionary.get("payment_details") else None
         payment_method = dictionary.get("payment_method") if dictionary.get("payment_method") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(amount,
                    memo,
                    payment_details,
-                   payment_method)
+                   payment_method,
+                   dictionary)

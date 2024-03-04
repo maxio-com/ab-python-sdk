@@ -102,7 +102,8 @@ class GetOneTimeTokenPaymentProfile(object):
                  customer_id=APIHelper.SKIP,
                  billing_address_2=APIHelper.SKIP,
                  customer_vault_token=APIHelper.SKIP,
-                 gateway_handle=APIHelper.SKIP):
+                 gateway_handle=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the GetOneTimeTokenPaymentProfile class"""
 
         # Initialize members of the class
@@ -132,6 +133,9 @@ class GetOneTimeTokenPaymentProfile(object):
             self.customer_vault_token = customer_vault_token 
         if gateway_handle is not APIHelper.SKIP:
             self.gateway_handle = gateway_handle 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -173,6 +177,10 @@ class GetOneTimeTokenPaymentProfile(object):
         billing_address_2 = dictionary.get("billing_address_2") if dictionary.get("billing_address_2") else APIHelper.SKIP
         customer_vault_token = dictionary.get("customer_vault_token") if "customer_vault_token" in dictionary.keys() else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -194,4 +202,5 @@ class GetOneTimeTokenPaymentProfile(object):
                    customer_id,
                    billing_address_2,
                    customer_vault_token,
-                   gateway_handle)
+                   gateway_handle,
+                   dictionary)

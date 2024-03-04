@@ -55,7 +55,8 @@ class InvoicePayer(object):
                  last_name=APIHelper.SKIP,
                  organization=APIHelper.SKIP,
                  email=APIHelper.SKIP,
-                 vat_number=APIHelper.SKIP):
+                 vat_number=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoicePayer class"""
 
         # Initialize members of the class
@@ -71,6 +72,9 @@ class InvoicePayer(object):
             self.email = email 
         if vat_number is not APIHelper.SKIP:
             self.vat_number = vat_number 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -97,13 +101,18 @@ class InvoicePayer(object):
         organization = dictionary.get("organization") if "organization" in dictionary.keys() else APIHelper.SKIP
         email = dictionary.get("email") if dictionary.get("email") else APIHelper.SKIP
         vat_number = dictionary.get("vat_number") if "vat_number" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(chargify_id,
                    first_name,
                    last_name,
                    organization,
                    email,
-                   vat_number)
+                   vat_number,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

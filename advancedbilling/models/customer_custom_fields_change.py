@@ -30,12 +30,16 @@ class CustomerCustomFieldsChange(object):
 
     def __init__(self,
                  before=None,
-                 after=None):
+                 after=None,
+                 additional_properties={}):
         """Constructor for the CustomerCustomFieldsChange class"""
 
         # Initialize members of the class
         self.before = before 
         self.after = after 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -62,9 +66,14 @@ class CustomerCustomFieldsChange(object):
         after = None
         if dictionary.get('after') is not None:
             after = [InvoiceCustomField.from_dictionary(x) for x in dictionary.get('after')]
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(before,
-                   after)
+                   after,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

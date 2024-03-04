@@ -12,7 +12,7 @@
 | `uid` | `str` | Optional | - |
 | `title` | `str` | Optional | - |
 | `description` | `str` | Optional | - |
-| `source_type` | `str` | Optional | - |
+| `source_type` | [`ProformaInvoiceTaxSourceType`](../../doc/models/proforma-invoice-tax-source-type.md) | Optional | - |
 | `source_id` | `int` | Optional | - |
 | `percentage` | `str` | Optional | - |
 | `taxable_amount` | `str` | Optional | - |
@@ -28,7 +28,7 @@
   "uid": "uid8",
   "title": "title6",
   "description": "description2",
-  "source_type": "source_type8",
+  "source_type": "Tax",
   "source_id": 164
 }
 ```

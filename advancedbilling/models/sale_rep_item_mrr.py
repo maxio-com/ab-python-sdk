@@ -38,7 +38,8 @@ class SaleRepItemMrr(object):
     def __init__(self,
                  mrr=APIHelper.SKIP,
                  usage=APIHelper.SKIP,
-                 recurring=APIHelper.SKIP):
+                 recurring=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SaleRepItemMrr class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class SaleRepItemMrr(object):
             self.usage = usage 
         if recurring is not APIHelper.SKIP:
             self.recurring = recurring 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,7 +75,12 @@ class SaleRepItemMrr(object):
         mrr = dictionary.get("mrr") if dictionary.get("mrr") else APIHelper.SKIP
         usage = dictionary.get("usage") if dictionary.get("usage") else APIHelper.SKIP
         recurring = dictionary.get("recurring") if dictionary.get("recurring") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(mrr,
                    usage,
-                   recurring)
+                   recurring,
+                   dictionary)

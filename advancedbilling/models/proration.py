@@ -31,12 +31,16 @@ class Proration(object):
     ]
 
     def __init__(self,
-                 preserve_period=APIHelper.SKIP):
+                 preserve_period=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Proration class"""
 
         # Initialize members of the class
         if preserve_period is not APIHelper.SKIP:
             self.preserve_period = preserve_period 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class Proration(object):
 
         # Extract variables from the dictionary
         preserve_period = dictionary.get("preserve_period") if "preserve_period" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(preserve_period)
+        return cls(preserve_period,
+                   dictionary)

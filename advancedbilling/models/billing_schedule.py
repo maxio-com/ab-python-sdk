@@ -38,12 +38,16 @@ class BillingSchedule(object):
     ]
 
     def __init__(self,
-                 initial_billing_at=APIHelper.SKIP):
+                 initial_billing_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the BillingSchedule class"""
 
         # Initialize members of the class
         if initial_billing_at is not APIHelper.SKIP:
             self.initial_billing_at = initial_billing_at 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -65,8 +69,13 @@ class BillingSchedule(object):
 
         # Extract variables from the dictionary
         initial_billing_at = dateutil.parser.parse(dictionary.get('initial_billing_at')).date() if dictionary.get('initial_billing_at') else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(initial_billing_at)
+        return cls(initial_billing_at,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

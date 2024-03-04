@@ -65,7 +65,8 @@ class AllocationPreviewLineItem(object):
                  taxable_amount_in_cents=APIHelper.SKIP,
                  component_id=APIHelper.SKIP,
                  component_handle=APIHelper.SKIP,
-                 direction=APIHelper.SKIP):
+                 direction=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AllocationPreviewLineItem class"""
 
         # Initialize members of the class
@@ -87,6 +88,9 @@ class AllocationPreviewLineItem(object):
             self.component_handle = component_handle 
         if direction is not APIHelper.SKIP:
             self.direction = direction 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -116,6 +120,10 @@ class AllocationPreviewLineItem(object):
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
         component_handle = dictionary.get("component_handle") if dictionary.get("component_handle") else APIHelper.SKIP
         direction = dictionary.get("direction") if dictionary.get("direction") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(transaction_type,
                    kind,
@@ -125,4 +133,5 @@ class AllocationPreviewLineItem(object):
                    taxable_amount_in_cents,
                    component_id,
                    component_handle,
-                   direction)
+                   direction,
+                   dictionary)

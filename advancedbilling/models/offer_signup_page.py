@@ -50,7 +50,8 @@ class OfferSignupPage(object):
                  enabled=APIHelper.SKIP,
                  return_url=APIHelper.SKIP,
                  return_params=APIHelper.SKIP,
-                 url=APIHelper.SKIP):
+                 url=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the OfferSignupPage class"""
 
         # Initialize members of the class
@@ -66,6 +67,9 @@ class OfferSignupPage(object):
             self.return_params = return_params 
         if url is not APIHelper.SKIP:
             self.url = url 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -92,10 +96,15 @@ class OfferSignupPage(object):
         return_url = dictionary.get("return_url") if dictionary.get("return_url") else APIHelper.SKIP
         return_params = dictionary.get("return_params") if dictionary.get("return_params") else APIHelper.SKIP
         url = dictionary.get("url") if dictionary.get("url") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    nickname,
                    enabled,
                    return_url,
                    return_params,
-                   url)
+                   url,
+                   dictionary)

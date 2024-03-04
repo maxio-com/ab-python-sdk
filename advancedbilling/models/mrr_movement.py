@@ -42,7 +42,8 @@ class MRRMovement(object):
                  amount=APIHelper.SKIP,
                  category=APIHelper.SKIP,
                  subscriber_delta=APIHelper.SKIP,
-                 lead_delta=APIHelper.SKIP):
+                 lead_delta=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the MRRMovement class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class MRRMovement(object):
             self.subscriber_delta = subscriber_delta 
         if lead_delta is not APIHelper.SKIP:
             self.lead_delta = lead_delta 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,8 +82,13 @@ class MRRMovement(object):
         category = dictionary.get("category") if dictionary.get("category") else APIHelper.SKIP
         subscriber_delta = dictionary.get("subscriber_delta") if dictionary.get("subscriber_delta") else APIHelper.SKIP
         lead_delta = dictionary.get("lead_delta") if dictionary.get("lead_delta") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(amount,
                    category,
                    subscriber_delta,
-                   lead_delta)
+                   lead_delta,
+                   dictionary)

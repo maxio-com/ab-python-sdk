@@ -68,7 +68,8 @@ class SubscriptionGroupSignup(object):
                  payment_collection_method='automatic',
                  payer_attributes=APIHelper.SKIP,
                  credit_card_attributes=APIHelper.SKIP,
-                 bank_account_attributes=APIHelper.SKIP):
+                 bank_account_attributes=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupSignup class"""
 
         # Initialize members of the class
@@ -86,6 +87,9 @@ class SubscriptionGroupSignup(object):
         if bank_account_attributes is not APIHelper.SKIP:
             self.bank_account_attributes = bank_account_attributes 
         self.subscriptions = subscriptions 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -116,6 +120,10 @@ class SubscriptionGroupSignup(object):
         payer_attributes = PayerAttributes.from_dictionary(dictionary.get('payer_attributes')) if 'payer_attributes' in dictionary.keys() else APIHelper.SKIP
         credit_card_attributes = SubscriptionGroupCreditCard.from_dictionary(dictionary.get('credit_card_attributes')) if 'credit_card_attributes' in dictionary.keys() else APIHelper.SKIP
         bank_account_attributes = SubscriptionGroupBankAccount.from_dictionary(dictionary.get('bank_account_attributes')) if 'bank_account_attributes' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(subscriptions,
                    payment_profile_id,
@@ -124,4 +132,5 @@ class SubscriptionGroupSignup(object):
                    payment_collection_method,
                    payer_attributes,
                    credit_card_attributes,
-                   bank_account_attributes)
+                   bank_account_attributes,
+                   dictionary)

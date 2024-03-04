@@ -82,7 +82,8 @@ class Segment(object):
                  segment_property_4_value=APIHelper.SKIP,
                  created_at=APIHelper.SKIP,
                  updated_at=APIHelper.SKIP,
-                 prices=APIHelper.SKIP):
+                 prices=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Segment class"""
 
         # Initialize members of the class
@@ -110,6 +111,9 @@ class Segment(object):
             self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -147,6 +151,10 @@ class Segment(object):
             prices = [SegmentPrice.from_dictionary(x) for x in dictionary.get('prices')]
         else:
             prices = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    component_id,
@@ -159,4 +167,5 @@ class Segment(object):
                    segment_property_4_value,
                    created_at,
                    updated_at,
-                   prices)
+                   prices,
+                   dictionary)

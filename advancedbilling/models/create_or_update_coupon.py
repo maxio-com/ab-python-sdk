@@ -44,7 +44,8 @@ class CreateOrUpdateCoupon(object):
     def __init__(self,
                  coupon=APIHelper.SKIP,
                  restricted_products=APIHelper.SKIP,
-                 restricted_components=APIHelper.SKIP):
+                 restricted_components=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateOrUpdateCoupon class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class CreateOrUpdateCoupon(object):
             self.restricted_products = restricted_products 
         if restricted_components is not APIHelper.SKIP:
             self.restricted_components = restricted_components 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,7 +82,12 @@ class CreateOrUpdateCoupon(object):
         coupon = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateOrUpdateCouponCoupon'), dictionary.get('coupon'), False) if dictionary.get('coupon') is not None else APIHelper.SKIP
         restricted_products = dictionary.get("restricted_products") if "restricted_products" in dictionary.keys() else APIHelper.SKIP
         restricted_components = dictionary.get("restricted_components") if "restricted_components" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(coupon,
                    restricted_products,
-                   restricted_components)
+                   restricted_components,
+                   dictionary)

@@ -61,7 +61,8 @@ class OverrideSubscription(object):
                  canceled_at=APIHelper.SKIP,
                  cancellation_message=APIHelper.SKIP,
                  expires_at=APIHelper.SKIP,
-                 current_period_starts_at=APIHelper.SKIP):
+                 current_period_starts_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the OverrideSubscription class"""
 
         # Initialize members of the class
@@ -75,6 +76,9 @@ class OverrideSubscription(object):
             self.expires_at = APIHelper.apply_datetime_converter(expires_at, APIHelper.RFC3339DateTime) if expires_at else None 
         if current_period_starts_at is not APIHelper.SKIP:
             self.current_period_starts_at = APIHelper.apply_datetime_converter(current_period_starts_at, APIHelper.RFC3339DateTime) if current_period_starts_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -100,9 +104,14 @@ class OverrideSubscription(object):
         cancellation_message = dictionary.get("cancellation_message") if dictionary.get("cancellation_message") else APIHelper.SKIP
         expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else APIHelper.SKIP
         current_period_starts_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("current_period_starts_at")).datetime if dictionary.get("current_period_starts_at") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(activated_at,
                    canceled_at,
                    cancellation_message,
                    expires_at,
-                   current_period_starts_at)
+                   current_period_starts_at,
+                   dictionary)

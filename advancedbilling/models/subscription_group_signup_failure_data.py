@@ -65,7 +65,8 @@ class SubscriptionGroupSignupFailureData(object):
                  payer_attributes=APIHelper.SKIP,
                  credit_card_attributes=APIHelper.SKIP,
                  bank_account_attributes=APIHelper.SKIP,
-                 subscriptions=APIHelper.SKIP):
+                 subscriptions=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupSignupFailureData class"""
 
         # Initialize members of the class
@@ -85,6 +86,9 @@ class SubscriptionGroupSignupFailureData(object):
             self.bank_account_attributes = bank_account_attributes 
         if subscriptions is not APIHelper.SKIP:
             self.subscriptions = subscriptions 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -117,6 +121,10 @@ class SubscriptionGroupSignupFailureData(object):
             subscriptions = [SubscriptionGroupSignupItem.from_dictionary(x) for x in dictionary.get('subscriptions')]
         else:
             subscriptions = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(payer_id,
                    payer_reference,
@@ -125,7 +133,8 @@ class SubscriptionGroupSignupFailureData(object):
                    payer_attributes,
                    credit_card_attributes,
                    bank_account_attributes,
-                   subscriptions)
+                   subscriptions,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

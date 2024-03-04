@@ -55,7 +55,8 @@ class ListMRRResponseResult(object):
                  total_entries=APIHelper.SKIP,
                  currency=APIHelper.SKIP,
                  currency_symbol=APIHelper.SKIP,
-                 movements=APIHelper.SKIP):
+                 movements=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ListMRRResponseResult class"""
 
         # Initialize members of the class
@@ -73,6 +74,9 @@ class ListMRRResponseResult(object):
             self.currency_symbol = currency_symbol 
         if movements is not APIHelper.SKIP:
             self.movements = movements 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -104,6 +108,10 @@ class ListMRRResponseResult(object):
             movements = [Movement.from_dictionary(x) for x in dictionary.get('movements')]
         else:
             movements = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(page,
                    per_page,
@@ -111,4 +119,5 @@ class ListMRRResponseResult(object):
                    total_entries,
                    currency,
                    currency_symbol,
-                   movements)
+                   movements,
+                   dictionary)

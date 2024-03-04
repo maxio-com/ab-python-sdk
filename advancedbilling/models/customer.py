@@ -174,7 +174,8 @@ class Customer(object):
                  vat_number=APIHelper.SKIP,
                  parent_id=APIHelper.SKIP,
                  locale=APIHelper.SKIP,
-                 default_subscription_group_uid=APIHelper.SKIP):
+                 default_subscription_group_uid=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Customer class"""
 
         # Initialize members of the class
@@ -233,6 +234,9 @@ class Customer(object):
         if default_subscription_group_uid is not APIHelper.SKIP:
             self.default_subscription_group_uid = default_subscription_group_uid 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -288,6 +292,10 @@ class Customer(object):
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
         locale = dictionary.get("locale") if "locale" in dictionary.keys() else APIHelper.SKIP
         default_subscription_group_uid = dictionary.get("default_subscription_group_uid") if "default_subscription_group_uid" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -315,7 +323,8 @@ class Customer(object):
                    vat_number,
                    parent_id,
                    locale,
-                   default_subscription_group_uid)
+                   default_subscription_group_uid,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

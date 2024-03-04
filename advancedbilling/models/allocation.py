@@ -67,6 +67,9 @@ class Allocation(object):
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
         payment (PaymentForAllocation | None): TODO: type description here.
+        expires_at (datetime): TODO: type description here.
+        used_quantity (long|int): TODO: type description here.
+        charge_id (long|int): TODO: type description here.
 
     """
 
@@ -93,7 +96,10 @@ class Allocation(object):
         "initiate_dunning": 'initiate_dunning',
         "upgrade_charge": 'upgrade_charge',
         "downgrade_credit": 'downgrade_credit',
-        "payment": 'payment'
+        "payment": 'payment',
+        "expires_at": 'expires_at',
+        "used_quantity": 'used_quantity',
+        "charge_id": 'charge_id'
     }
 
     _optionals = [
@@ -119,6 +125,9 @@ class Allocation(object):
         'upgrade_charge',
         'downgrade_credit',
         'payment',
+        'expires_at',
+        'used_quantity',
+        'charge_id',
     ]
 
     _nullables = [
@@ -151,7 +160,11 @@ class Allocation(object):
                  initiate_dunning=APIHelper.SKIP,
                  upgrade_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
-                 payment=APIHelper.SKIP):
+                 payment=APIHelper.SKIP,
+                 expires_at=APIHelper.SKIP,
+                 used_quantity=APIHelper.SKIP,
+                 charge_id=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Allocation class"""
 
         # Initialize members of the class
@@ -199,6 +212,15 @@ class Allocation(object):
             self.downgrade_credit = downgrade_credit 
         if payment is not APIHelper.SKIP:
             self.payment = payment 
+        if expires_at is not APIHelper.SKIP:
+            self.expires_at = APIHelper.apply_datetime_converter(expires_at, APIHelper.RFC3339DateTime) if expires_at else None 
+        if used_quantity is not APIHelper.SKIP:
+            self.used_quantity = used_quantity 
+        if charge_id is not APIHelper.SKIP:
+            self.charge_id = charge_id 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -245,6 +267,13 @@ class Allocation(object):
             payment = APIHelper.deserialize_union_type(UnionTypeLookUp.get('AllocationPayment'), dictionary.get('payment'), False) if dictionary.get('payment') is not None else None
         else:
             payment = APIHelper.SKIP
+        expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else APIHelper.SKIP
+        used_quantity = dictionary.get("used_quantity") if dictionary.get("used_quantity") else APIHelper.SKIP
+        charge_id = dictionary.get("charge_id") if dictionary.get("charge_id") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(allocation_id,
                    component_id,
@@ -267,4 +296,8 @@ class Allocation(object):
                    initiate_dunning,
                    upgrade_charge,
                    downgrade_credit,
-                   payment)
+                   payment,
+                   expires_at,
+                   used_quantity,
+                   charge_id,
+                   dictionary)

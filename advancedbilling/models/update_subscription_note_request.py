@@ -26,11 +26,15 @@ class UpdateSubscriptionNoteRequest(object):
     }
 
     def __init__(self,
-                 note=None):
+                 note=None,
+                 additional_properties={}):
         """Constructor for the UpdateSubscriptionNoteRequest class"""
 
         # Initialize members of the class
         self.note = note 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class UpdateSubscriptionNoteRequest(object):
 
         # Extract variables from the dictionary
         note = UpdateSubscriptionNote.from_dictionary(dictionary.get('note')) if dictionary.get('note') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(note)
+        return cls(note,
+                   dictionary)

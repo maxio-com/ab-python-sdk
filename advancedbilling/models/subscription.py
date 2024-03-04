@@ -460,7 +460,8 @@ class Subscription(object):
                  credit_balance_in_cents=APIHelper.SKIP,
                  prepayment_balance_in_cents=APIHelper.SKIP,
                  prepaid_configuration=APIHelper.SKIP,
-                 self_service_page_token=APIHelper.SKIP):
+                 self_service_page_token=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Subscription class"""
 
         # Initialize members of the class
@@ -588,6 +589,9 @@ class Subscription(object):
         if self_service_page_token is not APIHelper.SKIP:
             self.self_service_page_token = self_service_page_token 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -701,6 +705,10 @@ class Subscription(object):
         prepayment_balance_in_cents = dictionary.get("prepayment_balance_in_cents") if dictionary.get("prepayment_balance_in_cents") else APIHelper.SKIP
         prepaid_configuration = PrepaidConfiguration.from_dictionary(dictionary.get('prepaid_configuration')) if 'prepaid_configuration' in dictionary.keys() else APIHelper.SKIP
         self_service_page_token = dictionary.get("self_service_page_token") if dictionary.get("self_service_page_token") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    state,
@@ -763,4 +771,5 @@ class Subscription(object):
                    credit_balance_in_cents,
                    prepayment_balance_in_cents,
                    prepaid_configuration,
-                   self_service_page_token)
+                   self_service_page_token,
+                   dictionary)

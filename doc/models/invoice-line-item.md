@@ -30,6 +30,7 @@
 | `component_cost_data` | [Invoice Line Item Component Cost Data](../../doc/models/invoice-line-item-component-cost-data.md) \| None | Optional | This is a container for one-of cases. |
 | `product_price_point_id` | `int` | Optional | The price point ID of the line item's product |
 | `custom_item` | `bool` | Optional | - |
+| `kind` | `str` | Optional | - |
 
 ## Example (as JSON)
 

@@ -118,6 +118,7 @@ class BankAccountPaymentProfile(object):
         'billing_country',
         'customer_vault_token',
         'billing_address_2',
+        'site_gateway_setting_id',
         'gateway_handle',
     ]
 
@@ -143,7 +144,8 @@ class BankAccountPaymentProfile(object):
                  payment_type=APIHelper.SKIP,
                  verified=False,
                  site_gateway_setting_id=APIHelper.SKIP,
-                 gateway_handle=APIHelper.SKIP):
+                 gateway_handle=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the BankAccountPaymentProfile class"""
 
         # Initialize members of the class
@@ -189,6 +191,9 @@ class BankAccountPaymentProfile(object):
         if gateway_handle is not APIHelper.SKIP:
             self.gateway_handle = gateway_handle 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -228,8 +233,12 @@ class BankAccountPaymentProfile(object):
         bank_account_holder_type = dictionary.get("bank_account_holder_type") if dictionary.get("bank_account_holder_type") else APIHelper.SKIP
         payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         verified = dictionary.get("verified") if dictionary.get("verified") else False
-        site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if dictionary.get("site_gateway_setting_id") else APIHelper.SKIP
+        site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if "site_gateway_setting_id" in dictionary.keys() else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(masked_bank_routing_number,
                    masked_bank_account_number,
@@ -252,7 +261,8 @@ class BankAccountPaymentProfile(object):
                    payment_type,
                    verified,
                    site_gateway_setting_id,
-                   gateway_handle)
+                   gateway_handle,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

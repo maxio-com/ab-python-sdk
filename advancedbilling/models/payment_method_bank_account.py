@@ -33,13 +33,17 @@ class PaymentMethodBankAccount(object):
     def __init__(self,
                  masked_account_number=None,
                  masked_routing_number=None,
-                 mtype=None):
+                 mtype=None,
+                 additional_properties={}):
         """Constructor for the PaymentMethodBankAccount class"""
 
         # Initialize members of the class
         self.masked_account_number = masked_account_number 
         self.masked_routing_number = masked_routing_number 
         self.mtype = mtype 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -63,10 +67,15 @@ class PaymentMethodBankAccount(object):
         masked_account_number = dictionary.get("masked_account_number") if dictionary.get("masked_account_number") else None
         masked_routing_number = dictionary.get("masked_routing_number") if dictionary.get("masked_routing_number") else None
         mtype = dictionary.get("type") if dictionary.get("type") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(masked_account_number,
                    masked_routing_number,
-                   mtype)
+                   mtype,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -36,7 +36,8 @@ class CalendarBilling(object):
 
     def __init__(self,
                  snap_day=APIHelper.SKIP,
-                 calendar_billing_first_charge=APIHelper.SKIP):
+                 calendar_billing_first_charge=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CalendarBilling class"""
 
         # Initialize members of the class
@@ -44,6 +45,9 @@ class CalendarBilling(object):
             self.snap_day = snap_day 
         if calendar_billing_first_charge is not APIHelper.SKIP:
             self.calendar_billing_first_charge = calendar_billing_first_charge 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -67,9 +71,14 @@ class CalendarBilling(object):
         # Extract variables from the dictionary
         snap_day = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CalendarBillingSnapDay'), dictionary.get('snap_day'), False) if dictionary.get('snap_day') is not None else APIHelper.SKIP
         calendar_billing_first_charge = dictionary.get("calendar_billing_first_charge") if dictionary.get("calendar_billing_first_charge") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(snap_day,
-                   calendar_billing_first_charge)
+                   calendar_billing_first_charge,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

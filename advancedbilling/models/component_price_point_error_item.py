@@ -38,7 +38,8 @@ class ComponentPricePointErrorItem(object):
     def __init__(self,
                  component_id=APIHelper.SKIP,
                  message=APIHelper.SKIP,
-                 price_point=APIHelper.SKIP):
+                 price_point=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ComponentPricePointErrorItem class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class ComponentPricePointErrorItem(object):
             self.message = message 
         if price_point is not APIHelper.SKIP:
             self.price_point = price_point 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,7 +75,12 @@ class ComponentPricePointErrorItem(object):
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
         message = dictionary.get("message") if dictionary.get("message") else APIHelper.SKIP
         price_point = dictionary.get("price_point") if dictionary.get("price_point") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(component_id,
                    message,
-                   price_point)
+                   price_point,
+                   dictionary)

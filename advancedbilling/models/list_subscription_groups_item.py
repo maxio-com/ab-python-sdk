@@ -68,7 +68,8 @@ class ListSubscriptionGroupsItem(object):
                  next_assessment_at=APIHelper.SKIP,
                  state=APIHelper.SKIP,
                  cancel_at_end_of_period=APIHelper.SKIP,
-                 account_balances=APIHelper.SKIP):
+                 account_balances=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ListSubscriptionGroupsItem class"""
 
         # Initialize members of the class
@@ -92,6 +93,9 @@ class ListSubscriptionGroupsItem(object):
             self.cancel_at_end_of_period = cancel_at_end_of_period 
         if account_balances is not APIHelper.SKIP:
             self.account_balances = account_balances 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -122,6 +126,10 @@ class ListSubscriptionGroupsItem(object):
         state = dictionary.get("state") if dictionary.get("state") else APIHelper.SKIP
         cancel_at_end_of_period = dictionary.get("cancel_at_end_of_period") if "cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
         account_balances = SubscriptionGroupBalances.from_dictionary(dictionary.get('account_balances')) if 'account_balances' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    scheme,
@@ -132,4 +140,5 @@ class ListSubscriptionGroupsItem(object):
                    next_assessment_at,
                    state,
                    cancel_at_end_of_period,
-                   account_balances)
+                   account_balances,
+                   dictionary)

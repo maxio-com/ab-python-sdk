@@ -29,11 +29,15 @@ class EventBasedBillingSegmentError(object):
     }
 
     def __init__(self,
-                 segments=None):
+                 segments=None,
+                 additional_properties={}):
         """Constructor for the EventBasedBillingSegmentError class"""
 
         # Initialize members of the class
         self.segments = segments 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -55,5 +59,10 @@ class EventBasedBillingSegmentError(object):
 
         # Extract variables from the dictionary
         segments = dictionary.get("segments") if dictionary.get("segments") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(segments)
+        return cls(segments,
+                   dictionary)

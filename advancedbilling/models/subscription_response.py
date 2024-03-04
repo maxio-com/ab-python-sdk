@@ -31,12 +31,16 @@ class SubscriptionResponse(object):
     ]
 
     def __init__(self,
-                 subscription=APIHelper.SKIP):
+                 subscription=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionResponse class"""
 
         # Initialize members of the class
         if subscription is not APIHelper.SKIP:
             self.subscription = subscription 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class SubscriptionResponse(object):
 
         # Extract variables from the dictionary
         subscription = Subscription.from_dictionary(dictionary.get('subscription')) if 'subscription' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(subscription)
+        return cls(subscription,
+                   dictionary)

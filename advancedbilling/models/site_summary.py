@@ -47,7 +47,8 @@ class SiteSummary(object):
                  site_name=APIHelper.SKIP,
                  site_id=APIHelper.SKIP,
                  site_currency=APIHelper.SKIP,
-                 stats=APIHelper.SKIP):
+                 stats=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SiteSummary class"""
 
         # Initialize members of the class
@@ -61,6 +62,9 @@ class SiteSummary(object):
             self.site_currency = site_currency 
         if stats is not APIHelper.SKIP:
             self.stats = stats 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -86,9 +90,14 @@ class SiteSummary(object):
         site_id = dictionary.get("site_id") if dictionary.get("site_id") else APIHelper.SKIP
         site_currency = dictionary.get("site_currency") if dictionary.get("site_currency") else APIHelper.SKIP
         stats = SiteStatistics.from_dictionary(dictionary.get('stats')) if 'stats' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(seller_name,
                    site_name,
                    site_id,
                    site_currency,
-                   stats)
+                   stats,
+                   dictionary)

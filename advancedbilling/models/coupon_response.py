@@ -31,12 +31,16 @@ class CouponResponse(object):
     ]
 
     def __init__(self,
-                 coupon=APIHelper.SKIP):
+                 coupon=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CouponResponse class"""
 
         # Initialize members of the class
         if coupon is not APIHelper.SKIP:
             self.coupon = coupon 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class CouponResponse(object):
 
         # Extract variables from the dictionary
         coupon = Coupon.from_dictionary(dictionary.get('coupon')) if 'coupon' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(coupon)
+        return cls(coupon,
+                   dictionary)

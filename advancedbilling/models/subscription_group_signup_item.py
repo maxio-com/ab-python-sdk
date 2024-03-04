@@ -103,7 +103,8 @@ class SubscriptionGroupSignupItem(object):
                  components=APIHelper.SKIP,
                  custom_price=APIHelper.SKIP,
                  calendar_billing=APIHelper.SKIP,
-                 metafields=APIHelper.SKIP):
+                 metafields=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupSignupItem class"""
 
         # Initialize members of the class
@@ -133,6 +134,9 @@ class SubscriptionGroupSignupItem(object):
             self.calendar_billing = calendar_billing 
         if metafields is not APIHelper.SKIP:
             self.metafields = metafields 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -170,6 +174,10 @@ class SubscriptionGroupSignupItem(object):
         custom_price = SubscriptionCustomPrice.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
         calendar_billing = CalendarBilling.from_dictionary(dictionary.get('calendar_billing')) if 'calendar_billing' in dictionary.keys() else APIHelper.SKIP
         metafields = dictionary.get("metafields") if dictionary.get("metafields") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(product_handle,
                    product_id,
@@ -183,7 +191,8 @@ class SubscriptionGroupSignupItem(object):
                    components,
                    custom_price,
                    calendar_billing,
-                   metafields)
+                   metafields,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

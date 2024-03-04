@@ -38,7 +38,8 @@ class PrepaymentAggregatedError(object):
     def __init__(self,
                  amount_in_cents=APIHelper.SKIP,
                  base=APIHelper.SKIP,
-                 external=APIHelper.SKIP):
+                 external=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PrepaymentAggregatedError class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class PrepaymentAggregatedError(object):
             self.base = base 
         if external is not APIHelper.SKIP:
             self.external = external 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,7 +75,12 @@ class PrepaymentAggregatedError(object):
         amount_in_cents = dictionary.get("amount_in_cents") if dictionary.get("amount_in_cents") else APIHelper.SKIP
         base = dictionary.get("base") if dictionary.get("base") else APIHelper.SKIP
         external = dictionary.get("external") if dictionary.get("external") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(amount_in_cents,
                    base,
-                   external)
+                   external,
+                   dictionary)

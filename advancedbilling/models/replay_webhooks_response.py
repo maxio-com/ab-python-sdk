@@ -30,12 +30,16 @@ class ReplayWebhooksResponse(object):
     ]
 
     def __init__(self,
-                 status=APIHelper.SKIP):
+                 status=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ReplayWebhooksResponse class"""
 
         # Initialize members of the class
         if status is not APIHelper.SKIP:
             self.status = status 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,5 +61,10 @@ class ReplayWebhooksResponse(object):
 
         # Extract variables from the dictionary
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(status)
+        return cls(status,
+                   dictionary)

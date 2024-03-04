@@ -53,7 +53,8 @@ class AgreementAcceptance(object):
                  privacy_policy_url=APIHelper.SKIP,
                  return_refund_policy_url=APIHelper.SKIP,
                  delivery_policy_url=APIHelper.SKIP,
-                 secure_checkout_policy_url=APIHelper.SKIP):
+                 secure_checkout_policy_url=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AgreementAcceptance class"""
 
         # Initialize members of the class
@@ -69,6 +70,9 @@ class AgreementAcceptance(object):
             self.delivery_policy_url = delivery_policy_url 
         if secure_checkout_policy_url is not APIHelper.SKIP:
             self.secure_checkout_policy_url = secure_checkout_policy_url 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -95,13 +99,18 @@ class AgreementAcceptance(object):
         return_refund_policy_url = dictionary.get("return_refund_policy_url") if dictionary.get("return_refund_policy_url") else APIHelper.SKIP
         delivery_policy_url = dictionary.get("delivery_policy_url") if dictionary.get("delivery_policy_url") else APIHelper.SKIP
         secure_checkout_policy_url = dictionary.get("secure_checkout_policy_url") if dictionary.get("secure_checkout_policy_url") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(ip_address,
                    terms_url,
                    privacy_policy_url,
                    return_refund_policy_url,
                    delivery_policy_url,
-                   secure_checkout_policy_url)
+                   secure_checkout_policy_url,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

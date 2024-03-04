@@ -160,7 +160,8 @@ class PrepaidUsageComponent(object):
                  expiration_interval_unit=APIHelper.SKIP,
                  display_on_hosted_page=APIHelper.SKIP,
                  allow_fractional_quantities=APIHelper.SKIP,
-                 public_signup_page_ids=APIHelper.SKIP):
+                 public_signup_page_ids=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PrepaidUsageComponent class"""
 
         # Initialize members of the class
@@ -207,6 +208,9 @@ class PrepaidUsageComponent(object):
             self.allow_fractional_quantities = allow_fractional_quantities 
         if public_signup_page_ids is not APIHelper.SKIP:
             self.public_signup_page_ids = public_signup_page_ids 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -258,6 +262,10 @@ class PrepaidUsageComponent(object):
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
         public_signup_page_ids = dictionary.get("public_signup_page_ids") if dictionary.get("public_signup_page_ids") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(name,
                    unit_name,
@@ -280,4 +288,5 @@ class PrepaidUsageComponent(object):
                    expiration_interval_unit,
                    display_on_hosted_page,
                    allow_fractional_quantities,
-                   public_signup_page_ids)
+                   public_signup_page_ids,
+                   dictionary)

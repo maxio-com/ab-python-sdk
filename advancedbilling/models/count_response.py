@@ -30,12 +30,16 @@ class CountResponse(object):
     ]
 
     def __init__(self,
-                 count=APIHelper.SKIP):
+                 count=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CountResponse class"""
 
         # Initialize members of the class
         if count is not APIHelper.SKIP:
             self.count = count 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,5 +61,10 @@ class CountResponse(object):
 
         # Extract variables from the dictionary
         count = dictionary.get("count") if dictionary.get("count") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(count)
+        return cls(count,
+                   dictionary)

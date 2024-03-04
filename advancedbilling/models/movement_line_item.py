@@ -66,7 +66,8 @@ class MovementLineItem(object):
                  mrr_movements=APIHelper.SKIP,
                  quantity=APIHelper.SKIP,
                  prev_quantity=APIHelper.SKIP,
-                 recurring=APIHelper.SKIP):
+                 recurring=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the MovementLineItem class"""
 
         # Initialize members of the class
@@ -88,6 +89,9 @@ class MovementLineItem(object):
             self.prev_quantity = prev_quantity 
         if recurring is not APIHelper.SKIP:
             self.recurring = recurring 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -121,6 +125,10 @@ class MovementLineItem(object):
         quantity = dictionary.get("quantity") if dictionary.get("quantity") else APIHelper.SKIP
         prev_quantity = dictionary.get("prev_quantity") if dictionary.get("prev_quantity") else APIHelper.SKIP
         recurring = dictionary.get("recurring") if "recurring" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(product_id,
                    component_id,
@@ -130,4 +138,5 @@ class MovementLineItem(object):
                    mrr_movements,
                    quantity,
                    prev_quantity,
-                   recurring)
+                   recurring,
+                   dictionary)

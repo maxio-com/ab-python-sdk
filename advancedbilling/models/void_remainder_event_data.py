@@ -37,7 +37,8 @@ class VoidRemainderEventData(object):
                  credit_note_attributes=None,
                  memo=None,
                  applied_amount=None,
-                 transaction_time=None):
+                 transaction_time=None,
+                 additional_properties={}):
         """Constructor for the VoidRemainderEventData class"""
 
         # Initialize members of the class
@@ -45,6 +46,9 @@ class VoidRemainderEventData(object):
         self.memo = memo 
         self.applied_amount = applied_amount 
         self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -69,11 +73,16 @@ class VoidRemainderEventData(object):
         memo = dictionary.get("memo") if dictionary.get("memo") else None
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
         transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(credit_note_attributes,
                    memo,
                    applied_amount,
-                   transaction_time)
+                   transaction_time,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

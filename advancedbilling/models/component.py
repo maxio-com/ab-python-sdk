@@ -220,7 +220,8 @@ class Component(object):
                  accounting_code=APIHelper.SKIP,
                  event_based_billing_metric_id=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
-                 interval_unit=APIHelper.SKIP):
+                 interval_unit=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Component class"""
 
         # Initialize members of the class
@@ -293,6 +294,9 @@ class Component(object):
         if interval_unit is not APIHelper.SKIP:
             self.interval_unit = interval_unit 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -359,6 +363,10 @@ class Component(object):
         event_based_billing_metric_id = dictionary.get("event_based_billing_metric_id") if dictionary.get("event_based_billing_metric_id") else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    name,
@@ -393,4 +401,5 @@ class Component(object):
                    accounting_code,
                    event_based_billing_metric_id,
                    interval,
-                   interval_unit)
+                   interval_unit,
+                   dictionary)

@@ -101,7 +101,8 @@ class PayerAttributes(object):
                  vat_number=APIHelper.SKIP,
                  tax_exempt=APIHelper.SKIP,
                  tax_exempt_reason=APIHelper.SKIP,
-                 metafields=APIHelper.SKIP):
+                 metafields=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PayerAttributes class"""
 
         # Initialize members of the class
@@ -142,6 +143,9 @@ class PayerAttributes(object):
         if metafields is not APIHelper.SKIP:
             self.metafields = metafields 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -179,6 +183,10 @@ class PayerAttributes(object):
         tax_exempt = dictionary.get("tax_exempt") if dictionary.get("tax_exempt") else APIHelper.SKIP
         tax_exempt_reason = dictionary.get("tax_exempt_reason") if dictionary.get("tax_exempt_reason") else APIHelper.SKIP
         metafields = dictionary.get("metafields") if dictionary.get("metafields") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -197,7 +205,8 @@ class PayerAttributes(object):
                    vat_number,
                    tax_exempt,
                    tax_exempt_reason,
-                   metafields)
+                   metafields,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

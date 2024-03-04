@@ -48,7 +48,8 @@ class ComponentAllocationChange(object):
                  component_handle=None,
                  memo=None,
                  allocation_id=None,
-                 allocated_quantity=APIHelper.SKIP):
+                 allocated_quantity=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ComponentAllocationChange class"""
 
         # Initialize members of the class
@@ -60,6 +61,9 @@ class ComponentAllocationChange(object):
         self.allocation_id = allocation_id 
         if allocated_quantity is not APIHelper.SKIP:
             self.allocated_quantity = allocated_quantity 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -88,6 +92,10 @@ class ComponentAllocationChange(object):
         memo = dictionary.get("memo") if dictionary.get("memo") else None
         allocation_id = dictionary.get("allocation_id") if dictionary.get("allocation_id") else None
         allocated_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ComponentAllocationChangeAllocatedQuantity'), dictionary.get('allocated_quantity'), False) if dictionary.get('allocated_quantity') is not None else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(previous_allocation,
                    new_allocation,
@@ -95,7 +103,8 @@ class ComponentAllocationChange(object):
                    component_handle,
                    memo,
                    allocation_id,
-                   allocated_quantity)
+                   allocated_quantity,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

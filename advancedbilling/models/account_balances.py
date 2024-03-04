@@ -47,7 +47,8 @@ class AccountBalances(object):
                  open_invoices=APIHelper.SKIP,
                  pending_discounts=APIHelper.SKIP,
                  service_credits=APIHelper.SKIP,
-                 prepayments=APIHelper.SKIP):
+                 prepayments=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AccountBalances class"""
 
         # Initialize members of the class
@@ -59,6 +60,9 @@ class AccountBalances(object):
             self.service_credits = service_credits 
         if prepayments is not APIHelper.SKIP:
             self.prepayments = prepayments 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -83,8 +87,13 @@ class AccountBalances(object):
         pending_discounts = AccountBalance.from_dictionary(dictionary.get('pending_discounts')) if 'pending_discounts' in dictionary.keys() else APIHelper.SKIP
         service_credits = AccountBalance.from_dictionary(dictionary.get('service_credits')) if 'service_credits' in dictionary.keys() else APIHelper.SKIP
         prepayments = AccountBalance.from_dictionary(dictionary.get('prepayments')) if 'prepayments' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(open_invoices,
                    pending_discounts,
                    service_credits,
-                   prepayments)
+                   prepayments,
+                   dictionary)

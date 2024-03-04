@@ -30,12 +30,16 @@ class CustomerPayerChange(object):
 
     def __init__(self,
                  before=None,
-                 after=None):
+                 after=None,
+                 additional_properties={}):
         """Constructor for the CustomerPayerChange class"""
 
         # Initialize members of the class
         self.before = before 
         self.after = after 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,9 +62,14 @@ class CustomerPayerChange(object):
         # Extract variables from the dictionary
         before = InvoicePayerChange.from_dictionary(dictionary.get('before')) if dictionary.get('before') else None
         after = InvoicePayerChange.from_dictionary(dictionary.get('after')) if dictionary.get('after') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(before,
-                   after)
+                   after,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -37,7 +37,8 @@ class ListProformaInvoicesResponse(object):
 
     def __init__(self,
                  proforma_invoices=APIHelper.SKIP,
-                 meta=APIHelper.SKIP):
+                 meta=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ListProformaInvoicesResponse class"""
 
         # Initialize members of the class
@@ -45,6 +46,9 @@ class ListProformaInvoicesResponse(object):
             self.proforma_invoices = proforma_invoices 
         if meta is not APIHelper.SKIP:
             self.meta = meta 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,6 +75,11 @@ class ListProformaInvoicesResponse(object):
         else:
             proforma_invoices = APIHelper.SKIP
         meta = ListProformaInvoicesMeta.from_dictionary(dictionary.get('meta')) if 'meta' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(proforma_invoices,
-                   meta)
+                   meta,
+                   dictionary)

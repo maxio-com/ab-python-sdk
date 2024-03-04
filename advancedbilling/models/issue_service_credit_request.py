@@ -26,11 +26,15 @@ class IssueServiceCreditRequest(object):
     }
 
     def __init__(self,
-                 service_credit=None):
+                 service_credit=None,
+                 additional_properties={}):
         """Constructor for the IssueServiceCreditRequest class"""
 
         # Initialize members of the class
         self.service_credit = service_credit 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class IssueServiceCreditRequest(object):
 
         # Extract variables from the dictionary
         service_credit = IssueServiceCredit.from_dictionary(dictionary.get('service_credit')) if dictionary.get('service_credit') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(service_credit)
+        return cls(service_credit,
+                   dictionary)

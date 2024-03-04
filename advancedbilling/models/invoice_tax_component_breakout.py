@@ -42,7 +42,8 @@ class InvoiceTaxComponentBreakout(object):
                  tax_rule_id=APIHelper.SKIP,
                  percentage=APIHelper.SKIP,
                  country_code=APIHelper.SKIP,
-                 subdivision_code=APIHelper.SKIP):
+                 subdivision_code=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceTaxComponentBreakout class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class InvoiceTaxComponentBreakout(object):
             self.country_code = country_code 
         if subdivision_code is not APIHelper.SKIP:
             self.subdivision_code = subdivision_code 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,11 +82,16 @@ class InvoiceTaxComponentBreakout(object):
         percentage = dictionary.get("percentage") if dictionary.get("percentage") else APIHelper.SKIP
         country_code = dictionary.get("country_code") if dictionary.get("country_code") else APIHelper.SKIP
         subdivision_code = dictionary.get("subdivision_code") if dictionary.get("subdivision_code") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(tax_rule_id,
                    percentage,
                    country_code,
-                   subdivision_code)
+                   subdivision_code,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

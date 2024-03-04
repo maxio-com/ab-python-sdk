@@ -50,7 +50,8 @@ class ComponentCustomPrice(object):
                  pricing_scheme=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
                  interval_unit=APIHelper.SKIP,
-                 prices=APIHelper.SKIP):
+                 prices=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ComponentCustomPrice class"""
 
         # Initialize members of the class
@@ -62,6 +63,9 @@ class ComponentCustomPrice(object):
             self.interval_unit = interval_unit 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -90,11 +94,16 @@ class ComponentCustomPrice(object):
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
         else:
             prices = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(pricing_scheme,
                    interval,
                    interval_unit,
-                   prices)
+                   prices,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

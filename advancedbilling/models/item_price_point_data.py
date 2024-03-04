@@ -38,7 +38,8 @@ class ItemPricePointData(object):
     def __init__(self,
                  id=APIHelper.SKIP,
                  handle=APIHelper.SKIP,
-                 name=APIHelper.SKIP):
+                 name=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ItemPricePointData class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class ItemPricePointData(object):
             self.handle = handle 
         if name is not APIHelper.SKIP:
             self.name = name 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,10 +75,15 @@ class ItemPricePointData(object):
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    handle,
-                   name)
+                   name,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

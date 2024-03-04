@@ -30,12 +30,16 @@ class UpdateSubscriptionGroup(object):
     ]
 
     def __init__(self,
-                 member_ids=APIHelper.SKIP):
+                 member_ids=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the UpdateSubscriptionGroup class"""
 
         # Initialize members of the class
         if member_ids is not APIHelper.SKIP:
             self.member_ids = member_ids 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,5 +61,10 @@ class UpdateSubscriptionGroup(object):
 
         # Extract variables from the dictionary
         member_ids = dictionary.get("member_ids") if dictionary.get("member_ids") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(member_ids)
+        return cls(member_ids,
+                   dictionary)

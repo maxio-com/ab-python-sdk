@@ -7,17 +7,17 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.component_s_price_point_assignment import ComponentSPricePointAssignment
+from advancedbilling.models.component_price_point_assignment import ComponentPricePointAssignment
 
 
-class BulkComponentSPricePointAssignment(object):
+class BulkComponentsPricePointAssignment(object):
 
-    """Implementation of the 'Bulk Component's Price Point Assignment' model.
+    """Implementation of the 'Bulk Components Price Point Assignment' model.
 
     TODO: type model description here.
 
     Attributes:
-        components (List[ComponentSPricePointAssignment]): TODO: type
+        components (List[ComponentPricePointAssignment]): TODO: type
             description here.
 
     """
@@ -32,12 +32,16 @@ class BulkComponentSPricePointAssignment(object):
     ]
 
     def __init__(self,
-                 components=APIHelper.SKIP):
-        """Constructor for the BulkComponentSPricePointAssignment class"""
+                 components=APIHelper.SKIP,
+                 additional_properties={}):
+        """Constructor for the BulkComponentsPricePointAssignment class"""
 
         # Initialize members of the class
         if components is not APIHelper.SKIP:
             self.components = components 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -60,8 +64,13 @@ class BulkComponentSPricePointAssignment(object):
         # Extract variables from the dictionary
         components = None
         if dictionary.get('components') is not None:
-            components = [ComponentSPricePointAssignment.from_dictionary(x) for x in dictionary.get('components')]
+            components = [ComponentPricePointAssignment.from_dictionary(x) for x in dictionary.get('components')]
         else:
             components = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(components)
+        return cls(components,
+                   dictionary)

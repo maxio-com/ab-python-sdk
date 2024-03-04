@@ -42,7 +42,8 @@ class ComponentAllocationErrorItem(object):
                  component_id=APIHelper.SKIP,
                  message=APIHelper.SKIP,
                  kind=APIHelper.SKIP,
-                 on=APIHelper.SKIP):
+                 on=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ComponentAllocationErrorItem class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class ComponentAllocationErrorItem(object):
             self.kind = kind 
         if on is not APIHelper.SKIP:
             self.on = on 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,8 +82,13 @@ class ComponentAllocationErrorItem(object):
         message = dictionary.get("message") if dictionary.get("message") else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
         on = dictionary.get("on") if dictionary.get("on") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(component_id,
                    message,
                    kind,
-                   on)
+                   on,
+                   dictionary)

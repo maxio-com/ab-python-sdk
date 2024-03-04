@@ -31,12 +31,16 @@ class BulkCreateProductPricePointsResponse(object):
     ]
 
     def __init__(self,
-                 price_points=APIHelper.SKIP):
+                 price_points=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the BulkCreateProductPricePointsResponse class"""
 
         # Initialize members of the class
         if price_points is not APIHelper.SKIP:
             self.price_points = price_points 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -62,5 +66,10 @@ class BulkCreateProductPricePointsResponse(object):
             price_points = [ProductPricePoint.from_dictionary(x) for x in dictionary.get('price_points')]
         else:
             price_points = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(price_points)
+        return cls(price_points,
+                   dictionary)

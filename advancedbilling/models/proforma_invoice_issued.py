@@ -61,7 +61,8 @@ class ProformaInvoiceIssued(object):
                  tax_amount=None,
                  total_amount=None,
                  product_name=None,
-                 line_items=None):
+                 line_items=None,
+                 additional_properties={}):
         """Constructor for the ProformaInvoiceIssued class"""
 
         # Initialize members of the class
@@ -76,6 +77,9 @@ class ProformaInvoiceIssued(object):
         self.total_amount = total_amount 
         self.product_name = product_name 
         self.line_items = line_items 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -109,6 +113,10 @@ class ProformaInvoiceIssued(object):
         line_items = None
         if dictionary.get('line_items') is not None:
             line_items = [InvoiceLineItemEventData.from_dictionary(x) for x in dictionary.get('line_items')]
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    number,
@@ -120,7 +128,8 @@ class ProformaInvoiceIssued(object):
                    tax_amount,
                    total_amount,
                    product_name,
-                   line_items)
+                   line_items,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

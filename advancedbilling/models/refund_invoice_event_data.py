@@ -69,7 +69,8 @@ class RefundInvoiceEventData(object):
                  transaction_time=None,
                  consolidation_level=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
-                 original_amount=APIHelper.SKIP):
+                 original_amount=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the RefundInvoiceEventData class"""
 
         # Initialize members of the class
@@ -85,6 +86,9 @@ class RefundInvoiceEventData(object):
         self.refund_amount = refund_amount 
         self.refund_id = refund_id 
         self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -114,6 +118,10 @@ class RefundInvoiceEventData(object):
         consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(apply_credit,
                    credit_note_attributes,
@@ -123,7 +131,8 @@ class RefundInvoiceEventData(object):
                    transaction_time,
                    consolidation_level,
                    memo,
-                   original_amount)
+                   original_amount,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

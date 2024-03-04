@@ -72,7 +72,8 @@ class SubscriptionGroupItem(object):
                  currency=APIHelper.SKIP,
                  coupon_code=APIHelper.SKIP,
                  total_revenue_in_cents=APIHelper.SKIP,
-                 balance_in_cents=APIHelper.SKIP):
+                 balance_in_cents=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupItem class"""
 
         # Initialize members of the class
@@ -96,6 +97,9 @@ class SubscriptionGroupItem(object):
             self.total_revenue_in_cents = total_revenue_in_cents 
         if balance_in_cents is not APIHelper.SKIP:
             self.balance_in_cents = balance_in_cents 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -126,6 +130,10 @@ class SubscriptionGroupItem(object):
         coupon_code = dictionary.get("coupon_code") if "coupon_code" in dictionary.keys() else APIHelper.SKIP
         total_revenue_in_cents = dictionary.get("total_revenue_in_cents") if dictionary.get("total_revenue_in_cents") else APIHelper.SKIP
         balance_in_cents = dictionary.get("balance_in_cents") if dictionary.get("balance_in_cents") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    reference,
@@ -136,4 +144,5 @@ class SubscriptionGroupItem(object):
                    currency,
                    coupon_code,
                    total_revenue_in_cents,
-                   balance_in_cents)
+                   balance_in_cents,
+                   dictionary)

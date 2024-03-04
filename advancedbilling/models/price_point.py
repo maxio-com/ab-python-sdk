@@ -96,7 +96,8 @@ class PricePoint(object):
                  rollover_prepaid_remainder=APIHelper.SKIP,
                  renew_prepaid_allocation=APIHelper.SKIP,
                  expiration_interval=APIHelper.SKIP,
-                 expiration_interval_unit=APIHelper.SKIP):
+                 expiration_interval_unit=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PricePoint class"""
 
         # Initialize members of the class
@@ -125,6 +126,9 @@ class PricePoint(object):
             self.expiration_interval = expiration_interval 
         if expiration_interval_unit is not APIHelper.SKIP:
             self.expiration_interval_unit = expiration_interval_unit 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -162,6 +166,10 @@ class PricePoint(object):
         renew_prepaid_allocation = dictionary.get("renew_prepaid_allocation") if "renew_prepaid_allocation" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
         expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(name,
                    handle,
@@ -175,4 +183,5 @@ class PricePoint(object):
                    rollover_prepaid_remainder,
                    renew_prepaid_allocation,
                    expiration_interval,
-                   expiration_interval_unit)
+                   expiration_interval_unit,
+                   dictionary)

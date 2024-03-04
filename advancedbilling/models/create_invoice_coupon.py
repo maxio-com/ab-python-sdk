@@ -51,7 +51,8 @@ class CreateInvoiceCoupon(object):
                  amount=APIHelper.SKIP,
                  description=APIHelper.SKIP,
                  product_family_id=APIHelper.SKIP,
-                 compounding_strategy=APIHelper.SKIP):
+                 compounding_strategy=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateInvoiceCoupon class"""
 
         # Initialize members of the class
@@ -67,6 +68,9 @@ class CreateInvoiceCoupon(object):
             self.product_family_id = product_family_id 
         if compounding_strategy is not APIHelper.SKIP:
             self.compounding_strategy = compounding_strategy 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -94,10 +98,15 @@ class CreateInvoiceCoupon(object):
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         product_family_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceCouponProductFamilyId'), dictionary.get('product_family_id'), False) if dictionary.get('product_family_id') is not None else APIHelper.SKIP
         compounding_strategy = dictionary.get("compounding_strategy") if dictionary.get("compounding_strategy") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(code,
                    percentage,
                    amount,
                    description,
                    product_family_id,
-                   compounding_strategy)
+                   compounding_strategy,
+                   dictionary)

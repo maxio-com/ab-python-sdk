@@ -68,7 +68,8 @@ class InvoiceEventPayment1(object):
                  email=None,
                  mtype='Invoice Event Payment1',
                  card_expiration=APIHelper.SKIP,
-                 last_four=APIHelper.SKIP):
+                 last_four=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceEventPayment1 class"""
 
         # Initialize members of the class
@@ -85,6 +86,9 @@ class InvoiceEventPayment1(object):
         self.kind = kind 
         self.memo = memo 
         self.email = email 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -116,6 +120,10 @@ class InvoiceEventPayment1(object):
         mtype = dictionary.get("type") if dictionary.get("type") else 'Invoice Event Payment1'
         card_expiration = dictionary.get("card_expiration") if dictionary.get("card_expiration") else APIHelper.SKIP
         last_four = dictionary.get("last_four") if "last_four" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(masked_account_number,
                    masked_routing_number,
@@ -127,4 +135,5 @@ class InvoiceEventPayment1(object):
                    email,
                    mtype,
                    card_expiration,
-                   last_four)
+                   last_four,
+                   dictionary)

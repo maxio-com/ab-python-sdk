@@ -44,7 +44,8 @@ class RefundPrepayment(object):
                  amount_in_cents=None,
                  amount=None,
                  memo=None,
-                 external=APIHelper.SKIP):
+                 external=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the RefundPrepayment class"""
 
         # Initialize members of the class
@@ -53,6 +54,9 @@ class RefundPrepayment(object):
         self.memo = memo 
         if external is not APIHelper.SKIP:
             self.external = external 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,11 +82,16 @@ class RefundPrepayment(object):
         amount = APIHelper.deserialize_union_type(UnionTypeLookUp.get('RefundPrepaymentAmount'), dictionary.get('amount'), False) if dictionary.get('amount') is not None else None
         memo = dictionary.get("memo") if dictionary.get("memo") else None
         external = dictionary.get("external") if "external" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(amount_in_cents,
                    amount,
                    memo,
-                   external)
+                   external,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

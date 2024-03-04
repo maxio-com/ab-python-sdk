@@ -31,12 +31,16 @@ class EBBEvent(object):
     ]
 
     def __init__(self,
-                 chargify=APIHelper.SKIP):
+                 chargify=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the EBBEvent class"""
 
         # Initialize members of the class
         if chargify is not APIHelper.SKIP:
             self.chargify = chargify 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class EBBEvent(object):
 
         # Extract variables from the dictionary
         chargify = ChargifyEBB.from_dictionary(dictionary.get('chargify')) if 'chargify' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(chargify)
+        return cls(chargify,
+                   dictionary)

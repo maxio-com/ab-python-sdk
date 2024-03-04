@@ -28,12 +28,16 @@ class UpdateCurrencyPrice(object):
 
     def __init__(self,
                  id=None,
-                 price=None):
+                 price=None,
+                 additional_properties={}):
         """Constructor for the UpdateCurrencyPrice class"""
 
         # Initialize members of the class
         self.id = id 
         self.price = price 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -56,6 +60,11 @@ class UpdateCurrencyPrice(object):
         # Extract variables from the dictionary
         id = dictionary.get("id") if dictionary.get("id") else None
         price = dictionary.get("price") if dictionary.get("price") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
-                   price)
+                   price,
+                   dictionary)

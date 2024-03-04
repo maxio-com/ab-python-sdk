@@ -62,7 +62,8 @@ class SegmentPrice(object):
                  unit_price=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
                  formatted_unit_price=APIHelper.SKIP,
-                 segment_id=APIHelper.SKIP):
+                 segment_id=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SegmentPrice class"""
 
         # Initialize members of the class
@@ -82,6 +83,9 @@ class SegmentPrice(object):
             self.formatted_unit_price = formatted_unit_price 
         if segment_id is not APIHelper.SKIP:
             self.segment_id = segment_id 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -110,6 +114,10 @@ class SegmentPrice(object):
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         formatted_unit_price = dictionary.get("formatted_unit_price") if dictionary.get("formatted_unit_price") else APIHelper.SKIP
         segment_id = dictionary.get("segment_id") if dictionary.get("segment_id") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    component_id,
@@ -118,7 +126,8 @@ class SegmentPrice(object):
                    unit_price,
                    price_point_id,
                    formatted_unit_price,
-                   segment_id)
+                   segment_id,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

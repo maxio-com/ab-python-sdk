@@ -37,7 +37,8 @@ class ListSubscriptionGroupsResponse(object):
 
     def __init__(self,
                  subscription_groups=APIHelper.SKIP,
-                 meta=APIHelper.SKIP):
+                 meta=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ListSubscriptionGroupsResponse class"""
 
         # Initialize members of the class
@@ -45,6 +46,9 @@ class ListSubscriptionGroupsResponse(object):
             self.subscription_groups = subscription_groups 
         if meta is not APIHelper.SKIP:
             self.meta = meta 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,6 +75,11 @@ class ListSubscriptionGroupsResponse(object):
         else:
             subscription_groups = APIHelper.SKIP
         meta = ListSubscriptionGroupsMeta.from_dictionary(dictionary.get('meta')) if 'meta' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(subscription_groups,
-                   meta)
+                   meta,
+                   dictionary)

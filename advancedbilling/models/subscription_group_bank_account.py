@@ -102,7 +102,8 @@ class SubscriptionGroupBankAccount(object):
                  billing_country=APIHelper.SKIP,
                  chargify_token=APIHelper.SKIP,
                  current_vault=APIHelper.SKIP,
-                 gateway_handle=APIHelper.SKIP):
+                 gateway_handle=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupBankAccount class"""
 
         # Initialize members of the class
@@ -139,6 +140,9 @@ class SubscriptionGroupBankAccount(object):
         if gateway_handle is not APIHelper.SKIP:
             self.gateway_handle = gateway_handle 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -174,6 +178,10 @@ class SubscriptionGroupBankAccount(object):
         chargify_token = dictionary.get("chargify_token") if dictionary.get("chargify_token") else APIHelper.SKIP
         current_vault = dictionary.get("current_vault") if dictionary.get("current_vault") else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if dictionary.get("gateway_handle") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(bank_name,
                    bank_account_number,
@@ -190,7 +198,8 @@ class SubscriptionGroupBankAccount(object):
                    billing_country,
                    chargify_token,
                    current_vault,
-                   gateway_handle)
+                   gateway_handle,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

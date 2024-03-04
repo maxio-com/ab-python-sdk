@@ -31,13 +31,17 @@ class CreateProductCurrencyPrice(object):
     def __init__(self,
                  currency=None,
                  price=None,
-                 role=None):
+                 role=None,
+                 additional_properties={}):
         """Constructor for the CreateProductCurrencyPrice class"""
 
         # Initialize members of the class
         self.currency = currency 
         self.price = price 
         self.role = role 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -61,7 +65,12 @@ class CreateProductCurrencyPrice(object):
         currency = dictionary.get("currency") if dictionary.get("currency") else None
         price = dictionary.get("price") if dictionary.get("price") else None
         role = dictionary.get("role") if dictionary.get("role") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(currency,
                    price,
-                   role)
+                   role,
+                   dictionary)

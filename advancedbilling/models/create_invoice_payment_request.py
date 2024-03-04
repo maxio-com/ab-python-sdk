@@ -35,13 +35,17 @@ class CreateInvoicePaymentRequest(object):
 
     def __init__(self,
                  payment=None,
-                 mtype=APIHelper.SKIP):
+                 mtype=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateInvoicePaymentRequest class"""
 
         # Initialize members of the class
         self.payment = payment 
         if mtype is not APIHelper.SKIP:
             self.mtype = mtype 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -64,6 +68,11 @@ class CreateInvoicePaymentRequest(object):
         # Extract variables from the dictionary
         payment = CreateInvoicePayment.from_dictionary(dictionary.get('payment')) if dictionary.get('payment') else None
         mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(payment,
-                   mtype)
+                   mtype,
+                   dictionary)

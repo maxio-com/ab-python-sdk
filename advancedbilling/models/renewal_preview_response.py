@@ -26,11 +26,15 @@ class RenewalPreviewResponse(object):
     }
 
     def __init__(self,
-                 renewal_preview=None):
+                 renewal_preview=None,
+                 additional_properties={}):
         """Constructor for the RenewalPreviewResponse class"""
 
         # Initialize members of the class
         self.renewal_preview = renewal_preview 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class RenewalPreviewResponse(object):
 
         # Extract variables from the dictionary
         renewal_preview = RenewalPreview.from_dictionary(dictionary.get('renewal_preview')) if dictionary.get('renewal_preview') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(renewal_preview)
+        return cls(renewal_preview,
+                   dictionary)

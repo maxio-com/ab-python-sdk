@@ -27,11 +27,15 @@ class ListSubscriptionComponentsResponse(object):
     }
 
     def __init__(self,
-                 subscriptions_components=None):
+                 subscriptions_components=None,
+                 additional_properties={}):
         """Constructor for the ListSubscriptionComponentsResponse class"""
 
         # Initialize members of the class
         self.subscriptions_components = subscriptions_components 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -55,5 +59,10 @@ class ListSubscriptionComponentsResponse(object):
         subscriptions_components = None
         if dictionary.get('subscriptions_components') is not None:
             subscriptions_components = [SubscriptionComponent.from_dictionary(x) for x in dictionary.get('subscriptions_components')]
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(subscriptions_components)
+        return cls(subscriptions_components,
+                   dictionary)

@@ -50,7 +50,8 @@ class ComponentCurrencyPrice(object):
                  price=APIHelper.SKIP,
                  formatted_price=APIHelper.SKIP,
                  price_id=APIHelper.SKIP,
-                 price_point_id=APIHelper.SKIP):
+                 price_point_id=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ComponentCurrencyPrice class"""
 
         # Initialize members of the class
@@ -66,6 +67,9 @@ class ComponentCurrencyPrice(object):
             self.price_id = price_id 
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -92,13 +96,18 @@ class ComponentCurrencyPrice(object):
         formatted_price = dictionary.get("formatted_price") if dictionary.get("formatted_price") else APIHelper.SKIP
         price_id = dictionary.get("price_id") if dictionary.get("price_id") else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    currency,
                    price,
                    formatted_price,
                    price_id,
-                   price_point_id)
+                   price_point_id,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

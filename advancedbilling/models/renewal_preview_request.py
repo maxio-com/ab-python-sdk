@@ -36,12 +36,16 @@ class RenewalPreviewRequest(object):
     ]
 
     def __init__(self,
-                 components=APIHelper.SKIP):
+                 components=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the RenewalPreviewRequest class"""
 
         # Initialize members of the class
         if components is not APIHelper.SKIP:
             self.components = components 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -67,5 +71,10 @@ class RenewalPreviewRequest(object):
             components = [RenewalPreviewComponent.from_dictionary(x) for x in dictionary.get('components')]
         else:
             components = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(components)
+        return cls(components,
+                   dictionary)

@@ -26,11 +26,15 @@ class VoidInvoiceRequest(object):
     }
 
     def __init__(self,
-                 void=None):
+                 void=None,
+                 additional_properties={}):
         """Constructor for the VoidInvoiceRequest class"""
 
         # Initialize members of the class
         self.void = void 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class VoidInvoiceRequest(object):
 
         # Extract variables from the dictionary
         void = VoidInvoice.from_dictionary(dictionary.get('void')) if dictionary.get('void') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(void)
+        return cls(void,
+                   dictionary)

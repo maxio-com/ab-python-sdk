@@ -57,7 +57,8 @@ class CreateSubscriptionComponent(object):
                  allocated_quantity=APIHelper.SKIP,
                  quantity=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
-                 custom_price=APIHelper.SKIP):
+                 custom_price=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateSubscriptionComponent class"""
 
         # Initialize members of the class
@@ -75,6 +76,9 @@ class CreateSubscriptionComponent(object):
             self.price_point_id = price_point_id 
         if custom_price is not APIHelper.SKIP:
             self.custom_price = custom_price 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -103,6 +107,10 @@ class CreateSubscriptionComponent(object):
         quantity = dictionary.get("quantity") if dictionary.get("quantity") else APIHelper.SKIP
         price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionComponentPricePointId'), dictionary.get('price_point_id'), False) if dictionary.get('price_point_id') is not None else APIHelper.SKIP
         custom_price = ComponentCustomPrice.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(component_id,
                    enabled,
@@ -110,7 +118,8 @@ class CreateSubscriptionComponent(object):
                    allocated_quantity,
                    quantity,
                    price_point_id,
-                   custom_price)
+                   custom_price,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

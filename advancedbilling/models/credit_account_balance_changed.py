@@ -40,7 +40,8 @@ class CreditAccountBalanceChanged(object):
                  service_credit_account_balance_in_cents=None,
                  service_credit_balance_change_in_cents=None,
                  currency_code=None,
-                 at_time=None):
+                 at_time=None,
+                 additional_properties={}):
         """Constructor for the CreditAccountBalanceChanged class"""
 
         # Initialize members of the class
@@ -49,6 +50,9 @@ class CreditAccountBalanceChanged(object):
         self.service_credit_balance_change_in_cents = service_credit_balance_change_in_cents 
         self.currency_code = currency_code 
         self.at_time = APIHelper.apply_datetime_converter(at_time, APIHelper.RFC3339DateTime) if at_time else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -74,12 +78,17 @@ class CreditAccountBalanceChanged(object):
         service_credit_balance_change_in_cents = dictionary.get("service_credit_balance_change_in_cents") if dictionary.get("service_credit_balance_change_in_cents") else None
         currency_code = dictionary.get("currency_code") if dictionary.get("currency_code") else None
         at_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("at_time")).datetime if dictionary.get("at_time") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(reason,
                    service_credit_account_balance_in_cents,
                    service_credit_balance_change_in_cents,
                    currency_code,
-                   at_time)
+                   at_time,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

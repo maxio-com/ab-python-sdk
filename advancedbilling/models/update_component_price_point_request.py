@@ -31,12 +31,16 @@ class UpdateComponentPricePointRequest(object):
     ]
 
     def __init__(self,
-                 price_point=APIHelper.SKIP):
+                 price_point=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the UpdateComponentPricePointRequest class"""
 
         # Initialize members of the class
         if price_point is not APIHelper.SKIP:
             self.price_point = price_point 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class UpdateComponentPricePointRequest(object):
 
         # Extract variables from the dictionary
         price_point = UpdateComponentPricePoint.from_dictionary(dictionary.get('price_point')) if 'price_point' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(price_point)
+        return cls(price_point,
+                   dictionary)

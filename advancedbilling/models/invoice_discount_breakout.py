@@ -38,7 +38,8 @@ class InvoiceDiscountBreakout(object):
     def __init__(self,
                  uid=APIHelper.SKIP,
                  eligible_amount=APIHelper.SKIP,
-                 discount_amount=APIHelper.SKIP):
+                 discount_amount=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceDiscountBreakout class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class InvoiceDiscountBreakout(object):
             self.eligible_amount = eligible_amount 
         if discount_amount is not APIHelper.SKIP:
             self.discount_amount = discount_amount 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,10 +75,15 @@ class InvoiceDiscountBreakout(object):
         uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
         eligible_amount = dictionary.get("eligible_amount") if dictionary.get("eligible_amount") else APIHelper.SKIP
         discount_amount = dictionary.get("discount_amount") if dictionary.get("discount_amount") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    eligible_amount,
-                   discount_amount)
+                   discount_amount,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -45,13 +45,17 @@ class GroupBilling(object):
     def __init__(self,
                  accrue=False,
                  align_date=False,
-                 prorate=False):
+                 prorate=False,
+                 additional_properties={}):
         """Constructor for the GroupBilling class"""
 
         # Initialize members of the class
         self.accrue = accrue 
         self.align_date = align_date 
         self.prorate = prorate 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -75,10 +79,15 @@ class GroupBilling(object):
         accrue = dictionary.get("accrue") if dictionary.get("accrue") else False
         align_date = dictionary.get("align_date") if dictionary.get("align_date") else False
         prorate = dictionary.get("prorate") if dictionary.get("prorate") else False
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(accrue,
                    align_date,
-                   prorate)
+                   prorate,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -38,7 +38,8 @@ class PublicKey(object):
     def __init__(self,
                  public_key=APIHelper.SKIP,
                  requires_security_token=APIHelper.SKIP,
-                 created_at=APIHelper.SKIP):
+                 created_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PublicKey class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class PublicKey(object):
             self.requires_security_token = requires_security_token 
         if created_at is not APIHelper.SKIP:
             self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,7 +75,12 @@ class PublicKey(object):
         public_key = dictionary.get("public_key") if dictionary.get("public_key") else APIHelper.SKIP
         requires_security_token = dictionary.get("requires_security_token") if "requires_security_token" in dictionary.keys() else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(public_key,
                    requires_security_token,
-                   created_at)
+                   created_at,
+                   dictionary)

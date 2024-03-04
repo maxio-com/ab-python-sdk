@@ -38,7 +38,8 @@ class InvoiceBalanceItem(object):
     def __init__(self,
                  uid=APIHelper.SKIP,
                  number=APIHelper.SKIP,
-                 outstanding_amount=APIHelper.SKIP):
+                 outstanding_amount=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceBalanceItem class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class InvoiceBalanceItem(object):
             self.number = number 
         if outstanding_amount is not APIHelper.SKIP:
             self.outstanding_amount = outstanding_amount 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,10 +75,15 @@ class InvoiceBalanceItem(object):
         uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
         number = dictionary.get("number") if dictionary.get("number") else APIHelper.SKIP
         outstanding_amount = dictionary.get("outstanding_amount") if dictionary.get("outstanding_amount") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    number,
-                   outstanding_amount)
+                   outstanding_amount,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

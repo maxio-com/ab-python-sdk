@@ -84,7 +84,8 @@ class CreateInvoiceItem(object):
                  component_id=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
-                 description=APIHelper.SKIP):
+                 description=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateInvoiceItem class"""
 
         # Initialize members of the class
@@ -112,6 +113,9 @@ class CreateInvoiceItem(object):
             self.product_price_point_id = product_price_point_id 
         if description is not APIHelper.SKIP:
             self.description = description 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -145,6 +149,10 @@ class CreateInvoiceItem(object):
         price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceItemPricePointId'), dictionary.get('price_point_id'), False) if dictionary.get('price_point_id') is not None else APIHelper.SKIP
         product_price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceItemProductPricePointId'), dictionary.get('product_price_point_id'), False) if dictionary.get('product_price_point_id') is not None else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(title,
                    quantity,
@@ -157,4 +165,5 @@ class CreateInvoiceItem(object):
                    component_id,
                    price_point_id,
                    product_price_point_id,
-                   description)
+                   description,
+                   dictionary)

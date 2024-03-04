@@ -43,11 +43,15 @@ class IssueInvoiceRequest(object):
     ]
 
     def __init__(self,
-                 on_failed_payment='leave_open_invoice'):
+                 on_failed_payment='leave_open_invoice',
+                 additional_properties={}):
         """Constructor for the IssueInvoiceRequest class"""
 
         # Initialize members of the class
         self.on_failed_payment = on_failed_payment 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -69,5 +73,10 @@ class IssueInvoiceRequest(object):
 
         # Extract variables from the dictionary
         on_failed_payment = dictionary.get("on_failed_payment") if dictionary.get("on_failed_payment") else 'leave_open_invoice'
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(on_failed_payment)
+        return cls(on_failed_payment,
+                   dictionary)

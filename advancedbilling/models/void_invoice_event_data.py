@@ -51,7 +51,8 @@ class VoidInvoiceEventData(object):
                  applied_amount=None,
                  transaction_time=None,
                  is_advance_invoice=None,
-                 reason=None):
+                 reason=None,
+                 additional_properties={}):
         """Constructor for the VoidInvoiceEventData class"""
 
         # Initialize members of the class
@@ -61,6 +62,9 @@ class VoidInvoiceEventData(object):
         self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
         self.is_advance_invoice = is_advance_invoice 
         self.reason = reason 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -88,13 +92,18 @@ class VoidInvoiceEventData(object):
         transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else None
         is_advance_invoice = dictionary.get("is_advance_invoice") if "is_advance_invoice" in dictionary.keys() else None
         reason = dictionary.get("reason") if dictionary.get("reason") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(credit_note_attributes,
                    memo,
                    applied_amount,
                    transaction_time,
                    is_advance_invoice,
-                   reason)
+                   reason,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

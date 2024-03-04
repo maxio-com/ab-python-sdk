@@ -42,7 +42,8 @@ class PaymentForAllocation(object):
                  id=APIHelper.SKIP,
                  amount_in_cents=APIHelper.SKIP,
                  success=APIHelper.SKIP,
-                 memo=APIHelper.SKIP):
+                 memo=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PaymentForAllocation class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class PaymentForAllocation(object):
             self.success = success 
         if memo is not APIHelper.SKIP:
             self.memo = memo 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,11 +82,16 @@ class PaymentForAllocation(object):
         amount_in_cents = dictionary.get("amount_in_cents") if dictionary.get("amount_in_cents") else APIHelper.SKIP
         success = dictionary.get("success") if "success" in dictionary.keys() else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    amount_in_cents,
                    success,
-                   memo)
+                   memo,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

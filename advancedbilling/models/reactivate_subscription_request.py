@@ -62,7 +62,8 @@ class ReactivateSubscriptionRequest(object):
                  preserve_balance=APIHelper.SKIP,
                  coupon_code=APIHelper.SKIP,
                  use_credits_and_prepayments=APIHelper.SKIP,
-                 resume=APIHelper.SKIP):
+                 resume=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ReactivateSubscriptionRequest class"""
 
         # Initialize members of the class
@@ -78,6 +79,9 @@ class ReactivateSubscriptionRequest(object):
             self.use_credits_and_prepayments = use_credits_and_prepayments 
         if resume is not APIHelper.SKIP:
             self.resume = resume 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -105,10 +109,15 @@ class ReactivateSubscriptionRequest(object):
         coupon_code = dictionary.get("coupon_code") if dictionary.get("coupon_code") else APIHelper.SKIP
         use_credits_and_prepayments = dictionary.get("use_credits_and_prepayments") if "use_credits_and_prepayments" in dictionary.keys() else APIHelper.SKIP
         resume = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ReactivateSubscriptionRequestResume'), dictionary.get('resume'), False) if dictionary.get('resume') is not None else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(calendar_billing,
                    include_trial,
                    preserve_balance,
                    coupon_code,
                    use_credits_and_prepayments,
-                   resume)
+                   resume,
+                   dictionary)

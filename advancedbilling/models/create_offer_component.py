@@ -34,7 +34,8 @@ class CreateOfferComponent(object):
 
     def __init__(self,
                  component_id=APIHelper.SKIP,
-                 starting_quantity=APIHelper.SKIP):
+                 starting_quantity=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateOfferComponent class"""
 
         # Initialize members of the class
@@ -42,6 +43,9 @@ class CreateOfferComponent(object):
             self.component_id = component_id 
         if starting_quantity is not APIHelper.SKIP:
             self.starting_quantity = starting_quantity 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -64,6 +68,11 @@ class CreateOfferComponent(object):
         # Extract variables from the dictionary
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
         starting_quantity = dictionary.get("starting_quantity") if dictionary.get("starting_quantity") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(component_id,
-                   starting_quantity)
+                   starting_quantity,
+                   dictionary)

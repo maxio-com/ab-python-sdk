@@ -27,11 +27,15 @@ class UpsertPrepaidConfigurationRequest(object):
     }
 
     def __init__(self,
-                 prepaid_configuration=None):
+                 prepaid_configuration=None,
+                 additional_properties={}):
         """Constructor for the UpsertPrepaidConfigurationRequest class"""
 
         # Initialize members of the class
         self.prepaid_configuration = prepaid_configuration 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -53,5 +57,10 @@ class UpsertPrepaidConfigurationRequest(object):
 
         # Extract variables from the dictionary
         prepaid_configuration = UpsertPrepaidConfiguration.from_dictionary(dictionary.get('prepaid_configuration')) if dictionary.get('prepaid_configuration') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(prepaid_configuration)
+        return cls(prepaid_configuration,
+                   dictionary)

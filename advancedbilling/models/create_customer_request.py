@@ -26,11 +26,15 @@ class CreateCustomerRequest(object):
     }
 
     def __init__(self,
-                 customer=None):
+                 customer=None,
+                 additional_properties={}):
         """Constructor for the CreateCustomerRequest class"""
 
         # Initialize members of the class
         self.customer = customer 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class CreateCustomerRequest(object):
 
         # Extract variables from the dictionary
         customer = CreateCustomer.from_dictionary(dictionary.get('customer')) if dictionary.get('customer') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(customer)
+        return cls(customer,
+                   dictionary)

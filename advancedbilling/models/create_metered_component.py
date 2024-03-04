@@ -26,11 +26,15 @@ class CreateMeteredComponent(object):
     }
 
     def __init__(self,
-                 metered_component=None):
+                 metered_component=None,
+                 additional_properties={}):
         """Constructor for the CreateMeteredComponent class"""
 
         # Initialize members of the class
         self.metered_component = metered_component 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class CreateMeteredComponent(object):
 
         # Extract variables from the dictionary
         metered_component = MeteredComponent.from_dictionary(dictionary.get('metered_component')) if dictionary.get('metered_component') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(metered_component)
+        return cls(metered_component,
+                   dictionary)

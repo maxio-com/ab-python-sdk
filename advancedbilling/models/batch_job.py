@@ -52,7 +52,8 @@ class BatchJob(object):
                  finished_at=APIHelper.SKIP,
                  row_count=APIHelper.SKIP,
                  created_at=APIHelper.SKIP,
-                 completed=APIHelper.SKIP):
+                 completed=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the BatchJob class"""
 
         # Initialize members of the class
@@ -66,6 +67,9 @@ class BatchJob(object):
             self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if completed is not APIHelper.SKIP:
             self.completed = completed 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -97,9 +101,14 @@ class BatchJob(object):
         else:
             created_at = APIHelper.SKIP
         completed = dictionary.get("completed") if dictionary.get("completed") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    finished_at,
                    row_count,
                    created_at,
-                   completed)
+                   completed,
+                   dictionary)

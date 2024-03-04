@@ -43,7 +43,8 @@ class SubscriptionGroupBalances(object):
                  prepayments=APIHelper.SKIP,
                  service_credits=APIHelper.SKIP,
                  open_invoices=APIHelper.SKIP,
-                 pending_discounts=APIHelper.SKIP):
+                 pending_discounts=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupBalances class"""
 
         # Initialize members of the class
@@ -55,6 +56,9 @@ class SubscriptionGroupBalances(object):
             self.open_invoices = open_invoices 
         if pending_discounts is not APIHelper.SKIP:
             self.pending_discounts = pending_discounts 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -79,8 +83,13 @@ class SubscriptionGroupBalances(object):
         service_credits = AccountBalance.from_dictionary(dictionary.get('service_credits')) if 'service_credits' in dictionary.keys() else APIHelper.SKIP
         open_invoices = AccountBalance.from_dictionary(dictionary.get('open_invoices')) if 'open_invoices' in dictionary.keys() else APIHelper.SKIP
         pending_discounts = AccountBalance.from_dictionary(dictionary.get('pending_discounts')) if 'pending_discounts' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(prepayments,
                    service_credits,
                    open_invoices,
-                   pending_discounts)
+                   pending_discounts,
+                   dictionary)

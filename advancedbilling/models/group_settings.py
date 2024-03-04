@@ -37,13 +37,17 @@ class GroupSettings(object):
 
     def __init__(self,
                  target=None,
-                 billing=APIHelper.SKIP):
+                 billing=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the GroupSettings class"""
 
         # Initialize members of the class
         self.target = target 
         if billing is not APIHelper.SKIP:
             self.billing = billing 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -66,9 +70,14 @@ class GroupSettings(object):
         # Extract variables from the dictionary
         target = GroupTarget.from_dictionary(dictionary.get('target')) if dictionary.get('target') else None
         billing = GroupBilling.from_dictionary(dictionary.get('billing')) if 'billing' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(target,
-                   billing)
+                   billing,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

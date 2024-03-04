@@ -77,7 +77,8 @@ class CreateInvoice(object):
                  billing_address=APIHelper.SKIP,
                  shipping_address=APIHelper.SKIP,
                  coupons=APIHelper.SKIP,
-                 status='open'):
+                 status='open',
+                 additional_properties={}):
         """Constructor for the CreateInvoice class"""
 
         # Initialize members of the class
@@ -100,6 +101,9 @@ class CreateInvoice(object):
         if coupons is not APIHelper.SKIP:
             self.coupons = coupons 
         self.status = status 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -138,6 +142,10 @@ class CreateInvoice(object):
         else:
             coupons = APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else 'open'
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(line_items,
                    issue_date,
@@ -148,4 +156,5 @@ class CreateInvoice(object):
                    billing_address,
                    shipping_address,
                    coupons,
-                   status)
+                   status,
+                   dictionary)

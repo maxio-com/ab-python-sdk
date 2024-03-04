@@ -27,11 +27,15 @@ class BankAccountVerificationRequest(object):
     }
 
     def __init__(self,
-                 bank_account_verification=None):
+                 bank_account_verification=None,
+                 additional_properties={}):
         """Constructor for the BankAccountVerificationRequest class"""
 
         # Initialize members of the class
         self.bank_account_verification = bank_account_verification 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -53,5 +57,10 @@ class BankAccountVerificationRequest(object):
 
         # Extract variables from the dictionary
         bank_account_verification = BankAccountVerification.from_dictionary(dictionary.get('bank_account_verification')) if dictionary.get('bank_account_verification') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(bank_account_verification)
+        return cls(bank_account_verification,
+                   dictionary)

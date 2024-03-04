@@ -46,7 +46,8 @@ class CreditNoteApplication(object):
                  transaction_time=APIHelper.SKIP,
                  invoice_uid=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
-                 applied_amount=APIHelper.SKIP):
+                 applied_amount=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreditNoteApplication class"""
 
         # Initialize members of the class
@@ -60,6 +61,9 @@ class CreditNoteApplication(object):
             self.memo = memo 
         if applied_amount is not APIHelper.SKIP:
             self.applied_amount = applied_amount 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -85,12 +89,17 @@ class CreditNoteApplication(object):
         invoice_uid = dictionary.get("invoice_uid") if dictionary.get("invoice_uid") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    transaction_time,
                    invoice_uid,
                    memo,
-                   applied_amount)
+                   applied_amount,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

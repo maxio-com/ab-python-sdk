@@ -48,6 +48,7 @@ class Customer1(object):
     ]
 
     _nullables = [
+        'chargify_id',
         'organization',
         'vat_number',
         'reference',
@@ -60,7 +61,8 @@ class Customer1(object):
                  organization=APIHelper.SKIP,
                  email=APIHelper.SKIP,
                  vat_number=APIHelper.SKIP,
-                 reference=APIHelper.SKIP):
+                 reference=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Customer1 class"""
 
         # Initialize members of the class
@@ -78,6 +80,9 @@ class Customer1(object):
             self.vat_number = vat_number 
         if reference is not APIHelper.SKIP:
             self.reference = reference 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -98,13 +103,17 @@ class Customer1(object):
             return None
 
         # Extract variables from the dictionary
-        chargify_id = dictionary.get("chargify_id") if dictionary.get("chargify_id") else APIHelper.SKIP
+        chargify_id = dictionary.get("chargify_id") if "chargify_id" in dictionary.keys() else APIHelper.SKIP
         first_name = dictionary.get("first_name") if dictionary.get("first_name") else APIHelper.SKIP
         last_name = dictionary.get("last_name") if dictionary.get("last_name") else APIHelper.SKIP
         organization = dictionary.get("organization") if "organization" in dictionary.keys() else APIHelper.SKIP
         email = dictionary.get("email") if dictionary.get("email") else APIHelper.SKIP
         vat_number = dictionary.get("vat_number") if "vat_number" in dictionary.keys() else APIHelper.SKIP
         reference = dictionary.get("reference") if "reference" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(chargify_id,
                    first_name,
@@ -112,7 +121,8 @@ class Customer1(object):
                    organization,
                    email,
                    vat_number,
-                   reference)
+                   reference,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

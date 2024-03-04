@@ -59,7 +59,8 @@ class DunningStepData(object):
                  send_sms=None,
                  email_body=APIHelper.SKIP,
                  email_subject=APIHelper.SKIP,
-                 sms_body=APIHelper.SKIP):
+                 sms_body=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the DunningStepData class"""
 
         # Initialize members of the class
@@ -74,6 +75,9 @@ class DunningStepData(object):
         self.send_sms = send_sms 
         if sms_body is not APIHelper.SKIP:
             self.sms_body = sms_body 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -102,6 +106,10 @@ class DunningStepData(object):
         email_body = dictionary.get("email_body") if "email_body" in dictionary.keys() else APIHelper.SKIP
         email_subject = dictionary.get("email_subject") if "email_subject" in dictionary.keys() else APIHelper.SKIP
         sms_body = dictionary.get("sms_body") if "sms_body" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(day_threshold,
                    action,
@@ -110,7 +118,8 @@ class DunningStepData(object):
                    send_sms,
                    email_body,
                    email_subject,
-                   sms_body)
+                   sms_body,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

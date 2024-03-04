@@ -38,7 +38,8 @@ class SendInvoiceRequest(object):
     def __init__(self,
                  recipient_emails=APIHelper.SKIP,
                  cc_recipient_emails=APIHelper.SKIP,
-                 bcc_recipient_emails=APIHelper.SKIP):
+                 bcc_recipient_emails=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SendInvoiceRequest class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class SendInvoiceRequest(object):
             self.cc_recipient_emails = cc_recipient_emails 
         if bcc_recipient_emails is not APIHelper.SKIP:
             self.bcc_recipient_emails = bcc_recipient_emails 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,7 +75,12 @@ class SendInvoiceRequest(object):
         recipient_emails = dictionary.get("recipient_emails") if dictionary.get("recipient_emails") else APIHelper.SKIP
         cc_recipient_emails = dictionary.get("cc_recipient_emails") if dictionary.get("cc_recipient_emails") else APIHelper.SKIP
         bcc_recipient_emails = dictionary.get("bcc_recipient_emails") if dictionary.get("bcc_recipient_emails") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(recipient_emails,
                    cc_recipient_emails,
-                   bcc_recipient_emails)
+                   bcc_recipient_emails,
+                   dictionary)

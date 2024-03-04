@@ -52,7 +52,8 @@ class RefundConsolidatedInvoice(object):
                  segment_uids=None,
                  external=APIHelper.SKIP,
                  apply_credit=APIHelper.SKIP,
-                 amount=APIHelper.SKIP):
+                 amount=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the RefundConsolidatedInvoice class"""
 
         # Initialize members of the class
@@ -65,6 +66,9 @@ class RefundConsolidatedInvoice(object):
             self.apply_credit = apply_credit 
         if amount is not APIHelper.SKIP:
             self.amount = amount 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -92,13 +96,18 @@ class RefundConsolidatedInvoice(object):
         external = dictionary.get("external") if "external" in dictionary.keys() else APIHelper.SKIP
         apply_credit = dictionary.get("apply_credit") if "apply_credit" in dictionary.keys() else APIHelper.SKIP
         amount = dictionary.get("amount") if dictionary.get("amount") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(memo,
                    payment_id,
                    segment_uids,
                    external,
                    apply_credit,
-                   amount)
+                   amount,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

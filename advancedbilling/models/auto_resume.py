@@ -34,12 +34,16 @@ class AutoResume(object):
     ]
 
     def __init__(self,
-                 automatically_resume_at=APIHelper.SKIP):
+                 automatically_resume_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AutoResume class"""
 
         # Initialize members of the class
         if automatically_resume_at is not APIHelper.SKIP:
             self.automatically_resume_at = APIHelper.apply_datetime_converter(automatically_resume_at, APIHelper.RFC3339DateTime) if automatically_resume_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -64,5 +68,10 @@ class AutoResume(object):
             automatically_resume_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("automatically_resume_at")).datetime if dictionary.get("automatically_resume_at") else None
         else:
             automatically_resume_at = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(automatically_resume_at)
+        return cls(automatically_resume_at,
+                   dictionary)

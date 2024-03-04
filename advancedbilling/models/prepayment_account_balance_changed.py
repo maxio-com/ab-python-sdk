@@ -37,7 +37,8 @@ class PrepaymentAccountBalanceChanged(object):
                  reason=None,
                  prepayment_account_balance_in_cents=None,
                  prepayment_balance_change_in_cents=None,
-                 currency_code=None):
+                 currency_code=None,
+                 additional_properties={}):
         """Constructor for the PrepaymentAccountBalanceChanged class"""
 
         # Initialize members of the class
@@ -45,6 +46,9 @@ class PrepaymentAccountBalanceChanged(object):
         self.prepayment_account_balance_in_cents = prepayment_account_balance_in_cents 
         self.prepayment_balance_change_in_cents = prepayment_balance_change_in_cents 
         self.currency_code = currency_code 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -69,11 +73,16 @@ class PrepaymentAccountBalanceChanged(object):
         prepayment_account_balance_in_cents = dictionary.get("prepayment_account_balance_in_cents") if dictionary.get("prepayment_account_balance_in_cents") else None
         prepayment_balance_change_in_cents = dictionary.get("prepayment_balance_change_in_cents") if dictionary.get("prepayment_balance_change_in_cents") else None
         currency_code = dictionary.get("currency_code") if dictionary.get("currency_code") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(reason,
                    prepayment_account_balance_in_cents,
                    prepayment_balance_change_in_cents,
-                   currency_code)
+                   currency_code,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

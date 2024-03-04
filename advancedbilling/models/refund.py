@@ -62,7 +62,8 @@ class Refund(object):
                  external=APIHelper.SKIP,
                  apply_credit=APIHelper.SKIP,
                  void_invoice=APIHelper.SKIP,
-                 segment_uids=APIHelper.SKIP):
+                 segment_uids=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Refund class"""
 
         # Initialize members of the class
@@ -80,6 +81,9 @@ class Refund(object):
             self.void_invoice = void_invoice 
         if segment_uids is not APIHelper.SKIP:
             self.segment_uids = segment_uids 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -108,6 +112,10 @@ class Refund(object):
         apply_credit = dictionary.get("apply_credit") if "apply_credit" in dictionary.keys() else APIHelper.SKIP
         void_invoice = dictionary.get("void_invoice") if "void_invoice" in dictionary.keys() else APIHelper.SKIP
         segment_uids = APIHelper.deserialize_union_type(UnionTypeLookUp.get('RefundSegmentUids'), dictionary.get('segment_uids'), False) if dictionary.get('segment_uids') is not None else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(amount,
                    memo,
@@ -115,4 +123,5 @@ class Refund(object):
                    external,
                    apply_credit,
                    void_invoice,
-                   segment_uids)
+                   segment_uids,
+                   dictionary)

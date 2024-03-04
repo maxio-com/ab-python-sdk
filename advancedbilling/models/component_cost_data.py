@@ -62,7 +62,8 @@ class ComponentCostData(object):
                  quantity=APIHelper.SKIP,
                  amount=APIHelper.SKIP,
                  pricing_scheme=APIHelper.SKIP,
-                 tiers=APIHelper.SKIP):
+                 tiers=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ComponentCostData class"""
 
         # Initialize members of the class
@@ -80,6 +81,9 @@ class ComponentCostData(object):
             self.pricing_scheme = pricing_scheme 
         if tiers is not APIHelper.SKIP:
             self.tiers = tiers 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -111,6 +115,10 @@ class ComponentCostData(object):
             tiers = [ComponentCostDataRateTier.from_dictionary(x) for x in dictionary.get('tiers')]
         else:
             tiers = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(component_code_id,
                    price_point_id,
@@ -118,7 +126,8 @@ class ComponentCostData(object):
                    quantity,
                    amount,
                    pricing_scheme,
-                   tiers)
+                   tiers,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

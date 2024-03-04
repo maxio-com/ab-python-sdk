@@ -26,11 +26,15 @@ class ListInvoicesResponse(object):
     }
 
     def __init__(self,
-                 invoices=None):
+                 invoices=None,
+                 additional_properties={}):
         """Constructor for the ListInvoicesResponse class"""
 
         # Initialize members of the class
         self.invoices = invoices 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -54,5 +58,10 @@ class ListInvoicesResponse(object):
         invoices = None
         if dictionary.get('invoices') is not None:
             invoices = [Invoice.from_dictionary(x) for x in dictionary.get('invoices')]
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(invoices)
+        return cls(invoices,
+                   dictionary)

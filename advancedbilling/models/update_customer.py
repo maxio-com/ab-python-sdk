@@ -102,7 +102,8 @@ class UpdateCustomer(object):
                  vat_number=APIHelper.SKIP,
                  tax_exempt=APIHelper.SKIP,
                  tax_exempt_reason=APIHelper.SKIP,
-                 parent_id=APIHelper.SKIP):
+                 parent_id=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the UpdateCustomer class"""
 
         # Initialize members of the class
@@ -143,6 +144,9 @@ class UpdateCustomer(object):
         if parent_id is not APIHelper.SKIP:
             self.parent_id = parent_id 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -180,6 +184,10 @@ class UpdateCustomer(object):
         tax_exempt = dictionary.get("tax_exempt") if "tax_exempt" in dictionary.keys() else APIHelper.SKIP
         tax_exempt_reason = dictionary.get("tax_exempt_reason") if dictionary.get("tax_exempt_reason") else APIHelper.SKIP
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -198,4 +206,5 @@ class UpdateCustomer(object):
                    vat_number,
                    tax_exempt,
                    tax_exempt_reason,
-                   parent_id)
+                   parent_id,
+                   dictionary)

@@ -42,7 +42,8 @@ class ListPublicKeysMeta(object):
                  total_count=APIHelper.SKIP,
                  current_page=APIHelper.SKIP,
                  total_pages=APIHelper.SKIP,
-                 per_page=APIHelper.SKIP):
+                 per_page=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ListPublicKeysMeta class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class ListPublicKeysMeta(object):
             self.total_pages = total_pages 
         if per_page is not APIHelper.SKIP:
             self.per_page = per_page 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,8 +82,13 @@ class ListPublicKeysMeta(object):
         current_page = dictionary.get("current_page") if dictionary.get("current_page") else APIHelper.SKIP
         total_pages = dictionary.get("total_pages") if dictionary.get("total_pages") else APIHelper.SKIP
         per_page = dictionary.get("per_page") if dictionary.get("per_page") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(total_count,
                    current_page,
                    total_pages,
-                   per_page)
+                   per_page,
+                   dictionary)

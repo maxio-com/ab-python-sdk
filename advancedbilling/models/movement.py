@@ -64,7 +64,8 @@ class Movement(object):
                  breakouts=APIHelper.SKIP,
                  line_items=APIHelper.SKIP,
                  subscription_id=APIHelper.SKIP,
-                 subscriber_name=APIHelper.SKIP):
+                 subscriber_name=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Movement class"""
 
         # Initialize members of the class
@@ -86,6 +87,9 @@ class Movement(object):
             self.subscription_id = subscription_id 
         if subscriber_name is not APIHelper.SKIP:
             self.subscriber_name = subscriber_name 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -119,6 +123,10 @@ class Movement(object):
             line_items = APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         subscriber_name = dictionary.get("subscriber_name") if dictionary.get("subscriber_name") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(timestamp,
                    amount_in_cents,
@@ -128,4 +136,5 @@ class Movement(object):
                    breakouts,
                    line_items,
                    subscription_id,
-                   subscriber_name)
+                   subscriber_name,
+                   dictionary)

@@ -21,7 +21,8 @@ class InvoiceTax(object):
         uid (str): TODO: type description here.
         title (str): TODO: type description here.
         description (str): TODO: type description here.
-        source_type (str): TODO: type description here.
+        source_type (ProformaInvoiceTaxSourceType): TODO: type description
+            here.
         source_id (int): TODO: type description here.
         percentage (str): TODO: type description here.
         taxable_amount (str): TODO: type description here.
@@ -78,7 +79,8 @@ class InvoiceTax(object):
                  tax_amount=APIHelper.SKIP,
                  transaction_id=APIHelper.SKIP,
                  line_item_breakouts=APIHelper.SKIP,
-                 tax_component_breakouts=APIHelper.SKIP):
+                 tax_component_breakouts=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceTax class"""
 
         # Initialize members of the class
@@ -104,6 +106,9 @@ class InvoiceTax(object):
             self.line_item_breakouts = line_item_breakouts 
         if tax_component_breakouts is not APIHelper.SKIP:
             self.tax_component_breakouts = tax_component_breakouts 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -143,6 +148,10 @@ class InvoiceTax(object):
             tax_component_breakouts = [InvoiceTaxComponentBreakout.from_dictionary(x) for x in dictionary.get('tax_component_breakouts')]
         else:
             tax_component_breakouts = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    title,
@@ -154,7 +163,8 @@ class InvoiceTax(object):
                    tax_amount,
                    transaction_id,
                    line_item_breakouts,
-                   tax_component_breakouts)
+                   tax_component_breakouts,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

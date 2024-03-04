@@ -63,7 +63,8 @@ class Metafield(object):
                  scope=APIHelper.SKIP,
                  data_count=APIHelper.SKIP,
                  input_type=APIHelper.SKIP,
-                 enum=APIHelper.SKIP):
+                 enum=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Metafield class"""
 
         # Initialize members of the class
@@ -79,6 +80,9 @@ class Metafield(object):
             self.input_type = input_type 
         if enum is not APIHelper.SKIP:
             self.enum = enum 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -109,10 +113,15 @@ class Metafield(object):
             enum = APIHelper.deserialize_union_type(UnionTypeLookUp.get('MetafieldEnum'), dictionary.get('enum'), False) if dictionary.get('enum') is not None else None
         else:
             enum = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    name,
                    scope,
                    data_count,
                    input_type,
-                   enum)
+                   enum,
+                   dictionary)

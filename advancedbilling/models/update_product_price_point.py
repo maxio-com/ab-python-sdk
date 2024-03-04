@@ -34,7 +34,8 @@ class UpdateProductPricePoint(object):
 
     def __init__(self,
                  handle=APIHelper.SKIP,
-                 price_in_cents=APIHelper.SKIP):
+                 price_in_cents=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the UpdateProductPricePoint class"""
 
         # Initialize members of the class
@@ -42,6 +43,9 @@ class UpdateProductPricePoint(object):
             self.handle = handle 
         if price_in_cents is not APIHelper.SKIP:
             self.price_in_cents = price_in_cents 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -64,6 +68,11 @@ class UpdateProductPricePoint(object):
         # Extract variables from the dictionary
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(handle,
-                   price_in_cents)
+                   price_in_cents,
+                   dictionary)

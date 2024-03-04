@@ -54,7 +54,8 @@ class CreateMultiInvoicePayment(object):
                  memo=APIHelper.SKIP,
                  details=APIHelper.SKIP,
                  method=APIHelper.SKIP,
-                 received_on=APIHelper.SKIP):
+                 received_on=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateMultiInvoicePayment class"""
 
         # Initialize members of the class
@@ -68,6 +69,9 @@ class CreateMultiInvoicePayment(object):
         if received_on is not APIHelper.SKIP:
             self.received_on = received_on 
         self.applications = applications 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -97,13 +101,18 @@ class CreateMultiInvoicePayment(object):
         details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
         method = dictionary.get("method") if dictionary.get("method") else APIHelper.SKIP
         received_on = dictionary.get("received_on") if dictionary.get("received_on") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(amount,
                    applications,
                    memo,
                    details,
                    method,
-                   received_on)
+                   received_on,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

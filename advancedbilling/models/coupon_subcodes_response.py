@@ -38,7 +38,8 @@ class CouponSubcodesResponse(object):
     def __init__(self,
                  created_codes=APIHelper.SKIP,
                  duplicate_codes=APIHelper.SKIP,
-                 invalid_codes=APIHelper.SKIP):
+                 invalid_codes=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CouponSubcodesResponse class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class CouponSubcodesResponse(object):
             self.duplicate_codes = duplicate_codes 
         if invalid_codes is not APIHelper.SKIP:
             self.invalid_codes = invalid_codes 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,7 +75,12 @@ class CouponSubcodesResponse(object):
         created_codes = dictionary.get("created_codes") if dictionary.get("created_codes") else APIHelper.SKIP
         duplicate_codes = dictionary.get("duplicate_codes") if dictionary.get("duplicate_codes") else APIHelper.SKIP
         invalid_codes = dictionary.get("invalid_codes") if dictionary.get("invalid_codes") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(created_codes,
                    duplicate_codes,
-                   invalid_codes)
+                   invalid_codes,
+                   dictionary)

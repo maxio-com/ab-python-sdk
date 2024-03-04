@@ -33,13 +33,17 @@ class CreateSubscriptionGroup(object):
 
     def __init__(self,
                  subscription_id=None,
-                 member_ids=APIHelper.SKIP):
+                 member_ids=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateSubscriptionGroup class"""
 
         # Initialize members of the class
         self.subscription_id = subscription_id 
         if member_ids is not APIHelper.SKIP:
             self.member_ids = member_ids 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -63,9 +67,14 @@ class CreateSubscriptionGroup(object):
         # Extract variables from the dictionary
         subscription_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionGroupSubscriptionId'), dictionary.get('subscription_id'), False) if dictionary.get('subscription_id') is not None else None
         member_ids = dictionary.get("member_ids") if dictionary.get("member_ids") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(subscription_id,
-                   member_ids)
+                   member_ids,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

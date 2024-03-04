@@ -190,7 +190,8 @@ class PaymentProfileAttributes(object):
                  payment_method_nonce=APIHelper.SKIP,
                  gateway_handle=APIHelper.SKIP,
                  cvv=APIHelper.SKIP,
-                 last_four=APIHelper.SKIP):
+                 last_four=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PaymentProfileAttributes class"""
 
         # Initialize members of the class
@@ -245,6 +246,9 @@ class PaymentProfileAttributes(object):
         if last_four is not APIHelper.SKIP:
             self.last_four = last_four 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -290,6 +294,10 @@ class PaymentProfileAttributes(object):
         gateway_handle = dictionary.get("gateway_handle") if dictionary.get("gateway_handle") else APIHelper.SKIP
         cvv = dictionary.get("cvv") if dictionary.get("cvv") else APIHelper.SKIP
         last_four = dictionary.get("last_four") if dictionary.get("last_four") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(chargify_token,
                    id,
@@ -315,7 +323,8 @@ class PaymentProfileAttributes(object):
                    payment_method_nonce,
                    gateway_handle,
                    cvv,
-                   last_four)
+                   last_four,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

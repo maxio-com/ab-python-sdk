@@ -18,7 +18,7 @@ from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.subscription_component_response import SubscriptionComponentResponse
-from advancedbilling.models.bulk_component_s_price_point_assignment import BulkComponentSPricePointAssignment
+from advancedbilling.models.bulk_components_price_point_assignment import BulkComponentsPricePointAssignment
 from advancedbilling.models.subscription_response import SubscriptionResponse
 from advancedbilling.models.allocation_response import AllocationResponse
 from advancedbilling.models.allocation_preview_response import AllocationPreviewResponse
@@ -237,11 +237,11 @@ class SubscriptionComponentsController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (BulkComponentSPricePointAssignment, optional): TODO: type
+            body (BulkComponentsPricePointAssignment, optional): TODO: type
                 description here.
 
         Returns:
-            BulkComponentSPricePointAssignment: Response from the API. OK
+            BulkComponentsPricePointAssignment: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -273,7 +273,7 @@ class SubscriptionComponentsController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(BulkComponentSPricePointAssignment.from_dictionary)
+            .deserialize_into(BulkComponentsPricePointAssignment.from_dictionary)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ComponentPricePointErrorException)
         ).execute()
 
@@ -290,7 +290,7 @@ class SubscriptionComponentsController(BaseController):
             subscription_id (int): The Chargify id of the subscription
 
         Returns:
-            SubscriptionResponse: Response from the API. OK
+            SubscriptionResponse: Response from the API. Created
 
         Raises:
             APIException: When an error occurs while fetching the data from

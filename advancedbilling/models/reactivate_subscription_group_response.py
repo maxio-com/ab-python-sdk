@@ -62,7 +62,8 @@ class ReactivateSubscriptionGroupResponse(object):
                  primary_subscription_id=APIHelper.SKIP,
                  next_assessment_at=APIHelper.SKIP,
                  state=APIHelper.SKIP,
-                 cancel_at_end_of_period=APIHelper.SKIP):
+                 cancel_at_end_of_period=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ReactivateSubscriptionGroupResponse class"""
 
         # Initialize members of the class
@@ -84,6 +85,9 @@ class ReactivateSubscriptionGroupResponse(object):
             self.state = state 
         if cancel_at_end_of_period is not APIHelper.SKIP:
             self.cancel_at_end_of_period = cancel_at_end_of_period 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -113,6 +117,10 @@ class ReactivateSubscriptionGroupResponse(object):
         next_assessment_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_assessment_at")).datetime if dictionary.get("next_assessment_at") else APIHelper.SKIP
         state = dictionary.get("state") if dictionary.get("state") else APIHelper.SKIP
         cancel_at_end_of_period = dictionary.get("cancel_at_end_of_period") if "cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    scheme,
@@ -122,4 +130,5 @@ class ReactivateSubscriptionGroupResponse(object):
                    primary_subscription_id,
                    next_assessment_at,
                    state,
-                   cancel_at_end_of_period)
+                   cancel_at_end_of_period,
+                   dictionary)

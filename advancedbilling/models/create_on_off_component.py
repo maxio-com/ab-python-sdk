@@ -26,11 +26,15 @@ class CreateOnOffComponent(object):
     }
 
     def __init__(self,
-                 on_off_component=None):
+                 on_off_component=None,
+                 additional_properties={}):
         """Constructor for the CreateOnOffComponent class"""
 
         # Initialize members of the class
         self.on_off_component = on_off_component 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class CreateOnOffComponent(object):
 
         # Extract variables from the dictionary
         on_off_component = OnOffComponent.from_dictionary(dictionary.get('on_off_component')) if dictionary.get('on_off_component') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(on_off_component)
+        return cls(on_off_component,
+                   dictionary)

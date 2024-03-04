@@ -62,7 +62,8 @@ class InvoicePaymentMethod(object):
                  card_brand=APIHelper.SKIP,
                  card_expiration=APIHelper.SKIP,
                  last_four=APIHelper.SKIP,
-                 masked_card_number=APIHelper.SKIP):
+                 masked_card_number=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoicePaymentMethod class"""
 
         # Initialize members of the class
@@ -82,6 +83,9 @@ class InvoicePaymentMethod(object):
             self.last_four = last_four 
         if masked_card_number is not APIHelper.SKIP:
             self.masked_card_number = masked_card_number 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -110,6 +114,10 @@ class InvoicePaymentMethod(object):
         card_expiration = dictionary.get("card_expiration") if dictionary.get("card_expiration") else APIHelper.SKIP
         last_four = dictionary.get("last_four") if "last_four" in dictionary.keys() else APIHelper.SKIP
         masked_card_number = dictionary.get("masked_card_number") if dictionary.get("masked_card_number") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(details,
                    kind,
@@ -118,7 +126,8 @@ class InvoicePaymentMethod(object):
                    card_brand,
                    card_expiration,
                    last_four,
-                   masked_card_number)
+                   masked_card_number,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

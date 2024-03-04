@@ -46,7 +46,8 @@ class SubscriptionGroupCustomer(object):
                  last_name=APIHelper.SKIP,
                  organization=APIHelper.SKIP,
                  email=APIHelper.SKIP,
-                 reference=APIHelper.SKIP):
+                 reference=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupCustomer class"""
 
         # Initialize members of the class
@@ -60,6 +61,9 @@ class SubscriptionGroupCustomer(object):
             self.email = email 
         if reference is not APIHelper.SKIP:
             self.reference = reference 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -85,9 +89,14 @@ class SubscriptionGroupCustomer(object):
         organization = dictionary.get("organization") if dictionary.get("organization") else APIHelper.SKIP
         email = dictionary.get("email") if dictionary.get("email") else APIHelper.SKIP
         reference = dictionary.get("reference") if dictionary.get("reference") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(first_name,
                    last_name,
                    organization,
                    email,
-                   reference)
+                   reference,
+                   dictionary)

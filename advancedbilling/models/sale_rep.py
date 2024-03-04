@@ -48,7 +48,8 @@ class SaleRep(object):
                  full_name=APIHelper.SKIP,
                  subscriptions_count=APIHelper.SKIP,
                  test_mode=APIHelper.SKIP,
-                 subscriptions=APIHelper.SKIP):
+                 subscriptions=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SaleRep class"""
 
         # Initialize members of the class
@@ -62,6 +63,9 @@ class SaleRep(object):
             self.test_mode = test_mode 
         if subscriptions is not APIHelper.SKIP:
             self.subscriptions = subscriptions 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -91,9 +95,14 @@ class SaleRep(object):
             subscriptions = [SaleRepSubscription.from_dictionary(x) for x in dictionary.get('subscriptions')]
         else:
             subscriptions = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    full_name,
                    subscriptions_count,
                    test_mode,
-                   subscriptions)
+                   subscriptions,
+                   dictionary)

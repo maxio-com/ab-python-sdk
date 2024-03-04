@@ -48,7 +48,8 @@ class PrepaidConfiguration(object):
                  initial_funding_amount_in_cents=APIHelper.SKIP,
                  replenish_to_amount_in_cents=APIHelper.SKIP,
                  auto_replenish=APIHelper.SKIP,
-                 replenish_threshold_amount_in_cents=APIHelper.SKIP):
+                 replenish_threshold_amount_in_cents=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PrepaidConfiguration class"""
 
         # Initialize members of the class
@@ -62,6 +63,9 @@ class PrepaidConfiguration(object):
             self.auto_replenish = auto_replenish 
         if replenish_threshold_amount_in_cents is not APIHelper.SKIP:
             self.replenish_threshold_amount_in_cents = replenish_threshold_amount_in_cents 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -87,12 +91,17 @@ class PrepaidConfiguration(object):
         replenish_to_amount_in_cents = dictionary.get("replenish_to_amount_in_cents") if dictionary.get("replenish_to_amount_in_cents") else APIHelper.SKIP
         auto_replenish = dictionary.get("auto_replenish") if "auto_replenish" in dictionary.keys() else APIHelper.SKIP
         replenish_threshold_amount_in_cents = dictionary.get("replenish_threshold_amount_in_cents") if dictionary.get("replenish_threshold_amount_in_cents") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    initial_funding_amount_in_cents,
                    replenish_to_amount_in_cents,
                    auto_replenish,
-                   replenish_threshold_amount_in_cents)
+                   replenish_threshold_amount_in_cents,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

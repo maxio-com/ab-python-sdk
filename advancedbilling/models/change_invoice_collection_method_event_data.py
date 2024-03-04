@@ -30,12 +30,16 @@ class ChangeInvoiceCollectionMethodEventData(object):
 
     def __init__(self,
                  from_collection_method=None,
-                 to_collection_method=None):
+                 to_collection_method=None,
+                 additional_properties={}):
         """Constructor for the ChangeInvoiceCollectionMethodEventData class"""
 
         # Initialize members of the class
         self.from_collection_method = from_collection_method 
         self.to_collection_method = to_collection_method 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,9 +62,14 @@ class ChangeInvoiceCollectionMethodEventData(object):
         # Extract variables from the dictionary
         from_collection_method = dictionary.get("from_collection_method") if dictionary.get("from_collection_method") else None
         to_collection_method = dictionary.get("to_collection_method") if dictionary.get("to_collection_method") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(from_collection_method,
-                   to_collection_method)
+                   to_collection_method,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

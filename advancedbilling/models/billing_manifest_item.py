@@ -84,7 +84,8 @@ class BillingManifestItem(object):
                  product_handle=APIHelper.SKIP,
                  product_name=APIHelper.SKIP,
                  period_range_start=APIHelper.SKIP,
-                 period_range_end=APIHelper.SKIP):
+                 period_range_end=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the BillingManifestItem class"""
 
         # Initialize members of the class
@@ -116,6 +117,9 @@ class BillingManifestItem(object):
             self.period_range_start = period_range_start 
         if period_range_end is not APIHelper.SKIP:
             self.period_range_end = period_range_end 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -150,6 +154,10 @@ class BillingManifestItem(object):
         product_name = dictionary.get("product_name") if dictionary.get("product_name") else APIHelper.SKIP
         period_range_start = dictionary.get("period_range_start") if dictionary.get("period_range_start") else APIHelper.SKIP
         period_range_end = dictionary.get("period_range_end") if dictionary.get("period_range_end") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(transaction_type,
                    kind,
@@ -164,4 +172,5 @@ class BillingManifestItem(object):
                    product_handle,
                    product_name,
                    period_range_start,
-                   period_range_end)
+                   period_range_end,
+                   dictionary)

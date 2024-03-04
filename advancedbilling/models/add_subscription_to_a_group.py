@@ -30,12 +30,16 @@ class AddSubscriptionToAGroup(object):
     ]
 
     def __init__(self,
-                 group=APIHelper.SKIP):
+                 group=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AddSubscriptionToAGroup class"""
 
         # Initialize members of the class
         if group is not APIHelper.SKIP:
             self.group = group 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class AddSubscriptionToAGroup(object):
 
         # Extract variables from the dictionary
         group = APIHelper.deserialize_union_type(UnionTypeLookUp.get('AddSubscriptionToAGroupGroup'), dictionary.get('group'), False) if dictionary.get('group') is not None else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(group)
+        return cls(group,
+                   dictionary)

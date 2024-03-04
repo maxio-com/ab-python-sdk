@@ -70,7 +70,8 @@ class SiteStatistics(object):
                  total_active_subscriptions=APIHelper.SKIP,
                  total_past_due_subscriptions=APIHelper.SKIP,
                  total_unpaid_subscriptions=APIHelper.SKIP,
-                 total_dunning_subscriptions=APIHelper.SKIP):
+                 total_dunning_subscriptions=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SiteStatistics class"""
 
         # Initialize members of the class
@@ -96,6 +97,9 @@ class SiteStatistics(object):
             self.total_unpaid_subscriptions = total_unpaid_subscriptions 
         if total_dunning_subscriptions is not APIHelper.SKIP:
             self.total_dunning_subscriptions = total_dunning_subscriptions 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -127,6 +131,10 @@ class SiteStatistics(object):
         total_past_due_subscriptions = dictionary.get("total_past_due_subscriptions") if dictionary.get("total_past_due_subscriptions") else APIHelper.SKIP
         total_unpaid_subscriptions = dictionary.get("total_unpaid_subscriptions") if dictionary.get("total_unpaid_subscriptions") else APIHelper.SKIP
         total_dunning_subscriptions = dictionary.get("total_dunning_subscriptions") if dictionary.get("total_dunning_subscriptions") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(total_subscriptions,
                    subscriptions_today,
@@ -138,4 +146,5 @@ class SiteStatistics(object):
                    total_active_subscriptions,
                    total_past_due_subscriptions,
                    total_unpaid_subscriptions,
-                   total_dunning_subscriptions)
+                   total_dunning_subscriptions,
+                   dictionary)

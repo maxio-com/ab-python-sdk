@@ -80,7 +80,8 @@ class ApplyPaymentEventData(object):
                  parent_invoice_number=APIHelper.SKIP,
                  remaining_prepayment_amount=APIHelper.SKIP,
                  prepayment=APIHelper.SKIP,
-                 external=APIHelper.SKIP):
+                 external=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ApplyPaymentEventData class"""
 
         # Initialize members of the class
@@ -99,6 +100,9 @@ class ApplyPaymentEventData(object):
             self.prepayment = prepayment 
         if external is not APIHelper.SKIP:
             self.external = external 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -130,6 +134,10 @@ class ApplyPaymentEventData(object):
         remaining_prepayment_amount = dictionary.get("remaining_prepayment_amount") if "remaining_prepayment_amount" in dictionary.keys() else APIHelper.SKIP
         prepayment = dictionary.get("prepayment") if "prepayment" in dictionary.keys() else APIHelper.SKIP
         external = dictionary.get("external") if "external" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(memo,
                    original_amount,
@@ -140,7 +148,8 @@ class ApplyPaymentEventData(object):
                    parent_invoice_number,
                    remaining_prepayment_amount,
                    prepayment,
-                   external)
+                   external,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

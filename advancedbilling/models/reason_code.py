@@ -54,7 +54,8 @@ class ReasonCode(object):
                  description=APIHelper.SKIP,
                  position=APIHelper.SKIP,
                  created_at=APIHelper.SKIP,
-                 updated_at=APIHelper.SKIP):
+                 updated_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ReasonCode class"""
 
         # Initialize members of the class
@@ -72,6 +73,9 @@ class ReasonCode(object):
             self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         if updated_at is not APIHelper.SKIP:
             self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -99,6 +103,10 @@ class ReasonCode(object):
         position = dictionary.get("position") if dictionary.get("position") else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    site_id,
@@ -106,4 +114,5 @@ class ReasonCode(object):
                    description,
                    position,
                    created_at,
-                   updated_at)
+                   updated_at,
+                   dictionary)

@@ -62,7 +62,8 @@ class ListSubcriptionGroupPrepaymentItem(object):
                  external=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
                  payment_type=APIHelper.SKIP,
-                 created_at=APIHelper.SKIP):
+                 created_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ListSubcriptionGroupPrepaymentItem class"""
 
         # Initialize members of the class
@@ -84,6 +85,9 @@ class ListSubcriptionGroupPrepaymentItem(object):
             self.payment_type = payment_type 
         if created_at is not APIHelper.SKIP:
             self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -113,6 +117,10 @@ class ListSubcriptionGroupPrepaymentItem(object):
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    subscription_group_uid,
@@ -122,4 +130,5 @@ class ListSubcriptionGroupPrepaymentItem(object):
                    external,
                    memo,
                    payment_type,
-                   created_at)
+                   created_at,
+                   dictionary)

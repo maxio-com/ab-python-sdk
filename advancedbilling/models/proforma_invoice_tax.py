@@ -7,7 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.proforma_invoice_tax_breakout import ProformaInvoiceTaxBreakout
+from advancedbilling.models.invoice_tax_breakout import InvoiceTaxBreakout
 
 
 class ProformaInvoiceTax(object):
@@ -19,12 +19,13 @@ class ProformaInvoiceTax(object):
     Attributes:
         uid (str): TODO: type description here.
         title (str): TODO: type description here.
-        source_type (str): TODO: type description here.
+        source_type (ProformaInvoiceTaxSourceType): TODO: type description
+            here.
         percentage (str): TODO: type description here.
         taxable_amount (str): TODO: type description here.
         tax_amount (str): TODO: type description here.
-        line_item_breakouts (List[ProformaInvoiceTaxBreakout]): TODO: type
-            description here.
+        line_item_breakouts (List[InvoiceTaxBreakout]): TODO: type description
+            here.
 
     """
 
@@ -56,7 +57,8 @@ class ProformaInvoiceTax(object):
                  percentage=APIHelper.SKIP,
                  taxable_amount=APIHelper.SKIP,
                  tax_amount=APIHelper.SKIP,
-                 line_item_breakouts=APIHelper.SKIP):
+                 line_item_breakouts=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ProformaInvoiceTax class"""
 
         # Initialize members of the class
@@ -74,6 +76,9 @@ class ProformaInvoiceTax(object):
             self.tax_amount = tax_amount 
         if line_item_breakouts is not APIHelper.SKIP:
             self.line_item_breakouts = line_item_breakouts 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -102,9 +107,13 @@ class ProformaInvoiceTax(object):
         tax_amount = dictionary.get("tax_amount") if dictionary.get("tax_amount") else APIHelper.SKIP
         line_item_breakouts = None
         if dictionary.get('line_item_breakouts') is not None:
-            line_item_breakouts = [ProformaInvoiceTaxBreakout.from_dictionary(x) for x in dictionary.get('line_item_breakouts')]
+            line_item_breakouts = [InvoiceTaxBreakout.from_dictionary(x) for x in dictionary.get('line_item_breakouts')]
         else:
             line_item_breakouts = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    title,
@@ -112,4 +121,5 @@ class ProformaInvoiceTax(object):
                    percentage,
                    taxable_amount,
                    tax_amount,
-                   line_item_breakouts)
+                   line_item_breakouts,
+                   dictionary)

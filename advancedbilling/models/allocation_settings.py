@@ -49,7 +49,8 @@ class AllocationSettings(object):
     def __init__(self,
                  upgrade_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
-                 accrue_charge=APIHelper.SKIP):
+                 accrue_charge=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AllocationSettings class"""
 
         # Initialize members of the class
@@ -59,6 +60,9 @@ class AllocationSettings(object):
             self.downgrade_credit = downgrade_credit 
         if accrue_charge is not APIHelper.SKIP:
             self.accrue_charge = accrue_charge 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -82,7 +86,12 @@ class AllocationSettings(object):
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         accrue_charge = dictionary.get("accrue_charge") if dictionary.get("accrue_charge") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(upgrade_charge,
                    downgrade_credit,
-                   accrue_charge)
+                   accrue_charge,
+                   dictionary)

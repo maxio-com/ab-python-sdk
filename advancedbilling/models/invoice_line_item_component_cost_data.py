@@ -31,12 +31,16 @@ class InvoiceLineItemComponentCostData(object):
     ]
 
     def __init__(self,
-                 rates=APIHelper.SKIP):
+                 rates=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceLineItemComponentCostData class"""
 
         # Initialize members of the class
         if rates is not APIHelper.SKIP:
             self.rates = rates 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -62,8 +66,13 @@ class InvoiceLineItemComponentCostData(object):
             rates = [ComponentCostData.from_dictionary(x) for x in dictionary.get('rates')]
         else:
             rates = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(rates)
+        return cls(rates,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

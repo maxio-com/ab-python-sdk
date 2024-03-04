@@ -45,7 +45,8 @@ class NestedSubscriptionGroup(object):
                  uid=APIHelper.SKIP,
                  scheme=APIHelper.SKIP,
                  primary_subscription_id=APIHelper.SKIP,
-                 primary=APIHelper.SKIP):
+                 primary=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the NestedSubscriptionGroup class"""
 
         # Initialize members of the class
@@ -57,6 +58,9 @@ class NestedSubscriptionGroup(object):
             self.primary_subscription_id = primary_subscription_id 
         if primary is not APIHelper.SKIP:
             self.primary = primary 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -81,11 +85,16 @@ class NestedSubscriptionGroup(object):
         scheme = dictionary.get("scheme") if dictionary.get("scheme") else APIHelper.SKIP
         primary_subscription_id = dictionary.get("primary_subscription_id") if dictionary.get("primary_subscription_id") else APIHelper.SKIP
         primary = dictionary.get("primary") if "primary" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    scheme,
                    primary_subscription_id,
-                   primary)
+                   primary,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

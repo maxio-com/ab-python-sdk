@@ -104,7 +104,8 @@ class UpdatePaymentProfile(object):
                  billing_state=APIHelper.SKIP,
                  billing_zip=APIHelper.SKIP,
                  billing_country=APIHelper.SKIP,
-                 billing_address_2=APIHelper.SKIP):
+                 billing_address_2=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the UpdatePaymentProfile class"""
 
         # Initialize members of the class
@@ -134,6 +135,9 @@ class UpdatePaymentProfile(object):
             self.billing_country = billing_country 
         if billing_address_2 is not APIHelper.SKIP:
             self.billing_address_2 = billing_address_2 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -167,6 +171,10 @@ class UpdatePaymentProfile(object):
         billing_zip = dictionary.get("billing_zip") if dictionary.get("billing_zip") else APIHelper.SKIP
         billing_country = dictionary.get("billing_country") if dictionary.get("billing_country") else APIHelper.SKIP
         billing_address_2 = dictionary.get("billing_address_2") if "billing_address_2" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -180,4 +188,5 @@ class UpdatePaymentProfile(object):
                    billing_state,
                    billing_zip,
                    billing_country,
-                   billing_address_2)
+                   billing_address_2,
+                   dictionary)

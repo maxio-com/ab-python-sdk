@@ -260,7 +260,7 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
-        'ComponentSPricePointAssignmentPricePoint': OneOf(
+        'ComponentPricePointAssignmentPricePoint': OneOf(
             [
                 LeafType(str),
                 LeafType(int)

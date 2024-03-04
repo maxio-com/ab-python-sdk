@@ -99,7 +99,8 @@ class SubscriptionComponentSubscription(object):
 
     def __init__(self,
                  state=APIHelper.SKIP,
-                 updated_at=APIHelper.SKIP):
+                 updated_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionComponentSubscription class"""
 
         # Initialize members of the class
@@ -107,6 +108,9 @@ class SubscriptionComponentSubscription(object):
             self.state = state 
         if updated_at is not APIHelper.SKIP:
             self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -129,9 +133,14 @@ class SubscriptionComponentSubscription(object):
         # Extract variables from the dictionary
         state = dictionary.get("state") if dictionary.get("state") else APIHelper.SKIP
         updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(state,
-                   updated_at)
+                   updated_at,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

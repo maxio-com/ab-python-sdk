@@ -28,11 +28,15 @@ class CreateComponentPricePointsRequest(object):
     }
 
     def __init__(self,
-                 price_points=None):
+                 price_points=None,
+                 additional_properties={}):
         """Constructor for the CreateComponentPricePointsRequest class"""
 
         # Initialize members of the class
         self.price_points = price_points 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -55,8 +59,13 @@ class CreateComponentPricePointsRequest(object):
 
         # Extract variables from the dictionary
         price_points = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateComponentPricePointsRequestPricePoints'), dictionary.get('price_points'), False) if dictionary.get('price_points') is not None else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(price_points)
+        return cls(price_points,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

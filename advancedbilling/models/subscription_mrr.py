@@ -37,7 +37,8 @@ class SubscriptionMRR(object):
     def __init__(self,
                  subscription_id=None,
                  mrr_amount_in_cents=None,
-                 breakouts=APIHelper.SKIP):
+                 breakouts=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionMRR class"""
 
         # Initialize members of the class
@@ -45,6 +46,9 @@ class SubscriptionMRR(object):
         self.mrr_amount_in_cents = mrr_amount_in_cents 
         if breakouts is not APIHelper.SKIP:
             self.breakouts = breakouts 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -68,7 +72,12 @@ class SubscriptionMRR(object):
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else None
         mrr_amount_in_cents = dictionary.get("mrr_amount_in_cents") if dictionary.get("mrr_amount_in_cents") else None
         breakouts = SubscriptionMRRBreakout.from_dictionary(dictionary.get('breakouts')) if 'breakouts' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(subscription_id,
                    mrr_amount_in_cents,
-                   breakouts)
+                   breakouts,
+                   dictionary)
