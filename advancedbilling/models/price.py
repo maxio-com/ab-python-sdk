@@ -41,7 +41,8 @@ class Price(object):
     def __init__(self,
                  starting_quantity=None,
                  unit_price=None,
-                 ending_quantity=APIHelper.SKIP):
+                 ending_quantity=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Price class"""
 
         # Initialize members of the class
@@ -49,6 +50,9 @@ class Price(object):
         if ending_quantity is not APIHelper.SKIP:
             self.ending_quantity = ending_quantity 
         self.unit_price = unit_price 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -76,10 +80,15 @@ class Price(object):
             ending_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PriceEndingQuantity'), dictionary.get('ending_quantity'), False) if dictionary.get('ending_quantity') is not None else None
         else:
             ending_quantity = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(starting_quantity,
                    unit_price,
-                   ending_quantity)
+                   ending_quantity,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -30,12 +30,16 @@ class ReasonCodesJsonResponse(object):
     ]
 
     def __init__(self,
-                 ok=APIHelper.SKIP):
+                 ok=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ReasonCodesJsonResponse class"""
 
         # Initialize members of the class
         if ok is not APIHelper.SKIP:
             self.ok = ok 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,5 +61,10 @@ class ReasonCodesJsonResponse(object):
 
         # Extract variables from the dictionary
         ok = dictionary.get("ok") if dictionary.get("ok") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(ok)
+        return cls(ok,
+                   dictionary)

@@ -96,7 +96,8 @@ class Site(object):
                  organization_address=APIHelper.SKIP,
                  tax_configuration=APIHelper.SKIP,
                  net_terms=APIHelper.SKIP,
-                 test=APIHelper.SKIP):
+                 test=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Site class"""
 
         # Initialize members of the class
@@ -133,6 +134,9 @@ class Site(object):
         if test is not APIHelper.SKIP:
             self.test = test 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -168,6 +172,10 @@ class Site(object):
         tax_configuration = TaxConfiguration.from_dictionary(dictionary.get('tax_configuration')) if 'tax_configuration' in dictionary.keys() else APIHelper.SKIP
         net_terms = NetTerms.from_dictionary(dictionary.get('net_terms')) if 'net_terms' in dictionary.keys() else APIHelper.SKIP
         test = dictionary.get("test") if "test" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    name,
@@ -184,4 +192,5 @@ class Site(object):
                    organization_address,
                    tax_configuration,
                    net_terms,
-                   test)
+                   test,
+                   dictionary)

@@ -38,7 +38,8 @@ class PrepaidSubscriptionBalanceChanged(object):
                  reason=None,
                  current_account_balance_in_cents=None,
                  prepayment_account_balance_in_cents=None,
-                 current_usage_amount_in_cents=None):
+                 current_usage_amount_in_cents=None,
+                 additional_properties={}):
         """Constructor for the PrepaidSubscriptionBalanceChanged class"""
 
         # Initialize members of the class
@@ -46,6 +47,9 @@ class PrepaidSubscriptionBalanceChanged(object):
         self.current_account_balance_in_cents = current_account_balance_in_cents 
         self.prepayment_account_balance_in_cents = prepayment_account_balance_in_cents 
         self.current_usage_amount_in_cents = current_usage_amount_in_cents 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -70,11 +74,16 @@ class PrepaidSubscriptionBalanceChanged(object):
         current_account_balance_in_cents = dictionary.get("current_account_balance_in_cents") if dictionary.get("current_account_balance_in_cents") else None
         prepayment_account_balance_in_cents = dictionary.get("prepayment_account_balance_in_cents") if dictionary.get("prepayment_account_balance_in_cents") else None
         current_usage_amount_in_cents = dictionary.get("current_usage_amount_in_cents") if dictionary.get("current_usage_amount_in_cents") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(reason,
                    current_account_balance_in_cents,
                    prepayment_account_balance_in_cents,
-                   current_usage_amount_in_cents)
+                   current_usage_amount_in_cents,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

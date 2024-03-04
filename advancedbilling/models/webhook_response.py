@@ -31,12 +31,16 @@ class WebhookResponse(object):
     ]
 
     def __init__(self,
-                 webhook=APIHelper.SKIP):
+                 webhook=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the WebhookResponse class"""
 
         # Initialize members of the class
         if webhook is not APIHelper.SKIP:
             self.webhook = webhook 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class WebhookResponse(object):
 
         # Extract variables from the dictionary
         webhook = Webhook.from_dictionary(dictionary.get('webhook')) if 'webhook' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(webhook)
+        return cls(webhook,
+                   dictionary)

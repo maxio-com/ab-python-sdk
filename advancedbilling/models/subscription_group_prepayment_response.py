@@ -47,7 +47,8 @@ class SubscriptionGroupPrepaymentResponse(object):
                  amount_in_cents=APIHelper.SKIP,
                  ending_balance_in_cents=APIHelper.SKIP,
                  entry_type=APIHelper.SKIP,
-                 memo=APIHelper.SKIP):
+                 memo=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupPrepaymentResponse class"""
 
         # Initialize members of the class
@@ -61,6 +62,9 @@ class SubscriptionGroupPrepaymentResponse(object):
             self.entry_type = entry_type 
         if memo is not APIHelper.SKIP:
             self.memo = memo 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -86,9 +90,14 @@ class SubscriptionGroupPrepaymentResponse(object):
         ending_balance_in_cents = dictionary.get("ending_balance_in_cents") if dictionary.get("ending_balance_in_cents") else APIHelper.SKIP
         entry_type = dictionary.get("entry_type") if dictionary.get("entry_type") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    amount_in_cents,
                    ending_balance_in_cents,
                    entry_type,
-                   memo)
+                   memo,
+                   dictionary)

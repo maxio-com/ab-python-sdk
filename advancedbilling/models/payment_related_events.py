@@ -29,12 +29,16 @@ class PaymentRelatedEvents(object):
 
     def __init__(self,
                  product_id=None,
-                 account_transaction_id=None):
+                 account_transaction_id=None,
+                 additional_properties={}):
         """Constructor for the PaymentRelatedEvents class"""
 
         # Initialize members of the class
         self.product_id = product_id 
         self.account_transaction_id = account_transaction_id 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,9 +61,14 @@ class PaymentRelatedEvents(object):
         # Extract variables from the dictionary
         product_id = dictionary.get("product_id") if dictionary.get("product_id") else None
         account_transaction_id = dictionary.get("account_transaction_id") if dictionary.get("account_transaction_id") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(product_id,
-                   account_transaction_id)
+                   account_transaction_id,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

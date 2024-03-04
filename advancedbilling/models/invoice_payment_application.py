@@ -40,7 +40,8 @@ class InvoicePaymentApplication(object):
     def __init__(self,
                  invoice_uid=APIHelper.SKIP,
                  application_uid=APIHelper.SKIP,
-                 applied_amount=APIHelper.SKIP):
+                 applied_amount=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoicePaymentApplication class"""
 
         # Initialize members of the class
@@ -50,6 +51,9 @@ class InvoicePaymentApplication(object):
             self.application_uid = application_uid 
         if applied_amount is not APIHelper.SKIP:
             self.applied_amount = applied_amount 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -73,7 +77,12 @@ class InvoicePaymentApplication(object):
         invoice_uid = dictionary.get("invoice_uid") if dictionary.get("invoice_uid") else APIHelper.SKIP
         application_uid = dictionary.get("application_uid") if dictionary.get("application_uid") else APIHelper.SKIP
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(invoice_uid,
                    application_uid,
-                   applied_amount)
+                   applied_amount,
+                   dictionary)

@@ -232,7 +232,8 @@ class Product(object):
                  use_site_exchange_rate=APIHelper.SKIP,
                  item_category=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
-                 product_price_point_handle=APIHelper.SKIP):
+                 product_price_point_handle=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Product class"""
 
         # Initialize members of the class
@@ -311,6 +312,9 @@ class Product(object):
         if product_price_point_handle is not APIHelper.SKIP:
             self.product_price_point_handle = product_price_point_handle 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -381,6 +385,10 @@ class Product(object):
         item_category = dictionary.get("item_category") if "item_category" in dictionary.keys() else APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
         product_price_point_handle = dictionary.get("product_price_point_handle") if "product_price_point_handle" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    name,
@@ -418,7 +426,8 @@ class Product(object):
                    use_site_exchange_rate,
                    item_category,
                    product_price_point_id,
-                   product_price_point_handle)
+                   product_price_point_handle,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

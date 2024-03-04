@@ -25,11 +25,15 @@ class VoidInvoice(object):
     }
 
     def __init__(self,
-                 reason=None):
+                 reason=None,
+                 additional_properties={}):
         """Constructor for the VoidInvoice class"""
 
         # Initialize members of the class
         self.reason = reason 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -51,5 +55,10 @@ class VoidInvoice(object):
 
         # Extract variables from the dictionary
         reason = dictionary.get("reason") if dictionary.get("reason") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(reason)
+        return cls(reason,
+                   dictionary)

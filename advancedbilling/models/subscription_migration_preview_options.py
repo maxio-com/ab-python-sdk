@@ -91,7 +91,8 @@ class SubscriptionMigrationPreviewOptions(object):
                  product_handle=APIHelper.SKIP,
                  product_price_point_handle=APIHelper.SKIP,
                  proration=APIHelper.SKIP,
-                 proration_date=APIHelper.SKIP):
+                 proration_date=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionMigrationPreviewOptions class"""
 
         # Initialize members of the class
@@ -111,6 +112,9 @@ class SubscriptionMigrationPreviewOptions(object):
             self.proration = proration 
         if proration_date is not APIHelper.SKIP:
             self.proration_date = APIHelper.apply_datetime_converter(proration_date, APIHelper.RFC3339DateTime) if proration_date else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -141,6 +145,10 @@ class SubscriptionMigrationPreviewOptions(object):
         product_price_point_handle = dictionary.get("product_price_point_handle") if dictionary.get("product_price_point_handle") else APIHelper.SKIP
         proration = Proration.from_dictionary(dictionary.get('proration')) if 'proration' in dictionary.keys() else APIHelper.SKIP
         proration_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("proration_date")).datetime if dictionary.get("proration_date") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(product_id,
                    product_price_point_id,
@@ -151,4 +159,5 @@ class SubscriptionMigrationPreviewOptions(object):
                    product_handle,
                    product_price_point_handle,
                    proration,
-                   proration_date)
+                   proration_date,
+                   dictionary)

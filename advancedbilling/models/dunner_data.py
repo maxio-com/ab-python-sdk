@@ -41,7 +41,8 @@ class DunnerData(object):
                  revenue_at_risk_in_cents=None,
                  created_at=None,
                  attempts=None,
-                 last_attempted_at=None):
+                 last_attempted_at=None,
+                 additional_properties={}):
         """Constructor for the DunnerData class"""
 
         # Initialize members of the class
@@ -51,6 +52,9 @@ class DunnerData(object):
         self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
         self.attempts = attempts 
         self.last_attempted_at = APIHelper.apply_datetime_converter(last_attempted_at, APIHelper.RFC3339DateTime) if last_attempted_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -77,13 +81,18 @@ class DunnerData(object):
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else None
         attempts = dictionary.get("attempts") if dictionary.get("attempts") else None
         last_attempted_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("last_attempted_at")).datetime if dictionary.get("last_attempted_at") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(state,
                    subscription_id,
                    revenue_at_risk_in_cents,
                    created_at,
                    attempts,
-                   last_attempted_at)
+                   last_attempted_at,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

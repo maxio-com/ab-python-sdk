@@ -215,7 +215,8 @@ class CreatePaymentProfile(object):
                  bank_branch_code=APIHelper.SKIP,
                  bank_account_type=APIHelper.SKIP,
                  bank_account_holder_type=APIHelper.SKIP,
-                 last_four=APIHelper.SKIP):
+                 last_four=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreatePaymentProfile class"""
 
         # Initialize members of the class
@@ -284,6 +285,9 @@ class CreatePaymentProfile(object):
         if last_four is not APIHelper.SKIP:
             self.last_four = last_four 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -336,6 +340,10 @@ class CreatePaymentProfile(object):
         bank_account_type = dictionary.get("bank_account_type") if dictionary.get("bank_account_type") else APIHelper.SKIP
         bank_account_holder_type = dictionary.get("bank_account_holder_type") if dictionary.get("bank_account_holder_type") else APIHelper.SKIP
         last_four = dictionary.get("last_four") if dictionary.get("last_four") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(chargify_token,
                    id,
@@ -368,4 +376,5 @@ class CreatePaymentProfile(object):
                    bank_branch_code,
                    bank_account_type,
                    bank_account_holder_type,
-                   last_four)
+                   last_four,
+                   dictionary)

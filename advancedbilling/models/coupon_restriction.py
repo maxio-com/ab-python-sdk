@@ -50,7 +50,8 @@ class CouponRestriction(object):
                  item_type=APIHelper.SKIP,
                  item_id=APIHelper.SKIP,
                  name=APIHelper.SKIP,
-                 handle=APIHelper.SKIP):
+                 handle=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CouponRestriction class"""
 
         # Initialize members of the class
@@ -64,6 +65,9 @@ class CouponRestriction(object):
             self.name = name 
         if handle is not APIHelper.SKIP:
             self.handle = handle 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -89,12 +93,17 @@ class CouponRestriction(object):
         item_id = dictionary.get("item_id") if dictionary.get("item_id") else APIHelper.SKIP
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         handle = dictionary.get("handle") if "handle" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    item_type,
                    item_id,
                    name,
-                   handle)
+                   handle,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

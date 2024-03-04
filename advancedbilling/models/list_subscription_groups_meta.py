@@ -34,7 +34,8 @@ class ListSubscriptionGroupsMeta(object):
 
     def __init__(self,
                  current_page=APIHelper.SKIP,
-                 total_count=APIHelper.SKIP):
+                 total_count=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ListSubscriptionGroupsMeta class"""
 
         # Initialize members of the class
@@ -42,6 +43,9 @@ class ListSubscriptionGroupsMeta(object):
             self.current_page = current_page 
         if total_count is not APIHelper.SKIP:
             self.total_count = total_count 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -64,6 +68,11 @@ class ListSubscriptionGroupsMeta(object):
         # Extract variables from the dictionary
         current_page = dictionary.get("current_page") if dictionary.get("current_page") else APIHelper.SKIP
         total_count = dictionary.get("total_count") if dictionary.get("total_count") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(current_page,
-                   total_count)
+                   total_count,
+                   dictionary)

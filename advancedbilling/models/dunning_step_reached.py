@@ -34,13 +34,17 @@ class DunningStepReached(object):
     def __init__(self,
                  dunner=None,
                  current_step=None,
-                 next_step=None):
+                 next_step=None,
+                 additional_properties={}):
         """Constructor for the DunningStepReached class"""
 
         # Initialize members of the class
         self.dunner = dunner 
         self.current_step = current_step 
         self.next_step = next_step 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -64,10 +68,15 @@ class DunningStepReached(object):
         dunner = DunnerData.from_dictionary(dictionary.get('dunner')) if dictionary.get('dunner') else None
         current_step = DunningStepData.from_dictionary(dictionary.get('current_step')) if dictionary.get('current_step') else None
         next_step = DunningStepData.from_dictionary(dictionary.get('next_step')) if dictionary.get('next_step') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(dunner,
                    current_step,
-                   next_step)
+                   next_step,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

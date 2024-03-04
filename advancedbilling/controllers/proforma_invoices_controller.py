@@ -15,9 +15,8 @@ from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
-from advancedbilling.models.proforma_invoice import ProformaInvoice
 from advancedbilling.models.list_proforma_invoices_response import ListProformaInvoicesResponse
-from advancedbilling.models.proforma_invoice_preview import ProformaInvoicePreview
+from advancedbilling.models.proforma_invoice import ProformaInvoice
 from advancedbilling.models.signup_proforma_preview_response import SignupProformaPreviewResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.api_exception import APIException
@@ -75,7 +74,7 @@ class ProformaInvoicesController(BaseController):
         ).execute()
 
     def list_subscription_group_proforma_invoices(self,
-                                                  uid):
+                                                  options=dict()):
         """Does a GET request to /subscription_groups/{uid}/proforma_invoices.json.
 
         Only proforma invoices with a `consolidation_level` of parent are
@@ -87,10 +86,22 @@ class ProformaInvoicesController(BaseController):
         set to true.
 
         Args:
-            uid (str): The uid of the subscription group
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    uid -- str -- The uid of the subscription group
+                    line_items -- bool -- Include line items data
+                    discounts -- bool -- Include discounts data
+                    taxes -- bool -- Include taxes data
+                    credits -- bool -- Include credits data
+                    payments -- bool -- Include payments data
+                    custom_fields -- bool -- Include custom fields data
 
         Returns:
-            ProformaInvoice: Response from the API. OK
+            ListProformaInvoicesResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -106,9 +117,27 @@ class ProformaInvoicesController(BaseController):
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('uid')
-                            .value(uid)
+                            .value(options.get('uid', None))
                             .is_required(True)
                             .should_encode(True))
+            .query_param(Parameter()
+                         .key('line_items')
+                         .value(options.get('line_items', None)))
+            .query_param(Parameter()
+                         .key('discounts')
+                         .value(options.get('discounts', None)))
+            .query_param(Parameter()
+                         .key('taxes')
+                         .value(options.get('taxes', None)))
+            .query_param(Parameter()
+                         .key('credits')
+                         .value(options.get('credits', None)))
+            .query_param(Parameter()
+                         .key('payments')
+                         .value(options.get('payments', None)))
+            .query_param(Parameter()
+                         .key('custom_fields')
+                         .value(options.get('custom_fields', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -116,7 +145,7 @@ class ProformaInvoicesController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProformaInvoice.from_dictionary)
+            .deserialize_into(ListProformaInvoicesResponse.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
@@ -235,9 +264,9 @@ class ProformaInvoicesController(BaseController):
                         invoice's Due Date, in the YYYY-MM-DD format.
                     end_date -- str -- The ending date range for the invoice's
                         Due Date, in the YYYY-MM-DD format.
-                    status -- InvoiceStatus -- The current status of the
-                        invoice.  Allowed Values: draft, open, paid, pending,
-                        voided
+                    status -- ProformaInvoiceStatus -- The current status of
+                        the invoice.  Allowed Values: draft, open, paid,
+                        pending, voided
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to
@@ -412,7 +441,7 @@ class ProformaInvoicesController(BaseController):
             subscription_id (int): The Chargify id of the subscription
 
         Returns:
-            ProformaInvoicePreview: Response from the API. OK
+            ProformaInvoice: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -438,7 +467,7 @@ class ProformaInvoicesController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProformaInvoicePreview.from_dictionary)
+            .deserialize_into(ProformaInvoice.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
@@ -500,7 +529,7 @@ class ProformaInvoicesController(BaseController):
         ).execute()
 
     def preview_signup_proforma_invoice(self,
-                                        include_next_proforma_invoice=None,
+                                        include=None,
                                         body=None):
         """Does a POST request to /subscriptions/proforma_invoices/preview.json.
 
@@ -519,8 +548,9 @@ class ProformaInvoicesController(BaseController):
         minimum requirements.
 
         Args:
-            include_next_proforma_invoice (str, optional): Choose to include a
-                proforma invoice preview for the first renewal
+            include (CreateSignupProformaPreviewInclude, optional): Choose to
+                include a proforma invoice preview for the first renewal. Use
+                in query `include=next_proforma_invoice`.
             body (CreateSubscriptionRequest, optional): TODO: type description
                 here.
 
@@ -543,8 +573,8 @@ class ProformaInvoicesController(BaseController):
                           .key('Content-Type')
                           .value('application/json'))
             .query_param(Parameter()
-                         .key('include=next_proforma_invoice')
-                         .value(include_next_proforma_invoice))
+                         .key('include')
+                         .value(include))
             .body_param(Parameter()
                         .value(body))
             .header_param(Parameter()

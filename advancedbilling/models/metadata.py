@@ -58,7 +58,8 @@ class Metadata(object):
                  resource_id=APIHelper.SKIP,
                  name=APIHelper.SKIP,
                  deleted_at=APIHelper.SKIP,
-                 metafield_id=APIHelper.SKIP):
+                 metafield_id=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Metadata class"""
 
         # Initialize members of the class
@@ -74,6 +75,9 @@ class Metadata(object):
             self.deleted_at = APIHelper.apply_datetime_converter(deleted_at, APIHelper.RFC3339DateTime) if deleted_at else None 
         if metafield_id is not APIHelper.SKIP:
             self.metafield_id = metafield_id 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -103,10 +107,15 @@ class Metadata(object):
         else:
             deleted_at = APIHelper.SKIP
         metafield_id = dictionary.get("metafield_id") if "metafield_id" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    value,
                    resource_id,
                    name,
                    deleted_at,
-                   metafield_id)
+                   metafield_id,
+                   dictionary)

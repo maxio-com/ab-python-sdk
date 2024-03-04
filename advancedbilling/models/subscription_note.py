@@ -50,7 +50,8 @@ class SubscriptionNote(object):
                  subscription_id=APIHelper.SKIP,
                  created_at=APIHelper.SKIP,
                  updated_at=APIHelper.SKIP,
-                 sticky=APIHelper.SKIP):
+                 sticky=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionNote class"""
 
         # Initialize members of the class
@@ -66,6 +67,9 @@ class SubscriptionNote(object):
             self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
         if sticky is not APIHelper.SKIP:
             self.sticky = sticky 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -92,10 +96,15 @@ class SubscriptionNote(object):
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         sticky = dictionary.get("sticky") if "sticky" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    body,
                    subscription_id,
                    created_at,
                    updated_at,
-                   sticky)
+                   sticky,
+                   dictionary)

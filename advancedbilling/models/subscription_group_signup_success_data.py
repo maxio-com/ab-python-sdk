@@ -50,7 +50,8 @@ class SubscriptionGroupSignupSuccessData(object):
                  primary_subscription_id=None,
                  next_assessment_at=None,
                  state=None,
-                 cancel_at_end_of_period=None):
+                 cancel_at_end_of_period=None,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupSignupSuccessData class"""
 
         # Initialize members of the class
@@ -63,6 +64,9 @@ class SubscriptionGroupSignupSuccessData(object):
         self.next_assessment_at = APIHelper.apply_datetime_converter(next_assessment_at, APIHelper.RFC3339DateTime) if next_assessment_at else None 
         self.state = state 
         self.cancel_at_end_of_period = cancel_at_end_of_period 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -92,6 +96,10 @@ class SubscriptionGroupSignupSuccessData(object):
         next_assessment_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_assessment_at")).datetime if dictionary.get("next_assessment_at") else None
         state = dictionary.get("state") if dictionary.get("state") else None
         cancel_at_end_of_period = dictionary.get("cancel_at_end_of_period") if "cancel_at_end_of_period" in dictionary.keys() else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    scheme,
@@ -101,7 +109,8 @@ class SubscriptionGroupSignupSuccessData(object):
                    primary_subscription_id,
                    next_assessment_at,
                    state,
-                   cancel_at_end_of_period)
+                   cancel_at_end_of_period,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -27,11 +27,15 @@ class PaymentMethodApplePay(object):
     }
 
     def __init__(self,
-                 mtype=None):
+                 mtype=None,
+                 additional_properties={}):
         """Constructor for the PaymentMethodApplePay class"""
 
         # Initialize members of the class
         self.mtype = mtype 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -53,8 +57,13 @@ class PaymentMethodApplePay(object):
 
         # Extract variables from the dictionary
         mtype = dictionary.get("type") if dictionary.get("type") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(mtype)
+        return cls(mtype,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

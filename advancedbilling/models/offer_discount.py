@@ -38,7 +38,8 @@ class OfferDiscount(object):
     def __init__(self,
                  coupon_code=APIHelper.SKIP,
                  coupon_id=APIHelper.SKIP,
-                 coupon_name=APIHelper.SKIP):
+                 coupon_name=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the OfferDiscount class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class OfferDiscount(object):
             self.coupon_id = coupon_id 
         if coupon_name is not APIHelper.SKIP:
             self.coupon_name = coupon_name 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,7 +75,12 @@ class OfferDiscount(object):
         coupon_code = dictionary.get("coupon_code") if dictionary.get("coupon_code") else APIHelper.SKIP
         coupon_id = dictionary.get("coupon_id") if dictionary.get("coupon_id") else APIHelper.SKIP
         coupon_name = dictionary.get("coupon_name") if dictionary.get("coupon_name") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(coupon_code,
                    coupon_id,
-                   coupon_name)
+                   coupon_name,
+                   dictionary)

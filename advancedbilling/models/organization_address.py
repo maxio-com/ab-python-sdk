@@ -69,7 +69,8 @@ class OrganizationAddress(object):
                  zip=APIHelper.SKIP,
                  country=APIHelper.SKIP,
                  name=APIHelper.SKIP,
-                 phone=APIHelper.SKIP):
+                 phone=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the OrganizationAddress class"""
 
         # Initialize members of the class
@@ -89,6 +90,9 @@ class OrganizationAddress(object):
             self.name = name 
         if phone is not APIHelper.SKIP:
             self.phone = phone 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -117,6 +121,10 @@ class OrganizationAddress(object):
         country = dictionary.get("country") if "country" in dictionary.keys() else APIHelper.SKIP
         name = dictionary.get("name") if "name" in dictionary.keys() else APIHelper.SKIP
         phone = dictionary.get("phone") if "phone" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(street,
                    line_2,
@@ -125,4 +133,5 @@ class OrganizationAddress(object):
                    zip,
                    country,
                    name,
-                   phone)
+                   phone,
+                   dictionary)

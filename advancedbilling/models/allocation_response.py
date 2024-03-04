@@ -31,12 +31,16 @@ class AllocationResponse(object):
     ]
 
     def __init__(self,
-                 allocation=APIHelper.SKIP):
+                 allocation=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AllocationResponse class"""
 
         # Initialize members of the class
         if allocation is not APIHelper.SKIP:
             self.allocation = allocation 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class AllocationResponse(object):
 
         # Extract variables from the dictionary
         allocation = Allocation.from_dictionary(dictionary.get('allocation')) if 'allocation' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(allocation)
+        return cls(allocation,
+                   dictionary)

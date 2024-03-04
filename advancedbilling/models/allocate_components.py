@@ -74,7 +74,8 @@ class AllocateComponents(object):
                  upgrade_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
                  payment_collection_method=APIHelper.SKIP,
-                 initiate_dunning=APIHelper.SKIP):
+                 initiate_dunning=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AllocateComponents class"""
 
         # Initialize members of the class
@@ -94,6 +95,9 @@ class AllocateComponents(object):
             self.payment_collection_method = payment_collection_method 
         if initiate_dunning is not APIHelper.SKIP:
             self.initiate_dunning = initiate_dunning 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -126,6 +130,10 @@ class AllocateComponents(object):
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         initiate_dunning = dictionary.get("initiate_dunning") if "initiate_dunning" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(proration_upgrade_scheme,
                    proration_downgrade_scheme,
@@ -134,4 +142,5 @@ class AllocateComponents(object):
                    upgrade_charge,
                    downgrade_credit,
                    payment_collection_method,
-                   initiate_dunning)
+                   initiate_dunning,
+                   dictionary)

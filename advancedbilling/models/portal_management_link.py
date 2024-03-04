@@ -54,7 +54,8 @@ class PortalManagementLink(object):
                  created_at=APIHelper.SKIP,
                  new_link_available_at=APIHelper.SKIP,
                  expires_at=APIHelper.SKIP,
-                 last_invite_sent_at=APIHelper.SKIP):
+                 last_invite_sent_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PortalManagementLink class"""
 
         # Initialize members of the class
@@ -70,6 +71,9 @@ class PortalManagementLink(object):
             self.expires_at = APIHelper.apply_datetime_converter(expires_at, APIHelper.RFC3339DateTime) if expires_at else None 
         if last_invite_sent_at is not APIHelper.SKIP:
             self.last_invite_sent_at = APIHelper.apply_datetime_converter(last_invite_sent_at, APIHelper.RFC3339DateTime) if last_invite_sent_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -99,10 +103,15 @@ class PortalManagementLink(object):
             last_invite_sent_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("last_invite_sent_at")).datetime if dictionary.get("last_invite_sent_at") else None
         else:
             last_invite_sent_at = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(url,
                    fetch_count,
                    created_at,
                    new_link_available_at,
                    expires_at,
-                   last_invite_sent_at)
+                   last_invite_sent_at,
+                   dictionary)

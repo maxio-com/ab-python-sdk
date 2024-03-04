@@ -34,7 +34,8 @@ class ReactivateSubscriptionGroupRequest(object):
 
     def __init__(self,
                  resume=APIHelper.SKIP,
-                 resume_members=APIHelper.SKIP):
+                 resume_members=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ReactivateSubscriptionGroupRequest class"""
 
         # Initialize members of the class
@@ -42,6 +43,9 @@ class ReactivateSubscriptionGroupRequest(object):
             self.resume = resume 
         if resume_members is not APIHelper.SKIP:
             self.resume_members = resume_members 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -64,6 +68,11 @@ class ReactivateSubscriptionGroupRequest(object):
         # Extract variables from the dictionary
         resume = dictionary.get("resume") if "resume" in dictionary.keys() else APIHelper.SKIP
         resume_members = dictionary.get("resume_members") if "resume_members" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(resume,
-                   resume_members)
+                   resume_members,
+                   dictionary)

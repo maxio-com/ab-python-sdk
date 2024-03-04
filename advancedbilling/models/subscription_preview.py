@@ -36,7 +36,8 @@ class SubscriptionPreview(object):
 
     def __init__(self,
                  current_billing_manifest=APIHelper.SKIP,
-                 next_billing_manifest=APIHelper.SKIP):
+                 next_billing_manifest=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionPreview class"""
 
         # Initialize members of the class
@@ -44,6 +45,9 @@ class SubscriptionPreview(object):
             self.current_billing_manifest = current_billing_manifest 
         if next_billing_manifest is not APIHelper.SKIP:
             self.next_billing_manifest = next_billing_manifest 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -66,6 +70,11 @@ class SubscriptionPreview(object):
         # Extract variables from the dictionary
         current_billing_manifest = BillingManifest.from_dictionary(dictionary.get('current_billing_manifest')) if 'current_billing_manifest' in dictionary.keys() else APIHelper.SKIP
         next_billing_manifest = BillingManifest.from_dictionary(dictionary.get('next_billing_manifest')) if 'next_billing_manifest' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(current_billing_manifest,
-                   next_billing_manifest)
+                   next_billing_manifest,
+                   dictionary)

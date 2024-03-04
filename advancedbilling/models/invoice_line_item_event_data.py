@@ -119,7 +119,8 @@ class InvoiceLineItemEventData(object):
                  price_point_id=APIHelper.SKIP,
                  component_id=APIHelper.SKIP,
                  billing_schedule_item_id=APIHelper.SKIP,
-                 custom_item=APIHelper.SKIP):
+                 custom_item=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceLineItemEventData class"""
 
         # Initialize members of the class
@@ -164,6 +165,9 @@ class InvoiceLineItemEventData(object):
         if custom_item is not APIHelper.SKIP:
             self.custom_item = custom_item 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -207,6 +211,10 @@ class InvoiceLineItemEventData(object):
         component_id = dictionary.get("component_id") if "component_id" in dictionary.keys() else APIHelper.SKIP
         billing_schedule_item_id = dictionary.get("billing_schedule_item_id") if "billing_schedule_item_id" in dictionary.keys() else APIHelper.SKIP
         custom_item = dictionary.get("custom_item") if "custom_item" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    title,
@@ -227,7 +235,8 @@ class InvoiceLineItemEventData(object):
                    price_point_id,
                    component_id,
                    billing_schedule_item_id,
-                   custom_item)
+                   custom_item,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -27,11 +27,15 @@ class CreateMetafieldsRequest(object):
     }
 
     def __init__(self,
-                 metafields=None):
+                 metafields=None,
+                 additional_properties={}):
         """Constructor for the CreateMetafieldsRequest class"""
 
         # Initialize members of the class
         self.metafields = metafields 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -54,8 +58,13 @@ class CreateMetafieldsRequest(object):
 
         # Extract variables from the dictionary
         metafields = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateMetafieldsRequestMetafields'), dictionary.get('metafields'), False) if dictionary.get('metafields') is not None else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(metafields)
+        return cls(metafields,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

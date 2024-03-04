@@ -21,9 +21,9 @@ class InvoiceDiscount(object):
         title (str): TODO: type description here.
         description (str): TODO: type description here.
         code (str): TODO: type description here.
-        source_type (str): TODO: type description here.
+        source_type (InvoiceDiscountSourceType): TODO: type description here.
         source_id (int): TODO: type description here.
-        discount_type (str): TODO: type description here.
+        discount_type (InvoiceDiscountType): TODO: type description here.
         percentage (str): TODO: type description here.
         eligible_amount (str): TODO: type description here.
         discount_amount (str): TODO: type description here.
@@ -80,7 +80,8 @@ class InvoiceDiscount(object):
                  eligible_amount=APIHelper.SKIP,
                  discount_amount=APIHelper.SKIP,
                  transaction_id=APIHelper.SKIP,
-                 line_item_breakouts=APIHelper.SKIP):
+                 line_item_breakouts=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceDiscount class"""
 
         # Initialize members of the class
@@ -108,6 +109,9 @@ class InvoiceDiscount(object):
             self.transaction_id = transaction_id 
         if line_item_breakouts is not APIHelper.SKIP:
             self.line_item_breakouts = line_item_breakouts 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -144,6 +148,10 @@ class InvoiceDiscount(object):
             line_item_breakouts = [InvoiceDiscountBreakout.from_dictionary(x) for x in dictionary.get('line_item_breakouts')]
         else:
             line_item_breakouts = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    title,
@@ -156,7 +164,8 @@ class InvoiceDiscount(object):
                    eligible_amount,
                    discount_amount,
                    transaction_id,
-                   line_item_breakouts)
+                   line_item_breakouts,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

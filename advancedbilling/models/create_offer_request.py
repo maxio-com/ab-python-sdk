@@ -26,11 +26,15 @@ class CreateOfferRequest(object):
     }
 
     def __init__(self,
-                 offer=None):
+                 offer=None,
+                 additional_properties={}):
         """Constructor for the CreateOfferRequest class"""
 
         # Initialize members of the class
         self.offer = offer 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class CreateOfferRequest(object):
 
         # Extract variables from the dictionary
         offer = CreateOffer.from_dictionary(dictionary.get('offer')) if dictionary.get('offer') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(offer)
+        return cls(offer,
+                   dictionary)

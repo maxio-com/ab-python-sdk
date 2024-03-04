@@ -26,11 +26,15 @@ class AllocationPreviewResponse(object):
     }
 
     def __init__(self,
-                 allocation_preview=None):
+                 allocation_preview=None,
+                 additional_properties={}):
         """Constructor for the AllocationPreviewResponse class"""
 
         # Initialize members of the class
         self.allocation_preview = allocation_preview 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class AllocationPreviewResponse(object):
 
         # Extract variables from the dictionary
         allocation_preview = AllocationPreview.from_dictionary(dictionary.get('allocation_preview')) if dictionary.get('allocation_preview') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(allocation_preview)
+        return cls(allocation_preview,
+                   dictionary)

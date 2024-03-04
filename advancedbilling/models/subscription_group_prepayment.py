@@ -35,7 +35,8 @@ class SubscriptionGroupPrepayment(object):
                  amount=None,
                  details=None,
                  memo=None,
-                 method=None):
+                 method=None,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupPrepayment class"""
 
         # Initialize members of the class
@@ -43,6 +44,9 @@ class SubscriptionGroupPrepayment(object):
         self.details = details 
         self.memo = memo 
         self.method = method 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -67,8 +71,13 @@ class SubscriptionGroupPrepayment(object):
         details = dictionary.get("details") if dictionary.get("details") else None
         memo = dictionary.get("memo") if dictionary.get("memo") else None
         method = dictionary.get("method") if dictionary.get("method") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(amount,
                    details,
                    memo,
-                   method)
+                   method,
+                   dictionary)

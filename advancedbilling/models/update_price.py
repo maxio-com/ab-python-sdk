@@ -47,7 +47,8 @@ class UpdatePrice(object):
                  ending_quantity=APIHelper.SKIP,
                  unit_price=APIHelper.SKIP,
                  destroy=APIHelper.SKIP,
-                 starting_quantity=APIHelper.SKIP):
+                 starting_quantity=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the UpdatePrice class"""
 
         # Initialize members of the class
@@ -61,6 +62,9 @@ class UpdatePrice(object):
             self.destroy = destroy 
         if starting_quantity is not APIHelper.SKIP:
             self.starting_quantity = starting_quantity 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -87,9 +91,14 @@ class UpdatePrice(object):
         unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdatePriceUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else APIHelper.SKIP
         destroy = dictionary.get("_destroy") if "_destroy" in dictionary.keys() else APIHelper.SKIP
         starting_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdatePriceStartingQuantity'), dictionary.get('starting_quantity'), False) if dictionary.get('starting_quantity') is not None else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    ending_quantity,
                    unit_price,
                    destroy,
-                   starting_quantity)
+                   starting_quantity,
+                   dictionary)

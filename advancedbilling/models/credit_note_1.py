@@ -185,7 +185,8 @@ class CreditNote1(object):
                  taxes=APIHelper.SKIP,
                  applications=APIHelper.SKIP,
                  refunds=APIHelper.SKIP,
-                 origin_invoices=APIHelper.SKIP):
+                 origin_invoices=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreditNote1 class"""
 
         # Initialize members of the class
@@ -243,6 +244,9 @@ class CreditNote1(object):
             self.refunds = refunds 
         if origin_invoices is not APIHelper.SKIP:
             self.origin_invoices = origin_invoices 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -314,6 +318,10 @@ class CreditNote1(object):
             origin_invoices = [OriginInvoice.from_dictionary(x) for x in dictionary.get('origin_invoices')]
         else:
             origin_invoices = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    site_id,
@@ -341,7 +349,8 @@ class CreditNote1(object):
                    taxes,
                    applications,
                    refunds,
-                   origin_invoices)
+                   origin_invoices,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

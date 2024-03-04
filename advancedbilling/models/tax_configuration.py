@@ -43,7 +43,8 @@ class TaxConfiguration(object):
     def __init__(self,
                  kind='custom',
                  destination_address=APIHelper.SKIP,
-                 fully_configured=False):
+                 fully_configured=False,
+                 additional_properties={}):
         """Constructor for the TaxConfiguration class"""
 
         # Initialize members of the class
@@ -51,6 +52,9 @@ class TaxConfiguration(object):
         if destination_address is not APIHelper.SKIP:
             self.destination_address = destination_address 
         self.fully_configured = fully_configured 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -74,7 +78,12 @@ class TaxConfiguration(object):
         kind = dictionary.get("kind") if dictionary.get("kind") else 'custom'
         destination_address = dictionary.get("destination_address") if dictionary.get("destination_address") else APIHelper.SKIP
         fully_configured = dictionary.get("fully_configured") if dictionary.get("fully_configured") else False
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(kind,
                    destination_address,
-                   fully_configured)
+                   fully_configured,
+                   dictionary)

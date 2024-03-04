@@ -365,7 +365,8 @@ class CreateSubscription(object):
                  ach_agreement=APIHelper.SKIP,
                  dunning_communication_delay_enabled=False,
                  dunning_communication_delay_time_zone=APIHelper.SKIP,
-                 skip_billing_manifest_taxes=False):
+                 skip_billing_manifest_taxes=False,
+                 additional_properties={}):
         """Constructor for the CreateSubscription class"""
 
         # Initialize members of the class
@@ -465,6 +466,9 @@ class CreateSubscription(object):
             self.dunning_communication_delay_time_zone = dunning_communication_delay_time_zone 
         self.skip_billing_manifest_taxes = skip_billing_manifest_taxes 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -538,6 +542,10 @@ class CreateSubscription(object):
         dunning_communication_delay_enabled = dictionary.get("dunning_communication_delay_enabled") if dictionary.get("dunning_communication_delay_enabled") else False
         dunning_communication_delay_time_zone = dictionary.get("dunning_communication_delay_time_zone") if "dunning_communication_delay_time_zone" in dictionary.keys() else APIHelper.SKIP
         skip_billing_manifest_taxes = dictionary.get("skip_billing_manifest_taxes") if dictionary.get("skip_billing_manifest_taxes") else False
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(product_handle,
                    product_id,
@@ -587,4 +595,5 @@ class CreateSubscription(object):
                    ach_agreement,
                    dunning_communication_delay_enabled,
                    dunning_communication_delay_time_zone,
-                   skip_billing_manifest_taxes)
+                   skip_billing_manifest_taxes,
+                   dictionary)

@@ -25,11 +25,15 @@ class AttributeError(object):
     }
 
     def __init__(self,
-                 attribute=None):
+                 attribute=None,
+                 additional_properties={}):
         """Constructor for the AttributeError class"""
 
         # Initialize members of the class
         self.attribute = attribute 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -51,5 +55,10 @@ class AttributeError(object):
 
         # Extract variables from the dictionary
         attribute = dictionary.get("attribute") if dictionary.get("attribute") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(attribute)
+        return cls(attribute,
+                   dictionary)

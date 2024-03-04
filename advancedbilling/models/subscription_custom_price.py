@@ -79,7 +79,8 @@ class SubscriptionCustomPrice(object):
                  initial_charge_after_trial=APIHelper.SKIP,
                  expiration_interval=APIHelper.SKIP,
                  expiration_interval_unit=APIHelper.SKIP,
-                 tax_included=APIHelper.SKIP):
+                 tax_included=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionCustomPrice class"""
 
         # Initialize members of the class
@@ -106,6 +107,9 @@ class SubscriptionCustomPrice(object):
             self.expiration_interval_unit = expiration_interval_unit 
         if tax_included is not APIHelper.SKIP:
             self.tax_included = tax_included 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -140,6 +144,10 @@ class SubscriptionCustomPrice(object):
         expiration_interval = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCustomPriceExpirationInterval'), dictionary.get('expiration_interval'), False) if dictionary.get('expiration_interval') is not None else APIHelper.SKIP
         expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(price_in_cents,
                    interval,
@@ -153,7 +161,8 @@ class SubscriptionCustomPrice(object):
                    initial_charge_after_trial,
                    expiration_interval,
                    expiration_interval_unit,
-                   tax_included)
+                   tax_included,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

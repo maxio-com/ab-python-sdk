@@ -27,11 +27,15 @@ class GetOneTimeTokenRequest(object):
     }
 
     def __init__(self,
-                 payment_profile=None):
+                 payment_profile=None,
+                 additional_properties={}):
         """Constructor for the GetOneTimeTokenRequest class"""
 
         # Initialize members of the class
         self.payment_profile = payment_profile 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -53,5 +57,10 @@ class GetOneTimeTokenRequest(object):
 
         # Extract variables from the dictionary
         payment_profile = GetOneTimeTokenPaymentProfile.from_dictionary(dictionary.get('payment_profile')) if dictionary.get('payment_profile') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(payment_profile)
+        return cls(payment_profile,
+                   dictionary)

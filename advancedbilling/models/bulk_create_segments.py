@@ -31,12 +31,16 @@ class BulkCreateSegments(object):
     ]
 
     def __init__(self,
-                 segments=APIHelper.SKIP):
+                 segments=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the BulkCreateSegments class"""
 
         # Initialize members of the class
         if segments is not APIHelper.SKIP:
             self.segments = segments 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -62,5 +66,10 @@ class BulkCreateSegments(object):
             segments = [CreateSegment.from_dictionary(x) for x in dictionary.get('segments')]
         else:
             segments = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(segments)
+        return cls(segments,
+                   dictionary)

@@ -42,7 +42,8 @@ class ResentInvitation(object):
                  last_sent_at=APIHelper.SKIP,
                  last_accepted_at=APIHelper.SKIP,
                  send_invite_link_text=APIHelper.SKIP,
-                 uninvited_count=APIHelper.SKIP):
+                 uninvited_count=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ResentInvitation class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class ResentInvitation(object):
             self.send_invite_link_text = send_invite_link_text 
         if uninvited_count is not APIHelper.SKIP:
             self.uninvited_count = uninvited_count 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,8 +82,13 @@ class ResentInvitation(object):
         last_accepted_at = dictionary.get("last_accepted_at") if dictionary.get("last_accepted_at") else APIHelper.SKIP
         send_invite_link_text = dictionary.get("send_invite_link_text") if dictionary.get("send_invite_link_text") else APIHelper.SKIP
         uninvited_count = dictionary.get("uninvited_count") if dictionary.get("uninvited_count") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(last_sent_at,
                    last_accepted_at,
                    send_invite_link_text,
-                   uninvited_count)
+                   uninvited_count,
+                   dictionary)

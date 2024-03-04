@@ -46,7 +46,8 @@ class Endpoint(object):
                  url=APIHelper.SKIP,
                  site_id=APIHelper.SKIP,
                  status=APIHelper.SKIP,
-                 webhook_subscriptions=APIHelper.SKIP):
+                 webhook_subscriptions=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Endpoint class"""
 
         # Initialize members of the class
@@ -60,6 +61,9 @@ class Endpoint(object):
             self.status = status 
         if webhook_subscriptions is not APIHelper.SKIP:
             self.webhook_subscriptions = webhook_subscriptions 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -85,9 +89,14 @@ class Endpoint(object):
         site_id = dictionary.get("site_id") if dictionary.get("site_id") else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         webhook_subscriptions = dictionary.get("webhook_subscriptions") if dictionary.get("webhook_subscriptions") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    url,
                    site_id,
                    status,
-                   webhook_subscriptions)
+                   webhook_subscriptions,
+                   dictionary)

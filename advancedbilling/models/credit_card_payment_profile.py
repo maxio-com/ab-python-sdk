@@ -144,7 +144,8 @@ class CreditCardPaymentProfile(object):
                  disabled=APIHelper.SKIP,
                  chargify_token=APIHelper.SKIP,
                  site_gateway_setting_id=APIHelper.SKIP,
-                 gateway_handle=APIHelper.SKIP):
+                 gateway_handle=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreditCardPaymentProfile class"""
 
         # Initialize members of the class
@@ -192,6 +193,9 @@ class CreditCardPaymentProfile(object):
         if gateway_handle is not APIHelper.SKIP:
             self.gateway_handle = gateway_handle 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -233,6 +237,10 @@ class CreditCardPaymentProfile(object):
         chargify_token = dictionary.get("chargify_token") if dictionary.get("chargify_token") else APIHelper.SKIP
         site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if "site_gateway_setting_id" in dictionary.keys() else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(masked_card_number,
                    id,
@@ -255,7 +263,8 @@ class CreditCardPaymentProfile(object):
                    disabled,
                    chargify_token,
                    site_gateway_setting_id,
-                   gateway_handle)
+                   gateway_handle,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -45,7 +45,8 @@ class SubscriptionGroupComponentCustomPrice(object):
     def __init__(self,
                  pricing_scheme=APIHelper.SKIP,
                  prices=APIHelper.SKIP,
-                 overage_pricing=APIHelper.SKIP):
+                 overage_pricing=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupComponentCustomPrice class"""
 
         # Initialize members of the class
@@ -55,6 +56,9 @@ class SubscriptionGroupComponentCustomPrice(object):
             self.prices = prices 
         if overage_pricing is not APIHelper.SKIP:
             self.overage_pricing = overage_pricing 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -86,10 +90,15 @@ class SubscriptionGroupComponentCustomPrice(object):
             overage_pricing = [ComponentCustomPrice.from_dictionary(x) for x in dictionary.get('overage_pricing')]
         else:
             overage_pricing = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(pricing_scheme,
                    prices,
-                   overage_pricing)
+                   overage_pricing,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

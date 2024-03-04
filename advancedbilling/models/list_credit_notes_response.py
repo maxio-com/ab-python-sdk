@@ -26,11 +26,15 @@ class ListCreditNotesResponse(object):
     }
 
     def __init__(self,
-                 credit_notes=None):
+                 credit_notes=None,
+                 additional_properties={}):
         """Constructor for the ListCreditNotesResponse class"""
 
         # Initialize members of the class
         self.credit_notes = credit_notes 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -54,5 +58,10 @@ class ListCreditNotesResponse(object):
         credit_notes = None
         if dictionary.get('credit_notes') is not None:
             credit_notes = [CreditNote.from_dictionary(x) for x in dictionary.get('credit_notes')]
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(credit_notes)
+        return cls(credit_notes,
+                   dictionary)

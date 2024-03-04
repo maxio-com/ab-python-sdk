@@ -38,7 +38,8 @@ class CreateProductFamily(object):
 
     def __init__(self,
                  name=APIHelper.SKIP,
-                 description=APIHelper.SKIP):
+                 description=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateProductFamily class"""
 
         # Initialize members of the class
@@ -46,6 +47,9 @@ class CreateProductFamily(object):
             self.name = name 
         if description is not APIHelper.SKIP:
             self.description = description 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -68,6 +72,11 @@ class CreateProductFamily(object):
         # Extract variables from the dictionary
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(name,
-                   description)
+                   description,
+                   dictionary)

@@ -27,11 +27,15 @@ class SignupProformaPreviewResponse(object):
     }
 
     def __init__(self,
-                 proforma_invoice_preview=None):
+                 proforma_invoice_preview=None,
+                 additional_properties={}):
         """Constructor for the SignupProformaPreviewResponse class"""
 
         # Initialize members of the class
         self.proforma_invoice_preview = proforma_invoice_preview 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -53,5 +57,10 @@ class SignupProformaPreviewResponse(object):
 
         # Extract variables from the dictionary
         proforma_invoice_preview = SignupProformaPreview.from_dictionary(dictionary.get('proforma_invoice_preview')) if dictionary.get('proforma_invoice_preview') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(proforma_invoice_preview)
+        return cls(proforma_invoice_preview,
+                   dictionary)

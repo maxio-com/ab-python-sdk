@@ -27,11 +27,15 @@ class PaymentProfileResponse(object):
     }
 
     def __init__(self,
-                 payment_profile=None):
+                 payment_profile=None,
+                 additional_properties={}):
         """Constructor for the PaymentProfileResponse class"""
 
         # Initialize members of the class
         self.payment_profile = payment_profile 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -54,8 +58,13 @@ class PaymentProfileResponse(object):
 
         # Extract variables from the dictionary
         payment_profile = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile'), dictionary.get('payment_profile'), False) if dictionary.get('payment_profile') is not None else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(payment_profile)
+        return cls(payment_profile,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

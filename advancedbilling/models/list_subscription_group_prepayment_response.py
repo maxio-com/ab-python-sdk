@@ -27,11 +27,15 @@ class ListSubscriptionGroupPrepaymentResponse(object):
     }
 
     def __init__(self,
-                 prepayments=None):
+                 prepayments=None,
+                 additional_properties={}):
         """Constructor for the ListSubscriptionGroupPrepaymentResponse class"""
 
         # Initialize members of the class
         self.prepayments = prepayments 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -55,5 +59,10 @@ class ListSubscriptionGroupPrepaymentResponse(object):
         prepayments = None
         if dictionary.get('prepayments') is not None:
             prepayments = [ListSubscriptionGroupPrepayment.from_dictionary(x) for x in dictionary.get('prepayments')]
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(prepayments)
+        return cls(prepayments,
+                   dictionary)

@@ -42,7 +42,8 @@ class ReferralCode(object):
                  id=APIHelper.SKIP,
                  site_id=APIHelper.SKIP,
                  subscription_id=APIHelper.SKIP,
-                 code=APIHelper.SKIP):
+                 code=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ReferralCode class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class ReferralCode(object):
             self.subscription_id = subscription_id 
         if code is not APIHelper.SKIP:
             self.code = code 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,8 +82,13 @@ class ReferralCode(object):
         site_id = dictionary.get("site_id") if dictionary.get("site_id") else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         code = dictionary.get("code") if dictionary.get("code") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    site_id,
                    subscription_id,
-                   code)
+                   code,
+                   dictionary)

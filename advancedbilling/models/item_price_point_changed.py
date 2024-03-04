@@ -44,7 +44,8 @@ class ItemPricePointChanged(object):
                  item_handle=None,
                  item_name=None,
                  previous_price_point=None,
-                 current_price_point=None):
+                 current_price_point=None,
+                 additional_properties={}):
         """Constructor for the ItemPricePointChanged class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class ItemPricePointChanged(object):
         self.item_name = item_name 
         self.previous_price_point = previous_price_point 
         self.current_price_point = current_price_point 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -80,13 +84,18 @@ class ItemPricePointChanged(object):
         item_name = dictionary.get("item_name") if dictionary.get("item_name") else None
         previous_price_point = ItemPricePointData.from_dictionary(dictionary.get('previous_price_point')) if dictionary.get('previous_price_point') else None
         current_price_point = ItemPricePointData.from_dictionary(dictionary.get('current_price_point')) if dictionary.get('current_price_point') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(item_id,
                    item_type,
                    item_handle,
                    item_name,
                    previous_price_point,
-                   current_price_point)
+                   current_price_point,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

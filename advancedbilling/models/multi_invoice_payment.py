@@ -45,7 +45,8 @@ class MultiInvoicePayment(object):
                  transaction_id=APIHelper.SKIP,
                  total_amount=APIHelper.SKIP,
                  currency_code=APIHelper.SKIP,
-                 applications=APIHelper.SKIP):
+                 applications=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the MultiInvoicePayment class"""
 
         # Initialize members of the class
@@ -57,6 +58,9 @@ class MultiInvoicePayment(object):
             self.currency_code = currency_code 
         if applications is not APIHelper.SKIP:
             self.applications = applications 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -85,8 +89,13 @@ class MultiInvoicePayment(object):
             applications = [InvoicePaymentApplication.from_dictionary(x) for x in dictionary.get('applications')]
         else:
             applications = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(transaction_id,
                    total_amount,
                    currency_code,
-                   applications)
+                   applications,
+                   dictionary)

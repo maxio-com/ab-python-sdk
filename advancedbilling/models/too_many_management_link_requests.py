@@ -29,12 +29,16 @@ class TooManyManagementLinkRequests(object):
 
     def __init__(self,
                  error=None,
-                 new_link_available_at=None):
+                 new_link_available_at=None,
+                 additional_properties={}):
         """Constructor for the TooManyManagementLinkRequests class"""
 
         # Initialize members of the class
         self.error = error 
         self.new_link_available_at = APIHelper.apply_datetime_converter(new_link_available_at, APIHelper.RFC3339DateTime) if new_link_available_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,6 +61,11 @@ class TooManyManagementLinkRequests(object):
         # Extract variables from the dictionary
         error = dictionary.get("error") if dictionary.get("error") else None
         new_link_available_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("new_link_available_at")).datetime if dictionary.get("new_link_available_at") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(error,
-                   new_link_available_at)
+                   new_link_available_at,
+                   dictionary)

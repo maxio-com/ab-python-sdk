@@ -70,7 +70,7 @@ By default, proforma invoices returned on the index will only include totals, no
 
 ```python
 def list_subscription_group_proforma_invoices(self,
-                                             uid)
+                                             options=dict())
 ```
 
 ## Parameters
@@ -78,17 +78,30 @@ def list_subscription_group_proforma_invoices(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `str` | Template, Required | The uid of the subscription group |
+| `line_items` | `bool` | Query, Optional | Include line items data |
+| `discounts` | `bool` | Query, Optional | Include discounts data |
+| `taxes` | `bool` | Query, Optional | Include taxes data |
+| `credits` | `bool` | Query, Optional | Include credits data |
+| `payments` | `bool` | Query, Optional | Include payments data |
+| `custom_fields` | `bool` | Query, Optional | Include custom fields data |
 
 ## Response Type
 
-[`ProformaInvoice`](../../doc/models/proforma-invoice.md)
+[`ListProformaInvoicesResponse`](../../doc/models/list-proforma-invoices-response.md)
 
 ## Example Usage
 
 ```python
-uid = 'uid0'
-
-result = proforma_invoices_controller.list_subscription_group_proforma_invoices(uid)
+collect = {
+    'uid': 'uid0',
+    'line_items': False,
+    'discounts': False,
+    'taxes': False,
+    'credits': False,
+    'payments': False,
+    'custom_fields': False
+}
+result = proforma_invoices_controller.list_subscription_group_proforma_invoices(collect)
 print(result)
 ```
 
@@ -195,7 +208,7 @@ def list_proforma_invoices(self,
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `start_date` | `str` | Query, Optional | The beginning date range for the invoice's Due Date, in the YYYY-MM-DD format. |
 | `end_date` | `str` | Query, Optional | The ending date range for the invoice's Due Date, in the YYYY-MM-DD format. |
-| `status` | [`InvoiceStatus`](../../doc/models/invoice-status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
+| `status` | [`ProformaInvoiceStatus`](../../doc/models/proforma-invoice-status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 | `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned invoices. |
@@ -299,7 +312,7 @@ def preview_proforma_invoice(self,
 
 ## Response Type
 
-[`ProformaInvoicePreview`](../../doc/models/proforma-invoice-preview.md)
+[`ProformaInvoice`](../../doc/models/proforma-invoice.md)
 
 ## Example Usage
 
@@ -383,7 +396,7 @@ A product and customer first name, last name, and email are the minimum requirem
 
 ```python
 def preview_signup_proforma_invoice(self,
-                                   include_next_proforma_invoice=None,
+                                   include=None,
                                    body=None)
 ```
 
@@ -391,7 +404,7 @@ def preview_signup_proforma_invoice(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `include_next_proforma_invoice` | `str` | Query, Optional | Choose to include a proforma invoice preview for the first renewal |
+| `include` | [`CreateSignupProformaPreviewInclude`](../../doc/models/create-signup-proforma-preview-include.md) | Query, Optional | Choose to include a proforma invoice preview for the first renewal. Use in query `include=next_proforma_invoice`. |
 | `body` | [`CreateSubscriptionRequest`](../../doc/models/create-subscription-request.md) | Body, Optional | - |
 
 ## Response Type

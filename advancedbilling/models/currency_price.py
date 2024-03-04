@@ -50,7 +50,8 @@ class CurrencyPrice(object):
                  price=APIHelper.SKIP,
                  formatted_price=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
-                 role=APIHelper.SKIP):
+                 role=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CurrencyPrice class"""
 
         # Initialize members of the class
@@ -66,6 +67,9 @@ class CurrencyPrice(object):
             self.product_price_point_id = product_price_point_id 
         if role is not APIHelper.SKIP:
             self.role = role 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -92,10 +96,15 @@ class CurrencyPrice(object):
         formatted_price = dictionary.get("formatted_price") if dictionary.get("formatted_price") else APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
         role = dictionary.get("role") if dictionary.get("role") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    currency,
                    price,
                    formatted_price,
                    product_price_point_id,
-                   role)
+                   role,
+                   dictionary)

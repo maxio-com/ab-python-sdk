@@ -48,7 +48,8 @@ class SubscriptionMigrationPreview(object):
                  prorated_adjustment_in_cents=APIHelper.SKIP,
                  charge_in_cents=APIHelper.SKIP,
                  payment_due_in_cents=APIHelper.SKIP,
-                 credit_applied_in_cents=APIHelper.SKIP):
+                 credit_applied_in_cents=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionMigrationPreview class"""
 
         # Initialize members of the class
@@ -60,6 +61,9 @@ class SubscriptionMigrationPreview(object):
             self.payment_due_in_cents = payment_due_in_cents 
         if credit_applied_in_cents is not APIHelper.SKIP:
             self.credit_applied_in_cents = credit_applied_in_cents 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -84,8 +88,13 @@ class SubscriptionMigrationPreview(object):
         charge_in_cents = dictionary.get("charge_in_cents") if dictionary.get("charge_in_cents") else APIHelper.SKIP
         payment_due_in_cents = dictionary.get("payment_due_in_cents") if dictionary.get("payment_due_in_cents") else APIHelper.SKIP
         credit_applied_in_cents = dictionary.get("credit_applied_in_cents") if dictionary.get("credit_applied_in_cents") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(prorated_adjustment_in_cents,
                    charge_in_cents,
                    payment_due_in_cents,
-                   credit_applied_in_cents)
+                   credit_applied_in_cents,
+                   dictionary)

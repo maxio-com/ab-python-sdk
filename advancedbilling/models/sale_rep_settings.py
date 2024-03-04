@@ -54,7 +54,8 @@ class SaleRepSettings(object):
                  site_name=APIHelper.SKIP,
                  subscription_mrr=APIHelper.SKIP,
                  sales_rep_id=APIHelper.SKIP,
-                 sales_rep_name=APIHelper.SKIP):
+                 sales_rep_name=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SaleRepSettings class"""
 
         # Initialize members of the class
@@ -72,6 +73,9 @@ class SaleRepSettings(object):
             self.sales_rep_id = sales_rep_id 
         if sales_rep_name is not APIHelper.SKIP:
             self.sales_rep_name = sales_rep_name 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -99,6 +103,10 @@ class SaleRepSettings(object):
         subscription_mrr = dictionary.get("subscription_mrr") if dictionary.get("subscription_mrr") else APIHelper.SKIP
         sales_rep_id = dictionary.get("sales_rep_id") if dictionary.get("sales_rep_id") else APIHelper.SKIP
         sales_rep_name = dictionary.get("sales_rep_name") if dictionary.get("sales_rep_name") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(customer_name,
                    subscription_id,
@@ -106,4 +114,5 @@ class SaleRepSettings(object):
                    site_name,
                    subscription_mrr,
                    sales_rep_id,
-                   sales_rep_name)
+                   sales_rep_name,
+                   dictionary)

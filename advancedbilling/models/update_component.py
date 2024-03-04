@@ -79,7 +79,8 @@ class UpdateComponent(object):
                  tax_code=APIHelper.SKIP,
                  item_category=APIHelper.SKIP,
                  display_on_hosted_page=APIHelper.SKIP,
-                 upgrade_charge=APIHelper.SKIP):
+                 upgrade_charge=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the UpdateComponent class"""
 
         # Initialize members of the class
@@ -101,6 +102,9 @@ class UpdateComponent(object):
             self.display_on_hosted_page = display_on_hosted_page 
         if upgrade_charge is not APIHelper.SKIP:
             self.upgrade_charge = upgrade_charge 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -130,6 +134,10 @@ class UpdateComponent(object):
         item_category = dictionary.get("item_category") if "item_category" in dictionary.keys() else APIHelper.SKIP
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(handle,
                    name,
@@ -139,4 +147,5 @@ class UpdateComponent(object):
                    tax_code,
                    item_category,
                    display_on_hosted_page,
-                   upgrade_charge)
+                   upgrade_charge,
+                   dictionary)

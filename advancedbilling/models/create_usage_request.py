@@ -26,11 +26,15 @@ class CreateUsageRequest(object):
     }
 
     def __init__(self,
-                 usage=None):
+                 usage=None,
+                 additional_properties={}):
         """Constructor for the CreateUsageRequest class"""
 
         # Initialize members of the class
         self.usage = usage 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class CreateUsageRequest(object):
 
         # Extract variables from the dictionary
         usage = CreateUsage.from_dictionary(dictionary.get('usage')) if dictionary.get('usage') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(usage)
+        return cls(usage,
+                   dictionary)

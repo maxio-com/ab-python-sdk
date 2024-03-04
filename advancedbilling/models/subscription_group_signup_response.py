@@ -76,7 +76,8 @@ class SubscriptionGroupSignupResponse(object):
                  state=APIHelper.SKIP,
                  cancel_at_end_of_period=APIHelper.SKIP,
                  subscriptions=APIHelper.SKIP,
-                 payment_collection_method='automatic'):
+                 payment_collection_method='automatic',
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupSignupResponse class"""
 
         # Initialize members of the class
@@ -101,6 +102,9 @@ class SubscriptionGroupSignupResponse(object):
         if subscriptions is not APIHelper.SKIP:
             self.subscriptions = subscriptions 
         self.payment_collection_method = payment_collection_method 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -136,6 +140,10 @@ class SubscriptionGroupSignupResponse(object):
         else:
             subscriptions = APIHelper.SKIP
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    scheme,
@@ -147,4 +155,5 @@ class SubscriptionGroupSignupResponse(object):
                    state,
                    cancel_at_end_of_period,
                    subscriptions,
-                   payment_collection_method)
+                   payment_collection_method,
+                   dictionary)

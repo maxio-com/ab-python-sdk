@@ -38,7 +38,8 @@ class CreateOrUpdateSegmentPrice(object):
     def __init__(self,
                  unit_price=None,
                  starting_quantity=APIHelper.SKIP,
-                 ending_quantity=APIHelper.SKIP):
+                 ending_quantity=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateOrUpdateSegmentPrice class"""
 
         # Initialize members of the class
@@ -47,6 +48,9 @@ class CreateOrUpdateSegmentPrice(object):
         if ending_quantity is not APIHelper.SKIP:
             self.ending_quantity = ending_quantity 
         self.unit_price = unit_price 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,10 +75,15 @@ class CreateOrUpdateSegmentPrice(object):
         unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateOrUpdateSegmentPriceUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else None
         starting_quantity = dictionary.get("starting_quantity") if dictionary.get("starting_quantity") else APIHelper.SKIP
         ending_quantity = dictionary.get("ending_quantity") if dictionary.get("ending_quantity") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(unit_price,
                    starting_quantity,
-                   ending_quantity)
+                   ending_quantity,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

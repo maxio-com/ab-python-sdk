@@ -31,12 +31,16 @@ class ProductFamilyResponse(object):
     ]
 
     def __init__(self,
-                 product_family=APIHelper.SKIP):
+                 product_family=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ProductFamilyResponse class"""
 
         # Initialize members of the class
         if product_family is not APIHelper.SKIP:
             self.product_family = product_family 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class ProductFamilyResponse(object):
 
         # Extract variables from the dictionary
         product_family = ProductFamily.from_dictionary(dictionary.get('product_family')) if 'product_family' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(product_family)
+        return cls(product_family,
+                   dictionary)

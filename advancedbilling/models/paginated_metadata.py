@@ -47,7 +47,8 @@ class PaginatedMetadata(object):
                  current_page=APIHelper.SKIP,
                  total_pages=APIHelper.SKIP,
                  per_page=APIHelper.SKIP,
-                 metadata=APIHelper.SKIP):
+                 metadata=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PaginatedMetadata class"""
 
         # Initialize members of the class
@@ -61,6 +62,9 @@ class PaginatedMetadata(object):
             self.per_page = per_page 
         if metadata is not APIHelper.SKIP:
             self.metadata = metadata 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -90,9 +94,14 @@ class PaginatedMetadata(object):
             metadata = [Metadata.from_dictionary(x) for x in dictionary.get('metadata')]
         else:
             metadata = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(total_count,
                    current_page,
                    total_pages,
                    per_page,
-                   metadata)
+                   metadata,
+                   dictionary)

@@ -38,13 +38,17 @@ class GroupTarget(object):
 
     def __init__(self,
                  mtype=None,
-                 id=APIHelper.SKIP):
+                 id=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the GroupTarget class"""
 
         # Initialize members of the class
         self.mtype = mtype 
         if id is not APIHelper.SKIP:
             self.id = id 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -67,9 +71,14 @@ class GroupTarget(object):
         # Extract variables from the dictionary
         mtype = dictionary.get("type") if dictionary.get("type") else None
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(mtype,
-                   id)
+                   id,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

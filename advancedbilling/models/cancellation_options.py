@@ -36,7 +36,8 @@ class CancellationOptions(object):
 
     def __init__(self,
                  cancellation_message=APIHelper.SKIP,
-                 reason_code=APIHelper.SKIP):
+                 reason_code=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CancellationOptions class"""
 
         # Initialize members of the class
@@ -44,6 +45,9 @@ class CancellationOptions(object):
             self.cancellation_message = cancellation_message 
         if reason_code is not APIHelper.SKIP:
             self.reason_code = reason_code 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -66,6 +70,11 @@ class CancellationOptions(object):
         # Extract variables from the dictionary
         cancellation_message = dictionary.get("cancellation_message") if dictionary.get("cancellation_message") else APIHelper.SKIP
         reason_code = dictionary.get("reason_code") if dictionary.get("reason_code") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(cancellation_message,
-                   reason_code)
+                   reason_code,
+                   dictionary)

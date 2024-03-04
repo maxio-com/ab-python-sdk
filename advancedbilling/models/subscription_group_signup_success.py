@@ -32,12 +32,16 @@ class SubscriptionGroupSignupSuccess(object):
 
     def __init__(self,
                  subscription_group=None,
-                 customer=None):
+                 customer=None,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupSignupSuccess class"""
 
         # Initialize members of the class
         self.subscription_group = subscription_group 
         self.customer = customer 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -60,9 +64,14 @@ class SubscriptionGroupSignupSuccess(object):
         # Extract variables from the dictionary
         subscription_group = SubscriptionGroupSignupSuccessData.from_dictionary(dictionary.get('subscription_group')) if dictionary.get('subscription_group') else None
         customer = Customer.from_dictionary(dictionary.get('customer')) if dictionary.get('customer') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(subscription_group,
-                   customer)
+                   customer,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

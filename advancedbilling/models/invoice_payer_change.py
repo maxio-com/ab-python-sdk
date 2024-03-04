@@ -42,7 +42,8 @@ class InvoicePayerChange(object):
                  first_name=APIHelper.SKIP,
                  last_name=APIHelper.SKIP,
                  organization=APIHelper.SKIP,
-                 email=APIHelper.SKIP):
+                 email=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoicePayerChange class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class InvoicePayerChange(object):
             self.organization = organization 
         if email is not APIHelper.SKIP:
             self.email = email 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,11 +82,16 @@ class InvoicePayerChange(object):
         last_name = dictionary.get("last_name") if dictionary.get("last_name") else APIHelper.SKIP
         organization = dictionary.get("organization") if dictionary.get("organization") else APIHelper.SKIP
         email = dictionary.get("email") if dictionary.get("email") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(first_name,
                    last_name,
                    organization,
-                   email)
+                   email,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

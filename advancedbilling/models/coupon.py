@@ -159,7 +159,8 @@ class Coupon(object):
                  discount_type=APIHelper.SKIP,
                  exclude_mid_period_allocations=APIHelper.SKIP,
                  apply_on_cancel_at_end_of_period=APIHelper.SKIP,
-                 coupon_restrictions=APIHelper.SKIP):
+                 coupon_restrictions=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Coupon class"""
 
         # Initialize members of the class
@@ -222,6 +223,9 @@ class Coupon(object):
         if coupon_restrictions is not APIHelper.SKIP:
             self.coupon_restrictions = coupon_restrictions 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -281,6 +285,10 @@ class Coupon(object):
             coupon_restrictions = [CouponRestriction.from_dictionary(x) for x in dictionary.get('coupon_restrictions')]
         else:
             coupon_restrictions = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    name,
@@ -310,4 +318,5 @@ class Coupon(object):
                    discount_type,
                    exclude_mid_period_allocations,
                    apply_on_cancel_at_end_of_period,
-                   coupon_restrictions)
+                   coupon_restrictions,
+                   dictionary)

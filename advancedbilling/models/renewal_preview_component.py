@@ -47,7 +47,8 @@ class RenewalPreviewComponent(object):
     def __init__(self,
                  component_id=APIHelper.SKIP,
                  quantity=APIHelper.SKIP,
-                 price_point_id=APIHelper.SKIP):
+                 price_point_id=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the RenewalPreviewComponent class"""
 
         # Initialize members of the class
@@ -57,6 +58,9 @@ class RenewalPreviewComponent(object):
             self.quantity = quantity 
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -81,7 +85,12 @@ class RenewalPreviewComponent(object):
         component_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('RenewalPreviewComponentComponentId'), dictionary.get('component_id'), False) if dictionary.get('component_id') is not None else APIHelper.SKIP
         quantity = dictionary.get("quantity") if dictionary.get("quantity") else APIHelper.SKIP
         price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('RenewalPreviewComponentPricePointId'), dictionary.get('price_point_id'), False) if dictionary.get('price_point_id') is not None else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(component_id,
                    quantity,
-                   price_point_id)
+                   price_point_id,
+                   dictionary)

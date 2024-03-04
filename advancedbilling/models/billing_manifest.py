@@ -63,7 +63,8 @@ class BillingManifest(object):
                  start_date=APIHelper.SKIP,
                  end_date=APIHelper.SKIP,
                  period_type=APIHelper.SKIP,
-                 existing_balance_in_cents=APIHelper.SKIP):
+                 existing_balance_in_cents=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the BillingManifest class"""
 
         # Initialize members of the class
@@ -85,6 +86,9 @@ class BillingManifest(object):
             self.period_type = period_type 
         if existing_balance_in_cents is not APIHelper.SKIP:
             self.existing_balance_in_cents = existing_balance_in_cents 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -118,6 +122,10 @@ class BillingManifest(object):
         end_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("end_date")).datetime if dictionary.get("end_date") else APIHelper.SKIP
         period_type = dictionary.get("period_type") if dictionary.get("period_type") else APIHelper.SKIP
         existing_balance_in_cents = dictionary.get("existing_balance_in_cents") if dictionary.get("existing_balance_in_cents") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(line_items,
                    total_in_cents,
@@ -127,4 +135,5 @@ class BillingManifest(object):
                    start_date,
                    end_date,
                    period_type,
-                   existing_balance_in_cents)
+                   existing_balance_in_cents,
+                   dictionary)

@@ -59,7 +59,8 @@ class Prepayment(object):
                  created_at=None,
                  refunded_amount_in_cents=APIHelper.SKIP,
                  details=APIHelper.SKIP,
-                 payment_type=APIHelper.SKIP):
+                 payment_type=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Prepayment class"""
 
         # Initialize members of the class
@@ -76,6 +77,9 @@ class Prepayment(object):
         if payment_type is not APIHelper.SKIP:
             self.payment_type = payment_type 
         self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -106,6 +110,10 @@ class Prepayment(object):
         refunded_amount_in_cents = dictionary.get("refunded_amount_in_cents") if dictionary.get("refunded_amount_in_cents") else APIHelper.SKIP
         details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
         payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    subscription_id,
@@ -116,4 +124,5 @@ class Prepayment(object):
                    created_at,
                    refunded_amount_in_cents,
                    details,
-                   payment_type)
+                   payment_type,
+                   dictionary)

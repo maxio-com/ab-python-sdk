@@ -26,11 +26,15 @@ class UpdateReasonCodeRequest(object):
     }
 
     def __init__(self,
-                 reason_code=None):
+                 reason_code=None,
+                 additional_properties={}):
         """Constructor for the UpdateReasonCodeRequest class"""
 
         # Initialize members of the class
         self.reason_code = reason_code 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class UpdateReasonCodeRequest(object):
 
         # Extract variables from the dictionary
         reason_code = UpdateReasonCode.from_dictionary(dictionary.get('reason_code')) if dictionary.get('reason_code') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(reason_code)
+        return cls(reason_code,
+                   dictionary)

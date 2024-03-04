@@ -47,7 +47,8 @@ class NetTerms(object):
                  automatic_net_terms=0,
                  remittance_net_terms=0,
                  net_terms_on_remittance_signups_enabled=False,
-                 custom_net_terms_enabled=False):
+                 custom_net_terms_enabled=False,
+                 additional_properties={}):
         """Constructor for the NetTerms class"""
 
         # Initialize members of the class
@@ -56,6 +57,9 @@ class NetTerms(object):
         self.remittance_net_terms = remittance_net_terms 
         self.net_terms_on_remittance_signups_enabled = net_terms_on_remittance_signups_enabled 
         self.custom_net_terms_enabled = custom_net_terms_enabled 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -81,9 +85,14 @@ class NetTerms(object):
         remittance_net_terms = dictionary.get("remittance_net_terms") if dictionary.get("remittance_net_terms") else 0
         net_terms_on_remittance_signups_enabled = dictionary.get("net_terms_on_remittance_signups_enabled") if dictionary.get("net_terms_on_remittance_signups_enabled") else False
         custom_net_terms_enabled = dictionary.get("custom_net_terms_enabled") if dictionary.get("custom_net_terms_enabled") else False
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(default_net_terms,
                    automatic_net_terms,
                    remittance_net_terms,
                    net_terms_on_remittance_signups_enabled,
-                   custom_net_terms_enabled)
+                   custom_net_terms_enabled,
+                   dictionary)

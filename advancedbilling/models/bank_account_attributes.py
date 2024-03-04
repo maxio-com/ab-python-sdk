@@ -88,7 +88,8 @@ class BankAccountAttributes(object):
                  payment_type=APIHelper.SKIP,
                  current_vault=APIHelper.SKIP,
                  vault_token=APIHelper.SKIP,
-                 customer_vault_token=APIHelper.SKIP):
+                 customer_vault_token=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the BankAccountAttributes class"""
 
         # Initialize members of the class
@@ -116,6 +117,9 @@ class BankAccountAttributes(object):
             self.vault_token = vault_token 
         if customer_vault_token is not APIHelper.SKIP:
             self.customer_vault_token = customer_vault_token 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -148,6 +152,10 @@ class BankAccountAttributes(object):
         current_vault = dictionary.get("current_vault") if dictionary.get("current_vault") else APIHelper.SKIP
         vault_token = dictionary.get("vault_token") if dictionary.get("vault_token") else APIHelper.SKIP
         customer_vault_token = dictionary.get("customer_vault_token") if dictionary.get("customer_vault_token") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(chargify_token,
                    bank_name,
@@ -160,7 +168,8 @@ class BankAccountAttributes(object):
                    payment_type,
                    current_vault,
                    vault_token,
-                   customer_vault_token)
+                   customer_vault_token,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

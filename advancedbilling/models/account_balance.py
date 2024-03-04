@@ -30,12 +30,16 @@ class AccountBalance(object):
     ]
 
     def __init__(self,
-                 balance_in_cents=APIHelper.SKIP):
+                 balance_in_cents=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AccountBalance class"""
 
         # Initialize members of the class
         if balance_in_cents is not APIHelper.SKIP:
             self.balance_in_cents = balance_in_cents 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,5 +61,10 @@ class AccountBalance(object):
 
         # Extract variables from the dictionary
         balance_in_cents = dictionary.get("balance_in_cents") if dictionary.get("balance_in_cents") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(balance_in_cents)
+        return cls(balance_in_cents,
+                   dictionary)

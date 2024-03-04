@@ -41,7 +41,8 @@ class InvoicePrePayment(object):
     def __init__(self,
                  subscription_id=APIHelper.SKIP,
                  amount_in_cents=APIHelper.SKIP,
-                 ending_balance_in_cents=APIHelper.SKIP):
+                 ending_balance_in_cents=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoicePrePayment class"""
 
         # Initialize members of the class
@@ -51,6 +52,9 @@ class InvoicePrePayment(object):
             self.amount_in_cents = amount_in_cents 
         if ending_balance_in_cents is not APIHelper.SKIP:
             self.ending_balance_in_cents = ending_balance_in_cents 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -74,10 +78,15 @@ class InvoicePrePayment(object):
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         amount_in_cents = dictionary.get("amount_in_cents") if dictionary.get("amount_in_cents") else APIHelper.SKIP
         ending_balance_in_cents = dictionary.get("ending_balance_in_cents") if dictionary.get("ending_balance_in_cents") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(subscription_id,
                    amount_in_cents,
-                   ending_balance_in_cents)
+                   ending_balance_in_cents,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

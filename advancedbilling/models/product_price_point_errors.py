@@ -50,7 +50,8 @@ class ProductPricePointErrors(object):
                  interval_unit=APIHelper.SKIP,
                  name=APIHelper.SKIP,
                  price=APIHelper.SKIP,
-                 price_in_cents=APIHelper.SKIP):
+                 price_in_cents=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ProductPricePointErrors class"""
 
         # Initialize members of the class
@@ -66,6 +67,9 @@ class ProductPricePointErrors(object):
             self.price = price 
         if price_in_cents is not APIHelper.SKIP:
             self.price_in_cents = price_in_cents 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -92,10 +96,15 @@ class ProductPricePointErrors(object):
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         price = dictionary.get("price") if dictionary.get("price") else APIHelper.SKIP
         price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(price_point,
                    interval,
                    interval_unit,
                    name,
                    price,
-                   price_in_cents)
+                   price_in_cents,
+                   dictionary)

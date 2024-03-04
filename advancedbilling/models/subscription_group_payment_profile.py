@@ -42,7 +42,8 @@ class SubscriptionGroupPaymentProfile(object):
                  id=APIHelper.SKIP,
                  first_name=APIHelper.SKIP,
                  last_name=APIHelper.SKIP,
-                 masked_card_number=APIHelper.SKIP):
+                 masked_card_number=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupPaymentProfile class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class SubscriptionGroupPaymentProfile(object):
             self.last_name = last_name 
         if masked_card_number is not APIHelper.SKIP:
             self.masked_card_number = masked_card_number 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,8 +82,13 @@ class SubscriptionGroupPaymentProfile(object):
         first_name = dictionary.get("first_name") if dictionary.get("first_name") else APIHelper.SKIP
         last_name = dictionary.get("last_name") if dictionary.get("last_name") else APIHelper.SKIP
         masked_card_number = dictionary.get("masked_card_number") if dictionary.get("masked_card_number") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    first_name,
                    last_name,
-                   masked_card_number)
+                   masked_card_number,
+                   dictionary)

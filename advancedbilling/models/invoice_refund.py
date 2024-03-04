@@ -64,7 +64,8 @@ class InvoiceRefund(object):
                  applied_amount=APIHelper.SKIP,
                  gateway_transaction_id=APIHelper.SKIP,
                  gateway_used=APIHelper.SKIP,
-                 gateway_handle=APIHelper.SKIP):
+                 gateway_handle=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceRefund class"""
 
         # Initialize members of the class
@@ -84,6 +85,9 @@ class InvoiceRefund(object):
             self.gateway_used = gateway_used 
         if gateway_handle is not APIHelper.SKIP:
             self.gateway_handle = gateway_handle 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -112,6 +116,10 @@ class InvoiceRefund(object):
         gateway_transaction_id = dictionary.get("gateway_transaction_id") if "gateway_transaction_id" in dictionary.keys() else APIHelper.SKIP
         gateway_used = dictionary.get("gateway_used") if dictionary.get("gateway_used") else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(transaction_id,
                    payment_id,
@@ -120,7 +128,8 @@ class InvoiceRefund(object):
                    applied_amount,
                    gateway_transaction_id,
                    gateway_used,
-                   gateway_handle)
+                   gateway_handle,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

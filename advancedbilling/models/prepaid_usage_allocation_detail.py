@@ -38,7 +38,8 @@ class PrepaidUsageAllocationDetail(object):
     def __init__(self,
                  allocation_id=APIHelper.SKIP,
                  charge_id=APIHelper.SKIP,
-                 usage_quantity=APIHelper.SKIP):
+                 usage_quantity=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PrepaidUsageAllocationDetail class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class PrepaidUsageAllocationDetail(object):
             self.charge_id = charge_id 
         if usage_quantity is not APIHelper.SKIP:
             self.usage_quantity = usage_quantity 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,10 +75,15 @@ class PrepaidUsageAllocationDetail(object):
         allocation_id = dictionary.get("allocation_id") if dictionary.get("allocation_id") else APIHelper.SKIP
         charge_id = dictionary.get("charge_id") if dictionary.get("charge_id") else APIHelper.SKIP
         usage_quantity = dictionary.get("usage_quantity") if dictionary.get("usage_quantity") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(allocation_id,
                    charge_id,
-                   usage_quantity)
+                   usage_quantity,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -37,7 +37,8 @@ class ComponentPricePointsResponse(object):
 
     def __init__(self,
                  price_points=APIHelper.SKIP,
-                 meta=APIHelper.SKIP):
+                 meta=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ComponentPricePointsResponse class"""
 
         # Initialize members of the class
@@ -45,6 +46,9 @@ class ComponentPricePointsResponse(object):
             self.price_points = price_points 
         if meta is not APIHelper.SKIP:
             self.meta = meta 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,6 +75,11 @@ class ComponentPricePointsResponse(object):
         else:
             price_points = APIHelper.SKIP
         meta = ListPublicKeysMeta.from_dictionary(dictionary.get('meta')) if 'meta' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(price_points,
-                   meta)
+                   meta,
+                   dictionary)

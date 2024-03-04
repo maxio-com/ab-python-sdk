@@ -55,7 +55,8 @@ class PrepaidUsage(object):
                  component_id=None,
                  component_handle=None,
                  memo=None,
-                 allocation_details=None):
+                 allocation_details=None,
+                 additional_properties={}):
         """Constructor for the PrepaidUsage class"""
 
         # Initialize members of the class
@@ -69,6 +70,9 @@ class PrepaidUsage(object):
         self.component_handle = component_handle 
         self.memo = memo 
         self.allocation_details = allocation_details 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -101,6 +105,10 @@ class PrepaidUsage(object):
         allocation_details = None
         if dictionary.get('allocation_details') is not None:
             allocation_details = [PrepaidUsageAllocationDetail.from_dictionary(x) for x in dictionary.get('allocation_details')]
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(previous_unit_balance,
                    previous_overage_unit_balance,
@@ -111,7 +119,8 @@ class PrepaidUsage(object):
                    component_id,
                    component_handle,
                    memo,
-                   allocation_details)
+                   allocation_details,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

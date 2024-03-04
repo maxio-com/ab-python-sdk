@@ -27,11 +27,15 @@ class CreatePrepaidComponent(object):
     }
 
     def __init__(self,
-                 prepaid_usage_component=None):
+                 prepaid_usage_component=None,
+                 additional_properties={}):
         """Constructor for the CreatePrepaidComponent class"""
 
         # Initialize members of the class
         self.prepaid_usage_component = prepaid_usage_component 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -53,5 +57,10 @@ class CreatePrepaidComponent(object):
 
         # Extract variables from the dictionary
         prepaid_usage_component = PrepaidUsageComponent.from_dictionary(dictionary.get('prepaid_usage_component')) if dictionary.get('prepaid_usage_component') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(prepaid_usage_component)
+        return cls(prepaid_usage_component,
+                   dictionary)

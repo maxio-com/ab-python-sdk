@@ -47,7 +47,8 @@ class Seller(object):
                  name=APIHelper.SKIP,
                  address=APIHelper.SKIP,
                  phone=APIHelper.SKIP,
-                 logo_url=APIHelper.SKIP):
+                 logo_url=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Seller class"""
 
         # Initialize members of the class
@@ -59,6 +60,9 @@ class Seller(object):
             self.phone = phone 
         if logo_url is not APIHelper.SKIP:
             self.logo_url = logo_url 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -83,11 +87,16 @@ class Seller(object):
         address = InvoiceAddress.from_dictionary(dictionary.get('address')) if 'address' in dictionary.keys() else APIHelper.SKIP
         phone = dictionary.get("phone") if dictionary.get("phone") else APIHelper.SKIP
         logo_url = dictionary.get("logo_url") if "logo_url" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(name,
                    address,
                    phone,
-                   logo_url)
+                   logo_url,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

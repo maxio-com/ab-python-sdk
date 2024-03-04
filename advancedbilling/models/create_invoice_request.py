@@ -26,11 +26,15 @@ class CreateInvoiceRequest(object):
     }
 
     def __init__(self,
-                 invoice=None):
+                 invoice=None,
+                 additional_properties={}):
         """Constructor for the CreateInvoiceRequest class"""
 
         # Initialize members of the class
         self.invoice = invoice 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class CreateInvoiceRequest(object):
 
         # Extract variables from the dictionary
         invoice = CreateInvoice.from_dictionary(dictionary.get('invoice')) if dictionary.get('invoice') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(invoice)
+        return cls(invoice,
+                   dictionary)

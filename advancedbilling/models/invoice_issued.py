@@ -73,7 +73,8 @@ class InvoiceIssued(object):
                  status_amount=None,
                  product_name=None,
                  consolidation_level=None,
-                 line_items=None):
+                 line_items=None,
+                 additional_properties={}):
         """Constructor for the InvoiceIssued class"""
 
         # Initialize members of the class
@@ -92,6 +93,9 @@ class InvoiceIssued(object):
         self.product_name = product_name 
         self.consolidation_level = consolidation_level 
         self.line_items = line_items 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -129,6 +133,10 @@ class InvoiceIssued(object):
         line_items = None
         if dictionary.get('line_items') is not None:
             line_items = [InvoiceLineItemEventData.from_dictionary(x) for x in dictionary.get('line_items')]
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    number,
@@ -144,7 +152,8 @@ class InvoiceIssued(object):
                    status_amount,
                    product_name,
                    consolidation_level,
-                   line_items)
+                   line_items,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -111,7 +111,8 @@ class Offer(object):
                  product_name=APIHelper.SKIP,
                  product_price_point_name=APIHelper.SKIP,
                  product_price_in_cents=APIHelper.SKIP,
-                 offer_signup_pages=APIHelper.SKIP):
+                 offer_signup_pages=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Offer class"""
 
         # Initialize members of the class
@@ -153,6 +154,9 @@ class Offer(object):
             self.product_price_in_cents = product_price_in_cents 
         if offer_signup_pages is not APIHelper.SKIP:
             self.offer_signup_pages = offer_signup_pages 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -207,6 +211,10 @@ class Offer(object):
             offer_signup_pages = [OfferSignupPage.from_dictionary(x) for x in dictionary.get('offer_signup_pages')]
         else:
             offer_signup_pages = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    site_id,
@@ -226,4 +234,5 @@ class Offer(object):
                    product_name,
                    product_price_point_name,
                    product_price_in_cents,
-                   offer_signup_pages)
+                   offer_signup_pages,
+                   dictionary)

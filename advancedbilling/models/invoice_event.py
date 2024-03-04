@@ -53,7 +53,8 @@ class InvoiceEvent(object):
                  event_type=APIHelper.SKIP,
                  event_data=APIHelper.SKIP,
                  timestamp=APIHelper.SKIP,
-                 invoice=APIHelper.SKIP):
+                 invoice=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceEvent class"""
 
         # Initialize members of the class
@@ -67,6 +68,9 @@ class InvoiceEvent(object):
             self.timestamp = APIHelper.apply_datetime_converter(timestamp, APIHelper.RFC3339DateTime) if timestamp else None 
         if invoice is not APIHelper.SKIP:
             self.invoice = invoice 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -93,9 +97,14 @@ class InvoiceEvent(object):
         event_data = APIHelper.deserialize_union_type(UnionTypeLookUp.get('InvoiceEventEventData'), dictionary.get('event_data'), False) if dictionary.get('event_data') is not None else APIHelper.SKIP
         timestamp = APIHelper.RFC3339DateTime.from_value(dictionary.get("timestamp")).datetime if dictionary.get("timestamp") else APIHelper.SKIP
         invoice = Invoice.from_dictionary(dictionary.get('invoice')) if 'invoice' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    event_type,
                    event_data,
                    timestamp,
-                   invoice)
+                   invoice,
+                   dictionary)

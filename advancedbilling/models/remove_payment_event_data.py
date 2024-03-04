@@ -54,7 +54,8 @@ class RemovePaymentEventData(object):
                  transaction_time=None,
                  payment_method=None,
                  prepayment=None,
-                 original_amount=APIHelper.SKIP):
+                 original_amount=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the RemovePaymentEventData class"""
 
         # Initialize members of the class
@@ -66,6 +67,9 @@ class RemovePaymentEventData(object):
         self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
         self.payment_method = payment_method 
         self.prepayment = prepayment 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -94,6 +98,10 @@ class RemovePaymentEventData(object):
         payment_method = APIHelper.deserialize_union_type(UnionTypeLookUp.get('Invoice-Event-Payment'), dictionary.get('payment_method'), False) if dictionary.get('payment_method') is not None else None
         prepayment = dictionary.get("prepayment") if "prepayment" in dictionary.keys() else None
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(transaction_id,
                    memo,
@@ -101,7 +109,8 @@ class RemovePaymentEventData(object):
                    transaction_time,
                    payment_method,
                    prepayment,
-                   original_amount)
+                   original_amount,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

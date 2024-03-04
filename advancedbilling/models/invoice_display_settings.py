@@ -34,7 +34,8 @@ class InvoiceDisplaySettings(object):
 
     def __init__(self,
                  hide_zero_subtotal_lines=APIHelper.SKIP,
-                 include_discounts_on_lines=APIHelper.SKIP):
+                 include_discounts_on_lines=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceDisplaySettings class"""
 
         # Initialize members of the class
@@ -42,6 +43,9 @@ class InvoiceDisplaySettings(object):
             self.hide_zero_subtotal_lines = hide_zero_subtotal_lines 
         if include_discounts_on_lines is not APIHelper.SKIP:
             self.include_discounts_on_lines = include_discounts_on_lines 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -64,9 +68,14 @@ class InvoiceDisplaySettings(object):
         # Extract variables from the dictionary
         hide_zero_subtotal_lines = dictionary.get("hide_zero_subtotal_lines") if "hide_zero_subtotal_lines" in dictionary.keys() else APIHelper.SKIP
         include_discounts_on_lines = dictionary.get("include_discounts_on_lines") if "include_discounts_on_lines" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(hide_zero_subtotal_lines,
-                   include_discounts_on_lines)
+                   include_discounts_on_lines,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

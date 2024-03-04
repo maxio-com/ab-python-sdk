@@ -60,7 +60,8 @@ class SubscriptionIncludedCoupon(object):
                  expires_at=APIHelper.SKIP,
                  recurring=APIHelper.SKIP,
                  amount_in_cents=APIHelper.SKIP,
-                 percentage=APIHelper.SKIP):
+                 percentage=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionIncludedCoupon class"""
 
         # Initialize members of the class
@@ -78,6 +79,9 @@ class SubscriptionIncludedCoupon(object):
             self.amount_in_cents = amount_in_cents 
         if percentage is not APIHelper.SKIP:
             self.percentage = percentage 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -105,6 +109,10 @@ class SubscriptionIncludedCoupon(object):
         recurring = dictionary.get("recurring") if "recurring" in dictionary.keys() else APIHelper.SKIP
         amount_in_cents = dictionary.get("amount_in_cents") if "amount_in_cents" in dictionary.keys() else APIHelper.SKIP
         percentage = dictionary.get("percentage") if "percentage" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(code,
                    use_count,
@@ -112,7 +120,8 @@ class SubscriptionIncludedCoupon(object):
                    expires_at,
                    recurring,
                    amount_in_cents,
-                   percentage)
+                   percentage,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

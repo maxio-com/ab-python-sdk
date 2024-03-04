@@ -117,7 +117,8 @@ class AllocationPreviewItem(object):
                  previous_price_point_id=APIHelper.SKIP,
                  price_point_handle=APIHelper.SKIP,
                  price_point_name=APIHelper.SKIP,
-                 component_handle=APIHelper.SKIP):
+                 component_handle=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the AllocationPreviewItem class"""
 
         # Initialize members of the class
@@ -158,6 +159,9 @@ class AllocationPreviewItem(object):
         if component_handle is not APIHelper.SKIP:
             self.component_handle = component_handle 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -196,6 +200,10 @@ class AllocationPreviewItem(object):
         price_point_handle = dictionary.get("price_point_handle") if dictionary.get("price_point_handle") else APIHelper.SKIP
         price_point_name = dictionary.get("price_point_name") if dictionary.get("price_point_name") else APIHelper.SKIP
         component_handle = dictionary.get("component_handle") if "component_handle" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(component_id,
                    subscription_id,
@@ -214,4 +222,5 @@ class AllocationPreviewItem(object):
                    previous_price_point_id,
                    price_point_handle,
                    price_point_name,
-                   component_handle)
+                   component_handle,
+                   dictionary)

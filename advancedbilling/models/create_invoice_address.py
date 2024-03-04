@@ -62,7 +62,8 @@ class CreateInvoiceAddress(object):
                  city=APIHelper.SKIP,
                  state=APIHelper.SKIP,
                  zip=APIHelper.SKIP,
-                 country=APIHelper.SKIP):
+                 country=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateInvoiceAddress class"""
 
         # Initialize members of the class
@@ -84,6 +85,9 @@ class CreateInvoiceAddress(object):
             self.zip = zip 
         if country is not APIHelper.SKIP:
             self.country = country 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -113,6 +117,10 @@ class CreateInvoiceAddress(object):
         state = dictionary.get("state") if dictionary.get("state") else APIHelper.SKIP
         zip = dictionary.get("zip") if dictionary.get("zip") else APIHelper.SKIP
         country = dictionary.get("country") if dictionary.get("country") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -122,4 +130,5 @@ class CreateInvoiceAddress(object):
                    city,
                    state,
                    zip,
-                   country)
+                   country,
+                   dictionary)

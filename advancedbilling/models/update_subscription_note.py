@@ -28,12 +28,16 @@ class UpdateSubscriptionNote(object):
 
     def __init__(self,
                  body=None,
-                 sticky=None):
+                 sticky=None,
+                 additional_properties={}):
         """Constructor for the UpdateSubscriptionNote class"""
 
         # Initialize members of the class
         self.body = body 
         self.sticky = sticky 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -56,6 +60,11 @@ class UpdateSubscriptionNote(object):
         # Extract variables from the dictionary
         body = dictionary.get("body") if dictionary.get("body") else None
         sticky = dictionary.get("sticky") if "sticky" in dictionary.keys() else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(body,
-                   sticky)
+                   sticky,
+                   dictionary)

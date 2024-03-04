@@ -47,7 +47,8 @@ class ListSaleRepItem(object):
                  full_name=APIHelper.SKIP,
                  subscriptions_count=APIHelper.SKIP,
                  mrr_data=APIHelper.SKIP,
-                 test_mode=APIHelper.SKIP):
+                 test_mode=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ListSaleRepItem class"""
 
         # Initialize members of the class
@@ -61,6 +62,9 @@ class ListSaleRepItem(object):
             self.mrr_data = mrr_data 
         if test_mode is not APIHelper.SKIP:
             self.test_mode = test_mode 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -86,9 +90,14 @@ class ListSaleRepItem(object):
         subscriptions_count = dictionary.get("subscriptions_count") if dictionary.get("subscriptions_count") else APIHelper.SKIP
         mrr_data = SaleRepItemMrr.from_dictionary(dictionary.get('mrr_data')) if 'mrr_data' in dictionary.keys() else APIHelper.SKIP
         test_mode = dictionary.get("test_mode") if "test_mode" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    full_name,
                    subscriptions_count,
                    mrr_data,
-                   test_mode)
+                   test_mode,
+                   dictionary)

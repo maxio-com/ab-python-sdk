@@ -51,7 +51,8 @@ class PrepaidComponentPricePoint(object):
                  handle=APIHelper.SKIP,
                  pricing_scheme=APIHelper.SKIP,
                  prices=APIHelper.SKIP,
-                 overage_pricing=APIHelper.SKIP):
+                 overage_pricing=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PrepaidComponentPricePoint class"""
 
         # Initialize members of the class
@@ -65,6 +66,9 @@ class PrepaidComponentPricePoint(object):
             self.prices = prices 
         if overage_pricing is not APIHelper.SKIP:
             self.overage_pricing = overage_pricing 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -94,12 +98,17 @@ class PrepaidComponentPricePoint(object):
         else:
             prices = APIHelper.SKIP
         overage_pricing = OveragePricing.from_dictionary(dictionary.get('overage_pricing')) if 'overage_pricing' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(name,
                    handle,
                    pricing_scheme,
                    prices,
-                   overage_pricing)
+                   overage_pricing,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

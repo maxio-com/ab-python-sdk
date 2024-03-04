@@ -47,7 +47,8 @@ class CreateUsage(object):
                  quantity=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
-                 billing_schedule=APIHelper.SKIP):
+                 billing_schedule=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateUsage class"""
 
         # Initialize members of the class
@@ -59,6 +60,9 @@ class CreateUsage(object):
             self.memo = memo 
         if billing_schedule is not APIHelper.SKIP:
             self.billing_schedule = billing_schedule 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -83,8 +87,13 @@ class CreateUsage(object):
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         billing_schedule = BillingSchedule.from_dictionary(dictionary.get('billing_schedule')) if 'billing_schedule' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(quantity,
                    price_point_id,
                    memo,
-                   billing_schedule)
+                   billing_schedule,
+                   dictionary)

@@ -31,12 +31,16 @@ class CreateInvoicePaymentApplication(object):
 
     def __init__(self,
                  invoice_uid=None,
-                 amount=None):
+                 amount=None,
+                 additional_properties={}):
         """Constructor for the CreateInvoicePaymentApplication class"""
 
         # Initialize members of the class
         self.invoice_uid = invoice_uid 
         self.amount = amount 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -59,9 +63,14 @@ class CreateInvoicePaymentApplication(object):
         # Extract variables from the dictionary
         invoice_uid = dictionary.get("invoice_uid") if dictionary.get("invoice_uid") else None
         amount = dictionary.get("amount") if dictionary.get("amount") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(invoice_uid,
-                   amount)
+                   amount,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

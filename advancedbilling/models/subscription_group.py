@@ -48,7 +48,8 @@ class SubscriptionGroup(object):
                  payment_profile=APIHelper.SKIP,
                  payment_collection_method=APIHelper.SKIP,
                  subscription_ids=APIHelper.SKIP,
-                 created_at=APIHelper.SKIP):
+                 created_at=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroup class"""
 
         # Initialize members of the class
@@ -62,6 +63,9 @@ class SubscriptionGroup(object):
             self.subscription_ids = subscription_ids 
         if created_at is not APIHelper.SKIP:
             self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -87,9 +91,14 @@ class SubscriptionGroup(object):
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         subscription_ids = dictionary.get("subscription_ids") if dictionary.get("subscription_ids") else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(customer_id,
                    payment_profile,
                    payment_collection_method,
                    subscription_ids,
-                   created_at)
+                   created_at,
+                   dictionary)

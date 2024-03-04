@@ -38,7 +38,8 @@ class CreditCardAttributes(object):
     def __init__(self,
                  full_number=APIHelper.SKIP,
                  expiration_month=APIHelper.SKIP,
-                 expiration_year=APIHelper.SKIP):
+                 expiration_year=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreditCardAttributes class"""
 
         # Initialize members of the class
@@ -48,6 +49,9 @@ class CreditCardAttributes(object):
             self.expiration_month = expiration_month 
         if expiration_year is not APIHelper.SKIP:
             self.expiration_year = expiration_year 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,10 +75,15 @@ class CreditCardAttributes(object):
         full_number = dictionary.get("full_number") if dictionary.get("full_number") else APIHelper.SKIP
         expiration_month = dictionary.get("expiration_month") if dictionary.get("expiration_month") else APIHelper.SKIP
         expiration_year = dictionary.get("expiration_year") if dictionary.get("expiration_year") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(full_number,
                    expiration_month,
-                   expiration_year)
+                   expiration_year,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

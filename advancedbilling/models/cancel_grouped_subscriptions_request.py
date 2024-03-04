@@ -30,12 +30,16 @@ class CancelGroupedSubscriptionsRequest(object):
     ]
 
     def __init__(self,
-                 charge_unbilled_usage=APIHelper.SKIP):
+                 charge_unbilled_usage=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CancelGroupedSubscriptionsRequest class"""
 
         # Initialize members of the class
         if charge_unbilled_usage is not APIHelper.SKIP:
             self.charge_unbilled_usage = charge_unbilled_usage 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,5 +61,10 @@ class CancelGroupedSubscriptionsRequest(object):
 
         # Extract variables from the dictionary
         charge_unbilled_usage = dictionary.get("charge_unbilled_usage") if "charge_unbilled_usage" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(charge_unbilled_usage)
+        return cls(charge_unbilled_usage,
+                   dictionary)

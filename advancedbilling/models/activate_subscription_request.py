@@ -39,12 +39,16 @@ class ActivateSubscriptionRequest(object):
     ]
 
     def __init__(self,
-                 revert_on_failure=APIHelper.SKIP):
+                 revert_on_failure=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ActivateSubscriptionRequest class"""
 
         # Initialize members of the class
         if revert_on_failure is not APIHelper.SKIP:
             self.revert_on_failure = revert_on_failure 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -66,5 +70,10 @@ class ActivateSubscriptionRequest(object):
 
         # Extract variables from the dictionary
         revert_on_failure = dictionary.get("revert_on_failure") if "revert_on_failure" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(revert_on_failure)
+        return cls(revert_on_failure,
+                   dictionary)

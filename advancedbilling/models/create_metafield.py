@@ -51,7 +51,8 @@ class CreateMetafield(object):
                  name=APIHelper.SKIP,
                  scope=APIHelper.SKIP,
                  input_type=APIHelper.SKIP,
-                 enum=APIHelper.SKIP):
+                 enum=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateMetafield class"""
 
         # Initialize members of the class
@@ -63,6 +64,9 @@ class CreateMetafield(object):
             self.input_type = input_type 
         if enum is not APIHelper.SKIP:
             self.enum = enum 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -87,11 +91,16 @@ class CreateMetafield(object):
         scope = MetafieldScope.from_dictionary(dictionary.get('scope')) if 'scope' in dictionary.keys() else APIHelper.SKIP
         input_type = dictionary.get("input_type") if dictionary.get("input_type") else APIHelper.SKIP
         enum = dictionary.get("enum") if dictionary.get("enum") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(name,
                    scope,
                    input_type,
-                   enum)
+                   enum,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

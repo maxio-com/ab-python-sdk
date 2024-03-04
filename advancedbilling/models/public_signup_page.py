@@ -50,7 +50,8 @@ class PublicSignupPage(object):
                  id=APIHelper.SKIP,
                  return_url=APIHelper.SKIP,
                  return_params=APIHelper.SKIP,
-                 url=APIHelper.SKIP):
+                 url=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PublicSignupPage class"""
 
         # Initialize members of the class
@@ -62,6 +63,9 @@ class PublicSignupPage(object):
             self.return_params = return_params 
         if url is not APIHelper.SKIP:
             self.url = url 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -86,11 +90,16 @@ class PublicSignupPage(object):
         return_url = dictionary.get("return_url") if "return_url" in dictionary.keys() else APIHelper.SKIP
         return_params = dictionary.get("return_params") if "return_params" in dictionary.keys() else APIHelper.SKIP
         url = dictionary.get("url") if dictionary.get("url") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(id,
                    return_url,
                    return_params,
-                   url)
+                   url,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

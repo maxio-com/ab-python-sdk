@@ -62,7 +62,8 @@ class MetafieldScope(object):
                  portal=APIHelper.SKIP,
                  public_show=APIHelper.SKIP,
                  public_edit=APIHelper.SKIP,
-                 hosted=APIHelper.SKIP):
+                 hosted=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the MetafieldScope class"""
 
         # Initialize members of the class
@@ -80,6 +81,9 @@ class MetafieldScope(object):
             self.public_edit = public_edit 
         if hosted is not APIHelper.SKIP:
             self.hosted = hosted 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -107,6 +111,10 @@ class MetafieldScope(object):
         public_show = dictionary.get("public_show") if dictionary.get("public_show") else APIHelper.SKIP
         public_edit = dictionary.get("public_edit") if dictionary.get("public_edit") else APIHelper.SKIP
         hosted = dictionary.get("hosted") if dictionary.get("hosted") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(csv,
                    invoices,
@@ -114,7 +122,8 @@ class MetafieldScope(object):
                    portal,
                    public_show,
                    public_edit,
-                   hosted)
+                   hosted,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

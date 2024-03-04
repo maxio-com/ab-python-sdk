@@ -29,12 +29,16 @@ class IssueServiceCredit(object):
 
     def __init__(self,
                  amount=None,
-                 memo=None):
+                 memo=None,
+                 additional_properties={}):
         """Constructor for the IssueServiceCredit class"""
 
         # Initialize members of the class
         self.amount = amount 
         self.memo = memo 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,9 +62,14 @@ class IssueServiceCredit(object):
         # Extract variables from the dictionary
         amount = APIHelper.deserialize_union_type(UnionTypeLookUp.get('IssueServiceCreditAmount'), dictionary.get('amount'), False) if dictionary.get('amount') is not None else None
         memo = dictionary.get("memo") if dictionary.get("memo") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(amount,
-                   memo)
+                   memo,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

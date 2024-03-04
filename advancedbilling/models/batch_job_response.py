@@ -26,11 +26,15 @@ class BatchJobResponse(object):
     }
 
     def __init__(self,
-                 batchjob=None):
+                 batchjob=None,
+                 additional_properties={}):
         """Constructor for the BatchJobResponse class"""
 
         # Initialize members of the class
         self.batchjob = batchjob 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class BatchJobResponse(object):
 
         # Extract variables from the dictionary
         batchjob = BatchJob.from_dictionary(dictionary.get('batchjob')) if dictionary.get('batchjob') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(batchjob)
+        return cls(batchjob,
+                   dictionary)

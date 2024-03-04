@@ -39,7 +39,8 @@ class ApplyDebitNoteEventData(object):
                  debit_note_number=None,
                  debit_note_uid=None,
                  original_amount=None,
-                 applied_amount=None):
+                 applied_amount=None,
+                 additional_properties={}):
         """Constructor for the ApplyDebitNoteEventData class"""
 
         # Initialize members of the class
@@ -47,6 +48,9 @@ class ApplyDebitNoteEventData(object):
         self.debit_note_uid = debit_note_uid 
         self.original_amount = original_amount 
         self.applied_amount = applied_amount 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -71,11 +75,16 @@ class ApplyDebitNoteEventData(object):
         debit_note_uid = dictionary.get("debit_note_uid") if dictionary.get("debit_note_uid") else None
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else None
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(debit_note_number,
                    debit_note_uid,
                    original_amount,
-                   applied_amount)
+                   applied_amount,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -132,7 +132,8 @@ class CustomerAttributes(object):
                  tax_exempt=APIHelper.SKIP,
                  vat_number=APIHelper.SKIP,
                  metafields=APIHelper.SKIP,
-                 parent_id=APIHelper.SKIP):
+                 parent_id=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CustomerAttributes class"""
 
         # Initialize members of the class
@@ -173,6 +174,9 @@ class CustomerAttributes(object):
         if parent_id is not APIHelper.SKIP:
             self.parent_id = parent_id 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -210,6 +214,10 @@ class CustomerAttributes(object):
         vat_number = dictionary.get("vat_number") if dictionary.get("vat_number") else APIHelper.SKIP
         metafields = dictionary.get("metafields") if dictionary.get("metafields") else APIHelper.SKIP
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -228,7 +236,8 @@ class CustomerAttributes(object):
                    tax_exempt,
                    vat_number,
                    metafields,
-                   parent_id)
+                   parent_id,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

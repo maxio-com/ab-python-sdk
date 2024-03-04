@@ -29,12 +29,16 @@ class SubscriptionStateChange(object):
 
     def __init__(self,
                  previous_subscription_state=None,
-                 new_subscription_state=None):
+                 new_subscription_state=None,
+                 additional_properties={}):
         """Constructor for the SubscriptionStateChange class"""
 
         # Initialize members of the class
         self.previous_subscription_state = previous_subscription_state 
         self.new_subscription_state = new_subscription_state 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,9 +61,14 @@ class SubscriptionStateChange(object):
         # Extract variables from the dictionary
         previous_subscription_state = dictionary.get("previous_subscription_state") if dictionary.get("previous_subscription_state") else None
         new_subscription_state = dictionary.get("new_subscription_state") if dictionary.get("new_subscription_state") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(previous_subscription_state,
-                   new_subscription_state)
+                   new_subscription_state,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

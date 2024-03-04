@@ -29,12 +29,16 @@ class SubscriptionProductChange(object):
 
     def __init__(self,
                  previous_product_id=None,
-                 new_product_id=None):
+                 new_product_id=None,
+                 additional_properties={}):
         """Constructor for the SubscriptionProductChange class"""
 
         # Initialize members of the class
         self.previous_product_id = previous_product_id 
         self.new_product_id = new_product_id 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,9 +61,14 @@ class SubscriptionProductChange(object):
         # Extract variables from the dictionary
         previous_product_id = dictionary.get("previous_product_id") if dictionary.get("previous_product_id") else None
         new_product_id = dictionary.get("new_product_id") if dictionary.get("new_product_id") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(previous_product_id,
-                   new_product_id)
+                   new_product_id,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

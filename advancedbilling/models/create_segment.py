@@ -66,7 +66,8 @@ class CreateSegment(object):
                  segment_property_2_value=APIHelper.SKIP,
                  segment_property_3_value=APIHelper.SKIP,
                  segment_property_4_value=APIHelper.SKIP,
-                 prices=APIHelper.SKIP):
+                 prices=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateSegment class"""
 
         # Initialize members of the class
@@ -81,6 +82,9 @@ class CreateSegment(object):
         self.pricing_scheme = pricing_scheme 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -112,10 +116,15 @@ class CreateSegment(object):
             prices = [CreateOrUpdateSegmentPrice.from_dictionary(x) for x in dictionary.get('prices')]
         else:
             prices = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(pricing_scheme,
                    segment_property_1_value,
                    segment_property_2_value,
                    segment_property_3_value,
                    segment_property_4_value,
-                   prices)
+                   prices,
+                   dictionary)

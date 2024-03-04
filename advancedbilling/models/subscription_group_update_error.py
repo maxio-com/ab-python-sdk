@@ -32,12 +32,16 @@ class SubscriptionGroupUpdateError(object):
     ]
 
     def __init__(self,
-                 members=APIHelper.SKIP):
+                 members=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionGroupUpdateError class"""
 
         # Initialize members of the class
         if members is not APIHelper.SKIP:
             self.members = members 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -63,5 +67,10 @@ class SubscriptionGroupUpdateError(object):
             members = [SubscriptionGroupMemberError.from_dictionary(x) for x in dictionary.get('members')]
         else:
             members = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(members)
+        return cls(members,
+                   dictionary)

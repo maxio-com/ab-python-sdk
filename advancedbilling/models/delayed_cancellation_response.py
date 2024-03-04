@@ -30,12 +30,16 @@ class DelayedCancellationResponse(object):
     ]
 
     def __init__(self,
-                 message=APIHelper.SKIP):
+                 message=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the DelayedCancellationResponse class"""
 
         # Initialize members of the class
         if message is not APIHelper.SKIP:
             self.message = message 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,5 +61,10 @@ class DelayedCancellationResponse(object):
 
         # Extract variables from the dictionary
         message = dictionary.get("message") if dictionary.get("message") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(message)
+        return cls(message,
+                   dictionary)

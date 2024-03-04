@@ -47,7 +47,8 @@ class ListMetafieldsResponse(object):
                  current_page=APIHelper.SKIP,
                  total_pages=APIHelper.SKIP,
                  per_page=APIHelper.SKIP,
-                 metafields=APIHelper.SKIP):
+                 metafields=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ListMetafieldsResponse class"""
 
         # Initialize members of the class
@@ -61,6 +62,9 @@ class ListMetafieldsResponse(object):
             self.per_page = per_page 
         if metafields is not APIHelper.SKIP:
             self.metafields = metafields 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -90,9 +94,14 @@ class ListMetafieldsResponse(object):
             metafields = [Metafield.from_dictionary(x) for x in dictionary.get('metafields')]
         else:
             metafields = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(total_count,
                    current_page,
                    total_pages,
                    per_page,
-                   metafields)
+                   metafields,
+                   dictionary)

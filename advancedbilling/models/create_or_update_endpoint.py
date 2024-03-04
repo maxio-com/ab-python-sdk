@@ -29,12 +29,16 @@ class CreateOrUpdateEndpoint(object):
 
     def __init__(self,
                  url=None,
-                 webhook_subscriptions=None):
+                 webhook_subscriptions=None,
+                 additional_properties={}):
         """Constructor for the CreateOrUpdateEndpoint class"""
 
         # Initialize members of the class
         self.url = url 
         self.webhook_subscriptions = webhook_subscriptions 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,6 +61,11 @@ class CreateOrUpdateEndpoint(object):
         # Extract variables from the dictionary
         url = dictionary.get("url") if dictionary.get("url") else None
         webhook_subscriptions = dictionary.get("webhook_subscriptions") if dictionary.get("webhook_subscriptions") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(url,
-                   webhook_subscriptions)
+                   webhook_subscriptions,
+                   dictionary)

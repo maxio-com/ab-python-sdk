@@ -29,12 +29,16 @@ class PaymentCollectionMethodChanged(object):
 
     def __init__(self,
                  previous_value=None,
-                 current_value=None):
+                 current_value=None,
+                 additional_properties={}):
         """Constructor for the PaymentCollectionMethodChanged class"""
 
         # Initialize members of the class
         self.previous_value = previous_value 
         self.current_value = current_value 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,9 +61,14 @@ class PaymentCollectionMethodChanged(object):
         # Extract variables from the dictionary
         previous_value = dictionary.get("previous_value") if dictionary.get("previous_value") else None
         current_value = dictionary.get("current_value") if dictionary.get("current_value") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(previous_value,
-                   current_value)
+                   current_value,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

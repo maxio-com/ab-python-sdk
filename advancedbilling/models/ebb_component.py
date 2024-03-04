@@ -135,7 +135,8 @@ class EBBComponent(object):
                  hide_date_range_on_invoice=APIHelper.SKIP,
                  price_in_cents=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
-                 interval_unit=APIHelper.SKIP):
+                 interval_unit=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the EBBComponent class"""
 
         # Initialize members of the class
@@ -169,6 +170,9 @@ class EBBComponent(object):
             self.interval = interval 
         if interval_unit is not APIHelper.SKIP:
             self.interval_unit = interval_unit 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -215,6 +219,10 @@ class EBBComponent(object):
         price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(name,
                    unit_name,
@@ -232,4 +240,5 @@ class EBBComponent(object):
                    hide_date_range_on_invoice,
                    price_in_cents,
                    interval,
-                   interval_unit)
+                   interval_unit,
+                   dictionary)

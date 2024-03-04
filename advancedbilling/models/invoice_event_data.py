@@ -199,7 +199,8 @@ class InvoiceEventData(object):
                  refund_amount=APIHelper.SKIP,
                  refund_id=APIHelper.SKIP,
                  is_advance_invoice=APIHelper.SKIP,
-                 reason=APIHelper.SKIP):
+                 reason=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceEventData class"""
 
         # Initialize members of the class
@@ -268,6 +269,9 @@ class InvoiceEventData(object):
         if reason is not APIHelper.SKIP:
             self.reason = reason 
 
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
+
     @classmethod
     def from_dictionary(cls,
                         dictionary):
@@ -324,6 +328,10 @@ class InvoiceEventData(object):
         refund_id = dictionary.get("refund_id") if dictionary.get("refund_id") else APIHelper.SKIP
         is_advance_invoice = dictionary.get("is_advance_invoice") if "is_advance_invoice" in dictionary.keys() else APIHelper.SKIP
         reason = dictionary.get("reason") if dictionary.get("reason") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    credit_note_number,
@@ -356,4 +364,5 @@ class InvoiceEventData(object):
                    refund_amount,
                    refund_id,
                    is_advance_invoice,
-                   reason)
+                   reason,
+                   dictionary)

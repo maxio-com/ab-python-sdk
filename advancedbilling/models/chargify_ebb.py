@@ -67,7 +67,8 @@ class ChargifyEBB(object):
                  created_at=APIHelper.SKIP,
                  uniqueness_token=APIHelper.SKIP,
                  subscription_id=APIHelper.SKIP,
-                 subscription_reference=APIHelper.SKIP):
+                 subscription_reference=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ChargifyEBB class"""
 
         # Initialize members of the class
@@ -83,6 +84,9 @@ class ChargifyEBB(object):
             self.subscription_id = subscription_id 
         if subscription_reference is not APIHelper.SKIP:
             self.subscription_reference = subscription_reference 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -109,10 +113,15 @@ class ChargifyEBB(object):
         uniqueness_token = dictionary.get("uniqueness_token") if dictionary.get("uniqueness_token") else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         subscription_reference = dictionary.get("subscription_reference") if dictionary.get("subscription_reference") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(timestamp,
                    id,
                    created_at,
                    uniqueness_token,
                    subscription_id,
-                   subscription_reference)
+                   subscription_reference,
+                   dictionary)

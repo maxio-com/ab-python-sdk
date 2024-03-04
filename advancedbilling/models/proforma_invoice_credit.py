@@ -42,7 +42,8 @@ class ProformaInvoiceCredit(object):
                  uid=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
                  original_amount=APIHelper.SKIP,
-                 applied_amount=APIHelper.SKIP):
+                 applied_amount=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ProformaInvoiceCredit class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class ProformaInvoiceCredit(object):
             self.original_amount = original_amount 
         if applied_amount is not APIHelper.SKIP:
             self.applied_amount = applied_amount 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,8 +82,13 @@ class ProformaInvoiceCredit(object):
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    memo,
                    original_amount,
-                   applied_amount)
+                   applied_amount,
+                   dictionary)

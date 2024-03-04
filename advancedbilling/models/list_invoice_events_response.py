@@ -43,7 +43,8 @@ class ListInvoiceEventsResponse(object):
                  events=APIHelper.SKIP,
                  page=APIHelper.SKIP,
                  per_page=APIHelper.SKIP,
-                 total_pages=APIHelper.SKIP):
+                 total_pages=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ListInvoiceEventsResponse class"""
 
         # Initialize members of the class
@@ -55,6 +56,9 @@ class ListInvoiceEventsResponse(object):
             self.per_page = per_page 
         if total_pages is not APIHelper.SKIP:
             self.total_pages = total_pages 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -83,8 +87,13 @@ class ListInvoiceEventsResponse(object):
         page = dictionary.get("page") if dictionary.get("page") else APIHelper.SKIP
         per_page = dictionary.get("per_page") if dictionary.get("per_page") else APIHelper.SKIP
         total_pages = dictionary.get("total_pages") if dictionary.get("total_pages") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(events,
                    page,
                    per_page,
-                   total_pages)
+                   total_pages,
+                   dictionary)

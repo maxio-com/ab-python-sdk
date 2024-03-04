@@ -30,12 +30,16 @@ class CustomerError(object):
     ]
 
     def __init__(self,
-                 customer=APIHelper.SKIP):
+                 customer=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CustomerError class"""
 
         # Initialize members of the class
         if customer is not APIHelper.SKIP:
             self.customer = customer 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,8 +61,13 @@ class CustomerError(object):
 
         # Extract variables from the dictionary
         customer = dictionary.get("customer") if dictionary.get("customer") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(customer)
+        return cls(customer,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

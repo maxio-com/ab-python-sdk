@@ -31,12 +31,16 @@ class PrepaymentsResponse(object):
     ]
 
     def __init__(self,
-                 prepayments=APIHelper.SKIP):
+                 prepayments=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the PrepaymentsResponse class"""
 
         # Initialize members of the class
         if prepayments is not APIHelper.SKIP:
             self.prepayments = prepayments 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -62,5 +66,10 @@ class PrepaymentsResponse(object):
             prepayments = [Prepayment.from_dictionary(x) for x in dictionary.get('prepayments')]
         else:
             prepayments = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(prepayments)
+        return cls(prepayments,
+                   dictionary)

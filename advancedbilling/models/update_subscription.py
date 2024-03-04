@@ -114,7 +114,8 @@ class UpdateSubscription(object):
                  custom_price=APIHelper.SKIP,
                  components=APIHelper.SKIP,
                  dunning_communication_delay_enabled=APIHelper.SKIP,
-                 dunning_communication_delay_time_zone=APIHelper.SKIP):
+                 dunning_communication_delay_time_zone=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the UpdateSubscription class"""
 
         # Initialize members of the class
@@ -152,6 +153,9 @@ class UpdateSubscription(object):
             self.dunning_communication_delay_enabled = dunning_communication_delay_enabled 
         if dunning_communication_delay_time_zone is not APIHelper.SKIP:
             self.dunning_communication_delay_time_zone = dunning_communication_delay_time_zone 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -194,6 +198,10 @@ class UpdateSubscription(object):
             components = APIHelper.SKIP
         dunning_communication_delay_enabled = dictionary.get("dunning_communication_delay_enabled") if "dunning_communication_delay_enabled" in dictionary.keys() else APIHelper.SKIP
         dunning_communication_delay_time_zone = dictionary.get("dunning_communication_delay_time_zone") if "dunning_communication_delay_time_zone" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(credit_card_attributes,
                    product_handle,
@@ -211,4 +219,5 @@ class UpdateSubscription(object):
                    custom_price,
                    components,
                    dunning_communication_delay_enabled,
-                   dunning_communication_delay_time_zone)
+                   dunning_communication_delay_time_zone,
+                   dictionary)

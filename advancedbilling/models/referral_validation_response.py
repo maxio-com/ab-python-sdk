@@ -31,12 +31,16 @@ class ReferralValidationResponse(object):
     ]
 
     def __init__(self,
-                 referral_code=APIHelper.SKIP):
+                 referral_code=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ReferralValidationResponse class"""
 
         # Initialize members of the class
         if referral_code is not APIHelper.SKIP:
             self.referral_code = referral_code 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -58,5 +62,10 @@ class ReferralValidationResponse(object):
 
         # Extract variables from the dictionary
         referral_code = ReferralCode.from_dictionary(dictionary.get('referral_code')) if 'referral_code' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(referral_code)
+        return cls(referral_code,
+                   dictionary)

@@ -93,6 +93,7 @@ class InvoiceLineItem(object):
         product_price_point_id (int): The price point ID of the line item's
             product
         custom_item (bool): TODO: type description here.
+        kind (str): TODO: type description here.
 
     """
 
@@ -118,7 +119,8 @@ class InvoiceLineItem(object):
         "hide": 'hide',
         "component_cost_data": 'component_cost_data',
         "product_price_point_id": 'product_price_point_id',
-        "custom_item": 'custom_item'
+        "custom_item": 'custom_item',
+        "kind": 'kind'
     }
 
     _optionals = [
@@ -143,6 +145,7 @@ class InvoiceLineItem(object):
         'component_cost_data',
         'product_price_point_id',
         'custom_item',
+        'kind',
     ]
 
     _nullables = [
@@ -175,7 +178,9 @@ class InvoiceLineItem(object):
                  hide=APIHelper.SKIP,
                  component_cost_data=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
-                 custom_item=APIHelper.SKIP):
+                 custom_item=APIHelper.SKIP,
+                 kind=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the InvoiceLineItem class"""
 
         # Initialize members of the class
@@ -221,6 +226,11 @@ class InvoiceLineItem(object):
             self.product_price_point_id = product_price_point_id 
         if custom_item is not APIHelper.SKIP:
             self.custom_item = custom_item 
+        if kind is not APIHelper.SKIP:
+            self.kind = kind 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -266,6 +276,11 @@ class InvoiceLineItem(object):
             component_cost_data = APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if "product_price_point_id" in dictionary.keys() else APIHelper.SKIP
         custom_item = dictionary.get("custom_item") if "custom_item" in dictionary.keys() else APIHelper.SKIP
+        kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    title,
@@ -287,7 +302,9 @@ class InvoiceLineItem(object):
                    hide,
                    component_cost_data,
                    product_price_point_id,
-                   custom_item)
+                   custom_item,
+                   kind,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

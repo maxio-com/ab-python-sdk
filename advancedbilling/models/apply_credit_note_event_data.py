@@ -71,7 +71,8 @@ class ApplyCreditNoteEventData(object):
                  memo=APIHelper.SKIP,
                  role=APIHelper.SKIP,
                  consolidated_invoice=APIHelper.SKIP,
-                 applied_credit_notes=APIHelper.SKIP):
+                 applied_credit_notes=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ApplyCreditNoteEventData class"""
 
         # Initialize members of the class
@@ -90,6 +91,9 @@ class ApplyCreditNoteEventData(object):
             self.consolidated_invoice = consolidated_invoice 
         if applied_credit_notes is not APIHelper.SKIP:
             self.applied_credit_notes = applied_credit_notes 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -124,6 +128,10 @@ class ApplyCreditNoteEventData(object):
             applied_credit_notes = [AppliedCreditNoteData.from_dictionary(x) for x in dictionary.get('applied_credit_notes')]
         else:
             applied_credit_notes = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(uid,
                    credit_note_number,
@@ -134,7 +142,8 @@ class ApplyCreditNoteEventData(object):
                    memo,
                    role,
                    consolidated_invoice,
-                   applied_credit_notes)
+                   applied_credit_notes,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

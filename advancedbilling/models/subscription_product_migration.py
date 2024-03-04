@@ -86,7 +86,8 @@ class SubscriptionProductMigration(object):
                  preserve_period=False,
                  product_handle=APIHelper.SKIP,
                  product_price_point_handle=APIHelper.SKIP,
-                 proration=APIHelper.SKIP):
+                 proration=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the SubscriptionProductMigration class"""
 
         # Initialize members of the class
@@ -104,6 +105,9 @@ class SubscriptionProductMigration(object):
             self.product_price_point_handle = product_price_point_handle 
         if proration is not APIHelper.SKIP:
             self.proration = proration 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -133,6 +137,10 @@ class SubscriptionProductMigration(object):
         product_handle = dictionary.get("product_handle") if dictionary.get("product_handle") else APIHelper.SKIP
         product_price_point_handle = dictionary.get("product_price_point_handle") if dictionary.get("product_price_point_handle") else APIHelper.SKIP
         proration = Proration.from_dictionary(dictionary.get('proration')) if 'proration' in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(product_id,
                    product_price_point_id,
@@ -142,4 +150,5 @@ class SubscriptionProductMigration(object):
                    preserve_period,
                    product_handle,
                    product_price_point_handle,
-                   proration)
+                   proration,
+                   dictionary)

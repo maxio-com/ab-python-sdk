@@ -30,12 +30,16 @@ class IssueAdvanceInvoiceRequest(object):
     ]
 
     def __init__(self,
-                 force=APIHelper.SKIP):
+                 force=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the IssueAdvanceInvoiceRequest class"""
 
         # Initialize members of the class
         if force is not APIHelper.SKIP:
             self.force = force 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -57,5 +61,10 @@ class IssueAdvanceInvoiceRequest(object):
 
         # Extract variables from the dictionary
         force = dictionary.get("force") if "force" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(force)
+        return cls(force,
+                   dictionary)

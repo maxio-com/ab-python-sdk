@@ -26,11 +26,15 @@ class CreateProductFamilyRequest(object):
     }
 
     def __init__(self,
-                 product_family=None):
+                 product_family=None,
+                 additional_properties={}):
         """Constructor for the CreateProductFamilyRequest class"""
 
         # Initialize members of the class
         self.product_family = product_family 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class CreateProductFamilyRequest(object):
 
         # Extract variables from the dictionary
         product_family = CreateProductFamily.from_dictionary(dictionary.get('product_family')) if dictionary.get('product_family') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(product_family)
+        return cls(product_family,
+                   dictionary)

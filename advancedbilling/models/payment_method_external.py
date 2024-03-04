@@ -41,7 +41,8 @@ class PaymentMethodExternal(object):
                  details=None,
                  kind=None,
                  memo=None,
-                 mtype=None):
+                 mtype=None,
+                 additional_properties={}):
         """Constructor for the PaymentMethodExternal class"""
 
         # Initialize members of the class
@@ -49,6 +50,9 @@ class PaymentMethodExternal(object):
         self.kind = kind 
         self.memo = memo 
         self.mtype = mtype 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -73,11 +77,16 @@ class PaymentMethodExternal(object):
         kind = dictionary.get("kind") if dictionary.get("kind") else None
         memo = dictionary.get("memo") if dictionary.get("memo") else None
         mtype = dictionary.get("type") if dictionary.get("type") else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(details,
                    kind,
                    memo,
-                   mtype)
+                   mtype,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):

@@ -42,7 +42,8 @@ class Breakouts(object):
                  plan_amount_in_cents=APIHelper.SKIP,
                  plan_amount_formatted=APIHelper.SKIP,
                  usage_amount_in_cents=APIHelper.SKIP,
-                 usage_amount_formatted=APIHelper.SKIP):
+                 usage_amount_formatted=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the Breakouts class"""
 
         # Initialize members of the class
@@ -54,6 +55,9 @@ class Breakouts(object):
             self.usage_amount_in_cents = usage_amount_in_cents 
         if usage_amount_formatted is not APIHelper.SKIP:
             self.usage_amount_formatted = usage_amount_formatted 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -78,8 +82,13 @@ class Breakouts(object):
         plan_amount_formatted = dictionary.get("plan_amount_formatted") if dictionary.get("plan_amount_formatted") else APIHelper.SKIP
         usage_amount_in_cents = dictionary.get("usage_amount_in_cents") if dictionary.get("usage_amount_in_cents") else APIHelper.SKIP
         usage_amount_formatted = dictionary.get("usage_amount_formatted") if dictionary.get("usage_amount_formatted") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(plan_amount_in_cents,
                    plan_amount_formatted,
                    usage_amount_in_cents,
-                   usage_amount_formatted)
+                   usage_amount_formatted,
+                   dictionary)

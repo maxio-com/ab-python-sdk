@@ -26,11 +26,15 @@ class CreateMetadataRequest(object):
     }
 
     def __init__(self,
-                 metadata=None):
+                 metadata=None,
+                 additional_properties={}):
         """Constructor for the CreateMetadataRequest class"""
 
         # Initialize members of the class
         self.metadata = metadata 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -54,5 +58,10 @@ class CreateMetadataRequest(object):
         metadata = None
         if dictionary.get('metadata') is not None:
             metadata = [CreateMetadata.from_dictionary(x) for x in dictionary.get('metadata')]
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(metadata)
+        return cls(metadata,
+                   dictionary)

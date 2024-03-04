@@ -50,7 +50,8 @@ class CustomerChange(object):
                  payer=APIHelper.SKIP,
                  shipping_address=APIHelper.SKIP,
                  billing_address=APIHelper.SKIP,
-                 custom_fields=APIHelper.SKIP):
+                 custom_fields=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CustomerChange class"""
 
         # Initialize members of the class
@@ -62,6 +63,9 @@ class CustomerChange(object):
             self.billing_address = billing_address 
         if custom_fields is not APIHelper.SKIP:
             self.custom_fields = custom_fields 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -99,8 +103,13 @@ class CustomerChange(object):
             custom_fields = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomerChangeCustomFields'), dictionary.get('custom_fields'), False) if dictionary.get('custom_fields') is not None else None
         else:
             custom_fields = APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(payer,
                    shipping_address,
                    billing_address,
-                   custom_fields)
+                   custom_fields,
+                   dictionary)

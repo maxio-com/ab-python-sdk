@@ -26,11 +26,15 @@ class ListMRRResponse(object):
     }
 
     def __init__(self,
-                 mrr=None):
+                 mrr=None,
+                 additional_properties={}):
         """Constructor for the ListMRRResponse class"""
 
         # Initialize members of the class
         self.mrr = mrr 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -52,5 +56,10 @@ class ListMRRResponse(object):
 
         # Extract variables from the dictionary
         mrr = ListMRRResponseResult.from_dictionary(dictionary.get('mrr')) if dictionary.get('mrr') else None
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
-        return cls(mrr)
+        return cls(mrr,
+                   dictionary)

@@ -94,7 +94,8 @@ class CreateProductPricePoint(object):
                  initial_charge_after_trial=APIHelper.SKIP,
                  expiration_interval=APIHelper.SKIP,
                  expiration_interval_unit=APIHelper.SKIP,
-                 use_site_exchange_rate=True):
+                 use_site_exchange_rate=True,
+                 additional_properties={}):
         """Constructor for the CreateProductPricePoint class"""
 
         # Initialize members of the class
@@ -121,6 +122,9 @@ class CreateProductPricePoint(object):
         if expiration_interval_unit is not APIHelper.SKIP:
             self.expiration_interval_unit = expiration_interval_unit 
         self.use_site_exchange_rate = use_site_exchange_rate 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -155,6 +159,10 @@ class CreateProductPricePoint(object):
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
         expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if dictionary.get("use_site_exchange_rate") else True
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(name,
                    price_in_cents,
@@ -169,4 +177,5 @@ class CreateProductPricePoint(object):
                    initial_charge_after_trial,
                    expiration_interval,
                    expiration_interval_unit,
-                   use_site_exchange_rate)
+                   use_site_exchange_rate,
+                   dictionary)

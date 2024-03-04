@@ -50,7 +50,8 @@ class CreateInvoicePayment(object):
                  memo=APIHelper.SKIP,
                  method=APIHelper.SKIP,
                  details=APIHelper.SKIP,
-                 payment_profile_id=APIHelper.SKIP):
+                 payment_profile_id=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateInvoicePayment class"""
 
         # Initialize members of the class
@@ -64,6 +65,9 @@ class CreateInvoicePayment(object):
             self.details = details 
         if payment_profile_id is not APIHelper.SKIP:
             self.payment_profile_id = payment_profile_id 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -90,9 +94,14 @@ class CreateInvoicePayment(object):
         method = dictionary.get("method") if dictionary.get("method") else APIHelper.SKIP
         details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
         payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(amount,
                    memo,
                    method,
                    details,
-                   payment_profile_id)
+                   payment_profile_id,
+                   dictionary)

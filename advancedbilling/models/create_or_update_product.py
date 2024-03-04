@@ -101,7 +101,8 @@ class CreateOrUpdateProduct(object):
                  expiration_interval=APIHelper.SKIP,
                  expiration_interval_unit=APIHelper.SKIP,
                  auto_create_signup_page=APIHelper.SKIP,
-                 tax_code=APIHelper.SKIP):
+                 tax_code=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the CreateOrUpdateProduct class"""
 
         # Initialize members of the class
@@ -132,6 +133,9 @@ class CreateOrUpdateProduct(object):
             self.auto_create_signup_page = auto_create_signup_page 
         if tax_code is not APIHelper.SKIP:
             self.tax_code = tax_code 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -168,6 +172,10 @@ class CreateOrUpdateProduct(object):
         expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
         auto_create_signup_page = dictionary.get("auto_create_signup_page") if "auto_create_signup_page" in dictionary.keys() else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if dictionary.get("tax_code") else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(name,
                    description,
@@ -184,4 +192,5 @@ class CreateOrUpdateProduct(object):
                    expiration_interval,
                    expiration_interval_unit,
                    auto_create_signup_page,
-                   tax_code)
+                   tax_code,
+                   dictionary)

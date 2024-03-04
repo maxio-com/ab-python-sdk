@@ -39,7 +39,8 @@ class ResumeOptions(object):
 
     def __init__(self,
                  require_resume=APIHelper.SKIP,
-                 forgive_balance=APIHelper.SKIP):
+                 forgive_balance=APIHelper.SKIP,
+                 additional_properties={}):
         """Constructor for the ResumeOptions class"""
 
         # Initialize members of the class
@@ -47,6 +48,9 @@ class ResumeOptions(object):
             self.require_resume = require_resume 
         if forgive_balance is not APIHelper.SKIP:
             self.forgive_balance = forgive_balance 
+
+        # Add additional model properties to the instance
+        self.additional_properties = additional_properties
 
     @classmethod
     def from_dictionary(cls,
@@ -69,9 +73,14 @@ class ResumeOptions(object):
         # Extract variables from the dictionary
         require_resume = dictionary.get("require_resume") if "require_resume" in dictionary.keys() else APIHelper.SKIP
         forgive_balance = dictionary.get("forgive_balance") if "forgive_balance" in dictionary.keys() else APIHelper.SKIP
+        # Clean out expected properties from dictionary
+        for key in cls._names.values():
+            if key in dictionary:
+                del dictionary[key]
         # Return an object of this model
         return cls(require_resume,
-                   forgive_balance)
+                   forgive_balance,
+                   dictionary)
 
     @classmethod
     def validate(cls, dictionary):
