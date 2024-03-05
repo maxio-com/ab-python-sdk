@@ -46,6 +46,7 @@ class Coupon(object):
         discount_type (DiscountType): TODO: type description here.
         exclude_mid_period_allocations (bool): TODO: type description here.
         apply_on_cancel_at_end_of_period (bool): TODO: type description here.
+        apply_on_subscription_expiration (bool): TODO: type description here.
         coupon_restrictions (List[CouponRestriction]): TODO: type description
             here.
 
@@ -81,6 +82,7 @@ class Coupon(object):
         "discount_type": 'discount_type',
         "exclude_mid_period_allocations": 'exclude_mid_period_allocations',
         "apply_on_cancel_at_end_of_period": 'apply_on_cancel_at_end_of_period',
+        "apply_on_subscription_expiration": 'apply_on_subscription_expiration',
         "coupon_restrictions": 'coupon_restrictions'
     }
 
@@ -113,6 +115,7 @@ class Coupon(object):
         'discount_type',
         'exclude_mid_period_allocations',
         'apply_on_cancel_at_end_of_period',
+        'apply_on_subscription_expiration',
         'coupon_restrictions',
     ]
 
@@ -159,6 +162,7 @@ class Coupon(object):
                  discount_type=APIHelper.SKIP,
                  exclude_mid_period_allocations=APIHelper.SKIP,
                  apply_on_cancel_at_end_of_period=APIHelper.SKIP,
+                 apply_on_subscription_expiration=APIHelper.SKIP,
                  coupon_restrictions=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the Coupon class"""
@@ -220,6 +224,8 @@ class Coupon(object):
             self.exclude_mid_period_allocations = exclude_mid_period_allocations 
         if apply_on_cancel_at_end_of_period is not APIHelper.SKIP:
             self.apply_on_cancel_at_end_of_period = apply_on_cancel_at_end_of_period 
+        if apply_on_subscription_expiration is not APIHelper.SKIP:
+            self.apply_on_subscription_expiration = apply_on_subscription_expiration 
         if coupon_restrictions is not APIHelper.SKIP:
             self.coupon_restrictions = coupon_restrictions 
 
@@ -280,6 +286,7 @@ class Coupon(object):
         discount_type = dictionary.get("discount_type") if dictionary.get("discount_type") else APIHelper.SKIP
         exclude_mid_period_allocations = dictionary.get("exclude_mid_period_allocations") if "exclude_mid_period_allocations" in dictionary.keys() else APIHelper.SKIP
         apply_on_cancel_at_end_of_period = dictionary.get("apply_on_cancel_at_end_of_period") if "apply_on_cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
+        apply_on_subscription_expiration = dictionary.get("apply_on_subscription_expiration") if "apply_on_subscription_expiration" in dictionary.keys() else APIHelper.SKIP
         coupon_restrictions = None
         if dictionary.get('coupon_restrictions') is not None:
             coupon_restrictions = [CouponRestriction.from_dictionary(x) for x in dictionary.get('coupon_restrictions')]
@@ -318,5 +325,6 @@ class Coupon(object):
                    discount_type,
                    exclude_mid_period_allocations,
                    apply_on_cancel_at_end_of_period,
+                   apply_on_subscription_expiration,
                    coupon_restrictions,
                    dictionary)
