@@ -21,6 +21,7 @@
 | `compounding_strategy` | [`CompoundingStrategy`](../../doc/models/compounding-strategy.md) | Optional | - |
 | `exclude_mid_period_allocations` | `bool` | Optional | - |
 | `apply_on_cancel_at_end_of_period` | `bool` | Optional | - |
+| `apply_on_subscription_expiration` | `bool` | Optional | - |
 
 ## Example (as JSON)
 

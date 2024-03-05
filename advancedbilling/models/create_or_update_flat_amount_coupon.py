@@ -31,6 +31,7 @@ class CreateOrUpdateFlatAmountCoupon(object):
             here.
         exclude_mid_period_allocations (bool): TODO: type description here.
         apply_on_cancel_at_end_of_period (bool): TODO: type description here.
+        apply_on_subscription_expiration (bool): TODO: type description here.
 
     """
 
@@ -47,7 +48,8 @@ class CreateOrUpdateFlatAmountCoupon(object):
         "stackable": 'stackable',
         "compounding_strategy": 'compounding_strategy',
         "exclude_mid_period_allocations": 'exclude_mid_period_allocations',
-        "apply_on_cancel_at_end_of_period": 'apply_on_cancel_at_end_of_period'
+        "apply_on_cancel_at_end_of_period": 'apply_on_cancel_at_end_of_period',
+        "apply_on_subscription_expiration": 'apply_on_subscription_expiration'
     }
 
     _optionals = [
@@ -60,6 +62,7 @@ class CreateOrUpdateFlatAmountCoupon(object):
         'compounding_strategy',
         'exclude_mid_period_allocations',
         'apply_on_cancel_at_end_of_period',
+        'apply_on_subscription_expiration',
     ]
 
     def __init__(self,
@@ -75,6 +78,7 @@ class CreateOrUpdateFlatAmountCoupon(object):
                  compounding_strategy=APIHelper.SKIP,
                  exclude_mid_period_allocations=APIHelper.SKIP,
                  apply_on_cancel_at_end_of_period=APIHelper.SKIP,
+                 apply_on_subscription_expiration=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the CreateOrUpdateFlatAmountCoupon class"""
 
@@ -100,6 +104,8 @@ class CreateOrUpdateFlatAmountCoupon(object):
             self.exclude_mid_period_allocations = exclude_mid_period_allocations 
         if apply_on_cancel_at_end_of_period is not APIHelper.SKIP:
             self.apply_on_cancel_at_end_of_period = apply_on_cancel_at_end_of_period 
+        if apply_on_subscription_expiration is not APIHelper.SKIP:
+            self.apply_on_subscription_expiration = apply_on_subscription_expiration 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -135,6 +141,7 @@ class CreateOrUpdateFlatAmountCoupon(object):
         compounding_strategy = dictionary.get("compounding_strategy") if dictionary.get("compounding_strategy") else APIHelper.SKIP
         exclude_mid_period_allocations = dictionary.get("exclude_mid_period_allocations") if "exclude_mid_period_allocations" in dictionary.keys() else APIHelper.SKIP
         apply_on_cancel_at_end_of_period = dictionary.get("apply_on_cancel_at_end_of_period") if "apply_on_cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
+        apply_on_subscription_expiration = dictionary.get("apply_on_subscription_expiration") if "apply_on_subscription_expiration" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -152,6 +159,7 @@ class CreateOrUpdateFlatAmountCoupon(object):
                    compounding_strategy,
                    exclude_mid_period_allocations,
                    apply_on_cancel_at_end_of_period,
+                   apply_on_subscription_expiration,
                    dictionary)
 
     @classmethod
