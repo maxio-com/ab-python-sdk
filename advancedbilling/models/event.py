@@ -16,7 +16,7 @@ class Event(object):
     TODO: type model description here.
 
     Attributes:
-        id (int): TODO: type description here.
+        id (long|int): TODO: type description here.
         key (str): TODO: type description here.
         message (str): TODO: type description here.
         subscription_id (int): TODO: type description here.

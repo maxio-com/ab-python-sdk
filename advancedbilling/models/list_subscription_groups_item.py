@@ -28,6 +28,7 @@ class ListSubscriptionGroupsItem(object):
         cancel_at_end_of_period (bool): TODO: type description here.
         account_balances (SubscriptionGroupBalances): TODO: type description
             here.
+        group_type (GroupType): TODO: type description here.
 
     """
 
@@ -42,7 +43,8 @@ class ListSubscriptionGroupsItem(object):
         "next_assessment_at": 'next_assessment_at',
         "state": 'state',
         "cancel_at_end_of_period": 'cancel_at_end_of_period',
-        "account_balances": 'account_balances'
+        "account_balances": 'account_balances',
+        "group_type": 'group_type'
     }
 
     _optionals = [
@@ -56,6 +58,7 @@ class ListSubscriptionGroupsItem(object):
         'state',
         'cancel_at_end_of_period',
         'account_balances',
+        'group_type',
     ]
 
     def __init__(self,
@@ -69,6 +72,7 @@ class ListSubscriptionGroupsItem(object):
                  state=APIHelper.SKIP,
                  cancel_at_end_of_period=APIHelper.SKIP,
                  account_balances=APIHelper.SKIP,
+                 group_type=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the ListSubscriptionGroupsItem class"""
 
@@ -93,6 +97,8 @@ class ListSubscriptionGroupsItem(object):
             self.cancel_at_end_of_period = cancel_at_end_of_period 
         if account_balances is not APIHelper.SKIP:
             self.account_balances = account_balances 
+        if group_type is not APIHelper.SKIP:
+            self.group_type = group_type 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -126,6 +132,7 @@ class ListSubscriptionGroupsItem(object):
         state = dictionary.get("state") if dictionary.get("state") else APIHelper.SKIP
         cancel_at_end_of_period = dictionary.get("cancel_at_end_of_period") if "cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
         account_balances = SubscriptionGroupBalances.from_dictionary(dictionary.get('account_balances')) if 'account_balances' in dictionary.keys() else APIHelper.SKIP
+        group_type = dictionary.get("group_type") if dictionary.get("group_type") else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -141,4 +148,5 @@ class ListSubscriptionGroupsItem(object):
                    state,
                    cancel_at_end_of_period,
                    account_balances,
+                   group_type,
                    dictionary)

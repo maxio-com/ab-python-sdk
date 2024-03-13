@@ -32,12 +32,10 @@ class AdvanceInvoiceController(BaseController):
         """Does a POST request to /subscriptions/{subscription_id}/advance_invoice/issue.json.
 
         Generate an invoice in advance for a subscription's next renewal date.
-        [Please see our
-        docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice) for
-        more information on advance invoices, including eligibility on
-        generating one; for the most part, they function like any other
-        invoice, except they are issued early and have special behavior upon
-        being voided.
+        [Please see our docs]($m/Invoice) for more information on advance
+        invoices, including eligibility on generating one; for the most part,
+        they function like any other invoice, except they are issued early and
+        have special behavior upon being voided.
         A subscription may only have one advance invoice per billing period.
         Attempting to issue an advance invoice when one already exists will
         return an error.
@@ -145,7 +143,7 @@ class AdvanceInvoiceController(BaseController):
         open status. Voiding will cause any prepayments and credits that were
         applied to the invoice to be returned to the subscription. For a full
         overview of the impact of voiding, please [see our help
-        docs](reference/Chargify-API.v1.yaml/components/schemas/Invoice).
+        docs]($m/Invoice).
 
         Args:
             subscription_id (int): The Chargify id of the subscription

@@ -93,7 +93,7 @@ class SubscriptionInvoiceAccountController(BaseController):
                 here.
 
         Returns:
-            CreatePrepaymentResponse: Response from the API. OK
+            CreatePrepaymentResponse: Response from the API. Created
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -126,6 +126,7 @@ class SubscriptionInvoiceAccountController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CreatePrepaymentResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', APIException)
         ).execute()
 
     def list_prepayments(self,

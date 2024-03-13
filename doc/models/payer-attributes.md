@@ -24,7 +24,7 @@
 | `phone` | `str` | Optional | - |
 | `locale` | `str` | Optional | - |
 | `vat_number` | `str` | Optional | - |
-| `tax_exempt` | `str` | Optional | - |
+| `tax_exempt` | `bool` | Optional | - |
 | `tax_exempt_reason` | `str` | Optional | - |
 | `metafields` | `Dict[str, str]` | Optional | (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |
 

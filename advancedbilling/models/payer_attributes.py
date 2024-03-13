@@ -31,7 +31,7 @@ class PayerAttributes(object):
         phone (str): TODO: type description here.
         locale (str): TODO: type description here.
         vat_number (str): TODO: type description here.
-        tax_exempt (str): TODO: type description here.
+        tax_exempt (bool): TODO: type description here.
         tax_exempt_reason (str): TODO: type description here.
         metafields (Dict[str, str]): (Optional) A set of key/value pairs
             representing custom fields and their values. Metafields will be
@@ -180,7 +180,7 @@ class PayerAttributes(object):
         phone = dictionary.get("phone") if dictionary.get("phone") else APIHelper.SKIP
         locale = dictionary.get("locale") if dictionary.get("locale") else APIHelper.SKIP
         vat_number = dictionary.get("vat_number") if dictionary.get("vat_number") else APIHelper.SKIP
-        tax_exempt = dictionary.get("tax_exempt") if dictionary.get("tax_exempt") else APIHelper.SKIP
+        tax_exempt = dictionary.get("tax_exempt") if "tax_exempt" in dictionary.keys() else APIHelper.SKIP
         tax_exempt_reason = dictionary.get("tax_exempt_reason") if dictionary.get("tax_exempt_reason") else APIHelper.SKIP
         metafields = dictionary.get("metafields") if dictionary.get("metafields") else APIHelper.SKIP
         # Clean out expected properties from dictionary

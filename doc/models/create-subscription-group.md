@@ -9,14 +9,14 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | str \| int | Required | This is a container for one-of cases. |
+| `subscription_id` | `int` | Required | - |
 | `member_ids` | `List[int]` | Optional | - |
 
 ## Example (as JSON)
 
 ```json
 {
-  "subscription_id": "String7",
+  "subscription_id": 38,
   "member_ids": [
     162
   ]

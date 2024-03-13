@@ -20,7 +20,11 @@ class SubscriptionGroup(object):
         customer_id (int): TODO: type description here.
         payment_profile (SubscriptionGroupPaymentProfile): TODO: type
             description here.
-        payment_collection_method (str): TODO: type description here.
+        payment_collection_method (CollectionMethod): The type of payment
+            collection to be used in the subscription. For legacy Statements
+            Architecture valid options are - `invoice`, `automatic`. For
+            current Relationship Invoicing Architecture valid options are -
+            `remittance`, `automatic`, `prepaid`.
         subscription_ids (List[int]): TODO: type description here.
         created_at (datetime): TODO: type description here.
 
@@ -46,7 +50,7 @@ class SubscriptionGroup(object):
     def __init__(self,
                  customer_id=APIHelper.SKIP,
                  payment_profile=APIHelper.SKIP,
-                 payment_collection_method=APIHelper.SKIP,
+                 payment_collection_method='automatic',
                  subscription_ids=APIHelper.SKIP,
                  created_at=APIHelper.SKIP,
                  additional_properties={}):
@@ -57,8 +61,7 @@ class SubscriptionGroup(object):
             self.customer_id = customer_id 
         if payment_profile is not APIHelper.SKIP:
             self.payment_profile = payment_profile 
-        if payment_collection_method is not APIHelper.SKIP:
-            self.payment_collection_method = payment_collection_method 
+        self.payment_collection_method = payment_collection_method 
         if subscription_ids is not APIHelper.SKIP:
             self.subscription_ids = subscription_ids 
         if created_at is not APIHelper.SKIP:
@@ -88,7 +91,7 @@ class SubscriptionGroup(object):
         # Extract variables from the dictionary
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
         payment_profile = SubscriptionGroupPaymentProfile.from_dictionary(dictionary.get('payment_profile')) if 'payment_profile' in dictionary.keys() else APIHelper.SKIP
-        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
+        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
         subscription_ids = dictionary.get("subscription_ids") if dictionary.get("subscription_ids") else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         # Clean out expected properties from dictionary
