@@ -16,7 +16,7 @@ class CreatedPrepayment(object):
     TODO: type model description here.
 
     Attributes:
-        id (int): TODO: type description here.
+        id (long|int): TODO: type description here.
         subscription_id (int): TODO: type description here.
         amount_in_cents (long|int): TODO: type description here.
         memo (str): TODO: type description here.

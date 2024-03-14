@@ -14,6 +14,7 @@ from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
+from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.subscription_group_signup_response import SubscriptionGroupSignupResponse
 from advancedbilling.models.subscription_group_response import SubscriptionGroupResponse
@@ -21,7 +22,7 @@ from advancedbilling.models.list_subscription_groups_response import ListSubscri
 from advancedbilling.models.full_subscription_group_response import FullSubscriptionGroupResponse
 from advancedbilling.models.delete_subscription_group_response import DeleteSubscriptionGroupResponse
 from advancedbilling.exceptions.subscription_group_signup_error_response_exception import SubscriptionGroupSignupErrorResponseException
-from advancedbilling.exceptions.single_string_error_response_exception import SingleStringErrorResponseException
+from advancedbilling.exceptions.subscription_group_create_error_response_exception import SubscriptionGroupCreateErrorResponseException
 from advancedbilling.exceptions.subscription_group_update_error_response_exception import SubscriptionGroupUpdateErrorResponseException
 from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
@@ -126,7 +127,7 @@ class SubscriptionGroupsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionGroupResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SingleStringErrorResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SubscriptionGroupCreateErrorResponseException)
         ).execute()
 
     def list_subscription_groups(self,
@@ -162,10 +163,11 @@ class SubscriptionGroupsController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    include -- str -- A list of additional information to
-                        include in the response. The following values are
-                        supported:  - `account_balances`: Account balance
-                        information for the subscription groups. Use in query:
+                    include -- List[SubscriptionGroupsListInclude] -- A list
+                        of additional information to include in the response.
+                        The following values are supported:  -
+                        `account_balances`: Account balance information for
+                        the subscription groups. Use in query:
                         `include[]=account_balances`
 
         Returns:
@@ -190,11 +192,12 @@ class SubscriptionGroupsController(BaseController):
                          .key('per_page')
                          .value(options.get('per_page', None)))
             .query_param(Parameter()
-                         .key('include')
+                         .key('include[]')
                          .value(options.get('include', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
+            .array_serialization_format(SerializationFormats.CSV)
             .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
@@ -203,7 +206,8 @@ class SubscriptionGroupsController(BaseController):
         ).execute()
 
     def read_subscription_group(self,
-                                uid):
+                                uid,
+                                include=None):
         """Does a GET request to /subscription_groups/{uid}.json.
 
         Use this endpoint to find subscription group details.
@@ -215,6 +219,9 @@ class SubscriptionGroupsController(BaseController):
 
         Args:
             uid (str): The uid of the subscription group
+            include (List[SubscriptionGroupInclude], optional): Allows
+                including additional data in the response. Use in query:
+                `include[]=current_billing_amount_in_cents`.
 
         Returns:
             FullSubscriptionGroupResponse: Response from the API. OK
@@ -236,9 +243,13 @@ class SubscriptionGroupsController(BaseController):
                             .value(uid)
                             .is_required(True)
                             .should_encode(True))
+            .query_param(Parameter()
+                         .key('include[]')
+                         .value(include))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
+            .array_serialization_format(SerializationFormats.CSV)
             .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()

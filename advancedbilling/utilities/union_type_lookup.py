@@ -60,8 +60,10 @@ from advancedbilling.models.refund_success import RefundSuccess
 from advancedbilling.models.remove_payment_event_data import RemovePaymentEventData
 from advancedbilling.models.resume_options import ResumeOptions
 from advancedbilling.models.snap_day import SnapDay
+from advancedbilling.models.subscription_group_members_array_error import SubscriptionGroupMembersArrayError
 from advancedbilling.models.subscription_group_signup_failure import SubscriptionGroupSignupFailure
 from advancedbilling.models.subscription_group_signup_success import SubscriptionGroupSignupSuccess
+from advancedbilling.models.subscription_group_single_error import SubscriptionGroupSingleError
 from advancedbilling.models.subscription_product_change import SubscriptionProductChange
 from advancedbilling.models.subscription_state_change import SubscriptionStateChange
 from advancedbilling.models.update_metafield import UpdateMetafield
@@ -526,12 +528,6 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSubscriptionGroupSubscriptionId': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ]
-        ),
         'CustomerChangePayer': OneOf(
             [
                 LeafType(CustomerPayerChange)
@@ -972,6 +968,13 @@ class UnionTypeLookUp:
             Context.create(
                is_optional=True
             )
+        ),
+        'SubscriptionGroupCreateErrorResponseErrors': OneOf(
+            [
+                LeafType(SubscriptionGroupMembersArrayError),
+                LeafType(SubscriptionGroupSingleError),
+                LeafType(str)
+            ]
         ),
         'SubscriptionGroupCreditCardFullNumber': OneOf(
             [

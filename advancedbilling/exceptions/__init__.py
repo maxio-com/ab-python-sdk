@@ -17,6 +17,7 @@ __all__ = [
     'single_string_error_response_exception',
     'subscription_add_coupon_error_exception',
     'subscription_component_allocation_error_exception',
+    'subscription_group_create_error_response_exception',
     'subscription_group_signup_error_response_exception',
     'subscription_group_update_error_response_exception',
     'subscription_remove_coupon_errors_exception',

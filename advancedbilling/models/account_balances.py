@@ -19,6 +19,8 @@ class AccountBalances(object):
     Attributes:
         open_invoices (AccountBalance): The balance, in cents, of the sum of
             the subscription's  open, payable invoices.
+        pending_invoices (AccountBalance): The balance, in cents, of the sum
+            of the subscription's  pending, payable invoices.
         pending_discounts (AccountBalance): The balance, in cents, of the
             subscription's Pending Discount account.
         service_credits (AccountBalance): The balance, in cents, of the
@@ -31,6 +33,7 @@ class AccountBalances(object):
     # Create a mapping from Model property names to API property names
     _names = {
         "open_invoices": 'open_invoices',
+        "pending_invoices": 'pending_invoices',
         "pending_discounts": 'pending_discounts',
         "service_credits": 'service_credits',
         "prepayments": 'prepayments'
@@ -38,6 +41,7 @@ class AccountBalances(object):
 
     _optionals = [
         'open_invoices',
+        'pending_invoices',
         'pending_discounts',
         'service_credits',
         'prepayments',
@@ -45,6 +49,7 @@ class AccountBalances(object):
 
     def __init__(self,
                  open_invoices=APIHelper.SKIP,
+                 pending_invoices=APIHelper.SKIP,
                  pending_discounts=APIHelper.SKIP,
                  service_credits=APIHelper.SKIP,
                  prepayments=APIHelper.SKIP,
@@ -54,6 +59,8 @@ class AccountBalances(object):
         # Initialize members of the class
         if open_invoices is not APIHelper.SKIP:
             self.open_invoices = open_invoices 
+        if pending_invoices is not APIHelper.SKIP:
+            self.pending_invoices = pending_invoices 
         if pending_discounts is not APIHelper.SKIP:
             self.pending_discounts = pending_discounts 
         if service_credits is not APIHelper.SKIP:
@@ -84,6 +91,7 @@ class AccountBalances(object):
 
         # Extract variables from the dictionary
         open_invoices = AccountBalance.from_dictionary(dictionary.get('open_invoices')) if 'open_invoices' in dictionary.keys() else APIHelper.SKIP
+        pending_invoices = AccountBalance.from_dictionary(dictionary.get('pending_invoices')) if 'pending_invoices' in dictionary.keys() else APIHelper.SKIP
         pending_discounts = AccountBalance.from_dictionary(dictionary.get('pending_discounts')) if 'pending_discounts' in dictionary.keys() else APIHelper.SKIP
         service_credits = AccountBalance.from_dictionary(dictionary.get('service_credits')) if 'service_credits' in dictionary.keys() else APIHelper.SKIP
         prepayments = AccountBalance.from_dictionary(dictionary.get('prepayments')) if 'prepayments' in dictionary.keys() else APIHelper.SKIP
@@ -93,6 +101,7 @@ class AccountBalances(object):
                 del dictionary[key]
         # Return an object of this model
         return cls(open_invoices,
+                   pending_invoices,
                    pending_discounts,
                    service_credits,
                    prepayments,

@@ -9,38 +9,29 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class CreateSubscriptionGroup(object):
+class SubscriptionGroupMembersArrayError(object):
 
-    """Implementation of the 'Create Subscription Group' model.
+    """Implementation of the 'Subscription Group Members Array Error' model.
 
     TODO: type model description here.
 
     Attributes:
-        subscription_id (int): TODO: type description here.
-        member_ids (List[int]): TODO: type description here.
+        members (List[str]): TODO: type description here.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "subscription_id": 'subscription_id',
-        "member_ids": 'member_ids'
+        "members": 'members'
     }
 
-    _optionals = [
-        'member_ids',
-    ]
-
     def __init__(self,
-                 subscription_id=None,
-                 member_ids=APIHelper.SKIP,
+                 members=None,
                  additional_properties={}):
-        """Constructor for the CreateSubscriptionGroup class"""
+        """Constructor for the SubscriptionGroupMembersArrayError class"""
 
         # Initialize members of the class
-        self.subscription_id = subscription_id 
-        if member_ids is not APIHelper.SKIP:
-            self.member_ids = member_ids 
+        self.members = members 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -64,13 +55,33 @@ class CreateSubscriptionGroup(object):
             return None
 
         # Extract variables from the dictionary
-        subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else None
-        member_ids = dictionary.get("member_ids") if dictionary.get("member_ids") else APIHelper.SKIP
+        members = dictionary.get("members") if dictionary.get("members") else None
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
                 del dictionary[key]
         # Return an object of this model
-        return cls(subscription_id,
-                   member_ids,
+        return cls(members,
                    dictionary)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+
+        if isinstance(dictionary, cls):
+            return APIHelper.is_valid_type(value=dictionary.members, type_callable=lambda value: isinstance(value, str))
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return APIHelper.is_valid_type(value=dictionary.get('members'), type_callable=lambda value: isinstance(value, str))

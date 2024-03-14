@@ -21,6 +21,12 @@ class SubscriptionGroupSubscriptionError(object):
         payment_profile (List[str]): TODO: type description here.
         payment_profile_chargify_token (List[str]): TODO: type description
             here.
+        base (List[str]): TODO: type description here.
+        payment_profile_expiration_month (List[str]): TODO: type description
+            here.
+        payment_profile_expiration_year (List[str]): TODO: type description
+            here.
+        payment_profile_full_number (List[str]): TODO: type description here.
 
     """
 
@@ -29,7 +35,11 @@ class SubscriptionGroupSubscriptionError(object):
         "product": 'product',
         "product_price_point_id": 'product_price_point_id',
         "payment_profile": 'payment_profile',
-        "payment_profile_chargify_token": 'payment_profile.chargify_token'
+        "payment_profile_chargify_token": 'payment_profile.chargify_token',
+        "base": 'base',
+        "payment_profile_expiration_month": 'payment_profile.expiration_month',
+        "payment_profile_expiration_year": 'payment_profile.expiration_year',
+        "payment_profile_full_number": 'payment_profile.full_number'
     }
 
     _optionals = [
@@ -37,6 +47,10 @@ class SubscriptionGroupSubscriptionError(object):
         'product_price_point_id',
         'payment_profile',
         'payment_profile_chargify_token',
+        'base',
+        'payment_profile_expiration_month',
+        'payment_profile_expiration_year',
+        'payment_profile_full_number',
     ]
 
     def __init__(self,
@@ -44,6 +58,10 @@ class SubscriptionGroupSubscriptionError(object):
                  product_price_point_id=APIHelper.SKIP,
                  payment_profile=APIHelper.SKIP,
                  payment_profile_chargify_token=APIHelper.SKIP,
+                 base=APIHelper.SKIP,
+                 payment_profile_expiration_month=APIHelper.SKIP,
+                 payment_profile_expiration_year=APIHelper.SKIP,
+                 payment_profile_full_number=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the SubscriptionGroupSubscriptionError class"""
 
@@ -56,6 +74,14 @@ class SubscriptionGroupSubscriptionError(object):
             self.payment_profile = payment_profile 
         if payment_profile_chargify_token is not APIHelper.SKIP:
             self.payment_profile_chargify_token = payment_profile_chargify_token 
+        if base is not APIHelper.SKIP:
+            self.base = base 
+        if payment_profile_expiration_month is not APIHelper.SKIP:
+            self.payment_profile_expiration_month = payment_profile_expiration_month 
+        if payment_profile_expiration_year is not APIHelper.SKIP:
+            self.payment_profile_expiration_year = payment_profile_expiration_year 
+        if payment_profile_full_number is not APIHelper.SKIP:
+            self.payment_profile_full_number = payment_profile_full_number 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -83,6 +109,10 @@ class SubscriptionGroupSubscriptionError(object):
         product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
         payment_profile = dictionary.get("payment_profile") if dictionary.get("payment_profile") else APIHelper.SKIP
         payment_profile_chargify_token = dictionary.get("payment_profile.chargify_token") if dictionary.get("payment_profile.chargify_token") else APIHelper.SKIP
+        base = dictionary.get("base") if dictionary.get("base") else APIHelper.SKIP
+        payment_profile_expiration_month = dictionary.get("payment_profile.expiration_month") if dictionary.get("payment_profile.expiration_month") else APIHelper.SKIP
+        payment_profile_expiration_year = dictionary.get("payment_profile.expiration_year") if dictionary.get("payment_profile.expiration_year") else APIHelper.SKIP
+        payment_profile_full_number = dictionary.get("payment_profile.full_number") if dictionary.get("payment_profile.full_number") else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -92,4 +122,8 @@ class SubscriptionGroupSubscriptionError(object):
                    product_price_point_id,
                    payment_profile,
                    payment_profile_chargify_token,
+                   base,
+                   payment_profile_expiration_month,
+                   payment_profile_expiration_year,
+                   payment_profile_full_number,
                    dictionary)

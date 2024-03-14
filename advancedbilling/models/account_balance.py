@@ -17,26 +17,45 @@ class AccountBalance(object):
 
     Attributes:
         balance_in_cents (long|int): The balance in cents.
+        automatic_balance_in_cents (long|int): The automatic balance in
+            cents.
+        remittance_balance_in_cents (long|int): The remittance balance in
+            cents.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "balance_in_cents": 'balance_in_cents'
+        "balance_in_cents": 'balance_in_cents',
+        "automatic_balance_in_cents": 'automatic_balance_in_cents',
+        "remittance_balance_in_cents": 'remittance_balance_in_cents'
     }
 
     _optionals = [
         'balance_in_cents',
+        'automatic_balance_in_cents',
+        'remittance_balance_in_cents',
+    ]
+
+    _nullables = [
+        'automatic_balance_in_cents',
+        'remittance_balance_in_cents',
     ]
 
     def __init__(self,
                  balance_in_cents=APIHelper.SKIP,
+                 automatic_balance_in_cents=APIHelper.SKIP,
+                 remittance_balance_in_cents=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the AccountBalance class"""
 
         # Initialize members of the class
         if balance_in_cents is not APIHelper.SKIP:
             self.balance_in_cents = balance_in_cents 
+        if automatic_balance_in_cents is not APIHelper.SKIP:
+            self.automatic_balance_in_cents = automatic_balance_in_cents 
+        if remittance_balance_in_cents is not APIHelper.SKIP:
+            self.remittance_balance_in_cents = remittance_balance_in_cents 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -61,10 +80,14 @@ class AccountBalance(object):
 
         # Extract variables from the dictionary
         balance_in_cents = dictionary.get("balance_in_cents") if dictionary.get("balance_in_cents") else APIHelper.SKIP
+        automatic_balance_in_cents = dictionary.get("automatic_balance_in_cents") if "automatic_balance_in_cents" in dictionary.keys() else APIHelper.SKIP
+        remittance_balance_in_cents = dictionary.get("remittance_balance_in_cents") if "remittance_balance_in_cents" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
                 del dictionary[key]
         # Return an object of this model
         return cls(balance_in_cents,
+                   automatic_balance_in_cents,
+                   remittance_balance_in_cents,
                    dictionary)
