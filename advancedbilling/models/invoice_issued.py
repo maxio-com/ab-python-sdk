@@ -24,8 +24,10 @@ class InvoiceIssued(object):
         number (str): TODO: type description here.
         role (str): TODO: type description here.
         due_date (date): TODO: type description here.
-        issue_date (date): TODO: type description here.
-        paid_date (date): TODO: type description here.
+        issue_date (str): Invoice issue date. Can be an empty string if value
+            is missing.
+        paid_date (str): Paid date. Can be an empty string if value is
+            missing.
         due_amount (str): TODO: type description here.
         paid_amount (str): TODO: type description here.
         tax_amount (str): TODO: type description here.
@@ -57,6 +59,10 @@ class InvoiceIssued(object):
         "consolidation_level": 'consolidation_level',
         "line_items": 'line_items'
     }
+
+    _nullables = [
+        'due_date',
+    ]
 
     def __init__(self,
                  uid=None,
@@ -120,8 +126,8 @@ class InvoiceIssued(object):
         number = dictionary.get("number") if dictionary.get("number") else None
         role = dictionary.get("role") if dictionary.get("role") else None
         due_date = dateutil.parser.parse(dictionary.get('due_date')).date() if dictionary.get('due_date') else None
-        issue_date = dateutil.parser.parse(dictionary.get('issue_date')).date() if dictionary.get('issue_date') else None
-        paid_date = dateutil.parser.parse(dictionary.get('paid_date')).date() if dictionary.get('paid_date') else None
+        issue_date = dictionary.get("issue_date") if dictionary.get("issue_date") else None
+        paid_date = dictionary.get("paid_date") if dictionary.get("paid_date") else None
         due_amount = dictionary.get("due_amount") if dictionary.get("due_amount") else None
         paid_amount = dictionary.get("paid_amount") if dictionary.get("paid_amount") else None
         tax_amount = dictionary.get("tax_amount") if dictionary.get("tax_amount") else None
@@ -173,9 +179,9 @@ class InvoiceIssued(object):
             return APIHelper.is_valid_type(value=dictionary.uid, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.number, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.role, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.due_date, type_callable=lambda value: isinstance(value, date)) \
-                and APIHelper.is_valid_type(value=dictionary.issue_date, type_callable=lambda value: isinstance(value, date)) \
-                and APIHelper.is_valid_type(value=dictionary.paid_date, type_callable=lambda value: isinstance(value, date)) \
+                and APIHelper.is_valid_type(value=dictionary.due_date, type_callable=lambda value: isinstance(value, date), is_value_nullable=True) \
+                and APIHelper.is_valid_type(value=dictionary.issue_date, type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.paid_date, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.due_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.paid_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.tax_amount, type_callable=lambda value: isinstance(value, str)) \
@@ -192,7 +198,7 @@ class InvoiceIssued(object):
         return APIHelper.is_valid_type(value=dictionary.get('uid'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('number'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('role'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('due_date'), type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('due_date'), type_callable=lambda value: isinstance(value, str), is_value_nullable=True) \
             and APIHelper.is_valid_type(value=dictionary.get('issue_date'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('paid_date'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('due_amount'), type_callable=lambda value: isinstance(value, str)) \
