@@ -34,6 +34,8 @@ class UpdateCustomer(object):
         tax_exempt (bool): TODO: type description here.
         tax_exempt_reason (str): TODO: type description here.
         parent_id (int): TODO: type description here.
+        verified (bool): Is the customer verified to use ACH as a payment
+            method. Available only on Authorize.Net gateway
 
     """
 
@@ -56,7 +58,8 @@ class UpdateCustomer(object):
         "vat_number": 'vat_number',
         "tax_exempt": 'tax_exempt',
         "tax_exempt_reason": 'tax_exempt_reason',
-        "parent_id": 'parent_id'
+        "parent_id": 'parent_id',
+        "verified": 'verified'
     }
 
     _optionals = [
@@ -78,10 +81,12 @@ class UpdateCustomer(object):
         'tax_exempt',
         'tax_exempt_reason',
         'parent_id',
+        'verified',
     ]
 
     _nullables = [
         'parent_id',
+        'verified',
     ]
 
     def __init__(self,
@@ -103,6 +108,7 @@ class UpdateCustomer(object):
                  tax_exempt=APIHelper.SKIP,
                  tax_exempt_reason=APIHelper.SKIP,
                  parent_id=APIHelper.SKIP,
+                 verified=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the UpdateCustomer class"""
 
@@ -143,6 +149,8 @@ class UpdateCustomer(object):
             self.tax_exempt_reason = tax_exempt_reason 
         if parent_id is not APIHelper.SKIP:
             self.parent_id = parent_id 
+        if verified is not APIHelper.SKIP:
+            self.verified = verified 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -184,6 +192,7 @@ class UpdateCustomer(object):
         tax_exempt = dictionary.get("tax_exempt") if "tax_exempt" in dictionary.keys() else APIHelper.SKIP
         tax_exempt_reason = dictionary.get("tax_exempt_reason") if dictionary.get("tax_exempt_reason") else APIHelper.SKIP
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
+        verified = dictionary.get("verified") if "verified" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -207,4 +216,5 @@ class UpdateCustomer(object):
                    tax_exempt,
                    tax_exempt_reason,
                    parent_id,
+                   verified,
                    dictionary)

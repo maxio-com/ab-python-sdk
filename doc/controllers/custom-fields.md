@@ -99,7 +99,6 @@ print(result)
   {
     "name": "Color",
     "scope": {
-      "hosted": [],
       "csv": "0",
       "statements": "0",
       "invoices": "0",
@@ -112,7 +111,6 @@ print(result)
   {
     "name": "Brand",
     "scope": {
-      "hosted": [],
       "csv": "0",
       "statements": "0",
       "invoices": "0",
@@ -489,7 +487,7 @@ resource_type = ResourceType.SUBSCRIPTIONS
 
 resource_id = 60
 
-Liquid error: Value cannot be null. (Parameter 'key')result = custom_fields_controller.delete_metadata(Liquid error: Value cannot be null. (Parameter 'key')
+result = custom_fields_controller.delete_metadata(
     resource_type,
     resource_id
 )
@@ -547,7 +545,7 @@ def list_metadata_for_resource_type(self,
 ## Example Usage
 
 ```python
-collect = {Liquid error: Value cannot be null. (Parameter 'key')
+collect = {
     'resource_type': ResourceType.SUBSCRIPTIONS,
     'page': 2,
     'per_page': 50,

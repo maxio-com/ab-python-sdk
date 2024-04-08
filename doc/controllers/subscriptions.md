@@ -885,14 +885,17 @@ def list_subscriptions(self,
 ## Example Usage
 
 ```python
-collect = {Liquid error: Value cannot be null. (Parameter 'key')
+collect = {
     'page': 2,
     'per_page': 50,
     'start_date': dateutil.parser.parse('2022-07-01').date(),
     'end_date': dateutil.parser.parse('2022-08-01').date(),
     'start_datetime': dateutil.parser.parse('2022-07-01 09:00:05'),
     'end_datetime': dateutil.parser.parse('2022-08-01 10:00:05'),
-    'sort': SubscriptionSort.SIGNUP_DATE
+    'sort': SubscriptionSort.SIGNUP_DATE,
+    'include': [
+        SubscriptionListInclude.SELF_SERVICE_PAGE_TOKEN
+    ]
 }
 result = subscriptions_controller.list_subscriptions(collect)
 print(result)
@@ -1130,7 +1133,15 @@ def read_subscription(self,
 ```python
 subscription_id = 222
 
-Liquid error: Value cannot be null. (Parameter 'key')result = subscriptions_controller.read_subscription(Liquid error: Value cannot be null. (Parameter 'key')subscription_id)
+include = [
+    SubscriptionInclude.COUPONS,
+    SubscriptionInclude.SELF_SERVICE_PAGE_TOKEN
+]
+
+result = subscriptions_controller.read_subscription(
+    subscription_id,
+    include=include
+)
 print(result)
 ```
 
@@ -1406,9 +1417,15 @@ subscription_id = 222
 
 ack = 252
 
-Liquid error: Value cannot be null. (Parameter 'key')result = subscriptions_controller.purge_subscription(Liquid error: Value cannot be null. (Parameter 'key')
+cascade = [
+    SubscriptionPurgeType.CUSTOMER,
+    SubscriptionPurgeType.PAYMENT_PROFILE
+]
+
+result = subscriptions_controller.purge_subscription(
     subscription_id,
-    ack
+    ack,
+    cascade=cascade
 )
 print(result)
 ```

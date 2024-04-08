@@ -14,6 +14,7 @@ from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
+from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.product_response import ProductResponse
 from advancedbilling.models.product_family_response import ProductFamilyResponse
@@ -60,6 +61,8 @@ class ProductFamiliesController(BaseController):
                     date_field -- BasicDateField -- The type of filter you
                         would like to apply to your search. Use in query:
                         `date_field=created_at`.
+                    filter -- ListProductsFilter -- Filter to use for List
+                        Products operations
                     start_date -- str -- The start date (format YYYY-MM-DD)
                         with which to filter the date_field. Returns products
                         with a timestamp at or after midnight (12:00:00 AM) in
@@ -86,18 +89,6 @@ class ProductFamiliesController(BaseController):
                     include -- ListProductsInclude -- Allows including
                         additional data in the response. Use in query
                         `include=prepaid_product_price_point`.
-                    filter_prepaid_product_price_point_product_price_point_id
-                        -- IncludeNotNull -- Allows fetching products only if
-                        a prepaid product price point is present or not. To
-                        use this filter you also have to include the following
-                        param in the request
-                        `include=prepaid_product_price_point`. Use in query
-                        `filter[prepaid_product_price_point][product_price_poin
-                        t_id]=not_null`.
-                    filter_use_site_exchange_rate -- bool -- Allows fetching
-                        products with matching use_site_exchange_rate based on
-                        provided value (refers to default price point). Use in
-                        query `filter[use_site_exchange_rate]=true`.
 
         Returns:
             List[ProductResponse]: Response from the API. OK
@@ -129,6 +120,9 @@ class ProductFamiliesController(BaseController):
                          .key('date_field')
                          .value(options.get('date_field', None)))
             .query_param(Parameter()
+                         .key('filter')
+                         .value(options.get('filter', None)))
+            .query_param(Parameter()
                          .key('start_date')
                          .value(options.get('start_date', None)))
             .query_param(Parameter()
@@ -146,15 +140,10 @@ class ProductFamiliesController(BaseController):
             .query_param(Parameter()
                          .key('include')
                          .value(options.get('include', None)))
-            .query_param(Parameter()
-                         .key('filter[prepaid_product_price_point][product_price_point_id]')
-                         .value(options.get('filter_prepaid_product_price_point_product_price_point_id', None)))
-            .query_param(Parameter()
-                         .key('filter[use_site_exchange_rate]')
-                         .value(options.get('filter_use_site_exchange_rate', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
+            .array_serialization_format(SerializationFormats.CSV)
             .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()

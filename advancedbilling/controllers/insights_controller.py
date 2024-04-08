@@ -223,9 +223,8 @@ class InsightsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    filter_subscription_ids -- List[int] -- Submit ids in
-                        order to limit results. Use in query:
-                        `filter[subscription_ids]=1,2,3`.
+                    filter -- ListMrrFilter -- Filter to use for List MRR per
+                        subscription operation
                     at_time -- str -- Submit a timestamp in ISO8601 format to
                         request MRR for a historic time. Use in query:
                         `at_time=2022-01-10T10:00:00-05:00`.
@@ -264,8 +263,8 @@ class InsightsController(BaseController):
             .path('/subscriptions_mrr.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
-                         .key('filter[subscription_ids]')
-                         .value(options.get('filter_subscription_ids', None)))
+                         .key('filter')
+                         .value(options.get('filter', None)))
             .query_param(Parameter()
                          .key('at_time')
                          .value(options.get('at_time', None)))

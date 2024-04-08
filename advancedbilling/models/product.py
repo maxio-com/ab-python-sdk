@@ -30,9 +30,9 @@ class Product(object):
             subscription to this product will run before it expires. See the
             description of interval for a description of how this value is
             coupled with an interval unit to calculate the full interval
-        expiration_interval_unit (ExtendedIntervalUnit | None): A string
-            representing the expiration interval unit for this product, either
-            month or day
+        expiration_interval_unit (ExtendedIntervalUnit): A string representing
+            the expiration interval unit for this product, either month or
+            day
         created_at (datetime): Timestamp indicating when this product was
             created
         updated_at (datetime): Timestamp indicating when this product was last
@@ -51,8 +51,8 @@ class Product(object):
             period of a subscription to this product. See the description of
             interval for a description of how this value is coupled with an
             interval unit to calculate the full interval
-        trial_interval_unit (IntervalUnit | None): A string representing the
-            trial interval unit for this product, either month or day
+        trial_interval_unit (IntervalUnit): A string representing the trial
+            interval unit for this product, either month or day
         archived_at (datetime): Timestamp indicating when this product was
             archived
         require_credit_card (bool): Boolean that controls whether a payment
@@ -329,7 +329,6 @@ class Product(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if dictionary is None:
             return None
@@ -342,10 +341,7 @@ class Product(object):
         accounting_code = dictionary.get("accounting_code") if "accounting_code" in dictionary.keys() else APIHelper.SKIP
         request_credit_card = dictionary.get("request_credit_card") if "request_credit_card" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if "expiration_interval" in dictionary.keys() else APIHelper.SKIP
-        if 'expiration_interval_unit' in dictionary.keys():
-            expiration_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ProductExpirationIntervalUnit'), dictionary.get('expiration_interval_unit'), False) if dictionary.get('expiration_interval_unit') is not None else None
-        else:
-            expiration_interval_unit = APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
@@ -354,10 +350,7 @@ class Product(object):
         initial_charge_in_cents = dictionary.get("initial_charge_in_cents") if "initial_charge_in_cents" in dictionary.keys() else APIHelper.SKIP
         trial_price_in_cents = dictionary.get("trial_price_in_cents") if "trial_price_in_cents" in dictionary.keys() else APIHelper.SKIP
         trial_interval = dictionary.get("trial_interval") if "trial_interval" in dictionary.keys() else APIHelper.SKIP
-        if 'trial_interval_unit' in dictionary.keys():
-            trial_interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ProductTrialIntervalUnit'), dictionary.get('trial_interval_unit'), False) if dictionary.get('trial_interval_unit') is not None else None
-        else:
-            trial_interval_unit = APIHelper.SKIP
+        trial_interval_unit = dictionary.get("trial_interval_unit") if "trial_interval_unit" in dictionary.keys() else APIHelper.SKIP
         if 'archived_at' in dictionary.keys():
             archived_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("archived_at")).datetime if dictionary.get("archived_at") else None
         else:
@@ -428,25 +421,3 @@ class Product(object):
                    product_price_point_id,
                    product_price_point_handle,
                    dictionary)
-
-    @classmethod
-    def validate(cls, dictionary):
-        """Validates dictionary against class required properties
-
-        Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
-
-        Returns:
-            boolean : if dictionary is valid contains required properties.
-
-        """
-
-        if isinstance(dictionary, cls):
-            return True
-
-        if not isinstance(dictionary, dict):
-            return False
-
-        return True

@@ -48,10 +48,9 @@ class ComponentPricePoint(object):
             coupled with an interval_unit of day would mean this component
             price point would renew every 30 days. This property is only
             available for sites with Multifrequency enabled.
-        interval_unit (IntervalUnit | None): A string representing the
-            interval unit for this component price point, either month or day.
-            This property is only available for sites with Multifrequency
-            enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit
+            for this component price point, either month or day. This property
+            is only available for sites with Multifrequency enabled.
         currency_prices (List[ComponentCurrencyPrice]): An array of currency
             pricing data is available when multiple currencies are defined for
             the site. It varies based on the use_site_exchange_rate setting
@@ -182,7 +181,6 @@ class ComponentPricePoint(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if dictionary is None:
             return None
@@ -210,10 +208,7 @@ class ComponentPricePoint(object):
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
         interval = dictionary.get("interval") if "interval" in dictionary.keys() else APIHelper.SKIP
-        if 'interval_unit' in dictionary.keys():
-            interval_unit = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ComponentPricePointIntervalUnit'), dictionary.get('interval_unit'), False) if dictionary.get('interval_unit') is not None else None
-        else:
-            interval_unit = APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         currency_prices = None
         if dictionary.get('currency_prices') is not None:
             currency_prices = [ComponentCurrencyPrice.from_dictionary(x) for x in dictionary.get('currency_prices')]

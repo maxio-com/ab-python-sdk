@@ -17,7 +17,7 @@
 | `unit_balance` | `int` | Optional | - |
 | `currency` | `str` | Optional | - |
 | `allocated_quantity` | int \| str \| None | Optional | This is a container for one-of cases. |
-| `pricing_scheme` | [Pricing Scheme](../../doc/models/pricing-scheme.md) \| None | Optional | This is a container for one-of cases. |
+| `pricing_scheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Optional | - |
 | `component_id` | `int` | Optional | - |
 | `component_handle` | `str` | Optional | - |
 | `subscription_id` | `int` | Optional | - |

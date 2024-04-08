@@ -10,6 +10,7 @@ from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.bank_account_payment_profile import BankAccountPaymentProfile
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
 from advancedbilling.models.customer import Customer
+from advancedbilling.models.nested_subscription_group import NestedSubscriptionGroup
 from advancedbilling.models.prepaid_configuration import PrepaidConfiguration
 from advancedbilling.models.product import Product
 from advancedbilling.models.subscription_included_coupon import SubscriptionIncludedCoupon
@@ -156,7 +157,7 @@ class Subscription(object):
         customer (Customer): TODO: type description here.
         product (Product): TODO: type description here.
         credit_card (CreditCardPaymentProfile): TODO: type description here.
-        group (NestedSubscriptionGroup | None): TODO: type description here.
+        group (NestedSubscriptionGroup): TODO: type description here.
         bank_account (BankAccountPaymentProfile): TODO: type description
             here.
         payment_type (str): The payment profile type for the active profile on
@@ -186,7 +187,8 @@ class Subscription(object):
             paying for the subscription. Defaults to the Customer ID unless
             the 'Customer Hierarchies & WhoPays' feature is enabled.
         current_billing_amount_in_cents (long|int): The balance in cents plus
-            the estimated renewal amount in cents.
+            the estimated renewal amount in cents. Returned ONLY for
+            readSubscription operation as it's compute intensive operation.
         product_price_point_id (int): The product price point currently
             subscribed to.
         product_price_point_type (PricePointType): Price point type. We expose
@@ -606,7 +608,6 @@ class Subscription(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if dictionary is None:
             return None
@@ -657,7 +658,7 @@ class Subscription(object):
         product = Product.from_dictionary(dictionary.get('product')) if 'product' in dictionary.keys() else APIHelper.SKIP
         credit_card = CreditCardPaymentProfile.from_dictionary(dictionary.get('credit_card')) if 'credit_card' in dictionary.keys() else APIHelper.SKIP
         if 'group' in dictionary.keys():
-            group = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionGroup2'), dictionary.get('group'), False) if dictionary.get('group') is not None else None
+            group = NestedSubscriptionGroup.from_dictionary(dictionary.get('group')) if dictionary.get('group') else None
         else:
             group = APIHelper.SKIP
         bank_account = BankAccountPaymentProfile.from_dictionary(dictionary.get('bank_account')) if 'bank_account' in dictionary.keys() else APIHelper.SKIP

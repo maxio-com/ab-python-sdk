@@ -14,6 +14,7 @@ from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
+from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.account_balances import AccountBalances
 from advancedbilling.models.create_prepayment_response import CreatePrepaymentResponse
@@ -158,23 +159,8 @@ class SubscriptionInvoiceAccountController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    filter_date_field -- BasicDateField -- The type of filter
-                        you would like to apply to your search. created_at -
-                        Time when prepayment was created. application_at -
-                        Time when prepayment was applied to invoice. Use in
-                        query `filter[date_field]=created_at`.
-                    filter_start_date -- date -- The start date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns prepayments with a timestamp at or after
-                        midnight (12:00:00 AM) in your site’s time zone on the
-                        date specified. Use in query
-                        `filter[start_date]=2011-12-15`.
-                    filter_end_date -- date -- The end date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns prepayments with a timestamp up to and
-                        including 11:59:59PM in your site’s time zone on the
-                        date specified. Use in query
-                        `filter[end_date]=2011-12-15`.
+                    filter -- ListPrepaymentsFilter -- Filter to use for List
+                        Prepayments operations
 
         Returns:
             PrepaymentsResponse: Response from the API. OK
@@ -203,17 +189,12 @@ class SubscriptionInvoiceAccountController(BaseController):
                          .key('per_page')
                          .value(options.get('per_page', None)))
             .query_param(Parameter()
-                         .key('filter[date_field]')
-                         .value(options.get('filter_date_field', None)))
-            .query_param(Parameter()
-                         .key('filter[start_date]')
-                         .value(options.get('filter_start_date', None)))
-            .query_param(Parameter()
-                         .key('filter[end_date]')
-                         .value(options.get('filter_end_date', None)))
+                         .key('filter')
+                         .value(options.get('filter', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
+            .array_serialization_format(SerializationFormats.CSV)
             .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()

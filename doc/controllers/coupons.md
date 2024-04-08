@@ -121,15 +121,8 @@ def list_coupons_for_product_family(self,
 | `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the coupon belongs |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `filter_date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `filter[date_field]=created_at`. |
-| `filter_end_date` | `date` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `filter[date_field]=2011-12-15`. |
-| `filter_end_datetime` | `datetime` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `?filter[end_datetime]=2011-12-1T10:15:30+01:00`. |
-| `filter_start_date` | `date` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-17`. |
-| `filter_start_datetime` | `datetime` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `filter[start_datetime]=2011-12-19T10:15:30+01:00`. |
-| `filter_ids` | `List[int]` | Query, Optional | Allows fetching coupons with matching id based on provided values. Use in query `filter[ids]=1,2,3`. |
-| `filter_codes` | `List[str]` | Query, Optional | Allows fetching coupons with matching codes based on provided values. Use in query `filter[codes]=free,free_trial`. |
+| `filter` | [`ListCouponsFilter`](../../doc/models/list-coupons-filter.md) | Query, Optional | Filter to use for List Coupons operations |
 | `currency_prices` | `bool` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. Use in query `currency_prices=true`. |
-| `filter_use_site_exchange_rate` | `bool` | Query, Optional | Allows fetching coupons with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 
 ## Response Type
 
@@ -138,10 +131,25 @@ def list_coupons_for_product_family(self,
 ## Example Usage
 
 ```python
-collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+collect = {
     'product_family_id': 140,
     'page': 2,
     'per_page': 50,
+    'filter': ListCouponsFilter(
+        start_date=dateutil.parser.parse('2011-12-17').date(),
+        end_date=dateutil.parser.parse('2011-12-15').date(),
+        start_datetime=dateutil.parser.parse('12/19/2011 09:15:30'),
+        end_datetime=dateutil.parser.parse('06/07/2019 17:20:06'),
+        ids=[
+            1,
+            2,
+            3
+        ],
+        codes=[
+            'free',
+            'free_trial'
+        ]
+    ),
     'currency_prices': True
 }
 result = coupons_controller.list_coupons_for_product_family(collect)
@@ -174,7 +182,6 @@ print(result)
       "conversion_limit": "100",
       "stackable": false,
       "compounding_strategy": "compound",
-      "coupon_restrictions": [],
       "use_site_exchange_rate": true
     }
   },
@@ -200,7 +207,6 @@ print(result)
       "conversion_limit": "100",
       "stackable": false,
       "compounding_strategy": "compound",
-      "coupon_restrictions": [],
       "use_site_exchange_rate": true
     }
   },
@@ -337,8 +343,7 @@ print(result)
     "archived_at": null,
     "conversion_limit": null,
     "stackable": true,
-    "compounding_strategy": "compound",
-    "coupon_restrictions": []
+    "compounding_strategy": "compound"
   }
 }
 ```
@@ -433,8 +438,7 @@ print(result)
     "archived_at": null,
     "conversion_limit": null,
     "stackable": true,
-    "compounding_strategy": "compound",
-    "coupon_restrictions": []
+    "compounding_strategy": "compound"
   }
 }
 ```
@@ -501,8 +505,7 @@ print(result)
     "archived_at": "2016-12-02T13:09:33-05:00",
     "conversion_limit": null,
     "stackable": true,
-    "compounding_strategy": "compound",
-    "coupon_restrictions": []
+    "compounding_strategy": "compound"
   }
 }
 ```
@@ -525,20 +528,8 @@ def list_coupons(self,
 |  --- | --- | --- | --- |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[date_field] instead to achieve the same result. The type of filter you would like to apply to your search. |
-| `start_date` | `date` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[start_date] instead to achieve the same result. The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
-| `end_date` | `date` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[end_date] instead to achieve the same result. The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
-| `start_datetime` | `datetime` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[start_datetime] instead to achieve the same result. The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
-| `end_datetime` | `datetime` | Query, Optional | The field was deprecated: on January 20, 2022. We recommend using filter[end_datetime] instead to achieve the same result. The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
-| `filter_ids` | `List[int]` | Query, Optional | Allows fetching coupons with matching id based on provided values. Use in query `filter[ids]=1,2,3`. |
-| `filter_codes` | `List[str]` | Query, Optional | Allows fetching coupons with matching code based on provided values. Use in query `filter[ids]=1,2,3`. |
+| `filter` | [`ListCouponsFilter`](../../doc/models/list-coupons-filter.md) | Query, Optional | Filter to use for List Coupons operations |
 | `currency_prices` | `bool` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. Use in query `currency_prices=true`. |
-| `filter_end_date` | `date` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `filter[end_date]=2011-12-17`. |
-| `filter_end_datetime` | `datetime` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `filter[end_datetime]=2011-12-19T10:15:30+01:00`. |
-| `filter_start_date` | `date` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns coupons with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `filter[start_date]=2011-12-19`. |
-| `filter_start_datetime` | `datetime` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns coupons with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `filter[start_datetime]=2011-12-19T10:15:30+01:00`. |
-| `filter_date_field` | [`BasicDateField`](../../doc/models/basic-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `filter[date_field]=updated_at`. |
-| `filter_use_site_exchange_rate` | `bool` | Query, Optional | Allows fetching coupons with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 
 ## Response Type
 
@@ -547,13 +538,24 @@ def list_coupons(self,
 ## Example Usage
 
 ```python
-collect = {Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')Liquid error: Value cannot be null. (Parameter 'key')
+collect = {
     'page': 2,
     'per_page': 50,
-    'date_field': BasicDateField.UPDATED_AT,
-    'start_date': dateutil.parser.parse('2011-12-17').date(),
-    'start_datetime': dateutil.parser.parse('06/07/2019 17:20:06'),
-    'end_datetime': dateutil.parser.parse('06/07/2019 17:20:06'),
+    'filter': ListCouponsFilter(
+        start_date=dateutil.parser.parse('2011-12-17').date(),
+        end_date=dateutil.parser.parse('2011-12-15').date(),
+        start_datetime=dateutil.parser.parse('12/19/2011 09:15:30'),
+        end_datetime=dateutil.parser.parse('06/07/2019 17:20:06'),
+        ids=[
+            1,
+            2,
+            3
+        ],
+        codes=[
+            'free',
+            'free_trial'
+        ]
+    ),
     'currency_prices': True
 }
 result = coupons_controller.list_coupons(collect)
@@ -753,8 +755,7 @@ print(result)
     "archived_at": null,
     "conversion_limit": null,
     "stackable": true,
-    "compounding_strategy": "full-price",
-    "coupon_restrictions": []
+    "compounding_strategy": "full-price"
   }
 }
 ```
@@ -903,9 +904,7 @@ print(result)
     "BALTIMOREFALL",
     "ORLANDOFALL",
     "DETROITFALL"
-  ],
-  "duplicate_codes": [],
-  "invalid_codes": []
+  ]
 }
 ```
 

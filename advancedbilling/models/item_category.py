@@ -23,7 +23,6 @@ class ItemCategory(object):
         OTHER: TODO: type description here.
 
     """
-    _all_values = ['Business Software', 'Consumer Software', 'Digital Services', 'Physical Goods', 'Other']
     ENUM_BUSINESS_SOFTWARE = 'Business Software'
 
     ENUM_CONSUMER_SOFTWARE = 'Consumer Software'
@@ -34,15 +33,3 @@ class ItemCategory(object):
 
     OTHER = 'Other'
 
-    @classmethod
-    def validate(cls, value):
-        """Validates value contains in enum
-
-        Args:
-            value: the value to be validated
-
-        Returns:
-            boolean : if value is valid enum values.
-
-        """
-        return value in cls._all_values
