@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 import pytest
 
 from advancedbilling.advanced_billing_client import (
@@ -35,10 +37,16 @@ from advancedbilling.models.create_quantity_based_component import (
 from advancedbilling.models.create_subscription_request import CreateSubscriptionRequest
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
 from advancedbilling.models.customer import Customer
+from advancedbilling.models.list_subscription_components_for_site_filter import ListSubscriptionComponentsForSiteFilter
+from advancedbilling.models.list_subscription_components_include import ListSubscriptionComponentsInclude
+from advancedbilling.models.list_subscription_components_response import ListSubscriptionComponentsResponse
 from advancedbilling.models.preview_allocations_request import PreviewAllocationsRequest
 from advancedbilling.models.product import Product
 from advancedbilling.models.product_family import ProductFamily
 from advancedbilling.models.subscription import Subscription
+from advancedbilling.models.subscription_component import SubscriptionComponent
+from advancedbilling.models.subscription_filter import SubscriptionFilter
+from advancedbilling.models.subscription_list_date_field import SubscriptionListDateField
 
 from .data import InitCases, SubscriptionsComponentsAssertCases
 from .utils import assert_properties
@@ -168,6 +176,76 @@ class TestSubscriptionComponents:
 
         subscriptions_controller.purge_subscription(subscription.id, customer.id)
         customers_controller.delete_customer(customer.id)
+
+    def test_list_subscription_components_controller_list_components_with_filter(
+        self,
+        components_controller: ComponentsController,
+        customers_controller: CustomersController,
+        payment_profiles_controller: PaymentProfilesController,
+        product_families_controller: ProductFamiliesController,
+        products_controller: ProductsController,
+        subscription_components_controller: SubscriptionComponentsController,
+        subscriptions_controller: SubscriptionsController,
+    ):
+        product_family: ProductFamily = product_families_controller.create_product_family(
+            CreateProductFamilyRequest(InitCases.get_product_family_request())
+        ).product_family
+
+        product: Product = products_controller.create_product(
+            product_family.id,
+            CreateOrUpdateProductRequest(InitCases.get_product_request()),
+        ).product
+
+        customer: Customer = customers_controller.create_customer(
+            CreateCustomerRequest(InitCases.get_customer_request())
+        ).customer
+
+        payment_profile: CreditCardPaymentProfile = payment_profiles_controller.create_payment_profile(
+            CreatePaymentProfileRequest(InitCases.get_payment_profile_request(customer.id))
+        ).payment_profile
+
+        quantity_based_component: Component = components_controller.create_quantity_based_component(
+            product_family.id,
+            CreateQuantityBasedComponent(InitCases.get_quantity_based_component_data()),
+        ).component
+
+        create_subscription_request = InitCases.get_subscription_request(product.id, customer.id, payment_profile.id)
+        create_subscription_request["components"] = [{"component_id": quantity_based_component.id, "allocated_quantity": "40"}]
+        subscription: Subscription = subscriptions_controller.create_subscription(
+            CreateSubscriptionRequest(create_subscription_request)
+        ).subscription
+
+        # THEN
+        filtered_components1: [SubscriptionComponent] = subscription_components_controller\
+            .list_subscription_components_for_site(
+            {
+                "product_family_ids": product_family.id,
+                "subscription_ids": [subscription.id],
+                "include": ListSubscriptionComponentsInclude.SUBSCRIPTION,
+                "filter": ListSubscriptionComponentsForSiteFilter(subscription=SubscriptionFilter(
+                    date_field=SubscriptionListDateField.UPDATED_AT,
+                    start_date=date.today() - timedelta(weeks=5)
+                ))
+            }
+        ).subscriptions_components
+
+        assert len(filtered_components1) == 1
+        assert filtered_components1[0].component_id == quantity_based_component.id
+
+        filtered_components2: [SubscriptionComponent] = subscription_components_controller \
+            .list_subscription_components_for_site(
+            {
+                "product_family_ids": product_family.id,
+                "subscription_ids": [subscription.id],
+                "include": ListSubscriptionComponentsInclude.SUBSCRIPTION,
+                "filter": ListSubscriptionComponentsForSiteFilter(subscription=SubscriptionFilter(
+                    date_field=SubscriptionListDateField.UPDATED_AT,
+                    end_date=date.today() - timedelta(weeks=1)
+                ))
+            }
+        ).subscriptions_components
+
+        assert len(filtered_components2) == 0
 
     def test_allocate_components_given_on_off_component_with_invalid_quantity_then_raises_exception_with_422_status_code(
         self,
