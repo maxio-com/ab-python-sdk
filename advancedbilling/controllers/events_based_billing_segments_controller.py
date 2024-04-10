@@ -14,6 +14,7 @@ from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
+from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.segment_response import SegmentResponse
 from advancedbilling.models.list_segments_response import ListSegmentsResponse
@@ -128,26 +129,8 @@ class EventsBasedBillingSegmentsController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    filter_segment_property_1_value -- str -- The value passed
-                        here would be used to filter segments. Pass a value
-                        related to `segment_property_1` on attached Metric. If
-                        empty string is passed, this filter would be rejected.
-                        Use in query `filter[segment_property_1_value]=EU`.
-                    filter_segment_property_2_value -- str -- The value passed
-                        here would be used to filter segments. Pass a value
-                        related to `segment_property_2` on attached Metric. If
-                        empty string is passed, this filter would be
-                        rejected.
-                    filter_segment_property_3_value -- str -- The value passed
-                        here would be used to filter segments. Pass a value
-                        related to `segment_property_3` on attached Metric. If
-                        empty string is passed, this filter would be
-                        rejected.
-                    filter_segment_property_4_value -- str -- The value passed
-                        here would be used to filter segments. Pass a value
-                        related to `segment_property_4` on attached Metric. If
-                        empty string is passed, this filter would be
-                        rejected.
+                    filter -- ListSegmentsFilter -- Filter to use for List
+                        Segments for a Price Point operation
 
         Returns:
             ListSegmentsResponse: Response from the API. OK
@@ -181,20 +164,12 @@ class EventsBasedBillingSegmentsController(BaseController):
                          .key('per_page')
                          .value(options.get('per_page', None)))
             .query_param(Parameter()
-                         .key('filter[segment_property_1_value]')
-                         .value(options.get('filter_segment_property_1_value', None)))
-            .query_param(Parameter()
-                         .key('filter[segment_property_2_value]')
-                         .value(options.get('filter_segment_property_2_value', None)))
-            .query_param(Parameter()
-                         .key('filter[segment_property_3_value]')
-                         .value(options.get('filter_segment_property_3_value', None)))
-            .query_param(Parameter()
-                         .key('filter[segment_property_4_value]')
-                         .value(options.get('filter_segment_property_4_value', None)))
+                         .key('filter')
+                         .value(options.get('filter', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
+            .array_serialization_format(SerializationFormats.CSV)
             .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()

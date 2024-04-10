@@ -16,7 +16,7 @@
 | `accounting_code` | `str` | Optional | E.g. Internal ID or SKU Number |
 | `request_credit_card` | `bool` | Optional | Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, please read this attribute from under the signup page. |
 | `expiration_interval` | `int` | Optional | A numerical interval for the length a subscription to this product will run before it expires. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval |
-| `expiration_interval_unit` | [Extended Interval Unit](../../doc/models/extended-interval-unit.md) \| None | Optional | This is a container for one-of cases. |
+| `expiration_interval_unit` | [`ExtendedIntervalUnit`](../../doc/models/extended-interval-unit.md) | Optional | A string representing the expiration interval unit for this product, either month or day |
 | `created_at` | `datetime` | Optional | Timestamp indicating when this product was created |
 | `updated_at` | `datetime` | Optional | Timestamp indicating when this product was last updated |
 | `price_in_cents` | `long\|int` | Optional | The product price, in integer cents |
@@ -25,7 +25,7 @@
 | `initial_charge_in_cents` | `long\|int` | Optional | The up front charge you have specified. |
 | `trial_price_in_cents` | `long\|int` | Optional | The price of the trial period for a subscription to this product, in integer cents. |
 | `trial_interval` | `int` | Optional | A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval |
-| `trial_interval_unit` | [Interval Unit](../../doc/models/interval-unit.md) \| None | Optional | This is a container for one-of cases. |
+| `trial_interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | A string representing the trial interval unit for this product, either month or day |
 | `archived_at` | `datetime` | Optional | Timestamp indicating when this product was archived |
 | `require_credit_card` | `bool` | Optional | Boolean that controls whether a payment profile is required to be entered for customers wishing to sign up on this product. |
 | `return_params` | `str` | Optional | - |

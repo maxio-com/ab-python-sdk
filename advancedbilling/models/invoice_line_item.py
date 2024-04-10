@@ -9,6 +9,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 import dateutil.parser
 
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.invoice_line_item_component_cost_data import InvoiceLineItemComponentCostData
 
 
 class InvoiceLineItem(object):
@@ -88,8 +89,8 @@ class InvoiceLineItem(object):
         price_point_id (int): The price point ID of the component being
             billed. Will be `nil` for non-component charges.
         hide (bool): TODO: type description here.
-        component_cost_data (InvoiceLineItemComponentCostData | None): TODO:
-            type description here.
+        component_cost_data (InvoiceLineItemComponentCostData): TODO: type
+            description here.
         product_price_point_id (int): The price point ID of the line item's
             product
         custom_item (bool): TODO: type description here.
@@ -246,7 +247,6 @@ class InvoiceLineItem(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if dictionary is None:
             return None
@@ -271,7 +271,7 @@ class InvoiceLineItem(object):
         price_point_id = dictionary.get("price_point_id") if "price_point_id" in dictionary.keys() else APIHelper.SKIP
         hide = dictionary.get("hide") if "hide" in dictionary.keys() else APIHelper.SKIP
         if 'component_cost_data' in dictionary.keys():
-            component_cost_data = APIHelper.deserialize_union_type(UnionTypeLookUp.get('InvoiceLineItemComponentCostData2'), dictionary.get('component_cost_data'), False) if dictionary.get('component_cost_data') is not None else None
+            component_cost_data = InvoiceLineItemComponentCostData.from_dictionary(dictionary.get('component_cost_data')) if dictionary.get('component_cost_data') else None
         else:
             component_cost_data = APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if "product_price_point_id" in dictionary.keys() else APIHelper.SKIP

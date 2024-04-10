@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.invoice_pre_payment import InvoicePrePayment
 from advancedbilling.models.paid_invoice import PaidInvoice
 
 
@@ -18,7 +19,7 @@ class RecordPaymentResponse(object):
 
     Attributes:
         paid_invoices (List[PaidInvoice]): TODO: type description here.
-        prepayment (InvoicePrePayment | None): TODO: type description here.
+        prepayment (InvoicePrePayment): TODO: type description here.
 
     """
 
@@ -66,7 +67,6 @@ class RecordPaymentResponse(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if dictionary is None:
             return None
@@ -78,7 +78,7 @@ class RecordPaymentResponse(object):
         else:
             paid_invoices = APIHelper.SKIP
         if 'prepayment' in dictionary.keys():
-            prepayment = APIHelper.deserialize_union_type(UnionTypeLookUp.get('RecordPaymentResponsePrepayment'), dictionary.get('prepayment'), False) if dictionary.get('prepayment') is not None else None
+            prepayment = InvoicePrePayment.from_dictionary(dictionary.get('prepayment')) if dictionary.get('prepayment') else None
         else:
             prepayment = APIHelper.SKIP
         # Clean out expected properties from dictionary

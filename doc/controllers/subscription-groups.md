@@ -179,9 +179,12 @@ def list_subscription_groups(self,
 ## Example Usage
 
 ```python
-collect = {Liquid error: Value cannot be null. (Parameter 'key')
+collect = {
     'page': 2,
-    'per_page': 50
+    'per_page': 50,
+    'include': [
+        SubscriptionGroupsListInclude.ACCOUNT_BALANCES
+    ]
 }
 result = subscription_groups_controller.list_subscription_groups(collect)
 print(result)
@@ -256,7 +259,14 @@ def read_subscription_group(self,
 ```python
 uid = 'uid0'
 
-Liquid error: Value cannot be null. (Parameter 'key')result = subscription_groups_controller.read_subscription_group(Liquid error: Value cannot be null. (Parameter 'key')uid)
+include = [
+    SubscriptionGroupInclude.CURRENT_BILLING_AMOUNT_IN_CENTS
+]
+
+result = subscription_groups_controller.read_subscription_group(
+    uid,
+    include=include
+)
 print(result)
 ```
 
@@ -306,7 +316,7 @@ print(result)
 # Update Subscription Group Members
 
 Use this endpoint to update subscription group members.
-`"member_ids": []` should contain an array of both subscription IDs to set as group members and subscription IDs already present in the groups. Not including them will result in removing them from subscription group. To clean up members, just leave the array empty.
+`"member_ids"` should contain an array of both subscription IDs to set as group members and subscription IDs already present in the groups. Not including them will result in removing them from subscription group. To clean up members, just leave the array empty.
 
 ```python
 def update_subscription_group_members(self,

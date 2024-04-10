@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `paid_invoices` | [`List[PaidInvoice]`](../../doc/models/paid-invoice.md) | Optional | - |
-| `prepayment` | [Invoice PrePayment](../../doc/models/invoice-pre-payment.md) \| None | Optional | This is a container for one-of cases. |
+| `prepayment` | [`InvoicePrePayment`](../../doc/models/invoice-pre-payment.md) | Optional | - |
 
 ## Example (as JSON)
 
@@ -37,9 +37,9 @@
     }
   ],
   "prepayment": {
-    "subscription_id": 180,
-    "amount_in_cents": 100,
-    "ending_balance_in_cents": 60
+    "subscription_id": 148,
+    "amount_in_cents": 124,
+    "ending_balance_in_cents": 164
   }
 }
 ```

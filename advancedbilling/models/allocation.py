@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.payment_for_allocation import PaymentForAllocation
 
 
 class Allocation(object):
@@ -66,7 +67,7 @@ class Allocation(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        payment (PaymentForAllocation | None): TODO: type description here.
+        payment (PaymentForAllocation): TODO: type description here.
         expires_at (datetime): TODO: type description here.
         used_quantity (long|int): TODO: type description here.
         charge_id (long|int): TODO: type description here.
@@ -264,7 +265,7 @@ class Allocation(object):
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         if 'payment' in dictionary.keys():
-            payment = APIHelper.deserialize_union_type(UnionTypeLookUp.get('AllocationPayment'), dictionary.get('payment'), False) if dictionary.get('payment') is not None else None
+            payment = PaymentForAllocation.from_dictionary(dictionary.get('payment')) if dictionary.get('payment') else None
         else:
             payment = APIHelper.SKIP
         expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else APIHelper.SKIP

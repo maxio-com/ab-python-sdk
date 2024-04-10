@@ -28,7 +28,7 @@ class SubscriptionComponent(object):
         allocated_quantity (int | str | None): For Quantity-based components:
             The current allocation for the component on the given
             subscription. For On/Off components: Use 1 for on. Use 0 for off.
-        pricing_scheme (PricingScheme | None): TODO: type description here.
+        pricing_scheme (PricingScheme): TODO: type description here.
         component_id (int): TODO: type description here.
         component_handle (str): TODO: type description here.
         subscription_id (int): TODO: type description here.
@@ -279,10 +279,7 @@ class SubscriptionComponent(object):
         unit_balance = dictionary.get("unit_balance") if dictionary.get("unit_balance") else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         allocated_quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionComponentAllocatedQuantity'), dictionary.get('allocated_quantity'), False) if dictionary.get('allocated_quantity') is not None else APIHelper.SKIP
-        if 'pricing_scheme' in dictionary.keys():
-            pricing_scheme = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionComponentPricingScheme'), dictionary.get('pricing_scheme'), False) if dictionary.get('pricing_scheme') is not None else None
-        else:
-            pricing_scheme = APIHelper.SKIP
+        pricing_scheme = dictionary.get("pricing_scheme") if "pricing_scheme" in dictionary.keys() else APIHelper.SKIP
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
         component_handle = dictionary.get("component_handle") if "component_handle" in dictionary.keys() else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP

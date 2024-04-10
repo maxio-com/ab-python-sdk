@@ -6,7 +6,6 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.invoice_payer_change import InvoicePayerChange
 
 
@@ -70,27 +69,3 @@ class CustomerPayerChange(object):
         return cls(before,
                    after,
                    dictionary)
-
-    @classmethod
-    def validate(cls, dictionary):
-        """Validates dictionary against class required properties
-
-        Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
-
-        Returns:
-            boolean : if dictionary is valid contains required properties.
-
-        """
-
-        if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.before, type_callable=lambda value: InvoicePayerChange.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.after, type_callable=lambda value: InvoicePayerChange.validate(value))
-
-        if not isinstance(dictionary, dict):
-            return False
-
-        return APIHelper.is_valid_type(value=dictionary.get('before'), type_callable=lambda value: InvoicePayerChange.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('after'), type_callable=lambda value: InvoicePayerChange.validate(value))

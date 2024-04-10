@@ -39,3 +39,4 @@ class InvoiceDiscountSourceType(object):
 
         """
         return value in cls._all_values
+   

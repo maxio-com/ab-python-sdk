@@ -7,6 +7,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.address_change import AddressChange
+from advancedbilling.models.customer_custom_fields_change import CustomerCustomFieldsChange
+from advancedbilling.models.customer_payer_change import CustomerPayerChange
 
 
 class CustomerChange(object):
@@ -16,11 +19,11 @@ class CustomerChange(object):
     TODO: type model description here.
 
     Attributes:
-        payer (CustomerPayerChange | None): TODO: type description here.
-        shipping_address (AddressChange | None): TODO: type description here.
-        billing_address (AddressChange | None): TODO: type description here.
-        custom_fields (CustomerCustomFieldsChange | None): TODO: type
-            description here.
+        payer (CustomerPayerChange): TODO: type description here.
+        shipping_address (AddressChange): TODO: type description here.
+        billing_address (AddressChange): TODO: type description here.
+        custom_fields (CustomerCustomFieldsChange): TODO: type description
+            here.
 
     """
 
@@ -81,26 +84,25 @@ class CustomerChange(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
         if 'payer' in dictionary.keys():
-            payer = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomerChangePayer'), dictionary.get('payer'), False) if dictionary.get('payer') is not None else None
+            payer = CustomerPayerChange.from_dictionary(dictionary.get('payer')) if dictionary.get('payer') else None
         else:
             payer = APIHelper.SKIP
         if 'shipping_address' in dictionary.keys():
-            shipping_address = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomerChangeShippingAddress'), dictionary.get('shipping_address'), False) if dictionary.get('shipping_address') is not None else None
+            shipping_address = AddressChange.from_dictionary(dictionary.get('shipping_address')) if dictionary.get('shipping_address') else None
         else:
             shipping_address = APIHelper.SKIP
         if 'billing_address' in dictionary.keys():
-            billing_address = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomerChangeBillingAddress'), dictionary.get('billing_address'), False) if dictionary.get('billing_address') is not None else None
+            billing_address = AddressChange.from_dictionary(dictionary.get('billing_address')) if dictionary.get('billing_address') else None
         else:
             billing_address = APIHelper.SKIP
         if 'custom_fields' in dictionary.keys():
-            custom_fields = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CustomerChangeCustomFields'), dictionary.get('custom_fields'), False) if dictionary.get('custom_fields') is not None else None
+            custom_fields = CustomerCustomFieldsChange.from_dictionary(dictionary.get('custom_fields')) if dictionary.get('custom_fields') else None
         else:
             custom_fields = APIHelper.SKIP
         # Clean out expected properties from dictionary

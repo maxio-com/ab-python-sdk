@@ -30,7 +30,7 @@
 | `initiate_dunning` | `bool` | Optional | If true, if the immediate component payment fails, initiate dunning for the subscription.<br>Otherwise, leave the charges on the subscription to pay for at renewal. |
 | `upgrade_charge` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `downgrade_credit` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
-| `payment` | [Payment for Allocation](../../doc/models/payment-for-allocation.md) \| None | Optional | This is a container for one-of cases. |
+| `payment` | [`PaymentForAllocation`](../../doc/models/payment-for-allocation.md) | Optional | - |
 | `expires_at` | `datetime` | Optional | - |
 | `used_quantity` | `long\|int` | Optional | - |
 | `charge_id` | `long\|int` | Optional | - |

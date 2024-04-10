@@ -192,12 +192,12 @@ class SubscriptionGroupsController(BaseController):
                          .key('per_page')
                          .value(options.get('per_page', None)))
             .query_param(Parameter()
-                         .key('include[]')
+                         .key('include')
                          .value(options.get('include', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .array_serialization_format(SerializationFormats.CSV)
+            .array_serialization_format(SerializationFormats.UN_INDEXED)
             .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
@@ -244,12 +244,12 @@ class SubscriptionGroupsController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .query_param(Parameter()
-                         .key('include[]')
+                         .key('include')
                          .value(include))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .array_serialization_format(SerializationFormats.CSV)
+            .array_serialization_format(SerializationFormats.UN_INDEXED)
             .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
@@ -263,10 +263,10 @@ class SubscriptionGroupsController(BaseController):
         """Does a PUT request to /subscription_groups/{uid}.json.
 
         Use this endpoint to update subscription group members.
-        `"member_ids": []` should contain an array of both subscription IDs to
-        set as group members and subscription IDs already present in the
-        groups. Not including them will result in removing them from
-        subscription group. To clean up members, just leave the array empty.
+        `"member_ids"` should contain an array of both subscription IDs to set
+        as group members and subscription IDs already present in the groups.
+        Not including them will result in removing them from subscription
+        group. To clean up members, just leave the array empty.
 
         Args:
             uid (str): The uid of the subscription group

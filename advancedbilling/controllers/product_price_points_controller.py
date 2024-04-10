@@ -625,42 +625,8 @@ class ProductPricePointsController(BaseController):
                     direction -- SortingDirection -- Controls the order in
                         which results are returned. Use in query
                         `direction=asc`.
-                    filter_archived_at -- IncludeNotNull -- Allows fetching
-                        price points only if archived_at is present or not.
-                        Use in query: `filter[archived_at]=not_null`.
-                    filter_date_field -- BasicDateField -- The type of filter
-                        you would like to apply to your search. Use in query:
-                        `filter[date_field]=created_at`.
-                    filter_end_date -- date -- The end date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns price points with a timestamp up to and
-                        including 11:59:59PM in your site’s time zone on the
-                        date specified.
-                    filter_end_datetime -- datetime -- The end date and time
-                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns price points with a timestamp at
-                        or before exact time provided in query. You can
-                        specify timezone in query - otherwise your site's time
-                        zone will be used. If provided, this parameter will be
-                        used instead of end_date.
-                    filter_ids -- List[int] -- Allows fetching price points
-                        with matching id based on provided values. Use in
-                        query: `filter[ids]=1,2,3`.
-                    filter_start_date -- date -- The start date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns price points with a timestamp at or after
-                        midnight (12:00:00 AM) in your site’s time zone on the
-                        date specified.
-                    filter_start_datetime -- datetime -- The start date and
-                        time (format YYYY-MM-DD HH:MM:SS) with which to filter
-                        the date_field. Returns price points with a timestamp
-                        at or after exact time provided in query. You can
-                        specify timezone in query - otherwise your site's time
-                        zone will be used. If provided, this parameter will be
-                        used instead of start_date.
-                    filter_type -- List[PricePointType] -- Allows fetching
-                        price points with matching type. Use in query:
-                        `filter[type]=catalog,custom`.
+                    filter -- ListPricePointsFilter -- Filter to use for List
+                        PricePoints operations
                     include -- ListProductsPricePointsInclude -- Allows
                         including additional data in the response. Use in
                         query: `include=currency_prices`.
@@ -698,29 +664,8 @@ class ProductPricePointsController(BaseController):
                          .key('direction')
                          .value(options.get('direction', None)))
             .query_param(Parameter()
-                         .key('filter[archived_at]')
-                         .value(options.get('filter_archived_at', None)))
-            .query_param(Parameter()
-                         .key('filter[date_field]')
-                         .value(options.get('filter_date_field', None)))
-            .query_param(Parameter()
-                         .key('filter[end_date]')
-                         .value(options.get('filter_end_date', None)))
-            .query_param(Parameter()
-                         .key('filter[end_datetime]')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_end_datetime', None))))
-            .query_param(Parameter()
-                         .key('filter[ids]')
-                         .value(options.get('filter_ids', None)))
-            .query_param(Parameter()
-                         .key('filter[start_date]')
-                         .value(options.get('filter_start_date', None)))
-            .query_param(Parameter()
-                         .key('filter[start_datetime]')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_start_datetime', None))))
-            .query_param(Parameter()
-                         .key('filter[type]')
-                         .value(options.get('filter_type', None)))
+                         .key('filter')
+                         .value(options.get('filter', None)))
             .query_param(Parameter()
                          .key('include')
                          .value(options.get('include', None)))

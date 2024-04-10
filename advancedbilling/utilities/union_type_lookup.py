@@ -7,7 +7,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
-from advancedbilling.models.address_change import AddressChange
 from advancedbilling.models.apply_credit_note_event_data import ApplyCreditNoteEventData
 from advancedbilling.models.apply_debit_note_event_data import ApplyDebitNoteEventData
 from advancedbilling.models.apply_payment_event_data import ApplyPaymentEventData
@@ -22,24 +21,15 @@ from advancedbilling.models.create_or_update_percentage_coupon import CreateOrUp
 from advancedbilling.models.create_prepaid_usage_component_price_point import CreatePrepaidUsageComponentPricePoint
 from advancedbilling.models.credit_account_balance_changed import CreditAccountBalanceChanged
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
-from advancedbilling.models.credit_note import CreditNote
 from advancedbilling.models.custom_field_value_change import CustomFieldValueChange
-from advancedbilling.models.customer_custom_fields_change import CustomerCustomFieldsChange
 from advancedbilling.models.customer_error import CustomerError
-from advancedbilling.models.customer_payer_change import CustomerPayerChange
 from advancedbilling.models.dunning_step_reached import DunningStepReached
-from advancedbilling.models.extended_interval_unit import ExtendedIntervalUnit
 from advancedbilling.models.group_settings import GroupSettings
-from advancedbilling.models.interval_unit import IntervalUnit
 from advancedbilling.models.invoice_issued import InvoiceIssued
-from advancedbilling.models.invoice_line_item_component_cost_data import InvoiceLineItemComponentCostData
-from advancedbilling.models.invoice_pre_payment import InvoicePrePayment
 from advancedbilling.models.issue_invoice_event_data import IssueInvoiceEventData
 from advancedbilling.models.item_price_point_changed import ItemPricePointChanged
 from advancedbilling.models.metered_usage import MeteredUsage
-from advancedbilling.models.nested_subscription_group import NestedSubscriptionGroup
 from advancedbilling.models.payment_collection_method_changed import PaymentCollectionMethodChanged
-from advancedbilling.models.payment_for_allocation import PaymentForAllocation
 from advancedbilling.models.payment_method_apple_pay import PaymentMethodApplePay
 from advancedbilling.models.payment_method_bank_account import PaymentMethodBankAccount
 from advancedbilling.models.payment_method_credit_card import PaymentMethodCreditCard
@@ -51,7 +41,6 @@ from advancedbilling.models.prepaid_subscription_balance_changed import PrepaidS
 from advancedbilling.models.prepaid_usage import PrepaidUsage
 from advancedbilling.models.prepayment_account_balance_changed import PrepaymentAccountBalanceChanged
 from advancedbilling.models.price_point_type import PricePointType
-from advancedbilling.models.pricing_scheme import PricingScheme
 from advancedbilling.models.proforma_invoice_issued import ProformaInvoiceIssued
 from advancedbilling.models.refund_consolidated_invoice import RefundConsolidatedInvoice
 from advancedbilling.models.refund_invoice import RefundInvoice
@@ -170,15 +159,6 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'AllocationPayment': OneOf(
-            [
-                LeafType(PaymentForAllocation)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
         'AllocationPreviewItemQuantity': OneOf(
             [
                 LeafType(int),
@@ -235,15 +215,6 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ComponentPricingScheme': OneOf(
-            [
-                LeafType(PricingScheme)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
         'ComponentAllocationChangeAllocatedQuantity': OneOf(
             [
                 LeafType(int),
@@ -251,15 +222,6 @@ class UnionTypeLookUp:
             ],
             Context.create(
                is_optional=True
-            )
-        ),
-        'ComponentPricePointIntervalUnit': OneOf(
-            [
-                LeafType(IntervalUnit)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
             )
         ),
         'ComponentPricePointAssignmentPricePoint': OneOf(
@@ -528,42 +490,6 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CustomerChangePayer': OneOf(
-            [
-                LeafType(CustomerPayerChange)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
-        'CustomerChangeShippingAddress': OneOf(
-            [
-                LeafType(AddressChange)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
-        'CustomerChangeBillingAddress': OneOf(
-            [
-                LeafType(AddressChange)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
-        'CustomerChangeCustomFields': OneOf(
-            [
-                LeafType(CustomerCustomFieldsChange)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
         'CustomerErrorResponseErrors': OneOf(
             [
                 LeafType(CustomerError),
@@ -643,15 +569,6 @@ class UnionTypeLookUp:
             ],
             Context.create(
                is_optional=True
-            )
-        ),
-        'InvoiceLineItemComponentCostData2': OneOf(
-            [
-                LeafType(InvoiceLineItemComponentCostData)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
             )
         ),
         'IssueServiceCreditAmount': OneOf(
@@ -746,24 +663,6 @@ class UnionTypeLookUp:
                 LeafType(str)
             ]
         ),
-        'ProductExpirationIntervalUnit': OneOf(
-            [
-                LeafType(ExtendedIntervalUnit)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
-        'ProductTrialIntervalUnit': OneOf(
-            [
-                LeafType(IntervalUnit)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
         'QuantityBasedComponentUnitPrice': OneOf(
             [
                 LeafType(str),
@@ -780,15 +679,6 @@ class UnionTypeLookUp:
             ],
             Context.create(
                is_optional=True
-            )
-        ),
-        'RecordPaymentResponsePrepayment': OneOf(
-            [
-                LeafType(InvoicePrePayment)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
             )
         ),
         'RefundSegmentUids': OneOf(
@@ -886,15 +776,6 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionGroup2': OneOf(
-            [
-                LeafType(NestedSubscriptionGroup)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
         'SubscriptionComponentAllocatedQuantity': OneOf(
             [
                 LeafType(int),
@@ -902,15 +783,6 @@ class UnionTypeLookUp:
             ],
             Context.create(
                is_optional=True
-            )
-        ),
-        'SubscriptionComponentPricingScheme': OneOf(
-            [
-                LeafType(PricingScheme)
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
             )
         ),
         'SubscriptionComponentPricePointType': OneOf(
@@ -1103,14 +975,6 @@ class UnionTypeLookUp:
             ],
             Context.create(
                is_optional=True
-            )
-        ),
-        'VoidInvoiceEventDataCreditNoteAttributes': OneOf(
-            [
-                LeafType(CreditNote)
-            ],
-            Context.create(
-               is_nullable=True
             )
         )
     }

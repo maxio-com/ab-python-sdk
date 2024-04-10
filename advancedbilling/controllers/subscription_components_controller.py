@@ -111,6 +111,8 @@ class SubscriptionComponentsController(BaseController):
                     direction -- SortingDirection -- Controls the order in
                         which results are returned. Use in query
                         `direction=asc`.
+                    filter -- ListSubscriptionComponentsFilter -- Filter to
+                        use for List Subscription Components operation
                     end_date -- str -- The end date (format YYYY-MM-DD) with
                         which to filter the date_field. Returns components
                         with a timestamp up to and including 11:59:59PM in
@@ -146,14 +148,6 @@ class SubscriptionComponentsController(BaseController):
                     include -- ListSubscriptionComponentsInclude -- Allows
                         including additional data in the response. Use in
                         query `include=subscription`.
-                    filter_use_site_exchange_rate -- bool -- Allows fetching
-                        components allocation with matching
-                        use_site_exchange_rate based on provided value. Use in
-                        query `filter[use_site_exchange_rate]=true`.
-                    filter_currencies -- List[str] -- Allows fetching
-                        components allocation with matching currency based on
-                        provided values. Use in query
-                        `filter[currencies]=EUR,USD`.
 
         Returns:
             List[SubscriptionComponentResponse]: Response from the API. OK
@@ -182,6 +176,9 @@ class SubscriptionComponentsController(BaseController):
                          .key('direction')
                          .value(options.get('direction', None)))
             .query_param(Parameter()
+                         .key('filter')
+                         .value(options.get('filter', None)))
+            .query_param(Parameter()
                          .key('end_date')
                          .value(options.get('end_date', None)))
             .query_param(Parameter()
@@ -205,12 +202,6 @@ class SubscriptionComponentsController(BaseController):
             .query_param(Parameter()
                          .key('include')
                          .value(options.get('include', None)))
-            .query_param(Parameter()
-                         .key('filter[use_site_exchange_rate]')
-                         .value(options.get('filter_use_site_exchange_rate', None)))
-            .query_param(Parameter()
-                         .key('filter[currencies]')
-                         .value(options.get('filter_currencies', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -1277,6 +1268,9 @@ class SubscriptionComponentsController(BaseController):
                     direction -- SortingDirection -- Controls the order in
                         which results are returned. Use in query
                         `direction=asc`.
+                    filter -- ListSubscriptionComponentsForSiteFilter --
+                        Filter to use for List Subscription Components For
+                        Site operation
                     date_field -- SubscriptionListDateField -- The type of
                         filter you'd like to apply to your search. Use in
                         query: `date_field=updated_at`.
@@ -1320,64 +1314,6 @@ class SubscriptionComponentsController(BaseController):
                     include -- ListSubscriptionComponentsInclude -- Allows
                         including additional data in the response. Use in
                         query `include=subscription`.
-                    filter_use_site_exchange_rate -- bool -- Allows fetching
-                        components allocation with matching
-                        use_site_exchange_rate based on provided value. Use in
-                        query `filter[use_site_exchange_rate]=true`.
-                    filter_currencies -- List[str] -- Allows fetching
-                        components allocation with matching currency based on
-                        provided values. Use in query
-                        `filter[currencies]=USD,EUR`.
-                    filter_subscription_states --
-                        List[SubscriptionStateFilter] -- Allows fetching
-                        components allocations that belong to the subscription
-                        with matching states based on provided values. To use
-                        this filter you also have to include the following
-                        param in the request `include=subscription`. Use in
-                        query
-                        `filter[subscription][states]=active,canceled&include=s
-                        ubscription`.
-                    filter_subscription_date_field --
-                        SubscriptionListDateField -- The type of filter you'd
-                        like to apply to your search. To use this filter you
-                        also have to include the following param in the
-                        request `include=subscription`.
-                    filter_subscription_start_date -- date -- The start date
-                        (format YYYY-MM-DD) with which to filter the
-                        date_field. Returns components that belong to the
-                        subscription with a timestamp at or after midnight
-                        (12:00:00 AM) in your site’s time zone on the date
-                        specified. To use this filter you also have to include
-                        the following param in the request
-                        `include=subscription`.
-                    filter_subscription_start_datetime -- datetime -- The
-                        start date and time (format YYYY-MM-DD HH:MM:SS) with
-                        which to filter the date_field. Returns components
-                        that belong to the subscription with a timestamp at or
-                        after exact time provided in query. You can specify
-                        timezone in query - otherwise your site''s time zone
-                        will be used. If provided, this parameter will be used
-                        instead of start_date. To use this filter you also
-                        have to include the following param in the request
-                        `include=subscription`.
-                    filter_subscription_end_date -- date -- The end date
-                        (format YYYY-MM-DD) with which to filter the
-                        date_field. Returns components that belong to the
-                        subscription with a timestamp up to and including
-                        11:59:59PM in your site’s time zone on the date
-                        specified. To use this filter you also have to include
-                        the following param in the request
-                        `include=subscription`.
-                    filter_subscription_end_datetime -- datetime -- The end
-                        date and time (format YYYY-MM-DD HH:MM:SS) with which
-                        to filter the date_field. Returns components that
-                        belong to the subscription with a timestamp at or
-                        before exact time provided in query. You can specify
-                        timezone in query - otherwise your site''s time zone
-                        will be used. If provided, this parameter will be used
-                        instead of end_date. To use this filter you also have
-                        to include the following param in the request
-                        `include=subscription`.
 
         Returns:
             ListSubscriptionComponentsResponse: Response from the API. OK
@@ -1407,6 +1343,9 @@ class SubscriptionComponentsController(BaseController):
                          .key('direction')
                          .value(options.get('direction', None)))
             .query_param(Parameter()
+                         .key('filter')
+                         .value(options.get('filter', None)))
+            .query_param(Parameter()
                          .key('date_field')
                          .value(options.get('date_field', None)))
             .query_param(Parameter()
@@ -1433,30 +1372,6 @@ class SubscriptionComponentsController(BaseController):
             .query_param(Parameter()
                          .key('include')
                          .value(options.get('include', None)))
-            .query_param(Parameter()
-                         .key('filter[use_site_exchange_rate]')
-                         .value(options.get('filter_use_site_exchange_rate', None)))
-            .query_param(Parameter()
-                         .key('filter[currencies]')
-                         .value(options.get('filter_currencies', None)))
-            .query_param(Parameter()
-                         .key('filter[subscription][states]')
-                         .value(options.get('filter_subscription_states', None)))
-            .query_param(Parameter()
-                         .key('filter[subscription][date_field]')
-                         .value(options.get('filter_subscription_date_field', None)))
-            .query_param(Parameter()
-                         .key('filter[subscription][start_date]')
-                         .value(options.get('filter_subscription_start_date', None)))
-            .query_param(Parameter()
-                         .key('filter[subscription][start_datetime]')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_subscription_start_datetime', None))))
-            .query_param(Parameter()
-                         .key('filter[subscription][end_date]')
-                         .value(options.get('filter_subscription_end_date', None)))
-            .query_param(Parameter()
-                         .key('filter[subscription][end_datetime]')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_subscription_end_datetime', None))))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

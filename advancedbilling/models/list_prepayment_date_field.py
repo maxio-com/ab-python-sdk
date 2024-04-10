@@ -8,9 +8,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 
-class ListSubscriptionGroupPrepaymentDateField(object):
+class ListPrepaymentDateField(object):
 
-    """Implementation of the 'List Subscription Group Prepayment Date Field' enum.
+    """Implementation of the 'List Prepayment Date Field' enum.
 
     TODO: type enum description here.
 

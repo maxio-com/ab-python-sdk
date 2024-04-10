@@ -132,52 +132,13 @@ class CouponsController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    filter_date_field -- BasicDateField -- The type of filter
-                        you would like to apply to your search. Use in query
-                        `filter[date_field]=created_at`.
-                    filter_end_date -- date -- The end date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns coupons with a timestamp up to and including
-                        11:59:59PM in your site’s time zone on the date
-                        specified. Use in query
-                        `filter[date_field]=2011-12-15`.
-                    filter_end_datetime -- datetime -- The end date and time
-                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns coupons with a timestamp at or
-                        before exact time provided in query. You can specify
-                        timezone in query - otherwise your site's time zone
-                        will be used. If provided, this parameter will be used
-                        instead of end_date. Use in query
-                        `?filter[end_datetime]=2011-12-1T10:15:30+01:00`.
-                    filter_start_date -- date -- The start date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns coupons with a timestamp at or after midnight
-                        (12:00:00 AM) in your site’s time zone on the date
-                        specified. Use in query
-                        `filter[start_date]=2011-12-17`.
-                    filter_start_datetime -- datetime -- The start date and
-                        time (format YYYY-MM-DD HH:MM:SS) with which to filter
-                        the date_field. Returns coupons with a timestamp at or
-                        after exact time provided in query. You can specify
-                        timezone in query - otherwise your site's time zone
-                        will be used. If provided, this parameter will be used
-                        instead of start_date. Use in query
-                        `filter[start_datetime]=2011-12-19T10:15:30+01:00`.
-                    filter_ids -- List[int] -- Allows fetching coupons with
-                        matching id based on provided values. Use in query
-                        `filter[ids]=1,2,3`.
-                    filter_codes -- List[str] -- Allows fetching coupons with
-                        matching codes based on provided values. Use in query
-                        `filter[codes]=free,free_trial`.
+                    filter -- ListCouponsFilter -- Filter to use for List
+                        Coupons operations
                     currency_prices -- bool -- When fetching coupons, if you
                         have defined multiple currencies at the site level,
                         you can optionally pass the `?currency_prices=true`
                         query param to include an array of currency price data
                         in the response. Use in query `currency_prices=true`.
-                    filter_use_site_exchange_rate -- bool -- Allows fetching
-                        coupons with matching use_site_exchange_rate based on
-                        provided value. Use in query
-                        `filter[use_site_exchange_rate]=true`.
 
         Returns:
             List[CouponResponse]: Response from the API. OK
@@ -206,32 +167,11 @@ class CouponsController(BaseController):
                          .key('per_page')
                          .value(options.get('per_page', None)))
             .query_param(Parameter()
-                         .key('filter[date_field]')
-                         .value(options.get('filter_date_field', None)))
-            .query_param(Parameter()
-                         .key('filter[end_date]')
-                         .value(options.get('filter_end_date', None)))
-            .query_param(Parameter()
-                         .key('filter[end_datetime]')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_end_datetime', None))))
-            .query_param(Parameter()
-                         .key('filter[start_date]')
-                         .value(options.get('filter_start_date', None)))
-            .query_param(Parameter()
-                         .key('filter[start_datetime]')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_start_datetime', None))))
-            .query_param(Parameter()
-                         .key('filter[ids]')
-                         .value(options.get('filter_ids', None)))
-            .query_param(Parameter()
-                         .key('filter[codes]')
-                         .value(options.get('filter_codes', None)))
+                         .key('filter')
+                         .value(options.get('filter', None)))
             .query_param(Parameter()
                          .key('currency_prices')
                          .value(options.get('currency_prices', None)))
-            .query_param(Parameter()
-                         .key('filter[use_site_exchange_rate]')
-                         .value(options.get('filter_use_site_exchange_rate', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -492,91 +432,13 @@ class CouponsController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    date_field -- BasicDateField -- The field was deprecated:
-                        on January 20, 2022. We recommend using
-                        filter[date_field] instead to achieve the same result.
-                        The type of filter you would like to apply to your
-                        search.
-                    start_date -- date -- The field was deprecated: on January
-                        20, 2022. We recommend using filter[start_date]
-                        instead to achieve the same result. The start date
-                        (format YYYY-MM-DD) with which to filter the
-                        date_field. Returns coupons with a timestamp at or
-                        after midnight (12:00:00 AM) in your site’s time zone
-                        on the date specified.
-                    end_date -- date -- The field was deprecated: on January
-                        20, 2022. We recommend using filter[end_date] instead
-                        to achieve the same result. The end date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns coupons with a timestamp up to and including
-                        11:59:59PM in your site’s time zone on the date
-                        specified.
-                    start_datetime -- datetime -- The field was deprecated: on
-                        January 20, 2022. We recommend using
-                        filter[start_datetime] instead to achieve the same
-                        result. The start date and time (format YYYY-MM-DD
-                        HH:MM:SS) with which to filter the date_field. Returns
-                        coupons with a timestamp at or after exact time
-                        provided in query. You can specify timezone in query -
-                        otherwise your site's time zone will be used. If
-                        provided, this parameter will be used instead of
-                        start_date.
-                    end_datetime -- datetime -- The field was deprecated: on
-                        January 20, 2022. We recommend using
-                        filter[end_datetime] instead to achieve the same
-                        result. The end date and time (format YYYY-MM-DD
-                        HH:MM:SS) with which to filter the date_field. Returns
-                        coupons with a timestamp at or before exact time
-                        provided in query. You can specify timezone in query -
-                        otherwise your site's time zone will be used. If
-                        provided, this parameter will be used instead of
-                        end_date.
-                    filter_ids -- List[int] -- Allows fetching coupons with
-                        matching id based on provided values. Use in query
-                        `filter[ids]=1,2,3`.
-                    filter_codes -- List[str] -- Allows fetching coupons with
-                        matching code based on provided values. Use in query
-                        `filter[ids]=1,2,3`.
+                    filter -- ListCouponsFilter -- Filter to use for List
+                        Coupons operations
                     currency_prices -- bool -- When fetching coupons, if you
                         have defined multiple currencies at the site level,
                         you can optionally pass the `?currency_prices=true`
                         query param to include an array of currency price data
                         in the response. Use in query `currency_prices=true`.
-                    filter_end_date -- date -- The end date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns coupons with a timestamp up to and including
-                        11:59:59PM in your site’s time zone on the date
-                        specified. Use in query
-                        `filter[end_date]=2011-12-17`.
-                    filter_end_datetime -- datetime -- The end date and time
-                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns coupons with a timestamp at or
-                        before exact time provided in query. You can specify
-                        timezone in query - otherwise your site's time zone
-                        will be used. If provided, this parameter will be used
-                        instead of end_date. Use in query
-                        `filter[end_datetime]=2011-12-19T10:15:30+01:00`.
-                    filter_start_date -- date -- The start date (format
-                        YYYY-MM-DD) with which to filter the date_field.
-                        Returns coupons with a timestamp at or after midnight
-                        (12:00:00 AM) in your site’s time zone on the date
-                        specified. Use in query
-                        `filter[start_date]=2011-12-19`.
-                    filter_start_datetime -- datetime -- The start date and
-                        time (format YYYY-MM-DD HH:MM:SS) with which to filter
-                        the date_field. Returns coupons with a timestamp at or
-                        after exact time provided in query. You can specify
-                        timezone in query - otherwise your site's time zone
-                        will be used. If provided, this parameter will be used
-                        instead of start_date. Use in query
-                        `filter[start_datetime]=2011-12-19T10:15:30+01:00`.
-                    filter_date_field -- BasicDateField -- The type of filter
-                        you would like to apply to your search. Use in query
-                        `filter[date_field]=updated_at`.
-                    filter_use_site_exchange_rate -- bool -- Allows fetching
-                        coupons with matching use_site_exchange_rate based on
-                        provided value. Use in query
-                        `filter[use_site_exchange_rate]=true`.
 
         Returns:
             List[CouponResponse]: Response from the API. OK
@@ -600,47 +462,11 @@ class CouponsController(BaseController):
                          .key('per_page')
                          .value(options.get('per_page', None)))
             .query_param(Parameter()
-                         .key('date_field')
-                         .value(options.get('date_field', None)))
-            .query_param(Parameter()
-                         .key('start_date')
-                         .value(options.get('start_date', None)))
-            .query_param(Parameter()
-                         .key('end_date')
-                         .value(options.get('end_date', None)))
-            .query_param(Parameter()
-                         .key('start_datetime')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('start_datetime', None))))
-            .query_param(Parameter()
-                         .key('end_datetime')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('end_datetime', None))))
-            .query_param(Parameter()
-                         .key('filter[ids]')
-                         .value(options.get('filter_ids', None)))
-            .query_param(Parameter()
-                         .key('filter[codes]')
-                         .value(options.get('filter_codes', None)))
+                         .key('filter')
+                         .value(options.get('filter', None)))
             .query_param(Parameter()
                          .key('currency_prices')
                          .value(options.get('currency_prices', None)))
-            .query_param(Parameter()
-                         .key('filter[end_date]')
-                         .value(options.get('filter_end_date', None)))
-            .query_param(Parameter()
-                         .key('filter[end_datetime]')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_end_datetime', None))))
-            .query_param(Parameter()
-                         .key('filter[start_date]')
-                         .value(options.get('filter_start_date', None)))
-            .query_param(Parameter()
-                         .key('filter[start_datetime]')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('filter_start_datetime', None))))
-            .query_param(Parameter()
-                         .key('filter[date_field]')
-                         .value(options.get('filter_date_field', None)))
-            .query_param(Parameter()
-                         .key('filter[use_site_exchange_rate]')
-                         .value(options.get('filter_use_site_exchange_rate', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
