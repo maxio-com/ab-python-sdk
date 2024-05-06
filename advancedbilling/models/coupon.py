@@ -38,8 +38,8 @@ class Coupon(object):
         archived_at (datetime): TODO: type description here.
         conversion_limit (str): TODO: type description here.
         stackable (bool): TODO: type description here.
-        compounding_strategy (CompoundingStrategy | None): TODO: type
-            description here.
+        compounding_strategy (CompoundingStrategy): TODO: type description
+            here.
         use_site_exchange_rate (bool): TODO: type description here.
         created_at (datetime): TODO: type description here.
         updated_at (datetime): TODO: type description here.
@@ -131,6 +131,7 @@ class Coupon(object):
         'duration_interval_span',
         'archived_at',
         'conversion_limit',
+        'compounding_strategy',
     ]
 
     def __init__(self,
@@ -246,7 +247,6 @@ class Coupon(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if dictionary is None:
             return None
@@ -279,7 +279,7 @@ class Coupon(object):
             archived_at = APIHelper.SKIP
         conversion_limit = dictionary.get("conversion_limit") if "conversion_limit" in dictionary.keys() else APIHelper.SKIP
         stackable = dictionary.get("stackable") if "stackable" in dictionary.keys() else APIHelper.SKIP
-        compounding_strategy = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CouponCompoundingStrategy'), dictionary.get('compounding_strategy'), False) if dictionary.get('compounding_strategy') is not None else APIHelper.SKIP
+        compounding_strategy = dictionary.get("compounding_strategy") if "compounding_strategy" in dictionary.keys() else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP

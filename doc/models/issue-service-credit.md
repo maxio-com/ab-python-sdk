@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `amount` | float \| str | Required | This is a container for one-of cases. |
-| `memo` | `str` | Required | - |
+| `memo` | `str` | Optional | - |
 
 ## Example (as JSON)
 

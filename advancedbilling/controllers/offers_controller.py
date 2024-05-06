@@ -50,7 +50,7 @@ class OffersController(BaseController):
             body (CreateOfferRequest, optional): TODO: type description here.
 
         Returns:
-            OfferResponse: Response from the API. OK
+            OfferResponse: Response from the API. Created
 
         Raises:
             APIException: When an error occurs while fetching the data from

@@ -45,8 +45,8 @@ class ListPricePointsFilter(object):
             matching type. Use in query: `filter[type]=custom,catalog`.
         ids (List[int]): Allows fetching price points with matching id based
             on provided values. Use in query: `filter[ids]=1,2,3`.
-        archived_at (IncludeNotNull): Allows fetching price points only if
-            archived_at is present or not. Use in query:
+        archived_at (IncludeNullOrNotNull): Allows fetching price points only
+            if archived_at is present or not. Use in query:
             `filter[archived_at]=not_null`.
 
     """

@@ -11,7 +11,6 @@ __all__ = [
     'event_based_billing_segment_errors_exception',
     'product_price_point_error_response_exception',
     'proforma_bad_request_error_response_exception',
-    'refund_prepayment_aggregated_errors_response_exception',
     'refund_prepayment_base_errors_response_exception',
     'single_error_response_exception',
     'single_string_error_response_exception',

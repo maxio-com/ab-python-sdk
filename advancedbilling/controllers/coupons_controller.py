@@ -64,7 +64,7 @@ class CouponsController(BaseController):
                 here.
 
         Returns:
-            CouponResponse: Response from the API. OK
+            CouponResponse: Response from the API. Created
 
         Raises:
             APIException: When an error occurs while fetching the data from

@@ -102,6 +102,7 @@ class ComponentPricePoint(object):
     ]
 
     _nullables = [
+        'handle',
         'archived_at',
         'interval',
         'interval_unit',
@@ -192,7 +193,7 @@ class ComponentPricePoint(object):
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else APIHelper.SKIP
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
-        handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
+        handle = dictionary.get("handle") if "handle" in dictionary.keys() else APIHelper.SKIP
         if 'archived_at' in dictionary.keys():
             archived_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("archived_at")).datetime if dictionary.get("archived_at") else None
         else:

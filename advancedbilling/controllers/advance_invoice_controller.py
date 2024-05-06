@@ -32,7 +32,9 @@ class AdvanceInvoiceController(BaseController):
         """Does a POST request to /subscriptions/{subscription_id}/advance_invoice/issue.json.
 
         Generate an invoice in advance for a subscription's next renewal date.
-        [Please see our docs]($m/Invoice) for more information on advance
+        [Please see our
+        docs](https://maxio-chargify.zendesk.com/hc/en-us/articles/540481106254
+        1-Issue-Invoice-In-Advance  ) for more information on advance
         invoices, including eligibility on generating one; for the most part,
         they function like any other invoice, except they are issued early and
         have special behavior upon being voided.

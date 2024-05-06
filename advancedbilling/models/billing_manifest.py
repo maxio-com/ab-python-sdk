@@ -54,6 +54,12 @@ class BillingManifest(object):
         'existing_balance_in_cents',
     ]
 
+    _nullables = [
+        'start_date',
+        'end_date',
+        'period_type',
+    ]
+
     def __init__(self,
                  line_items=APIHelper.SKIP,
                  total_in_cents=APIHelper.SKIP,
@@ -118,9 +124,15 @@ class BillingManifest(object):
         total_discount_in_cents = dictionary.get("total_discount_in_cents") if dictionary.get("total_discount_in_cents") else APIHelper.SKIP
         total_tax_in_cents = dictionary.get("total_tax_in_cents") if dictionary.get("total_tax_in_cents") else APIHelper.SKIP
         subtotal_in_cents = dictionary.get("subtotal_in_cents") if dictionary.get("subtotal_in_cents") else APIHelper.SKIP
-        start_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("start_date")).datetime if dictionary.get("start_date") else APIHelper.SKIP
-        end_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("end_date")).datetime if dictionary.get("end_date") else APIHelper.SKIP
-        period_type = dictionary.get("period_type") if dictionary.get("period_type") else APIHelper.SKIP
+        if 'start_date' in dictionary.keys():
+            start_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("start_date")).datetime if dictionary.get("start_date") else None
+        else:
+            start_date = APIHelper.SKIP
+        if 'end_date' in dictionary.keys():
+            end_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("end_date")).datetime if dictionary.get("end_date") else None
+        else:
+            end_date = APIHelper.SKIP
+        period_type = dictionary.get("period_type") if "period_type" in dictionary.keys() else APIHelper.SKIP
         existing_balance_in_cents = dictionary.get("existing_balance_in_cents") if dictionary.get("existing_balance_in_cents") else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():

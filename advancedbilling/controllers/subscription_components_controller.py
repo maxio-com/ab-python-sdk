@@ -145,9 +145,9 @@ class SubscriptionComponentsController(BaseController):
                         timezone in query - otherwise your site''s time zone
                         will be used. If provided, this parameter will be used
                         instead of start_date.
-                    include -- ListSubscriptionComponentsInclude -- Allows
-                        including additional data in the response. Use in
-                        query `include=subscription`.
+                    include -- List[ListSubscriptionComponentsInclude] --
+                        Allows including additional data in the response. Use
+                        in query `include=subscription,historic_usages`.
 
         Returns:
             List[SubscriptionComponentResponse]: Response from the API. OK
@@ -1313,7 +1313,7 @@ class SubscriptionComponentsController(BaseController):
                         `product_family_ids=1,2,3`.
                     include -- ListSubscriptionComponentsInclude -- Allows
                         including additional data in the response. Use in
-                        query `include=subscription`.
+                        query `include=subscription,historic_usages`.
 
         Returns:
             ListSubscriptionComponentsResponse: Response from the API. OK

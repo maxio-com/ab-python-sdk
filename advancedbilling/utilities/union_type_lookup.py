@@ -13,7 +13,6 @@ from advancedbilling.models.apply_payment_event_data import ApplyPaymentEventDat
 from advancedbilling.models.bank_account_payment_profile import BankAccountPaymentProfile
 from advancedbilling.models.change_invoice_collection_method_event_data import ChangeInvoiceCollectionMethodEventData
 from advancedbilling.models.component_allocation_change import ComponentAllocationChange
-from advancedbilling.models.compounding_strategy import CompoundingStrategy
 from advancedbilling.models.create_component_price_point import CreateComponentPricePoint
 from advancedbilling.models.create_metafield import CreateMetafield
 from advancedbilling.models.create_or_update_flat_amount_coupon import CreateOrUpdateFlatAmountCoupon
@@ -40,7 +39,6 @@ from advancedbilling.models.pending_cancellation_change import PendingCancellati
 from advancedbilling.models.prepaid_subscription_balance_changed import PrepaidSubscriptionBalanceChanged
 from advancedbilling.models.prepaid_usage import PrepaidUsage
 from advancedbilling.models.prepayment_account_balance_changed import PrepaymentAccountBalanceChanged
-from advancedbilling.models.price_point_type import PricePointType
 from advancedbilling.models.proforma_invoice_issued import ProformaInvoiceIssued
 from advancedbilling.models.refund_consolidated_invoice import RefundConsolidatedInvoice
 from advancedbilling.models.refund_invoice import RefundInvoice
@@ -228,14 +226,6 @@ class UnionTypeLookUp:
             [
                 LeafType(str),
                 LeafType(int)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'CouponCompoundingStrategy': AnyOf(
-            [
-                LeafType(CompoundingStrategy)
             ],
             Context.create(
                is_optional=True
@@ -780,14 +770,6 @@ class UnionTypeLookUp:
             [
                 LeafType(int),
                 LeafType(str)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'SubscriptionComponentPricePointType': OneOf(
-            [
-                LeafType(PricePointType)
             ],
             Context.create(
                is_optional=True

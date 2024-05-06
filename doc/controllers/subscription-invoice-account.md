@@ -213,8 +213,7 @@ subscription_id = 222
 
 body = IssueServiceCreditRequest(
     service_credit=IssueServiceCredit(
-        amount='1',
-        memo='Courtesy credit'
+        amount='1'
     )
 )
 
@@ -236,6 +235,12 @@ print(result)
   "memo": "Credit to group account"
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | `APIException` |
 
 
 # Deduct Service Credit
@@ -282,7 +287,7 @@ print(result)
 
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+| 422 | Unprocessable Entity (WebDAV) | `APIException` |
 
 
 # Refund Prepayment
@@ -303,7 +308,7 @@ def refund_prepayment(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `prepayment_id` | `str` | Template, Required | id of prepayment |
+| `prepayment_id` | `long\|int` | Template, Required | id of prepayment |
 | `body` | [`RefundPrepaymentRequest`](../../doc/models/refund-prepayment-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -315,7 +320,7 @@ def refund_prepayment(self,
 ```python
 subscription_id = 222
 
-prepayment_id = 'prepayment_id8'
+prepayment_id = 228
 
 result = subscription_invoice_account_controller.refund_prepayment(
     subscription_id,
@@ -330,5 +335,5 @@ print(result)
 |  --- | --- | --- |
 | 400 | Bad Request | [`RefundPrepaymentBaseErrorsResponseException`](../../doc/models/refund-prepayment-base-errors-response-exception.md) |
 | 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity | [`RefundPrepaymentAggregatedErrorsResponseException`](../../doc/models/refund-prepayment-aggregated-errors-response-exception.md) |
+| 422 | Unprocessable Entity | `APIException` |
 

@@ -42,6 +42,10 @@ class SubscriptionGroupPrepaymentResponse(object):
         'memo',
     ]
 
+    _nullables = [
+        'memo',
+    ]
+
     def __init__(self,
                  id=APIHelper.SKIP,
                  amount_in_cents=APIHelper.SKIP,
@@ -89,7 +93,7 @@ class SubscriptionGroupPrepaymentResponse(object):
         amount_in_cents = dictionary.get("amount_in_cents") if dictionary.get("amount_in_cents") else APIHelper.SKIP
         ending_balance_in_cents = dictionary.get("ending_balance_in_cents") if dictionary.get("ending_balance_in_cents") else APIHelper.SKIP
         entry_type = dictionary.get("entry_type") if dictionary.get("entry_type") else APIHelper.SKIP
-        memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
+        memo = dictionary.get("memo") if "memo" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:

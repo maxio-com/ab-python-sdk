@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.historic_usage import HistoricUsage
 from advancedbilling.models.subscription_component_subscription import SubscriptionComponentSubscription
 
 
@@ -44,8 +45,7 @@ class SubscriptionComponent(object):
         archived_at (datetime): TODO: type description here.
         price_point_id (int): TODO: type description here.
         price_point_handle (str): TODO: type description here.
-        price_point_type (PricePointType | None): TODO: type description
-            here.
+        price_point_type (PricePointType): TODO: type description here.
         price_point_name (str): TODO: type description here.
         product_family_id (int): TODO: type description here.
         product_family_handle (str): TODO: type description here.
@@ -56,6 +56,7 @@ class SubscriptionComponent(object):
         allow_fractional_quantities (bool): TODO: type description here.
         subscription (SubscriptionComponentSubscription): An optional object,
             will be returned if provided `include=subscription` query param.
+        historic_usages (List[HistoricUsage]): TODO: type description here.
         display_on_hosted_page (bool): TODO: type description here.
         interval (int): The numerical interval. i.e. an interval of '30'
             coupled with an interval_unit of day would mean this component
@@ -97,6 +98,7 @@ class SubscriptionComponent(object):
         "description": 'description',
         "allow_fractional_quantities": 'allow_fractional_quantities',
         "subscription": 'subscription',
+        "historic_usages": 'historic_usages',
         "display_on_hosted_page": 'display_on_hosted_page',
         "interval": 'interval',
         "interval_unit": 'interval_unit'
@@ -131,6 +133,7 @@ class SubscriptionComponent(object):
         'description',
         'allow_fractional_quantities',
         'subscription',
+        'historic_usages',
         'display_on_hosted_page',
         'interval',
         'interval_unit',
@@ -144,6 +147,7 @@ class SubscriptionComponent(object):
         'archived_at',
         'price_point_id',
         'price_point_handle',
+        'price_point_type',
         'price_point_name',
         'use_site_exchange_rate',
         'description',
@@ -178,6 +182,7 @@ class SubscriptionComponent(object):
                  description=APIHelper.SKIP,
                  allow_fractional_quantities=APIHelper.SKIP,
                  subscription=APIHelper.SKIP,
+                 historic_usages=APIHelper.SKIP,
                  display_on_hosted_page=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
                  interval_unit=APIHelper.SKIP,
@@ -241,6 +246,8 @@ class SubscriptionComponent(object):
             self.allow_fractional_quantities = allow_fractional_quantities 
         if subscription is not APIHelper.SKIP:
             self.subscription = subscription 
+        if historic_usages is not APIHelper.SKIP:
+            self.historic_usages = historic_usages 
         if display_on_hosted_page is not APIHelper.SKIP:
             self.display_on_hosted_page = display_on_hosted_page 
         if interval is not APIHelper.SKIP:
@@ -292,7 +299,7 @@ class SubscriptionComponent(object):
             archived_at = APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if "price_point_id" in dictionary.keys() else APIHelper.SKIP
         price_point_handle = dictionary.get("price_point_handle") if "price_point_handle" in dictionary.keys() else APIHelper.SKIP
-        price_point_type = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionComponentPricePointType'), dictionary.get('price_point_type'), False) if dictionary.get('price_point_type') is not None else APIHelper.SKIP
+        price_point_type = dictionary.get("price_point_type") if "price_point_type" in dictionary.keys() else APIHelper.SKIP
         price_point_name = dictionary.get("price_point_name") if "price_point_name" in dictionary.keys() else APIHelper.SKIP
         product_family_id = dictionary.get("product_family_id") if dictionary.get("product_family_id") else APIHelper.SKIP
         product_family_handle = dictionary.get("product_family_handle") if dictionary.get("product_family_handle") else APIHelper.SKIP
@@ -302,6 +309,11 @@ class SubscriptionComponent(object):
         description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
         subscription = SubscriptionComponentSubscription.from_dictionary(dictionary.get('subscription')) if 'subscription' in dictionary.keys() else APIHelper.SKIP
+        historic_usages = None
+        if dictionary.get('historic_usages') is not None:
+            historic_usages = [HistoricUsage.from_dictionary(x) for x in dictionary.get('historic_usages')]
+        else:
+            historic_usages = APIHelper.SKIP
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
@@ -338,6 +350,7 @@ class SubscriptionComponent(object):
                    description,
                    allow_fractional_quantities,
                    subscription,
+                   historic_usages,
                    display_on_hosted_page,
                    interval,
                    interval_unit,

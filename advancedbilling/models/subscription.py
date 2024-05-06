@@ -368,13 +368,17 @@ class Subscription(object):
     ]
 
     _nullables = [
+        'current_period_ends_at',
+        'next_assessment_at',
         'trial_started_at',
         'trial_ended_at',
+        'activated_at',
         'expires_at',
         'cancellation_message',
         'cancellation_method',
         'cancel_at_end_of_period',
         'canceled_at',
+        'current_period_started_at',
         'delayed_cancel_at',
         'coupon_code',
         'snap_day',
@@ -398,6 +402,7 @@ class Subscription(object):
         'receives_invoice_emails',
         'locale',
         'scheduled_cancellation_at',
+        'prepaid_configuration',
     ]
 
     def __init__(self,
@@ -619,8 +624,14 @@ class Subscription(object):
         total_revenue_in_cents = dictionary.get("total_revenue_in_cents") if dictionary.get("total_revenue_in_cents") else APIHelper.SKIP
         product_price_in_cents = dictionary.get("product_price_in_cents") if dictionary.get("product_price_in_cents") else APIHelper.SKIP
         product_version_number = dictionary.get("product_version_number") if dictionary.get("product_version_number") else APIHelper.SKIP
-        current_period_ends_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("current_period_ends_at")).datetime if dictionary.get("current_period_ends_at") else APIHelper.SKIP
-        next_assessment_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_assessment_at")).datetime if dictionary.get("next_assessment_at") else APIHelper.SKIP
+        if 'current_period_ends_at' in dictionary.keys():
+            current_period_ends_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("current_period_ends_at")).datetime if dictionary.get("current_period_ends_at") else None
+        else:
+            current_period_ends_at = APIHelper.SKIP
+        if 'next_assessment_at' in dictionary.keys():
+            next_assessment_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_assessment_at")).datetime if dictionary.get("next_assessment_at") else None
+        else:
+            next_assessment_at = APIHelper.SKIP
         if 'trial_started_at' in dictionary.keys():
             trial_started_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("trial_started_at")).datetime if dictionary.get("trial_started_at") else None
         else:
@@ -629,7 +640,10 @@ class Subscription(object):
             trial_ended_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("trial_ended_at")).datetime if dictionary.get("trial_ended_at") else None
         else:
             trial_ended_at = APIHelper.SKIP
-        activated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("activated_at")).datetime if dictionary.get("activated_at") else APIHelper.SKIP
+        if 'activated_at' in dictionary.keys():
+            activated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("activated_at")).datetime if dictionary.get("activated_at") else None
+        else:
+            activated_at = APIHelper.SKIP
         if 'expires_at' in dictionary.keys():
             expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else None
         else:
@@ -643,7 +657,10 @@ class Subscription(object):
             canceled_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("canceled_at")).datetime if dictionary.get("canceled_at") else None
         else:
             canceled_at = APIHelper.SKIP
-        current_period_started_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("current_period_started_at")).datetime if dictionary.get("current_period_started_at") else APIHelper.SKIP
+        if 'current_period_started_at' in dictionary.keys():
+            current_period_started_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("current_period_started_at")).datetime if dictionary.get("current_period_started_at") else None
+        else:
+            current_period_started_at = APIHelper.SKIP
         previous_state = dictionary.get("previous_state") if dictionary.get("previous_state") else APIHelper.SKIP
         signup_payment_id = dictionary.get("signup_payment_id") if dictionary.get("signup_payment_id") else APIHelper.SKIP
         signup_revenue = dictionary.get("signup_revenue") if dictionary.get("signup_revenue") else APIHelper.SKIP
@@ -704,7 +721,10 @@ class Subscription(object):
             scheduled_cancellation_at = APIHelper.SKIP
         credit_balance_in_cents = dictionary.get("credit_balance_in_cents") if dictionary.get("credit_balance_in_cents") else APIHelper.SKIP
         prepayment_balance_in_cents = dictionary.get("prepayment_balance_in_cents") if dictionary.get("prepayment_balance_in_cents") else APIHelper.SKIP
-        prepaid_configuration = PrepaidConfiguration.from_dictionary(dictionary.get('prepaid_configuration')) if 'prepaid_configuration' in dictionary.keys() else APIHelper.SKIP
+        if 'prepaid_configuration' in dictionary.keys():
+            prepaid_configuration = PrepaidConfiguration.from_dictionary(dictionary.get('prepaid_configuration')) if dictionary.get('prepaid_configuration') else None
+        else:
+            prepaid_configuration = APIHelper.SKIP
         self_service_page_token = dictionary.get("self_service_page_token") if dictionary.get("self_service_page_token") else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
