@@ -22,9 +22,7 @@ from advancedbilling.models.prepayments_response import PrepaymentsResponse
 from advancedbilling.models.service_credit import ServiceCredit
 from advancedbilling.models.prepayment_response import PrepaymentResponse
 from advancedbilling.exceptions.api_exception import APIException
-from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.refund_prepayment_base_errors_response_exception import RefundPrepaymentBaseErrorsResponseException
-from advancedbilling.exceptions.refund_prepayment_aggregated_errors_response_exception import RefundPrepaymentAggregatedErrorsResponseException
 
 
 class SubscriptionInvoiceAccountController(BaseController):
@@ -251,6 +249,7 @@ class SubscriptionInvoiceAccountController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ServiceCredit.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', APIException)
         ).execute()
 
     def deduct_service_credit(self,
@@ -311,7 +310,7 @@ class SubscriptionInvoiceAccountController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            prepayment_id (str): id of prepayment
+            prepayment_id (long|int): id of prepayment
             body (RefundPrepaymentRequest, optional): TODO: type description
                 here.
 
@@ -356,5 +355,5 @@ class SubscriptionInvoiceAccountController(BaseController):
             .deserialize_into(PrepaymentResponse.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
             .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', RefundPrepaymentBaseErrorsResponseException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', RefundPrepaymentAggregatedErrorsResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', APIException)
         ).execute()

@@ -17,6 +17,7 @@ class CreateOfferComponent(object):
 
     Attributes:
         component_id (int): TODO: type description here.
+        price_point_id (int): TODO: type description here.
         starting_quantity (int): TODO: type description here.
 
     """
@@ -24,16 +25,19 @@ class CreateOfferComponent(object):
     # Create a mapping from Model property names to API property names
     _names = {
         "component_id": 'component_id',
+        "price_point_id": 'price_point_id',
         "starting_quantity": 'starting_quantity'
     }
 
     _optionals = [
         'component_id',
+        'price_point_id',
         'starting_quantity',
     ]
 
     def __init__(self,
                  component_id=APIHelper.SKIP,
+                 price_point_id=APIHelper.SKIP,
                  starting_quantity=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the CreateOfferComponent class"""
@@ -41,6 +45,8 @@ class CreateOfferComponent(object):
         # Initialize members of the class
         if component_id is not APIHelper.SKIP:
             self.component_id = component_id 
+        if price_point_id is not APIHelper.SKIP:
+            self.price_point_id = price_point_id 
         if starting_quantity is not APIHelper.SKIP:
             self.starting_quantity = starting_quantity 
 
@@ -67,6 +73,7 @@ class CreateOfferComponent(object):
 
         # Extract variables from the dictionary
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
+        price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         starting_quantity = dictionary.get("starting_quantity") if dictionary.get("starting_quantity") else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
@@ -74,5 +81,6 @@ class CreateOfferComponent(object):
                 del dictionary[key]
         # Return an object of this model
         return cls(component_id,
+                   price_point_id,
                    starting_quantity,
                    dictionary)

@@ -46,7 +46,7 @@ class ProductsController(BaseController):
                 description here.
 
         Returns:
-            ProductResponse: Response from the API. OK
+            ProductResponse: Response from the API. Created
 
         Raises:
             APIException: When an error occurs while fetching the data from

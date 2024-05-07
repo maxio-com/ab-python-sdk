@@ -16,7 +16,10 @@ class ListSubscriptionComponentsInclude(object):
 
     Attributes:
         SUBSCRIPTION: TODO: type description here.
+        HISTORIC_USAGES: TODO: type description here.
 
     """
     SUBSCRIPTION = 'subscription'
+
+    HISTORIC_USAGES = 'historic_usages'
 

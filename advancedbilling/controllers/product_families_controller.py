@@ -169,7 +169,7 @@ class ProductFamiliesController(BaseController):
                 description here.
 
         Returns:
-            ProductFamilyResponse: Response from the API. OK
+            ProductFamilyResponse: Response from the API. Created
 
         Raises:
             APIException: When an error occurs while fetching the data from

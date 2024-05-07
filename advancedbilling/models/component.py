@@ -177,6 +177,7 @@ class Component(object):
         'default_price_point_id',
         'overage_prices',
         'prices',
+        'price_points_url',
         'tax_code',
         'upgrade_charge',
         'downgrade_credit',
@@ -339,7 +340,7 @@ class Component(object):
         else:
             prices = APIHelper.SKIP
         price_point_count = dictionary.get("price_point_count") if dictionary.get("price_point_count") else APIHelper.SKIP
-        price_points_url = dictionary.get("price_points_url") if dictionary.get("price_points_url") else APIHelper.SKIP
+        price_points_url = dictionary.get("price_points_url") if "price_points_url" in dictionary.keys() else APIHelper.SKIP
         default_price_point_name = dictionary.get("default_price_point_name") if dictionary.get("default_price_point_name") else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if "tax_code" in dictionary.keys() else APIHelper.SKIP
         recurring = dictionary.get("recurring") if "recurring" in dictionary.keys() else APIHelper.SKIP

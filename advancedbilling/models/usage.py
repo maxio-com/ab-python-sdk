@@ -53,6 +53,10 @@ class Usage(object):
         'subscription_id',
     ]
 
+    _nullables = [
+        'memo',
+    ]
+
     def __init__(self,
                  id=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
@@ -110,7 +114,7 @@ class Usage(object):
 
         # Extract variables from the dictionary
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
+        memo = dictionary.get("memo") if "memo" in dictionary.keys() else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UsageQuantity'), dictionary.get('quantity'), False) if dictionary.get('quantity') is not None else APIHelper.SKIP

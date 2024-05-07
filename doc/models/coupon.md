@@ -30,7 +30,7 @@
 | `archived_at` | `datetime` | Optional | - |
 | `conversion_limit` | `str` | Optional | - |
 | `stackable` | `bool` | Optional | - |
-| `compounding_strategy` | [Compounding Strategy](../../doc/models/compounding-strategy.md) \| None | Optional | This is a container for any-of cases. |
+| `compounding_strategy` | [`CompoundingStrategy`](../../doc/models/compounding-strategy.md) | Optional | - |
 | `use_site_exchange_rate` | `bool` | Optional | - |
 | `created_at` | `datetime` | Optional | - |
 | `updated_at` | `datetime` | Optional | - |
