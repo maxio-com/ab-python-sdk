@@ -26,7 +26,7 @@ class AuthorizeAssertCases:
                     "state": "TX",
                     "zip": "78015",
                     "country": "US",
-                    "name": "Developer Experience",
+                    "name": "Maxio Developer Experience",
                     "phone": "555 111 222",
                 },
                 "tax_configuration": {
