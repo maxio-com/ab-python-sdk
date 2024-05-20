@@ -61,6 +61,10 @@ class ApplyCreditNoteEventData(object):
         'applied_credit_notes',
     ]
 
+    _nullables = [
+        'memo',
+    ]
+
     def __init__(self,
                  uid=None,
                  credit_note_number=None,
@@ -120,7 +124,7 @@ class ApplyCreditNoteEventData(object):
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else None
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
         transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else APIHelper.SKIP
-        memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
+        memo = dictionary.get("memo") if "memo" in dictionary.keys() else APIHelper.SKIP
         role = dictionary.get("role") if dictionary.get("role") else APIHelper.SKIP
         consolidated_invoice = dictionary.get("consolidated_invoice") if "consolidated_invoice" in dictionary.keys() else APIHelper.SKIP
         applied_credit_notes = None

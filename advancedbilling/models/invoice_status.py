@@ -13,8 +13,8 @@ class InvoiceStatus(object):
     """Implementation of the 'Invoice Status' enum.
 
     The current status of the invoice. See [Invoice
-    Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494171#line
-    -item-breakdowns) for more.
+    Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/540507879425
+    3-Introduction-to-Invoices#invoice-statuses) for more.
 
     Attributes:
         DRAFT: TODO: type description here.

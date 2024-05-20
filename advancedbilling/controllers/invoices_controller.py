@@ -366,11 +366,11 @@ class InvoicesController(BaseController):
                         event from which you want to start the search. All the
                         events before the `since_date` timestamp are not
                         returned in the response.
-                    since_id -- int -- The ID of the event from which you want
-                        to start the search(ID is not included. e.g. if ID is
-                        set to 2, then all events with ID 3 and more will be
-                        shown) This parameter is not used if since_date is
-                        defined.
+                    since_id -- long|int -- The ID of the event from which you
+                        want to start the search(ID is not included. e.g. if
+                        ID is set to 2, then all events with ID 3 and more
+                        will be shown) This parameter is not used if
+                        since_date is defined.
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to

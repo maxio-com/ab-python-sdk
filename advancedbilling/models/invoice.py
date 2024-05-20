@@ -60,8 +60,8 @@ class Invoice(object):
             `"YYYY-MM-DD"`.
         status (InvoiceStatus): The current status of the invoice. See
             [Invoice
-            Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
-            171#line-item-breakdowns) for more.
+            Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
+            078794253-Introduction-to-Invoices#invoice-statuses) for more.
         role (InvoiceRole): TODO: type description here.
         parent_invoice_id (int): TODO: type description here.
         collection_method (CollectionMethod): The type of payment collection
