@@ -148,6 +148,10 @@ class SubscriptionComponentsController(BaseController):
                     include -- List[ListSubscriptionComponentsInclude] --
                         Allows including additional data in the response. Use
                         in query `include=subscription,historic_usages`.
+                    in_use -- bool -- If in_use is set to true, it returns
+                        only components that are currently in use. However, if
+                        it's set to false or not provided, it returns all
+                        components connected with the subscription.
 
         Returns:
             List[SubscriptionComponentResponse]: Response from the API. OK
@@ -202,6 +206,9 @@ class SubscriptionComponentsController(BaseController):
             .query_param(Parameter()
                          .key('include')
                          .value(options.get('include', None)))
+            .query_param(Parameter()
+                         .key('in_use')
+                         .value(options.get('in_use', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -931,10 +938,10 @@ class SubscriptionComponentsController(BaseController):
                     component_id -- int | str -- Either the Chargify id for
                         the component or the component's handle prefixed by
                         `handle:`
-                    since_id -- int -- Returns usages with an id greater than
+                    since_id -- long|int -- Returns usages with an id greater
+                        than or equal to the one specified
+                    max_id -- long|int -- Returns usages with an id less than
                         or equal to the one specified
-                    max_id -- int -- Returns usages with an id less than or
-                        equal to the one specified
                     since_date -- date -- Returns usages with a created_at
                         date greater than or equal to midnight (12:00 AM) on
                         the date specified.

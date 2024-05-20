@@ -111,10 +111,10 @@ class EventsController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    since_id -- int -- Returns events with an id greater than
+                    since_id -- long|int -- Returns events with an id greater
+                        than or equal to the one specified
+                    max_id -- long|int -- Returns events with an id less than
                         or equal to the one specified
-                    max_id -- int -- Returns events with an id less than or
-                        equal to the one specified
                     direction -- Direction -- The sort direction of the
                         returned events.
                     filter -- List[EventType] -- You can pass multiple event
@@ -236,10 +236,10 @@ class EventsController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    since_id -- int -- Returns events with an id greater than
+                    since_id -- long|int -- Returns events with an id greater
+                        than or equal to the one specified
+                    max_id -- long|int -- Returns events with an id less than
                         or equal to the one specified
-                    max_id -- int -- Returns events with an id less than or
-                        equal to the one specified
                     direction -- Direction -- The sort direction of the
                         returned events.
                     filter -- List[EventType] -- You can pass multiple event
@@ -322,10 +322,10 @@ class EventsController(BaseController):
                         The maximum allowed values is 200; any per_page value
                         over 200 will be changed to 200. Use in query
                         `per_page=200`.
-                    since_id -- int -- Returns events with an id greater than
+                    since_id -- long|int -- Returns events with an id greater
+                        than or equal to the one specified
+                    max_id -- long|int -- Returns events with an id less than
                         or equal to the one specified
-                    max_id -- int -- Returns events with an id less than or
-                        equal to the one specified
                     direction -- Direction -- The sort direction of the
                         returned events.
                     filter -- List[EventType] -- You can pass multiple event

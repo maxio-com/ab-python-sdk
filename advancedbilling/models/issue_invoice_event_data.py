@@ -30,13 +30,13 @@ class IssueInvoiceEventData(object):
             documentation](https://chargify.zendesk.com/hc/en-us/articles/44077
             46391835).
         from_status (InvoiceStatus): The status of the invoice before event
-            occurence. See [Invoice
-            Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
-            171#line-item-breakdowns) for more.
+            occurrence. See [Invoice
+            Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
+            078794253-Introduction-to-Invoices#invoice-statusess) for more.
         to_status (InvoiceStatus): The status of the invoice after event
-            occurence. See [Invoice
-            Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
-            171#line-item-breakdowns) for more.
+            occurrence. See [Invoice
+            Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
+            078794253-Introduction-to-Invoices#invoice-statusess) for more.
         due_amount (str): Amount due on the invoice, which is `total_amount -
             credit_amount - paid_amount`.
         total_amount (str): The invoice total, which is `subtotal_amount -

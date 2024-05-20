@@ -17,6 +17,7 @@ class CreateProductFamily(object):
 
     Attributes:
         name (str): TODO: type description here.
+        handle (str): TODO: type description here.
         description (str): TODO: type description here.
 
     """
@@ -24,27 +25,31 @@ class CreateProductFamily(object):
     # Create a mapping from Model property names to API property names
     _names = {
         "name": 'name',
+        "handle": 'handle',
         "description": 'description'
     }
 
     _optionals = [
-        'name',
+        'handle',
         'description',
     ]
 
     _nullables = [
+        'handle',
         'description',
     ]
 
     def __init__(self,
-                 name=APIHelper.SKIP,
+                 name=None,
+                 handle=APIHelper.SKIP,
                  description=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the CreateProductFamily class"""
 
         # Initialize members of the class
-        if name is not APIHelper.SKIP:
-            self.name = name 
+        self.name = name 
+        if handle is not APIHelper.SKIP:
+            self.handle = handle 
         if description is not APIHelper.SKIP:
             self.description = description 
 
@@ -70,7 +75,8 @@ class CreateProductFamily(object):
             return None
 
         # Extract variables from the dictionary
-        name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
+        name = dictionary.get("name") if dictionary.get("name") else None
+        handle = dictionary.get("handle") if "handle" in dictionary.keys() else APIHelper.SKIP
         description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
@@ -78,5 +84,6 @@ class CreateProductFamily(object):
                 del dictionary[key]
         # Return an object of this model
         return cls(name,
+                   handle,
                    description,
                    dictionary)

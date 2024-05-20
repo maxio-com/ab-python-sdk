@@ -11,7 +11,9 @@ from advancedbilling.models.apply_credit_note_event_data import ApplyCreditNoteE
 from advancedbilling.models.apply_debit_note_event_data import ApplyDebitNoteEventData
 from advancedbilling.models.apply_payment_event_data import ApplyPaymentEventData
 from advancedbilling.models.bank_account_payment_profile import BankAccountPaymentProfile
+from advancedbilling.models.change_chargeback_status_event_data import ChangeChargebackStatusEventData
 from advancedbilling.models.change_invoice_collection_method_event_data import ChangeInvoiceCollectionMethodEventData
+from advancedbilling.models.change_invoice_status_event_data import ChangeInvoiceStatusEventData
 from advancedbilling.models.component_allocation_change import ComponentAllocationChange
 from advancedbilling.models.create_component_price_point import CreateComponentPricePoint
 from advancedbilling.models.create_metafield import CreateMetafield
@@ -20,10 +22,14 @@ from advancedbilling.models.create_or_update_percentage_coupon import CreateOrUp
 from advancedbilling.models.create_prepaid_usage_component_price_point import CreatePrepaidUsageComponentPricePoint
 from advancedbilling.models.credit_account_balance_changed import CreditAccountBalanceChanged
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
+from advancedbilling.models.credit_note import CreditNote
 from advancedbilling.models.custom_field_value_change import CustomFieldValueChange
 from advancedbilling.models.customer_error import CustomerError
+from advancedbilling.models.debit_note import DebitNote
 from advancedbilling.models.dunning_step_reached import DunningStepReached
+from advancedbilling.models.failed_payment_event_data import FailedPaymentEventData
 from advancedbilling.models.group_settings import GroupSettings
+from advancedbilling.models.invoice import Invoice
 from advancedbilling.models.invoice_issued import InvoiceIssued
 from advancedbilling.models.issue_invoice_event_data import IssueInvoiceEventData
 from advancedbilling.models.item_price_point_changed import ItemPricePointChanged
@@ -543,7 +549,13 @@ class UnionTypeLookUp:
                 LeafType(RefundInvoiceEventData),
                 LeafType(RemovePaymentEventData),
                 LeafType(VoidInvoiceEventData),
-                LeafType(VoidRemainderEventData)
+                LeafType(VoidRemainderEventData),
+                LeafType(Invoice),
+                LeafType(ChangeInvoiceStatusEventData),
+                LeafType(FailedPaymentEventData),
+                LeafType(DebitNote),
+                LeafType(CreditNote),
+                LeafType(ChangeChargebackStatusEventData)
             ],
             Context.create(
                is_optional=True

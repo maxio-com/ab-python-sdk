@@ -24,6 +24,9 @@ class ApplyDebitNoteEventData(object):
         original_amount (str): The full, original amount of the debit note.
         applied_amount (str): The amount of the debit note applied to
             invoice.
+        memo (str): The debit note memo.
+        transaction_time (datetime): The time the debit note was applied, in
+            ISO 8601 format, i.e. "2019-06-07T17:20:06Z"
 
     """
 
@@ -32,14 +35,28 @@ class ApplyDebitNoteEventData(object):
         "debit_note_number": 'debit_note_number',
         "debit_note_uid": 'debit_note_uid',
         "original_amount": 'original_amount',
-        "applied_amount": 'applied_amount'
+        "applied_amount": 'applied_amount',
+        "memo": 'memo',
+        "transaction_time": 'transaction_time'
     }
+
+    _optionals = [
+        'memo',
+        'transaction_time',
+    ]
+
+    _nullables = [
+        'memo',
+        'transaction_time',
+    ]
 
     def __init__(self,
                  debit_note_number=None,
                  debit_note_uid=None,
                  original_amount=None,
                  applied_amount=None,
+                 memo=APIHelper.SKIP,
+                 transaction_time=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the ApplyDebitNoteEventData class"""
 
@@ -48,6 +65,10 @@ class ApplyDebitNoteEventData(object):
         self.debit_note_uid = debit_note_uid 
         self.original_amount = original_amount 
         self.applied_amount = applied_amount 
+        if memo is not APIHelper.SKIP:
+            self.memo = memo 
+        if transaction_time is not APIHelper.SKIP:
+            self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -75,6 +96,11 @@ class ApplyDebitNoteEventData(object):
         debit_note_uid = dictionary.get("debit_note_uid") if dictionary.get("debit_note_uid") else None
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else None
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
+        memo = dictionary.get("memo") if "memo" in dictionary.keys() else APIHelper.SKIP
+        if 'transaction_time' in dictionary.keys():
+            transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else None
+        else:
+            transaction_time = APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -84,6 +110,8 @@ class ApplyDebitNoteEventData(object):
                    debit_note_uid,
                    original_amount,
                    applied_amount,
+                   memo,
+                   transaction_time,
                    dictionary)
 
     @classmethod

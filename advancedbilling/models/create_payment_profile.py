@@ -94,10 +94,10 @@ class CreatePaymentProfile(object):
             of the bank. It becomes bank_code while passing via GoCardless
             API
         bank_account_number (str): (Required when creating with ACH,
-            GoCardless, Stripe BECS Direct Debit and bank_iban is blank) The
-            customerʼs bank account number
+            GoCardless, Stripe BECS or BACS Direct Debit, and bank_iban is
+            blank) The customerʼs bank account number
         bank_branch_code (str): (Optional when creating with GoCardless,
-            required with Stripe BECS Direct Debit) Branch code.
+            required with Stripe BECS or BACS Direct Debit) Branch/Sort code.
             Alternatively, an IBAN can be provided
         bank_account_type (BankAccountType): Defaults to checking
         bank_account_holder_type (BankAccountHolderType): Defaults to

@@ -61,7 +61,7 @@ class InvoiceAssertCases:
             "tax_amount": "0.0",
             "total_amount": "1530.0",
             "seller": {
-                "name": "Developer Experience",
+                "name": "Maxio Developer Experience",
                 "phone": "555 111 222",
                 "address": {
                     "city": "San Antonio",
