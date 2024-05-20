@@ -20,6 +20,7 @@ class InvoiceEventType(object):
         CREATE_CREDIT_NOTE: TODO: type description here.
         APPLY_PAYMENT: TODO: type description here.
         APPLY_DEBIT_NOTE: TODO: type description here.
+        CREATE_DEBIT_NOTE: TODO: type description here.
         REFUND_INVOICE: TODO: type description here.
         VOID_INVOICE: TODO: type description here.
         VOID_REMAINDER: TODO: type description here.
@@ -31,7 +32,7 @@ class InvoiceEventType(object):
         CHANGE_CHARGEBACK_STATUS: TODO: type description here.
 
     """
-    _all_values = ['issue_invoice', 'apply_credit_note', 'create_credit_note', 'apply_payment', 'apply_debit_note', 'refund_invoice', 'void_invoice', 'void_remainder', 'backport_invoice', 'change_invoice_status', 'change_invoice_collection_method', 'remove_payment', 'failed_payment', 'change_chargeback_status']
+    _all_values = ['issue_invoice', 'apply_credit_note', 'create_credit_note', 'apply_payment', 'apply_debit_note', 'create_debit_note', 'refund_invoice', 'void_invoice', 'void_remainder', 'backport_invoice', 'change_invoice_status', 'change_invoice_collection_method', 'remove_payment', 'failed_payment', 'change_chargeback_status']
     ISSUE_INVOICE = 'issue_invoice'
 
     APPLY_CREDIT_NOTE = 'apply_credit_note'
@@ -41,6 +42,8 @@ class InvoiceEventType(object):
     APPLY_PAYMENT = 'apply_payment'
 
     APPLY_DEBIT_NOTE = 'apply_debit_note'
+
+    CREATE_DEBIT_NOTE = 'create_debit_note'
 
     REFUND_INVOICE = 'refund_invoice'
 

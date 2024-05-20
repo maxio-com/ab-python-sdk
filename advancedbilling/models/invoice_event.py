@@ -17,15 +17,17 @@ class InvoiceEvent(object):
     TODO: type model description here.
 
     Attributes:
-        id (int): TODO: type description here.
+        id (long|int): TODO: type description here.
         event_type (InvoiceEventType): Invoice Event Type
         event_data (ApplyCreditNoteEventData | ApplyDebitNoteEventData |
             ApplyPaymentEventData | ChangeInvoiceCollectionMethodEventData |
             IssueInvoiceEventData | RefundInvoiceEventData |
             RemovePaymentEventData | VoidInvoiceEventData |
-            VoidRemainderEventData | None): The event data is the data that,
-            when combined with the command, results in the output invoice
-            found in the invoice field.
+            VoidRemainderEventData | Invoice | ChangeInvoiceStatusEventData |
+            FailedPaymentEventData | DebitNote | CreditNote |
+            ChangeChargebackStatusEventData | None): The event data is the
+            data that, when combined with the command, results in the output
+            invoice found in the invoice field.
         timestamp (datetime): TODO: type description here.
         invoice (Invoice): TODO: type description here.
 

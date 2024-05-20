@@ -19,8 +19,8 @@ class PaidInvoice(object):
         invoice_id (str): The uid of the paid invoice
         status (InvoiceStatus): The current status of the invoice. See
             [Invoice
-            Statuses](https://chargify.zendesk.com/hc/en-us/articles/4407737494
-            171#line-item-breakdowns) for more.
+            Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
+            078794253-Introduction-to-Invoices#invoice-statuses) for more.
         due_amount (str): The remaining due amount on the invoice
         paid_amount (str): The total amount paid on this invoice (including
             any prior payments)

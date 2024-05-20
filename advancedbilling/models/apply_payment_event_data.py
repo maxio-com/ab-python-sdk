@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.invoice_consolidation_level import InvoiceConsolidationLevel
 
 
 class ApplyPaymentEventData(object):
@@ -16,6 +17,8 @@ class ApplyPaymentEventData(object):
     Example schema for an `apply_payment` event
 
     Attributes:
+        consolidation_level (InvoiceConsolidationLevel): TODO: type
+            description here.
         memo (str): The payment memo
         original_amount (str): The full, original amount of the payment
             transaction as a string in full units. Incoming payments can be
@@ -45,6 +48,7 @@ class ApplyPaymentEventData(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
+        "consolidation_level": 'consolidation_level',
         "memo": 'memo',
         "original_amount": 'original_amount',
         "applied_amount": 'applied_amount',
@@ -71,6 +75,7 @@ class ApplyPaymentEventData(object):
     ]
 
     def __init__(self,
+                 consolidation_level=None,
                  memo=None,
                  original_amount=None,
                  applied_amount=None,
@@ -85,6 +90,7 @@ class ApplyPaymentEventData(object):
         """Constructor for the ApplyPaymentEventData class"""
 
         # Initialize members of the class
+        self.consolidation_level = consolidation_level 
         self.memo = memo 
         self.original_amount = original_amount 
         self.applied_amount = applied_amount 
@@ -124,6 +130,7 @@ class ApplyPaymentEventData(object):
             return None
 
         # Extract variables from the dictionary
+        consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else None
         memo = dictionary.get("memo") if dictionary.get("memo") else None
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else None
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
@@ -139,7 +146,8 @@ class ApplyPaymentEventData(object):
             if key in dictionary:
                 del dictionary[key]
         # Return an object of this model
-        return cls(memo,
+        return cls(consolidation_level,
+                   memo,
                    original_amount,
                    applied_amount,
                    transaction_time,
@@ -167,7 +175,8 @@ class ApplyPaymentEventData(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
+            return APIHelper.is_valid_type(value=dictionary.consolidation_level, type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.original_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.transaction_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
@@ -176,7 +185,8 @@ class ApplyPaymentEventData(object):
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
+        return APIHelper.is_valid_type(value=dictionary.get('consolidation_level'), type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('original_amount'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('transaction_time'), type_callable=lambda value: isinstance(value, str)) \
