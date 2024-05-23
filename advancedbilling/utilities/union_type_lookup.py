@@ -7,31 +7,31 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
-from advancedbilling.models.apply_credit_note_event_data import ApplyCreditNoteEventData
-from advancedbilling.models.apply_debit_note_event_data import ApplyDebitNoteEventData
-from advancedbilling.models.apply_payment_event_data import ApplyPaymentEventData
+from advancedbilling.models.apply_credit_note_event import ApplyCreditNoteEvent
+from advancedbilling.models.apply_debit_note_event import ApplyDebitNoteEvent
+from advancedbilling.models.apply_payment_event import ApplyPaymentEvent
+from advancedbilling.models.backport_invoice_event import BackportInvoiceEvent
 from advancedbilling.models.bank_account_payment_profile import BankAccountPaymentProfile
-from advancedbilling.models.change_chargeback_status_event_data import ChangeChargebackStatusEventData
-from advancedbilling.models.change_invoice_collection_method_event_data import ChangeInvoiceCollectionMethodEventData
-from advancedbilling.models.change_invoice_status_event_data import ChangeInvoiceStatusEventData
+from advancedbilling.models.change_chargeback_status_event import ChangeChargebackStatusEvent
+from advancedbilling.models.change_invoice_collection_method_event import ChangeInvoiceCollectionMethodEvent
+from advancedbilling.models.change_invoice_status_event import ChangeInvoiceStatusEvent
 from advancedbilling.models.component_allocation_change import ComponentAllocationChange
 from advancedbilling.models.create_component_price_point import CreateComponentPricePoint
+from advancedbilling.models.create_credit_note_event import CreateCreditNoteEvent
+from advancedbilling.models.create_debit_note_event import CreateDebitNoteEvent
 from advancedbilling.models.create_metafield import CreateMetafield
 from advancedbilling.models.create_or_update_flat_amount_coupon import CreateOrUpdateFlatAmountCoupon
 from advancedbilling.models.create_or_update_percentage_coupon import CreateOrUpdatePercentageCoupon
 from advancedbilling.models.create_prepaid_usage_component_price_point import CreatePrepaidUsageComponentPricePoint
 from advancedbilling.models.credit_account_balance_changed import CreditAccountBalanceChanged
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
-from advancedbilling.models.credit_note import CreditNote
 from advancedbilling.models.custom_field_value_change import CustomFieldValueChange
 from advancedbilling.models.customer_error import CustomerError
-from advancedbilling.models.debit_note import DebitNote
 from advancedbilling.models.dunning_step_reached import DunningStepReached
-from advancedbilling.models.failed_payment_event_data import FailedPaymentEventData
+from advancedbilling.models.failed_payment_event import FailedPaymentEvent
 from advancedbilling.models.group_settings import GroupSettings
-from advancedbilling.models.invoice import Invoice
 from advancedbilling.models.invoice_issued import InvoiceIssued
-from advancedbilling.models.issue_invoice_event_data import IssueInvoiceEventData
+from advancedbilling.models.issue_invoice_event import IssueInvoiceEvent
 from advancedbilling.models.item_price_point_changed import ItemPricePointChanged
 from advancedbilling.models.metered_usage import MeteredUsage
 from advancedbilling.models.payment_collection_method_changed import PaymentCollectionMethodChanged
@@ -48,9 +48,9 @@ from advancedbilling.models.prepayment_account_balance_changed import Prepayment
 from advancedbilling.models.proforma_invoice_issued import ProformaInvoiceIssued
 from advancedbilling.models.refund_consolidated_invoice import RefundConsolidatedInvoice
 from advancedbilling.models.refund_invoice import RefundInvoice
-from advancedbilling.models.refund_invoice_event_data import RefundInvoiceEventData
+from advancedbilling.models.refund_invoice_event import RefundInvoiceEvent
 from advancedbilling.models.refund_success import RefundSuccess
-from advancedbilling.models.remove_payment_event_data import RemovePaymentEventData
+from advancedbilling.models.remove_payment_event import RemovePaymentEvent
 from advancedbilling.models.resume_options import ResumeOptions
 from advancedbilling.models.snap_day import SnapDay
 from advancedbilling.models.subscription_group_members_array_error import SubscriptionGroupMembersArrayError
@@ -60,8 +60,8 @@ from advancedbilling.models.subscription_group_single_error import SubscriptionG
 from advancedbilling.models.subscription_product_change import SubscriptionProductChange
 from advancedbilling.models.subscription_state_change import SubscriptionStateChange
 from advancedbilling.models.update_metafield import UpdateMetafield
-from advancedbilling.models.void_invoice_event_data import VoidInvoiceEventData
-from advancedbilling.models.void_remainder_event_data import VoidRemainderEventData
+from advancedbilling.models.void_invoice_event import VoidInvoiceEvent
+from advancedbilling.models.void_remainder_event import VoidRemainderEvent
 from apimatic_core.types.union_types.any_of import AnyOf
 from apimatic_core.types.union_types.leaf_type import LeafType
 from apimatic_core.types.union_types.one_of import OneOf
@@ -136,6 +136,89 @@ class UnionTypeLookUp:
                 LeafType(str)
             ]
         ),
+        'Invoice-Event': AnyOf(
+            [
+                LeafType(ApplyCreditNoteEvent,
+                         Context.create(
+                             discriminator_value='apply_credit_note',
+                             discriminator='event_type'
+                         )),
+                LeafType(ApplyDebitNoteEvent,
+                         Context.create(
+                             discriminator_value='apply_debit_note',
+                             discriminator='event_type'
+                         )),
+                LeafType(ApplyPaymentEvent,
+                         Context.create(
+                             discriminator_value='apply_payment',
+                             discriminator='event_type'
+                         )),
+                LeafType(BackportInvoiceEvent,
+                         Context.create(
+                             discriminator_value='backport_invoice',
+                             discriminator='event_type'
+                         )),
+                LeafType(ChangeChargebackStatusEvent,
+                         Context.create(
+                             discriminator_value='change_chargeback_status',
+                             discriminator='event_type'
+                         )),
+                LeafType(ChangeInvoiceCollectionMethodEvent,
+                         Context.create(
+                             discriminator_value='change_invoice_collection_method',
+                             discriminator='event_type'
+                         )),
+                LeafType(ChangeInvoiceStatusEvent,
+                         Context.create(
+                             discriminator_value='change_invoice_status',
+                             discriminator='event_type'
+                         )),
+                LeafType(CreateCreditNoteEvent,
+                         Context.create(
+                             discriminator_value='create_credit_note',
+                             discriminator='event_type'
+                         )),
+                LeafType(CreateDebitNoteEvent,
+                         Context.create(
+                             discriminator_value='create_debit_note',
+                             discriminator='event_type'
+                         )),
+                LeafType(FailedPaymentEvent,
+                         Context.create(
+                             discriminator_value='failed_payment',
+                             discriminator='event_type'
+                         )),
+                LeafType(IssueInvoiceEvent,
+                         Context.create(
+                             discriminator_value='issue_invoice',
+                             discriminator='event_type'
+                         )),
+                LeafType(RefundInvoiceEvent,
+                         Context.create(
+                             discriminator_value='refund_invoice',
+                             discriminator='event_type'
+                         )),
+                LeafType(RemovePaymentEvent,
+                         Context.create(
+                             discriminator_value='remove_payment',
+                             discriminator='event_type'
+                         )),
+                LeafType(VoidInvoiceEvent,
+                         Context.create(
+                             discriminator_value='void_invoice',
+                             discriminator='event_type'
+                         )),
+                LeafType(VoidRemainderEvent,
+                         Context.create(
+                             discriminator_value='void_remainder',
+                             discriminator='event_type'
+                         ))
+            ],
+            Context.create(
+               is_array=True,
+               is_optional=True
+            )
+        ),
         'AddSubscriptionToAGroupGroup': OneOf(
             [
                 LeafType(GroupSettings),
@@ -180,6 +263,15 @@ class UnionTypeLookUp:
             Context.create(
                is_optional=True
             )
+        ),
+        'ApplyCreditNoteEventData1PaymentMethod': AnyOf(
+            [
+                LeafType(PaymentMethodApplePay),
+                LeafType(PaymentMethodBankAccount),
+                LeafType(PaymentMethodCreditCard),
+                LeafType(PaymentMethodExternal),
+                LeafType(PaymentMethodPaypal)
+            ]
         ),
         'Invoice-Event-Payment': AnyOf(
             [
@@ -537,40 +629,6 @@ class UnionTypeLookUp:
             ],
             Context.create(
                is_nullable=True
-            )
-        ),
-        'InvoiceEventEventData': AnyOf(
-            [
-                LeafType(ApplyCreditNoteEventData),
-                LeafType(ApplyDebitNoteEventData),
-                LeafType(ApplyPaymentEventData),
-                LeafType(ChangeInvoiceCollectionMethodEventData),
-                LeafType(IssueInvoiceEventData),
-                LeafType(RefundInvoiceEventData),
-                LeafType(RemovePaymentEventData),
-                LeafType(VoidInvoiceEventData),
-                LeafType(VoidRemainderEventData),
-                LeafType(Invoice),
-                LeafType(ChangeInvoiceStatusEventData),
-                LeafType(FailedPaymentEventData),
-                LeafType(DebitNote),
-                LeafType(CreditNote),
-                LeafType(ChangeChargebackStatusEventData)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'InvoiceEventDataPaymentMethod': AnyOf(
-            [
-                LeafType(PaymentMethodApplePay),
-                LeafType(PaymentMethodBankAccount),
-                LeafType(PaymentMethodCreditCard),
-                LeafType(PaymentMethodExternal),
-                LeafType(PaymentMethodPaypal)
-            ],
-            Context.create(
-               is_optional=True
             )
         ),
         'IssueServiceCreditAmount': OneOf(

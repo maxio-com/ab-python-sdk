@@ -6,7 +6,7 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.models.customer import Customer
+from advancedbilling.models.customer_1 import Customer1
 
 
 class CustomerResponse(object):
@@ -16,7 +16,7 @@ class CustomerResponse(object):
     TODO: type model description here.
 
     Attributes:
-        customer (Customer): TODO: type description here.
+        customer (Customer1): TODO: type description here.
 
     """
 
@@ -55,7 +55,7 @@ class CustomerResponse(object):
             return None
 
         # Extract variables from the dictionary
-        customer = Customer.from_dictionary(dictionary.get('customer')) if dictionary.get('customer') else None
+        customer = Customer1.from_dictionary(dictionary.get('customer')) if dictionary.get('customer') else None
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:

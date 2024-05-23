@@ -8,9 +8,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 
-class InvoiceRole1(object):
+class InvoiceRole2(object):
 
-    """Implementation of the 'Invoice Role1' enum.
+    """Implementation of the 'Invoice Role2' enum.
 
     The role of the credit note (e.g. 'general')
 

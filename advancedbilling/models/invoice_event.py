@@ -7,7 +7,8 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.invoice import Invoice
+from advancedbilling.models.apply_credit_note_event_data_1 import ApplyCreditNoteEventData1
+from advancedbilling.models.invoice_1 import Invoice1
 
 
 class InvoiceEvent(object):
@@ -18,58 +19,50 @@ class InvoiceEvent(object):
 
     Attributes:
         id (long|int): TODO: type description here.
-        event_type (InvoiceEventType): Invoice Event Type
-        event_data (ApplyCreditNoteEventData | ApplyDebitNoteEventData |
-            ApplyPaymentEventData | ChangeInvoiceCollectionMethodEventData |
-            IssueInvoiceEventData | RefundInvoiceEventData |
-            RemovePaymentEventData | VoidInvoiceEventData |
-            VoidRemainderEventData | Invoice | ChangeInvoiceStatusEventData |
-            FailedPaymentEventData | DebitNote | CreditNote |
-            ChangeChargebackStatusEventData | None): The event data is the
-            data that, when combined with the command, results in the output
-            invoice found in the invoice field.
         timestamp (datetime): TODO: type description here.
-        invoice (Invoice): TODO: type description here.
+        invoice (Invoice1): TODO: type description here.
+        event_type (str): TODO: type description here.
+        event_data (ApplyCreditNoteEventData1): Example schema for an
+            `apply_credit_note` event
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
         "id": 'id',
-        "event_type": 'event_type',
-        "event_data": 'event_data',
         "timestamp": 'timestamp',
-        "invoice": 'invoice'
+        "invoice": 'invoice',
+        "event_type": 'event_type',
+        "event_data": 'event_data'
     }
 
     _optionals = [
         'id',
-        'event_type',
-        'event_data',
         'timestamp',
         'invoice',
+        'event_type',
+        'event_data',
     ]
 
     def __init__(self,
                  id=APIHelper.SKIP,
-                 event_type=APIHelper.SKIP,
-                 event_data=APIHelper.SKIP,
                  timestamp=APIHelper.SKIP,
                  invoice=APIHelper.SKIP,
+                 event_type='Invoice Event',
+                 event_data=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the InvoiceEvent class"""
 
         # Initialize members of the class
         if id is not APIHelper.SKIP:
             self.id = id 
-        if event_type is not APIHelper.SKIP:
-            self.event_type = event_type 
-        if event_data is not APIHelper.SKIP:
-            self.event_data = event_data 
         if timestamp is not APIHelper.SKIP:
             self.timestamp = APIHelper.apply_datetime_converter(timestamp, APIHelper.RFC3339DateTime) if timestamp else None 
         if invoice is not APIHelper.SKIP:
             self.invoice = invoice 
+        self.event_type = event_type 
+        if event_data is not APIHelper.SKIP:
+            self.event_data = event_data 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -88,25 +81,24 @@ class InvoiceEvent(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        event_type = dictionary.get("event_type") if dictionary.get("event_type") else APIHelper.SKIP
-        event_data = APIHelper.deserialize_union_type(UnionTypeLookUp.get('InvoiceEventEventData'), dictionary.get('event_data'), False) if dictionary.get('event_data') is not None else APIHelper.SKIP
         timestamp = APIHelper.RFC3339DateTime.from_value(dictionary.get("timestamp")).datetime if dictionary.get("timestamp") else APIHelper.SKIP
-        invoice = Invoice.from_dictionary(dictionary.get('invoice')) if 'invoice' in dictionary.keys() else APIHelper.SKIP
+        invoice = Invoice1.from_dictionary(dictionary.get('invoice')) if 'invoice' in dictionary.keys() else APIHelper.SKIP
+        event_type = dictionary.get("event_type") if dictionary.get("event_type") else 'Invoice Event'
+        event_data = ApplyCreditNoteEventData1.from_dictionary(dictionary.get('event_data')) if 'event_data' in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
                 del dictionary[key]
         # Return an object of this model
         return cls(id,
-                   event_type,
-                   event_data,
                    timestamp,
                    invoice,
+                   event_type,
+                   event_data,
                    dictionary)

@@ -7,7 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.customer import Customer
+from advancedbilling.models.customer_1 import Customer1
 from advancedbilling.models.subscription_group_signup_success_data import SubscriptionGroupSignupSuccessData
 
 
@@ -20,7 +20,7 @@ class SubscriptionGroupSignupSuccess(object):
     Attributes:
         subscription_group (SubscriptionGroupSignupSuccessData): TODO: type
             description here.
-        customer (Customer): TODO: type description here.
+        customer (Customer1): TODO: type description here.
 
     """
 
@@ -63,7 +63,7 @@ class SubscriptionGroupSignupSuccess(object):
 
         # Extract variables from the dictionary
         subscription_group = SubscriptionGroupSignupSuccessData.from_dictionary(dictionary.get('subscription_group')) if dictionary.get('subscription_group') else None
-        customer = Customer.from_dictionary(dictionary.get('customer')) if dictionary.get('customer') else None
+        customer = Customer1.from_dictionary(dictionary.get('customer')) if dictionary.get('customer') else None
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -89,10 +89,10 @@ class SubscriptionGroupSignupSuccess(object):
 
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(value=dictionary.subscription_group, type_callable=lambda value: SubscriptionGroupSignupSuccessData.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.customer, type_callable=lambda value: Customer.validate(value))
+                and APIHelper.is_valid_type(value=dictionary.customer, type_callable=lambda value: Customer1.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
         return APIHelper.is_valid_type(value=dictionary.get('subscription_group'), type_callable=lambda value: SubscriptionGroupSignupSuccessData.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('customer'), type_callable=lambda value: Customer.validate(value))
+            and APIHelper.is_valid_type(value=dictionary.get('customer'), type_callable=lambda value: Customer1.validate(value))

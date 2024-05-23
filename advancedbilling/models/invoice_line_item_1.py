@@ -9,7 +9,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 import dateutil.parser
 
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.invoice_line_item_component_cost_data import InvoiceLineItemComponentCostData
+from advancedbilling.models.component_cost_data_1 import ComponentCostData1
 
 
 class InvoiceLineItem1(object):
@@ -89,13 +89,12 @@ class InvoiceLineItem1(object):
         price_point_id (int): The price point ID of the component being
             billed. Will be `nil` for non-component charges.
         hide (bool): TODO: type description here.
-        component_cost_data (InvoiceLineItemComponentCostData): TODO: type
-            description here.
+        component_cost_data (ComponentCostData1): TODO: type description
+            here.
         product_price_point_id (int): The price point ID of the line item's
             product
         custom_item (bool): TODO: type description here.
         kind (str): TODO: type description here.
-        billing_schedule_item_id (int): TODO: type description here.
 
     """
 
@@ -122,8 +121,7 @@ class InvoiceLineItem1(object):
         "component_cost_data": 'component_cost_data',
         "product_price_point_id": 'product_price_point_id',
         "custom_item": 'custom_item',
-        "kind": 'kind',
-        "billing_schedule_item_id": 'billing_schedule_item_id'
+        "kind": 'kind'
     }
 
     _optionals = [
@@ -149,7 +147,6 @@ class InvoiceLineItem1(object):
         'product_price_point_id',
         'custom_item',
         'kind',
-        'billing_schedule_item_id',
     ]
 
     _nullables = [
@@ -157,9 +154,7 @@ class InvoiceLineItem1(object):
         'product_version',
         'component_id',
         'price_point_id',
-        'component_cost_data',
         'product_price_point_id',
-        'billing_schedule_item_id',
     ]
 
     def __init__(self,
@@ -185,7 +180,6 @@ class InvoiceLineItem1(object):
                  product_price_point_id=APIHelper.SKIP,
                  custom_item=APIHelper.SKIP,
                  kind=APIHelper.SKIP,
-                 billing_schedule_item_id=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the InvoiceLineItem1 class"""
 
@@ -234,8 +228,6 @@ class InvoiceLineItem1(object):
             self.custom_item = custom_item 
         if kind is not APIHelper.SKIP:
             self.kind = kind 
-        if billing_schedule_item_id is not APIHelper.SKIP:
-            self.billing_schedule_item_id = billing_schedule_item_id 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -277,14 +269,10 @@ class InvoiceLineItem1(object):
         component_id = dictionary.get("component_id") if "component_id" in dictionary.keys() else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if "price_point_id" in dictionary.keys() else APIHelper.SKIP
         hide = dictionary.get("hide") if "hide" in dictionary.keys() else APIHelper.SKIP
-        if 'component_cost_data' in dictionary.keys():
-            component_cost_data = InvoiceLineItemComponentCostData.from_dictionary(dictionary.get('component_cost_data')) if dictionary.get('component_cost_data') else None
-        else:
-            component_cost_data = APIHelper.SKIP
+        component_cost_data = ComponentCostData1.from_dictionary(dictionary.get('component_cost_data')) if 'component_cost_data' in dictionary.keys() else APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if "product_price_point_id" in dictionary.keys() else APIHelper.SKIP
         custom_item = dictionary.get("custom_item") if "custom_item" in dictionary.keys() else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
-        billing_schedule_item_id = dictionary.get("billing_schedule_item_id") if "billing_schedule_item_id" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -312,27 +300,4 @@ class InvoiceLineItem1(object):
                    product_price_point_id,
                    custom_item,
                    kind,
-                   billing_schedule_item_id,
                    dictionary)
-
-    @classmethod
-    def validate(cls, dictionary):
-        """Validates dictionary against class required properties
-
-        Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
-
-        Returns:
-            boolean : if dictionary is valid contains required properties.
-
-        """
-
-        if isinstance(dictionary, cls):
-            return True
-
-        if not isinstance(dictionary, dict):
-            return False
-
-        return True

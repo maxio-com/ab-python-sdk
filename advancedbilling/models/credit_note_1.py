@@ -12,7 +12,7 @@ from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.billing_address import BillingAddress
 from advancedbilling.models.credit_note_application import CreditNoteApplication
 from advancedbilling.models.credit_note_line_item import CreditNoteLineItem
-from advancedbilling.models.customer_1 import Customer1
+from advancedbilling.models.customer import Customer
 from advancedbilling.models.invoice_discount import InvoiceDiscount
 from advancedbilling.models.invoice_refund import InvoiceRefund
 from advancedbilling.models.invoice_tax import InvoiceTax
@@ -59,7 +59,7 @@ class CreditNote1(object):
         memo (str): The memo printed on credit note, which is a description of
             the reason for the credit.
         seller (Seller): TODO: type description here.
-        customer (Customer1): TODO: type description here.
+        customer (Customer): TODO: type description here.
         billing_address (BillingAddress): TODO: type description here.
         shipping_address (ShippingAddress): TODO: type description here.
         subtotal_amount (str): Subtotal of the credit note, which is the sum
@@ -279,7 +279,7 @@ class CreditNote1(object):
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         seller = Seller.from_dictionary(dictionary.get('seller')) if 'seller' in dictionary.keys() else APIHelper.SKIP
-        customer = Customer1.from_dictionary(dictionary.get('customer')) if 'customer' in dictionary.keys() else APIHelper.SKIP
+        customer = Customer.from_dictionary(dictionary.get('customer')) if 'customer' in dictionary.keys() else APIHelper.SKIP
         billing_address = BillingAddress.from_dictionary(dictionary.get('billing_address')) if 'billing_address' in dictionary.keys() else APIHelper.SKIP
         shipping_address = ShippingAddress.from_dictionary(dictionary.get('shipping_address')) if 'shipping_address' in dictionary.keys() else APIHelper.SKIP
         subtotal_amount = dictionary.get("subtotal_amount") if dictionary.get("subtotal_amount") else APIHelper.SKIP

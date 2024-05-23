@@ -27,11 +27,10 @@
 | `component_id` | `int` | Optional | The ID of the component being billed. Will be `nil` for non-component charges. |
 | `price_point_id` | `int` | Optional | The price point ID of the component being billed. Will be `nil` for non-component charges. |
 | `hide` | `bool` | Optional | - |
-| `component_cost_data` | [`InvoiceLineItemComponentCostData`](../../doc/models/invoice-line-item-component-cost-data.md) | Optional | - |
+| `component_cost_data` | [`ComponentCostData1`](../../doc/models/component-cost-data-1.md) | Optional | - |
 | `product_price_point_id` | `int` | Optional | The price point ID of the line item's product |
 | `custom_item` | `bool` | Optional | - |
 | `kind` | `str` | Optional | - |
-| `billing_schedule_item_id` | `int` | Optional | - |
 
 ## Example (as JSON)
 

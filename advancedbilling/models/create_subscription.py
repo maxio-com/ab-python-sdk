@@ -324,7 +324,7 @@ class CreateSubscription(object):
                  custom_price=APIHelper.SKIP,
                  coupon_code=APIHelper.SKIP,
                  coupon_codes=APIHelper.SKIP,
-                 payment_collection_method='automatic',
+                 payment_collection_method=APIHelper.SKIP,
                  receives_invoice_emails=APIHelper.SKIP,
                  net_terms=APIHelper.SKIP,
                  customer_id=APIHelper.SKIP,
@@ -384,7 +384,8 @@ class CreateSubscription(object):
             self.coupon_code = coupon_code 
         if coupon_codes is not APIHelper.SKIP:
             self.coupon_codes = coupon_codes 
-        self.payment_collection_method = payment_collection_method 
+        if payment_collection_method is not APIHelper.SKIP:
+            self.payment_collection_method = payment_collection_method 
         if receives_invoice_emails is not APIHelper.SKIP:
             self.receives_invoice_emails = receives_invoice_emails 
         if net_terms is not APIHelper.SKIP:
@@ -496,7 +497,7 @@ class CreateSubscription(object):
         custom_price = SubscriptionCustomPrice.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
         coupon_code = dictionary.get("coupon_code") if dictionary.get("coupon_code") else APIHelper.SKIP
         coupon_codes = dictionary.get("coupon_codes") if dictionary.get("coupon_codes") else APIHelper.SKIP
-        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
+        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         receives_invoice_emails = dictionary.get("receives_invoice_emails") if dictionary.get("receives_invoice_emails") else APIHelper.SKIP
         net_terms = dictionary.get("net_terms") if dictionary.get("net_terms") else APIHelper.SKIP
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
