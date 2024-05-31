@@ -32,12 +32,13 @@ from advancedbilling.models.create_subscription_request import CreateSubscriptio
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
 from advancedbilling.models.customer import Customer
 from advancedbilling.models.invoice import Invoice
-from advancedbilling.models.invoice_event import InvoiceEvent
 from advancedbilling.models.invoice_event_type import InvoiceEventType
+from advancedbilling.models.issue_invoice_event import IssueInvoiceEvent
 from advancedbilling.models.product import Product
 from advancedbilling.models.product_family import ProductFamily
 from advancedbilling.models.subscription import Subscription
 from advancedbilling.models.void_invoice import VoidInvoice
+from advancedbilling.models.void_invoice_event import VoidInvoiceEvent
 from advancedbilling.models.void_invoice_request import VoidInvoiceRequest
 
 from .data import InitCases, InvoiceAssertCases
@@ -200,9 +201,9 @@ class TestInvoices:
 
         assert len(events) > 2
 
-        event: InvoiceEvent
         for event in events:
-            assert event.event_type in (InvoiceEventType.ISSUE_INVOICE, InvoiceEventType.VOID_INVOICE)
+            assert event.event_type == InvoiceEventType.ISSUE_INVOICE and isinstance(event, IssueInvoiceEvent) or \
+                   event.event_type == InvoiceEventType.VOID_INVOICE and isinstance(event, VoidInvoiceEvent)
 
         subscriptions_controller.purge_subscription(subscription.id, customer.id)
         customers_controller.delete_customer(customer.id)
