@@ -65,7 +65,7 @@ class SubscriptionGroupSignup(object):
                  payment_profile_id=APIHelper.SKIP,
                  payer_id=APIHelper.SKIP,
                  payer_reference=APIHelper.SKIP,
-                 payment_collection_method='automatic',
+                 payment_collection_method=APIHelper.SKIP,
                  payer_attributes=APIHelper.SKIP,
                  credit_card_attributes=APIHelper.SKIP,
                  bank_account_attributes=APIHelper.SKIP,
@@ -79,7 +79,8 @@ class SubscriptionGroupSignup(object):
             self.payer_id = payer_id 
         if payer_reference is not APIHelper.SKIP:
             self.payer_reference = payer_reference 
-        self.payment_collection_method = payment_collection_method 
+        if payment_collection_method is not APIHelper.SKIP:
+            self.payment_collection_method = payment_collection_method 
         if payer_attributes is not APIHelper.SKIP:
             self.payer_attributes = payer_attributes 
         if credit_card_attributes is not APIHelper.SKIP:
@@ -116,7 +117,7 @@ class SubscriptionGroupSignup(object):
         payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP
         payer_id = dictionary.get("payer_id") if dictionary.get("payer_id") else APIHelper.SKIP
         payer_reference = dictionary.get("payer_reference") if dictionary.get("payer_reference") else APIHelper.SKIP
-        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
+        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         payer_attributes = PayerAttributes.from_dictionary(dictionary.get('payer_attributes')) if 'payer_attributes' in dictionary.keys() else APIHelper.SKIP
         credit_card_attributes = SubscriptionGroupCreditCard.from_dictionary(dictionary.get('credit_card_attributes')) if 'credit_card_attributes' in dictionary.keys() else APIHelper.SKIP
         bank_account_attributes = SubscriptionGroupBankAccount.from_dictionary(dictionary.get('bank_account_attributes')) if 'bank_account_attributes' in dictionary.keys() else APIHelper.SKIP

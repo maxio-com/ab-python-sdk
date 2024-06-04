@@ -121,19 +121,31 @@ class ComponentAllocationChange(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.previous_allocation, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.new_allocation, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.component_id, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.component_handle, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.allocation_id, type_callable=lambda value: isinstance(value, int))
+            return APIHelper.is_valid_type(value=dictionary.previous_allocation,
+                                           type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.new_allocation,
+                                            type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.component_id,
+                                            type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.component_handle,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.memo,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.allocation_id,
+                                            type_callable=lambda value: isinstance(value, int))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('previous_allocation'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('new_allocation'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('component_id'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('component_handle'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('allocation_id'), type_callable=lambda value: isinstance(value, int))
+        return APIHelper.is_valid_type(value=dictionary.get('previous_allocation'),
+                                       type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('new_allocation'),
+                                        type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('component_id'),
+                                        type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('component_handle'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('memo'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('allocation_id'),
+                                        type_callable=lambda value: isinstance(value, int))

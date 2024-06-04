@@ -116,15 +116,23 @@ class FailedPaymentEventData(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.amount_in_cents, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.payment_method, type_callable=lambda value: InvoicePaymentMethodType.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.transaction_id, type_callable=lambda value: isinstance(value, int))
+            return APIHelper.is_valid_type(value=dictionary.amount_in_cents,
+                                           type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.applied_amount,
+                                            type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.payment_method,
+                                            type_callable=lambda value: InvoicePaymentMethodType.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.transaction_id,
+                                            type_callable=lambda value: isinstance(value, int))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('amount_in_cents'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('payment_method'), type_callable=lambda value: InvoicePaymentMethodType.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('transaction_id'), type_callable=lambda value: isinstance(value, int))
+        return APIHelper.is_valid_type(value=dictionary.get('amount_in_cents'),
+                                       type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'),
+                                        type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('payment_method'),
+                                        type_callable=lambda value: InvoicePaymentMethodType.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('transaction_id'),
+                                        type_callable=lambda value: isinstance(value, int))

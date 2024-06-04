@@ -99,9 +99,11 @@ class OveragePricing(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.pricing_scheme, type_callable=lambda value: PricingScheme.validate(value))
+            return APIHelper.is_valid_type(value=dictionary.pricing_scheme,
+                                           type_callable=lambda value: PricingScheme.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('pricing_scheme'), type_callable=lambda value: PricingScheme.validate(value))
+        return APIHelper.is_valid_type(value=dictionary.get('pricing_scheme'),
+                                       type_callable=lambda value: PricingScheme.validate(value))

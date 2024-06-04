@@ -175,19 +175,29 @@ class ApplyPaymentEventData(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.consolidation_level, type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.original_amount, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.transaction_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
+            return APIHelper.is_valid_type(value=dictionary.consolidation_level,
+                                           type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.memo,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.original_amount,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.applied_amount,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.transaction_time,
+                                            type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime)) \
                 and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.payment_method).is_valid
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('consolidation_level'), type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('original_amount'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('transaction_time'), type_callable=lambda value: isinstance(value, str)) \
+        return APIHelper.is_valid_type(value=dictionary.get('consolidation_level'),
+                                       type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('memo'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('original_amount'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('transaction_time'),
+                                        type_callable=lambda value: isinstance(value, str)) \
             and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.get('payment_method')).is_valid

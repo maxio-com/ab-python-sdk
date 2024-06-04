@@ -278,7 +278,7 @@ class Invoice(object):
                  status=APIHelper.SKIP,
                  role=APIHelper.SKIP,
                  parent_invoice_id=APIHelper.SKIP,
-                 collection_method='automatic',
+                 collection_method=APIHelper.SKIP,
                  payment_instructions=APIHelper.SKIP,
                  currency=APIHelper.SKIP,
                  consolidation_level=APIHelper.SKIP,
@@ -350,7 +350,8 @@ class Invoice(object):
             self.role = role 
         if parent_invoice_id is not APIHelper.SKIP:
             self.parent_invoice_id = parent_invoice_id 
-        self.collection_method = collection_method 
+        if collection_method is not APIHelper.SKIP:
+            self.collection_method = collection_method 
         if payment_instructions is not APIHelper.SKIP:
             self.payment_instructions = payment_instructions 
         if currency is not APIHelper.SKIP:
@@ -463,7 +464,7 @@ class Invoice(object):
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         role = dictionary.get("role") if dictionary.get("role") else APIHelper.SKIP
         parent_invoice_id = dictionary.get("parent_invoice_id") if "parent_invoice_id" in dictionary.keys() else APIHelper.SKIP
-        collection_method = dictionary.get("collection_method") if dictionary.get("collection_method") else 'automatic'
+        collection_method = dictionary.get("collection_method") if dictionary.get("collection_method") else APIHelper.SKIP
         payment_instructions = dictionary.get("payment_instructions") if dictionary.get("payment_instructions") else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP

@@ -99,15 +99,23 @@ class PrepaymentAccountBalanceChanged(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.reason, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.prepayment_account_balance_in_cents, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.prepayment_balance_change_in_cents, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.currency_code, type_callable=lambda value: isinstance(value, str))
+            return APIHelper.is_valid_type(value=dictionary.reason,
+                                           type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.prepayment_account_balance_in_cents,
+                                            type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.prepayment_balance_change_in_cents,
+                                            type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.currency_code,
+                                            type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('reason'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('prepayment_account_balance_in_cents'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('prepayment_balance_change_in_cents'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('currency_code'), type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(value=dictionary.get('reason'),
+                                       type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('prepayment_account_balance_in_cents'),
+                                        type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('prepayment_balance_change_in_cents'),
+                                        type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('currency_code'),
+                                        type_callable=lambda value: isinstance(value, str))

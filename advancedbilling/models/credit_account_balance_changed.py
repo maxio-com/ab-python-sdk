@@ -105,17 +105,27 @@ class CreditAccountBalanceChanged(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.reason, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.service_credit_account_balance_in_cents, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.service_credit_balance_change_in_cents, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.currency_code, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.at_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime))
+            return APIHelper.is_valid_type(value=dictionary.reason,
+                                           type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.service_credit_account_balance_in_cents,
+                                            type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.service_credit_balance_change_in_cents,
+                                            type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.currency_code,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.at_time,
+                                            type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('reason'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('service_credit_account_balance_in_cents'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('service_credit_balance_change_in_cents'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('currency_code'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('at_time'), type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(value=dictionary.get('reason'),
+                                       type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('service_credit_account_balance_in_cents'),
+                                        type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('service_credit_balance_change_in_cents'),
+                                        type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('currency_code'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('at_time'),
+                                        type_callable=lambda value: isinstance(value, str))

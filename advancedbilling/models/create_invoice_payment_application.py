@@ -87,11 +87,15 @@ class CreateInvoicePaymentApplication(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.invoice_uid, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.amount, type_callable=lambda value: isinstance(value, str))
+            return APIHelper.is_valid_type(value=dictionary.invoice_uid,
+                                           type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.amount,
+                                            type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('invoice_uid'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('amount'), type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(value=dictionary.get('invoice_uid'),
+                                       type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('amount'),
+                                        type_callable=lambda value: isinstance(value, str))

@@ -85,11 +85,15 @@ class SubscriptionProductChange(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.previous_product_id, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.new_product_id, type_callable=lambda value: isinstance(value, int))
+            return APIHelper.is_valid_type(value=dictionary.previous_product_id,
+                                           type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.new_product_id,
+                                            type_callable=lambda value: isinstance(value, int))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('previous_product_id'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('new_product_id'), type_callable=lambda value: isinstance(value, int))
+        return APIHelper.is_valid_type(value=dictionary.get('previous_product_id'),
+                                       type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('new_product_id'),
+                                        type_callable=lambda value: isinstance(value, int))

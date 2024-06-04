@@ -179,13 +179,17 @@ class CreateOrUpdatePercentageCoupon(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.name, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.code, type_callable=lambda value: isinstance(value, str)) \
+            return APIHelper.is_valid_type(value=dictionary.name,
+                                           type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.code,
+                                            type_callable=lambda value: isinstance(value, str)) \
                 and UnionTypeLookUp.get('CreateOrUpdatePercentageCouponPercentage').validate(dictionary.percentage).is_valid
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('name'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('code'), type_callable=lambda value: isinstance(value, str)) \
+        return APIHelper.is_valid_type(value=dictionary.get('name'),
+                                       type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('code'),
+                                        type_callable=lambda value: isinstance(value, str)) \
             and UnionTypeLookUp.get('CreateOrUpdatePercentageCouponPercentage').validate(dictionary.get('percentage')).is_valid

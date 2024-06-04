@@ -92,13 +92,19 @@ class PaymentMethodBankAccount(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.masked_account_number, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.masked_routing_number, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.mtype, type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
+            return APIHelper.is_valid_type(value=dictionary.masked_account_number,
+                                           type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.masked_routing_number,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.mtype,
+                                            type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('masked_account_number'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('masked_routing_number'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('type'), type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
+        return APIHelper.is_valid_type(value=dictionary.get('masked_account_number'),
+                                       type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('masked_routing_number'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('type'),
+                                        type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))

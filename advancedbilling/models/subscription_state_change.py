@@ -85,11 +85,15 @@ class SubscriptionStateChange(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.previous_subscription_state, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.new_subscription_state, type_callable=lambda value: isinstance(value, str))
+            return APIHelper.is_valid_type(value=dictionary.previous_subscription_state,
+                                           type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.new_subscription_state,
+                                            type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('previous_subscription_state'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('new_subscription_state'), type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(value=dictionary.get('previous_subscription_state'),
+                                       type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('new_subscription_state'),
+                                        type_callable=lambda value: isinstance(value, str))

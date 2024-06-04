@@ -122,11 +122,15 @@ class ChangeInvoiceStatusEventData(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.from_status, type_callable=lambda value: InvoiceStatus.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.to_status, type_callable=lambda value: InvoiceStatus.validate(value))
+            return APIHelper.is_valid_type(value=dictionary.from_status,
+                                           type_callable=lambda value: InvoiceStatus.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.to_status,
+                                            type_callable=lambda value: InvoiceStatus.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('from_status'), type_callable=lambda value: InvoiceStatus.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('to_status'), type_callable=lambda value: InvoiceStatus.validate(value))
+        return APIHelper.is_valid_type(value=dictionary.get('from_status'),
+                                       type_callable=lambda value: InvoiceStatus.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('to_status'),
+                                        type_callable=lambda value: InvoiceStatus.validate(value))

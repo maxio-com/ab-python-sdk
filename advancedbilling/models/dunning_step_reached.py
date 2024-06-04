@@ -93,13 +93,25 @@ class DunningStepReached(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.dunner, type_callable=lambda value: DunnerData.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.current_step, type_callable=lambda value: DunningStepData.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.next_step, type_callable=lambda value: DunningStepData.validate(value))
+            return APIHelper.is_valid_type(value=dictionary.dunner,
+                                           type_callable=lambda value: DunnerData.validate(value),
+                                           is_model_dict=True) \
+                and APIHelper.is_valid_type(value=dictionary.current_step,
+                                            type_callable=lambda value: DunningStepData.validate(value),
+                                            is_model_dict=True) \
+                and APIHelper.is_valid_type(value=dictionary.next_step,
+                                            type_callable=lambda value: DunningStepData.validate(value),
+                                            is_model_dict=True)
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('dunner'), type_callable=lambda value: DunnerData.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('current_step'), type_callable=lambda value: DunningStepData.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('next_step'), type_callable=lambda value: DunningStepData.validate(value))
+        return APIHelper.is_valid_type(value=dictionary.get('dunner'),
+                                       type_callable=lambda value: DunnerData.validate(value),
+                                       is_model_dict=True) \
+            and APIHelper.is_valid_type(value=dictionary.get('current_step'),
+                                        type_callable=lambda value: DunningStepData.validate(value),
+                                        is_model_dict=True) \
+            and APIHelper.is_valid_type(value=dictionary.get('next_step'),
+                                        type_callable=lambda value: DunningStepData.validate(value),
+                                        is_model_dict=True)

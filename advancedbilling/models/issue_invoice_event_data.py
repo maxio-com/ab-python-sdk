@@ -123,17 +123,27 @@ class IssueInvoiceEventData(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.consolidation_level, type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.from_status, type_callable=lambda value: InvoiceStatus.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.to_status, type_callable=lambda value: InvoiceStatus.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.due_amount, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.total_amount, type_callable=lambda value: isinstance(value, str))
+            return APIHelper.is_valid_type(value=dictionary.consolidation_level,
+                                           type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.from_status,
+                                            type_callable=lambda value: InvoiceStatus.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.to_status,
+                                            type_callable=lambda value: InvoiceStatus.validate(value)) \
+                and APIHelper.is_valid_type(value=dictionary.due_amount,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.total_amount,
+                                            type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('consolidation_level'), type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('from_status'), type_callable=lambda value: InvoiceStatus.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('to_status'), type_callable=lambda value: InvoiceStatus.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('due_amount'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('total_amount'), type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(value=dictionary.get('consolidation_level'),
+                                       type_callable=lambda value: InvoiceConsolidationLevel.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('from_status'),
+                                        type_callable=lambda value: InvoiceStatus.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('to_status'),
+                                        type_callable=lambda value: InvoiceStatus.validate(value)) \
+            and APIHelper.is_valid_type(value=dictionary.get('due_amount'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('total_amount'),
+                                        type_callable=lambda value: isinstance(value, str))

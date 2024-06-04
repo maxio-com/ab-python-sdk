@@ -7,7 +7,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.invoice_event import InvoiceEvent
 
 
 class ListInvoiceEventsResponse(object):
@@ -17,7 +16,13 @@ class ListInvoiceEventsResponse(object):
     TODO: type model description here.
 
     Attributes:
-        events (List[InvoiceEvent]): TODO: type description here.
+        events (List[ApplyCreditNoteEvent | ApplyDebitNoteEvent |
+            ApplyPaymentEvent | BackportInvoiceEvent |
+            ChangeChargebackStatusEvent | ChangeInvoiceCollectionMethodEvent |
+            ChangeInvoiceStatusEvent | CreateCreditNoteEvent |
+            CreateDebitNoteEvent | FailedPaymentEvent | IssueInvoiceEvent |
+            RefundInvoiceEvent | RemovePaymentEvent | VoidInvoiceEvent |
+            VoidRemainderEvent] | None): TODO: type description here.
         page (int): TODO: type description here.
         per_page (int): TODO: type description here.
         total_pages (int): TODO: type description here.
@@ -74,16 +79,13 @@ class ListInvoiceEventsResponse(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        events = None
-        if dictionary.get('events') is not None:
-            events = [InvoiceEvent.from_dictionary(x) for x in dictionary.get('events')]
-        else:
-            events = APIHelper.SKIP
+        events = APIHelper.deserialize_union_type(UnionTypeLookUp.get('Invoice-Event'), dictionary.get('events'), False) if dictionary.get('events') is not None else APIHelper.SKIP
         page = dictionary.get("page") if dictionary.get("page") else APIHelper.SKIP
         per_page = dictionary.get("per_page") if dictionary.get("per_page") else APIHelper.SKIP
         total_pages = dictionary.get("total_pages") if dictionary.get("total_pages") else APIHelper.SKIP
