@@ -88,11 +88,19 @@ class SubscriptionGroupSignupSuccess(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.subscription_group, type_callable=lambda value: SubscriptionGroupSignupSuccessData.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.customer, type_callable=lambda value: Customer.validate(value))
+            return APIHelper.is_valid_type(value=dictionary.subscription_group,
+                                           type_callable=lambda value: SubscriptionGroupSignupSuccessData.validate(value),
+                                           is_model_dict=True) \
+                and APIHelper.is_valid_type(value=dictionary.customer,
+                                            type_callable=lambda value: Customer.validate(value),
+                                            is_model_dict=True)
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('subscription_group'), type_callable=lambda value: SubscriptionGroupSignupSuccessData.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('customer'), type_callable=lambda value: Customer.validate(value))
+        return APIHelper.is_valid_type(value=dictionary.get('subscription_group'),
+                                       type_callable=lambda value: SubscriptionGroupSignupSuccessData.validate(value),
+                                       is_model_dict=True) \
+            and APIHelper.is_valid_type(value=dictionary.get('customer'),
+                                        type_callable=lambda value: Customer.validate(value),
+                                        is_model_dict=True)

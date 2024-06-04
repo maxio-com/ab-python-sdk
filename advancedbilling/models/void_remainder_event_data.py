@@ -99,15 +99,25 @@ class VoidRemainderEventData(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.credit_note_attributes, type_callable=lambda value: CreditNote.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.transaction_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime))
+            return APIHelper.is_valid_type(value=dictionary.credit_note_attributes,
+                                           type_callable=lambda value: CreditNote.validate(value),
+                                           is_model_dict=True) \
+                and APIHelper.is_valid_type(value=dictionary.memo,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.applied_amount,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.transaction_time,
+                                            type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('credit_note_attributes'), type_callable=lambda value: CreditNote.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('transaction_time'), type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(value=dictionary.get('credit_note_attributes'),
+                                       type_callable=lambda value: CreditNote.validate(value),
+                                       is_model_dict=True) \
+            and APIHelper.is_valid_type(value=dictionary.get('memo'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('transaction_time'),
+                                        type_callable=lambda value: isinstance(value, str))

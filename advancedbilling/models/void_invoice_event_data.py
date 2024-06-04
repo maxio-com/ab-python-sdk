@@ -119,19 +119,41 @@ class VoidInvoiceEventData(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.credit_note_attributes, type_callable=lambda value: CreditNote.validate(value), is_value_nullable=True) \
-                and APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str), is_value_nullable=True) \
-                and APIHelper.is_valid_type(value=dictionary.applied_amount, type_callable=lambda value: isinstance(value, str), is_value_nullable=True) \
-                and APIHelper.is_valid_type(value=dictionary.transaction_time, type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime), is_value_nullable=True) \
-                and APIHelper.is_valid_type(value=dictionary.is_advance_invoice, type_callable=lambda value: isinstance(value, bool)) \
-                and APIHelper.is_valid_type(value=dictionary.reason, type_callable=lambda value: isinstance(value, str))
+            return APIHelper.is_valid_type(value=dictionary.credit_note_attributes,
+                                           type_callable=lambda value: CreditNote.validate(value),
+                                           is_value_nullable=True,
+                                           is_model_dict=True) \
+                and APIHelper.is_valid_type(value=dictionary.memo,
+                                            type_callable=lambda value: isinstance(value, str),
+                                            is_value_nullable=True) \
+                and APIHelper.is_valid_type(value=dictionary.applied_amount,
+                                            type_callable=lambda value: isinstance(value, str),
+                                            is_value_nullable=True) \
+                and APIHelper.is_valid_type(value=dictionary.transaction_time,
+                                            type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime),
+                                            is_value_nullable=True) \
+                and APIHelper.is_valid_type(value=dictionary.is_advance_invoice,
+                                            type_callable=lambda value: isinstance(value, bool)) \
+                and APIHelper.is_valid_type(value=dictionary.reason,
+                                            type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('credit_note_attributes'), type_callable=lambda value: CreditNote.validate(value), is_value_nullable=True) \
-            and APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str), is_value_nullable=True) \
-            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'), type_callable=lambda value: isinstance(value, str), is_value_nullable=True) \
-            and APIHelper.is_valid_type(value=dictionary.get('transaction_time'), type_callable=lambda value: isinstance(value, str), is_value_nullable=True) \
-            and APIHelper.is_valid_type(value=dictionary.get('is_advance_invoice'), type_callable=lambda value: isinstance(value, bool)) \
-            and APIHelper.is_valid_type(value=dictionary.get('reason'), type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(value=dictionary.get('credit_note_attributes'),
+                                       type_callable=lambda value: CreditNote.validate(value),
+                                       is_value_nullable=True,
+                                       is_model_dict=True) \
+            and APIHelper.is_valid_type(value=dictionary.get('memo'),
+                                        type_callable=lambda value: isinstance(value, str),
+                                        is_value_nullable=True) \
+            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'),
+                                        type_callable=lambda value: isinstance(value, str),
+                                        is_value_nullable=True) \
+            and APIHelper.is_valid_type(value=dictionary.get('transaction_time'),
+                                        type_callable=lambda value: isinstance(value, str),
+                                        is_value_nullable=True) \
+            and APIHelper.is_valid_type(value=dictionary.get('is_advance_invoice'),
+                                        type_callable=lambda value: isinstance(value, bool)) \
+            and APIHelper.is_valid_type(value=dictionary.get('reason'),
+                                        type_callable=lambda value: isinstance(value, str))

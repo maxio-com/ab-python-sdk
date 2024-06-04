@@ -281,9 +281,11 @@ class CreditCardPaymentProfile(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.masked_card_number, type_callable=lambda value: isinstance(value, str))
+            return APIHelper.is_valid_type(value=dictionary.masked_card_number,
+                                           type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('masked_card_number'), type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(value=dictionary.get('masked_card_number'),
+                                       type_callable=lambda value: isinstance(value, str))

@@ -431,7 +431,7 @@ class Subscription(object):
                  delayed_cancel_at=APIHelper.SKIP,
                  coupon_code=APIHelper.SKIP,
                  snap_day=APIHelper.SKIP,
-                 payment_collection_method='automatic',
+                 payment_collection_method=APIHelper.SKIP,
                  customer=APIHelper.SKIP,
                  product=APIHelper.SKIP,
                  credit_card=APIHelper.SKIP,
@@ -522,7 +522,8 @@ class Subscription(object):
             self.coupon_code = coupon_code 
         if snap_day is not APIHelper.SKIP:
             self.snap_day = snap_day 
-        self.payment_collection_method = payment_collection_method 
+        if payment_collection_method is not APIHelper.SKIP:
+            self.payment_collection_method = payment_collection_method 
         if customer is not APIHelper.SKIP:
             self.customer = customer 
         if product is not APIHelper.SKIP:
@@ -670,7 +671,7 @@ class Subscription(object):
             delayed_cancel_at = APIHelper.SKIP
         coupon_code = dictionary.get("coupon_code") if "coupon_code" in dictionary.keys() else APIHelper.SKIP
         snap_day = dictionary.get("snap_day") if "snap_day" in dictionary.keys() else APIHelper.SKIP
-        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else 'automatic'
+        payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         customer = Customer.from_dictionary(dictionary.get('customer')) if 'customer' in dictionary.keys() else APIHelper.SKIP
         product = Product.from_dictionary(dictionary.get('product')) if 'product' in dictionary.keys() else APIHelper.SKIP
         credit_card = CreditCardPaymentProfile.from_dictionary(dictionary.get('credit_card')) if 'credit_card' in dictionary.keys() else APIHelper.SKIP

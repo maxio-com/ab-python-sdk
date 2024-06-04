@@ -91,11 +91,19 @@ class SubscriptionGroupSignupFailure(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.subscription_group, type_callable=lambda value: SubscriptionGroupSignupFailureData.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.customer, type_callable=lambda value: isinstance(value, str), is_value_nullable=True)
+            return APIHelper.is_valid_type(value=dictionary.subscription_group,
+                                           type_callable=lambda value: SubscriptionGroupSignupFailureData.validate(value),
+                                           is_model_dict=True) \
+                and APIHelper.is_valid_type(value=dictionary.customer,
+                                            type_callable=lambda value: isinstance(value, str),
+                                            is_value_nullable=True)
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('subscription_group'), type_callable=lambda value: SubscriptionGroupSignupFailureData.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('customer'), type_callable=lambda value: isinstance(value, str), is_value_nullable=True)
+        return APIHelper.is_valid_type(value=dictionary.get('subscription_group'),
+                                       type_callable=lambda value: SubscriptionGroupSignupFailureData.validate(value),
+                                       is_model_dict=True) \
+            and APIHelper.is_valid_type(value=dictionary.get('customer'),
+                                        type_callable=lambda value: isinstance(value, str),
+                                        is_value_nullable=True)

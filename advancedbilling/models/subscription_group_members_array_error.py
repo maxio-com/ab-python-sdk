@@ -79,9 +79,11 @@ class SubscriptionGroupMembersArrayError(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.members, type_callable=lambda value: isinstance(value, str))
+            return APIHelper.is_valid_type(value=dictionary.members,
+                                           type_callable=lambda value: isinstance(value, str))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('members'), type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(value=dictionary.get('members'),
+                                       type_callable=lambda value: isinstance(value, str))

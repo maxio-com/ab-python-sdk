@@ -131,10 +131,16 @@ class CreateMultiInvoicePayment(object):
 
         if isinstance(dictionary, cls):
             return UnionTypeLookUp.get('CreateMultiInvoicePaymentAmount').validate(dictionary.amount).is_valid \
-                and APIHelper.is_valid_type(value=dictionary.applications, type_callable=lambda value: CreateInvoicePaymentApplication.validate(value))
+                and APIHelper.is_valid_type(value=dictionary.applications,
+                                            type_callable=lambda value: CreateInvoicePaymentApplication.validate(value),
+                                            is_model_dict=True,
+                                            is_inner_model_dict=True)
 
         if not isinstance(dictionary, dict):
             return False
 
         return UnionTypeLookUp.get('CreateMultiInvoicePaymentAmount').validate(dictionary.get('amount')).is_valid \
-            and APIHelper.is_valid_type(value=dictionary.get('applications'), type_callable=lambda value: CreateInvoicePaymentApplication.validate(value))
+            and APIHelper.is_valid_type(value=dictionary.get('applications'),
+                                        type_callable=lambda value: CreateInvoicePaymentApplication.validate(value),
+                                        is_model_dict=True,
+                                        is_inner_model_dict=True)

@@ -182,7 +182,7 @@ class ProformaInvoice(object):
                  created_at=APIHelper.SKIP,
                  delivery_date=APIHelper.SKIP,
                  status=APIHelper.SKIP,
-                 collection_method='automatic',
+                 collection_method=APIHelper.SKIP,
                  payment_instructions=APIHelper.SKIP,
                  currency=APIHelper.SKIP,
                  consolidation_level=APIHelper.SKIP,
@@ -231,7 +231,8 @@ class ProformaInvoice(object):
             self.delivery_date = delivery_date 
         if status is not APIHelper.SKIP:
             self.status = status 
-        self.collection_method = collection_method 
+        if collection_method is not APIHelper.SKIP:
+            self.collection_method = collection_method 
         if payment_instructions is not APIHelper.SKIP:
             self.payment_instructions = payment_instructions 
         if currency is not APIHelper.SKIP:
@@ -316,7 +317,7 @@ class ProformaInvoice(object):
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         delivery_date = dateutil.parser.parse(dictionary.get('delivery_date')).date() if dictionary.get('delivery_date') else APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
-        collection_method = dictionary.get("collection_method") if dictionary.get("collection_method") else 'automatic'
+        collection_method = dictionary.get("collection_method") if dictionary.get("collection_method") else APIHelper.SKIP
         payment_instructions = dictionary.get("payment_instructions") if dictionary.get("payment_instructions") else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP

@@ -95,9 +95,11 @@ class GroupTarget(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.mtype, type_callable=lambda value: GroupTargetType.validate(value))
+            return APIHelper.is_valid_type(value=dictionary.mtype,
+                                           type_callable=lambda value: GroupTargetType.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('type'), type_callable=lambda value: GroupTargetType.validate(value))
+        return APIHelper.is_valid_type(value=dictionary.get('type'),
+                                       type_callable=lambda value: GroupTargetType.validate(value))

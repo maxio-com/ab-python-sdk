@@ -65,7 +65,9 @@ client = AdvancedBillingClient(
     basic_auth_credentials=BasicAuthCredentials(
         username='BasicAuthUserName',
         password='BasicAuthPassword'
-    )
+    ),
+    subdomain='subdomain',
+    domain='chargify.com'
 )
 ```
 

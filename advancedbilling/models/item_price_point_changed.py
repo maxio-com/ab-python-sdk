@@ -112,19 +112,35 @@ class ItemPricePointChanged(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.item_id, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.item_type, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.item_handle, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.item_name, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.previous_price_point, type_callable=lambda value: ItemPricePointData.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.current_price_point, type_callable=lambda value: ItemPricePointData.validate(value))
+            return APIHelper.is_valid_type(value=dictionary.item_id,
+                                           type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.item_type,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.item_handle,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.item_name,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.previous_price_point,
+                                            type_callable=lambda value: ItemPricePointData.validate(value),
+                                            is_model_dict=True) \
+                and APIHelper.is_valid_type(value=dictionary.current_price_point,
+                                            type_callable=lambda value: ItemPricePointData.validate(value),
+                                            is_model_dict=True)
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('item_id'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('item_type'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('item_handle'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('item_name'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('previous_price_point'), type_callable=lambda value: ItemPricePointData.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('current_price_point'), type_callable=lambda value: ItemPricePointData.validate(value))
+        return APIHelper.is_valid_type(value=dictionary.get('item_id'),
+                                       type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('item_type'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('item_handle'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('item_name'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('previous_price_point'),
+                                        type_callable=lambda value: ItemPricePointData.validate(value),
+                                        is_model_dict=True) \
+            and APIHelper.is_valid_type(value=dictionary.get('current_price_point'),
+                                        type_callable=lambda value: ItemPricePointData.validate(value),
+                                        is_model_dict=True)

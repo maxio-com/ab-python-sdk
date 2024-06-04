@@ -125,13 +125,17 @@ class RefundConsolidatedInvoice(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.memo, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.payment_id, type_callable=lambda value: isinstance(value, int)) \
+            return APIHelper.is_valid_type(value=dictionary.memo,
+                                           type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.payment_id,
+                                            type_callable=lambda value: isinstance(value, int)) \
                 and UnionTypeLookUp.get('RefundConsolidatedInvoiceSegmentUids').validate(dictionary.segment_uids).is_valid
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('memo'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('payment_id'), type_callable=lambda value: isinstance(value, int)) \
+        return APIHelper.is_valid_type(value=dictionary.get('memo'),
+                                       type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('payment_id'),
+                                        type_callable=lambda value: isinstance(value, int)) \
             and UnionTypeLookUp.get('RefundConsolidatedInvoiceSegmentUids').validate(dictionary.get('segment_uids')).is_valid

@@ -136,17 +136,27 @@ class DunningStepData(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.day_threshold, type_callable=lambda value: isinstance(value, int)) \
-                and APIHelper.is_valid_type(value=dictionary.action, type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.send_email, type_callable=lambda value: isinstance(value, bool)) \
-                and APIHelper.is_valid_type(value=dictionary.send_bcc_email, type_callable=lambda value: isinstance(value, bool)) \
-                and APIHelper.is_valid_type(value=dictionary.send_sms, type_callable=lambda value: isinstance(value, bool))
+            return APIHelper.is_valid_type(value=dictionary.day_threshold,
+                                           type_callable=lambda value: isinstance(value, int)) \
+                and APIHelper.is_valid_type(value=dictionary.action,
+                                            type_callable=lambda value: isinstance(value, str)) \
+                and APIHelper.is_valid_type(value=dictionary.send_email,
+                                            type_callable=lambda value: isinstance(value, bool)) \
+                and APIHelper.is_valid_type(value=dictionary.send_bcc_email,
+                                            type_callable=lambda value: isinstance(value, bool)) \
+                and APIHelper.is_valid_type(value=dictionary.send_sms,
+                                            type_callable=lambda value: isinstance(value, bool))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('day_threshold'), type_callable=lambda value: isinstance(value, int)) \
-            and APIHelper.is_valid_type(value=dictionary.get('action'), type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('send_email'), type_callable=lambda value: isinstance(value, bool)) \
-            and APIHelper.is_valid_type(value=dictionary.get('send_bcc_email'), type_callable=lambda value: isinstance(value, bool)) \
-            and APIHelper.is_valid_type(value=dictionary.get('send_sms'), type_callable=lambda value: isinstance(value, bool))
+        return APIHelper.is_valid_type(value=dictionary.get('day_threshold'),
+                                       type_callable=lambda value: isinstance(value, int)) \
+            and APIHelper.is_valid_type(value=dictionary.get('action'),
+                                        type_callable=lambda value: isinstance(value, str)) \
+            and APIHelper.is_valid_type(value=dictionary.get('send_email'),
+                                        type_callable=lambda value: isinstance(value, bool)) \
+            and APIHelper.is_valid_type(value=dictionary.get('send_bcc_email'),
+                                        type_callable=lambda value: isinstance(value, bool)) \
+            and APIHelper.is_valid_type(value=dictionary.get('send_sms'),
+                                        type_callable=lambda value: isinstance(value, bool))
