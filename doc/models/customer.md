@@ -13,7 +13,7 @@
 | `last_name` | `str` | Optional | The last name of the customer |
 | `email` | `str` | Optional | The email address of the customer |
 | `cc_emails` | `str` | Optional | A comma-separated list of emails that should be cc’d on all customer communications (i.e. “joe@example.com, sue@example.com”) |
-| `organization` | `str` | Optional | The organization of the customer |
+| `organization` | `str` | Optional | The organization of the customer. If no value, `null` or empty string is provided, `organization` will be populated with the customer's first and last name, separated with a space. |
 | `reference` | `str` | Optional | The unique identifier used within your own application for this customer |
 | `id` | `int` | Optional | The customer ID in Chargify |
 | `created_at` | `datetime` | Optional | The timestamp in which the customer object was created in Chargify |
