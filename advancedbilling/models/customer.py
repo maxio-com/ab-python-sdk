@@ -22,7 +22,10 @@ class Customer(object):
         cc_emails (str): A comma-separated list of emails that should be cc’d
             on all customer communications (i.e. “joe@example.com,
             sue@example.com”)
-        organization (str): The organization of the customer
+        organization (str): The organization of the customer. If no value,
+            `null` or empty string is provided, `organization` will be
+            populated with the customer's first and last name, separated with
+            a space.
         reference (str): The unique identifier used within your own
             application for this customer
         id (int): The customer ID in Chargify
