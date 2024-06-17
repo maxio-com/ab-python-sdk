@@ -244,11 +244,11 @@ class TestInvoices:
                 CreateInvoiceRequest(InitCases.get_invoice_request_with_invalid_period()),
             )
 
-            errors = exception_info.value.errors
+        errors = exception_info.value.errors
 
-            assert exception_info.value.response_code == 422
-            assert len(errors) == 1
-            assert errors == {"line_items[0].period_range_end": ["Must be greater or equal to period_range_start."]}
+        assert exception_info.value.response_code == 422
+        assert len(errors) == 1
+        assert errors == {"line_items[0].period_range_end": ["Must be greater or equal to period_range_start."]}
 
         subscriptions_controller.purge_subscription(subscription.id, customer.id)
         customers_controller.delete_customer(customer.id)

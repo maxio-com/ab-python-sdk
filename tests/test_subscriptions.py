@@ -141,8 +141,8 @@ class TestSubscriptions:
                 )
             )
 
-            assert e.value.response_code == 422
-            assert e.value.message == "A Customer must be specified for the subscription to be valid."
+        assert e.value.response_code == 422
+        assert e.value.errors == ["A Customer must be specified for the subscription to be valid."]
 
     def test_create_subscription_given_invalid_credentials_then_thrown_exception_with_401_status_code(
         self,
@@ -159,7 +159,7 @@ class TestSubscriptions:
                 )
             )
 
-            assert e.value.response_code == 401
+        assert e.value.response_code == 401
 
     def test_list_subscriptions_filtering_by_metadata_given_filter_by_metadata_then_return_subscription_having_this_metadata(
         self,

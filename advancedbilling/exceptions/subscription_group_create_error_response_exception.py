@@ -35,4 +35,5 @@ class SubscriptionGroupCreateErrorResponseException(advancedbilling.exceptions.a
             MUST match property names in the API description.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         self.errors = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionGroupCreateErrorResponseErrors'), dictionary.get('errors'), False) if dictionary.get('errors') is not None else None
