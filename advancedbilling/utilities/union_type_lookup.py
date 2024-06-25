@@ -76,6 +76,42 @@ class UnionTypeLookUp:
 
     """
     _templates = {
+        'UpdateComponentPricePointComponentId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'UpdateComponentPricePointPricePointId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ReadComponentPricePointComponentId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ReadComponentPricePointPricePointId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ArchiveComponentPricePointComponentId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ArchiveComponentPricePointPricePointId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
         'CreateProductPricePointProductId': OneOf(
             [
                 LeafType(int),
