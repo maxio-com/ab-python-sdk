@@ -40,8 +40,8 @@ class ProductsController(BaseController):
         4669-Product-Changes-Migrations)
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the product belongs
+            product_family_id (str): Either the product family's id or its
+                handle prefixed with `handle:`
             body (CreateOrUpdateProductRequest, optional): TODO: type
                 description here.
 

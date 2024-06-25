@@ -183,9 +183,14 @@ class ProductPricePointsController(BaseController):
 
         Args:
             product_id (int | str): The id or handle of the product. When
-                using the handle, it must be prefixed with `handle:`
+                using the handle, it must be prefixed with `handle:`. Example:
+                `123` for an integer ID, or `handle:example-product-handle`
+                for a string handle.
             price_point_id (int | str): The id or handle of the price point.
-                When using the handle, it must be prefixed with `handle:`
+                When using the handle, it must be prefixed with `handle:`.
+                Example: `123` for an integer ID, or
+                `handle:example-product-price-point-handle` for a string
+                handle.
             body (UpdateProductPricePointRequest, optional): TODO: type
                 description here.
 
@@ -239,13 +244,19 @@ class ProductPricePointsController(BaseController):
         """Does a GET request to /products/{product_id}/price_points/{price_point_id}.json.
 
         Use this endpoint to retrieve details for a specific product price
-        point.
+        point. You can achieve this by using either the product price point ID
+        or handle.
 
         Args:
             product_id (int | str): The id or handle of the product. When
-                using the handle, it must be prefixed with `handle:`
+                using the handle, it must be prefixed with `handle:`. Example:
+                `123` for an integer ID, or `handle:example-product-handle`
+                for a string handle.
             price_point_id (int | str): The id or handle of the price point.
-                When using the handle, it must be prefixed with `handle:`
+                When using the handle, it must be prefixed with `handle:`.
+                Example: `123` for an integer ID, or
+                `handle:example-product-price-point-handle` for a string
+                handle.
             currency_prices (bool, optional): When fetching a product's price
                 points, if you have defined multiple currencies at the site
                 level, you can optionally pass the ?currency_prices=true query
@@ -304,9 +315,14 @@ class ProductPricePointsController(BaseController):
 
         Args:
             product_id (int | str): The id or handle of the product. When
-                using the handle, it must be prefixed with `handle:`
+                using the handle, it must be prefixed with `handle:`. Example:
+                `123` for an integer ID, or `handle:example-product-handle`
+                for a string handle.
             price_point_id (int | str): The id or handle of the price point.
-                When using the handle, it must be prefixed with `handle:`
+                When using the handle, it must be prefixed with `handle:`.
+                Example: `123` for an integer ID, or
+                `handle:example-product-price-point-handle` for a string
+                handle.
 
         Returns:
             ProductPricePointResponse: Response from the API. OK

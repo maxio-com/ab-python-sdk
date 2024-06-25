@@ -48,7 +48,7 @@ class Configuration(HttpClientConfiguration):
 
     def __init__(self, http_client_instance=None,
                  override_http_client_configuration=False, http_call_back=None,
-                 timeout=30, max_retries=0, backoff_factor=2,
+                 timeout=120, max_retries=0, backoff_factor=2,
                  retry_statuses=None, retry_methods=None,
                  environment=Environment.PRODUCTION, subdomain='subdomain',
                  domain='chargify.com', basic_auth_credentials=None):

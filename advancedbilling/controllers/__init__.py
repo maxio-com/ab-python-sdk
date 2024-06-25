@@ -5,6 +5,7 @@ __all__ = [
     'billing_portal_controller',
     'coupons_controller',
     'components_controller',
+    'component_price_points_controller',
     'customers_controller',
     'custom_fields_controller',
     'events_controller',

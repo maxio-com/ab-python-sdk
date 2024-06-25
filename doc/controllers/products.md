@@ -35,7 +35,7 @@ def create_product(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the product belongs |
+| `product_family_id` | `str` | Template, Required | Either the product family's id or its handle prefixed with `handle:` |
 | `body` | [`CreateOrUpdateProductRequest`](../../doc/models/create-or-update-product-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -45,7 +45,7 @@ def create_product(self,
 ## Example Usage
 
 ```python
-product_family_id = 140
+product_family_id = 'product_family_id4'
 
 body = CreateOrUpdateProductRequest(
     product=CreateOrUpdateProduct(

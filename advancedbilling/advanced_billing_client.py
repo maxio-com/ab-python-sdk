@@ -22,6 +22,8 @@ from advancedbilling.controllers.billing_portal_controller\
 from advancedbilling.controllers.coupons_controller import CouponsController
 from advancedbilling.controllers.components_controller\
     import ComponentsController
+from advancedbilling.controllers.component_price_points_controller\
+    import ComponentPricePointsController
 from advancedbilling.controllers.customers_controller\
     import CustomersController
 from advancedbilling.controllers.custom_fields_controller\
@@ -89,6 +91,10 @@ class AdvancedBillingClient(object):
     @LazyProperty
     def components(self):
         return ComponentsController(self.global_configuration)
+
+    @LazyProperty
+    def component_price_points(self):
+        return ComponentPricePointsController(self.global_configuration)
 
     @LazyProperty
     def customers(self):
@@ -196,7 +202,7 @@ class AdvancedBillingClient(object):
 
     def __init__(self, http_client_instance=None,
                  override_http_client_configuration=False, http_call_back=None,
-                 timeout=30, max_retries=0, backoff_factor=2,
+                 timeout=120, max_retries=0, backoff_factor=2,
                  retry_statuses=None, retry_methods=None,
                  environment=Environment.PRODUCTION, subdomain='subdomain',
                  domain='chargify.com', basic_auth_credentials=None,

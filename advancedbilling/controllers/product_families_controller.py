@@ -42,8 +42,8 @@ class ProductFamiliesController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    product_family_id -- int -- The Chargify id of the product
-                        family to which the product belongs
+                    product_family_id -- str -- Either the product family's id
+                        or its handle prefixed with `handle:`
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to
