@@ -3,11 +3,11 @@ class AuthorizeAssertCases:
     def get_result_data() -> dict:
         return {
             "site": {
-                "id": 86561,
+                "id": 87358,
                 "name": "Python SDK",
                 "subdomain": "python-sdk",
                 "currency": "USD",
-                "seller_id": 56887,
+                "seller_id": 58665,
                 "relationship_invoicing_enabled": True,
                 "customer_hierarchy_enabled": False,
                 "whopays_enabled": False,
