@@ -20,6 +20,9 @@
 | `transaction_id` | `int` | Optional | - |
 | `line_item_breakouts` | [`List[InvoiceTaxBreakout]`](../../doc/models/invoice-tax-breakout.md) | Optional | - |
 | `tax_component_breakouts` | [`List[InvoiceTaxComponentBreakout]`](../../doc/models/invoice-tax-component-breakout.md) | Optional | - |
+| `eu_vat` | `bool` | Optional | - |
+| `mtype` | `str` | Optional | - |
+| `tax_exempt_amount` | `str` | Optional | - |
 
 ## Example (as JSON)
 

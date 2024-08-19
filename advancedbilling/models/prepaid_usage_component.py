@@ -39,9 +39,9 @@ class PrepaidUsageComponent(object):
             tml) for an overview of pricing schemes.
         prices (List[Price]): (Not required for ‘per_unit’ pricing schemes)
             One or more price brackets. See [Price Bracket
-            Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883
-            #general-price-bracket-rules) for an overview of how price
-            brackets work for different pricing schemes.
+            Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-C
+            omponent-Pricing-Schemes#price-bracket-rules) for an overview of
+            how price brackets work for different pricing schemes.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
@@ -76,7 +76,8 @@ class PrepaidUsageComponent(object):
             rollover_prepaid_remainder is true) The number of
             `expiration_interval_unit`s after which rollover amounts should
             expire
-        expiration_interval_unit (IntervalUnit): TODO: type description here.
+        expiration_interval_unit (ExpirationIntervalUnit): TODO: type
+            description here.
         display_on_hosted_page (bool): TODO: type description here.
         allow_fractional_quantities (bool): TODO: type description here.
         public_signup_page_ids (List[int]): TODO: type description here.
@@ -136,6 +137,7 @@ class PrepaidUsageComponent(object):
     _nullables = [
         'upgrade_charge',
         'downgrade_credit',
+        'expiration_interval_unit',
     ]
 
     def __init__(self,
@@ -258,7 +260,7 @@ class PrepaidUsageComponent(object):
         rollover_prepaid_remainder = dictionary.get("rollover_prepaid_remainder") if "rollover_prepaid_remainder" in dictionary.keys() else APIHelper.SKIP
         renew_prepaid_allocation = dictionary.get("renew_prepaid_allocation") if "renew_prepaid_allocation" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
-        expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
         public_signup_page_ids = dictionary.get("public_signup_page_ids") if dictionary.get("public_signup_page_ids") else APIHelper.SKIP

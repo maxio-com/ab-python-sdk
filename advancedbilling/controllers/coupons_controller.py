@@ -38,14 +38,15 @@ class CouponsController(BaseController):
         """Does a POST request to /product_families/{product_family_id}/coupons.json.
 
         ## Coupons Documentation
-        Coupons can be administered in the Chargify application or created via
-        API. Please view our section on [creating
-        coupons](https://maxio-chargify.zendesk.com/hc/en-us/articles/540474283
-        0733) for more information.
+        Coupons can be administered in the Advanced Billing application or
+        created via API. Please view our section on [creating
+        coupons](https://maxio.zendesk.com/hc/en-us/articles/24261212433165-Cre
+        ating-Editing-Deleting-Coupons) for more information.
         Additionally, for documentation on how to apply a coupon to a
-        subscription within the Chargify UI, please see our documentation
-        [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/54047610128
-        77).
+        subscription within the Advanced Billing UI, please see our
+        documentation
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupo
+        ns-and-Subscriptions).
         ## Create Coupon
         This request will create a coupon, based on the provided information.
         When creating a coupon, you must specify a product family using the
@@ -58,8 +59,8 @@ class CouponsController(BaseController):
         `{ "<product/component_id>": boolean_value }`
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the coupon belongs
+            product_family_id (int): The Advanced Billing id of the product
+                family to which the coupon belongs
             body (CreateOrUpdateCoupon, optional): TODO: type description
                 here.
 
@@ -116,8 +117,8 @@ class CouponsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    product_family_id -- int -- The Chargify id of the product
-                        family to which the coupon belongs
+                    product_family_id -- int -- The Advanced Billing id of the
+                        product family to which the coupon belongs
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to
@@ -197,8 +198,8 @@ class CouponsController(BaseController):
         string param) the product family id.
 
         Args:
-            product_family_id (int, optional): The Chargify id of the product
-                family to which the coupon belongs
+            product_family_id (int, optional): The Advanced Billing id of the
+                product family to which the coupon belongs
             code (str, optional): The code of the coupon
 
         Returns:
@@ -238,8 +239,8 @@ class CouponsController(BaseController):
         """Does a GET request to /product_families/{product_family_id}/coupons/{coupon_id}.json.
 
         You can retrieve the Coupon via the API with the Show method. You must
-        identify the Coupon in this call by the ID parameter that Chargify
-        assigns.
+        identify the Coupon in this call by the ID parameter that Advanced
+        Billing assigns.
         If instead you would like to find a Coupon using a Coupon code, see
         the Coupon Find method.
         When fetching a coupon, if you have defined multiple currencies at the
@@ -250,9 +251,9 @@ class CouponsController(BaseController):
         false, it will return all of the defined prices for each currency.
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the coupon belongs
-            coupon_id (int): The Chargify id of the coupon
+            product_family_id (int): The Advanced Billing id of the product
+                family to which the coupon belongs
+            coupon_id (int): The Advanced Billing id of the coupon
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -304,9 +305,9 @@ class CouponsController(BaseController):
         `{ "<product/component_id>": boolean_value }`
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the coupon belongs
-            coupon_id (int): The Chargify id of the coupon
+            product_family_id (int): The Advanced Billing id of the product
+                family to which the coupon belongs
+            coupon_id (int): The Advanced Billing id of the coupon
             body (CreateOrUpdateCoupon, optional): TODO: type description
                 here.
 
@@ -363,9 +364,9 @@ class CouponsController(BaseController):
         The `archived_at` date and time will be assigned.
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the coupon belongs
-            coupon_id (int): The Chargify id of the coupon
+            product_family_id (int): The Advanced Billing id of the product
+                family to which the coupon belongs
+            coupon_id (int): The Advanced Billing id of the coupon
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -487,9 +488,9 @@ class CouponsController(BaseController):
         of data hashes, one per product.
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the coupon belongs
-            coupon_id (int): The Chargify id of the coupon
+            product_family_id (int): The Advanced Billing id of the product
+                family to which the coupon belongs
+            coupon_id (int): The Advanced Billing id of the coupon
 
         Returns:
             List[CouponUsage]: Response from the API. OK
@@ -560,8 +561,8 @@ class CouponsController(BaseController):
 
         Args:
             code (str): The code of the coupon
-            product_family_id (int, optional): The Chargify id of the product
-                family to which the coupon belongs
+            product_family_id (int, optional): The Advanced Billing id of the
+                product family to which the coupon belongs
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -611,7 +612,7 @@ class CouponsController(BaseController):
         not be able to define pricing in non-primary currencies.
 
         Args:
-            coupon_id (int): The Chargify id of the coupon
+            coupon_id (int): The Advanced Billing id of the coupon
             body (CouponCurrencyRequest, optional): TODO: type description
                 here.
 
@@ -673,14 +674,15 @@ class CouponsController(BaseController):
         contain only letters and numbers, and do not have any spaces.
         Lowercase letters will be capitalized before the subcode is created.
         ## Coupon Subcodes Documentation
-        Full documentation on how to create coupon subcodes in the Chargify UI
-        can be located
-        [here](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#cou
-        pon-codes).
+        Full documentation on how to create coupon subcodes in the Advanced
+        Billing UI can be located
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24261208729229-Coupo
+        n-Codes).
         Additionally, for documentation on how to apply a coupon to a
-        Subscription within the Chargify UI, please see our documentation
-        [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#cou
-        pon).
+        Subscription within the Advanced Billing UI, please see our
+        documentation
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupo
+        ns-and-Subscriptions).
         ## Create Coupon Subcode
         This request allows you to create specific subcodes underneath an
         existing coupon code.
@@ -698,7 +700,7 @@ class CouponsController(BaseController):
         `https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>`
         
         Args:
-            coupon_id (int): The Chargify id of the coupon
+            coupon_id (int): The Advanced Billing id of the coupon
             body (CouponSubcodes, optional): TODO: type description here.
 
         Returns:
@@ -751,7 +753,7 @@ class CouponsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    coupon_id -- int -- The Chargify id of the coupon
+                    coupon_id -- int -- The Advanced Billing id of the coupon
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to
@@ -819,7 +821,7 @@ class CouponsController(BaseController):
         + Any subcodes not created because they are invalid.
 
         Args:
-            coupon_id (int): The Chargify id of the coupon
+            coupon_id (int): The Advanced Billing id of the coupon
             body (CouponSubcodes, optional): TODO: type description here.
 
         Returns:
@@ -886,8 +888,8 @@ class CouponsController(BaseController):
         @https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>
 
         Args:
-            coupon_id (int): The Chargify id of the coupon to which the
-                subcode belongs
+            coupon_id (int): The Advanced Billing id of the coupon to which
+                the subcode belongs
             subcode (str): The subcode of the coupon
 
         Returns:

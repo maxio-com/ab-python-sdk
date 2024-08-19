@@ -28,8 +28,8 @@ class RefundInvoiceEventData(object):
             segments.  "Parent" invoices do not have lines of their own, but
             they have subtotals and totals which aggregate the member invoice
             segments.  See also the [invoice consolidation
-            documentation](https://chargify.zendesk.com/hc/en-us/articles/44077
-            46391835).
+            documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269
+            909389-Invoice-Consolidation).
         credit_note_attributes (CreditNote): TODO: type description here.
         memo (str): The refund memo.
         original_amount (str): The full, original amount of the refund.

@@ -40,21 +40,22 @@ class WebhooksController(BaseController):
         sent on endpoints specified by you. Endpoints can be added via API or
         Web UI. There is also an option to enable / disable webhooks via API
         request.
-        We recommend that you review Chargify's webhook documentation located
-        in our help site. The following resources will help guide you on how
-        to use webhooks in Chargify, in addition to these webhook endpoints:
+        We recommend that you review Advanced Billing's webhook documentation
+        located in our help site. The following resources will help guide you
+        on how to use webhooks in Advanced Billing, in addition to these
+        webhook endpoints:
         + [Adding/editing new
-        webhooks](https://maxio-chargify.zendesk.com/hc/en-us/articles/54044484
-        50317#configure-webhook-url)
+        webhooks](https://maxio.zendesk.com/hc/en-us/articles/24286723085197-We
+        bhooks#configure-webhook-url)
         + [Webhooks introduction and delivery
-        information](https://maxio-chargify.zendesk.com/hc/en-us/articles/54055
-        68068365#webhooks-introduction-0-0)
+        information](https://maxio.zendesk.com/hc/en-us/articles/24266143173901
+        -Webhooks-Overview)
         + [Main webhook
-        overview](https://maxio-chargify.zendesk.com/hc/en-us/articles/54053575
-        09645-Webhooks-Reference#webhooks-reference-0-0)
+        reference](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-W
+        ebhooks-Reference)
         + [Available webhooks and
-        payloads](https://maxio-chargify.zendesk.com/hc/en-us/articles/54053575
-        09645-Webhooks-Reference#events)
+        payloads](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-We
+        bhooks-Reference#events)
         ## List Webhooks for a Site
         This method allows you to fetch data about webhooks. You can pass
         query parameters if you want to filter webhooks.
@@ -90,8 +91,8 @@ class WebhooksController(BaseController):
                         `per_page=200`.
                     order -- WebhookOrder -- The order in which the Webhooks
                         are returned.
-                    subscription -- int -- The Chargify id of a subscription
-                        you'd like to filter for
+                    subscription -- int -- The Advanced Billing id of a
+                        subscription you'd like to filter for
 
         Returns:
             List[WebhookResponse]: Response from the API. OK
@@ -233,8 +234,8 @@ class WebhooksController(BaseController):
         webhooks subscriptions (events) to it.
         You can check available events here.
         [Event
-        keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/540535750964
-        5-Webhooks-Reference#example-payloads)
+        keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhoo
+        ks-Reference#events)
 
         Args:
             body (CreateOrUpdateEndpointRequest, optional): TODO: type
@@ -312,8 +313,8 @@ class WebhooksController(BaseController):
         You can change the `url` of your endpoint which consumes webhooks or
         list of `webhook_subscriptions`.
         Check available [Event
-        keys](https://maxio-chargify.zendesk.com/hc/en-us/articles/540444845031
-        7-Webhooks#configure-webhook-url).
+        keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhoo
+        ks-Reference#events).
         Always send a complete list of events which you want subscribe/watch.
         Sending an PUT request for existing endpoint with empty list of
         `webhook_subscriptions` will end with unsubscribe from all events.
@@ -321,8 +322,8 @@ class WebhooksController(BaseController):
         `webhook_subscriptions` without the specific event key.
 
         Args:
-            endpoint_id (int): The Chargify id for the endpoint that should be
-                updated
+            endpoint_id (int): The Advanced Billing id for the endpoint that
+                should be updated
             body (CreateOrUpdateEndpointRequest, optional): TODO: type
                 description here.
 

@@ -74,7 +74,6 @@ result = events_based_billing_segments_controller.create_segment(
     price_point_id,
     body=body
 )
-print(result)
 ```
 
 ## Errors
@@ -125,7 +124,6 @@ collect = {
     )
 }
 result = events_based_billing_segments_controller.list_segments_for_price_point(collect)
-print(result)
 ```
 
 ## Errors
@@ -177,7 +175,6 @@ result = events_based_billing_segments_controller.update_segment(
     price_point_id,
     id
 )
-print(result)
 ```
 
 ## Errors
@@ -222,12 +219,11 @@ price_point_id = 'price_point_id8'
 
 id = 60
 
-result = events_based_billing_segments_controller.delete_segment(
+events_based_billing_segments_controller.delete_segment(
     component_id,
     price_point_id,
     id
 )
-print(result)
 ```
 
 ## Errors
@@ -276,7 +272,6 @@ result = events_based_billing_segments_controller.bulk_create_segments(
     component_id,
     price_point_id
 )
-print(result)
 ```
 
 ## Errors
@@ -325,7 +320,6 @@ result = events_based_billing_segments_controller.bulk_update_segments(
     component_id,
     price_point_id
 )
-print(result)
 ```
 
 ## Errors

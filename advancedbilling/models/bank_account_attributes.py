@@ -37,7 +37,7 @@ class BankAccountAttributes(object):
             personal
         payment_type (PaymentType): TODO: type description here.
         current_vault (BankAccountVault): The vault that stores the payment
-            profile with the provided vault_token.
+            profile with the provided vault_token. Use `bogus` for testing.
         vault_token (str): TODO: type description here.
         customer_vault_token (str): (only for Authorize.Net CIM storage or
             Square) The customerProfileId for the owner of the

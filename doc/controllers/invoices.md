@@ -76,7 +76,6 @@ result = invoices_controller.refund_invoice(
     uid,
     body=body
 )
-print(result)
 ```
 
 ## Errors
@@ -157,7 +156,6 @@ collect = {
     'sort': InvoiceSortField.TOTAL_AMOUNT
 }
 result = invoices_controller.list_invoices(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -472,7 +470,6 @@ def read_invoice(self,
 uid = 'uid0'
 
 result = invoices_controller.read_invoice(uid)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -640,7 +637,6 @@ collect = {
     'per_page': 100
 }
 result = invoices_controller.list_invoice_events(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -973,9 +969,22 @@ print(result)
                 "tax_rule_id": 1,
                 "percentage": "6.75",
                 "country_code": "US",
-                "subdivision_code": "NC"
+                "subdivision_code": "NC",
+                "tax_amount": "10.66",
+                "taxable_amount": "157.95",
+                "tax_exempt_amount": "0.0",
+                "non_taxable_amount": "0.0",
+                "tax_name": "NC STATE TAX",
+                "tax_type": "Sales",
+                "rate_type": "General",
+                "tax_authority_type": 45,
+                "state_assigned_no": "",
+                "tax_sub_type": "S"
               }
-            ]
+            ],
+            "eu_vat": false,
+            "type": "Sales",
+            "tax_exempt_amount": "0.0"
           }
         ],
         "credit_amount": "0.0",
@@ -1060,7 +1069,7 @@ In order to apply a service credit to an invoice, specify the `type` as `service
 }
 ```
 
-Note that Chargify will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
+Note that Advanced Billing will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
 
 ```python
 def record_payment_for_invoice(self,
@@ -1097,7 +1106,6 @@ result = invoices_controller.record_payment_for_invoice(
     uid,
     body=body
 )
-print(result)
 ```
 
 ## Errors
@@ -1176,7 +1184,6 @@ body = CreateMultiInvoicePaymentRequest(
 result = invoices_controller.record_payment_for_multiple_invoices(
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1225,7 +1232,7 @@ def list_credit_notes(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Query, Optional | The subscription's Chargify id |
+| `subscription_id` | `int` | Query, Optional | The subscription's Advanced Billing id |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 | `line_items` | `bool` | Query, Optional | Include line items data |
@@ -1251,7 +1258,6 @@ collect = {
     'applications': False
 }
 result = invoices_controller.list_credit_notes(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1508,7 +1514,28 @@ print(result)
               "taxable_amount": "6.87559535",
               "tax_amount": "0.46410269"
             }
-          ]
+          ],
+          "tax_component_breakouts": [
+            {
+              "tax_rule_id": 1,
+              "percentage": "6.75",
+              "country_code": "US",
+              "subdivision_code": "NC",
+              "tax_amount": "10.66",
+              "taxable_amount": "157.95",
+              "tax_exempt_amount": "0.0",
+              "non_taxable_amount": "0.0",
+              "tax_name": "NC STATE TAX",
+              "tax_type": "Sales",
+              "rate_type": "General",
+              "tax_authority_type": 45,
+              "state_assigned_no": "",
+              "tax_sub_type": "S"
+            }
+          ],
+          "eu_vat": false,
+          "type": "Sales",
+          "tax_exempt_amount": "0.0"
         }
       ],
       "applications": [
@@ -1560,7 +1587,6 @@ def read_credit_note(self,
 uid = 'uid0'
 
 result = invoices_controller.read_credit_note(uid)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1827,7 +1853,28 @@ print(result)
           "taxable_amount": "6.87559535",
           "tax_amount": "0.46410269"
         }
-      ]
+      ],
+      "tax_component_breakouts": [
+        {
+          "tax_rule_id": 1,
+          "percentage": "6.75",
+          "country_code": "US",
+          "subdivision_code": "NC",
+          "tax_amount": "10.66",
+          "taxable_amount": "157.95",
+          "tax_exempt_amount": "0.0",
+          "non_taxable_amount": "0.0",
+          "tax_name": "NC STATE TAX",
+          "tax_type": "Sales",
+          "rate_type": "General",
+          "tax_authority_type": 45,
+          "state_assigned_no": "",
+          "tax_sub_type": "S"
+        }
+      ],
+      "eu_vat": false,
+      "type": "Sales",
+      "tax_exempt_amount": "0.0"
     }
   ],
   "applications": [
@@ -1897,7 +1944,6 @@ result = invoices_controller.record_payment_for_subscription(
     subscription_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1965,7 +2011,6 @@ def reopen_invoice(self,
 uid = 'uid0'
 
 result = invoices_controller.reopen_invoice(uid)
-print(result)
 ```
 
 ## Errors
@@ -2012,7 +2057,6 @@ result = invoices_controller.void_invoice(
     uid,
     body=body
 )
-print(result)
 ```
 
 ## Errors
@@ -2055,7 +2099,6 @@ collect = {
     'direction': Direction.ASC
 }
 result = invoices_controller.list_consolidated_invoice_segments(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -2540,7 +2583,6 @@ result = invoices_controller.create_invoice(
     subscription_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -2689,11 +2731,10 @@ body = SendInvoiceRequest(
     ]
 )
 
-result = invoices_controller.send_invoice(
+invoices_controller.send_invoice(
     uid,
     body=body
 )
-print(result)
 ```
 
 ## Errors
@@ -2730,7 +2771,6 @@ def preview_customer_information_changes(self,
 uid = 'uid0'
 
 result = invoices_controller.preview_customer_information_changes(uid)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -2821,7 +2861,6 @@ def update_customer_information(self,
 uid = 'uid0'
 
 result = invoices_controller.update_customer_information(uid)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -3007,7 +3046,8 @@ print(result)
         "outstanding_amount": "id"
       }
     ]
-  }
+  },
+  "public_url_expires_on": "2024-11-21"
 }
 ```
 
@@ -3063,7 +3103,6 @@ result = invoices_controller.issue_invoice(
     uid,
     body=body
 )
-print(result)
 ```
 
 ## Errors

@@ -31,13 +31,14 @@ class ProductsController(BaseController):
                        body=None):
         """Does a POST request to /product_families/{product_family_id}/products.json.
 
-        Use this method to create a product within your Chargify site.
+        Use this method to create a product within your Advanced Billing
+        site.
         + [Products
-        Documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/540
-        5561405709)
+        Documentation](https://maxio.zendesk.com/hc/en-us/articles/242610901176
+        45-Products-Overview)
         + [Changing a Subscription's
-        Product](https://maxio-chargify.zendesk.com/hc/en-us/articles/540422533
-        4669-Product-Changes-Migrations)
+        Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-Pro
+        duct-Changes-and-Migrations)
 
         Args:
             product_family_id (str): Either the product family's id or its
@@ -87,10 +88,10 @@ class ProductsController(BaseController):
         """Does a GET request to /products/{product_id}.json.
 
         This endpoint allows you to read the current details of a product that
-        you've created in Chargify.
+        you've created in Advanced Billing.
 
         Args:
-            product_id (int): The Chargify id of the product
+            product_id (int): The Advanced Billing id of the product
 
         Returns:
             ProductResponse: Response from the API. OK
@@ -138,7 +139,7 @@ class ProductsController(BaseController):
         separately.
 
         Args:
-            product_id (int): The Chargify id of the product
+            product_id (int): The Advanced Billing id of the product
             body (CreateOrUpdateProductRequest, optional): TODO: type
                 description here.
 
@@ -191,7 +192,7 @@ class ProductsController(BaseController):
         product.
 
         Args:
-            product_id (int): The Chargify id of the product
+            product_id (int): The Advanced Billing id of the product
 
         Returns:
             ProductResponse: Response from the API. OK

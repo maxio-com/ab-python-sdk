@@ -23,12 +23,12 @@ class ChangeInvoiceStatusEventData(object):
             expressed in dollars.
         from_status (InvoiceStatus): The status of the invoice before any
             changes occurred. See [Invoice
-            Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
-            078794253-Introduction-to-Invoices#invoice-statuses) for more.
+            Statuses](https://maxio.zendesk.com/hc/en-us/articles/2425228782964
+            5-Advanced-Billing-Invoices-Overview#invoice-statuses) for more.
         to_status (InvoiceStatus): The updated status of the invoice after
             changes have been made. See [Invoice
-            Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
-            078794253-Introduction-to-Invoices#invoice-statuses) for more.
+            Statuses](https://maxio.zendesk.com/hc/en-us/articles/2425228782964
+            5-Advanced-Billing-Invoices-Overview#invoice-statuses) for more.
         consolidation_level (InvoiceConsolidationLevel): TODO: type
             description here.
 

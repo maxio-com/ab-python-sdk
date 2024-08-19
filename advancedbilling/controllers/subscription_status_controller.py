@@ -32,8 +32,9 @@ class SubscriptionStatusController(BaseController):
                            subscription_id):
         """Does a PUT request to /subscriptions/{subscription_id}/retry.json.
 
-        Chargify offers the ability to retry collecting the balance due on a
-        past due Subscription without waiting for the next scheduled attempt.
+        Advanced Billing offers the ability to retry collecting the balance
+        due on a past due Subscription without waiting for the next scheduled
+        attempt.
         ## Successful Reactivation
         The response will be `200 OK` with the updated Subscription.
         ## Failed Reactivation
@@ -285,14 +286,14 @@ class SubscriptionStatusController(BaseController):
                                 body=None):
         """Does a PUT request to /subscriptions/{subscription_id}/reactivate.json.
 
-        Chargify offers the ability to reactivate a previously canceled
-        subscription. For details on how the reactivation works, and how to
-        reactivate subscriptions through the application, see
-        [reactivation](https://chargify.zendesk.com/hc/en-us/articles/440789873
-        7691).
+        Advanced Billing offers the ability to reactivate a previously
+        canceled subscription. For details on how the reactivation works, and
+        how to reactivate subscriptions through the application, see
+        [reactivation](https://maxio.zendesk.com/hc/en-us/articles/242521095036
+        29-Reactivating-and-Resuming).
         **Please note: The term
-        "resume" is used also during another process in Chargify. This occurs
-        when an on-hold subscription is "resumed". This returns the
+        "resume" is used also during another process in Advanced Billing. This
+        occurs when an on-hold subscription is "resumed". This returns the
         subscription to an active state.**
         + The response returns the subscription object in the `active` or
         `trialing` state.
@@ -313,12 +314,12 @@ class SubscriptionStatusController(BaseController):
         Consider a subscription which was created on June 1st, and would renew
         on July 1st. The subscription is then canceled on June 15.
         If a reactivation with `resume: true` were attempted _before_ what
-        would have been the next billing date of July 1st, then Chargify would
-        resume the subscription.
+        would have been the next billing date of July 1st, then Advanced
+        Billing would resume the subscription.
         If a reactivation with `resume: true` were attempted _after_ what
-        would have been the next billing date of July 1st, then Chargify would
-        not resume the subscription, and instead it would be reactivated with
-        a new billing period.
+        would have been the next billing date of July 1st, then Advanced
+        Billing would not resume the subscription, and instead it would be
+        reactivated with a new billing period.
         | Canceled | Reactivation | Resumable? |
         |---|---|---|
         | Jun 15 | June 28 | Yes |
@@ -474,8 +475,9 @@ class SubscriptionStatusController(BaseController):
                                       body=None):
         """Does a POST request to /subscriptions/{subscription_id}/delayed_cancel.json.
 
-        Chargify offers the ability to cancel a subscription at the end of the
-        current billing period. This period is set by its current product.
+        Advanced Billing offers the ability to cancel a subscription at the
+        end of the current billing period. This period is set by its current
+        product.
         Requesting to cancel the subscription at the end of the period sets
         the `cancel_at_end_of_period` flag to true.
         Note that you cannot set `cancel_at_end_of_period` at subscription
@@ -620,8 +622,8 @@ class SubscriptionStatusController(BaseController):
         The "Next Billing" amount and "Next Billing" date are already
         represented in the UI on each Subscriber's Summary. For more
         information, please see our documentation
-        [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#nex
-        t-billing).
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subsc
+        riber-Interface-Overview).
         ## Optional Component Fields
         This endpoint is particularly useful due to the fact that it will
         return the computed billing amount for the base product and the

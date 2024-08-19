@@ -40,9 +40,9 @@ class CreateProductPricePoint(object):
             expiration_interval of ‘30’ coupled with an
             expiration_interval_unit of day would mean this product price
             point would expire after 30 days.
-        expiration_interval_unit (IntervalUnit): A string representing the
-            expiration interval unit for this product price point, either
-            month or day
+        expiration_interval_unit (ExpirationIntervalUnit): A string
+            representing the expiration interval unit for this product price
+            point, either month, day or never
         use_site_exchange_rate (bool): Whether or not to use the site's
             exchange rate or define your own pricing when your site has
             multiple currencies defined.
@@ -78,6 +78,10 @@ class CreateProductPricePoint(object):
         'expiration_interval',
         'expiration_interval_unit',
         'use_site_exchange_rate',
+    ]
+
+    _nullables = [
+        'expiration_interval_unit',
     ]
 
     def __init__(self,
@@ -157,7 +161,7 @@ class CreateProductPricePoint(object):
         initial_charge_in_cents = dictionary.get("initial_charge_in_cents") if dictionary.get("initial_charge_in_cents") else APIHelper.SKIP
         initial_charge_after_trial = dictionary.get("initial_charge_after_trial") if "initial_charge_after_trial" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
-        expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if dictionary.get("use_site_exchange_rate") else True
         # Clean out expected properties from dictionary
         for key in cls._names.values():

@@ -40,7 +40,6 @@ def read_site_stats(self)
 
 ```python
 result = insights_controller.read_site_stats()
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -90,7 +89,6 @@ def read_mrr(self,
 
 ```python
 result = insights_controller.read_mrr()
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -122,7 +120,7 @@ This endpoint returns your site's MRR movements.
 
 ## Understanding MRR movements
 
-This endpoint will aid in accessing your site's [MRR Report](https://chargify.zendesk.com/hc/en-us/articles/4407838249627) data.
+This endpoint will aid in accessing your site's [MRR Report](https://maxio.zendesk.com/hc/en-us/articles/24285894587021-MRR-Analytics) data.
 
 Whenever a subscription event occurs that causes your site's MRR to change (such as a signup or upgrade), we record an MRR movement. These records are accessible via the MRR Movements endpoint.
 
@@ -130,7 +128,7 @@ Each MRR Movement belongs to a subscription and contains a timestamp, category, 
 
 ### Plan & Usage Breakouts
 
-In the MRR Report UI, we support a setting to [include or exclude](https://chargify.zendesk.com/hc/en-us/articles/4407838249627#displaying-component-based-metered-usage-in-mrr) usage revenue. In the MRR APIs, responses include `plan` and `usage` breakouts.
+In the MRR Report UI, we support a setting to [include or exclude](https://maxio.zendesk.com/hc/en-us/articles/24285894587021-MRR-Analytics#displaying-component-based-metered-usage-in-mrr) usage revenue. In the MRR APIs, responses include `plan` and `usage` breakouts.
 
 Plan includes revenue from:
 
@@ -169,7 +167,6 @@ collect = {
     'per_page': 20
 }
 result = insights_controller.list_mrr_movements(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -267,7 +264,6 @@ collect = {
     'direction': Direction.DESC
 }
 result = insights_controller.list_mrr_per_subscription(collect)
-print(result)
 ```
 
 ## Errors

@@ -42,7 +42,7 @@ class SubscriptionGroupBankAccount(object):
         billing_country (str): TODO: type description here.
         chargify_token (str): TODO: type description here.
         current_vault (BankAccountVault): The vault that stores the payment
-            profile with the provided vault_token.
+            profile with the provided vault_token. Use `bogus` for testing.
         gateway_handle (str): TODO: type description here.
 
     """

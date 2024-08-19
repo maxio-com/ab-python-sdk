@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.payment_type import PaymentType
 
 
 class CreditCardPaymentProfile(object):
@@ -32,7 +33,7 @@ class CreditCardPaymentProfile(object):
             year of the card(i.e. ‘2012’).
         customer_id (int): The Chargify-assigned id for the customer record to
             which the card belongs.
-        current_vault (CurrentVault): The vault that stores the payment
+        current_vault (CreditCardVault): The vault that stores the payment
             profile with the provided `vault_token`. Use `bogus` for testing.
         vault_token (str): The “token” provided by your vault storage for an
             already stored payment profile.
@@ -61,10 +62,11 @@ class CreditCardPaymentProfile(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "masked_card_number": 'masked_card_number',
+        "payment_type": 'payment_type',
         "id": 'id',
         "first_name": 'first_name',
         "last_name": 'last_name',
+        "masked_card_number": 'masked_card_number',
         "card_type": 'card_type',
         "expiration_month": 'expiration_month',
         "expiration_year": 'expiration_year',
@@ -78,7 +80,6 @@ class CreditCardPaymentProfile(object):
         "billing_country": 'billing_country',
         "customer_vault_token": 'customer_vault_token',
         "billing_address_2": 'billing_address_2',
-        "payment_type": 'payment_type',
         "disabled": 'disabled',
         "chargify_token": 'chargify_token',
         "site_gateway_setting_id": 'site_gateway_setting_id',
@@ -89,6 +90,7 @@ class CreditCardPaymentProfile(object):
         'id',
         'first_name',
         'last_name',
+        'masked_card_number',
         'card_type',
         'expiration_month',
         'expiration_year',
@@ -102,7 +104,6 @@ class CreditCardPaymentProfile(object):
         'billing_country',
         'customer_vault_token',
         'billing_address_2',
-        'payment_type',
         'disabled',
         'chargify_token',
         'site_gateway_setting_id',
@@ -123,10 +124,11 @@ class CreditCardPaymentProfile(object):
     ]
 
     def __init__(self,
-                 masked_card_number=None,
+                 payment_type='credit_card',
                  id=APIHelper.SKIP,
                  first_name=APIHelper.SKIP,
                  last_name=APIHelper.SKIP,
+                 masked_card_number=APIHelper.SKIP,
                  card_type=APIHelper.SKIP,
                  expiration_month=APIHelper.SKIP,
                  expiration_year=APIHelper.SKIP,
@@ -140,7 +142,6 @@ class CreditCardPaymentProfile(object):
                  billing_country=APIHelper.SKIP,
                  customer_vault_token=APIHelper.SKIP,
                  billing_address_2=APIHelper.SKIP,
-                 payment_type=APIHelper.SKIP,
                  disabled=APIHelper.SKIP,
                  chargify_token=APIHelper.SKIP,
                  site_gateway_setting_id=APIHelper.SKIP,
@@ -155,7 +156,8 @@ class CreditCardPaymentProfile(object):
             self.first_name = first_name 
         if last_name is not APIHelper.SKIP:
             self.last_name = last_name 
-        self.masked_card_number = masked_card_number 
+        if masked_card_number is not APIHelper.SKIP:
+            self.masked_card_number = masked_card_number 
         if card_type is not APIHelper.SKIP:
             self.card_type = card_type 
         if expiration_month is not APIHelper.SKIP:
@@ -182,8 +184,7 @@ class CreditCardPaymentProfile(object):
             self.customer_vault_token = customer_vault_token 
         if billing_address_2 is not APIHelper.SKIP:
             self.billing_address_2 = billing_address_2 
-        if payment_type is not APIHelper.SKIP:
-            self.payment_type = payment_type 
+        self.payment_type = payment_type 
         if disabled is not APIHelper.SKIP:
             self.disabled = disabled 
         if chargify_token is not APIHelper.SKIP:
@@ -215,10 +216,11 @@ class CreditCardPaymentProfile(object):
             return None
 
         # Extract variables from the dictionary
-        masked_card_number = dictionary.get("masked_card_number") if dictionary.get("masked_card_number") else None
+        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else 'credit_card'
         id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
         first_name = dictionary.get("first_name") if dictionary.get("first_name") else APIHelper.SKIP
         last_name = dictionary.get("last_name") if dictionary.get("last_name") else APIHelper.SKIP
+        masked_card_number = dictionary.get("masked_card_number") if dictionary.get("masked_card_number") else APIHelper.SKIP
         card_type = dictionary.get("card_type") if dictionary.get("card_type") else APIHelper.SKIP
         expiration_month = dictionary.get("expiration_month") if dictionary.get("expiration_month") else APIHelper.SKIP
         expiration_year = dictionary.get("expiration_year") if dictionary.get("expiration_year") else APIHelper.SKIP
@@ -232,7 +234,6 @@ class CreditCardPaymentProfile(object):
         billing_country = dictionary.get("billing_country") if "billing_country" in dictionary.keys() else APIHelper.SKIP
         customer_vault_token = dictionary.get("customer_vault_token") if "customer_vault_token" in dictionary.keys() else APIHelper.SKIP
         billing_address_2 = dictionary.get("billing_address_2") if "billing_address_2" in dictionary.keys() else APIHelper.SKIP
-        payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         disabled = dictionary.get("disabled") if "disabled" in dictionary.keys() else APIHelper.SKIP
         chargify_token = dictionary.get("chargify_token") if dictionary.get("chargify_token") else APIHelper.SKIP
         site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if "site_gateway_setting_id" in dictionary.keys() else APIHelper.SKIP
@@ -242,10 +243,11 @@ class CreditCardPaymentProfile(object):
             if key in dictionary:
                 del dictionary[key]
         # Return an object of this model
-        return cls(masked_card_number,
+        return cls(payment_type,
                    id,
                    first_name,
                    last_name,
+                   masked_card_number,
                    card_type,
                    expiration_month,
                    expiration_year,
@@ -259,7 +261,6 @@ class CreditCardPaymentProfile(object):
                    billing_country,
                    customer_vault_token,
                    billing_address_2,
-                   payment_type,
                    disabled,
                    chargify_token,
                    site_gateway_setting_id,
@@ -281,11 +282,11 @@ class CreditCardPaymentProfile(object):
         """
 
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.masked_card_number,
-                                           type_callable=lambda value: isinstance(value, str))
+            return APIHelper.is_valid_type(value=dictionary.payment_type,
+                                           type_callable=lambda value: PaymentType.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('masked_card_number'),
-                                       type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(value=dictionary.get('payment_type'),
+                                       type_callable=lambda value: PaymentType.validate(value))

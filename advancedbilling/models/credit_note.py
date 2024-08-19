@@ -95,8 +95,8 @@ class CreditNote(object):
         refunds (List[InvoiceRefund]): TODO: type description here.
         origin_invoices (List[OriginInvoice]): An array of origin invoices for
             the credit note. Learn more about [Origin Invoice from our
-            docs](https://chargify.zendesk.com/hc/en-us/articles/4407753036699#
-            origin-invoices)
+            docs](https://maxio.zendesk.com/hc/en-us/articles/24252261284749-Cr
+            edit-Notes-Proration#origin-invoices)
 
     """
 

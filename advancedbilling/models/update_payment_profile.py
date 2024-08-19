@@ -26,8 +26,8 @@ class UpdatePaymentProfile(object):
         expiration_year (str): (Optional when performing a Import via
             vault_token, required otherwise) The 4-digit credit card
             expiration year, as an integer or string, i.e. 2012
-        current_vault (CurrentVault): The vault that stores the payment
-            profile with the provided `vault_token`. Use `bogus` for testing.
+        current_vault (AllVaults): The vault that stores the payment profile
+            with the provided `vault_token`. Use `bogus` for testing.
         billing_address (str): The credit card or bank account billing street
             address (i.e. 123 Main St.). This value is merely passed through
             to the payment gateway.

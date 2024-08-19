@@ -25,7 +25,7 @@ product_price_points_controller = client.product_price_points
 
 # Create Product Price Point
 
-[Product Price Point Documentation](https://chargify.zendesk.com/hc/en-us/articles/4407755824155)
+[Product Price Point Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261111947789-Product-Price-Points)
 
 ```python
 def create_product_price_point(self,
@@ -63,7 +63,7 @@ body = CreateProductPricePointRequest(
         initial_charge_in_cents=120000,
         initial_charge_after_trial=False,
         expiration_interval=12,
-        expiration_interval_unit=IntervalUnit.MONTH
+        expiration_interval_unit=ExpirationIntervalUnit.MONTH
     )
 )
 
@@ -71,7 +71,6 @@ result = product_price_points_controller.create_product_price_point(
     product_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -140,7 +139,6 @@ collect = {Liquid error: Value cannot be null. (Parameter 'key')
     'per_page': 10
 }
 result = product_price_points_controller.list_product_price_points(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -217,7 +215,6 @@ result = product_price_points_controller.update_product_price_point(
     price_point_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -282,7 +279,6 @@ result = product_price_points_controller.read_product_price_point(
     product_id,
     price_point_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -345,7 +341,6 @@ result = product_price_points_controller.archive_product_price_point(
     product_id,
     price_point_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -396,8 +391,8 @@ def unarchive_product_price_point(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The Chargify id of the product to which the price point belongs |
-| `price_point_id` | `int` | Template, Required | The Chargify id of the product price point |
+| `product_id` | `int` | Template, Required | The Advanced Billing id of the product to which the price point belongs |
+| `price_point_id` | `int` | Template, Required | The Advanced Billing id of the product price point |
 
 ## Response Type
 
@@ -414,7 +409,6 @@ result = product_price_points_controller.unarchive_product_price_point(
     product_id,
     price_point_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -461,8 +455,8 @@ def promote_product_price_point_to_default(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The Chargify id of the product to which the price point belongs |
-| `price_point_id` | `int` | Template, Required | The Chargify id of the product price point |
+| `product_id` | `int` | Template, Required | The Advanced Billing id of the product to which the price point belongs |
+| `price_point_id` | `int` | Template, Required | The Advanced Billing id of the product price point |
 
 ## Response Type
 
@@ -479,7 +473,6 @@ result = product_price_points_controller.promote_product_price_point_to_default(
     product_id,
     price_point_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -550,7 +543,7 @@ def bulk_create_product_price_points(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The Chargify id of the product to which the price points belong |
+| `product_id` | `int` | Template, Required | The Advanced Billing id of the product to which the price points belong |
 | `body` | [`BulkCreateProductPricePointsRequest`](../../doc/models/bulk-create-product-price-points-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -577,7 +570,7 @@ body = BulkCreateProductPricePointsRequest(
             initial_charge_in_cents=120000,
             initial_charge_after_trial=False,
             expiration_interval=12,
-            expiration_interval_unit=IntervalUnit.MONTH
+            expiration_interval_unit=ExpirationIntervalUnit.MONTH
         ),
         CreateProductPricePoint(
             name='More Educational',
@@ -592,7 +585,7 @@ body = BulkCreateProductPricePointsRequest(
             initial_charge_in_cents=120000,
             initial_charge_after_trial=False,
             expiration_interval=12,
-            expiration_interval_unit=IntervalUnit.MONTH
+            expiration_interval_unit=ExpirationIntervalUnit.MONTH
         )
     ]
 )
@@ -601,7 +594,6 @@ result = product_price_points_controller.bulk_create_product_price_points(
     product_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -658,7 +650,7 @@ def create_product_currency_prices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_price_point_id` | `int` | Template, Required | The Chargify id of the product price point |
+| `product_price_point_id` | `int` | Template, Required | The Advanced Billing id of the product price point |
 | `body` | [`CreateProductCurrencyPricesRequest`](../../doc/models/create-product-currency-prices-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -694,7 +686,6 @@ result = product_price_points_controller.create_product_currency_prices(
     product_price_point_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -739,7 +730,7 @@ def update_product_currency_prices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_price_point_id` | `int` | Template, Required | The Chargify id of the product price point |
+| `product_price_point_id` | `int` | Template, Required | The Advanced Billing id of the product price point |
 | `body` | [`UpdateCurrencyPricesRequest`](../../doc/models/update-currency-prices-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -768,7 +759,6 @@ result = product_price_points_controller.update_product_currency_prices(
     product_price_point_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -843,7 +833,6 @@ collect = {
     'per_page': 50
 }
 result = product_price_points_controller.list_all_product_price_points(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

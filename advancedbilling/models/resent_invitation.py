@@ -20,6 +20,8 @@ class ResentInvitation(object):
         last_accepted_at (str): TODO: type description here.
         send_invite_link_text (str): TODO: type description here.
         uninvited_count (int): TODO: type description here.
+        last_invite_sent_at (datetime): TODO: type description here.
+        last_invite_accepted_at (datetime): TODO: type description here.
 
     """
 
@@ -28,7 +30,9 @@ class ResentInvitation(object):
         "last_sent_at": 'last_sent_at',
         "last_accepted_at": 'last_accepted_at',
         "send_invite_link_text": 'send_invite_link_text',
-        "uninvited_count": 'uninvited_count'
+        "uninvited_count": 'uninvited_count',
+        "last_invite_sent_at": 'last_invite_sent_at',
+        "last_invite_accepted_at": 'last_invite_accepted_at'
     }
 
     _optionals = [
@@ -36,6 +40,8 @@ class ResentInvitation(object):
         'last_accepted_at',
         'send_invite_link_text',
         'uninvited_count',
+        'last_invite_sent_at',
+        'last_invite_accepted_at',
     ]
 
     def __init__(self,
@@ -43,6 +49,8 @@ class ResentInvitation(object):
                  last_accepted_at=APIHelper.SKIP,
                  send_invite_link_text=APIHelper.SKIP,
                  uninvited_count=APIHelper.SKIP,
+                 last_invite_sent_at=APIHelper.SKIP,
+                 last_invite_accepted_at=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the ResentInvitation class"""
 
@@ -55,6 +63,10 @@ class ResentInvitation(object):
             self.send_invite_link_text = send_invite_link_text 
         if uninvited_count is not APIHelper.SKIP:
             self.uninvited_count = uninvited_count 
+        if last_invite_sent_at is not APIHelper.SKIP:
+            self.last_invite_sent_at = APIHelper.apply_datetime_converter(last_invite_sent_at, APIHelper.RFC3339DateTime) if last_invite_sent_at else None 
+        if last_invite_accepted_at is not APIHelper.SKIP:
+            self.last_invite_accepted_at = APIHelper.apply_datetime_converter(last_invite_accepted_at, APIHelper.RFC3339DateTime) if last_invite_accepted_at else None 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -82,6 +94,8 @@ class ResentInvitation(object):
         last_accepted_at = dictionary.get("last_accepted_at") if dictionary.get("last_accepted_at") else APIHelper.SKIP
         send_invite_link_text = dictionary.get("send_invite_link_text") if dictionary.get("send_invite_link_text") else APIHelper.SKIP
         uninvited_count = dictionary.get("uninvited_count") if dictionary.get("uninvited_count") else APIHelper.SKIP
+        last_invite_sent_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("last_invite_sent_at")).datetime if dictionary.get("last_invite_sent_at") else APIHelper.SKIP
+        last_invite_accepted_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("last_invite_accepted_at")).datetime if dictionary.get("last_invite_accepted_at") else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -91,4 +105,6 @@ class ResentInvitation(object):
                    last_accepted_at,
                    send_invite_link_text,
                    uninvited_count,
+                   last_invite_sent_at,
+                   last_invite_accepted_at,
                    dictionary)

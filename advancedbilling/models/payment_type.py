@@ -18,14 +18,17 @@ class PaymentType(object):
         CREDIT_CARD: TODO: type description here.
         BANK_ACCOUNT: TODO: type description here.
         PAYPAL_ACCOUNT: TODO: type description here.
+        APPLE_PAY: TODO: type description here.
 
     """
-    _all_values = ['credit_card', 'bank_account', 'paypal_account']
+    _all_values = ['credit_card', 'bank_account', 'paypal_account', 'apple_pay']
     CREDIT_CARD = 'credit_card'
 
     BANK_ACCOUNT = 'bank_account'
 
     PAYPAL_ACCOUNT = 'paypal_account'
+
+    APPLE_PAY = 'apple_pay'
 
     @classmethod
     def validate(cls, value):

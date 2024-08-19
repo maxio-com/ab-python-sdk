@@ -40,8 +40,8 @@ class ProductPricePointsController(BaseController):
         """Does a POST request to /products/{product_id}/price_points.json.
 
         [Product Price Point
-        Documentation](https://chargify.zendesk.com/hc/en-us/articles/440775582
-        4155)
+        Documentation](https://maxio.zendesk.com/hc/en-us/articles/242611119477
+        89-Product-Price-Points)
 
         Args:
             product_id (int | str): The id or handle of the product. When
@@ -370,9 +370,10 @@ class ProductPricePointsController(BaseController):
         Use this endpoint to unarchive an archived product price point.
 
         Args:
-            product_id (int): The Chargify id of the product to which the
-                price point belongs
-            price_point_id (int): The Chargify id of the product price point
+            product_id (int): The Advanced Billing id of the product to which
+                the price point belongs
+            price_point_id (int): The Advanced Billing id of the product price
+                point
 
         Returns:
             ProductPricePointResponse: Response from the API. OK
@@ -420,9 +421,10 @@ class ProductPricePointsController(BaseController):
         default for a product.
 
         Args:
-            product_id (int): The Chargify id of the product to which the
-                price point belongs
-            price_point_id (int): The Chargify id of the product price point
+            product_id (int): The Advanced Billing id of the product to which
+                the price point belongs
+            price_point_id (int): The Advanced Billing id of the product price
+                point
 
         Returns:
             ProductResponse: Response from the API. OK
@@ -468,8 +470,8 @@ class ProductPricePointsController(BaseController):
         request.
 
         Args:
-            product_id (int): The Chargify id of the product to which the
-                price points belong
+            product_id (int): The Advanced Billing id of the product to which
+                the price points belong
             body (BulkCreateProductPricePointsRequest, optional): TODO: type
                 description here.
 
@@ -526,8 +528,8 @@ class ProductPricePointsController(BaseController):
         price points.
 
         Args:
-            product_price_point_id (int): The Chargify id of the product price
-                point
+            product_price_point_id (int): The Advanced Billing id of the
+                product price point
             body (CreateProductCurrencyPricesRequest, optional): TODO: type
                 description here.
 
@@ -582,8 +584,8 @@ class ProductPricePointsController(BaseController):
         price points.
 
         Args:
-            product_price_point_id (int): The Chargify id of the product price
-                point
+            product_price_point_id (int): The Advanced Billing id of the
+                product price point
             body (UpdateCurrencyPricesRequest, optional): TODO: type
                 description here.
 

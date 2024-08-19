@@ -20,10 +20,10 @@ products_controller = client.products
 
 # Create Product
 
-Use this method to create a product within your Chargify site.
+Use this method to create a product within your Advanced Billing site.
 
-+ [Products Documentation](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405561405709)
-+ [Changing a Subscription's Product](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404225334669-Product-Changes-Migrations)
++ [Products Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-Overview)
++ [Changing a Subscription's Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-Product-Changes-and-Migrations)
 
 ```python
 def create_product(self,
@@ -66,7 +66,6 @@ result = products_controller.create_product(
     product_family_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -127,7 +126,7 @@ print(result)
 
 # Read Product
 
-This endpoint allows you to read the current details of a product that you've created in Chargify.
+This endpoint allows you to read the current details of a product that you've created in Advanced Billing.
 
 ```python
 def read_product(self,
@@ -138,7 +137,7 @@ def read_product(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The Chargify id of the product |
+| `product_id` | `int` | Template, Required | The Advanced Billing id of the product |
 
 ## Response Type
 
@@ -150,7 +149,6 @@ def read_product(self,
 product_id = 202
 
 result = products_controller.read_product(product_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -219,7 +217,7 @@ def update_product(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The Chargify id of the product |
+| `product_id` | `int` | Template, Required | The Advanced Billing id of the product |
 | `body` | [`CreateOrUpdateProductRequest`](../../doc/models/create-or-update-product-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -232,7 +230,6 @@ def update_product(self,
 product_id = 202
 
 result = products_controller.update_product(product_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -305,7 +302,7 @@ def archive_product(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The Chargify id of the product |
+| `product_id` | `int` | Template, Required | The Advanced Billing id of the product |
 
 ## Response Type
 
@@ -317,7 +314,6 @@ def archive_product(self,
 product_id = 202
 
 result = products_controller.archive_product(product_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -395,7 +391,6 @@ def read_product_by_handle(self,
 api_handle = 'api_handle6'
 
 result = products_controller.read_product_by_handle(api_handle)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -506,7 +501,6 @@ collect = {
     'include': ListProductsInclude.PREPAID_PRODUCT_PRICE_POINT
 }
 result = products_controller.list_products(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

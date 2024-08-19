@@ -30,9 +30,9 @@ coupons_controller = client.coupons
 
 ## Coupons Documentation
 
-Coupons can be administered in the Chargify application or created via API. Please view our section on [creating coupons](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404742830733) for more information.
+Coupons can be administered in the Advanced Billing application or created via API. Please view our section on [creating coupons](https://maxio.zendesk.com/hc/en-us/articles/24261212433165-Creating-Editing-Deleting-Coupons) for more information.
 
-Additionally, for documentation on how to apply a coupon to a subscription within the Chargify UI, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404761012877).
+Additionally, for documentation on how to apply a coupon to a subscription within the Advanced Billing UI, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and-Subscriptions).
 
 ## Create Coupon
 
@@ -53,7 +53,7 @@ def create_coupon(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the coupon belongs |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
 | `body` | [`CreateOrUpdateCoupon`](../../doc/models/create-or-update-coupon.md) | Body, Optional | - |
 
 ## Response Type
@@ -93,7 +93,6 @@ result = coupons_controller.create_coupon(
     product_family_id,
     body=body
 )
-print(result)
 ```
 
 ## Errors
@@ -118,7 +117,7 @@ def list_coupons_for_product_family(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the coupon belongs |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 | `filter` | [`ListCouponsFilter`](../../doc/models/list-coupons-filter.md) | Query, Optional | Filter to use for List Coupons operations |
@@ -153,7 +152,6 @@ collect = {
     'currency_prices': True
 }
 result = coupons_controller.list_coupons_for_product_family(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -264,7 +262,7 @@ def find_coupon(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Query, Optional | The Chargify id of the product family to which the coupon belongs |
+| `product_family_id` | `int` | Query, Optional | The Advanced Billing id of the product family to which the coupon belongs |
 | `code` | `str` | Query, Optional | The code of the coupon |
 
 ## Response Type
@@ -275,13 +273,12 @@ def find_coupon(self,
 
 ```python
 result = coupons_controller.find_coupon()
-print(result)
 ```
 
 
 # Read Coupon
 
-You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this call by the ID parameter that Chargify assigns.
+You can retrieve the Coupon via the API with the Show method. You must identify the Coupon in this call by the ID parameter that Advanced Billing assigns.
 If instead you would like to find a Coupon using a Coupon code, see the Coupon Find method.
 
 When fetching a coupon, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
@@ -298,8 +295,8 @@ def read_coupon(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the coupon belongs |
-| `coupon_id` | `int` | Template, Required | The Chargify id of the coupon |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
+| `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
 
 ## Response Type
 
@@ -316,7 +313,6 @@ result = coupons_controller.read_coupon(
     product_family_id,
     coupon_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -369,8 +365,8 @@ def update_coupon(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the coupon belongs |
-| `coupon_id` | `int` | Template, Required | The Chargify id of the coupon |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
+| `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
 | `body` | [`CreateOrUpdateCoupon`](../../doc/models/create-or-update-coupon.md) | Body, Optional | - |
 
 ## Response Type
@@ -411,7 +407,6 @@ result = coupons_controller.update_coupon(
     coupon_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -460,8 +455,8 @@ def archive_coupon(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the coupon belongs |
-| `coupon_id` | `int` | Template, Required | The Chargify id of the coupon |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
+| `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
 
 ## Response Type
 
@@ -478,7 +473,6 @@ result = coupons_controller.archive_coupon(
     product_family_id,
     coupon_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -559,7 +553,6 @@ collect = {
     'currency_prices': True
 }
 result = coupons_controller.list_coupons(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -625,8 +618,8 @@ def read_coupon_usage(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the coupon belongs |
-| `coupon_id` | `int` | Template, Required | The Chargify id of the coupon |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
+| `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
 
 ## Response Type
 
@@ -643,7 +636,6 @@ result = coupons_controller.read_coupon_usage(
     product_family_id,
     coupon_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -716,7 +708,7 @@ def validate_coupon(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `code` | `str` | Query, Required | The code of the coupon |
-| `product_family_id` | `int` | Query, Optional | The Chargify id of the product family to which the coupon belongs |
+| `product_family_id` | `int` | Query, Optional | The Advanced Billing id of the product family to which the coupon belongs |
 
 ## Response Type
 
@@ -728,7 +720,6 @@ def validate_coupon(self,
 code = 'code8'
 
 result = coupons_controller.validate_coupon(code)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -783,7 +774,7 @@ def create_or_update_coupon_currency_prices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `coupon_id` | `int` | Template, Required | The Chargify id of the coupon |
+| `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
 | `body` | [`CouponCurrencyRequest`](../../doc/models/coupon-currency-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -812,7 +803,6 @@ result = coupons_controller.create_or_update_coupon_currency_prices(
     coupon_id,
     body=body
 )
-print(result)
 ```
 
 
@@ -840,9 +830,9 @@ When creating a coupon subcode, you must specify a coupon to attach it to using 
 
 ## Coupon Subcodes Documentation
 
-Full documentation on how to create coupon subcodes in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407755909531#coupon-codes).
+Full documentation on how to create coupon subcodes in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24261208729229-Coupon-Codes).
 
-Additionally, for documentation on how to apply a coupon to a Subscription within the Chargify UI, please see our documentation [here](https://chargify.zendesk.com/hc/en-us/articles/4407884887835#coupon).
+Additionally, for documentation on how to apply a coupon to a Subscription within the Advanced Billing UI, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and-Subscriptions).
 
 ## Create Coupon Subcode
 
@@ -869,7 +859,7 @@ def create_coupon_subcodes(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `coupon_id` | `int` | Template, Required | The Chargify id of the coupon |
+| `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
 | `body` | [`CouponSubcodes`](../../doc/models/coupon-subcodes.md) | Body, Optional | - |
 
 ## Response Type
@@ -893,7 +883,6 @@ result = coupons_controller.create_coupon_subcodes(
     coupon_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -922,7 +911,7 @@ def list_coupon_subcodes(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `coupon_id` | `int` | Template, Required | The Chargify id of the coupon |
+| `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
 
@@ -939,7 +928,6 @@ collect = {
     'per_page': 50
 }
 result = coupons_controller.list_coupon_subcodes(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -996,7 +984,7 @@ def update_coupon_subcodes(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `coupon_id` | `int` | Template, Required | The Chargify id of the coupon |
+| `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
 | `body` | [`CouponSubcodes`](../../doc/models/coupon-subcodes.md) | Body, Optional | - |
 
 ## Response Type
@@ -1020,7 +1008,6 @@ result = coupons_controller.update_coupon_subcodes(
     coupon_id,
     body=body
 )
-print(result)
 ```
 
 
@@ -1059,7 +1046,7 @@ def delete_coupon_subcode(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `coupon_id` | `int` | Template, Required | The Chargify id of the coupon to which the subcode belongs |
+| `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon to which the subcode belongs |
 | `subcode` | `str` | Template, Required | The subcode of the coupon |
 
 ## Response Type
@@ -1073,11 +1060,10 @@ coupon_id = 162
 
 subcode = 'subcode4'
 
-result = coupons_controller.delete_coupon_subcode(
+coupons_controller.delete_coupon_subcode(
     coupon_id,
     subcode
 )
-print(result)
 ```
 
 ## Errors

@@ -47,9 +47,10 @@ class SubscriptionProductsController(BaseController):
         the subscription should be canceled, the product changed, and then the
         subscription can be reactivated.)
         ## Migrations Documentation
-        Full documentation on how to record Migrations in the Chargify UI can
-        be located
-        [here](https://chargify.zendesk.com/hc/en-us/articles/4407898373531).
+        Full documentation on how to record Migrations in the Advanced Billing
+        UI can be located
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24181589372429-Data-
+        Migration-to-Advanced-Billing).
         ## Failed Migrations
         One of the most common ways that a migration can fail is when the
         attempt is made to migrate a subscription to it's current product.
@@ -58,10 +59,10 @@ class SubscriptionProductsController(BaseController):
         It may happen that a payment needs 3D Secure Authentication when the
         subscription is migrated to a new product; this is referred to in our
         help docs as a [post-authentication
-        flow](https://maxio-chargify.zendesk.com/hc/en-us/articles/540517743207
-        7#psd2-flows-pre-authentication-and-post-authentication). The server
-        returns `422 Unprocessable Entity` in this case with the following
-        response:
+        flow](https://maxio.zendesk.com/hc/en-us/articles/24176278996493-Testin
+        g-Implementing-3D-Secure#psd2-flows-pre-authentication-and-post-authent
+        ication). The server returns `422 Unprocessable Entity` in this case
+        with the following response:
         ```json
         {
           "errors": [

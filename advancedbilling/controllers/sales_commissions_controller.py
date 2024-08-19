@@ -44,7 +44,7 @@ class SalesCommissionsController(BaseController):
         Access to the Sales Commission API endpoints is available to users
         with financial access, where the seller has the Advanced Analytics
         component enabled. For further information on getting access to
-        Advanced Analytics please contact Chargify support.
+        Advanced Analytics please contact Maxio support.
         > Note: The request is at seller level, it means `<<subdomain>>`
         variable will be replaced by `app`
 
@@ -138,7 +138,7 @@ class SalesCommissionsController(BaseController):
         Access to the Sales Commission API endpoints is available to users
         with financial access, where the seller has the Advanced Analytics
         component enabled. For further information on getting access to
-        Advanced Analytics please contact Chargify support.
+        Advanced Analytics please contact Maxio support.
         > Note: The request is at seller level, it means `<<subdomain>>`
         variable will be replaced by `app`
 
@@ -237,13 +237,13 @@ class SalesCommissionsController(BaseController):
         Access to the Sales Commission API endpoints is available to users
         with financial access, where the seller has the Advanced Analytics
         component enabled. For further information on getting access to
-        Advanced Analytics please contact Chargify support.
+        Advanced Analytics please contact Maxio support.
         > Note: The request is at seller level, it means `<<subdomain>>`
         variable will be replaced by `app`
 
         Args:
             seller_id (str): The Chargify id of your seller account
-            sales_rep_id (str): The Chargify id of sales rep.
+            sales_rep_id (str): The Advanced Billing id of sales rep.
             authorization (str, optional): For authorization use user API key.
                 See details
                 [here](https://developers.chargify.com/docs/developer-docs/ZG9j

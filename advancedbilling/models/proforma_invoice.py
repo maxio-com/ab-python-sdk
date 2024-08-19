@@ -52,8 +52,8 @@ class ProformaInvoice(object):
             segments.  "Parent" invoices do not have lines of their own, but
             they have subtotals and totals which aggregate the member invoice
             segments.  See also the [invoice consolidation
-            documentation](https://chargify.zendesk.com/hc/en-us/articles/44077
-            46391835).
+            documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269
+            909389-Invoice-Consolidation).
         product_name (str): TODO: type description here.
         product_family_name (str): TODO: type description here.
         role (ProformaInvoiceRole): 'proforma' value is deprecated in favor of

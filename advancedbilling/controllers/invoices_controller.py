@@ -489,7 +489,7 @@ class InvoicesController(BaseController):
           }
         }
         ```
-        Note that Chargify will attempt to fully pay the invoice's
+        Note that Advanced Billing will attempt to fully pay the invoice's
         `due_amount` from the Subscription's Service Credit account. At this
         time, partial payments from a Service Credit Account are only allowed
         for consolidated invoices (subscription groups). Therefore, for normal
@@ -625,7 +625,8 @@ class InvoicesController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    subscription_id -- int -- The subscription's Chargify id
+                    subscription_id -- int -- The subscription's Advanced
+                        Billing id
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to

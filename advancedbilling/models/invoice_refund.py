@@ -25,6 +25,7 @@ class InvoiceRefund(object):
             returned from the payment gateway
         gateway_used (str): TODO: type description here.
         gateway_handle (str): TODO: type description here.
+        ach_late_reject (bool): TODO: type description here.
 
     """
 
@@ -37,7 +38,8 @@ class InvoiceRefund(object):
         "applied_amount": 'applied_amount',
         "gateway_transaction_id": 'gateway_transaction_id',
         "gateway_used": 'gateway_used',
-        "gateway_handle": 'gateway_handle'
+        "gateway_handle": 'gateway_handle',
+        "ach_late_reject": 'ach_late_reject'
     }
 
     _optionals = [
@@ -49,11 +51,13 @@ class InvoiceRefund(object):
         'gateway_transaction_id',
         'gateway_used',
         'gateway_handle',
+        'ach_late_reject',
     ]
 
     _nullables = [
         'gateway_transaction_id',
         'gateway_handle',
+        'ach_late_reject',
     ]
 
     def __init__(self,
@@ -65,6 +69,7 @@ class InvoiceRefund(object):
                  gateway_transaction_id=APIHelper.SKIP,
                  gateway_used=APIHelper.SKIP,
                  gateway_handle=APIHelper.SKIP,
+                 ach_late_reject=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the InvoiceRefund class"""
 
@@ -85,6 +90,8 @@ class InvoiceRefund(object):
             self.gateway_used = gateway_used 
         if gateway_handle is not APIHelper.SKIP:
             self.gateway_handle = gateway_handle 
+        if ach_late_reject is not APIHelper.SKIP:
+            self.ach_late_reject = ach_late_reject 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -116,6 +123,7 @@ class InvoiceRefund(object):
         gateway_transaction_id = dictionary.get("gateway_transaction_id") if "gateway_transaction_id" in dictionary.keys() else APIHelper.SKIP
         gateway_used = dictionary.get("gateway_used") if dictionary.get("gateway_used") else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
+        ach_late_reject = dictionary.get("ach_late_reject") if "ach_late_reject" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -129,6 +137,7 @@ class InvoiceRefund(object):
                    gateway_transaction_id,
                    gateway_used,
                    gateway_handle,
+                   ach_late_reject,
                    dictionary)
 
     @classmethod
