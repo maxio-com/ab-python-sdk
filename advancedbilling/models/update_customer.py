@@ -36,6 +36,7 @@ class UpdateCustomer(object):
         parent_id (int): TODO: type description here.
         verified (bool): Is the customer verified to use ACH as a payment
             method. Available only on Authorize.Net gateway
+        salesforce_id (str): The Salesforce ID of the customer
 
     """
 
@@ -59,7 +60,8 @@ class UpdateCustomer(object):
         "tax_exempt": 'tax_exempt',
         "tax_exempt_reason": 'tax_exempt_reason',
         "parent_id": 'parent_id',
-        "verified": 'verified'
+        "verified": 'verified',
+        "salesforce_id": 'salesforce_id'
     }
 
     _optionals = [
@@ -82,11 +84,13 @@ class UpdateCustomer(object):
         'tax_exempt_reason',
         'parent_id',
         'verified',
+        'salesforce_id',
     ]
 
     _nullables = [
         'parent_id',
         'verified',
+        'salesforce_id',
     ]
 
     def __init__(self,
@@ -109,6 +113,7 @@ class UpdateCustomer(object):
                  tax_exempt_reason=APIHelper.SKIP,
                  parent_id=APIHelper.SKIP,
                  verified=APIHelper.SKIP,
+                 salesforce_id=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the UpdateCustomer class"""
 
@@ -151,6 +156,8 @@ class UpdateCustomer(object):
             self.parent_id = parent_id 
         if verified is not APIHelper.SKIP:
             self.verified = verified 
+        if salesforce_id is not APIHelper.SKIP:
+            self.salesforce_id = salesforce_id 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -193,6 +200,7 @@ class UpdateCustomer(object):
         tax_exempt_reason = dictionary.get("tax_exempt_reason") if dictionary.get("tax_exempt_reason") else APIHelper.SKIP
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
         verified = dictionary.get("verified") if "verified" in dictionary.keys() else APIHelper.SKIP
+        salesforce_id = dictionary.get("salesforce_id") if "salesforce_id" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -217,4 +225,5 @@ class UpdateCustomer(object):
                    tax_exempt_reason,
                    parent_id,
                    verified,
+                   salesforce_id,
                    dictionary)

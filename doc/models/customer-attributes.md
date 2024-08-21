@@ -27,6 +27,7 @@
 | `vat_number` | `str` | Optional | (Optional) Supplying the VAT number allows EU customer’s to opt-out of the Value Added Tax assuming the merchant address and customer billing address are not within the same EU country. It’s important to omit the country code from the VAT number upon entry. Otherwise, taxes will be assessed upon the purchase. |
 | `metafields` | `Dict[str, str]` | Optional | (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |
 | `parent_id` | `int` | Optional | The parent ID in Chargify if applicable. Parent is another Customer object. |
+| `salesforce_id` | `str` | Optional | (Optional) The Salesforce ID of the customer. |
 
 ## Example (as JSON)
 

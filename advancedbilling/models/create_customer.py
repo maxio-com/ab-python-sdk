@@ -35,6 +35,7 @@ class CreateCustomer(object):
         tax_exempt_reason (str): TODO: type description here.
         parent_id (int): The parent ID in Chargify if applicable. Parent is
             another Customer object.
+        salesforce_id (str): The Salesforce ID of the customer
 
     """
 
@@ -57,7 +58,8 @@ class CreateCustomer(object):
         "vat_number": 'vat_number',
         "tax_exempt": 'tax_exempt',
         "tax_exempt_reason": 'tax_exempt_reason',
-        "parent_id": 'parent_id'
+        "parent_id": 'parent_id',
+        "salesforce_id": 'salesforce_id'
     }
 
     _optionals = [
@@ -76,10 +78,12 @@ class CreateCustomer(object):
         'tax_exempt',
         'tax_exempt_reason',
         'parent_id',
+        'salesforce_id',
     ]
 
     _nullables = [
         'parent_id',
+        'salesforce_id',
     ]
 
     def __init__(self,
@@ -101,6 +105,7 @@ class CreateCustomer(object):
                  tax_exempt=APIHelper.SKIP,
                  tax_exempt_reason=APIHelper.SKIP,
                  parent_id=APIHelper.SKIP,
+                 salesforce_id=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the CreateCustomer class"""
 
@@ -138,6 +143,8 @@ class CreateCustomer(object):
             self.tax_exempt_reason = tax_exempt_reason 
         if parent_id is not APIHelper.SKIP:
             self.parent_id = parent_id 
+        if salesforce_id is not APIHelper.SKIP:
+            self.salesforce_id = salesforce_id 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -179,6 +186,7 @@ class CreateCustomer(object):
         tax_exempt = dictionary.get("tax_exempt") if "tax_exempt" in dictionary.keys() else APIHelper.SKIP
         tax_exempt_reason = dictionary.get("tax_exempt_reason") if dictionary.get("tax_exempt_reason") else APIHelper.SKIP
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
+        salesforce_id = dictionary.get("salesforce_id") if "salesforce_id" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -202,4 +210,5 @@ class CreateCustomer(object):
                    tax_exempt,
                    tax_exempt_reason,
                    parent_id,
+                   salesforce_id,
                    dictionary)

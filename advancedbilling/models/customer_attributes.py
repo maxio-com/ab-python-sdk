@@ -63,6 +63,7 @@ class CustomerAttributes(object):
             not been created yet.
         parent_id (int): The parent ID in Chargify if applicable. Parent is
             another Customer object.
+        salesforce_id (str): (Optional) The Salesforce ID of the customer.
 
     """
 
@@ -85,7 +86,8 @@ class CustomerAttributes(object):
         "tax_exempt": 'tax_exempt',
         "vat_number": 'vat_number',
         "metafields": 'metafields',
-        "parent_id": 'parent_id'
+        "parent_id": 'parent_id',
+        "salesforce_id": 'salesforce_id'
     }
 
     _optionals = [
@@ -107,11 +109,13 @@ class CustomerAttributes(object):
         'vat_number',
         'metafields',
         'parent_id',
+        'salesforce_id',
     ]
 
     _nullables = [
         'address_2',
         'parent_id',
+        'salesforce_id',
     ]
 
     def __init__(self,
@@ -133,6 +137,7 @@ class CustomerAttributes(object):
                  vat_number=APIHelper.SKIP,
                  metafields=APIHelper.SKIP,
                  parent_id=APIHelper.SKIP,
+                 salesforce_id=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the CustomerAttributes class"""
 
@@ -173,6 +178,8 @@ class CustomerAttributes(object):
             self.metafields = metafields 
         if parent_id is not APIHelper.SKIP:
             self.parent_id = parent_id 
+        if salesforce_id is not APIHelper.SKIP:
+            self.salesforce_id = salesforce_id 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -214,6 +221,7 @@ class CustomerAttributes(object):
         vat_number = dictionary.get("vat_number") if dictionary.get("vat_number") else APIHelper.SKIP
         metafields = dictionary.get("metafields") if dictionary.get("metafields") else APIHelper.SKIP
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
+        salesforce_id = dictionary.get("salesforce_id") if "salesforce_id" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -237,6 +245,7 @@ class CustomerAttributes(object):
                    vat_number,
                    metafields,
                    parent_id,
+                   salesforce_id,
                    dictionary)
 
     @classmethod
