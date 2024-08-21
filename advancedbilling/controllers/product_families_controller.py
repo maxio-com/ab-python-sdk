@@ -156,13 +156,13 @@ class ProductFamiliesController(BaseController):
                               body=None):
         """Does a POST request to /product_families.json.
 
-        This method will create a Product Family within your Chargify site.
-        Create a Product Family to act as a container for your products,
+        This method will create a Product Family within your Advanced Billing
+        site. Create a Product Family to act as a container for your products,
         components and coupons.
-        Full documentation on how Product Families operate within the Chargify
-        UI can be located
-        [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/54053696334
-        21).
+        Full documentation on how Product Families operate within the Advanced
+        Billing UI can be located
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Produ
+        ct-Families).
 
         Args:
             body (CreateProductFamilyRequest, optional): TODO: type
@@ -290,7 +290,7 @@ class ProductFamiliesController(BaseController):
         the `handle:my-family` format.
 
         Args:
-            id (int): The Chargify id of the product family
+            id (int): The Advanced Billing id of the product family
 
         Returns:
             ProductFamilyResponse: Response from the API. OK

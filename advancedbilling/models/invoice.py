@@ -60,8 +60,8 @@ class Invoice(object):
             `"YYYY-MM-DD"`.
         status (InvoiceStatus): The current status of the invoice. See
             [Invoice
-            Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
-            078794253-Introduction-to-Invoices#invoice-statuses) for more.
+            Statuses](https://maxio.zendesk.com/hc/en-us/articles/2425228782964
+            5-Advanced-Billing-Invoices-Overview#invoice-statuses) for more.
         role (InvoiceRole): TODO: type description here.
         parent_invoice_id (int): TODO: type description here.
         collection_method (CollectionMethod): The type of payment collection
@@ -84,8 +84,8 @@ class Invoice(object):
             segments.  "Parent" invoices do not have lines of their own, but
             they have subtotals and totals which aggregate the member invoice
             segments.  See also the [invoice consolidation
-            documentation](https://chargify.zendesk.com/hc/en-us/articles/44077
-            46391835).
+            documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269
+            909389-Invoice-Consolidation).
         parent_invoice_uid (str): For invoices with `consolidation_level` of
             `child`, this specifies the UID of the parent (consolidated)
             invoice.
@@ -138,6 +138,7 @@ class Invoice(object):
         public_url (str): The public URL of the invoice
         previous_balance_data (InvoicePreviousBalance): TODO: type description
             here.
+        public_url_expires_on (date): The format is `"YYYY-MM-DD"`.
 
     """
 
@@ -194,7 +195,8 @@ class Invoice(object):
         "custom_fields": 'custom_fields',
         "display_settings": 'display_settings',
         "public_url": 'public_url',
-        "previous_balance_data": 'previous_balance_data'
+        "previous_balance_data": 'previous_balance_data',
+        "public_url_expires_on": 'public_url_expires_on'
     }
 
     _optionals = [
@@ -250,6 +252,7 @@ class Invoice(object):
         'display_settings',
         'public_url',
         'previous_balance_data',
+        'public_url_expires_on',
     ]
 
     _nullables = [
@@ -314,6 +317,7 @@ class Invoice(object):
                  display_settings=APIHelper.SKIP,
                  public_url=APIHelper.SKIP,
                  previous_balance_data=APIHelper.SKIP,
+                 public_url_expires_on=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the Invoice class"""
 
@@ -422,6 +426,8 @@ class Invoice(object):
             self.public_url = public_url 
         if previous_balance_data is not APIHelper.SKIP:
             self.previous_balance_data = previous_balance_data 
+        if public_url_expires_on is not APIHelper.SKIP:
+            self.public_url_expires_on = public_url_expires_on 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -528,6 +534,7 @@ class Invoice(object):
         display_settings = InvoiceDisplaySettings.from_dictionary(dictionary.get('display_settings')) if 'display_settings' in dictionary.keys() else APIHelper.SKIP
         public_url = dictionary.get("public_url") if dictionary.get("public_url") else APIHelper.SKIP
         previous_balance_data = InvoicePreviousBalance.from_dictionary(dictionary.get('previous_balance_data')) if 'previous_balance_data' in dictionary.keys() else APIHelper.SKIP
+        public_url_expires_on = dateutil.parser.parse(dictionary.get('public_url_expires_on')).date() if dictionary.get('public_url_expires_on') else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -585,6 +592,7 @@ class Invoice(object):
                    display_settings,
                    public_url,
                    previous_balance_data,
+                   public_url_expires_on,
                    dictionary)
 
     @classmethod

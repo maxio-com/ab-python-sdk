@@ -27,16 +27,16 @@ class IssueInvoiceEventData(object):
             segments.  "Parent" invoices do not have lines of their own, but
             they have subtotals and totals which aggregate the member invoice
             segments.  See also the [invoice consolidation
-            documentation](https://chargify.zendesk.com/hc/en-us/articles/44077
-            46391835).
+            documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269
+            909389-Invoice-Consolidation).
         from_status (InvoiceStatus): The status of the invoice before event
             occurrence. See [Invoice
-            Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
-            078794253-Introduction-to-Invoices#invoice-statusess) for more.
+            Statuses](https://maxio.zendesk.com/hc/en-us/articles/2425228782964
+            5-Advanced-Billing-Invoices-Overview#invoice-statuses) for more.
         to_status (InvoiceStatus): The status of the invoice after event
             occurrence. See [Invoice
-            Statuses](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405
-            078794253-Introduction-to-Invoices#invoice-statusess) for more.
+            Statuses](https://maxio.zendesk.com/hc/en-us/articles/2425228782964
+            5-Advanced-Billing-Invoices-Overview#invoice-statuses) for more.
         due_amount (str): Amount due on the invoice, which is `total_amount -
             credit_amount - paid_amount`.
         total_amount (str): The invoice total, which is `subtotal_amount -

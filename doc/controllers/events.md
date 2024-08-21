@@ -19,9 +19,9 @@ events_controller = client.events
 
 ## Events Intro
 
-Chargify Events include various activity that happens around a Site. This information is **especially** useful to track down issues that arise when subscriptions are not created due to errors.
+Advanced Billing Events include various activity that happens around a Site. This information is **especially** useful to track down issues that arise when subscriptions are not created due to errors.
 
-Within the Chargify UI, "Events" are referred to as "Site Activity".  Full documentation on how to record view Events / Site Activty in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407864698139).
+Within the Advanced Billing UI, "Events" are referred to as "Site Activity".  Full documentation on how to record view Events / Site Activty in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24250671733517-Site-Activity).
 
 ## List Events for a Site
 
@@ -119,7 +119,6 @@ collect = {
     'date_field': ListEventsDateField.CREATED_AT
 }
 result = events_controller.list_events(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -226,7 +225,6 @@ collect = {
     ]
 }
 result = events_controller.list_subscription_events(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -310,7 +308,6 @@ collect = {
     ]
 }
 result = events_controller.read_events_count(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

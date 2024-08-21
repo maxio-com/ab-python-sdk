@@ -27,7 +27,7 @@ Notes allow you to record information about a particular Subscription in a free 
 
 If you have structured data such as birth date, color, etc., consider using Metadata instead.
 
-Full documentation on how to use Notes in the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404434903181-Subscription-Summary#notes).
+Full documentation on how to use Notes in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24251712214413-Subscription-Summary-Overview).
 
 ```python
 def create_subscription_note(self,
@@ -62,7 +62,6 @@ result = subscription_notes_controller.create_subscription_note(
     subscription_id,
     body=body
 )
-print(result)
 ```
 
 
@@ -96,7 +95,6 @@ collect = {
     'per_page': 50
 }
 result = subscription_notes_controller.list_subscription_notes(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -142,7 +140,7 @@ def read_subscription_note(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `note_id` | `int` | Template, Required | The Chargify id of the note |
+| `note_id` | `int` | Template, Required | The Advanced Billing id of the note |
 
 ## Response Type
 
@@ -159,7 +157,6 @@ result = subscription_notes_controller.read_subscription_note(
     subscription_id,
     note_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -194,7 +191,7 @@ def update_subscription_note(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `note_id` | `int` | Template, Required | The Chargify id of the note |
+| `note_id` | `int` | Template, Required | The Advanced Billing id of the note |
 | `body` | [`UpdateSubscriptionNoteRequest`](../../doc/models/update-subscription-note-request.md) | Body, Optional | Updatable fields for Subscription Note |
 
 ## Response Type
@@ -220,7 +217,6 @@ result = subscription_notes_controller.update_subscription_note(
     note_id,
     body=body
 )
-print(result)
 ```
 
 
@@ -239,7 +235,7 @@ def delete_subscription_note(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `note_id` | `int` | Template, Required | The Chargify id of the note |
+| `note_id` | `int` | Template, Required | The Advanced Billing id of the note |
 
 ## Response Type
 
@@ -252,10 +248,9 @@ subscription_id = 222
 
 note_id = 66
 
-result = subscription_notes_controller.delete_subscription_note(
+subscription_notes_controller.delete_subscription_note(
     subscription_id,
     note_id
 )
-print(result)
 ```
 

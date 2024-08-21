@@ -17,11 +17,11 @@ class PaymentProfileAttributes(object):
 
     Attributes:
         chargify_token (str): (Optional) Token received after sending billing
-            informations using chargify.js. This token must be passed as a
-            sole attribute of `payment_profile_attributes` (i.e.
+            information using chargify.js. This token must be passed as a sole
+            attribute of `payment_profile_attributes` (i.e.
             tok_9g6hw85pnpt6knmskpwp4ttt)
         id (int): TODO: type description here.
-        payment_type (str): TODO: type description here.
+        payment_type (PaymentType): TODO: type description here.
         first_name (str): (Optional) First name on card or bank account. If
             omitted, the first_name from customer attributes will be used.
         last_name (str): (Optional) Last name on card or bank account. If
@@ -68,7 +68,7 @@ class PaymentProfileAttributes(object):
             configuration or gateway settings) The credit card or bank account
             billing address zip code (i.e. 12345). This value is merely passed
             through to the payment gateway.
-        current_vault (CurrentVault): (Optional, used only for Subscription
+        current_vault (AllVaults): (Optional, used only for Subscription
             Import) The vault that stores the payment profile with the
             provided vault_token.
         vault_token (str): (Optional, used only for Subscription Import) The

@@ -39,7 +39,9 @@ class CreatePrepaidUsageComponentPricePoint(object):
             rollover_prepaid_remainder is true) The number of
             `expiration_interval_unit`s after which rollover amounts should
             expire
-        expiration_interval_unit (IntervalUnit): TODO: type description here.
+        expiration_interval_unit (ExpirationIntervalUnit): A string
+            representing the expiration interval unit for this component,
+            either month or day
 
     """
 
@@ -63,6 +65,10 @@ class CreatePrepaidUsageComponentPricePoint(object):
         'rollover_prepaid_remainder',
         'renew_prepaid_allocation',
         'expiration_interval',
+        'expiration_interval_unit',
+    ]
+
+    _nullables = [
         'expiration_interval_unit',
     ]
 
@@ -130,7 +136,7 @@ class CreatePrepaidUsageComponentPricePoint(object):
         rollover_prepaid_remainder = dictionary.get("rollover_prepaid_remainder") if "rollover_prepaid_remainder" in dictionary.keys() else APIHelper.SKIP
         renew_prepaid_allocation = dictionary.get("renew_prepaid_allocation") if "renew_prepaid_allocation" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
-        expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:

@@ -36,6 +36,7 @@
 | `parent_id` | `int` | Optional | The parent ID in Chargify if applicable. Parent is another Customer object. |
 | `locale` | `str` | Optional | The locale for the customer to identify language-region |
 | `default_subscription_group_uid` | `str` | Optional | - |
+| `salesforce_id` | `str` | Optional | The Salesforce ID for the customer |
 
 ## Example (as JSON)
 

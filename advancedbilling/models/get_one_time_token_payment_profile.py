@@ -24,7 +24,7 @@ class GetOneTimeTokenPaymentProfile(object):
         expiration_month (float): TODO: type description here.
         expiration_year (float): TODO: type description here.
         customer_id (str): TODO: type description here.
-        current_vault (CurrentVault): The vault that stores the payment
+        current_vault (CreditCardVault): The vault that stores the payment
             profile with the provided `vault_token`. Use `bogus` for testing.
         vault_token (str): TODO: type description here.
         billing_address (str): TODO: type description here.

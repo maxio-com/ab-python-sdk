@@ -43,7 +43,6 @@ def create_subscription_group_prepayment(self,
 uid = 'uid0'
 
 result = subscription_group_invoice_account_controller.create_subscription_group_prepayment(uid)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -101,7 +100,6 @@ collect = {
     )
 }
 result = subscription_group_invoice_account_controller.list_prepayments_for_subscription_group(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -170,7 +168,6 @@ result = subscription_group_invoice_account_controller.issue_subscription_group_
     uid,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -231,7 +228,6 @@ result = subscription_group_invoice_account_controller.deduct_subscription_group
     uid,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

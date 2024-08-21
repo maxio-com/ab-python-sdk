@@ -66,10 +66,10 @@ class Configuration(HttpClientConfiguration):
         # Current API environment
         self._environment = environment
 
-        # The subdomain for your Chargify site.
+        # The subdomain for your Advanced Billing site.
         self._subdomain = subdomain
 
-        # The Chargify server domain.
+        # The Advanced Billing server domain.
         self._domain = domain
 
         self._basic_auth_credentials = basic_auth_credentials

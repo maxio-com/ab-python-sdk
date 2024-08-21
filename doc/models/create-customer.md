@@ -27,6 +27,7 @@
 | `tax_exempt` | `bool` | Optional | - |
 | `tax_exempt_reason` | `str` | Optional | - |
 | `parent_id` | `int` | Optional | The parent ID in Chargify if applicable. Parent is another Customer object. |
+| `salesforce_id` | `str` | Optional | The Salesforce ID of the customer |
 
 ## Example (as JSON)
 

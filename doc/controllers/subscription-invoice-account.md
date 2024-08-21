@@ -43,7 +43,6 @@ def read_account_balances(self,
 subscription_id = 222
 
 result = subscription_invoice_account_controller.read_account_balances(subscription_id)
-print(result)
 ```
 
 
@@ -92,7 +91,6 @@ result = subscription_invoice_account_controller.create_prepayment(
     subscription_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -154,7 +152,6 @@ collect = {
     )
 }
 result = subscription_invoice_account_controller.list_prepayments(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -221,7 +218,6 @@ result = subscription_invoice_account_controller.issue_service_credit(
     subscription_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -276,11 +272,10 @@ body = DeductServiceCreditRequest(
     )
 )
 
-result = subscription_invoice_account_controller.deduct_service_credit(
+subscription_invoice_account_controller.deduct_service_credit(
     subscription_id,
     body=body
 )
-print(result)
 ```
 
 ## Errors
@@ -326,7 +321,6 @@ result = subscription_invoice_account_controller.refund_prepayment(
     subscription_id,
     prepayment_id
 )
-print(result)
 ```
 
 ## Errors

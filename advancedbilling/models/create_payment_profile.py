@@ -56,8 +56,8 @@ class CreatePaymentProfile(object):
         billing_zip (str): The credit card or bank account billing address zip
             code (i.e. 12345). This value is merely passed through to the
             payment gateway.
-        current_vault (CurrentVault): The vault that stores the payment
-            profile with the provided `vault_token`. Use `bogus` for testing.
+        current_vault (AllVaults): The vault that stores the payment profile
+            with the provided `vault_token`. Use `bogus` for testing.
         vault_token (str): The “token” provided by your vault storage for an
             already stored payment profile
         customer_vault_token (str): (only for Authorize.Net CIM storage or

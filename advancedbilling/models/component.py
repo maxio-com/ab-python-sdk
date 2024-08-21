@@ -185,6 +185,7 @@ class Component(object):
         'item_category',
         'use_site_exchange_rate',
         'accounting_code',
+        'interval_unit',
     ]
 
     def __init__(self,
@@ -359,7 +360,7 @@ class Component(object):
         accounting_code = dictionary.get("accounting_code") if "accounting_code" in dictionary.keys() else APIHelper.SKIP
         event_based_billing_metric_id = dictionary.get("event_based_billing_metric_id") if dictionary.get("event_based_billing_metric_id") else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
-        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:

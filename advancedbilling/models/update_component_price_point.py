@@ -61,6 +61,10 @@ class UpdateComponentPricePoint(object):
         'prices',
     ]
 
+    _nullables = [
+        'interval_unit',
+    ]
+
     def __init__(self,
                  name=APIHelper.SKIP,
                  handle=APIHelper.SKIP,
@@ -119,7 +123,7 @@ class UpdateComponentPricePoint(object):
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
-        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         prices = None
         if dictionary.get('prices') is not None:
             prices = [UpdatePrice.from_dictionary(x) for x in dictionary.get('prices')]

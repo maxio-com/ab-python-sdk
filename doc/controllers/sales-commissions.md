@@ -23,7 +23,7 @@ Endpoint returns subscriptions with associated sales reps
 
 The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
 
-Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
+Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Maxio support.
 
 > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
 
@@ -56,7 +56,6 @@ collect = {
     'per_page': 100
 }
 result = sales_commissions_controller.list_sales_commission_settings(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -102,7 +101,7 @@ Endpoint returns sales rep list with details
 
 The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
 
-Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
+Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Maxio support.
 
 > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
 
@@ -135,7 +134,6 @@ collect = {
     'per_page': 100
 }
 result = sales_commissions_controller.list_sales_reps(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -230,7 +228,7 @@ Endpoint returns sales rep and attached subscriptions details.
 
 The Sales Commission API differs from other Chargify API endpoints. This resource is associated with the seller itself. Up to now all available resources were at the level of the site, therefore creating the API Key per site was a sufficient solution. To share resources at the seller level, a new authentication method was introduced, which is user authentication. Creating an API Key for a user is a required step to correctly use the Sales Commission API, more details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication).
 
-Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Chargify support.
+Access to the Sales Commission API endpoints is available to users with financial access, where the seller has the Advanced Analytics component enabled. For further information on getting access to Advanced Analytics please contact Maxio support.
 
 > Note: The request is at seller level, it means `<<subdomain>>` variable will be replaced by `app`
 
@@ -249,7 +247,7 @@ def read_sales_rep(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `seller_id` | `str` | Template, Required | The Chargify id of your seller account |
-| `sales_rep_id` | `str` | Template, Required | The Chargify id of sales rep. |
+| `sales_rep_id` | `str` | Template, Required | The Advanced Billing id of sales rep. |
 | `authorization` | `str` | Header, Optional | For authorization use user API key. See details [here](https://developers.chargify.com/docs/developer-docs/ZG9jOjMyNzk5NTg0-2020-04-20-new-api-authentication). |
 | `live_mode` | `bool` | Query, Optional | This parameter indicates if records should be fetched from live mode sites. Default value is true. |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
@@ -279,7 +277,6 @@ result = sales_commissions_controller.read_sales_rep(
     page=page,
     per_page=per_page
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*

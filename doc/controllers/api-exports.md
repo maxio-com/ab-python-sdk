@@ -53,7 +53,6 @@ collect = {
     'page': 2
 }
 result = api_exports_controller.list_exported_proforma_invoices(collect)
-print(result)
 ```
 
 ## Errors
@@ -95,7 +94,6 @@ collect = {
     'page': 2
 }
 result = api_exports_controller.list_exported_invoices(collect)
-print(result)
 ```
 
 ## Errors
@@ -137,7 +135,6 @@ collect = {
     'page': 2
 }
 result = api_exports_controller.list_exported_subscriptions(collect)
-print(result)
 ```
 
 ## Errors
@@ -165,7 +162,6 @@ def export_proforma_invoices(self)
 
 ```python
 result = api_exports_controller.export_proforma_invoices()
-print(result)
 ```
 
 ## Errors
@@ -192,7 +188,6 @@ def export_invoices(self)
 
 ```python
 result = api_exports_controller.export_invoices()
-print(result)
 ```
 
 ## Errors
@@ -219,7 +214,6 @@ def export_subscriptions(self)
 
 ```python
 result = api_exports_controller.export_subscriptions()
-print(result)
 ```
 
 ## Errors
@@ -254,7 +248,6 @@ def read_proforma_invoices_export(self,
 batch_id = 'batch_id8'
 
 result = api_exports_controller.read_proforma_invoices_export(batch_id)
-print(result)
 ```
 
 ## Errors
@@ -289,7 +282,6 @@ def read_invoices_export(self,
 batch_id = 'batch_id8'
 
 result = api_exports_controller.read_invoices_export(batch_id)
-print(result)
 ```
 
 ## Errors
@@ -324,7 +316,6 @@ def read_subscriptions_export(self,
 batch_id = 'batch_id8'
 
 result = api_exports_controller.read_subscriptions_export(batch_id)
-print(result)
 ```
 
 ## Errors

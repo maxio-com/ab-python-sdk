@@ -23,7 +23,7 @@
 | `billing_zip` | `str` | Optional | - |
 | `billing_country` | `str` | Optional | - |
 | `chargify_token` | `str` | Optional | - |
-| `current_vault` | [`BankAccountVault`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. |
+| `current_vault` | [`BankAccountVault`](../../doc/models/bank-account-vault.md) | Optional | The vault that stores the payment profile with the provided vault_token. Use `bogus` for testing. |
 | `gateway_handle` | `str` | Optional | - |
 
 ## Example (as JSON)

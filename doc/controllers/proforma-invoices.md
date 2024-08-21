@@ -51,8 +51,7 @@ def create_consolidated_proforma_invoice(self,
 ```python
 uid = 'uid0'
 
-result = proforma_invoices_controller.create_consolidated_proforma_invoice(uid)
-print(result)
+proforma_invoices_controller.create_consolidated_proforma_invoice(uid)
 ```
 
 ## Errors
@@ -102,7 +101,6 @@ collect = {
     'custom_fields': False
 }
 result = proforma_invoices_controller.list_subscription_group_proforma_invoices(collect)
-print(result)
 ```
 
 ## Errors
@@ -141,7 +139,6 @@ def read_proforma_invoice(self,
 proforma_invoice_uid = 'proforma_invoice_uid4'
 
 result = proforma_invoices_controller.read_proforma_invoice(proforma_invoice_uid)
-print(result)
 ```
 
 ## Errors
@@ -182,7 +179,6 @@ def create_proforma_invoice(self,
 subscription_id = 222
 
 result = proforma_invoices_controller.create_proforma_invoice(subscription_id)
-print(result)
 ```
 
 ## Errors
@@ -239,7 +235,6 @@ collect = {
     'custom_fields': False
 }
 result = proforma_invoices_controller.list_proforma_invoices(collect)
-print(result)
 ```
 
 
@@ -278,7 +273,6 @@ def void_proforma_invoice(self,
 proforma_invoice_uid = 'proforma_invoice_uid4'
 
 result = proforma_invoices_controller.void_proforma_invoice(proforma_invoice_uid)
-print(result)
 ```
 
 ## Errors
@@ -320,7 +314,6 @@ def preview_proforma_invoice(self,
 subscription_id = 222
 
 result = proforma_invoices_controller.preview_proforma_invoice(subscription_id)
-print(result)
 ```
 
 ## Errors
@@ -373,7 +366,6 @@ body = CreateSubscriptionRequest(
 result = proforma_invoices_controller.create_signup_proforma_invoice(
     body=body
 )
-print(result)
 ```
 
 ## Errors
@@ -428,7 +420,6 @@ body = CreateSubscriptionRequest(
 result = proforma_invoices_controller.preview_signup_proforma_invoice(
     body=body
 )
-print(result)
 ```
 
 ## Errors

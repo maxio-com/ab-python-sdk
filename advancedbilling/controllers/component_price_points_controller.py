@@ -41,16 +41,16 @@ class ComponentPricePointsController(BaseController):
         will apply to all new subscriptions going forward - existing
         subscriptions will remain on their current price point.
         See [Price Points
-        Documentation](https://chargify.zendesk.com/hc/en-us/articles/440775586
-        5883#price-points) for more information on price points and moving
-        subscriptions between price points.
+        Documentation](https://maxio.zendesk.com/hc/en-us/articles/242611917371
+        01-Price-Points-Components) for more information on price points and
+        moving subscriptions between price points.
         Note: Custom price points are not able to be set as the default for a
         component.
 
         Args:
-            component_id (int): The Chargify id of the component to which the
-                price point belongs
-            price_point_id (int): The Chargify id of the price point
+            component_id (int): The Advanced Billing id of the component to
+                which the price point belongs
+            price_point_id (int): The Advanced Billing id of the price point
 
         Returns:
             ComponentResponse: Response from the API. OK
@@ -96,7 +96,7 @@ class ComponentPricePointsController(BaseController):
         component.
 
         Args:
-            component_id (int): The Chargify id of the component
+            component_id (int): The Advanced Billing id of the component
             body (CreateComponentPricePointRequest, optional): TODO: type
                 description here.
 
@@ -159,7 +159,8 @@ class ComponentPricePointsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    component_id -- int -- The Chargify id of the component
+                    component_id -- int -- The Advanced Billing id of the
+                        component
                     currency_prices -- bool -- Include an array of currency
                         price data
                     page -- int -- Result records are organized in pages. By
@@ -231,8 +232,8 @@ class ComponentPricePointsController(BaseController):
         request.
 
         Args:
-            component_id (str): The Chargify id of the component for which you
-                want to fetch price points.
+            component_id (str): The Advanced Billing id of the component for
+                which you want to fetch price points.
             body (CreateComponentPricePointsRequest, optional): TODO: type
                 description here.
 
@@ -465,9 +466,9 @@ class ComponentPricePointsController(BaseController):
         Use this endpoint to unarchive a component price point.
 
         Args:
-            component_id (int): The Chargify id of the component to which the
-                price point belongs
-            price_point_id (int): The Chargify id of the price point
+            component_id (int): The Advanced Billing id of the component to
+                which the price point belongs
+            price_point_id (int): The Advanced Billing id of the price point
 
         Returns:
             ComponentPricePointResponse: Response from the API. OK
@@ -519,7 +520,7 @@ class ComponentPricePointsController(BaseController):
         points.
 
         Args:
-            price_point_id (int): The Chargify id of the price point
+            price_point_id (int): The Advanced Billing id of the price point
             body (CreateCurrencyPricesRequest, optional): TODO: type
                 description here.
 
@@ -571,7 +572,7 @@ class ComponentPricePointsController(BaseController):
         points.
 
         Args:
-            price_point_id (int): The Chargify id of the price point
+            price_point_id (int): The Advanced Billing id of the price point
             body (UpdateCurrencyPricesRequest, optional): TODO: type
                 description here.
 

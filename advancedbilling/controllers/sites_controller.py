@@ -29,11 +29,13 @@ class SitesController(BaseController):
         """Does a GET request to /site.json.
 
         This endpoint allows you to fetch some site data.
-        Full documentation on Sites in the Chargify UI can be located
-        [here](https://chargify.zendesk.com/hc/en-us/articles/4407870738587).
+        Full documentation on Sites in the Advanced Billing UI can be located
+        [here](https://maxio.zendesk.com/hc/en-us/sections/24250550707085-Sites
+        ).
         Specifically, the [Clearing Site
-        Data](https://maxio-chargify.zendesk.com/hc/en-us/articles/540542832730
-        9) section is extremely relevant to this endpoint documentation.
+        Data](https://maxio.zendesk.com/hc/en-us/articles/24250617028365-Cleari
+        ng-Site-Data) section is extremely relevant to this endpoint
+        documentation.
         #### Relationship invoicing enabled
         If site has RI enabled then you will see more settings like:
             "customer_hierarchy_enabled": true,
@@ -41,8 +43,8 @@ class SitesController(BaseController):
             "whopays_default_payer": "self"
         You can read more about these settings here:
          [Who Pays & Customer
-         Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/440774668329
-         1)
+         Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-
+         Customer-Hierarchies-WhoPays)
 
         Returns:
             SiteResponse: Response from the API. OK

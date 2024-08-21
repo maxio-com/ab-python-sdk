@@ -16,8 +16,9 @@ class PaymentProfileResponse(object):
     TODO: type model description here.
 
     Attributes:
-        payment_profile (BankAccountPaymentProfile |
-            CreditCardPaymentProfile): TODO: type description here.
+        payment_profile (ApplePayPaymentProfile | BankAccountPaymentProfile |
+            CreditCardPaymentProfile | PaypalPaymentProfile): TODO: type
+            description here.
 
     """
 
@@ -57,7 +58,7 @@ class PaymentProfileResponse(object):
             return None
 
         # Extract variables from the dictionary
-        payment_profile = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile'), dictionary.get('payment_profile'), False) if dictionary.get('payment_profile') is not None else None
+        payment_profile = APIHelper.deserialize_union_type(UnionTypeLookUp.get('Payment-Profile'), dictionary.get('payment_profile'), False) if dictionary.get('payment_profile') is not None else None
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -82,9 +83,9 @@ class PaymentProfileResponse(object):
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile').validate(dictionary.payment_profile).is_valid
+            return UnionTypeLookUp.get('Payment-Profile').validate(dictionary.payment_profile).is_valid
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('PaymentProfileResponsePaymentProfile').validate(dictionary.get('payment_profile')).is_valid
+        return UnionTypeLookUp.get('Payment-Profile').validate(dictionary.get('payment_profile')).is_valid

@@ -56,7 +56,6 @@ collect = {
     'include': ListProductsInclude.PREPAID_PRODUCT_PRICE_POINT
 }
 result = product_families_controller.list_products_for_product_family(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -167,9 +166,9 @@ print(result)
 
 # Create Product Family
 
-This method will create a Product Family within your Chargify site. Create a Product Family to act as a container for your products, components and coupons.
+This method will create a Product Family within your Advanced Billing site. Create a Product Family to act as a container for your products, components and coupons.
 
-Full documentation on how Product Families operate within the Chargify UI can be located [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405369633421).
+Full documentation on how Product Families operate within the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families).
 
 ```python
 def create_product_family(self,
@@ -199,7 +198,6 @@ body = CreateProductFamilyRequest(
 result = product_families_controller.create_product_family(
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -253,7 +251,6 @@ collect = {
     'date_field': BasicDateField.UPDATED_AT
 }
 result = product_families_controller.list_product_families(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -301,7 +298,7 @@ def read_product_family(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `int` | Template, Required | The Chargify id of the product family |
+| `id` | `int` | Template, Required | The Advanced Billing id of the product family |
 
 ## Response Type
 
@@ -313,7 +310,6 @@ def read_product_family(self,
 id = 112
 
 result = product_families_controller.read_product_family(id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

@@ -53,6 +53,10 @@ class ComponentPricePointItem(object):
         'prices',
     ]
 
+    _nullables = [
+        'interval_unit',
+    ]
+
     def __init__(self,
                  name=APIHelper.SKIP,
                  handle=APIHelper.SKIP,
@@ -103,7 +107,7 @@ class ComponentPricePointItem(object):
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
-        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         prices = None
         if dictionary.get('prices') is not None:
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]

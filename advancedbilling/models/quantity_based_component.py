@@ -38,9 +38,9 @@ class QuantityBasedComponent(object):
             tml) for an overview of pricing schemes.
         prices (List[Price]): (Not required for ‘per_unit’ pricing schemes)
             One or more price brackets. See [Price Bracket
-            Rules](https://chargify.zendesk.com/hc/en-us/articles/4407755865883
-            #price-bracket-rules) for an overview of how price brackets work
-            for different pricing schemes.
+            Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-C
+            omponent-Pricing-Schemes#price-bracket-rules) for an overview of
+            how price brackets work for different pricing schemes.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
@@ -127,6 +127,7 @@ class QuantityBasedComponent(object):
     _nullables = [
         'upgrade_charge',
         'downgrade_credit',
+        'interval_unit',
     ]
 
     def __init__(self,
@@ -242,7 +243,7 @@ class QuantityBasedComponent(object):
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
         public_signup_page_ids = dictionary.get("public_signup_page_ids") if dictionary.get("public_signup_page_ids") else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
-        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:

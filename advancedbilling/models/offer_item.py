@@ -62,6 +62,10 @@ class OfferItem(object):
         'interval_unit',
     ]
 
+    _nullables = [
+        'interval_unit',
+    ]
+
     def __init__(self,
                  component_id=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
@@ -133,7 +137,7 @@ class OfferItem(object):
         else:
             currency_prices = APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
-        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:

@@ -360,7 +360,7 @@ class SubscriptionGroupsController(BaseController):
         If the subscription is not in a group endpoint will return 404 code.
 
         Args:
-            subscription_id (str): The Chargify id of the subscription
+            subscription_id (str): The Advanced Billing id of the subscription
                 associated with the subscription group
 
         Returns:
@@ -399,11 +399,11 @@ class SubscriptionGroupsController(BaseController):
         """Does a POST request to /subscriptions/{subscription_id}/group.json.
 
         For sites making use of the [Relationship
-        Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171)
-        and [Customer
-        Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291
-        ) features, it is possible to add existing subscriptions to
-        subscription groups.
+        Billing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Adv
+        anced-Billing-Invoices-Overview) and [Customer
+        Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-C
+        ustomer-Hierarchies-WhoPays#customer-hierarchies) features, it is
+        possible to add existing subscriptions to subscription groups.
         Passing `group` parameters with a `target` containing a `type` and
         optional `id` is all that's needed. When the `target` parameter
         specifies a `"customer"` or `"subscription"` that is already part of a
@@ -475,11 +475,11 @@ class SubscriptionGroupsController(BaseController):
         """Does a DELETE request to /subscriptions/{subscription_id}/group.json.
 
         For sites making use of the [Relationship
-        Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171)
-        and [Customer
-        Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291
-        ) features, it is possible to remove existing subscription from
-        subscription group.
+        Billing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Adv
+        anced-Billing-Invoices-Overview) and [Customer
+        Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-C
+        ustomer-Hierarchies-WhoPays#customer-hierarchies) features, it is
+        possible to remove existing subscription from subscription group.
 
         Args:
             subscription_id (int): The Chargify id of the subscription

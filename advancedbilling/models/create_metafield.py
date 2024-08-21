@@ -28,7 +28,7 @@ class CreateMetafield(object):
             input, and appear differently on a Public Signup Page. Defaults to
             'text'
         enum (List[str]): Only applicable when input_type is radio or
-            dropdown
+            dropdown. Empty strings will not be submitted.
 
     """
 

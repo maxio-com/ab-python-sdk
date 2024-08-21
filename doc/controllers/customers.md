@@ -23,19 +23,19 @@ customers_controller = client.customers
 
 You may create a new Customer at any time, or you may create a Customer at the same time you create a Subscription. The only validation restriction is that you may only create one customer for a given reference value.
 
-If provided, the `reference` value must be unique. It represents a unique identifier for the customer from your own app, i.e. the customer’s ID. This allows you to retrieve a given customer via a piece of shared information. Alternatively, you may choose to leave `reference` blank, and store Chargify’s unique ID for the customer, which is in the `id` attribute.
+If provided, the `reference` value must be unique. It represents a unique identifier for the customer from your own app, i.e. the customer’s ID. This allows you to retrieve a given customer via a piece of shared information. Alternatively, you may choose to leave `reference` blank, and store Advanced Billing’s unique ID for the customer, which is in the `id` attribute.
 
-Full documentation on how to locate, create and edit Customers in the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407659914267).
+Full documentation on how to locate, create and edit Customers in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24252190590093-Customer-Details).
 
 ## Required Country Format
 
-Chargify requires that you use the ISO Standard Country codes when formatting country attribute of the customer.
+Advanced Billing requires that you use the ISO Standard Country codes when formatting country attribute of the customer.
 
 Countries should be formatted as 2 characters. For more information, please see the following wikipedia article on [ISO_3166-1.](http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes)
 
 ## Required State Format
 
-Chargify requires that you use the ISO Standard State codes when formatting state attribute of the customer.
+Advanced Billing requires that you use the ISO Standard State codes when formatting state attribute of the customer.
 
 + US States (2 characters): [ISO_3166-2](https://en.wikipedia.org/wiki/ISO_3166-2:US)
 
@@ -43,8 +43,8 @@ Chargify requires that you use the ISO Standard State codes when formatting stat
 
 ## Locale
 
-Chargify allows you to attribute a language/region to your customer to deliver invoices in any required language.
-For more: [Customer Locale](https://chargify.zendesk.com/hc/en-us/articles/4407870384283#customer-locale)
+Advanced Billing allows you to attribute a language/region to your customer to deliver invoices in any required language.
+For more: [Customer Locale](https://maxio.zendesk.com/hc/en-us/articles/24286672013709-Customer-Locale)
 
 ```python
 def create_customer(self,
@@ -86,7 +86,6 @@ body = CreateCustomerRequest(
 result = customers_controller.create_customer(
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -142,7 +141,7 @@ Use the search feature with the `q` query parameter to retrieve an array of cust
 Common use cases are:
 
 + Search by an email
-+ Search by a Chargify ID
++ Search by an Advanced Billing ID
 + Search by an organization
 + Search by a reference value from your application
 + Search by a first or last name
@@ -181,7 +180,6 @@ collect = {
     'date_field': BasicDateField.UPDATED_AT
 }
 result = customers_controller.list_customers(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -271,7 +269,7 @@ print(result)
 
 # Read Customer
 
-This method allows to retrieve the Customer properties by Chargify-generated Customer ID.
+This method allows to retrieve the Customer properties by Advanced Billing-generated Customer ID.
 
 ```python
 def read_customer(self,
@@ -282,7 +280,7 @@ def read_customer(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `int` | Template, Required | The Chargify id of the customer |
+| `id` | `int` | Template, Required | The Advanced Billing id of the customer |
 
 ## Response Type
 
@@ -294,7 +292,6 @@ def read_customer(self,
 id = 112
 
 result = customers_controller.read_customer(id)
-print(result)
 ```
 
 
@@ -312,7 +309,7 @@ def update_customer(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `int` | Template, Required | The Chargify id of the customer |
+| `id` | `int` | Template, Required | The Advanced Billing id of the customer |
 | `body` | [`UpdateCustomerRequest`](../../doc/models/update-customer-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -336,7 +333,6 @@ result = customers_controller.update_customer(
     id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -391,7 +387,7 @@ def delete_customer(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `int` | Template, Required | The Chargify id of the customer |
+| `id` | `int` | Template, Required | The Advanced Billing id of the customer |
 
 ## Response Type
 
@@ -402,8 +398,7 @@ def delete_customer(self,
 ```python
 id = 112
 
-result = customers_controller.delete_customer(id)
-print(result)
+customers_controller.delete_customer(id)
 ```
 
 
@@ -432,7 +427,6 @@ def read_customer_by_reference(self,
 reference = 'reference4'
 
 result = customers_controller.read_customer_by_reference(reference)
-print(result)
 ```
 
 
@@ -461,6 +455,5 @@ def list_customer_subscriptions(self,
 customer_id = 150
 
 result = customers_controller.list_customer_subscriptions(customer_id)
-print(result)
 ```
 

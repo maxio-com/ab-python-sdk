@@ -21,7 +21,7 @@ class SubscriptionGroupCreditCard(object):
         expiration_year (str | int | None): TODO: type description here.
         chargify_token (str): TODO: type description here.
         vault_token (str): TODO: type description here.
-        current_vault (CurrentVault): The vault that stores the payment
+        current_vault (CreditCardVault): The vault that stores the payment
             profile with the provided `vault_token`. Use `bogus` for testing.
         gateway_handle (str): TODO: type description here.
         first_name (str): TODO: type description here.

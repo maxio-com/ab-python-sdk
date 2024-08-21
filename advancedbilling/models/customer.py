@@ -63,6 +63,7 @@ class Customer(object):
             another Customer object.
         locale (str): The locale for the customer to identify language-region
         default_subscription_group_uid (str): TODO: type description here.
+        salesforce_id (str): The Salesforce ID for the customer
 
     """
 
@@ -94,7 +95,8 @@ class Customer(object):
         "vat_number": 'vat_number',
         "parent_id": 'parent_id',
         "locale": 'locale',
-        "default_subscription_group_uid": 'default_subscription_group_uid'
+        "default_subscription_group_uid": 'default_subscription_group_uid',
+        "salesforce_id": 'salesforce_id'
     }
 
     _optionals = [
@@ -125,6 +127,7 @@ class Customer(object):
         'parent_id',
         'locale',
         'default_subscription_group_uid',
+        'salesforce_id',
     ]
 
     _nullables = [
@@ -148,6 +151,7 @@ class Customer(object):
         'parent_id',
         'locale',
         'default_subscription_group_uid',
+        'salesforce_id',
     ]
 
     def __init__(self,
@@ -178,6 +182,7 @@ class Customer(object):
                  parent_id=APIHelper.SKIP,
                  locale=APIHelper.SKIP,
                  default_subscription_group_uid=APIHelper.SKIP,
+                 salesforce_id=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the Customer class"""
 
@@ -236,6 +241,8 @@ class Customer(object):
             self.locale = locale 
         if default_subscription_group_uid is not APIHelper.SKIP:
             self.default_subscription_group_uid = default_subscription_group_uid 
+        if salesforce_id is not APIHelper.SKIP:
+            self.salesforce_id = salesforce_id 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -295,6 +302,7 @@ class Customer(object):
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
         locale = dictionary.get("locale") if "locale" in dictionary.keys() else APIHelper.SKIP
         default_subscription_group_uid = dictionary.get("default_subscription_group_uid") if "default_subscription_group_uid" in dictionary.keys() else APIHelper.SKIP
+        salesforce_id = dictionary.get("salesforce_id") if "salesforce_id" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -327,6 +335,7 @@ class Customer(object):
                    parent_id,
                    locale,
                    default_subscription_group_uid,
+                   salesforce_id,
                    dictionary)
 
     @classmethod

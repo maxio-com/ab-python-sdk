@@ -59,6 +59,10 @@ class CreateComponentPricePoint(object):
         'interval_unit',
     ]
 
+    _nullables = [
+        'interval_unit',
+    ]
+
     def __init__(self,
                  name=None,
                  pricing_scheme=None,
@@ -116,7 +120,7 @@ class CreateComponentPricePoint(object):
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if dictionary.get("use_site_exchange_rate") else True
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
-        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:

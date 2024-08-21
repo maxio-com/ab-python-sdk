@@ -37,8 +37,9 @@ class BillingPortalController(BaseController):
 
         ## Billing Portal Documentation
         Full documentation on how the Billing Portal operates within the
-        Chargify UI can be located
-        [here](https://chargify.zendesk.com/hc/en-us/articles/4407648972443).
+        Advanced Billing UI can be located
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24252412965133-Billi
+        ng-Portal-Overview).
         This documentation is focused on how the to configure the Billing
         Portal Settings, as well as Subscriber Interaction and Merchant
         Management of the Billing Portal.
@@ -54,12 +55,13 @@ class BillingPortalController(BaseController):
         If you need to provide your customer their Management URL through
         other means, you can retrieve it via the API. Because the URL is
         cryptographically signed with a timestamp, it is not possible for
-        merchants to generate the URL without requesting it from Chargify.
+        merchants to generate the URL without requesting it from Advanced
+        Billing.
         In order to prevent abuse & overuse, we ask that you request a new URL
         only when absolutely necessary. Management URLs are good for 65 days,
         so you should re-use a previously generated one as much as possible.
         If you use the URL frequently (such as to display on your website),
-        please **do not** make an API request to Chargify every time.
+        please **do not** make an API request to Advanced Billing every time.
 
         Args:
             customer_id (int): The Chargify id of the customer

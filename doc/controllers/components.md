@@ -32,7 +32,7 @@ Metered components are used to bill for any type of unit that resets to 0 at the
 
 Note that this is different from recurring quantity-based components, which DO NOT reset to zero at the start of every billing period. If you want to bill for a quantity of something that does not change unless you change it, then you want quantity components, instead.
 
-For more information on components, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677).
+For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```python
 def create_metered_component(self,
@@ -44,7 +44,7 @@ def create_metered_component(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the component belongs |
+| `product_family_id` | `str` | Template, Required | Either the product family's id or its handle prefixed with `handle:` |
 | `body` | [`CreateMeteredComponent`](../../doc/models/create-metered-component.md) | Body, Optional | - |
 
 ## Response Type
@@ -54,7 +54,7 @@ def create_metered_component(self,
 ## Example Usage
 
 ```python
-product_family_id = 140
+product_family_id = 'product_family_id4'
 
 body = CreateMeteredComponent(
     metered_component=MeteredComponent(
@@ -75,7 +75,6 @@ result = components_controller.create_metered_component(
     product_family_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -152,7 +151,7 @@ One-time quantity-based components are used to create ad hoc usage charges that 
 
 The allocated quantity for one-time quantity-based components immediately gets reset back to zero after the allocation is made.
 
-For more information on components, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677).
+For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```python
 def create_quantity_based_component(self,
@@ -164,7 +163,7 @@ def create_quantity_based_component(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the component belongs |
+| `product_family_id` | `str` | Template, Required | Either the product family's id or its handle prefixed with `handle:` |
 | `body` | [`CreateQuantityBasedComponent`](../../doc/models/create-quantity-based-component.md) | Body, Optional | - |
 
 ## Response Type
@@ -174,7 +173,7 @@ def create_quantity_based_component(self,
 ## Example Usage
 
 ```python
-product_family_id = 140
+product_family_id = 'product_family_id4'
 
 body = CreateQuantityBasedComponent(
     quantity_based_component=QuantityBasedComponent(
@@ -196,7 +195,6 @@ result = components_controller.create_quantity_based_component(
     product_family_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -263,7 +261,7 @@ This request will create a component definition of kind **on_off_component** und
 
 On/off components are used for any flat fee, recurring add on (think $99/month for tech support or a flat add on shipping fee).
 
-For more information on components, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677).
+For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```python
 def create_on_off_component(self,
@@ -275,7 +273,7 @@ def create_on_off_component(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the component belongs |
+| `product_family_id` | `str` | Template, Required | Either the product family's id or its handle prefixed with `handle:` |
 | `body` | [`CreateOnOffComponent`](../../doc/models/create-on-off-component.md) | Body, Optional | - |
 
 ## Response Type
@@ -285,7 +283,7 @@ def create_on_off_component(self,
 ## Example Usage
 
 ```python
-product_family_id = 140
+product_family_id = 'product_family_id4'
 
 body = CreateOnOffComponent(
     on_off_component=OnOffComponent(
@@ -309,7 +307,6 @@ result = components_controller.create_on_off_component(
     product_family_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -364,7 +361,7 @@ This request will create a component definition of kind **prepaid_usage_componen
 
 Prepaid components allow customers to pre-purchase units that can be used up over time on their subscription. In a sense, they are the mirror image of metered components; while metered components charge at the end of the period for the amount of units used, prepaid components are charged for at the time of purchase, and we subsequently keep track of the usage against the amount purchased.
 
-For more information on components, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677).
+For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```python
 def create_prepaid_usage_component(self,
@@ -376,7 +373,7 @@ def create_prepaid_usage_component(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the component belongs |
+| `product_family_id` | `str` | Template, Required | Either the product family's id or its handle prefixed with `handle:` |
 | `body` | [`CreatePrepaidComponent`](../../doc/models/create-prepaid-component.md) | Body, Optional | - |
 
 ## Response Type
@@ -386,7 +383,7 @@ def create_prepaid_usage_component(self,
 ## Example Usage
 
 ```python
-product_family_id = 140
+product_family_id = 'product_family_id4'
 
 body = CreatePrepaidComponent(
     prepaid_usage_component=PrepaidUsageComponent(
@@ -411,7 +408,7 @@ body = CreatePrepaidComponent(
         rollover_prepaid_remainder=True,
         renew_prepaid_allocation=True,
         expiration_interval=15,
-        expiration_interval_unit=IntervalUnit.DAY
+        expiration_interval_unit=ExpirationIntervalUnit.DAY
     )
 )
 
@@ -419,7 +416,6 @@ result = components_controller.create_prepaid_usage_component(
     product_family_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -500,7 +496,7 @@ Event-based components are similar to other component types, in that you define 
 
 So, instead of reporting usage directly for each component (as you would with metered components), the usage is derived from analysis of your events.
 
-For more information on components, please see our documentation [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/5405020625677).
+For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```python
 def create_event_based_component(self,
@@ -512,7 +508,7 @@ def create_event_based_component(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the component belongs |
+| `product_family_id` | `str` | Template, Required | Either the product family's id or its handle prefixed with `handle:` |
 | `body` | [`CreateEBBComponent`](../../doc/models/create-ebb-component.md) | Body, Optional | - |
 
 ## Response Type
@@ -522,7 +518,7 @@ def create_event_based_component(self,
 ## Example Usage
 
 ```python
-product_family_id = 140
+product_family_id = 'product_family_id4'
 
 body = CreateEBBComponent(
     event_based_component=EBBComponent(
@@ -546,7 +542,6 @@ result = components_controller.create_event_based_component(
     product_family_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -621,7 +616,6 @@ def find_component(self,
 handle = 'handle6'
 
 result = components_controller.find_component(handle)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -671,8 +665,8 @@ def read_component(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the component belongs |
-| `component_id` | `str` | Template, Required | Either the Chargify id of the component or the handle for the component prefixed with `handle:` |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the component belongs |
+| `component_id` | `str` | Template, Required | Either the Advanced Billing id of the component or the handle for the component prefixed with `handle:` |
 
 ## Response Type
 
@@ -689,7 +683,6 @@ result = components_controller.read_component(
     product_family_id,
     component_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -740,8 +733,8 @@ def update_product_family_component(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the component belongs |
-| `component_id` | `str` | Template, Required | Either the Chargify id of the component or the handle for the component prefixed with `handle:` |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the component belongs |
+| `component_id` | `str` | Template, Required | Either the Advanced Billing id of the component or the handle for the component prefixed with `handle:` |
 | `body` | [`UpdateComponentRequest`](../../doc/models/update-component-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -766,7 +759,6 @@ result = components_controller.update_product_family_component(
     component_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -820,8 +812,8 @@ def archive_component(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family to which the component belongs |
-| `component_id` | `str` | Template, Required | Either the Chargify id of the component or the handle for the component prefixed with `handle:` |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the component belongs |
+| `component_id` | `str` | Template, Required | Either the Advanced Billing id of the component or the handle for the component prefixed with `handle:` |
 
 ## Response Type
 
@@ -838,7 +830,6 @@ result = components_controller.archive_component(
     product_family_id,
     component_id
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -917,7 +908,6 @@ collect = {
     )
 }
 result = components_controller.list_components(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1055,7 +1045,6 @@ result = components_controller.update_component(
     component_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1108,7 +1097,7 @@ def list_components_for_product_family(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Chargify id of the product family |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family |
 | `include_archived` | `bool` | Query, Optional | Include archived items. |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
@@ -1140,7 +1129,6 @@ collect = {
     'date_field': BasicDateField.UPDATED_AT
 }
 result = components_controller.list_components_for_product_family(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

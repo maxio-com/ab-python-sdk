@@ -45,12 +45,12 @@ class ComponentsController(BaseController):
         you want to bill for a quantity of something that does not change
         unless you change it, then you want quantity components, instead.
         For more information on components, please see our documentation
-        [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/54050206256
-        77).
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Compo
+        nents-Overview).
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the component belongs
+            product_family_id (str): Either the product family's id or its
+                handle prefixed with `handle:`
             body (CreateMeteredComponent, optional): TODO: type description
                 here.
 
@@ -116,12 +116,12 @@ class ComponentsController(BaseController):
         The allocated quantity for one-time quantity-based components
         immediately gets reset back to zero after the allocation is made.
         For more information on components, please see our documentation
-        [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/54050206256
-        77).
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Compo
+        nents-Overview).
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the component belongs
+            product_family_id (str): Either the product family's id or its
+                handle prefixed with `handle:`
             body (CreateQuantityBasedComponent, optional): TODO: type
                 description here.
 
@@ -174,12 +174,12 @@ class ComponentsController(BaseController):
         On/off components are used for any flat fee, recurring add on (think
         $99/month for tech support or a flat add on shipping fee).
         For more information on components, please see our documentation
-        [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/54050206256
-        77).
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Compo
+        nents-Overview).
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the component belongs
+            product_family_id (str): Either the product family's id or its
+                handle prefixed with `handle:`
             body (CreateOnOffComponent, optional): TODO: type description
                 here.
 
@@ -237,12 +237,12 @@ class ComponentsController(BaseController):
         are charged for at the time of purchase, and we subsequently keep
         track of the usage against the amount purchased.
         For more information on components, please see our documentation
-        [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/54050206256
-        77).
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Compo
+        nents-Overview).
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the component belongs
+            product_family_id (str): Either the product family's id or its
+                handle prefixed with `handle:`
             body (CreatePrepaidComponent, optional): TODO: type description
                 here.
 
@@ -303,12 +303,12 @@ class ComponentsController(BaseController):
         would with metered components), the usage is derived from analysis of
         your events.
         For more information on components, please see our documentation
-        [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/54050206256
-        77).
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Compo
+        nents-Overview).
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the component belongs
+            product_family_id (str): Either the product family's id or its
+                handle prefixed with `handle:`
             body (CreateEBBComponent, optional): TODO: type description here.
 
         Returns:
@@ -400,10 +400,11 @@ class ComponentsController(BaseController):
         When using the handle, it must be prefixed with `handle:`.
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the component belongs
-            component_id (str): Either the Chargify id of the component or the
-                handle for the component prefixed with `handle:`
+            product_family_id (int): The Advanced Billing id of the product
+                family to which the component belongs
+            component_id (str): Either the Advanced Billing id of the
+                component or the handle for the component prefixed with
+                `handle:`
 
         Returns:
             ComponentResponse: Response from the API. OK
@@ -451,10 +452,11 @@ class ComponentsController(BaseController):
         When using the handle, it must be prefixed with `handle:`.
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the component belongs
-            component_id (str): Either the Chargify id of the component or the
-                handle for the component prefixed with `handle:`
+            product_family_id (int): The Advanced Billing id of the product
+                family to which the component belongs
+            component_id (str): Either the Advanced Billing id of the
+                component or the handle for the component prefixed with
+                `handle:`
             body (UpdateComponentRequest, optional): TODO: type description
                 here.
 
@@ -510,10 +512,11 @@ class ComponentsController(BaseController):
         will continue to be charged as usual.
 
         Args:
-            product_family_id (int): The Chargify id of the product family to
-                which the component belongs
-            component_id (str): Either the Chargify id of the component or the
-                handle for the component prefixed with `handle:`
+            product_family_id (int): The Advanced Billing id of the product
+                family to which the component belongs
+            component_id (str): Either the Advanced Billing id of the
+                component or the handle for the component prefixed with
+                `handle:`
 
         Returns:
             Component: Response from the API. OK
@@ -725,8 +728,8 @@ class ComponentsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    product_family_id -- int -- The Chargify id of the product
-                        family
+                    product_family_id -- int -- The Advanced Billing id of the
+                        product family
                     include_archived -- bool -- Include archived items.
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The

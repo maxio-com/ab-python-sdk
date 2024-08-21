@@ -20,7 +20,7 @@ billing_portal_controller = client.billing_portal
 
 ## Billing Portal Documentation
 
-Full documentation on how the Billing Portal operates within the Chargify UI can be located [here](https://chargify.zendesk.com/hc/en-us/articles/4407648972443).
+Full documentation on how the Billing Portal operates within the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24252412965133-Billing-Portal-Overview).
 
 This documentation is focused on how the to configure the Billing Portal Settings, as well as Subscriber Interaction and Merchant Management of the Billing Portal.
 
@@ -30,9 +30,9 @@ You can use this endpoint to enable Billing Portal access for a Customer, with t
 
 If your customer has been invited to the Billing Portal, then they will receive a link to manage their subscription (the “Management URL”) automatically at the bottom of their statements, invoices, and receipts. **This link changes periodically for security and is only valid for 65 days.**
 
-If you need to provide your customer their Management URL through other means, you can retrieve it via the API. Because the URL is cryptographically signed with a timestamp, it is not possible for merchants to generate the URL without requesting it from Chargify.
+If you need to provide your customer their Management URL through other means, you can retrieve it via the API. Because the URL is cryptographically signed with a timestamp, it is not possible for merchants to generate the URL without requesting it from Advanced Billing.
 
-In order to prevent abuse & overuse, we ask that you request a new URL only when absolutely necessary. Management URLs are good for 65 days, so you should re-use a previously generated one as much as possible. If you use the URL frequently (such as to display on your website), please **do not** make an API request to Chargify every time.
+In order to prevent abuse & overuse, we ask that you request a new URL only when absolutely necessary. Management URLs are good for 65 days, so you should re-use a previously generated one as much as possible. If you use the URL frequently (such as to display on your website), please **do not** make an API request to Advanced Billing every time.
 
 ```python
 def enable_billing_portal_for_customer(self,
@@ -57,7 +57,6 @@ def enable_billing_portal_for_customer(self,
 customer_id = 150
 
 result = billing_portal_controller.enable_billing_portal_for_customer(customer_id)
-print(result)
 ```
 
 ## Errors
@@ -100,7 +99,6 @@ def read_billing_portal_link(self,
 customer_id = 150
 
 result = billing_portal_controller.read_billing_portal_link(customer_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -161,7 +159,6 @@ def resend_billing_portal_invitation(self,
 customer_id = 150
 
 result = billing_portal_controller.resend_billing_portal_invitation(customer_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -214,7 +211,6 @@ def revoke_billing_portal_access(self,
 customer_id = 150
 
 result = billing_portal_controller.revoke_billing_portal_access(customer_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*

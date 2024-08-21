@@ -32,6 +32,9 @@ class InvoiceTax(object):
             here.
         tax_component_breakouts (List[InvoiceTaxComponentBreakout]): TODO:
             type description here.
+        eu_vat (bool): TODO: type description here.
+        mtype (str): TODO: type description here.
+        tax_exempt_amount (str): TODO: type description here.
 
     """
 
@@ -47,7 +50,10 @@ class InvoiceTax(object):
         "tax_amount": 'tax_amount',
         "transaction_id": 'transaction_id',
         "line_item_breakouts": 'line_item_breakouts',
-        "tax_component_breakouts": 'tax_component_breakouts'
+        "tax_component_breakouts": 'tax_component_breakouts',
+        "eu_vat": 'eu_vat',
+        "mtype": 'type',
+        "tax_exempt_amount": 'tax_exempt_amount'
     }
 
     _optionals = [
@@ -62,6 +68,9 @@ class InvoiceTax(object):
         'transaction_id',
         'line_item_breakouts',
         'tax_component_breakouts',
+        'eu_vat',
+        'mtype',
+        'tax_exempt_amount',
     ]
 
     _nullables = [
@@ -80,6 +89,9 @@ class InvoiceTax(object):
                  transaction_id=APIHelper.SKIP,
                  line_item_breakouts=APIHelper.SKIP,
                  tax_component_breakouts=APIHelper.SKIP,
+                 eu_vat=APIHelper.SKIP,
+                 mtype=APIHelper.SKIP,
+                 tax_exempt_amount=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the InvoiceTax class"""
 
@@ -106,6 +118,12 @@ class InvoiceTax(object):
             self.line_item_breakouts = line_item_breakouts 
         if tax_component_breakouts is not APIHelper.SKIP:
             self.tax_component_breakouts = tax_component_breakouts 
+        if eu_vat is not APIHelper.SKIP:
+            self.eu_vat = eu_vat 
+        if mtype is not APIHelper.SKIP:
+            self.mtype = mtype 
+        if tax_exempt_amount is not APIHelper.SKIP:
+            self.tax_exempt_amount = tax_exempt_amount 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -148,6 +166,9 @@ class InvoiceTax(object):
             tax_component_breakouts = [InvoiceTaxComponentBreakout.from_dictionary(x) for x in dictionary.get('tax_component_breakouts')]
         else:
             tax_component_breakouts = APIHelper.SKIP
+        eu_vat = dictionary.get("eu_vat") if "eu_vat" in dictionary.keys() else APIHelper.SKIP
+        mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP
+        tax_exempt_amount = dictionary.get("tax_exempt_amount") if dictionary.get("tax_exempt_amount") else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -164,6 +185,9 @@ class InvoiceTax(object):
                    transaction_id,
                    line_item_breakouts,
                    tax_component_breakouts,
+                   eu_vat,
+                   mtype,
+                   tax_exempt_amount,
                    dictionary)
 
     @classmethod

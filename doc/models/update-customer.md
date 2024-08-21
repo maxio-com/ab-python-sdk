@@ -28,6 +28,7 @@
 | `tax_exempt_reason` | `str` | Optional | - |
 | `parent_id` | `int` | Optional | - |
 | `verified` | `bool` | Optional | Is the customer verified to use ACH as a payment method. Available only on Authorize.Net gateway |
+| `salesforce_id` | `str` | Optional | The Salesforce ID of the customer |
 
 ## Example (as JSON)
 

@@ -73,7 +73,6 @@ body = SubscriptionGroupSignupRequest(
 result = subscription_groups_controller.signup_with_subscription_group(
     body=body
 )
-print(result)
 ```
 
 ## Errors
@@ -119,7 +118,6 @@ body = CreateSubscriptionGroupRequest(
 result = subscription_groups_controller.create_subscription_group(
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -187,7 +185,6 @@ collect = {
     ]
 }
 result = subscription_groups_controller.list_subscription_groups(collect)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -267,7 +264,6 @@ result = subscription_groups_controller.read_subscription_group(
     uid,
     include=include
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -354,7 +350,6 @@ result = subscription_groups_controller.update_subscription_group_members(
     uid,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -411,7 +406,6 @@ def delete_subscription_group(self,
 uid = 'uid0'
 
 result = subscription_groups_controller.delete_subscription_group(uid)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -445,7 +439,7 @@ def find_subscription_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `str` | Query, Required | The Chargify id of the subscription associated with the subscription group |
+| `subscription_id` | `str` | Query, Required | The Advanced Billing id of the subscription associated with the subscription group |
 
 ## Response Type
 
@@ -457,7 +451,6 @@ def find_subscription_group(self,
 subscription_id = 'subscription_id0'
 
 result = subscription_groups_controller.find_subscription_group(subscription_id)
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -510,7 +503,7 @@ print(result)
 
 # Add Subscription to Group
 
-For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to add existing subscriptions to subscription groups.
+For sites making use of the [Relationship Billing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview) and [Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-hierarchies) features, it is possible to add existing subscriptions to subscription groups.
 
 Passing `group` parameters with a `target` containing a `type` and optional `id` is all that's needed. When the `target` parameter specifies a `"customer"` or `"subscription"` that is already part of a hierarchy, the subscription will become a member of the customer's subscription group.  If the target customer or subscription is not part of a subscription group, a new group will be created and the subscription will become part of the group with the specified target customer set as the responsible payer for the group's subscriptions.
 
@@ -565,7 +558,6 @@ result = subscription_groups_controller.add_subscription_to_group(
     subscription_id,
     body=body
 )
-print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -593,7 +585,7 @@ print(result)
 
 # Remove Subscription From Group
 
-For sites making use of the [Relationship Billing](https://chargify.zendesk.com/hc/en-us/articles/4407737494171) and [Customer Hierarchy](https://chargify.zendesk.com/hc/en-us/articles/4407746683291) features, it is possible to remove existing subscription from subscription group.
+For sites making use of the [Relationship Billing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview) and [Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-hierarchies) features, it is possible to remove existing subscription from subscription group.
 
 ```python
 def remove_subscription_from_group(self,
@@ -615,8 +607,7 @@ def remove_subscription_from_group(self,
 ```python
 subscription_id = 222
 
-result = subscription_groups_controller.remove_subscription_from_group(subscription_id)
-print(result)
+subscription_groups_controller.remove_subscription_from_group(subscription_id)
 ```
 
 ## Errors

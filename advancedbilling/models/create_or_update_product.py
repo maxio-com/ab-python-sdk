@@ -41,8 +41,9 @@ class CreateOrUpdateProduct(object):
             expiration_interval of ‘30’ coupled with an
             expiration_interval_unit of day would mean this product would
             expire after 30 days.
-        expiration_interval_unit (IntervalUnit): A string representing the
-            expiration interval unit for this product, either month or day
+        expiration_interval_unit (ExpirationIntervalUnit): A string
+            representing the expiration interval unit for this product, either
+            month, day or never
         auto_create_signup_page (bool): TODO: type description here.
         tax_code (str): A string representing the tax code related to the
             product type. This is especially important when using the Avalara
@@ -83,6 +84,11 @@ class CreateOrUpdateProduct(object):
         'expiration_interval_unit',
         'auto_create_signup_page',
         'tax_code',
+    ]
+
+    _nullables = [
+        'trial_interval_unit',
+        'expiration_interval_unit',
     ]
 
     def __init__(self,
@@ -166,10 +172,10 @@ class CreateOrUpdateProduct(object):
         require_credit_card = dictionary.get("require_credit_card") if "require_credit_card" in dictionary.keys() else APIHelper.SKIP
         trial_price_in_cents = dictionary.get("trial_price_in_cents") if dictionary.get("trial_price_in_cents") else APIHelper.SKIP
         trial_interval = dictionary.get("trial_interval") if dictionary.get("trial_interval") else APIHelper.SKIP
-        trial_interval_unit = dictionary.get("trial_interval_unit") if dictionary.get("trial_interval_unit") else APIHelper.SKIP
+        trial_interval_unit = dictionary.get("trial_interval_unit") if "trial_interval_unit" in dictionary.keys() else APIHelper.SKIP
         trial_type = dictionary.get("trial_type") if dictionary.get("trial_type") else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
-        expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         auto_create_signup_page = dictionary.get("auto_create_signup_page") if "auto_create_signup_page" in dictionary.keys() else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if dictionary.get("tax_code") else APIHelper.SKIP
         # Clean out expected properties from dictionary

@@ -151,6 +151,7 @@ class SubscriptionComponent(object):
         'price_point_name',
         'use_site_exchange_rate',
         'description',
+        'interval_unit',
     ]
 
     def __init__(self,
@@ -316,7 +317,7 @@ class SubscriptionComponent(object):
             historic_usages = APIHelper.SKIP
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
-        interval_unit = dictionary.get("interval_unit") if dictionary.get("interval_unit") else APIHelper.SKIP
+        interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:

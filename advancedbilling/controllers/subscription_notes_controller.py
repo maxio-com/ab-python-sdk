@@ -35,10 +35,10 @@ class SubscriptionNotesController(BaseController):
         in a free text format.
         If you have structured data such as birth date, color, etc., consider
         using Metadata instead.
-        Full documentation on how to use Notes in the Chargify UI can be
-        located
-        [here](https://maxio-chargify.zendesk.com/hc/en-us/articles/54044349031
-        81-Subscription-Summary#notes).
+        Full documentation on how to use Notes in the Advanced Billing UI can
+        be located
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24251712214413-Subsc
+        ription-Summary-Overview).
 
         Args:
             subscription_id (int): The Chargify id of the subscription
@@ -158,7 +158,7 @@ class SubscriptionNotesController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            note_id (int): The Chargify id of the note
+            note_id (int): The Advanced Billing id of the note
 
         Returns:
             SubscriptionNoteResponse: Response from the API. OK
@@ -205,7 +205,7 @@ class SubscriptionNotesController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            note_id (int): The Chargify id of the note
+            note_id (int): The Advanced Billing id of the note
             body (UpdateSubscriptionNoteRequest, optional): TODO: type
                 description here.
 
@@ -259,7 +259,7 @@ class SubscriptionNotesController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            note_id (int): The Chargify id of the note
+            note_id (int): The Advanced Billing id of the note
 
         Returns:
             void: Response from the API. OK

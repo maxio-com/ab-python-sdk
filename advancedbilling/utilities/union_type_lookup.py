@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+from advancedbilling.models.apple_pay_payment_profile import ApplePayPaymentProfile
 from advancedbilling.models.apply_credit_note_event import ApplyCreditNoteEvent
 from advancedbilling.models.apply_debit_note_event import ApplyDebitNoteEvent
 from advancedbilling.models.apply_payment_event import ApplyPaymentEvent
@@ -41,6 +42,7 @@ from advancedbilling.models.payment_method_credit_card import PaymentMethodCredi
 from advancedbilling.models.payment_method_external import PaymentMethodExternal
 from advancedbilling.models.payment_method_paypal import PaymentMethodPaypal
 from advancedbilling.models.payment_related_events import PaymentRelatedEvents
+from advancedbilling.models.paypal_payment_profile import PaypalPaymentProfile
 from advancedbilling.models.pending_cancellation_change import PendingCancellationChange
 from advancedbilling.models.prepaid_subscription_balance_changed import PrepaidSubscriptionBalanceChanged
 from advancedbilling.models.prepaid_usage import PrepaidUsage
@@ -713,10 +715,28 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'PaymentProfileResponsePaymentProfile': OneOf(
+        'Payment-Profile': AnyOf(
             [
-                LeafType(BankAccountPaymentProfile),
-                LeafType(CreditCardPaymentProfile)
+                LeafType(ApplePayPaymentProfile,
+                         Context.create(
+                             discriminator_value='apple_pay',
+                             discriminator='payment_type'
+                         )),
+                LeafType(BankAccountPaymentProfile,
+                         Context.create(
+                             discriminator_value='bank_account',
+                             discriminator='payment_type'
+                         )),
+                LeafType(CreditCardPaymentProfile,
+                         Context.create(
+                             discriminator_value='credit_card',
+                             discriminator='payment_type'
+                         )),
+                LeafType(PaypalPaymentProfile,
+                         Context.create(
+                             discriminator_value='paypal_account',
+                             discriminator='payment_type'
+                         ))
             ]
         ),
         'PrepaidUsageComponentUnitPrice': OneOf(

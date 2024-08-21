@@ -30,9 +30,9 @@ class Product(object):
             subscription to this product will run before it expires. See the
             description of interval for a description of how this value is
             coupled with an interval unit to calculate the full interval
-        expiration_interval_unit (ExtendedIntervalUnit): A string representing
-            the expiration interval unit for this product, either month or
-            day
+        expiration_interval_unit (ExpirationIntervalUnit): A string
+            representing the expiration interval unit for this product, either
+            month, day or never
         created_at (datetime): Timestamp indicating when this product was
             created
         updated_at (datetime): Timestamp indicating when this product was last

@@ -31,7 +31,7 @@ class SubscriptionCustomPrice(object):
         initial_charge_in_cents (str | long | int | None): (Optional)
         initial_charge_after_trial (bool): (Optional)
         expiration_interval (str | int | None): (Optional)
-        expiration_interval_unit (IntervalUnit): (Optional)
+        expiration_interval_unit (ExpirationIntervalUnit): (Optional)
         tax_included (bool): (Optional)
 
     """
@@ -64,6 +64,11 @@ class SubscriptionCustomPrice(object):
         'expiration_interval',
         'expiration_interval_unit',
         'tax_included',
+    ]
+
+    _nullables = [
+        'interval_unit',
+        'expiration_interval_unit',
     ]
 
     def __init__(self,
@@ -142,7 +147,7 @@ class SubscriptionCustomPrice(object):
         initial_charge_in_cents = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCustomPriceInitialChargeInCents'), dictionary.get('initial_charge_in_cents'), False) if dictionary.get('initial_charge_in_cents') is not None else APIHelper.SKIP
         initial_charge_after_trial = dictionary.get("initial_charge_after_trial") if "initial_charge_after_trial" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCustomPriceExpirationInterval'), dictionary.get('expiration_interval'), False) if dictionary.get('expiration_interval') is not None else APIHelper.SKIP
-        expiration_interval_unit = dictionary.get("expiration_interval_unit") if dictionary.get("expiration_interval_unit") else APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
@@ -183,7 +188,8 @@ class SubscriptionCustomPrice(object):
             return UnionTypeLookUp.get('SubscriptionCustomPricePriceInCents').validate(dictionary.price_in_cents).is_valid \
                 and UnionTypeLookUp.get('SubscriptionCustomPriceInterval').validate(dictionary.interval).is_valid \
                 and APIHelper.is_valid_type(value=dictionary.interval_unit,
-                                            type_callable=lambda value: IntervalUnit.validate(value))
+                                            type_callable=lambda value: IntervalUnit.validate(value),
+                                            is_value_nullable=True)
 
         if not isinstance(dictionary, dict):
             return False
@@ -191,4 +197,5 @@ class SubscriptionCustomPrice(object):
         return UnionTypeLookUp.get('SubscriptionCustomPricePriceInCents').validate(dictionary.get('price_in_cents')).is_valid \
             and UnionTypeLookUp.get('SubscriptionCustomPriceInterval').validate(dictionary.get('interval')).is_valid \
             and APIHelper.is_valid_type(value=dictionary.get('interval_unit'),
-                                        type_callable=lambda value: IntervalUnit.validate(value))
+                                        type_callable=lambda value: IntervalUnit.validate(value),
+                                        is_value_nullable=True)
