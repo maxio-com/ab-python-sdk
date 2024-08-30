@@ -28,22 +28,21 @@ class ComponentsController(BaseController):
     def __init__(self, config):
         super(ComponentsController, self).__init__(config)
 
-    def create_metered_component(self,
-                                 product_family_id,
-                                 body=None):
-        """Does a POST request to /product_families/{product_family_id}/metered_components.json.
+    def create_prepaid_usage_component(self,
+                                       product_family_id,
+                                       body=None):
+        """Does a POST request to /product_families/{product_family_id}/prepaid_usage_components.json.
 
         This request will create a component definition of kind
-        **metered_component** under the specified product family. Metered
-        component can then be added and “allocated” for a subscription.
-        Metered components are used to bill for any type of unit that resets
-        to 0 at the end of the billing period (think daily Google Adwords
-        clicks or monthly cell phone minutes). This is most commonly
-        associated with usage-based billing and many other pricing schemes.
-        Note that this is different from recurring quantity-based components,
-        which DO NOT reset to zero at the start of every billing period. If
-        you want to bill for a quantity of something that does not change
-        unless you change it, then you want quantity components, instead.
+        **prepaid_usage_component** under the specified product family.
+        Prepaid component can then be added and “allocated” for a
+        subscription.
+        Prepaid components allow customers to pre-purchase units that can be
+        used up over time on their subscription. In a sense, they are the
+        mirror image of metered components; while metered components charge at
+        the end of the period for the amount of units used, prepaid components
+        are charged for at the time of purchase, and we subsequently keep
+        track of the usage against the amount purchased.
         For more information on components, please see our documentation
         [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Compo
         nents-Overview).
@@ -51,7 +50,7 @@ class ComponentsController(BaseController):
         Args:
             product_family_id (str): Either the product family's id or its
                 handle prefixed with `handle:`
-            body (CreateMeteredComponent, optional): TODO: type description
+            body (CreatePrepaidComponent, optional): TODO: type description
                 here.
 
         Returns:
@@ -67,7 +66,7 @@ class ComponentsController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEFAULT)
-            .path('/product_families/{product_family_id}/metered_components.json')
+            .path('/product_families/{product_family_id}/prepaid_usage_components.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
                             .key('product_family_id')
@@ -221,69 +220,6 @@ class ComponentsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def create_prepaid_usage_component(self,
-                                       product_family_id,
-                                       body=None):
-        """Does a POST request to /product_families/{product_family_id}/prepaid_usage_components.json.
-
-        This request will create a component definition of kind
-        **prepaid_usage_component** under the specified product family.
-        Prepaid component can then be added and “allocated” for a
-        subscription.
-        Prepaid components allow customers to pre-purchase units that can be
-        used up over time on their subscription. In a sense, they are the
-        mirror image of metered components; while metered components charge at
-        the end of the period for the amount of units used, prepaid components
-        are charged for at the time of purchase, and we subsequently keep
-        track of the usage against the amount purchased.
-        For more information on components, please see our documentation
-        [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Compo
-        nents-Overview).
-
-        Args:
-            product_family_id (str): Either the product family's id or its
-                handle prefixed with `handle:`
-            body (CreatePrepaidComponent, optional): TODO: type description
-                here.
-
-        Returns:
-            ComponentResponse: Response from the API. Created
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/product_families/{product_family_id}/prepaid_usage_components.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('product_family_id')
-                            .value(product_family_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ComponentResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
     def create_event_based_component(self,
                                      product_family_id,
                                      body=None):
@@ -389,6 +325,70 @@ class ComponentsController(BaseController):
             .deserialize_into(ComponentResponse.from_dictionary)
         ).execute()
 
+    def create_metered_component(self,
+                                 product_family_id,
+                                 body=None):
+        """Does a POST request to /product_families/{product_family_id}/metered_components.json.
+
+        This request will create a component definition of kind
+        **metered_component** under the specified product family. Metered
+        component can then be added and “allocated” for a subscription.
+        Metered components are used to bill for any type of unit that resets
+        to 0 at the end of the billing period (think daily Google Adwords
+        clicks or monthly cell phone minutes). This is most commonly
+        associated with usage-based billing and many other pricing schemes.
+        Note that this is different from recurring quantity-based components,
+        which DO NOT reset to zero at the start of every billing period. If
+        you want to bill for a quantity of something that does not change
+        unless you change it, then you want quantity components, instead.
+        For more information on components, please see our documentation
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Compo
+        nents-Overview).
+
+        Args:
+            product_family_id (str): Either the product family's id or its
+                handle prefixed with `handle:`
+            body (CreateMeteredComponent, optional): TODO: type description
+                here.
+
+        Returns:
+            ComponentResponse: Response from the API. Created
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/product_families/{product_family_id}/metered_components.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('product_family_id')
+                            .value(product_family_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ComponentResponse.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
     def read_component(self,
                        product_family_id,
                        component_id):
@@ -439,6 +439,58 @@ class ComponentsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
+        ).execute()
+
+    def archive_component(self,
+                          product_family_id,
+                          component_id):
+        """Does a DELETE request to /product_families/{product_family_id}/components/{component_id}.json.
+
+        Sending a DELETE request to this endpoint will archive the component.
+        All current subscribers will be unffected; their subscription/purchase
+        will continue to be charged as usual.
+
+        Args:
+            product_family_id (int): The Advanced Billing id of the product
+                family to which the component belongs
+            component_id (str): Either the Advanced Billing id of the
+                component or the handle for the component prefixed with
+                `handle:`
+
+        Returns:
+            Component: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/product_families/{product_family_id}/components/{component_id}.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('product_family_id')
+                            .value(product_family_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('component_id')
+                            .value(component_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Component.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def update_product_family_component(self,
@@ -499,58 +551,6 @@ class ComponentsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def archive_component(self,
-                          product_family_id,
-                          component_id):
-        """Does a DELETE request to /product_families/{product_family_id}/components/{component_id}.json.
-
-        Sending a DELETE request to this endpoint will archive the component.
-        All current subscribers will be unffected; their subscription/purchase
-        will continue to be charged as usual.
-
-        Args:
-            product_family_id (int): The Advanced Billing id of the product
-                family to which the component belongs
-            component_id (str): Either the Advanced Billing id of the
-                component or the handle for the component prefixed with
-                `handle:`
-
-        Returns:
-            Component: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/product_families/{product_family_id}/components/{component_id}.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('product_family_id')
-                            .value(product_family_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('component_id')
-                            .value(component_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Component.from_dictionary)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 

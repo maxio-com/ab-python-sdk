@@ -10,9 +10,46 @@ advance_invoice_controller = client.advance_invoice
 
 ## Methods
 
+* [Void Advance Invoice](../../doc/controllers/advance-invoice.md#void-advance-invoice)
 * [Issue Advance Invoice](../../doc/controllers/advance-invoice.md#issue-advance-invoice)
 * [Read Advance Invoice](../../doc/controllers/advance-invoice.md#read-advance-invoice)
-* [Void Advance Invoice](../../doc/controllers/advance-invoice.md#void-advance-invoice)
+
+
+# Void Advance Invoice
+
+Void a subscription's existing advance invoice. Once voided, it can later be regenerated if desired.
+A `reason` is required in order to void, and the invoice must have an open status. Voiding will cause any prepayments and credits that were applied to the invoice to be returned to the subscription. For a full overview of the impact of voiding, please [see our help docs](../../doc/models/invoice.md).
+
+```python
+def void_advance_invoice(self,
+                        subscription_id,
+                        body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `body` | [`VoidInvoiceRequest`](../../doc/models/void-invoice-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`Invoice`](../../doc/models/invoice.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+result = advance_invoice_controller.void_advance_invoice(subscription_id)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
 
 
 # Issue Advance Invoice
@@ -87,43 +124,6 @@ def read_advance_invoice(self,
 subscription_id = 222
 
 result = advance_invoice_controller.read_advance_invoice(subscription_id)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-
-
-# Void Advance Invoice
-
-Void a subscription's existing advance invoice. Once voided, it can later be regenerated if desired.
-A `reason` is required in order to void, and the invoice must have an open status. Voiding will cause any prepayments and credits that were applied to the invoice to be returned to the subscription. For a full overview of the impact of voiding, please [see our help docs](../../doc/models/invoice.md).
-
-```python
-def void_advance_invoice(self,
-                        subscription_id,
-                        body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `body` | [`VoidInvoiceRequest`](../../doc/models/void-invoice-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`Invoice`](../../doc/models/invoice.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-result = advance_invoice_controller.void_advance_invoice(subscription_id)
 ```
 
 ## Errors

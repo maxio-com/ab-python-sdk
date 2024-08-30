@@ -11,9 +11,9 @@ product_families_controller = client.product_families
 ## Methods
 
 * [List Products for Product Family](../../doc/controllers/product-families.md#list-products-for-product-family)
+* [Read Product Family](../../doc/controllers/product-families.md#read-product-family)
 * [Create Product Family](../../doc/controllers/product-families.md#create-product-family)
 * [List Product Families](../../doc/controllers/product-families.md#list-product-families)
-* [Read Product Family](../../doc/controllers/product-families.md#read-product-family)
 
 
 # List Products for Product Family
@@ -164,6 +164,50 @@ result = product_families_controller.list_products_for_product_family(collect)
 | 404 | Not Found | `APIException` |
 
 
+# Read Product Family
+
+This method allows to retrieve a Product Family via the `product_family_id`. The response will contain a Product Family object.
+
+The product family can be specified either with the id number, or with the `handle:my-family` format.
+
+```python
+def read_product_family(self,
+                       id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `int` | Template, Required | The Advanced Billing id of the product family |
+
+## Response Type
+
+[`ProductFamilyResponse`](../../doc/models/product-family-response.md)
+
+## Example Usage
+
+```python
+id = 112
+
+result = product_families_controller.read_product_family(id)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "product_family": {
+    "id": 527890,
+    "name": "Acme Projects",
+    "description": "",
+    "handle": "billing-plans",
+    "accounting_code": null
+  }
+}
+```
+
+
 # Create Product Family
 
 This method will create a Product Family within your Advanced Billing site. Create a Product Family to act as a container for your products, components and coupons.
@@ -280,49 +324,5 @@ result = product_families_controller.list_product_families(collect)
     }
   }
 ]
-```
-
-
-# Read Product Family
-
-This method allows to retrieve a Product Family via the `product_family_id`. The response will contain a Product Family object.
-
-The product family can be specified either with the id number, or with the `handle:my-family` format.
-
-```python
-def read_product_family(self,
-                       id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `int` | Template, Required | The Advanced Billing id of the product family |
-
-## Response Type
-
-[`ProductFamilyResponse`](../../doc/models/product-family-response.md)
-
-## Example Usage
-
-```python
-id = 112
-
-result = product_families_controller.read_product_family(id)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "product_family": {
-    "id": 527890,
-    "name": "Acme Projects",
-    "description": "",
-    "handle": "billing-plans",
-    "accounting_code": null
-  }
-}
 ```
 

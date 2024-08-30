@@ -10,10 +10,46 @@ subscription_group_status_controller = client.subscription_group_status
 
 ## Methods
 
-* [Cancel Subscriptions in Group](../../doc/controllers/subscription-group-status.md#cancel-subscriptions-in-group)
 * [Initiate Delayed Cancellation for Group](../../doc/controllers/subscription-group-status.md#initiate-delayed-cancellation-for-group)
+* [Cancel Subscriptions in Group](../../doc/controllers/subscription-group-status.md#cancel-subscriptions-in-group)
 * [Cancel Delayed Cancellation for Group](../../doc/controllers/subscription-group-status.md#cancel-delayed-cancellation-for-group)
 * [Reactivate Subscription Group](../../doc/controllers/subscription-group-status.md#reactivate-subscription-group)
+
+
+# Initiate Delayed Cancellation for Group
+
+This endpoint will schedule all subscriptions within the specified group to be canceled at the end of their billing period. The group is identified by it's uid passed in the URL.
+
+All subscriptions in the group must be on automatic billing in order to successfully cancel them, and the group must not be in a "past_due" state.
+
+```python
+def initiate_delayed_cancellation_for_group(self,
+                                           uid)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `str` | Template, Required | The uid of the subscription group |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+uid = 'uid0'
+
+subscription_group_status_controller.initiate_delayed_cancellation_for_group(uid)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Cancel Subscriptions in Group
@@ -52,42 +88,6 @@ subscription_group_status_controller.cancel_subscriptions_in_group(
     uid,
     body=body
 )
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Initiate Delayed Cancellation for Group
-
-This endpoint will schedule all subscriptions within the specified group to be canceled at the end of their billing period. The group is identified by it's uid passed in the URL.
-
-All subscriptions in the group must be on automatic billing in order to successfully cancel them, and the group must not be in a "past_due" state.
-
-```python
-def initiate_delayed_cancellation_for_group(self,
-                                           uid)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `str` | Template, Required | The uid of the subscription group |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-uid = 'uid0'
-
-subscription_group_status_controller.initiate_delayed_cancellation_for_group(uid)
 ```
 
 ## Errors

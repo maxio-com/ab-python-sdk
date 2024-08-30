@@ -21,10 +21,10 @@ from advancedbilling.models.list_invoices_response import ListInvoicesResponse
 from advancedbilling.models.list_invoice_events_response import ListInvoiceEventsResponse
 from advancedbilling.models.multi_invoice_payment_response import MultiInvoicePaymentResponse
 from advancedbilling.models.list_credit_notes_response import ListCreditNotesResponse
-from advancedbilling.models.credit_note import CreditNote
-from advancedbilling.models.record_payment_response import RecordPaymentResponse
 from advancedbilling.models.consolidated_invoice import ConsolidatedInvoice
+from advancedbilling.models.credit_note import CreditNote
 from advancedbilling.models.invoice_response import InvoiceResponse
+from advancedbilling.models.record_payment_response import RecordPaymentResponse
 from advancedbilling.models.customer_changes_preview_response import CustomerChangesPreviewResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.api_exception import APIException
@@ -37,24 +37,27 @@ class InvoicesController(BaseController):
     def __init__(self, config):
         super(InvoicesController, self).__init__(config)
 
-    def refund_invoice(self,
-                       uid,
-                       body=None):
-        """Does a POST request to /invoices/{uid}/refunds.json.
+    def read_invoice(self,
+                     uid):
+        """Does a GET request to /invoices/{uid}.json.
 
-        Refund an invoice, segment, or consolidated invoice.
-        ## Partial Refund for Consolidated Invoice
-        A refund less than the total of a consolidated invoice will be split
-        across its segments.
-        A $50.00 refund on a $100.00 consolidated invoice with one $60.00 and
-        one $40.00 segment, the refunded amount will be applied as 50% of each
-        ($30.00 and $20.00 respectively).
+        Use this endpoint to retrieve the details for an invoice.
+        ## PDF Invoice retrieval
+        Individual PDF Invoices can be retrieved by using the "Accept" header
+        application/pdf or appending .pdf as the format portion of the URL:
+        ```curl -u <api_key>:x -H
+        Accept:application/pdf -H
+        https://acme.chargify.com/invoices/inv_8gd8tdhtd3hgr.pdf >
+        output_file.pdf
+        URL: `https://<subdomain>.chargify.com/invoices/<uid>.<format>`
+        Method: GET
+        Required parameters: `uid`
+        Response: A single Invoice.
+        ```
 
         Args:
             uid (str): The unique identifier for the invoice, this does not
                 refer to the public facing invoice number.
-            body (RefundInvoiceRequest, optional): TODO: type description
-                here.
 
         Returns:
             Invoice: Response from the API. OK
@@ -69,28 +72,21 @@ class InvoicesController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEFAULT)
-            .path('/invoices/{uid}/refunds.json')
-            .http_method(HttpMethodEnum.POST)
+            .path('/invoices/{uid}.json')
+            .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
                             .key('uid')
                             .value(uid)
                             .is_required(True)
                             .should_encode(True))
             .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
             .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def list_invoices(self,
@@ -273,58 +269,6 @@ class InvoicesController(BaseController):
             .deserialize_into(ListInvoicesResponse.from_dictionary)
         ).execute()
 
-    def read_invoice(self,
-                     uid):
-        """Does a GET request to /invoices/{uid}.json.
-
-        Use this endpoint to retrieve the details for an invoice.
-        ## PDF Invoice retrieval
-        Individual PDF Invoices can be retrieved by using the "Accept" header
-        application/pdf or appending .pdf as the format portion of the URL:
-        ```curl -u <api_key>:x -H
-        Accept:application/pdf -H
-        https://acme.chargify.com/invoices/inv_8gd8tdhtd3hgr.pdf >
-        output_file.pdf
-        URL: `https://<subdomain>.chargify.com/invoices/<uid>.<format>`
-        Method: GET
-        Required parameters: `uid`
-        Response: A single Invoice.
-        ```
-
-        Args:
-            uid (str): The unique identifier for the invoice, this does not
-                refer to the public facing invoice number.
-
-        Returns:
-            Invoice: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/invoices/{uid}.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Invoice.from_dictionary)
-        ).execute()
-
     def list_invoice_events(self,
                             options=dict()):
         """Does a GET request to /invoices/events.json.
@@ -440,103 +384,6 @@ class InvoicesController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListInvoiceEventsResponse.from_dictionary)
-        ).execute()
-
-    def record_payment_for_invoice(self,
-                                   uid,
-                                   body=None):
-        """Does a POST request to /invoices/{uid}/payments.json.
-
-        This API call should be used when you want to record a payment of a
-        given type against a specific invoice. If you would like to apply a
-        payment across multiple invoices, you can use the Bulk Payment
-        endpoint.
-        ## Create a Payment from the existing payment profile
-        In order to apply a payment to an invoice using an existing payment
-        profile, specify `type` as `payment`, the amount less than the invoice
-        total, and the customer's `payment_profile_id`. The ID of a payment
-        profile might be retrieved via the Payment Profiles API endpoint.
-        ```
-        {
-          "type": "payment",
-          "payment": {
-            "amount": 10.00,
-            "payment_profile_id": 123
-          }
-        }
-        ```
-        ## Create a Payment from the Subscription's Prepayment Account
-        In order apply a prepayment to an invoice, specify the `type` as
-        `prepayment`, and also the `amount`.
-        ```
-        {
-          "type": "prepayment",
-          "payment": {
-            "amount": 10.00
-          }
-        }
-        ```
-        Note that the `amount` must be less than or equal to the
-        Subscription's Prepayment account balance.
-        ## Create a Payment from the Subscription's Service Credit Account
-        In order to apply a service credit to an invoice, specify the `type`
-        as `service_credit`, and also the `amount`:
-        ```
-        {
-          "type": "service_credit",
-          "payment": {
-            "amount": 10.00
-          }
-        }
-        ```
-        Note that Advanced Billing will attempt to fully pay the invoice's
-        `due_amount` from the Subscription's Service Credit account. At this
-        time, partial payments from a Service Credit Account are only allowed
-        for consolidated invoices (subscription groups). Therefore, for normal
-        invoices the Service Credit account balance must be greater than or
-        equal to the invoice's `due_amount`.
-
-        Args:
-            uid (str): The unique identifier for the invoice, this does not
-                refer to the public facing invoice number.
-            body (CreateInvoicePaymentRequest, optional): TODO: type
-                description here.
-
-        Returns:
-            Invoice: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/invoices/{uid}/payments.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Invoice.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def record_payment_for_multiple_invoices(self,
@@ -696,67 +543,27 @@ class InvoicesController(BaseController):
             .deserialize_into(ListCreditNotesResponse.from_dictionary)
         ).execute()
 
-    def read_credit_note(self,
-                         uid):
-        """Does a GET request to /credit_notes/{uid}.json.
+    def refund_invoice(self,
+                       uid,
+                       body=None):
+        """Does a POST request to /invoices/{uid}/refunds.json.
 
-        Use this endpoint to retrieve the details for a credit note.
-
-        Args:
-            uid (str): The unique identifier of the credit note
-
-        Returns:
-            CreditNote: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/credit_notes/{uid}.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(CreditNote.from_dictionary)
-        ).execute()
-
-    def record_payment_for_subscription(self,
-                                        subscription_id,
-                                        body=None):
-        """Does a POST request to /subscriptions/{subscription_id}/payments.json.
-
-        Record an external payment made against a subscription that will pay
-        partially or in full one or more invoices.
-        Payment will be applied starting with the oldest open invoice and then
-        next oldest, and so on until the amount of the payment is fully
-        consumed.
-        Excess payment will result in the creation of a prepayment on the
-        Invoice Account.
-        Only ungrouped or primary subscriptions may be paid using the "bulk"
-        payment request.
+        Refund an invoice, segment, or consolidated invoice.
+        ## Partial Refund for Consolidated Invoice
+        A refund less than the total of a consolidated invoice will be split
+        across its segments.
+        A $50.00 refund on a $100.00 consolidated invoice with one $60.00 and
+        one $40.00 segment, the refunded amount will be applied as 50% of each
+        ($30.00 and $20.00 respectively).
 
         Args:
-            subscription_id (int): The Chargify id of the subscription
-            body (RecordPaymentRequest, optional): TODO: type description
+            uid (str): The unique identifier for the invoice, this does not
+                refer to the public facing invoice number.
+            body (RefundInvoiceRequest, optional): TODO: type description
                 here.
 
         Returns:
-            RecordPaymentResponse: Response from the API. OK
+            Invoice: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -768,11 +575,11 @@ class InvoicesController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/payments.json')
+            .path('/invoices/{uid}/refunds.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
+                            .key('uid')
+                            .value(uid)
                             .is_required(True)
                             .should_encode(True))
             .header_param(Parameter()
@@ -788,7 +595,104 @@ class InvoicesController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(RecordPaymentResponse.from_dictionary)
+            .deserialize_into(Invoice.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def record_payment_for_invoice(self,
+                                   uid,
+                                   body=None):
+        """Does a POST request to /invoices/{uid}/payments.json.
+
+        This API call should be used when you want to record a payment of a
+        given type against a specific invoice. If you would like to apply a
+        payment across multiple invoices, you can use the Bulk Payment
+        endpoint.
+        ## Create a Payment from the existing payment profile
+        In order to apply a payment to an invoice using an existing payment
+        profile, specify `type` as `payment`, the amount less than the invoice
+        total, and the customer's `payment_profile_id`. The ID of a payment
+        profile might be retrieved via the Payment Profiles API endpoint.
+        ```
+        {
+          "type": "payment",
+          "payment": {
+            "amount": 10.00,
+            "payment_profile_id": 123
+          }
+        }
+        ```
+        ## Create a Payment from the Subscription's Prepayment Account
+        In order apply a prepayment to an invoice, specify the `type` as
+        `prepayment`, and also the `amount`.
+        ```
+        {
+          "type": "prepayment",
+          "payment": {
+            "amount": 10.00
+          }
+        }
+        ```
+        Note that the `amount` must be less than or equal to the
+        Subscription's Prepayment account balance.
+        ## Create a Payment from the Subscription's Service Credit Account
+        In order to apply a service credit to an invoice, specify the `type`
+        as `service_credit`, and also the `amount`:
+        ```
+        {
+          "type": "service_credit",
+          "payment": {
+            "amount": 10.00
+          }
+        }
+        ```
+        Note that Advanced Billing will attempt to fully pay the invoice's
+        `due_amount` from the Subscription's Service Credit account. At this
+        time, partial payments from a Service Credit Account are only allowed
+        for consolidated invoices (subscription groups). Therefore, for normal
+        invoices the Service Credit account balance must be greater than or
+        equal to the invoice's `due_amount`.
+
+        Args:
+            uid (str): The unique identifier for the invoice, this does not
+                refer to the public facing invoice number.
+            body (CreateInvoicePaymentRequest, optional): TODO: type
+                description here.
+
+        Returns:
+            Invoice: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/invoices/{uid}/payments.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('uid')
+                            .value(uid)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Invoice.from_dictionary)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
@@ -851,19 +755,45 @@ class InvoicesController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def void_invoice(self,
-                     uid,
-                     body=None):
-        """Does a POST request to /invoices/{uid}/void.json.
+    def issue_invoice(self,
+                      uid,
+                      body=None):
+        """Does a POST request to /invoices/{uid}/issue.json.
 
-        This endpoint allows you to void any invoice with the "open" or
-        "canceled" status.  It will also allow voiding of an invoice with the
-        "pending" status if it is not a consolidated invoice.
+        This endpoint allows you to issue an invoice that is in "pending"
+        status. For example, you can issue an invoice that was created when
+        allocating new quantity on a component and using "accrue charges"
+        option.
+        You cannot issue a pending child invoice that was created for a member
+        subscription in a group.
+        For Remittance subscriptions, the invoice will go into "open" status
+        and payment won't be attempted. The value for `on_failed_payment`
+        would be rejected if sent. Any prepayments or service credits that
+        exist on subscription will be automatically applied. Additionally, if
+        setting is on, an email will be sent for issued invoice.
+        For Automatic subscriptions, prepayments and service credits will
+        apply to the invoice and before payment is attempted. On successful
+        payment, the invoice will go into "paid" status and email will be sent
+        to the customer (if setting applies). When payment fails, the next
+        event depends on the `on_failed_payment` value:
+        - `leave_open_invoice` - prepayments and credits applied to invoice;
+        invoice status set to "open"; email sent to the customer for the
+        issued invoice (if setting applies); payment failure recorded in the
+        invoice history. This is the default option.
+        - `rollback_to_pending` - prepayments and credits not applied; invoice
+        remains in "pending" status; no email sent to the customer; payment
+        failure recorded in the invoice history.
+        - `initiate_dunning` - prepayments and credits applied to the invoice;
+        invoice status set to "open"; email sent to the customer for the
+        issued invoice (if setting applies); payment failure recorded in the
+        invoice history; subscription will  most likely go into "past_due" or
+        "canceled" state (depending upon net terms and dunning settings).
 
         Args:
             uid (str): The unique identifier for the invoice, this does not
                 refer to the public facing invoice number.
-            body (VoidInvoiceRequest, optional): TODO: type description here.
+            body (IssueInvoiceRequest, optional): TODO: type description
+                here.
 
         Returns:
             Invoice: Response from the API. OK
@@ -878,7 +808,7 @@ class InvoicesController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEFAULT)
-            .path('/invoices/{uid}/void.json')
+            .path('/invoices/{uid}/issue.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
                             .key('uid')
@@ -974,6 +904,45 @@ class InvoicesController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ConsolidatedInvoice.from_dictionary)
+        ).execute()
+
+    def read_credit_note(self,
+                         uid):
+        """Does a GET request to /credit_notes/{uid}.json.
+
+        Use this endpoint to retrieve the details for a credit note.
+
+        Args:
+            uid (str): The unique identifier of the credit note
+
+        Returns:
+            CreditNote: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/credit_notes/{uid}.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('uid')
+                            .value(uid)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(CreditNote.from_dictionary)
         ).execute()
 
     def create_invoice(self,
@@ -1249,6 +1218,115 @@ class InvoicesController(BaseController):
             .auth(Single('BasicAuth'))
         ).execute()
 
+    def record_payment_for_subscription(self,
+                                        subscription_id,
+                                        body=None):
+        """Does a POST request to /subscriptions/{subscription_id}/payments.json.
+
+        Record an external payment made against a subscription that will pay
+        partially or in full one or more invoices.
+        Payment will be applied starting with the oldest open invoice and then
+        next oldest, and so on until the amount of the payment is fully
+        consumed.
+        Excess payment will result in the creation of a prepayment on the
+        Invoice Account.
+        Only ungrouped or primary subscriptions may be paid using the "bulk"
+        payment request.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            body (RecordPaymentRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            RecordPaymentResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/payments.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(RecordPaymentResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def void_invoice(self,
+                     uid,
+                     body=None):
+        """Does a POST request to /invoices/{uid}/void.json.
+
+        This endpoint allows you to void any invoice with the "open" or
+        "canceled" status.  It will also allow voiding of an invoice with the
+        "pending" status if it is not a consolidated invoice.
+
+        Args:
+            uid (str): The unique identifier for the invoice, this does not
+                refer to the public facing invoice number.
+            body (VoidInvoiceRequest, optional): TODO: type description here.
+
+        Returns:
+            Invoice: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/invoices/{uid}/void.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('uid')
+                            .value(uid)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Invoice.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
     def preview_customer_information_changes(self,
                                              uid):
         """Does a POST request to /invoices/{uid}/customer_information/preview.json.
@@ -1340,83 +1418,5 @@ class InvoicesController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(Invoice.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', ErrorListResponseException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def issue_invoice(self,
-                      uid,
-                      body=None):
-        """Does a POST request to /invoices/{uid}/issue.json.
-
-        This endpoint allows you to issue an invoice that is in "pending"
-        status. For example, you can issue an invoice that was created when
-        allocating new quantity on a component and using "accrue charges"
-        option.
-        You cannot issue a pending child invoice that was created for a member
-        subscription in a group.
-        For Remittance subscriptions, the invoice will go into "open" status
-        and payment won't be attempted. The value for `on_failed_payment`
-        would be rejected if sent. Any prepayments or service credits that
-        exist on subscription will be automatically applied. Additionally, if
-        setting is on, an email will be sent for issued invoice.
-        For Automatic subscriptions, prepayments and service credits will
-        apply to the invoice and before payment is attempted. On successful
-        payment, the invoice will go into "paid" status and email will be sent
-        to the customer (if setting applies). When payment fails, the next
-        event depends on the `on_failed_payment` value:
-        - `leave_open_invoice` - prepayments and credits applied to invoice;
-        invoice status set to "open"; email sent to the customer for the
-        issued invoice (if setting applies); payment failure recorded in the
-        invoice history. This is the default option.
-        - `rollback_to_pending` - prepayments and credits not applied; invoice
-        remains in "pending" status; no email sent to the customer; payment
-        failure recorded in the invoice history.
-        - `initiate_dunning` - prepayments and credits applied to the invoice;
-        invoice status set to "open"; email sent to the customer for the
-        issued invoice (if setting applies); payment failure recorded in the
-        invoice history; subscription will  most likely go into "past_due" or
-        "canceled" state (depending upon net terms and dunning settings).
-
-        Args:
-            uid (str): The unique identifier for the invoice, this does not
-                refer to the public facing invoice number.
-            body (IssueInvoiceRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            Invoice: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/invoices/{uid}/issue.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Invoice.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()

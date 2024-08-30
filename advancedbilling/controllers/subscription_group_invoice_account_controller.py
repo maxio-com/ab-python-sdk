@@ -16,10 +16,10 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
-from advancedbilling.models.subscription_group_prepayment_response import SubscriptionGroupPrepaymentResponse
-from advancedbilling.models.list_subscription_group_prepayment_response import ListSubscriptionGroupPrepaymentResponse
-from advancedbilling.models.service_credit_response import ServiceCreditResponse
 from advancedbilling.models.service_credit import ServiceCredit
+from advancedbilling.models.list_subscription_group_prepayment_response import ListSubscriptionGroupPrepaymentResponse
+from advancedbilling.models.subscription_group_prepayment_response import SubscriptionGroupPrepaymentResponse
+from advancedbilling.models.service_credit_response import ServiceCreditResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.api_exception import APIException
 
@@ -30,23 +30,22 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
     def __init__(self, config):
         super(SubscriptionGroupInvoiceAccountController, self).__init__(config)
 
-    def create_subscription_group_prepayment(self,
-                                             uid,
-                                             body=None):
-        """Does a POST request to /subscription_groups/{uid}/prepayments.json.
+    def deduct_subscription_group_service_credit(self,
+                                                 uid,
+                                                 body=None):
+        """Does a POST request to /subscription_groups/{uid}/service_credit_deductions.json.
 
-        A prepayment can be added for a subscription group identified by the
-        group's `uid`. This endpoint requires a `amount`, `details`, `method`,
-        and `memo`. On success, the prepayment will be added to the group's
-        prepayment balance.
+        Credit can be deducted for a subscription group identified by the
+        group's `uid`. Credit will be deducted from the group in the amount
+        specified in the request body.
 
         Args:
             uid (str): The uid of the subscription group
-            body (SubscriptionGroupPrepaymentRequest, optional): TODO: type
+            body (DeductServiceCreditRequest, optional): TODO: type
                 description here.
 
         Returns:
-            SubscriptionGroupPrepaymentResponse: Response from the API. OK
+            ServiceCredit: Response from the API. Created
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -58,7 +57,7 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEFAULT)
-            .path('/subscription_groups/{uid}/prepayments.json')
+            .path('/subscription_groups/{uid}/service_credit_deductions.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
                             .key('uid')
@@ -78,7 +77,7 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SubscriptionGroupPrepaymentResponse.from_dictionary)
+            .deserialize_into(ServiceCredit.from_dictionary)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
@@ -155,6 +154,58 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
+    def create_subscription_group_prepayment(self,
+                                             uid,
+                                             body=None):
+        """Does a POST request to /subscription_groups/{uid}/prepayments.json.
+
+        A prepayment can be added for a subscription group identified by the
+        group's `uid`. This endpoint requires a `amount`, `details`, `method`,
+        and `memo`. On success, the prepayment will be added to the group's
+        prepayment balance.
+
+        Args:
+            uid (str): The uid of the subscription group
+            body (SubscriptionGroupPrepaymentRequest, optional): TODO: type
+                description here.
+
+        Returns:
+            SubscriptionGroupPrepaymentResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscription_groups/{uid}/prepayments.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('uid')
+                            .value(uid)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SubscriptionGroupPrepaymentResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
     def issue_subscription_group_service_credit(self,
                                                 uid,
                                                 body=None):
@@ -204,56 +255,5 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ServiceCreditResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def deduct_subscription_group_service_credit(self,
-                                                 uid,
-                                                 body=None):
-        """Does a POST request to /subscription_groups/{uid}/service_credit_deductions.json.
-
-        Credit can be deducted for a subscription group identified by the
-        group's `uid`. Credit will be deducted from the group in the amount
-        specified in the request body.
-
-        Args:
-            uid (str): The uid of the subscription group
-            body (DeductServiceCreditRequest, optional): TODO: type
-                description here.
-
-        Returns:
-            ServiceCredit: Response from the API. Created
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscription_groups/{uid}/service_credit_deductions.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ServiceCredit.from_dictionary)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()

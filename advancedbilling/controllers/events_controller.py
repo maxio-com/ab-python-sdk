@@ -26,6 +26,96 @@ class EventsController(BaseController):
     def __init__(self, config):
         super(EventsController, self).__init__(config)
 
+    def list_subscription_events(self,
+                                 options=dict()):
+        """Does a GET request to /subscriptions/{subscription_id}/events.json.
+
+        The following request will return a list of events for a
+        subscription.
+        Each event type has its own `event_specific_data` specified.
+
+        Args:
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    subscription_id -- int -- The Chargify id of the
+                        subscription
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    since_id -- long|int -- Returns events with an id greater
+                        than or equal to the one specified
+                    max_id -- long|int -- Returns events with an id less than
+                        or equal to the one specified
+                    direction -- Direction -- The sort direction of the
+                        returned events.
+                    filter -- List[EventType] -- You can pass multiple event
+                        keys after comma. Use in query
+                        `filter=signup_success,payment_success`.
+
+        Returns:
+            List[EventResponse]: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/events.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(options.get('subscription_id', None))
+                            .is_required(True)
+                            .should_encode(True))
+            .query_param(Parameter()
+                         .key('page')
+                         .value(options.get('page', None)))
+            .query_param(Parameter()
+                         .key('per_page')
+                         .value(options.get('per_page', None)))
+            .query_param(Parameter()
+                         .key('since_id')
+                         .value(options.get('since_id', None)))
+            .query_param(Parameter()
+                         .key('max_id')
+                         .value(options.get('max_id', None)))
+            .query_param(Parameter()
+                         .key('direction')
+                         .value(options.get('direction', None)))
+            .query_param(Parameter()
+                         .key('filter')
+                         .value(options.get('filter', None)))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .array_serialization_format(SerializationFormats.CSV)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(EventResponse.from_dictionary)
+        ).execute()
+
     def list_events(self,
                     options=dict()):
         """Does a GET request to /events.json.
@@ -195,96 +285,6 @@ class EventsController(BaseController):
             .query_param(Parameter()
                          .key('end_datetime')
                          .value(options.get('end_datetime', None)))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(EventResponse.from_dictionary)
-        ).execute()
-
-    def list_subscription_events(self,
-                                 options=dict()):
-        """Does a GET request to /subscriptions/{subscription_id}/events.json.
-
-        The following request will return a list of events for a
-        subscription.
-        Each event type has its own `event_specific_data` specified.
-
-        Args:
-            options (dict, optional): Key-value pairs for any of the
-                parameters to this API Endpoint. All parameters to the
-                endpoint are supplied through the dictionary with their names
-                being the key and their desired values being the value. A list
-                of parameters that can be used are::
-
-                    subscription_id -- int -- The Chargify id of the
-                        subscription
-                    page -- int -- Result records are organized in pages. By
-                        default, the first page of results is displayed. The
-                        page parameter specifies a page number of results to
-                        fetch. You can start navigating through the pages to
-                        consume the results. You do this by passing in a page
-                        parameter. Retrieve the next page by adding ?page=2 to
-                        the query string. If there are no results to return,
-                        then an empty result set will be returned. Use in
-                        query `page=1`.
-                    per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is 20.
-                        The maximum allowed values is 200; any per_page value
-                        over 200 will be changed to 200. Use in query
-                        `per_page=200`.
-                    since_id -- long|int -- Returns events with an id greater
-                        than or equal to the one specified
-                    max_id -- long|int -- Returns events with an id less than
-                        or equal to the one specified
-                    direction -- Direction -- The sort direction of the
-                        returned events.
-                    filter -- List[EventType] -- You can pass multiple event
-                        keys after comma. Use in query
-                        `filter=signup_success,payment_success`.
-
-        Returns:
-            List[EventResponse]: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/events.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(options.get('subscription_id', None))
-                            .is_required(True)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('page')
-                         .value(options.get('page', None)))
-            .query_param(Parameter()
-                         .key('per_page')
-                         .value(options.get('per_page', None)))
-            .query_param(Parameter()
-                         .key('since_id')
-                         .value(options.get('since_id', None)))
-            .query_param(Parameter()
-                         .key('max_id')
-                         .value(options.get('max_id', None)))
-            .query_param(Parameter()
-                         .key('direction')
-                         .value(options.get('direction', None)))
-            .query_param(Parameter()
-                         .key('filter')
-                         .value(options.get('filter', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

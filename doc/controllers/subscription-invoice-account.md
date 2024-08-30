@@ -10,40 +10,12 @@ subscription_invoice_account_controller = client.subscription_invoice_account
 
 ## Methods
 
-* [Read Account Balances](../../doc/controllers/subscription-invoice-account.md#read-account-balances)
 * [Create Prepayment](../../doc/controllers/subscription-invoice-account.md#create-prepayment)
 * [List Prepayments](../../doc/controllers/subscription-invoice-account.md#list-prepayments)
+* [Refund Prepayment](../../doc/controllers/subscription-invoice-account.md#refund-prepayment)
+* [Read Account Balances](../../doc/controllers/subscription-invoice-account.md#read-account-balances)
 * [Issue Service Credit](../../doc/controllers/subscription-invoice-account.md#issue-service-credit)
 * [Deduct Service Credit](../../doc/controllers/subscription-invoice-account.md#deduct-service-credit)
-* [Refund Prepayment](../../doc/controllers/subscription-invoice-account.md#refund-prepayment)
-
-
-# Read Account Balances
-
-Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
-
-```python
-def read_account_balances(self,
-                         subscription_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-
-## Response Type
-
-[`AccountBalances`](../../doc/models/account-balances.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-result = subscription_invoice_account_controller.read_account_balances(subscription_id)
-```
 
 
 # Create Prepayment
@@ -182,6 +154,81 @@ result = subscription_invoice_account_controller.list_prepayments(collect)
 | 404 | Not Found | `APIException` |
 
 
+# Refund Prepayment
+
+This endpoint will refund, completely or partially, a particular prepayment applied to a subscription. The `prepayment_id` will be the account transaction ID of the original payment. The prepayment must have some amount remaining in order to be refunded.
+
+The amount may be passed either as a decimal, with `amount`, or an integer in cents, with `amount_in_cents`.
+
+```python
+def refund_prepayment(self,
+                     subscription_id,
+                     prepayment_id,
+                     body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `prepayment_id` | `long\|int` | Template, Required | id of prepayment |
+| `body` | [`RefundPrepaymentRequest`](../../doc/models/refund-prepayment-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`PrepaymentResponse`](../../doc/models/prepayment-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+prepayment_id = 228
+
+result = subscription_invoice_account_controller.refund_prepayment(
+    subscription_id,
+    prepayment_id
+)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Bad Request | [`RefundPrepaymentBaseErrorsResponseException`](../../doc/models/refund-prepayment-base-errors-response-exception.md) |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity | `APIException` |
+
+
+# Read Account Balances
+
+Returns the `balance_in_cents` of the Subscription's Pending Discount, Service Credit, and Prepayment accounts, as well as the sum of the Subscription's open, payable invoices.
+
+```python
+def read_account_balances(self,
+                         subscription_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+
+## Response Type
+
+[`AccountBalances`](../../doc/models/account-balances.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+result = subscription_invoice_account_controller.read_account_balances(subscription_id)
+```
+
+
 # Issue Service Credit
 
 Credit will be added to the subscription in the amount specified in the request body. The credit is subsequently applied to the next generated invoice.
@@ -283,51 +330,4 @@ subscription_invoice_account_controller.deduct_service_credit(
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | Unprocessable Entity (WebDAV) | `APIException` |
-
-
-# Refund Prepayment
-
-This endpoint will refund, completely or partially, a particular prepayment applied to a subscription. The `prepayment_id` will be the account transaction ID of the original payment. The prepayment must have some amount remaining in order to be refunded.
-
-The amount may be passed either as a decimal, with `amount`, or an integer in cents, with `amount_in_cents`.
-
-```python
-def refund_prepayment(self,
-                     subscription_id,
-                     prepayment_id,
-                     body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `prepayment_id` | `long\|int` | Template, Required | id of prepayment |
-| `body` | [`RefundPrepaymentRequest`](../../doc/models/refund-prepayment-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`PrepaymentResponse`](../../doc/models/prepayment-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-prepayment_id = 228
-
-result = subscription_invoice_account_controller.refund_prepayment(
-    subscription_id,
-    prepayment_id
-)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Bad Request | [`RefundPrepaymentBaseErrorsResponseException`](../../doc/models/refund-prepayment-base-errors-response-exception.md) |
-| 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity | `APIException` |
 

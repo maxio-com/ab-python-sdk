@@ -10,15 +10,169 @@ subscription_groups_controller = client.subscription_groups
 
 ## Methods
 
+* [List Subscription Groups](../../doc/controllers/subscription-groups.md#list-subscription-groups)
+* [Find Subscription Group](../../doc/controllers/subscription-groups.md#find-subscription-group)
 * [Signup With Subscription Group](../../doc/controllers/subscription-groups.md#signup-with-subscription-group)
 * [Create Subscription Group](../../doc/controllers/subscription-groups.md#create-subscription-group)
-* [List Subscription Groups](../../doc/controllers/subscription-groups.md#list-subscription-groups)
+* [Delete Subscription Group](../../doc/controllers/subscription-groups.md#delete-subscription-group)
+* [Add Subscription to Group](../../doc/controllers/subscription-groups.md#add-subscription-to-group)
 * [Read Subscription Group](../../doc/controllers/subscription-groups.md#read-subscription-group)
 * [Update Subscription Group Members](../../doc/controllers/subscription-groups.md#update-subscription-group-members)
-* [Delete Subscription Group](../../doc/controllers/subscription-groups.md#delete-subscription-group)
-* [Find Subscription Group](../../doc/controllers/subscription-groups.md#find-subscription-group)
-* [Add Subscription to Group](../../doc/controllers/subscription-groups.md#add-subscription-to-group)
 * [Remove Subscription From Group](../../doc/controllers/subscription-groups.md#remove-subscription-from-group)
+
+
+# List Subscription Groups
+
+Returns an array of subscription groups for the site. The response is paginated and will return a `meta` key with pagination information.
+
+#### Account Balance Information
+
+Account balance information for the subscription groups is not returned by default. If this information is desired, the `include[]=account_balances` parameter must be provided with the request.
+
+```python
+def list_subscription_groups(self,
+                            options=dict())
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
+| `include` | [`List[SubscriptionGroupsListInclude]`](../../doc/models/subscription-groups-list-include.md) | Query, Optional | A list of additional information to include in the response. The following values are supported:<br><br>- `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances` |
+
+## Response Type
+
+[`ListSubscriptionGroupsResponse`](../../doc/models/list-subscription-groups-response.md)
+
+## Example Usage
+
+```python
+collect = {
+    'page': 2,
+    'per_page': 50,
+    'include': [
+        SubscriptionGroupsListInclude.ACCOUNT_BALANCES
+    ]
+}
+result = subscription_groups_controller.list_subscription_groups(collect)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription_groups": [
+    {
+      "uid": "grp_952mvqcnk53wq",
+      "scheme": 1,
+      "customer_id": 88498000,
+      "payment_profile_id": 93063018,
+      "subscription_ids": [
+        42768907,
+        82370782
+      ],
+      "primary_subscription_id": 69844395,
+      "next_assessment_at": "2021-05-05T16:00:21-04:00",
+      "state": "active",
+      "cancel_at_end_of_period": false,
+      "account_balances": {
+        "prepayments": {
+          "balance_in_cents": 0
+        },
+        "service_credits": {
+          "balance_in_cents": 0
+        },
+        "pending_discounts": {
+          "balance_in_cents": 0
+        }
+      }
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "total_count": 1
+  }
+}
+```
+
+
+# Find Subscription Group
+
+Use this endpoint to find subscription group associated with subscription.
+
+If the subscription is not in a group endpoint will return 404 code.
+
+```python
+def find_subscription_group(self,
+                           subscription_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `str` | Query, Required | The Advanced Billing id of the subscription associated with the subscription group |
+
+## Response Type
+
+[`FullSubscriptionGroupResponse`](../../doc/models/full-subscription-group-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 'subscription_id0'
+
+result = subscription_groups_controller.find_subscription_group(subscription_id)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "uid": "grp_939ktzq8v4477",
+  "scheme": 1,
+  "customer_id": 400,
+  "payment_profile_id": 567,
+  "subscription_ids": [
+    101,
+    102,
+    103
+  ],
+  "primary_subscription_id": 101,
+  "next_assessment_at": "2020-08-01T14:00:00-05:00",
+  "state": "active",
+  "cancel_at_end_of_period": false,
+  "customer": {
+    "first_name": "Mark",
+    "last_name": "Wannabewahlberg",
+    "organization": "The Funky Bunch",
+    "email": "markymark@example.com",
+    "reference": "4c92223b-bc16-4d0d-87ff-b177a89a2655"
+  },
+  "account_balances": {
+    "prepayments": {
+      "balance_in_cents": 0
+    },
+    "service_credits": {
+      "balance_in_cents": 0
+    },
+    "open_invoices": {
+      "balance_in_cents": 4400
+    },
+    "pending_discounts": {
+      "balance_in_cents": 0
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
 
 
 # Signup With Subscription Group
@@ -149,78 +303,127 @@ result = subscription_groups_controller.create_subscription_group(
 | 422 | Unprocessable Entity (WebDAV) | [`SubscriptionGroupCreateErrorResponseException`](../../doc/models/subscription-group-create-error-response-exception.md) |
 
 
-# List Subscription Groups
+# Delete Subscription Group
 
-Returns an array of subscription groups for the site. The response is paginated and will return a `meta` key with pagination information.
-
-#### Account Balance Information
-
-Account balance information for the subscription groups is not returned by default. If this information is desired, the `include[]=account_balances` parameter must be provided with the request.
+Use this endpoint to delete subscription group.
+Only groups without members can be deleted
 
 ```python
-def list_subscription_groups(self,
-                            options=dict())
+def delete_subscription_group(self,
+                             uid)
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `include` | [`List[SubscriptionGroupsListInclude]`](../../doc/models/subscription-groups-list-include.md) | Query, Optional | A list of additional information to include in the response. The following values are supported:<br><br>- `account_balances`: Account balance information for the subscription groups. Use in query: `include[]=account_balances` |
+| `uid` | `str` | Template, Required | The uid of the subscription group |
 
 ## Response Type
 
-[`ListSubscriptionGroupsResponse`](../../doc/models/list-subscription-groups-response.md)
+[`DeleteSubscriptionGroupResponse`](../../doc/models/delete-subscription-group-response.md)
 
 ## Example Usage
 
 ```python
-collect = {
-    'page': 2,
-    'per_page': 50,
-    'include': [
-        SubscriptionGroupsListInclude.ACCOUNT_BALANCES
-    ]
-}
-result = subscription_groups_controller.list_subscription_groups(collect)
+uid = 'uid0'
+
+result = subscription_groups_controller.delete_subscription_group(uid)
 ```
 
 ## Example Response *(as JSON)*
 
 ```json
 {
-  "subscription_groups": [
-    {
-      "uid": "grp_952mvqcnk53wq",
-      "scheme": 1,
-      "customer_id": 88498000,
-      "payment_profile_id": 93063018,
-      "subscription_ids": [
-        42768907,
-        82370782
-      ],
-      "primary_subscription_id": 69844395,
-      "next_assessment_at": "2021-05-05T16:00:21-04:00",
-      "state": "active",
-      "cancel_at_end_of_period": false,
-      "account_balances": {
-        "prepayments": {
-          "balance_in_cents": 0
-        },
-        "service_credits": {
-          "balance_in_cents": 0
-        },
-        "pending_discounts": {
-          "balance_in_cents": 0
-        }
-      }
-    }
-  ],
-  "meta": {
-    "current_page": 1,
-    "total_count": 1
+  "uid": "grp_99w5xp9y5xycy",
+  "deleted": true
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+
+
+# Add Subscription to Group
+
+For sites making use of the [Relationship Billing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview) and [Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-hierarchies) features, it is possible to add existing subscriptions to subscription groups.
+
+Passing `group` parameters with a `target` containing a `type` and optional `id` is all that's needed. When the `target` parameter specifies a `"customer"` or `"subscription"` that is already part of a hierarchy, the subscription will become a member of the customer's subscription group.  If the target customer or subscription is not part of a subscription group, a new group will be created and the subscription will become part of the group with the specified target customer set as the responsible payer for the group's subscriptions.
+
+**Please Note:** In order to add an existing subscription to a subscription group, it must belong to either the same customer record as the target, or be within the same customer hierarchy.
+
+Rather than specifying a customer, the `target` parameter could instead simply have a value of
+
+* `"self"` which indicates the subscription will be paid for not by some other customer, but by the subscribing customer,
+* `"parent"` which indicates the subscription will be paid for by the subscribing customer's parent within a customer hierarchy, or
+* `"eldest"` which indicates the subscription will be paid for by the root-level customer in the subscribing customer's hierarchy.
+
+To create a new subscription into a subscription group, please reference the following:
+[Create Subscription in a Subscription Group](https://developers.chargify.com/docs/api-docs/d571659cf0f24-create-subscription#subscription-in-a-subscription-group)
+
+```python
+def add_subscription_to_group(self,
+                             subscription_id,
+                             body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `body` | [`AddSubscriptionToAGroup`](../../doc/models/add-subscription-to-a-group.md) | Body, Optional | - |
+
+## Response Type
+
+[`SubscriptionGroupResponse`](../../doc/models/subscription-group-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+body = AddSubscriptionToAGroup(
+    group=GroupSettings(
+        target=GroupTarget(
+            mtype=GroupTargetType.SUBSCRIPTION,
+            id=32987
+        ),
+        billing=GroupBilling(
+            accrue=True,
+            align_date=True,
+            prorate=True
+        )
+    )
+)
+
+result = subscription_groups_controller.add_subscription_to_group(
+    subscription_id,
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription_group": {
+    "customer_id": 130690,
+    "payment_profile": {
+      "id": 32055,
+      "first_name": "Marty",
+      "last_name": "McFly",
+      "masked_card_number": "XXXX-XXXX-XXXX-1111"
+    },
+    "subscription_ids": [
+      32988,
+      33060,
+      32986
+    ],
+    "created_at": "2018-08-30T17:14:30-04:00"
   }
 }
 ```
@@ -378,209 +581,6 @@ result = subscription_groups_controller.update_subscription_group_members(
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | Unprocessable Entity (WebDAV) | [`SubscriptionGroupUpdateErrorResponseException`](../../doc/models/subscription-group-update-error-response-exception.md) |
-
-
-# Delete Subscription Group
-
-Use this endpoint to delete subscription group.
-Only groups without members can be deleted
-
-```python
-def delete_subscription_group(self,
-                             uid)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `str` | Template, Required | The uid of the subscription group |
-
-## Response Type
-
-[`DeleteSubscriptionGroupResponse`](../../doc/models/delete-subscription-group-response.md)
-
-## Example Usage
-
-```python
-uid = 'uid0'
-
-result = subscription_groups_controller.delete_subscription_group(uid)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "uid": "grp_99w5xp9y5xycy",
-  "deleted": true
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-
-
-# Find Subscription Group
-
-Use this endpoint to find subscription group associated with subscription.
-
-If the subscription is not in a group endpoint will return 404 code.
-
-```python
-def find_subscription_group(self,
-                           subscription_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `str` | Query, Required | The Advanced Billing id of the subscription associated with the subscription group |
-
-## Response Type
-
-[`FullSubscriptionGroupResponse`](../../doc/models/full-subscription-group-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 'subscription_id0'
-
-result = subscription_groups_controller.find_subscription_group(subscription_id)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "uid": "grp_939ktzq8v4477",
-  "scheme": 1,
-  "customer_id": 400,
-  "payment_profile_id": 567,
-  "subscription_ids": [
-    101,
-    102,
-    103
-  ],
-  "primary_subscription_id": 101,
-  "next_assessment_at": "2020-08-01T14:00:00-05:00",
-  "state": "active",
-  "cancel_at_end_of_period": false,
-  "customer": {
-    "first_name": "Mark",
-    "last_name": "Wannabewahlberg",
-    "organization": "The Funky Bunch",
-    "email": "markymark@example.com",
-    "reference": "4c92223b-bc16-4d0d-87ff-b177a89a2655"
-  },
-  "account_balances": {
-    "prepayments": {
-      "balance_in_cents": 0
-    },
-    "service_credits": {
-      "balance_in_cents": 0
-    },
-    "open_invoices": {
-      "balance_in_cents": 4400
-    },
-    "pending_discounts": {
-      "balance_in_cents": 0
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-
-
-# Add Subscription to Group
-
-For sites making use of the [Relationship Billing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview) and [Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-hierarchies) features, it is possible to add existing subscriptions to subscription groups.
-
-Passing `group` parameters with a `target` containing a `type` and optional `id` is all that's needed. When the `target` parameter specifies a `"customer"` or `"subscription"` that is already part of a hierarchy, the subscription will become a member of the customer's subscription group.  If the target customer or subscription is not part of a subscription group, a new group will be created and the subscription will become part of the group with the specified target customer set as the responsible payer for the group's subscriptions.
-
-**Please Note:** In order to add an existing subscription to a subscription group, it must belong to either the same customer record as the target, or be within the same customer hierarchy.
-
-Rather than specifying a customer, the `target` parameter could instead simply have a value of
-
-* `"self"` which indicates the subscription will be paid for not by some other customer, but by the subscribing customer,
-* `"parent"` which indicates the subscription will be paid for by the subscribing customer's parent within a customer hierarchy, or
-* `"eldest"` which indicates the subscription will be paid for by the root-level customer in the subscribing customer's hierarchy.
-
-To create a new subscription into a subscription group, please reference the following:
-[Create Subscription in a Subscription Group](https://developers.chargify.com/docs/api-docs/d571659cf0f24-create-subscription#subscription-in-a-subscription-group)
-
-```python
-def add_subscription_to_group(self,
-                             subscription_id,
-                             body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `body` | [`AddSubscriptionToAGroup`](../../doc/models/add-subscription-to-a-group.md) | Body, Optional | - |
-
-## Response Type
-
-[`SubscriptionGroupResponse`](../../doc/models/subscription-group-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-body = AddSubscriptionToAGroup(
-    group=GroupSettings(
-        target=GroupTarget(
-            mtype=GroupTargetType.SUBSCRIPTION,
-            id=32987
-        ),
-        billing=GroupBilling(
-            accrue=True,
-            align_date=True,
-            prorate=True
-        )
-    )
-)
-
-result = subscription_groups_controller.add_subscription_to_group(
-    subscription_id,
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription_group": {
-    "customer_id": 130690,
-    "payment_profile": {
-      "id": 32055,
-      "first_name": "Marty",
-      "last_name": "McFly",
-      "masked_card_number": "XXXX-XXXX-XXXX-1111"
-    },
-    "subscription_ids": [
-      32988,
-      33060,
-      32986
-    ],
-    "created_at": "2018-08-30T17:14:30-04:00"
-  }
-}
-```
 
 
 # Remove Subscription From Group

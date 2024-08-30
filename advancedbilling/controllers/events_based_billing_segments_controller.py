@@ -20,8 +20,8 @@ from advancedbilling.models.segment_response import SegmentResponse
 from advancedbilling.models.list_segments_response import ListSegmentsResponse
 from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.exceptions.event_based_billing_segment_errors_exception import EventBasedBillingSegmentErrorsException
-from advancedbilling.exceptions.event_based_billing_list_segments_errors_exception import EventBasedBillingListSegmentsErrorsException
 from advancedbilling.exceptions.event_based_billing_segment_exception import EventBasedBillingSegmentException
+from advancedbilling.exceptions.event_based_billing_list_segments_errors_exception import EventBasedBillingListSegmentsErrorsException
 
 
 class EventsBasedBillingSegmentsController(BaseController):
@@ -91,6 +91,139 @@ class EventsBasedBillingSegmentsController(BaseController):
             .deserialize_into(SegmentResponse.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', EventBasedBillingSegmentErrorsException)
+        ).execute()
+
+    def update_segment(self,
+                       component_id,
+                       price_point_id,
+                       id,
+                       body=None):
+        """Does a PUT request to /components/{component_id}/price_points/{price_point_id}/segments/{id}.json.
+
+        This endpoint updates a single Segment for a Component with a
+        segmented Metric. It allows you to update the pricing for the
+        segment.
+        You may specify component and/or price point by using either the
+        numeric ID or the `handle:gold` syntax.
+
+        Args:
+            component_id (str): ID or Handle of the Component
+            price_point_id (str): ID or Handle of the Price Point belonging to
+                the Component
+            id (float): The ID of the Segment
+            body (UpdateSegmentRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            SegmentResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/components/{component_id}/price_points/{price_point_id}/segments/{id}.json')
+            .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('component_id')
+                            .value(component_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('price_point_id')
+                            .value(price_point_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('id')
+                            .value(id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SegmentResponse.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', EventBasedBillingSegmentErrorsException)
+        ).execute()
+
+    def bulk_create_segments(self,
+                             component_id,
+                             price_point_id,
+                             body=None):
+        """Does a POST request to /components/{component_id}/price_points/{price_point_id}/segments/bulk.json.
+
+        This endpoint allows you to create multiple segments in one request.
+        The array of segments can contain up to `2000` records.
+        If any of the records contain an error the whole request would fail
+        and none of the requested segments get created. The error response
+        contains a message for only the one segment that failed validation,
+        with the corresponding index in the array.
+        You may specify component and/or price point by using either the
+        numeric ID or the `handle:gold` syntax.
+
+        Args:
+            component_id (str): ID or Handle for the Component
+            price_point_id (str): ID or Handle for the Price Point belonging
+                to the Component
+            body (BulkCreateSegments, optional): TODO: type description here.
+
+        Returns:
+            ListSegmentsResponse: Response from the API. Created
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/components/{component_id}/price_points/{price_point_id}/segments/bulk.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('component_id')
+                            .value(component_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('price_point_id')
+                            .value(price_point_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ListSegmentsResponse.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', EventBasedBillingSegmentException)
         ).execute()
 
     def list_segments_for_price_point(self,
@@ -179,75 +312,6 @@ class EventsBasedBillingSegmentsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', EventBasedBillingListSegmentsErrorsException)
         ).execute()
 
-    def update_segment(self,
-                       component_id,
-                       price_point_id,
-                       id,
-                       body=None):
-        """Does a PUT request to /components/{component_id}/price_points/{price_point_id}/segments/{id}.json.
-
-        This endpoint updates a single Segment for a Component with a
-        segmented Metric. It allows you to update the pricing for the
-        segment.
-        You may specify component and/or price point by using either the
-        numeric ID or the `handle:gold` syntax.
-
-        Args:
-            component_id (str): ID or Handle of the Component
-            price_point_id (str): ID or Handle of the Price Point belonging to
-                the Component
-            id (float): The ID of the Segment
-            body (UpdateSegmentRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            SegmentResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/components/{component_id}/price_points/{price_point_id}/segments/{id}.json')
-            .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('component_id')
-                            .value(component_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('price_point_id')
-                            .value(price_point_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('id')
-                            .value(id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SegmentResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', EventBasedBillingSegmentErrorsException)
-        ).execute()
-
     def delete_segment(self,
                        component_id,
                        price_point_id,
@@ -295,70 +359,6 @@ class EventsBasedBillingSegmentsController(BaseController):
                             .is_required(True)
                             .should_encode(True))
             .auth(Single('BasicAuth'))
-        ).execute()
-
-    def bulk_create_segments(self,
-                             component_id,
-                             price_point_id,
-                             body=None):
-        """Does a POST request to /components/{component_id}/price_points/{price_point_id}/segments/bulk.json.
-
-        This endpoint allows you to create multiple segments in one request.
-        The array of segments can contain up to `2000` records.
-        If any of the records contain an error the whole request would fail
-        and none of the requested segments get created. The error response
-        contains a message for only the one segment that failed validation,
-        with the corresponding index in the array.
-        You may specify component and/or price point by using either the
-        numeric ID or the `handle:gold` syntax.
-
-        Args:
-            component_id (str): ID or Handle for the Component
-            price_point_id (str): ID or Handle for the Price Point belonging
-                to the Component
-            body (BulkCreateSegments, optional): TODO: type description here.
-
-        Returns:
-            ListSegmentsResponse: Response from the API. Created
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/components/{component_id}/price_points/{price_point_id}/segments/bulk.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('component_id')
-                            .value(component_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('price_point_id')
-                            .value(price_point_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ListSegmentsResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', EventBasedBillingSegmentException)
         ).execute()
 
     def bulk_update_segments(self,

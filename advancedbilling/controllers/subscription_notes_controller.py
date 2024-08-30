@@ -24,63 +24,6 @@ class SubscriptionNotesController(BaseController):
     def __init__(self, config):
         super(SubscriptionNotesController, self).__init__(config)
 
-    def create_subscription_note(self,
-                                 subscription_id,
-                                 body=None):
-        """Does a POST request to /subscriptions/{subscription_id}/notes.json.
-
-        Use the following method to create a note for a subscription.
-        ## How to Use Subscription Notes
-        Notes allow you to record information about a particular Subscription
-        in a free text format.
-        If you have structured data such as birth date, color, etc., consider
-        using Metadata instead.
-        Full documentation on how to use Notes in the Advanced Billing UI can
-        be located
-        [here](https://maxio.zendesk.com/hc/en-us/articles/24251712214413-Subsc
-        ription-Summary-Overview).
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            body (UpdateSubscriptionNoteRequest, optional): TODO: type
-                description here.
-
-        Returns:
-            SubscriptionNoteResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/notes.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SubscriptionNoteResponse.from_dictionary)
-        ).execute()
-
     def list_subscription_notes(self,
                                 options=dict()):
         """Does a GET request to /subscriptions/{subscription_id}/notes.json.
@@ -141,6 +84,102 @@ class SubscriptionNotesController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SubscriptionNoteResponse.from_dictionary)
+        ).execute()
+
+    def delete_subscription_note(self,
+                                 subscription_id,
+                                 note_id):
+        """Does a DELETE request to /subscriptions/{subscription_id}/notes/{note_id}.json.
+
+        Use the following method to delete a note for a Subscription.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            note_id (int): The Advanced Billing id of the note
+
+        Returns:
+            void: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/notes/{note_id}.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('note_id')
+                            .value(note_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('BasicAuth'))
+        ).execute()
+
+    def create_subscription_note(self,
+                                 subscription_id,
+                                 body=None):
+        """Does a POST request to /subscriptions/{subscription_id}/notes.json.
+
+        Use the following method to create a note for a subscription.
+        ## How to Use Subscription Notes
+        Notes allow you to record information about a particular Subscription
+        in a free text format.
+        If you have structured data such as birth date, color, etc., consider
+        using Metadata instead.
+        Full documentation on how to use Notes in the Advanced Billing UI can
+        be located
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24251712214413-Subsc
+        ription-Summary-Overview).
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            body (UpdateSubscriptionNoteRequest, optional): TODO: type
+                description here.
+
+        Returns:
+            SubscriptionNoteResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/notes.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
             .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()
@@ -248,43 +287,4 @@ class SubscriptionNotesController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionNoteResponse.from_dictionary)
-        ).execute()
-
-    def delete_subscription_note(self,
-                                 subscription_id,
-                                 note_id):
-        """Does a DELETE request to /subscriptions/{subscription_id}/notes/{note_id}.json.
-
-        Use the following method to delete a note for a Subscription.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            note_id (int): The Advanced Billing id of the note
-
-        Returns:
-            void: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/notes/{note_id}.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('note_id')
-                            .value(note_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('BasicAuth'))
         ).execute()

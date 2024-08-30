@@ -16,10 +16,10 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.payment_profile_response import PaymentProfileResponse
-from advancedbilling.models.bank_account_response import BankAccountResponse
 from advancedbilling.models.get_one_time_token_request import GetOneTimeTokenRequest
-from advancedbilling.exceptions.api_exception import APIException
+from advancedbilling.models.bank_account_response import BankAccountResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
+from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.exceptions.error_string_map_response_exception import ErrorStringMapResponseException
 
 
@@ -28,6 +28,252 @@ class PaymentProfilesController(BaseController):
     """A Controller to access Endpoints in the advancedbilling API."""
     def __init__(self, config):
         super(PaymentProfilesController, self).__init__(config)
+
+    def list_payment_profiles(self,
+                              options=dict()):
+        """Does a GET request to /payment_profiles.json.
+
+        This method will return all of the active `payment_profiles` for a
+        Site, or for one Customer within a site.  If no payment profiles are
+        found, this endpoint will return an empty array, not a 404.
+
+        Args:
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    customer_id -- int -- The ID of the customer for which you
+                        wish to list payment profiles
+
+        Returns:
+            List[PaymentProfileResponse]: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/payment_profiles.json')
+            .http_method(HttpMethodEnum.GET)
+            .query_param(Parameter()
+                         .key('page')
+                         .value(options.get('page', None)))
+            .query_param(Parameter()
+                         .key('per_page')
+                         .value(options.get('per_page', None)))
+            .query_param(Parameter()
+                         .key('customer_id')
+                         .value(options.get('customer_id', None)))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(PaymentProfileResponse.from_dictionary)
+        ).execute()
+
+    def change_subscription_group_default_payment_profile(self,
+                                                          uid,
+                                                          payment_profile_id):
+        """Does a POST request to /subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json.
+
+        This will change the default payment profile on the subscription group
+        to the existing payment profile with the id specified.
+        You must elect to change the existing payment profile to a new payment
+        profile ID in order to receive a satisfactory response from this
+        endpoint.
+        The new payment profile must belong to the subscription group's
+        customer, otherwise you will receive an error.
+
+        Args:
+            uid (str): The uid of the subscription group
+            payment_profile_id (int): The Chargify id of the payment profile
+
+        Returns:
+            PaymentProfileResponse: Response from the API. Created
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('uid')
+                            .value(uid)
+                            .is_required(True)
+                            .should_encode(True))
+            .template_param(Parameter()
+                            .key('payment_profile_id')
+                            .value(payment_profile_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(PaymentProfileResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def read_one_time_token(self,
+                            chargify_token):
+        """Does a GET request to /one_time_tokens/{chargify_token}.json.
+
+        One Time Tokens aka Advanced Billing Tokens house the credit card or
+        ACH (Authorize.Net or Stripe only) data for a customer.
+        You can use One Time Tokens while creating a subscription or payment
+        profile instead of passing all bank account or credit card data
+        directly to a given API endpoint.
+        To obtain a One Time Token you have to use
+        [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jO
+        jE0NjAzNDI0-overview).
+
+        Args:
+            chargify_token (str): Advanced Billing Token
+
+        Returns:
+            GetOneTimeTokenRequest: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/one_time_tokens/{chargify_token}.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('chargify_token')
+                            .value(chargify_token)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(GetOneTimeTokenRequest.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', ErrorListResponseException)
+        ).execute()
+
+    def send_request_update_payment_email(self,
+                                          subscription_id):
+        """Does a POST request to /subscriptions/{subscription_id}/request_payment_profiles_update.json.
+
+        You can send a "request payment update" email to the customer
+        associated with the subscription.
+        If you attempt to send a "request payment update" email more than five
+        times within a 30-minute period, you will receive a `422` response
+        with an error message in the body. This error message will indicate
+        that the request has been rejected due to excessive attempts, and will
+        provide instructions on how to resubmit the request.
+        Additionally, if you attempt to send a "request payment update" email
+        for a subscription that does not exist, you will receive a `404` error
+        response. This error message will indicate that the subscription could
+        not be found, and will provide instructions on how to correct the
+        error and resubmit the request.
+        These error responses are designed to prevent excessive or invalid
+        requests, and to provide clear and helpful information to users who
+        encounter errors during the request process.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+
+        Returns:
+            void: Response from the API. Created
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/request_payment_profiles_update.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('BasicAuth'))
+        ).execute()
+
+    def delete_unused_payment_profile(self,
+                                      payment_profile_id):
+        """Does a DELETE request to /payment_profiles/{payment_profile_id}.json.
+
+        Deletes an unused payment profile.
+        If the payment profile is in use by one or more subscriptions or
+        groups, a 422 and error message will be returned.
+
+        Args:
+            payment_profile_id (int): The Chargify id of the payment profile
+
+        Returns:
+            void: Response from the API. No Content
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/payment_profiles/{payment_profile_id}.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('payment_profile_id')
+                            .value(payment_profile_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('BasicAuth'))
+        ).execute()
 
     def create_payment_profile(self,
                                body=None):
@@ -400,72 +646,6 @@ class PaymentProfilesController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def list_payment_profiles(self,
-                              options=dict()):
-        """Does a GET request to /payment_profiles.json.
-
-        This method will return all of the active `payment_profiles` for a
-        Site, or for one Customer within a site.  If no payment profiles are
-        found, this endpoint will return an empty array, not a 404.
-
-        Args:
-            options (dict, optional): Key-value pairs for any of the
-                parameters to this API Endpoint. All parameters to the
-                endpoint are supplied through the dictionary with their names
-                being the key and their desired values being the value. A list
-                of parameters that can be used are::
-
-                    page -- int -- Result records are organized in pages. By
-                        default, the first page of results is displayed. The
-                        page parameter specifies a page number of results to
-                        fetch. You can start navigating through the pages to
-                        consume the results. You do this by passing in a page
-                        parameter. Retrieve the next page by adding ?page=2 to
-                        the query string. If there are no results to return,
-                        then an empty result set will be returned. Use in
-                        query `page=1`.
-                    per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is 20.
-                        The maximum allowed values is 200; any per_page value
-                        over 200 will be changed to 200. Use in query
-                        `per_page=200`.
-                    customer_id -- int -- The ID of the customer for which you
-                        wish to list payment profiles
-
-        Returns:
-            List[PaymentProfileResponse]: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/payment_profiles.json')
-            .http_method(HttpMethodEnum.GET)
-            .query_param(Parameter()
-                         .key('page')
-                         .value(options.get('page', None)))
-            .query_param(Parameter()
-                         .key('per_page')
-                         .value(options.get('per_page', None)))
-            .query_param(Parameter()
-                         .key('customer_id')
-                         .value(options.get('customer_id', None)))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(PaymentProfileResponse.from_dictionary)
-        ).execute()
-
     def read_payment_profile(self,
                              payment_profile_id):
         """Does a GET request to /payment_profiles/{payment_profile_id}.json.
@@ -627,40 +807,6 @@ class PaymentProfilesController(BaseController):
             .deserialize_into(PaymentProfileResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorStringMapResponseException)
-        ).execute()
-
-    def delete_unused_payment_profile(self,
-                                      payment_profile_id):
-        """Does a DELETE request to /payment_profiles/{payment_profile_id}.json.
-
-        Deletes an unused payment profile.
-        If the payment profile is in use by one or more subscriptions or
-        groups, a 422 and error message will be returned.
-
-        Args:
-            payment_profile_id (int): The Chargify id of the payment profile
-
-        Returns:
-            void: Response from the API. No Content
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/payment_profiles/{payment_profile_id}.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('BasicAuth'))
         ).execute()
 
     def delete_subscriptions_payment_profile(self,
@@ -855,150 +1001,4 @@ class PaymentProfilesController(BaseController):
             .deserialize_into(PaymentProfileResponse.from_dictionary)
             .local_error('404', 'Not Found', APIException)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def change_subscription_group_default_payment_profile(self,
-                                                          uid,
-                                                          payment_profile_id):
-        """Does a POST request to /subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json.
-
-        This will change the default payment profile on the subscription group
-        to the existing payment profile with the id specified.
-        You must elect to change the existing payment profile to a new payment
-        profile ID in order to receive a satisfactory response from this
-        endpoint.
-        The new payment profile must belong to the subscription group's
-        customer, otherwise you will receive an error.
-
-        Args:
-            uid (str): The uid of the subscription group
-            payment_profile_id (int): The Chargify id of the payment profile
-
-        Returns:
-            PaymentProfileResponse: Response from the API. Created
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
-                            .is_required(True)
-                            .should_encode(True))
-            .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(PaymentProfileResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def read_one_time_token(self,
-                            chargify_token):
-        """Does a GET request to /one_time_tokens/{chargify_token}.json.
-
-        One Time Tokens aka Advanced Billing Tokens house the credit card or
-        ACH (Authorize.Net or Stripe only) data for a customer.
-        You can use One Time Tokens while creating a subscription or payment
-        profile instead of passing all bank account or credit card data
-        directly to a given API endpoint.
-        To obtain a One Time Token you have to use
-        [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jO
-        jE0NjAzNDI0-overview).
-
-        Args:
-            chargify_token (str): Advanced Billing Token
-
-        Returns:
-            GetOneTimeTokenRequest: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/one_time_tokens/{chargify_token}.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('chargify_token')
-                            .value(chargify_token)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(GetOneTimeTokenRequest.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', ErrorListResponseException)
-        ).execute()
-
-    def send_request_update_payment_email(self,
-                                          subscription_id):
-        """Does a POST request to /subscriptions/{subscription_id}/request_payment_profiles_update.json.
-
-        You can send a "request payment update" email to the customer
-        associated with the subscription.
-        If you attempt to send a "request payment update" email more than five
-        times within a 30-minute period, you will receive a `422` response
-        with an error message in the body. This error message will indicate
-        that the request has been rejected due to excessive attempts, and will
-        provide instructions on how to resubmit the request.
-        Additionally, if you attempt to send a "request payment update" email
-        for a subscription that does not exist, you will receive a `404` error
-        response. This error message will indicate that the subscription could
-        not be found, and will provide instructions on how to correct the
-        error and resubmit the request.
-        These error responses are designed to prevent excessive or invalid
-        requests, and to provide clear and helpful information to users who
-        encounter errors during the request process.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-
-        Returns:
-            void: Response from the API. Created
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/request_payment_profiles_update.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('BasicAuth'))
         ).execute()

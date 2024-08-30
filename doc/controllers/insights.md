@@ -10,106 +10,10 @@ insights_controller = client.insights
 
 ## Methods
 
-* [Read Site Stats](../../doc/controllers/insights.md#read-site-stats)
-* [Read Mrr](../../doc/controllers/insights.md#read-mrr)
 * [List Mrr Movements](../../doc/controllers/insights.md#list-mrr-movements)
 * [List Mrr Per Subscription](../../doc/controllers/insights.md#list-mrr-per-subscription)
-
-
-# Read Site Stats
-
-The Stats API is a very basic view of some Site-level stats. This API call only answers with JSON responses. An XML version is not provided.
-
-## Stats Documentation
-
-There currently is not a complimentary matching set of documentation that compliments this endpoint. However, each Site's dashboard will reflect the summary of information provided in the Stats reposnse.
-
-```
-https://subdomain.chargify.com/dashboard
-```
-
-```python
-def read_site_stats(self)
-```
-
-## Response Type
-
-[`SiteSummary`](../../doc/models/site-summary.md)
-
-## Example Usage
-
-```python
-result = insights_controller.read_site_stats()
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "seller_name": "Acme, Inc.",
-  "site_name": "Production",
-  "site_id": 12345,
-  "site_currency": "USD",
-  "stats": {
-    "total_subscriptions": 120,
-    "subscriptions_today": 4,
-    "total_revenue": "$45,978.81",
-    "revenue_today": "$1,405.12",
-    "revenue_this_month": "$10,000.00",
-    "revenue_this_year": "$27,935.24"
-  }
-}
-```
-
-
-# Read Mrr
-
-**This endpoint is deprecated.**
-
-This endpoint returns your site's current MRR, including plan and usage breakouts.
-
-```python
-def read_mrr(self,
-            at_time=None,
-            subscription_id=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `at_time` | `datetime` | Query, Optional | submit a timestamp in ISO8601 format to request MRR for a historic time |
-| `subscription_id` | `int` | Query, Optional | submit the id of a subscription in order to limit results |
-
-## Response Type
-
-[`MRRResponse`](../../doc/models/mrr-response.md)
-
-## Example Usage
-
-```python
-result = insights_controller.read_mrr()
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "mrr": {
-    "amount_in_cents": 9915593,
-    "amount_formatted": "$99,155.93",
-    "currency": "USD",
-    "currency_symbol": "$",
-    "at_time": "2021-02-03T14:23:17-05:00",
-    "breakouts": {
-      "plan_amount_in_cents": 9913593,
-      "plan_amount_formatted": "$99,135.93",
-      "usage_amount_in_cents": 2000,
-      "usage_amount_formatted": "$20.00"
-    }
-  }
-}
-```
+* [Read Site Stats](../../doc/controllers/insights.md#read-site-stats)
+* [Read Mrr](../../doc/controllers/insights.md#read-mrr)
 
 
 # List Mrr Movements
@@ -271,4 +175,100 @@ result = insights_controller.list_mrr_per_subscription(collect)
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 400 | Bad Request | [`SubscriptionsMrrErrorResponseException`](../../doc/models/subscriptions-mrr-error-response-exception.md) |
+
+
+# Read Site Stats
+
+The Stats API is a very basic view of some Site-level stats. This API call only answers with JSON responses. An XML version is not provided.
+
+## Stats Documentation
+
+There currently is not a complimentary matching set of documentation that compliments this endpoint. However, each Site's dashboard will reflect the summary of information provided in the Stats reposnse.
+
+```
+https://subdomain.chargify.com/dashboard
+```
+
+```python
+def read_site_stats(self)
+```
+
+## Response Type
+
+[`SiteSummary`](../../doc/models/site-summary.md)
+
+## Example Usage
+
+```python
+result = insights_controller.read_site_stats()
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "seller_name": "Acme, Inc.",
+  "site_name": "Production",
+  "site_id": 12345,
+  "site_currency": "USD",
+  "stats": {
+    "total_subscriptions": 120,
+    "subscriptions_today": 4,
+    "total_revenue": "$45,978.81",
+    "revenue_today": "$1,405.12",
+    "revenue_this_month": "$10,000.00",
+    "revenue_this_year": "$27,935.24"
+  }
+}
+```
+
+
+# Read Mrr
+
+**This endpoint is deprecated.**
+
+This endpoint returns your site's current MRR, including plan and usage breakouts.
+
+```python
+def read_mrr(self,
+            at_time=None,
+            subscription_id=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `at_time` | `datetime` | Query, Optional | submit a timestamp in ISO8601 format to request MRR for a historic time |
+| `subscription_id` | `int` | Query, Optional | submit the id of a subscription in order to limit results |
+
+## Response Type
+
+[`MRRResponse`](../../doc/models/mrr-response.md)
+
+## Example Usage
+
+```python
+result = insights_controller.read_mrr()
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "mrr": {
+    "amount_in_cents": 9915593,
+    "amount_formatted": "$99,155.93",
+    "currency": "USD",
+    "currency_symbol": "$",
+    "at_time": "2021-02-03T14:23:17-05:00",
+    "breakouts": {
+      "plan_amount_in_cents": 9913593,
+      "plan_amount_formatted": "$99,135.93",
+      "usage_amount_in_cents": 2000,
+      "usage_amount_formatted": "$20.00"
+    }
+  }
+}
+```
 

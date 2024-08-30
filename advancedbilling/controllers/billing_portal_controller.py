@@ -16,12 +16,12 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.customer_response import CustomerResponse
-from advancedbilling.models.portal_management_link import PortalManagementLink
 from advancedbilling.models.resent_invitation import ResentInvitation
 from advancedbilling.models.revoked_invitation import RevokedInvitation
+from advancedbilling.models.portal_management_link import PortalManagementLink
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
-from advancedbilling.exceptions.too_many_management_link_requests_error_exception import TooManyManagementLinkRequestsErrorException
 from advancedbilling.exceptions.api_exception import APIException
+from advancedbilling.exceptions.too_many_management_link_requests_error_exception import TooManyManagementLinkRequestsErrorException
 
 
 class BillingPortalController(BaseController):
@@ -102,58 +102,6 @@ class BillingPortalController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerResponse.from_dictionary)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def read_billing_portal_link(self,
-                                 customer_id):
-        """Does a GET request to /portal/customers/{customer_id}/management_link.json.
-
-        This method will provide to the API user the exact URL required for a
-        subscriber to access the Billing Portal.
-        ## Rules for Management Link API
-        + When retrieving a management URL, multiple requests for the same
-        customer in a short period will return the **same** URL
-        + We will not generate a new URL for 15 days
-        + You must cache and remember this URL if you are going to need it
-        again within 15 days
-        + Only request a new URL after the `new_link_available_at` date
-        + You are limited to 15 requests for the same URL. If you make more
-        than 15 requests before `new_link_available_at`, you will be blocked
-        from further Management URL requests (with a response code `429`)
-
-        Args:
-            customer_id (int): The Chargify id of the customer
-
-        Returns:
-            PortalManagementLink: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/portal/customers/{customer_id}/management_link.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('customer_id')
-                            .value(customer_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(PortalManagementLink.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-            .local_error_template('429', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', TooManyManagementLinkRequestsErrorException)
         ).execute()
 
     def resend_billing_portal_invitation(self,
@@ -251,4 +199,56 @@ class BillingPortalController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(RevokedInvitation.from_dictionary)
+        ).execute()
+
+    def read_billing_portal_link(self,
+                                 customer_id):
+        """Does a GET request to /portal/customers/{customer_id}/management_link.json.
+
+        This method will provide to the API user the exact URL required for a
+        subscriber to access the Billing Portal.
+        ## Rules for Management Link API
+        + When retrieving a management URL, multiple requests for the same
+        customer in a short period will return the **same** URL
+        + We will not generate a new URL for 15 days
+        + You must cache and remember this URL if you are going to need it
+        again within 15 days
+        + Only request a new URL after the `new_link_available_at` date
+        + You are limited to 15 requests for the same URL. If you make more
+        than 15 requests before `new_link_available_at`, you will be blocked
+        from further Management URL requests (with a response code `429`)
+
+        Args:
+            customer_id (int): The Chargify id of the customer
+
+        Returns:
+            PortalManagementLink: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/portal/customers/{customer_id}/management_link.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('customer_id')
+                            .value(customer_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(PortalManagementLink.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+            .local_error_template('429', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', TooManyManagementLinkRequestsErrorException)
         ).execute()

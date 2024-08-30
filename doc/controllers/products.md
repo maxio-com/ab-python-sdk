@@ -11,10 +11,10 @@ products_controller = client.products
 ## Methods
 
 * [Create Product](../../doc/controllers/products.md#create-product)
-* [Read Product](../../doc/controllers/products.md#read-product)
 * [Update Product](../../doc/controllers/products.md#update-product)
 * [Archive Product](../../doc/controllers/products.md#archive-product)
 * [Read Product by Handle](../../doc/controllers/products.md#read-product-by-handle)
+* [Read Product](../../doc/controllers/products.md#read-product)
 * [List Products](../../doc/controllers/products.md#list-products)
 
 
@@ -122,77 +122,6 @@ result = products_controller.create_product(
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Read Product
-
-This endpoint allows you to read the current details of a product that you've created in Advanced Billing.
-
-```python
-def read_product(self,
-                product_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `product_id` | `int` | Template, Required | The Advanced Billing id of the product |
-
-## Response Type
-
-[`ProductResponse`](../../doc/models/product-response.md)
-
-## Example Usage
-
-```python
-product_id = 202
-
-result = products_controller.read_product(product_id)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "product": {
-    "id": 4535635,
-    "name": "Paid Annual Seats",
-    "handle": "paid-annual-seats",
-    "description": "Paid annual seats for our commercial enterprise product",
-    "accounting_code": "paid-annual-seats",
-    "request_credit_card": true,
-    "expiration_interval": 1,
-    "expiration_interval_unit": "day",
-    "created_at": "2017-08-25T10:25:31-05:00",
-    "updated_at": "2018-01-16T12:58:04-06:00",
-    "price_in_cents": 10000,
-    "interval": 12,
-    "interval_unit": "month",
-    "initial_charge_in_cents": 4900,
-    "trial_price_in_cents": 1000,
-    "trial_interval": 14,
-    "trial_interval_unit": "day",
-    "archived_at": null,
-    "require_credit_card": true,
-    "return_params": "id={subscription_id}&ref={customer_reference}",
-    "taxable": true,
-    "update_return_url": "http://www.example.com",
-    "tax_code": "D0000000",
-    "initial_charge_after_trial": false,
-    "version_number": 4,
-    "update_return_params": "id={subscription_id}&ref={customer_reference}",
-    "product_family": {
-      "id": 1025627,
-      "name": "Acme Products",
-      "description": "",
-      "handle": "acme-products",
-      "accounting_code": null
-    },
-    "product_price_point_name": "Default"
-  }
-}
-```
 
 
 # Update Product
@@ -456,6 +385,77 @@ result = products_controller.read_product_by_handle(api_handle)
         "url": "https://general-goods.chargify.com/subscribe/m6tbcq4mcgpw/no-cost-product"
       }
     ],
+    "product_price_point_name": "Default"
+  }
+}
+```
+
+
+# Read Product
+
+This endpoint allows you to read the current details of a product that you've created in Advanced Billing.
+
+```python
+def read_product(self,
+                product_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `product_id` | `int` | Template, Required | The Advanced Billing id of the product |
+
+## Response Type
+
+[`ProductResponse`](../../doc/models/product-response.md)
+
+## Example Usage
+
+```python
+product_id = 202
+
+result = products_controller.read_product(product_id)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "product": {
+    "id": 4535635,
+    "name": "Paid Annual Seats",
+    "handle": "paid-annual-seats",
+    "description": "Paid annual seats for our commercial enterprise product",
+    "accounting_code": "paid-annual-seats",
+    "request_credit_card": true,
+    "expiration_interval": 1,
+    "expiration_interval_unit": "day",
+    "created_at": "2017-08-25T10:25:31-05:00",
+    "updated_at": "2018-01-16T12:58:04-06:00",
+    "price_in_cents": 10000,
+    "interval": 12,
+    "interval_unit": "month",
+    "initial_charge_in_cents": 4900,
+    "trial_price_in_cents": 1000,
+    "trial_interval": 14,
+    "trial_interval_unit": "day",
+    "archived_at": null,
+    "require_credit_card": true,
+    "return_params": "id={subscription_id}&ref={customer_reference}",
+    "taxable": true,
+    "update_return_url": "http://www.example.com",
+    "tax_code": "D0000000",
+    "initial_charge_after_trial": false,
+    "version_number": 4,
+    "update_return_params": "id={subscription_id}&ref={customer_reference}",
+    "product_family": {
+      "id": 1025627,
+      "name": "Acme Products",
+      "description": "",
+      "handle": "acme-products",
+      "accounting_code": null
+    },
     "product_price_point_name": "Default"
   }
 }

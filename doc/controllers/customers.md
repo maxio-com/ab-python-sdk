@@ -14,8 +14,8 @@ customers_controller = client.customers
 * [List Customers](../../doc/controllers/customers.md#list-customers)
 * [Read Customer](../../doc/controllers/customers.md#read-customer)
 * [Update Customer](../../doc/controllers/customers.md#update-customer)
-* [Delete Customer](../../doc/controllers/customers.md#delete-customer)
 * [Read Customer by Reference](../../doc/controllers/customers.md#read-customer-by-reference)
+* [Delete Customer](../../doc/controllers/customers.md#delete-customer)
 * [List Customer Subscriptions](../../doc/controllers/customers.md#list-customer-subscriptions)
 
 
@@ -374,34 +374,6 @@ result = customers_controller.update_customer(
 | 422 | Unprocessable Entity (WebDAV) | [`CustomerErrorResponseException`](../../doc/models/customer-error-response-exception.md) |
 
 
-# Delete Customer
-
-This method allows you to delete the Customer.
-
-```python
-def delete_customer(self,
-                   id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `id` | `int` | Template, Required | The Advanced Billing id of the customer |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-id = 112
-
-customers_controller.delete_customer(id)
-```
-
-
 # Read Customer by Reference
 
 Use this method to return the customer object if you have the unique **Reference ID (Your App)** value handy. It will return a single match.
@@ -427,6 +399,34 @@ def read_customer_by_reference(self,
 reference = 'reference4'
 
 result = customers_controller.read_customer_by_reference(reference)
+```
+
+
+# Delete Customer
+
+This method allows you to delete the Customer.
+
+```python
+def delete_customer(self,
+                   id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `int` | Template, Required | The Advanced Billing id of the customer |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+id = 112
+
+customers_controller.delete_customer(id)
 ```
 
 

@@ -28,20 +28,22 @@ class SubscriptionStatusController(BaseController):
     def __init__(self, config):
         super(SubscriptionStatusController, self).__init__(config)
 
-    def retry_subscription(self,
-                           subscription_id):
-        """Does a PUT request to /subscriptions/{subscription_id}/retry.json.
+    def update_automatic_subscription_resumption(self,
+                                                 subscription_id,
+                                                 body=None):
+        """Does a PUT request to /subscriptions/{subscription_id}/hold.json.
 
-        Advanced Billing offers the ability to retry collecting the balance
-        due on a past due Subscription without waiting for the next scheduled
-        attempt.
-        ## Successful Reactivation
-        The response will be `200 OK` with the updated Subscription.
-        ## Failed Reactivation
-        The response will be `422 "Unprocessable Entity`.
+        Once a subscription has been paused / put on hold, you can update the
+        date which was specified to automatically resume the subscription.
+        To update a subscription's resume date, use this method to change or
+        update the `automatically_resume_at` date.
+        ### Remove the resume date
+        Alternately, you can change the `automatically_resume_at` to `null` if
+        you would like the subscription to not have a resume date.
 
         Args:
             subscription_id (int): The Chargify id of the subscription
+            body (PauseRequest, optional): TODO: type description here.
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -56,52 +58,8 @@ class SubscriptionStatusController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/retry.json')
+            .path('/subscriptions/{subscription_id}/hold.json')
             .http_method(HttpMethodEnum.PUT)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SubscriptionResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def cancel_subscription(self,
-                            subscription_id,
-                            body=None):
-        """Does a DELETE request to /subscriptions/{subscription_id}.json.
-
-        The DELETE action causes the cancellation of the Subscription. This
-        means, the method sets the Subscription state to "canceled".
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            body (CancellationRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            SubscriptionResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}.json')
-            .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
                             .key('subscription_id')
                             .value(subscription_id)
@@ -121,8 +79,187 @@ class SubscriptionStatusController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def initiate_delayed_cancellation(self,
+                                      subscription_id,
+                                      body=None):
+        """Does a POST request to /subscriptions/{subscription_id}/delayed_cancel.json.
+
+        Advanced Billing offers the ability to cancel a subscription at the
+        end of the current billing period. This period is set by its current
+        product.
+        Requesting to cancel the subscription at the end of the period sets
+        the `cancel_at_end_of_period` flag to true.
+        Note that you cannot set `cancel_at_end_of_period` at subscription
+        creation, or if the subscription is past due.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            body (CancellationRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            DelayedCancellationResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/delayed_cancel.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DelayedCancellationResponse.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', APIException)
+        ).execute()
+
+    def cancel_delayed_cancellation(self,
+                                    subscription_id):
+        """Does a DELETE request to /subscriptions/{subscription_id}/delayed_cancel.json.
+
+        Removing the delayed cancellation on a subscription will ensure that
+        it doesn't get canceled at the end of the period that it is in. The
+        request will reset the `cancel_at_end_of_period` flag to `false`.
+        This endpoint is idempotent. If the subscription was not set to cancel
+        in the future, removing the delayed cancellation has no effect and the
+        call will be successful.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+
+        Returns:
+            DelayedCancellationResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/delayed_cancel.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(DelayedCancellationResponse.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+        ).execute()
+
+    def preview_renewal(self,
+                        subscription_id,
+                        body=None):
+        """Does a POST request to /subscriptions/{subscription_id}/renewals/preview.json.
+
+        The Chargify API allows you to preview a renewal by posting to the
+        renewals endpoint. Renewal Preview is an object representing a
+        subscription’s next assessment. You can retrieve it to see a snapshot
+        of how much your customer will be charged on their next renewal.
+        The "Next Billing" amount and "Next Billing" date are already
+        represented in the UI on each Subscriber's Summary. For more
+        information, please see our documentation
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subsc
+        riber-Interface-Overview).
+        ## Optional Component Fields
+        This endpoint is particularly useful due to the fact that it will
+        return the computed billing amount for the base product and the
+        components which are in use by a subscriber.
+        By default, the preview will include billing details for all
+        components _at their **current** quantities_. This means:
+        * Current `allocated_quantity` for quantity-based components
+        * Current enabled/disabled status for on/off components
+        * Current metered usage `unit_balance` for metered components
+        * Current metric quantity value for events recorded thus far for
+        events-based components
+        In the above statements, "current" means the quantity or value as of
+        the call to the renewal preview endpoint. We do not predict
+        end-of-period values for components, so metered or events-based usage
+        may be less than it will eventually be at the end of the period.
+        Optionally, **you may provide your own custom quantities** for any
+        component to see a billing preview for non-current quantities. This is
+        accomplished by sending a request body with data under the
+        `components` key. See the request body documentation below.
+        ## Subscription Side Effects
+        You can request a `POST` to obtain this data from the endpoint without
+        any side effects. Plain and simple, this will preview data, not log
+        any changes against a subscription.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            body (RenewalPreviewRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            RenewalPreviewResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/renewals/preview.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(RenewalPreviewResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def resume_subscription(self,
@@ -227,22 +364,20 @@ class SubscriptionStatusController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def update_automatic_subscription_resumption(self,
-                                                 subscription_id,
-                                                 body=None):
-        """Does a PUT request to /subscriptions/{subscription_id}/hold.json.
+    def retry_subscription(self,
+                           subscription_id):
+        """Does a PUT request to /subscriptions/{subscription_id}/retry.json.
 
-        Once a subscription has been paused / put on hold, you can update the
-        date which was specified to automatically resume the subscription.
-        To update a subscription's resume date, use this method to change or
-        update the `automatically_resume_at` date.
-        ### Remove the resume date
-        Alternately, you can change the `automatically_resume_at` to `null` if
-        you would like the subscription to not have a resume date.
+        Advanced Billing offers the ability to retry collecting the balance
+        due on a past due Subscription without waiting for the next scheduled
+        attempt.
+        ## Successful Reactivation
+        The response will be `200 OK` with the updated Subscription.
+        ## Failed Reactivation
+        The response will be `422 "Unprocessable Entity`.
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (PauseRequest, optional): TODO: type description here.
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -257,8 +392,52 @@ class SubscriptionStatusController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/hold.json')
+            .path('/subscriptions/{subscription_id}/retry.json')
             .http_method(HttpMethodEnum.PUT)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SubscriptionResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+        ).execute()
+
+    def cancel_subscription(self,
+                            subscription_id,
+                            body=None):
+        """Does a DELETE request to /subscriptions/{subscription_id}.json.
+
+        The DELETE action causes the cancellation of the Subscription. This
+        means, the method sets the Subscription state to "canceled".
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            body (CancellationRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            SubscriptionResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}.json')
+            .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
                             .key('subscription_id')
                             .value(subscription_id)
@@ -278,7 +457,48 @@ class SubscriptionStatusController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', APIException)
+        ).execute()
+
+    def cancel_dunning(self,
+                       subscription_id):
+        """Does a POST request to /subscriptions/{subscription_id}/cancel_dunning.json.
+
+        If a subscription is currently in dunning, the subscription will be
+        set to active and the active Dunner will be resolved.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+
+        Returns:
+            SubscriptionResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/cancel_dunning.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SubscriptionResponse.from_dictionary)
         ).execute()
 
     def reactivate_subscription(self,
@@ -467,225 +687,5 @@ class SubscriptionStatusController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
-        ).execute()
-
-    def initiate_delayed_cancellation(self,
-                                      subscription_id,
-                                      body=None):
-        """Does a POST request to /subscriptions/{subscription_id}/delayed_cancel.json.
-
-        Advanced Billing offers the ability to cancel a subscription at the
-        end of the current billing period. This period is set by its current
-        product.
-        Requesting to cancel the subscription at the end of the period sets
-        the `cancel_at_end_of_period` flag to true.
-        Note that you cannot set `cancel_at_end_of_period` at subscription
-        creation, or if the subscription is past due.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            body (CancellationRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            DelayedCancellationResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/delayed_cancel.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DelayedCancellationResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-        ).execute()
-
-    def cancel_delayed_cancellation(self,
-                                    subscription_id):
-        """Does a DELETE request to /subscriptions/{subscription_id}/delayed_cancel.json.
-
-        Removing the delayed cancellation on a subscription will ensure that
-        it doesn't get canceled at the end of the period that it is in. The
-        request will reset the `cancel_at_end_of_period` flag to `false`.
-        This endpoint is idempotent. If the subscription was not set to cancel
-        in the future, removing the delayed cancellation has no effect and the
-        call will be successful.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-
-        Returns:
-            DelayedCancellationResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/delayed_cancel.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(DelayedCancellationResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-        ).execute()
-
-    def cancel_dunning(self,
-                       subscription_id):
-        """Does a POST request to /subscriptions/{subscription_id}/cancel_dunning.json.
-
-        If a subscription is currently in dunning, the subscription will be
-        set to active and the active Dunner will be resolved.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-
-        Returns:
-            SubscriptionResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/cancel_dunning.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SubscriptionResponse.from_dictionary)
-        ).execute()
-
-    def preview_renewal(self,
-                        subscription_id,
-                        body=None):
-        """Does a POST request to /subscriptions/{subscription_id}/renewals/preview.json.
-
-        The Chargify API allows you to preview a renewal by posting to the
-        renewals endpoint. Renewal Preview is an object representing a
-        subscription’s next assessment. You can retrieve it to see a snapshot
-        of how much your customer will be charged on their next renewal.
-        The "Next Billing" amount and "Next Billing" date are already
-        represented in the UI on each Subscriber's Summary. For more
-        information, please see our documentation
-        [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subsc
-        riber-Interface-Overview).
-        ## Optional Component Fields
-        This endpoint is particularly useful due to the fact that it will
-        return the computed billing amount for the base product and the
-        components which are in use by a subscriber.
-        By default, the preview will include billing details for all
-        components _at their **current** quantities_. This means:
-        * Current `allocated_quantity` for quantity-based components
-        * Current enabled/disabled status for on/off components
-        * Current metered usage `unit_balance` for metered components
-        * Current metric quantity value for events recorded thus far for
-        events-based components
-        In the above statements, "current" means the quantity or value as of
-        the call to the renewal preview endpoint. We do not predict
-        end-of-period values for components, so metered or events-based usage
-        may be less than it will eventually be at the end of the period.
-        Optionally, **you may provide your own custom quantities** for any
-        component to see a billing preview for non-current quantities. This is
-        accomplished by sending a request body with data under the
-        `components` key. See the request body documentation below.
-        ## Subscription Side Effects
-        You can request a `POST` to obtain this data from the endpoint without
-        any side effects. Plain and simple, this will preview data, not log
-        any changes against a subscription.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            body (RenewalPreviewRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            RenewalPreviewResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/renewals/preview.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(RenewalPreviewResponse.from_dictionary)
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()

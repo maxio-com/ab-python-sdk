@@ -10,18 +10,299 @@ payment_profiles_controller = client.payment_profiles
 
 ## Methods
 
-* [Create Payment Profile](../../doc/controllers/payment-profiles.md#create-payment-profile)
 * [List Payment Profiles](../../doc/controllers/payment-profiles.md#list-payment-profiles)
+* [Change Subscription Group Default Payment Profile](../../doc/controllers/payment-profiles.md#change-subscription-group-default-payment-profile)
+* [Read One Time Token](../../doc/controllers/payment-profiles.md#read-one-time-token)
+* [Send Request Update Payment Email](../../doc/controllers/payment-profiles.md#send-request-update-payment-email)
+* [Delete Unused Payment Profile](../../doc/controllers/payment-profiles.md#delete-unused-payment-profile)
+* [Create Payment Profile](../../doc/controllers/payment-profiles.md#create-payment-profile)
 * [Read Payment Profile](../../doc/controllers/payment-profiles.md#read-payment-profile)
 * [Update Payment Profile](../../doc/controllers/payment-profiles.md#update-payment-profile)
-* [Delete Unused Payment Profile](../../doc/controllers/payment-profiles.md#delete-unused-payment-profile)
 * [Delete Subscriptions Payment Profile](../../doc/controllers/payment-profiles.md#delete-subscriptions-payment-profile)
 * [Verify Bank Account](../../doc/controllers/payment-profiles.md#verify-bank-account)
 * [Delete Subscription Group Payment Profile](../../doc/controllers/payment-profiles.md#delete-subscription-group-payment-profile)
 * [Change Subscription Default Payment Profile](../../doc/controllers/payment-profiles.md#change-subscription-default-payment-profile)
-* [Change Subscription Group Default Payment Profile](../../doc/controllers/payment-profiles.md#change-subscription-group-default-payment-profile)
-* [Read One Time Token](../../doc/controllers/payment-profiles.md#read-one-time-token)
-* [Send Request Update Payment Email](../../doc/controllers/payment-profiles.md#send-request-update-payment-email)
+
+
+# List Payment Profiles
+
+This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404.
+
+```python
+def list_payment_profiles(self,
+                         options=dict())
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
+| `customer_id` | `int` | Query, Optional | The ID of the customer for which you wish to list payment profiles |
+
+## Response Type
+
+[`List[PaymentProfileResponse]`](../../doc/models/payment-profile-response.md)
+
+## Example Usage
+
+```python
+collect = {
+    'page': 2,
+    'per_page': 50
+}
+result = payment_profiles_controller.list_payment_profiles(collect)
+```
+
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "payment_profile": {
+      "id": 10089892,
+      "first_name": "Chester",
+      "last_name": "Tester",
+      "customer_id": 14543792,
+      "current_vault": "bogus",
+      "vault_token": "0011223344",
+      "billing_address": "456 Juniper Court",
+      "billing_city": "Boulder",
+      "billing_state": "CO",
+      "billing_zip": "80302",
+      "billing_country": "US",
+      "customer_vault_token": null,
+      "billing_address_2": "",
+      "bank_name": "Bank of Kansas City",
+      "masked_bank_routing_number": "XXXX6789",
+      "masked_bank_account_number": "XXXX3344",
+      "bank_account_type": "checking",
+      "bank_account_holder_type": "personal",
+      "payment_type": "bank_account",
+      "verified": true,
+      "site_gateway_setting_id": 1,
+      "gateway_handle": "handle"
+    }
+  },
+  {
+    "payment_profile": {
+      "id": 10188522,
+      "first_name": "Frankie",
+      "last_name": "Tester",
+      "customer_id": 14543712,
+      "current_vault": "bogus",
+      "vault_token": "123456789",
+      "billing_address": "123 Montana Way",
+      "billing_city": "Los Angeles",
+      "billing_state": "CA",
+      "billing_zip": "90210",
+      "billing_country": "US",
+      "customer_vault_token": null,
+      "billing_address_2": "",
+      "bank_name": "Bank of Kansas City",
+      "masked_bank_routing_number": "XXXX6789",
+      "masked_bank_account_number": "XXXX6789",
+      "bank_account_type": "checking",
+      "bank_account_holder_type": "personal",
+      "payment_type": "bank_account",
+      "verified": true,
+      "site_gateway_setting_id": 1,
+      "gateway_handle": "handle"
+    }
+  }
+]
+```
+
+
+# Change Subscription Group Default Payment Profile
+
+This will change the default payment profile on the subscription group to the existing payment profile with the id specified.
+
+You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
+
+The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
+
+```python
+def change_subscription_group_default_payment_profile(self,
+                                                     uid,
+                                                     payment_profile_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `str` | Template, Required | The uid of the subscription group |
+| `payment_profile_id` | `int` | Template, Required | The Chargify id of the payment profile |
+
+## Response Type
+
+[`PaymentProfileResponse`](../../doc/models/payment-profile-response.md)
+
+## Example Usage
+
+```python
+uid = 'uid0'
+
+payment_profile_id = 198
+
+result = payment_profiles_controller.change_subscription_group_default_payment_profile(
+    uid,
+    payment_profile_id
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "payment_profile": {
+    "id": 10211899,
+    "first_name": "Amelia",
+    "last_name": "Example",
+    "masked_card_number": "XXXX-XXXX-XXXX-1",
+    "card_type": "bogus",
+    "expiration_month": 2,
+    "expiration_year": 2018,
+    "customer_id": 14399371,
+    "current_vault": "bogus",
+    "vault_token": "1",
+    "billing_address": "",
+    "billing_city": "",
+    "billing_state": "",
+    "billing_zip": "",
+    "billing_country": "",
+    "customer_vault_token": null,
+    "billing_address_2": "",
+    "payment_type": "credit_card",
+    "site_gateway_setting_id": 1,
+    "gateway_handle": null
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Read One Time Token
+
+One Time Tokens aka Advanced Billing Tokens house the credit card or ACH (Authorize.Net or Stripe only) data for a customer.
+
+You can use One Time Tokens while creating a subscription or payment profile instead of passing all bank account or credit card data directly to a given API endpoint.
+
+To obtain a One Time Token you have to use [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview).
+
+```python
+def read_one_time_token(self,
+                       chargify_token)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `chargify_token` | `str` | Template, Required | Advanced Billing Token |
+
+## Response Type
+
+[`GetOneTimeTokenRequest`](../../doc/models/get-one-time-token-request.md)
+
+## Example Usage
+
+```python
+chargify_token = 'chargify_token8'
+
+result = payment_profiles_controller.read_one_time_token(chargify_token)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Send Request Update Payment Email
+
+You can send a "request payment update" email to the customer associated with the subscription.
+
+If you attempt to send a "request payment update" email more than five times within a 30-minute period, you will receive a `422` response with an error message in the body. This error message will indicate that the request has been rejected due to excessive attempts, and will provide instructions on how to resubmit the request.
+
+Additionally, if you attempt to send a "request payment update" email for a subscription that does not exist, you will receive a `404` error response. This error message will indicate that the subscription could not be found, and will provide instructions on how to correct the error and resubmit the request.
+
+These error responses are designed to prevent excessive or invalid requests, and to provide clear and helpful information to users who encounter errors during the request process.
+
+```python
+def send_request_update_payment_email(self,
+                                     subscription_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+payment_profiles_controller.send_request_update_payment_email(subscription_id)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Delete Unused Payment Profile
+
+Deletes an unused payment profile.
+
+If the payment profile is in use by one or more subscriptions or groups, a 422 and error message will be returned.
+
+```python
+def delete_unused_payment_profile(self,
+                                 payment_profile_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `payment_profile_id` | `int` | Template, Required | The Chargify id of the payment profile |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+payment_profile_id = 198
+
+payment_profiles_controller.delete_unused_payment_profile(payment_profile_id)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Create Payment Profile
@@ -371,97 +652,6 @@ result = payment_profiles_controller.create_payment_profile(
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
-# List Payment Profiles
-
-This method will return all of the active `payment_profiles` for a Site, or for one Customer within a site.  If no payment profiles are found, this endpoint will return an empty array, not a 404.
-
-```python
-def list_payment_profiles(self,
-                         options=dict())
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `customer_id` | `int` | Query, Optional | The ID of the customer for which you wish to list payment profiles |
-
-## Response Type
-
-[`List[PaymentProfileResponse]`](../../doc/models/payment-profile-response.md)
-
-## Example Usage
-
-```python
-collect = {
-    'page': 2,
-    'per_page': 50
-}
-result = payment_profiles_controller.list_payment_profiles(collect)
-```
-
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "payment_profile": {
-      "id": 10089892,
-      "first_name": "Chester",
-      "last_name": "Tester",
-      "customer_id": 14543792,
-      "current_vault": "bogus",
-      "vault_token": "0011223344",
-      "billing_address": "456 Juniper Court",
-      "billing_city": "Boulder",
-      "billing_state": "CO",
-      "billing_zip": "80302",
-      "billing_country": "US",
-      "customer_vault_token": null,
-      "billing_address_2": "",
-      "bank_name": "Bank of Kansas City",
-      "masked_bank_routing_number": "XXXX6789",
-      "masked_bank_account_number": "XXXX3344",
-      "bank_account_type": "checking",
-      "bank_account_holder_type": "personal",
-      "payment_type": "bank_account",
-      "verified": true,
-      "site_gateway_setting_id": 1,
-      "gateway_handle": "handle"
-    }
-  },
-  {
-    "payment_profile": {
-      "id": 10188522,
-      "first_name": "Frankie",
-      "last_name": "Tester",
-      "customer_id": 14543712,
-      "current_vault": "bogus",
-      "vault_token": "123456789",
-      "billing_address": "123 Montana Way",
-      "billing_city": "Los Angeles",
-      "billing_state": "CA",
-      "billing_zip": "90210",
-      "billing_country": "US",
-      "customer_vault_token": null,
-      "billing_address_2": "",
-      "bank_name": "Bank of Kansas City",
-      "masked_bank_routing_number": "XXXX6789",
-      "masked_bank_account_number": "XXXX6789",
-      "bank_account_type": "checking",
-      "bank_account_holder_type": "personal",
-      "payment_type": "bank_account",
-      "verified": true,
-      "site_gateway_setting_id": 1,
-      "gateway_handle": "handle"
-    }
-  }
-]
-```
-
-
 # Read Payment Profile
 
 Using the GET method you can retrieve a Payment Profile identified by its unique ID.
@@ -679,43 +869,6 @@ result = payment_profiles_controller.update_payment_profile(
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorStringMapResponseException`](../../doc/models/error-string-map-response-exception.md) |
 
 
-# Delete Unused Payment Profile
-
-Deletes an unused payment profile.
-
-If the payment profile is in use by one or more subscriptions or groups, a 422 and error message will be returned.
-
-```python
-def delete_unused_payment_profile(self,
-                                 payment_profile_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `payment_profile_id` | `int` | Template, Required | The Chargify id of the payment profile |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-payment_profile_id = 198
-
-payment_profiles_controller.delete_unused_payment_profile(payment_profile_id)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
 # Delete Subscriptions Payment Profile
 
 This will delete a payment profile belonging to the customer on the subscription.
@@ -930,159 +1083,6 @@ result = payment_profiles_controller.change_subscription_default_payment_profile
     "gateway_handle": null
   }
 }
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Change Subscription Group Default Payment Profile
-
-This will change the default payment profile on the subscription group to the existing payment profile with the id specified.
-
-You must elect to change the existing payment profile to a new payment profile ID in order to receive a satisfactory response from this endpoint.
-
-The new payment profile must belong to the subscription group's customer, otherwise you will receive an error.
-
-```python
-def change_subscription_group_default_payment_profile(self,
-                                                     uid,
-                                                     payment_profile_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `str` | Template, Required | The uid of the subscription group |
-| `payment_profile_id` | `int` | Template, Required | The Chargify id of the payment profile |
-
-## Response Type
-
-[`PaymentProfileResponse`](../../doc/models/payment-profile-response.md)
-
-## Example Usage
-
-```python
-uid = 'uid0'
-
-payment_profile_id = 198
-
-result = payment_profiles_controller.change_subscription_group_default_payment_profile(
-    uid,
-    payment_profile_id
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "payment_profile": {
-    "id": 10211899,
-    "first_name": "Amelia",
-    "last_name": "Example",
-    "masked_card_number": "XXXX-XXXX-XXXX-1",
-    "card_type": "bogus",
-    "expiration_month": 2,
-    "expiration_year": 2018,
-    "customer_id": 14399371,
-    "current_vault": "bogus",
-    "vault_token": "1",
-    "billing_address": "",
-    "billing_city": "",
-    "billing_state": "",
-    "billing_zip": "",
-    "billing_country": "",
-    "customer_vault_token": null,
-    "billing_address_2": "",
-    "payment_type": "credit_card",
-    "site_gateway_setting_id": 1,
-    "gateway_handle": null
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Read One Time Token
-
-One Time Tokens aka Advanced Billing Tokens house the credit card or ACH (Authorize.Net or Stripe only) data for a customer.
-
-You can use One Time Tokens while creating a subscription or payment profile instead of passing all bank account or credit card data directly to a given API endpoint.
-
-To obtain a One Time Token you have to use [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDI0-overview).
-
-```python
-def read_one_time_token(self,
-                       chargify_token)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `chargify_token` | `str` | Template, Required | Advanced Billing Token |
-
-## Response Type
-
-[`GetOneTimeTokenRequest`](../../doc/models/get-one-time-token-request.md)
-
-## Example Usage
-
-```python
-chargify_token = 'chargify_token8'
-
-result = payment_profiles_controller.read_one_time_token(chargify_token)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Send Request Update Payment Email
-
-You can send a "request payment update" email to the customer associated with the subscription.
-
-If you attempt to send a "request payment update" email more than five times within a 30-minute period, you will receive a `422` response with an error message in the body. This error message will indicate that the request has been rejected due to excessive attempts, and will provide instructions on how to resubmit the request.
-
-Additionally, if you attempt to send a "request payment update" email for a subscription that does not exist, you will receive a `404` error response. This error message will indicate that the subscription could not be found, and will provide instructions on how to correct the error and resubmit the request.
-
-These error responses are designed to prevent excessive or invalid requests, and to provide clear and helpful information to users who encounter errors during the request process.
-
-```python
-def send_request_update_payment_email(self,
-                                     subscription_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-payment_profiles_controller.send_request_update_payment_email(subscription_id)
 ```
 
 ## Errors

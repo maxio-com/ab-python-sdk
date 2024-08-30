@@ -317,38 +317,6 @@ class CustomersController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', CustomerErrorResponseException)
         ).execute()
 
-    def delete_customer(self,
-                        id):
-        """Does a DELETE request to /customers/{id}.json.
-
-        This method allows you to delete the Customer.
-
-        Args:
-            id (int): The Advanced Billing id of the customer
-
-        Returns:
-            void: Response from the API. No Content
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/customers/{id}.json')
-            .http_method(HttpMethodEnum.DELETE)
-            .template_param(Parameter()
-                            .key('id')
-                            .value(id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('BasicAuth'))
-        ).execute()
-
     def read_customer_by_reference(self,
                                    reference):
         """Does a GET request to /customers/lookup.json.
@@ -387,6 +355,38 @@ class CustomersController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CustomerResponse.from_dictionary)
+        ).execute()
+
+    def delete_customer(self,
+                        id):
+        """Does a DELETE request to /customers/{id}.json.
+
+        This method allows you to delete the Customer.
+
+        Args:
+            id (int): The Advanced Billing id of the customer
+
+        Returns:
+            void: Response from the API. No Content
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/customers/{id}.json')
+            .http_method(HttpMethodEnum.DELETE)
+            .template_param(Parameter()
+                            .key('id')
+                            .value(id)
+                            .is_required(True)
+                            .should_encode(True))
+            .auth(Single('BasicAuth'))
         ).execute()
 
     def list_customer_subscriptions(self,

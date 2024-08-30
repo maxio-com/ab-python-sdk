@@ -10,16 +10,698 @@ subscription_status_controller = client.subscription_status
 
 ## Methods
 
-* [Retry Subscription](../../doc/controllers/subscription-status.md#retry-subscription)
-* [Cancel Subscription](../../doc/controllers/subscription-status.md#cancel-subscription)
-* [Resume Subscription](../../doc/controllers/subscription-status.md#resume-subscription)
-* [Pause Subscription](../../doc/controllers/subscription-status.md#pause-subscription)
 * [Update Automatic Subscription Resumption](../../doc/controllers/subscription-status.md#update-automatic-subscription-resumption)
-* [Reactivate Subscription](../../doc/controllers/subscription-status.md#reactivate-subscription)
 * [Initiate Delayed Cancellation](../../doc/controllers/subscription-status.md#initiate-delayed-cancellation)
 * [Cancel Delayed Cancellation](../../doc/controllers/subscription-status.md#cancel-delayed-cancellation)
-* [Cancel Dunning](../../doc/controllers/subscription-status.md#cancel-dunning)
 * [Preview Renewal](../../doc/controllers/subscription-status.md#preview-renewal)
+* [Resume Subscription](../../doc/controllers/subscription-status.md#resume-subscription)
+* [Pause Subscription](../../doc/controllers/subscription-status.md#pause-subscription)
+* [Retry Subscription](../../doc/controllers/subscription-status.md#retry-subscription)
+* [Cancel Subscription](../../doc/controllers/subscription-status.md#cancel-subscription)
+* [Cancel Dunning](../../doc/controllers/subscription-status.md#cancel-dunning)
+* [Reactivate Subscription](../../doc/controllers/subscription-status.md#reactivate-subscription)
+
+
+# Update Automatic Subscription Resumption
+
+Once a subscription has been paused / put on hold, you can update the date which was specified to automatically resume the subscription.
+
+To update a subscription's resume date, use this method to change or update the `automatically_resume_at` date.
+
+### Remove the resume date
+
+Alternately, you can change the `automatically_resume_at` to `null` if you would like the subscription to not have a resume date.
+
+```python
+def update_automatic_subscription_resumption(self,
+                                            subscription_id,
+                                            body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `body` | [`PauseRequest`](../../doc/models/pause-request.md) | Body, Optional | Allows to pause a Subscription |
+
+## Response Type
+
+[`SubscriptionResponse`](../../doc/models/subscription-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+body = PauseRequest(
+    hold=AutoResume(
+        automatically_resume_at=dateutil.parser.parse('2019-01-20T00:00:00')
+    )
+)
+
+result = subscription_status_controller.update_automatic_subscription_resumption(
+    subscription_id,
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription": {
+    "id": 20359140,
+    "state": "on_hold",
+    "trial_started_at": null,
+    "trial_ended_at": null,
+    "activated_at": "2018-01-05T17:15:50-06:00",
+    "created_at": "2018-01-05T17:15:49-06:00",
+    "updated_at": "2018-01-09T10:26:14-06:00",
+    "expires_at": null,
+    "balance_in_cents": 0,
+    "current_period_ends_at": "2023-01-05T17:15:00-06:00",
+    "next_assessment_at": "2023-01-05T17:15:00-06:00",
+    "canceled_at": null,
+    "cancellation_message": null,
+    "next_product_id": null,
+    "cancel_at_end_of_period": false,
+    "payment_collection_method": "automatic",
+    "snap_day": null,
+    "cancellation_method": null,
+    "current_period_started_at": "2018-01-05T17:15:49-06:00",
+    "previous_state": "active",
+    "signup_payment_id": 219829722,
+    "signup_revenue": "100.00",
+    "delayed_cancel_at": null,
+    "coupon_code": null,
+    "total_revenue_in_cents": 10009991,
+    "product_price_in_cents": 10000,
+    "product_version_number": 1,
+    "payment_type": "credit_card",
+    "referral_code": "8y7jqr",
+    "coupon_use_count": null,
+    "coupon_uses_allowed": null,
+    "reason_code": null,
+    "automatically_resume_at": "2019-01-20T00:00:00-06:00",
+    "customer": {
+      "id": 19948683,
+      "first_name": "Vanessa",
+      "last_name": "Test",
+      "organization": "",
+      "email": "vanessa@example.com",
+      "created_at": "2018-01-05T17:15:49-06:00",
+      "updated_at": "2018-01-05T17:15:51-06:00",
+      "reference": null,
+      "address": "123 Anywhere Ln",
+      "address_2": "",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02120",
+      "country": "US",
+      "phone": "555-555-1212",
+      "portal_invite_last_sent_at": "2018-01-05T17:15:51-06:00",
+      "portal_invite_last_accepted_at": null,
+      "verified": null,
+      "portal_customer_created_at": "2018-01-05T17:15:51-06:00",
+      "cc_emails": null,
+      "tax_exempt": false
+    },
+    "product": {
+      "id": 4535643,
+      "name": "Annual Product",
+      "handle": "annual-product",
+      "description": "",
+      "accounting_code": "",
+      "request_credit_card": true,
+      "expiration_interval": null,
+      "expiration_interval_unit": "never",
+      "created_at": "2017-08-25T10:25:31-05:00",
+      "updated_at": "2017-08-25T10:25:31-05:00",
+      "price_in_cents": 10000,
+      "interval": 12,
+      "interval_unit": "month",
+      "initial_charge_in_cents": null,
+      "trial_price_in_cents": null,
+      "trial_interval": null,
+      "trial_interval_unit": "month",
+      "archived_at": null,
+      "require_credit_card": true,
+      "return_params": "",
+      "taxable": false,
+      "update_return_url": "",
+      "tax_code": "",
+      "initial_charge_after_trial": false,
+      "version_number": 1,
+      "update_return_params": "",
+      "product_family": {
+        "id": 1025627,
+        "name": "Acme Products",
+        "description": "",
+        "handle": "acme-products",
+        "accounting_code": null
+      }
+    },
+    "credit_card": {
+      "id": 13826563,
+      "first_name": "Bomb 3",
+      "last_name": "Test",
+      "masked_card_number": "XXXX-XXXX-XXXX-1",
+      "card_type": "bogus",
+      "expiration_month": 1,
+      "expiration_year": 2028,
+      "customer_id": 19948683,
+      "current_vault": "bogus",
+      "vault_token": "1",
+      "billing_address": "123 Anywhere Lane",
+      "billing_city": "Boston",
+      "billing_state": "Ma",
+      "billing_zip": "02120",
+      "billing_country": "US",
+      "customer_vault_token": null,
+      "billing_address_2": "",
+      "payment_type": "credit_card"
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Initiate Delayed Cancellation
+
+Advanced Billing offers the ability to cancel a subscription at the end of the current billing period. This period is set by its current product.
+
+Requesting to cancel the subscription at the end of the period sets the `cancel_at_end_of_period` flag to true.
+
+Note that you cannot set `cancel_at_end_of_period` at subscription creation, or if the subscription is past due.
+
+```python
+def initiate_delayed_cancellation(self,
+                                 subscription_id,
+                                 body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `body` | [`CancellationRequest`](../../doc/models/cancellation-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`DelayedCancellationResponse`](../../doc/models/delayed-cancellation-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+result = subscription_status_controller.initiate_delayed_cancellation(subscription_id)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+
+
+# Cancel Delayed Cancellation
+
+Removing the delayed cancellation on a subscription will ensure that it doesn't get canceled at the end of the period that it is in. The request will reset the `cancel_at_end_of_period` flag to `false`.
+
+This endpoint is idempotent. If the subscription was not set to cancel in the future, removing the delayed cancellation has no effect and the call will be successful.
+
+```python
+def cancel_delayed_cancellation(self,
+                               subscription_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+
+## Response Type
+
+[`DelayedCancellationResponse`](../../doc/models/delayed-cancellation-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+result = subscription_status_controller.cancel_delayed_cancellation(subscription_id)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "message": "This subscription will no longer be canceled"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+
+
+# Preview Renewal
+
+The Chargify API allows you to preview a renewal by posting to the renewals endpoint. Renewal Preview is an object representing a subscription’s next assessment. You can retrieve it to see a snapshot of how much your customer will be charged on their next renewal.
+
+The "Next Billing" amount and "Next Billing" date are already represented in the UI on each Subscriber's Summary. For more information, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subscriber-Interface-Overview).
+
+## Optional Component Fields
+
+This endpoint is particularly useful due to the fact that it will return the computed billing amount for the base product and the components which are in use by a subscriber.
+
+By default, the preview will include billing details for all components _at their **current** quantities_. This means:
+
+* Current `allocated_quantity` for quantity-based components
+* Current enabled/disabled status for on/off components
+* Current metered usage `unit_balance` for metered components
+* Current metric quantity value for events recorded thus far for events-based components
+
+In the above statements, "current" means the quantity or value as of the call to the renewal preview endpoint. We do not predict end-of-period values for components, so metered or events-based usage may be less than it will eventually be at the end of the period.
+
+Optionally, **you may provide your own custom quantities** for any component to see a billing preview for non-current quantities. This is accomplished by sending a request body with data under the `components` key. See the request body documentation below.
+
+## Subscription Side Effects
+
+You can request a `POST` to obtain this data from the endpoint without any side effects. Plain and simple, this will preview data, not log any changes against a subscription.
+
+```python
+def preview_renewal(self,
+                   subscription_id,
+                   body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `body` | [`RenewalPreviewRequest`](../../doc/models/renewal-preview-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`RenewalPreviewResponse`](../../doc/models/renewal-preview-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+body = RenewalPreviewRequest(
+    components=[
+        RenewalPreviewComponent(
+            component_id=10708,
+            quantity=10000
+        ),
+        RenewalPreviewComponent(
+            component_id='handle:small-instance-hours',
+            quantity=10000,
+            price_point_id=8712
+        ),
+        RenewalPreviewComponent(
+            component_id='handle:large-instance-hours',
+            quantity=100,
+            price_point_id='handle:startup-pricing'
+        )
+    ]
+)
+
+result = subscription_status_controller.preview_renewal(
+    subscription_id,
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "renewal_preview": {
+    "next_assessment_at": "2017-03-13T12:50:55-04:00",
+    "subtotal_in_cents": 6000,
+    "total_tax_in_cents": 0,
+    "total_discount_in_cents": 0,
+    "total_in_cents": 6000,
+    "existing_balance_in_cents": 0,
+    "total_amount_due_in_cents": 6000,
+    "uncalculated_taxes": false,
+    "line_items": [
+      {
+        "transaction_type": "charge",
+        "kind": "baseline",
+        "amount_in_cents": 5000,
+        "memo": "Gold Product (03/13/2017 - 04/13/2017)",
+        "discount_amount_in_cents": 0,
+        "taxable_amount_in_cents": 0,
+        "product_id": 1,
+        "product_handle": "gold-product",
+        "product_name": "Gold Product",
+        "period_range_start": "01/10/2024",
+        "period_range_end": "02/10/2024"
+      },
+      {
+        "transaction_type": "charge",
+        "kind": "quantity_based_component",
+        "amount_in_cents": 1000,
+        "memo": "Quantity Component: 10 Quantity Components",
+        "discount_amount_in_cents": 0,
+        "taxable_amount_in_cents": 0,
+        "component_id": 104,
+        "component_handle": "quantity-component",
+        "component_name": "Quantity Component",
+        "period_range_start": "01/10/2024",
+        "period_range_end": "02/10/2024"
+      }
+    ]
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Resume Subscription
+
+Resume a paused (on-hold) subscription. If the normal next renewal date has not passed, the subscription will return to active and will renew on that date.  Otherwise, it will behave like a reactivation, setting the billing date to 'now' and charging the subscriber.
+
+```python
+def resume_subscription(self,
+                       subscription_id,
+                       calendar_billing_resumption_charge='prorated')
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `calendar_billing_resumption_charge` | [`ResumptionCharge`](../../doc/models/resumption-charge.md) | Query, Optional | (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled |
+
+## Response Type
+
+[`SubscriptionResponse`](../../doc/models/subscription-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+Liquid error: Value cannot be null. (Parameter 'key')result = subscription_status_controller.resume_subscription(Liquid error: Value cannot be null. (Parameter 'key')subscription_id)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription": {
+    "id": 18220670,
+    "state": "active",
+    "trial_started_at": null,
+    "trial_ended_at": null,
+    "activated_at": "2017-06-27T13:45:15-05:00",
+    "created_at": "2017-06-27T13:45:13-05:00",
+    "updated_at": "2017-06-30T09:26:50-05:00",
+    "expires_at": null,
+    "balance_in_cents": 10000,
+    "current_period_ends_at": "2017-06-30T12:00:00-05:00",
+    "next_assessment_at": "2017-06-30T12:00:00-05:00",
+    "canceled_at": null,
+    "cancellation_message": null,
+    "next_product_id": null,
+    "cancel_at_end_of_period": false,
+    "payment_collection_method": "automatic",
+    "snap_day": "end",
+    "cancellation_method": null,
+    "current_period_started_at": "2017-06-27T13:45:13-05:00",
+    "previous_state": "active",
+    "signup_payment_id": 191819284,
+    "signup_revenue": "0.00",
+    "delayed_cancel_at": null,
+    "coupon_code": null,
+    "total_revenue_in_cents": 0,
+    "product_price_in_cents": 0,
+    "product_version_number": 1,
+    "payment_type": null,
+    "referral_code": "d3pw7f",
+    "coupon_use_count": null,
+    "coupon_uses_allowed": null,
+    "reason_code": null,
+    "automatically_resume_at": null,
+    "current_billing_amount_in_cents": 10000,
+    "customer": {
+      "id": 17780587,
+      "first_name": "Catie",
+      "last_name": "Test",
+      "organization": "Acme, Inc.",
+      "email": "catie@example.com",
+      "created_at": "2017-06-27T13:01:05-05:00",
+      "updated_at": "2017-06-30T09:23:10-05:00",
+      "reference": "123ABC",
+      "address": "123 Anywhere Street",
+      "address_2": "Apartment #10",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90210",
+      "country": "US",
+      "phone": "555-555-5555",
+      "portal_invite_last_sent_at": "2017-06-27T13:45:16-05:00",
+      "portal_invite_last_accepted_at": null,
+      "verified": true,
+      "portal_customer_created_at": "2017-06-27T13:01:08-05:00",
+      "cc_emails": "support@example.com",
+      "tax_exempt": true
+    },
+    "product": {
+      "id": 4470347,
+      "name": "Zero Dollar Product",
+      "handle": "zero-dollar-product",
+      "description": "",
+      "accounting_code": "",
+      "request_credit_card": true,
+      "expiration_interval": null,
+      "expiration_interval_unit": "never",
+      "created_at": "2017-03-23T10:54:12-05:00",
+      "updated_at": "2017-04-20T15:18:46-05:00",
+      "price_in_cents": 0,
+      "interval": 1,
+      "interval_unit": "month",
+      "initial_charge_in_cents": null,
+      "trial_price_in_cents": null,
+      "trial_interval": null,
+      "trial_interval_unit": "month",
+      "archived_at": null,
+      "require_credit_card": false,
+      "return_params": "",
+      "taxable": false,
+      "update_return_url": "",
+      "tax_code": "",
+      "initial_charge_after_trial": false,
+      "version_number": 1,
+      "update_return_params": "",
+      "product_family": {
+        "id": 997233,
+        "name": "Acme Products",
+        "description": "",
+        "handle": "acme-products",
+        "accounting_code": null
+      },
+      "public_signup_pages": [
+        {
+          "id": 316810,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product"
+        }
+      ]
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Pause Subscription
+
+This will place the subscription in the on_hold state and it will not renew.
+
+## Limitations
+
+You may not place a subscription on hold if the `next_billing` date is within 24 hours.
+
+```python
+def pause_subscription(self,
+                      subscription_id,
+                      body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `body` | [`PauseRequest`](../../doc/models/pause-request.md) | Body, Optional | Allows to pause a Subscription |
+
+## Response Type
+
+[`SubscriptionResponse`](../../doc/models/subscription-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+body = PauseRequest(
+    hold=AutoResume(
+        automatically_resume_at=dateutil.parser.parse('2017-05-25T11:25:00Z')
+    )
+)
+
+result = subscription_status_controller.pause_subscription(
+    subscription_id,
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription": {
+    "id": 18220670,
+    "state": "on_hold",
+    "trial_started_at": null,
+    "trial_ended_at": null,
+    "activated_at": "2017-06-27T13:45:15-05:00",
+    "created_at": "2017-06-27T13:45:13-05:00",
+    "updated_at": "2017-06-30T09:26:50-05:00",
+    "expires_at": null,
+    "balance_in_cents": 10000,
+    "current_period_ends_at": "2017-06-30T12:00:00-05:00",
+    "next_assessment_at": "2017-06-30T12:00:00-05:00",
+    "canceled_at": null,
+    "cancellation_message": null,
+    "next_product_id": null,
+    "cancel_at_end_of_period": false,
+    "payment_collection_method": "automatic",
+    "snap_day": "end",
+    "cancellation_method": null,
+    "current_period_started_at": "2017-06-27T13:45:13-05:00",
+    "previous_state": "active",
+    "signup_payment_id": 191819284,
+    "signup_revenue": "0.00",
+    "delayed_cancel_at": null,
+    "coupon_code": null,
+    "total_revenue_in_cents": 0,
+    "product_price_in_cents": 0,
+    "product_version_number": 1,
+    "payment_type": null,
+    "referral_code": "d3pw7f",
+    "coupon_use_count": null,
+    "coupon_uses_allowed": null,
+    "reason_code": null,
+    "automatically_resume_at": null,
+    "current_billing_amount_in_cents": 10000,
+    "customer": {
+      "id": 17780587,
+      "first_name": "Catie",
+      "last_name": "Test",
+      "organization": "Acme, Inc.",
+      "email": "catie@example.com",
+      "created_at": "2017-06-27T13:01:05-05:00",
+      "updated_at": "2017-06-30T09:23:10-05:00",
+      "reference": "123ABC",
+      "address": "123 Anywhere Street",
+      "address_2": "Apartment #10",
+      "city": "Los Angeles",
+      "state": "CA",
+      "zip": "90210",
+      "country": "US",
+      "phone": "555-555-5555",
+      "portal_invite_last_sent_at": "2017-06-27T13:45:16-05:00",
+      "portal_invite_last_accepted_at": null,
+      "verified": true,
+      "portal_customer_created_at": "2017-06-27T13:01:08-05:00",
+      "cc_emails": "support@example.com",
+      "tax_exempt": true
+    },
+    "product": {
+      "id": 4470347,
+      "name": "Zero Dollar Product",
+      "handle": "zero-dollar-product",
+      "description": "",
+      "accounting_code": "",
+      "request_credit_card": true,
+      "expiration_interval": null,
+      "expiration_interval_unit": "never",
+      "created_at": "2017-03-23T10:54:12-05:00",
+      "updated_at": "2017-04-20T15:18:46-05:00",
+      "price_in_cents": 0,
+      "interval": 1,
+      "interval_unit": "month",
+      "initial_charge_in_cents": null,
+      "trial_price_in_cents": null,
+      "trial_interval": null,
+      "trial_interval_unit": "month",
+      "archived_at": null,
+      "require_credit_card": false,
+      "return_params": "",
+      "taxable": false,
+      "update_return_url": "",
+      "tax_code": "",
+      "initial_charge_after_trial": false,
+      "version_number": 1,
+      "update_return_params": "",
+      "product_family": {
+        "id": 997233,
+        "name": "Acme Products",
+        "description": "",
+        "handle": "acme-products",
+        "accounting_code": null
+      },
+      "public_signup_pages": [
+        {
+          "id": 316810,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product"
+        }
+      ]
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Retry Subscription
@@ -373,14 +1055,13 @@ result = subscription_status_controller.cancel_subscription(subscription_id)
 | 422 | Unprocessable Entity (WebDAV) | `APIException` |
 
 
-# Resume Subscription
+# Cancel Dunning
 
-Resume a paused (on-hold) subscription. If the normal next renewal date has not passed, the subscription will return to active and will renew on that date.  Otherwise, it will behave like a reactivation, setting the billing date to 'now' and charging the subscriber.
+If a subscription is currently in dunning, the subscription will be set to active and the active Dunner will be resolved.
 
 ```python
-def resume_subscription(self,
-                       subscription_id,
-                       calendar_billing_resumption_charge='prorated')
+def cancel_dunning(self,
+                  subscription_id)
 ```
 
 ## Parameters
@@ -388,7 +1069,6 @@ def resume_subscription(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `calendar_billing_resumption_charge` | [`ResumptionCharge`](../../doc/models/resumption-charge.md) | Query, Optional | (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled |
 
 ## Response Type
 
@@ -399,452 +1079,8 @@ def resume_subscription(self,
 ```python
 subscription_id = 222
 
-Liquid error: Value cannot be null. (Parameter 'key')result = subscription_status_controller.resume_subscription(Liquid error: Value cannot be null. (Parameter 'key')subscription_id)
+result = subscription_status_controller.cancel_dunning(subscription_id)
 ```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription": {
-    "id": 18220670,
-    "state": "active",
-    "trial_started_at": null,
-    "trial_ended_at": null,
-    "activated_at": "2017-06-27T13:45:15-05:00",
-    "created_at": "2017-06-27T13:45:13-05:00",
-    "updated_at": "2017-06-30T09:26:50-05:00",
-    "expires_at": null,
-    "balance_in_cents": 10000,
-    "current_period_ends_at": "2017-06-30T12:00:00-05:00",
-    "next_assessment_at": "2017-06-30T12:00:00-05:00",
-    "canceled_at": null,
-    "cancellation_message": null,
-    "next_product_id": null,
-    "cancel_at_end_of_period": false,
-    "payment_collection_method": "automatic",
-    "snap_day": "end",
-    "cancellation_method": null,
-    "current_period_started_at": "2017-06-27T13:45:13-05:00",
-    "previous_state": "active",
-    "signup_payment_id": 191819284,
-    "signup_revenue": "0.00",
-    "delayed_cancel_at": null,
-    "coupon_code": null,
-    "total_revenue_in_cents": 0,
-    "product_price_in_cents": 0,
-    "product_version_number": 1,
-    "payment_type": null,
-    "referral_code": "d3pw7f",
-    "coupon_use_count": null,
-    "coupon_uses_allowed": null,
-    "reason_code": null,
-    "automatically_resume_at": null,
-    "current_billing_amount_in_cents": 10000,
-    "customer": {
-      "id": 17780587,
-      "first_name": "Catie",
-      "last_name": "Test",
-      "organization": "Acme, Inc.",
-      "email": "catie@example.com",
-      "created_at": "2017-06-27T13:01:05-05:00",
-      "updated_at": "2017-06-30T09:23:10-05:00",
-      "reference": "123ABC",
-      "address": "123 Anywhere Street",
-      "address_2": "Apartment #10",
-      "city": "Los Angeles",
-      "state": "CA",
-      "zip": "90210",
-      "country": "US",
-      "phone": "555-555-5555",
-      "portal_invite_last_sent_at": "2017-06-27T13:45:16-05:00",
-      "portal_invite_last_accepted_at": null,
-      "verified": true,
-      "portal_customer_created_at": "2017-06-27T13:01:08-05:00",
-      "cc_emails": "support@example.com",
-      "tax_exempt": true
-    },
-    "product": {
-      "id": 4470347,
-      "name": "Zero Dollar Product",
-      "handle": "zero-dollar-product",
-      "description": "",
-      "accounting_code": "",
-      "request_credit_card": true,
-      "expiration_interval": null,
-      "expiration_interval_unit": "never",
-      "created_at": "2017-03-23T10:54:12-05:00",
-      "updated_at": "2017-04-20T15:18:46-05:00",
-      "price_in_cents": 0,
-      "interval": 1,
-      "interval_unit": "month",
-      "initial_charge_in_cents": null,
-      "trial_price_in_cents": null,
-      "trial_interval": null,
-      "trial_interval_unit": "month",
-      "archived_at": null,
-      "require_credit_card": false,
-      "return_params": "",
-      "taxable": false,
-      "update_return_url": "",
-      "tax_code": "",
-      "initial_charge_after_trial": false,
-      "version_number": 1,
-      "update_return_params": "",
-      "product_family": {
-        "id": 997233,
-        "name": "Acme Products",
-        "description": "",
-        "handle": "acme-products",
-        "accounting_code": null
-      },
-      "public_signup_pages": [
-        {
-          "id": 316810,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product"
-        }
-      ]
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Pause Subscription
-
-This will place the subscription in the on_hold state and it will not renew.
-
-## Limitations
-
-You may not place a subscription on hold if the `next_billing` date is within 24 hours.
-
-```python
-def pause_subscription(self,
-                      subscription_id,
-                      body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `body` | [`PauseRequest`](../../doc/models/pause-request.md) | Body, Optional | Allows to pause a Subscription |
-
-## Response Type
-
-[`SubscriptionResponse`](../../doc/models/subscription-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-body = PauseRequest(
-    hold=AutoResume(
-        automatically_resume_at=dateutil.parser.parse('2017-05-25T11:25:00Z')
-    )
-)
-
-result = subscription_status_controller.pause_subscription(
-    subscription_id,
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription": {
-    "id": 18220670,
-    "state": "on_hold",
-    "trial_started_at": null,
-    "trial_ended_at": null,
-    "activated_at": "2017-06-27T13:45:15-05:00",
-    "created_at": "2017-06-27T13:45:13-05:00",
-    "updated_at": "2017-06-30T09:26:50-05:00",
-    "expires_at": null,
-    "balance_in_cents": 10000,
-    "current_period_ends_at": "2017-06-30T12:00:00-05:00",
-    "next_assessment_at": "2017-06-30T12:00:00-05:00",
-    "canceled_at": null,
-    "cancellation_message": null,
-    "next_product_id": null,
-    "cancel_at_end_of_period": false,
-    "payment_collection_method": "automatic",
-    "snap_day": "end",
-    "cancellation_method": null,
-    "current_period_started_at": "2017-06-27T13:45:13-05:00",
-    "previous_state": "active",
-    "signup_payment_id": 191819284,
-    "signup_revenue": "0.00",
-    "delayed_cancel_at": null,
-    "coupon_code": null,
-    "total_revenue_in_cents": 0,
-    "product_price_in_cents": 0,
-    "product_version_number": 1,
-    "payment_type": null,
-    "referral_code": "d3pw7f",
-    "coupon_use_count": null,
-    "coupon_uses_allowed": null,
-    "reason_code": null,
-    "automatically_resume_at": null,
-    "current_billing_amount_in_cents": 10000,
-    "customer": {
-      "id": 17780587,
-      "first_name": "Catie",
-      "last_name": "Test",
-      "organization": "Acme, Inc.",
-      "email": "catie@example.com",
-      "created_at": "2017-06-27T13:01:05-05:00",
-      "updated_at": "2017-06-30T09:23:10-05:00",
-      "reference": "123ABC",
-      "address": "123 Anywhere Street",
-      "address_2": "Apartment #10",
-      "city": "Los Angeles",
-      "state": "CA",
-      "zip": "90210",
-      "country": "US",
-      "phone": "555-555-5555",
-      "portal_invite_last_sent_at": "2017-06-27T13:45:16-05:00",
-      "portal_invite_last_accepted_at": null,
-      "verified": true,
-      "portal_customer_created_at": "2017-06-27T13:01:08-05:00",
-      "cc_emails": "support@example.com",
-      "tax_exempt": true
-    },
-    "product": {
-      "id": 4470347,
-      "name": "Zero Dollar Product",
-      "handle": "zero-dollar-product",
-      "description": "",
-      "accounting_code": "",
-      "request_credit_card": true,
-      "expiration_interval": null,
-      "expiration_interval_unit": "never",
-      "created_at": "2017-03-23T10:54:12-05:00",
-      "updated_at": "2017-04-20T15:18:46-05:00",
-      "price_in_cents": 0,
-      "interval": 1,
-      "interval_unit": "month",
-      "initial_charge_in_cents": null,
-      "trial_price_in_cents": null,
-      "trial_interval": null,
-      "trial_interval_unit": "month",
-      "archived_at": null,
-      "require_credit_card": false,
-      "return_params": "",
-      "taxable": false,
-      "update_return_url": "",
-      "tax_code": "",
-      "initial_charge_after_trial": false,
-      "version_number": 1,
-      "update_return_params": "",
-      "product_family": {
-        "id": 997233,
-        "name": "Acme Products",
-        "description": "",
-        "handle": "acme-products",
-        "accounting_code": null
-      },
-      "public_signup_pages": [
-        {
-          "id": 316810,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargify.com/subscribe/69x825m78v3d/zero-dollar-product"
-        }
-      ]
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Update Automatic Subscription Resumption
-
-Once a subscription has been paused / put on hold, you can update the date which was specified to automatically resume the subscription.
-
-To update a subscription's resume date, use this method to change or update the `automatically_resume_at` date.
-
-### Remove the resume date
-
-Alternately, you can change the `automatically_resume_at` to `null` if you would like the subscription to not have a resume date.
-
-```python
-def update_automatic_subscription_resumption(self,
-                                            subscription_id,
-                                            body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `body` | [`PauseRequest`](../../doc/models/pause-request.md) | Body, Optional | Allows to pause a Subscription |
-
-## Response Type
-
-[`SubscriptionResponse`](../../doc/models/subscription-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-body = PauseRequest(
-    hold=AutoResume(
-        automatically_resume_at=dateutil.parser.parse('2019-01-20T00:00:00')
-    )
-)
-
-result = subscription_status_controller.update_automatic_subscription_resumption(
-    subscription_id,
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription": {
-    "id": 20359140,
-    "state": "on_hold",
-    "trial_started_at": null,
-    "trial_ended_at": null,
-    "activated_at": "2018-01-05T17:15:50-06:00",
-    "created_at": "2018-01-05T17:15:49-06:00",
-    "updated_at": "2018-01-09T10:26:14-06:00",
-    "expires_at": null,
-    "balance_in_cents": 0,
-    "current_period_ends_at": "2023-01-05T17:15:00-06:00",
-    "next_assessment_at": "2023-01-05T17:15:00-06:00",
-    "canceled_at": null,
-    "cancellation_message": null,
-    "next_product_id": null,
-    "cancel_at_end_of_period": false,
-    "payment_collection_method": "automatic",
-    "snap_day": null,
-    "cancellation_method": null,
-    "current_period_started_at": "2018-01-05T17:15:49-06:00",
-    "previous_state": "active",
-    "signup_payment_id": 219829722,
-    "signup_revenue": "100.00",
-    "delayed_cancel_at": null,
-    "coupon_code": null,
-    "total_revenue_in_cents": 10009991,
-    "product_price_in_cents": 10000,
-    "product_version_number": 1,
-    "payment_type": "credit_card",
-    "referral_code": "8y7jqr",
-    "coupon_use_count": null,
-    "coupon_uses_allowed": null,
-    "reason_code": null,
-    "automatically_resume_at": "2019-01-20T00:00:00-06:00",
-    "customer": {
-      "id": 19948683,
-      "first_name": "Vanessa",
-      "last_name": "Test",
-      "organization": "",
-      "email": "vanessa@example.com",
-      "created_at": "2018-01-05T17:15:49-06:00",
-      "updated_at": "2018-01-05T17:15:51-06:00",
-      "reference": null,
-      "address": "123 Anywhere Ln",
-      "address_2": "",
-      "city": "Boston",
-      "state": "MA",
-      "zip": "02120",
-      "country": "US",
-      "phone": "555-555-1212",
-      "portal_invite_last_sent_at": "2018-01-05T17:15:51-06:00",
-      "portal_invite_last_accepted_at": null,
-      "verified": null,
-      "portal_customer_created_at": "2018-01-05T17:15:51-06:00",
-      "cc_emails": null,
-      "tax_exempt": false
-    },
-    "product": {
-      "id": 4535643,
-      "name": "Annual Product",
-      "handle": "annual-product",
-      "description": "",
-      "accounting_code": "",
-      "request_credit_card": true,
-      "expiration_interval": null,
-      "expiration_interval_unit": "never",
-      "created_at": "2017-08-25T10:25:31-05:00",
-      "updated_at": "2017-08-25T10:25:31-05:00",
-      "price_in_cents": 10000,
-      "interval": 12,
-      "interval_unit": "month",
-      "initial_charge_in_cents": null,
-      "trial_price_in_cents": null,
-      "trial_interval": null,
-      "trial_interval_unit": "month",
-      "archived_at": null,
-      "require_credit_card": true,
-      "return_params": "",
-      "taxable": false,
-      "update_return_url": "",
-      "tax_code": "",
-      "initial_charge_after_trial": false,
-      "version_number": 1,
-      "update_return_params": "",
-      "product_family": {
-        "id": 1025627,
-        "name": "Acme Products",
-        "description": "",
-        "handle": "acme-products",
-        "accounting_code": null
-      }
-    },
-    "credit_card": {
-      "id": 13826563,
-      "first_name": "Bomb 3",
-      "last_name": "Test",
-      "masked_card_number": "XXXX-XXXX-XXXX-1",
-      "card_type": "bogus",
-      "expiration_month": 1,
-      "expiration_year": 2028,
-      "customer_id": 19948683,
-      "current_vault": "bogus",
-      "vault_token": "1",
-      "billing_address": "123 Anywhere Lane",
-      "billing_city": "Boston",
-      "billing_state": "Ma",
-      "billing_zip": "02120",
-      "billing_country": "US",
-      "customer_vault_token": null,
-      "billing_address_2": "",
-      "payment_type": "credit_card"
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Reactivate Subscription
@@ -1154,242 +1390,6 @@ result = subscription_status_controller.reactivate_subscription(
         }
       ]
     }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Initiate Delayed Cancellation
-
-Advanced Billing offers the ability to cancel a subscription at the end of the current billing period. This period is set by its current product.
-
-Requesting to cancel the subscription at the end of the period sets the `cancel_at_end_of_period` flag to true.
-
-Note that you cannot set `cancel_at_end_of_period` at subscription creation, or if the subscription is past due.
-
-```python
-def initiate_delayed_cancellation(self,
-                                 subscription_id,
-                                 body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `body` | [`CancellationRequest`](../../doc/models/cancellation-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`DelayedCancellationResponse`](../../doc/models/delayed-cancellation-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-result = subscription_status_controller.initiate_delayed_cancellation(subscription_id)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-
-
-# Cancel Delayed Cancellation
-
-Removing the delayed cancellation on a subscription will ensure that it doesn't get canceled at the end of the period that it is in. The request will reset the `cancel_at_end_of_period` flag to `false`.
-
-This endpoint is idempotent. If the subscription was not set to cancel in the future, removing the delayed cancellation has no effect and the call will be successful.
-
-```python
-def cancel_delayed_cancellation(self,
-                               subscription_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-
-## Response Type
-
-[`DelayedCancellationResponse`](../../doc/models/delayed-cancellation-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-result = subscription_status_controller.cancel_delayed_cancellation(subscription_id)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "message": "This subscription will no longer be canceled"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-
-
-# Cancel Dunning
-
-If a subscription is currently in dunning, the subscription will be set to active and the active Dunner will be resolved.
-
-```python
-def cancel_dunning(self,
-                  subscription_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-
-## Response Type
-
-[`SubscriptionResponse`](../../doc/models/subscription-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-result = subscription_status_controller.cancel_dunning(subscription_id)
-```
-
-
-# Preview Renewal
-
-The Chargify API allows you to preview a renewal by posting to the renewals endpoint. Renewal Preview is an object representing a subscription’s next assessment. You can retrieve it to see a snapshot of how much your customer will be charged on their next renewal.
-
-The "Next Billing" amount and "Next Billing" date are already represented in the UI on each Subscriber's Summary. For more information, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subscriber-Interface-Overview).
-
-## Optional Component Fields
-
-This endpoint is particularly useful due to the fact that it will return the computed billing amount for the base product and the components which are in use by a subscriber.
-
-By default, the preview will include billing details for all components _at their **current** quantities_. This means:
-
-* Current `allocated_quantity` for quantity-based components
-* Current enabled/disabled status for on/off components
-* Current metered usage `unit_balance` for metered components
-* Current metric quantity value for events recorded thus far for events-based components
-
-In the above statements, "current" means the quantity or value as of the call to the renewal preview endpoint. We do not predict end-of-period values for components, so metered or events-based usage may be less than it will eventually be at the end of the period.
-
-Optionally, **you may provide your own custom quantities** for any component to see a billing preview for non-current quantities. This is accomplished by sending a request body with data under the `components` key. See the request body documentation below.
-
-## Subscription Side Effects
-
-You can request a `POST` to obtain this data from the endpoint without any side effects. Plain and simple, this will preview data, not log any changes against a subscription.
-
-```python
-def preview_renewal(self,
-                   subscription_id,
-                   body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `body` | [`RenewalPreviewRequest`](../../doc/models/renewal-preview-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`RenewalPreviewResponse`](../../doc/models/renewal-preview-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-body = RenewalPreviewRequest(
-    components=[
-        RenewalPreviewComponent(
-            component_id=10708,
-            quantity=10000
-        ),
-        RenewalPreviewComponent(
-            component_id='handle:small-instance-hours',
-            quantity=10000,
-            price_point_id=8712
-        ),
-        RenewalPreviewComponent(
-            component_id='handle:large-instance-hours',
-            quantity=100,
-            price_point_id='handle:startup-pricing'
-        )
-    ]
-)
-
-result = subscription_status_controller.preview_renewal(
-    subscription_id,
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "renewal_preview": {
-    "next_assessment_at": "2017-03-13T12:50:55-04:00",
-    "subtotal_in_cents": 6000,
-    "total_tax_in_cents": 0,
-    "total_discount_in_cents": 0,
-    "total_in_cents": 6000,
-    "existing_balance_in_cents": 0,
-    "total_amount_due_in_cents": 6000,
-    "uncalculated_taxes": false,
-    "line_items": [
-      {
-        "transaction_type": "charge",
-        "kind": "baseline",
-        "amount_in_cents": 5000,
-        "memo": "Gold Product (03/13/2017 - 04/13/2017)",
-        "discount_amount_in_cents": 0,
-        "taxable_amount_in_cents": 0,
-        "product_id": 1,
-        "product_handle": "gold-product",
-        "product_name": "Gold Product",
-        "period_range_start": "01/10/2024",
-        "period_range_end": "02/10/2024"
-      },
-      {
-        "transaction_type": "charge",
-        "kind": "quantity_based_component",
-        "amount_in_cents": 1000,
-        "memo": "Quantity Component: 10 Quantity Components",
-        "discount_amount_in_cents": 0,
-        "taxable_amount_in_cents": 0,
-        "component_id": 104,
-        "component_handle": "quantity-component",
-        "component_name": "Quantity Component",
-        "period_range_start": "01/10/2024",
-        "period_range_end": "02/10/2024"
-      }
-    ]
   }
 }
 ```

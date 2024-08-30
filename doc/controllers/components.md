@@ -10,34 +10,32 @@ components_controller = client.components
 
 ## Methods
 
-* [Create Metered Component](../../doc/controllers/components.md#create-metered-component)
+* [Create Prepaid Usage Component](../../doc/controllers/components.md#create-prepaid-usage-component)
 * [Create Quantity Based Component](../../doc/controllers/components.md#create-quantity-based-component)
 * [Create on Off Component](../../doc/controllers/components.md#create-on-off-component)
-* [Create Prepaid Usage Component](../../doc/controllers/components.md#create-prepaid-usage-component)
 * [Create Event Based Component](../../doc/controllers/components.md#create-event-based-component)
 * [Find Component](../../doc/controllers/components.md#find-component)
+* [Create Metered Component](../../doc/controllers/components.md#create-metered-component)
 * [Read Component](../../doc/controllers/components.md#read-component)
-* [Update Product Family Component](../../doc/controllers/components.md#update-product-family-component)
 * [Archive Component](../../doc/controllers/components.md#archive-component)
+* [Update Product Family Component](../../doc/controllers/components.md#update-product-family-component)
 * [List Components](../../doc/controllers/components.md#list-components)
 * [Update Component](../../doc/controllers/components.md#update-component)
 * [List Components for Product Family](../../doc/controllers/components.md#list-components-for-product-family)
 
 
-# Create Metered Component
+# Create Prepaid Usage Component
 
-This request will create a component definition of kind **metered_component** under the specified product family. Metered component can then be added and “allocated” for a subscription.
+This request will create a component definition of kind **prepaid_usage_component** under the specified product family. Prepaid component can then be added and “allocated” for a subscription.
 
-Metered components are used to bill for any type of unit that resets to 0 at the end of the billing period (think daily Google Adwords clicks or monthly cell phone minutes). This is most commonly associated with usage-based billing and many other pricing schemes.
-
-Note that this is different from recurring quantity-based components, which DO NOT reset to zero at the start of every billing period. If you want to bill for a quantity of something that does not change unless you change it, then you want quantity components, instead.
+Prepaid components allow customers to pre-purchase units that can be used up over time on their subscription. In a sense, they are the mirror image of metered components; while metered components charge at the end of the period for the amount of units used, prepaid components are charged for at the time of purchase, and we subsequently keep track of the usage against the amount purchased.
 
 For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
 
 ```python
-def create_metered_component(self,
-                            product_family_id,
-                            body=None)
+def create_prepaid_usage_component(self,
+                                  product_family_id,
+                                  body=None)
 ```
 
 ## Parameters
@@ -45,7 +43,7 @@ def create_metered_component(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `product_family_id` | `str` | Template, Required | Either the product family's id or its handle prefixed with `handle:` |
-| `body` | [`CreateMeteredComponent`](../../doc/models/create-metered-component.md) | Body, Optional | - |
+| `body` | [`CreatePrepaidComponent`](../../doc/models/create-prepaid-component.md) | Body, Optional | - |
 
 ## Response Type
 
@@ -56,22 +54,34 @@ def create_metered_component(self,
 ```python
 product_family_id = 'product_family_id4'
 
-body = CreateMeteredComponent(
-    metered_component=MeteredComponent(
-        name='Text messages',
-        unit_name='text message',
+body = CreatePrepaidComponent(
+    prepaid_usage_component=PrepaidUsageComponent(
+        name='Minutes',
+        unit_name='minutes',
         pricing_scheme=PricingScheme.PER_UNIT,
-        taxable=False,
-        prices=[
-            Price(
-                starting_quantity=1,
-                unit_price=1
-            )
-        ]
+        unit_price=2,
+        overage_pricing=OveragePricing(
+            pricing_scheme=PricingScheme.STAIRSTEP,
+            prices=[
+                Price(
+                    starting_quantity=1,
+                    unit_price=3,
+                    ending_quantity=100
+                ),
+                Price(
+                    starting_quantity=101,
+                    unit_price=5
+                )
+            ]
+        ),
+        rollover_prepaid_remainder=True,
+        renew_prepaid_allocation=True,
+        expiration_interval=15,
+        expiration_interval_unit=ExpirationIntervalUnit.DAY
     )
 )
 
-result = components_controller.create_metered_component(
+result = components_controller.create_prepaid_usage_component(
     product_family_id,
     body=body
 )
@@ -83,28 +93,40 @@ result = components_controller.create_metered_component(
 {
   "component": {
     "id": 292609,
-    "name": "Text messages",
-    "handle": "text-messages",
+    "name": "Test Prepaid Component 98505",
+    "handle": "test-prepaid-component-9850584842",
     "pricing_scheme": "per_unit",
     "unit_name": "unit",
     "unit_price": "10.0",
     "product_family_id": 528484,
-    "product_family_name": "Cloud Compute Servers",
+    "product_family_name": "Test Product Family 27791",
     "price_per_unit_in_cents": null,
-    "kind": "metered_component",
+    "kind": "prepaid_usage_component",
     "archived": false,
     "taxable": false,
-    "description": null,
+    "description": "Description for: Test Prepaid Component 98505",
     "default_price_point_id": 2944263,
-    "prices": [
+    "overage_prices": [
       {
-        "id": 55423,
-        "component_id": 30002,
+        "id": 55964,
+        "component_id": 30427,
         "starting_quantity": 1,
         "ending_quantity": null,
-        "unit_price": "10.0",
-        "price_point_id": 2944263,
-        "formatted_unit_price": "$10.00",
+        "unit_price": "1.0",
+        "price_point_id": 2944756,
+        "formatted_unit_price": "$1.00",
+        "segment_id": null
+      }
+    ],
+    "prices": [
+      {
+        "id": 55963,
+        "component_id": 30427,
+        "starting_quantity": 1,
+        "ending_quantity": null,
+        "unit_price": "1.0",
+        "price_point_id": 2944756,
+        "formatted_unit_price": "$1.00",
         "segment_id": null
       }
     ],
@@ -112,7 +134,7 @@ result = components_controller.create_metered_component(
     "price_points_url": "https://demo-3238403362.chargify.com/components/30002/price_points",
     "default_price_point_name": "Original",
     "tax_code": null,
-    "recurring": false,
+    "recurring": true,
     "upgrade_charge": null,
     "downgrade_credit": null,
     "created_at": "2024-01-23T06:08:05-05:00",
@@ -355,139 +377,6 @@ result = components_controller.create_on_off_component(
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
-# Create Prepaid Usage Component
-
-This request will create a component definition of kind **prepaid_usage_component** under the specified product family. Prepaid component can then be added and “allocated” for a subscription.
-
-Prepaid components allow customers to pre-purchase units that can be used up over time on their subscription. In a sense, they are the mirror image of metered components; while metered components charge at the end of the period for the amount of units used, prepaid components are charged for at the time of purchase, and we subsequently keep track of the usage against the amount purchased.
-
-For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
-
-```python
-def create_prepaid_usage_component(self,
-                                  product_family_id,
-                                  body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `product_family_id` | `str` | Template, Required | Either the product family's id or its handle prefixed with `handle:` |
-| `body` | [`CreatePrepaidComponent`](../../doc/models/create-prepaid-component.md) | Body, Optional | - |
-
-## Response Type
-
-[`ComponentResponse`](../../doc/models/component-response.md)
-
-## Example Usage
-
-```python
-product_family_id = 'product_family_id4'
-
-body = CreatePrepaidComponent(
-    prepaid_usage_component=PrepaidUsageComponent(
-        name='Minutes',
-        unit_name='minutes',
-        pricing_scheme=PricingScheme.PER_UNIT,
-        unit_price=2,
-        overage_pricing=OveragePricing(
-            pricing_scheme=PricingScheme.STAIRSTEP,
-            prices=[
-                Price(
-                    starting_quantity=1,
-                    unit_price=3,
-                    ending_quantity=100
-                ),
-                Price(
-                    starting_quantity=101,
-                    unit_price=5
-                )
-            ]
-        ),
-        rollover_prepaid_remainder=True,
-        renew_prepaid_allocation=True,
-        expiration_interval=15,
-        expiration_interval_unit=ExpirationIntervalUnit.DAY
-    )
-)
-
-result = components_controller.create_prepaid_usage_component(
-    product_family_id,
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "component": {
-    "id": 292609,
-    "name": "Test Prepaid Component 98505",
-    "handle": "test-prepaid-component-9850584842",
-    "pricing_scheme": "per_unit",
-    "unit_name": "unit",
-    "unit_price": "10.0",
-    "product_family_id": 528484,
-    "product_family_name": "Test Product Family 27791",
-    "price_per_unit_in_cents": null,
-    "kind": "prepaid_usage_component",
-    "archived": false,
-    "taxable": false,
-    "description": "Description for: Test Prepaid Component 98505",
-    "default_price_point_id": 2944263,
-    "overage_prices": [
-      {
-        "id": 55964,
-        "component_id": 30427,
-        "starting_quantity": 1,
-        "ending_quantity": null,
-        "unit_price": "1.0",
-        "price_point_id": 2944756,
-        "formatted_unit_price": "$1.00",
-        "segment_id": null
-      }
-    ],
-    "prices": [
-      {
-        "id": 55963,
-        "component_id": 30427,
-        "starting_quantity": 1,
-        "ending_quantity": null,
-        "unit_price": "1.0",
-        "price_point_id": 2944756,
-        "formatted_unit_price": "$1.00",
-        "segment_id": null
-      }
-    ],
-    "price_point_count": 1,
-    "price_points_url": "https://demo-3238403362.chargify.com/components/30002/price_points",
-    "default_price_point_name": "Original",
-    "tax_code": null,
-    "recurring": true,
-    "upgrade_charge": null,
-    "downgrade_credit": null,
-    "created_at": "2024-01-23T06:08:05-05:00",
-    "updated_at": "2024-01-23T06:08:05-05:00",
-    "archived_at": null,
-    "hide_date_range_on_invoice": false,
-    "allow_fractional_quantities": false,
-    "use_site_exchange_rate": true,
-    "item_category": null,
-    "accounting_code": null
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
 # Create Event Based Component
 
 This request will create a component definition of kind **event_based_component** under the specified product family. Event-based component can then be added and “allocated” for a subscription.
@@ -649,6 +538,117 @@ result = components_controller.find_component(handle)
 ```
 
 
+# Create Metered Component
+
+This request will create a component definition of kind **metered_component** under the specified product family. Metered component can then be added and “allocated” for a subscription.
+
+Metered components are used to bill for any type of unit that resets to 0 at the end of the billing period (think daily Google Adwords clicks or monthly cell phone minutes). This is most commonly associated with usage-based billing and many other pricing schemes.
+
+Note that this is different from recurring quantity-based components, which DO NOT reset to zero at the start of every billing period. If you want to bill for a quantity of something that does not change unless you change it, then you want quantity components, instead.
+
+For more information on components, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-Overview).
+
+```python
+def create_metered_component(self,
+                            product_family_id,
+                            body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `product_family_id` | `str` | Template, Required | Either the product family's id or its handle prefixed with `handle:` |
+| `body` | [`CreateMeteredComponent`](../../doc/models/create-metered-component.md) | Body, Optional | - |
+
+## Response Type
+
+[`ComponentResponse`](../../doc/models/component-response.md)
+
+## Example Usage
+
+```python
+product_family_id = 'product_family_id4'
+
+body = CreateMeteredComponent(
+    metered_component=MeteredComponent(
+        name='Text messages',
+        unit_name='text message',
+        pricing_scheme=PricingScheme.PER_UNIT,
+        taxable=False,
+        prices=[
+            Price(
+                starting_quantity=1,
+                unit_price=1
+            )
+        ]
+    )
+)
+
+result = components_controller.create_metered_component(
+    product_family_id,
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "component": {
+    "id": 292609,
+    "name": "Text messages",
+    "handle": "text-messages",
+    "pricing_scheme": "per_unit",
+    "unit_name": "unit",
+    "unit_price": "10.0",
+    "product_family_id": 528484,
+    "product_family_name": "Cloud Compute Servers",
+    "price_per_unit_in_cents": null,
+    "kind": "metered_component",
+    "archived": false,
+    "taxable": false,
+    "description": null,
+    "default_price_point_id": 2944263,
+    "prices": [
+      {
+        "id": 55423,
+        "component_id": 30002,
+        "starting_quantity": 1,
+        "ending_quantity": null,
+        "unit_price": "10.0",
+        "price_point_id": 2944263,
+        "formatted_unit_price": "$10.00",
+        "segment_id": null
+      }
+    ],
+    "price_point_count": 1,
+    "price_points_url": "https://demo-3238403362.chargify.com/components/30002/price_points",
+    "default_price_point_name": "Original",
+    "tax_code": null,
+    "recurring": false,
+    "upgrade_charge": null,
+    "downgrade_credit": null,
+    "created_at": "2024-01-23T06:08:05-05:00",
+    "updated_at": "2024-01-23T06:08:05-05:00",
+    "archived_at": null,
+    "hide_date_range_on_invoice": false,
+    "allow_fractional_quantities": false,
+    "use_site_exchange_rate": true,
+    "item_category": null,
+    "accounting_code": null
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
 # Read Component
 
 This request will return information regarding a component from a specific product family.
@@ -714,6 +714,73 @@ result = components_controller.read_component(
   }
 }
 ```
+
+
+# Archive Component
+
+Sending a DELETE request to this endpoint will archive the component. All current subscribers will be unffected; their subscription/purchase will continue to be charged as usual.
+
+```python
+def archive_component(self,
+                     product_family_id,
+                     component_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the component belongs |
+| `component_id` | `str` | Template, Required | Either the Advanced Billing id of the component or the handle for the component prefixed with `handle:` |
+
+## Response Type
+
+[`Component`](../../doc/models/component.md)
+
+## Example Usage
+
+```python
+product_family_id = 140
+
+component_id = 'component_id8'
+
+result = components_controller.archive_component(
+    product_family_id,
+    component_id
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "id": 25407138,
+  "name": "cillum aute",
+  "pricing_scheme": "stairstep",
+  "unit_name": "nulla in",
+  "unit_price": "Excepteur veniam",
+  "product_family_id": -56705047,
+  "kind": "prepaid_usage_component",
+  "archived": true,
+  "taxable": false,
+  "description": "reprehenderit laborum qui fugiat",
+  "default_price_point_id": -64328176,
+  "price_point_count": 15252407,
+  "price_points_url": "dolor mollit consequat",
+  "tax_code": "ea nisi",
+  "recurring": false,
+  "created_at": "2016-11-08T16:22:26-05:00",
+  "default_price_point_name": "cupidatat Lorem non aliqua",
+  "product_family_name": "do elit",
+  "hide_date_range_on_invoice": false
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Update Product Family Component
@@ -788,73 +855,6 @@ result = components_controller.update_product_family_component(
     "default_price_point_name": "Original",
     "product_family_name": "Chargify"
   }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Archive Component
-
-Sending a DELETE request to this endpoint will archive the component. All current subscribers will be unffected; their subscription/purchase will continue to be charged as usual.
-
-```python
-def archive_component(self,
-                     product_family_id,
-                     component_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the component belongs |
-| `component_id` | `str` | Template, Required | Either the Advanced Billing id of the component or the handle for the component prefixed with `handle:` |
-
-## Response Type
-
-[`Component`](../../doc/models/component.md)
-
-## Example Usage
-
-```python
-product_family_id = 140
-
-component_id = 'component_id8'
-
-result = components_controller.archive_component(
-    product_family_id,
-    component_id
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "id": 25407138,
-  "name": "cillum aute",
-  "pricing_scheme": "stairstep",
-  "unit_name": "nulla in",
-  "unit_price": "Excepteur veniam",
-  "product_family_id": -56705047,
-  "kind": "prepaid_usage_component",
-  "archived": true,
-  "taxable": false,
-  "description": "reprehenderit laborum qui fugiat",
-  "default_price_point_id": -64328176,
-  "price_point_count": 15252407,
-  "price_points_url": "dolor mollit consequat",
-  "tax_code": "ea nisi",
-  "recurring": false,
-  "created_at": "2016-11-08T16:22:26-05:00",
-  "default_price_point_name": "cupidatat Lorem non aliqua",
-  "product_family_name": "do elit",
-  "hide_date_range_on_invoice": false
 }
 ```
 

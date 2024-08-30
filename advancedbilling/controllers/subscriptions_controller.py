@@ -19,9 +19,9 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.subscription_response import SubscriptionResponse
 from advancedbilling.models.prepaid_configuration_response import PrepaidConfigurationResponse
 from advancedbilling.models.subscription_preview_response import SubscriptionPreviewResponse
+from advancedbilling.exceptions.subscription_add_coupon_error_exception import SubscriptionAddCouponErrorException
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.single_error_response_exception import SingleErrorResponseException
-from advancedbilling.exceptions.subscription_add_coupon_error_exception import SubscriptionAddCouponErrorException
 from advancedbilling.exceptions.subscription_remove_coupon_errors_exception import SubscriptionRemoveCouponErrorsException
 from advancedbilling.exceptions.error_array_map_response_exception import ErrorArrayMapResponseException
 
@@ -31,6 +31,415 @@ class SubscriptionsController(BaseController):
     """A Controller to access Endpoints in the advancedbilling API."""
     def __init__(self, config):
         super(SubscriptionsController, self).__init__(config)
+
+    def list_subscriptions(self,
+                           options=dict()):
+        """Does a GET request to /subscriptions.json.
+
+        This method will return an array of subscriptions from a Site. Pay
+        close attention to query string filters and pagination in order to
+        control responses from the server.
+        ## Search for a subscription
+        Use the query strings below to search for a subscription using the
+        criteria available. The return value will be an array.
+        ## Self-Service Page token
+        Self-Service Page token for the subscriptions is not returned by
+        default. If this information is desired, the
+        include[]=self_service_page_token parameter must be provided with the
+        request.
+
+        Args:
+            options (dict, optional): Key-value pairs for any of the
+                parameters to this API Endpoint. All parameters to the
+                endpoint are supplied through the dictionary with their names
+                being the key and their desired values being the value. A list
+                of parameters that can be used are::
+
+                    page -- int -- Result records are organized in pages. By
+                        default, the first page of results is displayed. The
+                        page parameter specifies a page number of results to
+                        fetch. You can start navigating through the pages to
+                        consume the results. You do this by passing in a page
+                        parameter. Retrieve the next page by adding ?page=2 to
+                        the query string. If there are no results to return,
+                        then an empty result set will be returned. Use in
+                        query `page=1`.
+                    per_page -- int -- This parameter indicates how many
+                        records to fetch in each request. Default value is 20.
+                        The maximum allowed values is 200; any per_page value
+                        over 200 will be changed to 200. Use in query
+                        `per_page=200`.
+                    state -- SubscriptionStateFilter -- The current state of
+                        the subscription
+                    product -- int -- The product id of the subscription.
+                        (Note that the product handle cannot be used.)
+                    product_price_point_id -- int -- The ID of the product
+                        price point. If supplied, product is required
+                    coupon -- int -- The numeric id of the coupon currently
+                        applied to the subscription. (This can be found in the
+                        URL when editing a coupon. Note that the coupon code
+                        cannot be used.)
+                    date_field -- SubscriptionDateField -- The type of filter
+                        you'd like to apply to your search.  Allowed Values: ,
+                        current_period_ends_at, current_period_starts_at,
+                        created_at, activated_at, canceled_at, expires_at,
+                        trial_started_at, trial_ended_at, updated_at
+                    start_date -- date -- The start date (format YYYY-MM-DD)
+                        with which to filter the date_field. Returns
+                        subscriptions with a timestamp at or after midnight
+                        (12:00:00 AM) in your site’s time zone on the date
+                        specified. Use in query `start_date=2022-07-01`.
+                    end_date -- date -- The end date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns subscriptions
+                        with a timestamp up to and including 11:59:59PM in
+                        your site’s time zone on the date specified. Use in
+                        query `end_date=2022-08-01`.
+                    start_datetime -- datetime -- The start date and time
+                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns subscriptions with a timestamp at
+                        or after exact time provided in query. You can specify
+                        timezone in query - otherwise your site's time zone
+                        will be used. If provided, this parameter will be used
+                        instead of start_date. Use in query
+                        `start_datetime=2022-07-01 09:00:05`.
+                    end_datetime -- datetime -- The end date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                        date_field. Returns subscriptions with a timestamp at
+                        or before exact time provided in query. You can
+                        specify timezone in query - otherwise your site's time
+                        zone will be used. If provided, this parameter will be
+                        used instead of end_date. Use in query
+                        `end_datetime=2022-08-01 10:00:05`.
+                    metadata -- Dict[str, str] -- The value of the metadata
+                        field specified in the parameter. Use in query
+                        `metadata[my-field]=value&metadata[other-field]=another
+                        _value`.
+                    direction -- SortingDirection -- Controls the order in
+                        which results are returned. Use in query
+                        `direction=asc`.
+                    sort -- SubscriptionSort -- The attribute by which to
+                        sort
+                    include -- List[SubscriptionListInclude] -- Allows
+                        including additional data in the response. Use in
+                        query: `include[]=self_service_page_token`.
+
+        Returns:
+            List[SubscriptionResponse]: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions.json')
+            .http_method(HttpMethodEnum.GET)
+            .query_param(Parameter()
+                         .key('page')
+                         .value(options.get('page', None)))
+            .query_param(Parameter()
+                         .key('per_page')
+                         .value(options.get('per_page', None)))
+            .query_param(Parameter()
+                         .key('state')
+                         .value(options.get('state', None)))
+            .query_param(Parameter()
+                         .key('product')
+                         .value(options.get('product', None)))
+            .query_param(Parameter()
+                         .key('product_price_point_id')
+                         .value(options.get('product_price_point_id', None)))
+            .query_param(Parameter()
+                         .key('coupon')
+                         .value(options.get('coupon', None)))
+            .query_param(Parameter()
+                         .key('date_field')
+                         .value(options.get('date_field', None)))
+            .query_param(Parameter()
+                         .key('start_date')
+                         .value(options.get('start_date', None)))
+            .query_param(Parameter()
+                         .key('end_date')
+                         .value(options.get('end_date', None)))
+            .query_param(Parameter()
+                         .key('start_datetime')
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('start_datetime', None))))
+            .query_param(Parameter()
+                         .key('end_datetime')
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('end_datetime', None))))
+            .query_param(Parameter()
+                         .key('metadata')
+                         .value(options.get('metadata', None)))
+            .query_param(Parameter()
+                         .key('direction')
+                         .value(options.get('direction', None)))
+            .query_param(Parameter()
+                         .key('sort')
+                         .value(options.get('sort', None)))
+            .query_param(Parameter()
+                         .key('include')
+                         .value(options.get('include', None)))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .array_serialization_format(SerializationFormats.UN_INDEXED)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SubscriptionResponse.from_dictionary)
+        ).execute()
+
+    def purge_subscription(self,
+                           subscription_id,
+                           ack,
+                           cascade=None):
+        """Does a POST request to /subscriptions/{subscription_id}/purge.json.
+
+        For sites in test mode, you may purge individual subscriptions.
+        Provide the subscription ID in the url.  To confirm, supply the
+        customer ID in the query string `ack` parameter. You may also delete
+        the customer record and/or payment profiles by passing `cascade`
+        parameters. For example, to delete just the customer record, the query
+        params would be: `?ack={customer_id}&cascade[]=customer`
+        If you need to remove subscriptions from a live site, please contact
+        support to discuss your use case.
+        ### Delete customer and payment profile
+        The query params will be:
+        `?ack={customer_id}&cascade[]=customer&cascade[]=payment_profile`
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            ack (int): id of the customer.
+            cascade (List[SubscriptionPurgeType], optional): Options are
+                "customer" or "payment_profile". Use in query:
+                `cascade[]=customer&cascade[]=payment_profile`.
+
+        Returns:
+            void: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/purge.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .query_param(Parameter()
+                         .key('ack')
+                         .value(ack)
+                         .is_required(True))
+            .query_param(Parameter()
+                         .key('cascade')
+                         .value(cascade))
+            .array_serialization_format(SerializationFormats.CSV)
+            .auth(Single('BasicAuth'))
+        ).execute()
+
+    def apply_coupons_to_subscription(self,
+                                      subscription_id,
+                                      code=None,
+                                      body=None):
+        """Does a POST request to /subscriptions/{subscription_id}/add_coupon.json.
+
+        An existing subscription can accommodate multiple discounts/coupon
+        codes. This is only applicable if each coupon is stackable. For more
+        information on stackable coupons, we recommend reviewing our [coupon
+        documentation.](https://maxio.zendesk.com/hc/en-us/articles/24261259337
+        101-Coupons-and-Subscriptions#stackability-rules)
+        ## Query Parameters vs Request Body Parameters
+        Passing in a coupon code as a query parameter will add the code to the
+        subscription, completely replacing all existing coupon codes on the
+        subscription.
+        For this reason, using this query parameter on this endpoint has been
+        deprecated in favor of using the request body parameters as described
+        below. When passing in request body parameters, the list of coupon
+        codes will simply be added to any existing list of codes on the
+        subscription.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            code (str, optional): A code for the coupon that would be applied
+                to a subscription
+            body (AddCouponsRequest, optional): TODO: type description here.
+
+        Returns:
+            SubscriptionResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/add_coupon.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .query_param(Parameter()
+                         .key('code')
+                         .value(code))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SubscriptionResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SubscriptionAddCouponErrorException)
+        ).execute()
+
+    def update_prepaid_subscription_configuration(self,
+                                                  subscription_id,
+                                                  body=None):
+        """Does a POST request to /subscriptions/{subscription_id}/prepaid_configurations.json.
+
+        Use this endpoint to update a subscription's prepaid configuration.
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            body (UpsertPrepaidConfigurationRequest, optional): TODO: type
+                description here.
+
+        Returns:
+            PrepaidConfigurationResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/prepaid_configurations.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(PrepaidConfigurationResponse.from_dictionary)
+        ).execute()
+
+    def preview_subscription(self,
+                             body=None):
+        """Does a POST request to /subscriptions/preview.json.
+
+        The Chargify API allows you to preview a subscription by POSTing the
+        same JSON or XML as for a subscription creation.
+        The "Next Billing" amount and "Next Billing" date are represented in
+        each Subscriber's Summary. For more information, please see our
+        documentation
+        [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subsc
+        riber-Interface-Overview).
+        ## Side effects
+        A subscription will not be created by sending a POST to this endpoint.
+        It is meant to serve as a prediction.
+        ## Taxable Subscriptions
+        This endpoint will preview taxes applicable to a purchase. In order
+        for taxes to be previewed, the following conditions must be met:
+        + Taxes must be configured on the subscription
+        + The preview must be for the purchase of a taxable product or
+        component, or combination of the two.
+        + The subscription payload must contain a full billing or shipping
+        address in order to calculate tax
+        For more information about creating taxable previews, please see our
+        documentation guide on how to create [taxable
+        subscriptions.](https://maxio.zendesk.com/hc/en-us/sections/24287012349
+        325-Taxes)
+        You do **not** need to include a card number to generate tax
+        information when you are previewing a subscription. However, please
+        note that when you actually want to create the subscription, you must
+        include the credit card information if you want the billing address to
+        be stored in Advanced Billing. The billing address and the credit card
+        information are stored together within the payment profile object.
+        Also, you may not send a billing address to Advanced Billing without
+        payment profile information, as the address is stored on the card.
+        You can pass shipping and billing addresses and still decide not to
+        calculate taxes. To do that, pass `skip_billing_manifest_taxes: true`
+        attribute.
+        ## Non-taxable Subscriptions
+        If you'd like to calculate subscriptions that do not include tax,
+        please feel free to leave off the billing information.
+
+        Args:
+            body (CreateSubscriptionRequest, optional): TODO: type description
+                here.
+
+        Returns:
+            SubscriptionPreviewResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/preview.json')
+            .http_method(HttpMethodEnum.POST)
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SubscriptionPreviewResponse.from_dictionary)
+        ).execute()
 
     def create_subscription(self,
                             body=None):
@@ -886,168 +1295,6 @@ class SubscriptionsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def list_subscriptions(self,
-                           options=dict()):
-        """Does a GET request to /subscriptions.json.
-
-        This method will return an array of subscriptions from a Site. Pay
-        close attention to query string filters and pagination in order to
-        control responses from the server.
-        ## Search for a subscription
-        Use the query strings below to search for a subscription using the
-        criteria available. The return value will be an array.
-        ## Self-Service Page token
-        Self-Service Page token for the subscriptions is not returned by
-        default. If this information is desired, the
-        include[]=self_service_page_token parameter must be provided with the
-        request.
-
-        Args:
-            options (dict, optional): Key-value pairs for any of the
-                parameters to this API Endpoint. All parameters to the
-                endpoint are supplied through the dictionary with their names
-                being the key and their desired values being the value. A list
-                of parameters that can be used are::
-
-                    page -- int -- Result records are organized in pages. By
-                        default, the first page of results is displayed. The
-                        page parameter specifies a page number of results to
-                        fetch. You can start navigating through the pages to
-                        consume the results. You do this by passing in a page
-                        parameter. Retrieve the next page by adding ?page=2 to
-                        the query string. If there are no results to return,
-                        then an empty result set will be returned. Use in
-                        query `page=1`.
-                    per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is 20.
-                        The maximum allowed values is 200; any per_page value
-                        over 200 will be changed to 200. Use in query
-                        `per_page=200`.
-                    state -- SubscriptionStateFilter -- The current state of
-                        the subscription
-                    product -- int -- The product id of the subscription.
-                        (Note that the product handle cannot be used.)
-                    product_price_point_id -- int -- The ID of the product
-                        price point. If supplied, product is required
-                    coupon -- int -- The numeric id of the coupon currently
-                        applied to the subscription. (This can be found in the
-                        URL when editing a coupon. Note that the coupon code
-                        cannot be used.)
-                    date_field -- SubscriptionDateField -- The type of filter
-                        you'd like to apply to your search.  Allowed Values: ,
-                        current_period_ends_at, current_period_starts_at,
-                        created_at, activated_at, canceled_at, expires_at,
-                        trial_started_at, trial_ended_at, updated_at
-                    start_date -- date -- The start date (format YYYY-MM-DD)
-                        with which to filter the date_field. Returns
-                        subscriptions with a timestamp at or after midnight
-                        (12:00:00 AM) in your site’s time zone on the date
-                        specified. Use in query `start_date=2022-07-01`.
-                    end_date -- date -- The end date (format YYYY-MM-DD) with
-                        which to filter the date_field. Returns subscriptions
-                        with a timestamp up to and including 11:59:59PM in
-                        your site’s time zone on the date specified. Use in
-                        query `end_date=2022-08-01`.
-                    start_datetime -- datetime -- The start date and time
-                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns subscriptions with a timestamp at
-                        or after exact time provided in query. You can specify
-                        timezone in query - otherwise your site's time zone
-                        will be used. If provided, this parameter will be used
-                        instead of start_date. Use in query
-                        `start_datetime=2022-07-01 09:00:05`.
-                    end_datetime -- datetime -- The end date and time (format
-                        YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns subscriptions with a timestamp at
-                        or before exact time provided in query. You can
-                        specify timezone in query - otherwise your site's time
-                        zone will be used. If provided, this parameter will be
-                        used instead of end_date. Use in query
-                        `end_datetime=2022-08-01 10:00:05`.
-                    metadata -- Dict[str, str] -- The value of the metadata
-                        field specified in the parameter. Use in query
-                        `metadata[my-field]=value&metadata[other-field]=another
-                        _value`.
-                    direction -- SortingDirection -- Controls the order in
-                        which results are returned. Use in query
-                        `direction=asc`.
-                    sort -- SubscriptionSort -- The attribute by which to
-                        sort
-                    include -- List[SubscriptionListInclude] -- Allows
-                        including additional data in the response. Use in
-                        query: `include[]=self_service_page_token`.
-
-        Returns:
-            List[SubscriptionResponse]: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions.json')
-            .http_method(HttpMethodEnum.GET)
-            .query_param(Parameter()
-                         .key('page')
-                         .value(options.get('page', None)))
-            .query_param(Parameter()
-                         .key('per_page')
-                         .value(options.get('per_page', None)))
-            .query_param(Parameter()
-                         .key('state')
-                         .value(options.get('state', None)))
-            .query_param(Parameter()
-                         .key('product')
-                         .value(options.get('product', None)))
-            .query_param(Parameter()
-                         .key('product_price_point_id')
-                         .value(options.get('product_price_point_id', None)))
-            .query_param(Parameter()
-                         .key('coupon')
-                         .value(options.get('coupon', None)))
-            .query_param(Parameter()
-                         .key('date_field')
-                         .value(options.get('date_field', None)))
-            .query_param(Parameter()
-                         .key('start_date')
-                         .value(options.get('start_date', None)))
-            .query_param(Parameter()
-                         .key('end_date')
-                         .value(options.get('end_date', None)))
-            .query_param(Parameter()
-                         .key('start_datetime')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('start_datetime', None))))
-            .query_param(Parameter()
-                         .key('end_datetime')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('end_datetime', None))))
-            .query_param(Parameter()
-                         .key('metadata')
-                         .value(options.get('metadata', None)))
-            .query_param(Parameter()
-                         .key('direction')
-                         .value(options.get('direction', None)))
-            .query_param(Parameter()
-                         .key('sort')
-                         .value(options.get('sort', None)))
-            .query_param(Parameter()
-                         .key('include')
-                         .value(options.get('include', None)))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .array_serialization_format(SerializationFormats.UN_INDEXED)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SubscriptionResponse.from_dictionary)
-        ).execute()
-
     def update_subscription(self,
                             subscription_id,
                             body=None):
@@ -1322,253 +1569,6 @@ class SubscriptionsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
-        ).execute()
-
-    def purge_subscription(self,
-                           subscription_id,
-                           ack,
-                           cascade=None):
-        """Does a POST request to /subscriptions/{subscription_id}/purge.json.
-
-        For sites in test mode, you may purge individual subscriptions.
-        Provide the subscription ID in the url.  To confirm, supply the
-        customer ID in the query string `ack` parameter. You may also delete
-        the customer record and/or payment profiles by passing `cascade`
-        parameters. For example, to delete just the customer record, the query
-        params would be: `?ack={customer_id}&cascade[]=customer`
-        If you need to remove subscriptions from a live site, please contact
-        support to discuss your use case.
-        ### Delete customer and payment profile
-        The query params will be:
-        `?ack={customer_id}&cascade[]=customer&cascade[]=payment_profile`
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            ack (int): id of the customer.
-            cascade (List[SubscriptionPurgeType], optional): Options are
-                "customer" or "payment_profile". Use in query:
-                `cascade[]=customer&cascade[]=payment_profile`.
-
-        Returns:
-            void: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/purge.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .query_param(Parameter()
-                         .key('ack')
-                         .value(ack)
-                         .is_required(True))
-            .query_param(Parameter()
-                         .key('cascade')
-                         .value(cascade))
-            .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
-        ).execute()
-
-    def update_prepaid_subscription_configuration(self,
-                                                  subscription_id,
-                                                  body=None):
-        """Does a POST request to /subscriptions/{subscription_id}/prepaid_configurations.json.
-
-        Use this endpoint to update a subscription's prepaid configuration.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            body (UpsertPrepaidConfigurationRequest, optional): TODO: type
-                description here.
-
-        Returns:
-            PrepaidConfigurationResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/prepaid_configurations.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(PrepaidConfigurationResponse.from_dictionary)
-        ).execute()
-
-    def preview_subscription(self,
-                             body=None):
-        """Does a POST request to /subscriptions/preview.json.
-
-        The Chargify API allows you to preview a subscription by POSTing the
-        same JSON or XML as for a subscription creation.
-        The "Next Billing" amount and "Next Billing" date are represented in
-        each Subscriber's Summary. For more information, please see our
-        documentation
-        [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subsc
-        riber-Interface-Overview).
-        ## Side effects
-        A subscription will not be created by sending a POST to this endpoint.
-        It is meant to serve as a prediction.
-        ## Taxable Subscriptions
-        This endpoint will preview taxes applicable to a purchase. In order
-        for taxes to be previewed, the following conditions must be met:
-        + Taxes must be configured on the subscription
-        + The preview must be for the purchase of a taxable product or
-        component, or combination of the two.
-        + The subscription payload must contain a full billing or shipping
-        address in order to calculate tax
-        For more information about creating taxable previews, please see our
-        documentation guide on how to create [taxable
-        subscriptions.](https://maxio.zendesk.com/hc/en-us/sections/24287012349
-        325-Taxes)
-        You do **not** need to include a card number to generate tax
-        information when you are previewing a subscription. However, please
-        note that when you actually want to create the subscription, you must
-        include the credit card information if you want the billing address to
-        be stored in Advanced Billing. The billing address and the credit card
-        information are stored together within the payment profile object.
-        Also, you may not send a billing address to Advanced Billing without
-        payment profile information, as the address is stored on the card.
-        You can pass shipping and billing addresses and still decide not to
-        calculate taxes. To do that, pass `skip_billing_manifest_taxes: true`
-        attribute.
-        ## Non-taxable Subscriptions
-        If you'd like to calculate subscriptions that do not include tax,
-        please feel free to leave off the billing information.
-
-        Args:
-            body (CreateSubscriptionRequest, optional): TODO: type description
-                here.
-
-        Returns:
-            SubscriptionPreviewResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/preview.json')
-            .http_method(HttpMethodEnum.POST)
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SubscriptionPreviewResponse.from_dictionary)
-        ).execute()
-
-    def apply_coupons_to_subscription(self,
-                                      subscription_id,
-                                      code=None,
-                                      body=None):
-        """Does a POST request to /subscriptions/{subscription_id}/add_coupon.json.
-
-        An existing subscription can accommodate multiple discounts/coupon
-        codes. This is only applicable if each coupon is stackable. For more
-        information on stackable coupons, we recommend reviewing our [coupon
-        documentation.](https://maxio.zendesk.com/hc/en-us/articles/24261259337
-        101-Coupons-and-Subscriptions#stackability-rules)
-        ## Query Parameters vs Request Body Parameters
-        Passing in a coupon code as a query parameter will add the code to the
-        subscription, completely replacing all existing coupon codes on the
-        subscription.
-        For this reason, using this query parameter on this endpoint has been
-        deprecated in favor of using the request body parameters as described
-        below. When passing in request body parameters, the list of coupon
-        codes will simply be added to any existing list of codes on the
-        subscription.
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            code (str, optional): A code for the coupon that would be applied
-                to a subscription
-            body (AddCouponsRequest, optional): TODO: type description here.
-
-        Returns:
-            SubscriptionResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/add_coupon.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .query_param(Parameter()
-                         .key('code')
-                         .value(code))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SubscriptionResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SubscriptionAddCouponErrorException)
         ).execute()
 
     def remove_coupon_from_subscription(self,

@@ -83,46 +83,6 @@ class ProductsController(BaseController):
             .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
-    def read_product(self,
-                     product_id):
-        """Does a GET request to /products/{product_id}.json.
-
-        This endpoint allows you to read the current details of a product that
-        you've created in Advanced Billing.
-
-        Args:
-            product_id (int): The Advanced Billing id of the product
-
-        Returns:
-            ProductResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/products/{product_id}.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('product_id')
-                            .value(product_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProductResponse.from_dictionary)
-        ).execute()
-
     def update_product(self,
                        product_id,
                        body=None):
@@ -252,6 +212,46 @@ class ProductsController(BaseController):
             .template_param(Parameter()
                             .key('api_handle')
                             .value(api_handle)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ProductResponse.from_dictionary)
+        ).execute()
+
+    def read_product(self,
+                     product_id):
+        """Does a GET request to /products/{product_id}.json.
+
+        This endpoint allows you to read the current details of a product that
+        you've created in Advanced Billing.
+
+        Args:
+            product_id (int): The Advanced Billing id of the product
+
+        Returns:
+            ProductResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/products/{product_id}.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('product_id')
+                            .value(product_id)
                             .is_required(True)
                             .should_encode(True))
             .header_param(Parameter()

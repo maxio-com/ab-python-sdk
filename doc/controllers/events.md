@@ -10,9 +10,96 @@ events_controller = client.events
 
 ## Methods
 
-* [List Events](../../doc/controllers/events.md#list-events)
 * [List Subscription Events](../../doc/controllers/events.md#list-subscription-events)
+* [List Events](../../doc/controllers/events.md#list-events)
 * [Read Events Count](../../doc/controllers/events.md#read-events-count)
+
+
+# List Subscription Events
+
+The following request will return a list of events for a subscription.
+
+Each event type has its own `event_specific_data` specified.
+
+```python
+def list_subscription_events(self,
+                            options=dict())
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
+| `since_id` | `long\|int` | Query, Optional | Returns events with an id greater than or equal to the one specified |
+| `max_id` | `long\|int` | Query, Optional | Returns events with an id less than or equal to the one specified |
+| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events. |
+| `filter` | [`List[EventType]`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
+
+## Response Type
+
+[`List[EventResponse]`](../../doc/models/event-response.md)
+
+## Example Usage
+
+```python
+collect = {
+    'subscription_id': 222,
+    'page': 2,
+    'per_page': 50,
+    'direction': Direction.DESC,
+    'filter': [
+        EventType.CUSTOM_FIELD_VALUE_CHANGE,
+        EventType.PAYMENT_SUCCESS
+    ]
+}
+result = events_controller.list_subscription_events(collect)
+```
+
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "event": {
+      "id": 344799837,
+      "key": "statement_settled",
+      "message": "Statement 79702531 settled successfully for Amelia Example's subscription to Basic Plan",
+      "subscription_id": 14900541,
+      "customer_id": 77223344,
+      "created_at": "2016-11-01T12:41:29-04:00",
+      "event_specific_data": null
+    }
+  },
+  {
+    "event": {
+      "id": 344799815,
+      "key": "renewal_success",
+      "message": "Successful renewal for Amelia Example's subscription to Basic Plan",
+      "subscription_id": 14900541,
+      "customer_id": 77223344,
+      "created_at": "2016-11-01T12:41:28-04:00",
+      "event_specific_data": {
+        "product_id": 3792003,
+        "account_transaction_id": 7590246
+      }
+    }
+  },
+  {
+    "event": {
+      "id": 344799705,
+      "key": "billing_date_change",
+      "message": "Billing date changed on Amelia Example's subscription to Basic Plan from 11/26/2016 to 11/01/2016",
+      "subscription_id": 14900541,
+      "customer_id": 77223344,
+      "created_at": "2016-11-01T12:41:25-04:00",
+      "event_specific_data": null
+    }
+  }
+]
+```
 
 
 # List Events
@@ -178,93 +265,6 @@ result = events_controller.list_events(collect)
         "resource_type": "Subscription",
         "resource_id": 117
       }
-    }
-  }
-]
-```
-
-
-# List Subscription Events
-
-The following request will return a list of events for a subscription.
-
-Each event type has its own `event_specific_data` specified.
-
-```python
-def list_subscription_events(self,
-                            options=dict())
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `since_id` | `long\|int` | Query, Optional | Returns events with an id greater than or equal to the one specified |
-| `max_id` | `long\|int` | Query, Optional | Returns events with an id less than or equal to the one specified |
-| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events. |
-| `filter` | [`List[EventType]`](../../doc/models/event-type.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
-
-## Response Type
-
-[`List[EventResponse]`](../../doc/models/event-response.md)
-
-## Example Usage
-
-```python
-collect = {
-    'subscription_id': 222,
-    'page': 2,
-    'per_page': 50,
-    'direction': Direction.DESC,
-    'filter': [
-        EventType.CUSTOM_FIELD_VALUE_CHANGE,
-        EventType.PAYMENT_SUCCESS
-    ]
-}
-result = events_controller.list_subscription_events(collect)
-```
-
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "event": {
-      "id": 344799837,
-      "key": "statement_settled",
-      "message": "Statement 79702531 settled successfully for Amelia Example's subscription to Basic Plan",
-      "subscription_id": 14900541,
-      "customer_id": 77223344,
-      "created_at": "2016-11-01T12:41:29-04:00",
-      "event_specific_data": null
-    }
-  },
-  {
-    "event": {
-      "id": 344799815,
-      "key": "renewal_success",
-      "message": "Successful renewal for Amelia Example's subscription to Basic Plan",
-      "subscription_id": 14900541,
-      "customer_id": 77223344,
-      "created_at": "2016-11-01T12:41:28-04:00",
-      "event_specific_data": {
-        "product_id": 3792003,
-        "account_transaction_id": 7590246
-      }
-    }
-  },
-  {
-    "event": {
-      "id": 344799705,
-      "key": "billing_date_change",
-      "message": "Billing date changed on Amelia Example's subscription to Basic Plan from 11/26/2016 to 11/01/2016",
-      "subscription_id": 14900541,
-      "customer_id": 77223344,
-      "created_at": "2016-11-01T12:41:25-04:00",
-      "event_specific_data": null
     }
   }
 ]

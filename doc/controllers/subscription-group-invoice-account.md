@@ -10,20 +10,20 @@ subscription_group_invoice_account_controller = client.subscription_group_invoic
 
 ## Methods
 
-* [Create Subscription Group Prepayment](../../doc/controllers/subscription-group-invoice-account.md#create-subscription-group-prepayment)
-* [List Prepayments for Subscription Group](../../doc/controllers/subscription-group-invoice-account.md#list-prepayments-for-subscription-group)
-* [Issue Subscription Group Service Credit](../../doc/controllers/subscription-group-invoice-account.md#issue-subscription-group-service-credit)
 * [Deduct Subscription Group Service Credit](../../doc/controllers/subscription-group-invoice-account.md#deduct-subscription-group-service-credit)
+* [List Prepayments for Subscription Group](../../doc/controllers/subscription-group-invoice-account.md#list-prepayments-for-subscription-group)
+* [Create Subscription Group Prepayment](../../doc/controllers/subscription-group-invoice-account.md#create-subscription-group-prepayment)
+* [Issue Subscription Group Service Credit](../../doc/controllers/subscription-group-invoice-account.md#issue-subscription-group-service-credit)
 
 
-# Create Subscription Group Prepayment
+# Deduct Subscription Group Service Credit
 
-A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group's prepayment balance.
+Credit can be deducted for a subscription group identified by the group's `uid`. Credit will be deducted from the group in the amount specified in the request body.
 
 ```python
-def create_subscription_group_prepayment(self,
-                                        uid,
-                                        body=None)
+def deduct_subscription_group_service_credit(self,
+                                            uid,
+                                            body=None)
 ```
 
 ## Parameters
@@ -31,29 +31,39 @@ def create_subscription_group_prepayment(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `str` | Template, Required | The uid of the subscription group |
-| `body` | [`SubscriptionGroupPrepaymentRequest`](../../doc/models/subscription-group-prepayment-request.md) | Body, Optional | - |
+| `body` | [`DeductServiceCreditRequest`](../../doc/models/deduct-service-credit-request.md) | Body, Optional | - |
 
 ## Response Type
 
-[`SubscriptionGroupPrepaymentResponse`](../../doc/models/subscription-group-prepayment-response.md)
+[`ServiceCredit`](../../doc/models/service-credit.md)
 
 ## Example Usage
 
 ```python
 uid = 'uid0'
 
-result = subscription_group_invoice_account_controller.create_subscription_group_prepayment(uid)
+body = DeductServiceCreditRequest(
+    deduction=DeductServiceCredit(
+        amount=10,
+        memo='Deduct from group account'
+    )
+)
+
+result = subscription_group_invoice_account_controller.deduct_subscription_group_service_credit(
+    uid,
+    body=body
+)
 ```
 
 ## Example Response *(as JSON)*
 
 ```json
 {
-  "id": 6049554,
-  "amount_in_cents": 10000,
-  "ending_balance_in_cents": 5000,
+  "id": 100,
+  "amount_in_cents": 1000,
+  "ending_balance_in_cents": 0,
   "entry_type": "Debit",
-  "memo": "Debit from invoice account."
+  "memo": "Debit from group account"
 }
 ```
 
@@ -131,6 +141,54 @@ result = subscription_group_invoice_account_controller.list_prepayments_for_subs
 | 404 | Not Found | `APIException` |
 
 
+# Create Subscription Group Prepayment
+
+A prepayment can be added for a subscription group identified by the group's `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On success, the prepayment will be added to the group's prepayment balance.
+
+```python
+def create_subscription_group_prepayment(self,
+                                        uid,
+                                        body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `str` | Template, Required | The uid of the subscription group |
+| `body` | [`SubscriptionGroupPrepaymentRequest`](../../doc/models/subscription-group-prepayment-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`SubscriptionGroupPrepaymentResponse`](../../doc/models/subscription-group-prepayment-response.md)
+
+## Example Usage
+
+```python
+uid = 'uid0'
+
+result = subscription_group_invoice_account_controller.create_subscription_group_prepayment(uid)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "id": 6049554,
+  "amount_in_cents": 10000,
+  "ending_balance_in_cents": 5000,
+  "entry_type": "Debit",
+  "memo": "Debit from invoice account."
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
 # Issue Subscription Group Service Credit
 
 Credit can be issued for a subscription group identified by the group's `uid`. Credit will be added to the group in the amount specified in the request body. The credit will be applied to group member invoices as they are generated.
@@ -181,64 +239,6 @@ result = subscription_group_invoice_account_controller.issue_subscription_group_
     "entry_type": "Credit",
     "memo": "Credit to group account"
   }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Deduct Subscription Group Service Credit
-
-Credit can be deducted for a subscription group identified by the group's `uid`. Credit will be deducted from the group in the amount specified in the request body.
-
-```python
-def deduct_subscription_group_service_credit(self,
-                                            uid,
-                                            body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `str` | Template, Required | The uid of the subscription group |
-| `body` | [`DeductServiceCreditRequest`](../../doc/models/deduct-service-credit-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`ServiceCredit`](../../doc/models/service-credit.md)
-
-## Example Usage
-
-```python
-uid = 'uid0'
-
-body = DeductServiceCreditRequest(
-    deduction=DeductServiceCredit(
-        amount=10,
-        memo='Deduct from group account'
-    )
-)
-
-result = subscription_group_invoice_account_controller.deduct_subscription_group_service_credit(
-    uid,
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "id": 100,
-  "amount_in_cents": 1000,
-  "ending_balance_in_cents": 0,
-  "entry_type": "Debit",
-  "memo": "Debit from group account"
 }
 ```
 

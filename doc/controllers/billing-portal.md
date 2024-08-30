@@ -11,9 +11,9 @@ billing_portal_controller = client.billing_portal
 ## Methods
 
 * [Enable Billing Portal for Customer](../../doc/controllers/billing-portal.md#enable-billing-portal-for-customer)
-* [Read Billing Portal Link](../../doc/controllers/billing-portal.md#read-billing-portal-link)
 * [Resend Billing Portal Invitation](../../doc/controllers/billing-portal.md#resend-billing-portal-invitation)
 * [Revoke Billing Portal Access](../../doc/controllers/billing-portal.md#revoke-billing-portal-access)
+* [Read Billing Portal Link](../../doc/controllers/billing-portal.md#read-billing-portal-link)
 
 
 # Enable Billing Portal for Customer
@@ -64,62 +64,6 @@ result = billing_portal_controller.enable_billing_portal_for_customer(customer_i
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Read Billing Portal Link
-
-This method will provide to the API user the exact URL required for a subscriber to access the Billing Portal.
-
-## Rules for Management Link API
-
-+ When retrieving a management URL, multiple requests for the same customer in a short period will return the **same** URL
-+ We will not generate a new URL for 15 days
-+ You must cache and remember this URL if you are going to need it again within 15 days
-+ Only request a new URL after the `new_link_available_at` date
-+ You are limited to 15 requests for the same URL. If you make more than 15 requests before `new_link_available_at`, you will be blocked from further Management URL requests (with a response code `429`)
-
-```python
-def read_billing_portal_link(self,
-                            customer_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `customer_id` | `int` | Template, Required | The Chargify id of the customer |
-
-## Response Type
-
-[`PortalManagementLink`](../../doc/models/portal-management-link.md)
-
-## Example Usage
-
-```python
-customer_id = 150
-
-result = billing_portal_controller.read_billing_portal_link(customer_id)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "url": "https://www.billingportal.com/manage/19804639/1517596469/bd16498719a7d3e6",
-  "fetch_count": 1,
-  "created_at": "2018-02-02T18:34:29Z",
-  "new_link_available_at": "2018-02-17T18:34:29Z",
-  "expires_at": "2018-04-08T17:34:29Z",
-  "last_invite_sent_at": "2018-02-02T18:34:29Z"
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-| 429 | Too Many Requests | [`TooManyManagementLinkRequestsErrorException`](../../doc/models/too-many-management-link-requests-error-exception.md) |
 
 
 # Resend Billing Portal Invitation
@@ -222,4 +166,60 @@ result = billing_portal_controller.revoke_billing_portal_access(customer_id)
   "uninvited_count": 8
 }
 ```
+
+
+# Read Billing Portal Link
+
+This method will provide to the API user the exact URL required for a subscriber to access the Billing Portal.
+
+## Rules for Management Link API
+
++ When retrieving a management URL, multiple requests for the same customer in a short period will return the **same** URL
++ We will not generate a new URL for 15 days
++ You must cache and remember this URL if you are going to need it again within 15 days
++ Only request a new URL after the `new_link_available_at` date
++ You are limited to 15 requests for the same URL. If you make more than 15 requests before `new_link_available_at`, you will be blocked from further Management URL requests (with a response code `429`)
+
+```python
+def read_billing_portal_link(self,
+                            customer_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `customer_id` | `int` | Template, Required | The Chargify id of the customer |
+
+## Response Type
+
+[`PortalManagementLink`](../../doc/models/portal-management-link.md)
+
+## Example Usage
+
+```python
+customer_id = 150
+
+result = billing_portal_controller.read_billing_portal_link(customer_id)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "url": "https://www.billingportal.com/manage/19804639/1517596469/bd16498719a7d3e6",
+  "fetch_count": 1,
+  "created_at": "2018-02-02T18:34:29Z",
+  "new_link_available_at": "2018-02-17T18:34:29Z",
+  "expires_at": "2018-04-08T17:34:29Z",
+  "last_invite_sent_at": "2018-02-02T18:34:29Z"
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+| 429 | Too Many Requests | [`TooManyManagementLinkRequestsErrorException`](../../doc/models/too-many-management-link-requests-error-exception.md) |
 

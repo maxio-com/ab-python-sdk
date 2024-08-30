@@ -152,6 +152,49 @@ class ProductFamiliesController(BaseController):
             .local_error('404', 'Not Found', APIException)
         ).execute()
 
+    def read_product_family(self,
+                            id):
+        """Does a GET request to /product_families/{id}.json.
+
+        This method allows to retrieve a Product Family via the
+        `product_family_id`. The response will contain a Product Family
+        object.
+        The product family can be specified either with the id number, or with
+        the `handle:my-family` format.
+
+        Args:
+            id (int): The Advanced Billing id of the product family
+
+        Returns:
+            ProductFamilyResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/product_families/{id}.json')
+            .http_method(HttpMethodEnum.GET)
+            .template_param(Parameter()
+                            .key('id')
+                            .value(id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ProductFamilyResponse.from_dictionary)
+        ).execute()
+
     def create_product_family(self,
                               body=None):
         """Does a POST request to /product_families.json.
@@ -269,49 +312,6 @@ class ProductFamiliesController(BaseController):
             .query_param(Parameter()
                          .key('end_datetime')
                          .value(options.get('end_datetime', None)))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProductFamilyResponse.from_dictionary)
-        ).execute()
-
-    def read_product_family(self,
-                            id):
-        """Does a GET request to /product_families/{id}.json.
-
-        This method allows to retrieve a Product Family via the
-        `product_family_id`. The response will contain a Product Family
-        object.
-        The product family can be specified either with the id number, or with
-        the `handle:my-family` format.
-
-        Args:
-            id (int): The Advanced Billing id of the product family
-
-        Returns:
-            ProductFamilyResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/product_families/{id}.json')
-            .http_method(HttpMethodEnum.GET)
-            .template_param(Parameter()
-                            .key('id')
-                            .value(id)
-                            .is_required(True)
-                            .should_encode(True))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))

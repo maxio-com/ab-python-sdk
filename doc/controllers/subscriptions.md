@@ -10,18 +10,567 @@ subscriptions_controller = client.subscriptions
 
 ## Methods
 
-* [Create Subscription](../../doc/controllers/subscriptions.md#create-subscription)
 * [List Subscriptions](../../doc/controllers/subscriptions.md#list-subscriptions)
+* [Purge Subscription](../../doc/controllers/subscriptions.md#purge-subscription)
+* [Apply Coupons to Subscription](../../doc/controllers/subscriptions.md#apply-coupons-to-subscription)
+* [Update Prepaid Subscription Configuration](../../doc/controllers/subscriptions.md#update-prepaid-subscription-configuration)
+* [Preview Subscription](../../doc/controllers/subscriptions.md#preview-subscription)
+* [Create Subscription](../../doc/controllers/subscriptions.md#create-subscription)
 * [Update Subscription](../../doc/controllers/subscriptions.md#update-subscription)
 * [Read Subscription](../../doc/controllers/subscriptions.md#read-subscription)
 * [Override Subscription](../../doc/controllers/subscriptions.md#override-subscription)
 * [Find Subscription](../../doc/controllers/subscriptions.md#find-subscription)
-* [Purge Subscription](../../doc/controllers/subscriptions.md#purge-subscription)
-* [Update Prepaid Subscription Configuration](../../doc/controllers/subscriptions.md#update-prepaid-subscription-configuration)
-* [Preview Subscription](../../doc/controllers/subscriptions.md#preview-subscription)
-* [Apply Coupons to Subscription](../../doc/controllers/subscriptions.md#apply-coupons-to-subscription)
 * [Remove Coupon From Subscription](../../doc/controllers/subscriptions.md#remove-coupon-from-subscription)
 * [Activate Subscription](../../doc/controllers/subscriptions.md#activate-subscription)
+
+
+# List Subscriptions
+
+This method will return an array of subscriptions from a Site. Pay close attention to query string filters and pagination in order to control responses from the server.
+
+## Search for a subscription
+
+Use the query strings below to search for a subscription using the criteria available. The return value will be an array.
+
+## Self-Service Page token
+
+Self-Service Page token for the subscriptions is not returned by default. If this information is desired, the include[]=self_service_page_token parameter must be provided with the request.
+
+```python
+def list_subscriptions(self,
+                      options=dict())
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
+| `state` | [`SubscriptionStateFilter`](../../doc/models/subscription-state-filter.md) | Query, Optional | The current state of the subscription |
+| `product` | `int` | Query, Optional | The product id of the subscription. (Note that the product handle cannot be used.) |
+| `product_price_point_id` | `int` | Query, Optional | The ID of the product price point. If supplied, product is required |
+| `coupon` | `int` | Query, Optional | The numeric id of the coupon currently applied to the subscription. (This can be found in the URL when editing a coupon. Note that the coupon code cannot be used.) |
+| `date_field` | [`SubscriptionDateField`](../../doc/models/subscription-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search.  Allowed Values: , current_period_ends_at, current_period_starts_at, created_at, activated_at, canceled_at, expires_at, trial_started_at, trial_ended_at, updated_at |
+| `start_date` | `date` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `start_date=2022-07-01`. |
+| `end_date` | `date` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `end_date=2022-08-01`. |
+| `start_datetime` | `datetime` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `start_datetime=2022-07-01 09:00:05`. |
+| `end_datetime` | `datetime` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `end_datetime=2022-08-01 10:00:05`. |
+| `metadata` | `Dict[str, str]` | Query, Optional | The value of the metadata field specified in the parameter. Use in query `metadata[my-field]=value&metadata[other-field]=another_value`. |
+| `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
+| `sort` | [`SubscriptionSort`](../../doc/models/subscription-sort.md) | Query, Optional | The attribute by which to sort |
+| `include` | [`List[SubscriptionListInclude]`](../../doc/models/subscription-list-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include[]=self_service_page_token`. |
+
+## Response Type
+
+[`List[SubscriptionResponse]`](../../doc/models/subscription-response.md)
+
+## Example Usage
+
+```python
+collect = {
+    'page': 2,
+    'per_page': 50,
+    'start_date': dateutil.parser.parse('2022-07-01').date(),
+    'end_date': dateutil.parser.parse('2022-08-01').date(),
+    'start_datetime': dateutil.parser.parse('2022-07-01 09:00:05'),
+    'end_datetime': dateutil.parser.parse('2022-08-01 10:00:05'),
+    'sort': SubscriptionSort.SIGNUP_DATE,
+    'include': [
+        SubscriptionListInclude.SELF_SERVICE_PAGE_TOKEN
+    ]
+}
+result = subscriptions_controller.list_subscriptions(collect)
+```
+
+
+# Purge Subscription
+
+For sites in test mode, you may purge individual subscriptions.
+
+Provide the subscription ID in the url.  To confirm, supply the customer ID in the query string `ack` parameter. You may also delete the customer record and/or payment profiles by passing `cascade` parameters. For example, to delete just the customer record, the query params would be: `?ack={customer_id}&cascade[]=customer`
+
+If you need to remove subscriptions from a live site, please contact support to discuss your use case.
+
+### Delete customer and payment profile
+
+The query params will be: `?ack={customer_id}&cascade[]=customer&cascade[]=payment_profile`
+
+```python
+def purge_subscription(self,
+                      subscription_id,
+                      ack,
+                      cascade=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `ack` | `int` | Query, Required | id of the customer. |
+| `cascade` | [`List[SubscriptionPurgeType]`](../../doc/models/subscription-purge-type.md) | Query, Optional | Options are "customer" or "payment_profile".<br>Use in query: `cascade[]=customer&cascade[]=payment_profile`. |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+ack = 252
+
+cascade = [
+    SubscriptionPurgeType.CUSTOMER,
+    SubscriptionPurgeType.PAYMENT_PROFILE
+]
+
+subscriptions_controller.purge_subscription(
+    subscription_id,
+    ack,
+    cascade=cascade
+)
+```
+
+
+# Apply Coupons to Subscription
+
+An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and-Subscriptions#stackability-rules)
+
+## Query Parameters vs Request Body Parameters
+
+Passing in a coupon code as a query parameter will add the code to the subscription, completely replacing all existing coupon codes on the subscription.
+
+For this reason, using this query parameter on this endpoint has been deprecated in favor of using the request body parameters as described below. When passing in request body parameters, the list of coupon codes will simply be added to any existing list of codes on the subscription.
+
+```python
+def apply_coupons_to_subscription(self,
+                                 subscription_id,
+                                 code=None,
+                                 body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `code` | `str` | Query, Optional | A code for the coupon that would be applied to a subscription |
+| `body` | [`AddCouponsRequest`](../../doc/models/add-coupons-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`SubscriptionResponse`](../../doc/models/subscription-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+body = AddCouponsRequest(
+    codes=[
+        'COUPON_1',
+        'COUPON_2'
+    ]
+)
+
+result = subscriptions_controller.apply_coupons_to_subscription(
+    subscription_id,
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription": {
+    "id": 21607180,
+    "state": "active",
+    "trial_started_at": null,
+    "trial_ended_at": null,
+    "activated_at": "2018-04-20T14:20:57-05:00",
+    "created_at": "2018-04-20T14:20:57-05:00",
+    "updated_at": "2018-05-11T13:53:44-05:00",
+    "expires_at": null,
+    "balance_in_cents": 49000,
+    "current_period_ends_at": "2018-05-12T11:33:03-05:00",
+    "next_assessment_at": "2018-05-12T11:33:03-05:00",
+    "canceled_at": null,
+    "cancellation_message": null,
+    "next_product_id": null,
+    "cancel_at_end_of_period": false,
+    "payment_collection_method": "remittance",
+    "snap_day": null,
+    "cancellation_method": null,
+    "current_period_started_at": "2018-05-11T11:33:03-05:00",
+    "previous_state": "active",
+    "signup_payment_id": 237154761,
+    "signup_revenue": "0.00",
+    "delayed_cancel_at": null,
+    "coupon_code": "COUPONA",
+    "total_revenue_in_cents": 52762,
+    "product_price_in_cents": 100000,
+    "product_version_number": 2,
+    "payment_type": "credit_card",
+    "referral_code": "x45nc8",
+    "coupon_use_count": 0,
+    "coupon_uses_allowed": 1,
+    "reason_code": null,
+    "automatically_resume_at": null,
+    "coupon_codes": [
+      "COUPONA",
+      "COUPONB"
+    ],
+    "customer": {
+      "id": 21259051,
+      "first_name": "K",
+      "last_name": "C",
+      "organization": "",
+      "email": "example@chargify.com",
+      "created_at": "2018-04-20T14:20:57-05:00",
+      "updated_at": "2018-04-23T15:29:28-05:00",
+      "reference": null,
+      "address": "",
+      "address_2": "",
+      "city": "",
+      "state": "",
+      "zip": "",
+      "country": "",
+      "phone": "",
+      "portal_invite_last_sent_at": "2018-04-20T14:20:59-05:00",
+      "portal_invite_last_accepted_at": null,
+      "verified": false,
+      "portal_customer_created_at": "2018-04-20T14:20:59-05:00",
+      "cc_emails": "",
+      "tax_exempt": false
+    },
+    "product": {
+      "id": 4581816,
+      "name": "Basic",
+      "handle": "basic",
+      "description": "",
+      "accounting_code": "",
+      "request_credit_card": true,
+      "expiration_interval": null,
+      "expiration_interval_unit": "never",
+      "created_at": "2017-11-02T15:00:11-05:00",
+      "updated_at": "2018-04-10T09:02:59-05:00",
+      "price_in_cents": 100000,
+      "interval": 1,
+      "interval_unit": "month",
+      "initial_charge_in_cents": 100000,
+      "trial_price_in_cents": 1000,
+      "trial_interval": 10,
+      "trial_interval_unit": "month",
+      "archived_at": null,
+      "require_credit_card": true,
+      "return_params": "",
+      "taxable": false,
+      "update_return_url": "",
+      "tax_code": "",
+      "initial_charge_after_trial": false,
+      "version_number": 2,
+      "update_return_params": "",
+      "product_family": {
+        "id": 1025627,
+        "name": "My Product Family",
+        "description": "",
+        "handle": "acme-products",
+        "accounting_code": null
+      },
+      "public_signup_pages": [
+        {
+          "id": 333589,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargifypay.com/subscribe/hbwtd98j3hk2/basic"
+        },
+        {
+          "id": 335926,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargifypay.com/subscribe/g366zy67c7rm/basic"
+        },
+        {
+          "id": 345555,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargifypay.com/subscribe/txqyyqk7d8rz/basic"
+        },
+        {
+          "id": 345556,
+          "return_url": "",
+          "return_params": "",
+          "url": "https://general-goods.chargifypay.com/subscribe/2zss3qpf4249/basic"
+        }
+      ]
+    },
+    "credit_card": {
+      "id": 14839830,
+      "first_name": "John",
+      "last_name": "Doe",
+      "masked_card_number": "XXXX-XXXX-XXXX-1",
+      "card_type": "bogus",
+      "expiration_month": 1,
+      "expiration_year": 2028,
+      "customer_id": 21259051,
+      "current_vault": "bogus",
+      "vault_token": "1",
+      "billing_address": null,
+      "billing_city": null,
+      "billing_state": null,
+      "billing_zip": "99999",
+      "billing_country": null,
+      "customer_vault_token": null,
+      "billing_address_2": null,
+      "payment_type": "credit_card"
+    }
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionAddCouponErrorException`](../../doc/models/subscription-add-coupon-error-exception.md) |
+
+
+# Update Prepaid Subscription Configuration
+
+Use this endpoint to update a subscription's prepaid configuration.
+
+```python
+def update_prepaid_subscription_configuration(self,
+                                             subscription_id,
+                                             body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `body` | [`UpsertPrepaidConfigurationRequest`](../../doc/models/upsert-prepaid-configuration-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`PrepaidConfigurationResponse`](../../doc/models/prepaid-configuration-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+body = UpsertPrepaidConfigurationRequest(
+    prepaid_configuration=UpsertPrepaidConfiguration(
+        initial_funding_amount_in_cents=50000,
+        replenish_to_amount_in_cents=50000,
+        auto_replenish=True,
+        replenish_threshold_amount_in_cents=10000
+    )
+)
+
+result = subscriptions_controller.update_prepaid_subscription_configuration(
+    subscription_id,
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "prepaid_configuration": {
+    "id": 55,
+    "initial_funding_amount_in_cents": 2500,
+    "auto_replenish": true,
+    "replenish_to_amount_in_cents": 50000,
+    "replenish_threshold_amount_in_cents": 10000
+  }
+}
+```
+
+
+# Preview Subscription
+
+The Chargify API allows you to preview a subscription by POSTing the same JSON or XML as for a subscription creation.
+
+The "Next Billing" amount and "Next Billing" date are represented in each Subscriber's Summary. For more information, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subscriber-Interface-Overview).
+
+## Side effects
+
+A subscription will not be created by sending a POST to this endpoint. It is meant to serve as a prediction.
+
+## Taxable Subscriptions
+
+This endpoint will preview taxes applicable to a purchase. In order for taxes to be previewed, the following conditions must be met:
+
++ Taxes must be configured on the subscription
++ The preview must be for the purchase of a taxable product or component, or combination of the two.
++ The subscription payload must contain a full billing or shipping address in order to calculate tax
+
+For more information about creating taxable previews, please see our documentation guide on how to create [taxable subscriptions.](https://maxio.zendesk.com/hc/en-us/sections/24287012349325-Taxes)
+
+You do **not** need to include a card number to generate tax information when you are previewing a subscription. However, please note that when you actually want to create the subscription, you must include the credit card information if you want the billing address to be stored in Advanced Billing. The billing address and the credit card information are stored together within the payment profile object. Also, you may not send a billing address to Advanced Billing without payment profile information, as the address is stored on the card.
+
+You can pass shipping and billing addresses and still decide not to calculate taxes. To do that, pass `skip_billing_manifest_taxes: true` attribute.
+
+## Non-taxable Subscriptions
+
+If you'd like to calculate subscriptions that do not include tax, please feel free to leave off the billing information.
+
+```python
+def preview_subscription(self,
+                        body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`CreateSubscriptionRequest`](../../doc/models/create-subscription-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`SubscriptionPreviewResponse`](../../doc/models/subscription-preview-response.md)
+
+## Example Usage
+
+```python
+body = CreateSubscriptionRequest(
+    subscription=CreateSubscription(
+        product_handle='gold-product'
+    )
+)
+
+result = subscriptions_controller.preview_subscription(
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "subscription_preview": {
+    "current_billing_manifest": {
+      "line_items": [
+        {
+          "transaction_type": "charge",
+          "kind": "baseline",
+          "amount_in_cents": 5000,
+          "memo": "Gold Product (08/21/2018 - 09/21/2018)",
+          "discount_amount_in_cents": 0,
+          "taxable_amount_in_cents": 0,
+          "product_id": 1,
+          "product_handle": "gold-product",
+          "product_name": "Gold Product",
+          "period_range_start": "13 Oct 2023",
+          "period_range_end": "13 Nov 2023"
+        },
+        {
+          "transaction_type": "charge",
+          "kind": "component",
+          "amount_in_cents": 28000,
+          "memo": "Component name: 14 Unit names",
+          "discount_amount_in_cents": 0,
+          "taxable_amount_in_cents": 0,
+          "component_id": 462149,
+          "component_handle": "handle",
+          "component_name": "Component name"
+        },
+        {
+          "transaction_type": "charge",
+          "kind": "component",
+          "amount_in_cents": 2000,
+          "memo": "Fractional Metered Components: 20.0 Fractional Metereds",
+          "discount_amount_in_cents": 0,
+          "taxable_amount_in_cents": 0,
+          "component_id": 426665,
+          "component_handle": "handle",
+          "component_name": "Fractional Metered Components"
+        },
+        {
+          "transaction_type": "charge",
+          "kind": "component",
+          "amount_in_cents": 0,
+          "memo": "On/Off Component",
+          "discount_amount_in_cents": 0,
+          "taxable_amount_in_cents": 0,
+          "component_id": 426670,
+          "component_handle": "handle",
+          "component_name": "On/Off Component"
+        },
+        {
+          "transaction_type": "adjustment",
+          "kind": "coupon",
+          "amount_in_cents": 0,
+          "memo": "Coupon: 1DOLLAR - You only get $1.00 off",
+          "discount_amount_in_cents": 0,
+          "taxable_amount_in_cents": 0
+        }
+      ],
+      "total_in_cents": 35000,
+      "total_discount_in_cents": 0,
+      "total_tax_in_cents": 0,
+      "subtotal_in_cents": 35000,
+      "start_date": "2018-08-21T21:25:21Z",
+      "end_date": "2018-09-21T21:25:21Z",
+      "period_type": "recurring",
+      "existing_balance_in_cents": 0
+    },
+    "next_billing_manifest": {
+      "line_items": [
+        {
+          "transaction_type": "charge",
+          "kind": "baseline",
+          "amount_in_cents": 5000,
+          "memo": "Gold Product (09/21/2018 - 10/21/2018)",
+          "discount_amount_in_cents": 0,
+          "taxable_amount_in_cents": 0,
+          "product_id": 1,
+          "product_handle": "gold-product",
+          "product_name": "Gold Product"
+        },
+        {
+          "transaction_type": "charge",
+          "kind": "component",
+          "amount_in_cents": 28000,
+          "memo": "Component name: 14 Unit names",
+          "discount_amount_in_cents": 0,
+          "taxable_amount_in_cents": 0,
+          "component_id": 462149,
+          "component_handle": "handle",
+          "component_name": "Component name"
+        },
+        {
+          "transaction_type": "charge",
+          "kind": "component",
+          "amount_in_cents": 0,
+          "memo": "On/Off Component",
+          "discount_amount_in_cents": 0,
+          "taxable_amount_in_cents": 0,
+          "component_id": 426670,
+          "component_handle": "handle",
+          "component_name": "On/Off Component"
+        }
+      ],
+      "total_in_cents": 33000,
+      "total_discount_in_cents": 0,
+      "total_tax_in_cents": 0,
+      "subtotal_in_cents": 33000,
+      "start_date": "2018-09-21T21:25:21Z",
+      "end_date": "2018-10-21T21:25:21Z",
+      "period_type": "recurring",
+      "existing_balance_in_cents": 0
+    }
+  }
+}
+```
 
 
 # Create Subscription
@@ -876,66 +1425,6 @@ result = subscriptions_controller.create_subscription(
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
-# List Subscriptions
-
-This method will return an array of subscriptions from a Site. Pay close attention to query string filters and pagination in order to control responses from the server.
-
-## Search for a subscription
-
-Use the query strings below to search for a subscription using the criteria available. The return value will be an array.
-
-## Self-Service Page token
-
-Self-Service Page token for the subscriptions is not returned by default. If this information is desired, the include[]=self_service_page_token parameter must be provided with the request.
-
-```python
-def list_subscriptions(self,
-                      options=dict())
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `state` | [`SubscriptionStateFilter`](../../doc/models/subscription-state-filter.md) | Query, Optional | The current state of the subscription |
-| `product` | `int` | Query, Optional | The product id of the subscription. (Note that the product handle cannot be used.) |
-| `product_price_point_id` | `int` | Query, Optional | The ID of the product price point. If supplied, product is required |
-| `coupon` | `int` | Query, Optional | The numeric id of the coupon currently applied to the subscription. (This can be found in the URL when editing a coupon. Note that the coupon code cannot be used.) |
-| `date_field` | [`SubscriptionDateField`](../../doc/models/subscription-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search.  Allowed Values: , current_period_ends_at, current_period_starts_at, created_at, activated_at, canceled_at, expires_at, trial_started_at, trial_ended_at, updated_at |
-| `start_date` | `date` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. Use in query `start_date=2022-07-01`. |
-| `end_date` | `date` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns subscriptions with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. Use in query `end_date=2022-08-01`. |
-| `start_datetime` | `datetime` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. Use in query `start_datetime=2022-07-01 09:00:05`. |
-| `end_datetime` | `datetime` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns subscriptions with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. Use in query `end_datetime=2022-08-01 10:00:05`. |
-| `metadata` | `Dict[str, str]` | Query, Optional | The value of the metadata field specified in the parameter. Use in query `metadata[my-field]=value&metadata[other-field]=another_value`. |
-| `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
-| `sort` | [`SubscriptionSort`](../../doc/models/subscription-sort.md) | Query, Optional | The attribute by which to sort |
-| `include` | [`List[SubscriptionListInclude]`](../../doc/models/subscription-list-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include[]=self_service_page_token`. |
-
-## Response Type
-
-[`List[SubscriptionResponse]`](../../doc/models/subscription-response.md)
-
-## Example Usage
-
-```python
-collect = {
-    'page': 2,
-    'per_page': 50,
-    'start_date': dateutil.parser.parse('2022-07-01').date(),
-    'end_date': dateutil.parser.parse('2022-08-01').date(),
-    'start_datetime': dateutil.parser.parse('2022-07-01 09:00:05'),
-    'end_datetime': dateutil.parser.parse('2022-08-01 10:00:05'),
-    'sort': SubscriptionSort.SIGNUP_DATE,
-    'include': [
-        SubscriptionListInclude.SELF_SERVICE_PAGE_TOKEN
-    ]
-}
-result = subscriptions_controller.list_subscriptions(collect)
-```
-
-
 # Update Subscription
 
 The subscription endpoint allows you to instantly update one or many attributes about a subscription in a single call.
@@ -1407,495 +1896,6 @@ def find_subscription(self,
 ```python
 result = subscriptions_controller.find_subscription()
 ```
-
-
-# Purge Subscription
-
-For sites in test mode, you may purge individual subscriptions.
-
-Provide the subscription ID in the url.  To confirm, supply the customer ID in the query string `ack` parameter. You may also delete the customer record and/or payment profiles by passing `cascade` parameters. For example, to delete just the customer record, the query params would be: `?ack={customer_id}&cascade[]=customer`
-
-If you need to remove subscriptions from a live site, please contact support to discuss your use case.
-
-### Delete customer and payment profile
-
-The query params will be: `?ack={customer_id}&cascade[]=customer&cascade[]=payment_profile`
-
-```python
-def purge_subscription(self,
-                      subscription_id,
-                      ack,
-                      cascade=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `ack` | `int` | Query, Required | id of the customer. |
-| `cascade` | [`List[SubscriptionPurgeType]`](../../doc/models/subscription-purge-type.md) | Query, Optional | Options are "customer" or "payment_profile".<br>Use in query: `cascade[]=customer&cascade[]=payment_profile`. |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-ack = 252
-
-cascade = [
-    SubscriptionPurgeType.CUSTOMER,
-    SubscriptionPurgeType.PAYMENT_PROFILE
-]
-
-subscriptions_controller.purge_subscription(
-    subscription_id,
-    ack,
-    cascade=cascade
-)
-```
-
-
-# Update Prepaid Subscription Configuration
-
-Use this endpoint to update a subscription's prepaid configuration.
-
-```python
-def update_prepaid_subscription_configuration(self,
-                                             subscription_id,
-                                             body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `body` | [`UpsertPrepaidConfigurationRequest`](../../doc/models/upsert-prepaid-configuration-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`PrepaidConfigurationResponse`](../../doc/models/prepaid-configuration-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-body = UpsertPrepaidConfigurationRequest(
-    prepaid_configuration=UpsertPrepaidConfiguration(
-        initial_funding_amount_in_cents=50000,
-        replenish_to_amount_in_cents=50000,
-        auto_replenish=True,
-        replenish_threshold_amount_in_cents=10000
-    )
-)
-
-result = subscriptions_controller.update_prepaid_subscription_configuration(
-    subscription_id,
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "prepaid_configuration": {
-    "id": 55,
-    "initial_funding_amount_in_cents": 2500,
-    "auto_replenish": true,
-    "replenish_to_amount_in_cents": 50000,
-    "replenish_threshold_amount_in_cents": 10000
-  }
-}
-```
-
-
-# Preview Subscription
-
-The Chargify API allows you to preview a subscription by POSTing the same JSON or XML as for a subscription creation.
-
-The "Next Billing" amount and "Next Billing" date are represented in each Subscriber's Summary. For more information, please see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subscriber-Interface-Overview).
-
-## Side effects
-
-A subscription will not be created by sending a POST to this endpoint. It is meant to serve as a prediction.
-
-## Taxable Subscriptions
-
-This endpoint will preview taxes applicable to a purchase. In order for taxes to be previewed, the following conditions must be met:
-
-+ Taxes must be configured on the subscription
-+ The preview must be for the purchase of a taxable product or component, or combination of the two.
-+ The subscription payload must contain a full billing or shipping address in order to calculate tax
-
-For more information about creating taxable previews, please see our documentation guide on how to create [taxable subscriptions.](https://maxio.zendesk.com/hc/en-us/sections/24287012349325-Taxes)
-
-You do **not** need to include a card number to generate tax information when you are previewing a subscription. However, please note that when you actually want to create the subscription, you must include the credit card information if you want the billing address to be stored in Advanced Billing. The billing address and the credit card information are stored together within the payment profile object. Also, you may not send a billing address to Advanced Billing without payment profile information, as the address is stored on the card.
-
-You can pass shipping and billing addresses and still decide not to calculate taxes. To do that, pass `skip_billing_manifest_taxes: true` attribute.
-
-## Non-taxable Subscriptions
-
-If you'd like to calculate subscriptions that do not include tax, please feel free to leave off the billing information.
-
-```python
-def preview_subscription(self,
-                        body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`CreateSubscriptionRequest`](../../doc/models/create-subscription-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`SubscriptionPreviewResponse`](../../doc/models/subscription-preview-response.md)
-
-## Example Usage
-
-```python
-body = CreateSubscriptionRequest(
-    subscription=CreateSubscription(
-        product_handle='gold-product'
-    )
-)
-
-result = subscriptions_controller.preview_subscription(
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription_preview": {
-    "current_billing_manifest": {
-      "line_items": [
-        {
-          "transaction_type": "charge",
-          "kind": "baseline",
-          "amount_in_cents": 5000,
-          "memo": "Gold Product (08/21/2018 - 09/21/2018)",
-          "discount_amount_in_cents": 0,
-          "taxable_amount_in_cents": 0,
-          "product_id": 1,
-          "product_handle": "gold-product",
-          "product_name": "Gold Product",
-          "period_range_start": "13 Oct 2023",
-          "period_range_end": "13 Nov 2023"
-        },
-        {
-          "transaction_type": "charge",
-          "kind": "component",
-          "amount_in_cents": 28000,
-          "memo": "Component name: 14 Unit names",
-          "discount_amount_in_cents": 0,
-          "taxable_amount_in_cents": 0,
-          "component_id": 462149,
-          "component_handle": "handle",
-          "component_name": "Component name"
-        },
-        {
-          "transaction_type": "charge",
-          "kind": "component",
-          "amount_in_cents": 2000,
-          "memo": "Fractional Metered Components: 20.0 Fractional Metereds",
-          "discount_amount_in_cents": 0,
-          "taxable_amount_in_cents": 0,
-          "component_id": 426665,
-          "component_handle": "handle",
-          "component_name": "Fractional Metered Components"
-        },
-        {
-          "transaction_type": "charge",
-          "kind": "component",
-          "amount_in_cents": 0,
-          "memo": "On/Off Component",
-          "discount_amount_in_cents": 0,
-          "taxable_amount_in_cents": 0,
-          "component_id": 426670,
-          "component_handle": "handle",
-          "component_name": "On/Off Component"
-        },
-        {
-          "transaction_type": "adjustment",
-          "kind": "coupon",
-          "amount_in_cents": 0,
-          "memo": "Coupon: 1DOLLAR - You only get $1.00 off",
-          "discount_amount_in_cents": 0,
-          "taxable_amount_in_cents": 0
-        }
-      ],
-      "total_in_cents": 35000,
-      "total_discount_in_cents": 0,
-      "total_tax_in_cents": 0,
-      "subtotal_in_cents": 35000,
-      "start_date": "2018-08-21T21:25:21Z",
-      "end_date": "2018-09-21T21:25:21Z",
-      "period_type": "recurring",
-      "existing_balance_in_cents": 0
-    },
-    "next_billing_manifest": {
-      "line_items": [
-        {
-          "transaction_type": "charge",
-          "kind": "baseline",
-          "amount_in_cents": 5000,
-          "memo": "Gold Product (09/21/2018 - 10/21/2018)",
-          "discount_amount_in_cents": 0,
-          "taxable_amount_in_cents": 0,
-          "product_id": 1,
-          "product_handle": "gold-product",
-          "product_name": "Gold Product"
-        },
-        {
-          "transaction_type": "charge",
-          "kind": "component",
-          "amount_in_cents": 28000,
-          "memo": "Component name: 14 Unit names",
-          "discount_amount_in_cents": 0,
-          "taxable_amount_in_cents": 0,
-          "component_id": 462149,
-          "component_handle": "handle",
-          "component_name": "Component name"
-        },
-        {
-          "transaction_type": "charge",
-          "kind": "component",
-          "amount_in_cents": 0,
-          "memo": "On/Off Component",
-          "discount_amount_in_cents": 0,
-          "taxable_amount_in_cents": 0,
-          "component_id": 426670,
-          "component_handle": "handle",
-          "component_name": "On/Off Component"
-        }
-      ],
-      "total_in_cents": 33000,
-      "total_discount_in_cents": 0,
-      "total_tax_in_cents": 0,
-      "subtotal_in_cents": 33000,
-      "start_date": "2018-09-21T21:25:21Z",
-      "end_date": "2018-10-21T21:25:21Z",
-      "period_type": "recurring",
-      "existing_balance_in_cents": 0
-    }
-  }
-}
-```
-
-
-# Apply Coupons to Subscription
-
-An existing subscription can accommodate multiple discounts/coupon codes. This is only applicable if each coupon is stackable. For more information on stackable coupons, we recommend reviewing our [coupon documentation.](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and-Subscriptions#stackability-rules)
-
-## Query Parameters vs Request Body Parameters
-
-Passing in a coupon code as a query parameter will add the code to the subscription, completely replacing all existing coupon codes on the subscription.
-
-For this reason, using this query parameter on this endpoint has been deprecated in favor of using the request body parameters as described below. When passing in request body parameters, the list of coupon codes will simply be added to any existing list of codes on the subscription.
-
-```python
-def apply_coupons_to_subscription(self,
-                                 subscription_id,
-                                 code=None,
-                                 body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `code` | `str` | Query, Optional | A code for the coupon that would be applied to a subscription |
-| `body` | [`AddCouponsRequest`](../../doc/models/add-coupons-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`SubscriptionResponse`](../../doc/models/subscription-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-body = AddCouponsRequest(
-    codes=[
-        'COUPON_1',
-        'COUPON_2'
-    ]
-)
-
-result = subscriptions_controller.apply_coupons_to_subscription(
-    subscription_id,
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "subscription": {
-    "id": 21607180,
-    "state": "active",
-    "trial_started_at": null,
-    "trial_ended_at": null,
-    "activated_at": "2018-04-20T14:20:57-05:00",
-    "created_at": "2018-04-20T14:20:57-05:00",
-    "updated_at": "2018-05-11T13:53:44-05:00",
-    "expires_at": null,
-    "balance_in_cents": 49000,
-    "current_period_ends_at": "2018-05-12T11:33:03-05:00",
-    "next_assessment_at": "2018-05-12T11:33:03-05:00",
-    "canceled_at": null,
-    "cancellation_message": null,
-    "next_product_id": null,
-    "cancel_at_end_of_period": false,
-    "payment_collection_method": "remittance",
-    "snap_day": null,
-    "cancellation_method": null,
-    "current_period_started_at": "2018-05-11T11:33:03-05:00",
-    "previous_state": "active",
-    "signup_payment_id": 237154761,
-    "signup_revenue": "0.00",
-    "delayed_cancel_at": null,
-    "coupon_code": "COUPONA",
-    "total_revenue_in_cents": 52762,
-    "product_price_in_cents": 100000,
-    "product_version_number": 2,
-    "payment_type": "credit_card",
-    "referral_code": "x45nc8",
-    "coupon_use_count": 0,
-    "coupon_uses_allowed": 1,
-    "reason_code": null,
-    "automatically_resume_at": null,
-    "coupon_codes": [
-      "COUPONA",
-      "COUPONB"
-    ],
-    "customer": {
-      "id": 21259051,
-      "first_name": "K",
-      "last_name": "C",
-      "organization": "",
-      "email": "example@chargify.com",
-      "created_at": "2018-04-20T14:20:57-05:00",
-      "updated_at": "2018-04-23T15:29:28-05:00",
-      "reference": null,
-      "address": "",
-      "address_2": "",
-      "city": "",
-      "state": "",
-      "zip": "",
-      "country": "",
-      "phone": "",
-      "portal_invite_last_sent_at": "2018-04-20T14:20:59-05:00",
-      "portal_invite_last_accepted_at": null,
-      "verified": false,
-      "portal_customer_created_at": "2018-04-20T14:20:59-05:00",
-      "cc_emails": "",
-      "tax_exempt": false
-    },
-    "product": {
-      "id": 4581816,
-      "name": "Basic",
-      "handle": "basic",
-      "description": "",
-      "accounting_code": "",
-      "request_credit_card": true,
-      "expiration_interval": null,
-      "expiration_interval_unit": "never",
-      "created_at": "2017-11-02T15:00:11-05:00",
-      "updated_at": "2018-04-10T09:02:59-05:00",
-      "price_in_cents": 100000,
-      "interval": 1,
-      "interval_unit": "month",
-      "initial_charge_in_cents": 100000,
-      "trial_price_in_cents": 1000,
-      "trial_interval": 10,
-      "trial_interval_unit": "month",
-      "archived_at": null,
-      "require_credit_card": true,
-      "return_params": "",
-      "taxable": false,
-      "update_return_url": "",
-      "tax_code": "",
-      "initial_charge_after_trial": false,
-      "version_number": 2,
-      "update_return_params": "",
-      "product_family": {
-        "id": 1025627,
-        "name": "My Product Family",
-        "description": "",
-        "handle": "acme-products",
-        "accounting_code": null
-      },
-      "public_signup_pages": [
-        {
-          "id": 333589,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargifypay.com/subscribe/hbwtd98j3hk2/basic"
-        },
-        {
-          "id": 335926,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargifypay.com/subscribe/g366zy67c7rm/basic"
-        },
-        {
-          "id": 345555,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargifypay.com/subscribe/txqyyqk7d8rz/basic"
-        },
-        {
-          "id": 345556,
-          "return_url": "",
-          "return_params": "",
-          "url": "https://general-goods.chargifypay.com/subscribe/2zss3qpf4249/basic"
-        }
-      ]
-    },
-    "credit_card": {
-      "id": 14839830,
-      "first_name": "John",
-      "last_name": "Doe",
-      "masked_card_number": "XXXX-XXXX-XXXX-1",
-      "card_type": "bogus",
-      "expiration_month": 1,
-      "expiration_year": 2028,
-      "customer_id": 21259051,
-      "current_vault": "bogus",
-      "vault_token": "1",
-      "billing_address": null,
-      "billing_city": null,
-      "billing_state": null,
-      "billing_zip": "99999",
-      "billing_country": null,
-      "customer_vault_token": null,
-      "billing_address_2": null,
-      "payment_type": "credit_card"
-    }
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`SubscriptionAddCouponErrorException`](../../doc/models/subscription-add-coupon-error-exception.md) |
 
 
 # Remove Coupon From Subscription

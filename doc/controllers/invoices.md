@@ -10,39 +10,45 @@ invoices_controller = client.invoices
 
 ## Methods
 
-* [Refund Invoice](../../doc/controllers/invoices.md#refund-invoice)
-* [List Invoices](../../doc/controllers/invoices.md#list-invoices)
 * [Read Invoice](../../doc/controllers/invoices.md#read-invoice)
+* [List Invoices](../../doc/controllers/invoices.md#list-invoices)
 * [List Invoice Events](../../doc/controllers/invoices.md#list-invoice-events)
-* [Record Payment for Invoice](../../doc/controllers/invoices.md#record-payment-for-invoice)
 * [Record Payment for Multiple Invoices](../../doc/controllers/invoices.md#record-payment-for-multiple-invoices)
 * [List Credit Notes](../../doc/controllers/invoices.md#list-credit-notes)
-* [Read Credit Note](../../doc/controllers/invoices.md#read-credit-note)
-* [Record Payment for Subscription](../../doc/controllers/invoices.md#record-payment-for-subscription)
+* [Refund Invoice](../../doc/controllers/invoices.md#refund-invoice)
+* [Record Payment for Invoice](../../doc/controllers/invoices.md#record-payment-for-invoice)
 * [Reopen Invoice](../../doc/controllers/invoices.md#reopen-invoice)
-* [Void Invoice](../../doc/controllers/invoices.md#void-invoice)
+* [Issue Invoice](../../doc/controllers/invoices.md#issue-invoice)
 * [List Consolidated Invoice Segments](../../doc/controllers/invoices.md#list-consolidated-invoice-segments)
+* [Read Credit Note](../../doc/controllers/invoices.md#read-credit-note)
 * [Create Invoice](../../doc/controllers/invoices.md#create-invoice)
 * [Send Invoice](../../doc/controllers/invoices.md#send-invoice)
+* [Record Payment for Subscription](../../doc/controllers/invoices.md#record-payment-for-subscription)
+* [Void Invoice](../../doc/controllers/invoices.md#void-invoice)
 * [Preview Customer Information Changes](../../doc/controllers/invoices.md#preview-customer-information-changes)
 * [Update Customer Information](../../doc/controllers/invoices.md#update-customer-information)
-* [Issue Invoice](../../doc/controllers/invoices.md#issue-invoice)
 
 
-# Refund Invoice
+# Read Invoice
 
-Refund an invoice, segment, or consolidated invoice.
+Use this endpoint to retrieve the details for an invoice.
 
-## Partial Refund for Consolidated Invoice
+## PDF Invoice retrieval
 
-A refund less than the total of a consolidated invoice will be split across its segments.
+Individual PDF Invoices can be retrieved by using the "Accept" header application/pdf or appending .pdf as the format portion of the URL:
 
-A $50.00 refund on a $100.00 consolidated invoice with one $60.00 and one $40.00 segment, the refunded amount will be applied as 50% of each ($30.00 and $20.00 respectively).
+```curl -u <api_key>:x -H
+Accept:application/pdf -H
+https://acme.chargify.com/invoices/inv_8gd8tdhtd3hgr.pdf > output_file.pdf
+URL: `https://<subdomain>.chargify.com/invoices/<uid>.<format>`
+Method: GET
+Required parameters: `uid`
+Response: A single Invoice.
+```
 
 ```python
-def refund_invoice(self,
-                  uid,
-                  body=None)
+def read_invoice(self,
+                uid)
 ```
 
 ## Parameters
@@ -50,7 +56,6 @@ def refund_invoice(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
-| `body` | [`RefundInvoiceRequest`](../../doc/models/refund-invoice-request.md) | Body, Optional | - |
 
 ## Response Type
 
@@ -61,28 +66,116 @@ def refund_invoice(self,
 ```python
 uid = 'uid0'
 
-body = RefundInvoiceRequest(
-    refund=RefundInvoice(
-        amount='100.00',
-        memo='Refund for Basic Plan renewal',
-        payment_id=12345,
-        external=False,
-        apply_credit=False,
-        void_invoice=True
-    )
-)
-
-result = invoices_controller.refund_invoice(
-    uid,
-    body=body
-)
+result = invoices_controller.read_invoice(uid)
 ```
 
-## Errors
+## Example Response *(as JSON)*
 
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+```json
+{
+  "uid": "inv_8gd8tdhtd3hgr",
+  "site_id": 51288,
+  "customer_id": 20194505,
+  "subscription_id": 20597774,
+  "number": "117",
+  "sequence_number": 117,
+  "issue_date": "2018-07-26",
+  "due_date": "2018-07-26",
+  "paid_date": "2018-07-26",
+  "status": "paid",
+  "collection_method": "automatic",
+  "payment_instructions": "Make checks payable to Acme, Inc.",
+  "currency": "USD",
+  "consolidation_level": "none",
+  "parent_invoice_uid": null,
+  "parent_invoice_number": null,
+  "group_primary_subscription_id": null,
+  "product_name": "Monthly Product",
+  "product_family_name": "Billing Plans",
+  "seller": {
+    "name": "General Goods",
+    "address": {
+      "street": "123 General Goods Way",
+      "line2": "Apt. 10",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02120",
+      "country": "US"
+    },
+    "phone": "555-555-1212"
+  },
+  "customer": {
+    "chargify_id": 20194505,
+    "first_name": "Joe",
+    "last_name": "Example",
+    "organization": null,
+    "email": "joe@example.com"
+  },
+  "memo": "Please pay within 15 days.",
+  "billing_address": {
+    "street": null,
+    "line2": null,
+    "city": null,
+    "state": null,
+    "zip": null,
+    "country": null
+  },
+  "shipping_address": {
+    "street": null,
+    "line2": null,
+    "city": null,
+    "state": null,
+    "zip": null,
+    "country": null
+  },
+  "subtotal_amount": "100.0",
+  "discount_amount": "0.0",
+  "tax_amount": "0.0",
+  "total_amount": "100.0",
+  "credit_amount": "0.0",
+  "paid_amount": "100.0",
+  "refund_amount": "0.0",
+  "due_amount": "0.0",
+  "line_items": [
+    {
+      "uid": "li_8gd8tdhhgk55k",
+      "title": "Monthly Product",
+      "description": "Jul 26, 2018 - Aug 26, 2018",
+      "quantity": "1.0",
+      "unit_price": "100.0",
+      "subtotal_amount": "100.0",
+      "discount_amount": "0.0",
+      "tax_amount": "0.0",
+      "total_amount": "100.0",
+      "tiered_unit_price": false,
+      "period_range_start": "2018-07-26",
+      "period_range_end": "2018-08-26",
+      "product_id": 4607632,
+      "product_version": 1,
+      "component_id": null,
+      "price_point_id": null
+    }
+  ],
+  "payments": [
+    {
+      "transaction_time": "2018-07-26T15:22:02Z",
+      "memo": "Joe Example - Monthly Product: Renewal payment",
+      "original_amount": "100.0",
+      "applied_amount": "100.0",
+      "payment_method": {
+        "card_brand": "bogus",
+        "card_expiration": "10/2020",
+        "last_four": null,
+        "masked_card_number": "XXXX-XXXX-XXXX-1",
+        "type": "credit_card"
+      },
+      "transaction_id": 253028955,
+      "prepayment": false
+    }
+  ],
+  "public_url": "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
+}
+```
 
 
 # List Invoices
@@ -428,155 +521,6 @@ result = invoices_controller.list_invoices(collect)
       "public_url": "https://www.chargifypay.com/invoice/inv_8hjtk8bz56bbp?token=fb6kpjz5rcr2vttyjs4rcv6y"
     }
   ]
-}
-```
-
-
-# Read Invoice
-
-Use this endpoint to retrieve the details for an invoice.
-
-## PDF Invoice retrieval
-
-Individual PDF Invoices can be retrieved by using the "Accept" header application/pdf or appending .pdf as the format portion of the URL:
-
-```curl -u <api_key>:x -H
-Accept:application/pdf -H
-https://acme.chargify.com/invoices/inv_8gd8tdhtd3hgr.pdf > output_file.pdf
-URL: `https://<subdomain>.chargify.com/invoices/<uid>.<format>`
-Method: GET
-Required parameters: `uid`
-Response: A single Invoice.
-```
-
-```python
-def read_invoice(self,
-                uid)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
-
-## Response Type
-
-[`Invoice`](../../doc/models/invoice.md)
-
-## Example Usage
-
-```python
-uid = 'uid0'
-
-result = invoices_controller.read_invoice(uid)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "uid": "inv_8gd8tdhtd3hgr",
-  "site_id": 51288,
-  "customer_id": 20194505,
-  "subscription_id": 20597774,
-  "number": "117",
-  "sequence_number": 117,
-  "issue_date": "2018-07-26",
-  "due_date": "2018-07-26",
-  "paid_date": "2018-07-26",
-  "status": "paid",
-  "collection_method": "automatic",
-  "payment_instructions": "Make checks payable to Acme, Inc.",
-  "currency": "USD",
-  "consolidation_level": "none",
-  "parent_invoice_uid": null,
-  "parent_invoice_number": null,
-  "group_primary_subscription_id": null,
-  "product_name": "Monthly Product",
-  "product_family_name": "Billing Plans",
-  "seller": {
-    "name": "General Goods",
-    "address": {
-      "street": "123 General Goods Way",
-      "line2": "Apt. 10",
-      "city": "Boston",
-      "state": "MA",
-      "zip": "02120",
-      "country": "US"
-    },
-    "phone": "555-555-1212"
-  },
-  "customer": {
-    "chargify_id": 20194505,
-    "first_name": "Joe",
-    "last_name": "Example",
-    "organization": null,
-    "email": "joe@example.com"
-  },
-  "memo": "Please pay within 15 days.",
-  "billing_address": {
-    "street": null,
-    "line2": null,
-    "city": null,
-    "state": null,
-    "zip": null,
-    "country": null
-  },
-  "shipping_address": {
-    "street": null,
-    "line2": null,
-    "city": null,
-    "state": null,
-    "zip": null,
-    "country": null
-  },
-  "subtotal_amount": "100.0",
-  "discount_amount": "0.0",
-  "tax_amount": "0.0",
-  "total_amount": "100.0",
-  "credit_amount": "0.0",
-  "paid_amount": "100.0",
-  "refund_amount": "0.0",
-  "due_amount": "0.0",
-  "line_items": [
-    {
-      "uid": "li_8gd8tdhhgk55k",
-      "title": "Monthly Product",
-      "description": "Jul 26, 2018 - Aug 26, 2018",
-      "quantity": "1.0",
-      "unit_price": "100.0",
-      "subtotal_amount": "100.0",
-      "discount_amount": "0.0",
-      "tax_amount": "0.0",
-      "total_amount": "100.0",
-      "tiered_unit_price": false,
-      "period_range_start": "2018-07-26",
-      "period_range_end": "2018-08-26",
-      "product_id": 4607632,
-      "product_version": 1,
-      "component_id": null,
-      "price_point_id": null
-    }
-  ],
-  "payments": [
-    {
-      "transaction_time": "2018-07-26T15:22:02Z",
-      "memo": "Joe Example - Monthly Product: Renewal payment",
-      "original_amount": "100.0",
-      "applied_amount": "100.0",
-      "payment_method": {
-        "card_brand": "bogus",
-        "card_expiration": "10/2020",
-        "last_four": null,
-        "masked_card_number": "XXXX-XXXX-XXXX-1",
-        "type": "credit_card"
-      },
-      "transaction_id": 253028955,
-      "prepayment": false
-    }
-  ],
-  "public_url": "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
 }
 ```
 
@@ -1021,98 +965,6 @@ result = invoices_controller.list_invoice_events(collect)
   "total_pages": 102
 }
 ```
-
-
-# Record Payment for Invoice
-
-This API call should be used when you want to record a payment of a given type against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
-
-## Create a Payment from the existing payment profile
-
-In order to apply a payment to an invoice using an existing payment profile, specify `type` as `payment`, the amount less than the invoice total, and the customer's `payment_profile_id`. The ID of a payment profile might be retrieved via the Payment Profiles API endpoint.
-
-```
-{
-  "type": "payment",
-  "payment": {
-    "amount": 10.00,
-    "payment_profile_id": 123
-  }
-}
-```
-
-## Create a Payment from the Subscription's Prepayment Account
-
-In order apply a prepayment to an invoice, specify the `type` as `prepayment`, and also the `amount`.
-
-```
-{
-  "type": "prepayment",
-  "payment": {
-    "amount": 10.00
-  }
-}
-```
-
-Note that the `amount` must be less than or equal to the Subscription's Prepayment account balance.
-
-## Create a Payment from the Subscription's Service Credit Account
-
-In order to apply a service credit to an invoice, specify the `type` as `service_credit`, and also the `amount`:
-
-```
-{
-  "type": "service_credit",
-  "payment": {
-    "amount": 10.00
-  }
-}
-```
-
-Note that Advanced Billing will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
-
-```python
-def record_payment_for_invoice(self,
-                              uid,
-                              body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
-| `body` | [`CreateInvoicePaymentRequest`](../../doc/models/create-invoice-payment-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`Invoice`](../../doc/models/invoice.md)
-
-## Example Usage
-
-```python
-uid = 'uid0'
-
-body = CreateInvoicePaymentRequest(
-    payment=CreateInvoicePayment(
-        amount=124.33,
-        memo='for John Smith',
-        method=InvoicePaymentMethodType.CHECK,
-        details='#0102'
-    )
-)
-
-result = invoices_controller.record_payment_for_invoice(
-    uid,
-    body=body
-)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Record Payment for Multiple Invoices
@@ -1562,6 +1414,562 @@ result = invoices_controller.list_credit_notes(collect)
 ```
 
 
+# Refund Invoice
+
+Refund an invoice, segment, or consolidated invoice.
+
+## Partial Refund for Consolidated Invoice
+
+A refund less than the total of a consolidated invoice will be split across its segments.
+
+A $50.00 refund on a $100.00 consolidated invoice with one $60.00 and one $40.00 segment, the refunded amount will be applied as 50% of each ($30.00 and $20.00 respectively).
+
+```python
+def refund_invoice(self,
+                  uid,
+                  body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
+| `body` | [`RefundInvoiceRequest`](../../doc/models/refund-invoice-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`Invoice`](../../doc/models/invoice.md)
+
+## Example Usage
+
+```python
+uid = 'uid0'
+
+body = RefundInvoiceRequest(
+    refund=RefundInvoice(
+        amount='100.00',
+        memo='Refund for Basic Plan renewal',
+        payment_id=12345,
+        external=False,
+        apply_credit=False,
+        void_invoice=True
+    )
+)
+
+result = invoices_controller.refund_invoice(
+    uid,
+    body=body
+)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Record Payment for Invoice
+
+This API call should be used when you want to record a payment of a given type against a specific invoice. If you would like to apply a payment across multiple invoices, you can use the Bulk Payment endpoint.
+
+## Create a Payment from the existing payment profile
+
+In order to apply a payment to an invoice using an existing payment profile, specify `type` as `payment`, the amount less than the invoice total, and the customer's `payment_profile_id`. The ID of a payment profile might be retrieved via the Payment Profiles API endpoint.
+
+```
+{
+  "type": "payment",
+  "payment": {
+    "amount": 10.00,
+    "payment_profile_id": 123
+  }
+}
+```
+
+## Create a Payment from the Subscription's Prepayment Account
+
+In order apply a prepayment to an invoice, specify the `type` as `prepayment`, and also the `amount`.
+
+```
+{
+  "type": "prepayment",
+  "payment": {
+    "amount": 10.00
+  }
+}
+```
+
+Note that the `amount` must be less than or equal to the Subscription's Prepayment account balance.
+
+## Create a Payment from the Subscription's Service Credit Account
+
+In order to apply a service credit to an invoice, specify the `type` as `service_credit`, and also the `amount`:
+
+```
+{
+  "type": "service_credit",
+  "payment": {
+    "amount": 10.00
+  }
+}
+```
+
+Note that Advanced Billing will attempt to fully pay the invoice's `due_amount` from the Subscription's Service Credit account. At this time, partial payments from a Service Credit Account are only allowed for consolidated invoices (subscription groups). Therefore, for normal invoices the Service Credit account balance must be greater than or equal to the invoice's `due_amount`.
+
+```python
+def record_payment_for_invoice(self,
+                              uid,
+                              body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
+| `body` | [`CreateInvoicePaymentRequest`](../../doc/models/create-invoice-payment-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`Invoice`](../../doc/models/invoice.md)
+
+## Example Usage
+
+```python
+uid = 'uid0'
+
+body = CreateInvoicePaymentRequest(
+    payment=CreateInvoicePayment(
+        amount=124.33,
+        memo='for John Smith',
+        method=InvoicePaymentMethodType.CHECK,
+        details='#0102'
+    )
+)
+
+result = invoices_controller.record_payment_for_invoice(
+    uid,
+    body=body
+)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Reopen Invoice
+
+This endpoint allows you to reopen any invoice with the "canceled" status. Invoices enter "canceled" status if they were open at the time the subscription was canceled (whether through dunning or an intentional cancellation).
+
+Invoices with "canceled" status are no longer considered to be due. Once reopened, they are considered due for payment. Payment may then be captured in one of the following ways:
+
+- Reactivating the subscription, which will capture all open invoices (See note below about automatic reopening of invoices.)
+- Recording a payment directly against the invoice
+
+A note about reactivations: any canceled invoices from the most recent active period are automatically opened as a part of the reactivation process. Reactivating via this endpoint prior to reactivation is only necessary when you wish to capture older invoices from previous periods during the reactivation.
+
+### Reopening Consolidated Invoices
+
+When reopening a consolidated invoice, all of its canceled segments will also be reopened.
+
+```python
+def reopen_invoice(self,
+                  uid)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
+
+## Response Type
+
+[`Invoice`](../../doc/models/invoice.md)
+
+## Example Usage
+
+```python
+uid = 'uid0'
+
+result = invoices_controller.reopen_invoice(uid)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Issue Invoice
+
+This endpoint allows you to issue an invoice that is in "pending" status. For example, you can issue an invoice that was created when allocating new quantity on a component and using "accrue charges" option.
+
+You cannot issue a pending child invoice that was created for a member subscription in a group.
+
+For Remittance subscriptions, the invoice will go into "open" status and payment won't be attempted. The value for `on_failed_payment` would be rejected if sent. Any prepayments or service credits that exist on subscription will be automatically applied. Additionally, if setting is on, an email will be sent for issued invoice.
+
+For Automatic subscriptions, prepayments and service credits will apply to the invoice and before payment is attempted. On successful payment, the invoice will go into "paid" status and email will be sent to the customer (if setting applies). When payment fails, the next event depends on the `on_failed_payment` value:
+
+- `leave_open_invoice` - prepayments and credits applied to invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history. This is the default option.
+- `rollback_to_pending` - prepayments and credits not applied; invoice remains in "pending" status; no email sent to the customer; payment failure recorded in the invoice history.
+- `initiate_dunning` - prepayments and credits applied to the invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history; subscription will  most likely go into "past_due" or "canceled" state (depending upon net terms and dunning settings).
+
+```python
+def issue_invoice(self,
+                 uid,
+                 body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
+| `body` | [`IssueInvoiceRequest`](../../doc/models/issue-invoice-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`Invoice`](../../doc/models/invoice.md)
+
+## Example Usage
+
+```python
+uid = 'uid0'
+
+body = IssueInvoiceRequest(
+    on_failed_payment=FailedPaymentAction.LEAVE_OPEN_INVOICE
+)
+
+result = invoices_controller.issue_invoice(
+    uid,
+    body=body
+)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# List Consolidated Invoice Segments
+
+Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`.
+
+```python
+def list_consolidated_invoice_segments(self,
+                                      options=dict())
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `invoice_uid` | `str` | Template, Required | The unique identifier of the consolidated invoice |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
+| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | Sort direction of the returned segments. |
+
+## Response Type
+
+[`ConsolidatedInvoice`](../../doc/models/consolidated-invoice.md)
+
+## Example Usage
+
+```python
+collect = {
+    'invoice_uid': 'invoice_uid0',
+    'page': 2,
+    'per_page': 50,
+    'direction': Direction.ASC
+}
+result = invoices_controller.list_consolidated_invoice_segments(collect)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "invoices": [
+    {
+      "uid": "inv_8htcd29wcq3q6",
+      "site_id": 51288,
+      "customer_id": 20153415,
+      "subscription_id": 23277588,
+      "number": "125",
+      "sequence_number": 125,
+      "issue_date": "2018-09-20",
+      "due_date": "2018-09-20",
+      "paid_date": "2018-09-20",
+      "status": "paid",
+      "collection_method": "automatic",
+      "payment_instructions": "Make checks payable to Acme, Inc.",
+      "currency": "USD",
+      "consolidation_level": "parent",
+      "parent_invoice_uid": null,
+      "parent_invoice_number": null,
+      "group_primary_subscription_id": 23277588,
+      "product_name": "Trial and setup fee",
+      "product_family_name": "Billing Plans",
+      "seller": {
+        "name": "General Goods",
+        "address": {
+          "street": "123 General Goods Way",
+          "line2": "Apt. 10",
+          "city": "Boston",
+          "state": "MA",
+          "zip": "02120",
+          "country": "US"
+        },
+        "phone": "555-555-1212"
+      },
+      "customer": {
+        "chargify_id": 20153415,
+        "first_name": "Meg",
+        "last_name": "Example",
+        "organization": "",
+        "email": "meg@example.com"
+      },
+      "memo": "Please pay within 15 days.",
+      "billing_address": {
+        "street": "123 I Love Cats Way",
+        "line2": "",
+        "city": "Boston",
+        "state": "MA",
+        "zip": "90210",
+        "country": "US"
+      },
+      "shipping_address": {
+        "street": "123 I Love Cats Way",
+        "line2": "",
+        "city": "Boston",
+        "state": "MA",
+        "zip": "90210",
+        "country": "US"
+      },
+      "subtotal_amount": "100.0",
+      "discount_amount": "0.0",
+      "tax_amount": "0.0",
+      "total_amount": "100.0",
+      "credit_amount": "0.0",
+      "paid_amount": "100.0",
+      "refund_amount": "0.0",
+      "due_amount": "0.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8htcd29wcq3q6?token=fb6kpjz5rcr2vttyjs4rcv6y"
+    },
+    {
+      "uid": "inv_8hr3546xp4h8n",
+      "site_id": 51288,
+      "customer_id": 21687686,
+      "subscription_id": 22007644,
+      "number": "124",
+      "sequence_number": 124,
+      "issue_date": "2018-09-18",
+      "due_date": "2018-09-18",
+      "paid_date": null,
+      "status": "open",
+      "collection_method": "remittance",
+      "payment_instructions": "Make checks payable to Acme, Inc.",
+      "currency": "USD",
+      "consolidation_level": "none",
+      "parent_invoice_uid": null,
+      "parent_invoice_number": null,
+      "group_primary_subscription_id": null,
+      "product_name": "Trial and setup fee",
+      "product_family_name": "Billing Plans",
+      "seller": {
+        "name": "General Goods",
+        "address": {
+          "street": "123 General Goods Way",
+          "line2": "Apt. 10",
+          "city": "Boston",
+          "state": "MA",
+          "zip": "02120",
+          "country": "US"
+        },
+        "phone": "555-555-1212"
+      },
+      "customer": {
+        "chargify_id": 21687686,
+        "first_name": "Charlene",
+        "last_name": "Tester",
+        "organization": "",
+        "email": "food@example.com"
+      },
+      "memo": "Please pay within 15 days.",
+      "billing_address": {
+        "street": "",
+        "line2": "",
+        "city": "",
+        "state": "",
+        "zip": "",
+        "country": ""
+      },
+      "shipping_address": {
+        "street": "",
+        "line2": "",
+        "city": "",
+        "state": "",
+        "zip": "",
+        "country": ""
+      },
+      "subtotal_amount": "100.0",
+      "discount_amount": "0.0",
+      "tax_amount": "0.0",
+      "total_amount": "100.0",
+      "credit_amount": "0.0",
+      "paid_amount": "0.0",
+      "refund_amount": "0.0",
+      "due_amount": "100.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8hr3546xp4h8n?token=fb6kpjz5rcr2vttyjs4rcv6y"
+    },
+    {
+      "uid": "inv_8hr3546wdwxkr",
+      "site_id": 51288,
+      "customer_id": 21687670,
+      "subscription_id": 22007627,
+      "number": "123",
+      "sequence_number": 123,
+      "issue_date": "2018-09-18",
+      "due_date": "2018-09-18",
+      "paid_date": "2018-09-18",
+      "status": "paid",
+      "collection_method": "automatic",
+      "payment_instructions": "Make checks payable to Acme, Inc.",
+      "currency": "USD",
+      "consolidation_level": "none",
+      "parent_invoice_uid": null,
+      "parent_invoice_number": null,
+      "group_primary_subscription_id": null,
+      "product_name": "Trial End - Free",
+      "product_family_name": "Billing Plans",
+      "seller": {
+        "name": "General Goods",
+        "address": {
+          "street": "123 General Goods Way",
+          "line2": "Apt. 10",
+          "city": "Boston",
+          "state": "MA",
+          "zip": "02120",
+          "country": "US"
+        },
+        "phone": "555-555-1212"
+      },
+      "customer": {
+        "chargify_id": 21687670,
+        "first_name": "Hello",
+        "last_name": "World",
+        "organization": "123",
+        "email": "example@example.com"
+      },
+      "memo": "Please pay within 15 days.",
+      "billing_address": {
+        "street": "123 Anywhere Street",
+        "line2": "",
+        "city": "Boston",
+        "state": "MA",
+        "zip": "02120",
+        "country": "US"
+      },
+      "shipping_address": {
+        "street": "",
+        "line2": "",
+        "city": "Boston",
+        "state": "AL",
+        "zip": "02120",
+        "country": "US"
+      },
+      "subtotal_amount": "0.0",
+      "discount_amount": "0.0",
+      "tax_amount": "0.0",
+      "total_amount": "0.0",
+      "credit_amount": "0.0",
+      "paid_amount": "0.0",
+      "refund_amount": "0.0",
+      "due_amount": "0.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8hr3546wdwxkr?token=fb6kpjz5rcr2vttyjs4rcv6y"
+    },
+    {
+      "uid": "inv_8hjtk8bz56bbp",
+      "site_id": 51288,
+      "customer_id": 20137757,
+      "subscription_id": 20541100,
+      "number": "122",
+      "sequence_number": 122,
+      "issue_date": "2018-09-10",
+      "due_date": "2018-09-10",
+      "paid_date": "2018-09-10",
+      "status": "paid",
+      "collection_method": "automatic",
+      "payment_instructions": "Make checks payable to Acme, Inc.",
+      "currency": "USD",
+      "consolidation_level": "none",
+      "parent_invoice_uid": null,
+      "parent_invoice_number": null,
+      "group_primary_subscription_id": null,
+      "product_name": "$0 Product",
+      "product_family_name": "Billing Plans",
+      "seller": {
+        "name": "General Goods",
+        "address": {
+          "street": "123 General Goods Way",
+          "line2": "Apt. 10",
+          "city": "Boston",
+          "state": "MA",
+          "zip": "02120",
+          "country": "US"
+        },
+        "phone": "555-555-1212"
+      },
+      "customer": {
+        "chargify_id": 20137757,
+        "first_name": "Sasha",
+        "last_name": "Example",
+        "organization": "",
+        "email": "example@example.com"
+      },
+      "memo": "Please pay within 15 days.",
+      "billing_address": {
+        "street": "123 I Love Cats Way",
+        "line2": "",
+        "city": "Catville",
+        "state": "MA",
+        "zip": "90210",
+        "country": "US"
+      },
+      "shipping_address": {
+        "street": "123 I Love Cats Way",
+        "line2": "",
+        "city": "Catville",
+        "state": "AL",
+        "zip": "90210",
+        "country": "US"
+      },
+      "subtotal_amount": "0.0",
+      "discount_amount": "0.0",
+      "tax_amount": "0.0",
+      "total_amount": "0.0",
+      "credit_amount": "0.0",
+      "paid_amount": "0.0",
+      "refund_amount": "0.0",
+      "due_amount": "0.0",
+      "public_url": "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
+    }
+  ]
+}
+```
+
+
 # Read Credit Note
 
 Use this endpoint to retrieve the details for a credit note.
@@ -1893,482 +2301,6 @@ result = invoices_controller.read_credit_note(uid)
       "memo": "Refund for overpayment",
       "original_amount": "524.9",
       "applied_amount": "200.5"
-    }
-  ]
-}
-```
-
-
-# Record Payment for Subscription
-
-Record an external payment made against a subscription that will pay partially or in full one or more invoices.
-
-Payment will be applied starting with the oldest open invoice and then next oldest, and so on until the amount of the payment is fully consumed.
-
-Excess payment will result in the creation of a prepayment on the Invoice Account.
-
-Only ungrouped or primary subscriptions may be paid using the "bulk" payment request.
-
-```python
-def record_payment_for_subscription(self,
-                                   subscription_id,
-                                   body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `body` | [`RecordPaymentRequest`](../../doc/models/record-payment-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`RecordPaymentResponse`](../../doc/models/record-payment-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-body = RecordPaymentRequest(
-    payment=CreatePayment(
-        amount='10.0',
-        memo='to pay the bills',
-        payment_details='check number 8675309',
-        payment_method=InvoicePaymentMethodType.CHECK
-    )
-)
-
-result = invoices_controller.record_payment_for_subscription(
-    subscription_id,
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "paid_invoices": [
-    {
-      "invoice_id": "inv_bchyhr6z5grby",
-      "status": "paid",
-      "due_amount": "0.0",
-      "paid_amount": "50.0"
-    },
-    {
-      "invoice_id": "inv_bchyhrgvyb6vm",
-      "status": "paid",
-      "due_amount": "0.0",
-      "paid_amount": "50.0"
-    }
-  ],
-  "prepayment": null
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Reopen Invoice
-
-This endpoint allows you to reopen any invoice with the "canceled" status. Invoices enter "canceled" status if they were open at the time the subscription was canceled (whether through dunning or an intentional cancellation).
-
-Invoices with "canceled" status are no longer considered to be due. Once reopened, they are considered due for payment. Payment may then be captured in one of the following ways:
-
-- Reactivating the subscription, which will capture all open invoices (See note below about automatic reopening of invoices.)
-- Recording a payment directly against the invoice
-
-A note about reactivations: any canceled invoices from the most recent active period are automatically opened as a part of the reactivation process. Reactivating via this endpoint prior to reactivation is only necessary when you wish to capture older invoices from previous periods during the reactivation.
-
-### Reopening Consolidated Invoices
-
-When reopening a consolidated invoice, all of its canceled segments will also be reopened.
-
-```python
-def reopen_invoice(self,
-                  uid)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
-
-## Response Type
-
-[`Invoice`](../../doc/models/invoice.md)
-
-## Example Usage
-
-```python
-uid = 'uid0'
-
-result = invoices_controller.reopen_invoice(uid)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Void Invoice
-
-This endpoint allows you to void any invoice with the "open" or "canceled" status.  It will also allow voiding of an invoice with the "pending" status if it is not a consolidated invoice.
-
-```python
-def void_invoice(self,
-                uid,
-                body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
-| `body` | [`VoidInvoiceRequest`](../../doc/models/void-invoice-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`Invoice`](../../doc/models/invoice.md)
-
-## Example Usage
-
-```python
-uid = 'uid0'
-
-body = VoidInvoiceRequest(
-    void=VoidInvoice(
-        reason='Duplicate invoice'
-    )
-)
-
-result = invoices_controller.void_invoice(
-    uid,
-    body=body
-)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# List Consolidated Invoice Segments
-
-Invoice segments returned on the index will only include totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`, `payments`, or `custom_fields`.
-
-```python
-def list_consolidated_invoice_segments(self,
-                                      options=dict())
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `invoice_uid` | `str` | Template, Required | The unique identifier of the consolidated invoice |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`. |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`. |
-| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | Sort direction of the returned segments. |
-
-## Response Type
-
-[`ConsolidatedInvoice`](../../doc/models/consolidated-invoice.md)
-
-## Example Usage
-
-```python
-collect = {
-    'invoice_uid': 'invoice_uid0',
-    'page': 2,
-    'per_page': 50,
-    'direction': Direction.ASC
-}
-result = invoices_controller.list_consolidated_invoice_segments(collect)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "invoices": [
-    {
-      "uid": "inv_8htcd29wcq3q6",
-      "site_id": 51288,
-      "customer_id": 20153415,
-      "subscription_id": 23277588,
-      "number": "125",
-      "sequence_number": 125,
-      "issue_date": "2018-09-20",
-      "due_date": "2018-09-20",
-      "paid_date": "2018-09-20",
-      "status": "paid",
-      "collection_method": "automatic",
-      "payment_instructions": "Make checks payable to Acme, Inc.",
-      "currency": "USD",
-      "consolidation_level": "parent",
-      "parent_invoice_uid": null,
-      "parent_invoice_number": null,
-      "group_primary_subscription_id": 23277588,
-      "product_name": "Trial and setup fee",
-      "product_family_name": "Billing Plans",
-      "seller": {
-        "name": "General Goods",
-        "address": {
-          "street": "123 General Goods Way",
-          "line2": "Apt. 10",
-          "city": "Boston",
-          "state": "MA",
-          "zip": "02120",
-          "country": "US"
-        },
-        "phone": "555-555-1212"
-      },
-      "customer": {
-        "chargify_id": 20153415,
-        "first_name": "Meg",
-        "last_name": "Example",
-        "organization": "",
-        "email": "meg@example.com"
-      },
-      "memo": "Please pay within 15 days.",
-      "billing_address": {
-        "street": "123 I Love Cats Way",
-        "line2": "",
-        "city": "Boston",
-        "state": "MA",
-        "zip": "90210",
-        "country": "US"
-      },
-      "shipping_address": {
-        "street": "123 I Love Cats Way",
-        "line2": "",
-        "city": "Boston",
-        "state": "MA",
-        "zip": "90210",
-        "country": "US"
-      },
-      "subtotal_amount": "100.0",
-      "discount_amount": "0.0",
-      "tax_amount": "0.0",
-      "total_amount": "100.0",
-      "credit_amount": "0.0",
-      "paid_amount": "100.0",
-      "refund_amount": "0.0",
-      "due_amount": "0.0",
-      "public_url": "https://www.chargifypay.com/invoice/inv_8htcd29wcq3q6?token=fb6kpjz5rcr2vttyjs4rcv6y"
-    },
-    {
-      "uid": "inv_8hr3546xp4h8n",
-      "site_id": 51288,
-      "customer_id": 21687686,
-      "subscription_id": 22007644,
-      "number": "124",
-      "sequence_number": 124,
-      "issue_date": "2018-09-18",
-      "due_date": "2018-09-18",
-      "paid_date": null,
-      "status": "open",
-      "collection_method": "remittance",
-      "payment_instructions": "Make checks payable to Acme, Inc.",
-      "currency": "USD",
-      "consolidation_level": "none",
-      "parent_invoice_uid": null,
-      "parent_invoice_number": null,
-      "group_primary_subscription_id": null,
-      "product_name": "Trial and setup fee",
-      "product_family_name": "Billing Plans",
-      "seller": {
-        "name": "General Goods",
-        "address": {
-          "street": "123 General Goods Way",
-          "line2": "Apt. 10",
-          "city": "Boston",
-          "state": "MA",
-          "zip": "02120",
-          "country": "US"
-        },
-        "phone": "555-555-1212"
-      },
-      "customer": {
-        "chargify_id": 21687686,
-        "first_name": "Charlene",
-        "last_name": "Tester",
-        "organization": "",
-        "email": "food@example.com"
-      },
-      "memo": "Please pay within 15 days.",
-      "billing_address": {
-        "street": "",
-        "line2": "",
-        "city": "",
-        "state": "",
-        "zip": "",
-        "country": ""
-      },
-      "shipping_address": {
-        "street": "",
-        "line2": "",
-        "city": "",
-        "state": "",
-        "zip": "",
-        "country": ""
-      },
-      "subtotal_amount": "100.0",
-      "discount_amount": "0.0",
-      "tax_amount": "0.0",
-      "total_amount": "100.0",
-      "credit_amount": "0.0",
-      "paid_amount": "0.0",
-      "refund_amount": "0.0",
-      "due_amount": "100.0",
-      "public_url": "https://www.chargifypay.com/invoice/inv_8hr3546xp4h8n?token=fb6kpjz5rcr2vttyjs4rcv6y"
-    },
-    {
-      "uid": "inv_8hr3546wdwxkr",
-      "site_id": 51288,
-      "customer_id": 21687670,
-      "subscription_id": 22007627,
-      "number": "123",
-      "sequence_number": 123,
-      "issue_date": "2018-09-18",
-      "due_date": "2018-09-18",
-      "paid_date": "2018-09-18",
-      "status": "paid",
-      "collection_method": "automatic",
-      "payment_instructions": "Make checks payable to Acme, Inc.",
-      "currency": "USD",
-      "consolidation_level": "none",
-      "parent_invoice_uid": null,
-      "parent_invoice_number": null,
-      "group_primary_subscription_id": null,
-      "product_name": "Trial End - Free",
-      "product_family_name": "Billing Plans",
-      "seller": {
-        "name": "General Goods",
-        "address": {
-          "street": "123 General Goods Way",
-          "line2": "Apt. 10",
-          "city": "Boston",
-          "state": "MA",
-          "zip": "02120",
-          "country": "US"
-        },
-        "phone": "555-555-1212"
-      },
-      "customer": {
-        "chargify_id": 21687670,
-        "first_name": "Hello",
-        "last_name": "World",
-        "organization": "123",
-        "email": "example@example.com"
-      },
-      "memo": "Please pay within 15 days.",
-      "billing_address": {
-        "street": "123 Anywhere Street",
-        "line2": "",
-        "city": "Boston",
-        "state": "MA",
-        "zip": "02120",
-        "country": "US"
-      },
-      "shipping_address": {
-        "street": "",
-        "line2": "",
-        "city": "Boston",
-        "state": "AL",
-        "zip": "02120",
-        "country": "US"
-      },
-      "subtotal_amount": "0.0",
-      "discount_amount": "0.0",
-      "tax_amount": "0.0",
-      "total_amount": "0.0",
-      "credit_amount": "0.0",
-      "paid_amount": "0.0",
-      "refund_amount": "0.0",
-      "due_amount": "0.0",
-      "public_url": "https://www.chargifypay.com/invoice/inv_8hr3546wdwxkr?token=fb6kpjz5rcr2vttyjs4rcv6y"
-    },
-    {
-      "uid": "inv_8hjtk8bz56bbp",
-      "site_id": 51288,
-      "customer_id": 20137757,
-      "subscription_id": 20541100,
-      "number": "122",
-      "sequence_number": 122,
-      "issue_date": "2018-09-10",
-      "due_date": "2018-09-10",
-      "paid_date": "2018-09-10",
-      "status": "paid",
-      "collection_method": "automatic",
-      "payment_instructions": "Make checks payable to Acme, Inc.",
-      "currency": "USD",
-      "consolidation_level": "none",
-      "parent_invoice_uid": null,
-      "parent_invoice_number": null,
-      "group_primary_subscription_id": null,
-      "product_name": "$0 Product",
-      "product_family_name": "Billing Plans",
-      "seller": {
-        "name": "General Goods",
-        "address": {
-          "street": "123 General Goods Way",
-          "line2": "Apt. 10",
-          "city": "Boston",
-          "state": "MA",
-          "zip": "02120",
-          "country": "US"
-        },
-        "phone": "555-555-1212"
-      },
-      "customer": {
-        "chargify_id": 20137757,
-        "first_name": "Sasha",
-        "last_name": "Example",
-        "organization": "",
-        "email": "example@example.com"
-      },
-      "memo": "Please pay within 15 days.",
-      "billing_address": {
-        "street": "123 I Love Cats Way",
-        "line2": "",
-        "city": "Catville",
-        "state": "MA",
-        "zip": "90210",
-        "country": "US"
-      },
-      "shipping_address": {
-        "street": "123 I Love Cats Way",
-        "line2": "",
-        "city": "Catville",
-        "state": "AL",
-        "zip": "90210",
-        "country": "US"
-      },
-      "subtotal_amount": "0.0",
-      "discount_amount": "0.0",
-      "tax_amount": "0.0",
-      "total_amount": "0.0",
-      "credit_amount": "0.0",
-      "paid_amount": "0.0",
-      "refund_amount": "0.0",
-      "due_amount": "0.0",
-      "public_url": "https://www.chargifypay.com/invoice/inv_8jzrw74xq8kxr?token=fb6kpjz5rcr2vttyjs4rcv6y"
     }
   ]
 }
@@ -2744,6 +2676,128 @@ invoices_controller.send_invoice(
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
+# Record Payment for Subscription
+
+Record an external payment made against a subscription that will pay partially or in full one or more invoices.
+
+Payment will be applied starting with the oldest open invoice and then next oldest, and so on until the amount of the payment is fully consumed.
+
+Excess payment will result in the creation of a prepayment on the Invoice Account.
+
+Only ungrouped or primary subscriptions may be paid using the "bulk" payment request.
+
+```python
+def record_payment_for_subscription(self,
+                                   subscription_id,
+                                   body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `body` | [`RecordPaymentRequest`](../../doc/models/record-payment-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`RecordPaymentResponse`](../../doc/models/record-payment-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+body = RecordPaymentRequest(
+    payment=CreatePayment(
+        amount='10.0',
+        memo='to pay the bills',
+        payment_details='check number 8675309',
+        payment_method=InvoicePaymentMethodType.CHECK
+    )
+)
+
+result = invoices_controller.record_payment_for_subscription(
+    subscription_id,
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "paid_invoices": [
+    {
+      "invoice_id": "inv_bchyhr6z5grby",
+      "status": "paid",
+      "due_amount": "0.0",
+      "paid_amount": "50.0"
+    },
+    {
+      "invoice_id": "inv_bchyhrgvyb6vm",
+      "status": "paid",
+      "due_amount": "0.0",
+      "paid_amount": "50.0"
+    }
+  ],
+  "prepayment": null
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Void Invoice
+
+This endpoint allows you to void any invoice with the "open" or "canceled" status.  It will also allow voiding of an invoice with the "pending" status if it is not a consolidated invoice.
+
+```python
+def void_invoice(self,
+                uid,
+                body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
+| `body` | [`VoidInvoiceRequest`](../../doc/models/void-invoice-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`Invoice`](../../doc/models/invoice.md)
+
+## Example Usage
+
+```python
+uid = 'uid0'
+
+body = VoidInvoiceRequest(
+    void=VoidInvoice(
+        reason='Duplicate invoice'
+    )
+)
+
+result = invoices_controller.void_invoice(
+    uid,
+    body=body
+)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
 # Preview Customer Information Changes
 
 Customer information may change after an invoice is issued which may lead to a mismatch between customer information that are present on an open invoice and actual customer information. This endpoint allows to preview these differences, if any.
@@ -3056,59 +3110,5 @@ result = invoices_controller.update_customer_information(uid)
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# Issue Invoice
-
-This endpoint allows you to issue an invoice that is in "pending" status. For example, you can issue an invoice that was created when allocating new quantity on a component and using "accrue charges" option.
-
-You cannot issue a pending child invoice that was created for a member subscription in a group.
-
-For Remittance subscriptions, the invoice will go into "open" status and payment won't be attempted. The value for `on_failed_payment` would be rejected if sent. Any prepayments or service credits that exist on subscription will be automatically applied. Additionally, if setting is on, an email will be sent for issued invoice.
-
-For Automatic subscriptions, prepayments and service credits will apply to the invoice and before payment is attempted. On successful payment, the invoice will go into "paid" status and email will be sent to the customer (if setting applies). When payment fails, the next event depends on the `on_failed_payment` value:
-
-- `leave_open_invoice` - prepayments and credits applied to invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history. This is the default option.
-- `rollback_to_pending` - prepayments and credits not applied; invoice remains in "pending" status; no email sent to the customer; payment failure recorded in the invoice history.
-- `initiate_dunning` - prepayments and credits applied to the invoice; invoice status set to "open"; email sent to the customer for the issued invoice (if setting applies); payment failure recorded in the invoice history; subscription will  most likely go into "past_due" or "canceled" state (depending upon net terms and dunning settings).
-
-```python
-def issue_invoice(self,
-                 uid,
-                 body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `uid` | `str` | Template, Required | The unique identifier for the invoice, this does not refer to the public facing invoice number. |
-| `body` | [`IssueInvoiceRequest`](../../doc/models/issue-invoice-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`Invoice`](../../doc/models/invoice.md)
-
-## Example Usage
-
-```python
-uid = 'uid0'
-
-body = IssueInvoiceRequest(
-    on_failed_payment=FailedPaymentAction.LEAVE_OPEN_INVOICE
-)
-
-result = invoices_controller.issue_invoice(
-    uid,
-    body=body
-)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 

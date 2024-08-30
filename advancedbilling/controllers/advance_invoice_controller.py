@@ -26,6 +26,60 @@ class AdvanceInvoiceController(BaseController):
     def __init__(self, config):
         super(AdvanceInvoiceController, self).__init__(config)
 
+    def void_advance_invoice(self,
+                             subscription_id,
+                             body=None):
+        """Does a POST request to /subscriptions/{subscription_id}/advance_invoice/void.json.
+
+        Void a subscription's existing advance invoice. Once voided, it can
+        later be regenerated if desired.
+        A `reason` is required in order to void, and the invoice must have an
+        open status. Voiding will cause any prepayments and credits that were
+        applied to the invoice to be returned to the subscription. For a full
+        overview of the impact of voiding, please [see our help
+        docs]($m/Invoice).
+
+        Args:
+            subscription_id (int): The Chargify id of the subscription
+            body (VoidInvoiceRequest, optional): TODO: type description here.
+
+        Returns:
+            Invoice: Response from the API. Created
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/subscriptions/{subscription_id}/advance_invoice/void.json')
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                            .key('subscription_id')
+                            .value(subscription_id)
+                            .is_required(True)
+                            .should_encode(True))
+            .header_param(Parameter()
+                          .key('Content-Type')
+                          .value('application/json'))
+            .body_param(Parameter()
+                        .value(body))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(Invoice.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+        ).execute()
+
     def issue_advance_invoice(self,
                               subscription_id,
                               body=None):
@@ -126,60 +180,6 @@ class AdvanceInvoiceController(BaseController):
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(Invoice.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-        ).execute()
-
-    def void_advance_invoice(self,
-                             subscription_id,
-                             body=None):
-        """Does a POST request to /subscriptions/{subscription_id}/advance_invoice/void.json.
-
-        Void a subscription's existing advance invoice. Once voided, it can
-        later be regenerated if desired.
-        A `reason` is required in order to void, and the invoice must have an
-        open status. Voiding will cause any prepayments and credits that were
-        applied to the invoice to be returned to the subscription. For a full
-        overview of the impact of voiding, please [see our help
-        docs]($m/Invoice).
-
-        Args:
-            subscription_id (int): The Chargify id of the subscription
-            body (VoidInvoiceRequest, optional): TODO: type description here.
-
-        Returns:
-            Invoice: Response from the API. Created
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/subscriptions/{subscription_id}/advance_invoice/void.json')
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
-            .body_param(Parameter()
-                        .value(body))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .body_serializer(APIHelper.json_serialize)
             .auth(Single('BasicAuth'))
         ).response(
             ResponseHandler()

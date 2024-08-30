@@ -114,25 +114,7 @@ class UnionTypeLookUp:
                 LeafType(str)
             ]
         ),
-        'CreateProductPricePointProductId': OneOf(
-            [
-                LeafType(int),
-                LeafType(str)
-            ]
-        ),
         'ListProductPricePointsInputProductId': OneOf(
-            [
-                LeafType(int),
-                LeafType(str)
-            ]
-        ),
-        'UpdateProductPricePointProductId': OneOf(
-            [
-                LeafType(int),
-                LeafType(str)
-            ]
-        ),
-        'UpdateProductPricePointPricePointId': OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -150,6 +132,24 @@ class UnionTypeLookUp:
                 LeafType(str)
             ]
         ),
+        'CreateProductPricePointProductId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'UpdateProductPricePointProductId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'UpdateProductPricePointPricePointId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
         'ArchiveProductPricePointProductId': OneOf(
             [
                 LeafType(int),
@@ -162,17 +162,26 @@ class UnionTypeLookUp:
                 LeafType(str)
             ]
         ),
+        'ListUsagesInputComponentId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
         'CreateUsageComponentId': OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ListUsagesInputComponentId': OneOf(
+        'AddSubscriptionToAGroupGroup': OneOf(
             [
-                LeafType(int),
-                LeafType(str)
-            ]
+                LeafType(GroupSettings),
+                LeafType(bool)
+            ],
+            Context.create(
+               is_optional=True
+            )
         ),
         'Invoice-Event': AnyOf(
             [
@@ -257,10 +266,19 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'AddSubscriptionToAGroupGroup': OneOf(
+        'AllocationPreviewItemQuantity': OneOf(
             [
-                LeafType(GroupSettings),
-                LeafType(bool)
+                LeafType(int),
+                LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'AllocationPreviewItemPreviousQuantity': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
             ],
             Context.create(
                is_optional=True
@@ -276,24 +294,6 @@ class UnionTypeLookUp:
             )
         ),
         'AllocationPreviousQuantity': OneOf(
-            [
-                LeafType(int),
-                LeafType(str)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'AllocationPreviewItemQuantity': OneOf(
-            [
-                LeafType(int),
-                LeafType(str)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'AllocationPreviewItemPreviousQuantity': OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -340,6 +340,15 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
+        'ComponentPricePointAssignmentPricePoint': OneOf(
+            [
+                LeafType(str),
+                LeafType(int)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
         'ComponentAllocationChangeAllocatedQuantity': OneOf(
             [
                 LeafType(int),
@@ -349,10 +358,43 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ComponentPricePointAssignmentPricePoint': OneOf(
+        'CreateMetafieldsRequestMetafields': OneOf(
+            [
+                LeafType(CreateMetafield),
+                LeafType(CreateMetafield,
+                         Context.create(
+                             is_array=True
+                         ))
+            ]
+        ),
+        'CreateMultiInvoicePaymentAmount': OneOf(
             [
                 LeafType(str),
-                LeafType(int)
+                LeafType(float)
+            ]
+        ),
+        'CreateOrUpdateCouponCoupon': OneOf(
+            [
+                LeafType(CreateOrUpdatePercentageCoupon),
+                LeafType(CreateOrUpdateFlatAmountCoupon)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'CreatePaymentProfileExpirationMonth': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'CreatePaymentProfileExpirationYear': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
             ],
             Context.create(
                is_optional=True
@@ -366,21 +408,6 @@ class UnionTypeLookUp:
             Context.create(
                is_optional=True,
                is_nullable=True
-            )
-        ),
-        'CreateComponentPricePointRequestPricePoint': AnyOf(
-            [
-                LeafType(CreateComponentPricePoint),
-                LeafType(CreatePrepaidUsageComponentPricePoint)
-            ]
-        ),
-        'CreateComponentPricePointsRequestPricePoints': AnyOf(
-            [
-                LeafType(CreateComponentPricePoint),
-                LeafType(CreatePrepaidUsageComponentPricePoint)
-            ],
-            Context.create(
-               is_array=True
             )
         ),
         'CreateInvoiceCouponPercentage': OneOf(
@@ -408,6 +435,27 @@ class UnionTypeLookUp:
             ],
             Context.create(
                is_optional=True
+            )
+        ),
+        'CreateOrUpdatePercentageCouponPercentage': OneOf(
+            [
+                LeafType(str),
+                LeafType(float)
+            ]
+        ),
+        'CreateComponentPricePointRequestPricePoint': AnyOf(
+            [
+                LeafType(CreateComponentPricePoint),
+                LeafType(CreatePrepaidUsageComponentPricePoint)
+            ]
+        ),
+        'CreateComponentPricePointsRequestPricePoints': AnyOf(
+            [
+                LeafType(CreateComponentPricePoint),
+                LeafType(CreatePrepaidUsageComponentPricePoint)
+            ],
+            Context.create(
+               is_array=True
             )
         ),
         'CreateInvoiceItemQuantity': OneOf(
@@ -473,55 +521,28 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateMetafieldsRequestMetafields': OneOf(
-            [
-                LeafType(CreateMetafield),
-                LeafType(CreateMetafield,
-                         Context.create(
-                             is_array=True
-                         ))
-            ]
-        ),
-        'CreateMultiInvoicePaymentAmount': OneOf(
-            [
-                LeafType(str),
-                LeafType(float)
-            ]
-        ),
-        'CreateOrUpdateCouponCoupon': OneOf(
-            [
-                LeafType(CreateOrUpdatePercentageCoupon),
-                LeafType(CreateOrUpdateFlatAmountCoupon)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'CreateOrUpdatePercentageCouponPercentage': OneOf(
-            [
-                LeafType(str),
-                LeafType(float)
-            ]
-        ),
         'CreateOrUpdateSegmentPriceUnitPrice': OneOf(
             [
                 LeafType(str),
                 LeafType(float)
             ]
         ),
-        'CreatePaymentProfileExpirationMonth': OneOf(
+        'CustomerErrorResponseErrors': OneOf(
             [
-                LeafType(int),
-                LeafType(str)
+                LeafType(CustomerError),
+                LeafType(str,
+                         Context.create(
+                             is_array=True
+                         ))
             ],
             Context.create(
                is_optional=True
             )
         ),
-        'CreatePaymentProfileExpirationYear': OneOf(
+        'CreateSubscriptionOfferId': OneOf(
             [
-                LeafType(int),
-                LeafType(str)
+                LeafType(str),
+                LeafType(int)
             ],
             Context.create(
                is_optional=True
@@ -571,15 +592,6 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSubscriptionOfferId': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
         'CreateSubscriptionComponentComponentId': OneOf(
             [
                 LeafType(int),
@@ -607,13 +619,10 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CustomerErrorResponseErrors': OneOf(
+        'EBBComponentUnitPrice': OneOf(
             [
-                LeafType(CustomerError),
-                LeafType(str,
-                         Context.create(
-                             is_array=True
-                         ))
+                LeafType(str),
+                LeafType(float)
             ],
             Context.create(
                is_optional=True
@@ -624,15 +633,6 @@ class UnionTypeLookUp:
                 LeafType(str),
                 LeafType(float)
             ]
-        ),
-        'EBBComponentUnitPrice': OneOf(
-            [
-                LeafType(str),
-                LeafType(float)
-            ],
-            Context.create(
-               is_optional=True
-            )
         ),
         'EventEventSpecificData': OneOf(
             [
@@ -666,28 +666,6 @@ class UnionTypeLookUp:
                 LeafType(str)
             ]
         ),
-        'MetafieldEnum': OneOf(
-            [
-                LeafType(str),
-                LeafType(str,
-                         Context.create(
-                             is_array=True
-                         ))
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True
-            )
-        ),
-        'MeteredComponentUnitPrice': OneOf(
-            [
-                LeafType(str),
-                LeafType(float)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
         'OnOffComponentUnitPrice': OneOf(
             [
                 LeafType(str),
@@ -710,6 +688,15 @@ class UnionTypeLookUp:
             [
                 LeafType(int),
                 LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'MeteredComponentUnitPrice': OneOf(
+            [
+                LeafType(str),
+                LeafType(float)
             ],
             Context.create(
                is_optional=True
@@ -748,6 +735,43 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
+        'MetafieldEnum': OneOf(
+            [
+                LeafType(str),
+                LeafType(str,
+                         Context.create(
+                             is_array=True
+                         ))
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
+            )
+        ),
+        'QuantityBasedComponentUnitPrice': OneOf(
+            [
+                LeafType(str),
+                LeafType(float)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'RefundConsolidatedInvoiceSegmentUids': OneOf(
+            [
+                LeafType(str,
+                         Context.create(
+                             is_array=True
+                         )),
+                LeafType(str)
+            ]
+        ),
+        'RefundInvoiceRequestRefund': AnyOf(
+            [
+                LeafType(RefundInvoice),
+                LeafType(RefundConsolidatedInvoice)
+            ]
+        ),
         'PriceStartingQuantity': OneOf(
             [
                 LeafType(int),
@@ -770,15 +794,6 @@ class UnionTypeLookUp:
                 LeafType(str)
             ]
         ),
-        'QuantityBasedComponentUnitPrice': OneOf(
-            [
-                LeafType(str),
-                LeafType(float)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
         'ReactivateSubscriptionRequestResume': OneOf(
             [
                 LeafType(bool),
@@ -788,28 +803,25 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'RefundConsolidatedInvoiceSegmentUids': OneOf(
-            [
-                LeafType(str,
-                         Context.create(
-                             is_array=True
-                         )),
-                LeafType(str)
-            ]
-        ),
-        'RefundInvoiceRequestRefund': AnyOf(
-            [
-                LeafType(RefundInvoice),
-                LeafType(RefundConsolidatedInvoice)
-            ]
-        ),
         'RefundPrepaymentAmount': OneOf(
             [
                 LeafType(str),
                 LeafType(float)
             ]
         ),
-        'RenewalPreviewComponentComponentId': OneOf(
+        'SubscriptionCustomPricePriceInCents': OneOf(
+            [
+                LeafType(str),
+                LeafType(int)
+            ]
+        ),
+        'SubscriptionCustomPriceInterval': OneOf(
+            [
+                LeafType(str),
+                LeafType(int)
+            ]
+        ),
+        'SubscriptionCustomPriceTrialPriceInCents': OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -818,7 +830,25 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'RenewalPreviewComponentPricePointId': OneOf(
+        'SubscriptionCustomPriceTrialInterval': OneOf(
+            [
+                LeafType(str),
+                LeafType(int)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'SubscriptionCustomPriceInitialChargeInCents': OneOf(
+            [
+                LeafType(str),
+                LeafType(int)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'SubscriptionCustomPriceExpirationInterval': OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -871,6 +901,24 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
+        'RenewalPreviewComponentComponentId': OneOf(
+            [
+                LeafType(str),
+                LeafType(int)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'RenewalPreviewComponentPricePointId': OneOf(
+            [
+                LeafType(str),
+                LeafType(int)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
         'SubscriptionComponentAllocatedQuantity': OneOf(
             [
                 LeafType(int),
@@ -879,61 +927,6 @@ class UnionTypeLookUp:
             Context.create(
                is_optional=True
             )
-        ),
-        'SubscriptionCustomPricePriceInCents': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ]
-        ),
-        'SubscriptionCustomPriceInterval': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ]
-        ),
-        'SubscriptionCustomPriceTrialPriceInCents': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'SubscriptionCustomPriceTrialInterval': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'SubscriptionCustomPriceInitialChargeInCents': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'SubscriptionCustomPriceExpirationInterval': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'SubscriptionGroupCreateErrorResponseErrors': OneOf(
-            [
-                LeafType(SubscriptionGroupMembersArrayError),
-                LeafType(SubscriptionGroupSingleError),
-                LeafType(str)
-            ]
         ),
         'SubscriptionGroupCreditCardFullNumber': OneOf(
             [
@@ -961,6 +954,13 @@ class UnionTypeLookUp:
             Context.create(
                is_optional=True
             )
+        ),
+        'SubscriptionGroupCreateErrorResponseErrors': OneOf(
+            [
+                LeafType(SubscriptionGroupMembersArrayError),
+                LeafType(SubscriptionGroupSingleError),
+                LeafType(str)
+            ]
         ),
         'SubscriptionGroupSignupComponentComponentId': OneOf(
             [
@@ -998,13 +998,19 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'UpdateMetafieldsRequestMetafields': OneOf(
+        'UpdateSubscriptionSnapDay': OneOf(
             [
-                LeafType(UpdateMetafield),
-                LeafType(UpdateMetafield,
-                         Context.create(
-                             is_array=True
-                         ))
+                LeafType(SnapDay),
+                LeafType(int)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'UpdateSubscriptionNetTerms': OneOf(
+            [
+                LeafType(str),
+                LeafType(int)
             ],
             Context.create(
                is_optional=True
@@ -1037,28 +1043,22 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'UpdateSubscriptionSnapDay': OneOf(
-            [
-                LeafType(SnapDay),
-                LeafType(int)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'UpdateSubscriptionNetTerms': OneOf(
-            [
-                LeafType(str),
-                LeafType(int)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
         'UsageQuantity': OneOf(
             [
                 LeafType(int),
                 LeafType(str)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'UpdateMetafieldsRequestMetafields': OneOf(
+            [
+                LeafType(UpdateMetafield),
+                LeafType(UpdateMetafield,
+                         Context.create(
+                             is_array=True
+                         ))
             ],
             Context.create(
                is_optional=True

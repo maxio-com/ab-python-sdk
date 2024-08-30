@@ -10,59 +10,11 @@ subscription_notes_controller = client.subscription_notes
 
 ## Methods
 
-* [Create Subscription Note](../../doc/controllers/subscription-notes.md#create-subscription-note)
 * [List Subscription Notes](../../doc/controllers/subscription-notes.md#list-subscription-notes)
+* [Delete Subscription Note](../../doc/controllers/subscription-notes.md#delete-subscription-note)
+* [Create Subscription Note](../../doc/controllers/subscription-notes.md#create-subscription-note)
 * [Read Subscription Note](../../doc/controllers/subscription-notes.md#read-subscription-note)
 * [Update Subscription Note](../../doc/controllers/subscription-notes.md#update-subscription-note)
-* [Delete Subscription Note](../../doc/controllers/subscription-notes.md#delete-subscription-note)
-
-
-# Create Subscription Note
-
-Use the following method to create a note for a subscription.
-
-## How to Use Subscription Notes
-
-Notes allow you to record information about a particular Subscription in a free text format.
-
-If you have structured data such as birth date, color, etc., consider using Metadata instead.
-
-Full documentation on how to use Notes in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24251712214413-Subscription-Summary-Overview).
-
-```python
-def create_subscription_note(self,
-                            subscription_id,
-                            body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `body` | [`UpdateSubscriptionNoteRequest`](../../doc/models/update-subscription-note-request.md) | Body, Optional | Updatable fields for Subscription Note |
-
-## Response Type
-
-[`SubscriptionNoteResponse`](../../doc/models/subscription-note-response.md)
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-body = UpdateSubscriptionNoteRequest(
-    note=UpdateSubscriptionNote(
-        body='New test note.',
-        sticky=True
-    )
-)
-
-result = subscription_notes_controller.create_subscription_note(
-    subscription_id,
-    body=body
-)
-```
 
 
 # List Subscription Notes
@@ -122,6 +74,89 @@ result = subscription_notes_controller.list_subscription_notes(collect)
     }
   }
 ]
+```
+
+
+# Delete Subscription Note
+
+Use the following method to delete a note for a Subscription.
+
+```python
+def delete_subscription_note(self,
+                            subscription_id,
+                            note_id)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `note_id` | `int` | Template, Required | The Advanced Billing id of the note |
+
+## Response Type
+
+`void`
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+note_id = 66
+
+subscription_notes_controller.delete_subscription_note(
+    subscription_id,
+    note_id
+)
+```
+
+
+# Create Subscription Note
+
+Use the following method to create a note for a subscription.
+
+## How to Use Subscription Notes
+
+Notes allow you to record information about a particular Subscription in a free text format.
+
+If you have structured data such as birth date, color, etc., consider using Metadata instead.
+
+Full documentation on how to use Notes in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24251712214413-Subscription-Summary-Overview).
+
+```python
+def create_subscription_note(self,
+                            subscription_id,
+                            body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `body` | [`UpdateSubscriptionNoteRequest`](../../doc/models/update-subscription-note-request.md) | Body, Optional | Updatable fields for Subscription Note |
+
+## Response Type
+
+[`SubscriptionNoteResponse`](../../doc/models/subscription-note-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+body = UpdateSubscriptionNoteRequest(
+    note=UpdateSubscriptionNote(
+        body='New test note.',
+        sticky=True
+    )
+)
+
+result = subscription_notes_controller.create_subscription_note(
+    subscription_id,
+    body=body
+)
 ```
 
 
@@ -216,41 +251,6 @@ result = subscription_notes_controller.update_subscription_note(
     subscription_id,
     note_id,
     body=body
-)
-```
-
-
-# Delete Subscription Note
-
-Use the following method to delete a note for a Subscription.
-
-```python
-def delete_subscription_note(self,
-                            subscription_id,
-                            note_id)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `note_id` | `int` | Template, Required | The Advanced Billing id of the note |
-
-## Response Type
-
-`void`
-
-## Example Usage
-
-```python
-subscription_id = 222
-
-note_id = 66
-
-subscription_notes_controller.delete_subscription_note(
-    subscription_id,
-    note_id
 )
 ```
 

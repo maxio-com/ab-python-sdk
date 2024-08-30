@@ -10,12 +10,267 @@ webhooks_controller = client.webhooks
 
 ## Methods
 
-* [List Webhooks](../../doc/controllers/webhooks.md#list-webhooks)
-* [Enable Webhooks](../../doc/controllers/webhooks.md#enable-webhooks)
-* [Replay Webhooks](../../doc/controllers/webhooks.md#replay-webhooks)
 * [Create Endpoint](../../doc/controllers/webhooks.md#create-endpoint)
-* [List Endpoints](../../doc/controllers/webhooks.md#list-endpoints)
 * [Update Endpoint](../../doc/controllers/webhooks.md#update-endpoint)
+* [Enable Webhooks](../../doc/controllers/webhooks.md#enable-webhooks)
+* [List Endpoints](../../doc/controllers/webhooks.md#list-endpoints)
+* [Replay Webhooks](../../doc/controllers/webhooks.md#replay-webhooks)
+* [List Webhooks](../../doc/controllers/webhooks.md#list-webhooks)
+
+
+# Create Endpoint
+
+The Chargify API allows you to create an endpoint and assign a list of webhooks subscriptions (events) to it.
+
+You can check available events here.
+[Event keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhooks-Reference#events)
+
+```python
+def create_endpoint(self,
+                   body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`CreateOrUpdateEndpointRequest`](../../doc/models/create-or-update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
+
+## Response Type
+
+[`EndpointResponse`](../../doc/models/endpoint-response.md)
+
+## Example Usage
+
+```python
+body = CreateOrUpdateEndpointRequest(
+    endpoint=CreateOrUpdateEndpoint(
+        url='https://your.site/webhooks',
+        webhook_subscriptions=[
+            WebhookSubscription.PAYMENT_SUCCESS,
+            WebhookSubscription.PAYMENT_FAILURE
+        ]
+    )
+)
+
+result = webhooks_controller.create_endpoint(
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "endpoint": {
+    "id": 1,
+    "url": "https://your.site/webhooks",
+    "site_id": 1,
+    "status": "enabled",
+    "webhook_subscriptions": [
+      "payment_success",
+      "payment_failure"
+    ]
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Update Endpoint
+
+You can update an Endpoint via the API with a PUT request to the resource endpoint.
+
+You can change the `url` of your endpoint which consumes webhooks or list of `webhook_subscriptions`.
+Check available [Event keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhooks-Reference#events).
+
+Always send a complete list of events which you want subscribe/watch.
+Sending an PUT request for existing endpoint with empty list of `webhook_subscriptions` will end with unsubscribe from all events.
+
+If you want unsubscribe from specific event, just send a list of `webhook_subscriptions` without the specific event key.
+
+```python
+def update_endpoint(self,
+                   endpoint_id,
+                   body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `endpoint_id` | `int` | Template, Required | The Advanced Billing id for the endpoint that should be updated |
+| `body` | [`CreateOrUpdateEndpointRequest`](../../doc/models/create-or-update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
+
+## Response Type
+
+[`EndpointResponse`](../../doc/models/endpoint-response.md)
+
+## Example Usage
+
+```python
+endpoint_id = 42
+
+body = CreateOrUpdateEndpointRequest(
+    endpoint=CreateOrUpdateEndpoint(
+        url='https://yout.site/webhooks/1/json.',
+        webhook_subscriptions=[
+            WebhookSubscription.PAYMENT_FAILURE,
+            WebhookSubscription.PAYMENT_SUCCESS,
+            WebhookSubscription.REFUND_FAILURE
+        ]
+    )
+)
+
+result = webhooks_controller.update_endpoint(
+    endpoint_id,
+    body=body
+)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
+# Enable Webhooks
+
+This method allows you to enable webhooks via API for your site
+
+```python
+def enable_webhooks(self,
+                   body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`EnableWebhooksRequest`](../../doc/models/enable-webhooks-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`EnableWebhooksResponse`](../../doc/models/enable-webhooks-response.md)
+
+## Example Usage
+
+```python
+body = EnableWebhooksRequest(
+    webhooks_enabled=True
+)
+
+result = webhooks_controller.enable_webhooks(
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "webhooks_enabled": true
+}
+```
+
+
+# List Endpoints
+
+This method returns created endpoints for site.
+
+```python
+def list_endpoints(self)
+```
+
+## Response Type
+
+[`List[Endpoint]`](../../doc/models/endpoint.md)
+
+## Example Usage
+
+```python
+result = webhooks_controller.list_endpoints()
+```
+
+## Example Response *(as JSON)*
+
+```json
+[
+  {
+    "id": 11,
+    "url": "https://foobar.com/webhooks",
+    "site_id": 1,
+    "status": "enabled",
+    "webhook_subscriptions": [
+      "payment_success",
+      "payment_failure"
+    ]
+  },
+  {
+    "id": 12,
+    "url": "https:/example.com/webhooks",
+    "site_id": 1,
+    "status": "enabled",
+    "webhook_subscriptions": [
+      "payment_success",
+      "payment_failure",
+      "refund_failure"
+    ]
+  }
+]
+```
+
+
+# Replay Webhooks
+
+Posting to the replay endpoint does not immediately resend the webhooks. They are added to a queue and will be sent as soon as possible, depending on available system resources.
+
+You may submit an array of up to 1000 webhook IDs to replay in the request.
+
+```python
+def replay_webhooks(self,
+                   body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`ReplayWebhooksRequest`](../../doc/models/replay-webhooks-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`ReplayWebhooksResponse`](../../doc/models/replay-webhooks-response.md)
+
+## Example Usage
+
+```python
+body = ReplayWebhooksRequest(
+    ids=[
+        123456789,
+        123456788
+    ]
+)
+
+result = webhooks_controller.replay_webhooks(
+    body=body
+)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "status": "ok"
+}
+```
 
 
 # List Webhooks
@@ -104,259 +359,4 @@ result = webhooks_controller.list_webhooks(collect)
   }
 ]
 ```
-
-
-# Enable Webhooks
-
-This method allows you to enable webhooks via API for your site
-
-```python
-def enable_webhooks(self,
-                   body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`EnableWebhooksRequest`](../../doc/models/enable-webhooks-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`EnableWebhooksResponse`](../../doc/models/enable-webhooks-response.md)
-
-## Example Usage
-
-```python
-body = EnableWebhooksRequest(
-    webhooks_enabled=True
-)
-
-result = webhooks_controller.enable_webhooks(
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "webhooks_enabled": true
-}
-```
-
-
-# Replay Webhooks
-
-Posting to the replay endpoint does not immediately resend the webhooks. They are added to a queue and will be sent as soon as possible, depending on available system resources.
-
-You may submit an array of up to 1000 webhook IDs to replay in the request.
-
-```python
-def replay_webhooks(self,
-                   body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`ReplayWebhooksRequest`](../../doc/models/replay-webhooks-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`ReplayWebhooksResponse`](../../doc/models/replay-webhooks-response.md)
-
-## Example Usage
-
-```python
-body = ReplayWebhooksRequest(
-    ids=[
-        123456789,
-        123456788
-    ]
-)
-
-result = webhooks_controller.replay_webhooks(
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "status": "ok"
-}
-```
-
-
-# Create Endpoint
-
-The Chargify API allows you to create an endpoint and assign a list of webhooks subscriptions (events) to it.
-
-You can check available events here.
-[Event keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhooks-Reference#events)
-
-```python
-def create_endpoint(self,
-                   body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `body` | [`CreateOrUpdateEndpointRequest`](../../doc/models/create-or-update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
-
-## Response Type
-
-[`EndpointResponse`](../../doc/models/endpoint-response.md)
-
-## Example Usage
-
-```python
-body = CreateOrUpdateEndpointRequest(
-    endpoint=CreateOrUpdateEndpoint(
-        url='https://your.site/webhooks',
-        webhook_subscriptions=[
-            WebhookSubscription.PAYMENT_SUCCESS,
-            WebhookSubscription.PAYMENT_FAILURE
-        ]
-    )
-)
-
-result = webhooks_controller.create_endpoint(
-    body=body
-)
-```
-
-## Example Response *(as JSON)*
-
-```json
-{
-  "endpoint": {
-    "id": 1,
-    "url": "https://your.site/webhooks",
-    "site_id": 1,
-    "status": "enabled",
-    "webhook_subscriptions": [
-      "payment_success",
-      "payment_failure"
-    ]
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
-# List Endpoints
-
-This method returns created endpoints for site.
-
-```python
-def list_endpoints(self)
-```
-
-## Response Type
-
-[`List[Endpoint]`](../../doc/models/endpoint.md)
-
-## Example Usage
-
-```python
-result = webhooks_controller.list_endpoints()
-```
-
-## Example Response *(as JSON)*
-
-```json
-[
-  {
-    "id": 11,
-    "url": "https://foobar.com/webhooks",
-    "site_id": 1,
-    "status": "enabled",
-    "webhook_subscriptions": [
-      "payment_success",
-      "payment_failure"
-    ]
-  },
-  {
-    "id": 12,
-    "url": "https:/example.com/webhooks",
-    "site_id": 1,
-    "status": "enabled",
-    "webhook_subscriptions": [
-      "payment_success",
-      "payment_failure",
-      "refund_failure"
-    ]
-  }
-]
-```
-
-
-# Update Endpoint
-
-You can update an Endpoint via the API with a PUT request to the resource endpoint.
-
-You can change the `url` of your endpoint which consumes webhooks or list of `webhook_subscriptions`.
-Check available [Event keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhooks-Reference#events).
-
-Always send a complete list of events which you want subscribe/watch.
-Sending an PUT request for existing endpoint with empty list of `webhook_subscriptions` will end with unsubscribe from all events.
-
-If you want unsubscribe from specific event, just send a list of `webhook_subscriptions` without the specific event key.
-
-```python
-def update_endpoint(self,
-                   endpoint_id,
-                   body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `endpoint_id` | `int` | Template, Required | The Advanced Billing id for the endpoint that should be updated |
-| `body` | [`CreateOrUpdateEndpointRequest`](../../doc/models/create-or-update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
-
-## Response Type
-
-[`EndpointResponse`](../../doc/models/endpoint-response.md)
-
-## Example Usage
-
-```python
-endpoint_id = 42
-
-body = CreateOrUpdateEndpointRequest(
-    endpoint=CreateOrUpdateEndpoint(
-        url='https://yout.site/webhooks/1/json.',
-        webhook_subscriptions=[
-            WebhookSubscription.PAYMENT_FAILURE,
-            WebhookSubscription.PAYMENT_SUCCESS,
-            WebhookSubscription.REFUND_FAILURE
-        ]
-    )
-)
-
-result = webhooks_controller.update_endpoint(
-    endpoint_id,
-    body=body
-)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 

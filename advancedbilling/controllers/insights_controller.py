@@ -17,10 +17,10 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.types.array_serialization_format import SerializationFormats
 from apimatic_core.authentication.multiple.single_auth import Single
-from advancedbilling.models.site_summary import SiteSummary
-from advancedbilling.models.mrr_response import MRRResponse
 from advancedbilling.models.list_mrr_response import ListMRRResponse
 from advancedbilling.models.subscription_mrr_response import SubscriptionMRRResponse
+from advancedbilling.models.site_summary import SiteSummary
+from advancedbilling.models.mrr_response import MRRResponse
 from advancedbilling.exceptions.subscriptions_mrr_error_response_exception import SubscriptionsMrrErrorResponseException
 
 
@@ -29,91 +29,6 @@ class InsightsController(BaseController):
     """A Controller to access Endpoints in the advancedbilling API."""
     def __init__(self, config):
         super(InsightsController, self).__init__(config)
-
-    def read_site_stats(self):
-        """Does a GET request to /stats.json.
-
-        The Stats API is a very basic view of some Site-level stats. This API
-        call only answers with JSON responses. An XML version is not
-        provided.
-        ## Stats Documentation
-        There currently is not a complimentary matching set of documentation
-        that compliments this endpoint. However, each Site's dashboard will
-        reflect the summary of information provided in the Stats reposnse.
-        ```
-        https://subdomain.chargify.com/dashboard
-        ```
-
-        Returns:
-            SiteSummary: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/stats.json')
-            .http_method(HttpMethodEnum.GET)
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(SiteSummary.from_dictionary)
-        ).execute()
-
-    @deprecated()
-    def read_mrr(self,
-                 at_time=None,
-                 subscription_id=None):
-        """Does a GET request to /mrr.json.
-
-        This endpoint returns your site's current MRR, including plan and
-        usage breakouts.
-
-        Args:
-            at_time (datetime, optional): submit a timestamp in ISO8601 format
-                to request MRR for a historic time
-            subscription_id (int, optional): submit the id of a subscription
-                in order to limit results
-
-        Returns:
-            MRRResponse: Response from the API. OK
-
-        Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
-
-        """
-
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/mrr.json')
-            .http_method(HttpMethodEnum.GET)
-            .query_param(Parameter()
-                         .key('at_time')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, at_time)))
-            .query_param(Parameter()
-                         .key('subscription_id')
-                         .value(subscription_id))
-            .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(MRRResponse.from_dictionary)
-        ).execute()
 
     @deprecated()
     def list_mrr_movements(self,
@@ -288,4 +203,89 @@ class InsightsController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionMRRResponse.from_dictionary)
             .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SubscriptionsMrrErrorResponseException)
+        ).execute()
+
+    def read_site_stats(self):
+        """Does a GET request to /stats.json.
+
+        The Stats API is a very basic view of some Site-level stats. This API
+        call only answers with JSON responses. An XML version is not
+        provided.
+        ## Stats Documentation
+        There currently is not a complimentary matching set of documentation
+        that compliments this endpoint. However, each Site's dashboard will
+        reflect the summary of information provided in the Stats reposnse.
+        ```
+        https://subdomain.chargify.com/dashboard
+        ```
+
+        Returns:
+            SiteSummary: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/stats.json')
+            .http_method(HttpMethodEnum.GET)
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SiteSummary.from_dictionary)
+        ).execute()
+
+    @deprecated()
+    def read_mrr(self,
+                 at_time=None,
+                 subscription_id=None):
+        """Does a GET request to /mrr.json.
+
+        This endpoint returns your site's current MRR, including plan and
+        usage breakouts.
+
+        Args:
+            at_time (datetime, optional): submit a timestamp in ISO8601 format
+                to request MRR for a historic time
+            subscription_id (int, optional): submit the id of a subscription
+                in order to limit results
+
+        Returns:
+            MRRResponse: Response from the API. OK
+
+        Raises:
+            APIException: When an error occurs while fetching the data from
+                the remote API. This exception includes the HTTP Response
+                code, an error message, and the HTTP body that was received in
+                the request.
+
+        """
+
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.DEFAULT)
+            .path('/mrr.json')
+            .http_method(HttpMethodEnum.GET)
+            .query_param(Parameter()
+                         .key('at_time')
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, at_time)))
+            .query_param(Parameter()
+                         .key('subscription_id')
+                         .value(subscription_id))
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(MRRResponse.from_dictionary)
         ).execute()
