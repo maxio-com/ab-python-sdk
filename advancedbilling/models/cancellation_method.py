@@ -21,6 +21,7 @@ class CancellationMethod(object):
         DUNNING: TODO: type description here.
         BILLING_PORTAL: TODO: type description here.
         UNKNOWN: TODO: type description here.
+        IMPORTED: TODO: type description here.
 
     """
     MERCHANT_UI = 'merchant_ui'
@@ -32,4 +33,6 @@ class CancellationMethod(object):
     BILLING_PORTAL = 'billing_portal'
 
     UNKNOWN = 'unknown'
+
+    IMPORTED = 'imported'
 
