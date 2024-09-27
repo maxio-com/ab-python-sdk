@@ -26,6 +26,7 @@ client = AdvancedBillingClient(
         username='BasicAuthUserName',
         password='BasicAuthPassword'
     ),
+    environment=Environment.PRODUCTION,
     subdomain='subdomain',
     domain='chargify.com'
 )
