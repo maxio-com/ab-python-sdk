@@ -17,6 +17,8 @@ class ListProductsFilter(object):
     TODO: type model description here.
 
     Attributes:
+        ids (List[int]): Allows fetching products with matching id based on
+            provided values. Use in query `filter[ids]=1,2,3`.
         prepaid_product_price_point (PrepaidProductPricePointFilter): Allows
             fetching products only if a prepaid product price point is present
             or not. To use this filter you also have to include the following
@@ -32,22 +34,27 @@ class ListProductsFilter(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
+        "ids": 'ids',
         "prepaid_product_price_point": 'prepaid_product_price_point',
         "use_site_exchange_rate": 'use_site_exchange_rate'
     }
 
     _optionals = [
+        'ids',
         'prepaid_product_price_point',
         'use_site_exchange_rate',
     ]
 
     def __init__(self,
+                 ids=APIHelper.SKIP,
                  prepaid_product_price_point=APIHelper.SKIP,
                  use_site_exchange_rate=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the ListProductsFilter class"""
 
         # Initialize members of the class
+        if ids is not APIHelper.SKIP:
+            self.ids = ids 
         if prepaid_product_price_point is not APIHelper.SKIP:
             self.prepaid_product_price_point = prepaid_product_price_point 
         if use_site_exchange_rate is not APIHelper.SKIP:
@@ -75,6 +82,7 @@ class ListProductsFilter(object):
             return None
 
         # Extract variables from the dictionary
+        ids = dictionary.get("ids") if dictionary.get("ids") else APIHelper.SKIP
         prepaid_product_price_point = PrepaidProductPricePointFilter.from_dictionary(dictionary.get('prepaid_product_price_point')) if 'prepaid_product_price_point' in dictionary.keys() else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
@@ -82,6 +90,7 @@ class ListProductsFilter(object):
             if key in dictionary:
                 del dictionary[key]
         # Return an object of this model
-        return cls(prepaid_product_price_point,
+        return cls(ids,
+                   prepaid_product_price_point,
                    use_site_exchange_rate,
                    dictionary)

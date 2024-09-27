@@ -495,6 +495,13 @@ def list_products(self,
 ```python
 collect = {
     'date_field': BasicDateField.UPDATED_AT,
+    'filter': ListProductsFilter(
+        ids=[
+            1,
+            2,
+            3
+        ]
+    ),
     'page': 2,
     'per_page': 50,
     'include_archived': True,
