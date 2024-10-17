@@ -28,6 +28,7 @@
 | `metafields` | `Dict[str, str]` | Optional | (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |
 | `parent_id` | `int` | Optional | The parent ID in Chargify if applicable. Parent is another Customer object. |
 | `salesforce_id` | `str` | Optional | (Optional) The Salesforce ID of the customer. |
+| `default_auto_renewal_profile_id` | `int` | Optional | (Optional) The default auto-renewal profile ID for the customer |
 
 ## Example (as JSON)
 

@@ -63,7 +63,7 @@ class EventsController(BaseController):
                 "id": 351,
                 "key": "subscription_product_change",
                 "message": "Product changed on Marky Mark's subscription from
-                'Basic' to 'Pro'",
+        'Basic' to 'Pro'",
                 "subscription_id": 205,
                 "event_specific_data": {
                     "new_product_id": 3,
@@ -80,7 +80,7 @@ class EventsController(BaseController):
                  "id": 353,
                  "key": "subscription_state_change",
                  "message": "State changed on Marky Mark's subscription to Pro
-                 from trialing to active",
+        from trialing to active",
                  "subscription_id": 205,
                  "event_specific_data": {
                      "new_subscription_state": "active",
@@ -210,8 +210,7 @@ class EventsController(BaseController):
                                  options=dict()):
         """Does a GET request to /subscriptions/{subscription_id}/events.json.
 
-        The following request will return a list of events for a
-        subscription.
+        The following request will return a list of events for a subscription.
         Each event type has its own `event_specific_data` specified.
 
         Args:

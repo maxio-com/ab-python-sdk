@@ -37,8 +37,7 @@ class CreditCardPaymentProfile(object):
             profile with the provided `vault_token`. Use `bogus` for testing.
         vault_token (str): The “token” provided by your vault storage for an
             already stored payment profile.
-        billing_address (str): The current billing street address for the
-            card.
+        billing_address (str): The current billing street address for the card.
         billing_city (str): The current billing address city for the card.
         billing_state (str): The current billing address state for the card.
         billing_zip (str): The current billing address zip code for the card.

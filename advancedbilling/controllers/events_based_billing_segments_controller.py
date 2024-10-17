@@ -47,8 +47,7 @@ class EventsBasedBillingSegmentsController(BaseController):
             component_id (str): ID or Handle for the Component
             price_point_id (str): ID or Handle for the Price Point belonging
                 to the Component
-            body (CreateSegmentRequest, optional): TODO: type description
-                here.
+            body (CreateSegmentRequest, optional): TODO: type description here.
 
         Returns:
             SegmentResponse: Response from the API. Created
@@ -187,8 +186,7 @@ class EventsBasedBillingSegmentsController(BaseController):
         """Does a PUT request to /components/{component_id}/price_points/{price_point_id}/segments/{id}.json.
 
         This endpoint updates a single Segment for a Component with a
-        segmented Metric. It allows you to update the pricing for the
-        segment.
+        segmented Metric. It allows you to update the pricing for the segment.
         You may specify component and/or price point by using either the
         numeric ID or the `handle:gold` syntax.
 
@@ -197,8 +195,7 @@ class EventsBasedBillingSegmentsController(BaseController):
             price_point_id (str): ID or Handle of the Price Point belonging to
                 the Component
             id (float): The ID of the Segment
-            body (UpdateSegmentRequest, optional): TODO: type description
-                here.
+            body (UpdateSegmentRequest, optional): TODO: type description here.
 
         Returns:
             SegmentResponse: Response from the API. OK

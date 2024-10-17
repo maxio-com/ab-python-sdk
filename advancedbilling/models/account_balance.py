@@ -17,8 +17,7 @@ class AccountBalance(object):
 
     Attributes:
         balance_in_cents (long|int): The balance in cents.
-        automatic_balance_in_cents (long|int): The automatic balance in
-            cents.
+        automatic_balance_in_cents (long|int): The automatic balance in cents.
         remittance_balance_in_cents (long|int): The remittance balance in
             cents.
 

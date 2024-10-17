@@ -67,23 +67,23 @@ class SubscriptionProductsController(BaseController):
         {
           "errors": [
             "Your card was declined. This transaction requires 3D secure
-            authentication."
+        authentication."
           ],
           "gateway_payment_id": "pi_1F0aGoJ2UDb3Q4av7zU3sHPh",
           "description": "This card requires 3D secure authentication.
-          Redirect the customer to the URL from the action_link attribute to
-          authenticate. Attach callback_url param to this URL if you want to
-          be notified about the result of 3D Secure authentication. Attach
-          redirect_url param to this URL if you want to redirect a customer
-          back to your page after 3D Secure authentication. Example:
-          https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one
-          _time_token_id=128&callback_url=https://localhost:4000&redirect_url=h
-          ttps://yourpage.com will do a POST request to https://localhost:4000
-          after payment is authenticated and will redirect a customer to
-          https://yourpage.com after 3DS authentication.",
+        Redirect the customer to the URL from the action_link attribute to
+        authenticate. Attach callback_url param to this URL if you want to be
+        notified about the result of 3D Secure authentication. Attach
+        redirect_url param to this URL if you want to redirect a customer back
+        to your page after 3D Secure authentication. Example:
+        https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one_t
+        ime_token_id=128&callback_url=https://localhost:4000&redirect_url=https
+        ://yourpage.com will do a POST request to https://localhost:4000 after
+        payment is authenticated and will redirect a customer to
+        https://yourpage.com after 3DS authentication.",
           "action_link":
-          "http://acme.chargify.com/3d-secure/pi_1F0aGoJ2UDb3Q4av7zU3sHPh?one_t
-          ime_token_id=242"
+        "http://acme.chargify.com/3d-secure/pi_1F0aGoJ2UDb3Q4av7zU3sHPh?one_tim
+        e_token_id=242"
         }
         ```
         To let the customer go through 3D Secure Authentication, they need to

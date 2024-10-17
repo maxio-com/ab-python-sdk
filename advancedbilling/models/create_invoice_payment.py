@@ -6,6 +6,8 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 
 
@@ -18,13 +20,17 @@ class CreateInvoicePayment(object):
     Attributes:
         amount (str | float | None): A string of the dollar amount to be
             refunded (eg. "10.50" => $10.50)
-        memo (str): A description to be attached to the payment.
+        memo (str): A description to be attached to the payment. Applicable
+            only to `external` payments.
         method (InvoicePaymentMethodType): The type of payment method used.
             Defaults to other.
         details (str): Additional information related to the payment method
-            (eg. Check #)
+            (eg. Check #). Applicable only to `external` payments.
         payment_profile_id (int): The ID of the payment profile to be used for
             the payment.
+        received_on (date): Date reflecting when the payment was received from
+            a customer. Must be in the past. Applicable only to  `external`
+            payments.
 
     """
 
@@ -34,7 +40,8 @@ class CreateInvoicePayment(object):
         "memo": 'memo',
         "method": 'method',
         "details": 'details',
-        "payment_profile_id": 'payment_profile_id'
+        "payment_profile_id": 'payment_profile_id',
+        "received_on": 'received_on'
     }
 
     _optionals = [
@@ -43,6 +50,7 @@ class CreateInvoicePayment(object):
         'method',
         'details',
         'payment_profile_id',
+        'received_on',
     ]
 
     def __init__(self,
@@ -51,6 +59,7 @@ class CreateInvoicePayment(object):
                  method=APIHelper.SKIP,
                  details=APIHelper.SKIP,
                  payment_profile_id=APIHelper.SKIP,
+                 received_on=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the CreateInvoicePayment class"""
 
@@ -65,6 +74,8 @@ class CreateInvoicePayment(object):
             self.details = details 
         if payment_profile_id is not APIHelper.SKIP:
             self.payment_profile_id = payment_profile_id 
+        if received_on is not APIHelper.SKIP:
+            self.received_on = received_on 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -94,6 +105,7 @@ class CreateInvoicePayment(object):
         method = dictionary.get("method") if dictionary.get("method") else APIHelper.SKIP
         details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
         payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP
+        received_on = dateutil.parser.parse(dictionary.get('received_on')).date() if dictionary.get('received_on') else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -104,4 +116,5 @@ class CreateInvoicePayment(object):
                    method,
                    details,
                    payment_profile_id,
+                   received_on,
                    dictionary)

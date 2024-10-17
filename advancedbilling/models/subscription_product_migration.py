@@ -23,8 +23,7 @@ class SubscriptionProductMigration(object):
             Product Family. Note: Going to another Product Family, components
             will not be migrated as well.
         product_price_point_id (int): The ID of the specified product's price
-            point. This can be passed to migrate to a non-default price
-            point.
+            point. This can be passed to migrate to a non-default price point.
         include_trial (bool): Whether to include the trial period configured
             for the product price point when starting a new billing period.
             Note that if preserve_period is set, then include_trial will be

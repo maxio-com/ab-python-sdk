@@ -539,8 +539,7 @@ class CustomFieldsController(BaseController):
                 subscription for which the metadata applies
             name (str, optional): Name of field to be removed.
             names (List[str], optional): Names of fields to be removed. Use in
-                query:
-                `names[]=field1&names[]=my-field&names[]=another-field`.
+                query: `names[]=field1&names[]=my-field&names[]=another-field`.
 
         Returns:
             void: Response from the API. OK

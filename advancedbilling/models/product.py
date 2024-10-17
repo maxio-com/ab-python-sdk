@@ -76,8 +76,7 @@ class Product(object):
             request a billing address on any Self-Service Pages that are used
             by subscribers of this product.
         require_billing_address (bool): A boolean indicating whether a billing
-            address is required to add a payment profile, especially at
-            signup.
+            address is required to add a payment profile, especially at signup.
         require_shipping_address (bool): A boolean indicating whether a
             shipping address is required for the customer, especially at
             signup.

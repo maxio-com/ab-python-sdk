@@ -308,8 +308,7 @@ class APIExportsController(BaseController):
     def export_subscriptions(self):
         """Does a POST request to /api_exports/subscriptions.json.
 
-        This API creates a subscriptions export and returns a batchjob
-        object.
+        This API creates a subscriptions export and returns a batchjob object.
 
         Returns:
             BatchJobResponse: Response from the API. Created

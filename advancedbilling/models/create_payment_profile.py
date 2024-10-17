@@ -91,8 +91,7 @@ class CreatePaymentProfile(object):
             Alternatively, local bank details can be provided
         bank_routing_number (str): (Required when creating with ACH. Optional
             when creating a subscription with GoCardless). The routing number
-            of the bank. It becomes bank_code while passing via GoCardless
-            API
+            of the bank. It becomes bank_code while passing via GoCardless API
         bank_account_number (str): (Required when creating with ACH,
             GoCardless, Stripe BECS or BACS Direct Debit, and bank_iban is
             blank) The customerʼs bank account number
@@ -100,8 +99,7 @@ class CreatePaymentProfile(object):
             required with Stripe BECS or BACS Direct Debit) Branch/Sort code.
             Alternatively, an IBAN can be provided
         bank_account_type (BankAccountType): Defaults to checking
-        bank_account_holder_type (BankAccountHolderType): Defaults to
-            personal
+        bank_account_holder_type (BankAccountHolderType): Defaults to personal
         last_four (str): (Optional) Used for creating subscription with
             payment profile imported using vault_token, for proper display in
             Advanced Billing UI

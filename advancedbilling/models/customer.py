@@ -45,7 +45,7 @@ class Customer(object):
         country_name (str): The customer's full name of country
         phone (str): The phone number of the customer
         verified (bool): Is the customer verified to use ACH as a payment
-            method. Available only on Authorize.Net gateway
+            method.
         portal_customer_created_at (datetime): The timestamp of when the
             Billing Portal entry was created at for the customer
         portal_invite_last_sent_at (datetime): The timestamp of when the
@@ -64,6 +64,9 @@ class Customer(object):
         locale (str): The locale for the customer to identify language-region
         default_subscription_group_uid (str): TODO: type description here.
         salesforce_id (str): The Salesforce ID for the customer
+        tax_exempt_reason (str): The Tax Exemption Reason Code for the customer
+        default_auto_renewal_profile_id (int): The default auto-renewal
+            profile ID for the customer
 
     """
 
@@ -96,7 +99,9 @@ class Customer(object):
         "parent_id": 'parent_id',
         "locale": 'locale',
         "default_subscription_group_uid": 'default_subscription_group_uid',
-        "salesforce_id": 'salesforce_id'
+        "salesforce_id": 'salesforce_id',
+        "tax_exempt_reason": 'tax_exempt_reason',
+        "default_auto_renewal_profile_id": 'default_auto_renewal_profile_id'
     }
 
     _optionals = [
@@ -128,6 +133,8 @@ class Customer(object):
         'locale',
         'default_subscription_group_uid',
         'salesforce_id',
+        'tax_exempt_reason',
+        'default_auto_renewal_profile_id',
     ]
 
     _nullables = [
@@ -152,6 +159,8 @@ class Customer(object):
         'locale',
         'default_subscription_group_uid',
         'salesforce_id',
+        'tax_exempt_reason',
+        'default_auto_renewal_profile_id',
     ]
 
     def __init__(self,
@@ -183,6 +192,8 @@ class Customer(object):
                  locale=APIHelper.SKIP,
                  default_subscription_group_uid=APIHelper.SKIP,
                  salesforce_id=APIHelper.SKIP,
+                 tax_exempt_reason=APIHelper.SKIP,
+                 default_auto_renewal_profile_id=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the Customer class"""
 
@@ -243,6 +254,10 @@ class Customer(object):
             self.default_subscription_group_uid = default_subscription_group_uid 
         if salesforce_id is not APIHelper.SKIP:
             self.salesforce_id = salesforce_id 
+        if tax_exempt_reason is not APIHelper.SKIP:
+            self.tax_exempt_reason = tax_exempt_reason 
+        if default_auto_renewal_profile_id is not APIHelper.SKIP:
+            self.default_auto_renewal_profile_id = default_auto_renewal_profile_id 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -303,6 +318,8 @@ class Customer(object):
         locale = dictionary.get("locale") if "locale" in dictionary.keys() else APIHelper.SKIP
         default_subscription_group_uid = dictionary.get("default_subscription_group_uid") if "default_subscription_group_uid" in dictionary.keys() else APIHelper.SKIP
         salesforce_id = dictionary.get("salesforce_id") if "salesforce_id" in dictionary.keys() else APIHelper.SKIP
+        tax_exempt_reason = dictionary.get("tax_exempt_reason") if "tax_exempt_reason" in dictionary.keys() else APIHelper.SKIP
+        default_auto_renewal_profile_id = dictionary.get("default_auto_renewal_profile_id") if "default_auto_renewal_profile_id" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -336,6 +353,8 @@ class Customer(object):
                    locale,
                    default_subscription_group_uid,
                    salesforce_id,
+                   tax_exempt_reason,
+                   default_auto_renewal_profile_id,
                    dictionary)
 
     @classmethod

@@ -32,8 +32,7 @@ class Component(object):
             Component belongs
         product_family_name (str): The name of the Product Family to which the
             Component belongs
-        price_per_unit_in_cents (long|int): deprecated - use unit_price
-            instead
+        price_per_unit_in_cents (long|int): deprecated - use unit_price instead
         kind (ComponentKind): A handle for the component type
         archived (bool): Boolean flag describing whether a component is
             archived or not.

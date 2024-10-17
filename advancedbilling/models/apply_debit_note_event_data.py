@@ -22,8 +22,7 @@ class ApplyDebitNoteEventData(object):
             generated automatically by Chargify and has the prefix "db_"
             followed by alphanumeric characters.
         original_amount (str): The full, original amount of the debit note.
-        applied_amount (str): The amount of the debit note applied to
-            invoice.
+        applied_amount (str): The amount of the debit note applied to invoice.
         memo (str): The debit note memo.
         transaction_time (datetime): The time the debit note was applied, in
             ISO 8601 format, i.e. "2019-06-07T17:20:06Z"

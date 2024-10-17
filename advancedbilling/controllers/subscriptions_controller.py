@@ -84,8 +84,7 @@ class SubscriptionsController(BaseController):
         m-Taxes), there are a few considerations to be made regarding
         collecting subscription data.
         For subscribers to be eligible to be taxed, the following information
-        for the `customer` object or `payment_profile` object must by
-        supplied:
+        for the `customer` object or `payment_profile` object must by supplied:
         + A subscription to a [taxable
         product](https://maxio.zendesk.com/hc/en-us/articles/24261076617869-Pro
         duct-Editing#tax-settings)
@@ -159,8 +158,7 @@ class SubscriptionsController(BaseController):
         For a custom priced product, pass the custom_price object in place of
         `product_price_point_id`. For a custom priced component, pass the
         `custom_price` object within the component object.
-        Custom prices and price points can exist in harmony on a
-        subscription.
+        Custom prices and price points can exist in harmony on a subscription.
         # Passing Payment Information
         ## Subscription with Chargify.js token
         The `chargify_token` can be obtained using
@@ -495,23 +493,23 @@ class SubscriptionsController(BaseController):
         {
           "errors": [
             "Your card was declined. This transaction requires 3D secure
-            authentication."
+        authentication."
           ],
           "gateway_payment_id": "pi_1F0aGoJ2UDb3Q4av7zU3sHPh",
           "description": "This card requires 3D secure authentication.
-          Redirect the customer to the URL from the action_link attribute to
-          authenticate. Attach callback_url param to this URL if you want to
-          be notified about the result of 3D Secure authentication. Attach
-          redirect_url param to this URL if you want to redirect a customer
-          back to your page after 3D Secure authentication. Example:
-          https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one
-          _time_token_id=128&callback_url=https://localhost:4000&redirect_url=h
-          ttps://yourpage.com will do a POST request to https://localhost:4000
-          after payment is authenticated and will redirect a customer to
-          https://yourpage.com after 3DS authentication.",
+        Redirect the customer to the URL from the action_link attribute to
+        authenticate. Attach callback_url param to this URL if you want to be
+        notified about the result of 3D Secure authentication. Attach
+        redirect_url param to this URL if you want to redirect a customer back
+        to your page after 3D Secure authentication. Example:
+        https://mysite.chargify.com/3d-secure/pi_1FCm4RKDeye4C0XfbqquXRYm?one_t
+        ime_token_id=128&callback_url=https://localhost:4000&redirect_url=https
+        ://yourpage.com will do a POST request to https://localhost:4000 after
+        payment is authenticated and will redirect a customer to
+        https://yourpage.com after 3DS authentication.",
           "action_link":
-          "http://acme.chargify.com/3d-secure/pi_1F0aGoJ2UDb3Q4av7zU3sHPh?one_t
-          ime_token_id=242"
+        "http://acme.chargify.com/3d-secure/pi_1F0aGoJ2UDb3Q4av7zU3sHPh?one_tim
+        e_token_id=242"
         }
         ```
         To let the customer go through 3D Secure Authentication, they need to
@@ -547,24 +545,23 @@ class SubscriptionsController(BaseController):
         {
           "errors": [
             "Your card was declined. This transaction requires 3D secure
-            authentication."
+        authentication."
           ],
           "gateway_payment_id": "pay_6gjofv7dlyrkpizlolsuspvtiu",
           "description": "This card requires 3D secure authentication.
-          Redirect the customer to the URL from the action_link attribute to
-          authenticate. Attach callback_url param to this URL if you want to
-          be notified about the result of 3D Secure authentication. Attach
-          redirect_url param to this URL if you want to redirect a customer
-          back to your page after 3D Secure authentication. Example:
-          https://mysite.chargify.com/3d-secure/pay_6gjofv7dlyrkpizlolsuspvtiu?
-          one_time_token_id=123&callback_url=https://localhost:4000&redirect_ur
-          l=https://yourpage.com will do a POST request to
-          https://localhost:4000 after payment is authenticated and will
-          redirect a customer to https://yourpage.com after 3DS
-          authentication.",
+        Redirect the customer to the URL from the action_link attribute to
+        authenticate. Attach callback_url param to this URL if you want to be
+        notified about the result of 3D Secure authentication. Attach
+        redirect_url param to this URL if you want to redirect a customer back
+        to your page after 3D Secure authentication. Example:
+        https://mysite.chargify.com/3d-secure/pay_6gjofv7dlyrkpizlolsuspvtiu?on
+        e_time_token_id=123&callback_url=https://localhost:4000&redirect_url=ht
+        tps://yourpage.com will do a POST request to https://localhost:4000
+        after payment is authenticated and will redirect a customer to
+        https://yourpage.com after 3DS authentication.",
           "action_link":
-          "http://mysite.chargify.com/3d-secure/pay_6gjofv7dlyrkpizlolsuspvtiu?
-          one_time_token_id=123"
+        "http://mysite.chargify.com/3d-secure/pay_6gjofv7dlyrkpizlolsuspvtiu?on
+        e_time_token_id=123"
         }
         ```
         To let the customer go through 3D Secure Authentication, they need to
@@ -807,7 +804,7 @@ class SubscriptionsController(BaseController):
               "return_refund_policy_url": "https://return_refund_policy.url",
               "delivery_policy_url": "https://delivery_policy.url",
               "secure_checkout_policy_url":
-              "https://secure_checkout_policy.url"
+        "https://secure_checkout_policy.url"
             }
           }
         }
@@ -971,8 +968,7 @@ class SubscriptionsController(BaseController):
                     direction -- SortingDirection -- Controls the order in
                         which results are returned. Use in query
                         `direction=asc`.
-                    sort -- SubscriptionSort -- The attribute by which to
-                        sort
+                    sort -- SubscriptionSort -- The attribute by which to sort
                     include -- List[SubscriptionListInclude] -- Allows
                         including additional data in the response. Use in
                         query: `include[]=self_service_page_token`.

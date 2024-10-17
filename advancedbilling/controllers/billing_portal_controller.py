@@ -67,8 +67,7 @@ class BillingPortalController(BaseController):
             customer_id (int): The Chargify id of the customer
             auto_invite (AutoInvite, optional): When set to 1, an Invitation
                 email will be sent to the Customer. When set to 0, or not
-                sent, an email will not be sent. Use in query:
-                `auto_invite=1`.
+                sent, an email will not be sent. Use in query: `auto_invite=1`.
 
         Returns:
             CustomerResponse: Response from the API. OK
@@ -215,8 +214,7 @@ class BillingPortalController(BaseController):
 
         You can revoke a customer's Billing Portal invitation.
         If you attempt to revoke an invitation when the Billing Portal is
-        already disabled for a Customer, you will receive a 422 error
-        response.
+        already disabled for a Customer, you will receive a 422 error response.
         ## Limitations
         This endpoint will only return a JSON response.
 

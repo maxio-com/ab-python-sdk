@@ -34,8 +34,7 @@ class InsightsController(BaseController):
         """Does a GET request to /stats.json.
 
         The Stats API is a very basic view of some Site-level stats. This API
-        call only answers with JSON responses. An XML version is not
-        provided.
+        call only answers with JSON responses. An XML version is not provided.
         ## Stats Documentation
         There currently is not a complimentary matching set of documentation
         that compliments this endpoint. However, each Site's dashboard will

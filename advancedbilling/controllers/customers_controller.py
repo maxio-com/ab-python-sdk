@@ -354,8 +354,7 @@ class CustomersController(BaseController):
         """Does a GET request to /customers/lookup.json.
 
         Use this method to return the customer object if you have the unique
-        **Reference ID (Your App)** value handy. It will return a single
-        match.
+        **Reference ID (Your App)** value handy. It will return a single match.
 
         Args:
             reference (str): Customer reference

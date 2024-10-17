@@ -35,8 +35,7 @@ class CreateInvoiceItem(object):
         component_id (str | int | None): Component handle or component id.
         price_point_id (str | int | None): Price point handle or id. For
             component.
-        product_price_point_id (str | int | None): TODO: type description
-            here.
+        product_price_point_id (str | int | None): TODO: type description here.
         description (str): TODO: type description here.
 
     """

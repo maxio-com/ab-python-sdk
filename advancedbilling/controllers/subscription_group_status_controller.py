@@ -37,8 +37,7 @@ class SubscriptionGroupStatusController(BaseController):
         automatic billing or they must be prepaid.
         In order to cancel a subscription group while also charging for any
         unbilled usage on metered or prepaid components, the
-        `charge_unbilled_usage=true` parameter must be included in the
-        request.
+        `charge_unbilled_usage=true` parameter must be included in the request.
 
         Args:
             uid (str): The uid of the subscription group

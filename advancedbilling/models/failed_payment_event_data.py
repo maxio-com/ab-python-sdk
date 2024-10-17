@@ -22,8 +22,7 @@ class FailedPaymentEventData(object):
         applied_amount (int): The monetary value of the payment, expressed in
             dollars.
         memo (str): The memo passed when the payment was created.
-        payment_method (InvoicePaymentMethodType): TODO: type description
-            here.
+        payment_method (InvoicePaymentMethodType): TODO: type description here.
         transaction_id (int): The transaction ID of the failed payment.
 
     """

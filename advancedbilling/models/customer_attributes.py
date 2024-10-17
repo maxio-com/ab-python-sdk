@@ -24,8 +24,7 @@ class CustomerAttributes(object):
             a customer via attributes.
         cc_emails (str): A list of emails that should be cc’d on all customer
             communications. Optional.
-        organization (str): The organization/company of the customer.
-            Optional.
+        organization (str): The organization/company of the customer. Optional.
         reference (str): A customer “reference”, or unique identifier from
             your app, stored in Chargify. Can be used so that you may
             reference your customer’s within Chargify using the same unique
@@ -49,8 +48,7 @@ class CustomerAttributes(object):
         phone (str): (Optional) The phone number of the customer.
         verified (bool): TODO: type description here.
         tax_exempt (bool): (Optional) The tax_exempt status of the customer.
-            Acceptable values are true or 1 for true and false or 0 for
-            false.
+            Acceptable values are true or 1 for true and false or 0 for false.
         vat_number (str): (Optional) Supplying the VAT number allows EU
             customer’s to opt-out of the Value Added Tax assuming the merchant
             address and customer billing address are not within the same EU
@@ -64,6 +62,8 @@ class CustomerAttributes(object):
         parent_id (int): The parent ID in Chargify if applicable. Parent is
             another Customer object.
         salesforce_id (str): (Optional) The Salesforce ID of the customer.
+        default_auto_renewal_profile_id (int): (Optional) The default
+            auto-renewal profile ID for the customer
 
     """
 
@@ -87,7 +87,8 @@ class CustomerAttributes(object):
         "vat_number": 'vat_number',
         "metafields": 'metafields',
         "parent_id": 'parent_id',
-        "salesforce_id": 'salesforce_id'
+        "salesforce_id": 'salesforce_id',
+        "default_auto_renewal_profile_id": 'default_auto_renewal_profile_id'
     }
 
     _optionals = [
@@ -110,12 +111,14 @@ class CustomerAttributes(object):
         'metafields',
         'parent_id',
         'salesforce_id',
+        'default_auto_renewal_profile_id',
     ]
 
     _nullables = [
         'address_2',
         'parent_id',
         'salesforce_id',
+        'default_auto_renewal_profile_id',
     ]
 
     def __init__(self,
@@ -138,6 +141,7 @@ class CustomerAttributes(object):
                  metafields=APIHelper.SKIP,
                  parent_id=APIHelper.SKIP,
                  salesforce_id=APIHelper.SKIP,
+                 default_auto_renewal_profile_id=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the CustomerAttributes class"""
 
@@ -180,6 +184,8 @@ class CustomerAttributes(object):
             self.parent_id = parent_id 
         if salesforce_id is not APIHelper.SKIP:
             self.salesforce_id = salesforce_id 
+        if default_auto_renewal_profile_id is not APIHelper.SKIP:
+            self.default_auto_renewal_profile_id = default_auto_renewal_profile_id 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -222,6 +228,7 @@ class CustomerAttributes(object):
         metafields = dictionary.get("metafields") if dictionary.get("metafields") else APIHelper.SKIP
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
         salesforce_id = dictionary.get("salesforce_id") if "salesforce_id" in dictionary.keys() else APIHelper.SKIP
+        default_auto_renewal_profile_id = dictionary.get("default_auto_renewal_profile_id") if "default_auto_renewal_profile_id" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -246,6 +253,7 @@ class CustomerAttributes(object):
                    metafields,
                    parent_id,
                    salesforce_id,
+                   default_auto_renewal_profile_id,
                    dictionary)
 
     @classmethod
