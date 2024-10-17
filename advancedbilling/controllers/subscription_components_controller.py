@@ -225,8 +225,7 @@ class SubscriptionComponentsController(BaseController):
                                                          body=None):
         """Does a POST request to /subscriptions/{subscription_id}/price_points.json.
 
-        Updates the price points on one or more of a subscription's
-        components.
+        Updates the price points on one or more of a subscription's components.
         The `price_point` key can take either a:
         1. Price point id (integer)
         2. Price point handle (string)
@@ -281,8 +280,7 @@ class SubscriptionComponentsController(BaseController):
 
         Resets all of a subscription's components to use the current default.
         **Note**: this will update the price point for all of the
-        subscription's components, even ones that have not been allocated
-        yet.
+        subscription's components, even ones that have not been allocated yet.
 
         Args:
             subscription_id (int): The Chargify id of the subscription
@@ -654,8 +652,7 @@ class SubscriptionComponentsController(BaseController):
         call must be made to the allocation's endpoint with a new expiration
         date.
         ## Limitations
-        A few limitations exist when changing an allocation's expiration
-        date:
+        A few limitations exist when changing an allocation's expiration date:
         - An expiration date can only be changed for an allocation that
         belongs to a price point with expiration interval options explicitly
         set.
@@ -737,8 +734,7 @@ class SubscriptionComponentsController(BaseController):
             subscription_id (int): The Chargify id of the subscription
             component_id (int): The Advanced Billing id of the component
             allocation_id (int): The Advanced Billing id of the allocation
-            body (CreditSchemeRequest, optional): TODO: type description
-                here.
+            body (CreditSchemeRequest, optional): TODO: type description here.
 
         Returns:
             void: Response from the API. OK
@@ -1038,8 +1034,7 @@ class SubscriptionComponentsController(BaseController):
         component usage at renewal.*
 
         Args:
-            subscription_id (int): The Advanced Billing id of the
-                subscription
+            subscription_id (int): The Advanced Billing id of the subscription
             component_id (int): The Advanced Billing id of the component
             body (ActivateEventBasedComponent, optional): TODO: type
                 description here.
@@ -1088,8 +1083,7 @@ class SubscriptionComponentsController(BaseController):
         Billing to ignore related events at subscription renewal.
 
         Args:
-            subscription_id (int): The Advanced Billing id of the
-                subscription
+            subscription_id (int): The Advanced Billing id of the subscription
             component_id (int): The Advanced Billing id of the component
 
         Returns:

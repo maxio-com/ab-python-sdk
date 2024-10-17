@@ -58,8 +58,7 @@ class ProductPricePoint(object):
             multiple currencies defined.
         mtype (PricePointType): The type of price point
         tax_included (bool): Whether or not the price point includes tax
-        subscription_id (int): The subscription id this price point belongs
-            to
+        subscription_id (int): The subscription id this price point belongs to
         currency_prices (List[CurrencyPrice]): An array of currency pricing
             data is available when multiple currencies are defined for the
             site. It varies based on the use_site_exchange_rate setting for

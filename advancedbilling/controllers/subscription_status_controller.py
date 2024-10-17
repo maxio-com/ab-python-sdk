@@ -84,8 +84,7 @@ class SubscriptionStatusController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (CancellationRequest, optional): TODO: type description
-                here.
+            body (CancellationRequest, optional): TODO: type description here.
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -304,8 +303,7 @@ class SubscriptionStatusController(BaseController):
         "Trial Ended".
         ## Resume the current billing period for a subscription
         A subscription is considered "resumable" if you are attempting to
-        reactivate within the billing period the subscription was canceled
-        in.
+        reactivate within the billing period the subscription was canceled in.
         A resumed subscription's billing date remains the same as before it
         was canceled. In other words, it does not start a new billing period.
         Payment may or may not be collected for a resumed subscription,
@@ -402,7 +400,7 @@ class SubscriptionStatusController(BaseController):
         ```
           {
             "errors": ["Request was 'resume only', but this subscription
-            cannot be resumed."]
+        cannot be resumed."]
           }
         ```
         #### Results
@@ -485,8 +483,7 @@ class SubscriptionStatusController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (CancellationRequest, optional): TODO: type description
-                here.
+            body (CancellationRequest, optional): TODO: type description here.
 
         Returns:
             DelayedCancellationResponse: Response from the API. OK

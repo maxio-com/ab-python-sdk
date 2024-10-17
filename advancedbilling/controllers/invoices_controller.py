@@ -53,8 +53,7 @@ class InvoicesController(BaseController):
         Args:
             uid (str): The unique identifier for the invoice, this does not
                 refer to the public facing invoice number.
-            body (RefundInvoiceRequest, optional): TODO: type description
-                here.
+            body (RefundInvoiceRequest, optional): TODO: type description here.
 
         Returns:
             Invoice: Response from the API. OK
@@ -546,8 +545,8 @@ class InvoicesController(BaseController):
         This API call should be used when you want to record an external
         payment against multiple invoices.
          In order apply a payment to multiple invoices, at minimum, specify
-         the `amount` and `applications` (i.e., `invoice_uid` and `amount`)
-         details.
+        the `amount` and `applications` (i.e., `invoice_uid` and `amount`)
+        details.
         ```
         {
           "payment": {
@@ -752,8 +751,7 @@ class InvoicesController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (RecordPaymentRequest, optional): TODO: type description
-                here.
+            body (RecordPaymentRequest, optional): TODO: type description here.
 
         Returns:
             RecordPaymentResponse: Response from the API. OK
@@ -1153,8 +1151,7 @@ class InvoicesController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (CreateInvoiceRequest, optional): TODO: type description
-                here.
+            body (CreateInvoiceRequest, optional): TODO: type description here.
 
         Returns:
             InvoiceResponse: Response from the API. OK
@@ -1206,8 +1203,7 @@ class InvoicesController(BaseController):
         Please note that if no recipient email addresses are specified in the
         request, then the subscription's default email configuration will be
         used. For example, if `recipient_emails` is left blank, then the
-        invoice will be delivered to the subscription's customer email
-        address.
+        invoice will be delivered to the subscription's customer email address.
         On success, a 204 no-content response will be returned. Please note
         that this does not indicate that email(s) have been delivered, but
         instead indicates that emails have been successfully queued for
@@ -1380,8 +1376,7 @@ class InvoicesController(BaseController):
         Args:
             uid (str): The unique identifier for the invoice, this does not
                 refer to the public facing invoice number.
-            body (IssueInvoiceRequest, optional): TODO: type description
-                here.
+            body (IssueInvoiceRequest, optional): TODO: type description here.
 
         Returns:
             Invoice: Response from the API. OK

@@ -16,8 +16,7 @@ class SubscriptionGroupPrepaymentRequest(object):
     TODO: type model description here.
 
     Attributes:
-        prepayment (SubscriptionGroupPrepayment): TODO: type description
-            here.
+        prepayment (SubscriptionGroupPrepayment): TODO: type description here.
 
     """
 

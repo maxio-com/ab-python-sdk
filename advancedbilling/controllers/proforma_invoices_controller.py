@@ -153,8 +153,7 @@ class ProformaInvoicesController(BaseController):
                               proforma_invoice_uid):
         """Does a GET request to /proforma_invoices/{proforma_invoice_uid}.json.
 
-        Use this endpoint to read the details of an existing proforma
-        invoice.
+        Use this endpoint to read the details of an existing proforma invoice.
         ## Restrictions
         Proforma invoices are only available on Relationship Invoicing sites.
 
@@ -361,8 +360,7 @@ class ProformaInvoicesController(BaseController):
                               body=None):
         """Does a POST request to /proforma_invoices/{proforma_invoice_uid}/void.json.
 
-        This endpoint will void a proforma invoice that has the status
-        "draft".
+        This endpoint will void a proforma invoice that has the status "draft".
         ## Restrictions
         Proforma invoices are only available on Relationship Invoicing sites.
         Only proforma invoices that have the appropriate status may be

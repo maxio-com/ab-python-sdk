@@ -101,8 +101,7 @@ class ComponentsController(BaseController):
         **quantity_based_component** under the specified product family.
         Quantity Based component can then be added and “allocated” for a
         subscription.
-        When defining Quantity Based component, You can choose one of 2
-        types:
+        When defining Quantity Based component, You can choose one of 2 types:
         #### Recurring
         Recurring quantity-based components are used to bill for the number of
         some unit (think monthly software user licenses or the number of pairs
@@ -180,8 +179,7 @@ class ComponentsController(BaseController):
         Args:
             product_family_id (str): Either the product family's id or its
                 handle prefixed with `handle:`
-            body (CreateOnOffComponent, optional): TODO: type description
-                here.
+            body (CreateOnOffComponent, optional): TODO: type description here.
 
         Returns:
             ComponentResponse: Response from the API. Created
@@ -228,8 +226,7 @@ class ComponentsController(BaseController):
 
         This request will create a component definition of kind
         **prepaid_usage_component** under the specified product family.
-        Prepaid component can then be added and “allocated” for a
-        subscription.
+        Prepaid component can then be added and “allocated” for a subscription.
         Prepaid components allow customers to pre-purchase units that can be
         used up over time on their subscription. In a sense, they are the
         mirror image of metered components; while metered components charge at

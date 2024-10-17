@@ -114,8 +114,7 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
                         Prepayments operations
 
         Returns:
-            ListSubscriptionGroupPrepaymentResponse: Response from the API.
-                OK
+            ListSubscriptionGroupPrepaymentResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from

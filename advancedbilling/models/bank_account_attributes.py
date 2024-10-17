@@ -33,8 +33,7 @@ class BankAccountAttributes(object):
         bank_iban (str): (Optional when creating a subscription with
             GoCardless). International Bank Account Number. Alternatively,
             local bank details can be provided
-        bank_account_holder_type (BankAccountHolderType): Defaults to
-            personal
+        bank_account_holder_type (BankAccountHolderType): Defaults to personal
         payment_type (PaymentType): TODO: type description here.
         current_vault (BankAccountVault): The vault that stores the payment
             profile with the provided vault_token. Use `bogus` for testing.

@@ -16,8 +16,7 @@ class SubscriptionMRRResponse(object):
     TODO: type model description here.
 
     Attributes:
-        subscriptions_mrr (List[SubscriptionMRR]): TODO: type description
-            here.
+        subscriptions_mrr (List[SubscriptionMRR]): TODO: type description here.
 
     """
 

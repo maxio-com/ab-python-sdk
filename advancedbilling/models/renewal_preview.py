@@ -27,8 +27,7 @@ class RenewalPreview(object):
         total_discount_in_cents (long|int): An integer representing the amount
             of the coupon discounts that will be applied to the next renewal
         total_in_cents (long|int): An integer representing the total amount
-            owed, less any discounts, that will be assessed at the next
-            renewal
+            owed, less any discounts, that will be assessed at the next renewal
         existing_balance_in_cents (long|int): An integer representing the
             amount of the subscription’s current balance
         total_amount_due_in_cents (long|int): An integer representing the

@@ -158,8 +158,7 @@ class Subscription(object):
         product (Product): TODO: type description here.
         credit_card (CreditCardPaymentProfile): TODO: type description here.
         group (NestedSubscriptionGroup): TODO: type description here.
-        bank_account (BankAccountPaymentProfile): TODO: type description
-            here.
+        bank_account (BankAccountPaymentProfile): TODO: type description here.
         payment_type (str): The payment profile type for the active profile on
             file.
         referral_code (str): The subscription's unique code that can be given
@@ -208,8 +207,7 @@ class Subscription(object):
             charged successfully at renewal.
         reference (str): The reference value (provided by your app) for the
             subscription itelf.
-        on_hold_at (datetime): The timestamp of the most recent on hold
-            action.
+        on_hold_at (datetime): The timestamp of the most recent on hold action.
         prepaid_dunning (bool): Boolean representing whether the subscription
             is prepaid and currently in dunning. Only returned for
             Relationship Invoicing sites with the feature enabled

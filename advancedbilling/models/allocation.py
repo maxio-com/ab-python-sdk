@@ -19,8 +19,7 @@ class Allocation(object):
     Attributes:
         allocation_id (int): The allocation unique id
         component_id (int): The integer component ID for the allocation. This
-            references a component that you have created in your Product
-            setup
+            references a component that you have created in your Product setup
         component_handle (str): The handle of the component. This references a
             component that you have created in your Product setup
         subscription_id (int): The integer subscription ID for the allocation.

@@ -21,8 +21,7 @@ class SaleRep(object):
         full_name (str): TODO: type description here.
         subscriptions_count (int): TODO: type description here.
         test_mode (bool): TODO: type description here.
-        subscriptions (List[SaleRepSubscription]): TODO: type description
-            here.
+        subscriptions (List[SaleRepSubscription]): TODO: type description here.
 
     """
 

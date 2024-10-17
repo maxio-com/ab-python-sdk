@@ -74,13 +74,11 @@ class ProformaInvoice(object):
         refund_amount (str): TODO: type description here.
         due_amount (str): TODO: type description here.
         line_items (List[InvoiceLineItem]): TODO: type description here.
-        discounts (List[ProformaInvoiceDiscount]): TODO: type description
-            here.
+        discounts (List[ProformaInvoiceDiscount]): TODO: type description here.
         taxes (List[ProformaInvoiceTax]): TODO: type description here.
         credits (List[ProformaInvoiceCredit]): TODO: type description here.
         payments (List[ProformaInvoicePayment]): TODO: type description here.
-        custom_fields (List[InvoiceCustomField]): TODO: type description
-            here.
+        custom_fields (List[InvoiceCustomField]): TODO: type description here.
         public_url (str): TODO: type description here.
 
     """

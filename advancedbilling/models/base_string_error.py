@@ -13,8 +13,7 @@ class BaseStringError(object):
 
     """Implementation of the 'Base String Error' model.
 
-    The error is base if it is not directly associated with a single
-    attribute.
+    The error is base if it is not directly associated with a single attribute.
 
     Attributes:
         base (List[str]): TODO: type description here.

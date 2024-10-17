@@ -27,8 +27,7 @@ class SubscriptionFilter(object):
             .
         date_field (SubscriptionListDateField): The type of filter you'd like
             to apply to your search. To use this filter you also have to
-            include the following param in the request
-            `include=subscription`.
+            include the following param in the request `include=subscription`.
         start_date (date): The start date (format YYYY-MM-DD) with which to
             filter the date_field. Returns components that belong to the
             subscription with a timestamp at or after midnight (12:00:00 AM)

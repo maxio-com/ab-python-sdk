@@ -20,11 +20,9 @@ class ACHAgreement(object):
         agreement_terms (str): (Required when providing ACH agreement params)
             The ACH authorization agreement terms.
         authorizer_first_name (str): (Required when providing ACH agreement
-            params) The first name of the person authorizing the ACH
-            agreement.
+            params) The first name of the person authorizing the ACH agreement.
         authorizer_last_name (str): (Required when providing ACH agreement
-            params) The last name of the person authorizing the ACH
-            agreement.
+            params) The last name of the person authorizing the ACH agreement.
         ip_address (str): (Required when providing ACH agreement params) The
             IP address of the person authorizing the ACH agreement.
 

@@ -43,8 +43,8 @@ class SitesController(BaseController):
             "whopays_default_payer": "self"
         You can read more about these settings here:
          [Who Pays & Customer
-         Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-
-         Customer-Hierarchies-WhoPays)
+        Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-C
+        ustomer-Hierarchies-WhoPays)
 
         Returns:
             SiteResponse: Response from the API. OK

@@ -29,8 +29,7 @@ class DebitNote(object):
             automatically by Chargify and has the prefix "db_" followed by
             alphanumeric characters.
         site_id (int): ID of the site to which the debit note belongs.
-        customer_id (int): ID of the customer to which the debit note
-            belongs.
+        customer_id (int): ID of the customer to which the debit note belongs.
         subscription_id (int): ID of the subscription that generated the debit
             note.
         number (int): A unique, identifier that appears on the debit note and

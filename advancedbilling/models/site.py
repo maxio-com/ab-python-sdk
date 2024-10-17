@@ -30,8 +30,7 @@ class Site(object):
         customer_hierarchy_enabled (bool): TODO: type description here.
         whopays_enabled (bool): TODO: type description here.
         whopays_default_payer (str): TODO: type description here.
-        allocation_settings (AllocationSettings): TODO: type description
-            here.
+        allocation_settings (AllocationSettings): TODO: type description here.
         default_payment_collection_method (str): TODO: type description here.
         organization_address (OrganizationAddress): TODO: type description
             here.

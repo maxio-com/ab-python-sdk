@@ -113,8 +113,7 @@ class PaymentProfilesController(BaseController):
         Secure.  Instead, we have provided
         [Chargify.js](https://developers.chargify.com/docs/developer-docs/ZG9jO
         jE0NjAzNDI0-overview) which is continuously improved and supports
-        Credit Cards (along with 3D Secure), PayPal and ApplePay payment
-        types.
+        Credit Cards (along with 3D Secure), PayPal and ApplePay payment types.
         ## GoCardless
         For more information on GoCardless, please view the following
         resources:
@@ -179,9 +178,8 @@ class PaymentProfilesController(BaseController):
             "current_vault": "gocardless",
             "bank_name": "French Bank",
             "bank_account_number": [Last Four Of The Existing Account Number
-            or IBAN if applicable],
-            "bank_routing_number": [Last Four Of The Existing Routing
-            Number],
+        or IBAN if applicable],
+            "bank_routing_number": [Last Four Of The Existing Routing Number],
             "payment_type": "bank_account",
             "billing_address": "20 Place de la Gare",
             "billing_city": "Colombes",
@@ -297,23 +295,20 @@ class PaymentProfilesController(BaseController):
                 {
                     "title": "This card requires 3DSecure verification.",
                     "detail": "This card requires 3D secure authentication.
-                    Redirect the customer to the URL from the action_link
-                    attribute to authenticate. Attach callback_url param to
-                    this URL if you want to be notified about the result of 3D
-                    Secure authentication. Attach redirect_url param to this
-                    URL if you want to redirect a customer back to your page
-                    after 3D Secure authentication. Example:
-                    https://checkout-test.chargifypay.test/3d-secure/checkout/p
-                    ay_uerzhsxd5uhkbodx5jhvkg6yeu?one_time_token_id=93&callback
-                    _url=http://localhost:4000&redirect_url=https://yourpage.co
-                    m will do a POST request to https://localhost:4000 after
-                    credit card is authenticated and will redirect a customer
-                    to https://yourpage.com after 3DS authentication.",
+        Redirect the customer to the URL from the action_link attribute to
+        authenticate. Attach callback_url param to this URL if you want to be
+        notified about the result of 3D Secure authentication. Attach
+        redirect_url param to this URL if you want to redirect a customer back
+        to your page after 3D Secure authentication. Example:
+        https://checkout-test.chargifypay.test/3d-secure/checkout/pay_uerzhsxd5
+        uhkbodx5jhvkg6yeu?one_time_token_id=93&callback_url=http://localhost:40
+        00&redirect_url=https://yourpage.com will do a POST request to
+        https://localhost:4000 after credit card is authenticated and will
+        redirect a customer to https://yourpage.com after 3DS authentication.",
                     "links": {
                         "action_link":
-                        "https://checkout-test.chargifypay.test/3d-secure/check
-                        out/pay_uerzhsxd5uhkbodx5jhvkg6yeu?one_time_token_id=93
-                        "
+        "https://checkout-test.chargifypay.test/3d-secure/checkout/pay_uerzhsxd
+        5uhkbodx5jhvkg6yeu?one_time_token_id=93"
                     }
                 }
             ]

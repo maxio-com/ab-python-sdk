@@ -32,8 +32,7 @@ class SubscriptionGroupBankAccount(object):
         bank_branch_code (str): (Optional when creating a subscription with
             GoCardless) Branch code. Alternatively, an IBAN can be provided
         bank_account_type (BankAccountType): Defaults to checking
-        bank_account_holder_type (BankAccountHolderType): Defaults to
-            personal
+        bank_account_holder_type (BankAccountHolderType): Defaults to personal
         payment_type (PaymentType): TODO: type description here.
         billing_address (str): TODO: type description here.
         billing_city (str): TODO: type description here.

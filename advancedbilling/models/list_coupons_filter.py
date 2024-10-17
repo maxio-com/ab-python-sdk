@@ -19,8 +19,7 @@ class ListCouponsFilter(object):
 
     Attributes:
         date_field (BasicDateField): The type of filter you would like to
-            apply to your search. Use in query
-            `filter[date_field]=created_at`.
+            apply to your search. Use in query `filter[date_field]=created_at`.
         start_date (date): The start date (format YYYY-MM-DD) with which to
             filter the date_field. Returns coupons with a timestamp at or
             after midnight (12:00:00 AM) in your site’s time zone on the date

@@ -48,6 +48,10 @@ class UpdateSubscription(object):
             `dunning_communication_delay_time_zone` attribute.
         dunning_communication_delay_time_zone (str): Time zone for the Dunning
             Communication Delay feature.
+        product_price_point_id (int): Set to change the current product's
+            price point.
+        product_price_point_handle (str): Set to change the current product's
+            price point.
 
     """
 
@@ -69,7 +73,9 @@ class UpdateSubscription(object):
         "custom_price": 'custom_price',
         "components": 'components',
         "dunning_communication_delay_enabled": 'dunning_communication_delay_enabled',
-        "dunning_communication_delay_time_zone": 'dunning_communication_delay_time_zone'
+        "dunning_communication_delay_time_zone": 'dunning_communication_delay_time_zone',
+        "product_price_point_id": 'product_price_point_id',
+        "product_price_point_handle": 'product_price_point_handle'
     }
 
     _optionals = [
@@ -90,6 +96,8 @@ class UpdateSubscription(object):
         'components',
         'dunning_communication_delay_enabled',
         'dunning_communication_delay_time_zone',
+        'product_price_point_id',
+        'product_price_point_handle',
     ]
 
     _nullables = [
@@ -115,6 +123,8 @@ class UpdateSubscription(object):
                  components=APIHelper.SKIP,
                  dunning_communication_delay_enabled=APIHelper.SKIP,
                  dunning_communication_delay_time_zone=APIHelper.SKIP,
+                 product_price_point_id=APIHelper.SKIP,
+                 product_price_point_handle=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the UpdateSubscription class"""
 
@@ -153,6 +163,10 @@ class UpdateSubscription(object):
             self.dunning_communication_delay_enabled = dunning_communication_delay_enabled 
         if dunning_communication_delay_time_zone is not APIHelper.SKIP:
             self.dunning_communication_delay_time_zone = dunning_communication_delay_time_zone 
+        if product_price_point_id is not APIHelper.SKIP:
+            self.product_price_point_id = product_price_point_id 
+        if product_price_point_handle is not APIHelper.SKIP:
+            self.product_price_point_handle = product_price_point_handle 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -198,6 +212,8 @@ class UpdateSubscription(object):
             components = APIHelper.SKIP
         dunning_communication_delay_enabled = dictionary.get("dunning_communication_delay_enabled") if "dunning_communication_delay_enabled" in dictionary.keys() else APIHelper.SKIP
         dunning_communication_delay_time_zone = dictionary.get("dunning_communication_delay_time_zone") if "dunning_communication_delay_time_zone" in dictionary.keys() else APIHelper.SKIP
+        product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
+        product_price_point_handle = dictionary.get("product_price_point_handle") if dictionary.get("product_price_point_handle") else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -220,4 +236,6 @@ class UpdateSubscription(object):
                    components,
                    dunning_communication_delay_enabled,
                    dunning_communication_delay_time_zone,
+                   product_price_point_id,
+                   product_price_point_handle,
                    dictionary)

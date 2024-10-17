@@ -52,8 +52,7 @@ class BankAccountPaymentProfile(object):
             stored bank account number with all but the last 4 digits marked
             with X’s (i.e. ‘XXXXXXX1111’)
         bank_account_type (BankAccountType): Defaults to checking
-        bank_account_holder_type (BankAccountHolderType): Defaults to
-            personal
+        bank_account_holder_type (BankAccountHolderType): Defaults to personal
         payment_type (PaymentType): TODO: type description here.
         verified (bool): denotes whether a bank account has been verified by
             providing the amounts of two small deposits made into the account

@@ -6,6 +6,8 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.invoice_payment_method import InvoicePaymentMethod
 
@@ -28,6 +30,10 @@ class InvoicePayment(object):
         gateway_used (str): TODO: type description here.
         gateway_transaction_id (str): The transaction ID for the payment as
             returned from the payment gateway
+        received_on (date): Date reflecting when the payment was received from
+            a customer. Must be in the past. Applicable only to  `external`
+            payments.
+        uid (str): TODO: type description here.
 
     """
 
@@ -42,7 +48,9 @@ class InvoicePayment(object):
         "prepayment": 'prepayment',
         "gateway_handle": 'gateway_handle',
         "gateway_used": 'gateway_used',
-        "gateway_transaction_id": 'gateway_transaction_id'
+        "gateway_transaction_id": 'gateway_transaction_id',
+        "received_on": 'received_on',
+        "uid": 'uid'
     }
 
     _optionals = [
@@ -56,11 +64,14 @@ class InvoicePayment(object):
         'gateway_handle',
         'gateway_used',
         'gateway_transaction_id',
+        'received_on',
+        'uid',
     ]
 
     _nullables = [
         'gateway_handle',
         'gateway_transaction_id',
+        'received_on',
     ]
 
     def __init__(self,
@@ -74,6 +85,8 @@ class InvoicePayment(object):
                  gateway_handle=APIHelper.SKIP,
                  gateway_used=APIHelper.SKIP,
                  gateway_transaction_id=APIHelper.SKIP,
+                 received_on=APIHelper.SKIP,
+                 uid=APIHelper.SKIP,
                  additional_properties={}):
         """Constructor for the InvoicePayment class"""
 
@@ -98,6 +111,10 @@ class InvoicePayment(object):
             self.gateway_used = gateway_used 
         if gateway_transaction_id is not APIHelper.SKIP:
             self.gateway_transaction_id = gateway_transaction_id 
+        if received_on is not APIHelper.SKIP:
+            self.received_on = received_on 
+        if uid is not APIHelper.SKIP:
+            self.uid = uid 
 
         # Add additional model properties to the instance
         self.additional_properties = additional_properties
@@ -131,6 +148,11 @@ class InvoicePayment(object):
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
         gateway_used = dictionary.get("gateway_used") if dictionary.get("gateway_used") else APIHelper.SKIP
         gateway_transaction_id = dictionary.get("gateway_transaction_id") if "gateway_transaction_id" in dictionary.keys() else APIHelper.SKIP
+        if 'received_on' in dictionary.keys():
+            received_on = dateutil.parser.parse(dictionary.get('received_on')).date() if dictionary.get('received_on') else None
+        else:
+            received_on = APIHelper.SKIP
+        uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
         # Clean out expected properties from dictionary
         for key in cls._names.values():
             if key in dictionary:
@@ -146,6 +168,8 @@ class InvoicePayment(object):
                    gateway_handle,
                    gateway_used,
                    gateway_transaction_id,
+                   received_on,
+                   uid,
                    dictionary)
 
     @classmethod

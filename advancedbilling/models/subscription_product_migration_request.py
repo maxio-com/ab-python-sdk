@@ -16,8 +16,7 @@ class SubscriptionProductMigrationRequest(object):
     TODO: type model description here.
 
     Attributes:
-        migration (SubscriptionProductMigration): TODO: type description
-            here.
+        migration (SubscriptionProductMigration): TODO: type description here.
 
     """
 

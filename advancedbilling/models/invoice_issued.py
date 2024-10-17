@@ -26,8 +26,7 @@ class InvoiceIssued(object):
         due_date (date): TODO: type description here.
         issue_date (str): Invoice issue date. Can be an empty string if value
             is missing.
-        paid_date (str): Paid date. Can be an empty string if value is
-            missing.
+        paid_date (str): Paid date. Can be an empty string if value is missing.
         due_amount (str): TODO: type description here.
         paid_amount (str): TODO: type description here.
         tax_amount (str): TODO: type description here.

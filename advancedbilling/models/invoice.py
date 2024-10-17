@@ -56,8 +56,7 @@ class Invoice(object):
             `"YYYY-MM-DD"`.
         paid_date (date): Date the invoice became fully paid.  If partial
             payments are applied to the invoice, this date will not be present
-            until payment has been made in full.  The format is
-            `"YYYY-MM-DD"`.
+            until payment has been made in full.  The format is `"YYYY-MM-DD"`.
         status (InvoiceStatus): The current status of the invoice. See
             [Invoice
             Statuses](https://maxio.zendesk.com/hc/en-us/articles/2425228782964
@@ -119,8 +118,7 @@ class Invoice(object):
         total_amount (str): The invoice total, which is `subtotal_amount -
             discount_amount + tax_amount`.'
         credit_amount (str): The amount of credit (from credit notes) applied
-            to this invoice.  Credits offset the amount due from the
-            customer.
+            to this invoice.  Credits offset the amount due from the customer.
         refund_amount (str): TODO: type description here.
         paid_amount (str): The amount paid on the invoice by the customer.
         due_amount (str): Amount due on the invoice, which is `total_amount -
@@ -131,10 +129,8 @@ class Invoice(object):
         credits (List[InvoiceCredit]): TODO: type description here.
         refunds (List[InvoiceRefund]): TODO: type description here.
         payments (List[InvoicePayment]): TODO: type description here.
-        custom_fields (List[InvoiceCustomField]): TODO: type description
-            here.
-        display_settings (InvoiceDisplaySettings): TODO: type description
-            here.
+        custom_fields (List[InvoiceCustomField]): TODO: type description here.
+        display_settings (InvoiceDisplaySettings): TODO: type description here.
         public_url (str): The public URL of the invoice
         previous_balance_data (InvoicePreviousBalance): TODO: type description
             here.

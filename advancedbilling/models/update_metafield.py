@@ -28,8 +28,7 @@ class UpdateMetafield(object):
             hand, dropdown and radio have a set of allowed values that can be
             input, and appear differently on a Public Signup Page. Defaults to
             'text'
-        enum (List[str]): Only applicable when input_type is radio or
-            dropdown
+        enum (List[str]): Only applicable when input_type is radio or dropdown
 
     """
 

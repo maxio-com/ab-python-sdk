@@ -55,8 +55,7 @@ class SalesCommissionsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    seller_id -- str -- The Chargify id of your seller
-                        account
+                    seller_id -- str -- The Chargify id of your seller account
                     authorization -- str -- For authorization use user API
                         key. See details
                         [here](https://developers.chargify.com/docs/developer-d
@@ -75,8 +74,7 @@ class SalesCommissionsController(BaseController):
                         then an empty result set will be returned. Use in
                         query `page=1`.
                     per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is
-                        100.
+                        records to fetch in each request. Default value is 100.
 
         Returns:
             List[SaleRepSettings]: Response from the API. OK
@@ -149,8 +147,7 @@ class SalesCommissionsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    seller_id -- str -- The Chargify id of your seller
-                        account
+                    seller_id -- str -- The Chargify id of your seller account
                     authorization -- str -- For authorization use user API
                         key. See details
                         [here](https://developers.chargify.com/docs/developer-d
@@ -169,8 +166,7 @@ class SalesCommissionsController(BaseController):
                         then an empty result set will be returned. Use in
                         query `page=1`.
                     per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is
-                        100.
+                        records to fetch in each request. Default value is 100.
 
         Returns:
             List[ListSaleRepItem]: Response from the API. OK
@@ -249,8 +245,7 @@ class SalesCommissionsController(BaseController):
                 [here](https://developers.chargify.com/docs/developer-docs/ZG9j
                 OjMyNzk5NTg0-2020-04-20-new-api-authentication).
             live_mode (bool, optional): This parameter indicates if records
-                should be fetched from live mode sites. Default value is
-                true.
+                should be fetched from live mode sites. Default value is true.
             page (int, optional): Result records are organized in pages. By
                 default, the first page of results is displayed. The page
                 parameter specifies a page number of results to fetch. You can

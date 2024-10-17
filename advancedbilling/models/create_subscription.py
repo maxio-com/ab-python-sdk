@@ -106,8 +106,7 @@ class CreateSubscription(object):
             `bank_account` > id)
         reference (str): The reference value (provided by your app) for the
             subscription itelf.
-        customer_attributes (CustomerAttributes): TODO: type description
-            here.
+        customer_attributes (CustomerAttributes): TODO: type description here.
         payment_profile_attributes (PaymentProfileAttributes): alias to
             credit_card_attributes
         credit_card_attributes (PaymentProfileAttributes): Credit Card data to

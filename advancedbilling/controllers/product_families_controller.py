@@ -284,8 +284,7 @@ class ProductFamiliesController(BaseController):
         """Does a GET request to /product_families/{id}.json.
 
         This method allows to retrieve a Product Family via the
-        `product_family_id`. The response will contain a Product Family
-        object.
+        `product_family_id`. The response will contain a Product Family object.
         The product family can be specified either with the id number, or with
         the `handle:my-family` format.
 

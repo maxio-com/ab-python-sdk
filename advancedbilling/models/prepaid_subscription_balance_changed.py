@@ -21,8 +21,7 @@ class PrepaidSubscriptionBalanceChanged(object):
             here.
         prepayment_account_balance_in_cents (long|int): TODO: type description
             here.
-        current_usage_amount_in_cents (long|int): TODO: type description
-            here.
+        current_usage_amount_in_cents (long|int): TODO: type description here.
 
     """
 

@@ -22,8 +22,7 @@ class VoidInvoiceEventData(object):
         applied_amount (str): The amount of the void.
         transaction_time (datetime): The time the refund was applied, in ISO
             8601 format, i.e. "2019-06-07T17:20:06Z"
-        is_advance_invoice (bool): If true, the invoice is an advance
-            invoice.
+        is_advance_invoice (bool): If true, the invoice is an advance invoice.
         reason (str): The reason for the void.
 
     """

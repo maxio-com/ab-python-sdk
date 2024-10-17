@@ -29,8 +29,7 @@ class AllocationPreview(object):
         line_items (List[AllocationPreviewLineItem]): TODO: type description
             here.
         accrue_charge (bool): TODO: type description here.
-        allocations (List[AllocationPreviewItem]): TODO: type description
-            here.
+        allocations (List[AllocationPreviewItem]): TODO: type description here.
         period_type (str): TODO: type description here.
         existing_balance_in_cents (long|int): An integer representing the
             amount of the subscription's current balance

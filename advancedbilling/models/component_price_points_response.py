@@ -18,8 +18,7 @@ class ComponentPricePointsResponse(object):
     TODO: type model description here.
 
     Attributes:
-        price_points (List[ComponentPricePoint]): TODO: type description
-            here.
+        price_points (List[ComponentPricePoint]): TODO: type description here.
         meta (ListPublicKeysMeta): TODO: type description here.
 
     """

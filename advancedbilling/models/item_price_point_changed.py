@@ -21,10 +21,8 @@ class ItemPricePointChanged(object):
         item_type (str): TODO: type description here.
         item_handle (str): TODO: type description here.
         item_name (str): TODO: type description here.
-        previous_price_point (ItemPricePointData): TODO: type description
-            here.
-        current_price_point (ItemPricePointData): TODO: type description
-            here.
+        previous_price_point (ItemPricePointData): TODO: type description here.
+        current_price_point (ItemPricePointData): TODO: type description here.
 
     """
 

@@ -37,8 +37,7 @@ class CreateSegment(object):
             See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
-        prices (List[CreateOrUpdateSegmentPrice]): TODO: type description
-            here.
+        prices (List[CreateOrUpdateSegmentPrice]): TODO: type description here.
 
     """
 

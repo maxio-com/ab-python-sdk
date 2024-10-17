@@ -26,8 +26,7 @@ class ApplyCreditNoteEventData(object):
             generated automatically by Chargify and has the prefix "cn_"
             followed by alphanumeric characters.
         original_amount (str): The full, original amount of the credit note.
-        applied_amount (str): The amount of the credit note applied to
-            invoice.
+        applied_amount (str): The amount of the credit note applied to invoice.
         transaction_time (datetime): The time the credit note was applied, in
             ISO 8601 format, i.e. "2019-06-07T17:20:06Z"
         memo (str): The credit note memo.

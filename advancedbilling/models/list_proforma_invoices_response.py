@@ -18,8 +18,7 @@ class ListProformaInvoicesResponse(object):
     TODO: type model description here.
 
     Attributes:
-        proforma_invoices (List[ProformaInvoice]): TODO: type description
-            here.
+        proforma_invoices (List[ProformaInvoice]): TODO: type description here.
         meta (ListProformaInvoicesMeta): TODO: type description here.
 
     """

@@ -23,8 +23,7 @@ class CreateDebitNoteEvent(object):
         timestamp (datetime): TODO: type description here.
         invoice (Invoice): TODO: type description here.
         event_type (InvoiceEventType): TODO: type description here.
-        event_data (DebitNote): Example schema for an `create_debit_note`
-            event
+        event_data (DebitNote): Example schema for an `create_debit_note` event
 
     """
 

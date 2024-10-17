@@ -16,8 +16,7 @@ class SubscriptionMigrationPreviewResponse(object):
     TODO: type model description here.
 
     Attributes:
-        migration (SubscriptionMigrationPreview): TODO: type description
-            here.
+        migration (SubscriptionMigrationPreview): TODO: type description here.
 
     """
 

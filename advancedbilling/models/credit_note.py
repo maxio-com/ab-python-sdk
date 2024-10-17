@@ -31,8 +31,7 @@ class CreditNote(object):
             automatically by Chargify and has the prefix "cn_" followed by
             alphanumeric characters.
         site_id (int): ID of the site to which the credit note belongs.
-        customer_id (int): ID of the customer to which the credit note
-            belongs.
+        customer_id (int): ID of the customer to which the credit note belongs.
         subscription_id (int): ID of the subscription that generated the
             credit note.
         number (str): A unique, identifying string that appears on the credit
@@ -73,8 +72,7 @@ class CreditNote(object):
             being credited back to the customer (i.e. a credit on an earlier
             discount). For example, if the original purchase was $1.00 and the
             original discount was $0.10, a credit of $0.50 of the original
-            purchase (half) would have a discount credit of $0.05 (also
-            half).
+            purchase (half) would have a discount credit of $0.05 (also half).
         tax_amount (str): Total tax of the credit note. Note that this is a
             positive amount representing a previously taxex amount being
             credited back to the customer (i.e. a credit of an earlier tax).

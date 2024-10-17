@@ -31,8 +31,7 @@ class ProductsController(BaseController):
                        body=None):
         """Does a POST request to /product_families/{product_family_id}/products.json.
 
-        Use this method to create a product within your Advanced Billing
-        site.
+        Use this method to create a product within your Advanced Billing site.
         + [Products
         Documentation](https://maxio.zendesk.com/hc/en-us/articles/242610901176
         45-Products-Overview)
@@ -268,8 +267,7 @@ class ProductsController(BaseController):
                       options=dict()):
         """Does a GET request to /products.json.
 
-        This method allows to retrieve a list of Products belonging to a
-        Site.
+        This method allows to retrieve a list of Products belonging to a Site.
 
         Args:
             options (dict, optional): Key-value pairs for any of the
