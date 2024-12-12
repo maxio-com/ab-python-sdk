@@ -1,3 +1,4 @@
+from random import Random
 from uuid import uuid4
 
 from advancedbilling.models.component import Component
@@ -198,7 +199,7 @@ class InitCases:
     def get_coupon_data() -> dict:
         return {
             "name": "15% off",
-            "code": "15OFF",
+            "code": "15OFF" + str(Random().randint(1000, 10000)),
             "percentage": "15",
             "description": "15% off for life",
             "allow_negative_balance": False,

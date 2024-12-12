@@ -18,7 +18,7 @@ from advancedbilling.exceptions.error_array_map_response_exception import (
 from advancedbilling.models.coupon import Coupon
 from advancedbilling.models.create_customer_request import CreateCustomerRequest
 from advancedbilling.models.create_invoice_request import CreateInvoiceRequest
-from advancedbilling.models.create_or_update_coupon import CreateOrUpdateCoupon
+from advancedbilling.models.coupon_request import CouponRequest
 from advancedbilling.models.create_or_update_product_request import (
     CreateOrUpdateProductRequest,
 )
@@ -75,7 +75,7 @@ class TestInvoices:
         ).payment_profile
 
         coupon: Coupon = coupons_controller.create_coupon(
-            product_family.id, CreateOrUpdateCoupon(InitCases.get_coupon_data())
+            product_family.id, CouponRequest(InitCases.get_coupon_data())
         ).coupon
 
         subscription: Subscription = subscriptions_controller.create_subscription(
