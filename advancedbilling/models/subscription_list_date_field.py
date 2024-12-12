@@ -16,6 +16,8 @@ class SubscriptionListDateField(object):
 
     Attributes:
         UPDATED_AT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     UPDATED_AT = 'updated_at'

@@ -23,6 +23,8 @@ class InvoiceSortField(object):
         ISSUE_DATE: TODO: type description here.
         DUE_DATE: TODO: type description here.
         NUMBER: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     STATUS = 'status'

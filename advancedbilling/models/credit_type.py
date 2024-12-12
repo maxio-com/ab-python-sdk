@@ -20,6 +20,8 @@ class CreditType(object):
         FULL: TODO: type description here.
         PRORATED: TODO: type description here.
         NONE: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['full', 'prorated', 'none']

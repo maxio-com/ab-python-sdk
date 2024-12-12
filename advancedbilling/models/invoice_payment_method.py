@@ -24,6 +24,8 @@ class InvoicePaymentMethod(object):
         card_expiration (str): TODO: type description here.
         last_four (str): TODO: type description here.
         masked_card_number (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -63,7 +65,7 @@ class InvoicePaymentMethod(object):
                  card_expiration=APIHelper.SKIP,
                  last_four=APIHelper.SKIP,
                  masked_card_number=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the InvoicePaymentMethod class"""
 
         # Initialize members of the class
@@ -85,6 +87,8 @@ class InvoicePaymentMethod(object):
             self.masked_card_number = masked_card_number 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -102,7 +106,7 @@ class InvoicePaymentMethod(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -115,9 +119,7 @@ class InvoicePaymentMethod(object):
         last_four = dictionary.get("last_four") if "last_four" in dictionary.keys() else APIHelper.SKIP
         masked_card_number = dictionary.get("masked_card_number") if dictionary.get("masked_card_number") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(details,
                    kind,
@@ -127,7 +129,7 @@ class InvoicePaymentMethod(object):
                    card_expiration,
                    last_four,
                    masked_card_number,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

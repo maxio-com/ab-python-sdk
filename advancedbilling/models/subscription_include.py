@@ -17,6 +17,8 @@ class SubscriptionInclude(object):
     Attributes:
         COUPONS: TODO: type description here.
         SELF_SERVICE_PAGE_TOKEN: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     COUPONS = 'coupons'

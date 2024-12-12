@@ -46,6 +46,8 @@ class CreateProductPricePoint(object):
         use_site_exchange_rate (bool): Whether or not to use the site's
             exchange rate or define your own pricing when your site has
             multiple currencies defined.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -99,7 +101,7 @@ class CreateProductPricePoint(object):
                  expiration_interval=APIHelper.SKIP,
                  expiration_interval_unit=APIHelper.SKIP,
                  use_site_exchange_rate=True,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateProductPricePoint class"""
 
         # Initialize members of the class
@@ -128,6 +130,8 @@ class CreateProductPricePoint(object):
         self.use_site_exchange_rate = use_site_exchange_rate 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -145,7 +149,7 @@ class CreateProductPricePoint(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -164,9 +168,7 @@ class CreateProductPricePoint(object):
         expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if dictionary.get("use_site_exchange_rate") else True
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(name,
                    price_in_cents,
@@ -182,4 +184,4 @@ class CreateProductPricePoint(object):
                    expiration_interval,
                    expiration_interval_unit,
                    use_site_exchange_rate,
-                   dictionary)
+                   additional_properties)

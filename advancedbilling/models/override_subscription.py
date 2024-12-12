@@ -36,6 +36,8 @@ class OverrideSubscription(object):
             must be before the current date and time. Allows you to set when
             the period started so mid period component allocations have the
             correct proration. Only ISO8601 format is supported.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -62,7 +64,7 @@ class OverrideSubscription(object):
                  cancellation_message=APIHelper.SKIP,
                  expires_at=APIHelper.SKIP,
                  current_period_starts_at=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the OverrideSubscription class"""
 
         # Initialize members of the class
@@ -78,6 +80,8 @@ class OverrideSubscription(object):
             self.current_period_starts_at = APIHelper.apply_datetime_converter(current_period_starts_at, APIHelper.RFC3339DateTime) if current_period_starts_at else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -95,7 +99,7 @@ class OverrideSubscription(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -105,13 +109,11 @@ class OverrideSubscription(object):
         expires_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("expires_at")).datetime if dictionary.get("expires_at") else APIHelper.SKIP
         current_period_starts_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("current_period_starts_at")).datetime if dictionary.get("current_period_starts_at") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(activated_at,
                    canceled_at,
                    cancellation_message,
                    expires_at,
                    current_period_starts_at,
-                   dictionary)
+                   additional_properties)

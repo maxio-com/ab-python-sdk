@@ -37,6 +37,8 @@ class CreateInvoice(object):
             customer
         coupons (List[CreateInvoiceCoupon]): TODO: type description here.
         status (CreateInvoiceStatus): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -78,7 +80,7 @@ class CreateInvoice(object):
                  shipping_address=APIHelper.SKIP,
                  coupons=APIHelper.SKIP,
                  status='open',
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateInvoice class"""
 
         # Initialize members of the class
@@ -103,6 +105,8 @@ class CreateInvoice(object):
         self.status = status 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -120,7 +124,7 @@ class CreateInvoice(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -143,9 +147,7 @@ class CreateInvoice(object):
             coupons = APIHelper.SKIP
         status = dictionary.get("status") if dictionary.get("status") else 'open'
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(line_items,
                    issue_date,
@@ -157,4 +159,4 @@ class CreateInvoice(object):
                    shipping_address,
                    coupons,
                    status,
-                   dictionary)
+                   additional_properties)

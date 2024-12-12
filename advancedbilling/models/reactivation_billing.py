@@ -23,6 +23,8 @@ class ReactivationBilling(object):
             product price will be attempted immediately 3) `delayed` A
             full-price charge for the product price will be attempted at the
             next renewal
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -37,13 +39,15 @@ class ReactivationBilling(object):
 
     def __init__(self,
                  reactivation_charge='prorated',
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ReactivationBilling class"""
 
         # Initialize members of the class
         self.reactivation_charge = reactivation_charge 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -61,18 +65,16 @@ class ReactivationBilling(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         reactivation_charge = dictionary.get("reactivation_charge") if dictionary.get("reactivation_charge") else 'prorated'
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(reactivation_charge,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

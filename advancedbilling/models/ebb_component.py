@@ -38,17 +38,9 @@ class EBBComponent(object):
             tml) for an overview of pricing schemes.
         prices (List[Price]): (Not required for ‘per_unit’ pricing schemes)
             One or more price brackets. See [Price Bracket
-            Rules](https://help.chargify.com/products/product-components.html#g
-            eneral-price-bracket-rules) for an overview of how price brackets
-            work for different pricing schemes.
-        upgrade_charge (CreditType): The type of credit to be created when
-            upgrading/downgrading. Defaults to the component and then site
-            setting if one is not provided. Available values: `full`,
-            `prorated`, `none`.
-        downgrade_credit (CreditType): The type of credit to be created when
-            upgrading/downgrading. Defaults to the component and then site
-            setting if one is not provided. Available values: `full`,
-            `prorated`, `none`.
+            Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-C
+            omponent-Pricing-Schemes#price-bracket-rules) for an overview of
+            how price brackets work for different pricing schemes.
         price_points (List[ComponentPricePointItem]): TODO: type description
             here.
         unit_price (str | float | None): The amount the customer will be
@@ -62,7 +54,6 @@ class EBBComponent(object):
         hide_date_range_on_invoice (bool): (Only available on Relationship
             Invoicing sites) Boolean flag describing if the service date range
             should show for the component on generated invoices.
-        price_in_cents (str): deprecated May 2011 - use unit_price instead
         event_based_billing_metric_id (int): The ID of an event based billing
             metric that will be attached to this component.
         interval (int): The numerical interval. i.e. an interval of ‘30’
@@ -73,6 +64,8 @@ class EBBComponent(object):
             for this component's default price point, either month or day.
             This property is only available for sites with Multifrequency
             enabled.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -86,13 +79,10 @@ class EBBComponent(object):
         "handle": 'handle',
         "taxable": 'taxable',
         "prices": 'prices',
-        "upgrade_charge": 'upgrade_charge',
-        "downgrade_credit": 'downgrade_credit',
         "price_points": 'price_points',
         "unit_price": 'unit_price',
         "tax_code": 'tax_code',
         "hide_date_range_on_invoice": 'hide_date_range_on_invoice',
-        "price_in_cents": 'price_in_cents',
         "interval": 'interval',
         "interval_unit": 'interval_unit'
     }
@@ -102,20 +92,15 @@ class EBBComponent(object):
         'handle',
         'taxable',
         'prices',
-        'upgrade_charge',
-        'downgrade_credit',
         'price_points',
         'unit_price',
         'tax_code',
         'hide_date_range_on_invoice',
-        'price_in_cents',
         'interval',
         'interval_unit',
     ]
 
     _nullables = [
-        'upgrade_charge',
-        'downgrade_credit',
         'interval_unit',
     ]
 
@@ -128,16 +113,13 @@ class EBBComponent(object):
                  handle=APIHelper.SKIP,
                  taxable=APIHelper.SKIP,
                  prices=APIHelper.SKIP,
-                 upgrade_charge=APIHelper.SKIP,
-                 downgrade_credit=APIHelper.SKIP,
                  price_points=APIHelper.SKIP,
                  unit_price=APIHelper.SKIP,
                  tax_code=APIHelper.SKIP,
                  hide_date_range_on_invoice=APIHelper.SKIP,
-                 price_in_cents=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
                  interval_unit=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the EBBComponent class"""
 
         # Initialize members of the class
@@ -152,10 +134,6 @@ class EBBComponent(object):
         self.pricing_scheme = pricing_scheme 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
-        if upgrade_charge is not APIHelper.SKIP:
-            self.upgrade_charge = upgrade_charge 
-        if downgrade_credit is not APIHelper.SKIP:
-            self.downgrade_credit = downgrade_credit 
         if price_points is not APIHelper.SKIP:
             self.price_points = price_points 
         if unit_price is not APIHelper.SKIP:
@@ -164,8 +142,6 @@ class EBBComponent(object):
             self.tax_code = tax_code 
         if hide_date_range_on_invoice is not APIHelper.SKIP:
             self.hide_date_range_on_invoice = hide_date_range_on_invoice 
-        if price_in_cents is not APIHelper.SKIP:
-            self.price_in_cents = price_in_cents 
         self.event_based_billing_metric_id = event_based_billing_metric_id 
         if interval is not APIHelper.SKIP:
             self.interval = interval 
@@ -173,6 +149,8 @@ class EBBComponent(object):
             self.interval_unit = interval_unit 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -191,7 +169,7 @@ class EBBComponent(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -207,8 +185,6 @@ class EBBComponent(object):
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
         else:
             prices = APIHelper.SKIP
-        upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
-        downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         price_points = None
         if dictionary.get('price_points') is not None:
             price_points = [ComponentPricePointItem.from_dictionary(x) for x in dictionary.get('price_points')]
@@ -217,13 +193,10 @@ class EBBComponent(object):
         unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('EBBComponentUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if dictionary.get("tax_code") else APIHelper.SKIP
         hide_date_range_on_invoice = dictionary.get("hide_date_range_on_invoice") if "hide_date_range_on_invoice" in dictionary.keys() else APIHelper.SKIP
-        price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(name,
                    unit_name,
@@ -233,13 +206,10 @@ class EBBComponent(object):
                    handle,
                    taxable,
                    prices,
-                   upgrade_charge,
-                   downgrade_credit,
                    price_points,
                    unit_price,
                    tax_code,
                    hide_date_range_on_invoice,
-                   price_in_cents,
                    interval,
                    interval_unit,
-                   dictionary)
+                   additional_properties)

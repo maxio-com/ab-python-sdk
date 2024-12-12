@@ -18,6 +18,8 @@ class CurrencyPriceRole(object):
         BASELINE: TODO: type description here.
         TRIAL: TODO: type description here.
         INITIAL: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     BASELINE = 'baseline'

@@ -16,6 +16,8 @@ class CreateSignupProformaPreviewInclude(object):
 
     Attributes:
         NEXT_PROFORMA_INVOICE: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     NEXT_PROFORMA_INVOICE = 'next_proforma_invoice'

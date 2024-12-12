@@ -21,6 +21,8 @@ class BatchJob(object):
         row_count (int): TODO: type description here.
         created_at (datetime): TODO: type description here.
         completed (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -53,7 +55,7 @@ class BatchJob(object):
                  row_count=APIHelper.SKIP,
                  created_at=APIHelper.SKIP,
                  completed=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the BatchJob class"""
 
         # Initialize members of the class
@@ -69,6 +71,8 @@ class BatchJob(object):
             self.completed = completed 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -86,7 +90,7 @@ class BatchJob(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -102,13 +106,11 @@ class BatchJob(object):
             created_at = APIHelper.SKIP
         completed = dictionary.get("completed") if dictionary.get("completed") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    finished_at,
                    row_count,
                    created_at,
                    completed,
-                   dictionary)
+                   additional_properties)

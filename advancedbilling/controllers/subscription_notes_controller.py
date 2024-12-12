@@ -16,6 +16,7 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.subscription_note_response import SubscriptionNoteResponse
+from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 
 
 class SubscriptionNotesController(BaseController):
@@ -57,7 +58,7 @@ class SubscriptionNotesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/notes.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -79,6 +80,7 @@ class SubscriptionNotesController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionNoteResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def list_subscription_notes(self,
@@ -124,7 +126,7 @@ class SubscriptionNotesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/notes.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -146,6 +148,7 @@ class SubscriptionNotesController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionNoteResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def read_subscription_note(self,
@@ -172,7 +175,7 @@ class SubscriptionNotesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/notes/{note_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -221,7 +224,7 @@ class SubscriptionNotesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/notes/{note_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -248,6 +251,7 @@ class SubscriptionNotesController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionNoteResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def delete_subscription_note(self,
@@ -273,7 +277,7 @@ class SubscriptionNotesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/notes/{note_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()

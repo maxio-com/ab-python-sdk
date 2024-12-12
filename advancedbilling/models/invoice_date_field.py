@@ -20,6 +20,8 @@ class InvoiceDateField(object):
         ISSUE_DATE: TODO: type description here.
         UPDATED_AT: TODO: type description here.
         PAID_DATE: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     CREATED_AT = 'created_at'

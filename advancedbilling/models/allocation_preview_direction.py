@@ -17,6 +17,8 @@ class AllocationPreviewDirection(object):
     Attributes:
         UPGRADE: TODO: type description here.
         DOWNGRADE: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     UPGRADE = 'upgrade'

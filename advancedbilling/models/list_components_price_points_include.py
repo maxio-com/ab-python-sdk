@@ -16,6 +16,8 @@ class ListComponentsPricePointsInclude(object):
 
     Attributes:
         CURRENCY_PRICES: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     CURRENCY_PRICES = 'currency_prices'

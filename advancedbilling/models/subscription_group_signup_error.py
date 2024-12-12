@@ -26,6 +26,8 @@ class SubscriptionGroupSignupError(object):
         subscription_group (List[str]): TODO: type description here.
         payment_profile_id (str): TODO: type description here.
         payer_id (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -55,7 +57,7 @@ class SubscriptionGroupSignupError(object):
                  subscription_group=APIHelper.SKIP,
                  payment_profile_id=APIHelper.SKIP,
                  payer_id=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionGroupSignupError class"""
 
         # Initialize members of the class
@@ -73,6 +75,8 @@ class SubscriptionGroupSignupError(object):
             self.payer_id = payer_id 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -90,7 +94,7 @@ class SubscriptionGroupSignupError(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -101,9 +105,7 @@ class SubscriptionGroupSignupError(object):
         payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP
         payer_id = dictionary.get("payer_id") if dictionary.get("payer_id") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(subscriptions,
                    payer_reference,
@@ -111,4 +113,4 @@ class SubscriptionGroupSignupError(object):
                    subscription_group,
                    payment_profile_id,
                    payer_id,
-                   dictionary)
+                   additional_properties)

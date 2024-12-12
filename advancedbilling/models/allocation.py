@@ -70,6 +70,8 @@ class Allocation(object):
         expires_at (datetime): TODO: type description here.
         used_quantity (long|int): TODO: type description here.
         charge_id (long|int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -165,7 +167,7 @@ class Allocation(object):
                  expires_at=APIHelper.SKIP,
                  used_quantity=APIHelper.SKIP,
                  charge_id=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Allocation class"""
 
         # Initialize members of the class
@@ -221,6 +223,8 @@ class Allocation(object):
             self.charge_id = charge_id 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -239,7 +243,7 @@ class Allocation(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -272,9 +276,7 @@ class Allocation(object):
         used_quantity = dictionary.get("used_quantity") if dictionary.get("used_quantity") else APIHelper.SKIP
         charge_id = dictionary.get("charge_id") if dictionary.get("charge_id") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(allocation_id,
                    component_id,
@@ -301,4 +303,4 @@ class Allocation(object):
                    expires_at,
                    used_quantity,
                    charge_id,
-                   dictionary)
+                   additional_properties)

@@ -57,7 +57,7 @@ class ProductsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/products.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -104,7 +104,7 @@ class ProductsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -154,7 +154,7 @@ class ProductsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -205,7 +205,7 @@ class ProductsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -245,7 +245,7 @@ class ProductsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/handle/{api_handle}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -335,7 +335,7 @@ class ProductsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()

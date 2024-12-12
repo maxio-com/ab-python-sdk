@@ -17,6 +17,8 @@ class IncludeNullOrNotNull(object):
     Attributes:
         NOT_NULL: TODO: type description here.
         NULL: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     NOT_NULL = 'not_null'

@@ -24,6 +24,8 @@ class AgreementAcceptance(object):
         return_refund_policy_url (str): TODO: type description here.
         delivery_policy_url (str): TODO: type description here.
         secure_checkout_policy_url (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -53,7 +55,7 @@ class AgreementAcceptance(object):
                  return_refund_policy_url=APIHelper.SKIP,
                  delivery_policy_url=APIHelper.SKIP,
                  secure_checkout_policy_url=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the AgreementAcceptance class"""
 
         # Initialize members of the class
@@ -71,6 +73,8 @@ class AgreementAcceptance(object):
             self.secure_checkout_policy_url = secure_checkout_policy_url 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -88,7 +92,7 @@ class AgreementAcceptance(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -99,9 +103,7 @@ class AgreementAcceptance(object):
         delivery_policy_url = dictionary.get("delivery_policy_url") if dictionary.get("delivery_policy_url") else APIHelper.SKIP
         secure_checkout_policy_url = dictionary.get("secure_checkout_policy_url") if dictionary.get("secure_checkout_policy_url") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(ip_address,
                    terms_url,
@@ -109,7 +111,7 @@ class AgreementAcceptance(object):
                    return_refund_policy_url,
                    delivery_policy_url,
                    secure_checkout_policy_url,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

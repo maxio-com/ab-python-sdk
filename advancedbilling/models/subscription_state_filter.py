@@ -27,6 +27,8 @@ class SubscriptionStateFilter(object):
         TRIAL_ENDED: TODO: type description here.
         TRIALING: TODO: type description here.
         UNPAID: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     ACTIVE = 'active'

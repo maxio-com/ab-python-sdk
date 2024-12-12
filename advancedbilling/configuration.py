@@ -15,15 +15,16 @@ from apimatic_requests_client_adapter.requests_client import RequestsClient
 
 class Environment(Enum):
     """An enum for SDK environments"""
-    # Production server
-    PRODUCTION = 0
-    # Production server
-    ENVIRONMENT2 = 1
+    # Default Advanced Billing environment hosted in US. Valid for the majority of our customers.
+    US = 0
+    # Advanced Billing environment hosted in EU. Use only when you requested EU hosting for your AB account.
+    EU = 1
 
 
 class Server(Enum):
     """An enum for API servers"""
-    DEFAULT = 0
+    PRODUCTION = 0
+    EBB = 1
 
 
 class Configuration(HttpClientConfiguration):
@@ -35,12 +36,8 @@ class Configuration(HttpClientConfiguration):
         return self._environment
 
     @property
-    def subdomain(self):
-        return self._subdomain
-
-    @property
-    def domain(self):
-        return self._domain
+    def site(self):
+        return self._site
 
     @property
     def basic_auth_credentials(self):
@@ -50,8 +47,8 @@ class Configuration(HttpClientConfiguration):
                  override_http_client_configuration=False, http_call_back=None,
                  timeout=120, max_retries=0, backoff_factor=2,
                  retry_statuses=None, retry_methods=None,
-                 environment=Environment.PRODUCTION, subdomain='subdomain',
-                 domain='chargify.com', basic_auth_credentials=None):
+                 environment=Environment.US, site='subdomain',
+                 basic_auth_credentials=None):
         if retry_methods is None:
             retry_methods = ['GET', 'PUT']
 
@@ -67,10 +64,7 @@ class Configuration(HttpClientConfiguration):
         self._environment = environment
 
         # The subdomain for your Advanced Billing site.
-        self._subdomain = subdomain
-
-        # The Advanced Billing server domain.
-        self._domain = domain
+        self._site = site
 
         self._basic_auth_credentials = basic_auth_credentials
 
@@ -81,7 +75,7 @@ class Configuration(HttpClientConfiguration):
                    override_http_client_configuration=None, http_call_back=None,
                    timeout=None, max_retries=None, backoff_factor=None,
                    retry_statuses=None, retry_methods=None, environment=None,
-                   subdomain=None, domain=None, basic_auth_credentials=None):
+                   site=None, basic_auth_credentials=None):
         http_client_instance = http_client_instance or self.http_client_instance
         override_http_client_configuration = override_http_client_configuration or self.override_http_client_configuration
         http_call_back = http_call_back or self.http_callback
@@ -91,8 +85,7 @@ class Configuration(HttpClientConfiguration):
         retry_statuses = retry_statuses or self.retry_statuses
         retry_methods = retry_methods or self.retry_methods
         environment = environment or self.environment
-        subdomain = subdomain or self.subdomain
-        domain = domain or self.domain
+        site = site or self.site
         basic_auth_credentials = basic_auth_credentials or self.basic_auth_credentials
         return Configuration(
             http_client_instance=http_client_instance,
@@ -100,7 +93,7 @@ class Configuration(HttpClientConfiguration):
             http_call_back=http_call_back, timeout=timeout,
             max_retries=max_retries, backoff_factor=backoff_factor,
             retry_statuses=retry_statuses, retry_methods=retry_methods,
-            environment=environment, subdomain=subdomain, domain=domain,
+            environment=environment, site=site,
             basic_auth_credentials=basic_auth_credentials
         )
 
@@ -116,15 +109,17 @@ class Configuration(HttpClientConfiguration):
 
     # All the environments the SDK can run in
     environments = {
-        Environment.PRODUCTION: {
-            Server.DEFAULT: 'https://{subdomain}.{domain}'
+        Environment.US: {
+            Server.PRODUCTION: 'https://{site}.chargify.com',
+            Server.EBB: 'https://events.chargify.com/{site}'
         },
-        Environment.ENVIRONMENT2: {
-            Server.DEFAULT: 'https://events.chargify.com'
+        Environment.EU: {
+            Server.PRODUCTION: 'https://{site}.ebilling.maxio.com',
+            Server.EBB: 'https://events.chargify.com/{site}'
         }
     }
 
-    def get_base_uri(self, server=Server.DEFAULT):
+    def get_base_uri(self, server=Server.PRODUCTION):
         """Generates the appropriate base URI for the environment and the
         server.
 
@@ -137,8 +132,7 @@ class Configuration(HttpClientConfiguration):
 
         """
         parameters = {
-            "subdomain": {'value': self.subdomain, 'encode': False},
-            "domain": {'value': self.domain, 'encode': False},
+            "site": {'value': self.site, 'encode': False},
         }
 
         return APIHelper.append_url_with_template_parameters(

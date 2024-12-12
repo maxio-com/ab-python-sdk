@@ -24,6 +24,8 @@ class VoidInvoiceEventData(object):
             8601 format, i.e. "2019-06-07T17:20:06Z"
         is_advance_invoice (bool): If true, the invoice is an advance invoice.
         reason (str): The reason for the void.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -51,7 +53,7 @@ class VoidInvoiceEventData(object):
                  transaction_time=None,
                  is_advance_invoice=None,
                  reason=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the VoidInvoiceEventData class"""
 
         # Initialize members of the class
@@ -63,6 +65,8 @@ class VoidInvoiceEventData(object):
         self.reason = reason 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -80,7 +84,7 @@ class VoidInvoiceEventData(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -91,9 +95,7 @@ class VoidInvoiceEventData(object):
         is_advance_invoice = dictionary.get("is_advance_invoice") if "is_advance_invoice" in dictionary.keys() else None
         reason = dictionary.get("reason") if dictionary.get("reason") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(credit_note_attributes,
                    memo,
@@ -101,7 +103,7 @@ class VoidInvoiceEventData(object):
                    transaction_time,
                    is_advance_invoice,
                    reason,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

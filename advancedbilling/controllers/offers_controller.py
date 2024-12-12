@@ -18,6 +18,7 @@ from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.offer_response import OfferResponse
 from advancedbilling.models.list_offers_response import ListOffersResponse
 from advancedbilling.exceptions.error_array_map_response_exception import ErrorArrayMapResponseException
+from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 
 
 class OffersController(BaseController):
@@ -63,7 +64,7 @@ class OffersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/offers.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -125,7 +126,7 @@ class OffersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/offers.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -145,6 +146,7 @@ class OffersController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListOffersResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def read_offer(self,
@@ -170,7 +172,7 @@ class OffersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/offers/{offer_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -210,7 +212,7 @@ class OffersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/offers/{offer_id}/archive.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -243,7 +245,7 @@ class OffersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/offers/{offer_id}/unarchive.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()

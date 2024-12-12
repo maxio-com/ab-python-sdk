@@ -22,6 +22,8 @@ class OfferSignupPage(object):
         return_url (str): TODO: type description here.
         return_params (str): TODO: type description here.
         url (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -51,7 +53,7 @@ class OfferSignupPage(object):
                  return_url=APIHelper.SKIP,
                  return_params=APIHelper.SKIP,
                  url=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the OfferSignupPage class"""
 
         # Initialize members of the class
@@ -69,6 +71,8 @@ class OfferSignupPage(object):
             self.url = url 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -86,7 +90,7 @@ class OfferSignupPage(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -97,9 +101,7 @@ class OfferSignupPage(object):
         return_params = dictionary.get("return_params") if dictionary.get("return_params") else APIHelper.SKIP
         url = dictionary.get("url") if dictionary.get("url") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    nickname,
@@ -107,4 +109,4 @@ class OfferSignupPage(object):
                    return_url,
                    return_params,
                    url,
-                   dictionary)
+                   additional_properties)

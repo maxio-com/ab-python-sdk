@@ -24,6 +24,8 @@ class BankAccountVault(object):
         MAXIO_PAYMENTS: TODO: type description here.
         MAXP: TODO: type description here.
         STRIPE_CONNECT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['authorizenet', 'blue_snap', 'bogus', 'forte', 'gocardless', 'maxio_payments', 'maxp', 'stripe_connect']

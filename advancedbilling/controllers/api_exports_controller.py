@@ -74,7 +74,7 @@ class APIExportsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/api_exports/proforma_invoices/{batch_id}/rows.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -144,7 +144,7 @@ class APIExportsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/api_exports/invoices/{batch_id}/rows.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -214,7 +214,7 @@ class APIExportsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/api_exports/subscriptions/{batch_id}/rows.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -258,7 +258,7 @@ class APIExportsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/api_exports/proforma_invoices.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -290,7 +290,7 @@ class APIExportsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/api_exports/invoices.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -322,7 +322,7 @@ class APIExportsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/api_exports/subscriptions.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -357,7 +357,7 @@ class APIExportsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/api_exports/proforma_invoices/{batch_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -397,7 +397,7 @@ class APIExportsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/api_exports/invoices/{batch_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -437,7 +437,7 @@ class APIExportsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/api_exports/subscriptions/{batch_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()

@@ -20,8 +20,12 @@ class CurrencyPrice(object):
         currency (str): TODO: type description here.
         price (float): TODO: type description here.
         formatted_price (str): TODO: type description here.
+        price_id (int): TODO: type description here.
+        price_point_id (int): TODO: type description here.
         product_price_point_id (int): TODO: type description here.
         role (CurrencyPriceRole): Role for the price.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -31,6 +35,8 @@ class CurrencyPrice(object):
         "currency": 'currency',
         "price": 'price',
         "formatted_price": 'formatted_price',
+        "price_id": 'price_id',
+        "price_point_id": 'price_point_id',
         "product_price_point_id": 'product_price_point_id',
         "role": 'role'
     }
@@ -40,6 +46,8 @@ class CurrencyPrice(object):
         'currency',
         'price',
         'formatted_price',
+        'price_id',
+        'price_point_id',
         'product_price_point_id',
         'role',
     ]
@@ -49,9 +57,11 @@ class CurrencyPrice(object):
                  currency=APIHelper.SKIP,
                  price=APIHelper.SKIP,
                  formatted_price=APIHelper.SKIP,
+                 price_id=APIHelper.SKIP,
+                 price_point_id=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
                  role=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CurrencyPrice class"""
 
         # Initialize members of the class
@@ -63,12 +73,18 @@ class CurrencyPrice(object):
             self.price = price 
         if formatted_price is not APIHelper.SKIP:
             self.formatted_price = formatted_price 
+        if price_id is not APIHelper.SKIP:
+            self.price_id = price_id 
+        if price_point_id is not APIHelper.SKIP:
+            self.price_point_id = price_point_id 
         if product_price_point_id is not APIHelper.SKIP:
             self.product_price_point_id = product_price_point_id 
         if role is not APIHelper.SKIP:
             self.role = role 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -86,7 +102,7 @@ class CurrencyPrice(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -94,17 +110,19 @@ class CurrencyPrice(object):
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
         price = dictionary.get("price") if dictionary.get("price") else APIHelper.SKIP
         formatted_price = dictionary.get("formatted_price") if dictionary.get("formatted_price") else APIHelper.SKIP
+        price_id = dictionary.get("price_id") if dictionary.get("price_id") else APIHelper.SKIP
+        price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
         role = dictionary.get("role") if dictionary.get("role") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    currency,
                    price,
                    formatted_price,
+                   price_id,
+                   price_point_id,
                    product_price_point_id,
                    role,
-                   dictionary)
+                   additional_properties)

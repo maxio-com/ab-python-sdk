@@ -21,6 +21,8 @@ from advancedbilling.models.prepaid_configuration_response import PrepaidConfigu
 from advancedbilling.models.subscription_preview_response import SubscriptionPreviewResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.single_error_response_exception import SingleErrorResponseException
+from advancedbilling.exceptions.api_exception import APIException
+from advancedbilling.exceptions.subscription_response_error_exception import SubscriptionResponseErrorException
 from advancedbilling.exceptions.subscription_add_coupon_error_exception import SubscriptionAddCouponErrorException
 from advancedbilling.exceptions.subscription_remove_coupon_errors_exception import SubscriptionRemoveCouponErrorsException
 from advancedbilling.exceptions.error_array_map_response_exception import ErrorArrayMapResponseException
@@ -76,6 +78,17 @@ class SubscriptionsController(BaseController):
         `bank_account_attributes` for ACH and Direct Debit. That said, when
         you read the subscription after creation, we return the profile
         details under `credit_card` or `bank_account`.
+        ## Bulk creation of subscriptions
+        Bulk creation of subscriptions is currently not supported. For
+        scenarios where multiple subscriptions must be added, particularly
+        when assigning to the same subscription group, it is essential to
+        switch to a single-threaded approach. 
+        To avoid data conflicts or inaccuracies, incorporate a sleep interval
+        between requests.
+        While this single-threaded approach may impact performance, it ensures
+        data consistency and accuracy in cases where concurrent creation
+        attempts could otherwise lead to issues with subscription alignment
+        and integrity.        
         ## Taxable Subscriptions
         If your intent is to charge your subscribers tax via [Avalara
         Taxes](https://maxio.zendesk.com/hc/en-us/articles/24287043035661-Avala
@@ -863,7 +876,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -985,7 +998,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -1132,7 +1145,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -1187,7 +1200,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -1266,7 +1279,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/override.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -1304,7 +1317,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/lookup.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -1318,6 +1331,7 @@ class SubscriptionsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
+            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()
 
     def purge_subscription(self,
@@ -1346,7 +1360,7 @@ class SubscriptionsController(BaseController):
                 `cascade[]=customer&cascade[]=payment_profile`.
 
         Returns:
-            void: Response from the API. OK
+            SubscriptionResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -1357,7 +1371,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/purge.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -1372,8 +1386,16 @@ class SubscriptionsController(BaseController):
             .query_param(Parameter()
                          .key('cascade')
                          .value(cascade))
-            .array_serialization_format(SerializationFormats.CSV)
+            .header_param(Parameter()
+                          .key('accept')
+                          .value('application/json'))
+            .array_serialization_format(SerializationFormats.UN_INDEXED)
             .auth(Single('BasicAuth'))
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(SubscriptionResponse.from_dictionary)
+            .local_error_template('400', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', SubscriptionResponseErrorException)
         ).execute()
 
     def update_prepaid_subscription_configuration(self,
@@ -1400,7 +1422,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/prepaid_configurations.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -1422,6 +1444,7 @@ class SubscriptionsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PrepaidConfigurationResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', APIException)
         ).execute()
 
     def preview_subscription(self,
@@ -1481,7 +1504,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/preview.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -1539,7 +1562,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/add_coupon.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -1594,7 +1617,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/remove_coupon.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -1686,7 +1709,7 @@ class SubscriptionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/activate.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()

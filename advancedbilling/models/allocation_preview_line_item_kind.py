@@ -19,6 +19,8 @@ class AllocationPreviewLineItemKind(object):
         ON_OFF_COMPONENT: TODO: type description here.
         COUPON: TODO: type description here.
         TAX: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     QUANTITY_BASED_COMPONENT = 'quantity_based_component'

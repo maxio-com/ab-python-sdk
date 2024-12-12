@@ -55,7 +55,7 @@ class SubscriptionStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/retry.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -98,7 +98,7 @@ class SubscriptionStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -152,7 +152,7 @@ class SubscriptionStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/resume.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -201,7 +201,7 @@ class SubscriptionStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/hold.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -255,7 +255,7 @@ class SubscriptionStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/hold.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -443,7 +443,7 @@ class SubscriptionStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/reactivate.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -497,7 +497,7 @@ class SubscriptionStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/delayed_cancel.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -520,6 +520,7 @@ class SubscriptionStatusController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(DelayedCancellationResponse.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def cancel_delayed_cancellation(self,
@@ -548,7 +549,7 @@ class SubscriptionStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/delayed_cancel.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -589,7 +590,7 @@ class SubscriptionStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/cancel_dunning.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -605,6 +606,7 @@ class SubscriptionStatusController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(SubscriptionResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def preview_renewal(self,
@@ -662,7 +664,7 @@ class SubscriptionStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/renewals/preview.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()

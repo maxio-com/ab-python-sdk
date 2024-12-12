@@ -22,6 +22,8 @@ class NetTerms(object):
         net_terms_on_remittance_signups_enabled (bool): TODO: type description
             here.
         custom_net_terms_enabled (bool): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -48,7 +50,7 @@ class NetTerms(object):
                  remittance_net_terms=0,
                  net_terms_on_remittance_signups_enabled=False,
                  custom_net_terms_enabled=False,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the NetTerms class"""
 
         # Initialize members of the class
@@ -59,6 +61,8 @@ class NetTerms(object):
         self.custom_net_terms_enabled = custom_net_terms_enabled 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -76,7 +80,7 @@ class NetTerms(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -86,13 +90,11 @@ class NetTerms(object):
         net_terms_on_remittance_signups_enabled = dictionary.get("net_terms_on_remittance_signups_enabled") if dictionary.get("net_terms_on_remittance_signups_enabled") else False
         custom_net_terms_enabled = dictionary.get("custom_net_terms_enabled") if dictionary.get("custom_net_terms_enabled") else False
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(default_net_terms,
                    automatic_net_terms,
                    remittance_net_terms,
                    net_terms_on_remittance_signups_enabled,
                    custom_net_terms_enabled,
-                   dictionary)
+                   additional_properties)

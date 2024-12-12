@@ -57,7 +57,7 @@ class ReferralCodesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/referral_codes/validate.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()

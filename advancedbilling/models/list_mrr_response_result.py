@@ -24,6 +24,8 @@ class ListMRRResponseResult(object):
         currency (str): TODO: type description here.
         currency_symbol (str): TODO: type description here.
         movements (List[Movement]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -56,7 +58,7 @@ class ListMRRResponseResult(object):
                  currency=APIHelper.SKIP,
                  currency_symbol=APIHelper.SKIP,
                  movements=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ListMRRResponseResult class"""
 
         # Initialize members of the class
@@ -76,6 +78,8 @@ class ListMRRResponseResult(object):
             self.movements = movements 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -93,7 +97,7 @@ class ListMRRResponseResult(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -109,9 +113,7 @@ class ListMRRResponseResult(object):
         else:
             movements = APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(page,
                    per_page,
@@ -120,4 +122,4 @@ class ListMRRResponseResult(object):
                    currency,
                    currency_symbol,
                    movements,
-                   dictionary)
+                   additional_properties)

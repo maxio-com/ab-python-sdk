@@ -88,6 +88,7 @@ class InvoiceLineItem(object):
             `nil` for non-component charges.
         price_point_id (int): The price point ID of the component being
             billed. Will be `nil` for non-component charges.
+        billing_schedule_item_id (int): TODO: type description here.
         hide (bool): TODO: type description here.
         component_cost_data (InvoiceLineItemComponentCostData): TODO: type
             description here.
@@ -95,6 +96,8 @@ class InvoiceLineItem(object):
             product
         custom_item (bool): TODO: type description here.
         kind (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -117,6 +120,7 @@ class InvoiceLineItem(object):
         "product_version": 'product_version',
         "component_id": 'component_id',
         "price_point_id": 'price_point_id',
+        "billing_schedule_item_id": 'billing_schedule_item_id',
         "hide": 'hide',
         "component_cost_data": 'component_cost_data',
         "product_price_point_id": 'product_price_point_id',
@@ -142,6 +146,7 @@ class InvoiceLineItem(object):
         'product_version',
         'component_id',
         'price_point_id',
+        'billing_schedule_item_id',
         'hide',
         'component_cost_data',
         'product_price_point_id',
@@ -154,6 +159,7 @@ class InvoiceLineItem(object):
         'product_version',
         'component_id',
         'price_point_id',
+        'billing_schedule_item_id',
         'component_cost_data',
         'product_price_point_id',
     ]
@@ -176,12 +182,13 @@ class InvoiceLineItem(object):
                  product_version=APIHelper.SKIP,
                  component_id=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
+                 billing_schedule_item_id=APIHelper.SKIP,
                  hide=APIHelper.SKIP,
                  component_cost_data=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
                  custom_item=APIHelper.SKIP,
                  kind=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the InvoiceLineItem class"""
 
         # Initialize members of the class
@@ -219,6 +226,8 @@ class InvoiceLineItem(object):
             self.component_id = component_id 
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id 
+        if billing_schedule_item_id is not APIHelper.SKIP:
+            self.billing_schedule_item_id = billing_schedule_item_id 
         if hide is not APIHelper.SKIP:
             self.hide = hide 
         if component_cost_data is not APIHelper.SKIP:
@@ -231,6 +240,8 @@ class InvoiceLineItem(object):
             self.kind = kind 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -248,7 +259,7 @@ class InvoiceLineItem(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -269,6 +280,7 @@ class InvoiceLineItem(object):
         product_version = dictionary.get("product_version") if "product_version" in dictionary.keys() else APIHelper.SKIP
         component_id = dictionary.get("component_id") if "component_id" in dictionary.keys() else APIHelper.SKIP
         price_point_id = dictionary.get("price_point_id") if "price_point_id" in dictionary.keys() else APIHelper.SKIP
+        billing_schedule_item_id = dictionary.get("billing_schedule_item_id") if "billing_schedule_item_id" in dictionary.keys() else APIHelper.SKIP
         hide = dictionary.get("hide") if "hide" in dictionary.keys() else APIHelper.SKIP
         if 'component_cost_data' in dictionary.keys():
             component_cost_data = InvoiceLineItemComponentCostData.from_dictionary(dictionary.get('component_cost_data')) if dictionary.get('component_cost_data') else None
@@ -278,9 +290,7 @@ class InvoiceLineItem(object):
         custom_item = dictionary.get("custom_item") if "custom_item" in dictionary.keys() else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(uid,
                    title,
@@ -299,12 +309,13 @@ class InvoiceLineItem(object):
                    product_version,
                    component_id,
                    price_point_id,
+                   billing_schedule_item_id,
                    hide,
                    component_cost_data,
                    product_price_point_id,
                    custom_item,
                    kind,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

@@ -18,6 +18,8 @@ class InvoiceDiscountSourceType(object):
         COUPON: TODO: type description here.
         REFERRAL: TODO: type description here.
         ENUM_AD HOC COUPON: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['Coupon', 'Referral', 'Ad Hoc Coupon']

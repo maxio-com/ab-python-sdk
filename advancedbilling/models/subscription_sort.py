@@ -21,6 +21,8 @@ class SubscriptionSort(object):
         NEXT_ASSESSMENT: TODO: type description here.
         UPDATED_AT: TODO: type description here.
         CREATED_AT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     SIGNUP_DATE = 'signup_date'

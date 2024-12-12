@@ -33,6 +33,8 @@ class AllocationPreview(object):
         period_type (str): TODO: type description here.
         existing_balance_in_cents (long|int): An integer representing the
             amount of the subscription's current balance
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -83,7 +85,7 @@ class AllocationPreview(object):
                  allocations=APIHelper.SKIP,
                  period_type=APIHelper.SKIP,
                  existing_balance_in_cents=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the AllocationPreview class"""
 
         # Initialize members of the class
@@ -115,6 +117,8 @@ class AllocationPreview(object):
             self.existing_balance_in_cents = existing_balance_in_cents 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -132,7 +136,7 @@ class AllocationPreview(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -158,9 +162,7 @@ class AllocationPreview(object):
         period_type = dictionary.get("period_type") if dictionary.get("period_type") else APIHelper.SKIP
         existing_balance_in_cents = dictionary.get("existing_balance_in_cents") if dictionary.get("existing_balance_in_cents") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(start_date,
                    end_date,
@@ -175,4 +177,4 @@ class AllocationPreview(object):
                    allocations,
                    period_type,
                    existing_balance_in_cents,
-                   dictionary)
+                   additional_properties)

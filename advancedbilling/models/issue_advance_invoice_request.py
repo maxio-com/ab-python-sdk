@@ -17,6 +17,8 @@ class IssueAdvanceInvoiceRequest(object):
 
     Attributes:
         force (bool): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -31,7 +33,7 @@ class IssueAdvanceInvoiceRequest(object):
 
     def __init__(self,
                  force=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the IssueAdvanceInvoiceRequest class"""
 
         # Initialize members of the class
@@ -39,6 +41,8 @@ class IssueAdvanceInvoiceRequest(object):
             self.force = force 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -56,15 +60,13 @@ class IssueAdvanceInvoiceRequest(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         force = dictionary.get("force") if "force" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(force,
-                   dictionary)
+                   additional_properties)

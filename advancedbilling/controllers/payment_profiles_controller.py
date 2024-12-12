@@ -374,7 +374,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/payment_profiles.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -439,7 +439,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/payment_profiles.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -514,7 +514,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/payment_profiles/{payment_profile_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -598,7 +598,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/payment_profiles/{payment_profile_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -647,7 +647,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/payment_profiles/{payment_profile_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -691,7 +691,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -733,7 +733,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/bank_accounts/{bank_account_id}/verification.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -784,7 +784,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/payment_profiles/{payment_profile_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -827,7 +827,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -881,7 +881,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -933,7 +933,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/one_time_tokens/{chargify_token}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -987,7 +987,7 @@ class PaymentProfilesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/request_payment_profiles_update.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()

@@ -26,6 +26,7 @@
 | `product_version` | `int` | Optional | The version of the product subscribed when the charge was made. |
 | `component_id` | `int` | Optional | The ID of the component being billed. Will be `nil` for non-component charges. |
 | `price_point_id` | `int` | Optional | The price point ID of the component being billed. Will be `nil` for non-component charges. |
+| `billing_schedule_item_id` | `int` | Optional | - |
 | `hide` | `bool` | Optional | - |
 | `component_cost_data` | [`InvoiceLineItemComponentCostData`](../../doc/models/invoice-line-item-component-cost-data.md) | Optional | - |
 | `product_price_point_id` | `int` | Optional | The price point ID of the line item's product |

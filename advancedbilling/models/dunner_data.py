@@ -22,6 +22,8 @@ class DunnerData(object):
         created_at (datetime): TODO: type description here.
         attempts (int): TODO: type description here.
         last_attempted_at (datetime): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -42,7 +44,7 @@ class DunnerData(object):
                  created_at=None,
                  attempts=None,
                  last_attempted_at=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the DunnerData class"""
 
         # Initialize members of the class
@@ -54,6 +56,8 @@ class DunnerData(object):
         self.last_attempted_at = APIHelper.apply_datetime_converter(last_attempted_at, APIHelper.RFC3339DateTime) if last_attempted_at else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -71,7 +75,7 @@ class DunnerData(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -82,9 +86,7 @@ class DunnerData(object):
         attempts = dictionary.get("attempts") if dictionary.get("attempts") else None
         last_attempted_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("last_attempted_at")).datetime if dictionary.get("last_attempted_at") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(state,
                    subscription_id,
@@ -92,7 +94,7 @@ class DunnerData(object):
                    created_at,
                    attempts,
                    last_attempted_at,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

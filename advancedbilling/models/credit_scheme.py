@@ -18,6 +18,8 @@ class CreditScheme(object):
         NONE: TODO: type description here.
         CREDIT: TODO: type description here.
         REFUND: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     NONE = 'none'

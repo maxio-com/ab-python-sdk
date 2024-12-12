@@ -147,6 +147,12 @@ result = component_price_points_controller.create_component_price_point(
 )
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorArrayMapResponseException`](../../doc/models/error-array-map-response-exception.md) |
+
 
 # List Component Price Points
 
@@ -357,6 +363,12 @@ result = component_price_points_controller.bulk_create_component_price_points(
 }
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
 
 # Update Component Price Point
 
@@ -436,7 +448,8 @@ Use this endpoint to retrieve details for a specific component price point. You 
 ```python
 def read_component_price_point(self,
                               component_id,
-                              price_point_id)
+                              price_point_id,
+                              currency_prices=None)
 ```
 
 ## Parameters
@@ -445,6 +458,7 @@ def read_component_price_point(self,
 |  --- | --- | --- | --- |
 | `component_id` | int \| str | Template, Required | This is a container for one-of cases. |
 | `price_point_id` | int \| str | Template, Required | This is a container for one-of cases. |
+| `currency_prices` | `bool` | Query, Optional | Include an array of currency price data |
 
 ## Response Type
 

@@ -25,6 +25,8 @@ class AllocationSettings(object):
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
         accrue_charge (str): Either "true" or "false".
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -50,7 +52,7 @@ class AllocationSettings(object):
                  upgrade_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
                  accrue_charge=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the AllocationSettings class"""
 
         # Initialize members of the class
@@ -62,6 +64,8 @@ class AllocationSettings(object):
             self.accrue_charge = accrue_charge 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -79,7 +83,7 @@ class AllocationSettings(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -87,11 +91,9 @@ class AllocationSettings(object):
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         accrue_charge = dictionary.get("accrue_charge") if dictionary.get("accrue_charge") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(upgrade_charge,
                    downgrade_credit,
                    accrue_charge,
-                   dictionary)
+                   additional_properties)

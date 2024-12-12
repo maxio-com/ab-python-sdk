@@ -20,6 +20,7 @@ __all__ = [
     'subscription_group_signup_error_response_exception',
     'subscription_group_update_error_response_exception',
     'subscription_remove_coupon_errors_exception',
+    'subscription_response_error_exception',
     'subscriptions_mrr_error_response_exception',
     'too_many_management_link_requests_error_exception',
 ]

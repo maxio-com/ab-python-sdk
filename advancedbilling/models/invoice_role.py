@@ -25,6 +25,8 @@ class InvoiceRole(object):
         ADHOC: TODO: type description here.
         BACKPORT: TODO: type description here.
         BACKPORTBALANCERECONCILIATION: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['unset', 'signup', 'renewal', 'usage', 'reactivation', 'proration', 'migration', 'adhoc', 'backport', 'backport-balance-reconciliation']

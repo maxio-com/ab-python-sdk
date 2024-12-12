@@ -63,22 +63,22 @@ class ProductFamiliesController(BaseController):
                         `date_field=created_at`.
                     filter -- ListProductsFilter -- Filter to use for List
                         Products operations
-                    start_date -- str -- The start date (format YYYY-MM-DD)
+                    start_date -- date -- The start date (format YYYY-MM-DD)
                         with which to filter the date_field. Returns products
                         with a timestamp at or after midnight (12:00:00 AM) in
                         your site’s time zone on the date specified.
-                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                    end_date -- date -- The end date (format YYYY-MM-DD) with
                         which to filter the date_field. Returns products with
                         a timestamp up to and including 11:59:59PM in your
                         site’s time zone on the date specified.
-                    start_datetime -- str -- The start date and time (format
-                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                    start_datetime -- datetime -- The start date and time
+                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
                         date_field. Returns products with a timestamp at or
                         after exact time provided in query. You can specify
                         timezone in query - otherwise your site's time zone
                         will be used. If provided, this parameter will be used
                         instead of start_date.
-                    end_datetime -- str -- The end date and time (format
+                    end_datetime -- datetime -- The end date and time (format
                         YYYY-MM-DD HH:MM:SS) with which to filter the
                         date_field. Returns products with a timestamp at or
                         before exact time provided in query. You can specify
@@ -102,7 +102,7 @@ class ProductFamiliesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/products.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -130,10 +130,10 @@ class ProductFamiliesController(BaseController):
                          .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(options.get('start_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('start_datetime', None))))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(options.get('end_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('end_datetime', None))))
             .query_param(Parameter()
                          .key('include_archived')
                          .value(options.get('include_archived', None)))
@@ -180,7 +180,7 @@ class ProductFamiliesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -216,22 +216,22 @@ class ProductFamiliesController(BaseController):
                     date_field -- BasicDateField -- The type of filter you
                         would like to apply to your search. Use in query:
                         `date_field=created_at`.
-                    start_date -- str -- The start date (format YYYY-MM-DD)
+                    start_date -- date -- The start date (format YYYY-MM-DD)
                         with which to filter the date_field. Returns products
                         with a timestamp at or after midnight (12:00:00 AM) in
                         your site’s time zone on the date specified.
-                    end_date -- str -- The end date (format YYYY-MM-DD) with
+                    end_date -- date -- The end date (format YYYY-MM-DD) with
                         which to filter the date_field. Returns products with
                         a timestamp up to and including 11:59:59PM in your
                         site’s time zone on the date specified.
-                    start_datetime -- str -- The start date and time (format
-                        YYYY-MM-DD HH:MM:SS) with which to filter the
+                    start_datetime -- datetime -- The start date and time
+                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
                         date_field. Returns products with a timestamp at or
                         after exact time provided in query. You can specify
                         timezone in query - otherwise your site's time zone
                         will be used. If provided, this parameter will be used
                         instead of start_date.
-                    end_datetime -- str -- The end date and time (format
+                    end_datetime -- datetime -- The end date and time (format
                         YYYY-MM-DD HH:MM:SS) with which to filter the
                         date_field. Returns products with a timestamp at or
                         before exact time provided in query. You can specify
@@ -251,7 +251,7 @@ class ProductFamiliesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -265,10 +265,10 @@ class ProductFamiliesController(BaseController):
                          .value(options.get('end_date', None)))
             .query_param(Parameter()
                          .key('start_datetime')
-                         .value(options.get('start_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('start_datetime', None))))
             .query_param(Parameter()
                          .key('end_datetime')
-                         .value(options.get('end_datetime', None)))
+                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('end_datetime', None))))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -303,7 +303,7 @@ class ProductFamiliesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()

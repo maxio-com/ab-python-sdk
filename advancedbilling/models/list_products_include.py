@@ -16,6 +16,8 @@ class ListProductsInclude(object):
 
     Attributes:
         PREPAID_PRODUCT_PRICE_POINT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     PREPAID_PRODUCT_PRICE_POINT = 'prepaid_product_price_point'

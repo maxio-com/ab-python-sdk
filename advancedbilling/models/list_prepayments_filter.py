@@ -30,6 +30,8 @@ class ListPrepaymentsFilter(object):
             the date_field. Returns prepayments with a timestamp up to and
             including 11:59:59PM in your site's time zone on the date
             specified. Use in query: `filter[end_date]=2011-12-15`.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -50,7 +52,7 @@ class ListPrepaymentsFilter(object):
                  date_field=APIHelper.SKIP,
                  start_date=APIHelper.SKIP,
                  end_date=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ListPrepaymentsFilter class"""
 
         # Initialize members of the class
@@ -62,6 +64,8 @@ class ListPrepaymentsFilter(object):
             self.end_date = end_date 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -79,7 +83,7 @@ class ListPrepaymentsFilter(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -87,11 +91,9 @@ class ListPrepaymentsFilter(object):
         start_date = dateutil.parser.parse(dictionary.get('start_date')).date() if dictionary.get('start_date') else APIHelper.SKIP
         end_date = dateutil.parser.parse(dictionary.get('end_date')).date() if dictionary.get('end_date') else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(date_field,
                    start_date,
                    end_date,
-                   dictionary)
+                   additional_properties)

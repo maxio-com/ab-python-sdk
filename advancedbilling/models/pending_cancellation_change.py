@@ -18,6 +18,8 @@ class PendingCancellationChange(object):
     Attributes:
         cancellation_state (str): TODO: type description here.
         cancels_at (datetime): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -30,7 +32,7 @@ class PendingCancellationChange(object):
     def __init__(self,
                  cancellation_state=None,
                  cancels_at=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the PendingCancellationChange class"""
 
         # Initialize members of the class
@@ -38,6 +40,8 @@ class PendingCancellationChange(object):
         self.cancels_at = APIHelper.apply_datetime_converter(cancels_at, APIHelper.RFC3339DateTime) if cancels_at else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -55,20 +59,18 @@ class PendingCancellationChange(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         cancellation_state = dictionary.get("cancellation_state") if dictionary.get("cancellation_state") else None
         cancels_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("cancels_at")).datetime if dictionary.get("cancels_at") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(cancellation_state,
                    cancels_at,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

@@ -35,6 +35,8 @@ class ApplyCreditNoteEventData(object):
             consolidated invoice or not
         applied_credit_notes (List[AppliedCreditNoteData]): List of credit
             notes applied to children invoices (if consolidated invoice)
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -75,7 +77,7 @@ class ApplyCreditNoteEventData(object):
                  role=APIHelper.SKIP,
                  consolidated_invoice=APIHelper.SKIP,
                  applied_credit_notes=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ApplyCreditNoteEventData class"""
 
         # Initialize members of the class
@@ -96,6 +98,8 @@ class ApplyCreditNoteEventData(object):
             self.applied_credit_notes = applied_credit_notes 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -113,7 +117,7 @@ class ApplyCreditNoteEventData(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -132,9 +136,7 @@ class ApplyCreditNoteEventData(object):
         else:
             applied_credit_notes = APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(uid,
                    credit_note_number,
@@ -146,7 +148,7 @@ class ApplyCreditNoteEventData(object):
                    role,
                    consolidated_invoice,
                    applied_credit_notes,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

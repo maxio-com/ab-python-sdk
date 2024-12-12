@@ -1353,7 +1353,6 @@ https://events.chargify.com/my-site-subdomain/events/my-stream-api-handle
 
 ```python
 def record_event(self,
-                subdomain,
                 api_handle,
                 store_uid=None,
                 body=None)
@@ -1363,7 +1362,6 @@ def record_event(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subdomain` | `str` | Template, Required | Your site's subdomain |
 | `api_handle` | `str` | Template, Required | Identifies the Stream for which the event should be published. |
 | `store_uid` | `str` | Query, Optional | If you've attached your own Keen project as an Advanced Billing event data-store, use this parameter to indicate the data-store. |
 | `body` | [`EBBEvent`](../../doc/models/ebb-event.md) | Body, Optional | - |
@@ -1375,8 +1373,6 @@ def record_event(self,
 ## Example Usage
 
 ```python
-subdomain = 'subdomain4'
-
 api_handle = 'api_handle6'
 
 body = EBBEvent(
@@ -1387,7 +1383,6 @@ body = EBBEvent(
 )
 
 subscription_components_controller.record_event(
-    subdomain,
     api_handle,
     body=body
 )
@@ -1404,7 +1399,6 @@ A maximum of 1000 events can be published in a single request. A 422 will be ret
 
 ```python
 def bulk_record_events(self,
-                      subdomain,
                       api_handle,
                       store_uid=None,
                       body=None)
@@ -1414,7 +1408,6 @@ def bulk_record_events(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subdomain` | `str` | Template, Required | Your site's subdomain |
 | `api_handle` | `str` | Template, Required | Identifies the Stream for which the events should be published. |
 | `store_uid` | `str` | Query, Optional | If you've attached your own Keen project as an Advanced Billing event data-store, use this parameter to indicate the data-store. |
 | `body` | [`List[EBBEvent]`](../../doc/models/ebb-event.md) | Body, Optional | - |
@@ -1426,8 +1419,6 @@ def bulk_record_events(self,
 ## Example Usage
 
 ```python
-subdomain = 'subdomain4'
-
 api_handle = 'api_handle6'
 
 body = [
@@ -1440,7 +1431,6 @@ body = [
 ]
 
 subscription_components_controller.bulk_record_events(
-    subdomain,
     api_handle,
     body=body
 )

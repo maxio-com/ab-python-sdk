@@ -7,24 +7,25 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.coupon_payload import CouponPayload
 
 
-class CreateOrUpdateCoupon(object):
+class CouponRequest(object):
 
-    """Implementation of the 'Create or Update Coupon' model.
+    """Implementation of the 'Coupon Request' model.
 
     TODO: type model description here.
 
     Attributes:
-        coupon (CreateOrUpdatePercentageCoupon |
-            CreateOrUpdateFlatAmountCoupon | None): TODO: type description
-            here.
+        coupon (CouponPayload): TODO: type description here.
         restricted_products (Dict[str, bool]): An object where the keys are
             product_ids and the values are booleans indicating if the coupon
             should be applicable to the product
         restricted_components (Dict[str, bool]): An object where the keys are
             component_ids and the values are booleans indicating if the coupon
             should be applicable to the component
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -45,8 +46,8 @@ class CreateOrUpdateCoupon(object):
                  coupon=APIHelper.SKIP,
                  restricted_products=APIHelper.SKIP,
                  restricted_components=APIHelper.SKIP,
-                 additional_properties={}):
-        """Constructor for the CreateOrUpdateCoupon class"""
+                 additional_properties=None):
+        """Constructor for the CouponRequest class"""
 
         # Initialize members of the class
         if coupon is not APIHelper.SKIP:
@@ -57,6 +58,8 @@ class CreateOrUpdateCoupon(object):
             self.restricted_components = restricted_components 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -73,21 +76,18 @@ class CreateOrUpdateCoupon(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        coupon = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateOrUpdateCouponCoupon'), dictionary.get('coupon'), False) if dictionary.get('coupon') is not None else APIHelper.SKIP
+        coupon = CouponPayload.from_dictionary(dictionary.get('coupon')) if 'coupon' in dictionary.keys() else APIHelper.SKIP
         restricted_products = dictionary.get("restricted_products") if "restricted_products" in dictionary.keys() else APIHelper.SKIP
         restricted_components = dictionary.get("restricted_components") if "restricted_components" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(coupon,
                    restricted_products,
                    restricted_components,
-                   dictionary)
+                   additional_properties)

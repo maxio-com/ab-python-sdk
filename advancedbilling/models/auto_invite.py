@@ -17,6 +17,8 @@ class AutoInvite(object):
     Attributes:
         NO: Do not send the invitation email.
         YES: Automatically send the invitation email.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     NO = 0

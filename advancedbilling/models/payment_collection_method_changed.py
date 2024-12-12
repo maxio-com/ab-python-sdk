@@ -18,6 +18,8 @@ class PaymentCollectionMethodChanged(object):
     Attributes:
         previous_value (str): TODO: type description here.
         current_value (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -30,7 +32,7 @@ class PaymentCollectionMethodChanged(object):
     def __init__(self,
                  previous_value=None,
                  current_value=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the PaymentCollectionMethodChanged class"""
 
         # Initialize members of the class
@@ -38,6 +40,8 @@ class PaymentCollectionMethodChanged(object):
         self.current_value = current_value 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -55,20 +59,18 @@ class PaymentCollectionMethodChanged(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         previous_value = dictionary.get("previous_value") if dictionary.get("previous_value") else None
         current_value = dictionary.get("current_value") if dictionary.get("current_value") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(previous_value,
                    current_value,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

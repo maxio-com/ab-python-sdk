@@ -23,6 +23,8 @@ class NestedSubscriptionGroup(object):
             within the group. Applicable to scheme 1.
         primary (bool): A boolean indicating whether the subscription is the
             primary in the group. Applicable to scheme 1.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -46,7 +48,7 @@ class NestedSubscriptionGroup(object):
                  scheme=APIHelper.SKIP,
                  primary_subscription_id=APIHelper.SKIP,
                  primary=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the NestedSubscriptionGroup class"""
 
         # Initialize members of the class
@@ -60,6 +62,8 @@ class NestedSubscriptionGroup(object):
             self.primary = primary 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -77,7 +81,7 @@ class NestedSubscriptionGroup(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -86,12 +90,10 @@ class NestedSubscriptionGroup(object):
         primary_subscription_id = dictionary.get("primary_subscription_id") if dictionary.get("primary_subscription_id") else APIHelper.SKIP
         primary = dictionary.get("primary") if "primary" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(uid,
                    scheme,
                    primary_subscription_id,
                    primary,
-                   dictionary)
+                   additional_properties)

@@ -38,6 +38,8 @@ class GetOneTimeTokenPaymentProfile(object):
         site_gateway_setting_id (int): TODO: type description here.
         customer_vault_token (str): TODO: type description here.
         gateway_handle (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -103,7 +105,7 @@ class GetOneTimeTokenPaymentProfile(object):
                  billing_address_2=APIHelper.SKIP,
                  customer_vault_token=APIHelper.SKIP,
                  gateway_handle=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the GetOneTimeTokenPaymentProfile class"""
 
         # Initialize members of the class
@@ -135,6 +137,8 @@ class GetOneTimeTokenPaymentProfile(object):
             self.gateway_handle = gateway_handle 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -152,7 +156,7 @@ class GetOneTimeTokenPaymentProfile(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -178,9 +182,7 @@ class GetOneTimeTokenPaymentProfile(object):
         customer_vault_token = dictionary.get("customer_vault_token") if "customer_vault_token" in dictionary.keys() else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -203,4 +205,4 @@ class GetOneTimeTokenPaymentProfile(object):
                    billing_address_2,
                    customer_vault_token,
                    gateway_handle,
-                   dictionary)
+                   additional_properties)

@@ -22,6 +22,8 @@ class ProductPricePointErrors(object):
         name (List[str]): TODO: type description here.
         price (List[str]): TODO: type description here.
         price_in_cents (List[str]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -51,7 +53,7 @@ class ProductPricePointErrors(object):
                  name=APIHelper.SKIP,
                  price=APIHelper.SKIP,
                  price_in_cents=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ProductPricePointErrors class"""
 
         # Initialize members of the class
@@ -69,6 +71,8 @@ class ProductPricePointErrors(object):
             self.price_in_cents = price_in_cents 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -86,7 +90,7 @@ class ProductPricePointErrors(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -97,9 +101,7 @@ class ProductPricePointErrors(object):
         price = dictionary.get("price") if dictionary.get("price") else APIHelper.SKIP
         price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(price_point,
                    interval,
@@ -107,4 +109,4 @@ class ProductPricePointErrors(object):
                    name,
                    price,
                    price_in_cents,
-                   dictionary)
+                   additional_properties)

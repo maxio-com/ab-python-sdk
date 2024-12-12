@@ -24,6 +24,8 @@ class DunningStepData(object):
         send_bcc_email (bool): TODO: type description here.
         send_sms (bool): TODO: type description here.
         sms_body (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -60,7 +62,7 @@ class DunningStepData(object):
                  email_body=APIHelper.SKIP,
                  email_subject=APIHelper.SKIP,
                  sms_body=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the DunningStepData class"""
 
         # Initialize members of the class
@@ -77,6 +79,8 @@ class DunningStepData(object):
             self.sms_body = sms_body 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -94,7 +98,7 @@ class DunningStepData(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -107,9 +111,7 @@ class DunningStepData(object):
         email_subject = dictionary.get("email_subject") if "email_subject" in dictionary.keys() else APIHelper.SKIP
         sms_body = dictionary.get("sms_body") if "sms_body" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(day_threshold,
                    action,
@@ -119,7 +121,7 @@ class DunningStepData(object):
                    email_body,
                    email_subject,
                    sms_body,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

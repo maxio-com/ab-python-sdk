@@ -53,9 +53,17 @@ class EventsController(BaseController):
         integration)
         + `zferral_revenue_post_success` - (Specific to the deprecated Zferral
         integration)
+        ## Event Key
+        The event type is identified by the key property. You can check
+        supported keys [here]($m/Event%20Key).
         ## Event Specific Data
-        Event Specific Data
-        Each event type has its own `event_specific_data` specified.
+        Different event types may include additional data in
+        `event_specific_data` property.
+        While some events share the same schema for `event_specific_data`,
+        others may not include it at all.
+        For precise mappings from key to event_specific_data, refer to
+        [Event]($m/Event).
+        ### Example
         Here’s an example event for the `subscription_product_change` event:
         ```
         {
@@ -118,7 +126,7 @@ class EventsController(BaseController):
                         or equal to the one specified
                     direction -- Direction -- The sort direction of the
                         returned events.
-                    filter -- List[EventType] -- You can pass multiple event
+                    filter -- List[EventKey] -- You can pass multiple event
                         keys after comma. Use in query
                         `filter=signup_success,payment_success`.
                     date_field -- ListEventsDateField -- The type of filter
@@ -159,7 +167,7 @@ class EventsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/events.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -211,7 +219,16 @@ class EventsController(BaseController):
         """Does a GET request to /subscriptions/{subscription_id}/events.json.
 
         The following request will return a list of events for a subscription.
-        Each event type has its own `event_specific_data` specified.
+        ## Event Key
+        The event type is identified by the key property. You can check
+        supported keys [here]($m/Event%20Key).
+        ## Event Specific Data
+        Different event types may include additional data in
+        `event_specific_data` property.
+        While some events share the same schema for `event_specific_data`,
+        others may not include it at all.
+        For precise mappings from key to event_specific_data, refer to
+        [Event]($m/Event).
 
         Args:
             options (dict, optional): Key-value pairs for any of the
@@ -242,7 +259,7 @@ class EventsController(BaseController):
                         or equal to the one specified
                     direction -- Direction -- The sort direction of the
                         returned events.
-                    filter -- List[EventType] -- You can pass multiple event
+                    filter -- List[EventKey] -- You can pass multiple event
                         keys after comma. Use in query
                         `filter=signup_success,payment_success`.
 
@@ -258,7 +275,7 @@ class EventsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/events.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -328,7 +345,7 @@ class EventsController(BaseController):
                         or equal to the one specified
                     direction -- Direction -- The sort direction of the
                         returned events.
-                    filter -- List[EventType] -- You can pass multiple event
+                    filter -- List[EventKey] -- You can pass multiple event
                         keys after comma. Use in query
                         `filter=signup_success,payment_success`.
 
@@ -344,7 +361,7 @@ class EventsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/events/count.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()

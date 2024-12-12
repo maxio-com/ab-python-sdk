@@ -26,6 +26,8 @@ class CreatePrepaymentMethod(object):
         CREDIT_CARD: TODO: type description here.
         CREDIT_CARD_ON_FILE: TODO: type description here.
         OTHER: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     CHECK = 'check'

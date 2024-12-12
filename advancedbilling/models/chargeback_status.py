@@ -19,6 +19,8 @@ class ChargebackStatus(object):
         LOST: TODO: type description here.
         WON: TODO: type description here.
         CLOSED: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['open', 'lost', 'won', 'closed']

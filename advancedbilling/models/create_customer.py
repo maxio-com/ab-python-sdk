@@ -36,6 +36,8 @@ class CreateCustomer(object):
         parent_id (int): The parent ID in Chargify if applicable. Parent is
             another Customer object.
         salesforce_id (str): The Salesforce ID of the customer
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -106,7 +108,7 @@ class CreateCustomer(object):
                  tax_exempt_reason=APIHelper.SKIP,
                  parent_id=APIHelper.SKIP,
                  salesforce_id=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateCustomer class"""
 
         # Initialize members of the class
@@ -147,6 +149,8 @@ class CreateCustomer(object):
             self.salesforce_id = salesforce_id 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -164,7 +168,7 @@ class CreateCustomer(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -188,9 +192,7 @@ class CreateCustomer(object):
         parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
         salesforce_id = dictionary.get("salesforce_id") if "salesforce_id" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -211,4 +213,4 @@ class CreateCustomer(object):
                    tax_exempt_reason,
                    parent_id,
                    salesforce_id,
-                   dictionary)
+                   additional_properties)

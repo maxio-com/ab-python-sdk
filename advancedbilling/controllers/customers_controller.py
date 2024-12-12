@@ -84,7 +84,7 @@ class CustomersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/customers.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -187,7 +187,7 @@ class CustomersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/customers.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -249,7 +249,7 @@ class CustomersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/customers/{id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -291,7 +291,7 @@ class CustomersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/customers/{id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -338,7 +338,7 @@ class CustomersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/customers/{id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -371,7 +371,7 @@ class CustomersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/customers/lookup.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -409,7 +409,7 @@ class CustomersController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/customers/{customer_id}/subscriptions.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()

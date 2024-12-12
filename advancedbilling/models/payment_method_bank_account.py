@@ -20,6 +20,8 @@ class PaymentMethodBankAccount(object):
         masked_account_number (str): TODO: type description here.
         masked_routing_number (str): TODO: type description here.
         mtype (InvoiceEventPaymentMethod): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -34,7 +36,7 @@ class PaymentMethodBankAccount(object):
                  masked_account_number=None,
                  masked_routing_number=None,
                  mtype=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the PaymentMethodBankAccount class"""
 
         # Initialize members of the class
@@ -43,6 +45,8 @@ class PaymentMethodBankAccount(object):
         self.mtype = mtype 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -60,7 +64,7 @@ class PaymentMethodBankAccount(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -68,14 +72,12 @@ class PaymentMethodBankAccount(object):
         masked_routing_number = dictionary.get("masked_routing_number") if dictionary.get("masked_routing_number") else None
         mtype = dictionary.get("type") if dictionary.get("type") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(masked_account_number,
                    masked_routing_number,
                    mtype,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

@@ -18,6 +18,8 @@ class CreateProductCurrencyPrice(object):
         currency (str): ISO code for one of the site level currencies.
         price (int): Price for the given role.
         role (CurrencyPriceRole): Role for the price.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -32,7 +34,7 @@ class CreateProductCurrencyPrice(object):
                  currency=None,
                  price=None,
                  role=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateProductCurrencyPrice class"""
 
         # Initialize members of the class
@@ -41,6 +43,8 @@ class CreateProductCurrencyPrice(object):
         self.role = role 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -58,7 +62,7 @@ class CreateProductCurrencyPrice(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -66,11 +70,9 @@ class CreateProductCurrencyPrice(object):
         price = dictionary.get("price") if dictionary.get("price") else None
         role = dictionary.get("role") if dictionary.get("role") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(currency,
                    price,
                    role,
-                   dictionary)
+                   additional_properties)

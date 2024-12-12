@@ -7,7 +7,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.subscription_group_member_error import SubscriptionGroupMemberError
 
 
 class SubscriptionGroupUpdateError(object):
@@ -17,8 +16,9 @@ class SubscriptionGroupUpdateError(object):
     TODO: type model description here.
 
     Attributes:
-        members (List[SubscriptionGroupMemberError]): TODO: type description
-            here.
+        members (List[str]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -33,7 +33,7 @@ class SubscriptionGroupUpdateError(object):
 
     def __init__(self,
                  members=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionGroupUpdateError class"""
 
         # Initialize members of the class
@@ -41,6 +41,8 @@ class SubscriptionGroupUpdateError(object):
             self.members = members 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -58,19 +60,13 @@ class SubscriptionGroupUpdateError(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        members = None
-        if dictionary.get('members') is not None:
-            members = [SubscriptionGroupMemberError.from_dictionary(x) for x in dictionary.get('members')]
-        else:
-            members = APIHelper.SKIP
+        members = dictionary.get("members") if dictionary.get("members") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(members,
-                   dictionary)
+                   additional_properties)

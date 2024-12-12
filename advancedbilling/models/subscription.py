@@ -231,6 +231,8 @@ class Subscription(object):
         self_service_page_token (str): Returned only for list/read
             Subscription operation when `include[]=self_service_page_token`
             parameter is provided.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -466,7 +468,7 @@ class Subscription(object):
                  prepayment_balance_in_cents=APIHelper.SKIP,
                  prepaid_configuration=APIHelper.SKIP,
                  self_service_page_token=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Subscription class"""
 
         # Initialize members of the class
@@ -596,6 +598,8 @@ class Subscription(object):
             self.self_service_page_token = self_service_page_token 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -613,7 +617,7 @@ class Subscription(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -726,9 +730,7 @@ class Subscription(object):
             prepaid_configuration = APIHelper.SKIP
         self_service_page_token = dictionary.get("self_service_page_token") if dictionary.get("self_service_page_token") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    state,
@@ -792,4 +794,4 @@ class Subscription(object):
                    prepayment_balance_in_cents,
                    prepaid_configuration,
                    self_service_page_token,
-                   dictionary)
+                   additional_properties)

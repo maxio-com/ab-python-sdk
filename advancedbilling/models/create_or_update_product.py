@@ -49,6 +49,8 @@ class CreateOrUpdateProduct(object):
             product type. This is especially important when using the Avalara
             service to tax based on locale. This attribute has a max length of
             10 characters.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -108,7 +110,7 @@ class CreateOrUpdateProduct(object):
                  expiration_interval_unit=APIHelper.SKIP,
                  auto_create_signup_page=APIHelper.SKIP,
                  tax_code=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateOrUpdateProduct class"""
 
         # Initialize members of the class
@@ -141,6 +143,8 @@ class CreateOrUpdateProduct(object):
             self.tax_code = tax_code 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -158,7 +162,7 @@ class CreateOrUpdateProduct(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -179,9 +183,7 @@ class CreateOrUpdateProduct(object):
         auto_create_signup_page = dictionary.get("auto_create_signup_page") if "auto_create_signup_page" in dictionary.keys() else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if dictionary.get("tax_code") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(name,
                    description,
@@ -199,4 +201,4 @@ class CreateOrUpdateProduct(object):
                    expiration_interval_unit,
                    auto_create_signup_page,
                    tax_code,
-                   dictionary)
+                   additional_properties)

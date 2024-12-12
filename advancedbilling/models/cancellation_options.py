@@ -20,6 +20,8 @@ class CancellationOptions(object):
             why the subscription is being canceled.
         reason_code (str): The reason code associated with the cancellation.
             See the list of reason codes associated with your site.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -37,7 +39,7 @@ class CancellationOptions(object):
     def __init__(self,
                  cancellation_message=APIHelper.SKIP,
                  reason_code=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CancellationOptions class"""
 
         # Initialize members of the class
@@ -47,6 +49,8 @@ class CancellationOptions(object):
             self.reason_code = reason_code 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -64,17 +68,15 @@ class CancellationOptions(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         cancellation_message = dictionary.get("cancellation_message") if dictionary.get("cancellation_message") else APIHelper.SKIP
         reason_code = dictionary.get("reason_code") if dictionary.get("reason_code") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(cancellation_message,
                    reason_code,
-                   dictionary)
+                   additional_properties)

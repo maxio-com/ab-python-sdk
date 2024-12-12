@@ -68,7 +68,7 @@ class SubscriptionGroupsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/signup.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -110,7 +110,7 @@ class SubscriptionGroupsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -182,7 +182,7 @@ class SubscriptionGroupsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -235,7 +235,7 @@ class SubscriptionGroupsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -285,7 +285,7 @@ class SubscriptionGroupsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -332,7 +332,7 @@ class SubscriptionGroupsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -375,7 +375,7 @@ class SubscriptionGroupsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/lookup.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -446,7 +446,7 @@ class SubscriptionGroupsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/group.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -496,7 +496,7 @@ class SubscriptionGroupsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/group.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()

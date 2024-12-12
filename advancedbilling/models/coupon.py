@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.coupon_currency import CouponCurrency
 from advancedbilling.models.coupon_restriction import CouponRestriction
 
 
@@ -22,11 +23,13 @@ class Coupon(object):
         code (str): TODO: type description here.
         description (str): TODO: type description here.
         amount (float): TODO: type description here.
-        amount_in_cents (int): TODO: type description here.
+        amount_in_cents (long|int): TODO: type description here.
         product_family_id (int): TODO: type description here.
         product_family_name (str): TODO: type description here.
         start_date (datetime): TODO: type description here.
-        end_date (datetime): TODO: type description here.
+        end_date (datetime): After the given time, this coupon code will be
+            invalid for new signups. Recurring discounts started before this
+            date will continue to recur even after this date.
         percentage (str): TODO: type description here.
         recurring (bool): TODO: type description here.
         recurring_scheme (RecurringScheme): TODO: type description here.
@@ -34,12 +37,18 @@ class Coupon(object):
         duration_interval (int): TODO: type description here.
         duration_interval_unit (str): TODO: type description here.
         duration_interval_span (str): TODO: type description here.
-        allow_negative_balance (bool): TODO: type description here.
+        allow_negative_balance (bool): If set to true, discount is not limited
+            (credits will carry forward to next billing).
         archived_at (datetime): TODO: type description here.
         conversion_limit (str): TODO: type description here.
-        stackable (bool): TODO: type description here.
-        compounding_strategy (CompoundingStrategy): TODO: type description
-            here.
+        stackable (bool): A stackable coupon can be combined with other
+            coupons on a Subscription.
+        compounding_strategy (CompoundingStrategy): Applicable only to
+            stackable coupons. For `compound`, Percentage-based discounts will
+            be calculated against the remaining price, after prior discounts
+            have been calculated. For `full-price`, Percentage-based discounts
+            will always be calculated against the original item price, before
+            other discounts are applied.
         use_site_exchange_rate (bool): TODO: type description here.
         created_at (datetime): TODO: type description here.
         updated_at (datetime): TODO: type description here.
@@ -49,6 +58,10 @@ class Coupon(object):
         apply_on_subscription_expiration (bool): TODO: type description here.
         coupon_restrictions (List[CouponRestriction]): TODO: type description
             here.
+        currency_prices (List[CouponCurrency]): Returned in read, find, and
+            list endpoints if the query parameter is provided.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -83,7 +96,8 @@ class Coupon(object):
         "exclude_mid_period_allocations": 'exclude_mid_period_allocations',
         "apply_on_cancel_at_end_of_period": 'apply_on_cancel_at_end_of_period',
         "apply_on_subscription_expiration": 'apply_on_subscription_expiration',
-        "coupon_restrictions": 'coupon_restrictions'
+        "coupon_restrictions": 'coupon_restrictions',
+        "currency_prices": 'currency_prices'
     }
 
     _optionals = [
@@ -117,6 +131,7 @@ class Coupon(object):
         'apply_on_cancel_at_end_of_period',
         'apply_on_subscription_expiration',
         'coupon_restrictions',
+        'currency_prices',
     ]
 
     _nullables = [
@@ -165,7 +180,8 @@ class Coupon(object):
                  apply_on_cancel_at_end_of_period=APIHelper.SKIP,
                  apply_on_subscription_expiration=APIHelper.SKIP,
                  coupon_restrictions=APIHelper.SKIP,
-                 additional_properties={}):
+                 currency_prices=APIHelper.SKIP,
+                 additional_properties=None):
         """Constructor for the Coupon class"""
 
         # Initialize members of the class
@@ -229,8 +245,12 @@ class Coupon(object):
             self.apply_on_subscription_expiration = apply_on_subscription_expiration 
         if coupon_restrictions is not APIHelper.SKIP:
             self.coupon_restrictions = coupon_restrictions 
+        if currency_prices is not APIHelper.SKIP:
+            self.currency_prices = currency_prices 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -248,7 +268,7 @@ class Coupon(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -292,10 +312,13 @@ class Coupon(object):
             coupon_restrictions = [CouponRestriction.from_dictionary(x) for x in dictionary.get('coupon_restrictions')]
         else:
             coupon_restrictions = APIHelper.SKIP
+        currency_prices = None
+        if dictionary.get('currency_prices') is not None:
+            currency_prices = [CouponCurrency.from_dictionary(x) for x in dictionary.get('currency_prices')]
+        else:
+            currency_prices = APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    name,
@@ -327,4 +350,5 @@ class Coupon(object):
                    apply_on_cancel_at_end_of_period,
                    apply_on_subscription_expiration,
                    coupon_restrictions,
-                   dictionary)
+                   currency_prices,
+                   additional_properties)

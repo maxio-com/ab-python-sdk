@@ -27,8 +27,10 @@ class CreateComponentPricePoint(object):
         prices (List[Price]): TODO: type description here.
         use_site_exchange_rate (bool): Whether to use the site level exchange
             rate or define your own prices for each currency if you have
-            multiple currencies defined on the site.
-        tax_included (bool): Whether or not the price point includes tax
+            multiple currencies defined on the site. Setting not supported
+            when creating price points in bulk.
+        tax_included (bool): Whether or not the price point includes tax.
+            Setting not supported when creating price points in bulk.
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this price point
             would renew every 30 days. This property is only available for
@@ -36,6 +38,8 @@ class CreateComponentPricePoint(object):
         interval_unit (IntervalUnit): A string representing the interval unit
             for this price point, either month or day. This property is only
             available for sites with Multifrequency enabled.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -72,7 +76,7 @@ class CreateComponentPricePoint(object):
                  tax_included=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
                  interval_unit=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateComponentPricePoint class"""
 
         # Initialize members of the class
@@ -90,6 +94,8 @@ class CreateComponentPricePoint(object):
             self.interval_unit = interval_unit 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -107,7 +113,7 @@ class CreateComponentPricePoint(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -122,9 +128,7 @@ class CreateComponentPricePoint(object):
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(name,
                    pricing_scheme,
@@ -134,7 +138,7 @@ class CreateComponentPricePoint(object):
                    tax_included,
                    interval,
                    interval_unit,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

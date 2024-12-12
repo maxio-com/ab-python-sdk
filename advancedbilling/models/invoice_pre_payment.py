@@ -22,6 +22,8 @@ class InvoicePrePayment(object):
         ending_balance_in_cents (long|int): The total balance of the
             prepayment account for this subscription including any prior
             prepayments
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -42,7 +44,7 @@ class InvoicePrePayment(object):
                  subscription_id=APIHelper.SKIP,
                  amount_in_cents=APIHelper.SKIP,
                  ending_balance_in_cents=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the InvoicePrePayment class"""
 
         # Initialize members of the class
@@ -54,6 +56,8 @@ class InvoicePrePayment(object):
             self.ending_balance_in_cents = ending_balance_in_cents 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -71,7 +75,7 @@ class InvoicePrePayment(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -79,11 +83,9 @@ class InvoicePrePayment(object):
         amount_in_cents = dictionary.get("amount_in_cents") if dictionary.get("amount_in_cents") else APIHelper.SKIP
         ending_balance_in_cents = dictionary.get("ending_balance_in_cents") if dictionary.get("ending_balance_in_cents") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(subscription_id,
                    amount_in_cents,
                    ending_balance_in_cents,
-                   dictionary)
+                   additional_properties)

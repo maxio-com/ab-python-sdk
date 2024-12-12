@@ -22,6 +22,8 @@ class SubscriptionNote(object):
         created_at (datetime): TODO: type description here.
         updated_at (datetime): TODO: type description here.
         sticky (bool): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -51,7 +53,7 @@ class SubscriptionNote(object):
                  created_at=APIHelper.SKIP,
                  updated_at=APIHelper.SKIP,
                  sticky=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionNote class"""
 
         # Initialize members of the class
@@ -69,6 +71,8 @@ class SubscriptionNote(object):
             self.sticky = sticky 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -86,7 +90,7 @@ class SubscriptionNote(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -97,9 +101,7 @@ class SubscriptionNote(object):
         updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         sticky = dictionary.get("sticky") if "sticky" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    body,
@@ -107,4 +109,4 @@ class SubscriptionNote(object):
                    created_at,
                    updated_at,
                    sticky,
-                   dictionary)
+                   additional_properties)

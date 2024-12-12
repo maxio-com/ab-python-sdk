@@ -8,7 +8,6 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.component_price_point_item import ComponentPricePointItem
-from advancedbilling.models.price import Price
 
 
 class OnOffComponent(object):
@@ -28,11 +27,6 @@ class OnOffComponent(object):
             or the characters '.', ':', '-', or '_'.
         taxable (bool): Boolean flag describing whether a component is taxable
             or not.
-        prices (List[Price]): (Not required for ‘per_unit’ pricing schemes)
-            One or more price brackets. See [Price Bracket
-            Rules](https://maxio.zendesk.com/hc/en-us/articles/24261191737101-P
-            rice-Points-Components) for an overview of how price brackets work
-            for different pricing schemes.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
@@ -43,11 +37,9 @@ class OnOffComponent(object):
             `prorated`, `none`.
         price_points (List[ComponentPricePointItem]): TODO: type description
             here.
-        unit_price (str | float | None): The amount the customer will be
-            charged per unit when the pricing scheme is “per_unit”. For On/Off
-            Components, this is the amount that the customer will be charged
-            when they turn the component on for the subscription. The price
-            can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or
+        unit_price (str | float): This is the amount that the customer will be
+            charged when they turn the component on for the subscription. The
+            price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or
             0.00000065
         tax_code (str): A string representing the tax code related to the
             component type. This is especially important when using the
@@ -56,7 +48,6 @@ class OnOffComponent(object):
         hide_date_range_on_invoice (bool): (Only available on Relationship
             Invoicing sites) Boolean flag describing if the service date range
             should show for the component on generated invoices.
-        price_in_cents (str): deprecated May 2011 - use unit_price instead
         display_on_hosted_page (bool): TODO: type description here.
         allow_fractional_quantities (bool): TODO: type description here.
         public_signup_page_ids (List[int]): TODO: type description here.
@@ -68,23 +59,23 @@ class OnOffComponent(object):
             for this component's default price point, either month or day.
             This property is only available for sites with Multifrequency
             enabled.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
         "name": 'name',
+        "unit_price": 'unit_price',
         "description": 'description',
         "handle": 'handle',
         "taxable": 'taxable',
-        "prices": 'prices',
         "upgrade_charge": 'upgrade_charge',
         "downgrade_credit": 'downgrade_credit',
         "price_points": 'price_points',
-        "unit_price": 'unit_price',
         "tax_code": 'tax_code',
         "hide_date_range_on_invoice": 'hide_date_range_on_invoice',
-        "price_in_cents": 'price_in_cents',
         "display_on_hosted_page": 'display_on_hosted_page',
         "allow_fractional_quantities": 'allow_fractional_quantities',
         "public_signup_page_ids": 'public_signup_page_ids',
@@ -96,14 +87,11 @@ class OnOffComponent(object):
         'description',
         'handle',
         'taxable',
-        'prices',
         'upgrade_charge',
         'downgrade_credit',
         'price_points',
-        'unit_price',
         'tax_code',
         'hide_date_range_on_invoice',
-        'price_in_cents',
         'display_on_hosted_page',
         'allow_fractional_quantities',
         'public_signup_page_ids',
@@ -119,23 +107,21 @@ class OnOffComponent(object):
 
     def __init__(self,
                  name=None,
+                 unit_price=None,
                  description=APIHelper.SKIP,
                  handle=APIHelper.SKIP,
                  taxable=APIHelper.SKIP,
-                 prices=APIHelper.SKIP,
                  upgrade_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
                  price_points=APIHelper.SKIP,
-                 unit_price=APIHelper.SKIP,
                  tax_code=APIHelper.SKIP,
                  hide_date_range_on_invoice=APIHelper.SKIP,
-                 price_in_cents=APIHelper.SKIP,
                  display_on_hosted_page=APIHelper.SKIP,
                  allow_fractional_quantities=APIHelper.SKIP,
                  public_signup_page_ids=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
                  interval_unit=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the OnOffComponent class"""
 
         # Initialize members of the class
@@ -146,22 +132,17 @@ class OnOffComponent(object):
             self.handle = handle 
         if taxable is not APIHelper.SKIP:
             self.taxable = taxable 
-        if prices is not APIHelper.SKIP:
-            self.prices = prices 
         if upgrade_charge is not APIHelper.SKIP:
             self.upgrade_charge = upgrade_charge 
         if downgrade_credit is not APIHelper.SKIP:
             self.downgrade_credit = downgrade_credit 
         if price_points is not APIHelper.SKIP:
             self.price_points = price_points 
-        if unit_price is not APIHelper.SKIP:
-            self.unit_price = unit_price 
+        self.unit_price = unit_price 
         if tax_code is not APIHelper.SKIP:
             self.tax_code = tax_code 
         if hide_date_range_on_invoice is not APIHelper.SKIP:
             self.hide_date_range_on_invoice = hide_date_range_on_invoice 
-        if price_in_cents is not APIHelper.SKIP:
-            self.price_in_cents = price_in_cents 
         if display_on_hosted_page is not APIHelper.SKIP:
             self.display_on_hosted_page = display_on_hosted_page 
         if allow_fractional_quantities is not APIHelper.SKIP:
@@ -174,6 +155,8 @@ class OnOffComponent(object):
             self.interval_unit = interval_unit 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -192,19 +175,15 @@ class OnOffComponent(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         name = dictionary.get("name") if dictionary.get("name") else None
+        unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('OnOffComponentUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else None
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
-        prices = None
-        if dictionary.get('prices') is not None:
-            prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
-        else:
-            prices = APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         price_points = None
@@ -212,35 +191,56 @@ class OnOffComponent(object):
             price_points = [ComponentPricePointItem.from_dictionary(x) for x in dictionary.get('price_points')]
         else:
             price_points = APIHelper.SKIP
-        unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('OnOffComponentUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if dictionary.get("tax_code") else APIHelper.SKIP
         hide_date_range_on_invoice = dictionary.get("hide_date_range_on_invoice") if "hide_date_range_on_invoice" in dictionary.keys() else APIHelper.SKIP
-        price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
         public_signup_page_ids = dictionary.get("public_signup_page_ids") if dictionary.get("public_signup_page_ids") else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(name,
+                   unit_price,
                    description,
                    handle,
                    taxable,
-                   prices,
                    upgrade_charge,
                    downgrade_credit,
                    price_points,
-                   unit_price,
                    tax_code,
                    hide_date_range_on_invoice,
-                   price_in_cents,
                    display_on_hosted_page,
                    allow_fractional_quantities,
                    public_signup_page_ids,
                    interval,
                    interval_unit,
-                   dictionary)
+                   additional_properties)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+
+        if isinstance(dictionary, cls):
+            return APIHelper.is_valid_type(value=dictionary.name,
+                                           type_callable=lambda value: isinstance(value, str)) \
+                and UnionTypeLookUp.get('OnOffComponentUnitPrice').validate(dictionary.unit_price).is_valid
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return APIHelper.is_valid_type(value=dictionary.get('name'),
+                                       type_callable=lambda value: isinstance(value, str)) \
+            and UnionTypeLookUp.get('OnOffComponentUnitPrice').validate(dictionary.get('unit_price')).is_valid

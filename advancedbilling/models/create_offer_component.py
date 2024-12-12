@@ -19,6 +19,8 @@ class CreateOfferComponent(object):
         component_id (int): TODO: type description here.
         price_point_id (int): TODO: type description here.
         starting_quantity (int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -39,7 +41,7 @@ class CreateOfferComponent(object):
                  component_id=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
                  starting_quantity=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateOfferComponent class"""
 
         # Initialize members of the class
@@ -51,6 +53,8 @@ class CreateOfferComponent(object):
             self.starting_quantity = starting_quantity 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -68,7 +72,7 @@ class CreateOfferComponent(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -76,11 +80,9 @@ class CreateOfferComponent(object):
         price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
         starting_quantity = dictionary.get("starting_quantity") if dictionary.get("starting_quantity") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(component_id,
                    price_point_id,
                    starting_quantity,
-                   dictionary)
+                   additional_properties)

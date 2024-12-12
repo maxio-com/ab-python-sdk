@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.event_key import EventKey
 
 
 class Event(object):
@@ -17,7 +18,7 @@ class Event(object):
 
     Attributes:
         id (long|int): TODO: type description here.
-        key (str): TODO: type description here.
+        key (EventKey): TODO: type description here.
         message (str): TODO: type description here.
         subscription_id (int): TODO: type description here.
         customer_id (int): TODO: type description here.
@@ -27,10 +28,72 @@ class Event(object):
             ComponentAllocationChange | MeteredUsage | PrepaidUsage |
             DunningStepReached | InvoiceIssued | PendingCancellationChange |
             PrepaidSubscriptionBalanceChanged | ProformaInvoiceIssued |
-            SubscriptionGroupSignupSuccess | SubscriptionGroupSignupFailure |
-            CreditAccountBalanceChanged | PrepaymentAccountBalanceChanged |
-            PaymentCollectionMethodChanged | ItemPricePointChanged |
-            CustomFieldValueChange | None): TODO: type description here.
+            SubscriptionGroupSignupEventData | CreditAccountBalanceChanged |
+            PrepaymentAccountBalanceChanged | PaymentCollectionMethodChanged |
+            ItemPricePointChanged | CustomFieldValueChange | None): The schema
+            varies based on the event key. The key-to-event data mapping is as
+            follows:  * `subscription_product_change` -
+            SubscriptionProductChange * `subscription_state_change` -
+            SubscriptionStateChange * `signup_success`,
+            `delayed_signup_creation_success`, `payment_success`,
+            `payment_failure`, `renewal_success`, `renewal_failure`,
+            `chargeback_lost`, `chargeback_accepted`, `chargeback_closed` -
+            PaymentRelatedEvents * `refund_success` - RefundSuccess *
+            `component_allocation_change` - ComponentAllocationChange *
+            `metered_usage` - MeteredUsage * `prepaid_usage` - PrepaidUsage *
+            `dunning_step_reached` - DunningStepReached * `invoice_issued` -
+            InvoiceIssued * `pending_cancellation_change` -
+            PendingCancellationChange * `prepaid_subscription_balance_changed`
+            - PrepaidSubscriptionBalanceChanged *
+            `subscription_group_signup_success` and
+            `subscription_group_signup_failure` -
+            SubscriptionGroupSignupEventData * `proforma_invoice_issued` -
+            ProformaInvoiceIssued *
+            `subscription_prepayment_account_balance_changed` -
+            PrepaymentAccountBalanceChanged *
+            `payment_collection_method_changed` -
+            PaymentCollectionMethodChanged *
+            `subscription_service_credit_account_balance_changed` -
+            CreditAccountBalanceChanged * `item_price_point_changed` -
+            ItemPricePointChanged * `custom_field_value_change` -
+            CustomFieldValueChange * The rest, that is
+            `delayed_signup_creation_failure`, `billing_date_change`,
+            `expiration_date_change`, `expiring_card`,  `customer_update`,
+            `customer_create`, `customer_delete`, `upgrade_downgrade_success`,
+            `upgrade_downgrade_failure`,  `statement_closed`,
+            `statement_settled`, `subscription_card_update`,
+            `subscription_group_card_update`, 
+            `subscription_bank_account_update`, `refund_failure`,
+            `upcoming_renewal_notice`, `trial_end_notice`, 
+            `direct_debit_payment_paid_out`, `direct_debit_payment_rejected`,
+            `direct_debit_payment_pending`, `pending_payment_created`, 
+            `pending_payment_failed`, `pending_payment_completed`,  don't have
+            event_specific_data defined, `renewal_success_recreated`,
+            `renewal_failure_recreated`, `payment_success_recreated`,
+            `payment_failure_recreated`, `subscription_deletion`,
+            `subscription_group_bank_account_update`,
+            `subscription_paypal_account_update`,
+            `subscription_group_paypal_account_update`,
+            `subscription_customer_change`, `account_transaction_changed`,
+            `go_cardless_payment_paid_out`, `go_cardless_payment_rejected`,
+            `go_cardless_payment_pending`,
+            `stripe_direct_debit_payment_paid_out`,
+            `stripe_direct_debit_payment_rejected`,
+            `stripe_direct_debit_payment_pending`,
+            `maxio_payments_direct_debit_payment_paid_out`,
+            `maxio_payments_direct_debit_payment_rejected`,
+            `maxio_payments_direct_debit_payment_pending`,
+            `invoice_in_collections_canceled`, `subscription_added_to_group`,
+            `subscription_removed_from_group`, `chargeback_opened`,
+            `chargeback_lost`, `chargeback_accepted`, `chargeback_closed`,
+            `chargeback_won`, `payment_collection_method_changed`,
+            `component_billing_date_changed`,
+            `subscription_term_renewal_scheduled`,
+            `subscription_term_renewal_pending`,
+            `subscription_term_renewal_activated`,
+            `subscription_term_renewal_removed`  they map to `null` instead.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -59,7 +122,7 @@ class Event(object):
                  customer_id=None,
                  created_at=None,
                  event_specific_data=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Event class"""
 
         # Initialize members of the class
@@ -72,6 +135,8 @@ class Event(object):
         self.event_specific_data = event_specific_data 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -90,7 +155,7 @@ class Event(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -102,9 +167,7 @@ class Event(object):
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else None
         event_specific_data = APIHelper.deserialize_union_type(UnionTypeLookUp.get('EventEventSpecificData'), dictionary.get('event_specific_data'), False) if dictionary.get('event_specific_data') is not None else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    key,
@@ -113,7 +176,7 @@ class Event(object):
                    customer_id,
                    created_at,
                    event_specific_data,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):
@@ -134,7 +197,7 @@ class Event(object):
             return APIHelper.is_valid_type(value=dictionary.id,
                                            type_callable=lambda value: isinstance(value, int)) \
                 and APIHelper.is_valid_type(value=dictionary.key,
-                                            type_callable=lambda value: isinstance(value, str)) \
+                                            type_callable=lambda value: EventKey.validate(value)) \
                 and APIHelper.is_valid_type(value=dictionary.message,
                                             type_callable=lambda value: isinstance(value, str)) \
                 and APIHelper.is_valid_type(value=dictionary.subscription_id,
@@ -153,7 +216,7 @@ class Event(object):
         return APIHelper.is_valid_type(value=dictionary.get('id'),
                                        type_callable=lambda value: isinstance(value, int)) \
             and APIHelper.is_valid_type(value=dictionary.get('key'),
-                                        type_callable=lambda value: isinstance(value, str)) \
+                                        type_callable=lambda value: EventKey.validate(value)) \
             and APIHelper.is_valid_type(value=dictionary.get('message'),
                                         type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('subscription_id'),

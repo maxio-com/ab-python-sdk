@@ -18,6 +18,8 @@ class ChangeChargebackStatusEventData(object):
 
     Attributes:
         chargeback_status (ChargebackStatus): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -28,13 +30,15 @@ class ChangeChargebackStatusEventData(object):
 
     def __init__(self,
                  chargeback_status=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ChangeChargebackStatusEventData class"""
 
         # Initialize members of the class
         self.chargeback_status = chargeback_status 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -52,18 +56,16 @@ class ChangeChargebackStatusEventData(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         chargeback_status = dictionary.get("chargeback_status") if dictionary.get("chargeback_status") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(chargeback_status,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

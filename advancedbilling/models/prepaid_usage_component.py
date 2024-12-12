@@ -7,8 +7,8 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.create_prepaid_usage_component_price_point import CreatePrepaidUsageComponentPricePoint
 from advancedbilling.models.overage_pricing import OveragePricing
-from advancedbilling.models.prepaid_component_price_point import PrepaidComponentPricePoint
 from advancedbilling.models.price import Price
 
 
@@ -50,7 +50,7 @@ class PrepaidUsageComponent(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        price_points (List[PrepaidComponentPricePoint]): TODO: type
+        price_points (List[CreatePrepaidUsageComponentPricePoint]): TODO: type
             description here.
         unit_price (str | float | None): The amount the customer will be
             charged per unit when the pricing scheme is “per_unit”. For On/Off
@@ -65,7 +65,6 @@ class PrepaidUsageComponent(object):
         hide_date_range_on_invoice (bool): (Only available on Relationship
             Invoicing sites) Boolean flag describing if the service date range
             should show for the component on generated invoices.
-        price_in_cents (str): deprecated May 2011 - use unit_price instead
         overage_pricing (OveragePricing): TODO: type description here.
         rollover_prepaid_remainder (bool): Boolean which controls whether or
             not remaining units should be rolled over to the next period
@@ -81,6 +80,8 @@ class PrepaidUsageComponent(object):
         display_on_hosted_page (bool): TODO: type description here.
         allow_fractional_quantities (bool): TODO: type description here.
         public_signup_page_ids (List[int]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -88,10 +89,11 @@ class PrepaidUsageComponent(object):
     _names = {
         "name": 'name',
         "unit_name": 'unit_name',
+        "pricing_scheme": 'pricing_scheme',
+        "overage_pricing": 'overage_pricing',
         "description": 'description',
         "handle": 'handle',
         "taxable": 'taxable',
-        "pricing_scheme": 'pricing_scheme',
         "prices": 'prices',
         "upgrade_charge": 'upgrade_charge',
         "downgrade_credit": 'downgrade_credit',
@@ -99,8 +101,6 @@ class PrepaidUsageComponent(object):
         "unit_price": 'unit_price',
         "tax_code": 'tax_code',
         "hide_date_range_on_invoice": 'hide_date_range_on_invoice',
-        "price_in_cents": 'price_in_cents',
-        "overage_pricing": 'overage_pricing',
         "rollover_prepaid_remainder": 'rollover_prepaid_remainder',
         "renew_prepaid_allocation": 'renew_prepaid_allocation',
         "expiration_interval": 'expiration_interval',
@@ -111,11 +111,9 @@ class PrepaidUsageComponent(object):
     }
 
     _optionals = [
-        'unit_name',
         'description',
         'handle',
         'taxable',
-        'pricing_scheme',
         'prices',
         'upgrade_charge',
         'downgrade_credit',
@@ -123,8 +121,6 @@ class PrepaidUsageComponent(object):
         'unit_price',
         'tax_code',
         'hide_date_range_on_invoice',
-        'price_in_cents',
-        'overage_pricing',
         'rollover_prepaid_remainder',
         'renew_prepaid_allocation',
         'expiration_interval',
@@ -142,11 +138,12 @@ class PrepaidUsageComponent(object):
 
     def __init__(self,
                  name=None,
-                 unit_name=APIHelper.SKIP,
+                 unit_name=None,
+                 pricing_scheme=None,
+                 overage_pricing=None,
                  description=APIHelper.SKIP,
                  handle=APIHelper.SKIP,
                  taxable=APIHelper.SKIP,
-                 pricing_scheme=APIHelper.SKIP,
                  prices=APIHelper.SKIP,
                  upgrade_charge=APIHelper.SKIP,
                  downgrade_credit=APIHelper.SKIP,
@@ -154,8 +151,6 @@ class PrepaidUsageComponent(object):
                  unit_price=APIHelper.SKIP,
                  tax_code=APIHelper.SKIP,
                  hide_date_range_on_invoice=APIHelper.SKIP,
-                 price_in_cents=APIHelper.SKIP,
-                 overage_pricing=APIHelper.SKIP,
                  rollover_prepaid_remainder=APIHelper.SKIP,
                  renew_prepaid_allocation=APIHelper.SKIP,
                  expiration_interval=APIHelper.SKIP,
@@ -163,21 +158,19 @@ class PrepaidUsageComponent(object):
                  display_on_hosted_page=APIHelper.SKIP,
                  allow_fractional_quantities=APIHelper.SKIP,
                  public_signup_page_ids=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the PrepaidUsageComponent class"""
 
         # Initialize members of the class
         self.name = name 
-        if unit_name is not APIHelper.SKIP:
-            self.unit_name = unit_name 
+        self.unit_name = unit_name 
         if description is not APIHelper.SKIP:
             self.description = description 
         if handle is not APIHelper.SKIP:
             self.handle = handle 
         if taxable is not APIHelper.SKIP:
             self.taxable = taxable 
-        if pricing_scheme is not APIHelper.SKIP:
-            self.pricing_scheme = pricing_scheme 
+        self.pricing_scheme = pricing_scheme 
         if prices is not APIHelper.SKIP:
             self.prices = prices 
         if upgrade_charge is not APIHelper.SKIP:
@@ -192,10 +185,7 @@ class PrepaidUsageComponent(object):
             self.tax_code = tax_code 
         if hide_date_range_on_invoice is not APIHelper.SKIP:
             self.hide_date_range_on_invoice = hide_date_range_on_invoice 
-        if price_in_cents is not APIHelper.SKIP:
-            self.price_in_cents = price_in_cents 
-        if overage_pricing is not APIHelper.SKIP:
-            self.overage_pricing = overage_pricing 
+        self.overage_pricing = overage_pricing 
         if rollover_prepaid_remainder is not APIHelper.SKIP:
             self.rollover_prepaid_remainder = rollover_prepaid_remainder 
         if renew_prepaid_allocation is not APIHelper.SKIP:
@@ -212,6 +202,8 @@ class PrepaidUsageComponent(object):
             self.public_signup_page_ids = public_signup_page_ids 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -230,16 +222,17 @@ class PrepaidUsageComponent(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         name = dictionary.get("name") if dictionary.get("name") else None
-        unit_name = dictionary.get("unit_name") if dictionary.get("unit_name") else APIHelper.SKIP
+        unit_name = dictionary.get("unit_name") if dictionary.get("unit_name") else None
+        pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else None
+        overage_pricing = OveragePricing.from_dictionary(dictionary.get('overage_pricing')) if dictionary.get('overage_pricing') else None
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
         handle = dictionary.get("handle") if dictionary.get("handle") else APIHelper.SKIP
         taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
-        pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else APIHelper.SKIP
         prices = None
         if dictionary.get('prices') is not None:
             prices = [Price.from_dictionary(x) for x in dictionary.get('prices')]
@@ -249,14 +242,12 @@ class PrepaidUsageComponent(object):
         downgrade_credit = dictionary.get("downgrade_credit") if "downgrade_credit" in dictionary.keys() else APIHelper.SKIP
         price_points = None
         if dictionary.get('price_points') is not None:
-            price_points = [PrepaidComponentPricePoint.from_dictionary(x) for x in dictionary.get('price_points')]
+            price_points = [CreatePrepaidUsageComponentPricePoint.from_dictionary(x) for x in dictionary.get('price_points')]
         else:
             price_points = APIHelper.SKIP
         unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('PrepaidUsageComponentUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if dictionary.get("tax_code") else APIHelper.SKIP
         hide_date_range_on_invoice = dictionary.get("hide_date_range_on_invoice") if "hide_date_range_on_invoice" in dictionary.keys() else APIHelper.SKIP
-        price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
-        overage_pricing = OveragePricing.from_dictionary(dictionary.get('overage_pricing')) if 'overage_pricing' in dictionary.keys() else APIHelper.SKIP
         rollover_prepaid_remainder = dictionary.get("rollover_prepaid_remainder") if "rollover_prepaid_remainder" in dictionary.keys() else APIHelper.SKIP
         renew_prepaid_allocation = dictionary.get("renew_prepaid_allocation") if "renew_prepaid_allocation" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
@@ -265,16 +256,15 @@ class PrepaidUsageComponent(object):
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
         public_signup_page_ids = dictionary.get("public_signup_page_ids") if dictionary.get("public_signup_page_ids") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(name,
                    unit_name,
+                   pricing_scheme,
+                   overage_pricing,
                    description,
                    handle,
                    taxable,
-                   pricing_scheme,
                    prices,
                    upgrade_charge,
                    downgrade_credit,
@@ -282,8 +272,6 @@ class PrepaidUsageComponent(object):
                    unit_price,
                    tax_code,
                    hide_date_range_on_invoice,
-                   price_in_cents,
-                   overage_pricing,
                    rollover_prepaid_remainder,
                    renew_prepaid_allocation,
                    expiration_interval,
@@ -291,4 +279,4 @@ class PrepaidUsageComponent(object):
                    display_on_hosted_page,
                    allow_fractional_quantities,
                    public_signup_page_ids,
-                   dictionary)
+                   additional_properties)

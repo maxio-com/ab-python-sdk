@@ -17,6 +17,8 @@ class BankAccountHolderType(object):
     Attributes:
         PERSONAL: TODO: type description here.
         BUSINESS: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['personal', 'business']

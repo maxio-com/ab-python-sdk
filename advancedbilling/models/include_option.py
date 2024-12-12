@@ -17,6 +17,8 @@ class IncludeOption(object):
     Attributes:
         EXCLUDE: TODO: type description here.
         INCLUDE: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['0', '1']

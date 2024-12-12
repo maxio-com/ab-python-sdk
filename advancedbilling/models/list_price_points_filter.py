@@ -48,6 +48,8 @@ class ListPricePointsFilter(object):
         archived_at (IncludeNullOrNotNull): Allows fetching price points only
             if archived_at is present or not. Use in query:
             `filter[archived_at]=not_null`.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -83,7 +85,7 @@ class ListPricePointsFilter(object):
                  mtype=APIHelper.SKIP,
                  ids=APIHelper.SKIP,
                  archived_at=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ListPricePointsFilter class"""
 
         # Initialize members of the class
@@ -105,6 +107,8 @@ class ListPricePointsFilter(object):
             self.archived_at = archived_at 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -122,7 +126,7 @@ class ListPricePointsFilter(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -135,9 +139,7 @@ class ListPricePointsFilter(object):
         ids = dictionary.get("ids") if dictionary.get("ids") else APIHelper.SKIP
         archived_at = dictionary.get("archived_at") if dictionary.get("archived_at") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(date_field,
                    start_date,
@@ -147,4 +149,4 @@ class ListPricePointsFilter(object):
                    mtype,
                    ids,
                    archived_at,
-                   dictionary)
+                   additional_properties)

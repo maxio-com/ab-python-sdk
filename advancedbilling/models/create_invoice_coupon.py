@@ -21,8 +21,14 @@ class CreateInvoiceCoupon(object):
         amount (str | float | None): TODO: type description here.
         description (str): TODO: type description here.
         product_family_id (str | int | None): TODO: type description here.
-        compounding_strategy (CompoundingStrategy): TODO: type description
-            here.
+        compounding_strategy (CompoundingStrategy): Applicable only to
+            stackable coupons. For `compound`, Percentage-based discounts will
+            be calculated against the remaining price, after prior discounts
+            have been calculated. For `full-price`, Percentage-based discounts
+            will always be calculated against the original item price, before
+            other discounts are applied.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -52,7 +58,7 @@ class CreateInvoiceCoupon(object):
                  description=APIHelper.SKIP,
                  product_family_id=APIHelper.SKIP,
                  compounding_strategy=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateInvoiceCoupon class"""
 
         # Initialize members of the class
@@ -70,6 +76,8 @@ class CreateInvoiceCoupon(object):
             self.compounding_strategy = compounding_strategy 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -88,7 +96,7 @@ class CreateInvoiceCoupon(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -99,9 +107,7 @@ class CreateInvoiceCoupon(object):
         product_family_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceCouponProductFamilyId'), dictionary.get('product_family_id'), False) if dictionary.get('product_family_id') is not None else APIHelper.SKIP
         compounding_strategy = dictionary.get("compounding_strategy") if dictionary.get("compounding_strategy") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(code,
                    percentage,
@@ -109,4 +115,4 @@ class CreateInvoiceCoupon(object):
                    description,
                    product_family_id,
                    compounding_strategy,
-                   dictionary)
+                   additional_properties)

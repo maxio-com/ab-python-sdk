@@ -19,6 +19,8 @@ class CreateCurrencyPrice(object):
         currency (str): ISO code for a currency defined on the site level
         price (float): Price for the price level in this currency
         price_id (int): ID of the price that this corresponds with
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -39,7 +41,7 @@ class CreateCurrencyPrice(object):
                  currency=APIHelper.SKIP,
                  price=APIHelper.SKIP,
                  price_id=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateCurrencyPrice class"""
 
         # Initialize members of the class
@@ -51,6 +53,8 @@ class CreateCurrencyPrice(object):
             self.price_id = price_id 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -68,7 +72,7 @@ class CreateCurrencyPrice(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -76,11 +80,9 @@ class CreateCurrencyPrice(object):
         price = dictionary.get("price") if dictionary.get("price") else APIHelper.SKIP
         price_id = dictionary.get("price_id") if dictionary.get("price_id") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(currency,
                    price,
                    price_id,
-                   dictionary)
+                   additional_properties)

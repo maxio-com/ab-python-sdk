@@ -57,7 +57,7 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/prepayments.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -125,7 +125,7 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/prepayments.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -181,7 +181,7 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/service_credits.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -232,7 +232,7 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/service_credit_deductions.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()

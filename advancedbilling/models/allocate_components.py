@@ -35,6 +35,8 @@ class AllocateComponents(object):
         initiate_dunning (bool): If true, if the immediate component payment
             fails, initiate dunning for the subscription.  Otherwise, leave
             the charges on the subscription to pay for at renewal.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -75,7 +77,7 @@ class AllocateComponents(object):
                  downgrade_credit=APIHelper.SKIP,
                  payment_collection_method=APIHelper.SKIP,
                  initiate_dunning=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the AllocateComponents class"""
 
         # Initialize members of the class
@@ -97,6 +99,8 @@ class AllocateComponents(object):
             self.initiate_dunning = initiate_dunning 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -114,7 +118,7 @@ class AllocateComponents(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -131,9 +135,7 @@ class AllocateComponents(object):
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         initiate_dunning = dictionary.get("initiate_dunning") if "initiate_dunning" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(proration_upgrade_scheme,
                    proration_downgrade_scheme,
@@ -143,4 +145,4 @@ class AllocateComponents(object):
                    downgrade_credit,
                    payment_collection_method,
                    initiate_dunning,
-                   dictionary)
+                   additional_properties)

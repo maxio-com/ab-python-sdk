@@ -25,6 +25,8 @@ class CreateUsage(object):
             useful when you need to align billing events for different
             components on distinct schedules within a subscription. Please
             note this only works for site with Multifrequency enabled
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -48,7 +50,7 @@ class CreateUsage(object):
                  price_point_id=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
                  billing_schedule=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateUsage class"""
 
         # Initialize members of the class
@@ -62,6 +64,8 @@ class CreateUsage(object):
             self.billing_schedule = billing_schedule 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -79,7 +83,7 @@ class CreateUsage(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -88,12 +92,10 @@ class CreateUsage(object):
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         billing_schedule = BillingSchedule.from_dictionary(dictionary.get('billing_schedule')) if 'billing_schedule' in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(quantity,
                    price_point_id,
                    memo,
                    billing_schedule,
-                   dictionary)
+                   additional_properties)

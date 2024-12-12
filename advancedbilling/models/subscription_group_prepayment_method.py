@@ -21,6 +21,8 @@ class SubscriptionGroupPrepaymentMethod(object):
         ACH: TODO: type description here.
         PAYPAL_ACCOUNT: TODO: type description here.
         OTHER: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     CHECK = 'check'

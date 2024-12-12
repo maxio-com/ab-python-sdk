@@ -30,18 +30,22 @@ class CreatePrepaidUsageComponentPricePoint(object):
         use_site_exchange_rate (bool): Whether to use the site level exchange
             rate or define your own prices for each currency if you have
             multiple currencies defined on the site.
-        rollover_prepaid_remainder (bool): Boolean which controls whether or
-            not remaining units should be rolled over to the next period
-        renew_prepaid_allocation (bool): Boolean which controls whether or not
-            the allocated quantity should be renewed at the beginning of each
-            period
+        rollover_prepaid_remainder (bool): (only for prepaid usage components)
+            Boolean which controls whether or not remaining units should be
+            rolled over to the next period
+        renew_prepaid_allocation (bool): (only for prepaid usage components)
+            Boolean which controls whether or not the allocated quantity
+            should be renewed at the beginning of each period
         expiration_interval (float): (only for prepaid usage components where
             rollover_prepaid_remainder is true) The number of
             `expiration_interval_unit`s after which rollover amounts should
             expire
-        expiration_interval_unit (ExpirationIntervalUnit): A string
-            representing the expiration interval unit for this component,
-            either month or day
+        expiration_interval_unit (ExpirationIntervalUnit): (only for prepaid
+            usage components where rollover_prepaid_remainder is true) A
+            string representing the expiration interval unit for this
+            component, either month or day
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -83,7 +87,7 @@ class CreatePrepaidUsageComponentPricePoint(object):
                  renew_prepaid_allocation=APIHelper.SKIP,
                  expiration_interval=APIHelper.SKIP,
                  expiration_interval_unit=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreatePrepaidUsageComponentPricePoint class"""
 
         # Initialize members of the class
@@ -104,6 +108,8 @@ class CreatePrepaidUsageComponentPricePoint(object):
             self.expiration_interval_unit = expiration_interval_unit 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -121,7 +127,7 @@ class CreatePrepaidUsageComponentPricePoint(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -138,9 +144,7 @@ class CreatePrepaidUsageComponentPricePoint(object):
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
         expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(name,
                    pricing_scheme,
@@ -152,7 +156,7 @@ class CreatePrepaidUsageComponentPricePoint(object):
                    renew_prepaid_allocation,
                    expiration_interval,
                    expiration_interval_unit,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

@@ -24,6 +24,8 @@ class OrganizationAddress(object):
         country (str): TODO: type description here.
         name (str): TODO: type description here.
         phone (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -70,7 +72,7 @@ class OrganizationAddress(object):
                  country=APIHelper.SKIP,
                  name=APIHelper.SKIP,
                  phone=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the OrganizationAddress class"""
 
         # Initialize members of the class
@@ -92,6 +94,8 @@ class OrganizationAddress(object):
             self.phone = phone 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -109,7 +113,7 @@ class OrganizationAddress(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -122,9 +126,7 @@ class OrganizationAddress(object):
         name = dictionary.get("name") if "name" in dictionary.keys() else APIHelper.SKIP
         phone = dictionary.get("phone") if "phone" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(street,
                    line_2,
@@ -134,4 +136,4 @@ class OrganizationAddress(object):
                    country,
                    name,
                    phone,
-                   dictionary)
+                   additional_properties)

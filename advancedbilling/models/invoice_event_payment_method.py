@@ -20,6 +20,8 @@ class InvoiceEventPaymentMethod(object):
         CREDIT_CARD: TODO: type description here.
         EXTERNAL: TODO: type description here.
         PAYPAL_ACCOUNT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['apple_pay', 'bank_account', 'credit_card', 'external', 'paypal_account']

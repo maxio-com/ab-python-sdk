@@ -52,6 +52,8 @@ class WebhookSubscription(object):
             description here.
         SUBSCRIPTION_SERVICE_CREDIT_ACCOUNT_BALANCE_CHANGED: TODO: type
             description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     BILLING_DATE_CHANGE = 'billing_date_change'

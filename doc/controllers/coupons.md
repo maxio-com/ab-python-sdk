@@ -38,10 +38,10 @@ Additionally, for documentation on how to apply a coupon to a subscription withi
 
 This request will create a coupon, based on the provided information.
 
-When creating a coupon, you must specify a product family using the `product_family_id`. If no `product_family_id` is passed, the first product family available is used. You will also need to formulate your URL to cite the Product Family ID in your request.
+You can create either a flat amount coupon, by specyfing `amount_in_cents`, or percentage coupon by specyfing `percentage`.
 
-You can restrict a coupon to only apply to specific products / components by optionally passing in hashes of `restricted_products` and/or `restricted_components` in the format:
-`{ "<product/component_id>": boolean_value }`
+You can restrict a coupon to only apply to specific products / components by optionally passing in `restricted_products` and/or `restricted_components` objects in the format:
+`{ "<product_id/component_id>": boolean_value }`
 
 ```python
 def create_coupon(self,
@@ -54,7 +54,7 @@ def create_coupon(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
-| `body` | [`CreateOrUpdateCoupon`](../../doc/models/create-or-update-coupon.md) | Body, Optional | - |
+| `body` | [`CouponRequest`](../../doc/models/coupon-request.md) | Body, Optional | - |
 
 ## Response Type
 
@@ -65,15 +65,15 @@ def create_coupon(self,
 ```python
 product_family_id = 140
 
-body = CreateOrUpdateCoupon(
-    coupon=CreateOrUpdatePercentageCoupon(
+body = CouponRequest(
+    coupon=CouponPayload(
         name='15% off',
         code='15OFF',
-        percentage=15,
         description='15% off for life',
+        percentage=15,
         allow_negative_balance=False,
         recurring=False,
-        end_date=dateutil.parser.parse('2012-08-29T12:00:00-04:00'),
+        end_date=dateutil.parser.parse('2012-08-29').date(),
         product_family_id='2',
         stackable=True,
         compounding_strategy=CompoundingStrategy.COMPOUND,
@@ -255,7 +255,8 @@ If you have more than one product family and if the coupon you are trying to fin
 ```python
 def find_coupon(self,
                product_family_id=None,
-               code=None)
+               code=None,
+               currency_prices=None)
 ```
 
 ## Parameters
@@ -264,6 +265,7 @@ def find_coupon(self,
 |  --- | --- | --- | --- |
 | `product_family_id` | `int` | Query, Optional | The Advanced Billing id of the product family to which the coupon belongs |
 | `code` | `str` | Query, Optional | The code of the coupon |
+| `currency_prices` | `bool` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. |
 
 ## Response Type
 
@@ -272,7 +274,11 @@ def find_coupon(self,
 ## Example Usage
 
 ```python
-result = coupons_controller.find_coupon()
+currency_prices = True
+
+result = coupons_controller.find_coupon(
+    currency_prices=currency_prices
+)
 ```
 
 
@@ -288,7 +294,8 @@ If the coupon is set to `use_site_exchange_rate: true`, it will return pricing b
 ```python
 def read_coupon(self,
                product_family_id,
-               coupon_id)
+               coupon_id,
+               currency_prices=None)
 ```
 
 ## Parameters
@@ -297,6 +304,7 @@ def read_coupon(self,
 |  --- | --- | --- | --- |
 | `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
 | `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
+| `currency_prices` | `bool` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. |
 
 ## Response Type
 
@@ -309,9 +317,12 @@ product_family_id = 140
 
 coupon_id = 162
 
+currency_prices = True
+
 result = coupons_controller.read_coupon(
     product_family_id,
-    coupon_id
+    coupon_id,
+    currency_prices=currency_prices
 )
 ```
 
@@ -367,7 +378,7 @@ def update_coupon(self,
 |  --- | --- | --- | --- |
 | `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
 | `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
-| `body` | [`CreateOrUpdateCoupon`](../../doc/models/create-or-update-coupon.md) | Body, Optional | - |
+| `body` | [`CouponRequest`](../../doc/models/coupon-request.md) | Body, Optional | - |
 
 ## Response Type
 
@@ -380,15 +391,15 @@ product_family_id = 140
 
 coupon_id = 162
 
-body = CreateOrUpdateCoupon(
-    coupon=CreateOrUpdatePercentageCoupon(
+body = CouponRequest(
+    coupon=CouponPayload(
         name='15% off',
         code='15OFF',
-        percentage=15,
         description='15% off for life',
+        percentage=15,
         allow_negative_balance=False,
         recurring=False,
-        end_date=dateutil.parser.parse('2012-08-29T12:00:00-04:00'),
+        end_date=dateutil.parser.parse('2012-08-29').date(),
         product_family_id='2',
         stackable=True,
         compounding_strategy=CompoundingStrategy.COMPOUND
@@ -437,6 +448,12 @@ result = coupons_controller.update_coupon(
   }
 }
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Archive Coupon
@@ -804,6 +821,12 @@ result = coupons_controller.create_or_update_coupon_currency_prices(
     body=body
 )
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorStringMapResponseException`](../../doc/models/error-string-map-response-exception.md) |
 
 
 # Create Coupon Subcodes

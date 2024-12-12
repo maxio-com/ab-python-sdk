@@ -64,7 +64,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}/default.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -112,7 +112,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -134,6 +134,7 @@ class ComponentPricePointsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentPricePointResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorArrayMapResponseException)
         ).execute()
 
     def list_component_price_points(self,
@@ -192,7 +193,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -249,7 +250,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/bulk.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -271,6 +272,7 @@ class ComponentPricePointsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentPricePointsResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def update_component_price_point(self,
@@ -313,7 +315,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -347,7 +349,8 @@ class ComponentPricePointsController(BaseController):
 
     def read_component_price_point(self,
                                    component_id,
-                                   price_point_id):
+                                   price_point_id,
+                                   currency_prices=None):
         """Does a GET request to /components/{component_id}/price_points/{price_point_id}.json.
 
         Use this endpoint to retrieve details for a specific component price
@@ -363,6 +366,8 @@ class ComponentPricePointsController(BaseController):
                 When using the handle, it must be prefixed with `handle:`.
                 Example: `123` for an integer ID, or
                 `handle:example-price_point-handle` for a string handle.
+            currency_prices (bool, optional): Include an array of currency
+                price data
 
         Returns:
             ComponentPricePointResponse: Response from the API. OK
@@ -376,7 +381,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -391,6 +396,9 @@ class ComponentPricePointsController(BaseController):
                             .is_required(True)
                             .should_encode(True)
                             .validator(lambda value: UnionTypeLookUp.get('ReadComponentPricePointPricePointId').validate(value)))
+            .query_param(Parameter()
+                         .key('currency_prices')
+                         .value(currency_prices))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -432,7 +440,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -482,7 +490,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}/unarchive.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -536,7 +544,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/price_points/{price_point_id}/currency_prices.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -558,7 +566,7 @@ class ComponentPricePointsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentCurrencyPricesResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorArrayMapResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorArrayMapResponseException)
         ).execute()
 
     def update_currency_prices(self,
@@ -588,7 +596,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/price_points/{price_point_id}/currency_prices.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -610,7 +618,7 @@ class ComponentPricePointsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ComponentCurrencyPricesResponse.from_dictionary)
-            .local_error('422', 'Unprocessable Entity (WebDAV)', ErrorArrayMapResponseException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorArrayMapResponseException)
         ).execute()
 
     def list_all_component_price_points(self,
@@ -662,7 +670,7 @@ class ComponentPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components_price_points.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()

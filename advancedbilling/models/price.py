@@ -20,6 +20,8 @@ class Price(object):
         ending_quantity (int | str | None): TODO: type description here.
         unit_price (float | str): The price can contain up to 8 decimal
             places. i.e. 1.00 or 0.0012 or 0.00000065
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -42,7 +44,7 @@ class Price(object):
                  starting_quantity=None,
                  unit_price=None,
                  ending_quantity=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Price class"""
 
         # Initialize members of the class
@@ -52,6 +54,8 @@ class Price(object):
         self.unit_price = unit_price 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -70,7 +74,7 @@ class Price(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -81,14 +85,12 @@ class Price(object):
         else:
             ending_quantity = APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(starting_quantity,
                    unit_price,
                    ending_quantity,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

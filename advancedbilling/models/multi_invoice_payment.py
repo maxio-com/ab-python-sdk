@@ -23,6 +23,8 @@ class MultiInvoicePayment(object):
             representing the currency of invoice transaction.
         applications (List[InvoicePaymentApplication]): TODO: type description
             here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -46,7 +48,7 @@ class MultiInvoicePayment(object):
                  total_amount=APIHelper.SKIP,
                  currency_code=APIHelper.SKIP,
                  applications=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the MultiInvoicePayment class"""
 
         # Initialize members of the class
@@ -60,6 +62,8 @@ class MultiInvoicePayment(object):
             self.applications = applications 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -77,7 +81,7 @@ class MultiInvoicePayment(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -90,12 +94,10 @@ class MultiInvoicePayment(object):
         else:
             applications = APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(transaction_id,
                    total_amount,
                    currency_code,
                    applications,
-                   dictionary)
+                   additional_properties)

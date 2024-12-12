@@ -51,6 +51,8 @@ class CardType(object):
         SWITCH: TODO: type description here.
         SOLO: TODO: type description here.
         LASER: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['visa', 'master', 'elo', 'cabal', 'alelo', 'discover', 'american_express', 'naranja', 'diners_club', 'jcb', 'dankort', 'maestro', 'maestro_no_luhn', 'forbrugsforeningen', 'sodexo', 'alia', 'vr', 'unionpay', 'carnet', 'cartes_bancaires', 'olimpica', 'creditel', 'confiable', 'synchrony', 'routex', 'mada', 'bp_plus', 'passcard', 'edenred', 'anda', 'tarjeta-d', 'hipercard', 'bogus', 'switch', 'solo', 'laser']

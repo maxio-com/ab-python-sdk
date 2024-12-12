@@ -20,6 +20,8 @@ class ListPublicKeysMeta(object):
         current_page (int): TODO: type description here.
         total_pages (int): TODO: type description here.
         per_page (int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -43,7 +45,7 @@ class ListPublicKeysMeta(object):
                  current_page=APIHelper.SKIP,
                  total_pages=APIHelper.SKIP,
                  per_page=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ListPublicKeysMeta class"""
 
         # Initialize members of the class
@@ -57,6 +59,8 @@ class ListPublicKeysMeta(object):
             self.per_page = per_page 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -74,7 +78,7 @@ class ListPublicKeysMeta(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -83,12 +87,10 @@ class ListPublicKeysMeta(object):
         total_pages = dictionary.get("total_pages") if dictionary.get("total_pages") else APIHelper.SKIP
         per_page = dictionary.get("per_page") if dictionary.get("per_page") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(total_count,
                    current_page,
                    total_pages,
                    per_page,
-                   dictionary)
+                   additional_properties)

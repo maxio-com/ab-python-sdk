@@ -67,7 +67,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/{uid}/refunds.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -192,7 +192,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -306,7 +306,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/{uid}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -406,7 +406,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/events.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -513,7 +513,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/{uid}/payments.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -586,7 +586,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/payments.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -658,7 +658,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/credit_notes.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -716,7 +716,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/credit_notes/{uid}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -765,7 +765,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/payments.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -829,7 +829,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/{uid}/reopen.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -875,7 +875,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/{uid}/void.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -947,7 +947,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/{invoice_uid}/segments.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -1165,7 +1165,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/invoices.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -1228,7 +1228,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/{uid}/deliveries.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -1272,7 +1272,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/{uid}/customer_information/preview.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -1319,7 +1319,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/{uid}/customer_information.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -1390,7 +1390,7 @@ class InvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/invoices/{uid}/issue.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()

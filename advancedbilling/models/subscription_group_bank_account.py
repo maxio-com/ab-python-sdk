@@ -43,6 +43,8 @@ class SubscriptionGroupBankAccount(object):
         current_vault (BankAccountVault): The vault that stores the payment
             profile with the provided vault_token. Use `bogus` for testing.
         gateway_handle (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -102,7 +104,7 @@ class SubscriptionGroupBankAccount(object):
                  chargify_token=APIHelper.SKIP,
                  current_vault=APIHelper.SKIP,
                  gateway_handle=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionGroupBankAccount class"""
 
         # Initialize members of the class
@@ -140,6 +142,8 @@ class SubscriptionGroupBankAccount(object):
             self.gateway_handle = gateway_handle 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -157,7 +161,7 @@ class SubscriptionGroupBankAccount(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -178,9 +182,7 @@ class SubscriptionGroupBankAccount(object):
         current_vault = dictionary.get("current_vault") if dictionary.get("current_vault") else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if dictionary.get("gateway_handle") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(bank_name,
                    bank_account_number,
@@ -198,7 +200,7 @@ class SubscriptionGroupBankAccount(object):
                    chargify_token,
                    current_vault,
                    gateway_handle,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

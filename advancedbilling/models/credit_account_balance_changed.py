@@ -23,6 +23,8 @@ class CreditAccountBalanceChanged(object):
             description here.
         currency_code (str): TODO: type description here.
         at_time (datetime): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -41,7 +43,7 @@ class CreditAccountBalanceChanged(object):
                  service_credit_balance_change_in_cents=None,
                  currency_code=None,
                  at_time=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreditAccountBalanceChanged class"""
 
         # Initialize members of the class
@@ -52,6 +54,8 @@ class CreditAccountBalanceChanged(object):
         self.at_time = APIHelper.apply_datetime_converter(at_time, APIHelper.RFC3339DateTime) if at_time else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -69,7 +73,7 @@ class CreditAccountBalanceChanged(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -79,16 +83,14 @@ class CreditAccountBalanceChanged(object):
         currency_code = dictionary.get("currency_code") if dictionary.get("currency_code") else None
         at_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("at_time")).datetime if dictionary.get("at_time") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(reason,
                    service_credit_account_balance_in_cents,
                    service_credit_balance_change_in_cents,
                    currency_code,
                    at_time,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

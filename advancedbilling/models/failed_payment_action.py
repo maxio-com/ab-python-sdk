@@ -30,6 +30,8 @@ class FailedPaymentAction(object):
         LEAVE_OPEN_INVOICE: TODO: type description here.
         ROLLBACK_TO_PENDING: TODO: type description here.
         INITIATE_DUNNING: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     LEAVE_OPEN_INVOICE = 'leave_open_invoice'

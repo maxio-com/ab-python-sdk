@@ -16,6 +16,8 @@ class SubscriptionGroupsListInclude(object):
 
     Attributes:
         ACCOUNT_BALANCES: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     ACCOUNT_BALANCES = 'account_balances'

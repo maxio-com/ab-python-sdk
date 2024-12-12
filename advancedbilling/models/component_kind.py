@@ -20,6 +20,8 @@ class ComponentKind(object):
         ON_OFF_COMPONENT: TODO: type description here.
         PREPAID_USAGE_COMPONENT: TODO: type description here.
         EVENT_BASED_COMPONENT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['metered_component', 'quantity_based_component', 'on_off_component', 'prepaid_usage_component', 'event_based_component']

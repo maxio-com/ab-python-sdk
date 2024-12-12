@@ -16,6 +16,8 @@ class SubscriptionListInclude(object):
 
     Attributes:
         SELF_SERVICE_PAGE_TOKEN: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     SELF_SERVICE_PAGE_TOKEN = 'self_service_page_token'

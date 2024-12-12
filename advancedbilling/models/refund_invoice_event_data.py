@@ -38,6 +38,8 @@ class RefundInvoiceEventData(object):
         refund_id (int): The ID of the refund transaction.
         transaction_time (datetime): The time the refund was applied, in ISO
             8601 format, i.e. "2019-06-07T17:20:06Z"
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -70,7 +72,7 @@ class RefundInvoiceEventData(object):
                  consolidation_level=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
                  original_amount=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the RefundInvoiceEventData class"""
 
         # Initialize members of the class
@@ -88,6 +90,8 @@ class RefundInvoiceEventData(object):
         self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -105,7 +109,7 @@ class RefundInvoiceEventData(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -119,9 +123,7 @@ class RefundInvoiceEventData(object):
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(apply_credit,
                    credit_note_attributes,
@@ -132,7 +134,7 @@ class RefundInvoiceEventData(object):
                    consolidation_level,
                    memo,
                    original_amount,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

@@ -49,6 +49,8 @@ class CreditCardVault(object):
         TRUST_COMMERCE: TODO: type description here.
         UNIPAAS: TODO: type description here.
         WIRECARD: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['adyen', 'authorizenet', 'beanstream', 'blue_snap', 'bogus', 'braintree1', 'braintree_blue', 'checkout', 'cybersource', 'elavon', 'eway', 'eway_rapid', 'eway_rapid_std', 'firstdata', 'forte', 'litle', 'maxio_payments', 'maxp', 'moduslink', 'moneris', 'nmi', 'orbital', 'payment_express', 'paymill', 'paypal', 'paypal_complete', 'pin', 'square', 'stripe', 'stripe_connect', 'trust_commerce', 'unipaas', 'wirecard']

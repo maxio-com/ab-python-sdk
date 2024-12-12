@@ -24,6 +24,8 @@ class TaxConfiguration(object):
             More details about taxes:
             https://maxio.zendesk.com/hc/en-us/articles/24287012608909-Taxes-Ov
             erview
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -44,7 +46,7 @@ class TaxConfiguration(object):
                  kind='custom',
                  destination_address=APIHelper.SKIP,
                  fully_configured=False,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the TaxConfiguration class"""
 
         # Initialize members of the class
@@ -54,6 +56,8 @@ class TaxConfiguration(object):
         self.fully_configured = fully_configured 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -71,7 +75,7 @@ class TaxConfiguration(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -79,11 +83,9 @@ class TaxConfiguration(object):
         destination_address = dictionary.get("destination_address") if dictionary.get("destination_address") else APIHelper.SKIP
         fully_configured = dictionary.get("fully_configured") if dictionary.get("fully_configured") else False
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(kind,
                    destination_address,
                    fully_configured,
-                   dictionary)
+                   additional_properties)

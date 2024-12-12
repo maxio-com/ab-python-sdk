@@ -19,6 +19,8 @@ class PublicKey(object):
         public_key (str): TODO: type description here.
         requires_security_token (bool): TODO: type description here.
         created_at (datetime): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -39,7 +41,7 @@ class PublicKey(object):
                  public_key=APIHelper.SKIP,
                  requires_security_token=APIHelper.SKIP,
                  created_at=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the PublicKey class"""
 
         # Initialize members of the class
@@ -51,6 +53,8 @@ class PublicKey(object):
             self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -68,7 +72,7 @@ class PublicKey(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -76,11 +80,9 @@ class PublicKey(object):
         requires_security_token = dictionary.get("requires_security_token") if "requires_security_token" in dictionary.keys() else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(public_key,
                    requires_security_token,
                    created_at,
-                   dictionary)
+                   additional_properties)

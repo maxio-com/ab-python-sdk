@@ -18,6 +18,8 @@ class ComponentPricePointAssignment(object):
     Attributes:
         component_id (int): TODO: type description here.
         price_point (str | int | None): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -35,7 +37,7 @@ class ComponentPricePointAssignment(object):
     def __init__(self,
                  component_id=APIHelper.SKIP,
                  price_point=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ComponentPricePointAssignment class"""
 
         # Initialize members of the class
@@ -45,6 +47,8 @@ class ComponentPricePointAssignment(object):
             self.price_point = price_point 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -63,17 +67,15 @@ class ComponentPricePointAssignment(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
         price_point = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ComponentPricePointAssignmentPricePoint'), dictionary.get('price_point'), False) if dictionary.get('price_point') is not None else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(component_id,
                    price_point,
-                   dictionary)
+                   additional_properties)

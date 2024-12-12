@@ -67,6 +67,8 @@ class Customer(object):
         tax_exempt_reason (str): The Tax Exemption Reason Code for the customer
         default_auto_renewal_profile_id (int): The default auto-renewal
             profile ID for the customer
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -194,7 +196,7 @@ class Customer(object):
                  salesforce_id=APIHelper.SKIP,
                  tax_exempt_reason=APIHelper.SKIP,
                  default_auto_renewal_profile_id=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Customer class"""
 
         # Initialize members of the class
@@ -260,6 +262,8 @@ class Customer(object):
             self.default_auto_renewal_profile_id = default_auto_renewal_profile_id 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -277,7 +281,7 @@ class Customer(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -321,9 +325,7 @@ class Customer(object):
         tax_exempt_reason = dictionary.get("tax_exempt_reason") if "tax_exempt_reason" in dictionary.keys() else APIHelper.SKIP
         default_auto_renewal_profile_id = dictionary.get("default_auto_renewal_profile_id") if "default_auto_renewal_profile_id" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -355,7 +357,7 @@ class Customer(object):
                    salesforce_id,
                    tax_exempt_reason,
                    default_auto_renewal_profile_id,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

@@ -17,6 +17,8 @@ class ListSubscriptionComponentsInclude(object):
     Attributes:
         SUBSCRIPTION: TODO: type description here.
         HISTORIC_USAGES: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     SUBSCRIPTION = 'subscription'

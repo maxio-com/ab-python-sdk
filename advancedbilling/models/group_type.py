@@ -17,6 +17,8 @@ class GroupType(object):
     Attributes:
         SINGLE_CUSTOMER: TODO: type description here.
         MULTIPLE_CUSTOMERS: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     SINGLE_CUSTOMER = 'single_customer'

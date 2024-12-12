@@ -18,6 +18,8 @@ class InvoiceDiscountType(object):
         PERCENTAGE: TODO: type description here.
         FLAT_AMOUNT: TODO: type description here.
         ROLLOVER: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['percentage', 'flat_amount', 'rollover']

@@ -17,6 +17,8 @@ class SnapDay(object):
 
     Attributes:
         END: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['end']
