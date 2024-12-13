@@ -22,6 +22,8 @@ class VoidRemainderEventData(object):
         applied_amount (str): The amount of the void.
         transaction_time (datetime): The time the refund was applied, in ISO
             8601 format, i.e. "2019-06-07T17:20:06Z"
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -38,7 +40,7 @@ class VoidRemainderEventData(object):
                  memo=None,
                  applied_amount=None,
                  transaction_time=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the VoidRemainderEventData class"""
 
         # Initialize members of the class
@@ -48,6 +50,8 @@ class VoidRemainderEventData(object):
         self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -65,7 +69,7 @@ class VoidRemainderEventData(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -74,15 +78,13 @@ class VoidRemainderEventData(object):
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
         transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(credit_note_attributes,
                    memo,
                    applied_amount,
                    transaction_time,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

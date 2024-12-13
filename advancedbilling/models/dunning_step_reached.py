@@ -21,6 +21,8 @@ class DunningStepReached(object):
         dunner (DunnerData): TODO: type description here.
         current_step (DunningStepData): TODO: type description here.
         next_step (DunningStepData): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -35,7 +37,7 @@ class DunningStepReached(object):
                  dunner=None,
                  current_step=None,
                  next_step=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the DunningStepReached class"""
 
         # Initialize members of the class
@@ -44,6 +46,8 @@ class DunningStepReached(object):
         self.next_step = next_step 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -61,7 +65,7 @@ class DunningStepReached(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -69,14 +73,12 @@ class DunningStepReached(object):
         current_step = DunningStepData.from_dictionary(dictionary.get('current_step')) if dictionary.get('current_step') else None
         next_step = DunningStepData.from_dictionary(dictionary.get('next_step')) if dictionary.get('next_step') else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(dunner,
                    current_step,
                    next_step,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

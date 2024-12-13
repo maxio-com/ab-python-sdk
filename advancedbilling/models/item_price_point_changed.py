@@ -23,6 +23,8 @@ class ItemPricePointChanged(object):
         item_name (str): TODO: type description here.
         previous_price_point (ItemPricePointData): TODO: type description here.
         current_price_point (ItemPricePointData): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -43,7 +45,7 @@ class ItemPricePointChanged(object):
                  item_name=None,
                  previous_price_point=None,
                  current_price_point=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ItemPricePointChanged class"""
 
         # Initialize members of the class
@@ -55,6 +57,8 @@ class ItemPricePointChanged(object):
         self.current_price_point = current_price_point 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -72,7 +76,7 @@ class ItemPricePointChanged(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -83,9 +87,7 @@ class ItemPricePointChanged(object):
         previous_price_point = ItemPricePointData.from_dictionary(dictionary.get('previous_price_point')) if dictionary.get('previous_price_point') else None
         current_price_point = ItemPricePointData.from_dictionary(dictionary.get('current_price_point')) if dictionary.get('current_price_point') else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(item_id,
                    item_type,
@@ -93,7 +95,7 @@ class ItemPricePointChanged(object):
                    item_name,
                    previous_price_point,
                    current_price_point,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

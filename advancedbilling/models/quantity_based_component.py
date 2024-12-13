@@ -64,7 +64,6 @@ class QuantityBasedComponent(object):
         hide_date_range_on_invoice (bool): (Only available on Relationship
             Invoicing sites) Boolean flag describing if the service date range
             should show for the component on generated invoices.
-        price_in_cents (str): deprecated May 2011 - use unit_price instead
         recurring (bool): TODO: type description here.
         display_on_hosted_page (bool): TODO: type description here.
         allow_fractional_quantities (bool): TODO: type description here.
@@ -77,6 +76,8 @@ class QuantityBasedComponent(object):
             for this component's default price point, either month or day.
             This property is only available for sites with Multifrequency
             enabled.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -95,7 +96,6 @@ class QuantityBasedComponent(object):
         "unit_price": 'unit_price',
         "tax_code": 'tax_code',
         "hide_date_range_on_invoice": 'hide_date_range_on_invoice',
-        "price_in_cents": 'price_in_cents',
         "recurring": 'recurring',
         "display_on_hosted_page": 'display_on_hosted_page',
         "allow_fractional_quantities": 'allow_fractional_quantities',
@@ -115,7 +115,6 @@ class QuantityBasedComponent(object):
         'unit_price',
         'tax_code',
         'hide_date_range_on_invoice',
-        'price_in_cents',
         'recurring',
         'display_on_hosted_page',
         'allow_fractional_quantities',
@@ -144,14 +143,13 @@ class QuantityBasedComponent(object):
                  unit_price=APIHelper.SKIP,
                  tax_code=APIHelper.SKIP,
                  hide_date_range_on_invoice=APIHelper.SKIP,
-                 price_in_cents=APIHelper.SKIP,
                  recurring=APIHelper.SKIP,
                  display_on_hosted_page=APIHelper.SKIP,
                  allow_fractional_quantities=APIHelper.SKIP,
                  public_signup_page_ids=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
                  interval_unit=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the QuantityBasedComponent class"""
 
         # Initialize members of the class
@@ -178,8 +176,6 @@ class QuantityBasedComponent(object):
             self.tax_code = tax_code 
         if hide_date_range_on_invoice is not APIHelper.SKIP:
             self.hide_date_range_on_invoice = hide_date_range_on_invoice 
-        if price_in_cents is not APIHelper.SKIP:
-            self.price_in_cents = price_in_cents 
         if recurring is not APIHelper.SKIP:
             self.recurring = recurring 
         if display_on_hosted_page is not APIHelper.SKIP:
@@ -194,6 +190,8 @@ class QuantityBasedComponent(object):
             self.interval_unit = interval_unit 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -212,7 +210,7 @@ class QuantityBasedComponent(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -237,7 +235,6 @@ class QuantityBasedComponent(object):
         unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('QuantityBasedComponentUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if dictionary.get("tax_code") else APIHelper.SKIP
         hide_date_range_on_invoice = dictionary.get("hide_date_range_on_invoice") if "hide_date_range_on_invoice" in dictionary.keys() else APIHelper.SKIP
-        price_in_cents = dictionary.get("price_in_cents") if dictionary.get("price_in_cents") else APIHelper.SKIP
         recurring = dictionary.get("recurring") if "recurring" in dictionary.keys() else APIHelper.SKIP
         display_on_hosted_page = dictionary.get("display_on_hosted_page") if "display_on_hosted_page" in dictionary.keys() else APIHelper.SKIP
         allow_fractional_quantities = dictionary.get("allow_fractional_quantities") if "allow_fractional_quantities" in dictionary.keys() else APIHelper.SKIP
@@ -245,9 +242,7 @@ class QuantityBasedComponent(object):
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(name,
                    unit_name,
@@ -262,11 +257,10 @@ class QuantityBasedComponent(object):
                    unit_price,
                    tax_code,
                    hide_date_range_on_invoice,
-                   price_in_cents,
                    recurring,
                    display_on_hosted_page,
                    allow_fractional_quantities,
                    public_signup_page_ids,
                    interval,
                    interval_unit,
-                   dictionary)
+                   additional_properties)

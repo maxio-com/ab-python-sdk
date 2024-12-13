@@ -17,6 +17,8 @@ class ListComponentsPricePointsResponse(object):
 
     Attributes:
         price_points (List[ComponentPricePoint]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -27,13 +29,15 @@ class ListComponentsPricePointsResponse(object):
 
     def __init__(self,
                  price_points=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ListComponentsPricePointsResponse class"""
 
         # Initialize members of the class
         self.price_points = price_points 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -51,7 +55,7 @@ class ListComponentsPricePointsResponse(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -59,9 +63,7 @@ class ListComponentsPricePointsResponse(object):
         if dictionary.get('price_points') is not None:
             price_points = [ComponentPricePoint.from_dictionary(x) for x in dictionary.get('price_points')]
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(price_points,
-                   dictionary)
+                   additional_properties)

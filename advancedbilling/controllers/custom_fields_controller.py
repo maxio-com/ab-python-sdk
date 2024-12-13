@@ -89,7 +89,7 @@ class CustomFieldsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/{resource_type}/metafields.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -161,7 +161,7 @@ class CustomFieldsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/{resource_type}/metafields.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -217,7 +217,7 @@ class CustomFieldsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/{resource_type}/metafields.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -269,7 +269,7 @@ class CustomFieldsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/{resource_type}/metafields.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -338,7 +338,7 @@ class CustomFieldsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/{resource_type}/{resource_id}/metadata.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -417,7 +417,7 @@ class CustomFieldsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/{resource_type}/{resource_id}/metadata.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -475,7 +475,7 @@ class CustomFieldsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/{resource_type}/{resource_id}/metadata.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -553,7 +553,7 @@ class CustomFieldsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/{resource_type}/{resource_id}/metadata.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -660,7 +660,7 @@ class CustomFieldsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/{resource_type}/metadata.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()

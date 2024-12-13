@@ -52,6 +52,8 @@ class UpdateSubscription(object):
             price point.
         product_price_point_handle (str): Set to change the current product's
             price point.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -101,7 +103,6 @@ class UpdateSubscription(object):
     ]
 
     _nullables = [
-        'dunning_communication_delay_enabled',
         'dunning_communication_delay_time_zone',
     ]
 
@@ -125,7 +126,7 @@ class UpdateSubscription(object):
                  dunning_communication_delay_time_zone=APIHelper.SKIP,
                  product_price_point_id=APIHelper.SKIP,
                  product_price_point_handle=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the UpdateSubscription class"""
 
         # Initialize members of the class
@@ -169,6 +170,8 @@ class UpdateSubscription(object):
             self.product_price_point_handle = product_price_point_handle 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -187,7 +190,7 @@ class UpdateSubscription(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -215,9 +218,7 @@ class UpdateSubscription(object):
         product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
         product_price_point_handle = dictionary.get("product_price_point_handle") if dictionary.get("product_price_point_handle") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(credit_card_attributes,
                    product_handle,
@@ -238,4 +239,4 @@ class UpdateSubscription(object):
                    dunning_communication_delay_time_zone,
                    product_price_point_id,
                    product_price_point_handle,
-                   dictionary)
+                   additional_properties)

@@ -23,6 +23,8 @@ class MetafieldInput(object):
         TEXT: TODO: type description here.
         RADIO: TODO: type description here.
         DROPDOWN: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['balance_tracker', 'text', 'radio', 'dropdown']

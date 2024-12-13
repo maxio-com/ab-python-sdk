@@ -19,6 +19,8 @@ class WebhookStatus(object):
         FAILED: TODO: type description here.
         PENDING: TODO: type description here.
         PAUSED: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     SUCCESSFUL = 'successful'

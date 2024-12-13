@@ -101,6 +101,8 @@ class PaymentProfileAttributes(object):
             them here so that we may create a masked card number (i.e.
             XXXX-XXXX-XXXX-1234) for display in the UI. Last 4 digits are
             required for refunds in Auth.Net.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -191,7 +193,7 @@ class PaymentProfileAttributes(object):
                  gateway_handle=APIHelper.SKIP,
                  cvv=APIHelper.SKIP,
                  last_four=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the PaymentProfileAttributes class"""
 
         # Initialize members of the class
@@ -247,6 +249,8 @@ class PaymentProfileAttributes(object):
             self.last_four = last_four 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -265,7 +269,7 @@ class PaymentProfileAttributes(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -295,9 +299,7 @@ class PaymentProfileAttributes(object):
         cvv = dictionary.get("cvv") if dictionary.get("cvv") else APIHelper.SKIP
         last_four = dictionary.get("last_four") if dictionary.get("last_four") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(chargify_token,
                    id,
@@ -324,7 +326,7 @@ class PaymentProfileAttributes(object):
                    gateway_handle,
                    cvv,
                    last_four,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

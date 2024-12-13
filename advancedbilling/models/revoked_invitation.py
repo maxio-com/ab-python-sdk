@@ -19,6 +19,8 @@ class RevokedInvitation(object):
         last_sent_at (str): TODO: type description here.
         last_accepted_at (str): TODO: type description here.
         uninvited_count (int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -39,7 +41,7 @@ class RevokedInvitation(object):
                  last_sent_at=APIHelper.SKIP,
                  last_accepted_at=APIHelper.SKIP,
                  uninvited_count=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the RevokedInvitation class"""
 
         # Initialize members of the class
@@ -51,6 +53,8 @@ class RevokedInvitation(object):
             self.uninvited_count = uninvited_count 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -68,7 +72,7 @@ class RevokedInvitation(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -76,11 +80,9 @@ class RevokedInvitation(object):
         last_accepted_at = dictionary.get("last_accepted_at") if dictionary.get("last_accepted_at") else APIHelper.SKIP
         uninvited_count = dictionary.get("uninvited_count") if dictionary.get("uninvited_count") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(last_sent_at,
                    last_accepted_at,
                    uninvited_count,
-                   dictionary)
+                   additional_properties)

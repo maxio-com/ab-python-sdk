@@ -7,19 +7,22 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.customer import Customer
 from advancedbilling.models.subscription_group_signup_failure_data import SubscriptionGroupSignupFailureData
 
 
-class SubscriptionGroupSignupFailure(object):
+class SubscriptionGroupSignupEventData(object):
 
-    """Implementation of the 'Subscription Group Signup Failure' model.
+    """Implementation of the 'Subscription Group Signup Event Data' model.
 
     TODO: type model description here.
 
     Attributes:
         subscription_group (SubscriptionGroupSignupFailureData): TODO: type
             description here.
-        customer (str): TODO: type description here.
+        customer (Customer): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -36,14 +39,16 @@ class SubscriptionGroupSignupFailure(object):
     def __init__(self,
                  subscription_group=None,
                  customer=None,
-                 additional_properties={}):
-        """Constructor for the SubscriptionGroupSignupFailure class"""
+                 additional_properties=None):
+        """Constructor for the SubscriptionGroupSignupEventData class"""
 
         # Initialize members of the class
         self.subscription_group = subscription_group 
         self.customer = customer 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -61,20 +66,18 @@ class SubscriptionGroupSignupFailure(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         subscription_group = SubscriptionGroupSignupFailureData.from_dictionary(dictionary.get('subscription_group')) if dictionary.get('subscription_group') else None
-        customer = dictionary.get("customer") if dictionary.get("customer") else None
+        customer = Customer.from_dictionary(dictionary.get('customer')) if dictionary.get('customer') else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(subscription_group,
                    customer,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):
@@ -95,8 +98,9 @@ class SubscriptionGroupSignupFailure(object):
                                            type_callable=lambda value: SubscriptionGroupSignupFailureData.validate(value),
                                            is_model_dict=True) \
                 and APIHelper.is_valid_type(value=dictionary.customer,
-                                            type_callable=lambda value: isinstance(value, str),
-                                            is_value_nullable=True)
+                                            type_callable=lambda value: Customer.validate(value),
+                                            is_value_nullable=True,
+                                            is_model_dict=True)
 
         if not isinstance(dictionary, dict):
             return False
@@ -105,5 +109,6 @@ class SubscriptionGroupSignupFailure(object):
                                        type_callable=lambda value: SubscriptionGroupSignupFailureData.validate(value),
                                        is_model_dict=True) \
             and APIHelper.is_valid_type(value=dictionary.get('customer'),
-                                        type_callable=lambda value: isinstance(value, str),
-                                        is_value_nullable=True)
+                                        type_callable=lambda value: Customer.validate(value),
+                                        is_value_nullable=True,
+                                        is_model_dict=True)

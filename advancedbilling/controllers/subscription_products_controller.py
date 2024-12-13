@@ -144,7 +144,7 @@ class SubscriptionProductsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/migrations.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -200,7 +200,7 @@ class SubscriptionProductsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/migrations/preview.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()

@@ -20,6 +20,8 @@ class MRRMovement(object):
         category (str): TODO: type description here.
         subscriber_delta (int): TODO: type description here.
         lead_delta (int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -43,7 +45,7 @@ class MRRMovement(object):
                  category=APIHelper.SKIP,
                  subscriber_delta=APIHelper.SKIP,
                  lead_delta=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the MRRMovement class"""
 
         # Initialize members of the class
@@ -57,6 +59,8 @@ class MRRMovement(object):
             self.lead_delta = lead_delta 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -74,7 +78,7 @@ class MRRMovement(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -83,12 +87,10 @@ class MRRMovement(object):
         subscriber_delta = dictionary.get("subscriber_delta") if dictionary.get("subscriber_delta") else APIHelper.SKIP
         lead_delta = dictionary.get("lead_delta") if dictionary.get("lead_delta") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(amount,
                    category,
                    subscriber_delta,
                    lead_delta,
-                   dictionary)
+                   additional_properties)

@@ -5,9 +5,8 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `subdomain` | `str` | The subdomain for your Advanced Billing site.<br>*Default*: `'subdomain'` |
-| `domain` | `str` | The Advanced Billing server domain.<br>*Default*: `'chargify.com'` |
-| `environment` | `Environment` | The API environment. <br> **Default: `Environment.PRODUCTION`** |
+| `site` | `str` | The subdomain for your Advanced Billing site.<br>*Default*: `'subdomain'` |
+| `environment` | `Environment` | The API environment. <br> **Default: `Environment.US`** |
 | `http_client_instance` | `HttpClient` | The Http Client passed from the sdk user for making requests |
 | `override_http_client_configuration` | `bool` | The value which determines to override properties of the passed Http Client from the sdk user |
 | `http_call_back` | `HttpCallBack` | The callback value that is invoked before and after an HTTP call is made to an endpoint |
@@ -26,9 +25,8 @@ client = AdvancedBillingClient(
         username='BasicAuthUserName',
         password='BasicAuthPassword'
     ),
-    environment=Environment.PRODUCTION,
-    subdomain='subdomain',
-    domain='chargify.com'
+    environment=Environment.US,
+    site='subdomain'
 )
 ```
 

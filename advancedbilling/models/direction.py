@@ -17,6 +17,8 @@ class Direction(object):
     Attributes:
         ASC: TODO: type description here.
         DESC: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     ASC = 'asc'

@@ -22,7 +22,6 @@ from advancedbilling.models.resource_type import ResourceType
 
 BASIC_AUTH_USERNAME = os.getenv("BASIC_AUTH_USERNAME")
 BASIC_AUTH_PASSWORD = os.getenv("BASIC_AUTH_PASSWORD")
-DOMAIN = os.getenv("DOMAIN")
 SUBDOMAIN = os.getenv("SUBDOMAIN")
 
 
@@ -41,8 +40,7 @@ def clean_custom_fields(client: AdvancedBillingClient):
 @pytest.fixture(scope="session", autouse=True)
 def client() -> AdvancedBillingClient:
     client = AdvancedBillingClient(
-        subdomain=SUBDOMAIN,
-        domain=DOMAIN,
+        site=SUBDOMAIN,
         basic_auth_credentials=BasicAuthCredentials(
             username=BASIC_AUTH_USERNAME,
             password=BASIC_AUTH_PASSWORD
@@ -50,7 +48,7 @@ def client() -> AdvancedBillingClient:
     )
 
     clean_custom_fields(client)
-    client.sites.clear_site()
+    #client.sites.clear_site()
     sleep(10)  # Wait for site to be cleared as it takes some time
 
     yield client
@@ -59,8 +57,7 @@ def client() -> AdvancedBillingClient:
 @pytest.fixture(scope="session")
 def unauthorized_client() -> AdvancedBillingClient:
     return AdvancedBillingClient(
-        subdomain=SUBDOMAIN,
-        domain=DOMAIN,
+        site=SUBDOMAIN,
         basic_auth_credentials=BasicAuthCredentials(
             username="thisiswrongapitokenthisiswrongapitokenV8",
             password=BASIC_AUTH_PASSWORD

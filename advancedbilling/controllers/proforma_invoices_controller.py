@@ -62,7 +62,7 @@ class ProformaInvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/proforma_invoices.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -112,7 +112,7 @@ class ProformaInvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/proforma_invoices.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -172,7 +172,7 @@ class ProformaInvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/proforma_invoices/{proforma_invoice_uid}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -221,7 +221,7 @@ class ProformaInvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/proforma_invoices.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -301,7 +301,7 @@ class ProformaInvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/proforma_invoices.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -387,7 +387,7 @@ class ProformaInvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/proforma_invoices/{proforma_invoice_uid}/void.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -450,7 +450,7 @@ class ProformaInvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/proforma_invoices/preview.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -505,7 +505,7 @@ class ProformaInvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/proforma_invoices.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -564,7 +564,7 @@ class ProformaInvoicesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/proforma_invoices/preview.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()

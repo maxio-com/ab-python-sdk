@@ -17,6 +17,8 @@ class DiscountType(object):
     Attributes:
         AMOUNT: TODO: type description here.
         PERCENT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     AMOUNT = 'amount'

@@ -29,6 +29,8 @@ class UpdateMetafield(object):
             input, and appear differently on a Public Signup Page. Defaults to
             'text'
         enum (List[str]): Only applicable when input_type is radio or dropdown
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -55,7 +57,7 @@ class UpdateMetafield(object):
                  scope=APIHelper.SKIP,
                  input_type=APIHelper.SKIP,
                  enum=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the UpdateMetafield class"""
 
         # Initialize members of the class
@@ -71,6 +73,8 @@ class UpdateMetafield(object):
             self.enum = enum 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -88,7 +92,7 @@ class UpdateMetafield(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -98,16 +102,14 @@ class UpdateMetafield(object):
         input_type = dictionary.get("input_type") if dictionary.get("input_type") else APIHelper.SKIP
         enum = dictionary.get("enum") if dictionary.get("enum") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(current_name,
                    name,
                    scope,
                    input_type,
                    enum,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

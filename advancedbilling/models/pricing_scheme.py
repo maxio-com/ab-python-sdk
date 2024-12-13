@@ -21,6 +21,8 @@ class PricingScheme(object):
         VOLUME: TODO: type description here.
         PER_UNIT: TODO: type description here.
         TIERED: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['stairstep', 'volume', 'per_unit', 'tiered']

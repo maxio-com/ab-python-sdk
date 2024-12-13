@@ -31,6 +31,8 @@ class Metafield(object):
             input, and appear differently on a Public Signup Page. Defaults to
             'text'
         enum (str | List[str] | None): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -64,7 +66,7 @@ class Metafield(object):
                  data_count=APIHelper.SKIP,
                  input_type=APIHelper.SKIP,
                  enum=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Metafield class"""
 
         # Initialize members of the class
@@ -82,6 +84,8 @@ class Metafield(object):
             self.enum = enum 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -100,7 +104,7 @@ class Metafield(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -114,9 +118,7 @@ class Metafield(object):
         else:
             enum = APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    name,
@@ -124,4 +126,4 @@ class Metafield(object):
                    data_count,
                    input_type,
                    enum,
-                   dictionary)
+                   additional_properties)

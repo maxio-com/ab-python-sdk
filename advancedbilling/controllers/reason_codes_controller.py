@@ -16,7 +16,7 @@ from apimatic_core.types.parameter import Parameter
 from advancedbilling.http.http_method_enum import HttpMethodEnum
 from apimatic_core.authentication.multiple.single_auth import Single
 from advancedbilling.models.reason_code_response import ReasonCodeResponse
-from advancedbilling.models.reason_codes_json_response import ReasonCodesJsonResponse
+from advancedbilling.models.ok_response import OkResponse
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.api_exception import APIException
 
@@ -63,7 +63,7 @@ class ReasonCodesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/reason_codes.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -124,7 +124,7 @@ class ReasonCodesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/reason_codes.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -141,6 +141,7 @@ class ReasonCodesController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReasonCodeResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def read_reason_code(self,
@@ -166,7 +167,7 @@ class ReasonCodesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/reason_codes/{reason_code_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -210,7 +211,7 @@ class ReasonCodesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/reason_codes/{reason_code_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -233,6 +234,7 @@ class ReasonCodesController(BaseController):
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ReasonCodeResponse.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def delete_reason_code(self,
@@ -247,7 +249,7 @@ class ReasonCodesController(BaseController):
             reason_code_id (int): The Advanced Billing id of the reason code
 
         Returns:
-            ReasonCodesJsonResponse: Response from the API. OK
+            OkResponse: Response from the API. OK
 
         Raises:
             APIException: When an error occurs while fetching the data from
@@ -258,7 +260,7 @@ class ReasonCodesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/reason_codes/{reason_code_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -273,6 +275,6 @@ class ReasonCodesController(BaseController):
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ReasonCodesJsonResponse.from_dictionary)
+            .deserialize_into(OkResponse.from_dictionary)
             .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
         ).execute()

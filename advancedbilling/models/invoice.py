@@ -10,9 +10,11 @@ import dateutil.parser
 
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.invoice_address import InvoiceAddress
+from advancedbilling.models.invoice_avatax_details import InvoiceAvataxDetails
 from advancedbilling.models.invoice_credit import InvoiceCredit
 from advancedbilling.models.invoice_custom_field import InvoiceCustomField
 from advancedbilling.models.invoice_customer import InvoiceCustomer
+from advancedbilling.models.invoice_debit import InvoiceDebit
 from advancedbilling.models.invoice_discount import InvoiceDiscount
 from advancedbilling.models.invoice_display_settings import InvoiceDisplaySettings
 from advancedbilling.models.invoice_line_item import InvoiceLineItem
@@ -119,6 +121,7 @@ class Invoice(object):
             discount_amount + tax_amount`.'
         credit_amount (str): The amount of credit (from credit notes) applied
             to this invoice.  Credits offset the amount due from the customer.
+        debit_amount (str): TODO: type description here.
         refund_amount (str): TODO: type description here.
         paid_amount (str): The amount paid on the invoice by the customer.
         due_amount (str): Amount due on the invoice, which is `total_amount -
@@ -127,14 +130,18 @@ class Invoice(object):
         discounts (List[InvoiceDiscount]): TODO: type description here.
         taxes (List[InvoiceTax]): TODO: type description here.
         credits (List[InvoiceCredit]): TODO: type description here.
+        debits (List[InvoiceDebit]): TODO: type description here.
         refunds (List[InvoiceRefund]): TODO: type description here.
         payments (List[InvoicePayment]): TODO: type description here.
         custom_fields (List[InvoiceCustomField]): TODO: type description here.
         display_settings (InvoiceDisplaySettings): TODO: type description here.
+        avatax_details (InvoiceAvataxDetails): TODO: type description here.
         public_url (str): The public URL of the invoice
         previous_balance_data (InvoicePreviousBalance): TODO: type description
             here.
         public_url_expires_on (date): The format is `"YYYY-MM-DD"`.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -179,6 +186,7 @@ class Invoice(object):
         "tax_amount": 'tax_amount',
         "total_amount": 'total_amount',
         "credit_amount": 'credit_amount',
+        "debit_amount": 'debit_amount',
         "refund_amount": 'refund_amount',
         "paid_amount": 'paid_amount',
         "due_amount": 'due_amount',
@@ -186,10 +194,12 @@ class Invoice(object):
         "discounts": 'discounts',
         "taxes": 'taxes',
         "credits": 'credits',
+        "debits": 'debits',
         "refunds": 'refunds',
         "payments": 'payments',
         "custom_fields": 'custom_fields',
         "display_settings": 'display_settings',
+        "avatax_details": 'avatax_details',
         "public_url": 'public_url',
         "previous_balance_data": 'previous_balance_data',
         "public_url_expires_on": 'public_url_expires_on'
@@ -235,6 +245,7 @@ class Invoice(object):
         'tax_amount',
         'total_amount',
         'credit_amount',
+        'debit_amount',
         'refund_amount',
         'paid_amount',
         'due_amount',
@@ -242,10 +253,12 @@ class Invoice(object):
         'discounts',
         'taxes',
         'credits',
+        'debits',
         'refunds',
         'payments',
         'custom_fields',
         'display_settings',
+        'avatax_details',
         'public_url',
         'previous_balance_data',
         'public_url_expires_on',
@@ -300,6 +313,7 @@ class Invoice(object):
                  tax_amount=APIHelper.SKIP,
                  total_amount=APIHelper.SKIP,
                  credit_amount=APIHelper.SKIP,
+                 debit_amount=APIHelper.SKIP,
                  refund_amount=APIHelper.SKIP,
                  paid_amount=APIHelper.SKIP,
                  due_amount=APIHelper.SKIP,
@@ -307,14 +321,16 @@ class Invoice(object):
                  discounts=APIHelper.SKIP,
                  taxes=APIHelper.SKIP,
                  credits=APIHelper.SKIP,
+                 debits=APIHelper.SKIP,
                  refunds=APIHelper.SKIP,
                  payments=APIHelper.SKIP,
                  custom_fields=APIHelper.SKIP,
                  display_settings=APIHelper.SKIP,
+                 avatax_details=APIHelper.SKIP,
                  public_url=APIHelper.SKIP,
                  previous_balance_data=APIHelper.SKIP,
                  public_url_expires_on=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Invoice class"""
 
         # Initialize members of the class
@@ -396,6 +412,8 @@ class Invoice(object):
             self.total_amount = total_amount 
         if credit_amount is not APIHelper.SKIP:
             self.credit_amount = credit_amount 
+        if debit_amount is not APIHelper.SKIP:
+            self.debit_amount = debit_amount 
         if refund_amount is not APIHelper.SKIP:
             self.refund_amount = refund_amount 
         if paid_amount is not APIHelper.SKIP:
@@ -410,6 +428,8 @@ class Invoice(object):
             self.taxes = taxes 
         if credits is not APIHelper.SKIP:
             self.credits = credits 
+        if debits is not APIHelper.SKIP:
+            self.debits = debits 
         if refunds is not APIHelper.SKIP:
             self.refunds = refunds 
         if payments is not APIHelper.SKIP:
@@ -418,6 +438,8 @@ class Invoice(object):
             self.custom_fields = custom_fields 
         if display_settings is not APIHelper.SKIP:
             self.display_settings = display_settings 
+        if avatax_details is not APIHelper.SKIP:
+            self.avatax_details = avatax_details 
         if public_url is not APIHelper.SKIP:
             self.public_url = public_url 
         if previous_balance_data is not APIHelper.SKIP:
@@ -426,6 +448,8 @@ class Invoice(object):
             self.public_url_expires_on = public_url_expires_on 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -443,7 +467,7 @@ class Invoice(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -489,6 +513,7 @@ class Invoice(object):
         tax_amount = dictionary.get("tax_amount") if dictionary.get("tax_amount") else APIHelper.SKIP
         total_amount = dictionary.get("total_amount") if dictionary.get("total_amount") else APIHelper.SKIP
         credit_amount = dictionary.get("credit_amount") if dictionary.get("credit_amount") else APIHelper.SKIP
+        debit_amount = dictionary.get("debit_amount") if dictionary.get("debit_amount") else APIHelper.SKIP
         refund_amount = dictionary.get("refund_amount") if dictionary.get("refund_amount") else APIHelper.SKIP
         paid_amount = dictionary.get("paid_amount") if dictionary.get("paid_amount") else APIHelper.SKIP
         due_amount = dictionary.get("due_amount") if dictionary.get("due_amount") else APIHelper.SKIP
@@ -512,6 +537,11 @@ class Invoice(object):
             credits = [InvoiceCredit.from_dictionary(x) for x in dictionary.get('credits')]
         else:
             credits = APIHelper.SKIP
+        debits = None
+        if dictionary.get('debits') is not None:
+            debits = [InvoiceDebit.from_dictionary(x) for x in dictionary.get('debits')]
+        else:
+            debits = APIHelper.SKIP
         refunds = None
         if dictionary.get('refunds') is not None:
             refunds = [InvoiceRefund.from_dictionary(x) for x in dictionary.get('refunds')]
@@ -528,13 +558,12 @@ class Invoice(object):
         else:
             custom_fields = APIHelper.SKIP
         display_settings = InvoiceDisplaySettings.from_dictionary(dictionary.get('display_settings')) if 'display_settings' in dictionary.keys() else APIHelper.SKIP
+        avatax_details = InvoiceAvataxDetails.from_dictionary(dictionary.get('avatax_details')) if 'avatax_details' in dictionary.keys() else APIHelper.SKIP
         public_url = dictionary.get("public_url") if dictionary.get("public_url") else APIHelper.SKIP
         previous_balance_data = InvoicePreviousBalance.from_dictionary(dictionary.get('previous_balance_data')) if 'previous_balance_data' in dictionary.keys() else APIHelper.SKIP
         public_url_expires_on = dateutil.parser.parse(dictionary.get('public_url_expires_on')).date() if dictionary.get('public_url_expires_on') else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    uid,
@@ -575,6 +604,7 @@ class Invoice(object):
                    tax_amount,
                    total_amount,
                    credit_amount,
+                   debit_amount,
                    refund_amount,
                    paid_amount,
                    due_amount,
@@ -582,14 +612,16 @@ class Invoice(object):
                    discounts,
                    taxes,
                    credits,
+                   debits,
                    refunds,
                    payments,
                    custom_fields,
                    display_settings,
+                   avatax_details,
                    public_url,
                    previous_balance_data,
                    public_url_expires_on,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

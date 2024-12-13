@@ -19,6 +19,8 @@ class ChangeInvoiceCollectionMethodEventData(object):
         from_collection_method (str): The previous collection method of the
             invoice.
         to_collection_method (str): The new collection method of the invoice.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -31,7 +33,7 @@ class ChangeInvoiceCollectionMethodEventData(object):
     def __init__(self,
                  from_collection_method=None,
                  to_collection_method=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ChangeInvoiceCollectionMethodEventData class"""
 
         # Initialize members of the class
@@ -39,6 +41,8 @@ class ChangeInvoiceCollectionMethodEventData(object):
         self.to_collection_method = to_collection_method 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -56,20 +60,18 @@ class ChangeInvoiceCollectionMethodEventData(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         from_collection_method = dictionary.get("from_collection_method") if dictionary.get("from_collection_method") else None
         to_collection_method = dictionary.get("to_collection_method") if dictionary.get("to_collection_method") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(from_collection_method,
                    to_collection_method,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

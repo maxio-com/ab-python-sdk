@@ -58,7 +58,7 @@ class SitesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/site.json')
             .http_method(HttpMethodEnum.GET)
             .header_param(Parameter()
@@ -103,7 +103,7 @@ class SitesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/sites/clear_data.json')
             .http_method(HttpMethodEnum.POST)
             .query_param(Parameter()
@@ -152,7 +152,7 @@ class SitesController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/chargify_js_keys.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()

@@ -30,6 +30,8 @@ class InvoiceEventType(object):
         REMOVE_PAYMENT: TODO: type description here.
         FAILED_PAYMENT: TODO: type description here.
         CHANGE_CHARGEBACK_STATUS: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['issue_invoice', 'apply_credit_note', 'create_credit_note', 'apply_payment', 'apply_debit_note', 'create_debit_note', 'refund_invoice', 'void_invoice', 'void_remainder', 'backport_invoice', 'change_invoice_status', 'change_invoice_collection_method', 'remove_payment', 'failed_payment', 'change_chargeback_status']

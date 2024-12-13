@@ -56,7 +56,7 @@ class SubscriptionGroupStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/cancel.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -99,7 +99,7 @@ class SubscriptionGroupStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/delayed_cancel.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -134,7 +134,7 @@ class SubscriptionGroupStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/delayed_cancel.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -204,7 +204,7 @@ class SubscriptionGroupStatusController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscription_groups/{uid}/reactivate.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()

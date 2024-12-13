@@ -17,6 +17,8 @@ class WebhookOrder(object):
     Attributes:
         NEWEST_FIRST: TODO: type description here.
         OLDEST_FIRST: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     NEWEST_FIRST = 'newest_first'

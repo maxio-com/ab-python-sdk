@@ -65,6 +65,8 @@ class SubscriptionComponent(object):
         interval_unit (IntervalUnit): A string representing the interval unit
             for this component price point, either month or day. This property
             is only available for sites with Multifrequency enabled.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -187,7 +189,7 @@ class SubscriptionComponent(object):
                  display_on_hosted_page=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
                  interval_unit=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionComponent class"""
 
         # Initialize members of the class
@@ -257,6 +259,8 @@ class SubscriptionComponent(object):
             self.interval_unit = interval_unit 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -275,7 +279,7 @@ class SubscriptionComponent(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -319,9 +323,7 @@ class SubscriptionComponent(object):
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    name,
@@ -355,4 +357,4 @@ class SubscriptionComponent(object):
                    display_on_hosted_page,
                    interval,
                    interval_unit,
-                   dictionary)
+                   additional_properties)

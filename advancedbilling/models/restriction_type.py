@@ -17,6 +17,8 @@ class RestrictionType(object):
     Attributes:
         COMPONENT: TODO: type description here.
         PRODUCT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     COMPONENT = 'Component'

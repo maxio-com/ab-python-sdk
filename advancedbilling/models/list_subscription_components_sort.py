@@ -17,6 +17,8 @@ class ListSubscriptionComponentsSort(object):
     Attributes:
         ID: TODO: type description here.
         UPDATED_AT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     ID = 'id'

@@ -58,6 +58,8 @@ class BankAccountPaymentProfile(object):
             providing the amounts of two small deposits made into the account
         site_gateway_setting_id (int): TODO: type description here.
         gateway_handle (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -145,7 +147,7 @@ class BankAccountPaymentProfile(object):
                  verified=False,
                  site_gateway_setting_id=APIHelper.SKIP,
                  gateway_handle=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the BankAccountPaymentProfile class"""
 
         # Initialize members of the class
@@ -192,6 +194,8 @@ class BankAccountPaymentProfile(object):
             self.gateway_handle = gateway_handle 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -209,7 +213,7 @@ class BankAccountPaymentProfile(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -236,9 +240,7 @@ class BankAccountPaymentProfile(object):
         site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if "site_gateway_setting_id" in dictionary.keys() else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(masked_bank_account_number,
                    payment_type,
@@ -262,7 +264,7 @@ class BankAccountPaymentProfile(object):
                    verified,
                    site_gateway_setting_id,
                    gateway_handle,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

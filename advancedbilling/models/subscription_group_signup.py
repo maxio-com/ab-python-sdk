@@ -35,6 +35,8 @@ class SubscriptionGroupSignup(object):
             description here.
         subscriptions (List[SubscriptionGroupSignupItem]): TODO: type
             description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -69,7 +71,7 @@ class SubscriptionGroupSignup(object):
                  payer_attributes=APIHelper.SKIP,
                  credit_card_attributes=APIHelper.SKIP,
                  bank_account_attributes=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionGroupSignup class"""
 
         # Initialize members of the class
@@ -90,6 +92,8 @@ class SubscriptionGroupSignup(object):
         self.subscriptions = subscriptions 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -107,7 +111,7 @@ class SubscriptionGroupSignup(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -122,9 +126,7 @@ class SubscriptionGroupSignup(object):
         credit_card_attributes = SubscriptionGroupCreditCard.from_dictionary(dictionary.get('credit_card_attributes')) if 'credit_card_attributes' in dictionary.keys() else APIHelper.SKIP
         bank_account_attributes = SubscriptionGroupBankAccount.from_dictionary(dictionary.get('bank_account_attributes')) if 'bank_account_attributes' in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(subscriptions,
                    payment_profile_id,
@@ -134,4 +136,4 @@ class SubscriptionGroupSignup(object):
                    payer_attributes,
                    credit_card_attributes,
                    bank_account_attributes,
-                   dictionary)
+                   additional_properties)

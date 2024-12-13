@@ -17,6 +17,8 @@ class CreateInvoiceStatus(object):
     Attributes:
         DRAFT: TODO: type description here.
         OPEN: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     DRAFT = 'draft'

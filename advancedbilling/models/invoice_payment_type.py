@@ -19,6 +19,8 @@ class InvoicePaymentType(object):
         PREPAYMENT: TODO: type description here.
         SERVICE_CREDIT: TODO: type description here.
         PAYMENT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     EXTERNAL = 'external'

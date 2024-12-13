@@ -29,6 +29,8 @@ class ListProductsFilter(object):
         use_site_exchange_rate (bool): Allows fetching products with matching
             use_site_exchange_rate based on provided value (refers to default
             price point). Use in query `filter[use_site_exchange_rate]=true`.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -49,7 +51,7 @@ class ListProductsFilter(object):
                  ids=APIHelper.SKIP,
                  prepaid_product_price_point=APIHelper.SKIP,
                  use_site_exchange_rate=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ListProductsFilter class"""
 
         # Initialize members of the class
@@ -61,6 +63,8 @@ class ListProductsFilter(object):
             self.use_site_exchange_rate = use_site_exchange_rate 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -78,7 +82,7 @@ class ListProductsFilter(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -86,11 +90,9 @@ class ListProductsFilter(object):
         prepaid_product_price_point = PrepaidProductPricePointFilter.from_dictionary(dictionary.get('prepaid_product_price_point')) if 'prepaid_product_price_point' in dictionary.keys() else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(ids,
                    prepaid_product_price_point,
                    use_site_exchange_rate,
-                   dictionary)
+                   additional_properties)

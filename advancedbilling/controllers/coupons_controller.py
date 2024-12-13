@@ -23,6 +23,7 @@ from advancedbilling.models.coupon_subcodes_response import CouponSubcodesRespon
 from advancedbilling.models.coupon_subcodes import CouponSubcodes
 from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
 from advancedbilling.exceptions.single_string_error_response_exception import SingleStringErrorResponseException
+from advancedbilling.exceptions.error_string_map_response_exception import ErrorStringMapResponseException
 from advancedbilling.exceptions.api_exception import APIException
 
 
@@ -49,19 +50,17 @@ class CouponsController(BaseController):
         ns-and-Subscriptions).
         ## Create Coupon
         This request will create a coupon, based on the provided information.
-        When creating a coupon, you must specify a product family using the
-        `product_family_id`. If no `product_family_id` is passed, the first
-        product family available is used. You will also need to formulate your
-        URL to cite the Product Family ID in your request.
+        You can create either a flat amount coupon, by specyfing
+        `amount_in_cents`, or percentage coupon by specyfing `percentage`.
         You can restrict a coupon to only apply to specific products /
-        components by optionally passing in hashes of `restricted_products`
-        and/or `restricted_components` in the format:
-        `{ "<product/component_id>": boolean_value }`
+        components by optionally passing in `restricted_products` and/or
+        `restricted_components` objects in the format:
+        `{ "<product_id/component_id>": boolean_value }`
 
         Args:
             product_family_id (int): The Advanced Billing id of the product
                 family to which the coupon belongs
-            body (CreateOrUpdateCoupon, optional): TODO: type description here.
+            body (CouponRequest, optional): TODO: type description here.
 
         Returns:
             CouponResponse: Response from the API. Created
@@ -75,7 +74,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/coupons.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -152,7 +151,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/coupons.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -185,7 +184,8 @@ class CouponsController(BaseController):
 
     def find_coupon(self,
                     product_family_id=None,
-                    code=None):
+                    code=None,
+                    currency_prices=None):
         """Does a GET request to /coupons/find.json.
 
         You can search for a coupon via the API with the find method. By
@@ -200,6 +200,10 @@ class CouponsController(BaseController):
             product_family_id (int, optional): The Advanced Billing id of the
                 product family to which the coupon belongs
             code (str, optional): The code of the coupon
+            currency_prices (bool, optional): When fetching coupons, if you
+                have defined multiple currencies at the site level, you can
+                optionally pass the `?currency_prices=true` query param to
+                include an array of currency price data in the response.
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -213,7 +217,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/coupons/find.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -222,6 +226,9 @@ class CouponsController(BaseController):
             .query_param(Parameter()
                          .key('code')
                          .value(code))
+            .query_param(Parameter()
+                         .key('currency_prices')
+                         .value(currency_prices))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -234,7 +241,8 @@ class CouponsController(BaseController):
 
     def read_coupon(self,
                     product_family_id,
-                    coupon_id):
+                    coupon_id,
+                    currency_prices=None):
         """Does a GET request to /product_families/{product_family_id}/coupons/{coupon_id}.json.
 
         You can retrieve the Coupon via the API with the Show method. You must
@@ -253,6 +261,10 @@ class CouponsController(BaseController):
             product_family_id (int): The Advanced Billing id of the product
                 family to which the coupon belongs
             coupon_id (int): The Advanced Billing id of the coupon
+            currency_prices (bool, optional): When fetching coupons, if you
+                have defined multiple currencies at the site level, you can
+                optionally pass the `?currency_prices=true` query param to
+                include an array of currency price data in the response.
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -266,7 +278,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/coupons/{coupon_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -279,6 +291,9 @@ class CouponsController(BaseController):
                             .value(coupon_id)
                             .is_required(True)
                             .should_encode(True))
+            .query_param(Parameter()
+                         .key('currency_prices')
+                         .value(currency_prices))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -307,7 +322,7 @@ class CouponsController(BaseController):
             product_family_id (int): The Advanced Billing id of the product
                 family to which the coupon belongs
             coupon_id (int): The Advanced Billing id of the coupon
-            body (CreateOrUpdateCoupon, optional): TODO: type description here.
+            body (CouponRequest, optional): TODO: type description here.
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -321,7 +336,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/coupons/{coupon_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -348,6 +363,7 @@ class CouponsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
         ).execute()
 
     def archive_coupon(self,
@@ -378,7 +394,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/coupons/{coupon_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -451,7 +467,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/coupons.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -502,7 +518,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/coupons/{coupon_id}/usage.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -574,7 +590,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/coupons/validate.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -626,7 +642,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/coupons/{coupon_id}/currency_prices.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -648,6 +664,7 @@ class CouponsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponCurrencyResponse.from_dictionary)
+            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorStringMapResponseException)
         ).execute()
 
     def create_coupon_subcodes(self,
@@ -712,7 +729,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/coupons/{coupon_id}/codes.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -778,7 +795,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/coupons/{coupon_id}/codes.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -833,7 +850,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/coupons/{coupon_id}/codes.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -900,7 +917,7 @@ class CouponsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/coupons/{coupon_id}/codes/{subcode}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()

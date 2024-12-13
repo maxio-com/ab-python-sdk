@@ -15,10 +15,10 @@
 | `prices` | [`List[Price]`](../../doc/models/price.md) | Required | - |
 | `overage_pricing` | [`OveragePricing`](../../doc/models/overage-pricing.md) | Required | - |
 | `use_site_exchange_rate` | `bool` | Optional | Whether to use the site level exchange rate or define your own prices for each currency if you have multiple currencies defined on the site.<br>**Default**: `True` |
-| `rollover_prepaid_remainder` | `bool` | Optional | Boolean which controls whether or not remaining units should be rolled over to the next period |
-| `renew_prepaid_allocation` | `bool` | Optional | Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period |
+| `rollover_prepaid_remainder` | `bool` | Optional | (only for prepaid usage components) Boolean which controls whether or not remaining units should be rolled over to the next period |
+| `renew_prepaid_allocation` | `bool` | Optional | (only for prepaid usage components) Boolean which controls whether or not the allocated quantity should be renewed at the beginning of each period |
 | `expiration_interval` | `float` | Optional | (only for prepaid usage components where rollover_prepaid_remainder is true) The number of `expiration_interval_unit`s after which rollover amounts should expire |
-| `expiration_interval_unit` | [`ExpirationIntervalUnit`](../../doc/models/expiration-interval-unit.md) | Optional | A string representing the expiration interval unit for this component, either month or day |
+| `expiration_interval_unit` | [`ExpirationIntervalUnit`](../../doc/models/expiration-interval-unit.md) | Optional | (only for prepaid usage components where rollover_prepaid_remainder is true) A string representing the expiration interval unit for this component, either month or day |
 
 ## Example (as JSON)
 

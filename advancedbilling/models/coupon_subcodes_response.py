@@ -19,6 +19,8 @@ class CouponSubcodesResponse(object):
         created_codes (List[str]): TODO: type description here.
         duplicate_codes (List[str]): TODO: type description here.
         invalid_codes (List[str]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -39,7 +41,7 @@ class CouponSubcodesResponse(object):
                  created_codes=APIHelper.SKIP,
                  duplicate_codes=APIHelper.SKIP,
                  invalid_codes=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CouponSubcodesResponse class"""
 
         # Initialize members of the class
@@ -51,6 +53,8 @@ class CouponSubcodesResponse(object):
             self.invalid_codes = invalid_codes 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -68,7 +72,7 @@ class CouponSubcodesResponse(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -76,11 +80,9 @@ class CouponSubcodesResponse(object):
         duplicate_codes = dictionary.get("duplicate_codes") if dictionary.get("duplicate_codes") else APIHelper.SKIP
         invalid_codes = dictionary.get("invalid_codes") if dictionary.get("invalid_codes") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(created_codes,
                    duplicate_codes,
                    invalid_codes,
-                   dictionary)
+                   additional_properties)

@@ -18,6 +18,8 @@ class OriginInvoice(object):
     Attributes:
         uid (str): The UID of the invoice serving as an origin invoice.
         number (str): The number of the invoice serving as an origin invoice.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -35,7 +37,7 @@ class OriginInvoice(object):
     def __init__(self,
                  uid=APIHelper.SKIP,
                  number=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the OriginInvoice class"""
 
         # Initialize members of the class
@@ -45,6 +47,8 @@ class OriginInvoice(object):
             self.number = number 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -62,20 +66,18 @@ class OriginInvoice(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
         number = dictionary.get("number") if dictionary.get("number") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(uid,
                    number,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

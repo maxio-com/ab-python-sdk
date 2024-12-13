@@ -17,6 +17,8 @@ class SubscriptionPurgeType(object):
     Attributes:
         CUSTOMER: TODO: type description here.
         PAYMENT_PROFILE: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     CUSTOMER = 'customer'

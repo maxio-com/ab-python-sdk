@@ -18,6 +18,8 @@ class SubscriptionProductChange(object):
     Attributes:
         previous_product_id (int): TODO: type description here.
         new_product_id (int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -30,7 +32,7 @@ class SubscriptionProductChange(object):
     def __init__(self,
                  previous_product_id=None,
                  new_product_id=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionProductChange class"""
 
         # Initialize members of the class
@@ -38,6 +40,8 @@ class SubscriptionProductChange(object):
         self.new_product_id = new_product_id 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -55,20 +59,18 @@ class SubscriptionProductChange(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         previous_product_id = dictionary.get("previous_product_id") if dictionary.get("previous_product_id") else None
         new_product_id = dictionary.get("new_product_id") if dictionary.get("new_product_id") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(previous_product_id,
                    new_product_id,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

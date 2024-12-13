@@ -37,6 +37,8 @@ class InvoiceIssued(object):
         consolidation_level (str): TODO: type description here.
         line_items (List[InvoiceLineItemEventData]): TODO: type description
             here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -79,7 +81,7 @@ class InvoiceIssued(object):
                  product_name=None,
                  consolidation_level=None,
                  line_items=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the InvoiceIssued class"""
 
         # Initialize members of the class
@@ -100,6 +102,8 @@ class InvoiceIssued(object):
         self.line_items = line_items 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -117,7 +121,7 @@ class InvoiceIssued(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -139,9 +143,7 @@ class InvoiceIssued(object):
         if dictionary.get('line_items') is not None:
             line_items = [InvoiceLineItemEventData.from_dictionary(x) for x in dictionary.get('line_items')]
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(uid,
                    number,
@@ -158,7 +160,7 @@ class InvoiceIssued(object):
                    product_name,
                    consolidation_level,
                    line_items,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

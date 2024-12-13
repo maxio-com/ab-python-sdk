@@ -17,6 +17,8 @@ class ProformaInvoiceDiscountSourceType(object):
     Attributes:
         COUPON: TODO: type description here.
         REFERRAL: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     COUPON = 'Coupon'

@@ -203,6 +203,8 @@ class CreateSubscription(object):
         skip_billing_manifest_taxes (bool): Valid only for the Subscription
             Preview endpoint. When set to `true` it skips calculating taxes
             for the current and next billing manifests.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -312,7 +314,6 @@ class CreateSubscription(object):
     ]
 
     _nullables = [
-        'dunning_communication_delay_enabled',
         'dunning_communication_delay_time_zone',
     ]
 
@@ -366,7 +367,7 @@ class CreateSubscription(object):
                  dunning_communication_delay_enabled=False,
                  dunning_communication_delay_time_zone=APIHelper.SKIP,
                  skip_billing_manifest_taxes=False,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateSubscription class"""
 
         # Initialize members of the class
@@ -468,6 +469,8 @@ class CreateSubscription(object):
         self.skip_billing_manifest_taxes = skip_billing_manifest_taxes 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -486,7 +489,7 @@ class CreateSubscription(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -544,9 +547,7 @@ class CreateSubscription(object):
         dunning_communication_delay_time_zone = dictionary.get("dunning_communication_delay_time_zone") if "dunning_communication_delay_time_zone" in dictionary.keys() else APIHelper.SKIP
         skip_billing_manifest_taxes = dictionary.get("skip_billing_manifest_taxes") if dictionary.get("skip_billing_manifest_taxes") else False
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(product_handle,
                    product_id,
@@ -597,4 +598,4 @@ class CreateSubscription(object):
                    dunning_communication_delay_enabled,
                    dunning_communication_delay_time_zone,
                    skip_billing_manifest_taxes,
-                   dictionary)
+                   additional_properties)

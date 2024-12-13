@@ -24,6 +24,8 @@ class ComponentPrice(object):
         price_point_id (int): TODO: type description here.
         formatted_unit_price (str): TODO: type description here.
         segment_id (int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -64,7 +66,7 @@ class ComponentPrice(object):
                  price_point_id=APIHelper.SKIP,
                  formatted_unit_price=APIHelper.SKIP,
                  segment_id=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ComponentPrice class"""
 
         # Initialize members of the class
@@ -86,6 +88,8 @@ class ComponentPrice(object):
             self.segment_id = segment_id 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -103,7 +107,7 @@ class ComponentPrice(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -116,9 +120,7 @@ class ComponentPrice(object):
         formatted_unit_price = dictionary.get("formatted_unit_price") if dictionary.get("formatted_unit_price") else APIHelper.SKIP
         segment_id = dictionary.get("segment_id") if "segment_id" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    component_id,
@@ -128,4 +130,4 @@ class ComponentPrice(object):
                    price_point_id,
                    formatted_unit_price,
                    segment_id,
-                   dictionary)
+                   additional_properties)

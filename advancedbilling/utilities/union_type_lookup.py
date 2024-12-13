@@ -21,8 +21,6 @@ from advancedbilling.models.create_component_price_point import CreateComponentP
 from advancedbilling.models.create_credit_note_event import CreateCreditNoteEvent
 from advancedbilling.models.create_debit_note_event import CreateDebitNoteEvent
 from advancedbilling.models.create_metafield import CreateMetafield
-from advancedbilling.models.create_or_update_flat_amount_coupon import CreateOrUpdateFlatAmountCoupon
-from advancedbilling.models.create_or_update_percentage_coupon import CreateOrUpdatePercentageCoupon
 from advancedbilling.models.create_prepaid_usage_component_price_point import CreatePrepaidUsageComponentPricePoint
 from advancedbilling.models.credit_account_balance_changed import CreditAccountBalanceChanged
 from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
@@ -30,7 +28,6 @@ from advancedbilling.models.custom_field_value_change import CustomFieldValueCha
 from advancedbilling.models.customer_error import CustomerError
 from advancedbilling.models.dunning_step_reached import DunningStepReached
 from advancedbilling.models.failed_payment_event import FailedPaymentEvent
-from advancedbilling.models.group_settings import GroupSettings
 from advancedbilling.models.invoice_issued import InvoiceIssued
 from advancedbilling.models.issue_invoice_event import IssueInvoiceEvent
 from advancedbilling.models.item_price_point_changed import ItemPricePointChanged
@@ -56,8 +53,7 @@ from advancedbilling.models.remove_payment_event import RemovePaymentEvent
 from advancedbilling.models.resume_options import ResumeOptions
 from advancedbilling.models.snap_day import SnapDay
 from advancedbilling.models.subscription_group_members_array_error import SubscriptionGroupMembersArrayError
-from advancedbilling.models.subscription_group_signup_failure import SubscriptionGroupSignupFailure
-from advancedbilling.models.subscription_group_signup_success import SubscriptionGroupSignupSuccess
+from advancedbilling.models.subscription_group_signup_event_data import SubscriptionGroupSignupEventData
 from advancedbilling.models.subscription_group_single_error import SubscriptionGroupSingleError
 from advancedbilling.models.subscription_product_change import SubscriptionProductChange
 from advancedbilling.models.subscription_state_change import SubscriptionStateChange
@@ -257,15 +253,6 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'AddSubscriptionToAGroupGroup': OneOf(
-            [
-                LeafType(GroupSettings),
-                LeafType(bool)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
         'AllocationQuantity': OneOf(
             [
                 LeafType(int),
@@ -353,6 +340,15 @@ class UnionTypeLookUp:
             [
                 LeafType(str),
                 LeafType(int)
+            ],
+            Context.create(
+               is_optional=True
+            )
+        ),
+        'CouponPayloadPercentage': OneOf(
+            [
+                LeafType(str),
+                LeafType(float)
             ],
             Context.create(
                is_optional=True
@@ -483,21 +479,6 @@ class UnionTypeLookUp:
             ]
         ),
         'CreateMultiInvoicePaymentAmount': OneOf(
-            [
-                LeafType(str),
-                LeafType(float)
-            ]
-        ),
-        'CreateOrUpdateCouponCoupon': OneOf(
-            [
-                LeafType(CreateOrUpdatePercentageCoupon),
-                LeafType(CreateOrUpdateFlatAmountCoupon)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'CreateOrUpdatePercentageCouponPercentage': OneOf(
             [
                 LeafType(str),
                 LeafType(float)
@@ -648,8 +629,7 @@ class UnionTypeLookUp:
                 LeafType(PendingCancellationChange),
                 LeafType(PrepaidSubscriptionBalanceChanged),
                 LeafType(ProformaInvoiceIssued),
-                LeafType(SubscriptionGroupSignupSuccess),
-                LeafType(SubscriptionGroupSignupFailure),
+                LeafType(SubscriptionGroupSignupEventData),
                 LeafType(CreditAccountBalanceChanged),
                 LeafType(PrepaymentAccountBalanceChanged),
                 LeafType(PaymentCollectionMethodChanged),
@@ -692,10 +672,7 @@ class UnionTypeLookUp:
             [
                 LeafType(str),
                 LeafType(float)
-            ],
-            Context.create(
-               is_optional=True
-            )
+            ]
         ),
         'PaymentProfileAttributesExpirationMonth': OneOf(
             [

@@ -18,6 +18,8 @@ class CreateMetadata(object):
     Attributes:
         name (str): TODO: type description here.
         value (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -35,7 +37,7 @@ class CreateMetadata(object):
     def __init__(self,
                  name=APIHelper.SKIP,
                  value=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateMetadata class"""
 
         # Initialize members of the class
@@ -45,6 +47,8 @@ class CreateMetadata(object):
             self.value = value 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -62,17 +66,15 @@ class CreateMetadata(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
         value = dictionary.get("value") if dictionary.get("value") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(name,
                    value,
-                   dictionary)
+                   additional_properties)

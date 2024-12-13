@@ -43,6 +43,8 @@ class ApplyPaymentEventData(object):
         remaining_prepayment_amount (str): TODO: type description here.
         prepayment (bool): TODO: type description here.
         external (bool): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -86,7 +88,7 @@ class ApplyPaymentEventData(object):
                  remaining_prepayment_amount=APIHelper.SKIP,
                  prepayment=APIHelper.SKIP,
                  external=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ApplyPaymentEventData class"""
 
         # Initialize members of the class
@@ -108,6 +110,8 @@ class ApplyPaymentEventData(object):
             self.external = external 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -126,7 +130,7 @@ class ApplyPaymentEventData(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -142,9 +146,7 @@ class ApplyPaymentEventData(object):
         prepayment = dictionary.get("prepayment") if "prepayment" in dictionary.keys() else APIHelper.SKIP
         external = dictionary.get("external") if "external" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(consolidation_level,
                    memo,
@@ -157,7 +159,7 @@ class ApplyPaymentEventData(object):
                    remaining_prepayment_amount,
                    prepayment,
                    external,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

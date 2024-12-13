@@ -19,6 +19,8 @@ class TaxConfigurationKind(object):
         ENUM_MANAGED AVALARA: TODO: type description here.
         ENUM_LINKED AVALARA: TODO: type description here.
         ENUM_DIGITAL RIVER: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     CUSTOM = 'custom'

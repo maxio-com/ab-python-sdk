@@ -23,6 +23,8 @@ class CustomFieldValueChange(object):
         new_value (str): TODO: type description here.
         resource_type (str): TODO: type description here.
         resource_id (int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -50,7 +52,7 @@ class CustomFieldValueChange(object):
                  new_value=None,
                  resource_type=None,
                  resource_id=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CustomFieldValueChange class"""
 
         # Initialize members of the class
@@ -63,6 +65,8 @@ class CustomFieldValueChange(object):
         self.resource_id = resource_id 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -80,7 +84,7 @@ class CustomFieldValueChange(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -92,9 +96,7 @@ class CustomFieldValueChange(object):
         resource_type = dictionary.get("resource_type") if dictionary.get("resource_type") else None
         resource_id = dictionary.get("resource_id") if dictionary.get("resource_id") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(event_type,
                    metafield_name,
@@ -103,7 +105,7 @@ class CustomFieldValueChange(object):
                    new_value,
                    resource_type,
                    resource_id,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

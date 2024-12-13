@@ -23,6 +23,8 @@ class PricePointType(object):
         CATALOG: TODO: type description here.
         DEFAULT: TODO: type description here.
         CUSTOM: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['catalog', 'default', 'custom']

@@ -18,8 +18,10 @@ class CouponCurrency(object):
     Attributes:
         id (int): TODO: type description here.
         currency (str): TODO: type description here.
-        price (int): TODO: type description here.
+        price (float): TODO: type description here.
         coupon_id (int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -38,12 +40,17 @@ class CouponCurrency(object):
         'coupon_id',
     ]
 
+    _nullables = [
+        'id',
+        'price',
+    ]
+
     def __init__(self,
                  id=APIHelper.SKIP,
                  currency=APIHelper.SKIP,
                  price=APIHelper.SKIP,
                  coupon_id=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CouponCurrency class"""
 
         # Initialize members of the class
@@ -57,6 +64,8 @@ class CouponCurrency(object):
             self.coupon_id = coupon_id 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -74,21 +83,19 @@ class CouponCurrency(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
+        id = dictionary.get("id") if "id" in dictionary.keys() else APIHelper.SKIP
         currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
-        price = dictionary.get("price") if dictionary.get("price") else APIHelper.SKIP
+        price = dictionary.get("price") if "price" in dictionary.keys() else APIHelper.SKIP
         coupon_id = dictionary.get("coupon_id") if dictionary.get("coupon_id") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    currency,
                    price,
                    coupon_id,
-                   dictionary)
+                   additional_properties)

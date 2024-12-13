@@ -27,6 +27,8 @@ class SiteStatistics(object):
         total_past_due_subscriptions (int): TODO: type description here.
         total_unpaid_subscriptions (int): TODO: type description here.
         total_dunning_subscriptions (int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -71,7 +73,7 @@ class SiteStatistics(object):
                  total_past_due_subscriptions=APIHelper.SKIP,
                  total_unpaid_subscriptions=APIHelper.SKIP,
                  total_dunning_subscriptions=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SiteStatistics class"""
 
         # Initialize members of the class
@@ -99,6 +101,8 @@ class SiteStatistics(object):
             self.total_dunning_subscriptions = total_dunning_subscriptions 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -116,7 +120,7 @@ class SiteStatistics(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -132,9 +136,7 @@ class SiteStatistics(object):
         total_unpaid_subscriptions = dictionary.get("total_unpaid_subscriptions") if dictionary.get("total_unpaid_subscriptions") else APIHelper.SKIP
         total_dunning_subscriptions = dictionary.get("total_dunning_subscriptions") if dictionary.get("total_dunning_subscriptions") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(total_subscriptions,
                    subscriptions_today,
@@ -147,4 +149,4 @@ class SiteStatistics(object):
                    total_past_due_subscriptions,
                    total_unpaid_subscriptions,
                    total_dunning_subscriptions,
-                   dictionary)
+                   additional_properties)

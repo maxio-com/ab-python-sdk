@@ -25,6 +25,8 @@ class Usage(object):
         component_id (int): TODO: type description here.
         component_handle (str): TODO: type description here.
         subscription_id (int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -67,7 +69,7 @@ class Usage(object):
                  component_id=APIHelper.SKIP,
                  component_handle=APIHelper.SKIP,
                  subscription_id=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Usage class"""
 
         # Initialize members of the class
@@ -91,6 +93,8 @@ class Usage(object):
             self.subscription_id = subscription_id 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -109,7 +113,7 @@ class Usage(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -123,9 +127,7 @@ class Usage(object):
         component_handle = dictionary.get("component_handle") if dictionary.get("component_handle") else APIHelper.SKIP
         subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    memo,
@@ -136,4 +138,4 @@ class Usage(object):
                    component_id,
                    component_handle,
                    subscription_id,
-                   dictionary)
+                   additional_properties)

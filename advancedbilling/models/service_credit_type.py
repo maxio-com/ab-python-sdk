@@ -17,6 +17,8 @@ class ServiceCreditType(object):
     Attributes:
         CREDIT: TODO: type description here.
         DEBIT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     CREDIT = 'Credit'

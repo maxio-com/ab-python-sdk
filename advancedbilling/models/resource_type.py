@@ -17,6 +17,8 @@ class ResourceType(object):
     Attributes:
         SUBSCRIPTIONS: TODO: type description here.
         CUSTOMERS: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     SUBSCRIPTIONS = 'subscriptions'

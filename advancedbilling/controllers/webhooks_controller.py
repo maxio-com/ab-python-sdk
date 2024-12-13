@@ -106,7 +106,7 @@ class WebhooksController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/webhooks.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -162,7 +162,7 @@ class WebhooksController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/webhooks/settings.json')
             .http_method(HttpMethodEnum.PUT)
             .header_param(Parameter()
@@ -207,7 +207,7 @@ class WebhooksController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/webhooks/replay.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -253,7 +253,7 @@ class WebhooksController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/endpoints.json')
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
@@ -290,7 +290,7 @@ class WebhooksController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/endpoints.json')
             .http_method(HttpMethodEnum.GET)
             .header_param(Parameter()
@@ -339,7 +339,7 @@ class WebhooksController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/endpoints/{endpoint_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()

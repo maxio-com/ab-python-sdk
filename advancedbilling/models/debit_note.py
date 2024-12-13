@@ -71,6 +71,8 @@ class DebitNote(object):
         discounts (List[InvoiceDiscount]): TODO: type description here.
         taxes (List[InvoiceTax]): TODO: type description here.
         refunds (List[InvoiceRefund]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -151,7 +153,7 @@ class DebitNote(object):
                  discounts=APIHelper.SKIP,
                  taxes=APIHelper.SKIP,
                  refunds=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the DebitNote class"""
 
         # Initialize members of the class
@@ -203,6 +205,8 @@ class DebitNote(object):
             self.refunds = refunds 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -220,7 +224,7 @@ class DebitNote(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -264,9 +268,7 @@ class DebitNote(object):
         else:
             refunds = APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(uid,
                    site_id,
@@ -291,7 +293,7 @@ class DebitNote(object):
                    discounts,
                    taxes,
                    refunds,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

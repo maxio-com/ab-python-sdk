@@ -21,6 +21,8 @@ class SubscriptionGroupBalances(object):
         service_credits (AccountBalance): TODO: type description here.
         open_invoices (AccountBalance): TODO: type description here.
         pending_discounts (AccountBalance): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -44,7 +46,7 @@ class SubscriptionGroupBalances(object):
                  service_credits=APIHelper.SKIP,
                  open_invoices=APIHelper.SKIP,
                  pending_discounts=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionGroupBalances class"""
 
         # Initialize members of the class
@@ -58,6 +60,8 @@ class SubscriptionGroupBalances(object):
             self.pending_discounts = pending_discounts 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -75,7 +79,7 @@ class SubscriptionGroupBalances(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -84,12 +88,10 @@ class SubscriptionGroupBalances(object):
         open_invoices = AccountBalance.from_dictionary(dictionary.get('open_invoices')) if 'open_invoices' in dictionary.keys() else APIHelper.SKIP
         pending_discounts = AccountBalance.from_dictionary(dictionary.get('pending_discounts')) if 'pending_discounts' in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(prepayments,
                    service_credits,
                    open_invoices,
                    pending_discounts,
-                   dictionary)
+                   additional_properties)

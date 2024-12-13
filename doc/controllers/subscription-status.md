@@ -1203,6 +1203,7 @@ result = subscription_status_controller.initiate_delayed_cancellation(subscripti
 | HTTP Status Code | Error Description | Exception Class |
 |  --- | --- | --- |
 | 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Cancel Delayed Cancellation
@@ -1275,6 +1276,12 @@ subscription_id = 222
 
 result = subscription_status_controller.cancel_dunning(subscription_id)
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Preview Renewal

@@ -26,6 +26,8 @@ class Prepayment(object):
         memo (str): TODO: type description here.
         payment_type (PrepaymentMethod): The payment type of the prepayment.
         created_at (datetime): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -60,7 +62,7 @@ class Prepayment(object):
                  refunded_amount_in_cents=APIHelper.SKIP,
                  details=APIHelper.SKIP,
                  payment_type=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Prepayment class"""
 
         # Initialize members of the class
@@ -79,6 +81,8 @@ class Prepayment(object):
         self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -96,7 +100,7 @@ class Prepayment(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -111,9 +115,7 @@ class Prepayment(object):
         details = dictionary.get("details") if dictionary.get("details") else APIHelper.SKIP
         payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    subscription_id,
@@ -125,4 +127,4 @@ class Prepayment(object):
                    refunded_amount_in_cents,
                    details,
                    payment_type,
-                   dictionary)
+                   additional_properties)

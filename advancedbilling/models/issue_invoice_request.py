@@ -30,6 +30,8 @@ class IssueInvoiceRequest(object):
             recorded in the invoice history; subscription will  most likely go
             into "past_due" or "canceled" state (depending upon net terms and
             dunning settings).
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -44,13 +46,15 @@ class IssueInvoiceRequest(object):
 
     def __init__(self,
                  on_failed_payment='leave_open_invoice',
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the IssueInvoiceRequest class"""
 
         # Initialize members of the class
         self.on_failed_payment = on_failed_payment 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -68,15 +72,13 @@ class IssueInvoiceRequest(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         on_failed_payment = dictionary.get("on_failed_payment") if dictionary.get("on_failed_payment") else 'leave_open_invoice'
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(on_failed_payment,
-                   dictionary)
+                   additional_properties)

@@ -55,7 +55,7 @@ class InsightsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/stats.json')
             .http_method(HttpMethodEnum.GET)
             .header_param(Parameter()
@@ -95,7 +95,7 @@ class InsightsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/mrr.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -183,7 +183,7 @@ class InsightsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/mrr_movements.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -259,7 +259,7 @@ class InsightsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions_mrr.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()

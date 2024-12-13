@@ -22,6 +22,8 @@ class CancellationMethod(object):
         BILLING_PORTAL: TODO: type description here.
         UNKNOWN: TODO: type description here.
         IMPORTED: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     MERCHANT_UI = 'merchant_ui'

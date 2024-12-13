@@ -18,6 +18,8 @@ class Errors(object):
     Attributes:
         per_page (List[str]): TODO: type description here.
         price_point (List[str]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -35,7 +37,7 @@ class Errors(object):
     def __init__(self,
                  per_page=APIHelper.SKIP,
                  price_point=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Errors class"""
 
         # Initialize members of the class
@@ -45,6 +47,8 @@ class Errors(object):
             self.price_point = price_point 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -62,17 +66,15 @@ class Errors(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         per_page = dictionary.get("per_page") if dictionary.get("per_page") else APIHelper.SKIP
         price_point = dictionary.get("price_point") if dictionary.get("price_point") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(per_page,
                    price_point,
-                   dictionary)
+                   additional_properties)

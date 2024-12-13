@@ -16,6 +16,8 @@ class SubscriptionGroupInclude(object):
 
     Attributes:
         CURRENT_BILLING_AMOUNT_IN_CENTS: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     CURRENT_BILLING_AMOUNT_IN_CENTS = 'current_billing_amount_in_cents'

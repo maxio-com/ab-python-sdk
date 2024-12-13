@@ -24,6 +24,8 @@ class PaidInvoice(object):
         due_amount (str): The remaining due amount on the invoice
         paid_amount (str): The total amount paid on this invoice (including
             any prior payments)
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -47,7 +49,7 @@ class PaidInvoice(object):
                  status=APIHelper.SKIP,
                  due_amount=APIHelper.SKIP,
                  paid_amount=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the PaidInvoice class"""
 
         # Initialize members of the class
@@ -61,6 +63,8 @@ class PaidInvoice(object):
             self.paid_amount = paid_amount 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -78,7 +82,7 @@ class PaidInvoice(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -87,12 +91,10 @@ class PaidInvoice(object):
         due_amount = dictionary.get("due_amount") if dictionary.get("due_amount") else APIHelper.SKIP
         paid_amount = dictionary.get("paid_amount") if dictionary.get("paid_amount") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(invoice_id,
                    status,
                    due_amount,
                    paid_amount,
-                   dictionary)
+                   additional_properties)

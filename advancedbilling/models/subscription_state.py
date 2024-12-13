@@ -100,6 +100,8 @@ class SubscriptionState(object):
         TRIAL_ENDED: TODO: type description here.
         ON_HOLD: TODO: type description here.
         AWAITING_SIGNUP: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['pending', 'failed_to_create', 'trialing', 'assessing', 'active', 'soft_failure', 'past_due', 'suspended', 'canceled', 'expired', 'paused', 'unpaid', 'trial_ended', 'on_hold', 'awaiting_signup']

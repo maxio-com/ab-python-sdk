@@ -19,6 +19,8 @@ class CreateReasonCode(object):
         code (str): The unique identifier for the ReasonCode
         description (str): The friendly summary of what the code signifies
         position (int): The order that code appears in lists
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -37,7 +39,7 @@ class CreateReasonCode(object):
                  code=None,
                  description=None,
                  position=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateReasonCode class"""
 
         # Initialize members of the class
@@ -47,6 +49,8 @@ class CreateReasonCode(object):
             self.position = position 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -64,7 +68,7 @@ class CreateReasonCode(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -72,11 +76,9 @@ class CreateReasonCode(object):
         description = dictionary.get("description") if dictionary.get("description") else None
         position = dictionary.get("position") if dictionary.get("position") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(code,
                    description,
                    position,
-                   dictionary)
+                   additional_properties)

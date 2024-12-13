@@ -19,6 +19,8 @@ class CreateComponentPricePointsRequest(object):
         price_points (List[CreateComponentPricePoint |
             CreatePrepaidUsageComponentPricePoint]): TODO: type description
             here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -29,13 +31,15 @@ class CreateComponentPricePointsRequest(object):
 
     def __init__(self,
                  price_points=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateComponentPricePointsRequest class"""
 
         # Initialize members of the class
         self.price_points = price_points 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -54,18 +58,16 @@ class CreateComponentPricePointsRequest(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         price_points = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateComponentPricePointsRequestPricePoints'), dictionary.get('price_points'), False) if dictionary.get('price_points') is not None else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(price_points,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

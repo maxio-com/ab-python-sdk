@@ -21,6 +21,8 @@ class HistoricUsage(object):
             period
         billing_period_starts_at (datetime): Start date of billing period
         billing_period_ends_at (datetime): End date of billing period
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -41,7 +43,7 @@ class HistoricUsage(object):
                  total_usage_quantity=APIHelper.SKIP,
                  billing_period_starts_at=APIHelper.SKIP,
                  billing_period_ends_at=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the HistoricUsage class"""
 
         # Initialize members of the class
@@ -53,6 +55,8 @@ class HistoricUsage(object):
             self.billing_period_ends_at = APIHelper.apply_datetime_converter(billing_period_ends_at, APIHelper.RFC3339DateTime) if billing_period_ends_at else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -70,7 +74,7 @@ class HistoricUsage(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -78,14 +82,12 @@ class HistoricUsage(object):
         billing_period_starts_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("billing_period_starts_at")).datetime if dictionary.get("billing_period_starts_at") else APIHelper.SKIP
         billing_period_ends_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("billing_period_ends_at")).datetime if dictionary.get("billing_period_ends_at") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(total_usage_quantity,
                    billing_period_starts_at,
                    billing_period_ends_at,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

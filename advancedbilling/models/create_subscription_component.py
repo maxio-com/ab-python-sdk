@@ -26,6 +26,8 @@ class CreateSubscriptionComponent(object):
         price_point_id (int | str | None): TODO: type description here.
         custom_price (ComponentCustomPrice): Create or update custom pricing
             unique to the subscription. Used in place of `price_point_id`.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -58,7 +60,7 @@ class CreateSubscriptionComponent(object):
                  quantity=APIHelper.SKIP,
                  price_point_id=APIHelper.SKIP,
                  custom_price=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateSubscriptionComponent class"""
 
         # Initialize members of the class
@@ -78,6 +80,8 @@ class CreateSubscriptionComponent(object):
             self.custom_price = custom_price 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -96,7 +100,7 @@ class CreateSubscriptionComponent(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -108,9 +112,7 @@ class CreateSubscriptionComponent(object):
         price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateSubscriptionComponentPricePointId'), dictionary.get('price_point_id'), False) if dictionary.get('price_point_id') is not None else APIHelper.SKIP
         custom_price = ComponentCustomPrice.from_dictionary(dictionary.get('custom_price')) if 'custom_price' in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(component_id,
                    enabled,
@@ -119,7 +121,7 @@ class CreateSubscriptionComponent(object):
                    quantity,
                    price_point_id,
                    custom_price,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

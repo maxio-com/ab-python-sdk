@@ -27,6 +27,8 @@ class CouponUsage(object):
             received a discount from this coupon.
         revenue_in_cents (long|int): Total revenue of the all subscriptions
             that have received a discount from this coupon.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -65,7 +67,7 @@ class CouponUsage(object):
                  savings_in_cents=APIHelper.SKIP,
                  revenue=APIHelper.SKIP,
                  revenue_in_cents=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CouponUsage class"""
 
         # Initialize members of the class
@@ -85,6 +87,8 @@ class CouponUsage(object):
             self.revenue_in_cents = revenue_in_cents 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -102,7 +106,7 @@ class CouponUsage(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -114,9 +118,7 @@ class CouponUsage(object):
         revenue = dictionary.get("revenue") if "revenue" in dictionary.keys() else APIHelper.SKIP
         revenue_in_cents = dictionary.get("revenue_in_cents") if dictionary.get("revenue_in_cents") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    name,
@@ -125,4 +127,4 @@ class CouponUsage(object):
                    savings_in_cents,
                    revenue,
                    revenue_in_cents,
-                   dictionary)
+                   additional_properties)

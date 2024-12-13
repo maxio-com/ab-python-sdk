@@ -29,6 +29,8 @@ class RemovePaymentEventData(object):
             of payment
         prepayment (bool): The flag that shows whether the original payment
             was a prepayment or not
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -55,7 +57,7 @@ class RemovePaymentEventData(object):
                  payment_method=None,
                  prepayment=None,
                  original_amount=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the RemovePaymentEventData class"""
 
         # Initialize members of the class
@@ -69,6 +71,8 @@ class RemovePaymentEventData(object):
         self.prepayment = prepayment 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -87,7 +91,7 @@ class RemovePaymentEventData(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -99,9 +103,7 @@ class RemovePaymentEventData(object):
         prepayment = dictionary.get("prepayment") if "prepayment" in dictionary.keys() else None
         original_amount = dictionary.get("original_amount") if dictionary.get("original_amount") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(transaction_id,
                    memo,
@@ -110,7 +112,7 @@ class RemovePaymentEventData(object):
                    payment_method,
                    prepayment,
                    original_amount,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

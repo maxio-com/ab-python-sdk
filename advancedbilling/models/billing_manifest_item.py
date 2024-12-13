@@ -32,6 +32,8 @@ class BillingManifestItem(object):
         product_name (str): TODO: type description here.
         period_range_start (str): TODO: type description here.
         period_range_end (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -85,7 +87,7 @@ class BillingManifestItem(object):
                  product_name=APIHelper.SKIP,
                  period_range_start=APIHelper.SKIP,
                  period_range_end=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the BillingManifestItem class"""
 
         # Initialize members of the class
@@ -119,6 +121,8 @@ class BillingManifestItem(object):
             self.period_range_end = period_range_end 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -136,7 +140,7 @@ class BillingManifestItem(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -155,9 +159,7 @@ class BillingManifestItem(object):
         period_range_start = dictionary.get("period_range_start") if dictionary.get("period_range_start") else APIHelper.SKIP
         period_range_end = dictionary.get("period_range_end") if dictionary.get("period_range_end") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(transaction_type,
                    kind,
@@ -173,4 +175,4 @@ class BillingManifestItem(object):
                    product_name,
                    period_range_start,
                    period_range_end,
-                   dictionary)
+                   additional_properties)

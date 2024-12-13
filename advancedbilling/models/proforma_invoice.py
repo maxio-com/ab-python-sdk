@@ -80,6 +80,8 @@ class ProformaInvoice(object):
         payments (List[ProformaInvoicePayment]): TODO: type description here.
         custom_fields (List[InvoiceCustomField]): TODO: type description here.
         public_url (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -207,7 +209,7 @@ class ProformaInvoice(object):
                  payments=APIHelper.SKIP,
                  custom_fields=APIHelper.SKIP,
                  public_url=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ProformaInvoice class"""
 
         # Initialize members of the class
@@ -285,6 +287,8 @@ class ProformaInvoice(object):
             self.public_url = public_url 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -302,7 +306,7 @@ class ProformaInvoice(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -367,9 +371,7 @@ class ProformaInvoice(object):
             custom_fields = APIHelper.SKIP
         public_url = dictionary.get("public_url") if "public_url" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(uid,
                    site_id,
@@ -407,4 +409,4 @@ class ProformaInvoice(object):
                    payments,
                    custom_fields,
                    public_url,
-                   dictionary)
+                   additional_properties)

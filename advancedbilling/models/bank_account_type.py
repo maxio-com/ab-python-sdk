@@ -17,6 +17,8 @@ class BankAccountType(object):
     Attributes:
         CHECKING: TODO: type description here.
         SAVINGS: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['checking', 'savings']

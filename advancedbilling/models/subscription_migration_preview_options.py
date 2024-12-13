@@ -50,6 +50,8 @@ class SubscriptionMigrationPreviewOptions(object):
         proration (Proration): TODO: type description here.
         proration_date (datetime): The date that the proration is calculated
             from for the preview
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -91,7 +93,7 @@ class SubscriptionMigrationPreviewOptions(object):
                  product_price_point_handle=APIHelper.SKIP,
                  proration=APIHelper.SKIP,
                  proration_date=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionMigrationPreviewOptions class"""
 
         # Initialize members of the class
@@ -113,6 +115,8 @@ class SubscriptionMigrationPreviewOptions(object):
             self.proration_date = APIHelper.apply_datetime_converter(proration_date, APIHelper.RFC3339DateTime) if proration_date else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -130,7 +134,7 @@ class SubscriptionMigrationPreviewOptions(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -145,9 +149,7 @@ class SubscriptionMigrationPreviewOptions(object):
         proration = Proration.from_dictionary(dictionary.get('proration')) if 'proration' in dictionary.keys() else APIHelper.SKIP
         proration_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("proration_date")).datetime if dictionary.get("proration_date") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(product_id,
                    product_price_point_id,
@@ -159,4 +161,4 @@ class SubscriptionMigrationPreviewOptions(object):
                    product_price_point_handle,
                    proration,
                    proration_date,
-                   dictionary)
+                   additional_properties)

@@ -54,7 +54,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/account_balances.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -103,7 +103,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/prepayments.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -172,7 +172,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/prepayments.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -227,7 +227,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/service_credits.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -278,7 +278,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/service_credit_deductions.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -326,7 +326,7 @@ class SubscriptionInvoiceAccountController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/prepayments/{prepayment_id}/refunds.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()

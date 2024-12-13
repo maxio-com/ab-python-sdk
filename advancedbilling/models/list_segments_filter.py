@@ -32,6 +32,8 @@ class ListSegmentsFilter(object):
             filter segments. Pass a value related to `segment_property_4` on
             attached Metric. If empty string is passed, this filter would be
             rejected.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -55,7 +57,7 @@ class ListSegmentsFilter(object):
                  segment_property_2_value=APIHelper.SKIP,
                  segment_property_3_value=APIHelper.SKIP,
                  segment_property_4_value=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ListSegmentsFilter class"""
 
         # Initialize members of the class
@@ -69,6 +71,8 @@ class ListSegmentsFilter(object):
             self.segment_property_4_value = segment_property_4_value 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -86,7 +90,7 @@ class ListSegmentsFilter(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -95,12 +99,10 @@ class ListSegmentsFilter(object):
         segment_property_3_value = dictionary.get("segment_property_3_value") if dictionary.get("segment_property_3_value") else APIHelper.SKIP
         segment_property_4_value = dictionary.get("segment_property_4_value") if dictionary.get("segment_property_4_value") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(segment_property_1_value,
                    segment_property_2_value,
                    segment_property_3_value,
                    segment_property_4_value,
-                   dictionary)
+                   additional_properties)

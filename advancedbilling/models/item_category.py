@@ -21,6 +21,8 @@ class ItemCategory(object):
         ENUM_DIGITAL SERVICES: TODO: type description here.
         ENUM_PHYSICAL GOODS: TODO: type description here.
         OTHER: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     ENUM_BUSINESS_SOFTWARE = 'Business Software'

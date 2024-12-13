@@ -57,6 +57,26 @@ class ComponentPricePoint(object):
             for the price point. This parameter is present only in the
             response of read endpoints, after including the appropriate query
             parameter.
+        overage_prices (List[ComponentPrice]): Applicable only to prepaid
+            usage components. An array of overage price brackets.
+        overage_pricing_scheme (PricingScheme): Applicable only to prepaid
+            usage components. Pricing scheme for overage pricing.
+        renew_prepaid_allocation (bool): Applicable only to prepaid usage
+            components. Boolean which controls whether or not the allocated
+            quantity should be renewed at the beginning of each period.
+        rollover_prepaid_remainder (bool): Applicable only to prepaid usage
+            components. Boolean which controls whether or not remaining units
+            should be rolled over to the next period.
+        expiration_interval (int): Applicable only to prepaid usage components
+            where rollover_prepaid_remainder is true. The number of
+            `expiration_interval_unit`s after which rollover amounts should
+            expire.
+        expiration_interval_unit (ExpirationIntervalUnit): Applicable only to
+            prepaid usage components where rollover_prepaid_remainder is true.
+            A string representing the expiration interval unit for this
+            component, either month or day.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -78,7 +98,13 @@ class ComponentPricePoint(object):
         "tax_included": 'tax_included',
         "interval": 'interval',
         "interval_unit": 'interval_unit',
-        "currency_prices": 'currency_prices'
+        "currency_prices": 'currency_prices',
+        "overage_prices": 'overage_prices',
+        "overage_pricing_scheme": 'overage_pricing_scheme',
+        "renew_prepaid_allocation": 'renew_prepaid_allocation',
+        "rollover_prepaid_remainder": 'rollover_prepaid_remainder',
+        "expiration_interval": 'expiration_interval',
+        "expiration_interval_unit": 'expiration_interval_unit'
     }
 
     _optionals = [
@@ -99,6 +125,12 @@ class ComponentPricePoint(object):
         'interval',
         'interval_unit',
         'currency_prices',
+        'overage_prices',
+        'overage_pricing_scheme',
+        'renew_prepaid_allocation',
+        'rollover_prepaid_remainder',
+        'expiration_interval',
+        'expiration_interval_unit',
     ]
 
     _nullables = [
@@ -106,6 +138,8 @@ class ComponentPricePoint(object):
         'archived_at',
         'interval',
         'interval_unit',
+        'expiration_interval',
+        'expiration_interval_unit',
     ]
 
     def __init__(self,
@@ -126,7 +160,13 @@ class ComponentPricePoint(object):
                  interval=APIHelper.SKIP,
                  interval_unit=APIHelper.SKIP,
                  currency_prices=APIHelper.SKIP,
-                 additional_properties={}):
+                 overage_prices=APIHelper.SKIP,
+                 overage_pricing_scheme=APIHelper.SKIP,
+                 renew_prepaid_allocation=APIHelper.SKIP,
+                 rollover_prepaid_remainder=APIHelper.SKIP,
+                 expiration_interval=APIHelper.SKIP,
+                 expiration_interval_unit=APIHelper.SKIP,
+                 additional_properties=None):
         """Constructor for the ComponentPricePoint class"""
 
         # Initialize members of the class
@@ -164,8 +204,22 @@ class ComponentPricePoint(object):
             self.interval_unit = interval_unit 
         if currency_prices is not APIHelper.SKIP:
             self.currency_prices = currency_prices 
+        if overage_prices is not APIHelper.SKIP:
+            self.overage_prices = overage_prices 
+        if overage_pricing_scheme is not APIHelper.SKIP:
+            self.overage_pricing_scheme = overage_pricing_scheme 
+        if renew_prepaid_allocation is not APIHelper.SKIP:
+            self.renew_prepaid_allocation = renew_prepaid_allocation 
+        if rollover_prepaid_remainder is not APIHelper.SKIP:
+            self.rollover_prepaid_remainder = rollover_prepaid_remainder 
+        if expiration_interval is not APIHelper.SKIP:
+            self.expiration_interval = expiration_interval 
+        if expiration_interval_unit is not APIHelper.SKIP:
+            self.expiration_interval_unit = expiration_interval_unit 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -183,7 +237,7 @@ class ComponentPricePoint(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -215,10 +269,18 @@ class ComponentPricePoint(object):
             currency_prices = [ComponentCurrencyPrice.from_dictionary(x) for x in dictionary.get('currency_prices')]
         else:
             currency_prices = APIHelper.SKIP
+        overage_prices = None
+        if dictionary.get('overage_prices') is not None:
+            overage_prices = [ComponentPrice.from_dictionary(x) for x in dictionary.get('overage_prices')]
+        else:
+            overage_prices = APIHelper.SKIP
+        overage_pricing_scheme = dictionary.get("overage_pricing_scheme") if dictionary.get("overage_pricing_scheme") else APIHelper.SKIP
+        renew_prepaid_allocation = dictionary.get("renew_prepaid_allocation") if "renew_prepaid_allocation" in dictionary.keys() else APIHelper.SKIP
+        rollover_prepaid_remainder = dictionary.get("rollover_prepaid_remainder") if "rollover_prepaid_remainder" in dictionary.keys() else APIHelper.SKIP
+        expiration_interval = dictionary.get("expiration_interval") if "expiration_interval" in dictionary.keys() else APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    mtype,
@@ -237,4 +299,10 @@ class ComponentPricePoint(object):
                    interval,
                    interval_unit,
                    currency_prices,
-                   dictionary)
+                   overage_prices,
+                   overage_pricing_scheme,
+                   renew_prepaid_allocation,
+                   rollover_prepaid_remainder,
+                   expiration_interval,
+                   expiration_interval_unit,
+                   additional_properties)

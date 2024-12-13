@@ -62,7 +62,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/components/{component_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -165,7 +165,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/components.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -249,7 +249,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/price_points.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -297,7 +297,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/price_points/reset.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -412,7 +412,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/components/{component_id}/allocations.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -491,7 +491,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/components/{component_id}/allocations.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -549,7 +549,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/allocations.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -612,7 +612,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/allocations/preview.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -680,7 +680,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/components/{component_id}/allocations/{allocation_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -748,7 +748,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/components/{component_id}/allocations/{allocation_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -870,7 +870,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/components/{component_id}/usages.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -971,7 +971,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions/{subscription_id}/components/{component_id}/usages.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -1051,7 +1051,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/event_based_billing/subscriptions/{subscription_id}/components/{component_id}/activate.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -1098,7 +1098,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/event_based_billing/subscriptions/{subscription_id}/components/{component_id}/deactivate.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -1115,11 +1115,10 @@ class SubscriptionComponentsController(BaseController):
         ).execute()
 
     def record_event(self,
-                     subdomain,
                      api_handle,
                      store_uid=None,
                      body=None):
-        """Does a POST request to /{subdomain}/events/{api_handle}.json.
+        """Does a POST request to /events/{api_handle}.json.
 
         ## Documentation
         Events-Based Billing is an evolved form of metered billing that is
@@ -1144,7 +1143,6 @@ class SubscriptionComponentsController(BaseController):
         ```
 
         Args:
-            subdomain (str): Your site's subdomain
             api_handle (str): Identifies the Stream for which the event should
                 be published.
             store_uid (str, optional): If you've attached your own Keen
@@ -1164,14 +1162,9 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/{subdomain}/events/{api_handle}.json')
+            RequestBuilder().server(Server.EBB)
+            .path('/events/{api_handle}.json')
             .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subdomain')
-                            .value(subdomain)
-                            .is_required(True)
-                            .should_encode(True))
             .template_param(Parameter()
                             .key('api_handle')
                             .value(api_handle)
@@ -1190,11 +1183,10 @@ class SubscriptionComponentsController(BaseController):
         ).execute()
 
     def bulk_record_events(self,
-                           subdomain,
                            api_handle,
                            store_uid=None,
                            body=None):
-        """Does a POST request to /{subdomain}/events/{api_handle}/bulk.json.
+        """Does a POST request to /events/{api_handle}/bulk.json.
 
         Use this endpoint to record a collection of events.
         *Note: this endpoint differs from the standard Chargify API endpoints
@@ -1204,7 +1196,6 @@ class SubscriptionComponentsController(BaseController):
         will be returned if this limit is exceeded.
 
         Args:
-            subdomain (str): Your site's subdomain
             api_handle (str): Identifies the Stream for which the events
                 should be published.
             store_uid (str, optional): If you've attached your own Keen
@@ -1224,14 +1215,9 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
-            .path('/{subdomain}/events/{api_handle}/bulk.json')
+            RequestBuilder().server(Server.EBB)
+            .path('/events/{api_handle}/bulk.json')
             .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                            .key('subdomain')
-                            .value(subdomain)
-                            .is_required(True)
-                            .should_encode(True))
             .template_param(Parameter()
                             .key('api_handle')
                             .value(api_handle)
@@ -1340,7 +1326,7 @@ class SubscriptionComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/subscriptions_components.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()

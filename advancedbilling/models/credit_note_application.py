@@ -21,6 +21,8 @@ class CreditNoteApplication(object):
         invoice_uid (str): TODO: type description here.
         memo (str): TODO: type description here.
         applied_amount (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -47,7 +49,7 @@ class CreditNoteApplication(object):
                  invoice_uid=APIHelper.SKIP,
                  memo=APIHelper.SKIP,
                  applied_amount=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreditNoteApplication class"""
 
         # Initialize members of the class
@@ -63,6 +65,8 @@ class CreditNoteApplication(object):
             self.applied_amount = applied_amount 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -80,7 +84,7 @@ class CreditNoteApplication(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -90,16 +94,14 @@ class CreditNoteApplication(object):
         memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(uid,
                    transaction_time,
                    invoice_uid,
                    memo,
                    applied_amount,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

@@ -41,6 +41,8 @@ class IssueInvoiceEventData(object):
             credit_amount - paid_amount`.
         total_amount (str): The invoice total, which is `subtotal_amount -
             discount_amount + tax_amount`.'
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -59,7 +61,7 @@ class IssueInvoiceEventData(object):
                  to_status=None,
                  due_amount=None,
                  total_amount=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the IssueInvoiceEventData class"""
 
         # Initialize members of the class
@@ -70,6 +72,8 @@ class IssueInvoiceEventData(object):
         self.total_amount = total_amount 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -87,7 +91,7 @@ class IssueInvoiceEventData(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -97,16 +101,14 @@ class IssueInvoiceEventData(object):
         due_amount = dictionary.get("due_amount") if dictionary.get("due_amount") else None
         total_amount = dictionary.get("total_amount") if dictionary.get("total_amount") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(consolidation_level,
                    from_status,
                    to_status,
                    due_amount,
                    total_amount,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

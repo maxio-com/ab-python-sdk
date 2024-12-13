@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `group` | [Group Settings](../../doc/models/group-settings.md) \| bool \| None | Optional | This is a container for one-of cases. |
+| `group` | [`GroupSettings`](../../doc/models/group-settings.md) | Optional | - |
 
 ## Example (as JSON)
 

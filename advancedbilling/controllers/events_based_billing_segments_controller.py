@@ -61,7 +61,7 @@ class EventsBasedBillingSegmentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}/segments.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -143,7 +143,7 @@ class EventsBasedBillingSegmentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}/segments.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -209,7 +209,7 @@ class EventsBasedBillingSegmentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}/segments/{id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -273,7 +273,7 @@ class EventsBasedBillingSegmentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}/segments/{id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -327,7 +327,7 @@ class EventsBasedBillingSegmentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}/segments/bulk.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -391,7 +391,7 @@ class EventsBasedBillingSegmentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}/price_points/{price_point_id}/segments/bulk.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()

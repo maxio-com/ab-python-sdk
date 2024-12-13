@@ -66,7 +66,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/metered_components.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -136,7 +136,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/quantity_based_components.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -193,7 +193,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/on_off_components.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -255,7 +255,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/prepaid_usage_components.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -320,7 +320,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/event_based_components.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -369,7 +369,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/lookup.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -415,7 +415,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/components/{component_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -469,7 +469,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/components/{component_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -527,7 +527,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/components/{component_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -619,7 +619,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
@@ -686,7 +686,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/components/{component_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -783,7 +783,7 @@ class ComponentsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_families/{product_family_id}/components.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()

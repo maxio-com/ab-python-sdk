@@ -54,6 +54,8 @@ class SubscriptionGroupSignupItem(object):
             representing custom fields and their values. Metafields will be
             created “on-the-fly” in your site for a given key, if they have
             not been created yet.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -104,7 +106,7 @@ class SubscriptionGroupSignupItem(object):
                  custom_price=APIHelper.SKIP,
                  calendar_billing=APIHelper.SKIP,
                  metafields=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionGroupSignupItem class"""
 
         # Initialize members of the class
@@ -136,6 +138,8 @@ class SubscriptionGroupSignupItem(object):
             self.metafields = metafields 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -153,7 +157,7 @@ class SubscriptionGroupSignupItem(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -175,9 +179,7 @@ class SubscriptionGroupSignupItem(object):
         calendar_billing = CalendarBilling.from_dictionary(dictionary.get('calendar_billing')) if 'calendar_billing' in dictionary.keys() else APIHelper.SKIP
         metafields = dictionary.get("metafields") if dictionary.get("metafields") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(product_handle,
                    product_id,
@@ -192,7 +194,7 @@ class SubscriptionGroupSignupItem(object):
                    custom_price,
                    calendar_billing,
                    metafields,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

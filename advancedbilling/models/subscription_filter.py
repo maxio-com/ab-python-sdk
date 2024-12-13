@@ -56,6 +56,8 @@ class SubscriptionFilter(object):
             parameter will be used instead of end_date. To use this filter you
             also have to include the following param in the request
             `include=subscription`.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -85,7 +87,7 @@ class SubscriptionFilter(object):
                  end_date=APIHelper.SKIP,
                  start_datetime=APIHelper.SKIP,
                  end_datetime=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionFilter class"""
 
         # Initialize members of the class
@@ -103,6 +105,8 @@ class SubscriptionFilter(object):
             self.end_datetime = APIHelper.apply_datetime_converter(end_datetime, APIHelper.RFC3339DateTime) if end_datetime else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -120,7 +124,7 @@ class SubscriptionFilter(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -131,9 +135,7 @@ class SubscriptionFilter(object):
         start_datetime = APIHelper.RFC3339DateTime.from_value(dictionary.get("start_datetime")).datetime if dictionary.get("start_datetime") else APIHelper.SKIP
         end_datetime = APIHelper.RFC3339DateTime.from_value(dictionary.get("end_datetime")).datetime if dictionary.get("end_datetime") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(states,
                    date_field,
@@ -141,4 +143,4 @@ class SubscriptionFilter(object):
                    end_date,
                    start_datetime,
                    end_datetime,
-                   dictionary)
+                   additional_properties)

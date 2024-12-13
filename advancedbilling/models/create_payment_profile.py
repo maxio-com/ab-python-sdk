@@ -103,6 +103,8 @@ class CreatePaymentProfile(object):
         last_four (str): (Optional) Used for creating subscription with
             payment profile imported using vault_token, for proper display in
             Advanced Billing UI
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -214,7 +216,7 @@ class CreatePaymentProfile(object):
                  bank_account_type=APIHelper.SKIP,
                  bank_account_holder_type=APIHelper.SKIP,
                  last_four=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreatePaymentProfile class"""
 
         # Initialize members of the class
@@ -284,6 +286,8 @@ class CreatePaymentProfile(object):
             self.last_four = last_four 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -302,7 +306,7 @@ class CreatePaymentProfile(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -339,9 +343,7 @@ class CreatePaymentProfile(object):
         bank_account_holder_type = dictionary.get("bank_account_holder_type") if dictionary.get("bank_account_holder_type") else APIHelper.SKIP
         last_four = dictionary.get("last_four") if dictionary.get("last_four") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(chargify_token,
                    id,
@@ -375,4 +377,4 @@ class CreatePaymentProfile(object):
                    bank_account_type,
                    bank_account_holder_type,
                    last_four,
-                   dictionary)
+                   additional_properties)

@@ -26,6 +26,8 @@ class GroupBilling(object):
         prorate (bool): A flag indicating whether or not to prorate billing of
             the new subscription for the current period. A value of true is
             ignored unless align_date is also true.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -46,7 +48,7 @@ class GroupBilling(object):
                  accrue=False,
                  align_date=False,
                  prorate=False,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the GroupBilling class"""
 
         # Initialize members of the class
@@ -55,6 +57,8 @@ class GroupBilling(object):
         self.prorate = prorate 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -72,7 +76,7 @@ class GroupBilling(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -80,14 +84,12 @@ class GroupBilling(object):
         align_date = dictionary.get("align_date") if dictionary.get("align_date") else False
         prorate = dictionary.get("prorate") if dictionary.get("prorate") else False
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(accrue,
                    align_date,
                    prorate,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

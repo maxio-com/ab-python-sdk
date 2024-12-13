@@ -28,6 +28,8 @@ class PrepaidUsage(object):
         memo (str): TODO: type description here.
         allocation_details (List[PrepaidUsageAllocationDetail]): TODO: type
             description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -56,7 +58,7 @@ class PrepaidUsage(object):
                  component_handle=None,
                  memo=None,
                  allocation_details=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the PrepaidUsage class"""
 
         # Initialize members of the class
@@ -72,6 +74,8 @@ class PrepaidUsage(object):
         self.allocation_details = allocation_details 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -89,7 +93,7 @@ class PrepaidUsage(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -106,9 +110,7 @@ class PrepaidUsage(object):
         if dictionary.get('allocation_details') is not None:
             allocation_details = [PrepaidUsageAllocationDetail.from_dictionary(x) for x in dictionary.get('allocation_details')]
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(previous_unit_balance,
                    previous_overage_unit_balance,
@@ -120,7 +122,7 @@ class PrepaidUsage(object):
                    component_handle,
                    memo,
                    allocation_details,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

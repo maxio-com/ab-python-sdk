@@ -17,6 +17,8 @@ class CurrencyPricesResponse(object):
 
     Attributes:
         currency_prices (List[CurrencyPrice]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -27,13 +29,15 @@ class CurrencyPricesResponse(object):
 
     def __init__(self,
                  currency_prices=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CurrencyPricesResponse class"""
 
         # Initialize members of the class
         self.currency_prices = currency_prices 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -51,7 +55,7 @@ class CurrencyPricesResponse(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -59,9 +63,7 @@ class CurrencyPricesResponse(object):
         if dictionary.get('currency_prices') is not None:
             currency_prices = [CurrencyPrice.from_dictionary(x) for x in dictionary.get('currency_prices')]
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(currency_prices,
-                   dictionary)
+                   additional_properties)

@@ -22,6 +22,8 @@ class LineItemTransactionType(object):
         REFUND: TODO: type description here.
         INFO_TRANSACTION: TODO: type description here.
         PAYMENT_AUTHORIZATION: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     CHARGE = 'charge'

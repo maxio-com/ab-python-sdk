@@ -19,6 +19,8 @@ class TaxDestinationAddress(object):
         BILLING_THEN_SHIPPING: TODO: type description here.
         SHIPPING_ONLY: TODO: type description here.
         BILLING_ONLY: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     SHIPPING_THEN_BILLING = 'shipping_then_billing'

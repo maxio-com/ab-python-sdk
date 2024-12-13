@@ -19,6 +19,8 @@ class PaymentType(object):
         BANK_ACCOUNT: TODO: type description here.
         PAYPAL_ACCOUNT: TODO: type description here.
         APPLE_PAY: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['credit_card', 'bank_account', 'paypal_account', 'apple_pay']

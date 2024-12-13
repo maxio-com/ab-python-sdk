@@ -18,6 +18,8 @@ class FirstChargeType(object):
         PRORATED: TODO: type description here.
         IMMEDIATE: TODO: type description here.
         DELAYED: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['prorated', 'immediate', 'delayed']

@@ -31,6 +31,8 @@ class ChangeInvoiceStatusEventData(object):
             5-Advanced-Billing-Invoices-Overview#invoice-statuses) for more.
         consolidation_level (InvoiceConsolidationLevel): TODO: type
             description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -55,7 +57,7 @@ class ChangeInvoiceStatusEventData(object):
                  gateway_trans_id=APIHelper.SKIP,
                  amount=APIHelper.SKIP,
                  consolidation_level=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ChangeInvoiceStatusEventData class"""
 
         # Initialize members of the class
@@ -69,6 +71,8 @@ class ChangeInvoiceStatusEventData(object):
             self.consolidation_level = consolidation_level 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -86,7 +90,7 @@ class ChangeInvoiceStatusEventData(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -96,16 +100,14 @@ class ChangeInvoiceStatusEventData(object):
         amount = dictionary.get("amount") if dictionary.get("amount") else APIHelper.SKIP
         consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(from_status,
                    to_status,
                    gateway_trans_id,
                    amount,
                    consolidation_level,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

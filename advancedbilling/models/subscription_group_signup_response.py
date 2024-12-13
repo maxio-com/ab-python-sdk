@@ -97,6 +97,8 @@ class SubscriptionGroupSignupResponse(object):
             Architecture valid options are - `invoice`, `automatic`. For
             current Relationship Invoicing Architecture valid options are -
             `remittance`, `automatic`, `prepaid`.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -141,7 +143,7 @@ class SubscriptionGroupSignupResponse(object):
                  cancel_at_end_of_period=APIHelper.SKIP,
                  subscriptions=APIHelper.SKIP,
                  payment_collection_method=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionGroupSignupResponse class"""
 
         # Initialize members of the class
@@ -169,6 +171,8 @@ class SubscriptionGroupSignupResponse(object):
             self.payment_collection_method = payment_collection_method 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -186,7 +190,7 @@ class SubscriptionGroupSignupResponse(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -206,9 +210,7 @@ class SubscriptionGroupSignupResponse(object):
             subscriptions = APIHelper.SKIP
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(uid,
                    scheme,
@@ -221,4 +223,4 @@ class SubscriptionGroupSignupResponse(object):
                    cancel_at_end_of_period,
                    subscriptions,
                    payment_collection_method,
-                   dictionary)
+                   additional_properties)

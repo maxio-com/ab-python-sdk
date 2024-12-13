@@ -21,6 +21,8 @@ class Endpoint(object):
         site_id (int): TODO: type description here.
         status (str): TODO: type description here.
         webhook_subscriptions (List[str]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -47,7 +49,7 @@ class Endpoint(object):
                  site_id=APIHelper.SKIP,
                  status=APIHelper.SKIP,
                  webhook_subscriptions=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Endpoint class"""
 
         # Initialize members of the class
@@ -63,6 +65,8 @@ class Endpoint(object):
             self.webhook_subscriptions = webhook_subscriptions 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -80,7 +84,7 @@ class Endpoint(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -90,13 +94,11 @@ class Endpoint(object):
         status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
         webhook_subscriptions = dictionary.get("webhook_subscriptions") if dictionary.get("webhook_subscriptions") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    url,
                    site_id,
                    status,
                    webhook_subscriptions,
-                   dictionary)
+                   additional_properties)

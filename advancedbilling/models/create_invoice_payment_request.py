@@ -20,6 +20,8 @@ class CreateInvoicePaymentRequest(object):
         payment (CreateInvoicePayment): TODO: type description here.
         mtype (InvoicePaymentType): The type of payment to be applied to an
             Invoice. Defaults to external.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -36,7 +38,7 @@ class CreateInvoicePaymentRequest(object):
     def __init__(self,
                  payment=None,
                  mtype=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateInvoicePaymentRequest class"""
 
         # Initialize members of the class
@@ -45,6 +47,8 @@ class CreateInvoicePaymentRequest(object):
             self.mtype = mtype 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -62,17 +66,15 @@ class CreateInvoicePaymentRequest(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         payment = CreateInvoicePayment.from_dictionary(dictionary.get('payment')) if dictionary.get('payment') else None
         mtype = dictionary.get("type") if dictionary.get("type") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(payment,
                    mtype,
-                   dictionary)
+                   additional_properties)

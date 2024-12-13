@@ -16,6 +16,8 @@ class ApplePayVault(object):
 
     Attributes:
         BRAINTREE_BLUE: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['braintree_blue']

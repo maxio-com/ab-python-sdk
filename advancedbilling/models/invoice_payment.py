@@ -34,6 +34,8 @@ class InvoicePayment(object):
             a customer. Must be in the past. Applicable only to  `external`
             payments.
         uid (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -87,7 +89,7 @@ class InvoicePayment(object):
                  gateway_transaction_id=APIHelper.SKIP,
                  received_on=APIHelper.SKIP,
                  uid=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the InvoicePayment class"""
 
         # Initialize members of the class
@@ -117,6 +119,8 @@ class InvoicePayment(object):
             self.uid = uid 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -134,7 +138,7 @@ class InvoicePayment(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -154,9 +158,7 @@ class InvoicePayment(object):
             received_on = APIHelper.SKIP
         uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(transaction_time,
                    memo,
@@ -170,7 +172,7 @@ class InvoicePayment(object):
                    gateway_transaction_id,
                    received_on,
                    uid,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

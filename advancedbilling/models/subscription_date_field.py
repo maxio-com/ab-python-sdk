@@ -24,6 +24,8 @@ class SubscriptionDateField(object):
         TRIAL_STARTED_AT: TODO: type description here.
         TRIAL_ENDED_AT: TODO: type description here.
         UPDATED_AT: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     CURRENT_PERIOD_ENDS_AT = 'current_period_ends_at'

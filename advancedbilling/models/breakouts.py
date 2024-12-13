@@ -20,6 +20,8 @@ class Breakouts(object):
         plan_amount_formatted (str): TODO: type description here.
         usage_amount_in_cents (long|int): TODO: type description here.
         usage_amount_formatted (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -43,7 +45,7 @@ class Breakouts(object):
                  plan_amount_formatted=APIHelper.SKIP,
                  usage_amount_in_cents=APIHelper.SKIP,
                  usage_amount_formatted=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the Breakouts class"""
 
         # Initialize members of the class
@@ -57,6 +59,8 @@ class Breakouts(object):
             self.usage_amount_formatted = usage_amount_formatted 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -74,7 +78,7 @@ class Breakouts(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -83,12 +87,10 @@ class Breakouts(object):
         usage_amount_in_cents = dictionary.get("usage_amount_in_cents") if dictionary.get("usage_amount_in_cents") else APIHelper.SKIP
         usage_amount_formatted = dictionary.get("usage_amount_formatted") if dictionary.get("usage_amount_formatted") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(plan_amount_in_cents,
                    plan_amount_formatted,
                    usage_amount_in_cents,
                    usage_amount_formatted,
-                   dictionary)
+                   additional_properties)

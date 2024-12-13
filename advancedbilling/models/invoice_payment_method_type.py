@@ -21,6 +21,8 @@ class InvoicePaymentMethodType(object):
         MONEY_ORDER: TODO: type description here.
         ACH: TODO: type description here.
         OTHER: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     _all_values = ['credit_card', 'check', 'cash', 'money_order', 'ach', 'other']

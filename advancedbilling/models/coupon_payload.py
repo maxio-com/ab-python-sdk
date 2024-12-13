@@ -6,32 +6,53 @@ advanced_billing
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+import dateutil.parser
+
 from advancedbilling.api_helper import APIHelper
 
 
-class CreateOrUpdatePercentageCoupon(object):
+class CouponPayload(object):
 
-    """Implementation of the 'Create or Update Percentage Coupon' model.
+    """Implementation of the 'Coupon Payload' model.
 
     TODO: type model description here.
 
     Attributes:
-        name (str): the name of the coupon
-        code (str): may contain uppercase alphanumeric characters and these
-            special characters (which allow for email addresses to be used):
-            “%”, “@”, “+”, “-”, “_”, and “.”
-        description (str): TODO: type description here.
-        percentage (str | float): TODO: type description here.
-        allow_negative_balance (bool): TODO: type description here.
+        name (str): Required when creating a new coupon. This name is not
+            displayed to customers and is limited to 255 characters.
+        code (str): Required when creating a new coupon. The code is limited
+            to 255 characters. May contain uppercase alphanumeric characters
+            and these special characters (which allow for email addresses to
+            be used): “%”, “@”, “+”, “-”, “_”, and “.”
+        description (str): Required when creating a new coupon. A description
+            of the coupon that can be displayed to customers in transactions
+            and on statements. The description is limited to 255 characters.
+        percentage (str | float | None): Required when creating a new
+            percentage coupon. Can't be used together with amount_in_cents.
+            Percentage discount
+        amount_in_cents (long|int): Required when creating a new flat amount
+            coupon. Can't be used together with percentage. Flat USD discount
+        allow_negative_balance (bool): If set to true, discount is not limited
+            (credits will carry forward to next billing). Can't be used
+            together with restrictions.
         recurring (bool): TODO: type description here.
-        end_date (datetime): TODO: type description here.
+        end_date (date): After the end of the given day, this coupon code will
+            be invalid for new signups. Recurring discounts started before
+            this date will continue to recur even after this date.
         product_family_id (str): TODO: type description here.
-        stackable (bool): TODO: type description here.
-        compounding_strategy (CompoundingStrategy): TODO: type description
-            here.
+        stackable (bool): A stackable coupon can be combined with other
+            coupons on a Subscription.
+        compounding_strategy (CompoundingStrategy): Applicable only to
+            stackable coupons. For `compound`, Percentage-based discounts will
+            be calculated against the remaining price, after prior discounts
+            have been calculated. For `full-price`, Percentage-based discounts
+            will always be calculated against the original item price, before
+            other discounts are applied.
         exclude_mid_period_allocations (bool): TODO: type description here.
         apply_on_cancel_at_end_of_period (bool): TODO: type description here.
         apply_on_subscription_expiration (bool): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -39,8 +60,9 @@ class CreateOrUpdatePercentageCoupon(object):
     _names = {
         "name": 'name',
         "code": 'code',
-        "percentage": 'percentage',
         "description": 'description',
+        "percentage": 'percentage',
+        "amount_in_cents": 'amount_in_cents',
         "allow_negative_balance": 'allow_negative_balance',
         "recurring": 'recurring',
         "end_date": 'end_date',
@@ -53,7 +75,11 @@ class CreateOrUpdatePercentageCoupon(object):
     }
 
     _optionals = [
+        'name',
+        'code',
         'description',
+        'percentage',
+        'amount_in_cents',
         'allow_negative_balance',
         'recurring',
         'end_date',
@@ -66,10 +92,11 @@ class CreateOrUpdatePercentageCoupon(object):
     ]
 
     def __init__(self,
-                 name=None,
-                 code=None,
-                 percentage=None,
+                 name=APIHelper.SKIP,
+                 code=APIHelper.SKIP,
                  description=APIHelper.SKIP,
+                 percentage=APIHelper.SKIP,
+                 amount_in_cents=APIHelper.SKIP,
                  allow_negative_balance=APIHelper.SKIP,
                  recurring=APIHelper.SKIP,
                  end_date=APIHelper.SKIP,
@@ -79,21 +106,26 @@ class CreateOrUpdatePercentageCoupon(object):
                  exclude_mid_period_allocations=APIHelper.SKIP,
                  apply_on_cancel_at_end_of_period=APIHelper.SKIP,
                  apply_on_subscription_expiration=APIHelper.SKIP,
-                 additional_properties={}):
-        """Constructor for the CreateOrUpdatePercentageCoupon class"""
+                 additional_properties=None):
+        """Constructor for the CouponPayload class"""
 
         # Initialize members of the class
-        self.name = name 
-        self.code = code 
+        if name is not APIHelper.SKIP:
+            self.name = name 
+        if code is not APIHelper.SKIP:
+            self.code = code 
         if description is not APIHelper.SKIP:
             self.description = description 
-        self.percentage = percentage 
+        if percentage is not APIHelper.SKIP:
+            self.percentage = percentage 
+        if amount_in_cents is not APIHelper.SKIP:
+            self.amount_in_cents = amount_in_cents 
         if allow_negative_balance is not APIHelper.SKIP:
             self.allow_negative_balance = allow_negative_balance 
         if recurring is not APIHelper.SKIP:
             self.recurring = recurring 
         if end_date is not APIHelper.SKIP:
-            self.end_date = APIHelper.apply_datetime_converter(end_date, APIHelper.RFC3339DateTime) if end_date else None 
+            self.end_date = end_date 
         if product_family_id is not APIHelper.SKIP:
             self.product_family_id = product_family_id 
         if stackable is not APIHelper.SKIP:
@@ -108,6 +140,8 @@ class CreateOrUpdatePercentageCoupon(object):
             self.apply_on_subscription_expiration = apply_on_subscription_expiration 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -126,17 +160,18 @@ class CreateOrUpdatePercentageCoupon(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        name = dictionary.get("name") if dictionary.get("name") else None
-        code = dictionary.get("code") if dictionary.get("code") else None
-        percentage = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateOrUpdatePercentageCouponPercentage'), dictionary.get('percentage'), False) if dictionary.get('percentage') is not None else None
+        name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
+        code = dictionary.get("code") if dictionary.get("code") else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
+        percentage = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CouponPayloadPercentage'), dictionary.get('percentage'), False) if dictionary.get('percentage') is not None else APIHelper.SKIP
+        amount_in_cents = dictionary.get("amount_in_cents") if dictionary.get("amount_in_cents") else APIHelper.SKIP
         allow_negative_balance = dictionary.get("allow_negative_balance") if "allow_negative_balance" in dictionary.keys() else APIHelper.SKIP
         recurring = dictionary.get("recurring") if "recurring" in dictionary.keys() else APIHelper.SKIP
-        end_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("end_date")).datetime if dictionary.get("end_date") else APIHelper.SKIP
+        end_date = dateutil.parser.parse(dictionary.get('end_date')).date() if dictionary.get('end_date') else APIHelper.SKIP
         product_family_id = dictionary.get("product_family_id") if dictionary.get("product_family_id") else APIHelper.SKIP
         stackable = dictionary.get("stackable") if "stackable" in dictionary.keys() else APIHelper.SKIP
         compounding_strategy = dictionary.get("compounding_strategy") if dictionary.get("compounding_strategy") else APIHelper.SKIP
@@ -144,14 +179,13 @@ class CreateOrUpdatePercentageCoupon(object):
         apply_on_cancel_at_end_of_period = dictionary.get("apply_on_cancel_at_end_of_period") if "apply_on_cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
         apply_on_subscription_expiration = dictionary.get("apply_on_subscription_expiration") if "apply_on_subscription_expiration" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(name,
                    code,
-                   percentage,
                    description,
+                   percentage,
+                   amount_in_cents,
                    allow_negative_balance,
                    recurring,
                    end_date,
@@ -161,35 +195,4 @@ class CreateOrUpdatePercentageCoupon(object):
                    exclude_mid_period_allocations,
                    apply_on_cancel_at_end_of_period,
                    apply_on_subscription_expiration,
-                   dictionary)
-
-    @classmethod
-    def validate(cls, dictionary):
-        """Validates dictionary against class required properties
-
-        Args:
-            dictionary (dictionary): A dictionary representation of the object
-            as obtained from the deserialization of the server's response. The
-            keys MUST match property names in the API description.
-
-        Returns:
-            boolean : if dictionary is valid contains required properties.
-
-        """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
-
-        if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.name,
-                                           type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.code,
-                                            type_callable=lambda value: isinstance(value, str)) \
-                and UnionTypeLookUp.get('CreateOrUpdatePercentageCouponPercentage').validate(dictionary.percentage).is_valid
-
-        if not isinstance(dictionary, dict):
-            return False
-
-        return APIHelper.is_valid_type(value=dictionary.get('name'),
-                                       type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('code'),
-                                        type_callable=lambda value: isinstance(value, str)) \
-            and UnionTypeLookUp.get('CreateOrUpdatePercentageCouponPercentage').validate(dictionary.get('percentage')).is_valid
+                   additional_properties)

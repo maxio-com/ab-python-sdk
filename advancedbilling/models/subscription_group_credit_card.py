@@ -37,6 +37,8 @@ class SubscriptionGroupCreditCard(object):
         customer_vault_token (str): TODO: type description here.
         cvv (str): TODO: type description here.
         payment_type (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -108,7 +110,7 @@ class SubscriptionGroupCreditCard(object):
                  customer_vault_token=APIHelper.SKIP,
                  cvv=APIHelper.SKIP,
                  payment_type=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionGroupCreditCard class"""
 
         # Initialize members of the class
@@ -154,6 +156,8 @@ class SubscriptionGroupCreditCard(object):
             self.payment_type = payment_type 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -172,7 +176,7 @@ class SubscriptionGroupCreditCard(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -197,9 +201,7 @@ class SubscriptionGroupCreditCard(object):
         cvv = dictionary.get("cvv") if dictionary.get("cvv") else APIHelper.SKIP
         payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(full_number,
                    expiration_month,
@@ -221,7 +223,7 @@ class SubscriptionGroupCreditCard(object):
                    customer_vault_token,
                    cvv,
                    payment_type,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

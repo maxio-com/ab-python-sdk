@@ -17,6 +17,8 @@ class UpdateSubscriptionGroup(object):
 
     Attributes:
         member_ids (List[int]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -31,7 +33,7 @@ class UpdateSubscriptionGroup(object):
 
     def __init__(self,
                  member_ids=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the UpdateSubscriptionGroup class"""
 
         # Initialize members of the class
@@ -39,6 +41,8 @@ class UpdateSubscriptionGroup(object):
             self.member_ids = member_ids 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -56,15 +60,13 @@ class UpdateSubscriptionGroup(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         member_ids = dictionary.get("member_ids") if dictionary.get("member_ids") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(member_ids,
-                   dictionary)
+                   additional_properties)

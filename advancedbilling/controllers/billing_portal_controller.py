@@ -81,7 +81,7 @@ class BillingPortalController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/portal/customers/{customer_id}/enable.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -135,7 +135,7 @@ class BillingPortalController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/portal/customers/{customer_id}/management_link.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -188,7 +188,7 @@ class BillingPortalController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/portal/customers/{customer_id}/invitations/invite.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -233,7 +233,7 @@ class BillingPortalController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/portal/customers/{customer_id}/invitations/revoke.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()

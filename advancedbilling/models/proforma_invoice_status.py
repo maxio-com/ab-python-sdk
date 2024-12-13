@@ -18,6 +18,8 @@ class ProformaInvoiceStatus(object):
         DRAFT: TODO: type description here.
         VOIDED: TODO: type description here.
         ARCHIVED: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     DRAFT = 'draft'

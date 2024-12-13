@@ -17,6 +17,8 @@ class SubscriptionMRRBreakout(object):
     Attributes:
         plan_amount_in_cents (long|int): TODO: type description here.
         usage_amount_in_cents (long|int): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -29,7 +31,7 @@ class SubscriptionMRRBreakout(object):
     def __init__(self,
                  plan_amount_in_cents=None,
                  usage_amount_in_cents=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionMRRBreakout class"""
 
         # Initialize members of the class
@@ -37,6 +39,8 @@ class SubscriptionMRRBreakout(object):
         self.usage_amount_in_cents = usage_amount_in_cents 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -54,17 +58,15 @@ class SubscriptionMRRBreakout(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         plan_amount_in_cents = dictionary.get("plan_amount_in_cents") if dictionary.get("plan_amount_in_cents") else None
         usage_amount_in_cents = dictionary.get("usage_amount_in_cents") if dictionary.get("usage_amount_in_cents") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(plan_amount_in_cents,
                    usage_amount_in_cents,
-                   dictionary)
+                   additional_properties)

@@ -31,6 +31,8 @@ class CreateInvoicePayment(object):
         received_on (date): Date reflecting when the payment was received from
             a customer. Must be in the past. Applicable only to  `external`
             payments.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -60,7 +62,7 @@ class CreateInvoicePayment(object):
                  details=APIHelper.SKIP,
                  payment_profile_id=APIHelper.SKIP,
                  received_on=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateInvoicePayment class"""
 
         # Initialize members of the class
@@ -78,6 +80,8 @@ class CreateInvoicePayment(object):
             self.received_on = received_on 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -96,7 +100,7 @@ class CreateInvoicePayment(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -107,9 +111,7 @@ class CreateInvoicePayment(object):
         payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP
         received_on = dateutil.parser.parse(dictionary.get('received_on')).date() if dictionary.get('received_on') else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(amount,
                    memo,
@@ -117,4 +119,4 @@ class CreateInvoicePayment(object):
                    details,
                    payment_profile_id,
                    received_on,
-                   dictionary)
+                   additional_properties)

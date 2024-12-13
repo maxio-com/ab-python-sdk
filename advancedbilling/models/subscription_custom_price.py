@@ -33,6 +33,8 @@ class SubscriptionCustomPrice(object):
         expiration_interval (str | int | None): (Optional)
         expiration_interval_unit (ExpirationIntervalUnit): (Optional)
         tax_included (bool): (Optional)
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -85,7 +87,7 @@ class SubscriptionCustomPrice(object):
                  expiration_interval=APIHelper.SKIP,
                  expiration_interval_unit=APIHelper.SKIP,
                  tax_included=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionCustomPrice class"""
 
         # Initialize members of the class
@@ -114,6 +116,8 @@ class SubscriptionCustomPrice(object):
             self.tax_included = tax_included 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -132,7 +136,7 @@ class SubscriptionCustomPrice(object):
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -150,9 +154,7 @@ class SubscriptionCustomPrice(object):
         expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         tax_included = dictionary.get("tax_included") if "tax_included" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(price_in_cents,
                    interval,
@@ -167,7 +169,7 @@ class SubscriptionCustomPrice(object):
                    expiration_interval,
                    expiration_interval_unit,
                    tax_included,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

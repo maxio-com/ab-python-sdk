@@ -23,9 +23,12 @@ class InvoiceStatus(object):
         PENDING: TODO: type description here.
         VOIDED: TODO: type description here.
         CANCELED: TODO: type description here.
+        PROCESSING: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
-    _all_values = ['draft', 'open', 'paid', 'pending', 'voided', 'canceled']
+    _all_values = ['draft', 'open', 'paid', 'pending', 'voided', 'canceled', 'processing']
     DRAFT = 'draft'
 
     OPEN = 'open'
@@ -37,6 +40,8 @@ class InvoiceStatus(object):
     VOIDED = 'voided'
 
     CANCELED = 'canceled'
+
+    PROCESSING = 'processing'
 
     @classmethod
     def validate(cls, value):

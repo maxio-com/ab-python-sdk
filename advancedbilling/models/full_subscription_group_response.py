@@ -96,6 +96,8 @@ class FullSubscriptionGroupResponse(object):
         customer (SubscriptionGroupCustomer): TODO: type description here.
         account_balances (SubscriptionGroupBalances): TODO: type description
             here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -143,7 +145,7 @@ class FullSubscriptionGroupResponse(object):
                  current_billing_amount_in_cents=APIHelper.SKIP,
                  customer=APIHelper.SKIP,
                  account_balances=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the FullSubscriptionGroupResponse class"""
 
         # Initialize members of the class
@@ -173,6 +175,8 @@ class FullSubscriptionGroupResponse(object):
             self.account_balances = account_balances 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -190,7 +194,7 @@ class FullSubscriptionGroupResponse(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -207,9 +211,7 @@ class FullSubscriptionGroupResponse(object):
         customer = SubscriptionGroupCustomer.from_dictionary(dictionary.get('customer')) if 'customer' in dictionary.keys() else APIHelper.SKIP
         account_balances = SubscriptionGroupBalances.from_dictionary(dictionary.get('account_balances')) if 'account_balances' in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(uid,
                    scheme,
@@ -223,4 +225,4 @@ class FullSubscriptionGroupResponse(object):
                    current_billing_amount_in_cents,
                    customer,
                    account_balances,
-                   dictionary)
+                   additional_properties)

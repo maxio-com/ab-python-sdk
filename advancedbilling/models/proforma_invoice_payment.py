@@ -20,6 +20,8 @@ class ProformaInvoicePayment(object):
         original_amount (str): TODO: type description here.
         applied_amount (str): TODO: type description here.
         prepayment (bool): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -43,7 +45,7 @@ class ProformaInvoicePayment(object):
                  original_amount=APIHelper.SKIP,
                  applied_amount=APIHelper.SKIP,
                  prepayment=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ProformaInvoicePayment class"""
 
         # Initialize members of the class
@@ -57,6 +59,8 @@ class ProformaInvoicePayment(object):
             self.prepayment = prepayment 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -74,7 +78,7 @@ class ProformaInvoicePayment(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -83,12 +87,10 @@ class ProformaInvoicePayment(object):
         applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
         prepayment = dictionary.get("prepayment") if "prepayment" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(memo,
                    original_amount,
                    applied_amount,
                    prepayment,
-                   dictionary)
+                   additional_properties)

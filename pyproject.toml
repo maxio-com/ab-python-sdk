@@ -4,13 +4,13 @@ requires = ["setuptools>=61.0"]
 [project]
 name = "maxio-advanced-billing-sdk"
 description = "Ultimate billing and pricing flexibility for B2B SaaS.\nMaxio integrates directly into your product, so you can seamlessly manage your product catalog, bill customers, and collect payments."
-version = "5.2.0"
+version = "6.0.0"
 readme = "README.md"
 requires-python = ">=3.7"
 keywords = ["Maxio", "Advaced Billing", "Payments", "Subscription"]
 authors = [{name = "Maxio SDK", email = "maxio-sdk@maxio.com"}]
 urls = {Homepage = "https://www.maxio.com/product/advanced-billing"}
-dependencies = ["apimatic-core~=0.2.0, >= 0.2.15", "apimatic-core-interfaces~=0.1.0, >= 0.1.5", "apimatic-requests-client-adapter~=0.1.0, >= 0.1.6", "deprecation~=2.1", "python-dateutil~=2.8.1"]
+dependencies = ["apimatic-core~=0.2.0, >= 0.2.17", "apimatic-core-interfaces~=0.1.0, >= 0.1.5", "apimatic-requests-client-adapter~=0.1.0, >= 0.1.6", "deprecation~=2.1"]
 classifiers = []
 [project.optional-dependencies]
 testutils = ["pytest>=7.2.2"]

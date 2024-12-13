@@ -88,7 +88,7 @@ class SalesCommissionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/sellers/{seller_id}/sales_commission_settings.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -180,7 +180,7 @@ class SalesCommissionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/sellers/{seller_id}/sales_reps.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -269,7 +269,7 @@ class SalesCommissionsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/sellers/{seller_id}/sales_reps/{sales_rep_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()

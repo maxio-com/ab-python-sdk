@@ -23,7 +23,7 @@
 | `taxable` | `bool` | Optional | Boolean flag describing whether a component is taxable or not. |
 | `description` | `str` | Optional | The description of the component. |
 | `default_price_point_id` | `int` | Optional | - |
-| `overage_prices` | [`List[ComponentPrice]`](../../doc/models/component-price.md) | Optional | An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. |
+| `overage_prices` | [`List[ComponentPrice]`](../../doc/models/component-price.md) | Optional | Applicable only to prepaid usage components. An array of overage price brackets. |
 | `prices` | [`List[ComponentPrice]`](../../doc/models/component-price.md) | Optional | An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. |
 | `price_point_count` | `int` | Optional | Count for the number of price points associated with the component |
 | `price_points_url` | `str` | Optional | URL that points to the location to read the existing price points via GET request |

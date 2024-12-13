@@ -18,6 +18,8 @@ class CreateOrUpdateEndpoint(object):
         url (str): TODO: type description here.
         webhook_subscriptions (List[WebhookSubscription]): TODO: type
             description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -30,7 +32,7 @@ class CreateOrUpdateEndpoint(object):
     def __init__(self,
                  url=None,
                  webhook_subscriptions=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CreateOrUpdateEndpoint class"""
 
         # Initialize members of the class
@@ -38,6 +40,8 @@ class CreateOrUpdateEndpoint(object):
         self.webhook_subscriptions = webhook_subscriptions 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -55,17 +59,15 @@ class CreateOrUpdateEndpoint(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         url = dictionary.get("url") if dictionary.get("url") else None
         webhook_subscriptions = dictionary.get("webhook_subscriptions") if dictionary.get("webhook_subscriptions") else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(url,
                    webhook_subscriptions,
-                   dictionary)
+                   additional_properties)

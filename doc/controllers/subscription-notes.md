@@ -64,6 +64,12 @@ result = subscription_notes_controller.create_subscription_note(
 )
 ```
 
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
 
 # List Subscription Notes
 
@@ -123,6 +129,12 @@ result = subscription_notes_controller.list_subscription_notes(collect)
   }
 ]
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Read Subscription Note
@@ -218,6 +230,12 @@ result = subscription_notes_controller.update_subscription_note(
     body=body
 )
 ```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Delete Subscription Note

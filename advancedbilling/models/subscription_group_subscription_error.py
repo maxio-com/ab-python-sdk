@@ -27,6 +27,8 @@ class SubscriptionGroupSubscriptionError(object):
         payment_profile_expiration_year (List[str]): TODO: type description
             here.
         payment_profile_full_number (List[str]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -62,7 +64,7 @@ class SubscriptionGroupSubscriptionError(object):
                  payment_profile_expiration_month=APIHelper.SKIP,
                  payment_profile_expiration_year=APIHelper.SKIP,
                  payment_profile_full_number=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the SubscriptionGroupSubscriptionError class"""
 
         # Initialize members of the class
@@ -84,6 +86,8 @@ class SubscriptionGroupSubscriptionError(object):
             self.payment_profile_full_number = payment_profile_full_number 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -101,7 +105,7 @@ class SubscriptionGroupSubscriptionError(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -114,9 +118,7 @@ class SubscriptionGroupSubscriptionError(object):
         payment_profile_expiration_year = dictionary.get("payment_profile.expiration_year") if dictionary.get("payment_profile.expiration_year") else APIHelper.SKIP
         payment_profile_full_number = dictionary.get("payment_profile.full_number") if dictionary.get("payment_profile.full_number") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(product,
                    product_price_point_id,
@@ -126,4 +128,4 @@ class SubscriptionGroupSubscriptionError(object):
                    payment_profile_expiration_month,
                    payment_profile_expiration_year,
                    payment_profile_full_number,
-                   dictionary)
+                   additional_properties)

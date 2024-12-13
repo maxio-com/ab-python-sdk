@@ -17,6 +17,8 @@ class UpdateSegmentRequest(object):
 
     Attributes:
         segment (UpdateSegment): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -27,13 +29,15 @@ class UpdateSegmentRequest(object):
 
     def __init__(self,
                  segment=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the UpdateSegmentRequest class"""
 
         # Initialize members of the class
         self.segment = segment 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -51,15 +55,13 @@ class UpdateSegmentRequest(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         segment = UpdateSegment.from_dictionary(dictionary.get('segment')) if dictionary.get('segment') else None
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(segment,
-                   dictionary)
+                   additional_properties)

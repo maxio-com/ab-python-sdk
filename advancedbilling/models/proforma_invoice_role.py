@@ -20,6 +20,8 @@ class ProformaInvoiceRole(object):
         PROFORMA: TODO: type description here.
         PROFORMA_ADHOC: TODO: type description here.
         PROFORMA_AUTOMATIC: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     UNSET = 'unset'

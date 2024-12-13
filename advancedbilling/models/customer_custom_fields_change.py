@@ -18,6 +18,8 @@ class CustomerCustomFieldsChange(object):
     Attributes:
         before (List[InvoiceCustomField]): TODO: type description here.
         after (List[InvoiceCustomField]): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -30,7 +32,7 @@ class CustomerCustomFieldsChange(object):
     def __init__(self,
                  before=None,
                  after=None,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the CustomerCustomFieldsChange class"""
 
         # Initialize members of the class
@@ -38,6 +40,8 @@ class CustomerCustomFieldsChange(object):
         self.after = after 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -55,7 +59,7 @@ class CustomerCustomFieldsChange(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -66,10 +70,8 @@ class CustomerCustomFieldsChange(object):
         if dictionary.get('after') is not None:
             after = [InvoiceCustomField.from_dictionary(x) for x in dictionary.get('after')]
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(before,
                    after,
-                   dictionary)
+                   additional_properties)

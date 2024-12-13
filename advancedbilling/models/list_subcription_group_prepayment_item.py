@@ -25,6 +25,8 @@ class ListSubcriptionGroupPrepaymentItem(object):
         memo (str): TODO: type description here.
         payment_type (PrepaymentMethod): TODO: type description here.
         created_at (datetime): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -63,7 +65,7 @@ class ListSubcriptionGroupPrepaymentItem(object):
                  memo=APIHelper.SKIP,
                  payment_type=APIHelper.SKIP,
                  created_at=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ListSubcriptionGroupPrepaymentItem class"""
 
         # Initialize members of the class
@@ -87,6 +89,8 @@ class ListSubcriptionGroupPrepaymentItem(object):
             self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -104,7 +108,7 @@ class ListSubcriptionGroupPrepaymentItem(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -118,9 +122,7 @@ class ListSubcriptionGroupPrepaymentItem(object):
         payment_type = dictionary.get("payment_type") if dictionary.get("payment_type") else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(id,
                    subscription_group_uid,
@@ -131,4 +133,4 @@ class ListSubcriptionGroupPrepaymentItem(object):
                    memo,
                    payment_type,
                    created_at,
-                   dictionary)
+                   additional_properties)

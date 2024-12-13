@@ -51,6 +51,8 @@ class UpdatePaymentProfile(object):
             subscription, only US is supported at this time.
         billing_address_2 (str): Second line of the customer’s billing address
             i.e. Apt. 100
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -105,7 +107,7 @@ class UpdatePaymentProfile(object):
                  billing_zip=APIHelper.SKIP,
                  billing_country=APIHelper.SKIP,
                  billing_address_2=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the UpdatePaymentProfile class"""
 
         # Initialize members of the class
@@ -137,6 +139,8 @@ class UpdatePaymentProfile(object):
             self.billing_address_2 = billing_address_2 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -154,7 +158,7 @@ class UpdatePaymentProfile(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -172,9 +176,7 @@ class UpdatePaymentProfile(object):
         billing_country = dictionary.get("billing_country") if dictionary.get("billing_country") else APIHelper.SKIP
         billing_address_2 = dictionary.get("billing_address_2") if "billing_address_2" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -189,4 +191,4 @@ class UpdatePaymentProfile(object):
                    billing_zip,
                    billing_country,
                    billing_address_2,
-                   dictionary)
+                   additional_properties)

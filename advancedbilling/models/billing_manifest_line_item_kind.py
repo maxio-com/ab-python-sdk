@@ -21,6 +21,8 @@ class BillingManifestLineItemKind(object):
         COUPON: TODO: type description here.
         COMPONENT: TODO: type description here.
         TAX: TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
     BASELINE = 'baseline'

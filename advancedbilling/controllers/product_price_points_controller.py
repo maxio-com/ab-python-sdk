@@ -61,7 +61,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}/price_points.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -127,6 +127,8 @@ class ProductPricePointsController(BaseController):
                         of the defined prices for each currency.
                     filter_type -- List[PricePointType] -- Use in query:
                         `filter[type]=catalog,default`.
+                    archived -- bool -- Set to include archived price points
+                        in the response.
 
         Returns:
             ListProductPricePointsResponse: Response from the API. OK
@@ -140,7 +142,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}/price_points.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -161,6 +163,9 @@ class ProductPricePointsController(BaseController):
             .query_param(Parameter()
                          .key('filter[type]')
                          .value(options.get('filter_type', None)))
+            .query_param(Parameter()
+                         .key('archived')
+                         .value(options.get('archived', None)))
             .header_param(Parameter()
                           .key('accept')
                           .value('application/json'))
@@ -206,7 +211,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}/price_points/{price_point_id}.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -278,7 +283,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}/price_points/{price_point_id}.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
@@ -336,7 +341,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}/price_points/{price_point_id}.json')
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
@@ -387,7 +392,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}/price_points/{price_point_id}/unarchive.json')
             .http_method(HttpMethodEnum.PATCH)
             .template_param(Parameter()
@@ -438,7 +443,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}/price_points/{price_point_id}/default.json')
             .http_method(HttpMethodEnum.PATCH)
             .template_param(Parameter()
@@ -488,7 +493,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products/{product_id}/price_points/bulk.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -545,7 +550,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_price_points/{product_price_point_id}/currency_prices.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
@@ -601,7 +606,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/product_price_points/{product_price_point_id}/currency_prices.json')
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
@@ -675,7 +680,7 @@ class ProductPricePointsController(BaseController):
         """
 
         return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.DEFAULT)
+            RequestBuilder().server(Server.PRODUCTION)
             .path('/products_price_points.json')
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()

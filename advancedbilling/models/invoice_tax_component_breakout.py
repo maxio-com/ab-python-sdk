@@ -30,6 +30,8 @@ class InvoiceTaxComponentBreakout(object):
         tax_authority_type (int): TODO: type description here.
         state_assigned_no (str): TODO: type description here.
         tax_sub_type (str): TODO: type description here.
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -83,7 +85,7 @@ class InvoiceTaxComponentBreakout(object):
                  tax_authority_type=APIHelper.SKIP,
                  state_assigned_no=APIHelper.SKIP,
                  tax_sub_type=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the InvoiceTaxComponentBreakout class"""
 
         # Initialize members of the class
@@ -117,6 +119,8 @@ class InvoiceTaxComponentBreakout(object):
             self.tax_sub_type = tax_sub_type 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -134,7 +138,7 @@ class InvoiceTaxComponentBreakout(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
@@ -153,9 +157,7 @@ class InvoiceTaxComponentBreakout(object):
         state_assigned_no = dictionary.get("state_assigned_no") if dictionary.get("state_assigned_no") else APIHelper.SKIP
         tax_sub_type = dictionary.get("tax_sub_type") if dictionary.get("tax_sub_type") else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(tax_rule_id,
                    percentage,
@@ -171,7 +173,7 @@ class InvoiceTaxComponentBreakout(object):
                    tax_authority_type,
                    state_assigned_no,
                    tax_sub_type,
-                   dictionary)
+                   additional_properties)
 
     @classmethod
     def validate(cls, dictionary):

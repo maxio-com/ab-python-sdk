@@ -22,6 +22,8 @@ class ActivateSubscriptionRequest(object):
             activation and enter an end of life state. If this parameter is
             omitted or `null` is passed it will default to value set in the 
             site settings (default: `true`)
+        additional_properties (Dict[str, object]): The additional properties
+            for the model.
 
     """
 
@@ -40,7 +42,7 @@ class ActivateSubscriptionRequest(object):
 
     def __init__(self,
                  revert_on_failure=APIHelper.SKIP,
-                 additional_properties={}):
+                 additional_properties=None):
         """Constructor for the ActivateSubscriptionRequest class"""
 
         # Initialize members of the class
@@ -48,6 +50,8 @@ class ActivateSubscriptionRequest(object):
             self.revert_on_failure = revert_on_failure 
 
         # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
         self.additional_properties = additional_properties
 
     @classmethod
@@ -65,15 +69,13 @@ class ActivateSubscriptionRequest(object):
 
         """
 
-        if dictionary is None:
+        if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         revert_on_failure = dictionary.get("revert_on_failure") if "revert_on_failure" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
-        for key in cls._names.values():
-            if key in dictionary:
-                del dictionary[key]
+        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(revert_on_failure,
-                   dictionary)
+                   additional_properties)
