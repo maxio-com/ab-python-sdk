@@ -15,11 +15,11 @@ class GroupTargetType(object):
     The type of object indicated by the id attribute.
 
     Attributes:
-        CUSTOMER: TODO: type description here.
-        SUBSCRIPTION: TODO: type description here.
-        SELF: TODO: type description here.
-        PARENT: TODO: type description here.
-        ELDEST: TODO: type description here.
+        CUSTOMER: The enum member of type str.
+        SUBSCRIPTION: The enum member of type str.
+        SELF: The enum member of type str.
+        PARENT: The enum member of type str.
+        ELDEST: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

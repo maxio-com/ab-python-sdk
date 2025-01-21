@@ -13,10 +13,9 @@ class SubscriptionMRRResponse(object):
 
     """Implementation of the 'Subscription MRR Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        subscriptions_mrr (List[SubscriptionMRR]): TODO: type description here.
+        subscriptions_mrr (List[SubscriptionMRR]): The model property of type
+            List[SubscriptionMRR].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -67,3 +66,13 @@ class SubscriptionMRRResponse(object):
         # Return an object of this model
         return cls(subscriptions_mrr,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscriptions_mrr={self.subscriptions_mrr!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscriptions_mrr={self.subscriptions_mrr!s}, '
+                f'additional_properties={self.additional_properties!s})')

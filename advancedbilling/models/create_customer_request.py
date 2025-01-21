@@ -13,10 +13,8 @@ class CreateCustomerRequest(object):
 
     """Implementation of the 'Create Customer Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        customer (CreateCustomer): TODO: type description here.
+        customer (CreateCustomer): The model property of type CreateCustomer.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +63,13 @@ class CreateCustomerRequest(object):
         # Return an object of this model
         return cls(customer,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer={self.customer!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer={self.customer!s}, '
+                f'additional_properties={self.additional_properties!s})')

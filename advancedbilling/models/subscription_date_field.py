@@ -12,18 +12,16 @@ class SubscriptionDateField(object):
 
     """Implementation of the 'Subscription Date Field' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CURRENT_PERIOD_ENDS_AT: TODO: type description here.
-        CURRENT_PERIOD_STARTS_AT: TODO: type description here.
-        CREATED_AT: TODO: type description here.
-        ACTIVATED_AT: TODO: type description here.
-        CANCELED_AT: TODO: type description here.
-        EXPIRES_AT: TODO: type description here.
-        TRIAL_STARTED_AT: TODO: type description here.
-        TRIAL_ENDED_AT: TODO: type description here.
-        UPDATED_AT: TODO: type description here.
+        CURRENT_PERIOD_ENDS_AT: The enum member of type str.
+        CURRENT_PERIOD_STARTS_AT: The enum member of type str.
+        CREATED_AT: The enum member of type str.
+        ACTIVATED_AT: The enum member of type str.
+        CANCELED_AT: The enum member of type str.
+        EXPIRES_AT: The enum member of type str.
+        TRIAL_STARTED_AT: The enum member of type str.
+        TRIAL_ENDED_AT: The enum member of type str.
+        UPDATED_AT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

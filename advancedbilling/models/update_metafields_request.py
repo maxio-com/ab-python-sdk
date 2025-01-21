@@ -13,11 +13,9 @@ class UpdateMetafieldsRequest(object):
 
     """Implementation of the 'Update Metafields Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        metafields (UpdateMetafield | List[UpdateMetafield] | None): TODO:
-            type description here.
+        metafields (UpdateMetafield | List[UpdateMetafield] | None): The model
+            property of type UpdateMetafield | List[UpdateMetafield] | None.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -72,3 +70,13 @@ class UpdateMetafieldsRequest(object):
         # Return an object of this model
         return cls(metafields,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'metafields={self.metafields!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'metafields={self.metafields!s}, '
+                f'additional_properties={self.additional_properties!s})')

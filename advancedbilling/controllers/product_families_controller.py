@@ -165,8 +165,8 @@ class ProductFamiliesController(BaseController):
         ct-Families).
 
         Args:
-            body (CreateProductFamilyRequest, optional): TODO: type
-                description here.
+            body (CreateProductFamilyRequest, optional): The request body
+                parameter.
 
         Returns:
             ProductFamilyResponse: Response from the API. Created

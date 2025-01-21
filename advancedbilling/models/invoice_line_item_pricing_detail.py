@@ -13,11 +13,9 @@ class InvoiceLineItemPricingDetail(object):
 
     """Implementation of the 'Invoice Line Item Pricing Detail' model.
 
-    TODO: type model description here.
-
     Attributes:
-        label (str): TODO: type description here.
-        amount (str): TODO: type description here.
+        label (str): The model property of type str.
+        amount (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -100,3 +98,15 @@ class InvoiceLineItemPricingDetail(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'label={self.label!r}, '
+                f'amount={self.amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'label={self.label!s}, '
+                f'amount={self.amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

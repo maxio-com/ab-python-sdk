@@ -15,8 +15,6 @@ class GroupSettings(object):
 
     """Implementation of the 'Group Settings' model.
 
-    TODO: type model description here.
-
     Attributes:
         target (GroupTarget): Attributes of the target customer who will be
             the responsible payer of the created subscription. Required.
@@ -106,3 +104,15 @@ class GroupSettings(object):
         return APIHelper.is_valid_type(value=dictionary.get('target'),
                                        type_callable=lambda value: GroupTarget.validate(value),
                                        is_model_dict=True)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'target={self.target!r}, '
+                f'billing={self.billing!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'target={self.target!s}, '
+                f'billing={self.billing!s}, '
+                f'additional_properties={self.additional_properties!s})')

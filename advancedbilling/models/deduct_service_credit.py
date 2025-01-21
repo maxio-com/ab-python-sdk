@@ -13,11 +13,9 @@ class DeductServiceCredit(object):
 
     """Implementation of the 'Deduct Service Credit' model.
 
-    TODO: type model description here.
-
     Attributes:
-        amount (str | float): TODO: type description here.
-        memo (str): TODO: type description here.
+        amount (str | float): The model property of type str | float.
+        memo (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -100,3 +98,15 @@ class DeductServiceCredit(object):
             return False
 
         return UnionTypeLookUp.get('DeductServiceCreditAmount').validate(dictionary.get('amount')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!r}, '
+                f'memo={self.memo!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!s}, '
+                f'memo={self.memo!s}, '
+                f'additional_properties={self.additional_properties!s})')

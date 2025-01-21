@@ -13,11 +13,9 @@ class PrepaidConfigurationResponse(object):
 
     """Implementation of the 'Prepaid Configuration Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        prepaid_configuration (PrepaidConfiguration): TODO: type description
-            here.
+        prepaid_configuration (PrepaidConfiguration): The model property of
+            type PrepaidConfiguration.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -66,3 +64,13 @@ class PrepaidConfigurationResponse(object):
         # Return an object of this model
         return cls(prepaid_configuration,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'prepaid_configuration={self.prepaid_configuration!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'prepaid_configuration={self.prepaid_configuration!s}, '
+                f'additional_properties={self.additional_properties!s})')

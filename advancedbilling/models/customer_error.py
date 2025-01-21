@@ -13,10 +13,8 @@ class CustomerError(object):
 
     """Implementation of the 'Customer Error' model.
 
-    TODO: type model description here.
-
     Attributes:
-        customer (str): TODO: type description here.
+        customer (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -92,3 +90,13 @@ class CustomerError(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer={self.customer!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer={self.customer!s}, '
+                f'additional_properties={self.additional_properties!s})')

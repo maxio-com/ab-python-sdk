@@ -13,12 +13,10 @@ class InvoiceBalanceItem(object):
 
     """Implementation of the 'Invoice Balance Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        number (str): TODO: type description here.
-        outstanding_amount (str): TODO: type description here.
+        uid (str): The model property of type str.
+        number (str): The model property of type str.
+        outstanding_amount (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -108,3 +106,17 @@ class InvoiceBalanceItem(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'number={self.number!r}, '
+                f'outstanding_amount={self.outstanding_amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'number={self.number!s}, '
+                f'outstanding_amount={self.outstanding_amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

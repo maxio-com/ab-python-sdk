@@ -14,12 +14,11 @@ class SubscriptionPreview(object):
 
     """Implementation of the 'Subscription Preview' model.
 
-    TODO: type model description here.
-
     Attributes:
-        current_billing_manifest (BillingManifest): TODO: type description
-            here.
-        next_billing_manifest (BillingManifest): TODO: type description here.
+        current_billing_manifest (BillingManifest): The model property of type
+            BillingManifest.
+        next_billing_manifest (BillingManifest): The model property of type
+            BillingManifest.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -80,3 +79,15 @@ class SubscriptionPreview(object):
         return cls(current_billing_manifest,
                    next_billing_manifest,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'current_billing_manifest={self.current_billing_manifest!r}, '
+                f'next_billing_manifest={self.next_billing_manifest!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'current_billing_manifest={self.current_billing_manifest!s}, '
+                f'next_billing_manifest={self.next_billing_manifest!s}, '
+                f'additional_properties={self.additional_properties!s})')

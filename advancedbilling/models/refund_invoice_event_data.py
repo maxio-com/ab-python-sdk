@@ -30,7 +30,8 @@ class RefundInvoiceEventData(object):
             segments.  See also the [invoice consolidation
             documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269
             909389-Invoice-Consolidation).
-        credit_note_attributes (CreditNote): TODO: type description here.
+        credit_note_attributes (CreditNote): The model property of type
+            CreditNote.
         memo (str): The refund memo.
         original_amount (str): The full, original amount of the refund.
         payment_id (int): The ID of the payment transaction to be refunded.
@@ -181,3 +182,29 @@ class RefundInvoiceEventData(object):
                                         type_callable=lambda value: isinstance(value, int)) \
             and APIHelper.is_valid_type(value=dictionary.get('transaction_time'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'apply_credit={self.apply_credit!r}, '
+                f'consolidation_level={self.consolidation_level!r}, '
+                f'credit_note_attributes={self.credit_note_attributes!r}, '
+                f'memo={self.memo!r}, '
+                f'original_amount={self.original_amount!r}, '
+                f'payment_id={self.payment_id!r}, '
+                f'refund_amount={self.refund_amount!r}, '
+                f'refund_id={self.refund_id!r}, '
+                f'transaction_time={self.transaction_time!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'apply_credit={self.apply_credit!s}, '
+                f'consolidation_level={self.consolidation_level!s}, '
+                f'credit_note_attributes={self.credit_note_attributes!s}, '
+                f'memo={self.memo!s}, '
+                f'original_amount={self.original_amount!s}, '
+                f'payment_id={self.payment_id!s}, '
+                f'refund_amount={self.refund_amount!s}, '
+                f'refund_id={self.refund_id!s}, '
+                f'transaction_time={self.transaction_time!s}, '
+                f'additional_properties={self.additional_properties!s})')

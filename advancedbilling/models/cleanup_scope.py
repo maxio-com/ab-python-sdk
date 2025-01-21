@@ -18,8 +18,8 @@ class CleanupScope(object):
     to 0.
 
     Attributes:
-        ALL: TODO: type description here.
-        CUSTOMERS: TODO: type description here.
+        ALL: The enum member of type str.
+        CUSTOMERS: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

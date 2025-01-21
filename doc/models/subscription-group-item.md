@@ -17,8 +17,8 @@
 | `product_price_point_handle` | `str` | Optional | - |
 | `currency` | `str` | Optional | - |
 | `coupon_code` | `str` | Optional | - |
-| `total_revenue_in_cents` | `long\|int` | Optional | - |
-| `balance_in_cents` | `long\|int` | Optional | - |
+| `total_revenue_in_cents` | `int` | Optional | - |
+| `balance_in_cents` | `int` | Optional | - |
 
 ## Example (as JSON)
 

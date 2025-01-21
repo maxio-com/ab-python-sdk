@@ -13,14 +13,13 @@ class Endpoint(object):
 
     """Implementation of the 'Endpoint' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        url (str): TODO: type description here.
-        site_id (int): TODO: type description here.
-        status (str): TODO: type description here.
-        webhook_subscriptions (List[str]): TODO: type description here.
+        id (int): The model property of type int.
+        url (str): The model property of type str.
+        site_id (int): The model property of type int.
+        status (str): The model property of type str.
+        webhook_subscriptions (List[str]): The model property of type
+            List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -102,3 +101,21 @@ class Endpoint(object):
                    status,
                    webhook_subscriptions,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'url={self.url!r}, '
+                f'site_id={self.site_id!r}, '
+                f'status={self.status!r}, '
+                f'webhook_subscriptions={self.webhook_subscriptions!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'url={self.url!s}, '
+                f'site_id={self.site_id!s}, '
+                f'status={self.status!s}, '
+                f'webhook_subscriptions={self.webhook_subscriptions!s}, '
+                f'additional_properties={self.additional_properties!s})')

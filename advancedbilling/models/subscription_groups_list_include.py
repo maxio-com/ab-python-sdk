@@ -12,10 +12,8 @@ class SubscriptionGroupsListInclude(object):
 
     """Implementation of the 'Subscription Groups List Include' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        ACCOUNT_BALANCES: TODO: type description here.
+        ACCOUNT_BALANCES: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

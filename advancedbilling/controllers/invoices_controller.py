@@ -53,7 +53,7 @@ class InvoicesController(BaseController):
         Args:
             uid (str): The unique identifier for the invoice, this does not
                 refer to the public facing invoice number.
-            body (RefundInvoiceRequest, optional): TODO: type description here.
+            body (RefundInvoiceRequest, optional): The request body parameter.
 
         Returns:
             Invoice: Response from the API. OK
@@ -365,11 +365,11 @@ class InvoicesController(BaseController):
                         event from which you want to start the search. All the
                         events before the `since_date` timestamp are not
                         returned in the response.
-                    since_id -- long|int -- The ID of the event from which you
-                        want to start the search(ID is not included. e.g. if
-                        ID is set to 2, then all events with ID 3 and more
-                        will be shown) This parameter is not used if
-                        since_date is defined.
+                    since_id -- int -- The ID of the event from which you want
+                        to start the search(ID is not included. e.g. if ID is
+                        set to 2, then all events with ID 3 and more will be
+                        shown) This parameter is not used if since_date is
+                        defined.
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to
@@ -498,8 +498,8 @@ class InvoicesController(BaseController):
         Args:
             uid (str): The unique identifier for the invoice, this does not
                 refer to the public facing invoice number.
-            body (CreateInvoicePaymentRequest, optional): TODO: type
-                description here.
+            body (CreateInvoicePaymentRequest, optional): The request body
+                parameter.
 
         Returns:
             Invoice: Response from the API. OK
@@ -571,8 +571,8 @@ class InvoicesController(BaseController):
         amount must be greater or equal to invoices payment amount sum.
 
         Args:
-            body (CreateMultiInvoicePaymentRequest, optional): TODO: type
-                description here.
+            body (CreateMultiInvoicePaymentRequest, optional): The request
+                body parameter.
 
         Returns:
             MultiInvoicePaymentResponse: Response from the API. OK
@@ -751,7 +751,7 @@ class InvoicesController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (RecordPaymentRequest, optional): TODO: type description here.
+            body (RecordPaymentRequest, optional): The request body parameter.
 
         Returns:
             RecordPaymentResponse: Response from the API. OK
@@ -861,7 +861,7 @@ class InvoicesController(BaseController):
         Args:
             uid (str): The unique identifier for the invoice, this does not
                 refer to the public facing invoice number.
-            body (VoidInvoiceRequest, optional): TODO: type description here.
+            body (VoidInvoiceRequest, optional): The request body parameter.
 
         Returns:
             Invoice: Response from the API. OK
@@ -1151,7 +1151,7 @@ class InvoicesController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (CreateInvoiceRequest, optional): TODO: type description here.
+            body (CreateInvoiceRequest, optional): The request body parameter.
 
         Returns:
             InvoiceResponse: Response from the API. OK
@@ -1214,7 +1214,7 @@ class InvoicesController(BaseController):
         Args:
             uid (str): The unique identifier for the invoice, this does not
                 refer to the public facing invoice number.
-            body (SendInvoiceRequest, optional): TODO: type description here.
+            body (SendInvoiceRequest, optional): The request body parameter.
 
         Returns:
             void: Response from the API. No Content
@@ -1376,7 +1376,7 @@ class InvoicesController(BaseController):
         Args:
             uid (str): The unique identifier for the invoice, this does not
                 refer to the public facing invoice number.
-            body (IssueInvoiceRequest, optional): TODO: type description here.
+            body (IssueInvoiceRequest, optional): The request body parameter.
 
         Returns:
             Invoice: Response from the API. OK

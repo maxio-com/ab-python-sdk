@@ -14,11 +14,9 @@ class Metafield(object):
 
     """Implementation of the 'Metafield' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        name (str): TODO: type description here.
+        id (int): The model property of type int.
+        name (str): The model property of type str.
         scope (MetafieldScope): Warning: When updating a metafield's scope
             attribute, all scope attributes must be passed. Partially complete
             scope attributes will override the existing settings.
@@ -30,7 +28,8 @@ class Metafield(object):
             hand, dropdown and radio have a set of allowed values that can be
             input, and appear differently on a Public Signup Page. Defaults to
             'text'
-        enum (str | List[str] | None): TODO: type description here.
+        enum (str | List[str] | None): The model property of type str |
+            List[str] | None.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -127,3 +126,23 @@ class Metafield(object):
                    input_type,
                    enum,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'name={self.name!r}, '
+                f'scope={self.scope!r}, '
+                f'data_count={self.data_count!r}, '
+                f'input_type={self.input_type!r}, '
+                f'enum={self.enum!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'name={self.name!s}, '
+                f'scope={self.scope!s}, '
+                f'data_count={self.data_count!s}, '
+                f'input_type={self.input_type!s}, '
+                f'enum={self.enum!s}, '
+                f'additional_properties={self.additional_properties!s})')

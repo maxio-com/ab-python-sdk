@@ -13,10 +13,8 @@ class ComponentResponse(object):
 
     """Implementation of the 'Component Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component (Component): TODO: type description here.
+        component (Component): The model property of type Component.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +63,13 @@ class ComponentResponse(object):
         # Return an object of this model
         return cls(component,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component={self.component!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component={self.component!s}, '
+                f'additional_properties={self.additional_properties!s})')

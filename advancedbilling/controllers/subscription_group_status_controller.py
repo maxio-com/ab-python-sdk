@@ -41,8 +41,8 @@ class SubscriptionGroupStatusController(BaseController):
 
         Args:
             uid (str): The uid of the subscription group
-            body (CancelGroupedSubscriptionsRequest, optional): TODO: type
-                description here.
+            body (CancelGroupedSubscriptionsRequest, optional): The request
+                body parameter.
 
         Returns:
             void: Response from the API. OK
@@ -189,8 +189,8 @@ class SubscriptionGroupStatusController(BaseController):
 
         Args:
             uid (str): The uid of the subscription group
-            body (ReactivateSubscriptionGroupRequest, optional): TODO: type
-                description here.
+            body (ReactivateSubscriptionGroupRequest, optional): The request
+                body parameter.
 
         Returns:
             ReactivateSubscriptionGroupResponse: Response from the API. OK

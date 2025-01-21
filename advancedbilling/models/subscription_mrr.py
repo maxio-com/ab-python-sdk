@@ -14,12 +14,11 @@ class SubscriptionMRR(object):
 
     """Implementation of the 'Subscription MRR' model.
 
-    TODO: type model description here.
-
     Attributes:
-        subscription_id (int): TODO: type description here.
-        mrr_amount_in_cents (long|int): TODO: type description here.
-        breakouts (SubscriptionMRRBreakout): TODO: type description here.
+        subscription_id (int): The model property of type int.
+        mrr_amount_in_cents (int): The model property of type int.
+        breakouts (SubscriptionMRRBreakout): The model property of type
+            SubscriptionMRRBreakout.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -83,3 +82,17 @@ class SubscriptionMRR(object):
                    mrr_amount_in_cents,
                    breakouts,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_id={self.subscription_id!r}, '
+                f'mrr_amount_in_cents={self.mrr_amount_in_cents!r}, '
+                f'breakouts={self.breakouts!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_id={self.subscription_id!s}, '
+                f'mrr_amount_in_cents={self.mrr_amount_in_cents!s}, '
+                f'breakouts={self.breakouts!s}, '
+                f'additional_properties={self.additional_properties!s})')

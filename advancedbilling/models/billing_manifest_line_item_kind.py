@@ -15,12 +15,12 @@ class BillingManifestLineItemKind(object):
     A handle for the billing manifest line item kind
 
     Attributes:
-        BASELINE: TODO: type description here.
-        INITIAL: TODO: type description here.
-        TRIAL: TODO: type description here.
-        COUPON: TODO: type description here.
-        COMPONENT: TODO: type description here.
-        TAX: TODO: type description here.
+        BASELINE: The enum member of type str.
+        INITIAL: The enum member of type str.
+        TRIAL: The enum member of type str.
+        COUPON: The enum member of type str.
+        COMPONENT: The enum member of type str.
+        TAX: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

@@ -15,8 +15,8 @@ class BankAccountHolderType(object):
     Defaults to personal
 
     Attributes:
-        PERSONAL: TODO: type description here.
-        BUSINESS: TODO: type description here.
+        PERSONAL: The enum member of type str.
+        BUSINESS: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

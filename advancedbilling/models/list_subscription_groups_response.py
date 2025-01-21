@@ -15,12 +15,11 @@ class ListSubscriptionGroupsResponse(object):
 
     """Implementation of the 'List Subscription Groups Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        subscription_groups (List[ListSubscriptionGroupsItem]): TODO: type
-            description here.
-        meta (ListSubscriptionGroupsMeta): TODO: type description here.
+        subscription_groups (List[ListSubscriptionGroupsItem]): The model
+            property of type List[ListSubscriptionGroupsItem].
+        meta (ListSubscriptionGroupsMeta): The model property of type
+            ListSubscriptionGroupsMeta.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -85,3 +84,15 @@ class ListSubscriptionGroupsResponse(object):
         return cls(subscription_groups,
                    meta,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_groups={self.subscription_groups!r}, '
+                f'meta={self.meta!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_groups={self.subscription_groups!s}, '
+                f'meta={self.meta!s}, '
+                f'additional_properties={self.additional_properties!s})')

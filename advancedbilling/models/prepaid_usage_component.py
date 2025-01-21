@@ -16,8 +16,6 @@ class PrepaidUsageComponent(object):
 
     """Implementation of the 'Prepaid Usage Component' model.
 
-    TODO: type model description here.
-
     Attributes:
         name (str): A name for this component that is suitable for showing
             customers and displaying on billing statements, ie. "Minutes".
@@ -50,8 +48,8 @@ class PrepaidUsageComponent(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        price_points (List[CreatePrepaidUsageComponentPricePoint]): TODO: type
-            description here.
+        price_points (List[CreatePrepaidUsageComponentPricePoint]): The model
+            property of type List[CreatePrepaidUsageComponentPricePoint].
         unit_price (str | float | None): The amount the customer will be
             charged per unit when the pricing scheme is “per_unit”. For On/Off
             Components, this is the amount that the customer will be charged
@@ -65,7 +63,8 @@ class PrepaidUsageComponent(object):
         hide_date_range_on_invoice (bool): (Only available on Relationship
             Invoicing sites) Boolean flag describing if the service date range
             should show for the component on generated invoices.
-        overage_pricing (OveragePricing): TODO: type description here.
+        overage_pricing (OveragePricing): The model property of type
+            OveragePricing.
         rollover_prepaid_remainder (bool): Boolean which controls whether or
             not remaining units should be rolled over to the next period
         renew_prepaid_allocation (bool): Boolean which controls whether or not
@@ -75,11 +74,12 @@ class PrepaidUsageComponent(object):
             rollover_prepaid_remainder is true) The number of
             `expiration_interval_unit`s after which rollover amounts should
             expire
-        expiration_interval_unit (ExpirationIntervalUnit): TODO: type
-            description here.
-        display_on_hosted_page (bool): TODO: type description here.
-        allow_fractional_quantities (bool): TODO: type description here.
-        public_signup_page_ids (List[int]): TODO: type description here.
+        expiration_interval_unit (ExpirationIntervalUnit): The model property
+            of type ExpirationIntervalUnit.
+        display_on_hosted_page (bool): The model property of type bool.
+        allow_fractional_quantities (bool): The model property of type bool.
+        public_signup_page_ids (List[int]): The model property of type
+            List[int].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -280,3 +280,53 @@ class PrepaidUsageComponent(object):
                    allow_fractional_quantities,
                    public_signup_page_ids,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'unit_name={self.unit_name!r}, '
+                f'description={self.description!r}, '
+                f'handle={self.handle!r}, '
+                f'taxable={self.taxable!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'prices={self.prices!r}, '
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'price_points={self.price_points!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'tax_code={self.tax_code!r}, '
+                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!r}, '
+                f'overage_pricing={self.overage_pricing!r}, '
+                f'rollover_prepaid_remainder={self.rollover_prepaid_remainder!r}, '
+                f'renew_prepaid_allocation={self.renew_prepaid_allocation!r}, '
+                f'expiration_interval={self.expiration_interval!r}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!r}, '
+                f'display_on_hosted_page={self.display_on_hosted_page!r}, '
+                f'allow_fractional_quantities={self.allow_fractional_quantities!r}, '
+                f'public_signup_page_ids={self.public_signup_page_ids!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'unit_name={self.unit_name!s}, '
+                f'description={self.description!s}, '
+                f'handle={self.handle!s}, '
+                f'taxable={self.taxable!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'prices={self.prices!s}, '
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'price_points={self.price_points!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'tax_code={self.tax_code!s}, '
+                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!s}, '
+                f'overage_pricing={self.overage_pricing!s}, '
+                f'rollover_prepaid_remainder={self.rollover_prepaid_remainder!s}, '
+                f'renew_prepaid_allocation={self.renew_prepaid_allocation!s}, '
+                f'expiration_interval={self.expiration_interval!s}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!s}, '
+                f'display_on_hosted_page={self.display_on_hosted_page!s}, '
+                f'allow_fractional_quantities={self.allow_fractional_quantities!s}, '
+                f'public_signup_page_ids={self.public_signup_page_ids!s}, '
+                f'additional_properties={self.additional_properties!s})')

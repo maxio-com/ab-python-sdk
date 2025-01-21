@@ -14,8 +14,6 @@ class RenewalPreviewRequest(object):
 
     """Implementation of the 'Renewal Preview Request' model.
 
-    TODO: type model description here.
-
     Attributes:
         components (List[RenewalPreviewComponent]): An optional array of
             component definitions to preview. Providing any component
@@ -80,3 +78,13 @@ class RenewalPreviewRequest(object):
         # Return an object of this model
         return cls(components,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'components={self.components!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'components={self.components!s}, '
+                f'additional_properties={self.additional_properties!s})')

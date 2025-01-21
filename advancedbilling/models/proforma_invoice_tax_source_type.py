@@ -12,11 +12,9 @@ class ProformaInvoiceTaxSourceType(object):
 
     """Implementation of the 'Proforma Invoice Tax Source Type' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        TAX: TODO: type description here.
-        AVALARA: TODO: type description here.
+        TAX: The enum member of type str.
+        AVALARA: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

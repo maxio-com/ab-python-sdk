@@ -13,10 +13,8 @@ class VoidInvoiceRequest(object):
 
     """Implementation of the 'Void Invoice Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        void (VoidInvoice): TODO: type description here.
+        void (VoidInvoice): The model property of type VoidInvoice.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +63,13 @@ class VoidInvoiceRequest(object):
         # Return an object of this model
         return cls(void,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'void={self.void!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'void={self.void!s}, '
+                f'additional_properties={self.additional_properties!s})')

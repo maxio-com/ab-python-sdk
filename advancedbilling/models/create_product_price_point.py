@@ -13,29 +13,26 @@ class CreateProductPricePoint(object):
 
     """Implementation of the 'Create Product Price Point' model.
 
-    TODO: type model description here.
-
     Attributes:
         name (str): The product price point name
         handle (str): The product price point API handle
-        price_in_cents (long|int): The product price point price, in integer
-            cents
+        price_in_cents (int): The product price point price, in integer cents
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this product price
             point would renew every 30 days
         interval_unit (IntervalUnit): A string representing the interval unit
             for this product price point, either month or day
-        trial_price_in_cents (long|int): The product price point trial price,
-            in integer cents
+        trial_price_in_cents (int): The product price point trial price, in
+            integer cents
         trial_interval (int): The numerical trial interval. i.e. an interval
             of ‘30’ coupled with a trial_interval_unit of day would mean this
             product price point trial would last 30 days.
         trial_interval_unit (IntervalUnit): A string representing the trial
             interval unit for this product price point, either month or day
-        trial_type (str): TODO: type description here.
-        initial_charge_in_cents (long|int): The product price point initial
-            charge, in integer cents
-        initial_charge_after_trial (bool): TODO: type description here.
+        trial_type (str): The model property of type str.
+        initial_charge_in_cents (int): The product price point initial charge,
+            in integer cents
+        initial_charge_after_trial (bool): The model property of type bool.
         expiration_interval (int): The numerical expiration interval. i.e. an
             expiration_interval of ‘30’ coupled with an
             expiration_interval_unit of day would mean this product price
@@ -185,3 +182,39 @@ class CreateProductPricePoint(object):
                    expiration_interval_unit,
                    use_site_exchange_rate,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'price_in_cents={self.price_in_cents!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'trial_price_in_cents={self.trial_price_in_cents!r}, '
+                f'trial_interval={self.trial_interval!r}, '
+                f'trial_interval_unit={self.trial_interval_unit!r}, '
+                f'trial_type={self.trial_type!r}, '
+                f'initial_charge_in_cents={self.initial_charge_in_cents!r}, '
+                f'initial_charge_after_trial={self.initial_charge_after_trial!r}, '
+                f'expiration_interval={self.expiration_interval!r}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!r}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'price_in_cents={self.price_in_cents!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'trial_price_in_cents={self.trial_price_in_cents!s}, '
+                f'trial_interval={self.trial_interval!s}, '
+                f'trial_interval_unit={self.trial_interval_unit!s}, '
+                f'trial_type={self.trial_type!s}, '
+                f'initial_charge_in_cents={self.initial_charge_in_cents!s}, '
+                f'initial_charge_after_trial={self.initial_charge_after_trial!s}, '
+                f'expiration_interval={self.expiration_interval!s}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!s}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'additional_properties={self.additional_properties!s})')

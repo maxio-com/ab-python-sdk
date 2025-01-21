@@ -13,10 +13,9 @@ class MultiInvoicePaymentResponse(object):
 
     """Implementation of the 'Multi Invoice Payment Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        payment (MultiInvoicePayment): TODO: type description here.
+        payment (MultiInvoicePayment): The model property of type
+            MultiInvoicePayment.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class MultiInvoicePaymentResponse(object):
         # Return an object of this model
         return cls(payment,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'payment={self.payment!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'payment={self.payment!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,8 +13,6 @@ class CreateCurrencyPrice(object):
 
     """Implementation of the 'Create Currency Price' model.
 
-    TODO: type model description here.
-
     Attributes:
         currency (str): ISO code for a currency defined on the site level
         price (float): Price for the price level in this currency
@@ -86,3 +84,17 @@ class CreateCurrencyPrice(object):
                    price,
                    price_id,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'currency={self.currency!r}, '
+                f'price={self.price!r}, '
+                f'price_id={self.price_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'currency={self.currency!s}, '
+                f'price={self.price!s}, '
+                f'price_id={self.price_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

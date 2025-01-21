@@ -65,3 +65,13 @@ class CreateOrUpdateEndpointRequest(object):
         # Return an object of this model
         return cls(endpoint,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'endpoint={self.endpoint!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'endpoint={self.endpoint!s}, '
+                f'additional_properties={self.additional_properties!s})')

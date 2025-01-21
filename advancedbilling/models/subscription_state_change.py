@@ -13,11 +13,9 @@ class SubscriptionStateChange(object):
 
     """Implementation of the 'Subscription State Change' model.
 
-    TODO: type model description here.
-
     Attributes:
-        previous_subscription_state (str): TODO: type description here.
-        new_subscription_state (str): TODO: type description here.
+        previous_subscription_state (str): The model property of type str.
+        new_subscription_state (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -99,3 +97,15 @@ class SubscriptionStateChange(object):
                                        type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('new_subscription_state'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'previous_subscription_state={self.previous_subscription_state!r}, '
+                f'new_subscription_state={self.new_subscription_state!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'previous_subscription_state={self.previous_subscription_state!s}, '
+                f'new_subscription_state={self.new_subscription_state!s}, '
+                f'additional_properties={self.additional_properties!s})')

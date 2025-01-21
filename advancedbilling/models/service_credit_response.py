@@ -13,10 +13,9 @@ class ServiceCreditResponse(object):
 
     """Implementation of the 'Service Credit Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        service_credit (ServiceCredit): TODO: type description here.
+        service_credit (ServiceCredit): The model property of type
+            ServiceCredit.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class ServiceCreditResponse(object):
         # Return an object of this model
         return cls(service_credit,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'service_credit={self.service_credit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'service_credit={self.service_credit!s}, '
+                f'additional_properties={self.additional_properties!s})')

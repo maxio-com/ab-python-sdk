@@ -14,16 +14,14 @@ class ListMRRResponseResult(object):
 
     """Implementation of the 'List MRR Response Result' model.
 
-    TODO: type model description here.
-
     Attributes:
-        page (int): TODO: type description here.
-        per_page (int): TODO: type description here.
-        total_pages (int): TODO: type description here.
-        total_entries (int): TODO: type description here.
-        currency (str): TODO: type description here.
-        currency_symbol (str): TODO: type description here.
-        movements (List[Movement]): TODO: type description here.
+        page (int): The model property of type int.
+        per_page (int): The model property of type int.
+        total_pages (int): The model property of type int.
+        total_entries (int): The model property of type int.
+        currency (str): The model property of type str.
+        currency_symbol (str): The model property of type str.
+        movements (List[Movement]): The model property of type List[Movement].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -123,3 +121,25 @@ class ListMRRResponseResult(object):
                    currency_symbol,
                    movements,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'page={self.page!r}, '
+                f'per_page={self.per_page!r}, '
+                f'total_pages={self.total_pages!r}, '
+                f'total_entries={self.total_entries!r}, '
+                f'currency={self.currency!r}, '
+                f'currency_symbol={self.currency_symbol!r}, '
+                f'movements={self.movements!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'page={self.page!s}, '
+                f'per_page={self.per_page!s}, '
+                f'total_pages={self.total_pages!s}, '
+                f'total_entries={self.total_entries!s}, '
+                f'currency={self.currency!s}, '
+                f'currency_symbol={self.currency_symbol!s}, '
+                f'movements={self.movements!s}, '
+                f'additional_properties={self.additional_properties!s})')

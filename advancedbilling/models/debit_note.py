@@ -22,8 +22,6 @@ class DebitNote(object):
 
     """Implementation of the 'Debit Note' model.
 
-    TODO: type model description here.
-
     Attributes:
         uid (str): Unique identifier for the debit note. It is generated
             automatically by Chargify and has the prefix "db_" followed by
@@ -68,9 +66,11 @@ class DebitNote(object):
         shipping_address (InvoiceAddress): The shipping address of the debited
             subscription.
         line_items (List[CreditNoteLineItem]): Line items on the debit note.
-        discounts (List[InvoiceDiscount]): TODO: type description here.
-        taxes (List[InvoiceTax]): TODO: type description here.
-        refunds (List[InvoiceRefund]): TODO: type description here.
+        discounts (List[InvoiceDiscount]): The model property of type
+            List[InvoiceDiscount].
+        taxes (List[InvoiceTax]): The model property of type List[InvoiceTax].
+        refunds (List[InvoiceRefund]): The model property of type
+            List[InvoiceRefund].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -316,3 +316,57 @@ class DebitNote(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'site_id={self.site_id!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'number={self.number!r}, '
+                f'sequence_number={self.sequence_number!r}, '
+                f'origin_credit_note_uid={self.origin_credit_note_uid!r}, '
+                f'origin_credit_note_number={self.origin_credit_note_number!r}, '
+                f'issue_date={self.issue_date!r}, '
+                f'applied_date={self.applied_date!r}, '
+                f'due_date={self.due_date!r}, '
+                f'status={self.status!r}, '
+                f'memo={self.memo!r}, '
+                f'role={self.role!r}, '
+                f'currency={self.currency!r}, '
+                f'seller={self.seller!r}, '
+                f'customer={self.customer!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'shipping_address={self.shipping_address!r}, '
+                f'line_items={self.line_items!r}, '
+                f'discounts={self.discounts!r}, '
+                f'taxes={self.taxes!r}, '
+                f'refunds={self.refunds!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'site_id={self.site_id!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'number={self.number!s}, '
+                f'sequence_number={self.sequence_number!s}, '
+                f'origin_credit_note_uid={self.origin_credit_note_uid!s}, '
+                f'origin_credit_note_number={self.origin_credit_note_number!s}, '
+                f'issue_date={self.issue_date!s}, '
+                f'applied_date={self.applied_date!s}, '
+                f'due_date={self.due_date!s}, '
+                f'status={self.status!s}, '
+                f'memo={self.memo!s}, '
+                f'role={self.role!s}, '
+                f'currency={self.currency!s}, '
+                f'seller={self.seller!s}, '
+                f'customer={self.customer!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'shipping_address={self.shipping_address!s}, '
+                f'line_items={self.line_items!s}, '
+                f'discounts={self.discounts!s}, '
+                f'taxes={self.taxes!s}, '
+                f'refunds={self.refunds!s}, '
+                f'additional_properties={self.additional_properties!s})')

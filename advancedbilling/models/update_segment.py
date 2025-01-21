@@ -14,14 +14,13 @@ class UpdateSegment(object):
 
     """Implementation of the 'Update Segment' model.
 
-    TODO: type model description here.
-
     Attributes:
         pricing_scheme (PricingScheme): The identifier for the pricing scheme.
             See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
-        prices (List[CreateOrUpdateSegmentPrice]): TODO: type description here.
+        prices (List[CreateOrUpdateSegmentPrice]): The model property of type
+            List[CreateOrUpdateSegmentPrice].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -84,3 +83,15 @@ class UpdateSegment(object):
         return cls(pricing_scheme,
                    prices,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'prices={self.prices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'prices={self.prices!s}, '
+                f'additional_properties={self.additional_properties!s})')

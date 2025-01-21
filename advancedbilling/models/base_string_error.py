@@ -16,7 +16,7 @@ class BaseStringError(object):
     The error is base if it is not directly associated with a single attribute.
 
     Attributes:
-        base (List[str]): TODO: type description here.
+        base (List[str]): The model property of type List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -70,3 +70,13 @@ class BaseStringError(object):
         # Return an object of this model
         return cls(base,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'base={self.base!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'base={self.base!s}, '
+                f'additional_properties={self.additional_properties!s})')

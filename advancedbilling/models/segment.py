@@ -14,28 +14,27 @@ class Segment(object):
 
     """Implementation of the 'Segment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        component_id (int): TODO: type description here.
-        price_point_id (int): TODO: type description here.
-        event_based_billing_metric_id (int): TODO: type description here.
+        id (int): The model property of type int.
+        component_id (int): The model property of type int.
+        price_point_id (int): The model property of type int.
+        event_based_billing_metric_id (int): The model property of type int.
         pricing_scheme (PricingScheme): The identifier for the pricing scheme.
             See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
-        segment_property_1_value (str | float | int | bool | None): TODO: type
-            description here.
-        segment_property_2_value (str | float | int | bool | None): TODO: type
-            description here.
-        segment_property_3_value (str | float | int | bool | None): TODO: type
-            description here.
-        segment_property_4_value (str | float | int | bool | None): TODO: type
-            description here.
-        created_at (datetime): TODO: type description here.
-        updated_at (datetime): TODO: type description here.
-        prices (List[SegmentPrice]): TODO: type description here.
+        segment_property_1_value (str | float | int | bool | None): The model
+            property of type str | float | int | bool | None.
+        segment_property_2_value (str | float | int | bool | None): The model
+            property of type str | float | int | bool | None.
+        segment_property_3_value (str | float | int | bool | None): The model
+            property of type str | float | int | bool | None.
+        segment_property_4_value (str | float | int | bool | None): The model
+            property of type str | float | int | bool | None.
+        created_at (datetime): The model property of type datetime.
+        updated_at (datetime): The model property of type datetime.
+        prices (List[SegmentPrice]): The model property of type
+            List[SegmentPrice].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -171,3 +170,35 @@ class Segment(object):
                    updated_at,
                    prices,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'component_id={self.component_id!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'event_based_billing_metric_id={self.event_based_billing_metric_id!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'segment_property_1_value={self.segment_property_1_value!r}, '
+                f'segment_property_2_value={self.segment_property_2_value!r}, '
+                f'segment_property_3_value={self.segment_property_3_value!r}, '
+                f'segment_property_4_value={self.segment_property_4_value!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'prices={self.prices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'component_id={self.component_id!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'event_based_billing_metric_id={self.event_based_billing_metric_id!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'segment_property_1_value={self.segment_property_1_value!s}, '
+                f'segment_property_2_value={self.segment_property_2_value!s}, '
+                f'segment_property_3_value={self.segment_property_3_value!s}, '
+                f'segment_property_4_value={self.segment_property_4_value!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'prices={self.prices!s}, '
+                f'additional_properties={self.additional_properties!s})')

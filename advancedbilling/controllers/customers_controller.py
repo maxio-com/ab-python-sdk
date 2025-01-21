@@ -69,8 +69,7 @@ class CustomersController(BaseController):
         omer-Locale)
 
         Args:
-            body (CreateCustomerRequest, optional): TODO: type description
-                here.
+            body (CreateCustomerRequest, optional): The request body parameter.
 
         Returns:
             CustomerResponse: Response from the API. OK
@@ -276,8 +275,7 @@ class CustomersController(BaseController):
 
         Args:
             id (int): The Advanced Billing id of the customer
-            body (UpdateCustomerRequest, optional): TODO: type description
-                here.
+            body (UpdateCustomerRequest, optional): The request body parameter.
 
         Returns:
             CustomerResponse: Response from the API. OK

@@ -17,10 +17,10 @@ class PricingScheme(object):
     for an overview of pricing schemes.
 
     Attributes:
-        STAIRSTEP: TODO: type description here.
-        VOLUME: TODO: type description here.
-        PER_UNIT: TODO: type description here.
-        TIERED: TODO: type description here.
+        STAIRSTEP: The enum member of type str.
+        VOLUME: The enum member of type str.
+        PER_UNIT: The enum member of type str.
+        TIERED: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

@@ -13,13 +13,11 @@ class ReferralCode(object):
 
     """Implementation of the 'Referral Code' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        site_id (int): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        code (str): TODO: type description here.
+        id (int): The model property of type int.
+        site_id (int): The model property of type int.
+        subscription_id (int): The model property of type int.
+        code (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -94,3 +92,19 @@ class ReferralCode(object):
                    subscription_id,
                    code,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'site_id={self.site_id!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'code={self.code!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'site_id={self.site_id!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'code={self.code!s}, '
+                f'additional_properties={self.additional_properties!s})')

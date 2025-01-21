@@ -13,10 +13,9 @@ class DeductServiceCreditRequest(object):
 
     """Implementation of the 'Deduct Service Credit Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        deduction (DeductServiceCredit): TODO: type description here.
+        deduction (DeductServiceCredit): The model property of type
+            DeductServiceCredit.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class DeductServiceCreditRequest(object):
         # Return an object of this model
         return cls(deduction,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'deduction={self.deduction!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'deduction={self.deduction!s}, '
+                f'additional_properties={self.additional_properties!s})')

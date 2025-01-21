@@ -12,11 +12,9 @@ class RestrictionType(object):
 
     """Implementation of the 'Restriction Type' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        COMPONENT: TODO: type description here.
-        PRODUCT: TODO: type description here.
+        COMPONENT: The enum member of type str.
+        PRODUCT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

@@ -13,10 +13,8 @@ class OkResponse(object):
 
     """Implementation of the 'Ok Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        ok (str): TODO: type description here.
+        ok (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -70,3 +68,13 @@ class OkResponse(object):
         # Return an object of this model
         return cls(ok,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'ok={self.ok!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'ok={self.ok!s}, '
+                f'additional_properties={self.additional_properties!s})')

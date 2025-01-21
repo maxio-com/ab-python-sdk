@@ -14,31 +14,28 @@ class ProductPricePoint(object):
 
     """Implementation of the 'Product Price Point' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
+        id (int): The model property of type int.
         name (str): The product price point name
         handle (str): The product price point API handle
-        price_in_cents (long|int): The product price point price, in integer
-            cents
+        price_in_cents (int): The product price point price, in integer cents
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this product price
             point would renew every 30 days
         interval_unit (IntervalUnit): A string representing the interval unit
             for this product price point, either month or day
-        trial_price_in_cents (long|int): The product price point trial price,
-            in integer cents
+        trial_price_in_cents (int): The product price point trial price, in
+            integer cents
         trial_interval (int): The numerical trial interval. i.e. an interval
             of ‘30’ coupled with a trial_interval_unit of day would mean this
             product price point trial would last 30 days
         trial_interval_unit (IntervalUnit): A string representing the trial
             interval unit for this product price point, either month or day
-        trial_type (str): TODO: type description here.
+        trial_type (str): The model property of type str.
         introductory_offer (bool): reserved for future use
-        initial_charge_in_cents (long|int): The product price point initial
-            charge, in integer cents
-        initial_charge_after_trial (bool): TODO: type description here.
+        initial_charge_in_cents (int): The product price point initial charge,
+            in integer cents
+        initial_charge_after_trial (bool): The model property of type bool.
         expiration_interval (int): The numerical expiration interval. i.e. an
             expiration_interval of ‘30’ coupled with an
             expiration_interval_unit of day would mean this product price
@@ -299,3 +296,59 @@ class ProductPricePoint(object):
                    subscription_id,
                    currency_prices,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'price_in_cents={self.price_in_cents!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'trial_price_in_cents={self.trial_price_in_cents!r}, '
+                f'trial_interval={self.trial_interval!r}, '
+                f'trial_interval_unit={self.trial_interval_unit!r}, '
+                f'trial_type={self.trial_type!r}, '
+                f'introductory_offer={self.introductory_offer!r}, '
+                f'initial_charge_in_cents={self.initial_charge_in_cents!r}, '
+                f'initial_charge_after_trial={self.initial_charge_after_trial!r}, '
+                f'expiration_interval={self.expiration_interval!r}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!r}, '
+                f'product_id={self.product_id!r}, '
+                f'archived_at={self.archived_at!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'mtype={self.mtype!r}, '
+                f'tax_included={self.tax_included!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'currency_prices={self.currency_prices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'price_in_cents={self.price_in_cents!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'trial_price_in_cents={self.trial_price_in_cents!s}, '
+                f'trial_interval={self.trial_interval!s}, '
+                f'trial_interval_unit={self.trial_interval_unit!s}, '
+                f'trial_type={self.trial_type!s}, '
+                f'introductory_offer={self.introductory_offer!s}, '
+                f'initial_charge_in_cents={self.initial_charge_in_cents!s}, '
+                f'initial_charge_after_trial={self.initial_charge_after_trial!s}, '
+                f'expiration_interval={self.expiration_interval!s}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!s}, '
+                f'product_id={self.product_id!s}, '
+                f'archived_at={self.archived_at!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'mtype={self.mtype!s}, '
+                f'tax_included={self.tax_included!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'currency_prices={self.currency_prices!s}, '
+                f'additional_properties={self.additional_properties!s})')

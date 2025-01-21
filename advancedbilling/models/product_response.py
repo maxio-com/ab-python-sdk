@@ -13,10 +13,8 @@ class ProductResponse(object):
 
     """Implementation of the 'Product Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        product (Product): TODO: type description here.
+        product (Product): The model property of type Product.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +63,13 @@ class ProductResponse(object):
         # Return an object of this model
         return cls(product,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'product={self.product!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'product={self.product!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -12,14 +12,12 @@ class SubscriptionGroupPrepayment(object):
 
     """Implementation of the 'Subscription Group Prepayment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        amount (int): TODO: type description here.
-        details (str): TODO: type description here.
-        memo (str): TODO: type description here.
-        method (SubscriptionGroupPrepaymentMethod): TODO: type description
-            here.
+        amount (int): The model property of type int.
+        details (str): The model property of type str.
+        memo (str): The model property of type str.
+        method (SubscriptionGroupPrepaymentMethod): The model property of type
+            SubscriptionGroupPrepaymentMethod.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -83,3 +81,19 @@ class SubscriptionGroupPrepayment(object):
                    memo,
                    method,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!r}, '
+                f'details={self.details!r}, '
+                f'memo={self.memo!r}, '
+                f'method={self.method!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!s}, '
+                f'details={self.details!s}, '
+                f'memo={self.memo!s}, '
+                f'method={self.method!s}, '
+                f'additional_properties={self.additional_properties!s})')

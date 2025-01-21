@@ -13,13 +13,11 @@ class ProformaInvoicePayment(object):
 
     """Implementation of the 'Proforma Invoice Payment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        memo (str): TODO: type description here.
-        original_amount (str): TODO: type description here.
-        applied_amount (str): TODO: type description here.
-        prepayment (bool): TODO: type description here.
+        memo (str): The model property of type str.
+        original_amount (str): The model property of type str.
+        applied_amount (str): The model property of type str.
+        prepayment (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -94,3 +92,19 @@ class ProformaInvoicePayment(object):
                    applied_amount,
                    prepayment,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'memo={self.memo!r}, '
+                f'original_amount={self.original_amount!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'prepayment={self.prepayment!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'memo={self.memo!s}, '
+                f'original_amount={self.original_amount!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'prepayment={self.prepayment!s}, '
+                f'additional_properties={self.additional_properties!s})')

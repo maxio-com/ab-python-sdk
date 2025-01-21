@@ -13,11 +13,9 @@ class CreateMetafieldsRequest(object):
 
     """Implementation of the 'Create Metafields Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        metafields (CreateMetafield | List[CreateMetafield]): TODO: type
-            description here.
+        metafields (CreateMetafield | List[CreateMetafield]): The model
+            property of type CreateMetafield | List[CreateMetafield].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -90,3 +88,13 @@ class CreateMetafieldsRequest(object):
             return False
 
         return UnionTypeLookUp.get('CreateMetafieldsRequestMetafields').validate(dictionary.get('metafields')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'metafields={self.metafields!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'metafields={self.metafields!s}, '
+                f'additional_properties={self.additional_properties!s})')

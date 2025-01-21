@@ -14,8 +14,6 @@ class ProformaError(object):
 
     """Implementation of the 'Proforma Error' model.
 
-    TODO: type model description here.
-
     Attributes:
         subscription (BaseStringError): The error is base if it is not
             directly associated with a single attribute.
@@ -72,3 +70,13 @@ class ProformaError(object):
         # Return an object of this model
         return cls(subscription,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription={self.subscription!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription={self.subscription!s}, '
+                f'additional_properties={self.additional_properties!s})')

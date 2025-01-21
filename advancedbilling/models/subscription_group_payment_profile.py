@@ -13,13 +13,11 @@ class SubscriptionGroupPaymentProfile(object):
 
     """Implementation of the 'Subscription Group Payment Profile' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        first_name (str): TODO: type description here.
-        last_name (str): TODO: type description here.
-        masked_card_number (str): TODO: type description here.
+        id (int): The model property of type int.
+        first_name (str): The model property of type str.
+        last_name (str): The model property of type str.
+        masked_card_number (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -94,3 +92,19 @@ class SubscriptionGroupPaymentProfile(object):
                    last_name,
                    masked_card_number,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'masked_card_number={self.masked_card_number!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'masked_card_number={self.masked_card_number!s}, '
+                f'additional_properties={self.additional_properties!s})')

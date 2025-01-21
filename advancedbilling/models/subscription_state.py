@@ -85,21 +85,21 @@ class SubscriptionState(object):
     tion-States) for more info about subscription states and state transitions.
 
     Attributes:
-        PENDING: TODO: type description here.
-        FAILED_TO_CREATE: TODO: type description here.
-        TRIALING: TODO: type description here.
-        ASSESSING: TODO: type description here.
-        ACTIVE: TODO: type description here.
-        SOFT_FAILURE: TODO: type description here.
-        PAST_DUE: TODO: type description here.
-        SUSPENDED: TODO: type description here.
-        CANCELED: TODO: type description here.
-        EXPIRED: TODO: type description here.
-        PAUSED: TODO: type description here.
-        UNPAID: TODO: type description here.
-        TRIAL_ENDED: TODO: type description here.
-        ON_HOLD: TODO: type description here.
-        AWAITING_SIGNUP: TODO: type description here.
+        PENDING: The enum member of type str.
+        FAILED_TO_CREATE: The enum member of type str.
+        TRIALING: The enum member of type str.
+        ASSESSING: The enum member of type str.
+        ACTIVE: The enum member of type str.
+        SOFT_FAILURE: The enum member of type str.
+        PAST_DUE: The enum member of type str.
+        SUSPENDED: The enum member of type str.
+        CANCELED: The enum member of type str.
+        EXPIRED: The enum member of type str.
+        PAUSED: The enum member of type str.
+        UNPAID: The enum member of type str.
+        TRIAL_ENDED: The enum member of type str.
+        ON_HOLD: The enum member of type str.
+        AWAITING_SIGNUP: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

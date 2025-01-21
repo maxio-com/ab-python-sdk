@@ -15,8 +15,6 @@ class ListPricePointsFilter(object):
 
     """Implementation of the 'List PricePoints Filter' model.
 
-    TODO: type model description here.
-
     Attributes:
         date_field (BasicDateField): The type of filter you would like to
             apply to your search. Use in query:
@@ -150,3 +148,27 @@ class ListPricePointsFilter(object):
                    ids,
                    archived_at,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'date_field={self.date_field!r}, '
+                f'start_date={self.start_date!r}, '
+                f'end_date={self.end_date!r}, '
+                f'start_datetime={self.start_datetime!r}, '
+                f'end_datetime={self.end_datetime!r}, '
+                f'mtype={self.mtype!r}, '
+                f'ids={self.ids!r}, '
+                f'archived_at={self.archived_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'date_field={self.date_field!s}, '
+                f'start_date={self.start_date!s}, '
+                f'end_date={self.end_date!s}, '
+                f'start_datetime={self.start_datetime!s}, '
+                f'end_datetime={self.end_datetime!s}, '
+                f'mtype={self.mtype!s}, '
+                f'ids={self.ids!s}, '
+                f'archived_at={self.archived_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -142,3 +142,23 @@ class RefundInvoice(object):
                                         type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('payment_id'),
                                         type_callable=lambda value: isinstance(value, int))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!r}, '
+                f'memo={self.memo!r}, '
+                f'payment_id={self.payment_id!r}, '
+                f'external={self.external!r}, '
+                f'apply_credit={self.apply_credit!r}, '
+                f'void_invoice={self.void_invoice!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!s}, '
+                f'memo={self.memo!s}, '
+                f'payment_id={self.payment_id!s}, '
+                f'external={self.external!s}, '
+                f'apply_credit={self.apply_credit!s}, '
+                f'void_invoice={self.void_invoice!s}, '
+                f'additional_properties={self.additional_properties!s})')

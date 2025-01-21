@@ -13,18 +13,16 @@ class CreatePaymentProfile(object):
 
     """Implementation of the 'Create Payment Profile' model.
 
-    TODO: type model description here.
-
     Attributes:
         chargify_token (str): Token received after sending billing
             informations using chargify.js.
-        id (int): TODO: type description here.
-        payment_type (PaymentType): TODO: type description here.
+        id (int): The model property of type int.
+        payment_type (PaymentType): The model property of type PaymentType.
         first_name (str): First name on card or bank account. If omitted, the
             first_name from customer attributes will be used.
         last_name (str): Last name on card or bank account. If omitted, the
             last_name from customer attributes will be used.
-        masked_card_number (str): TODO: type description here.
+        masked_card_number (str): The model property of type str.
         full_number (str): The full credit card number
         card_type (CardType): The type of card used.
         expiration_month (int | str | None): (Optional when performing an
@@ -378,3 +376,75 @@ class CreatePaymentProfile(object):
                    bank_account_holder_type,
                    last_four,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargify_token={self.chargify_token!r}, '
+                f'id={self.id!r}, '
+                f'payment_type={self.payment_type!r}, '
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'masked_card_number={self.masked_card_number!r}, '
+                f'full_number={self.full_number!r}, '
+                f'card_type={self.card_type!r}, '
+                f'expiration_month={self.expiration_month!r}, '
+                f'expiration_year={self.expiration_year!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'billing_address_2={self.billing_address_2!r}, '
+                f'billing_city={self.billing_city!r}, '
+                f'billing_state={self.billing_state!r}, '
+                f'billing_country={self.billing_country!r}, '
+                f'billing_zip={self.billing_zip!r}, '
+                f'current_vault={self.current_vault!r}, '
+                f'vault_token={self.vault_token!r}, '
+                f'customer_vault_token={self.customer_vault_token!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'paypal_email={self.paypal_email!r}, '
+                f'payment_method_nonce={self.payment_method_nonce!r}, '
+                f'gateway_handle={self.gateway_handle!r}, '
+                f'cvv={self.cvv!r}, '
+                f'bank_name={self.bank_name!r}, '
+                f'bank_iban={self.bank_iban!r}, '
+                f'bank_routing_number={self.bank_routing_number!r}, '
+                f'bank_account_number={self.bank_account_number!r}, '
+                f'bank_branch_code={self.bank_branch_code!r}, '
+                f'bank_account_type={self.bank_account_type!r}, '
+                f'bank_account_holder_type={self.bank_account_holder_type!r}, '
+                f'last_four={self.last_four!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargify_token={self.chargify_token!s}, '
+                f'id={self.id!s}, '
+                f'payment_type={self.payment_type!s}, '
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'masked_card_number={self.masked_card_number!s}, '
+                f'full_number={self.full_number!s}, '
+                f'card_type={self.card_type!s}, '
+                f'expiration_month={self.expiration_month!s}, '
+                f'expiration_year={self.expiration_year!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'billing_address_2={self.billing_address_2!s}, '
+                f'billing_city={self.billing_city!s}, '
+                f'billing_state={self.billing_state!s}, '
+                f'billing_country={self.billing_country!s}, '
+                f'billing_zip={self.billing_zip!s}, '
+                f'current_vault={self.current_vault!s}, '
+                f'vault_token={self.vault_token!s}, '
+                f'customer_vault_token={self.customer_vault_token!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'paypal_email={self.paypal_email!s}, '
+                f'payment_method_nonce={self.payment_method_nonce!s}, '
+                f'gateway_handle={self.gateway_handle!s}, '
+                f'cvv={self.cvv!s}, '
+                f'bank_name={self.bank_name!s}, '
+                f'bank_iban={self.bank_iban!s}, '
+                f'bank_routing_number={self.bank_routing_number!s}, '
+                f'bank_account_number={self.bank_account_number!s}, '
+                f'bank_branch_code={self.bank_branch_code!s}, '
+                f'bank_account_type={self.bank_account_type!s}, '
+                f'bank_account_holder_type={self.bank_account_holder_type!s}, '
+                f'last_four={self.last_four!s}, '
+                f'additional_properties={self.additional_properties!s})')

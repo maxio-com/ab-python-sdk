@@ -15,12 +15,10 @@ class SubscriptionGroupSignupEventData(object):
 
     """Implementation of the 'Subscription Group Signup Event Data' model.
 
-    TODO: type model description here.
-
     Attributes:
-        subscription_group (SubscriptionGroupSignupFailureData): TODO: type
-            description here.
-        customer (Customer): TODO: type description here.
+        subscription_group (SubscriptionGroupSignupFailureData): The model
+            property of type SubscriptionGroupSignupFailureData.
+        customer (Customer): The model property of type Customer.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -112,3 +110,15 @@ class SubscriptionGroupSignupEventData(object):
                                         type_callable=lambda value: Customer.validate(value),
                                         is_value_nullable=True,
                                         is_model_dict=True)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_group={self.subscription_group!r}, '
+                f'customer={self.customer!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_group={self.subscription_group!s}, '
+                f'customer={self.customer!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -15,17 +15,15 @@ class SubscriptionGroupSignupError(object):
 
     """Implementation of the 'Subscription Group Signup Error' model.
 
-    TODO: type model description here.
-
     Attributes:
         subscriptions (Dict[str, SubscriptionGroupSubscriptionError]): Object
             that as key have subscription position in request subscriptions
             array and as value subscription errors object.
-        payer_reference (str): TODO: type description here.
-        payer (PayerError): TODO: type description here.
-        subscription_group (List[str]): TODO: type description here.
-        payment_profile_id (str): TODO: type description here.
-        payer_id (str): TODO: type description here.
+        payer_reference (str): The model property of type str.
+        payer (PayerError): The model property of type PayerError.
+        subscription_group (List[str]): The model property of type List[str].
+        payment_profile_id (str): The model property of type str.
+        payer_id (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -114,3 +112,23 @@ class SubscriptionGroupSignupError(object):
                    payment_profile_id,
                    payer_id,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscriptions={self.subscriptions!r}, '
+                f'payer_reference={self.payer_reference!r}, '
+                f'payer={self.payer!r}, '
+                f'subscription_group={self.subscription_group!r}, '
+                f'payment_profile_id={self.payment_profile_id!r}, '
+                f'payer_id={self.payer_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscriptions={self.subscriptions!s}, '
+                f'payer_reference={self.payer_reference!s}, '
+                f'payer={self.payer!s}, '
+                f'subscription_group={self.subscription_group!s}, '
+                f'payment_profile_id={self.payment_profile_id!s}, '
+                f'payer_id={self.payer_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

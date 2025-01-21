@@ -12,11 +12,9 @@ class GroupType(object):
 
     """Implementation of the 'Group Type' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        SINGLE_CUSTOMER: TODO: type description here.
-        MULTIPLE_CUSTOMERS: TODO: type description here.
+        SINGLE_CUSTOMER: The enum member of type str.
+        MULTIPLE_CUSTOMERS: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

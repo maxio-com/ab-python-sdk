@@ -16,9 +16,9 @@ class ResumptionCharge(object):
     subscription's charge should be handled
 
     Attributes:
-        PRORATED: TODO: type description here.
-        IMMEDIATE: TODO: type description here.
-        DELAYED: TODO: type description here.
+        PRORATED: The enum member of type str.
+        IMMEDIATE: The enum member of type str.
+        DELAYED: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

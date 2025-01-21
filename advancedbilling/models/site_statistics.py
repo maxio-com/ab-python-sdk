@@ -13,20 +13,18 @@ class SiteStatistics(object):
 
     """Implementation of the 'Site Statistics' model.
 
-    TODO: type model description here.
-
     Attributes:
-        total_subscriptions (int): TODO: type description here.
-        subscriptions_today (int): TODO: type description here.
-        total_revenue (str): TODO: type description here.
-        revenue_today (str): TODO: type description here.
-        revenue_this_month (str): TODO: type description here.
-        revenue_this_year (str): TODO: type description here.
-        total_canceled_subscriptions (int): TODO: type description here.
-        total_active_subscriptions (int): TODO: type description here.
-        total_past_due_subscriptions (int): TODO: type description here.
-        total_unpaid_subscriptions (int): TODO: type description here.
-        total_dunning_subscriptions (int): TODO: type description here.
+        total_subscriptions (int): The model property of type int.
+        subscriptions_today (int): The model property of type int.
+        total_revenue (str): The model property of type str.
+        revenue_today (str): The model property of type str.
+        revenue_this_month (str): The model property of type str.
+        revenue_this_year (str): The model property of type str.
+        total_canceled_subscriptions (int): The model property of type int.
+        total_active_subscriptions (int): The model property of type int.
+        total_past_due_subscriptions (int): The model property of type int.
+        total_unpaid_subscriptions (int): The model property of type int.
+        total_dunning_subscriptions (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -150,3 +148,33 @@ class SiteStatistics(object):
                    total_unpaid_subscriptions,
                    total_dunning_subscriptions,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'total_subscriptions={self.total_subscriptions!r}, '
+                f'subscriptions_today={self.subscriptions_today!r}, '
+                f'total_revenue={self.total_revenue!r}, '
+                f'revenue_today={self.revenue_today!r}, '
+                f'revenue_this_month={self.revenue_this_month!r}, '
+                f'revenue_this_year={self.revenue_this_year!r}, '
+                f'total_canceled_subscriptions={self.total_canceled_subscriptions!r}, '
+                f'total_active_subscriptions={self.total_active_subscriptions!r}, '
+                f'total_past_due_subscriptions={self.total_past_due_subscriptions!r}, '
+                f'total_unpaid_subscriptions={self.total_unpaid_subscriptions!r}, '
+                f'total_dunning_subscriptions={self.total_dunning_subscriptions!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'total_subscriptions={self.total_subscriptions!s}, '
+                f'subscriptions_today={self.subscriptions_today!s}, '
+                f'total_revenue={self.total_revenue!s}, '
+                f'revenue_today={self.revenue_today!s}, '
+                f'revenue_this_month={self.revenue_this_month!s}, '
+                f'revenue_this_year={self.revenue_this_year!s}, '
+                f'total_canceled_subscriptions={self.total_canceled_subscriptions!s}, '
+                f'total_active_subscriptions={self.total_active_subscriptions!s}, '
+                f'total_past_due_subscriptions={self.total_past_due_subscriptions!s}, '
+                f'total_unpaid_subscriptions={self.total_unpaid_subscriptions!s}, '
+                f'total_dunning_subscriptions={self.total_dunning_subscriptions!s}, '
+                f'additional_properties={self.additional_properties!s})')

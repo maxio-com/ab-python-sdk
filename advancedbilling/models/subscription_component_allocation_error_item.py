@@ -13,11 +13,9 @@ class SubscriptionComponentAllocationErrorItem(object):
 
     """Implementation of the 'Subscription Component Allocation Error Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        kind (str): TODO: type description here.
-        message (str): TODO: type description here.
+        kind (str): The model property of type str.
+        message (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -78,3 +76,15 @@ class SubscriptionComponentAllocationErrorItem(object):
         return cls(kind,
                    message,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'kind={self.kind!r}, '
+                f'message={self.message!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'kind={self.kind!s}, '
+                f'message={self.message!s}, '
+                f'additional_properties={self.additional_properties!s})')

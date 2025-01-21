@@ -13,8 +13,6 @@ class UpdatePaymentProfile(object):
 
     """Implementation of the 'Update Payment Profile' model.
 
-    TODO: type model description here.
-
     Attributes:
         first_name (str): The first name of the card holder.
         last_name (str): The last name of the card holder.
@@ -192,3 +190,37 @@ class UpdatePaymentProfile(object):
                    billing_country,
                    billing_address_2,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'full_number={self.full_number!r}, '
+                f'card_type={self.card_type!r}, '
+                f'expiration_month={self.expiration_month!r}, '
+                f'expiration_year={self.expiration_year!r}, '
+                f'current_vault={self.current_vault!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'billing_city={self.billing_city!r}, '
+                f'billing_state={self.billing_state!r}, '
+                f'billing_zip={self.billing_zip!r}, '
+                f'billing_country={self.billing_country!r}, '
+                f'billing_address_2={self.billing_address_2!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'full_number={self.full_number!s}, '
+                f'card_type={self.card_type!s}, '
+                f'expiration_month={self.expiration_month!s}, '
+                f'expiration_year={self.expiration_year!s}, '
+                f'current_vault={self.current_vault!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'billing_city={self.billing_city!s}, '
+                f'billing_state={self.billing_state!s}, '
+                f'billing_zip={self.billing_zip!s}, '
+                f'billing_country={self.billing_country!s}, '
+                f'billing_address_2={self.billing_address_2!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,13 +13,10 @@ class AccountBalance(object):
 
     """Implementation of the 'Account Balance' model.
 
-    TODO: type model description here.
-
     Attributes:
-        balance_in_cents (long|int): The balance in cents.
-        automatic_balance_in_cents (long|int): The automatic balance in cents.
-        remittance_balance_in_cents (long|int): The remittance balance in
-            cents.
+        balance_in_cents (int): The balance in cents.
+        automatic_balance_in_cents (int): The automatic balance in cents.
+        remittance_balance_in_cents (int): The remittance balance in cents.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -92,3 +89,17 @@ class AccountBalance(object):
                    automatic_balance_in_cents,
                    remittance_balance_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'balance_in_cents={self.balance_in_cents!r}, '
+                f'automatic_balance_in_cents={self.automatic_balance_in_cents!r}, '
+                f'remittance_balance_in_cents={self.remittance_balance_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'balance_in_cents={self.balance_in_cents!s}, '
+                f'automatic_balance_in_cents={self.automatic_balance_in_cents!s}, '
+                f'remittance_balance_in_cents={self.remittance_balance_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

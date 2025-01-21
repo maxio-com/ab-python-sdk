@@ -26,9 +26,9 @@ class InvoiceConsolidationLevel(object):
     nvoice-Consolidation).
 
     Attributes:
-        NONE: TODO: type description here.
-        CHILD: TODO: type description here.
-        PARENT: TODO: type description here.
+        NONE: The enum member of type str.
+        CHILD: The enum member of type str.
+        PARENT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

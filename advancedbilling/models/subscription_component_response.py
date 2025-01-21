@@ -14,10 +14,9 @@ class SubscriptionComponentResponse(object):
 
     """Implementation of the 'Subscription Component Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component (SubscriptionComponent): TODO: type description here.
+        component (SubscriptionComponent): The model property of type
+            SubscriptionComponent.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +70,13 @@ class SubscriptionComponentResponse(object):
         # Return an object of this model
         return cls(component,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component={self.component!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component={self.component!s}, '
+                f'additional_properties={self.additional_properties!s})')

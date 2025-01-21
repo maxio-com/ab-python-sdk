@@ -14,14 +14,13 @@ class ListSaleRepItem(object):
 
     """Implementation of the 'List Sale Rep Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        full_name (str): TODO: type description here.
-        subscriptions_count (int): TODO: type description here.
-        mrr_data (Dict[str, SaleRepItemMrr]): TODO: type description here.
-        test_mode (bool): TODO: type description here.
+        id (int): The model property of type int.
+        full_name (str): The model property of type str.
+        subscriptions_count (int): The model property of type int.
+        mrr_data (Dict[str, SaleRepItemMrr]): The model property of type
+            Dict[str, SaleRepItemMrr].
+        test_mode (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -103,3 +102,21 @@ class ListSaleRepItem(object):
                    mrr_data,
                    test_mode,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'full_name={self.full_name!r}, '
+                f'subscriptions_count={self.subscriptions_count!r}, '
+                f'mrr_data={self.mrr_data!r}, '
+                f'test_mode={self.test_mode!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'full_name={self.full_name!s}, '
+                f'subscriptions_count={self.subscriptions_count!s}, '
+                f'mrr_data={self.mrr_data!s}, '
+                f'test_mode={self.test_mode!s}, '
+                f'additional_properties={self.additional_properties!s})')

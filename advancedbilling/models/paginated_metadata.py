@@ -14,14 +14,12 @@ class PaginatedMetadata(object):
 
     """Implementation of the 'Paginated Metadata' model.
 
-    TODO: type model description here.
-
     Attributes:
-        total_count (int): TODO: type description here.
-        current_page (int): TODO: type description here.
-        total_pages (int): TODO: type description here.
-        per_page (int): TODO: type description here.
-        metadata (List[Metadata]): TODO: type description here.
+        total_count (int): The model property of type int.
+        current_page (int): The model property of type int.
+        total_pages (int): The model property of type int.
+        per_page (int): The model property of type int.
+        metadata (List[Metadata]): The model property of type List[Metadata].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -107,3 +105,21 @@ class PaginatedMetadata(object):
                    per_page,
                    metadata,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'total_count={self.total_count!r}, '
+                f'current_page={self.current_page!r}, '
+                f'total_pages={self.total_pages!r}, '
+                f'per_page={self.per_page!r}, '
+                f'metadata={self.metadata!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'total_count={self.total_count!s}, '
+                f'current_page={self.current_page!s}, '
+                f'total_pages={self.total_pages!s}, '
+                f'per_page={self.per_page!s}, '
+                f'metadata={self.metadata!s}, '
+                f'additional_properties={self.additional_properties!s})')

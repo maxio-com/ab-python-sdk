@@ -18,10 +18,10 @@ class CollectionMethod(object):
     `remittance`, `automatic`, `prepaid`.
 
     Attributes:
-        AUTOMATIC: TODO: type description here.
-        REMITTANCE: TODO: type description here.
-        PREPAID: TODO: type description here.
-        INVOICE: TODO: type description here.
+        AUTOMATIC: The enum member of type str.
+        REMITTANCE: The enum member of type str.
+        PREPAID: The enum member of type str.
+        INVOICE: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

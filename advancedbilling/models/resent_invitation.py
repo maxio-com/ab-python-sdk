@@ -13,15 +13,14 @@ class ResentInvitation(object):
 
     """Implementation of the 'Resent Invitation' model.
 
-    TODO: type model description here.
-
     Attributes:
-        last_sent_at (str): TODO: type description here.
-        last_accepted_at (str): TODO: type description here.
-        send_invite_link_text (str): TODO: type description here.
-        uninvited_count (int): TODO: type description here.
-        last_invite_sent_at (datetime): TODO: type description here.
-        last_invite_accepted_at (datetime): TODO: type description here.
+        last_sent_at (str): The model property of type str.
+        last_accepted_at (str): The model property of type str.
+        send_invite_link_text (str): The model property of type str.
+        uninvited_count (int): The model property of type int.
+        last_invite_sent_at (datetime): The model property of type datetime.
+        last_invite_accepted_at (datetime): The model property of type
+            datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -110,3 +109,23 @@ class ResentInvitation(object):
                    last_invite_sent_at,
                    last_invite_accepted_at,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'last_sent_at={self.last_sent_at!r}, '
+                f'last_accepted_at={self.last_accepted_at!r}, '
+                f'send_invite_link_text={self.send_invite_link_text!r}, '
+                f'uninvited_count={self.uninvited_count!r}, '
+                f'last_invite_sent_at={self.last_invite_sent_at!r}, '
+                f'last_invite_accepted_at={self.last_invite_accepted_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'last_sent_at={self.last_sent_at!s}, '
+                f'last_accepted_at={self.last_accepted_at!s}, '
+                f'send_invite_link_text={self.send_invite_link_text!s}, '
+                f'uninvited_count={self.uninvited_count!s}, '
+                f'last_invite_sent_at={self.last_invite_sent_at!s}, '
+                f'last_invite_accepted_at={self.last_invite_accepted_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

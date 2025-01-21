@@ -16,8 +16,6 @@ class InvoiceLineItem(object):
 
     """Implementation of the 'Invoice Line Item' model.
 
-    TODO: type model description here.
-
     Attributes:
         uid (str): Unique identifier for the line item.  Useful when
             cross-referencing the line against individual discounts in the
@@ -77,7 +75,7 @@ class InvoiceLineItem(object):
             For periodic charges paid in arrears (e.g. metered charges), this
             date will be the date of the current billing date. * For
             non-periodic charges, this date and the start date will match.
-        transaction_id (int): TODO: type description here.
+        transaction_id (int): The model property of type int.
         product_id (int): The ID of the product subscribed when the charge was
             made.  This may be set even for component charges, so true
             product-only (non-component) charges will also have a nil
@@ -88,14 +86,14 @@ class InvoiceLineItem(object):
             `nil` for non-component charges.
         price_point_id (int): The price point ID of the component being
             billed. Will be `nil` for non-component charges.
-        billing_schedule_item_id (int): TODO: type description here.
-        hide (bool): TODO: type description here.
-        component_cost_data (InvoiceLineItemComponentCostData): TODO: type
-            description here.
+        billing_schedule_item_id (int): The model property of type int.
+        hide (bool): The model property of type bool.
+        component_cost_data (InvoiceLineItemComponentCostData): The model
+            property of type InvoiceLineItemComponentCostData.
         product_price_point_id (int): The price point ID of the line item's
             product
-        custom_item (bool): TODO: type description here.
-        kind (str): TODO: type description here.
+        custom_item (bool): The model property of type bool.
+        kind (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -338,3 +336,57 @@ class InvoiceLineItem(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'title={self.title!r}, '
+                f'description={self.description!r}, '
+                f'quantity={self.quantity!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'subtotal_amount={self.subtotal_amount!r}, '
+                f'discount_amount={self.discount_amount!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'total_amount={self.total_amount!r}, '
+                f'tiered_unit_price={self.tiered_unit_price!r}, '
+                f'period_range_start={self.period_range_start!r}, '
+                f'period_range_end={self.period_range_end!r}, '
+                f'transaction_id={self.transaction_id!r}, '
+                f'product_id={self.product_id!r}, '
+                f'product_version={self.product_version!r}, '
+                f'component_id={self.component_id!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'billing_schedule_item_id={self.billing_schedule_item_id!r}, '
+                f'hide={self.hide!r}, '
+                f'component_cost_data={self.component_cost_data!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'custom_item={self.custom_item!r}, '
+                f'kind={self.kind!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'title={self.title!s}, '
+                f'description={self.description!s}, '
+                f'quantity={self.quantity!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'subtotal_amount={self.subtotal_amount!s}, '
+                f'discount_amount={self.discount_amount!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'total_amount={self.total_amount!s}, '
+                f'tiered_unit_price={self.tiered_unit_price!s}, '
+                f'period_range_start={self.period_range_start!s}, '
+                f'period_range_end={self.period_range_end!s}, '
+                f'transaction_id={self.transaction_id!s}, '
+                f'product_id={self.product_id!s}, '
+                f'product_version={self.product_version!s}, '
+                f'component_id={self.component_id!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'billing_schedule_item_id={self.billing_schedule_item_id!s}, '
+                f'hide={self.hide!s}, '
+                f'component_cost_data={self.component_cost_data!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'custom_item={self.custom_item!s}, '
+                f'kind={self.kind!s}, '
+                f'additional_properties={self.additional_properties!s})')

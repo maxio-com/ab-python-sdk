@@ -13,12 +13,10 @@ class CouponSubcodesResponse(object):
 
     """Implementation of the 'Coupon Subcodes Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        created_codes (List[str]): TODO: type description here.
-        duplicate_codes (List[str]): TODO: type description here.
-        invalid_codes (List[str]): TODO: type description here.
+        created_codes (List[str]): The model property of type List[str].
+        duplicate_codes (List[str]): The model property of type List[str].
+        invalid_codes (List[str]): The model property of type List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -86,3 +84,17 @@ class CouponSubcodesResponse(object):
                    duplicate_codes,
                    invalid_codes,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'created_codes={self.created_codes!r}, '
+                f'duplicate_codes={self.duplicate_codes!r}, '
+                f'invalid_codes={self.invalid_codes!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'created_codes={self.created_codes!s}, '
+                f'duplicate_codes={self.duplicate_codes!s}, '
+                f'invalid_codes={self.invalid_codes!s}, '
+                f'additional_properties={self.additional_properties!s})')

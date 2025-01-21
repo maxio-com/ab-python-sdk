@@ -13,8 +13,6 @@ class SubscriptionGroupBankAccount(object):
 
     """Implementation of the 'Subscription Group Bank Account' model.
 
-    TODO: type model description here.
-
     Attributes:
         bank_name (str): (Required when creating a subscription with ACH or
             GoCardless) The name of the bank where the customer’s account
@@ -33,16 +31,16 @@ class SubscriptionGroupBankAccount(object):
             GoCardless) Branch code. Alternatively, an IBAN can be provided
         bank_account_type (BankAccountType): Defaults to checking
         bank_account_holder_type (BankAccountHolderType): Defaults to personal
-        payment_type (PaymentType): TODO: type description here.
-        billing_address (str): TODO: type description here.
-        billing_city (str): TODO: type description here.
-        billing_state (str): TODO: type description here.
-        billing_zip (str): TODO: type description here.
-        billing_country (str): TODO: type description here.
-        chargify_token (str): TODO: type description here.
+        payment_type (PaymentType): The model property of type PaymentType.
+        billing_address (str): The model property of type str.
+        billing_city (str): The model property of type str.
+        billing_state (str): The model property of type str.
+        billing_zip (str): The model property of type str.
+        billing_country (str): The model property of type str.
+        chargify_token (str): The model property of type str.
         current_vault (BankAccountVault): The vault that stores the payment
             profile with the provided vault_token. Use `bogus` for testing.
-        gateway_handle (str): TODO: type description here.
+        gateway_handle (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -223,3 +221,43 @@ class SubscriptionGroupBankAccount(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'bank_name={self.bank_name!r}, '
+                f'bank_account_number={self.bank_account_number!r}, '
+                f'bank_routing_number={self.bank_routing_number!r}, '
+                f'bank_iban={self.bank_iban!r}, '
+                f'bank_branch_code={self.bank_branch_code!r}, '
+                f'bank_account_type={self.bank_account_type!r}, '
+                f'bank_account_holder_type={self.bank_account_holder_type!r}, '
+                f'payment_type={self.payment_type!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'billing_city={self.billing_city!r}, '
+                f'billing_state={self.billing_state!r}, '
+                f'billing_zip={self.billing_zip!r}, '
+                f'billing_country={self.billing_country!r}, '
+                f'chargify_token={self.chargify_token!r}, '
+                f'current_vault={self.current_vault!r}, '
+                f'gateway_handle={self.gateway_handle!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'bank_name={self.bank_name!s}, '
+                f'bank_account_number={self.bank_account_number!s}, '
+                f'bank_routing_number={self.bank_routing_number!s}, '
+                f'bank_iban={self.bank_iban!s}, '
+                f'bank_branch_code={self.bank_branch_code!s}, '
+                f'bank_account_type={self.bank_account_type!s}, '
+                f'bank_account_holder_type={self.bank_account_holder_type!s}, '
+                f'payment_type={self.payment_type!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'billing_city={self.billing_city!s}, '
+                f'billing_state={self.billing_state!s}, '
+                f'billing_zip={self.billing_zip!s}, '
+                f'billing_country={self.billing_country!s}, '
+                f'chargify_token={self.chargify_token!s}, '
+                f'current_vault={self.current_vault!s}, '
+                f'gateway_handle={self.gateway_handle!s}, '
+                f'additional_properties={self.additional_properties!s})')

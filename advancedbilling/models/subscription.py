@@ -20,8 +20,6 @@ class Subscription(object):
 
     """Implementation of the 'Subscription' model.
 
-    TODO: type model description here.
-
     Attributes:
         id (int): The subscription unique id within Chargify.
         state (SubscriptionState): The state of a subscription. * **Live
@@ -89,15 +87,15 @@ class Subscription(object):
             States](https://maxio.zendesk.com/hc/en-us/articles/24252119027853-
             Subscription-States) for more info about subscription states and
             state transitions.
-        balance_in_cents (long|int): Gives the current outstanding
-            subscription balance in the number of cents.
-        total_revenue_in_cents (long|int): Gives the total revenue from the
+        balance_in_cents (int): Gives the current outstanding subscription
+            balance in the number of cents.
+        total_revenue_in_cents (int): Gives the total revenue from the
             subscription in the number of cents.
-        product_price_in_cents (long|int): (Added Nov 5 2013) The recurring
-            amount of the product (and version),currently subscribed. NOTE:
-            this may differ from the current price of,the product, if you’ve
-            changed the price of the product but haven’t,moved this
-            subscription to a newer version.
+        product_price_in_cents (int): (Added Nov 5 2013) The recurring amount
+            of the product (and version),currently subscribed. NOTE: this may
+            differ from the current price of,the product, if you’ve changed
+            the price of the product but haven’t,moved this subscription to a
+            newer version.
         product_version_number (int): The version of the product for the
             subscription. Note that this is a deprecated field kept for
             backwards-compatibility.
@@ -154,11 +152,14 @@ class Subscription(object):
             Architecture valid options are - `invoice`, `automatic`. For
             current Relationship Invoicing Architecture valid options are -
             `remittance`, `automatic`, `prepaid`.
-        customer (Customer): TODO: type description here.
-        product (Product): TODO: type description here.
-        credit_card (CreditCardPaymentProfile): TODO: type description here.
-        group (NestedSubscriptionGroup): TODO: type description here.
-        bank_account (BankAccountPaymentProfile): TODO: type description here.
+        customer (Customer): The model property of type Customer.
+        product (Product): The model property of type Product.
+        credit_card (CreditCardPaymentProfile): The model property of type
+            CreditCardPaymentProfile.
+        group (NestedSubscriptionGroup): The model property of type
+            NestedSubscriptionGroup.
+        bank_account (BankAccountPaymentProfile): The model property of type
+            BankAccountPaymentProfile.
         payment_type (str): The payment profile type for the active profile on
             file.
         referral_code (str): The subscription's unique code that can be given
@@ -185,8 +186,8 @@ class Subscription(object):
         payer_id (int): On Relationship Invoicing, the ID of the individual
             paying for the subscription. Defaults to the Customer ID unless
             the 'Customer Hierarchies & WhoPays' feature is enabled.
-        current_billing_amount_in_cents (long|int): The balance in cents plus
-            the estimated renewal amount in cents. Returned ONLY for
+        current_billing_amount_in_cents (int): The balance in cents plus the
+            estimated renewal amount in cents. Returned ONLY for
             readSubscription operation as it's compute intensive operation.
         product_price_point_id (int): The product price point currently
             subscribed to.
@@ -220,14 +221,15 @@ class Subscription(object):
             `dunning_communication_delay_time_zone` attribute.
         dunning_communication_delay_time_zone (str): Time zone for the Dunning
             Communication Delay feature.
-        receives_invoice_emails (bool): TODO: type description here.
-        locale (str): TODO: type description here.
-        currency (str): TODO: type description here.
-        scheduled_cancellation_at (datetime): TODO: type description here.
-        credit_balance_in_cents (long|int): TODO: type description here.
-        prepayment_balance_in_cents (long|int): TODO: type description here.
-        prepaid_configuration (PrepaidConfiguration): TODO: type description
-            here.
+        receives_invoice_emails (bool): The model property of type bool.
+        locale (str): The model property of type str.
+        currency (str): The model property of type str.
+        scheduled_cancellation_at (datetime): The model property of type
+            datetime.
+        credit_balance_in_cents (int): The model property of type int.
+        prepayment_balance_in_cents (int): The model property of type int.
+        prepaid_configuration (PrepaidConfiguration): The model property of
+            type PrepaidConfiguration.
         self_service_page_token (str): Returned only for list/read
             Subscription operation when `include[]=self_service_page_token`
             parameter is provided.
@@ -795,3 +797,135 @@ class Subscription(object):
                    prepaid_configuration,
                    self_service_page_token,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'state={self.state!r}, '
+                f'balance_in_cents={self.balance_in_cents!r}, '
+                f'total_revenue_in_cents={self.total_revenue_in_cents!r}, '
+                f'product_price_in_cents={self.product_price_in_cents!r}, '
+                f'product_version_number={self.product_version_number!r}, '
+                f'current_period_ends_at={self.current_period_ends_at!r}, '
+                f'next_assessment_at={self.next_assessment_at!r}, '
+                f'trial_started_at={self.trial_started_at!r}, '
+                f'trial_ended_at={self.trial_ended_at!r}, '
+                f'activated_at={self.activated_at!r}, '
+                f'expires_at={self.expires_at!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'cancellation_message={self.cancellation_message!r}, '
+                f'cancellation_method={self.cancellation_method!r}, '
+                f'cancel_at_end_of_period={self.cancel_at_end_of_period!r}, '
+                f'canceled_at={self.canceled_at!r}, '
+                f'current_period_started_at={self.current_period_started_at!r}, '
+                f'previous_state={self.previous_state!r}, '
+                f'signup_payment_id={self.signup_payment_id!r}, '
+                f'signup_revenue={self.signup_revenue!r}, '
+                f'delayed_cancel_at={self.delayed_cancel_at!r}, '
+                f'coupon_code={self.coupon_code!r}, '
+                f'snap_day={self.snap_day!r}, '
+                f'payment_collection_method={self.payment_collection_method!r}, '
+                f'customer={self.customer!r}, '
+                f'product={self.product!r}, '
+                f'credit_card={self.credit_card!r}, '
+                f'group={self.group!r}, '
+                f'bank_account={self.bank_account!r}, '
+                f'payment_type={self.payment_type!r}, '
+                f'referral_code={self.referral_code!r}, '
+                f'next_product_id={self.next_product_id!r}, '
+                f'next_product_handle={self.next_product_handle!r}, '
+                f'coupon_use_count={self.coupon_use_count!r}, '
+                f'coupon_uses_allowed={self.coupon_uses_allowed!r}, '
+                f'reason_code={self.reason_code!r}, '
+                f'automatically_resume_at={self.automatically_resume_at!r}, '
+                f'coupon_codes={self.coupon_codes!r}, '
+                f'offer_id={self.offer_id!r}, '
+                f'payer_id={self.payer_id!r}, '
+                f'current_billing_amount_in_cents={self.current_billing_amount_in_cents!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'product_price_point_type={self.product_price_point_type!r}, '
+                f'next_product_price_point_id={self.next_product_price_point_id!r}, '
+                f'net_terms={self.net_terms!r}, '
+                f'stored_credential_transaction_id={self.stored_credential_transaction_id!r}, '
+                f'reference={self.reference!r}, '
+                f'on_hold_at={self.on_hold_at!r}, '
+                f'prepaid_dunning={self.prepaid_dunning!r}, '
+                f'coupons={self.coupons!r}, '
+                f'dunning_communication_delay_enabled={self.dunning_communication_delay_enabled!r}, '
+                f'dunning_communication_delay_time_zone={self.dunning_communication_delay_time_zone!r}, '
+                f'receives_invoice_emails={self.receives_invoice_emails!r}, '
+                f'locale={self.locale!r}, '
+                f'currency={self.currency!r}, '
+                f'scheduled_cancellation_at={self.scheduled_cancellation_at!r}, '
+                f'credit_balance_in_cents={self.credit_balance_in_cents!r}, '
+                f'prepayment_balance_in_cents={self.prepayment_balance_in_cents!r}, '
+                f'prepaid_configuration={self.prepaid_configuration!r}, '
+                f'self_service_page_token={self.self_service_page_token!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'state={self.state!s}, '
+                f'balance_in_cents={self.balance_in_cents!s}, '
+                f'total_revenue_in_cents={self.total_revenue_in_cents!s}, '
+                f'product_price_in_cents={self.product_price_in_cents!s}, '
+                f'product_version_number={self.product_version_number!s}, '
+                f'current_period_ends_at={self.current_period_ends_at!s}, '
+                f'next_assessment_at={self.next_assessment_at!s}, '
+                f'trial_started_at={self.trial_started_at!s}, '
+                f'trial_ended_at={self.trial_ended_at!s}, '
+                f'activated_at={self.activated_at!s}, '
+                f'expires_at={self.expires_at!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'cancellation_message={self.cancellation_message!s}, '
+                f'cancellation_method={self.cancellation_method!s}, '
+                f'cancel_at_end_of_period={self.cancel_at_end_of_period!s}, '
+                f'canceled_at={self.canceled_at!s}, '
+                f'current_period_started_at={self.current_period_started_at!s}, '
+                f'previous_state={self.previous_state!s}, '
+                f'signup_payment_id={self.signup_payment_id!s}, '
+                f'signup_revenue={self.signup_revenue!s}, '
+                f'delayed_cancel_at={self.delayed_cancel_at!s}, '
+                f'coupon_code={self.coupon_code!s}, '
+                f'snap_day={self.snap_day!s}, '
+                f'payment_collection_method={self.payment_collection_method!s}, '
+                f'customer={self.customer!s}, '
+                f'product={self.product!s}, '
+                f'credit_card={self.credit_card!s}, '
+                f'group={self.group!s}, '
+                f'bank_account={self.bank_account!s}, '
+                f'payment_type={self.payment_type!s}, '
+                f'referral_code={self.referral_code!s}, '
+                f'next_product_id={self.next_product_id!s}, '
+                f'next_product_handle={self.next_product_handle!s}, '
+                f'coupon_use_count={self.coupon_use_count!s}, '
+                f'coupon_uses_allowed={self.coupon_uses_allowed!s}, '
+                f'reason_code={self.reason_code!s}, '
+                f'automatically_resume_at={self.automatically_resume_at!s}, '
+                f'coupon_codes={self.coupon_codes!s}, '
+                f'offer_id={self.offer_id!s}, '
+                f'payer_id={self.payer_id!s}, '
+                f'current_billing_amount_in_cents={self.current_billing_amount_in_cents!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'product_price_point_type={self.product_price_point_type!s}, '
+                f'next_product_price_point_id={self.next_product_price_point_id!s}, '
+                f'net_terms={self.net_terms!s}, '
+                f'stored_credential_transaction_id={self.stored_credential_transaction_id!s}, '
+                f'reference={self.reference!s}, '
+                f'on_hold_at={self.on_hold_at!s}, '
+                f'prepaid_dunning={self.prepaid_dunning!s}, '
+                f'coupons={self.coupons!s}, '
+                f'dunning_communication_delay_enabled={self.dunning_communication_delay_enabled!s}, '
+                f'dunning_communication_delay_time_zone={self.dunning_communication_delay_time_zone!s}, '
+                f'receives_invoice_emails={self.receives_invoice_emails!s}, '
+                f'locale={self.locale!s}, '
+                f'currency={self.currency!s}, '
+                f'scheduled_cancellation_at={self.scheduled_cancellation_at!s}, '
+                f'credit_balance_in_cents={self.credit_balance_in_cents!s}, '
+                f'prepayment_balance_in_cents={self.prepayment_balance_in_cents!s}, '
+                f'prepaid_configuration={self.prepaid_configuration!s}, '
+                f'self_service_page_token={self.self_service_page_token!s}, '
+                f'additional_properties={self.additional_properties!s})')

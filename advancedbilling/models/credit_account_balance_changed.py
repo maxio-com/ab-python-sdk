@@ -13,16 +13,14 @@ class CreditAccountBalanceChanged(object):
 
     """Implementation of the 'Credit Account Balance Changed' model.
 
-    TODO: type model description here.
-
     Attributes:
-        reason (str): TODO: type description here.
-        service_credit_account_balance_in_cents (long|int): TODO: type
-            description here.
-        service_credit_balance_change_in_cents (long|int): TODO: type
-            description here.
-        currency_code (str): TODO: type description here.
-        at_time (datetime): TODO: type description here.
+        reason (str): The model property of type str.
+        service_credit_account_balance_in_cents (int): The model property of
+            type int.
+        service_credit_balance_change_in_cents (int): The model property of
+            type int.
+        currency_code (str): The model property of type str.
+        at_time (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -131,3 +129,21 @@ class CreditAccountBalanceChanged(object):
                                         type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('at_time'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'reason={self.reason!r}, '
+                f'service_credit_account_balance_in_cents={self.service_credit_account_balance_in_cents!r}, '
+                f'service_credit_balance_change_in_cents={self.service_credit_balance_change_in_cents!r}, '
+                f'currency_code={self.currency_code!r}, '
+                f'at_time={self.at_time!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'reason={self.reason!s}, '
+                f'service_credit_account_balance_in_cents={self.service_credit_account_balance_in_cents!s}, '
+                f'service_credit_balance_change_in_cents={self.service_credit_balance_change_in_cents!s}, '
+                f'currency_code={self.currency_code!s}, '
+                f'at_time={self.at_time!s}, '
+                f'additional_properties={self.additional_properties!s})')

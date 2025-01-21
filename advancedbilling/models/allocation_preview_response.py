@@ -13,10 +13,9 @@ class AllocationPreviewResponse(object):
 
     """Implementation of the 'Allocation Preview Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        allocation_preview (AllocationPreview): TODO: type description here.
+        allocation_preview (AllocationPreview): The model property of type
+            AllocationPreview.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class AllocationPreviewResponse(object):
         # Return an object of this model
         return cls(allocation_preview,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocation_preview={self.allocation_preview!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocation_preview={self.allocation_preview!s}, '
+                f'additional_properties={self.additional_properties!s})')

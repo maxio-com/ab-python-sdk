@@ -14,10 +14,10 @@
 | `description` | `str` | Required | The product description |
 | `accounting_code` | `str` | Optional | E.g. Internal ID or SKU Number |
 | `require_credit_card` | `bool` | Optional | Deprecated value that can be ignored unless you have legacy hosted pages. For Public Signup Page users, please read this attribute from under the signup page. |
-| `price_in_cents` | `long\|int` | Required | The product price, in integer cents |
+| `price_in_cents` | `int` | Required | The product price, in integer cents |
 | `interval` | `int` | Required | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days |
 | `interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Required | A string representing the interval unit for this product, either month or day |
-| `trial_price_in_cents` | `long\|int` | Optional | The product trial price, in integer cents |
+| `trial_price_in_cents` | `int` | Optional | The product trial price, in integer cents |
 | `trial_interval` | `int` | Optional | The numerical trial interval. i.e. an interval of ‘30’ coupled with a trial_interval_unit of day would mean this product trial would last 30 days. |
 | `trial_interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | A string representing the trial interval unit for this product, either month or day |
 | `trial_type` | `str` | Optional | - |

@@ -17,13 +17,13 @@ class InvoiceCustomer(object):
     subscription.
 
     Attributes:
-        chargify_id (int): TODO: type description here.
-        first_name (str): TODO: type description here.
-        last_name (str): TODO: type description here.
-        organization (str): TODO: type description here.
-        email (str): TODO: type description here.
-        vat_number (str): TODO: type description here.
-        reference (str): TODO: type description here.
+        chargify_id (int): The model property of type int.
+        first_name (str): The model property of type str.
+        last_name (str): The model property of type str.
+        organization (str): The model property of type str.
+        email (str): The model property of type str.
+        vat_number (str): The model property of type str.
+        reference (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -148,3 +148,25 @@ class InvoiceCustomer(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargify_id={self.chargify_id!r}, '
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'organization={self.organization!r}, '
+                f'email={self.email!r}, '
+                f'vat_number={self.vat_number!r}, '
+                f'reference={self.reference!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargify_id={self.chargify_id!s}, '
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'organization={self.organization!s}, '
+                f'email={self.email!s}, '
+                f'vat_number={self.vat_number!s}, '
+                f'reference={self.reference!s}, '
+                f'additional_properties={self.additional_properties!s})')

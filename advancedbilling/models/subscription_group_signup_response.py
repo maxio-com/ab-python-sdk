@@ -14,16 +14,14 @@ class SubscriptionGroupSignupResponse(object):
 
     """Implementation of the 'Subscription Group Signup Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        scheme (int): TODO: type description here.
-        customer_id (int): TODO: type description here.
-        payment_profile_id (int): TODO: type description here.
-        subscription_ids (List[int]): TODO: type description here.
-        primary_subscription_id (int): TODO: type description here.
-        next_assessment_at (datetime): TODO: type description here.
+        uid (str): The model property of type str.
+        scheme (int): The model property of type int.
+        customer_id (int): The model property of type int.
+        payment_profile_id (int): The model property of type int.
+        subscription_ids (List[int]): The model property of type List[int].
+        primary_subscription_id (int): The model property of type int.
+        next_assessment_at (datetime): The model property of type datetime.
         state (SubscriptionState): The state of a subscription. * **Live
             States**     * `active` - A normal, active subscription. It is not
             in a trial and is paid and up to date.     * `assessing` - An
@@ -89,9 +87,9 @@ class SubscriptionGroupSignupResponse(object):
             States](https://maxio.zendesk.com/hc/en-us/articles/24252119027853-
             Subscription-States) for more info about subscription states and
             state transitions.
-        cancel_at_end_of_period (bool): TODO: type description here.
-        subscriptions (List[SubscriptionGroupItem]): TODO: type description
-            here.
+        cancel_at_end_of_period (bool): The model property of type bool.
+        subscriptions (List[SubscriptionGroupItem]): The model property of
+            type List[SubscriptionGroupItem].
         payment_collection_method (CollectionMethod): The type of payment
             collection to be used in the subscription. For legacy Statements
             Architecture valid options are - `invoice`, `automatic`. For
@@ -224,3 +222,33 @@ class SubscriptionGroupSignupResponse(object):
                    subscriptions,
                    payment_collection_method,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'scheme={self.scheme!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'payment_profile_id={self.payment_profile_id!r}, '
+                f'subscription_ids={self.subscription_ids!r}, '
+                f'primary_subscription_id={self.primary_subscription_id!r}, '
+                f'next_assessment_at={self.next_assessment_at!r}, '
+                f'state={self.state!r}, '
+                f'cancel_at_end_of_period={self.cancel_at_end_of_period!r}, '
+                f'subscriptions={self.subscriptions!r}, '
+                f'payment_collection_method={self.payment_collection_method!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'scheme={self.scheme!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'payment_profile_id={self.payment_profile_id!s}, '
+                f'subscription_ids={self.subscription_ids!s}, '
+                f'primary_subscription_id={self.primary_subscription_id!s}, '
+                f'next_assessment_at={self.next_assessment_at!s}, '
+                f'state={self.state!s}, '
+                f'cancel_at_end_of_period={self.cancel_at_end_of_period!s}, '
+                f'subscriptions={self.subscriptions!s}, '
+                f'payment_collection_method={self.payment_collection_method!s}, '
+                f'additional_properties={self.additional_properties!s})')

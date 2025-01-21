@@ -14,11 +14,10 @@ class PaymentMethodPaypal(object):
 
     """Implementation of the 'Payment Method Paypal' model.
 
-    TODO: type model description here.
-
     Attributes:
-        email (str): TODO: type description here.
-        mtype (InvoiceEventPaymentMethod): TODO: type description here.
+        email (str): The model property of type str.
+        mtype (InvoiceEventPaymentMethod): The model property of type
+            InvoiceEventPaymentMethod.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -100,3 +99,15 @@ class PaymentMethodPaypal(object):
                                        type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('type'),
                                         type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'email={self.email!r}, '
+                f'mtype={self.mtype!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'email={self.email!s}, '
+                f'mtype={self.mtype!s}, '
+                f'additional_properties={self.additional_properties!s})')

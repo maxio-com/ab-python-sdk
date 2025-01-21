@@ -13,17 +13,15 @@ class ComponentPrice(object):
 
     """Implementation of the 'Component Price' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        component_id (int): TODO: type description here.
-        starting_quantity (int): TODO: type description here.
-        ending_quantity (int): TODO: type description here.
-        unit_price (str): TODO: type description here.
-        price_point_id (int): TODO: type description here.
-        formatted_unit_price (str): TODO: type description here.
-        segment_id (int): TODO: type description here.
+        id (int): The model property of type int.
+        component_id (int): The model property of type int.
+        starting_quantity (int): The model property of type int.
+        ending_quantity (int): The model property of type int.
+        unit_price (str): The model property of type str.
+        price_point_id (int): The model property of type int.
+        formatted_unit_price (str): The model property of type str.
+        segment_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -131,3 +129,27 @@ class ComponentPrice(object):
                    formatted_unit_price,
                    segment_id,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'component_id={self.component_id!r}, '
+                f'starting_quantity={self.starting_quantity!r}, '
+                f'ending_quantity={self.ending_quantity!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'formatted_unit_price={self.formatted_unit_price!r}, '
+                f'segment_id={self.segment_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'component_id={self.component_id!s}, '
+                f'starting_quantity={self.starting_quantity!s}, '
+                f'ending_quantity={self.ending_quantity!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'formatted_unit_price={self.formatted_unit_price!s}, '
+                f'segment_id={self.segment_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

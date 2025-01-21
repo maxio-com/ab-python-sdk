@@ -15,10 +15,10 @@ class InvoicePaymentType(object):
     The type of payment to be applied to an Invoice. Defaults to external.
 
     Attributes:
-        EXTERNAL: TODO: type description here.
-        PREPAYMENT: TODO: type description here.
-        SERVICE_CREDIT: TODO: type description here.
-        PAYMENT: TODO: type description here.
+        EXTERNAL: The enum member of type str.
+        PREPAYMENT: The enum member of type str.
+        SERVICE_CREDIT: The enum member of type str.
+        PAYMENT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

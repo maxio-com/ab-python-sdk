@@ -14,13 +14,12 @@ class PaymentMethodExternal(object):
 
     """Implementation of the 'Payment Method External' model.
 
-    TODO: type model description here.
-
     Attributes:
-        details (str): TODO: type description here.
-        kind (str): TODO: type description here.
-        memo (str): TODO: type description here.
-        mtype (InvoiceEventPaymentMethod): TODO: type description here.
+        details (str): The model property of type str.
+        kind (str): The model property of type str.
+        memo (str): The model property of type str.
+        mtype (InvoiceEventPaymentMethod): The model property of type
+            InvoiceEventPaymentMethod.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -129,3 +128,19 @@ class PaymentMethodExternal(object):
                                         is_value_nullable=True) \
             and APIHelper.is_valid_type(value=dictionary.get('type'),
                                         type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'details={self.details!r}, '
+                f'kind={self.kind!r}, '
+                f'memo={self.memo!r}, '
+                f'mtype={self.mtype!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'details={self.details!s}, '
+                f'kind={self.kind!s}, '
+                f'memo={self.memo!s}, '
+                f'mtype={self.mtype!s}, '
+                f'additional_properties={self.additional_properties!s})')

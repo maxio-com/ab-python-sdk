@@ -15,8 +15,6 @@ class CouponPayload(object):
 
     """Implementation of the 'Coupon Payload' model.
 
-    TODO: type model description here.
-
     Attributes:
         name (str): Required when creating a new coupon. This name is not
             displayed to customers and is limited to 255 characters.
@@ -30,16 +28,16 @@ class CouponPayload(object):
         percentage (str | float | None): Required when creating a new
             percentage coupon. Can't be used together with amount_in_cents.
             Percentage discount
-        amount_in_cents (long|int): Required when creating a new flat amount
+        amount_in_cents (int): Required when creating a new flat amount
             coupon. Can't be used together with percentage. Flat USD discount
         allow_negative_balance (bool): If set to true, discount is not limited
             (credits will carry forward to next billing). Can't be used
             together with restrictions.
-        recurring (bool): TODO: type description here.
+        recurring (bool): The model property of type bool.
         end_date (date): After the end of the given day, this coupon code will
             be invalid for new signups. Recurring discounts started before
             this date will continue to recur even after this date.
-        product_family_id (str): TODO: type description here.
+        product_family_id (str): The model property of type str.
         stackable (bool): A stackable coupon can be combined with other
             coupons on a Subscription.
         compounding_strategy (CompoundingStrategy): Applicable only to
@@ -48,9 +46,11 @@ class CouponPayload(object):
             have been calculated. For `full-price`, Percentage-based discounts
             will always be calculated against the original item price, before
             other discounts are applied.
-        exclude_mid_period_allocations (bool): TODO: type description here.
-        apply_on_cancel_at_end_of_period (bool): TODO: type description here.
-        apply_on_subscription_expiration (bool): TODO: type description here.
+        exclude_mid_period_allocations (bool): The model property of type bool.
+        apply_on_cancel_at_end_of_period (bool): The model property of type
+            bool.
+        apply_on_subscription_expiration (bool): The model property of type
+            bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -196,3 +196,39 @@ class CouponPayload(object):
                    apply_on_cancel_at_end_of_period,
                    apply_on_subscription_expiration,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'code={self.code!r}, '
+                f'description={self.description!r}, '
+                f'percentage={self.percentage!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'allow_negative_balance={self.allow_negative_balance!r}, '
+                f'recurring={self.recurring!r}, '
+                f'end_date={self.end_date!r}, '
+                f'product_family_id={self.product_family_id!r}, '
+                f'stackable={self.stackable!r}, '
+                f'compounding_strategy={self.compounding_strategy!r}, '
+                f'exclude_mid_period_allocations={self.exclude_mid_period_allocations!r}, '
+                f'apply_on_cancel_at_end_of_period={self.apply_on_cancel_at_end_of_period!r}, '
+                f'apply_on_subscription_expiration={self.apply_on_subscription_expiration!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'code={self.code!s}, '
+                f'description={self.description!s}, '
+                f'percentage={self.percentage!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'allow_negative_balance={self.allow_negative_balance!s}, '
+                f'recurring={self.recurring!s}, '
+                f'end_date={self.end_date!s}, '
+                f'product_family_id={self.product_family_id!s}, '
+                f'stackable={self.stackable!s}, '
+                f'compounding_strategy={self.compounding_strategy!s}, '
+                f'exclude_mid_period_allocations={self.exclude_mid_period_allocations!s}, '
+                f'apply_on_cancel_at_end_of_period={self.apply_on_cancel_at_end_of_period!s}, '
+                f'apply_on_subscription_expiration={self.apply_on_subscription_expiration!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -14,10 +14,8 @@ class WebhookResponse(object):
 
     """Implementation of the 'Webhook Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        webhook (Webhook): TODO: type description here.
+        webhook (Webhook): The model property of type Webhook.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +69,13 @@ class WebhookResponse(object):
         # Return an object of this model
         return cls(webhook,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'webhook={self.webhook!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'webhook={self.webhook!s}, '
+                f'additional_properties={self.additional_properties!s})')

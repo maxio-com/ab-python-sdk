@@ -12,11 +12,9 @@ class ResourceType(object):
 
     """Implementation of the 'Resource Type' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        SUBSCRIPTIONS: TODO: type description here.
-        CUSTOMERS: TODO: type description here.
+        SUBSCRIPTIONS: The enum member of type str.
+        CUSTOMERS: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

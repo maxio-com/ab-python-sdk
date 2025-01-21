@@ -13,13 +13,11 @@ class CouponCurrency(object):
 
     """Implementation of the 'Coupon Currency' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        currency (str): TODO: type description here.
-        price (float): TODO: type description here.
-        coupon_id (int): TODO: type description here.
+        id (int): The model property of type int.
+        currency (str): The model property of type str.
+        price (float): The model property of type float.
+        coupon_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -99,3 +97,19 @@ class CouponCurrency(object):
                    price,
                    coupon_id,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'currency={self.currency!r}, '
+                f'price={self.price!r}, '
+                f'coupon_id={self.coupon_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'currency={self.currency!s}, '
+                f'price={self.price!s}, '
+                f'coupon_id={self.coupon_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,15 +13,13 @@ class PrepaymentAccountBalanceChanged(object):
 
     """Implementation of the 'Prepayment Account Balance Changed' model.
 
-    TODO: type model description here.
-
     Attributes:
-        reason (str): TODO: type description here.
-        prepayment_account_balance_in_cents (long|int): TODO: type description
-            here.
-        prepayment_balance_change_in_cents (long|int): TODO: type description
-            here.
-        currency_code (str): TODO: type description here.
+        reason (str): The model property of type str.
+        prepayment_account_balance_in_cents (int): The model property of type
+            int.
+        prepayment_balance_change_in_cents (int): The model property of type
+            int.
+        currency_code (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -121,3 +119,19 @@ class PrepaymentAccountBalanceChanged(object):
                                         type_callable=lambda value: isinstance(value, int)) \
             and APIHelper.is_valid_type(value=dictionary.get('currency_code'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'reason={self.reason!r}, '
+                f'prepayment_account_balance_in_cents={self.prepayment_account_balance_in_cents!r}, '
+                f'prepayment_balance_change_in_cents={self.prepayment_balance_change_in_cents!r}, '
+                f'currency_code={self.currency_code!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'reason={self.reason!s}, '
+                f'prepayment_account_balance_in_cents={self.prepayment_account_balance_in_cents!s}, '
+                f'prepayment_balance_change_in_cents={self.prepayment_balance_change_in_cents!s}, '
+                f'currency_code={self.currency_code!s}, '
+                f'additional_properties={self.additional_properties!s})')

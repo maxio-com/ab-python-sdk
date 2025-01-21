@@ -12,10 +12,8 @@ class ListComponentsPricePointsInclude(object):
 
     """Implementation of the 'List Components Price Points Include' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CURRENCY_PRICES: TODO: type description here.
+        CURRENCY_PRICES: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

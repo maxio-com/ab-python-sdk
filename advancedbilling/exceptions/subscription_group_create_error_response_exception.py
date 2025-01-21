@@ -8,10 +8,10 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 from advancedbilling.api_helper import APIHelper
-import advancedbilling.exceptions.api_exception
+from advancedbilling.exceptions.api_exception import APIException
 
 
-class SubscriptionGroupCreateErrorResponseException(advancedbilling.exceptions.api_exception.APIException):
+class SubscriptionGroupCreateErrorResponseException(APIException):
     def __init__(self, reason, response):
         """Constructor for the SubscriptionGroupCreateErrorResponseException class
 
@@ -37,3 +37,9 @@ class SubscriptionGroupCreateErrorResponseException(advancedbilling.exceptions.a
         """
         from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
         self.errors = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionGroupCreateErrorResponseErrors'), dictionary.get('errors'), False) if dictionary.get('errors') is not None else None
+
+    def __str__(self):
+        base_str = super().__str__()
+        return (f'{self.__class__.__name__}('
+                f'{base_str[base_str.find("(") + 1:-1]}, '
+                f'errors={self.errors!s})')

@@ -13,7 +13,7 @@
 | `code` | `str` | Optional | Required when creating a new coupon. The code is limited to 255 characters. May contain uppercase alphanumeric characters and these special characters (which allow for email addresses to be used): “%”, “@”, “+”, “-”, “_”, and “.” |
 | `description` | `str` | Optional | Required when creating a new coupon. A description of the coupon that can be displayed to customers in transactions and on statements. The description is limited to 255 characters. |
 | `percentage` | str \| float \| None | Optional | This is a container for one-of cases. |
-| `amount_in_cents` | `long\|int` | Optional | Required when creating a new flat amount coupon. Can't be used together with percentage. Flat USD discount |
+| `amount_in_cents` | `int` | Optional | Required when creating a new flat amount coupon. Can't be used together with percentage. Flat USD discount |
 | `allow_negative_balance` | `bool` | Optional | If set to true, discount is not limited (credits will carry forward to next billing). Can't be used together with restrictions. |
 | `recurring` | `bool` | Optional | - |
 | `end_date` | `date` | Optional | After the end of the given day, this coupon code will be invalid for new signups. Recurring discounts started before this date will continue to recur even after this date. |

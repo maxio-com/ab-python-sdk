@@ -14,15 +14,13 @@ class Event(object):
 
     """Implementation of the 'Event' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (long|int): TODO: type description here.
-        key (EventKey): TODO: type description here.
-        message (str): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        customer_id (int): TODO: type description here.
-        created_at (datetime): TODO: type description here.
+        id (int): The model property of type int.
+        key (EventKey): The model property of type EventKey.
+        message (str): The model property of type str.
+        subscription_id (int): The model property of type int.
+        customer_id (int): The model property of type int.
+        created_at (datetime): The model property of type datetime.
         event_specific_data (SubscriptionProductChange |
             SubscriptionStateChange | PaymentRelatedEvents | RefundSuccess |
             ComponentAllocationChange | MeteredUsage | PrepaidUsage |
@@ -228,3 +226,25 @@ class Event(object):
             and APIHelper.is_valid_type(value=dictionary.get('created_at'),
                                         type_callable=lambda value: isinstance(value, str)) \
             and UnionTypeLookUp.get('EventEventSpecificData').validate(dictionary.get('event_specific_data')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'key={self.key!r}, '
+                f'message={self.message!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'created_at={self.created_at!r}, '
+                f'event_specific_data={self.event_specific_data!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'key={self.key!s}, '
+                f'message={self.message!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'created_at={self.created_at!s}, '
+                f'event_specific_data={self.event_specific_data!s}, '
+                f'additional_properties={self.additional_properties!s})')

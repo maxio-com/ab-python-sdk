@@ -16,7 +16,7 @@ class SnapDay(object):
     Value can be 1-28 or 'end'.
 
     Attributes:
-        END: TODO: type description here.
+        END: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

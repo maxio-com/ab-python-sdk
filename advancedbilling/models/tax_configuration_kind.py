@@ -12,13 +12,11 @@ class TaxConfigurationKind(object):
 
     """Implementation of the 'Tax Configuration Kind' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CUSTOM: TODO: type description here.
-        ENUM_MANAGED AVALARA: TODO: type description here.
-        ENUM_LINKED AVALARA: TODO: type description here.
-        ENUM_DIGITAL RIVER: TODO: type description here.
+        CUSTOM: The enum member of type str.
+        ENUM_MANAGED AVALARA: The enum member of type str.
+        ENUM_LINKED AVALARA: The enum member of type str.
+        ENUM_DIGITAL RIVER: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

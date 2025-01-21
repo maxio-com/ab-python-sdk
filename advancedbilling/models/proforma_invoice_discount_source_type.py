@@ -12,11 +12,9 @@ class ProformaInvoiceDiscountSourceType(object):
 
     """Implementation of the 'Proforma Invoice Discount Source Type' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        COUPON: TODO: type description here.
-        REFERRAL: TODO: type description here.
+        COUPON: The enum member of type str.
+        REFERRAL: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

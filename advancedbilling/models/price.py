@@ -13,11 +13,10 @@ class Price(object):
 
     """Implementation of the 'Price' model.
 
-    TODO: type model description here.
-
     Attributes:
-        starting_quantity (int | str): TODO: type description here.
-        ending_quantity (int | str | None): TODO: type description here.
+        starting_quantity (int | str): The model property of type int | str.
+        ending_quantity (int | str | None): The model property of type int |
+            str | None.
         unit_price (float | str): The price can contain up to 8 decimal
             places. i.e. 1.00 or 0.0012 or 0.00000065
         additional_properties (Dict[str, object]): The additional properties
@@ -116,3 +115,17 @@ class Price(object):
 
         return UnionTypeLookUp.get('PriceStartingQuantity').validate(dictionary.get('starting_quantity')).is_valid \
             and UnionTypeLookUp.get('PriceUnitPrice').validate(dictionary.get('unit_price')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'starting_quantity={self.starting_quantity!r}, '
+                f'ending_quantity={self.ending_quantity!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'starting_quantity={self.starting_quantity!s}, '
+                f'ending_quantity={self.ending_quantity!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'additional_properties={self.additional_properties!s})')

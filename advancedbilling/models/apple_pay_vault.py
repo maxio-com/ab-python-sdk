@@ -15,7 +15,7 @@ class ApplePayVault(object):
     The vault that stores the payment profile with the provided vault_token.
 
     Attributes:
-        BRAINTREE_BLUE: TODO: type description here.
+        BRAINTREE_BLUE: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

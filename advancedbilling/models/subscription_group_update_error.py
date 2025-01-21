@@ -13,10 +13,8 @@ class SubscriptionGroupUpdateError(object):
 
     """Implementation of the 'Subscription Group Update Error' model.
 
-    TODO: type model description here.
-
     Attributes:
-        members (List[str]): TODO: type description here.
+        members (List[str]): The model property of type List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -70,3 +68,13 @@ class SubscriptionGroupUpdateError(object):
         # Return an object of this model
         return cls(members,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'members={self.members!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'members={self.members!s}, '
+                f'additional_properties={self.additional_properties!s})')

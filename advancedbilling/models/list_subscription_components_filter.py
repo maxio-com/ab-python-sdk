@@ -13,8 +13,6 @@ class ListSubscriptionComponentsFilter(object):
 
     """Implementation of the 'List Subscription Components Filter' model.
 
-    TODO: type model description here.
-
     Attributes:
         currencies (List[str]): Allows fetching components allocation with
             matching currency based on provided values. Use in query
@@ -82,3 +80,15 @@ class ListSubscriptionComponentsFilter(object):
         return cls(currencies,
                    use_site_exchange_rate,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'currencies={self.currencies!r}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'currencies={self.currencies!s}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'additional_properties={self.additional_properties!s})')

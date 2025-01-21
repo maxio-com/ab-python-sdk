@@ -15,8 +15,6 @@ class ActivateEventBasedComponent(object):
 
     """Implementation of the 'Activate Event-Based Component' model.
 
-    TODO: type model description here.
-
     Attributes:
         price_point_id (int): The Chargify id of the price point
         billing_schedule (BillingSchedule): This attribute is particularly
@@ -92,3 +90,17 @@ class ActivateEventBasedComponent(object):
                    billing_schedule,
                    custom_price,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'price_point_id={self.price_point_id!r}, '
+                f'billing_schedule={self.billing_schedule!r}, '
+                f'custom_price={self.custom_price!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'price_point_id={self.price_point_id!s}, '
+                f'billing_schedule={self.billing_schedule!s}, '
+                f'custom_price={self.custom_price!s}, '
+                f'additional_properties={self.additional_properties!s})')

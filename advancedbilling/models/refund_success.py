@@ -13,12 +13,10 @@ class RefundSuccess(object):
 
     """Implementation of the 'Refund Success' model.
 
-    TODO: type model description here.
-
     Attributes:
-        refund_id (int): TODO: type description here.
-        gateway_transaction_id (int): TODO: type description here.
-        product_id (int): TODO: type description here.
+        refund_id (int): The model property of type int.
+        gateway_transaction_id (int): The model property of type int.
+        product_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -109,3 +107,17 @@ class RefundSuccess(object):
                                         type_callable=lambda value: isinstance(value, int)) \
             and APIHelper.is_valid_type(value=dictionary.get('product_id'),
                                         type_callable=lambda value: isinstance(value, int))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'refund_id={self.refund_id!r}, '
+                f'gateway_transaction_id={self.gateway_transaction_id!r}, '
+                f'product_id={self.product_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'refund_id={self.refund_id!s}, '
+                f'gateway_transaction_id={self.gateway_transaction_id!s}, '
+                f'product_id={self.product_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

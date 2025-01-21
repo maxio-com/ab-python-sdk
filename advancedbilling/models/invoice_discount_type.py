@@ -12,12 +12,10 @@ class InvoiceDiscountType(object):
 
     """Implementation of the 'Invoice Discount Type' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        PERCENTAGE: TODO: type description here.
-        FLAT_AMOUNT: TODO: type description here.
-        ROLLOVER: TODO: type description here.
+        PERCENTAGE: The enum member of type str.
+        FLAT_AMOUNT: The enum member of type str.
+        ROLLOVER: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

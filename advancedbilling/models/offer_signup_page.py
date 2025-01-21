@@ -13,15 +13,13 @@ class OfferSignupPage(object):
 
     """Implementation of the 'Offer Signup Page' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        nickname (str): TODO: type description here.
-        enabled (bool): TODO: type description here.
-        return_url (str): TODO: type description here.
-        return_params (str): TODO: type description here.
-        url (str): TODO: type description here.
+        id (int): The model property of type int.
+        nickname (str): The model property of type str.
+        enabled (bool): The model property of type bool.
+        return_url (str): The model property of type str.
+        return_params (str): The model property of type str.
+        url (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -110,3 +108,23 @@ class OfferSignupPage(object):
                    return_params,
                    url,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'nickname={self.nickname!r}, '
+                f'enabled={self.enabled!r}, '
+                f'return_url={self.return_url!r}, '
+                f'return_params={self.return_params!r}, '
+                f'url={self.url!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'nickname={self.nickname!s}, '
+                f'enabled={self.enabled!s}, '
+                f'return_url={self.return_url!s}, '
+                f'return_params={self.return_params!s}, '
+                f'url={self.url!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -14,10 +14,8 @@ class OfferResponse(object):
 
     """Implementation of the 'Offer Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        offer (Offer): TODO: type description here.
+        offer (Offer): The model property of type Offer.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +69,13 @@ class OfferResponse(object):
         # Return an object of this model
         return cls(offer,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'offer={self.offer!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'offer={self.offer!s}, '
+                f'additional_properties={self.additional_properties!s})')

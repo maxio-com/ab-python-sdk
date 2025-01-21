@@ -17,9 +17,9 @@ class CreditType(object):
     Available values: `full`, `prorated`, `none`.
 
     Attributes:
-        FULL: TODO: type description here.
-        PRORATED: TODO: type description here.
-        NONE: TODO: type description here.
+        FULL: The enum member of type str.
+        PRORATED: The enum member of type str.
+        NONE: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

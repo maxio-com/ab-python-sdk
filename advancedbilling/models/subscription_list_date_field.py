@@ -12,10 +12,8 @@ class SubscriptionListDateField(object):
 
     """Implementation of the 'Subscription List Date Field' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        UPDATED_AT: TODO: type description here.
+        UPDATED_AT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

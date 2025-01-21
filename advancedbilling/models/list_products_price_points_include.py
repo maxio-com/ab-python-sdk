@@ -12,10 +12,8 @@ class ListProductsPricePointsInclude(object):
 
     """Implementation of the 'List Products Price Points Include' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CURRENCY_PRICES: TODO: type description here.
+        CURRENCY_PRICES: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

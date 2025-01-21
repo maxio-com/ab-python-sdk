@@ -144,3 +144,23 @@ class SubscriptionFilter(object):
                    start_datetime,
                    end_datetime,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'states={self.states!r}, '
+                f'date_field={self.date_field!r}, '
+                f'start_date={self.start_date!r}, '
+                f'end_date={self.end_date!r}, '
+                f'start_datetime={self.start_datetime!r}, '
+                f'end_datetime={self.end_datetime!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'states={self.states!s}, '
+                f'date_field={self.date_field!s}, '
+                f'start_date={self.start_date!s}, '
+                f'end_date={self.end_date!s}, '
+                f'start_datetime={self.start_datetime!s}, '
+                f'end_datetime={self.end_datetime!s}, '
+                f'additional_properties={self.additional_properties!s})')

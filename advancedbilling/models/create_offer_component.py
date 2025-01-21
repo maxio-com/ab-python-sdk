@@ -13,12 +13,10 @@ class CreateOfferComponent(object):
 
     """Implementation of the 'Create Offer Component' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component_id (int): TODO: type description here.
-        price_point_id (int): TODO: type description here.
-        starting_quantity (int): TODO: type description here.
+        component_id (int): The model property of type int.
+        price_point_id (int): The model property of type int.
+        starting_quantity (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -86,3 +84,17 @@ class CreateOfferComponent(object):
                    price_point_id,
                    starting_quantity,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'starting_quantity={self.starting_quantity!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'starting_quantity={self.starting_quantity!s}, '
+                f'additional_properties={self.additional_properties!s})')

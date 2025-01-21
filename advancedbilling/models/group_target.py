@@ -105,3 +105,15 @@ class GroupTarget(object):
 
         return APIHelper.is_valid_type(value=dictionary.get('type'),
                                        type_callable=lambda value: GroupTargetType.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'mtype={self.mtype!r}, '
+                f'id={self.id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'mtype={self.mtype!s}, '
+                f'id={self.id!s}, '
+                f'additional_properties={self.additional_properties!s})')

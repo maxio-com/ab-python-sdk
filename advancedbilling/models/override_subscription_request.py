@@ -13,10 +13,9 @@ class OverrideSubscriptionRequest(object):
 
     """Implementation of the 'Override Subscription Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        subscription (OverrideSubscription): TODO: type description here.
+        subscription (OverrideSubscription): The model property of type
+            OverrideSubscription.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class OverrideSubscriptionRequest(object):
         # Return an object of this model
         return cls(subscription,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription={self.subscription!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription={self.subscription!s}, '
+                f'additional_properties={self.additional_properties!s})')

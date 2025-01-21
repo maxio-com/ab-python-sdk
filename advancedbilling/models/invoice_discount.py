@@ -14,22 +14,22 @@ class InvoiceDiscount(object):
 
     """Implementation of the 'Invoice Discount' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        title (str): TODO: type description here.
-        description (str): TODO: type description here.
-        code (str): TODO: type description here.
-        source_type (InvoiceDiscountSourceType): TODO: type description here.
-        source_id (int): TODO: type description here.
-        discount_type (InvoiceDiscountType): TODO: type description here.
-        percentage (str): TODO: type description here.
-        eligible_amount (str): TODO: type description here.
-        discount_amount (str): TODO: type description here.
-        transaction_id (int): TODO: type description here.
-        line_item_breakouts (List[InvoiceDiscountBreakout]): TODO: type
-            description here.
+        uid (str): The model property of type str.
+        title (str): The model property of type str.
+        description (str): The model property of type str.
+        code (str): The model property of type str.
+        source_type (InvoiceDiscountSourceType): The model property of type
+            InvoiceDiscountSourceType.
+        source_id (int): The model property of type int.
+        discount_type (InvoiceDiscountType): The model property of type
+            InvoiceDiscountType.
+        percentage (str): The model property of type str.
+        eligible_amount (str): The model property of type str.
+        discount_amount (str): The model property of type str.
+        transaction_id (int): The model property of type int.
+        line_item_breakouts (List[InvoiceDiscountBreakout]): The model
+            property of type List[InvoiceDiscountBreakout].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -190,3 +190,35 @@ class InvoiceDiscount(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'title={self.title!r}, '
+                f'description={self.description!r}, '
+                f'code={self.code!r}, '
+                f'source_type={self.source_type!r}, '
+                f'source_id={self.source_id!r}, '
+                f'discount_type={self.discount_type!r}, '
+                f'percentage={self.percentage!r}, '
+                f'eligible_amount={self.eligible_amount!r}, '
+                f'discount_amount={self.discount_amount!r}, '
+                f'transaction_id={self.transaction_id!r}, '
+                f'line_item_breakouts={self.line_item_breakouts!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'title={self.title!s}, '
+                f'description={self.description!s}, '
+                f'code={self.code!s}, '
+                f'source_type={self.source_type!s}, '
+                f'source_id={self.source_id!s}, '
+                f'discount_type={self.discount_type!s}, '
+                f'percentage={self.percentage!s}, '
+                f'eligible_amount={self.eligible_amount!s}, '
+                f'discount_amount={self.discount_amount!s}, '
+                f'transaction_id={self.transaction_id!s}, '
+                f'line_item_breakouts={self.line_item_breakouts!s}, '
+                f'additional_properties={self.additional_properties!s})')

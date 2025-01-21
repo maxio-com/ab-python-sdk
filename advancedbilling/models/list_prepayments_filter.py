@@ -15,8 +15,6 @@ class ListPrepaymentsFilter(object):
 
     """Implementation of the 'List Prepayments Filter' model.
 
-    TODO: type model description here.
-
     Attributes:
         date_field (ListPrepaymentDateField): The type of filter you would
             like to apply to your search. `created_at` - Time when prepayment
@@ -97,3 +95,17 @@ class ListPrepaymentsFilter(object):
                    start_date,
                    end_date,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'date_field={self.date_field!r}, '
+                f'start_date={self.start_date!r}, '
+                f'end_date={self.end_date!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'date_field={self.date_field!s}, '
+                f'start_date={self.start_date!s}, '
+                f'end_date={self.end_date!s}, '
+                f'additional_properties={self.additional_properties!s})')

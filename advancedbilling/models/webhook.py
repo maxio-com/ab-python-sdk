@@ -13,15 +13,13 @@ class Webhook(object):
 
     """Implementation of the 'Webhook' model.
 
-    TODO: type model description here.
-
     Attributes:
         event (str): A string describing which event type produced the given
             webhook
-        id (long|int): The unique identifier for the webhooks (unique across
-            all of Chargify). This is not changed on a retry/replay of the
-            same webhook, so it may be used to avoid duplicate action for the
-            same event.
+        id (int): The unique identifier for the webhooks (unique across all of
+            Chargify). This is not changed on a retry/replay of the same
+            webhook, so it may be used to avoid duplicate action for the same
+            event.
         created_at (datetime): Timestamp indicating when the webhook was
             created
         last_error (str): Text describing the status code and/or error from
@@ -182,3 +180,35 @@ class Webhook(object):
                    signature,
                    signature_hmac_sha_256,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'event={self.event!r}, '
+                f'id={self.id!r}, '
+                f'created_at={self.created_at!r}, '
+                f'last_error={self.last_error!r}, '
+                f'last_error_at={self.last_error_at!r}, '
+                f'accepted_at={self.accepted_at!r}, '
+                f'last_sent_at={self.last_sent_at!r}, '
+                f'last_sent_url={self.last_sent_url!r}, '
+                f'successful={self.successful!r}, '
+                f'body={self.body!r}, '
+                f'signature={self.signature!r}, '
+                f'signature_hmac_sha_256={self.signature_hmac_sha_256!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'event={self.event!s}, '
+                f'id={self.id!s}, '
+                f'created_at={self.created_at!s}, '
+                f'last_error={self.last_error!s}, '
+                f'last_error_at={self.last_error_at!s}, '
+                f'accepted_at={self.accepted_at!s}, '
+                f'last_sent_at={self.last_sent_at!s}, '
+                f'last_sent_url={self.last_sent_url!s}, '
+                f'successful={self.successful!s}, '
+                f'body={self.body!s}, '
+                f'signature={self.signature!s}, '
+                f'signature_hmac_sha_256={self.signature_hmac_sha_256!s}, '
+                f'additional_properties={self.additional_properties!s})')

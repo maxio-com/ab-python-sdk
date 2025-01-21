@@ -14,8 +14,6 @@ class ReactivateSubscriptionRequest(object):
 
     """Implementation of the 'Reactivate Subscription Request' model.
 
-    TODO: type model description here.
-
     Attributes:
         calendar_billing (ReactivationBilling): These values are only
             applicable to subscriptions using calendar billing
@@ -122,3 +120,23 @@ class ReactivateSubscriptionRequest(object):
                    use_credits_and_prepayments,
                    resume,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'calendar_billing={self.calendar_billing!r}, '
+                f'include_trial={self.include_trial!r}, '
+                f'preserve_balance={self.preserve_balance!r}, '
+                f'coupon_code={self.coupon_code!r}, '
+                f'use_credits_and_prepayments={self.use_credits_and_prepayments!r}, '
+                f'resume={self.resume!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'calendar_billing={self.calendar_billing!s}, '
+                f'include_trial={self.include_trial!s}, '
+                f'preserve_balance={self.preserve_balance!s}, '
+                f'coupon_code={self.coupon_code!s}, '
+                f'use_credits_and_prepayments={self.use_credits_and_prepayments!s}, '
+                f'resume={self.resume!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -15,27 +15,26 @@ class ComponentPricePoint(object):
 
     """Implementation of the 'Component Price Point' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
+        id (int): The model property of type int.
         mtype (PricePointType): Price point type. We expose the following
             types: 1. **default**: a price point that is marked as a default
             price for a certain product. 2. **custom**: a custom price point.
             3. **catalog**: a price point that is **not** marked as a default
             price for a certain product and is **not** a custom one.
         default (bool): Note: Refer to type attribute instead
-        name (str): TODO: type description here.
+        name (str): The model property of type str.
         pricing_scheme (PricingScheme): The identifier for the pricing scheme.
             See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
-        component_id (int): TODO: type description here.
-        handle (str): TODO: type description here.
-        archived_at (datetime): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        updated_at (datetime): TODO: type description here.
-        prices (List[ComponentPrice]): TODO: type description here.
+        component_id (int): The model property of type int.
+        handle (str): The model property of type str.
+        archived_at (datetime): The model property of type datetime.
+        created_at (datetime): The model property of type datetime.
+        updated_at (datetime): The model property of type datetime.
+        prices (List[ComponentPrice]): The model property of type
+            List[ComponentPrice].
         use_site_exchange_rate (bool): Whether to use the site level exchange
             rate or define your own prices for each currency if you have
             multiple currencies defined on the site. Defaults to true during
@@ -43,7 +42,7 @@ class ComponentPricePoint(object):
         subscription_id (int): (only used for Custom Pricing - ie. when the
             price point's type is `custom`) The id of the subscription that
             the custom price point is for.
-        tax_included (bool): TODO: type description here.
+        tax_included (bool): The model property of type bool.
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this component
             price point would renew every 30 days. This property is only
@@ -306,3 +305,57 @@ class ComponentPricePoint(object):
                    expiration_interval,
                    expiration_interval_unit,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'mtype={self.mtype!r}, '
+                f'default={self.default!r}, '
+                f'name={self.name!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'component_id={self.component_id!r}, '
+                f'handle={self.handle!r}, '
+                f'archived_at={self.archived_at!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'prices={self.prices!r}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'tax_included={self.tax_included!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'currency_prices={self.currency_prices!r}, '
+                f'overage_prices={self.overage_prices!r}, '
+                f'overage_pricing_scheme={self.overage_pricing_scheme!r}, '
+                f'renew_prepaid_allocation={self.renew_prepaid_allocation!r}, '
+                f'rollover_prepaid_remainder={self.rollover_prepaid_remainder!r}, '
+                f'expiration_interval={self.expiration_interval!r}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'mtype={self.mtype!s}, '
+                f'default={self.default!s}, '
+                f'name={self.name!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'component_id={self.component_id!s}, '
+                f'handle={self.handle!s}, '
+                f'archived_at={self.archived_at!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'prices={self.prices!s}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'tax_included={self.tax_included!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'currency_prices={self.currency_prices!s}, '
+                f'overage_prices={self.overage_prices!s}, '
+                f'overage_pricing_scheme={self.overage_pricing_scheme!s}, '
+                f'renew_prepaid_allocation={self.renew_prepaid_allocation!s}, '
+                f'rollover_prepaid_remainder={self.rollover_prepaid_remainder!s}, '
+                f'expiration_interval={self.expiration_interval!s}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!s}, '
+                f'additional_properties={self.additional_properties!s})')

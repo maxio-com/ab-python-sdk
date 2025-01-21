@@ -1176,8 +1176,8 @@ def list_usages(self,
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
 | `component_id` | int \| str | Template, Required | This is a container for one-of cases. |
-| `since_id` | `long\|int` | Query, Optional | Returns usages with an id greater than or equal to the one specified |
-| `max_id` | `long\|int` | Query, Optional | Returns usages with an id less than or equal to the one specified |
+| `since_id` | `int` | Query, Optional | Returns usages with an id greater than or equal to the one specified |
+| `max_id` | `int` | Query, Optional | Returns usages with an id less than or equal to the one specified |
 | `since_date` | `date` | Query, Optional | Returns usages with a created_at date greater than or equal to midnight (12:00 AM) on the date specified. |
 | `until_date` | `date` | Query, Optional | Returns usages with a created_at date less than or equal to midnight (12:00 AM) on the date specified. |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |

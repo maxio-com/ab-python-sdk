@@ -14,10 +14,9 @@ class PaymentMethodApplePay(object):
 
     """Implementation of the 'Payment Method Apple Pay' model.
 
-    TODO: type model description here.
-
     Attributes:
-        mtype (InvoiceEventPaymentMethod): TODO: type description here.
+        mtype (InvoiceEventPaymentMethod): The model property of type
+            InvoiceEventPaymentMethod.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -90,3 +89,13 @@ class PaymentMethodApplePay(object):
 
         return APIHelper.is_valid_type(value=dictionary.get('type'),
                                        type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'mtype={self.mtype!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'mtype={self.mtype!s}, '
+                f'additional_properties={self.additional_properties!s})')

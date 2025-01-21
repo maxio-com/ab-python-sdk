@@ -13,11 +13,11 @@ class CustomerPayerChange(object):
 
     """Implementation of the 'Customer Payer Change' model.
 
-    TODO: type model description here.
-
     Attributes:
-        before (InvoicePayerChange): TODO: type description here.
-        after (InvoicePayerChange): TODO: type description here.
+        before (InvoicePayerChange): The model property of type
+            InvoicePayerChange.
+        after (InvoicePayerChange): The model property of type
+            InvoicePayerChange.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +71,15 @@ class CustomerPayerChange(object):
         return cls(before,
                    after,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'before={self.before!r}, '
+                f'after={self.after!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'before={self.before!s}, '
+                f'after={self.after!s}, '
+                f'additional_properties={self.additional_properties!s})')

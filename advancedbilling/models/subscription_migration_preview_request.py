@@ -13,11 +13,9 @@ class SubscriptionMigrationPreviewRequest(object):
 
     """Implementation of the 'Subscription Migration Preview Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        migration (SubscriptionMigrationPreviewOptions): TODO: type
-            description here.
+        migration (SubscriptionMigrationPreviewOptions): The model property of
+            type SubscriptionMigrationPreviewOptions.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -66,3 +64,13 @@ class SubscriptionMigrationPreviewRequest(object):
         # Return an object of this model
         return cls(migration,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'migration={self.migration!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'migration={self.migration!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,10 +13,8 @@ class ReasonCodeResponse(object):
 
     """Implementation of the 'Reason Code Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        reason_code (ReasonCode): TODO: type description here.
+        reason_code (ReasonCode): The model property of type ReasonCode.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +63,13 @@ class ReasonCodeResponse(object):
         # Return an object of this model
         return cls(reason_code,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'reason_code={self.reason_code!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'reason_code={self.reason_code!s}, '
+                f'additional_properties={self.additional_properties!s})')

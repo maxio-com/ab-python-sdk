@@ -13,10 +13,8 @@ class UpdateSubscriptionGroup(object):
 
     """Implementation of the 'Update Subscription Group' model.
 
-    TODO: type model description here.
-
     Attributes:
-        member_ids (List[int]): TODO: type description here.
+        member_ids (List[int]): The model property of type List[int].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -70,3 +68,13 @@ class UpdateSubscriptionGroup(object):
         # Return an object of this model
         return cls(member_ids,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'member_ids={self.member_ids!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'member_ids={self.member_ids!s}, '
+                f'additional_properties={self.additional_properties!s})')

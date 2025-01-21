@@ -13,11 +13,9 @@ class SubscriptionPreviewResponse(object):
 
     """Implementation of the 'Subscription Preview Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        subscription_preview (SubscriptionPreview): TODO: type description
-            here.
+        subscription_preview (SubscriptionPreview): The model property of type
+            SubscriptionPreview.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -66,3 +64,13 @@ class SubscriptionPreviewResponse(object):
         # Return an object of this model
         return cls(subscription_preview,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_preview={self.subscription_preview!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_preview={self.subscription_preview!s}, '
+                f'additional_properties={self.additional_properties!s})')

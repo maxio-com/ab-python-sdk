@@ -30,7 +30,7 @@ class MetafieldScope(object):
             from being viewable by your ecosystem.
         public_edit (IncludeOption): Include (1) or exclude (0) metafields
             from being edited by your ecosystem.
-        hosted (List[str]): TODO: type description here.
+        hosted (List[str]): The model property of type List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -148,3 +148,25 @@ class MetafieldScope(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'csv={self.csv!r}, '
+                f'invoices={self.invoices!r}, '
+                f'statements={self.statements!r}, '
+                f'portal={self.portal!r}, '
+                f'public_show={self.public_show!r}, '
+                f'public_edit={self.public_edit!r}, '
+                f'hosted={self.hosted!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'csv={self.csv!s}, '
+                f'invoices={self.invoices!s}, '
+                f'statements={self.statements!s}, '
+                f'portal={self.portal!s}, '
+                f'public_show={self.public_show!s}, '
+                f'public_edit={self.public_edit!s}, '
+                f'hosted={self.hosted!s}, '
+                f'additional_properties={self.additional_properties!s})')

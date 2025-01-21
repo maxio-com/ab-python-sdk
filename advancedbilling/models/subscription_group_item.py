@@ -13,19 +13,17 @@ class SubscriptionGroupItem(object):
 
     """Implementation of the 'Subscription Group Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        reference (str): TODO: type description here.
-        product_id (int): TODO: type description here.
-        product_handle (str): TODO: type description here.
-        product_price_point_id (int): TODO: type description here.
-        product_price_point_handle (str): TODO: type description here.
-        currency (str): TODO: type description here.
-        coupon_code (str): TODO: type description here.
-        total_revenue_in_cents (long|int): TODO: type description here.
-        balance_in_cents (long|int): TODO: type description here.
+        id (int): The model property of type int.
+        reference (str): The model property of type str.
+        product_id (int): The model property of type int.
+        product_handle (str): The model property of type str.
+        product_price_point_id (int): The model property of type int.
+        product_price_point_handle (str): The model property of type str.
+        currency (str): The model property of type str.
+        coupon_code (str): The model property of type str.
+        total_revenue_in_cents (int): The model property of type int.
+        balance_in_cents (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -148,3 +146,31 @@ class SubscriptionGroupItem(object):
                    total_revenue_in_cents,
                    balance_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'reference={self.reference!r}, '
+                f'product_id={self.product_id!r}, '
+                f'product_handle={self.product_handle!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'product_price_point_handle={self.product_price_point_handle!r}, '
+                f'currency={self.currency!r}, '
+                f'coupon_code={self.coupon_code!r}, '
+                f'total_revenue_in_cents={self.total_revenue_in_cents!r}, '
+                f'balance_in_cents={self.balance_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'reference={self.reference!s}, '
+                f'product_id={self.product_id!s}, '
+                f'product_handle={self.product_handle!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'product_price_point_handle={self.product_price_point_handle!s}, '
+                f'currency={self.currency!s}, '
+                f'coupon_code={self.coupon_code!s}, '
+                f'total_revenue_in_cents={self.total_revenue_in_cents!s}, '
+                f'balance_in_cents={self.balance_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

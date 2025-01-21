@@ -15,9 +15,9 @@ class CreateOrUpdateEndpoint(object):
     Used to Create or Update Endpoint
 
     Attributes:
-        url (str): TODO: type description here.
-        webhook_subscriptions (List[WebhookSubscription]): TODO: type
-            description here.
+        url (str): The model property of type str.
+        webhook_subscriptions (List[WebhookSubscription]): The model property
+            of type List[WebhookSubscription].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +71,15 @@ class CreateOrUpdateEndpoint(object):
         return cls(url,
                    webhook_subscriptions,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'url={self.url!r}, '
+                f'webhook_subscriptions={self.webhook_subscriptions!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'url={self.url!s}, '
+                f'webhook_subscriptions={self.webhook_subscriptions!s}, '
+                f'additional_properties={self.additional_properties!s})')

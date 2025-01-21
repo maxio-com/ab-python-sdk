@@ -13,8 +13,6 @@ class ChargifyEBB(object):
 
     """Implementation of the 'Chargify EBB' model.
 
-    TODO: type model description here.
-
     Attributes:
         timestamp (datetime): This timestamp determines what billing period
             the event will be billed in. If your request payload does not
@@ -127,3 +125,23 @@ class ChargifyEBB(object):
                    subscription_id,
                    subscription_reference,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'timestamp={self.timestamp!r}, '
+                f'id={self.id!r}, '
+                f'created_at={self.created_at!r}, '
+                f'uniqueness_token={self.uniqueness_token!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'subscription_reference={self.subscription_reference!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'timestamp={self.timestamp!s}, '
+                f'id={self.id!s}, '
+                f'created_at={self.created_at!s}, '
+                f'uniqueness_token={self.uniqueness_token!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'subscription_reference={self.subscription_reference!s}, '
+                f'additional_properties={self.additional_properties!s})')

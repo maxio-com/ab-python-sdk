@@ -373,7 +373,7 @@ class ProformaInvoicesController(BaseController):
 
         Args:
             proforma_invoice_uid (str): The uid of the proforma invoice
-            body (VoidInvoiceRequest, optional): TODO: type description here.
+            body (VoidInvoiceRequest, optional): The request body parameter.
 
         Returns:
             ProformaInvoice: Response from the API. OK
@@ -490,8 +490,8 @@ class ProformaInvoicesController(BaseController):
         subscription_id will always be blank.
 
         Args:
-            body (CreateSubscriptionRequest, optional): TODO: type description
-                here.
+            body (CreateSubscriptionRequest, optional): The request body
+                parameter.
 
         Returns:
             ProformaInvoice: Response from the API. Created
@@ -549,8 +549,8 @@ class ProformaInvoicesController(BaseController):
             include (CreateSignupProformaPreviewInclude, optional): Choose to
                 include a proforma invoice preview for the first renewal. Use
                 in query `include=next_proforma_invoice`.
-            body (CreateSubscriptionRequest, optional): TODO: type description
-                here.
+            body (CreateSubscriptionRequest, optional): The request body
+                parameter.
 
         Returns:
             SignupProformaPreviewResponse: Response from the API. Created

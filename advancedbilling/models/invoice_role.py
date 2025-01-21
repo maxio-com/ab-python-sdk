@@ -12,19 +12,17 @@ class InvoiceRole(object):
 
     """Implementation of the 'Invoice Role' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        UNSET: TODO: type description here.
-        SIGNUP: TODO: type description here.
-        RENEWAL: TODO: type description here.
-        USAGE: TODO: type description here.
-        REACTIVATION: TODO: type description here.
-        PRORATION: TODO: type description here.
-        MIGRATION: TODO: type description here.
-        ADHOC: TODO: type description here.
-        BACKPORT: TODO: type description here.
-        BACKPORTBALANCERECONCILIATION: TODO: type description here.
+        UNSET: The enum member of type str.
+        SIGNUP: The enum member of type str.
+        RENEWAL: The enum member of type str.
+        USAGE: The enum member of type str.
+        REACTIVATION: The enum member of type str.
+        PRORATION: The enum member of type str.
+        MIGRATION: The enum member of type str.
+        ADHOC: The enum member of type str.
+        BACKPORT: The enum member of type str.
+        BACKPORTBALANCERECONCILIATION: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

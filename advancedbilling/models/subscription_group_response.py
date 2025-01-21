@@ -13,10 +13,9 @@ class SubscriptionGroupResponse(object):
 
     """Implementation of the 'Subscription Group Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        subscription_group (SubscriptionGroup): TODO: type description here.
+        subscription_group (SubscriptionGroup): The model property of type
+            SubscriptionGroup.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class SubscriptionGroupResponse(object):
         # Return an object of this model
         return cls(subscription_group,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_group={self.subscription_group!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_group={self.subscription_group!s}, '
+                f'additional_properties={self.additional_properties!s})')

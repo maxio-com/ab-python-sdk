@@ -16,15 +16,15 @@ class CreateInvoiceAddress(object):
     Overrides the default address.
 
     Attributes:
-        first_name (str): TODO: type description here.
-        last_name (str): TODO: type description here.
-        phone (str): TODO: type description here.
-        address (str): TODO: type description here.
-        address_2 (str): TODO: type description here.
-        city (str): TODO: type description here.
-        state (str): TODO: type description here.
-        zip (str): TODO: type description here.
-        country (str): TODO: type description here.
+        first_name (str): The model property of type str.
+        last_name (str): The model property of type str.
+        phone (str): The model property of type str.
+        address (str): The model property of type str.
+        address_2 (str): The model property of type str.
+        city (str): The model property of type str.
+        state (str): The model property of type str.
+        zip (str): The model property of type str.
+        country (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -134,3 +134,29 @@ class CreateInvoiceAddress(object):
                    zip,
                    country,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'phone={self.phone!r}, '
+                f'address={self.address!r}, '
+                f'address_2={self.address_2!r}, '
+                f'city={self.city!r}, '
+                f'state={self.state!r}, '
+                f'zip={self.zip!r}, '
+                f'country={self.country!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'phone={self.phone!s}, '
+                f'address={self.address!s}, '
+                f'address_2={self.address_2!s}, '
+                f'city={self.city!s}, '
+                f'state={self.state!s}, '
+                f'zip={self.zip!s}, '
+                f'country={self.country!s}, '
+                f'additional_properties={self.additional_properties!s})')

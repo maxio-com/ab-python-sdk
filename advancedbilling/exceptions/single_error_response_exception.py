@@ -8,10 +8,10 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 from advancedbilling.api_helper import APIHelper
-import advancedbilling.exceptions.api_exception
+from advancedbilling.exceptions.api_exception import APIException
 
 
-class SingleErrorResponseException(advancedbilling.exceptions.api_exception.APIException):
+class SingleErrorResponseException(APIException):
     def __init__(self, reason, response):
         """Constructor for the SingleErrorResponseException class
 
@@ -36,3 +36,9 @@ class SingleErrorResponseException(advancedbilling.exceptions.api_exception.APIE
 
         """
         self.error = dictionary.get("error") if dictionary.get("error") else None
+
+    def __str__(self):
+        base_str = super().__str__()
+        return (f'{self.__class__.__name__}('
+                f'{base_str[base_str.find("(") + 1:-1]}, '
+                f'error={self.error!s})')

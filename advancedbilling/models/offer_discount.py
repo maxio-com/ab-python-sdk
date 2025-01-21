@@ -13,12 +13,10 @@ class OfferDiscount(object):
 
     """Implementation of the 'Offer Discount' model.
 
-    TODO: type model description here.
-
     Attributes:
-        coupon_code (str): TODO: type description here.
-        coupon_id (int): TODO: type description here.
-        coupon_name (str): TODO: type description here.
+        coupon_code (str): The model property of type str.
+        coupon_id (int): The model property of type int.
+        coupon_name (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -86,3 +84,17 @@ class OfferDiscount(object):
                    coupon_id,
                    coupon_name,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'coupon_code={self.coupon_code!r}, '
+                f'coupon_id={self.coupon_id!r}, '
+                f'coupon_name={self.coupon_name!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'coupon_code={self.coupon_code!s}, '
+                f'coupon_id={self.coupon_id!s}, '
+                f'coupon_name={self.coupon_name!s}, '
+                f'additional_properties={self.additional_properties!s})')

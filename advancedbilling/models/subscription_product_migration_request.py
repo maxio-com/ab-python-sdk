@@ -13,10 +13,9 @@ class SubscriptionProductMigrationRequest(object):
 
     """Implementation of the 'Subscription Product Migration Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        migration (SubscriptionProductMigration): TODO: type description here.
+        migration (SubscriptionProductMigration): The model property of type
+            SubscriptionProductMigration.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class SubscriptionProductMigrationRequest(object):
         # Return an object of this model
         return cls(migration,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'migration={self.migration!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'migration={self.migration!s}, '
+                f'additional_properties={self.additional_properties!s})')

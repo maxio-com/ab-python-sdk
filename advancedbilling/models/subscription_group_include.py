@@ -12,10 +12,8 @@ class SubscriptionGroupInclude(object):
 
     """Implementation of the 'Subscription Group Include' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CURRENT_BILLING_AMOUNT_IN_CENTS: TODO: type description here.
+        CURRENT_BILLING_AMOUNT_IN_CENTS: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

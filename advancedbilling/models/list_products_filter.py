@@ -14,8 +14,6 @@ class ListProductsFilter(object):
 
     """Implementation of the 'List Products Filter' model.
 
-    TODO: type model description here.
-
     Attributes:
         ids (List[int]): Allows fetching products with matching id based on
             provided values. Use in query `filter[ids]=1,2,3`.
@@ -96,3 +94,17 @@ class ListProductsFilter(object):
                    prepaid_product_price_point,
                    use_site_exchange_rate,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'ids={self.ids!r}, '
+                f'prepaid_product_price_point={self.prepaid_product_price_point!r}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'ids={self.ids!s}, '
+                f'prepaid_product_price_point={self.prepaid_product_price_point!s}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'additional_properties={self.additional_properties!s})')

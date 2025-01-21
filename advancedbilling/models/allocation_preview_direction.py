@@ -12,11 +12,9 @@ class AllocationPreviewDirection(object):
 
     """Implementation of the 'Allocation Preview Direction' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        UPGRADE: TODO: type description here.
-        DOWNGRADE: TODO: type description here.
+        UPGRADE: The enum member of type str.
+        DOWNGRADE: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

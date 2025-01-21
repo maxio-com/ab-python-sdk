@@ -19,11 +19,11 @@
 | `expiration_interval_unit` | [`ExpirationIntervalUnit`](../../doc/models/expiration-interval-unit.md) | Optional | A string representing the expiration interval unit for this product, either month, day or never |
 | `created_at` | `datetime` | Optional | Timestamp indicating when this product was created |
 | `updated_at` | `datetime` | Optional | Timestamp indicating when this product was last updated |
-| `price_in_cents` | `long\|int` | Optional | The product price, in integer cents |
+| `price_in_cents` | `int` | Optional | The product price, in integer cents |
 | `interval` | `int` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this product would renew every 30 days |
 | `interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this product, either month or day |
-| `initial_charge_in_cents` | `long\|int` | Optional | The up front charge you have specified. |
-| `trial_price_in_cents` | `long\|int` | Optional | The price of the trial period for a subscription to this product, in integer cents. |
+| `initial_charge_in_cents` | `int` | Optional | The up front charge you have specified. |
+| `trial_price_in_cents` | `int` | Optional | The price of the trial period for a subscription to this product, in integer cents. |
 | `trial_interval` | `int` | Optional | A numerical interval for the length of the trial period of a subscription to this product. See the description of interval for a description of how this value is coupled with an interval unit to calculate the full interval |
 | `trial_interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | A string representing the trial interval unit for this product, either month or day |
 | `archived_at` | `datetime` | Optional | Timestamp indicating when this product was archived |

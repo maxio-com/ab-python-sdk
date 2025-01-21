@@ -14,8 +14,6 @@ class CreditCardPaymentProfile(object):
 
     """Implementation of the 'Credit Card Payment Profile' model.
 
-    TODO: type model description here.
-
     Attributes:
         id (int): The Chargify-assigned ID of the stored card. This value can
             be used as an input to payment_profile_id when creating a
@@ -48,13 +46,13 @@ class CreditCardPaymentProfile(object):
             provided as the vault_token.
         billing_address_2 (str): The current billing street address, second
             line, for the card.
-        payment_type (PaymentType): TODO: type description here.
-        disabled (bool): TODO: type description here.
+        payment_type (PaymentType): The model property of type PaymentType.
+        disabled (bool): The model property of type bool.
         chargify_token (str): Token received after sending billing information
             using chargify.js. This token will only be received if passed as a
             sole attribute of credit_card_attributes (i.e.
             tok_9g6hw85pnpt6knmskpwp4ttt)
-        site_gateway_setting_id (int): TODO: type description here.
+        site_gateway_setting_id (int): The model property of type int.
         gateway_handle (str): An identifier of connected gateway.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
@@ -291,3 +289,55 @@ class CreditCardPaymentProfile(object):
 
         return APIHelper.is_valid_type(value=dictionary.get('payment_type'),
                                        type_callable=lambda value: PaymentType.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'masked_card_number={self.masked_card_number!r}, '
+                f'card_type={self.card_type!r}, '
+                f'expiration_month={self.expiration_month!r}, '
+                f'expiration_year={self.expiration_year!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'current_vault={self.current_vault!r}, '
+                f'vault_token={self.vault_token!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'billing_city={self.billing_city!r}, '
+                f'billing_state={self.billing_state!r}, '
+                f'billing_zip={self.billing_zip!r}, '
+                f'billing_country={self.billing_country!r}, '
+                f'customer_vault_token={self.customer_vault_token!r}, '
+                f'billing_address_2={self.billing_address_2!r}, '
+                f'payment_type={self.payment_type!r}, '
+                f'disabled={self.disabled!r}, '
+                f'chargify_token={self.chargify_token!r}, '
+                f'site_gateway_setting_id={self.site_gateway_setting_id!r}, '
+                f'gateway_handle={self.gateway_handle!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'masked_card_number={self.masked_card_number!s}, '
+                f'card_type={self.card_type!s}, '
+                f'expiration_month={self.expiration_month!s}, '
+                f'expiration_year={self.expiration_year!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'current_vault={self.current_vault!s}, '
+                f'vault_token={self.vault_token!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'billing_city={self.billing_city!s}, '
+                f'billing_state={self.billing_state!s}, '
+                f'billing_zip={self.billing_zip!s}, '
+                f'billing_country={self.billing_country!s}, '
+                f'customer_vault_token={self.customer_vault_token!s}, '
+                f'billing_address_2={self.billing_address_2!s}, '
+                f'payment_type={self.payment_type!s}, '
+                f'disabled={self.disabled!s}, '
+                f'chargify_token={self.chargify_token!s}, '
+                f'site_gateway_setting_id={self.site_gateway_setting_id!s}, '
+                f'gateway_handle={self.gateway_handle!s}, '
+                f'additional_properties={self.additional_properties!s})')

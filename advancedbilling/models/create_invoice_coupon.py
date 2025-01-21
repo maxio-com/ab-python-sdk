@@ -13,14 +13,15 @@ class CreateInvoiceCoupon(object):
 
     """Implementation of the 'Create Invoice Coupon' model.
 
-    TODO: type model description here.
-
     Attributes:
-        code (str): TODO: type description here.
-        percentage (str | float | None): TODO: type description here.
-        amount (str | float | None): TODO: type description here.
-        description (str): TODO: type description here.
-        product_family_id (str | int | None): TODO: type description here.
+        code (str): The model property of type str.
+        percentage (str | float | None): The model property of type str |
+            float | None.
+        amount (str | float | None): The model property of type str | float |
+            None.
+        description (str): The model property of type str.
+        product_family_id (str | int | None): The model property of type str |
+            int | None.
         compounding_strategy (CompoundingStrategy): Applicable only to
             stackable coupons. For `compound`, Percentage-based discounts will
             be calculated against the remaining price, after prior discounts
@@ -116,3 +117,23 @@ class CreateInvoiceCoupon(object):
                    product_family_id,
                    compounding_strategy,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'code={self.code!r}, '
+                f'percentage={self.percentage!r}, '
+                f'amount={self.amount!r}, '
+                f'description={self.description!r}, '
+                f'product_family_id={self.product_family_id!r}, '
+                f'compounding_strategy={self.compounding_strategy!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'code={self.code!s}, '
+                f'percentage={self.percentage!s}, '
+                f'amount={self.amount!s}, '
+                f'description={self.description!s}, '
+                f'product_family_id={self.product_family_id!s}, '
+                f'compounding_strategy={self.compounding_strategy!s}, '
+                f'additional_properties={self.additional_properties!s})')

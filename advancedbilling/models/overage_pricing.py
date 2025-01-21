@@ -15,14 +15,12 @@ class OveragePricing(object):
 
     """Implementation of the 'Overage Pricing' model.
 
-    TODO: type model description here.
-
     Attributes:
         pricing_scheme (PricingScheme): The identifier for the pricing scheme.
             See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
-        prices (List[Price]): TODO: type description here.
+        prices (List[Price]): The model property of type List[Price].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -109,3 +107,15 @@ class OveragePricing(object):
 
         return APIHelper.is_valid_type(value=dictionary.get('pricing_scheme'),
                                        type_callable=lambda value: PricingScheme.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'prices={self.prices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'prices={self.prices!s}, '
+                f'additional_properties={self.additional_properties!s})')

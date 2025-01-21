@@ -13,12 +13,10 @@ class SaleRepItemMrr(object):
 
     """Implementation of the 'Sale Rep Item Mrr' model.
 
-    TODO: type model description here.
-
     Attributes:
-        mrr (str): TODO: type description here.
-        usage (str): TODO: type description here.
-        recurring (str): TODO: type description here.
+        mrr (str): The model property of type str.
+        usage (str): The model property of type str.
+        recurring (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -86,3 +84,17 @@ class SaleRepItemMrr(object):
                    usage,
                    recurring,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'mrr={self.mrr!r}, '
+                f'usage={self.usage!r}, '
+                f'recurring={self.recurring!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'mrr={self.mrr!s}, '
+                f'usage={self.usage!s}, '
+                f'recurring={self.recurring!s}, '
+                f'additional_properties={self.additional_properties!s})')

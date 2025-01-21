@@ -13,10 +13,8 @@ class BatchJobResponse(object):
 
     """Implementation of the 'Batch Job Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        batchjob (BatchJob): TODO: type description here.
+        batchjob (BatchJob): The model property of type BatchJob.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +63,13 @@ class BatchJobResponse(object):
         # Return an object of this model
         return cls(batchjob,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'batchjob={self.batchjob!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'batchjob={self.batchjob!s}, '
+                f'additional_properties={self.additional_properties!s})')

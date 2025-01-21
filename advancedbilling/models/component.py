@@ -14,15 +14,14 @@ class Component(object):
 
     """Implementation of the 'Component' model.
 
-    TODO: type model description here.
-
     Attributes:
         id (int): The unique ID assigned to the component by Chargify. This ID
             can be used to fetch the component from the API.
         name (str): The name of the Component, suitable for display on
             statements. i.e. Text Messages.
         handle (str): The component API handle
-        pricing_scheme (PricingScheme): TODO: type description here.
+        pricing_scheme (PricingScheme): The model property of type
+            PricingScheme.
         unit_name (str): The name of the unit that the component’s usage is
             measured in. i.e. message
         unit_price (str): The amount the customer will be charged per unit.
@@ -32,14 +31,14 @@ class Component(object):
             Component belongs
         product_family_name (str): The name of the Product Family to which the
             Component belongs
-        price_per_unit_in_cents (long|int): deprecated - use unit_price instead
+        price_per_unit_in_cents (int): deprecated - use unit_price instead
         kind (ComponentKind): A handle for the component type
         archived (bool): Boolean flag describing whether a component is
             archived or not.
         taxable (bool): Boolean flag describing whether a component is taxable
             or not.
         description (str): The description of the component.
-        default_price_point_id (int): TODO: type description here.
+        default_price_point_id (int): The model property of type int.
         overage_prices (List[ComponentPrice]): Applicable only to prepaid
             usage components. An array of overage price brackets.
         prices (List[ComponentPrice]): An array of price brackets. If the
@@ -49,12 +48,12 @@ class Component(object):
             associated with the component
         price_points_url (str): URL that points to the location to read the
             existing price points via GET request
-        default_price_point_name (str): TODO: type description here.
+        default_price_point_name (str): The model property of type str.
         tax_code (str): A string representing the tax code related to the
             component type. This is especially important when using the
             Avalara service to tax based on locale. This attribute has a max
             length of 10 characters.
-        recurring (bool): TODO: type description here.
+        recurring (bool): The model property of type bool.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
@@ -72,10 +71,10 @@ class Component(object):
         hide_date_range_on_invoice (bool): (Only available on Relationship
             Invoicing sites) Boolean flag describing if the service date range
             should show for the component on generated invoices.
-        allow_fractional_quantities (bool): TODO: type description here.
+        allow_fractional_quantities (bool): The model property of type bool.
         item_category (ItemCategory): One of the following: Business Software,
             Consumer Software, Digital Services, Physical Goods, Other
-        use_site_exchange_rate (bool): TODO: type description here.
+        use_site_exchange_rate (bool): The model property of type bool.
         accounting_code (str): E.g. Internal ID or SKU Number
         event_based_billing_metric_id (int): (Only for Event Based Components)
             This is an ID of a metric attached to the component. This metric
@@ -401,3 +400,79 @@ class Component(object):
                    interval,
                    interval_unit,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'unit_name={self.unit_name!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'product_family_id={self.product_family_id!r}, '
+                f'product_family_name={self.product_family_name!r}, '
+                f'price_per_unit_in_cents={self.price_per_unit_in_cents!r}, '
+                f'kind={self.kind!r}, '
+                f'archived={self.archived!r}, '
+                f'taxable={self.taxable!r}, '
+                f'description={self.description!r}, '
+                f'default_price_point_id={self.default_price_point_id!r}, '
+                f'overage_prices={self.overage_prices!r}, '
+                f'prices={self.prices!r}, '
+                f'price_point_count={self.price_point_count!r}, '
+                f'price_points_url={self.price_points_url!r}, '
+                f'default_price_point_name={self.default_price_point_name!r}, '
+                f'tax_code={self.tax_code!r}, '
+                f'recurring={self.recurring!r}, '
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'archived_at={self.archived_at!r}, '
+                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!r}, '
+                f'allow_fractional_quantities={self.allow_fractional_quantities!r}, '
+                f'item_category={self.item_category!r}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'accounting_code={self.accounting_code!r}, '
+                f'event_based_billing_metric_id={self.event_based_billing_metric_id!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'unit_name={self.unit_name!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'product_family_id={self.product_family_id!s}, '
+                f'product_family_name={self.product_family_name!s}, '
+                f'price_per_unit_in_cents={self.price_per_unit_in_cents!s}, '
+                f'kind={self.kind!s}, '
+                f'archived={self.archived!s}, '
+                f'taxable={self.taxable!s}, '
+                f'description={self.description!s}, '
+                f'default_price_point_id={self.default_price_point_id!s}, '
+                f'overage_prices={self.overage_prices!s}, '
+                f'prices={self.prices!s}, '
+                f'price_point_count={self.price_point_count!s}, '
+                f'price_points_url={self.price_points_url!s}, '
+                f'default_price_point_name={self.default_price_point_name!s}, '
+                f'tax_code={self.tax_code!s}, '
+                f'recurring={self.recurring!s}, '
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'archived_at={self.archived_at!s}, '
+                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!s}, '
+                f'allow_fractional_quantities={self.allow_fractional_quantities!s}, '
+                f'item_category={self.item_category!s}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'accounting_code={self.accounting_code!s}, '
+                f'event_based_billing_metric_id={self.event_based_billing_metric_id!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'additional_properties={self.additional_properties!s})')

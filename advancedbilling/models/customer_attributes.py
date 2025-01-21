@@ -13,8 +13,6 @@ class CustomerAttributes(object):
 
     """Implementation of the 'Customer Attributes' model.
 
-    TODO: type model description here.
-
     Attributes:
         first_name (str): The first name of the customer. Required when
             creating a customer via attributes.
@@ -46,7 +44,7 @@ class CustomerAttributes(object):
             alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format
             (i.e. “US”).
         phone (str): (Optional) The phone number of the customer.
-        verified (bool): TODO: type description here.
+        verified (bool): The model property of type bool.
         tax_exempt (bool): (Optional) The tax_exempt status of the customer.
             Acceptable values are true or 1 for true and false or 0 for false.
         vat_number (str): (Optional) Supplying the VAT number allows EU
@@ -279,3 +277,51 @@ class CustomerAttributes(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'email={self.email!r}, '
+                f'cc_emails={self.cc_emails!r}, '
+                f'organization={self.organization!r}, '
+                f'reference={self.reference!r}, '
+                f'address={self.address!r}, '
+                f'address_2={self.address_2!r}, '
+                f'city={self.city!r}, '
+                f'state={self.state!r}, '
+                f'zip={self.zip!r}, '
+                f'country={self.country!r}, '
+                f'phone={self.phone!r}, '
+                f'verified={self.verified!r}, '
+                f'tax_exempt={self.tax_exempt!r}, '
+                f'vat_number={self.vat_number!r}, '
+                f'metafields={self.metafields!r}, '
+                f'parent_id={self.parent_id!r}, '
+                f'salesforce_id={self.salesforce_id!r}, '
+                f'default_auto_renewal_profile_id={self.default_auto_renewal_profile_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'email={self.email!s}, '
+                f'cc_emails={self.cc_emails!s}, '
+                f'organization={self.organization!s}, '
+                f'reference={self.reference!s}, '
+                f'address={self.address!s}, '
+                f'address_2={self.address_2!s}, '
+                f'city={self.city!s}, '
+                f'state={self.state!s}, '
+                f'zip={self.zip!s}, '
+                f'country={self.country!s}, '
+                f'phone={self.phone!s}, '
+                f'verified={self.verified!s}, '
+                f'tax_exempt={self.tax_exempt!s}, '
+                f'vat_number={self.vat_number!s}, '
+                f'metafields={self.metafields!s}, '
+                f'parent_id={self.parent_id!s}, '
+                f'salesforce_id={self.salesforce_id!s}, '
+                f'default_auto_renewal_profile_id={self.default_auto_renewal_profile_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

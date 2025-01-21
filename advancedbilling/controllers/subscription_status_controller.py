@@ -84,7 +84,7 @@ class SubscriptionStatusController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (CancellationRequest, optional): TODO: type description here.
+            body (CancellationRequest, optional): The request body parameter.
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -187,7 +187,7 @@ class SubscriptionStatusController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (PauseRequest, optional): TODO: type description here.
+            body (PauseRequest, optional): The request body parameter.
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -241,7 +241,7 @@ class SubscriptionStatusController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (PauseRequest, optional): TODO: type description here.
+            body (PauseRequest, optional): The request body parameter.
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -428,8 +428,8 @@ class SubscriptionStatusController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (ReactivateSubscriptionRequest, optional): TODO: type
-                description here.
+            body (ReactivateSubscriptionRequest, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -483,7 +483,7 @@ class SubscriptionStatusController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (CancellationRequest, optional): TODO: type description here.
+            body (CancellationRequest, optional): The request body parameter.
 
         Returns:
             DelayedCancellationResponse: Response from the API. OK
@@ -649,8 +649,7 @@ class SubscriptionStatusController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (RenewalPreviewRequest, optional): TODO: type description
-                here.
+            body (RenewalPreviewRequest, optional): The request body parameter.
 
         Returns:
             RenewalPreviewResponse: Response from the API. OK

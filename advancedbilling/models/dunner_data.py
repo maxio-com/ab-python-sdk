@@ -13,15 +13,13 @@ class DunnerData(object):
 
     """Implementation of the 'Dunner Data' model.
 
-    TODO: type model description here.
-
     Attributes:
-        state (str): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        revenue_at_risk_in_cents (long|int): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        attempts (int): TODO: type description here.
-        last_attempted_at (datetime): TODO: type description here.
+        state (str): The model property of type str.
+        subscription_id (int): The model property of type int.
+        revenue_at_risk_in_cents (int): The model property of type int.
+        created_at (datetime): The model property of type datetime.
+        attempts (int): The model property of type int.
+        last_attempted_at (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -139,3 +137,23 @@ class DunnerData(object):
                                         type_callable=lambda value: isinstance(value, int)) \
             and APIHelper.is_valid_type(value=dictionary.get('last_attempted_at'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'state={self.state!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'revenue_at_risk_in_cents={self.revenue_at_risk_in_cents!r}, '
+                f'created_at={self.created_at!r}, '
+                f'attempts={self.attempts!r}, '
+                f'last_attempted_at={self.last_attempted_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'state={self.state!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'revenue_at_risk_in_cents={self.revenue_at_risk_in_cents!s}, '
+                f'created_at={self.created_at!s}, '
+                f'attempts={self.attempts!s}, '
+                f'last_attempted_at={self.last_attempted_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

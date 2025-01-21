@@ -13,8 +13,6 @@ class Customer(object):
 
     """Implementation of the 'Customer' model.
 
-    TODO: type model description here.
-
     Attributes:
         first_name (str): The first name of the customer
         last_name (str): The last name of the customer
@@ -62,7 +60,7 @@ class Customer(object):
         parent_id (int): The parent ID in Chargify if applicable. Parent is
             another Customer object.
         locale (str): The locale for the customer to identify language-region
-        default_subscription_group_uid (str): TODO: type description here.
+        default_subscription_group_uid (str): The model property of type str.
         salesforce_id (str): The Salesforce ID for the customer
         tax_exempt_reason (str): The Tax Exemption Reason Code for the customer
         default_auto_renewal_profile_id (int): The default auto-renewal
@@ -380,3 +378,71 @@ class Customer(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'email={self.email!r}, '
+                f'cc_emails={self.cc_emails!r}, '
+                f'organization={self.organization!r}, '
+                f'reference={self.reference!r}, '
+                f'id={self.id!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'address={self.address!r}, '
+                f'address_2={self.address_2!r}, '
+                f'city={self.city!r}, '
+                f'state={self.state!r}, '
+                f'state_name={self.state_name!r}, '
+                f'zip={self.zip!r}, '
+                f'country={self.country!r}, '
+                f'country_name={self.country_name!r}, '
+                f'phone={self.phone!r}, '
+                f'verified={self.verified!r}, '
+                f'portal_customer_created_at={self.portal_customer_created_at!r}, '
+                f'portal_invite_last_sent_at={self.portal_invite_last_sent_at!r}, '
+                f'portal_invite_last_accepted_at={self.portal_invite_last_accepted_at!r}, '
+                f'tax_exempt={self.tax_exempt!r}, '
+                f'vat_number={self.vat_number!r}, '
+                f'parent_id={self.parent_id!r}, '
+                f'locale={self.locale!r}, '
+                f'default_subscription_group_uid={self.default_subscription_group_uid!r}, '
+                f'salesforce_id={self.salesforce_id!r}, '
+                f'tax_exempt_reason={self.tax_exempt_reason!r}, '
+                f'default_auto_renewal_profile_id={self.default_auto_renewal_profile_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'email={self.email!s}, '
+                f'cc_emails={self.cc_emails!s}, '
+                f'organization={self.organization!s}, '
+                f'reference={self.reference!s}, '
+                f'id={self.id!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'address={self.address!s}, '
+                f'address_2={self.address_2!s}, '
+                f'city={self.city!s}, '
+                f'state={self.state!s}, '
+                f'state_name={self.state_name!s}, '
+                f'zip={self.zip!s}, '
+                f'country={self.country!s}, '
+                f'country_name={self.country_name!s}, '
+                f'phone={self.phone!s}, '
+                f'verified={self.verified!s}, '
+                f'portal_customer_created_at={self.portal_customer_created_at!s}, '
+                f'portal_invite_last_sent_at={self.portal_invite_last_sent_at!s}, '
+                f'portal_invite_last_accepted_at={self.portal_invite_last_accepted_at!s}, '
+                f'tax_exempt={self.tax_exempt!s}, '
+                f'vat_number={self.vat_number!s}, '
+                f'parent_id={self.parent_id!s}, '
+                f'locale={self.locale!s}, '
+                f'default_subscription_group_uid={self.default_subscription_group_uid!s}, '
+                f'salesforce_id={self.salesforce_id!s}, '
+                f'tax_exempt_reason={self.tax_exempt_reason!s}, '
+                f'default_auto_renewal_profile_id={self.default_auto_renewal_profile_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

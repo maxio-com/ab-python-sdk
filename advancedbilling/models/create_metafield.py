@@ -14,10 +14,8 @@ class CreateMetafield(object):
 
     """Implementation of the 'Create Metafield' model.
 
-    TODO: type model description here.
-
     Attributes:
-        name (str): TODO: type description here.
+        name (str): The model property of type str.
         scope (MetafieldScope): Warning: When updating a metafield's scope
             attribute, all scope attributes must be passed. Partially complete
             scope attributes will override the existing settings.
@@ -125,3 +123,19 @@ class CreateMetafield(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'scope={self.scope!r}, '
+                f'input_type={self.input_type!r}, '
+                f'enum={self.enum!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'scope={self.scope!s}, '
+                f'input_type={self.input_type!s}, '
+                f'enum={self.enum!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -15,8 +15,6 @@ class CreditNoteLineItem(object):
 
     """Implementation of the 'Credit Note Line Item' model.
 
-    TODO: type model description here.
-
     Attributes:
         uid (str): Unique identifier for the line item.  Useful when
             cross-referencing the line against individual discounts in the
@@ -73,8 +71,8 @@ class CreditNoteLineItem(object):
             `nil` for non-component credits.
         price_point_id (int): The price point ID of the component being
             credited. Will be `nil` for non-component credits.
-        billing_schedule_item_id (int): TODO: type description here.
-        custom_item (bool): TODO: type description here.
+        billing_schedule_item_id (int): The model property of type int.
+        custom_item (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -275,3 +273,47 @@ class CreditNoteLineItem(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'title={self.title!r}, '
+                f'description={self.description!r}, '
+                f'quantity={self.quantity!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'subtotal_amount={self.subtotal_amount!r}, '
+                f'discount_amount={self.discount_amount!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'total_amount={self.total_amount!r}, '
+                f'tiered_unit_price={self.tiered_unit_price!r}, '
+                f'period_range_start={self.period_range_start!r}, '
+                f'period_range_end={self.period_range_end!r}, '
+                f'product_id={self.product_id!r}, '
+                f'product_version={self.product_version!r}, '
+                f'component_id={self.component_id!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'billing_schedule_item_id={self.billing_schedule_item_id!r}, '
+                f'custom_item={self.custom_item!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'title={self.title!s}, '
+                f'description={self.description!s}, '
+                f'quantity={self.quantity!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'subtotal_amount={self.subtotal_amount!s}, '
+                f'discount_amount={self.discount_amount!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'total_amount={self.total_amount!s}, '
+                f'tiered_unit_price={self.tiered_unit_price!s}, '
+                f'period_range_start={self.period_range_start!s}, '
+                f'period_range_end={self.period_range_end!s}, '
+                f'product_id={self.product_id!s}, '
+                f'product_version={self.product_version!s}, '
+                f'component_id={self.component_id!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'billing_schedule_item_id={self.billing_schedule_item_id!s}, '
+                f'custom_item={self.custom_item!s}, '
+                f'additional_properties={self.additional_properties!s})')

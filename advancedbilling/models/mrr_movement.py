@@ -13,13 +13,11 @@ class MRRMovement(object):
 
     """Implementation of the 'MRR Movement' model.
 
-    TODO: type model description here.
-
     Attributes:
-        amount (int): TODO: type description here.
-        category (str): TODO: type description here.
-        subscriber_delta (int): TODO: type description here.
-        lead_delta (int): TODO: type description here.
+        amount (int): The model property of type int.
+        category (str): The model property of type str.
+        subscriber_delta (int): The model property of type int.
+        lead_delta (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -94,3 +92,19 @@ class MRRMovement(object):
                    subscriber_delta,
                    lead_delta,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!r}, '
+                f'category={self.category!r}, '
+                f'subscriber_delta={self.subscriber_delta!r}, '
+                f'lead_delta={self.lead_delta!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!s}, '
+                f'category={self.category!s}, '
+                f'subscriber_delta={self.subscriber_delta!s}, '
+                f'lead_delta={self.lead_delta!s}, '
+                f'additional_properties={self.additional_properties!s})')

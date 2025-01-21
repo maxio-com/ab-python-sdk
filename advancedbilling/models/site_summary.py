@@ -14,14 +14,12 @@ class SiteSummary(object):
 
     """Implementation of the 'Site Summary' model.
 
-    TODO: type model description here.
-
     Attributes:
-        seller_name (str): TODO: type description here.
-        site_name (str): TODO: type description here.
-        site_id (int): TODO: type description here.
-        site_currency (str): TODO: type description here.
-        stats (SiteStatistics): TODO: type description here.
+        seller_name (str): The model property of type str.
+        site_name (str): The model property of type str.
+        site_id (int): The model property of type int.
+        site_currency (str): The model property of type str.
+        stats (SiteStatistics): The model property of type SiteStatistics.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -103,3 +101,21 @@ class SiteSummary(object):
                    site_currency,
                    stats,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'seller_name={self.seller_name!r}, '
+                f'site_name={self.site_name!r}, '
+                f'site_id={self.site_id!r}, '
+                f'site_currency={self.site_currency!r}, '
+                f'stats={self.stats!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'seller_name={self.seller_name!s}, '
+                f'site_name={self.site_name!s}, '
+                f'site_id={self.site_id!s}, '
+                f'site_currency={self.site_currency!s}, '
+                f'stats={self.stats!s}, '
+                f'additional_properties={self.additional_properties!s})')

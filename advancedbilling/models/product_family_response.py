@@ -14,10 +14,9 @@ class ProductFamilyResponse(object):
 
     """Implementation of the 'Product Family Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        product_family (ProductFamily): TODO: type description here.
+        product_family (ProductFamily): The model property of type
+            ProductFamily.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +70,13 @@ class ProductFamilyResponse(object):
         # Return an object of this model
         return cls(product_family,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_family={self.product_family!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_family={self.product_family!s}, '
+                f'additional_properties={self.additional_properties!s})')

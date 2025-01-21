@@ -12,11 +12,9 @@ class WebhookOrder(object):
 
     """Implementation of the 'Webhook Order' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        NEWEST_FIRST: TODO: type description here.
-        OLDEST_FIRST: TODO: type description here.
+        NEWEST_FIRST: The enum member of type str.
+        OLDEST_FIRST: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

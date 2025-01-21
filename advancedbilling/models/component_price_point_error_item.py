@@ -13,12 +13,10 @@ class ComponentPricePointErrorItem(object):
 
     """Implementation of the 'Component PricePoint Error Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component_id (int): TODO: type description here.
-        message (str): TODO: type description here.
-        price_point (int): TODO: type description here.
+        component_id (int): The model property of type int.
+        message (str): The model property of type str.
+        price_point (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -86,3 +84,17 @@ class ComponentPricePointErrorItem(object):
                    message,
                    price_point,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!r}, '
+                f'message={self.message!r}, '
+                f'price_point={self.price_point!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!s}, '
+                f'message={self.message!s}, '
+                f'price_point={self.price_point!s}, '
+                f'additional_properties={self.additional_properties!s})')

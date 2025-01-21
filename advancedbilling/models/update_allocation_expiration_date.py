@@ -14,10 +14,9 @@ class UpdateAllocationExpirationDate(object):
 
     """Implementation of the 'Update Allocation Expiration Date' model.
 
-    TODO: type model description here.
-
     Attributes:
-        allocation (AllocationExpirationDate): TODO: type description here.
+        allocation (AllocationExpirationDate): The model property of type
+            AllocationExpirationDate.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +70,13 @@ class UpdateAllocationExpirationDate(object):
         # Return an object of this model
         return cls(allocation,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocation={self.allocation!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocation={self.allocation!s}, '
+                f'additional_properties={self.additional_properties!s})')

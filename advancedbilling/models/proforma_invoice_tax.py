@@ -14,18 +14,16 @@ class ProformaInvoiceTax(object):
 
     """Implementation of the 'Proforma Invoice Tax' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        title (str): TODO: type description here.
-        source_type (ProformaInvoiceTaxSourceType): TODO: type description
-            here.
-        percentage (str): TODO: type description here.
-        taxable_amount (str): TODO: type description here.
-        tax_amount (str): TODO: type description here.
-        line_item_breakouts (List[InvoiceTaxBreakout]): TODO: type description
-            here.
+        uid (str): The model property of type str.
+        title (str): The model property of type str.
+        source_type (ProformaInvoiceTaxSourceType): The model property of type
+            ProformaInvoiceTaxSourceType.
+        percentage (str): The model property of type str.
+        taxable_amount (str): The model property of type str.
+        tax_amount (str): The model property of type str.
+        line_item_breakouts (List[InvoiceTaxBreakout]): The model property of
+            type List[InvoiceTaxBreakout].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -125,3 +123,25 @@ class ProformaInvoiceTax(object):
                    tax_amount,
                    line_item_breakouts,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'title={self.title!r}, '
+                f'source_type={self.source_type!r}, '
+                f'percentage={self.percentage!r}, '
+                f'taxable_amount={self.taxable_amount!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'line_item_breakouts={self.line_item_breakouts!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'title={self.title!s}, '
+                f'source_type={self.source_type!s}, '
+                f'percentage={self.percentage!s}, '
+                f'taxable_amount={self.taxable_amount!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'line_item_breakouts={self.line_item_breakouts!s}, '
+                f'additional_properties={self.additional_properties!s})')

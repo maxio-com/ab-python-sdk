@@ -11,9 +11,9 @@
 |  --- | --- | --- | --- |
 | `id` | `int` | Required | - |
 | `subscription_id` | `int` | Required | - |
-| `amount_in_cents` | `long\|int` | Required | - |
-| `remaining_amount_in_cents` | `long\|int` | Required | - |
-| `refunded_amount_in_cents` | `long\|int` | Optional | - |
+| `amount_in_cents` | `int` | Required | - |
+| `remaining_amount_in_cents` | `int` | Required | - |
+| `refunded_amount_in_cents` | `int` | Optional | - |
 | `details` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `external` | `bool` | Required | - |
 | `memo` | `str` | Required | **Constraints**: *Minimum Length*: `1` |

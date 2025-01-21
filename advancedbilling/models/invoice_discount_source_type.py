@@ -12,12 +12,10 @@ class InvoiceDiscountSourceType(object):
 
     """Implementation of the 'Invoice Discount Source Type' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        COUPON: TODO: type description here.
-        REFERRAL: TODO: type description here.
-        ENUM_AD HOC COUPON: TODO: type description here.
+        COUPON: The enum member of type str.
+        REFERRAL: The enum member of type str.
+        ENUM_AD HOC COUPON: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

@@ -12,10 +12,8 @@ class ReplayWebhooksRequest(object):
 
     """Implementation of the 'Replay Webhooks Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        ids (List[long|int]): TODO: type description here.
+        ids (List[int]): The model property of type List[int].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -64,3 +62,13 @@ class ReplayWebhooksRequest(object):
         # Return an object of this model
         return cls(ids,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'ids={self.ids!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'ids={self.ids!s}, '
+                f'additional_properties={self.additional_properties!s})')

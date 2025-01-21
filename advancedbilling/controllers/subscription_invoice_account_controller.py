@@ -88,8 +88,8 @@ class SubscriptionInvoiceAccountController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (CreatePrepaymentRequest, optional): TODO: type description
-                here.
+            body (CreatePrepaymentRequest, optional): The request body
+                parameter.
 
         Returns:
             CreatePrepaymentResponse: Response from the API. Created
@@ -212,8 +212,8 @@ class SubscriptionInvoiceAccountController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (IssueServiceCreditRequest, optional): TODO: type description
-                here.
+            body (IssueServiceCreditRequest, optional): The request body
+                parameter.
 
         Returns:
             ServiceCredit: Response from the API. Created
@@ -263,8 +263,8 @@ class SubscriptionInvoiceAccountController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (DeductServiceCreditRequest, optional): TODO: type
-                description here.
+            body (DeductServiceCreditRequest, optional): The request body
+                parameter.
 
         Returns:
             void: Response from the API. OK
@@ -310,9 +310,9 @@ class SubscriptionInvoiceAccountController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            prepayment_id (long|int): id of prepayment
-            body (RefundPrepaymentRequest, optional): TODO: type description
-                here.
+            prepayment_id (int): id of prepayment
+            body (RefundPrepaymentRequest, optional): The request body
+                parameter.
 
         Returns:
             PrepaymentResponse: Response from the API. Created

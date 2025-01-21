@@ -13,11 +13,9 @@ class AddressChange(object):
 
     """Implementation of the 'Address Change' model.
 
-    TODO: type model description here.
-
     Attributes:
-        before (InvoiceAddress): TODO: type description here.
-        after (InvoiceAddress): TODO: type description here.
+        before (InvoiceAddress): The model property of type InvoiceAddress.
+        after (InvoiceAddress): The model property of type InvoiceAddress.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +69,15 @@ class AddressChange(object):
         return cls(before,
                    after,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'before={self.before!r}, '
+                f'after={self.after!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'before={self.before!s}, '
+                f'after={self.after!s}, '
+                f'additional_properties={self.additional_properties!s})')

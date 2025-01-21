@@ -60,7 +60,7 @@ class CouponsController(BaseController):
         Args:
             product_family_id (int): The Advanced Billing id of the product
                 family to which the coupon belongs
-            body (CouponRequest, optional): TODO: type description here.
+            body (CouponRequest, optional): The request body parameter.
 
         Returns:
             CouponResponse: Response from the API. Created
@@ -322,7 +322,7 @@ class CouponsController(BaseController):
             product_family_id (int): The Advanced Billing id of the product
                 family to which the coupon belongs
             coupon_id (int): The Advanced Billing id of the coupon
-            body (CouponRequest, optional): TODO: type description here.
+            body (CouponRequest, optional): The request body parameter.
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -627,8 +627,7 @@ class CouponsController(BaseController):
 
         Args:
             coupon_id (int): The Advanced Billing id of the coupon
-            body (CouponCurrencyRequest, optional): TODO: type description
-                here.
+            body (CouponCurrencyRequest, optional): The request body parameter.
 
         Returns:
             CouponCurrencyResponse: Response from the API. OK
@@ -715,7 +714,7 @@ class CouponsController(BaseController):
 
         Args:
             coupon_id (int): The Advanced Billing id of the coupon
-            body (CouponSubcodes, optional): TODO: type description here.
+            body (CouponSubcodes, optional): The request body parameter.
 
         Returns:
             CouponSubcodesResponse: Response from the API. OK
@@ -836,7 +835,7 @@ class CouponsController(BaseController):
 
         Args:
             coupon_id (int): The Advanced Billing id of the coupon
-            body (CouponSubcodes, optional): TODO: type description here.
+            body (CouponSubcodes, optional): The request body parameter.
 
         Returns:
             CouponSubcodesResponse: Response from the API. OK

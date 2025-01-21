@@ -13,10 +13,9 @@ class ListComponentsPricePointsResponse(object):
 
     """Implementation of the 'List Components Price Points Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        price_points (List[ComponentPricePoint]): TODO: type description here.
+        price_points (List[ComponentPricePoint]): The model property of type
+            List[ComponentPricePoint].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -67,3 +66,13 @@ class ListComponentsPricePointsResponse(object):
         # Return an object of this model
         return cls(price_points,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'price_points={self.price_points!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'price_points={self.price_points!s}, '
+                f'additional_properties={self.additional_properties!s})')

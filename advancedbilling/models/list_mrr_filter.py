@@ -13,8 +13,6 @@ class ListMrrFilter(object):
 
     """Implementation of the 'List Mrr Filter' model.
 
-    TODO: type model description here.
-
     Attributes:
         subscription_ids (List[int]): Submit ids in order to limit results.
             Use in query: `filter[subscription_ids]=1,2,3`.
@@ -71,3 +69,13 @@ class ListMrrFilter(object):
         # Return an object of this model
         return cls(subscription_ids,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_ids={self.subscription_ids!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_ids={self.subscription_ids!s}, '
+                f'additional_properties={self.additional_properties!s})')

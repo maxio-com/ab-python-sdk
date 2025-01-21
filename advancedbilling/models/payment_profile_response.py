@@ -13,12 +13,12 @@ class PaymentProfileResponse(object):
 
     """Implementation of the 'Payment Profile Response' model.
 
-    TODO: type model description here.
-
     Attributes:
         payment_profile (ApplePayPaymentProfile | BankAccountPaymentProfile |
-            CreditCardPaymentProfile | PaypalPaymentProfile): TODO: type
-            description here.
+            CreditCardPaymentProfile | PaypalPaymentProfile): The model
+            property of type ApplePayPaymentProfile |
+            BankAccountPaymentProfile | CreditCardPaymentProfile |
+            PaypalPaymentProfile.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -91,3 +91,13 @@ class PaymentProfileResponse(object):
             return False
 
         return UnionTypeLookUp.get('Payment-Profile').validate(dictionary.get('payment_profile')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'payment_profile={self.payment_profile!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'payment_profile={self.payment_profile!s}, '
+                f'additional_properties={self.additional_properties!s})')

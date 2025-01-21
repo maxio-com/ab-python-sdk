@@ -15,8 +15,8 @@ class SortingDirection(object):
     Used for sorting results.
 
     Attributes:
-        ASC: TODO: type description here.
-        DESC: TODO: type description here.
+        ASC: The enum member of type str.
+        DESC: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

@@ -18,8 +18,8 @@ class CalendarBilling(object):
     Attributes:
         snap_day (int | str | None): A day of month that subscription will be
             processed on. Can be 1 up to 28 or 'end'.
-        calendar_billing_first_charge (FirstChargeType): TODO: type
-            description here.
+        calendar_billing_first_charge (FirstChargeType): The model property of
+            type FirstChargeType.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -103,3 +103,15 @@ class CalendarBilling(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'snap_day={self.snap_day!r}, '
+                f'calendar_billing_first_charge={self.calendar_billing_first_charge!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'snap_day={self.snap_day!s}, '
+                f'calendar_billing_first_charge={self.calendar_billing_first_charge!s}, '
+                f'additional_properties={self.additional_properties!s})')

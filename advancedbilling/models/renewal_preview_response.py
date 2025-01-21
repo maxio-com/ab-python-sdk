@@ -13,10 +13,9 @@ class RenewalPreviewResponse(object):
 
     """Implementation of the 'Renewal Preview Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        renewal_preview (RenewalPreview): TODO: type description here.
+        renewal_preview (RenewalPreview): The model property of type
+            RenewalPreview.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class RenewalPreviewResponse(object):
         # Return an object of this model
         return cls(renewal_preview,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'renewal_preview={self.renewal_preview!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'renewal_preview={self.renewal_preview!s}, '
+                f'additional_properties={self.additional_properties!s})')

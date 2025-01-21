@@ -12,7 +12,7 @@ Information for captured payment, if applicable
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `int` | Optional | - |
-| `amount_in_cents` | `long\|int` | Optional | - |
+| `amount_in_cents` | `int` | Optional | - |
 | `success` | `bool` | Optional | - |
 | `memo` | `str` | Optional | - |
 

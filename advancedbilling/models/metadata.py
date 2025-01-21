@@ -13,15 +13,13 @@ class Metadata(object):
 
     """Implementation of the 'Metadata' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        value (str): TODO: type description here.
-        resource_id (int): TODO: type description here.
-        name (str): TODO: type description here.
-        deleted_at (datetime): TODO: type description here.
-        metafield_id (int): TODO: type description here.
+        id (int): The model property of type int.
+        value (str): The model property of type str.
+        resource_id (int): The model property of type int.
+        name (str): The model property of type str.
+        deleted_at (datetime): The model property of type datetime.
+        metafield_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -121,3 +119,23 @@ class Metadata(object):
                    deleted_at,
                    metafield_id,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'value={self.value!r}, '
+                f'resource_id={self.resource_id!r}, '
+                f'name={self.name!r}, '
+                f'deleted_at={self.deleted_at!r}, '
+                f'metafield_id={self.metafield_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'value={self.value!s}, '
+                f'resource_id={self.resource_id!s}, '
+                f'name={self.name!s}, '
+                f'deleted_at={self.deleted_at!s}, '
+                f'metafield_id={self.metafield_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -14,11 +14,9 @@ class ComponentPricePointItem(object):
 
     """Implementation of the 'Component Price Point Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        name (str): TODO: type description here.
-        handle (str): TODO: type description here.
+        name (str): The model property of type str.
+        handle (str): The model property of type str.
         pricing_scheme (PricingScheme): The identifier for the pricing scheme.
             See [Product
             Components](https://help.chargify.com/products/product-components.h
@@ -30,7 +28,7 @@ class ComponentPricePointItem(object):
         interval_unit (IntervalUnit): A string representing the interval unit
             for this component price point, either month or day. This property
             is only available for sites with Multifrequency enabled.
-        prices (List[Price]): TODO: type description here.
+        prices (List[Price]): The model property of type List[Price].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -149,3 +147,23 @@ class ComponentPricePointItem(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'prices={self.prices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'prices={self.prices!s}, '
+                f'additional_properties={self.additional_properties!s})')

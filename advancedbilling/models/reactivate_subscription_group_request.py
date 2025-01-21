@@ -13,11 +13,9 @@ class ReactivateSubscriptionGroupRequest(object):
 
     """Implementation of the 'Reactivate Subscription Group Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        resume (bool): TODO: type description here.
-        resume_members (bool): TODO: type description here.
+        resume (bool): The model property of type bool.
+        resume_members (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -78,3 +76,15 @@ class ReactivateSubscriptionGroupRequest(object):
         return cls(resume,
                    resume_members,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'resume={self.resume!r}, '
+                f'resume_members={self.resume_members!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'resume={self.resume!s}, '
+                f'resume_members={self.resume_members!s}, '
+                f'additional_properties={self.additional_properties!s})')

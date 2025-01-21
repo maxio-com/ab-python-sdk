@@ -13,10 +13,8 @@ class UpdateCustomerRequest(object):
 
     """Implementation of the 'Update Customer Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        customer (UpdateCustomer): TODO: type description here.
+        customer (UpdateCustomer): The model property of type UpdateCustomer.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +63,13 @@ class UpdateCustomerRequest(object):
         # Return an object of this model
         return cls(customer,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer={self.customer!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer={self.customer!s}, '
+                f'additional_properties={self.additional_properties!s})')

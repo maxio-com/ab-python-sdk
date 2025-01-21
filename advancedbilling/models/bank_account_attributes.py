@@ -13,10 +13,8 @@ class BankAccountAttributes(object):
 
     """Implementation of the 'Bank Account Attributes' model.
 
-    TODO: type model description here.
-
     Attributes:
-        chargify_token (str): TODO: type description here.
+        chargify_token (str): The model property of type str.
         bank_name (str): (Required when creating a subscription with ACH or
             GoCardless) The name of the bank where the customer’s account
             resides
@@ -34,10 +32,10 @@ class BankAccountAttributes(object):
             GoCardless). International Bank Account Number. Alternatively,
             local bank details can be provided
         bank_account_holder_type (BankAccountHolderType): Defaults to personal
-        payment_type (PaymentType): TODO: type description here.
+        payment_type (PaymentType): The model property of type PaymentType.
         current_vault (BankAccountVault): The vault that stores the payment
             profile with the provided vault_token. Use `bogus` for testing.
-        vault_token (str): TODO: type description here.
+        vault_token (str): The model property of type str.
         customer_vault_token (str): (only for Authorize.Net CIM storage or
             Square) The customerProfileId for the owner of the
             customerPaymentProfileId provided as the vault_token
@@ -193,3 +191,35 @@ class BankAccountAttributes(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargify_token={self.chargify_token!r}, '
+                f'bank_name={self.bank_name!r}, '
+                f'bank_routing_number={self.bank_routing_number!r}, '
+                f'bank_account_number={self.bank_account_number!r}, '
+                f'bank_account_type={self.bank_account_type!r}, '
+                f'bank_branch_code={self.bank_branch_code!r}, '
+                f'bank_iban={self.bank_iban!r}, '
+                f'bank_account_holder_type={self.bank_account_holder_type!r}, '
+                f'payment_type={self.payment_type!r}, '
+                f'current_vault={self.current_vault!r}, '
+                f'vault_token={self.vault_token!r}, '
+                f'customer_vault_token={self.customer_vault_token!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargify_token={self.chargify_token!s}, '
+                f'bank_name={self.bank_name!s}, '
+                f'bank_routing_number={self.bank_routing_number!s}, '
+                f'bank_account_number={self.bank_account_number!s}, '
+                f'bank_account_type={self.bank_account_type!s}, '
+                f'bank_branch_code={self.bank_branch_code!s}, '
+                f'bank_iban={self.bank_iban!s}, '
+                f'bank_account_holder_type={self.bank_account_holder_type!s}, '
+                f'payment_type={self.payment_type!s}, '
+                f'current_vault={self.current_vault!s}, '
+                f'vault_token={self.vault_token!s}, '
+                f'customer_vault_token={self.customer_vault_token!s}, '
+                f'additional_properties={self.additional_properties!s})')

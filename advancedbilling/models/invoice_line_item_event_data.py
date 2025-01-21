@@ -14,30 +14,28 @@ class InvoiceLineItemEventData(object):
 
     """Implementation of the 'Invoice Line Item Event Data' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        title (str): TODO: type description here.
-        description (str): TODO: type description here.
-        quantity (int): TODO: type description here.
-        quantity_delta (int): TODO: type description here.
-        unit_price (str): TODO: type description here.
-        period_range_start (str): TODO: type description here.
-        period_range_end (str): TODO: type description here.
-        amount (str): TODO: type description here.
-        line_references (str): TODO: type description here.
-        pricing_details_index (int): TODO: type description here.
-        pricing_details (List[InvoiceLineItemPricingDetail]): TODO: type
-            description here.
-        tax_code (str): TODO: type description here.
-        tax_amount (str): TODO: type description here.
-        product_id (int): TODO: type description here.
-        product_price_point_id (int): TODO: type description here.
-        price_point_id (int): TODO: type description here.
-        component_id (int): TODO: type description here.
-        billing_schedule_item_id (int): TODO: type description here.
-        custom_item (bool): TODO: type description here.
+        uid (str): The model property of type str.
+        title (str): The model property of type str.
+        description (str): The model property of type str.
+        quantity (int): The model property of type int.
+        quantity_delta (int): The model property of type int.
+        unit_price (str): The model property of type str.
+        period_range_start (str): The model property of type str.
+        period_range_end (str): The model property of type str.
+        amount (str): The model property of type str.
+        line_references (str): The model property of type str.
+        pricing_details_index (int): The model property of type int.
+        pricing_details (List[InvoiceLineItemPricingDetail]): The model
+            property of type List[InvoiceLineItemPricingDetail].
+        tax_code (str): The model property of type str.
+        tax_amount (str): The model property of type str.
+        product_id (int): The model property of type int.
+        product_price_point_id (int): The model property of type int.
+        price_point_id (int): The model property of type int.
+        component_id (int): The model property of type int.
+        billing_schedule_item_id (int): The model property of type int.
+        custom_item (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -261,3 +259,51 @@ class InvoiceLineItemEventData(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'title={self.title!r}, '
+                f'description={self.description!r}, '
+                f'quantity={self.quantity!r}, '
+                f'quantity_delta={self.quantity_delta!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'period_range_start={self.period_range_start!r}, '
+                f'period_range_end={self.period_range_end!r}, '
+                f'amount={self.amount!r}, '
+                f'line_references={self.line_references!r}, '
+                f'pricing_details_index={self.pricing_details_index!r}, '
+                f'pricing_details={self.pricing_details!r}, '
+                f'tax_code={self.tax_code!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'product_id={self.product_id!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'component_id={self.component_id!r}, '
+                f'billing_schedule_item_id={self.billing_schedule_item_id!r}, '
+                f'custom_item={self.custom_item!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'title={self.title!s}, '
+                f'description={self.description!s}, '
+                f'quantity={self.quantity!s}, '
+                f'quantity_delta={self.quantity_delta!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'period_range_start={self.period_range_start!s}, '
+                f'period_range_end={self.period_range_end!s}, '
+                f'amount={self.amount!s}, '
+                f'line_references={self.line_references!s}, '
+                f'pricing_details_index={self.pricing_details_index!s}, '
+                f'pricing_details={self.pricing_details!s}, '
+                f'tax_code={self.tax_code!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'product_id={self.product_id!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'component_id={self.component_id!s}, '
+                f'billing_schedule_item_id={self.billing_schedule_item_id!s}, '
+                f'custom_item={self.custom_item!s}, '
+                f'additional_properties={self.additional_properties!s})')

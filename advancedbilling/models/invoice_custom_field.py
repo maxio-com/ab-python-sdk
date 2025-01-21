@@ -13,14 +13,13 @@ class InvoiceCustomField(object):
 
     """Implementation of the 'Invoice Custom Field' model.
 
-    TODO: type model description here.
-
     Attributes:
-        owner_id (int): TODO: type description here.
-        owner_type (CustomFieldOwner): TODO: type description here.
-        name (str): TODO: type description here.
-        value (str): TODO: type description here.
-        metadatum_id (int): TODO: type description here.
+        owner_id (int): The model property of type int.
+        owner_type (CustomFieldOwner): The model property of type
+            CustomFieldOwner.
+        name (str): The model property of type str.
+        value (str): The model property of type str.
+        metadatum_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -124,3 +123,21 @@ class InvoiceCustomField(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'owner_id={self.owner_id!r}, '
+                f'owner_type={self.owner_type!r}, '
+                f'name={self.name!r}, '
+                f'value={self.value!r}, '
+                f'metadatum_id={self.metadatum_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'owner_id={self.owner_id!s}, '
+                f'owner_type={self.owner_type!s}, '
+                f'name={self.name!s}, '
+                f'value={self.value!s}, '
+                f'metadatum_id={self.metadatum_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

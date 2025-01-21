@@ -15,16 +15,16 @@ class LineItemKind(object):
     A handle for the line item kind
 
     Attributes:
-        BASELINE: TODO: type description here.
-        INITIAL: TODO: type description here.
-        TRIAL: TODO: type description here.
-        QUANTITY_BASED_COMPONENT: TODO: type description here.
-        PREPAID_USAGE_COMPONENT: TODO: type description here.
-        ON_OFF_COMPONENT: TODO: type description here.
-        METERED_COMPONENT: TODO: type description here.
-        EVENT_BASED_COMPONENT: TODO: type description here.
-        COUPON: TODO: type description here.
-        TAX: TODO: type description here.
+        BASELINE: The enum member of type str.
+        INITIAL: The enum member of type str.
+        TRIAL: The enum member of type str.
+        QUANTITY_BASED_COMPONENT: The enum member of type str.
+        PREPAID_USAGE_COMPONENT: The enum member of type str.
+        ON_OFF_COMPONENT: The enum member of type str.
+        METERED_COMPONENT: The enum member of type str.
+        EVENT_BASED_COMPONENT: The enum member of type str.
+        COUPON: The enum member of type str.
+        TAX: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

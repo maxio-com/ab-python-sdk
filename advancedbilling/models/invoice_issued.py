@@ -17,26 +17,24 @@ class InvoiceIssued(object):
 
     """Implementation of the 'Invoice Issued' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        number (str): TODO: type description here.
-        role (str): TODO: type description here.
-        due_date (date): TODO: type description here.
+        uid (str): The model property of type str.
+        number (str): The model property of type str.
+        role (str): The model property of type str.
+        due_date (date): The model property of type date.
         issue_date (str): Invoice issue date. Can be an empty string if value
             is missing.
         paid_date (str): Paid date. Can be an empty string if value is missing.
-        due_amount (str): TODO: type description here.
-        paid_amount (str): TODO: type description here.
-        tax_amount (str): TODO: type description here.
-        refund_amount (str): TODO: type description here.
-        total_amount (str): TODO: type description here.
-        status_amount (str): TODO: type description here.
-        product_name (str): TODO: type description here.
-        consolidation_level (str): TODO: type description here.
-        line_items (List[InvoiceLineItemEventData]): TODO: type description
-            here.
+        due_amount (str): The model property of type str.
+        paid_amount (str): The model property of type str.
+        tax_amount (str): The model property of type str.
+        refund_amount (str): The model property of type str.
+        total_amount (str): The model property of type str.
+        status_amount (str): The model property of type str.
+        product_name (str): The model property of type str.
+        consolidation_level (str): The model property of type str.
+        line_items (List[InvoiceLineItemEventData]): The model property of
+            type List[InvoiceLineItemEventData].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -247,3 +245,41 @@ class InvoiceIssued(object):
                                         type_callable=lambda value: InvoiceLineItemEventData.validate(value),
                                         is_model_dict=True,
                                         is_inner_model_dict=True)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'number={self.number!r}, '
+                f'role={self.role!r}, '
+                f'due_date={self.due_date!r}, '
+                f'issue_date={self.issue_date!r}, '
+                f'paid_date={self.paid_date!r}, '
+                f'due_amount={self.due_amount!r}, '
+                f'paid_amount={self.paid_amount!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'refund_amount={self.refund_amount!r}, '
+                f'total_amount={self.total_amount!r}, '
+                f'status_amount={self.status_amount!r}, '
+                f'product_name={self.product_name!r}, '
+                f'consolidation_level={self.consolidation_level!r}, '
+                f'line_items={self.line_items!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'number={self.number!s}, '
+                f'role={self.role!s}, '
+                f'due_date={self.due_date!s}, '
+                f'issue_date={self.issue_date!s}, '
+                f'paid_date={self.paid_date!s}, '
+                f'due_amount={self.due_amount!s}, '
+                f'paid_amount={self.paid_amount!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'refund_amount={self.refund_amount!s}, '
+                f'total_amount={self.total_amount!s}, '
+                f'status_amount={self.status_amount!s}, '
+                f'product_name={self.product_name!s}, '
+                f'consolidation_level={self.consolidation_level!s}, '
+                f'line_items={self.line_items!s}, '
+                f'additional_properties={self.additional_properties!s})')

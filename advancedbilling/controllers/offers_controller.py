@@ -50,7 +50,7 @@ class OffersController(BaseController):
         point will be used.
 
         Args:
-            body (CreateOfferRequest, optional): TODO: type description here.
+            body (CreateOfferRequest, optional): The request body parameter.
 
         Returns:
             OfferResponse: Response from the API. Created

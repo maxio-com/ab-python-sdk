@@ -43,8 +43,8 @@ class SubscriptionNotesController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (UpdateSubscriptionNoteRequest, optional): TODO: type
-                description here.
+            body (UpdateSubscriptionNoteRequest, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionNoteResponse: Response from the API. OK
@@ -209,8 +209,8 @@ class SubscriptionNotesController(BaseController):
         Args:
             subscription_id (int): The Chargify id of the subscription
             note_id (int): The Advanced Billing id of the note
-            body (UpdateSubscriptionNoteRequest, optional): TODO: type
-                description here.
+            body (UpdateSubscriptionNoteRequest, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionNoteResponse: Response from the API. OK

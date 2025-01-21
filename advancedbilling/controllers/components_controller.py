@@ -51,8 +51,8 @@ class ComponentsController(BaseController):
         Args:
             product_family_id (str): Either the product family's id or its
                 handle prefixed with `handle:`
-            body (CreateMeteredComponent, optional): TODO: type description
-                here.
+            body (CreateMeteredComponent, optional): The request body
+                parameter.
 
         Returns:
             ComponentResponse: Response from the API. Created
@@ -121,8 +121,8 @@ class ComponentsController(BaseController):
         Args:
             product_family_id (str): Either the product family's id or its
                 handle prefixed with `handle:`
-            body (CreateQuantityBasedComponent, optional): TODO: type
-                description here.
+            body (CreateQuantityBasedComponent, optional): The request body
+                parameter.
 
         Returns:
             ComponentResponse: Response from the API. Created
@@ -179,7 +179,7 @@ class ComponentsController(BaseController):
         Args:
             product_family_id (str): Either the product family's id or its
                 handle prefixed with `handle:`
-            body (CreateOnOffComponent, optional): TODO: type description here.
+            body (CreateOnOffComponent, optional): The request body parameter.
 
         Returns:
             ComponentResponse: Response from the API. Created
@@ -240,8 +240,8 @@ class ComponentsController(BaseController):
         Args:
             product_family_id (str): Either the product family's id or its
                 handle prefixed with `handle:`
-            body (CreatePrepaidComponent, optional): TODO: type description
-                here.
+            body (CreatePrepaidComponent, optional): The request body
+                parameter.
 
         Returns:
             ComponentResponse: Response from the API. Created
@@ -306,7 +306,7 @@ class ComponentsController(BaseController):
         Args:
             product_family_id (str): Either the product family's id or its
                 handle prefixed with `handle:`
-            body (CreateEBBComponent, optional): TODO: type description here.
+            body (CreateEBBComponent, optional): The request body parameter.
 
         Returns:
             ComponentResponse: Response from the API. Created
@@ -454,8 +454,8 @@ class ComponentsController(BaseController):
             component_id (str): Either the Advanced Billing id of the
                 component or the handle for the component prefixed with
                 `handle:`
-            body (UpdateComponentRequest, optional): TODO: type description
-                here.
+            body (UpdateComponentRequest, optional): The request body
+                parameter.
 
         Returns:
             ComponentResponse: Response from the API. OK
@@ -671,8 +671,8 @@ class ComponentsController(BaseController):
 
         Args:
             component_id (str): The id or handle of the component
-            body (UpdateComponentRequest, optional): TODO: type description
-                here.
+            body (UpdateComponentRequest, optional): The request body
+                parameter.
 
         Returns:
             ComponentResponse: Response from the API. OK

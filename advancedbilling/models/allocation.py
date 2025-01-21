@@ -14,8 +14,6 @@ class Allocation(object):
 
     """Implementation of the 'Allocation' model.
 
-    TODO: type model description here.
-
     Attributes:
         allocation_id (int): The allocation unique id
         component_id (int): The integer component ID for the allocation. This
@@ -41,9 +39,9 @@ class Allocation(object):
         proration_downgrade_scheme (str): The scheme used if the proration was
             a downgrade. This is only present when the allocation was created
             mid-period.
-        price_point_id (int): TODO: type description here.
-        price_point_name (str): TODO: type description here.
-        price_point_handle (str): TODO: type description here.
+        price_point_id (int): The model property of type int.
+        price_point_name (str): The model property of type str.
+        price_point_handle (str): The model property of type str.
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this component
             price point would renew every 30 days. This property is only
@@ -51,7 +49,7 @@ class Allocation(object):
         interval_unit (IntervalUnit): A string representing the interval unit
             for this component price point, either month or day. This property
             is only available for sites with Multifrequency enabled.
-        previous_price_point_id (int): TODO: type description here.
+        previous_price_point_id (int): The model property of type int.
         accrue_charge (bool): If the change in cost is an upgrade, this
             determines if the charge should accrue to the next renewal or if
             capture should be attempted immediately.
@@ -66,10 +64,11 @@ class Allocation(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        payment (PaymentForAllocation): TODO: type description here.
-        expires_at (datetime): TODO: type description here.
-        used_quantity (long|int): TODO: type description here.
-        charge_id (long|int): TODO: type description here.
+        payment (PaymentForAllocation): The model property of type
+            PaymentForAllocation.
+        expires_at (datetime): The model property of type datetime.
+        used_quantity (int): The model property of type int.
+        charge_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -304,3 +303,61 @@ class Allocation(object):
                    used_quantity,
                    charge_id,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocation_id={self.allocation_id!r}, '
+                f'component_id={self.component_id!r}, '
+                f'component_handle={self.component_handle!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'quantity={self.quantity!r}, '
+                f'previous_quantity={self.previous_quantity!r}, '
+                f'memo={self.memo!r}, '
+                f'timestamp={self.timestamp!r}, '
+                f'created_at={self.created_at!r}, '
+                f'proration_upgrade_scheme={self.proration_upgrade_scheme!r}, '
+                f'proration_downgrade_scheme={self.proration_downgrade_scheme!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'price_point_name={self.price_point_name!r}, '
+                f'price_point_handle={self.price_point_handle!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'previous_price_point_id={self.previous_price_point_id!r}, '
+                f'accrue_charge={self.accrue_charge!r}, '
+                f'initiate_dunning={self.initiate_dunning!r}, '
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'payment={self.payment!r}, '
+                f'expires_at={self.expires_at!r}, '
+                f'used_quantity={self.used_quantity!r}, '
+                f'charge_id={self.charge_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocation_id={self.allocation_id!s}, '
+                f'component_id={self.component_id!s}, '
+                f'component_handle={self.component_handle!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'quantity={self.quantity!s}, '
+                f'previous_quantity={self.previous_quantity!s}, '
+                f'memo={self.memo!s}, '
+                f'timestamp={self.timestamp!s}, '
+                f'created_at={self.created_at!s}, '
+                f'proration_upgrade_scheme={self.proration_upgrade_scheme!s}, '
+                f'proration_downgrade_scheme={self.proration_downgrade_scheme!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'price_point_name={self.price_point_name!s}, '
+                f'price_point_handle={self.price_point_handle!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'previous_price_point_id={self.previous_price_point_id!s}, '
+                f'accrue_charge={self.accrue_charge!s}, '
+                f'initiate_dunning={self.initiate_dunning!s}, '
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'payment={self.payment!s}, '
+                f'expires_at={self.expires_at!s}, '
+                f'used_quantity={self.used_quantity!s}, '
+                f'charge_id={self.charge_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

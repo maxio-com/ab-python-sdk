@@ -13,12 +13,10 @@ class CreditCardAttributes(object):
 
     """Implementation of the 'Credit Card Attributes' model.
 
-    TODO: type model description here.
-
     Attributes:
-        full_number (str): TODO: type description here.
-        expiration_month (str): TODO: type description here.
-        expiration_year (str): TODO: type description here.
+        full_number (str): The model property of type str.
+        expiration_month (str): The model property of type str.
+        expiration_year (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -108,3 +106,17 @@ class CreditCardAttributes(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'full_number={self.full_number!r}, '
+                f'expiration_month={self.expiration_month!r}, '
+                f'expiration_year={self.expiration_year!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'full_number={self.full_number!s}, '
+                f'expiration_month={self.expiration_month!s}, '
+                f'expiration_year={self.expiration_year!s}, '
+                f'additional_properties={self.additional_properties!s})')

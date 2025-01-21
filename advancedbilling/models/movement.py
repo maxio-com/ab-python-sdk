@@ -15,18 +15,17 @@ class Movement(object):
 
     """Implementation of the 'Movement' model.
 
-    TODO: type model description here.
-
     Attributes:
-        timestamp (datetime): TODO: type description here.
-        amount_in_cents (long|int): TODO: type description here.
-        amount_formatted (str): TODO: type description here.
-        description (str): TODO: type description here.
-        category (str): TODO: type description here.
-        breakouts (Breakouts): TODO: type description here.
-        line_items (List[MovementLineItem]): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        subscriber_name (str): TODO: type description here.
+        timestamp (datetime): The model property of type datetime.
+        amount_in_cents (int): The model property of type int.
+        amount_formatted (str): The model property of type str.
+        description (str): The model property of type str.
+        category (str): The model property of type str.
+        breakouts (Breakouts): The model property of type Breakouts.
+        line_items (List[MovementLineItem]): The model property of type
+            List[MovementLineItem].
+        subscription_id (int): The model property of type int.
+        subscriber_name (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -140,3 +139,29 @@ class Movement(object):
                    subscription_id,
                    subscriber_name,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'timestamp={self.timestamp!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'amount_formatted={self.amount_formatted!r}, '
+                f'description={self.description!r}, '
+                f'category={self.category!r}, '
+                f'breakouts={self.breakouts!r}, '
+                f'line_items={self.line_items!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'subscriber_name={self.subscriber_name!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'timestamp={self.timestamp!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'amount_formatted={self.amount_formatted!s}, '
+                f'description={self.description!s}, '
+                f'category={self.category!s}, '
+                f'breakouts={self.breakouts!s}, '
+                f'line_items={self.line_items!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'subscriber_name={self.subscriber_name!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,12 +13,10 @@ class InvoiceDiscountBreakout(object):
 
     """Implementation of the 'Invoice Discount Breakout' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        eligible_amount (str): TODO: type description here.
-        discount_amount (str): TODO: type description here.
+        uid (str): The model property of type str.
+        eligible_amount (str): The model property of type str.
+        discount_amount (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -108,3 +106,17 @@ class InvoiceDiscountBreakout(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'eligible_amount={self.eligible_amount!r}, '
+                f'discount_amount={self.discount_amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'eligible_amount={self.eligible_amount!s}, '
+                f'discount_amount={self.discount_amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,12 +13,11 @@ class TaxConfiguration(object):
 
     """Implementation of the 'Tax Configuration' model.
 
-    TODO: type model description here.
-
     Attributes:
-        kind (TaxConfigurationKind): TODO: type description here.
-        destination_address (TaxDestinationAddress): TODO: type description
-            here.
+        kind (TaxConfigurationKind): The model property of type
+            TaxConfigurationKind.
+        destination_address (TaxDestinationAddress): The model property of
+            type TaxDestinationAddress.
         fully_configured (bool): Returns `true` when Chargify has been
             properly configured to charge tax using the specified tax system.
             More details about taxes:
@@ -89,3 +88,17 @@ class TaxConfiguration(object):
                    destination_address,
                    fully_configured,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'kind={self.kind!r}, '
+                f'destination_address={self.destination_address!r}, '
+                f'fully_configured={self.fully_configured!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'kind={self.kind!s}, '
+                f'destination_address={self.destination_address!s}, '
+                f'fully_configured={self.fully_configured!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -12,8 +12,6 @@ class CreateProductCurrencyPrice(object):
 
     """Implementation of the 'Create Product Currency Price' model.
 
-    TODO: type model description here.
-
     Attributes:
         currency (str): ISO code for one of the site level currencies.
         price (int): Price for the given role.
@@ -76,3 +74,17 @@ class CreateProductCurrencyPrice(object):
                    price,
                    role,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'currency={self.currency!r}, '
+                f'price={self.price!r}, '
+                f'role={self.role!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'currency={self.currency!s}, '
+                f'price={self.price!s}, '
+                f'role={self.role!s}, '
+                f'additional_properties={self.additional_properties!s})')

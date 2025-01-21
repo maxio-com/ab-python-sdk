@@ -13,16 +13,14 @@ class ProductFamily(object):
 
     """Implementation of the 'Product Family' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        name (str): TODO: type description here.
-        handle (str): TODO: type description here.
-        accounting_code (str): TODO: type description here.
-        description (str): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        updated_at (datetime): TODO: type description here.
+        id (int): The model property of type int.
+        name (str): The model property of type str.
+        handle (str): The model property of type str.
+        accounting_code (str): The model property of type str.
+        description (str): The model property of type str.
+        created_at (datetime): The model property of type datetime.
+        updated_at (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -123,3 +121,25 @@ class ProductFamily(object):
                    created_at,
                    updated_at,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'accounting_code={self.accounting_code!r}, '
+                f'description={self.description!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'accounting_code={self.accounting_code!s}, '
+                f'description={self.description!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -15,42 +15,42 @@ class CardType(object):
     The type of card used.
 
     Attributes:
-        VISA: TODO: type description here.
-        MASTER: TODO: type description here.
-        ELO: TODO: type description here.
-        CABAL: TODO: type description here.
-        ALELO: TODO: type description here.
-        DISCOVER: TODO: type description here.
-        AMERICAN_EXPRESS: TODO: type description here.
-        NARANJA: TODO: type description here.
-        DINERS_CLUB: TODO: type description here.
-        JCB: TODO: type description here.
-        DANKORT: TODO: type description here.
-        MAESTRO: TODO: type description here.
-        MAESTRO_NO_LUHN: TODO: type description here.
-        FORBRUGSFORENINGEN: TODO: type description here.
-        SODEXO: TODO: type description here.
-        ALIA: TODO: type description here.
-        VR: TODO: type description here.
-        UNIONPAY: TODO: type description here.
-        CARNET: TODO: type description here.
-        CARTES_BANCAIRES: TODO: type description here.
-        OLIMPICA: TODO: type description here.
-        CREDITEL: TODO: type description here.
-        CONFIABLE: TODO: type description here.
-        SYNCHRONY: TODO: type description here.
-        ROUTEX: TODO: type description here.
-        MADA: TODO: type description here.
-        BP_PLUS: TODO: type description here.
-        PASSCARD: TODO: type description here.
-        EDENRED: TODO: type description here.
-        ANDA: TODO: type description here.
-        TARJETAD: TODO: type description here.
-        HIPERCARD: TODO: type description here.
-        BOGUS: TODO: type description here.
-        SWITCH: TODO: type description here.
-        SOLO: TODO: type description here.
-        LASER: TODO: type description here.
+        VISA: The enum member of type str.
+        MASTER: The enum member of type str.
+        ELO: The enum member of type str.
+        CABAL: The enum member of type str.
+        ALELO: The enum member of type str.
+        DISCOVER: The enum member of type str.
+        AMERICAN_EXPRESS: The enum member of type str.
+        NARANJA: The enum member of type str.
+        DINERS_CLUB: The enum member of type str.
+        JCB: The enum member of type str.
+        DANKORT: The enum member of type str.
+        MAESTRO: The enum member of type str.
+        MAESTRO_NO_LUHN: The enum member of type str.
+        FORBRUGSFORENINGEN: The enum member of type str.
+        SODEXO: The enum member of type str.
+        ALIA: The enum member of type str.
+        VR: The enum member of type str.
+        UNIONPAY: The enum member of type str.
+        CARNET: The enum member of type str.
+        CARTES_BANCAIRES: The enum member of type str.
+        OLIMPICA: The enum member of type str.
+        CREDITEL: The enum member of type str.
+        CONFIABLE: The enum member of type str.
+        SYNCHRONY: The enum member of type str.
+        ROUTEX: The enum member of type str.
+        MADA: The enum member of type str.
+        BP_PLUS: The enum member of type str.
+        PASSCARD: The enum member of type str.
+        EDENRED: The enum member of type str.
+        ANDA: The enum member of type str.
+        TARJETAD: The enum member of type str.
+        HIPERCARD: The enum member of type str.
+        BOGUS: The enum member of type str.
+        SWITCH: The enum member of type str.
+        SOLO: The enum member of type str.
+        LASER: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

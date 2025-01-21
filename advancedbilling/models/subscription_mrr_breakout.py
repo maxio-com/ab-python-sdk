@@ -12,11 +12,9 @@ class SubscriptionMRRBreakout(object):
 
     """Implementation of the 'Subscription MRR Breakout' model.
 
-    TODO: type model description here.
-
     Attributes:
-        plan_amount_in_cents (long|int): TODO: type description here.
-        usage_amount_in_cents (long|int): TODO: type description here.
+        plan_amount_in_cents (int): The model property of type int.
+        usage_amount_in_cents (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -70,3 +68,15 @@ class SubscriptionMRRBreakout(object):
         return cls(plan_amount_in_cents,
                    usage_amount_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'plan_amount_in_cents={self.plan_amount_in_cents!r}, '
+                f'usage_amount_in_cents={self.usage_amount_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'plan_amount_in_cents={self.plan_amount_in_cents!s}, '
+                f'usage_amount_in_cents={self.usage_amount_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

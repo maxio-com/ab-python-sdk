@@ -149,3 +149,21 @@ class IssueInvoiceEventData(object):
                                         type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('total_amount'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'consolidation_level={self.consolidation_level!r}, '
+                f'from_status={self.from_status!r}, '
+                f'to_status={self.to_status!r}, '
+                f'due_amount={self.due_amount!r}, '
+                f'total_amount={self.total_amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'consolidation_level={self.consolidation_level!s}, '
+                f'from_status={self.from_status!s}, '
+                f'to_status={self.to_status!s}, '
+                f'due_amount={self.due_amount!s}, '
+                f'total_amount={self.total_amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

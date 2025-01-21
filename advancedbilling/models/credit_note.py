@@ -24,8 +24,6 @@ class CreditNote(object):
 
     """Implementation of the 'Credit Note' model.
 
-    TODO: type model description here.
-
     Attributes:
         uid (str): Unique identifier for the credit note. It is generated
             automatically by Chargify and has the prefix "cn_" followed by
@@ -86,11 +84,13 @@ class CreditNote(object):
         remaining_amount (str): The amount of the credit note remaining to be
             applied to invoices, which is `total_amount - applied_amount`.
         line_items (List[CreditNoteLineItem]): Line items on the credit note.
-        discounts (List[InvoiceDiscount]): TODO: type description here.
-        taxes (List[InvoiceTax]): TODO: type description here.
-        applications (List[CreditNoteApplication]): TODO: type description
-            here.
-        refunds (List[InvoiceRefund]): TODO: type description here.
+        discounts (List[InvoiceDiscount]): The model property of type
+            List[InvoiceDiscount].
+        taxes (List[InvoiceTax]): The model property of type List[InvoiceTax].
+        applications (List[CreditNoteApplication]): The model property of type
+            List[CreditNoteApplication].
+        refunds (List[InvoiceRefund]): The model property of type
+            List[InvoiceRefund].
         origin_invoices (List[OriginInvoice]): An array of origin invoices for
             the credit note. Learn more about [Origin Invoice from our
             docs](https://maxio.zendesk.com/hc/en-us/articles/24252261284749-Cr
@@ -376,3 +376,65 @@ class CreditNote(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'site_id={self.site_id!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'number={self.number!r}, '
+                f'sequence_number={self.sequence_number!r}, '
+                f'issue_date={self.issue_date!r}, '
+                f'applied_date={self.applied_date!r}, '
+                f'status={self.status!r}, '
+                f'currency={self.currency!r}, '
+                f'memo={self.memo!r}, '
+                f'seller={self.seller!r}, '
+                f'customer={self.customer!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'shipping_address={self.shipping_address!r}, '
+                f'subtotal_amount={self.subtotal_amount!r}, '
+                f'discount_amount={self.discount_amount!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'total_amount={self.total_amount!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'remaining_amount={self.remaining_amount!r}, '
+                f'line_items={self.line_items!r}, '
+                f'discounts={self.discounts!r}, '
+                f'taxes={self.taxes!r}, '
+                f'applications={self.applications!r}, '
+                f'refunds={self.refunds!r}, '
+                f'origin_invoices={self.origin_invoices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'site_id={self.site_id!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'number={self.number!s}, '
+                f'sequence_number={self.sequence_number!s}, '
+                f'issue_date={self.issue_date!s}, '
+                f'applied_date={self.applied_date!s}, '
+                f'status={self.status!s}, '
+                f'currency={self.currency!s}, '
+                f'memo={self.memo!s}, '
+                f'seller={self.seller!s}, '
+                f'customer={self.customer!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'shipping_address={self.shipping_address!s}, '
+                f'subtotal_amount={self.subtotal_amount!s}, '
+                f'discount_amount={self.discount_amount!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'total_amount={self.total_amount!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'remaining_amount={self.remaining_amount!s}, '
+                f'line_items={self.line_items!s}, '
+                f'discounts={self.discounts!s}, '
+                f'taxes={self.taxes!s}, '
+                f'applications={self.applications!s}, '
+                f'refunds={self.refunds!s}, '
+                f'origin_invoices={self.origin_invoices!s}, '
+                f'additional_properties={self.additional_properties!s})')

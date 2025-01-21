@@ -12,8 +12,6 @@ class UpdateCouponCurrency(object):
 
     """Implementation of the 'Update Coupon Currency' model.
 
-    TODO: type model description here.
-
     Attributes:
         currency (str): ISO code for the site defined currency.
         price (int): Price for the given currency.
@@ -70,3 +68,15 @@ class UpdateCouponCurrency(object):
         return cls(currency,
                    price,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'currency={self.currency!r}, '
+                f'price={self.price!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'currency={self.currency!s}, '
+                f'price={self.price!s}, '
+                f'additional_properties={self.additional_properties!s})')

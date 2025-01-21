@@ -13,8 +13,6 @@ class PaidInvoice(object):
 
     """Implementation of the 'Paid Invoice' model.
 
-    TODO: type model description here.
-
     Attributes:
         invoice_id (str): The uid of the paid invoice
         status (InvoiceStatus): The current status of the invoice. See
@@ -98,3 +96,19 @@ class PaidInvoice(object):
                    due_amount,
                    paid_amount,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'invoice_id={self.invoice_id!r}, '
+                f'status={self.status!r}, '
+                f'due_amount={self.due_amount!r}, '
+                f'paid_amount={self.paid_amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'invoice_id={self.invoice_id!s}, '
+                f'status={self.status!s}, '
+                f'due_amount={self.due_amount!s}, '
+                f'paid_amount={self.paid_amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

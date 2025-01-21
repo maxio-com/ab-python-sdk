@@ -10,14 +10,14 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `line_items` | [`List[BillingManifestItem]`](../../doc/models/billing-manifest-item.md) | Optional | - |
-| `total_in_cents` | `long\|int` | Optional | - |
-| `total_discount_in_cents` | `long\|int` | Optional | - |
-| `total_tax_in_cents` | `long\|int` | Optional | - |
-| `subtotal_in_cents` | `long\|int` | Optional | - |
+| `total_in_cents` | `int` | Optional | - |
+| `total_discount_in_cents` | `int` | Optional | - |
+| `total_tax_in_cents` | `int` | Optional | - |
+| `subtotal_in_cents` | `int` | Optional | - |
 | `start_date` | `datetime` | Optional | - |
 | `end_date` | `datetime` | Optional | - |
 | `period_type` | `str` | Optional | - |
-| `existing_balance_in_cents` | `long\|int` | Optional | - |
+| `existing_balance_in_cents` | `int` | Optional | - |
 
 ## Example (as JSON)
 

@@ -13,8 +13,6 @@ class InvoicePaymentApplication(object):
 
     """Implementation of the 'Invoice Payment Application' model.
 
-    TODO: type model description here.
-
     Attributes:
         invoice_uid (str): Unique identifier for the paid invoice. It has the
             prefix "inv_" followed by alphanumeric characters.
@@ -88,3 +86,17 @@ class InvoicePaymentApplication(object):
                    application_uid,
                    applied_amount,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'invoice_uid={self.invoice_uid!r}, '
+                f'application_uid={self.application_uid!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'invoice_uid={self.invoice_uid!s}, '
+                f'application_uid={self.application_uid!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

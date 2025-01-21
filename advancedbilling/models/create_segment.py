@@ -14,8 +14,6 @@ class CreateSegment(object):
 
     """Implementation of the 'Create Segment' model.
 
-    TODO: type model description here.
-
     Attributes:
         segment_property_1_value (str | float | int | bool | None): A value
             that will occur in your events that you want to bill upon. The
@@ -37,7 +35,8 @@ class CreateSegment(object):
             See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
-        prices (List[CreateOrUpdateSegmentPrice]): TODO: type description here.
+        prices (List[CreateOrUpdateSegmentPrice]): The model property of type
+            List[CreateOrUpdateSegmentPrice].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -129,3 +128,23 @@ class CreateSegment(object):
                    segment_property_4_value,
                    prices,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'segment_property_1_value={self.segment_property_1_value!r}, '
+                f'segment_property_2_value={self.segment_property_2_value!r}, '
+                f'segment_property_3_value={self.segment_property_3_value!r}, '
+                f'segment_property_4_value={self.segment_property_4_value!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'prices={self.prices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'segment_property_1_value={self.segment_property_1_value!s}, '
+                f'segment_property_2_value={self.segment_property_2_value!s}, '
+                f'segment_property_3_value={self.segment_property_3_value!s}, '
+                f'segment_property_4_value={self.segment_property_4_value!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'prices={self.prices!s}, '
+                f'additional_properties={self.additional_properties!s})')

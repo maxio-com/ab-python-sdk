@@ -13,10 +13,8 @@ class CreateInvoiceItem(object):
 
     """Implementation of the 'Create Invoice Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        title (str): TODO: type description here.
+        title (str): The model property of type str.
         quantity (float | str | None): The quantity can contain up to 8
             decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a
             value with more than 8 decimal places, we will round it down to
@@ -28,15 +26,16 @@ class CreateInvoiceItem(object):
         taxable (bool): Set to true to automatically calculate taxes. Site
             must be configured to use and calculate taxes.  If using Avalara,
             a tax_code parameter must also be sent.
-        tax_code (str): TODO: type description here.
+        tax_code (str): The model property of type str.
         period_range_start (str): YYYY-MM-DD
         period_range_end (str): YYYY-MM-DD
         product_id (str | int | None): Product handle or product id.
         component_id (str | int | None): Component handle or component id.
         price_point_id (str | int | None): Price point handle or id. For
             component.
-        product_price_point_id (str | int | None): TODO: type description here.
-        description (str): TODO: type description here.
+        product_price_point_id (str | int | None): The model property of type
+            str | int | None.
+        description (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -168,3 +167,35 @@ class CreateInvoiceItem(object):
                    product_price_point_id,
                    description,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'title={self.title!r}, '
+                f'quantity={self.quantity!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'taxable={self.taxable!r}, '
+                f'tax_code={self.tax_code!r}, '
+                f'period_range_start={self.period_range_start!r}, '
+                f'period_range_end={self.period_range_end!r}, '
+                f'product_id={self.product_id!r}, '
+                f'component_id={self.component_id!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'description={self.description!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'title={self.title!s}, '
+                f'quantity={self.quantity!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'taxable={self.taxable!s}, '
+                f'tax_code={self.tax_code!s}, '
+                f'period_range_start={self.period_range_start!s}, '
+                f'period_range_end={self.period_range_end!s}, '
+                f'product_id={self.product_id!s}, '
+                f'component_id={self.component_id!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'description={self.description!s}, '
+                f'additional_properties={self.additional_properties!s})')

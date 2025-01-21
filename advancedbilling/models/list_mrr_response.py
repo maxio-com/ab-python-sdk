@@ -13,10 +13,9 @@ class ListMRRResponse(object):
 
     """Implementation of the 'List MRR Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        mrr (ListMRRResponseResult): TODO: type description here.
+        mrr (ListMRRResponseResult): The model property of type
+            ListMRRResponseResult.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class ListMRRResponse(object):
         # Return an object of this model
         return cls(mrr,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'mrr={self.mrr!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'mrr={self.mrr!s}, '
+                f'additional_properties={self.additional_properties!s})')

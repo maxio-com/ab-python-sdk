@@ -15,11 +15,11 @@ class ListPublicKeysResponse(object):
 
     """Implementation of the 'List Public Keys Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        chargify_js_keys (List[PublicKey]): TODO: type description here.
-        meta (ListPublicKeysMeta): TODO: type description here.
+        chargify_js_keys (List[PublicKey]): The model property of type
+            List[PublicKey].
+        meta (ListPublicKeysMeta): The model property of type
+            ListPublicKeysMeta.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -84,3 +84,15 @@ class ListPublicKeysResponse(object):
         return cls(chargify_js_keys,
                    meta,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargify_js_keys={self.chargify_js_keys!r}, '
+                f'meta={self.meta!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargify_js_keys={self.chargify_js_keys!s}, '
+                f'meta={self.meta!s}, '
+                f'additional_properties={self.additional_properties!s})')

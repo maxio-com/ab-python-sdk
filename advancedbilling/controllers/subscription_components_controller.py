@@ -234,8 +234,8 @@ class SubscriptionComponentsController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (BulkComponentsPricePointAssignment, optional): TODO: type
-                description here.
+            body (BulkComponentsPricePointAssignment, optional): The request
+                body parameter.
 
         Returns:
             BulkComponentsPricePointAssignment: Response from the API. OK
@@ -397,8 +397,8 @@ class SubscriptionComponentsController(BaseController):
         Args:
             subscription_id (int): The Chargify id of the subscription
             component_id (int): The Advanced Billing id of the component
-            body (CreateAllocationRequest, optional): TODO: type description
-                here.
+            body (CreateAllocationRequest, optional): The request body
+                parameter.
 
         Returns:
             AllocationResponse: Response from the API. OK
@@ -535,7 +535,7 @@ class SubscriptionComponentsController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (AllocateComponents, optional): TODO: type description here.
+            body (AllocateComponents, optional): The request body parameter.
 
         Returns:
             List[AllocationResponse]: Response from the API. OK
@@ -597,8 +597,8 @@ class SubscriptionComponentsController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (PreviewAllocationsRequest, optional): TODO: type description
-                here.
+            body (PreviewAllocationsRequest, optional): The request body
+                parameter.
 
         Returns:
             AllocationPreviewResponse: Response from the API. OK
@@ -665,8 +665,8 @@ class SubscriptionComponentsController(BaseController):
             subscription_id (int): The Chargify id of the subscription
             component_id (int): The Advanced Billing id of the component
             allocation_id (int): The Advanced Billing id of the allocation
-            body (UpdateAllocationExpirationDate, optional): TODO: type
-                description here.
+            body (UpdateAllocationExpirationDate, optional): The request body
+                parameter.
 
         Returns:
             void: Response from the API. OK
@@ -734,7 +734,7 @@ class SubscriptionComponentsController(BaseController):
             subscription_id (int): The Chargify id of the subscription
             component_id (int): The Advanced Billing id of the component
             allocation_id (int): The Advanced Billing id of the allocation
-            body (CreditSchemeRequest, optional): TODO: type description here.
+            body (CreditSchemeRequest, optional): The request body parameter.
 
         Returns:
             void: Response from the API. OK
@@ -856,7 +856,7 @@ class SubscriptionComponentsController(BaseController):
             subscription_id (int): The Chargify id of the subscription
             component_id (int | str): Either the Advanced Billing id for the
                 component or the component's handle prefixed by `handle:`
-            body (CreateUsageRequest, optional): TODO: type description here.
+            body (CreateUsageRequest, optional): The request body parameter.
 
         Returns:
             UsageResponse: Response from the API. OK
@@ -934,10 +934,10 @@ class SubscriptionComponentsController(BaseController):
                     component_id -- int | str -- Either the Advanced Billing
                         id for the component or the component's handle
                         prefixed by `handle:`
-                    since_id -- long|int -- Returns usages with an id greater
-                        than or equal to the one specified
-                    max_id -- long|int -- Returns usages with an id less than
+                    since_id -- int -- Returns usages with an id greater than
                         or equal to the one specified
+                    max_id -- int -- Returns usages with an id less than or
+                        equal to the one specified
                     since_date -- date -- Returns usages with a created_at
                         date greater than or equal to midnight (12:00 AM) on
                         the date specified.
@@ -1036,8 +1036,8 @@ class SubscriptionComponentsController(BaseController):
         Args:
             subscription_id (int): The Advanced Billing id of the subscription
             component_id (int): The Advanced Billing id of the component
-            body (ActivateEventBasedComponent, optional): TODO: type
-                description here.
+            body (ActivateEventBasedComponent, optional): The request body
+                parameter.
 
         Returns:
             void: Response from the API. OK
@@ -1148,7 +1148,7 @@ class SubscriptionComponentsController(BaseController):
             store_uid (str, optional): If you've attached your own Keen
                 project as an Advanced Billing event data-store, use this
                 parameter to indicate the data-store.
-            body (EBBEvent, optional): TODO: type description here.
+            body (EBBEvent, optional): The request body parameter.
 
         Returns:
             void: Response from the API. Created
@@ -1201,7 +1201,7 @@ class SubscriptionComponentsController(BaseController):
             store_uid (str, optional): If you've attached your own Keen
                 project as an Advanced Billing event data-store, use this
                 parameter to indicate the data-store.
-            body (List[EBBEvent], optional): TODO: type description here.
+            body (List[EBBEvent], optional): The request body parameter.
 
         Returns:
             void: Response from the API. Created

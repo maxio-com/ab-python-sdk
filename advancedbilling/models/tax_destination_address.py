@@ -12,13 +12,11 @@ class TaxDestinationAddress(object):
 
     """Implementation of the 'Tax Destination Address' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        SHIPPING_THEN_BILLING: TODO: type description here.
-        BILLING_THEN_SHIPPING: TODO: type description here.
-        SHIPPING_ONLY: TODO: type description here.
-        BILLING_ONLY: TODO: type description here.
+        SHIPPING_THEN_BILLING: The enum member of type str.
+        BILLING_THEN_SHIPPING: The enum member of type str.
+        SHIPPING_ONLY: The enum member of type str.
+        BILLING_ONLY: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

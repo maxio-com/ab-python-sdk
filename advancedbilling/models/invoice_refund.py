@@ -13,19 +13,17 @@ class InvoiceRefund(object):
 
     """Implementation of the 'Invoice Refund' model.
 
-    TODO: type model description here.
-
     Attributes:
-        transaction_id (int): TODO: type description here.
-        payment_id (int): TODO: type description here.
-        memo (str): TODO: type description here.
-        original_amount (str): TODO: type description here.
-        applied_amount (str): TODO: type description here.
+        transaction_id (int): The model property of type int.
+        payment_id (int): The model property of type int.
+        memo (str): The model property of type str.
+        original_amount (str): The model property of type str.
+        applied_amount (str): The model property of type str.
         gateway_transaction_id (str): The transaction ID for the refund as
             returned from the payment gateway
-        gateway_used (str): TODO: type description here.
-        gateway_handle (str): TODO: type description here.
-        ach_late_reject (bool): TODO: type description here.
+        gateway_used (str): The model property of type str.
+        gateway_handle (str): The model property of type str.
+        ach_late_reject (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -163,3 +161,29 @@ class InvoiceRefund(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'transaction_id={self.transaction_id!r}, '
+                f'payment_id={self.payment_id!r}, '
+                f'memo={self.memo!r}, '
+                f'original_amount={self.original_amount!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'gateway_transaction_id={self.gateway_transaction_id!r}, '
+                f'gateway_used={self.gateway_used!r}, '
+                f'gateway_handle={self.gateway_handle!r}, '
+                f'ach_late_reject={self.ach_late_reject!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'transaction_id={self.transaction_id!s}, '
+                f'payment_id={self.payment_id!s}, '
+                f'memo={self.memo!s}, '
+                f'original_amount={self.original_amount!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'gateway_transaction_id={self.gateway_transaction_id!s}, '
+                f'gateway_used={self.gateway_used!s}, '
+                f'gateway_handle={self.gateway_handle!s}, '
+                f'ach_late_reject={self.ach_late_reject!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -12,10 +12,8 @@ class EnableWebhooksRequest(object):
 
     """Implementation of the 'Enable Webhooks Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        webhooks_enabled (bool): TODO: type description here.
+        webhooks_enabled (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -64,3 +62,13 @@ class EnableWebhooksRequest(object):
         # Return an object of this model
         return cls(webhooks_enabled,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'webhooks_enabled={self.webhooks_enabled!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'webhooks_enabled={self.webhooks_enabled!s}, '
+                f'additional_properties={self.additional_properties!s})')

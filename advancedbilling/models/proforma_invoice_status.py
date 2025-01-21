@@ -12,12 +12,10 @@ class ProformaInvoiceStatus(object):
 
     """Implementation of the 'Proforma Invoice Status' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        DRAFT: TODO: type description here.
-        VOIDED: TODO: type description here.
-        ARCHIVED: TODO: type description here.
+        DRAFT: The enum member of type str.
+        VOIDED: The enum member of type str.
+        ARCHIVED: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

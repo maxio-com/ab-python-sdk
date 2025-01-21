@@ -15,8 +15,8 @@ class UpdateSubscriptionNote(object):
     Updatable fields for Subscription Note
 
     Attributes:
-        body (str): TODO: type description here.
-        sticky (bool): TODO: type description here.
+        body (str): The model property of type str.
+        sticky (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -70,3 +70,15 @@ class UpdateSubscriptionNote(object):
         return cls(body,
                    sticky,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'body={self.body!r}, '
+                f'sticky={self.sticky!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'body={self.body!s}, '
+                f'sticky={self.sticky!s}, '
+                f'additional_properties={self.additional_properties!s})')

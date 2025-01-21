@@ -18,10 +18,10 @@ class InvoiceSeller(object):
     invoice.
 
     Attributes:
-        name (str): TODO: type description here.
-        address (InvoiceAddress): TODO: type description here.
-        phone (str): TODO: type description here.
-        logo_url (str): TODO: type description here.
+        name (str): The model property of type str.
+        address (InvoiceAddress): The model property of type InvoiceAddress.
+        phone (str): The model property of type str.
+        logo_url (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -122,3 +122,19 @@ class InvoiceSeller(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'address={self.address!r}, '
+                f'phone={self.phone!r}, '
+                f'logo_url={self.logo_url!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'address={self.address!s}, '
+                f'phone={self.phone!s}, '
+                f'logo_url={self.logo_url!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,12 +13,10 @@ class PublicKey(object):
 
     """Implementation of the 'Public Key' model.
 
-    TODO: type model description here.
-
     Attributes:
-        public_key (str): TODO: type description here.
-        requires_security_token (bool): TODO: type description here.
-        created_at (datetime): TODO: type description here.
+        public_key (str): The model property of type str.
+        requires_security_token (bool): The model property of type bool.
+        created_at (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -86,3 +84,17 @@ class PublicKey(object):
                    requires_security_token,
                    created_at,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'public_key={self.public_key!r}, '
+                f'requires_security_token={self.requires_security_token!r}, '
+                f'created_at={self.created_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'public_key={self.public_key!s}, '
+                f'requires_security_token={self.requires_security_token!s}, '
+                f'created_at={self.created_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

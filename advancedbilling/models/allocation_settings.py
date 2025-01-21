@@ -13,8 +13,6 @@ class AllocationSettings(object):
 
     """Implementation of the 'Allocation Settings' model.
 
-    TODO: type model description here.
-
     Attributes:
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
@@ -97,3 +95,17 @@ class AllocationSettings(object):
                    downgrade_credit,
                    accrue_charge,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'accrue_charge={self.accrue_charge!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'accrue_charge={self.accrue_charge!s}, '
+                f'additional_properties={self.additional_properties!s})')

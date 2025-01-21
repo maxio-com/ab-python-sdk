@@ -13,11 +13,9 @@ class PendingCancellationChange(object):
 
     """Implementation of the 'Pending Cancellation Change' model.
 
-    TODO: type model description here.
-
     Attributes:
-        cancellation_state (str): TODO: type description here.
-        cancels_at (datetime): TODO: type description here.
+        cancellation_state (str): The model property of type str.
+        cancels_at (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -99,3 +97,15 @@ class PendingCancellationChange(object):
                                        type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('cancels_at'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'cancellation_state={self.cancellation_state!r}, '
+                f'cancels_at={self.cancels_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'cancellation_state={self.cancellation_state!s}, '
+                f'cancels_at={self.cancels_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -17,26 +17,30 @@ class Site(object):
 
     """Implementation of the 'Site' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        name (str): TODO: type description here.
-        subdomain (str): TODO: type description here.
-        currency (str): TODO: type description here.
-        seller_id (int): TODO: type description here.
-        non_primary_currencies (List[str]): TODO: type description here.
-        relationship_invoicing_enabled (bool): TODO: type description here.
-        customer_hierarchy_enabled (bool): TODO: type description here.
-        whopays_enabled (bool): TODO: type description here.
-        whopays_default_payer (str): TODO: type description here.
-        allocation_settings (AllocationSettings): TODO: type description here.
-        default_payment_collection_method (str): TODO: type description here.
-        organization_address (OrganizationAddress): TODO: type description
-            here.
-        tax_configuration (TaxConfiguration): TODO: type description here.
-        net_terms (NetTerms): TODO: type description here.
-        test (bool): TODO: type description here.
+        id (int): The model property of type int.
+        name (str): The model property of type str.
+        subdomain (str): The model property of type str.
+        currency (str): The model property of type str.
+        seller_id (int): The model property of type int.
+        non_primary_currencies (List[str]): The model property of type
+            List[str].
+        relationship_invoicing_enabled (bool): The model property of type bool.
+        schedule_subscription_cancellation_enabled (bool): The model property
+            of type bool.
+        customer_hierarchy_enabled (bool): The model property of type bool.
+        whopays_enabled (bool): The model property of type bool.
+        whopays_default_payer (str): The model property of type str.
+        allocation_settings (AllocationSettings): The model property of type
+            AllocationSettings.
+        default_payment_collection_method (str): The model property of type
+            str.
+        organization_address (OrganizationAddress): The model property of type
+            OrganizationAddress.
+        tax_configuration (TaxConfiguration): The model property of type
+            TaxConfiguration.
+        net_terms (NetTerms): The model property of type NetTerms.
+        test (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -51,6 +55,7 @@ class Site(object):
         "seller_id": 'seller_id',
         "non_primary_currencies": 'non_primary_currencies',
         "relationship_invoicing_enabled": 'relationship_invoicing_enabled',
+        "schedule_subscription_cancellation_enabled": 'schedule_subscription_cancellation_enabled',
         "customer_hierarchy_enabled": 'customer_hierarchy_enabled',
         "whopays_enabled": 'whopays_enabled',
         "whopays_default_payer": 'whopays_default_payer',
@@ -70,6 +75,7 @@ class Site(object):
         'seller_id',
         'non_primary_currencies',
         'relationship_invoicing_enabled',
+        'schedule_subscription_cancellation_enabled',
         'customer_hierarchy_enabled',
         'whopays_enabled',
         'whopays_default_payer',
@@ -89,6 +95,7 @@ class Site(object):
                  seller_id=APIHelper.SKIP,
                  non_primary_currencies=APIHelper.SKIP,
                  relationship_invoicing_enabled=APIHelper.SKIP,
+                 schedule_subscription_cancellation_enabled=APIHelper.SKIP,
                  customer_hierarchy_enabled=APIHelper.SKIP,
                  whopays_enabled=APIHelper.SKIP,
                  whopays_default_payer=APIHelper.SKIP,
@@ -116,6 +123,8 @@ class Site(object):
             self.non_primary_currencies = non_primary_currencies 
         if relationship_invoicing_enabled is not APIHelper.SKIP:
             self.relationship_invoicing_enabled = relationship_invoicing_enabled 
+        if schedule_subscription_cancellation_enabled is not APIHelper.SKIP:
+            self.schedule_subscription_cancellation_enabled = schedule_subscription_cancellation_enabled 
         if customer_hierarchy_enabled is not APIHelper.SKIP:
             self.customer_hierarchy_enabled = customer_hierarchy_enabled 
         if whopays_enabled is not APIHelper.SKIP:
@@ -166,6 +175,7 @@ class Site(object):
         seller_id = dictionary.get("seller_id") if dictionary.get("seller_id") else APIHelper.SKIP
         non_primary_currencies = dictionary.get("non_primary_currencies") if dictionary.get("non_primary_currencies") else APIHelper.SKIP
         relationship_invoicing_enabled = dictionary.get("relationship_invoicing_enabled") if "relationship_invoicing_enabled" in dictionary.keys() else APIHelper.SKIP
+        schedule_subscription_cancellation_enabled = dictionary.get("schedule_subscription_cancellation_enabled") if "schedule_subscription_cancellation_enabled" in dictionary.keys() else APIHelper.SKIP
         customer_hierarchy_enabled = dictionary.get("customer_hierarchy_enabled") if "customer_hierarchy_enabled" in dictionary.keys() else APIHelper.SKIP
         whopays_enabled = dictionary.get("whopays_enabled") if "whopays_enabled" in dictionary.keys() else APIHelper.SKIP
         whopays_default_payer = dictionary.get("whopays_default_payer") if dictionary.get("whopays_default_payer") else APIHelper.SKIP
@@ -185,6 +195,7 @@ class Site(object):
                    seller_id,
                    non_primary_currencies,
                    relationship_invoicing_enabled,
+                   schedule_subscription_cancellation_enabled,
                    customer_hierarchy_enabled,
                    whopays_enabled,
                    whopays_default_payer,
@@ -195,3 +206,45 @@ class Site(object):
                    net_terms,
                    test,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'name={self.name!r}, '
+                f'subdomain={self.subdomain!r}, '
+                f'currency={self.currency!r}, '
+                f'seller_id={self.seller_id!r}, '
+                f'non_primary_currencies={self.non_primary_currencies!r}, '
+                f'relationship_invoicing_enabled={self.relationship_invoicing_enabled!r}, '
+                f'schedule_subscription_cancellation_enabled={self.schedule_subscription_cancellation_enabled!r}, '
+                f'customer_hierarchy_enabled={self.customer_hierarchy_enabled!r}, '
+                f'whopays_enabled={self.whopays_enabled!r}, '
+                f'whopays_default_payer={self.whopays_default_payer!r}, '
+                f'allocation_settings={self.allocation_settings!r}, '
+                f'default_payment_collection_method={self.default_payment_collection_method!r}, '
+                f'organization_address={self.organization_address!r}, '
+                f'tax_configuration={self.tax_configuration!r}, '
+                f'net_terms={self.net_terms!r}, '
+                f'test={self.test!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'name={self.name!s}, '
+                f'subdomain={self.subdomain!s}, '
+                f'currency={self.currency!s}, '
+                f'seller_id={self.seller_id!s}, '
+                f'non_primary_currencies={self.non_primary_currencies!s}, '
+                f'relationship_invoicing_enabled={self.relationship_invoicing_enabled!s}, '
+                f'schedule_subscription_cancellation_enabled={self.schedule_subscription_cancellation_enabled!s}, '
+                f'customer_hierarchy_enabled={self.customer_hierarchy_enabled!s}, '
+                f'whopays_enabled={self.whopays_enabled!s}, '
+                f'whopays_default_payer={self.whopays_default_payer!s}, '
+                f'allocation_settings={self.allocation_settings!s}, '
+                f'default_payment_collection_method={self.default_payment_collection_method!s}, '
+                f'organization_address={self.organization_address!s}, '
+                f'tax_configuration={self.tax_configuration!s}, '
+                f'net_terms={self.net_terms!s}, '
+                f'test={self.test!s}, '
+                f'additional_properties={self.additional_properties!s})')

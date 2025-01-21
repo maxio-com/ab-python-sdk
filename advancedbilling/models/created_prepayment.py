@@ -13,16 +13,14 @@ class CreatedPrepayment(object):
 
     """Implementation of the 'Created Prepayment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (long|int): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        amount_in_cents (long|int): TODO: type description here.
-        memo (str): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        starting_balance_in_cents (long|int): TODO: type description here.
-        ending_balance_in_cents (long|int): TODO: type description here.
+        id (int): The model property of type int.
+        subscription_id (int): The model property of type int.
+        amount_in_cents (int): The model property of type int.
+        memo (str): The model property of type str.
+        created_at (datetime): The model property of type datetime.
+        starting_balance_in_cents (int): The model property of type int.
+        ending_balance_in_cents (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -118,3 +116,25 @@ class CreatedPrepayment(object):
                    starting_balance_in_cents,
                    ending_balance_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'memo={self.memo!r}, '
+                f'created_at={self.created_at!r}, '
+                f'starting_balance_in_cents={self.starting_balance_in_cents!r}, '
+                f'ending_balance_in_cents={self.ending_balance_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'memo={self.memo!s}, '
+                f'created_at={self.created_at!s}, '
+                f'starting_balance_in_cents={self.starting_balance_in_cents!s}, '
+                f'ending_balance_in_cents={self.ending_balance_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

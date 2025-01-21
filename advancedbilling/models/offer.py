@@ -16,29 +16,29 @@ class Offer(object):
 
     """Implementation of the 'Offer' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        site_id (int): TODO: type description here.
-        product_family_id (int): TODO: type description here.
-        product_id (int): TODO: type description here.
-        product_price_point_id (int): TODO: type description here.
-        product_revisable_number (int): TODO: type description here.
-        name (str): TODO: type description here.
-        handle (str): TODO: type description here.
-        description (str): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        updated_at (datetime): TODO: type description here.
-        archived_at (datetime): TODO: type description here.
-        offer_items (List[OfferItem]): TODO: type description here.
-        offer_discounts (List[OfferDiscount]): TODO: type description here.
-        product_family_name (str): TODO: type description here.
-        product_name (str): TODO: type description here.
-        product_price_point_name (str): TODO: type description here.
-        product_price_in_cents (long|int): TODO: type description here.
-        offer_signup_pages (List[OfferSignupPage]): TODO: type description
-            here.
+        id (int): The model property of type int.
+        site_id (int): The model property of type int.
+        product_family_id (int): The model property of type int.
+        product_id (int): The model property of type int.
+        product_price_point_id (int): The model property of type int.
+        product_revisable_number (int): The model property of type int.
+        name (str): The model property of type str.
+        handle (str): The model property of type str.
+        description (str): The model property of type str.
+        created_at (datetime): The model property of type datetime.
+        updated_at (datetime): The model property of type datetime.
+        archived_at (datetime): The model property of type datetime.
+        offer_items (List[OfferItem]): The model property of type
+            List[OfferItem].
+        offer_discounts (List[OfferDiscount]): The model property of type
+            List[OfferDiscount].
+        product_family_name (str): The model property of type str.
+        product_name (str): The model property of type str.
+        product_price_point_name (str): The model property of type str.
+        product_price_in_cents (int): The model property of type int.
+        offer_signup_pages (List[OfferSignupPage]): The model property of type
+            List[OfferSignupPage].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -238,3 +238,49 @@ class Offer(object):
                    product_price_in_cents,
                    offer_signup_pages,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'site_id={self.site_id!r}, '
+                f'product_family_id={self.product_family_id!r}, '
+                f'product_id={self.product_id!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'product_revisable_number={self.product_revisable_number!r}, '
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'description={self.description!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'archived_at={self.archived_at!r}, '
+                f'offer_items={self.offer_items!r}, '
+                f'offer_discounts={self.offer_discounts!r}, '
+                f'product_family_name={self.product_family_name!r}, '
+                f'product_name={self.product_name!r}, '
+                f'product_price_point_name={self.product_price_point_name!r}, '
+                f'product_price_in_cents={self.product_price_in_cents!r}, '
+                f'offer_signup_pages={self.offer_signup_pages!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'site_id={self.site_id!s}, '
+                f'product_family_id={self.product_family_id!s}, '
+                f'product_id={self.product_id!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'product_revisable_number={self.product_revisable_number!s}, '
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'description={self.description!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'archived_at={self.archived_at!s}, '
+                f'offer_items={self.offer_items!s}, '
+                f'offer_discounts={self.offer_discounts!s}, '
+                f'product_family_name={self.product_family_name!s}, '
+                f'product_name={self.product_name!s}, '
+                f'product_price_point_name={self.product_price_point_name!s}, '
+                f'product_price_in_cents={self.product_price_in_cents!s}, '
+                f'offer_signup_pages={self.offer_signup_pages!s}, '
+                f'additional_properties={self.additional_properties!s})')

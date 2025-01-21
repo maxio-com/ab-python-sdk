@@ -15,8 +15,8 @@ class IncludeNullOrNotNull(object):
     Allows to filter by `not_null` or `null`.
 
     Attributes:
-        NOT_NULL: TODO: type description here.
-        NULL: TODO: type description here.
+        NOT_NULL: The enum member of type str.
+        NULL: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

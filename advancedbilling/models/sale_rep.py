@@ -14,14 +14,13 @@ class SaleRep(object):
 
     """Implementation of the 'Sale Rep' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        full_name (str): TODO: type description here.
-        subscriptions_count (int): TODO: type description here.
-        test_mode (bool): TODO: type description here.
-        subscriptions (List[SaleRepSubscription]): TODO: type description here.
+        id (int): The model property of type int.
+        full_name (str): The model property of type str.
+        subscriptions_count (int): The model property of type int.
+        test_mode (bool): The model property of type bool.
+        subscriptions (List[SaleRepSubscription]): The model property of type
+            List[SaleRepSubscription].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -107,3 +106,21 @@ class SaleRep(object):
                    test_mode,
                    subscriptions,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'full_name={self.full_name!r}, '
+                f'subscriptions_count={self.subscriptions_count!r}, '
+                f'test_mode={self.test_mode!r}, '
+                f'subscriptions={self.subscriptions!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'full_name={self.full_name!s}, '
+                f'subscriptions_count={self.subscriptions_count!s}, '
+                f'test_mode={self.test_mode!s}, '
+                f'subscriptions={self.subscriptions!s}, '
+                f'additional_properties={self.additional_properties!s})')
