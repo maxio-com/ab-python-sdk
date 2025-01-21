@@ -14,8 +14,6 @@ class AccountBalances(object):
 
     """Implementation of the 'Account Balances' model.
 
-    TODO: type model description here.
-
     Attributes:
         open_invoices (AccountBalance): The balance, in cents, of the sum of
             the subscription's  open, payable invoices.
@@ -108,3 +106,21 @@ class AccountBalances(object):
                    service_credits,
                    prepayments,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'open_invoices={self.open_invoices!r}, '
+                f'pending_invoices={self.pending_invoices!r}, '
+                f'pending_discounts={self.pending_discounts!r}, '
+                f'service_credits={self.service_credits!r}, '
+                f'prepayments={self.prepayments!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'open_invoices={self.open_invoices!s}, '
+                f'pending_invoices={self.pending_invoices!s}, '
+                f'pending_discounts={self.pending_discounts!s}, '
+                f'service_credits={self.service_credits!s}, '
+                f'prepayments={self.prepayments!s}, '
+                f'additional_properties={self.additional_properties!s})')

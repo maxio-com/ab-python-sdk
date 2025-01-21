@@ -62,6 +62,7 @@ result = sites_controller.read_site()
       "string"
     ],
     "relationship_invoicing_enabled": true,
+    "schedule_subscription_cancellation_enabled": true,
     "customer_hierarchy_enabled": true,
     "whopays_enabled": true,
     "whopays_default_payer": "string",

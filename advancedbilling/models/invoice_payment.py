@@ -16,24 +16,23 @@ class InvoicePayment(object):
 
     """Implementation of the 'Invoice Payment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        transaction_time (datetime): TODO: type description here.
-        memo (str): TODO: type description here.
-        original_amount (str): TODO: type description here.
-        applied_amount (str): TODO: type description here.
-        payment_method (InvoicePaymentMethod): TODO: type description here.
-        transaction_id (int): TODO: type description here.
-        prepayment (bool): TODO: type description here.
-        gateway_handle (str): TODO: type description here.
-        gateway_used (str): TODO: type description here.
+        transaction_time (datetime): The model property of type datetime.
+        memo (str): The model property of type str.
+        original_amount (str): The model property of type str.
+        applied_amount (str): The model property of type str.
+        payment_method (InvoicePaymentMethod): The model property of type
+            InvoicePaymentMethod.
+        transaction_id (int): The model property of type int.
+        prepayment (bool): The model property of type bool.
+        gateway_handle (str): The model property of type str.
+        gateway_used (str): The model property of type str.
         gateway_transaction_id (str): The transaction ID for the payment as
             returned from the payment gateway
         received_on (date): Date reflecting when the payment was received from
             a customer. Must be in the past. Applicable only to  `external`
             payments.
-        uid (str): TODO: type description here.
+        uid (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -195,3 +194,35 @@ class InvoicePayment(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'transaction_time={self.transaction_time!r}, '
+                f'memo={self.memo!r}, '
+                f'original_amount={self.original_amount!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'payment_method={self.payment_method!r}, '
+                f'transaction_id={self.transaction_id!r}, '
+                f'prepayment={self.prepayment!r}, '
+                f'gateway_handle={self.gateway_handle!r}, '
+                f'gateway_used={self.gateway_used!r}, '
+                f'gateway_transaction_id={self.gateway_transaction_id!r}, '
+                f'received_on={self.received_on!r}, '
+                f'uid={self.uid!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'transaction_time={self.transaction_time!s}, '
+                f'memo={self.memo!s}, '
+                f'original_amount={self.original_amount!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'payment_method={self.payment_method!s}, '
+                f'transaction_id={self.transaction_id!s}, '
+                f'prepayment={self.prepayment!s}, '
+                f'gateway_handle={self.gateway_handle!s}, '
+                f'gateway_used={self.gateway_used!s}, '
+                f'gateway_transaction_id={self.gateway_transaction_id!s}, '
+                f'received_on={self.received_on!s}, '
+                f'uid={self.uid!s}, '
+                f'additional_properties={self.additional_properties!s})')

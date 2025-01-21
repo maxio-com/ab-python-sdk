@@ -97,8 +97,8 @@ class ComponentPricePointsController(BaseController):
 
         Args:
             component_id (int): The Advanced Billing id of the component
-            body (CreateComponentPricePointRequest, optional): TODO: type
-                description here.
+            body (CreateComponentPricePointRequest, optional): The request
+                body parameter.
 
         Returns:
             ComponentPricePointResponse: Response from the API. OK
@@ -235,8 +235,8 @@ class ComponentPricePointsController(BaseController):
         Args:
             component_id (str): The Advanced Billing id of the component for
                 which you want to fetch price points.
-            body (CreateComponentPricePointsRequest, optional): TODO: type
-                description here.
+            body (CreateComponentPricePointsRequest, optional): The request
+                body parameter.
 
         Returns:
             ComponentPricePointsResponse: Response from the API. OK
@@ -300,8 +300,8 @@ class ComponentPricePointsController(BaseController):
                 When using the handle, it must be prefixed with `handle:`.
                 Example: `123` for an integer ID, or
                 `handle:example-price_point-handle` for a string handle.
-            body (UpdateComponentPricePointRequest, optional): TODO: type
-                description here.
+            body (UpdateComponentPricePointRequest, optional): The request
+                body parameter.
 
         Returns:
             ComponentPricePointResponse: Response from the API. OK
@@ -529,8 +529,8 @@ class ComponentPricePointsController(BaseController):
 
         Args:
             price_point_id (int): The Advanced Billing id of the price point
-            body (CreateCurrencyPricesRequest, optional): TODO: type
-                description here.
+            body (CreateCurrencyPricesRequest, optional): The request body
+                parameter.
 
         Returns:
             ComponentCurrencyPricesResponse: Response from the API. OK
@@ -581,8 +581,8 @@ class ComponentPricePointsController(BaseController):
 
         Args:
             price_point_id (int): The Advanced Billing id of the price point
-            body (UpdateCurrencyPricesRequest, optional): TODO: type
-                description here.
+            body (UpdateCurrencyPricesRequest, optional): The request body
+                parameter.
 
         Returns:
             ComponentCurrencyPricesResponse: Response from the API. OK

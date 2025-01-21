@@ -17,20 +17,19 @@ class SubscriptionGroupSignupFailureData(object):
 
     """Implementation of the 'Subscription Group Signup Failure Data' model.
 
-    TODO: type model description here.
-
     Attributes:
-        payer_id (int): TODO: type description here.
-        payer_reference (str): TODO: type description here.
-        payment_profile_id (int): TODO: type description here.
-        payment_collection_method (str): TODO: type description here.
-        payer_attributes (PayerAttributes): TODO: type description here.
-        credit_card_attributes (SubscriptionGroupCreditCard): TODO: type
-            description here.
-        bank_account_attributes (SubscriptionGroupBankAccount): TODO: type
-            description here.
-        subscriptions (List[SubscriptionGroupSignupItem]): TODO: type
-            description here.
+        payer_id (int): The model property of type int.
+        payer_reference (str): The model property of type str.
+        payment_profile_id (int): The model property of type int.
+        payment_collection_method (str): The model property of type str.
+        payer_attributes (PayerAttributes): The model property of type
+            PayerAttributes.
+        credit_card_attributes (SubscriptionGroupCreditCard): The model
+            property of type SubscriptionGroupCreditCard.
+        bank_account_attributes (SubscriptionGroupBankAccount): The model
+            property of type SubscriptionGroupBankAccount.
+        subscriptions (List[SubscriptionGroupSignupItem]): The model property
+            of type List[SubscriptionGroupSignupItem].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -159,3 +158,27 @@ class SubscriptionGroupSignupFailureData(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'payer_id={self.payer_id!r}, '
+                f'payer_reference={self.payer_reference!r}, '
+                f'payment_profile_id={self.payment_profile_id!r}, '
+                f'payment_collection_method={self.payment_collection_method!r}, '
+                f'payer_attributes={self.payer_attributes!r}, '
+                f'credit_card_attributes={self.credit_card_attributes!r}, '
+                f'bank_account_attributes={self.bank_account_attributes!r}, '
+                f'subscriptions={self.subscriptions!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'payer_id={self.payer_id!s}, '
+                f'payer_reference={self.payer_reference!s}, '
+                f'payment_profile_id={self.payment_profile_id!s}, '
+                f'payment_collection_method={self.payment_collection_method!s}, '
+                f'payer_attributes={self.payer_attributes!s}, '
+                f'credit_card_attributes={self.credit_card_attributes!s}, '
+                f'bank_account_attributes={self.bank_account_attributes!s}, '
+                f'subscriptions={self.subscriptions!s}, '
+                f'additional_properties={self.additional_properties!s})')

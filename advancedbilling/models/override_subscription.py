@@ -13,8 +13,6 @@ class OverrideSubscription(object):
 
     """Implementation of the 'Override Subscription' model.
 
-    TODO: type model description here.
-
     Attributes:
         activated_at (datetime): Can be used to record an external signup
             date. Chargify uses this field to record when a subscription first
@@ -117,3 +115,21 @@ class OverrideSubscription(object):
                    expires_at,
                    current_period_starts_at,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'activated_at={self.activated_at!r}, '
+                f'canceled_at={self.canceled_at!r}, '
+                f'cancellation_message={self.cancellation_message!r}, '
+                f'expires_at={self.expires_at!r}, '
+                f'current_period_starts_at={self.current_period_starts_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'activated_at={self.activated_at!s}, '
+                f'canceled_at={self.canceled_at!s}, '
+                f'cancellation_message={self.cancellation_message!s}, '
+                f'expires_at={self.expires_at!s}, '
+                f'current_period_starts_at={self.current_period_starts_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

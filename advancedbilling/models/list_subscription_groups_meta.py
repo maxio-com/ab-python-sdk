@@ -13,11 +13,9 @@ class ListSubscriptionGroupsMeta(object):
 
     """Implementation of the 'List Subscription Groups Meta' model.
 
-    TODO: type model description here.
-
     Attributes:
-        current_page (int): TODO: type description here.
-        total_count (int): TODO: type description here.
+        current_page (int): The model property of type int.
+        total_count (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -78,3 +76,15 @@ class ListSubscriptionGroupsMeta(object):
         return cls(current_page,
                    total_count,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'current_page={self.current_page!r}, '
+                f'total_count={self.total_count!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'current_page={self.current_page!s}, '
+                f'total_count={self.total_count!s}, '
+                f'additional_properties={self.additional_properties!s})')

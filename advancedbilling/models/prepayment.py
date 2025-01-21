@@ -13,19 +13,17 @@ class Prepayment(object):
 
     """Implementation of the 'Prepayment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        amount_in_cents (long|int): TODO: type description here.
-        remaining_amount_in_cents (long|int): TODO: type description here.
-        refunded_amount_in_cents (long|int): TODO: type description here.
-        details (str): TODO: type description here.
-        external (bool): TODO: type description here.
-        memo (str): TODO: type description here.
+        id (int): The model property of type int.
+        subscription_id (int): The model property of type int.
+        amount_in_cents (int): The model property of type int.
+        remaining_amount_in_cents (int): The model property of type int.
+        refunded_amount_in_cents (int): The model property of type int.
+        details (str): The model property of type str.
+        external (bool): The model property of type bool.
+        memo (str): The model property of type str.
         payment_type (PrepaymentMethod): The payment type of the prepayment.
-        created_at (datetime): TODO: type description here.
+        created_at (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -128,3 +126,31 @@ class Prepayment(object):
                    details,
                    payment_type,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'remaining_amount_in_cents={self.remaining_amount_in_cents!r}, '
+                f'refunded_amount_in_cents={self.refunded_amount_in_cents!r}, '
+                f'details={self.details!r}, '
+                f'external={self.external!r}, '
+                f'memo={self.memo!r}, '
+                f'payment_type={self.payment_type!r}, '
+                f'created_at={self.created_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'remaining_amount_in_cents={self.remaining_amount_in_cents!s}, '
+                f'refunded_amount_in_cents={self.refunded_amount_in_cents!s}, '
+                f'details={self.details!s}, '
+                f'external={self.external!s}, '
+                f'memo={self.memo!s}, '
+                f'payment_type={self.payment_type!s}, '
+                f'created_at={self.created_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

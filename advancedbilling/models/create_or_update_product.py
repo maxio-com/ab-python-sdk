@@ -13,8 +13,6 @@ class CreateOrUpdateProduct(object):
 
     """Implementation of the 'Create or Update Product' model.
 
-    TODO: type model description here.
-
     Attributes:
         name (str): The product name
         handle (str): The product API handle
@@ -23,20 +21,19 @@ class CreateOrUpdateProduct(object):
         require_credit_card (bool): Deprecated value that can be ignored
             unless you have legacy hosted pages. For Public Signup Page users,
             please read this attribute from under the signup page.
-        price_in_cents (long|int): The product price, in integer cents
+        price_in_cents (int): The product price, in integer cents
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this product would
             renew every 30 days
         interval_unit (IntervalUnit): A string representing the interval unit
             for this product, either month or day
-        trial_price_in_cents (long|int): The product trial price, in integer
-            cents
+        trial_price_in_cents (int): The product trial price, in integer cents
         trial_interval (int): The numerical trial interval. i.e. an interval
             of ‘30’ coupled with a trial_interval_unit of day would mean this
             product trial would last 30 days.
         trial_interval_unit (IntervalUnit): A string representing the trial
             interval unit for this product, either month or day
-        trial_type (str): TODO: type description here.
+        trial_type (str): The model property of type str.
         expiration_interval (int): The numerical expiration interval. i.e. an
             expiration_interval of ‘30’ coupled with an
             expiration_interval_unit of day would mean this product would
@@ -44,7 +41,7 @@ class CreateOrUpdateProduct(object):
         expiration_interval_unit (ExpirationIntervalUnit): A string
             representing the expiration interval unit for this product, either
             month, day or never
-        auto_create_signup_page (bool): TODO: type description here.
+        auto_create_signup_page (bool): The model property of type bool.
         tax_code (str): A string representing the tax code related to the
             product type. This is especially important when using the Avalara
             service to tax based on locale. This attribute has a max length of
@@ -202,3 +199,43 @@ class CreateOrUpdateProduct(object):
                    auto_create_signup_page,
                    tax_code,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'description={self.description!r}, '
+                f'accounting_code={self.accounting_code!r}, '
+                f'require_credit_card={self.require_credit_card!r}, '
+                f'price_in_cents={self.price_in_cents!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'trial_price_in_cents={self.trial_price_in_cents!r}, '
+                f'trial_interval={self.trial_interval!r}, '
+                f'trial_interval_unit={self.trial_interval_unit!r}, '
+                f'trial_type={self.trial_type!r}, '
+                f'expiration_interval={self.expiration_interval!r}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!r}, '
+                f'auto_create_signup_page={self.auto_create_signup_page!r}, '
+                f'tax_code={self.tax_code!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'description={self.description!s}, '
+                f'accounting_code={self.accounting_code!s}, '
+                f'require_credit_card={self.require_credit_card!s}, '
+                f'price_in_cents={self.price_in_cents!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'trial_price_in_cents={self.trial_price_in_cents!s}, '
+                f'trial_interval={self.trial_interval!s}, '
+                f'trial_interval_unit={self.trial_interval_unit!s}, '
+                f'trial_type={self.trial_type!s}, '
+                f'expiration_interval={self.expiration_interval!s}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!s}, '
+                f'auto_create_signup_page={self.auto_create_signup_page!s}, '
+                f'tax_code={self.tax_code!s}, '
+                f'additional_properties={self.additional_properties!s})')

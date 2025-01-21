@@ -16,40 +16,40 @@ class AllVaults(object):
     Use `bogus` for testing.
 
     Attributes:
-        ADYEN: TODO: type description here.
-        AUTHORIZENET: TODO: type description here.
-        BEANSTREAM: TODO: type description here.
-        BLUE_SNAP: TODO: type description here.
-        BOGUS: TODO: type description here.
-        BRAINTREE1: TODO: type description here.
-        BRAINTREE_BLUE: TODO: type description here.
-        CHECKOUT: TODO: type description here.
-        CYBERSOURCE: TODO: type description here.
-        ELAVON: TODO: type description here.
-        EWAY: TODO: type description here.
-        EWAY_RAPID: TODO: type description here.
-        EWAY_RAPID_STD: TODO: type description here.
-        FIRSTDATA: TODO: type description here.
-        FORTE: TODO: type description here.
-        GOCARDLESS: TODO: type description here.
-        LITLE: TODO: type description here.
-        MAXIO_PAYMENTS: TODO: type description here.
-        MAXP: TODO: type description here.
-        MODUSLINK: TODO: type description here.
-        MONERIS: TODO: type description here.
-        NMI: TODO: type description here.
-        ORBITAL: TODO: type description here.
-        PAYMENT_EXPRESS: TODO: type description here.
-        PAYMILL: TODO: type description here.
-        PAYPAL: TODO: type description here.
-        PAYPAL_COMPLETE: TODO: type description here.
-        PIN: TODO: type description here.
-        SQUARE: TODO: type description here.
-        STRIPE: TODO: type description here.
-        STRIPE_CONNECT: TODO: type description here.
-        TRUST_COMMERCE: TODO: type description here.
-        UNIPAAS: TODO: type description here.
-        WIRECARD: TODO: type description here.
+        ADYEN: The enum member of type str.
+        AUTHORIZENET: The enum member of type str.
+        BEANSTREAM: The enum member of type str.
+        BLUE_SNAP: The enum member of type str.
+        BOGUS: The enum member of type str.
+        BRAINTREE1: The enum member of type str.
+        BRAINTREE_BLUE: The enum member of type str.
+        CHECKOUT: The enum member of type str.
+        CYBERSOURCE: The enum member of type str.
+        ELAVON: The enum member of type str.
+        EWAY: The enum member of type str.
+        EWAY_RAPID: The enum member of type str.
+        EWAY_RAPID_STD: The enum member of type str.
+        FIRSTDATA: The enum member of type str.
+        FORTE: The enum member of type str.
+        GOCARDLESS: The enum member of type str.
+        LITLE: The enum member of type str.
+        MAXIO_PAYMENTS: The enum member of type str.
+        MAXP: The enum member of type str.
+        MODUSLINK: The enum member of type str.
+        MONERIS: The enum member of type str.
+        NMI: The enum member of type str.
+        ORBITAL: The enum member of type str.
+        PAYMENT_EXPRESS: The enum member of type str.
+        PAYMILL: The enum member of type str.
+        PAYPAL: The enum member of type str.
+        PAYPAL_COMPLETE: The enum member of type str.
+        PIN: The enum member of type str.
+        SQUARE: The enum member of type str.
+        STRIPE: The enum member of type str.
+        STRIPE_CONNECT: The enum member of type str.
+        TRUST_COMMERCE: The enum member of type str.
+        UNIPAAS: The enum member of type str.
+        WIRECARD: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

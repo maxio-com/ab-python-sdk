@@ -15,11 +15,11 @@ class ComponentKind(object):
     A handle for the component type
 
     Attributes:
-        METERED_COMPONENT: TODO: type description here.
-        QUANTITY_BASED_COMPONENT: TODO: type description here.
-        ON_OFF_COMPONENT: TODO: type description here.
-        PREPAID_USAGE_COMPONENT: TODO: type description here.
-        EVENT_BASED_COMPONENT: TODO: type description here.
+        METERED_COMPONENT: The enum member of type str.
+        QUANTITY_BASED_COMPONENT: The enum member of type str.
+        ON_OFF_COMPONENT: The enum member of type str.
+        PREPAID_USAGE_COMPONENT: The enum member of type str.
+        EVENT_BASED_COMPONENT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

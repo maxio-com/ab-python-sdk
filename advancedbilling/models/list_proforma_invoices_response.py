@@ -15,11 +15,11 @@ class ListProformaInvoicesResponse(object):
 
     """Implementation of the 'List Proforma Invoices Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        proforma_invoices (List[ProformaInvoice]): TODO: type description here.
-        meta (ListProformaInvoicesMeta): TODO: type description here.
+        proforma_invoices (List[ProformaInvoice]): The model property of type
+            List[ProformaInvoice].
+        meta (ListProformaInvoicesMeta): The model property of type
+            ListProformaInvoicesMeta.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -84,3 +84,15 @@ class ListProformaInvoicesResponse(object):
         return cls(proforma_invoices,
                    meta,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'proforma_invoices={self.proforma_invoices!r}, '
+                f'meta={self.meta!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'proforma_invoices={self.proforma_invoices!s}, '
+                f'meta={self.meta!s}, '
+                f'additional_properties={self.additional_properties!s})')

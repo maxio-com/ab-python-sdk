@@ -13,12 +13,10 @@ class RevokedInvitation(object):
 
     """Implementation of the 'Revoked Invitation' model.
 
-    TODO: type model description here.
-
     Attributes:
-        last_sent_at (str): TODO: type description here.
-        last_accepted_at (str): TODO: type description here.
-        uninvited_count (int): TODO: type description here.
+        last_sent_at (str): The model property of type str.
+        last_accepted_at (str): The model property of type str.
+        uninvited_count (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -86,3 +84,17 @@ class RevokedInvitation(object):
                    last_accepted_at,
                    uninvited_count,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'last_sent_at={self.last_sent_at!r}, '
+                f'last_accepted_at={self.last_accepted_at!r}, '
+                f'uninvited_count={self.uninvited_count!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'last_sent_at={self.last_sent_at!s}, '
+                f'last_accepted_at={self.last_accepted_at!s}, '
+                f'uninvited_count={self.uninvited_count!s}, '
+                f'additional_properties={self.additional_properties!s})')

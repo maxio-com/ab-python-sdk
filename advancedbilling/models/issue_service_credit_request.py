@@ -13,10 +13,9 @@ class IssueServiceCreditRequest(object):
 
     """Implementation of the 'Issue Service Credit Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        service_credit (IssueServiceCredit): TODO: type description here.
+        service_credit (IssueServiceCredit): The model property of type
+            IssueServiceCredit.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class IssueServiceCreditRequest(object):
         # Return an object of this model
         return cls(service_credit,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'service_credit={self.service_credit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'service_credit={self.service_credit!s}, '
+                f'additional_properties={self.additional_properties!s})')

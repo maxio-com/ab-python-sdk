@@ -13,10 +13,9 @@ class CreateProductFamilyRequest(object):
 
     """Implementation of the 'Create Product Family Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        product_family (CreateProductFamily): TODO: type description here.
+        product_family (CreateProductFamily): The model property of type
+            CreateProductFamily.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class CreateProductFamilyRequest(object):
         # Return an object of this model
         return cls(product_family,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_family={self.product_family!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_family={self.product_family!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,13 +13,11 @@ class ListProformaInvoicesMeta(object):
 
     """Implementation of the 'List Proforma Invoices Meta' model.
 
-    TODO: type model description here.
-
     Attributes:
-        total_count (int): TODO: type description here.
-        current_page (int): TODO: type description here.
-        total_pages (int): TODO: type description here.
-        status_code (int): TODO: type description here.
+        total_count (int): The model property of type int.
+        current_page (int): The model property of type int.
+        total_pages (int): The model property of type int.
+        status_code (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -94,3 +92,19 @@ class ListProformaInvoicesMeta(object):
                    total_pages,
                    status_code,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'total_count={self.total_count!r}, '
+                f'current_page={self.current_page!r}, '
+                f'total_pages={self.total_pages!r}, '
+                f'status_code={self.status_code!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'total_count={self.total_count!s}, '
+                f'current_page={self.current_page!s}, '
+                f'total_pages={self.total_pages!s}, '
+                f'status_code={self.status_code!s}, '
+                f'additional_properties={self.additional_properties!s})')

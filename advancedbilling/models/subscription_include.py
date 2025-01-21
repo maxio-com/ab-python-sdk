@@ -12,11 +12,9 @@ class SubscriptionInclude(object):
 
     """Implementation of the 'Subscription Include' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        COUPONS: TODO: type description here.
-        SELF_SERVICE_PAGE_TOKEN: TODO: type description here.
+        COUPONS: The enum member of type str.
+        SELF_SERVICE_PAGE_TOKEN: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

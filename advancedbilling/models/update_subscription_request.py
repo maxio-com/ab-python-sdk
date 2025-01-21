@@ -13,10 +13,9 @@ class UpdateSubscriptionRequest(object):
 
     """Implementation of the 'Update Subscription Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        subscription (UpdateSubscription): TODO: type description here.
+        subscription (UpdateSubscription): The model property of type
+            UpdateSubscription.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class UpdateSubscriptionRequest(object):
         # Return an object of this model
         return cls(subscription,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription={self.subscription!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription={self.subscription!s}, '
+                f'additional_properties={self.additional_properties!s})')

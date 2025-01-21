@@ -14,10 +14,8 @@ class CouponRequest(object):
 
     """Implementation of the 'Coupon Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        coupon (CouponPayload): TODO: type description here.
+        coupon (CouponPayload): The model property of type CouponPayload.
         restricted_products (Dict[str, bool]): An object where the keys are
             product_ids and the values are booleans indicating if the coupon
             should be applicable to the product
@@ -91,3 +89,17 @@ class CouponRequest(object):
                    restricted_products,
                    restricted_components,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'coupon={self.coupon!r}, '
+                f'restricted_products={self.restricted_products!r}, '
+                f'restricted_components={self.restricted_components!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'coupon={self.coupon!s}, '
+                f'restricted_products={self.restricted_products!s}, '
+                f'restricted_components={self.restricted_components!s}, '
+                f'additional_properties={self.additional_properties!s})')

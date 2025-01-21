@@ -47,7 +47,7 @@ class EventsBasedBillingSegmentsController(BaseController):
             component_id (str): ID or Handle for the Component
             price_point_id (str): ID or Handle for the Price Point belonging
                 to the Component
-            body (CreateSegmentRequest, optional): TODO: type description here.
+            body (CreateSegmentRequest, optional): The request body parameter.
 
         Returns:
             SegmentResponse: Response from the API. Created
@@ -195,7 +195,7 @@ class EventsBasedBillingSegmentsController(BaseController):
             price_point_id (str): ID or Handle of the Price Point belonging to
                 the Component
             id (float): The ID of the Segment
-            body (UpdateSegmentRequest, optional): TODO: type description here.
+            body (UpdateSegmentRequest, optional): The request body parameter.
 
         Returns:
             SegmentResponse: Response from the API. OK
@@ -313,7 +313,7 @@ class EventsBasedBillingSegmentsController(BaseController):
             component_id (str): ID or Handle for the Component
             price_point_id (str): ID or Handle for the Price Point belonging
                 to the Component
-            body (BulkCreateSegments, optional): TODO: type description here.
+            body (BulkCreateSegments, optional): The request body parameter.
 
         Returns:
             ListSegmentsResponse: Response from the API. Created
@@ -377,7 +377,7 @@ class EventsBasedBillingSegmentsController(BaseController):
             component_id (str): ID or Handle for the Component
             price_point_id (str): ID or Handle for the Price Point belonging
                 to the Component
-            body (BulkUpdateSegments, optional): TODO: type description here.
+            body (BulkUpdateSegments, optional): The request body parameter.
 
         Returns:
             ListSegmentsResponse: Response from the API. OK

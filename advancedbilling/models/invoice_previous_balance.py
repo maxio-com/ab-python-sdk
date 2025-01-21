@@ -14,11 +14,10 @@ class InvoicePreviousBalance(object):
 
     """Implementation of the 'Invoice Previous Balance' model.
 
-    TODO: type model description here.
-
     Attributes:
-        captured_at (datetime): TODO: type description here.
-        invoices (List[InvoiceBalanceItem]): TODO: type description here.
+        captured_at (datetime): The model property of type datetime.
+        invoices (List[InvoiceBalanceItem]): The model property of type
+            List[InvoiceBalanceItem].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -105,3 +104,15 @@ class InvoicePreviousBalance(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'captured_at={self.captured_at!r}, '
+                f'invoices={self.invoices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'captured_at={self.captured_at!s}, '
+                f'invoices={self.invoices!s}, '
+                f'additional_properties={self.additional_properties!s})')

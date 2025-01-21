@@ -13,16 +13,14 @@ class SaleRepSettings(object):
 
     """Implementation of the 'Sale Rep Settings' model.
 
-    TODO: type model description here.
-
     Attributes:
-        customer_name (str): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        site_link (str): TODO: type description here.
-        site_name (str): TODO: type description here.
-        subscription_mrr (str): TODO: type description here.
-        sales_rep_id (int): TODO: type description here.
-        sales_rep_name (str): TODO: type description here.
+        customer_name (str): The model property of type str.
+        subscription_id (int): The model property of type int.
+        site_link (str): The model property of type str.
+        site_name (str): The model property of type str.
+        subscription_mrr (str): The model property of type str.
+        sales_rep_id (int): The model property of type int.
+        sales_rep_name (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -118,3 +116,25 @@ class SaleRepSettings(object):
                    sales_rep_id,
                    sales_rep_name,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer_name={self.customer_name!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'site_link={self.site_link!r}, '
+                f'site_name={self.site_name!r}, '
+                f'subscription_mrr={self.subscription_mrr!r}, '
+                f'sales_rep_id={self.sales_rep_id!r}, '
+                f'sales_rep_name={self.sales_rep_name!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer_name={self.customer_name!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'site_link={self.site_link!s}, '
+                f'site_name={self.site_name!s}, '
+                f'subscription_mrr={self.subscription_mrr!s}, '
+                f'sales_rep_id={self.sales_rep_id!s}, '
+                f'sales_rep_name={self.sales_rep_name!s}, '
+                f'additional_properties={self.additional_properties!s})')

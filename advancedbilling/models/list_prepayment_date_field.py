@@ -12,11 +12,9 @@ class ListPrepaymentDateField(object):
 
     """Implementation of the 'List Prepayment Date Field' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CREATED_AT: TODO: type description here.
-        APPLICATION_AT: TODO: type description here.
+        CREATED_AT: The enum member of type str.
+        APPLICATION_AT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

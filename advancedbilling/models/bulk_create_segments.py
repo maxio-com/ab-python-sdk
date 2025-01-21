@@ -14,10 +14,9 @@ class BulkCreateSegments(object):
 
     """Implementation of the 'Bulk Create Segments' model.
 
-    TODO: type model description here.
-
     Attributes:
-        segments (List[CreateSegment]): TODO: type description here.
+        segments (List[CreateSegment]): The model property of type
+            List[CreateSegment].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -75,3 +74,13 @@ class BulkCreateSegments(object):
         # Return an object of this model
         return cls(segments,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'segments={self.segments!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'segments={self.segments!s}, '
+                f'additional_properties={self.additional_properties!s})')

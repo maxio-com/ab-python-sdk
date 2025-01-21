@@ -13,17 +13,15 @@ class OrganizationAddress(object):
 
     """Implementation of the 'Organization Address' model.
 
-    TODO: type model description here.
-
     Attributes:
-        street (str): TODO: type description here.
-        line_2 (str): TODO: type description here.
-        city (str): TODO: type description here.
-        state (str): TODO: type description here.
-        zip (str): TODO: type description here.
-        country (str): TODO: type description here.
-        name (str): TODO: type description here.
-        phone (str): TODO: type description here.
+        street (str): The model property of type str.
+        line_2 (str): The model property of type str.
+        city (str): The model property of type str.
+        state (str): The model property of type str.
+        zip (str): The model property of type str.
+        country (str): The model property of type str.
+        name (str): The model property of type str.
+        phone (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -137,3 +135,27 @@ class OrganizationAddress(object):
                    name,
                    phone,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'street={self.street!r}, '
+                f'line_2={self.line_2!r}, '
+                f'city={self.city!r}, '
+                f'state={self.state!r}, '
+                f'zip={self.zip!r}, '
+                f'country={self.country!r}, '
+                f'name={self.name!r}, '
+                f'phone={self.phone!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'street={self.street!s}, '
+                f'line_2={self.line_2!s}, '
+                f'city={self.city!s}, '
+                f'state={self.state!s}, '
+                f'zip={self.zip!s}, '
+                f'country={self.country!s}, '
+                f'name={self.name!s}, '
+                f'phone={self.phone!s}, '
+                f'additional_properties={self.additional_properties!s})')

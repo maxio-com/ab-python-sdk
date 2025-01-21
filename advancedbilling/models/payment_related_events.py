@@ -13,11 +13,9 @@ class PaymentRelatedEvents(object):
 
     """Implementation of the 'Payment Related Events' model.
 
-    TODO: type model description here.
-
     Attributes:
-        product_id (int): TODO: type description here.
-        account_transaction_id (int): TODO: type description here.
+        product_id (int): The model property of type int.
+        account_transaction_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -99,3 +97,15 @@ class PaymentRelatedEvents(object):
                                        type_callable=lambda value: isinstance(value, int)) \
             and APIHelper.is_valid_type(value=dictionary.get('account_transaction_id'),
                                         type_callable=lambda value: isinstance(value, int))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_id={self.product_id!r}, '
+                f'account_transaction_id={self.account_transaction_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_id={self.product_id!s}, '
+                f'account_transaction_id={self.account_transaction_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

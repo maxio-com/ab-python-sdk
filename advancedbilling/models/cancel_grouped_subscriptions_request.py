@@ -13,10 +13,8 @@ class CancelGroupedSubscriptionsRequest(object):
 
     """Implementation of the 'Cancel Grouped Subscriptions Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        charge_unbilled_usage (bool): TODO: type description here.
+        charge_unbilled_usage (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -70,3 +68,13 @@ class CancelGroupedSubscriptionsRequest(object):
         # Return an object of this model
         return cls(charge_unbilled_usage,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'charge_unbilled_usage={self.charge_unbilled_usage!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'charge_unbilled_usage={self.charge_unbilled_usage!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -147,8 +147,7 @@ class WebhooksController(BaseController):
         This method allows you to enable webhooks via API for your site
 
         Args:
-            body (EnableWebhooksRequest, optional): TODO: type description
-                here.
+            body (EnableWebhooksRequest, optional): The request body parameter.
 
         Returns:
             EnableWebhooksResponse: Response from the API. OK
@@ -192,8 +191,7 @@ class WebhooksController(BaseController):
         request.
 
         Args:
-            body (ReplayWebhooksRequest, optional): TODO: type description
-                here.
+            body (ReplayWebhooksRequest, optional): The request body parameter.
 
         Returns:
             ReplayWebhooksResponse: Response from the API. OK
@@ -238,8 +236,8 @@ class WebhooksController(BaseController):
         ks-Reference#events)
 
         Args:
-            body (CreateOrUpdateEndpointRequest, optional): TODO: type
-                description here.
+            body (CreateOrUpdateEndpointRequest, optional): The request body
+                parameter.
 
         Returns:
             EndpointResponse: Response from the API. OK
@@ -324,8 +322,8 @@ class WebhooksController(BaseController):
         Args:
             endpoint_id (int): The Advanced Billing id for the endpoint that
                 should be updated
-            body (CreateOrUpdateEndpointRequest, optional): TODO: type
-                description here.
+            body (CreateOrUpdateEndpointRequest, optional): The request body
+                parameter.
 
         Returns:
             EndpointResponse: Response from the API. OK

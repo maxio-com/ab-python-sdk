@@ -141,3 +141,23 @@ class RefundConsolidatedInvoice(object):
             and APIHelper.is_valid_type(value=dictionary.get('payment_id'),
                                         type_callable=lambda value: isinstance(value, int)) \
             and UnionTypeLookUp.get('RefundConsolidatedInvoiceSegmentUids').validate(dictionary.get('segment_uids')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'memo={self.memo!r}, '
+                f'payment_id={self.payment_id!r}, '
+                f'segment_uids={self.segment_uids!r}, '
+                f'external={self.external!r}, '
+                f'apply_credit={self.apply_credit!r}, '
+                f'amount={self.amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'memo={self.memo!s}, '
+                f'payment_id={self.payment_id!s}, '
+                f'segment_uids={self.segment_uids!s}, '
+                f'external={self.external!s}, '
+                f'apply_credit={self.apply_credit!s}, '
+                f'amount={self.amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

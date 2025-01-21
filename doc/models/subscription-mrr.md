@@ -10,7 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Required | - |
-| `mrr_amount_in_cents` | `long\|int` | Required | - |
+| `mrr_amount_in_cents` | `int` | Required | - |
 | `breakouts` | [`SubscriptionMRRBreakout`](../../doc/models/subscription-mrr-breakout.md) | Optional | - |
 
 ## Example (as JSON)

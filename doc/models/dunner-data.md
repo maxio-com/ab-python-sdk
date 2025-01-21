@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `state` | `str` | Required | - |
 | `subscription_id` | `int` | Required | - |
-| `revenue_at_risk_in_cents` | `long\|int` | Required | - |
+| `revenue_at_risk_in_cents` | `int` | Required | - |
 | `created_at` | `datetime` | Required | - |
 | `attempts` | `int` | Required | - |
 | `last_attempted_at` | `datetime` | Required | - |

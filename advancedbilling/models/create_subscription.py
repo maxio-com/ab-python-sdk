@@ -23,8 +23,6 @@ class CreateSubscription(object):
 
     """Implementation of the 'Create Subscription' model.
 
-    TODO: type model description here.
-
     Attributes:
         product_handle (str): The API Handle of the product for which you are
             creating a subscription. Required, unless a `product_id` is given
@@ -94,7 +92,7 @@ class CreateSubscription(object):
             PSD2 and using 3D Secure, this can be used to reference a previous
             transaction for the customer. This will ensure the card will be
             charged successfully at renewal.
-        sales_rep_id (int): TODO: type description here.
+        sales_rep_id (int): The model property of type int.
         payment_profile_id (int): The Payment Profile ID of an existing card
             or bank account, which belongs to an existing customer to use for
             payment for this subscription. If the card, bank account, or
@@ -106,14 +104,15 @@ class CreateSubscription(object):
             `bank_account` > id)
         reference (str): The reference value (provided by your app) for the
             subscription itelf.
-        customer_attributes (CustomerAttributes): TODO: type description here.
+        customer_attributes (CustomerAttributes): The model property of type
+            CustomerAttributes.
         payment_profile_attributes (PaymentProfileAttributes): alias to
             credit_card_attributes
         credit_card_attributes (PaymentProfileAttributes): Credit Card data to
             create a new Subscription. Interchangeable with
             `payment_profile_attributes` property.
-        bank_account_attributes (BankAccountAttributes): TODO: type
-            description here.
+        bank_account_attributes (BankAccountAttributes): The model property of
+            type BankAccountAttributes.
         components (List[CreateSubscriptionComponent]): (Optional) An array of
             component ids and quantities to be added to the subscription. See
             [Components](https://maxio.zendesk.com/hc/en-us/articles/2426114152
@@ -127,7 +126,7 @@ class CreateSubscription(object):
         customer_reference (str): The reference value (provided by your app)
             of an existing customer within Chargify. Required, unless a
             `customer_id` or a set of `customer_attributes` is given.
-        group (GroupSettings): TODO: type description here.
+        group (GroupSettings): The model property of type GroupSettings.
         ref (str): A valid referral code. (optional, see
             [Referrals](https://maxio.zendesk.com/hc/en-us/articles/24286981223
             693-Referrals-Reference#how-to-obtain-referral-codes) for more
@@ -174,8 +173,8 @@ class CreateSubscription(object):
             component information to set up the subscription with an existing
             offer. May be either the Chargify id of the offer or its handle
             prefixed with `handle:`.er
-        prepaid_configuration (UpsertPrepaidConfiguration): TODO: type
-            description here.
+        prepaid_configuration (UpsertPrepaidConfiguration): The model property
+            of type UpsertPrepaidConfiguration.
         previous_billing_at (datetime): Providing a previous_billing_at that
             is in the past will set the current_period_starts_at when the
             subscription is created. It will also set activated_at if not
@@ -188,8 +187,8 @@ class CreateSubscription(object):
             For this value to be honored, a next_billing_at must be present
             and set to a future date. This key/value will not be returned in
             the subscription response body.
-        canceled_at (datetime): TODO: type description here.
-        activated_at (datetime): TODO: type description here.
+        canceled_at (datetime): The model property of type datetime.
+        activated_at (datetime): The model property of type datetime.
         agreement_acceptance (AgreementAcceptance): Required when creating a
             subscription with Maxio Payments.
         ach_agreement (ACHAgreement): (Optional) If passed, the proof of the
@@ -599,3 +598,109 @@ class CreateSubscription(object):
                    dunning_communication_delay_time_zone,
                    skip_billing_manifest_taxes,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_handle={self.product_handle!r}, '
+                f'product_id={self.product_id!r}, '
+                f'product_price_point_handle={self.product_price_point_handle!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'custom_price={self.custom_price!r}, '
+                f'coupon_code={self.coupon_code!r}, '
+                f'coupon_codes={self.coupon_codes!r}, '
+                f'payment_collection_method={self.payment_collection_method!r}, '
+                f'receives_invoice_emails={self.receives_invoice_emails!r}, '
+                f'net_terms={self.net_terms!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'next_billing_at={self.next_billing_at!r}, '
+                f'initial_billing_at={self.initial_billing_at!r}, '
+                f'stored_credential_transaction_id={self.stored_credential_transaction_id!r}, '
+                f'sales_rep_id={self.sales_rep_id!r}, '
+                f'payment_profile_id={self.payment_profile_id!r}, '
+                f'reference={self.reference!r}, '
+                f'customer_attributes={self.customer_attributes!r}, '
+                f'payment_profile_attributes={self.payment_profile_attributes!r}, '
+                f'credit_card_attributes={self.credit_card_attributes!r}, '
+                f'bank_account_attributes={self.bank_account_attributes!r}, '
+                f'components={self.components!r}, '
+                f'calendar_billing={self.calendar_billing!r}, '
+                f'metafields={self.metafields!r}, '
+                f'customer_reference={self.customer_reference!r}, '
+                f'group={self.group!r}, '
+                f'ref={self.ref!r}, '
+                f'cancellation_message={self.cancellation_message!r}, '
+                f'cancellation_method={self.cancellation_method!r}, '
+                f'currency={self.currency!r}, '
+                f'expires_at={self.expires_at!r}, '
+                f'expiration_tracks_next_billing_change={self.expiration_tracks_next_billing_change!r}, '
+                f'agreement_terms={self.agreement_terms!r}, '
+                f'authorizer_first_name={self.authorizer_first_name!r}, '
+                f'authorizer_last_name={self.authorizer_last_name!r}, '
+                f'calendar_billing_first_charge={self.calendar_billing_first_charge!r}, '
+                f'reason_code={self.reason_code!r}, '
+                f'product_change_delayed={self.product_change_delayed!r}, '
+                f'offer_id={self.offer_id!r}, '
+                f'prepaid_configuration={self.prepaid_configuration!r}, '
+                f'previous_billing_at={self.previous_billing_at!r}, '
+                f'import_mrr={self.import_mrr!r}, '
+                f'canceled_at={self.canceled_at!r}, '
+                f'activated_at={self.activated_at!r}, '
+                f'agreement_acceptance={self.agreement_acceptance!r}, '
+                f'ach_agreement={self.ach_agreement!r}, '
+                f'dunning_communication_delay_enabled={self.dunning_communication_delay_enabled!r}, '
+                f'dunning_communication_delay_time_zone={self.dunning_communication_delay_time_zone!r}, '
+                f'skip_billing_manifest_taxes={self.skip_billing_manifest_taxes!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_handle={self.product_handle!s}, '
+                f'product_id={self.product_id!s}, '
+                f'product_price_point_handle={self.product_price_point_handle!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'custom_price={self.custom_price!s}, '
+                f'coupon_code={self.coupon_code!s}, '
+                f'coupon_codes={self.coupon_codes!s}, '
+                f'payment_collection_method={self.payment_collection_method!s}, '
+                f'receives_invoice_emails={self.receives_invoice_emails!s}, '
+                f'net_terms={self.net_terms!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'next_billing_at={self.next_billing_at!s}, '
+                f'initial_billing_at={self.initial_billing_at!s}, '
+                f'stored_credential_transaction_id={self.stored_credential_transaction_id!s}, '
+                f'sales_rep_id={self.sales_rep_id!s}, '
+                f'payment_profile_id={self.payment_profile_id!s}, '
+                f'reference={self.reference!s}, '
+                f'customer_attributes={self.customer_attributes!s}, '
+                f'payment_profile_attributes={self.payment_profile_attributes!s}, '
+                f'credit_card_attributes={self.credit_card_attributes!s}, '
+                f'bank_account_attributes={self.bank_account_attributes!s}, '
+                f'components={self.components!s}, '
+                f'calendar_billing={self.calendar_billing!s}, '
+                f'metafields={self.metafields!s}, '
+                f'customer_reference={self.customer_reference!s}, '
+                f'group={self.group!s}, '
+                f'ref={self.ref!s}, '
+                f'cancellation_message={self.cancellation_message!s}, '
+                f'cancellation_method={self.cancellation_method!s}, '
+                f'currency={self.currency!s}, '
+                f'expires_at={self.expires_at!s}, '
+                f'expiration_tracks_next_billing_change={self.expiration_tracks_next_billing_change!s}, '
+                f'agreement_terms={self.agreement_terms!s}, '
+                f'authorizer_first_name={self.authorizer_first_name!s}, '
+                f'authorizer_last_name={self.authorizer_last_name!s}, '
+                f'calendar_billing_first_charge={self.calendar_billing_first_charge!s}, '
+                f'reason_code={self.reason_code!s}, '
+                f'product_change_delayed={self.product_change_delayed!s}, '
+                f'offer_id={self.offer_id!s}, '
+                f'prepaid_configuration={self.prepaid_configuration!s}, '
+                f'previous_billing_at={self.previous_billing_at!s}, '
+                f'import_mrr={self.import_mrr!s}, '
+                f'canceled_at={self.canceled_at!s}, '
+                f'activated_at={self.activated_at!s}, '
+                f'agreement_acceptance={self.agreement_acceptance!s}, '
+                f'ach_agreement={self.ach_agreement!s}, '
+                f'dunning_communication_delay_enabled={self.dunning_communication_delay_enabled!s}, '
+                f'dunning_communication_delay_time_zone={self.dunning_communication_delay_time_zone!s}, '
+                f'skip_billing_manifest_taxes={self.skip_billing_manifest_taxes!s}, '
+                f'additional_properties={self.additional_properties!s})')

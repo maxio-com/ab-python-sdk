@@ -13,11 +13,9 @@ class CreateProductCurrencyPricesRequest(object):
 
     """Implementation of the 'Create Product Currency Prices Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        currency_prices (List[CreateProductCurrencyPrice]): TODO: type
-            description here.
+        currency_prices (List[CreateProductCurrencyPrice]): The model property
+            of type List[CreateProductCurrencyPrice].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -68,3 +66,13 @@ class CreateProductCurrencyPricesRequest(object):
         # Return an object of this model
         return cls(currency_prices,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'currency_prices={self.currency_prices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'currency_prices={self.currency_prices!s}, '
+                f'additional_properties={self.additional_properties!s})')

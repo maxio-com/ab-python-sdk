@@ -17,8 +17,8 @@ class ApplyPaymentEventData(object):
     Example schema for an `apply_payment` event
 
     Attributes:
-        consolidation_level (InvoiceConsolidationLevel): TODO: type
-            description here.
+        consolidation_level (InvoiceConsolidationLevel): The model property of
+            type InvoiceConsolidationLevel.
         memo (str): The payment memo
         original_amount (str): The full, original amount of the payment
             transaction as a string in full units. Incoming payments can be
@@ -39,10 +39,10 @@ class ApplyPaymentEventData(object):
             PaymentMethodPaypal): A nested data structure detailing the method
             of payment
         transaction_id (int): The Chargify id of the original payment
-        parent_invoice_number (int): TODO: type description here.
-        remaining_prepayment_amount (str): TODO: type description here.
-        prepayment (bool): TODO: type description here.
-        external (bool): TODO: type description here.
+        parent_invoice_number (int): The model property of type int.
+        remaining_prepayment_amount (str): The model property of type str.
+        prepayment (bool): The model property of type bool.
+        external (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -203,3 +203,33 @@ class ApplyPaymentEventData(object):
             and APIHelper.is_valid_type(value=dictionary.get('transaction_time'),
                                         type_callable=lambda value: isinstance(value, str)) \
             and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.get('payment_method')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'consolidation_level={self.consolidation_level!r}, '
+                f'memo={self.memo!r}, '
+                f'original_amount={self.original_amount!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'transaction_time={self.transaction_time!r}, '
+                f'payment_method={self.payment_method!r}, '
+                f'transaction_id={self.transaction_id!r}, '
+                f'parent_invoice_number={self.parent_invoice_number!r}, '
+                f'remaining_prepayment_amount={self.remaining_prepayment_amount!r}, '
+                f'prepayment={self.prepayment!r}, '
+                f'external={self.external!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'consolidation_level={self.consolidation_level!s}, '
+                f'memo={self.memo!s}, '
+                f'original_amount={self.original_amount!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'transaction_time={self.transaction_time!s}, '
+                f'payment_method={self.payment_method!s}, '
+                f'transaction_id={self.transaction_id!s}, '
+                f'parent_invoice_number={self.parent_invoice_number!s}, '
+                f'remaining_prepayment_amount={self.remaining_prepayment_amount!s}, '
+                f'prepayment={self.prepayment!s}, '
+                f'external={self.external!s}, '
+                f'additional_properties={self.additional_properties!s})')

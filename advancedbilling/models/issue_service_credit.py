@@ -13,11 +13,9 @@ class IssueServiceCredit(object):
 
     """Implementation of the 'Issue Service Credit' model.
 
-    TODO: type model description here.
-
     Attributes:
-        amount (float | str): TODO: type description here.
-        memo (str): TODO: type description here.
+        amount (float | str): The model property of type float | str.
+        memo (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -100,3 +98,15 @@ class IssueServiceCredit(object):
             return False
 
         return UnionTypeLookUp.get('IssueServiceCreditAmount').validate(dictionary.get('amount')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!r}, '
+                f'memo={self.memo!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!s}, '
+                f'memo={self.memo!s}, '
+                f'additional_properties={self.additional_properties!s})')

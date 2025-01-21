@@ -13,10 +13,9 @@ class CreateMeteredComponent(object):
 
     """Implementation of the 'Create Metered Component' model.
 
-    TODO: type model description here.
-
     Attributes:
-        metered_component (MeteredComponent): TODO: type description here.
+        metered_component (MeteredComponent): The model property of type
+            MeteredComponent.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class CreateMeteredComponent(object):
         # Return an object of this model
         return cls(metered_component,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'metered_component={self.metered_component!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'metered_component={self.metered_component!s}, '
+                f'additional_properties={self.additional_properties!s})')

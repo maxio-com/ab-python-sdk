@@ -100,3 +100,15 @@ class ChangeInvoiceCollectionMethodEventData(object):
                                        type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('to_collection_method'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'from_collection_method={self.from_collection_method!r}, '
+                f'to_collection_method={self.to_collection_method!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'from_collection_method={self.from_collection_method!s}, '
+                f'to_collection_method={self.to_collection_method!s}, '
+                f'additional_properties={self.additional_properties!s})')

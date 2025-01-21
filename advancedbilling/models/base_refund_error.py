@@ -13,10 +13,8 @@ class BaseRefundError(object):
 
     """Implementation of the 'Base Refund Error' model.
 
-    TODO: type model description here.
-
     Attributes:
-        base (List[object]): TODO: type description here.
+        base (List[object]): The model property of type List[object].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -70,3 +68,13 @@ class BaseRefundError(object):
         # Return an object of this model
         return cls(base,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'base={self.base!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'base={self.base!s}, '
+                f'additional_properties={self.additional_properties!s})')

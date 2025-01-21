@@ -12,46 +12,44 @@ class WebhookSubscription(object):
 
     """Implementation of the 'Webhook Subscription' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        BILLING_DATE_CHANGE: TODO: type description here.
-        COMPONENT_ALLOCATION_CHANGE: TODO: type description here.
-        CUSTOMER_CREATE: TODO: type description here.
-        CUSTOMER_UPDATE: TODO: type description here.
-        DUNNING_STEP_REACHED: TODO: type description here.
-        EXPIRING_CARD: TODO: type description here.
-        EXPIRATION_DATE_CHANGE: TODO: type description here.
-        INVOICE_ISSUED: TODO: type description here.
-        METERED_USAGE: TODO: type description here.
-        PAYMENT_FAILURE: TODO: type description here.
-        PAYMENT_SUCCESS: TODO: type description here.
-        DIRECT_DEBIT_PAYMENT_PENDING: TODO: type description here.
-        DIRECT_DEBIT_PAYMENT_PAID_OUT: TODO: type description here.
-        DIRECT_DEBIT_PAYMENT_REJECTED: TODO: type description here.
-        PREPAID_SUBSCRIPTION_BALANCE_CHANGED: TODO: type description here.
-        PREPAID_USAGE: TODO: type description here.
-        REFUND_FAILURE: TODO: type description here.
-        REFUND_SUCCESS: TODO: type description here.
-        RENEWAL_FAILURE: TODO: type description here.
-        RENEWAL_SUCCESS: TODO: type description here.
-        SIGNUP_FAILURE: TODO: type description here.
-        SIGNUP_SUCCESS: TODO: type description here.
-        STATEMENT_CLOSED: TODO: type description here.
-        STATEMENT_SETTLED: TODO: type description here.
-        SUBSCRIPTION_CARD_UPDATE: TODO: type description here.
-        SUBSCRIPTION_GROUP_CARD_UPDATE: TODO: type description here.
-        SUBSCRIPTION_PRODUCT_CHANGE: TODO: type description here.
-        SUBSCRIPTION_STATE_CHANGE: TODO: type description here.
-        TRIAL_END_NOTICE: TODO: type description here.
-        UPCOMING_RENEWAL_NOTICE: TODO: type description here.
-        UPGRADE_DOWNGRADE_FAILURE: TODO: type description here.
-        UPGRADE_DOWNGRADE_SUCCESS: TODO: type description here.
-        PENDING_CANCELLATION_CHANGE: TODO: type description here.
-        SUBSCRIPTION_PREPAYMENT_ACCOUNT_BALANCE_CHANGED: TODO: type
-            description here.
-        SUBSCRIPTION_SERVICE_CREDIT_ACCOUNT_BALANCE_CHANGED: TODO: type
-            description here.
+        BILLING_DATE_CHANGE: The enum member of type str.
+        COMPONENT_ALLOCATION_CHANGE: The enum member of type str.
+        CUSTOMER_CREATE: The enum member of type str.
+        CUSTOMER_UPDATE: The enum member of type str.
+        DUNNING_STEP_REACHED: The enum member of type str.
+        EXPIRING_CARD: The enum member of type str.
+        EXPIRATION_DATE_CHANGE: The enum member of type str.
+        INVOICE_ISSUED: The enum member of type str.
+        METERED_USAGE: The enum member of type str.
+        PAYMENT_FAILURE: The enum member of type str.
+        PAYMENT_SUCCESS: The enum member of type str.
+        DIRECT_DEBIT_PAYMENT_PENDING: The enum member of type str.
+        DIRECT_DEBIT_PAYMENT_PAID_OUT: The enum member of type str.
+        DIRECT_DEBIT_PAYMENT_REJECTED: The enum member of type str.
+        PREPAID_SUBSCRIPTION_BALANCE_CHANGED: The enum member of type str.
+        PREPAID_USAGE: The enum member of type str.
+        REFUND_FAILURE: The enum member of type str.
+        REFUND_SUCCESS: The enum member of type str.
+        RENEWAL_FAILURE: The enum member of type str.
+        RENEWAL_SUCCESS: The enum member of type str.
+        SIGNUP_FAILURE: The enum member of type str.
+        SIGNUP_SUCCESS: The enum member of type str.
+        STATEMENT_CLOSED: The enum member of type str.
+        STATEMENT_SETTLED: The enum member of type str.
+        SUBSCRIPTION_CARD_UPDATE: The enum member of type str.
+        SUBSCRIPTION_GROUP_CARD_UPDATE: The enum member of type str.
+        SUBSCRIPTION_PRODUCT_CHANGE: The enum member of type str.
+        SUBSCRIPTION_STATE_CHANGE: The enum member of type str.
+        TRIAL_END_NOTICE: The enum member of type str.
+        UPCOMING_RENEWAL_NOTICE: The enum member of type str.
+        UPGRADE_DOWNGRADE_FAILURE: The enum member of type str.
+        UPGRADE_DOWNGRADE_SUCCESS: The enum member of type str.
+        PENDING_CANCELLATION_CHANGE: The enum member of type str.
+        SUBSCRIPTION_PREPAYMENT_ACCOUNT_BALANCE_CHANGED: The enum member of
+            type str.
+        SUBSCRIPTION_SERVICE_CREDIT_ACCOUNT_BALANCE_CHANGED: The enum member
+            of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

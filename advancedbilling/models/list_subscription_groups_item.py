@@ -14,21 +14,19 @@ class ListSubscriptionGroupsItem(object):
 
     """Implementation of the 'List Subscription Groups Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        scheme (int): TODO: type description here.
-        customer_id (int): TODO: type description here.
-        payment_profile_id (int): TODO: type description here.
-        subscription_ids (List[int]): TODO: type description here.
-        primary_subscription_id (int): TODO: type description here.
-        next_assessment_at (datetime): TODO: type description here.
-        state (str): TODO: type description here.
-        cancel_at_end_of_period (bool): TODO: type description here.
-        account_balances (SubscriptionGroupBalances): TODO: type description
-            here.
-        group_type (GroupType): TODO: type description here.
+        uid (str): The model property of type str.
+        scheme (int): The model property of type int.
+        customer_id (int): The model property of type int.
+        payment_profile_id (int): The model property of type int.
+        subscription_ids (List[int]): The model property of type List[int].
+        primary_subscription_id (int): The model property of type int.
+        next_assessment_at (datetime): The model property of type datetime.
+        state (str): The model property of type str.
+        cancel_at_end_of_period (bool): The model property of type bool.
+        account_balances (SubscriptionGroupBalances): The model property of
+            type SubscriptionGroupBalances.
+        group_type (GroupType): The model property of type GroupType.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -152,3 +150,33 @@ class ListSubscriptionGroupsItem(object):
                    account_balances,
                    group_type,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'scheme={self.scheme!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'payment_profile_id={self.payment_profile_id!r}, '
+                f'subscription_ids={self.subscription_ids!r}, '
+                f'primary_subscription_id={self.primary_subscription_id!r}, '
+                f'next_assessment_at={self.next_assessment_at!r}, '
+                f'state={self.state!r}, '
+                f'cancel_at_end_of_period={self.cancel_at_end_of_period!r}, '
+                f'account_balances={self.account_balances!r}, '
+                f'group_type={self.group_type!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'scheme={self.scheme!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'payment_profile_id={self.payment_profile_id!s}, '
+                f'subscription_ids={self.subscription_ids!s}, '
+                f'primary_subscription_id={self.primary_subscription_id!s}, '
+                f'next_assessment_at={self.next_assessment_at!s}, '
+                f'state={self.state!s}, '
+                f'cancel_at_end_of_period={self.cancel_at_end_of_period!s}, '
+                f'account_balances={self.account_balances!s}, '
+                f'group_type={self.group_type!s}, '
+                f'additional_properties={self.additional_properties!s})')

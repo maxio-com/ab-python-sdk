@@ -13,15 +13,13 @@ class ComponentCurrencyPrice(object):
 
     """Implementation of the 'Component Currency Price' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        currency (str): TODO: type description here.
-        price (str): TODO: type description here.
-        formatted_price (str): TODO: type description here.
-        price_id (int): TODO: type description here.
-        price_point_id (int): TODO: type description here.
+        id (int): The model property of type int.
+        currency (str): The model property of type str.
+        price (str): The model property of type str.
+        formatted_price (str): The model property of type str.
+        price_id (int): The model property of type int.
+        price_point_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -110,3 +108,23 @@ class ComponentCurrencyPrice(object):
                    price_id,
                    price_point_id,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'currency={self.currency!r}, '
+                f'price={self.price!r}, '
+                f'formatted_price={self.formatted_price!r}, '
+                f'price_id={self.price_id!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'currency={self.currency!s}, '
+                f'price={self.price!s}, '
+                f'formatted_price={self.formatted_price!s}, '
+                f'price_id={self.price_id!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

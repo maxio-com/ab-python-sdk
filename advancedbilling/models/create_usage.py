@@ -14,13 +14,11 @@ class CreateUsage(object):
 
     """Implementation of the 'Create Usage' model.
 
-    TODO: type model description here.
-
     Attributes:
         quantity (float): integer by default or decimal number if fractional
             quantities are enabled for the component
-        price_point_id (str): TODO: type description here.
-        memo (str): TODO: type description here.
+        price_point_id (str): The model property of type str.
+        memo (str): The model property of type str.
         billing_schedule (BillingSchedule): This attribute is particularly
             useful when you need to align billing events for different
             components on distinct schedules within a subscription. Please
@@ -99,3 +97,19 @@ class CreateUsage(object):
                    memo,
                    billing_schedule,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'quantity={self.quantity!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'memo={self.memo!r}, '
+                f'billing_schedule={self.billing_schedule!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'quantity={self.quantity!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'memo={self.memo!s}, '
+                f'billing_schedule={self.billing_schedule!s}, '
+                f'additional_properties={self.additional_properties!s})')

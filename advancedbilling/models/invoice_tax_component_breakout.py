@@ -13,23 +13,21 @@ class InvoiceTaxComponentBreakout(object):
 
     """Implementation of the 'Invoice Tax Component Breakout' model.
 
-    TODO: type model description here.
-
     Attributes:
-        tax_rule_id (int): TODO: type description here.
-        percentage (str): TODO: type description here.
-        country_code (str): TODO: type description here.
-        subdivision_code (str): TODO: type description here.
-        tax_amount (str): TODO: type description here.
-        taxable_amount (str): TODO: type description here.
-        tax_exempt_amount (str): TODO: type description here.
-        non_taxable_amount (str): TODO: type description here.
-        tax_name (str): TODO: type description here.
-        tax_type (str): TODO: type description here.
-        rate_type (str): TODO: type description here.
-        tax_authority_type (int): TODO: type description here.
-        state_assigned_no (str): TODO: type description here.
-        tax_sub_type (str): TODO: type description here.
+        tax_rule_id (int): The model property of type int.
+        percentage (str): The model property of type str.
+        country_code (str): The model property of type str.
+        subdivision_code (str): The model property of type str.
+        tax_amount (str): The model property of type str.
+        taxable_amount (str): The model property of type str.
+        tax_exempt_amount (str): The model property of type str.
+        non_taxable_amount (str): The model property of type str.
+        tax_name (str): The model property of type str.
+        tax_type (str): The model property of type str.
+        rate_type (str): The model property of type str.
+        tax_authority_type (int): The model property of type int.
+        state_assigned_no (str): The model property of type str.
+        tax_sub_type (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -196,3 +194,39 @@ class InvoiceTaxComponentBreakout(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'tax_rule_id={self.tax_rule_id!r}, '
+                f'percentage={self.percentage!r}, '
+                f'country_code={self.country_code!r}, '
+                f'subdivision_code={self.subdivision_code!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'taxable_amount={self.taxable_amount!r}, '
+                f'tax_exempt_amount={self.tax_exempt_amount!r}, '
+                f'non_taxable_amount={self.non_taxable_amount!r}, '
+                f'tax_name={self.tax_name!r}, '
+                f'tax_type={self.tax_type!r}, '
+                f'rate_type={self.rate_type!r}, '
+                f'tax_authority_type={self.tax_authority_type!r}, '
+                f'state_assigned_no={self.state_assigned_no!r}, '
+                f'tax_sub_type={self.tax_sub_type!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'tax_rule_id={self.tax_rule_id!s}, '
+                f'percentage={self.percentage!s}, '
+                f'country_code={self.country_code!s}, '
+                f'subdivision_code={self.subdivision_code!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'taxable_amount={self.taxable_amount!s}, '
+                f'tax_exempt_amount={self.tax_exempt_amount!s}, '
+                f'non_taxable_amount={self.non_taxable_amount!s}, '
+                f'tax_name={self.tax_name!s}, '
+                f'tax_type={self.tax_type!s}, '
+                f'rate_type={self.rate_type!s}, '
+                f'tax_authority_type={self.tax_authority_type!s}, '
+                f'state_assigned_no={self.state_assigned_no!s}, '
+                f'tax_sub_type={self.tax_sub_type!s}, '
+                f'additional_properties={self.additional_properties!s})')

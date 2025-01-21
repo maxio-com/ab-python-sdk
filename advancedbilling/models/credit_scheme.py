@@ -12,12 +12,10 @@ class CreditScheme(object):
 
     """Implementation of the 'Credit Scheme' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        NONE: TODO: type description here.
-        CREDIT: TODO: type description here.
-        REFUND: TODO: type description here.
+        NONE: The enum member of type str.
+        CREDIT: The enum member of type str.
+        REFUND: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

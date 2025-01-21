@@ -13,17 +13,15 @@ class InvoicePaymentMethod(object):
 
     """Implementation of the 'Invoice Payment Method' model.
 
-    TODO: type model description here.
-
     Attributes:
-        details (str): TODO: type description here.
-        kind (str): TODO: type description here.
-        memo (str): TODO: type description here.
-        mtype (str): TODO: type description here.
-        card_brand (str): TODO: type description here.
-        card_expiration (str): TODO: type description here.
-        last_four (str): TODO: type description here.
-        masked_card_number (str): TODO: type description here.
+        details (str): The model property of type str.
+        kind (str): The model property of type str.
+        memo (str): The model property of type str.
+        mtype (str): The model property of type str.
+        card_brand (str): The model property of type str.
+        card_expiration (str): The model property of type str.
+        last_four (str): The model property of type str.
+        masked_card_number (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -152,3 +150,27 @@ class InvoicePaymentMethod(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'details={self.details!r}, '
+                f'kind={self.kind!r}, '
+                f'memo={self.memo!r}, '
+                f'mtype={self.mtype!r}, '
+                f'card_brand={self.card_brand!r}, '
+                f'card_expiration={self.card_expiration!r}, '
+                f'last_four={self.last_four!r}, '
+                f'masked_card_number={self.masked_card_number!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'details={self.details!s}, '
+                f'kind={self.kind!s}, '
+                f'memo={self.memo!s}, '
+                f'mtype={self.mtype!s}, '
+                f'card_brand={self.card_brand!s}, '
+                f'card_expiration={self.card_expiration!s}, '
+                f'last_four={self.last_four!s}, '
+                f'masked_card_number={self.masked_card_number!s}, '
+                f'additional_properties={self.additional_properties!s})')

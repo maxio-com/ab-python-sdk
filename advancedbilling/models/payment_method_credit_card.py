@@ -14,14 +14,13 @@ class PaymentMethodCreditCard(object):
 
     """Implementation of the 'Payment Method Credit Card' model.
 
-    TODO: type model description here.
-
     Attributes:
-        card_brand (str): TODO: type description here.
-        card_expiration (str): TODO: type description here.
-        last_four (str): TODO: type description here.
-        masked_card_number (str): TODO: type description here.
-        mtype (InvoiceEventPaymentMethod): TODO: type description here.
+        card_brand (str): The model property of type str.
+        card_expiration (str): The model property of type str.
+        last_four (str): The model property of type str.
+        masked_card_number (str): The model property of type str.
+        mtype (InvoiceEventPaymentMethod): The model property of type
+            InvoiceEventPaymentMethod.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -133,3 +132,21 @@ class PaymentMethodCreditCard(object):
                                         type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('type'),
                                         type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'card_brand={self.card_brand!r}, '
+                f'card_expiration={self.card_expiration!r}, '
+                f'last_four={self.last_four!r}, '
+                f'masked_card_number={self.masked_card_number!r}, '
+                f'mtype={self.mtype!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'card_brand={self.card_brand!s}, '
+                f'card_expiration={self.card_expiration!s}, '
+                f'last_four={self.last_four!s}, '
+                f'masked_card_number={self.masked_card_number!s}, '
+                f'mtype={self.mtype!s}, '
+                f'additional_properties={self.additional_properties!s})')

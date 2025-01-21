@@ -14,16 +14,16 @@ class CreateSubscriptionComponent(object):
 
     """Implementation of the 'Create Subscription Component' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component_id (int | str | None): TODO: type description here.
+        component_id (int | str | None): The model property of type int | str
+            | None.
         enabled (bool): Used for on/off components only.
         unit_balance (int): Used for metered and events based components.
         allocated_quantity (int | str | None): Used for quantity based
             components.
         quantity (int): Deprecated. Use `allocated_quantity` instead.
-        price_point_id (int | str | None): TODO: type description here.
+        price_point_id (int | str | None): The model property of type int |
+            str | None.
         custom_price (ComponentCustomPrice): Create or update custom pricing
             unique to the subscription. Used in place of `price_point_id`.
         additional_properties (Dict[str, object]): The additional properties
@@ -144,3 +144,25 @@ class CreateSubscriptionComponent(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!r}, '
+                f'enabled={self.enabled!r}, '
+                f'unit_balance={self.unit_balance!r}, '
+                f'allocated_quantity={self.allocated_quantity!r}, '
+                f'quantity={self.quantity!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'custom_price={self.custom_price!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!s}, '
+                f'enabled={self.enabled!s}, '
+                f'unit_balance={self.unit_balance!s}, '
+                f'allocated_quantity={self.allocated_quantity!s}, '
+                f'quantity={self.quantity!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'custom_price={self.custom_price!s}, '
+                f'additional_properties={self.additional_properties!s})')

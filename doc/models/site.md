@@ -16,6 +16,7 @@
 | `seller_id` | `int` | Optional | - |
 | `non_primary_currencies` | `List[str]` | Optional | - |
 | `relationship_invoicing_enabled` | `bool` | Optional | - |
+| `schedule_subscription_cancellation_enabled` | `bool` | Optional | - |
 | `customer_hierarchy_enabled` | `bool` | Optional | - |
 | `whopays_enabled` | `bool` | Optional | - |
 | `whopays_default_payer` | `str` | Optional | - |

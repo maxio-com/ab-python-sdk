@@ -13,11 +13,9 @@ class CreateMetadata(object):
 
     """Implementation of the 'Create Metadata' model.
 
-    TODO: type model description here.
-
     Attributes:
-        name (str): TODO: type description here.
-        value (str): TODO: type description here.
+        name (str): The model property of type str.
+        value (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -78,3 +76,15 @@ class CreateMetadata(object):
         return cls(name,
                    value,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'value={self.value!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'value={self.value!s}, '
+                f'additional_properties={self.additional_properties!s})')

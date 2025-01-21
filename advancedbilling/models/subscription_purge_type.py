@@ -12,11 +12,9 @@ class SubscriptionPurgeType(object):
 
     """Implementation of the 'Subscription Purge Type' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CUSTOMER: TODO: type description here.
-        PAYMENT_PROFILE: TODO: type description here.
+        CUSTOMER: The enum member of type str.
+        PAYMENT_PROFILE: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

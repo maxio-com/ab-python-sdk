@@ -13,14 +13,12 @@ class ComponentCostDataRateTier(object):
 
     """Implementation of the 'Component Cost Data Rate Tier' model.
 
-    TODO: type model description here.
-
     Attributes:
-        starting_quantity (int): TODO: type description here.
-        ending_quantity (int): TODO: type description here.
-        quantity (str): TODO: type description here.
-        unit_price (str): TODO: type description here.
-        amount (str): TODO: type description here.
+        starting_quantity (int): The model property of type int.
+        ending_quantity (int): The model property of type int.
+        quantity (str): The model property of type str.
+        unit_price (str): The model property of type str.
+        amount (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -128,3 +126,21 @@ class ComponentCostDataRateTier(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'starting_quantity={self.starting_quantity!r}, '
+                f'ending_quantity={self.ending_quantity!r}, '
+                f'quantity={self.quantity!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'amount={self.amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'starting_quantity={self.starting_quantity!s}, '
+                f'ending_quantity={self.ending_quantity!s}, '
+                f'quantity={self.quantity!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'amount={self.amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

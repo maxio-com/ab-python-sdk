@@ -13,8 +13,6 @@ class ListInvoiceEventsResponse(object):
 
     """Implementation of the 'List Invoice Events Response' model.
 
-    TODO: type model description here.
-
     Attributes:
         events (List[ApplyCreditNoteEvent | ApplyDebitNoteEvent |
             ApplyPaymentEvent | BackportInvoiceEvent |
@@ -22,10 +20,17 @@ class ListInvoiceEventsResponse(object):
             ChangeInvoiceStatusEvent | CreateCreditNoteEvent |
             CreateDebitNoteEvent | FailedPaymentEvent | IssueInvoiceEvent |
             RefundInvoiceEvent | RemovePaymentEvent | VoidInvoiceEvent |
-            VoidRemainderEvent] | None): TODO: type description here.
-        page (int): TODO: type description here.
-        per_page (int): TODO: type description here.
-        total_pages (int): TODO: type description here.
+            VoidRemainderEvent] | None): The model property of type
+            List[ApplyCreditNoteEvent | ApplyDebitNoteEvent |
+            ApplyPaymentEvent | BackportInvoiceEvent |
+            ChangeChargebackStatusEvent | ChangeInvoiceCollectionMethodEvent |
+            ChangeInvoiceStatusEvent | CreateCreditNoteEvent |
+            CreateDebitNoteEvent | FailedPaymentEvent | IssueInvoiceEvent |
+            RefundInvoiceEvent | RemovePaymentEvent | VoidInvoiceEvent |
+            VoidRemainderEvent] | None.
+        page (int): The model property of type int.
+        per_page (int): The model property of type int.
+        total_pages (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -101,3 +106,19 @@ class ListInvoiceEventsResponse(object):
                    per_page,
                    total_pages,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'events={self.events!r}, '
+                f'page={self.page!r}, '
+                f'per_page={self.per_page!r}, '
+                f'total_pages={self.total_pages!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'events={self.events!s}, '
+                f'page={self.page!s}, '
+                f'per_page={self.per_page!s}, '
+                f'total_pages={self.total_pages!s}, '
+                f'additional_properties={self.additional_properties!s})')

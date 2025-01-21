@@ -13,13 +13,10 @@ class ServiceCredit(object):
 
     """Implementation of the 'Service Credit' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        amount_in_cents (long|int): The amount in cents of the entry
-        ending_balance_in_cents (long|int): The new balance for the credit
-            account
+        id (int): The model property of type int.
+        amount_in_cents (int): The amount in cents of the entry
+        ending_balance_in_cents (int): The new balance for the credit account
         entry_type (ServiceCreditType): The type of entry
         memo (str): The memo attached to the entry
         additional_properties (Dict[str, object]): The additional properties
@@ -103,3 +100,21 @@ class ServiceCredit(object):
                    entry_type,
                    memo,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'ending_balance_in_cents={self.ending_balance_in_cents!r}, '
+                f'entry_type={self.entry_type!r}, '
+                f'memo={self.memo!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'ending_balance_in_cents={self.ending_balance_in_cents!s}, '
+                f'entry_type={self.entry_type!s}, '
+                f'memo={self.memo!s}, '
+                f'additional_properties={self.additional_properties!s})')

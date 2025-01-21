@@ -13,16 +13,14 @@ class ReasonCode(object):
 
     """Implementation of the 'Reason Code' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        site_id (int): TODO: type description here.
-        code (str): TODO: type description here.
-        description (str): TODO: type description here.
-        position (int): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        updated_at (datetime): TODO: type description here.
+        id (int): The model property of type int.
+        site_id (int): The model property of type int.
+        code (str): The model property of type str.
+        description (str): The model property of type str.
+        position (int): The model property of type int.
+        created_at (datetime): The model property of type datetime.
+        updated_at (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -118,3 +116,25 @@ class ReasonCode(object):
                    created_at,
                    updated_at,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'site_id={self.site_id!r}, '
+                f'code={self.code!r}, '
+                f'description={self.description!r}, '
+                f'position={self.position!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'site_id={self.site_id!s}, '
+                f'code={self.code!s}, '
+                f'description={self.description!s}, '
+                f'position={self.position!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

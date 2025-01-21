@@ -13,8 +13,6 @@ class ListSegmentsFilter(object):
 
     """Implementation of the 'List Segments Filter' model.
 
-    TODO: type model description here.
-
     Attributes:
         segment_property_1_value (str): The value passed here would be used to
             filter segments. Pass a value related to `segment_property_1` on
@@ -106,3 +104,19 @@ class ListSegmentsFilter(object):
                    segment_property_3_value,
                    segment_property_4_value,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'segment_property_1_value={self.segment_property_1_value!r}, '
+                f'segment_property_2_value={self.segment_property_2_value!r}, '
+                f'segment_property_3_value={self.segment_property_3_value!r}, '
+                f'segment_property_4_value={self.segment_property_4_value!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'segment_property_1_value={self.segment_property_1_value!s}, '
+                f'segment_property_2_value={self.segment_property_2_value!s}, '
+                f'segment_property_3_value={self.segment_property_3_value!s}, '
+                f'segment_property_4_value={self.segment_property_4_value!s}, '
+                f'additional_properties={self.additional_properties!s})')

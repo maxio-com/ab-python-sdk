@@ -110,3 +110,17 @@ class HistoricUsage(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'total_usage_quantity={self.total_usage_quantity!r}, '
+                f'billing_period_starts_at={self.billing_period_starts_at!r}, '
+                f'billing_period_ends_at={self.billing_period_ends_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'total_usage_quantity={self.total_usage_quantity!s}, '
+                f'billing_period_starts_at={self.billing_period_starts_at!s}, '
+                f'billing_period_ends_at={self.billing_period_ends_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

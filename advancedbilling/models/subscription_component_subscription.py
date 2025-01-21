@@ -82,7 +82,7 @@ class SubscriptionComponentSubscription(object):
             States](https://maxio.zendesk.com/hc/en-us/articles/24252119027853-
             Subscription-States) for more info about subscription states and
             state transitions.
-        updated_at (datetime): TODO: type description here.
+        updated_at (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -165,3 +165,15 @@ class SubscriptionComponentSubscription(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'state={self.state!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'state={self.state!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

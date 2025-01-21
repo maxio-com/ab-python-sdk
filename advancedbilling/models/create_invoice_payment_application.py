@@ -13,8 +13,6 @@ class CreateInvoicePaymentApplication(object):
 
     """Implementation of the 'Create Invoice Payment Application' model.
 
-    TODO: type model description here.
-
     Attributes:
         invoice_uid (str): Unique identifier for the invoice. It has the
             prefix "inv_" followed by alphanumeric characters.
@@ -101,3 +99,15 @@ class CreateInvoicePaymentApplication(object):
                                        type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('amount'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'invoice_uid={self.invoice_uid!r}, '
+                f'amount={self.amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'invoice_uid={self.invoice_uid!s}, '
+                f'amount={self.amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

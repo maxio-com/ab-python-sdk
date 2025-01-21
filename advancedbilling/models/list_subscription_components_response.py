@@ -13,11 +13,9 @@ class ListSubscriptionComponentsResponse(object):
 
     """Implementation of the 'List Subscription Components Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        subscriptions_components (List[SubscriptionComponent]): TODO: type
-            description here.
+        subscriptions_components (List[SubscriptionComponent]): The model
+            property of type List[SubscriptionComponent].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -68,3 +66,13 @@ class ListSubscriptionComponentsResponse(object):
         # Return an object of this model
         return cls(subscriptions_components,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscriptions_components={self.subscriptions_components!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscriptions_components={self.subscriptions_components!s}, '
+                f'additional_properties={self.additional_properties!s})')

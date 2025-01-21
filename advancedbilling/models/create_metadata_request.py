@@ -13,10 +13,9 @@ class CreateMetadataRequest(object):
 
     """Implementation of the 'Create Metadata Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        metadata (List[CreateMetadata]): TODO: type description here.
+        metadata (List[CreateMetadata]): The model property of type
+            List[CreateMetadata].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -67,3 +66,13 @@ class CreateMetadataRequest(object):
         # Return an object of this model
         return cls(metadata,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'metadata={self.metadata!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'metadata={self.metadata!s}, '
+                f'additional_properties={self.additional_properties!s})')

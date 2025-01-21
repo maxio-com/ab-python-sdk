@@ -15,8 +15,6 @@ class MeteredComponent(object):
 
     """Implementation of the 'Metered Component' model.
 
-    TODO: type model description here.
-
     Attributes:
         name (str): A name for this component that is suitable for showing
             customers and displaying on billing statements, ie. "Minutes".
@@ -41,8 +39,8 @@ class MeteredComponent(object):
             Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-C
             omponent-Pricing-Schemes#price-bracket-rules) for an overview of
             how price brackets work for different pricing schemes.
-        price_points (List[ComponentPricePointItem]): TODO: type description
-            here.
+        price_points (List[ComponentPricePointItem]): The model property of
+            type List[ComponentPricePointItem].
         unit_price (str | float | None): The amount the customer will be
             charged per unit when the pricing scheme is “per_unit”. For On/Off
             Components, this is the amount that the customer will be charged
@@ -56,9 +54,10 @@ class MeteredComponent(object):
         hide_date_range_on_invoice (bool): (Only available on Relationship
             Invoicing sites) Boolean flag describing if the service date range
             should show for the component on generated invoices.
-        display_on_hosted_page (bool): TODO: type description here.
-        allow_fractional_quantities (bool): TODO: type description here.
-        public_signup_page_ids (List[int]): TODO: type description here.
+        display_on_hosted_page (bool): The model property of type bool.
+        allow_fractional_quantities (bool): The model property of type bool.
+        public_signup_page_ids (List[int]): The model property of type
+            List[int].
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this component's
             default price point would renew every 30 days. This property is
@@ -232,3 +231,43 @@ class MeteredComponent(object):
                    interval,
                    interval_unit,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'unit_name={self.unit_name!r}, '
+                f'description={self.description!r}, '
+                f'handle={self.handle!r}, '
+                f'taxable={self.taxable!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'prices={self.prices!r}, '
+                f'price_points={self.price_points!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'tax_code={self.tax_code!r}, '
+                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!r}, '
+                f'display_on_hosted_page={self.display_on_hosted_page!r}, '
+                f'allow_fractional_quantities={self.allow_fractional_quantities!r}, '
+                f'public_signup_page_ids={self.public_signup_page_ids!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'unit_name={self.unit_name!s}, '
+                f'description={self.description!s}, '
+                f'handle={self.handle!s}, '
+                f'taxable={self.taxable!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'prices={self.prices!s}, '
+                f'price_points={self.price_points!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'tax_code={self.tax_code!s}, '
+                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!s}, '
+                f'display_on_hosted_page={self.display_on_hosted_page!s}, '
+                f'allow_fractional_quantities={self.allow_fractional_quantities!s}, '
+                f'public_signup_page_ids={self.public_signup_page_ids!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'additional_properties={self.additional_properties!s})')

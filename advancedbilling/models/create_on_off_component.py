@@ -13,10 +13,9 @@ class CreateOnOffComponent(object):
 
     """Implementation of the 'Create On/Off Component' model.
 
-    TODO: type model description here.
-
     Attributes:
-        on_off_component (OnOffComponent): TODO: type description here.
+        on_off_component (OnOffComponent): The model property of type
+            OnOffComponent.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class CreateOnOffComponent(object):
         # Return an object of this model
         return cls(on_off_component,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'on_off_component={self.on_off_component!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'on_off_component={self.on_off_component!s}, '
+                f'additional_properties={self.additional_properties!s})')

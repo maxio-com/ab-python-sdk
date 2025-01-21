@@ -14,19 +14,18 @@ class ComponentCostData(object):
 
     """Implementation of the 'Component Cost Data' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component_code_id (int): TODO: type description here.
-        price_point_id (int): TODO: type description here.
-        product_id (int): TODO: type description here.
-        quantity (str): TODO: type description here.
-        amount (str): TODO: type description here.
+        component_code_id (int): The model property of type int.
+        price_point_id (int): The model property of type int.
+        product_id (int): The model property of type int.
+        quantity (str): The model property of type str.
+        amount (str): The model property of type str.
         pricing_scheme (PricingScheme): The identifier for the pricing scheme.
             See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
-        tiers (List[ComponentCostDataRateTier]): TODO: type description here.
+        tiers (List[ComponentCostDataRateTier]): The model property of type
+            List[ComponentCostDataRateTier].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -152,3 +151,25 @@ class ComponentCostData(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_code_id={self.component_code_id!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'product_id={self.product_id!r}, '
+                f'quantity={self.quantity!r}, '
+                f'amount={self.amount!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'tiers={self.tiers!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_code_id={self.component_code_id!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'product_id={self.product_id!s}, '
+                f'quantity={self.quantity!s}, '
+                f'amount={self.amount!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'tiers={self.tiers!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -12,10 +12,8 @@ class ListProductsInclude(object):
 
     """Implementation of the 'List Products Include' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        PREPAID_PRODUCT_PRICE_POINT: TODO: type description here.
+        PREPAID_PRODUCT_PRICE_POINT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

@@ -13,11 +13,9 @@ class CreatePrepaidComponent(object):
 
     """Implementation of the 'Create Prepaid Component' model.
 
-    TODO: type model description here.
-
     Attributes:
-        prepaid_usage_component (PrepaidUsageComponent): TODO: type
-            description here.
+        prepaid_usage_component (PrepaidUsageComponent): The model property of
+            type PrepaidUsageComponent.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -66,3 +64,13 @@ class CreatePrepaidComponent(object):
         # Return an object of this model
         return cls(prepaid_usage_component,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'prepaid_usage_component={self.prepaid_usage_component!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'prepaid_usage_component={self.prepaid_usage_component!s}, '
+                f'additional_properties={self.additional_properties!s})')

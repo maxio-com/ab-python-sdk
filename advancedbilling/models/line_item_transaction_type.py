@@ -15,13 +15,13 @@ class LineItemTransactionType(object):
     A handle for the line item transaction type
 
     Attributes:
-        CHARGE: TODO: type description here.
-        CREDIT: TODO: type description here.
-        ADJUSTMENT: TODO: type description here.
-        PAYMENT: TODO: type description here.
-        REFUND: TODO: type description here.
-        INFO_TRANSACTION: TODO: type description here.
-        PAYMENT_AUTHORIZATION: TODO: type description here.
+        CHARGE: The enum member of type str.
+        CREDIT: The enum member of type str.
+        ADJUSTMENT: The enum member of type str.
+        PAYMENT: The enum member of type str.
+        REFUND: The enum member of type str.
+        INFO_TRANSACTION: The enum member of type str.
+        PAYMENT_AUTHORIZATION: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

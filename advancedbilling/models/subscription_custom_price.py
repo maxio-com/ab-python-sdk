@@ -20,15 +20,14 @@ class SubscriptionCustomPrice(object):
     Attributes:
         name (str): (Optional)
         handle (str): (Optional)
-        price_in_cents (str | long | int): Required if using `custom_price`
-            attribute.
+        price_in_cents (str | int): Required if using `custom_price` attribute.
         interval (str | int): Required if using `custom_price` attribute.
         interval_unit (IntervalUnit): Required if using `custom_price`
             attribute.
-        trial_price_in_cents (str | long | int | None): (Optional)
+        trial_price_in_cents (str | int | None): (Optional)
         trial_interval (str | int | None): (Optional)
         trial_interval_unit (IntervalUnit): (Optional)
-        initial_charge_in_cents (str | long | int | None): (Optional)
+        initial_charge_in_cents (str | int | None): (Optional)
         initial_charge_after_trial (bool): (Optional)
         expiration_interval (str | int | None): (Optional)
         expiration_interval_unit (ExpirationIntervalUnit): (Optional)
@@ -201,3 +200,37 @@ class SubscriptionCustomPrice(object):
             and APIHelper.is_valid_type(value=dictionary.get('interval_unit'),
                                         type_callable=lambda value: IntervalUnit.validate(value),
                                         is_value_nullable=True)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'price_in_cents={self.price_in_cents!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'trial_price_in_cents={self.trial_price_in_cents!r}, '
+                f'trial_interval={self.trial_interval!r}, '
+                f'trial_interval_unit={self.trial_interval_unit!r}, '
+                f'initial_charge_in_cents={self.initial_charge_in_cents!r}, '
+                f'initial_charge_after_trial={self.initial_charge_after_trial!r}, '
+                f'expiration_interval={self.expiration_interval!r}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!r}, '
+                f'tax_included={self.tax_included!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'price_in_cents={self.price_in_cents!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'trial_price_in_cents={self.trial_price_in_cents!s}, '
+                f'trial_interval={self.trial_interval!s}, '
+                f'trial_interval_unit={self.trial_interval_unit!s}, '
+                f'initial_charge_in_cents={self.initial_charge_in_cents!s}, '
+                f'initial_charge_after_trial={self.initial_charge_after_trial!s}, '
+                f'expiration_interval={self.expiration_interval!s}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!s}, '
+                f'tax_included={self.tax_included!s}, '
+                f'additional_properties={self.additional_properties!s})')

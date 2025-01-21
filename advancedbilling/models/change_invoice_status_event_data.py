@@ -29,8 +29,8 @@ class ChangeInvoiceStatusEventData(object):
             changes have been made. See [Invoice
             Statuses](https://maxio.zendesk.com/hc/en-us/articles/2425228782964
             5-Advanced-Billing-Invoices-Overview#invoice-statuses) for more.
-        consolidation_level (InvoiceConsolidationLevel): TODO: type
-            description here.
+        consolidation_level (InvoiceConsolidationLevel): The model property of
+            type InvoiceConsolidationLevel.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -136,3 +136,21 @@ class ChangeInvoiceStatusEventData(object):
                                        type_callable=lambda value: InvoiceStatus.validate(value)) \
             and APIHelper.is_valid_type(value=dictionary.get('to_status'),
                                         type_callable=lambda value: InvoiceStatus.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'gateway_trans_id={self.gateway_trans_id!r}, '
+                f'amount={self.amount!r}, '
+                f'from_status={self.from_status!r}, '
+                f'to_status={self.to_status!r}, '
+                f'consolidation_level={self.consolidation_level!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'gateway_trans_id={self.gateway_trans_id!s}, '
+                f'amount={self.amount!s}, '
+                f'from_status={self.from_status!s}, '
+                f'to_status={self.to_status!s}, '
+                f'consolidation_level={self.consolidation_level!s}, '
+                f'additional_properties={self.additional_properties!s})')

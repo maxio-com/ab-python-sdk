@@ -15,11 +15,11 @@ class RecordPaymentResponse(object):
 
     """Implementation of the 'Record Payment Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        paid_invoices (List[PaidInvoice]): TODO: type description here.
-        prepayment (InvoicePrePayment): TODO: type description here.
+        paid_invoices (List[PaidInvoice]): The model property of type
+            List[PaidInvoice].
+        prepayment (InvoicePrePayment): The model property of type
+            InvoicePrePayment.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -91,3 +91,15 @@ class RecordPaymentResponse(object):
         return cls(paid_invoices,
                    prepayment,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'paid_invoices={self.paid_invoices!r}, '
+                f'prepayment={self.prepayment!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'paid_invoices={self.paid_invoices!s}, '
+                f'prepayment={self.prepayment!s}, '
+                f'additional_properties={self.additional_properties!s})')

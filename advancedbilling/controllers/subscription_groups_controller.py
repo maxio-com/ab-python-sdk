@@ -53,8 +53,8 @@ class SubscriptionGroupsController(BaseController):
         instead.
 
         Args:
-            body (SubscriptionGroupSignupRequest, optional): TODO: type
-                description here.
+            body (SubscriptionGroupSignupRequest, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionGroupSignupResponse: Response from the API. Created
@@ -95,8 +95,8 @@ class SubscriptionGroupsController(BaseController):
         Creates a subscription group with given members.
 
         Args:
-            body (CreateSubscriptionGroupRequest, optional): TODO: type
-                description here.
+            body (CreateSubscriptionGroupRequest, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionGroupResponse: Response from the API. OK
@@ -270,8 +270,8 @@ class SubscriptionGroupsController(BaseController):
 
         Args:
             uid (str): The uid of the subscription group
-            body (UpdateSubscriptionGroupRequest, optional): TODO: type
-                description here.
+            body (UpdateSubscriptionGroupRequest, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionGroupResponse: Response from the API. OK
@@ -431,8 +431,8 @@ class SubscriptionGroupsController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (AddSubscriptionToAGroup, optional): TODO: type description
-                here.
+            body (AddSubscriptionToAGroup, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionGroupResponse: Response from the API. OK

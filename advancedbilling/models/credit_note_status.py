@@ -15,8 +15,8 @@ class CreditNoteStatus(object):
     Current status of the credit note.
 
     Attributes:
-        OPEN: TODO: type description here.
-        APPLIED: TODO: type description here.
+        OPEN: The enum member of type str.
+        APPLIED: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

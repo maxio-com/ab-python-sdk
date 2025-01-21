@@ -13,15 +13,12 @@ class UpsertPrepaidConfiguration(object):
 
     """Implementation of the 'Upsert Prepaid Configuration' model.
 
-    TODO: type model description here.
-
     Attributes:
-        initial_funding_amount_in_cents (long|int): TODO: type description
-            here.
-        replenish_to_amount_in_cents (long|int): TODO: type description here.
-        auto_replenish (bool): TODO: type description here.
-        replenish_threshold_amount_in_cents (long|int): TODO: type description
-            here.
+        initial_funding_amount_in_cents (int): The model property of type int.
+        replenish_to_amount_in_cents (int): The model property of type int.
+        auto_replenish (bool): The model property of type bool.
+        replenish_threshold_amount_in_cents (int): The model property of type
+            int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -118,3 +115,19 @@ class UpsertPrepaidConfiguration(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'initial_funding_amount_in_cents={self.initial_funding_amount_in_cents!r}, '
+                f'replenish_to_amount_in_cents={self.replenish_to_amount_in_cents!r}, '
+                f'auto_replenish={self.auto_replenish!r}, '
+                f'replenish_threshold_amount_in_cents={self.replenish_threshold_amount_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'initial_funding_amount_in_cents={self.initial_funding_amount_in_cents!s}, '
+                f'replenish_to_amount_in_cents={self.replenish_to_amount_in_cents!s}, '
+                f'auto_replenish={self.auto_replenish!s}, '
+                f'replenish_threshold_amount_in_cents={self.replenish_threshold_amount_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,8 +13,6 @@ class CreateReasonCode(object):
 
     """Implementation of the 'Create Reason Code' model.
 
-    TODO: type model description here.
-
     Attributes:
         code (str): The unique identifier for the ReasonCode
         description (str): The friendly summary of what the code signifies
@@ -82,3 +80,17 @@ class CreateReasonCode(object):
                    description,
                    position,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'code={self.code!r}, '
+                f'description={self.description!r}, '
+                f'position={self.position!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'code={self.code!s}, '
+                f'description={self.description!s}, '
+                f'position={self.position!s}, '
+                f'additional_properties={self.additional_properties!s})')

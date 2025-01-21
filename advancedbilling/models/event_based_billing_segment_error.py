@@ -12,8 +12,6 @@ class EventBasedBillingSegmentError(object):
 
     """Implementation of the 'Event Based Billing Segment Error' model.
 
-    TODO: type model description here.
-
     Attributes:
         segments (Dict[str, object]): The key of the object would be a number
             (an index in the request array) where the error occurred. In the
@@ -68,3 +66,13 @@ class EventBasedBillingSegmentError(object):
         # Return an object of this model
         return cls(segments,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'segments={self.segments!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'segments={self.segments!s}, '
+                f'additional_properties={self.additional_properties!s})')

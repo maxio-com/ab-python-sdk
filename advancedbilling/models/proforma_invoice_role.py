@@ -16,10 +16,10 @@ class ProformaInvoiceRole(object):
     proforma_automatic
 
     Attributes:
-        UNSET: TODO: type description here.
-        PROFORMA: TODO: type description here.
-        PROFORMA_ADHOC: TODO: type description here.
-        PROFORMA_AUTOMATIC: TODO: type description here.
+        UNSET: The enum member of type str.
+        PROFORMA: The enum member of type str.
+        PROFORMA_ADHOC: The enum member of type str.
+        PROFORMA_AUTOMATIC: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

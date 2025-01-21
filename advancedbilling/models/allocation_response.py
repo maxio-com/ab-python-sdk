@@ -14,10 +14,8 @@ class AllocationResponse(object):
 
     """Implementation of the 'Allocation Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        allocation (Allocation): TODO: type description here.
+        allocation (Allocation): The model property of type Allocation.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +69,13 @@ class AllocationResponse(object):
         # Return an object of this model
         return cls(allocation,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocation={self.allocation!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocation={self.allocation!s}, '
+                f'additional_properties={self.additional_properties!s})')

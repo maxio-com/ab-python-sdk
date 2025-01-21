@@ -12,10 +12,8 @@ class VoidInvoice(object):
 
     """Implementation of the 'Void Invoice' model.
 
-    TODO: type model description here.
-
     Attributes:
-        reason (str): TODO: type description here.
+        reason (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -64,3 +62,13 @@ class VoidInvoice(object):
         # Return an object of this model
         return cls(reason,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'reason={self.reason!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'reason={self.reason!s}, '
+                f'additional_properties={self.additional_properties!s})')

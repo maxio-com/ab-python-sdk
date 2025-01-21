@@ -14,10 +14,8 @@ class EBBEvent(object):
 
     """Implementation of the 'EBB Event' model.
 
-    TODO: type model description here.
-
     Attributes:
-        chargify (ChargifyEBB): TODO: type description here.
+        chargify (ChargifyEBB): The model property of type ChargifyEBB.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +69,13 @@ class EBBEvent(object):
         # Return an object of this model
         return cls(chargify,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargify={self.chargify!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargify={self.chargify!s}, '
+                f'additional_properties={self.additional_properties!s})')

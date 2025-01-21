@@ -14,23 +14,21 @@ class RenewalPreview(object):
 
     """Implementation of the 'Renewal Preview' model.
 
-    TODO: type model description here.
-
     Attributes:
         next_assessment_at (datetime): The timestamp for the subscription’s
             next renewal
-        subtotal_in_cents (long|int): An integer representing the amount of
-            the total pre-tax, pre-discount charges that will be assessed at
-            the next renewal
-        total_tax_in_cents (long|int): An integer representing the total tax
+        subtotal_in_cents (int): An integer representing the amount of the
+            total pre-tax, pre-discount charges that will be assessed at the
+            next renewal
+        total_tax_in_cents (int): An integer representing the total tax
             charges that will be assessed at the next renewal
-        total_discount_in_cents (long|int): An integer representing the amount
-            of the coupon discounts that will be applied to the next renewal
-        total_in_cents (long|int): An integer representing the total amount
-            owed, less any discounts, that will be assessed at the next renewal
-        existing_balance_in_cents (long|int): An integer representing the
-            amount of the subscription’s current balance
-        total_amount_due_in_cents (long|int): An integer representing the
+        total_discount_in_cents (int): An integer representing the amount of
+            the coupon discounts that will be applied to the next renewal
+        total_in_cents (int): An integer representing the total amount owed,
+            less any discounts, that will be assessed at the next renewal
+        existing_balance_in_cents (int): An integer representing the amount of
+            the subscription’s current balance
+        total_amount_due_in_cents (int): An integer representing the
             existing_balance_in_cents plus the total_in_cents
         uncalculated_taxes (bool): A boolean indicating whether or not
             additional taxes will be calculated at the time of renewal. This
@@ -152,3 +150,29 @@ class RenewalPreview(object):
                    uncalculated_taxes,
                    line_items,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'next_assessment_at={self.next_assessment_at!r}, '
+                f'subtotal_in_cents={self.subtotal_in_cents!r}, '
+                f'total_tax_in_cents={self.total_tax_in_cents!r}, '
+                f'total_discount_in_cents={self.total_discount_in_cents!r}, '
+                f'total_in_cents={self.total_in_cents!r}, '
+                f'existing_balance_in_cents={self.existing_balance_in_cents!r}, '
+                f'total_amount_due_in_cents={self.total_amount_due_in_cents!r}, '
+                f'uncalculated_taxes={self.uncalculated_taxes!r}, '
+                f'line_items={self.line_items!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'next_assessment_at={self.next_assessment_at!s}, '
+                f'subtotal_in_cents={self.subtotal_in_cents!s}, '
+                f'total_tax_in_cents={self.total_tax_in_cents!s}, '
+                f'total_discount_in_cents={self.total_discount_in_cents!s}, '
+                f'total_in_cents={self.total_in_cents!s}, '
+                f'existing_balance_in_cents={self.existing_balance_in_cents!s}, '
+                f'total_amount_due_in_cents={self.total_amount_due_in_cents!s}, '
+                f'uncalculated_taxes={self.uncalculated_taxes!s}, '
+                f'line_items={self.line_items!s}, '
+                f'additional_properties={self.additional_properties!s})')

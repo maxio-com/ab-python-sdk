@@ -13,15 +13,12 @@ class PrepaidSubscriptionBalanceChanged(object):
 
     """Implementation of the 'Prepaid Subscription Balance Changed' model.
 
-    TODO: type model description here.
-
     Attributes:
-        reason (str): TODO: type description here.
-        current_account_balance_in_cents (long|int): TODO: type description
-            here.
-        prepayment_account_balance_in_cents (long|int): TODO: type description
-            here.
-        current_usage_amount_in_cents (long|int): TODO: type description here.
+        reason (str): The model property of type str.
+        current_account_balance_in_cents (int): The model property of type int.
+        prepayment_account_balance_in_cents (int): The model property of type
+            int.
+        current_usage_amount_in_cents (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -121,3 +118,19 @@ class PrepaidSubscriptionBalanceChanged(object):
                                         type_callable=lambda value: isinstance(value, int)) \
             and APIHelper.is_valid_type(value=dictionary.get('current_usage_amount_in_cents'),
                                         type_callable=lambda value: isinstance(value, int))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'reason={self.reason!r}, '
+                f'current_account_balance_in_cents={self.current_account_balance_in_cents!r}, '
+                f'prepayment_account_balance_in_cents={self.prepayment_account_balance_in_cents!r}, '
+                f'current_usage_amount_in_cents={self.current_usage_amount_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'reason={self.reason!s}, '
+                f'current_account_balance_in_cents={self.current_account_balance_in_cents!s}, '
+                f'prepayment_account_balance_in_cents={self.prepayment_account_balance_in_cents!s}, '
+                f'current_usage_amount_in_cents={self.current_usage_amount_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

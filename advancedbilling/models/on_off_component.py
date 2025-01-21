@@ -14,8 +14,6 @@ class OnOffComponent(object):
 
     """Implementation of the 'On/Off Component' model.
 
-    TODO: type model description here.
-
     Attributes:
         name (str): A name for this component that is suitable for showing
             customers and displaying on billing statements, ie. "Minutes".
@@ -35,8 +33,8 @@ class OnOffComponent(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        price_points (List[ComponentPricePointItem]): TODO: type description
-            here.
+        price_points (List[ComponentPricePointItem]): The model property of
+            type List[ComponentPricePointItem].
         unit_price (str | float): This is the amount that the customer will be
             charged when they turn the component on for the subscription. The
             price can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or
@@ -48,9 +46,10 @@ class OnOffComponent(object):
         hide_date_range_on_invoice (bool): (Only available on Relationship
             Invoicing sites) Boolean flag describing if the service date range
             should show for the component on generated invoices.
-        display_on_hosted_page (bool): TODO: type description here.
-        allow_fractional_quantities (bool): TODO: type description here.
-        public_signup_page_ids (List[int]): TODO: type description here.
+        display_on_hosted_page (bool): The model property of type bool.
+        allow_fractional_quantities (bool): The model property of type bool.
+        public_signup_page_ids (List[int]): The model property of type
+            List[int].
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this component's
             default price point would renew every 30 days. This property is
@@ -244,3 +243,41 @@ class OnOffComponent(object):
         return APIHelper.is_valid_type(value=dictionary.get('name'),
                                        type_callable=lambda value: isinstance(value, str)) \
             and UnionTypeLookUp.get('OnOffComponentUnitPrice').validate(dictionary.get('unit_price')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'description={self.description!r}, '
+                f'handle={self.handle!r}, '
+                f'taxable={self.taxable!r}, '
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'price_points={self.price_points!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'tax_code={self.tax_code!r}, '
+                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!r}, '
+                f'display_on_hosted_page={self.display_on_hosted_page!r}, '
+                f'allow_fractional_quantities={self.allow_fractional_quantities!r}, '
+                f'public_signup_page_ids={self.public_signup_page_ids!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'description={self.description!s}, '
+                f'handle={self.handle!s}, '
+                f'taxable={self.taxable!s}, '
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'price_points={self.price_points!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'tax_code={self.tax_code!s}, '
+                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!s}, '
+                f'display_on_hosted_page={self.display_on_hosted_page!s}, '
+                f'allow_fractional_quantities={self.allow_fractional_quantities!s}, '
+                f'public_signup_page_ids={self.public_signup_page_ids!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'additional_properties={self.additional_properties!s})')

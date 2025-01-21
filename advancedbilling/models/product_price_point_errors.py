@@ -13,15 +13,13 @@ class ProductPricePointErrors(object):
 
     """Implementation of the 'Product Price Point Errors' model.
 
-    TODO: type model description here.
-
     Attributes:
-        price_point (str): TODO: type description here.
-        interval (List[str]): TODO: type description here.
-        interval_unit (List[str]): TODO: type description here.
-        name (List[str]): TODO: type description here.
-        price (List[str]): TODO: type description here.
-        price_in_cents (List[str]): TODO: type description here.
+        price_point (str): The model property of type str.
+        interval (List[str]): The model property of type List[str].
+        interval_unit (List[str]): The model property of type List[str].
+        name (List[str]): The model property of type List[str].
+        price (List[str]): The model property of type List[str].
+        price_in_cents (List[str]): The model property of type List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -110,3 +108,23 @@ class ProductPricePointErrors(object):
                    price,
                    price_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'price_point={self.price_point!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'name={self.name!r}, '
+                f'price={self.price!r}, '
+                f'price_in_cents={self.price_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'price_point={self.price_point!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'name={self.name!s}, '
+                f'price={self.price!s}, '
+                f'price_in_cents={self.price_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,10 +13,8 @@ class CustomerChangesPreviewResponse(object):
 
     """Implementation of the 'Customer Changes Preview Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        changes (CustomerChange): TODO: type description here.
+        changes (CustomerChange): The model property of type CustomerChange.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +63,13 @@ class CustomerChangesPreviewResponse(object):
         # Return an object of this model
         return cls(changes,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'changes={self.changes!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'changes={self.changes!s}, '
+                f'additional_properties={self.additional_properties!s})')

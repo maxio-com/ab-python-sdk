@@ -16,10 +16,9 @@ class PreviewAllocationsRequest(object):
 
     """Implementation of the 'Preview Allocations Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        allocations (List[CreateAllocation]): TODO: type description here.
+        allocations (List[CreateAllocation]): The model property of type
+            List[CreateAllocation].
         effective_proration_date (date): To calculate proration amounts for a
             future time. Only within a current subscription period. Only
             ISO8601 format is supported.
@@ -110,3 +109,19 @@ class PreviewAllocationsRequest(object):
                    upgrade_charge,
                    downgrade_credit,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocations={self.allocations!r}, '
+                f'effective_proration_date={self.effective_proration_date!r}, '
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocations={self.allocations!s}, '
+                f'effective_proration_date={self.effective_proration_date!s}, '
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'additional_properties={self.additional_properties!s})')

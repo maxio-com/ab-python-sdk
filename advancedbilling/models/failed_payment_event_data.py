@@ -22,7 +22,8 @@ class FailedPaymentEventData(object):
         applied_amount (int): The monetary value of the payment, expressed in
             dollars.
         memo (str): The memo passed when the payment was created.
-        payment_method (InvoicePaymentMethodType): TODO: type description here.
+        payment_method (InvoicePaymentMethodType): The model property of type
+            InvoicePaymentMethodType.
         transaction_id (int): The transaction ID of the failed payment.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
@@ -137,3 +138,21 @@ class FailedPaymentEventData(object):
                                         type_callable=lambda value: InvoicePaymentMethodType.validate(value)) \
             and APIHelper.is_valid_type(value=dictionary.get('transaction_id'),
                                         type_callable=lambda value: isinstance(value, int))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'memo={self.memo!r}, '
+                f'payment_method={self.payment_method!r}, '
+                f'transaction_id={self.transaction_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'memo={self.memo!s}, '
+                f'payment_method={self.payment_method!s}, '
+                f'transaction_id={self.transaction_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

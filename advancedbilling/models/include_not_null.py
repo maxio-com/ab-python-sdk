@@ -15,7 +15,7 @@ class IncludeNotNull(object):
     Passed as a parameter to list methods to return only non null values.
 
     Attributes:
-        NOT_NULL: TODO: type description here.
+        NOT_NULL: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

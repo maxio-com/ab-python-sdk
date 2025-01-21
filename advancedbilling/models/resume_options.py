@@ -13,8 +13,6 @@ class ResumeOptions(object):
 
     """Implementation of the 'Resume Options' model.
 
-    TODO: type model description here.
-
     Attributes:
         require_resume (bool): Chargify will only attempt to resume the
             subscription's billing period. If not resumable, the subscription
@@ -105,3 +103,15 @@ class ResumeOptions(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'require_resume={self.require_resume!r}, '
+                f'forgive_balance={self.forgive_balance!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'require_resume={self.require_resume!s}, '
+                f'forgive_balance={self.forgive_balance!s}, '
+                f'additional_properties={self.additional_properties!s})')

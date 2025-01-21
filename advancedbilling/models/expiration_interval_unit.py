@@ -12,12 +12,10 @@ class ExpirationIntervalUnit(object):
 
     """Implementation of the 'Expiration Interval Unit' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        DAY: TODO: type description here.
-        MONTH: TODO: type description here.
-        NEVER: TODO: type description here.
+        DAY: The enum member of type str.
+        MONTH: The enum member of type str.
+        NEVER: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

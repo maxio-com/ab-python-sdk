@@ -15,8 +15,8 @@ class ServiceCreditType(object):
     The type of entry
 
     Attributes:
-        CREDIT: TODO: type description here.
-        DEBIT: TODO: type description here.
+        CREDIT: The enum member of type str.
+        DEBIT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

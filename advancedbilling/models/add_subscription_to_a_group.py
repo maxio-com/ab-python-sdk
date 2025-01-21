@@ -14,10 +14,8 @@ class AddSubscriptionToAGroup(object):
 
     """Implementation of the 'Add Subscription to a Group' model.
 
-    TODO: type model description here.
-
     Attributes:
-        group (GroupSettings): TODO: type description here.
+        group (GroupSettings): The model property of type GroupSettings.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +69,13 @@ class AddSubscriptionToAGroup(object):
         # Return an object of this model
         return cls(group,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'group={self.group!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'group={self.group!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,18 +13,18 @@ class AllocationPreviewItem(object):
 
     """Implementation of the 'Allocation Preview Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component_id (int): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        quantity (int | str | None): TODO: type description here.
-        previous_quantity (int | str | None): TODO: type description here.
-        memo (str): TODO: type description here.
-        timestamp (str): TODO: type description here.
-        proration_upgrade_scheme (str): TODO: type description here.
-        proration_downgrade_scheme (str): TODO: type description here.
-        accrue_charge (bool): TODO: type description here.
+        component_id (int): The model property of type int.
+        subscription_id (int): The model property of type int.
+        quantity (int | str | None): The model property of type int | str |
+            None.
+        previous_quantity (int | str | None): The model property of type int |
+            str | None.
+        memo (str): The model property of type str.
+        timestamp (str): The model property of type str.
+        proration_upgrade_scheme (str): The model property of type str.
+        proration_downgrade_scheme (str): The model property of type str.
+        accrue_charge (bool): The model property of type bool.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
@@ -33,7 +33,7 @@ class AllocationPreviewItem(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        price_point_id (int): TODO: type description here.
+        price_point_id (int): The model property of type int.
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this component
             price point would renew every 30 days. This property is only
@@ -41,10 +41,10 @@ class AllocationPreviewItem(object):
         interval_unit (IntervalUnit): A string representing the interval unit
             for this component price point, either month or day. This property
             is only available for sites with Multifrequency enabled.
-        previous_price_point_id (int): TODO: type description here.
-        price_point_handle (str): TODO: type description here.
-        price_point_name (str): TODO: type description here.
-        component_handle (str): TODO: type description here.
+        previous_price_point_id (int): The model property of type int.
+        price_point_handle (str): The model property of type str.
+        price_point_name (str): The model property of type str.
+        component_handle (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -227,3 +227,47 @@ class AllocationPreviewItem(object):
                    price_point_name,
                    component_handle,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'quantity={self.quantity!r}, '
+                f'previous_quantity={self.previous_quantity!r}, '
+                f'memo={self.memo!r}, '
+                f'timestamp={self.timestamp!r}, '
+                f'proration_upgrade_scheme={self.proration_upgrade_scheme!r}, '
+                f'proration_downgrade_scheme={self.proration_downgrade_scheme!r}, '
+                f'accrue_charge={self.accrue_charge!r}, '
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'previous_price_point_id={self.previous_price_point_id!r}, '
+                f'price_point_handle={self.price_point_handle!r}, '
+                f'price_point_name={self.price_point_name!r}, '
+                f'component_handle={self.component_handle!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'quantity={self.quantity!s}, '
+                f'previous_quantity={self.previous_quantity!s}, '
+                f'memo={self.memo!s}, '
+                f'timestamp={self.timestamp!s}, '
+                f'proration_upgrade_scheme={self.proration_upgrade_scheme!s}, '
+                f'proration_downgrade_scheme={self.proration_downgrade_scheme!s}, '
+                f'accrue_charge={self.accrue_charge!s}, '
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'previous_price_point_id={self.previous_price_point_id!s}, '
+                f'price_point_handle={self.price_point_handle!s}, '
+                f'price_point_name={self.price_point_name!s}, '
+                f'component_handle={self.component_handle!s}, '
+                f'additional_properties={self.additional_properties!s})')

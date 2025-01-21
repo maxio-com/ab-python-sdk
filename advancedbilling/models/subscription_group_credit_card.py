@@ -13,30 +13,31 @@ class SubscriptionGroupCreditCard(object):
 
     """Implementation of the 'Subscription Group Credit Card' model.
 
-    TODO: type model description here.
-
     Attributes:
-        full_number (str | int | None): TODO: type description here.
-        expiration_month (str | int | None): TODO: type description here.
-        expiration_year (str | int | None): TODO: type description here.
-        chargify_token (str): TODO: type description here.
-        vault_token (str): TODO: type description here.
+        full_number (str | int | None): The model property of type str | int |
+            None.
+        expiration_month (str | int | None): The model property of type str |
+            int | None.
+        expiration_year (str | int | None): The model property of type str |
+            int | None.
+        chargify_token (str): The model property of type str.
+        vault_token (str): The model property of type str.
         current_vault (CreditCardVault): The vault that stores the payment
             profile with the provided `vault_token`. Use `bogus` for testing.
-        gateway_handle (str): TODO: type description here.
-        first_name (str): TODO: type description here.
-        last_name (str): TODO: type description here.
-        billing_address (str): TODO: type description here.
-        billing_address_2 (str): TODO: type description here.
-        billing_city (str): TODO: type description here.
-        billing_state (str): TODO: type description here.
-        billing_zip (str): TODO: type description here.
-        billing_country (str): TODO: type description here.
-        last_four (str): TODO: type description here.
+        gateway_handle (str): The model property of type str.
+        first_name (str): The model property of type str.
+        last_name (str): The model property of type str.
+        billing_address (str): The model property of type str.
+        billing_address_2 (str): The model property of type str.
+        billing_city (str): The model property of type str.
+        billing_state (str): The model property of type str.
+        billing_zip (str): The model property of type str.
+        billing_country (str): The model property of type str.
+        last_four (str): The model property of type str.
         card_type (CardType): The type of card used.
-        customer_vault_token (str): TODO: type description here.
-        cvv (str): TODO: type description here.
-        payment_type (str): TODO: type description here.
+        customer_vault_token (str): The model property of type str.
+        cvv (str): The model property of type str.
+        payment_type (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -246,3 +247,51 @@ class SubscriptionGroupCreditCard(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'full_number={self.full_number!r}, '
+                f'expiration_month={self.expiration_month!r}, '
+                f'expiration_year={self.expiration_year!r}, '
+                f'chargify_token={self.chargify_token!r}, '
+                f'vault_token={self.vault_token!r}, '
+                f'current_vault={self.current_vault!r}, '
+                f'gateway_handle={self.gateway_handle!r}, '
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'billing_address_2={self.billing_address_2!r}, '
+                f'billing_city={self.billing_city!r}, '
+                f'billing_state={self.billing_state!r}, '
+                f'billing_zip={self.billing_zip!r}, '
+                f'billing_country={self.billing_country!r}, '
+                f'last_four={self.last_four!r}, '
+                f'card_type={self.card_type!r}, '
+                f'customer_vault_token={self.customer_vault_token!r}, '
+                f'cvv={self.cvv!r}, '
+                f'payment_type={self.payment_type!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'full_number={self.full_number!s}, '
+                f'expiration_month={self.expiration_month!s}, '
+                f'expiration_year={self.expiration_year!s}, '
+                f'chargify_token={self.chargify_token!s}, '
+                f'vault_token={self.vault_token!s}, '
+                f'current_vault={self.current_vault!s}, '
+                f'gateway_handle={self.gateway_handle!s}, '
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'billing_address_2={self.billing_address_2!s}, '
+                f'billing_city={self.billing_city!s}, '
+                f'billing_state={self.billing_state!s}, '
+                f'billing_zip={self.billing_zip!s}, '
+                f'billing_country={self.billing_country!s}, '
+                f'last_four={self.last_four!s}, '
+                f'card_type={self.card_type!s}, '
+                f'customer_vault_token={self.customer_vault_token!s}, '
+                f'cvv={self.cvv!s}, '
+                f'payment_type={self.payment_type!s}, '
+                f'additional_properties={self.additional_properties!s})')

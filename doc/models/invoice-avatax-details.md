@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `long\|int` | Optional | - |
+| `id` | `int` | Optional | - |
 | `status` | `str` | Optional | - |
 | `document_code` | `str` | Optional | - |
 | `commit_date` | `datetime` | Optional | - |

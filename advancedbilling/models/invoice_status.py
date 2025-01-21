@@ -17,13 +17,13 @@ class InvoiceStatus(object):
     ed-Billing-Invoices-Overview#invoice-statuses) for more.
 
     Attributes:
-        DRAFT: TODO: type description here.
-        OPEN: TODO: type description here.
-        PAID: TODO: type description here.
-        PENDING: TODO: type description here.
-        VOIDED: TODO: type description here.
-        CANCELED: TODO: type description here.
-        PROCESSING: TODO: type description here.
+        DRAFT: The enum member of type str.
+        OPEN: The enum member of type str.
+        PAID: The enum member of type str.
+        PENDING: The enum member of type str.
+        VOIDED: The enum member of type str.
+        CANCELED: The enum member of type str.
+        PROCESSING: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

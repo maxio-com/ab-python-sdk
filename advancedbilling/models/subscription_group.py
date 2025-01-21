@@ -14,19 +14,17 @@ class SubscriptionGroup(object):
 
     """Implementation of the 'Subscription Group' model.
 
-    TODO: type model description here.
-
     Attributes:
-        customer_id (int): TODO: type description here.
-        payment_profile (SubscriptionGroupPaymentProfile): TODO: type
-            description here.
+        customer_id (int): The model property of type int.
+        payment_profile (SubscriptionGroupPaymentProfile): The model property
+            of type SubscriptionGroupPaymentProfile.
         payment_collection_method (CollectionMethod): The type of payment
             collection to be used in the subscription. For legacy Statements
             Architecture valid options are - `invoice`, `automatic`. For
             current Relationship Invoicing Architecture valid options are -
             `remittance`, `automatic`, `prepaid`.
-        subscription_ids (List[int]): TODO: type description here.
-        created_at (datetime): TODO: type description here.
+        subscription_ids (List[int]): The model property of type List[int].
+        created_at (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -108,3 +106,21 @@ class SubscriptionGroup(object):
                    subscription_ids,
                    created_at,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer_id={self.customer_id!r}, '
+                f'payment_profile={self.payment_profile!r}, '
+                f'payment_collection_method={self.payment_collection_method!r}, '
+                f'subscription_ids={self.subscription_ids!r}, '
+                f'created_at={self.created_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer_id={self.customer_id!s}, '
+                f'payment_profile={self.payment_profile!s}, '
+                f'payment_collection_method={self.payment_collection_method!s}, '
+                f'subscription_ids={self.subscription_ids!s}, '
+                f'created_at={self.created_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

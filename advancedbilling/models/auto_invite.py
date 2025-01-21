@@ -12,8 +12,6 @@ class AutoInvite(object):
 
     """Implementation of the 'Auto Invite' enum.
 
-    TODO: type enum description here.
-
     Attributes:
         NO: Do not send the invitation email.
         YES: Automatically send the invitation email.

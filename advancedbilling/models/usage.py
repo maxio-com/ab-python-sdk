@@ -13,18 +13,17 @@ class Usage(object):
 
     """Implementation of the 'Usage' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (long|int): TODO: type description here.
-        memo (str): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        price_point_id (int): TODO: type description here.
-        quantity (int | str | None): TODO: type description here.
-        overage_quantity (int): TODO: type description here.
-        component_id (int): TODO: type description here.
-        component_handle (str): TODO: type description here.
-        subscription_id (int): TODO: type description here.
+        id (int): The model property of type int.
+        memo (str): The model property of type str.
+        created_at (datetime): The model property of type datetime.
+        price_point_id (int): The model property of type int.
+        quantity (int | str | None): The model property of type int | str |
+            None.
+        overage_quantity (int): The model property of type int.
+        component_id (int): The model property of type int.
+        component_handle (str): The model property of type str.
+        subscription_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -139,3 +138,29 @@ class Usage(object):
                    component_handle,
                    subscription_id,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'memo={self.memo!r}, '
+                f'created_at={self.created_at!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'quantity={self.quantity!r}, '
+                f'overage_quantity={self.overage_quantity!r}, '
+                f'component_id={self.component_id!r}, '
+                f'component_handle={self.component_handle!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'memo={self.memo!s}, '
+                f'created_at={self.created_at!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'quantity={self.quantity!s}, '
+                f'overage_quantity={self.overage_quantity!s}, '
+                f'component_id={self.component_id!s}, '
+                f'component_handle={self.component_handle!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

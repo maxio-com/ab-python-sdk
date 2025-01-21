@@ -13,11 +13,9 @@ class PaymentCollectionMethodChanged(object):
 
     """Implementation of the 'Payment Collection Method Changed' model.
 
-    TODO: type model description here.
-
     Attributes:
-        previous_value (str): TODO: type description here.
-        current_value (str): TODO: type description here.
+        previous_value (str): The model property of type str.
+        current_value (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -99,3 +97,15 @@ class PaymentCollectionMethodChanged(object):
                                        type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('current_value'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'previous_value={self.previous_value!r}, '
+                f'current_value={self.current_value!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'previous_value={self.previous_value!s}, '
+                f'current_value={self.current_value!s}, '
+                f'additional_properties={self.additional_properties!s})')

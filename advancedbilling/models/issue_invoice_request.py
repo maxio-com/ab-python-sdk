@@ -13,8 +13,6 @@ class IssueInvoiceRequest(object):
 
     """Implementation of the 'Issue Invoice Request' model.
 
-    TODO: type model description here.
-
     Attributes:
         on_failed_payment (FailedPaymentAction): Action taken when payment for
             an invoice fails: - `leave_open_invoice` - prepayments and credits
@@ -82,3 +80,13 @@ class IssueInvoiceRequest(object):
         # Return an object of this model
         return cls(on_failed_payment,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'on_failed_payment={self.on_failed_payment!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'on_failed_payment={self.on_failed_payment!s}, '
+                f'additional_properties={self.additional_properties!s})')

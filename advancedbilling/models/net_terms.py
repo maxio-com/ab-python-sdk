@@ -13,15 +13,13 @@ class NetTerms(object):
 
     """Implementation of the 'Net Terms' model.
 
-    TODO: type model description here.
-
     Attributes:
-        default_net_terms (int): TODO: type description here.
-        automatic_net_terms (int): TODO: type description here.
-        remittance_net_terms (int): TODO: type description here.
-        net_terms_on_remittance_signups_enabled (bool): TODO: type description
-            here.
-        custom_net_terms_enabled (bool): TODO: type description here.
+        default_net_terms (int): The model property of type int.
+        automatic_net_terms (int): The model property of type int.
+        remittance_net_terms (int): The model property of type int.
+        net_terms_on_remittance_signups_enabled (bool): The model property of
+            type bool.
+        custom_net_terms_enabled (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -98,3 +96,21 @@ class NetTerms(object):
                    net_terms_on_remittance_signups_enabled,
                    custom_net_terms_enabled,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'default_net_terms={self.default_net_terms!r}, '
+                f'automatic_net_terms={self.automatic_net_terms!r}, '
+                f'remittance_net_terms={self.remittance_net_terms!r}, '
+                f'net_terms_on_remittance_signups_enabled={self.net_terms_on_remittance_signups_enabled!r}, '
+                f'custom_net_terms_enabled={self.custom_net_terms_enabled!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'default_net_terms={self.default_net_terms!s}, '
+                f'automatic_net_terms={self.automatic_net_terms!s}, '
+                f'remittance_net_terms={self.remittance_net_terms!s}, '
+                f'net_terms_on_remittance_signups_enabled={self.net_terms_on_remittance_signups_enabled!s}, '
+                f'custom_net_terms_enabled={self.custom_net_terms_enabled!s}, '
+                f'additional_properties={self.additional_properties!s})')

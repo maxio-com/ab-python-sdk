@@ -17,7 +17,8 @@ class ChangeChargebackStatusEventData(object):
     Example schema for an `change_chargeback_status` event
 
     Attributes:
-        chargeback_status (ChargebackStatus): TODO: type description here.
+        chargeback_status (ChargebackStatus): The model property of type
+            ChargebackStatus.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -90,3 +91,13 @@ class ChangeChargebackStatusEventData(object):
 
         return APIHelper.is_valid_type(value=dictionary.get('chargeback_status'),
                                        type_callable=lambda value: ChargebackStatus.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargeback_status={self.chargeback_status!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'chargeback_status={self.chargeback_status!s}, '
+                f'additional_properties={self.additional_properties!s})')

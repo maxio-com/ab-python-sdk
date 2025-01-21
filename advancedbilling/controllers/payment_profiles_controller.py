@@ -583,8 +583,8 @@ class PaymentProfilesController(BaseController):
 
         Args:
             payment_profile_id (int): The Chargify id of the payment profile
-            body (UpdatePaymentProfileRequest, optional): TODO: type
-                description here.
+            body (UpdatePaymentProfileRequest, optional): The request body
+                parameter.
 
         Returns:
             PaymentProfileResponse: Response from the API. OK
@@ -718,8 +718,8 @@ class PaymentProfilesController(BaseController):
         Args:
             bank_account_id (int): Identifier of the bank account in the
                 system.
-            body (BankAccountVerificationRequest, optional): TODO: type
-                description here.
+            body (BankAccountVerificationRequest, optional): The request body
+                parameter.
 
         Returns:
             BankAccountResponse: Response from the API. OK

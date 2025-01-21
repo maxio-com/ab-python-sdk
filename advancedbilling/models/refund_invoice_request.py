@@ -13,11 +13,9 @@ class RefundInvoiceRequest(object):
 
     """Implementation of the 'Refund Invoice Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        refund (RefundInvoice | RefundConsolidatedInvoice): TODO: type
-            description here.
+        refund (RefundInvoice | RefundConsolidatedInvoice): The model property
+            of type RefundInvoice | RefundConsolidatedInvoice.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -90,3 +88,13 @@ class RefundInvoiceRequest(object):
             return False
 
         return UnionTypeLookUp.get('RefundInvoiceRequestRefund').validate(dictionary.get('refund')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'refund={self.refund!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'refund={self.refund!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -15,10 +15,10 @@ class AllocationPreviewLineItemKind(object):
     A handle for the line item kind for allocation preview
 
     Attributes:
-        QUANTITY_BASED_COMPONENT: TODO: type description here.
-        ON_OFF_COMPONENT: TODO: type description here.
-        COUPON: TODO: type description here.
-        TAX: TODO: type description here.
+        QUANTITY_BASED_COMPONENT: The enum member of type str.
+        ON_OFF_COMPONENT: The enum member of type str.
+        COUPON: The enum member of type str.
+        TAX: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

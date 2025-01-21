@@ -129,8 +129,8 @@ class SubscriptionProductsController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (SubscriptionProductMigrationRequest, optional): TODO: type
-                description here.
+            body (SubscriptionProductMigrationRequest, optional): The request
+                body parameter.
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -185,8 +185,8 @@ class SubscriptionProductsController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (SubscriptionMigrationPreviewRequest, optional): TODO: type
-                description here.
+            body (SubscriptionMigrationPreviewRequest, optional): The request
+                body parameter.
 
         Returns:
             SubscriptionMigrationPreviewResponse: Response from the API. OK

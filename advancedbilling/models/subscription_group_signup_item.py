@@ -16,8 +16,6 @@ class SubscriptionGroupSignupItem(object):
 
     """Implementation of the 'Subscription Group Signup Item' model.
 
-    TODO: type model description here.
-
     Attributes:
         product_handle (str): The API Handle of the product for which you are
             creating a subscription. Required, unless a `product_id` is given
@@ -43,8 +41,8 @@ class SubscriptionGroupSignupItem(object):
             update the currency of an existing subscription.
         coupon_codes (List[str]): An array for all the coupons attached to the
             subscription.
-        components (List[SubscriptionGroupSignupComponent]): TODO: type
-            description here.
+        components (List[SubscriptionGroupSignupComponent]): The model
+            property of type List[SubscriptionGroupSignupComponent].
         custom_price (SubscriptionCustomPrice): (Optional) Used in place of
             `product_price_point_id` to define a custom price point unique to
             the subscription
@@ -217,3 +215,37 @@ class SubscriptionGroupSignupItem(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_handle={self.product_handle!r}, '
+                f'product_id={self.product_id!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'product_price_point_handle={self.product_price_point_handle!r}, '
+                f'offer_id={self.offer_id!r}, '
+                f'reference={self.reference!r}, '
+                f'primary={self.primary!r}, '
+                f'currency={self.currency!r}, '
+                f'coupon_codes={self.coupon_codes!r}, '
+                f'components={self.components!r}, '
+                f'custom_price={self.custom_price!r}, '
+                f'calendar_billing={self.calendar_billing!r}, '
+                f'metafields={self.metafields!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_handle={self.product_handle!s}, '
+                f'product_id={self.product_id!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'product_price_point_handle={self.product_price_point_handle!s}, '
+                f'offer_id={self.offer_id!s}, '
+                f'reference={self.reference!s}, '
+                f'primary={self.primary!s}, '
+                f'currency={self.currency!s}, '
+                f'coupon_codes={self.coupon_codes!s}, '
+                f'components={self.components!s}, '
+                f'custom_price={self.custom_price!s}, '
+                f'calendar_billing={self.calendar_billing!s}, '
+                f'metafields={self.metafields!s}, '
+                f'additional_properties={self.additional_properties!s})')

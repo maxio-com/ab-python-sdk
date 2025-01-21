@@ -12,10 +12,8 @@ class CreateSignupProformaPreviewInclude(object):
 
     """Implementation of the 'Create Signup Proforma Preview Include' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        NEXT_PROFORMA_INVOICE: TODO: type description here.
+        NEXT_PROFORMA_INVOICE: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

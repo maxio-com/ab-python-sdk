@@ -14,10 +14,8 @@ class UpdateSubscriptionComponent(object):
 
     """Implementation of the 'Update Subscription Component' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component_id (int): TODO: type description here.
+        component_id (int): The model property of type int.
         custom_price (ComponentCustomPrice): Create or update custom pricing
             unique to the subscription. Used in place of `price_point_id`.
         additional_properties (Dict[str, object]): The additional properties
@@ -102,3 +100,15 @@ class UpdateSubscriptionComponent(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!r}, '
+                f'custom_price={self.custom_price!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!s}, '
+                f'custom_price={self.custom_price!s}, '
+                f'additional_properties={self.additional_properties!s})')

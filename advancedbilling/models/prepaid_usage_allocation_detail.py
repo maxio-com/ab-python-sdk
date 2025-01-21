@@ -13,12 +13,10 @@ class PrepaidUsageAllocationDetail(object):
 
     """Implementation of the 'Prepaid Usage Allocation Detail' model.
 
-    TODO: type model description here.
-
     Attributes:
-        allocation_id (int): TODO: type description here.
-        charge_id (int): TODO: type description here.
-        usage_quantity (int): TODO: type description here.
+        allocation_id (int): The model property of type int.
+        charge_id (int): The model property of type int.
+        usage_quantity (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -108,3 +106,17 @@ class PrepaidUsageAllocationDetail(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocation_id={self.allocation_id!r}, '
+                f'charge_id={self.charge_id!r}, '
+                f'usage_quantity={self.usage_quantity!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'allocation_id={self.allocation_id!s}, '
+                f'charge_id={self.charge_id!s}, '
+                f'usage_quantity={self.usage_quantity!s}, '
+                f'additional_properties={self.additional_properties!s})')

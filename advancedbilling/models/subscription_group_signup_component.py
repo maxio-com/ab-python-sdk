@@ -14,14 +14,15 @@ class SubscriptionGroupSignupComponent(object):
 
     """Implementation of the 'Subscription Group Signup Component' model.
 
-    TODO: type model description here.
-
     Attributes:
         component_id (str | int | None): Required if passing any component to
             `components` attribute.
-        allocated_quantity (str | int | None): TODO: type description here.
-        unit_balance (str | int | None): TODO: type description here.
-        price_point_id (str | int | None): TODO: type description here.
+        allocated_quantity (str | int | None): The model property of type str
+            | int | None.
+        unit_balance (str | int | None): The model property of type str | int
+            | None.
+        price_point_id (str | int | None): The model property of type str |
+            int | None.
         custom_price (SubscriptionGroupComponentCustomPrice): Used in place of
             `price_point_id` to define a custom price point unique to the
             subscription. You still need to provide `component_id`.
@@ -129,3 +130,21 @@ class SubscriptionGroupSignupComponent(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!r}, '
+                f'allocated_quantity={self.allocated_quantity!r}, '
+                f'unit_balance={self.unit_balance!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'custom_price={self.custom_price!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!s}, '
+                f'allocated_quantity={self.allocated_quantity!s}, '
+                f'unit_balance={self.unit_balance!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'custom_price={self.custom_price!s}, '
+                f'additional_properties={self.additional_properties!s})')

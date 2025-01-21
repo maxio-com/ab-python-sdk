@@ -13,11 +13,9 @@ class SignupProformaPreviewResponse(object):
 
     """Implementation of the 'Signup Proforma Preview Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        proforma_invoice_preview (SignupProformaPreview): TODO: type
-            description here.
+        proforma_invoice_preview (SignupProformaPreview): The model property
+            of type SignupProformaPreview.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -66,3 +64,13 @@ class SignupProformaPreviewResponse(object):
         # Return an object of this model
         return cls(proforma_invoice_preview,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'proforma_invoice_preview={self.proforma_invoice_preview!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'proforma_invoice_preview={self.proforma_invoice_preview!s}, '
+                f'additional_properties={self.additional_properties!s})')

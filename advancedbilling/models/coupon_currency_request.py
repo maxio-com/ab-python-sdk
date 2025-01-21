@@ -13,11 +13,9 @@ class CouponCurrencyRequest(object):
 
     """Implementation of the 'Coupon Currency Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        currency_prices (List[UpdateCouponCurrency]): TODO: type description
-            here.
+        currency_prices (List[UpdateCouponCurrency]): The model property of
+            type List[UpdateCouponCurrency].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -68,3 +66,13 @@ class CouponCurrencyRequest(object):
         # Return an object of this model
         return cls(currency_prices,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'currency_prices={self.currency_prices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'currency_prices={self.currency_prices!s}, '
+                f'additional_properties={self.additional_properties!s})')

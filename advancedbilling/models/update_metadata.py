@@ -13,12 +13,10 @@ class UpdateMetadata(object):
 
     """Implementation of the 'Update Metadata' model.
 
-    TODO: type model description here.
-
     Attributes:
-        current_name (str): TODO: type description here.
-        name (str): TODO: type description here.
-        value (str): TODO: type description here.
+        current_name (str): The model property of type str.
+        name (str): The model property of type str.
+        value (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -86,3 +84,17 @@ class UpdateMetadata(object):
                    name,
                    value,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'current_name={self.current_name!r}, '
+                f'name={self.name!r}, '
+                f'value={self.value!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'current_name={self.current_name!s}, '
+                f'name={self.name!s}, '
+                f'value={self.value!s}, '
+                f'additional_properties={self.additional_properties!s})')

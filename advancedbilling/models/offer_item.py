@@ -14,17 +14,16 @@ class OfferItem(object):
 
     """Implementation of the 'Offer Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component_id (int): TODO: type description here.
-        price_point_id (int): TODO: type description here.
-        starting_quantity (str): TODO: type description here.
-        editable (bool): TODO: type description here.
-        component_unit_price (str): TODO: type description here.
-        component_name (str): TODO: type description here.
-        price_point_name (str): TODO: type description here.
-        currency_prices (List[CurrencyPrice]): TODO: type description here.
+        component_id (int): The model property of type int.
+        price_point_id (int): The model property of type int.
+        starting_quantity (str): The model property of type str.
+        editable (bool): The model property of type bool.
+        component_unit_price (str): The model property of type str.
+        component_name (str): The model property of type str.
+        price_point_name (str): The model property of type str.
+        currency_prices (List[CurrencyPrice]): The model property of type
+            List[CurrencyPrice].
         interval (int): The numerical interval. i.e. an interval of '30'
             coupled with an interval_unit of day would mean this component
             price point would renew every 30 days. This property is only
@@ -156,3 +155,31 @@ class OfferItem(object):
                    interval,
                    interval_unit,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'starting_quantity={self.starting_quantity!r}, '
+                f'editable={self.editable!r}, '
+                f'component_unit_price={self.component_unit_price!r}, '
+                f'component_name={self.component_name!r}, '
+                f'price_point_name={self.price_point_name!r}, '
+                f'currency_prices={self.currency_prices!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'starting_quantity={self.starting_quantity!s}, '
+                f'editable={self.editable!s}, '
+                f'component_unit_price={self.component_unit_price!s}, '
+                f'component_name={self.component_name!s}, '
+                f'price_point_name={self.price_point_name!s}, '
+                f'currency_prices={self.currency_prices!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'additional_properties={self.additional_properties!s})')

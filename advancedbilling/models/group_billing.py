@@ -112,3 +112,17 @@ class GroupBilling(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'accrue={self.accrue!r}, '
+                f'align_date={self.align_date!r}, '
+                f'prorate={self.prorate!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'accrue={self.accrue!s}, '
+                f'align_date={self.align_date!s}, '
+                f'prorate={self.prorate!s}, '
+                f'additional_properties={self.additional_properties!s})')

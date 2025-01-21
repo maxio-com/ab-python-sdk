@@ -13,14 +13,12 @@ class InvoiceAvataxDetails(object):
 
     """Implementation of the 'Invoice Avatax Details' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (long|int): TODO: type description here.
-        status (str): TODO: type description here.
-        document_code (str): TODO: type description here.
-        commit_date (datetime): TODO: type description here.
-        modify_date (datetime): TODO: type description here.
+        id (int): The model property of type int.
+        status (str): The model property of type str.
+        document_code (str): The model property of type str.
+        commit_date (datetime): The model property of type datetime.
+        modify_date (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -138,3 +136,21 @@ class InvoiceAvataxDetails(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'status={self.status!r}, '
+                f'document_code={self.document_code!r}, '
+                f'commit_date={self.commit_date!r}, '
+                f'modify_date={self.modify_date!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'status={self.status!s}, '
+                f'document_code={self.document_code!s}, '
+                f'commit_date={self.commit_date!s}, '
+                f'modify_date={self.modify_date!s}, '
+                f'additional_properties={self.additional_properties!s})')

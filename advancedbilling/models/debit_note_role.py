@@ -15,8 +15,8 @@ class DebitNoteRole(object):
     The role of the debit note.
 
     Attributes:
-        CHARGEBACK: TODO: type description here.
-        REFUND: TODO: type description here.
+        CHARGEBACK: The enum member of type str.
+        REFUND: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

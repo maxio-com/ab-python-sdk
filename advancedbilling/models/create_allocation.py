@@ -14,8 +14,6 @@ class CreateAllocation(object):
 
     """Implementation of the 'Create Allocation' model.
 
-    TODO: type model description here.
-
     Attributes:
         quantity (float): The allocated quantity to which to set the
             line-items allocated quantity. By default, this is an integer. If
@@ -184,3 +182,33 @@ class CreateAllocation(object):
                    price_point_id,
                    billing_schedule,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'quantity={self.quantity!r}, '
+                f'component_id={self.component_id!r}, '
+                f'memo={self.memo!r}, '
+                f'proration_downgrade_scheme={self.proration_downgrade_scheme!r}, '
+                f'proration_upgrade_scheme={self.proration_upgrade_scheme!r}, '
+                f'accrue_charge={self.accrue_charge!r}, '
+                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'initiate_dunning={self.initiate_dunning!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'billing_schedule={self.billing_schedule!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'quantity={self.quantity!s}, '
+                f'component_id={self.component_id!s}, '
+                f'memo={self.memo!s}, '
+                f'proration_downgrade_scheme={self.proration_downgrade_scheme!s}, '
+                f'proration_upgrade_scheme={self.proration_upgrade_scheme!s}, '
+                f'accrue_charge={self.accrue_charge!s}, '
+                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'initiate_dunning={self.initiate_dunning!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'billing_schedule={self.billing_schedule!s}, '
+                f'additional_properties={self.additional_properties!s})')

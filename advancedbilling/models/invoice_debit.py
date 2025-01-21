@@ -13,17 +13,15 @@ class InvoiceDebit(object):
 
     """Implementation of the 'Invoice Debit' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        debit_note_number (str): TODO: type description here.
-        debit_note_uid (str): TODO: type description here.
+        uid (str): The model property of type str.
+        debit_note_number (str): The model property of type str.
+        debit_note_uid (str): The model property of type str.
         role (DebitNoteRole): The role of the debit note.
-        transaction_time (datetime): TODO: type description here.
-        memo (str): TODO: type description here.
-        original_amount (str): TODO: type description here.
-        applied_amount (str): TODO: type description here.
+        transaction_time (datetime): The model property of type datetime.
+        memo (str): The model property of type str.
+        original_amount (str): The model property of type str.
+        applied_amount (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -148,3 +146,27 @@ class InvoiceDebit(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'debit_note_number={self.debit_note_number!r}, '
+                f'debit_note_uid={self.debit_note_uid!r}, '
+                f'role={self.role!r}, '
+                f'transaction_time={self.transaction_time!r}, '
+                f'memo={self.memo!r}, '
+                f'original_amount={self.original_amount!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'debit_note_number={self.debit_note_number!s}, '
+                f'debit_note_uid={self.debit_note_uid!s}, '
+                f'role={self.role!s}, '
+                f'transaction_time={self.transaction_time!s}, '
+                f'memo={self.memo!s}, '
+                f'original_amount={self.original_amount!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

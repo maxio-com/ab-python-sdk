@@ -15,16 +15,14 @@ class CreateComponentPricePoint(object):
 
     """Implementation of the 'Create Component Price Point' model.
 
-    TODO: type model description here.
-
     Attributes:
-        name (str): TODO: type description here.
-        handle (str): TODO: type description here.
+        name (str): The model property of type str.
+        handle (str): The model property of type str.
         pricing_scheme (PricingScheme): The identifier for the pricing scheme.
             See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
-        prices (List[Price]): TODO: type description here.
+        prices (List[Price]): The model property of type List[Price].
         use_site_exchange_rate (bool): Whether to use the site level exchange
             rate or define your own prices for each currency if you have
             multiple currencies defined on the site. Setting not supported
@@ -175,3 +173,27 @@ class CreateComponentPricePoint(object):
                                         type_callable=lambda value: Price.validate(value),
                                         is_model_dict=True,
                                         is_inner_model_dict=True)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'prices={self.prices!r}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'tax_included={self.tax_included!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'prices={self.prices!s}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'tax_included={self.tax_included!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'additional_properties={self.additional_properties!s})')

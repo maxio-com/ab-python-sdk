@@ -13,15 +13,13 @@ class SubscriptionNote(object):
 
     """Implementation of the 'Subscription Note' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        body (str): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        updated_at (datetime): TODO: type description here.
-        sticky (bool): TODO: type description here.
+        id (int): The model property of type int.
+        body (str): The model property of type str.
+        subscription_id (int): The model property of type int.
+        created_at (datetime): The model property of type datetime.
+        updated_at (datetime): The model property of type datetime.
+        sticky (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -110,3 +108,23 @@ class SubscriptionNote(object):
                    updated_at,
                    sticky,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'body={self.body!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'sticky={self.sticky!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'body={self.body!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'sticky={self.sticky!s}, '
+                f'additional_properties={self.additional_properties!s})')

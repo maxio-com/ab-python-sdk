@@ -11,8 +11,8 @@
 |  --- | --- | --- | --- |
 | `id` | `int` | Optional | - |
 | `subscription_group_uid` | `str` | Optional | - |
-| `amount_in_cents` | `long\|int` | Optional | - |
-| `remaining_amount_in_cents` | `long\|int` | Optional | - |
+| `amount_in_cents` | `int` | Optional | - |
+| `remaining_amount_in_cents` | `int` | Optional | - |
 | `details` | `str` | Optional | - |
 | `external` | `bool` | Optional | - |
 | `memo` | `str` | Optional | - |

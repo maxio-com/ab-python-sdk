@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `balance_in_cents` | `long\|int` | Optional | The balance in cents. |
-| `automatic_balance_in_cents` | `long\|int` | Optional | The automatic balance in cents. |
-| `remittance_balance_in_cents` | `long\|int` | Optional | The remittance balance in cents. |
+| `balance_in_cents` | `int` | Optional | The balance in cents. |
+| `automatic_balance_in_cents` | `int` | Optional | The automatic balance in cents. |
+| `remittance_balance_in_cents` | `int` | Optional | The remittance balance in cents. |
 
 ## Example (as JSON)
 

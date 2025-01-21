@@ -42,8 +42,8 @@ class ProductsController(BaseController):
         Args:
             product_family_id (str): Either the product family's id or its
                 handle prefixed with `handle:`
-            body (CreateOrUpdateProductRequest, optional): TODO: type
-                description here.
+            body (CreateOrUpdateProductRequest, optional): The request body
+                parameter.
 
         Returns:
             ProductResponse: Response from the API. Created
@@ -139,8 +139,8 @@ class ProductsController(BaseController):
 
         Args:
             product_id (int): The Advanced Billing id of the product
-            body (CreateOrUpdateProductRequest, optional): TODO: type
-                description here.
+            body (CreateOrUpdateProductRequest, optional): The request body
+                parameter.
 
         Returns:
             ProductResponse: Response from the API. OK

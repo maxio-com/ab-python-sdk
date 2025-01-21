@@ -13,14 +13,12 @@ class UpdateComponent(object):
 
     """Implementation of the 'Update Component' model.
 
-    TODO: type model description here.
-
     Attributes:
-        handle (str): TODO: type description here.
+        handle (str): The model property of type str.
         name (str): The name of the Component, suitable for display on
             statements. i.e. Text Messages.
         description (str): The description of the component.
-        accounting_code (str): TODO: type description here.
+        accounting_code (str): The model property of type str.
         taxable (bool): Boolean flag describing whether a component is taxable
             or not.
         tax_code (str): A string representing the tax code related to the
@@ -29,7 +27,7 @@ class UpdateComponent(object):
             length of 10 characters.
         item_category (ItemCategory): One of the following: Business Software,
             Consumer Software, Digital Services, Physical Goods, Other
-        display_on_hosted_page (bool): TODO: type description here.
+        display_on_hosted_page (bool): The model property of type bool.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
@@ -151,3 +149,29 @@ class UpdateComponent(object):
                    display_on_hosted_page,
                    upgrade_charge,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'handle={self.handle!r}, '
+                f'name={self.name!r}, '
+                f'description={self.description!r}, '
+                f'accounting_code={self.accounting_code!r}, '
+                f'taxable={self.taxable!r}, '
+                f'tax_code={self.tax_code!r}, '
+                f'item_category={self.item_category!r}, '
+                f'display_on_hosted_page={self.display_on_hosted_page!r}, '
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'handle={self.handle!s}, '
+                f'name={self.name!s}, '
+                f'description={self.description!s}, '
+                f'accounting_code={self.accounting_code!s}, '
+                f'taxable={self.taxable!s}, '
+                f'tax_code={self.tax_code!s}, '
+                f'item_category={self.item_category!s}, '
+                f'display_on_hosted_page={self.display_on_hosted_page!s}, '
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'additional_properties={self.additional_properties!s})')

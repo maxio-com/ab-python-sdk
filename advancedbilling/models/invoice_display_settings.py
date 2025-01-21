@@ -13,11 +13,9 @@ class InvoiceDisplaySettings(object):
 
     """Implementation of the 'Invoice Display Settings' model.
 
-    TODO: type model description here.
-
     Attributes:
-        hide_zero_subtotal_lines (bool): TODO: type description here.
-        include_discounts_on_lines (bool): TODO: type description here.
+        hide_zero_subtotal_lines (bool): The model property of type bool.
+        include_discounts_on_lines (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -100,3 +98,15 @@ class InvoiceDisplaySettings(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'hide_zero_subtotal_lines={self.hide_zero_subtotal_lines!r}, '
+                f'include_discounts_on_lines={self.include_discounts_on_lines!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'hide_zero_subtotal_lines={self.hide_zero_subtotal_lines!s}, '
+                f'include_discounts_on_lines={self.include_discounts_on_lines!s}, '
+                f'additional_properties={self.additional_properties!s})')

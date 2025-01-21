@@ -15,8 +15,6 @@ class EBBComponent(object):
 
     """Implementation of the 'EBB Component' model.
 
-    TODO: type model description here.
-
     Attributes:
         name (str): A name for this component that is suitable for showing
             customers and displaying on billing statements, ie. "Minutes".
@@ -41,8 +39,8 @@ class EBBComponent(object):
             Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-C
             omponent-Pricing-Schemes#price-bracket-rules) for an overview of
             how price brackets work for different pricing schemes.
-        price_points (List[ComponentPricePointItem]): TODO: type description
-            here.
+        price_points (List[ComponentPricePointItem]): The model property of
+            type List[ComponentPricePointItem].
         unit_price (str | float | None): The amount the customer will be
             charged per unit when the pricing scheme is “per_unit”. The price
             can contain up to 8 decimal places. i.e. 1.00 or 0.0012 or
@@ -213,3 +211,39 @@ class EBBComponent(object):
                    interval,
                    interval_unit,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'unit_name={self.unit_name!r}, '
+                f'description={self.description!r}, '
+                f'handle={self.handle!r}, '
+                f'taxable={self.taxable!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'prices={self.prices!r}, '
+                f'price_points={self.price_points!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'tax_code={self.tax_code!r}, '
+                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!r}, '
+                f'event_based_billing_metric_id={self.event_based_billing_metric_id!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'unit_name={self.unit_name!s}, '
+                f'description={self.description!s}, '
+                f'handle={self.handle!s}, '
+                f'taxable={self.taxable!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'prices={self.prices!s}, '
+                f'price_points={self.price_points!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'tax_code={self.tax_code!s}, '
+                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!s}, '
+                f'event_based_billing_metric_id={self.event_based_billing_metric_id!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'additional_properties={self.additional_properties!s})')

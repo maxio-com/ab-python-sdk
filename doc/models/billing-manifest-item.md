@@ -11,10 +11,10 @@
 |  --- | --- | --- | --- |
 | `transaction_type` | [`LineItemTransactionType`](../../doc/models/line-item-transaction-type.md) | Optional | A handle for the line item transaction type |
 | `kind` | [`BillingManifestLineItemKind`](../../doc/models/billing-manifest-line-item-kind.md) | Optional | A handle for the billing manifest line item kind |
-| `amount_in_cents` | `long\|int` | Optional | - |
+| `amount_in_cents` | `int` | Optional | - |
 | `memo` | `str` | Optional | - |
-| `discount_amount_in_cents` | `long\|int` | Optional | - |
-| `taxable_amount_in_cents` | `long\|int` | Optional | - |
+| `discount_amount_in_cents` | `int` | Optional | - |
+| `taxable_amount_in_cents` | `int` | Optional | - |
 | `component_id` | `int` | Optional | - |
 | `component_handle` | `str` | Optional | - |
 | `component_name` | `str` | Optional | - |

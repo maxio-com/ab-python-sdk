@@ -51,8 +51,8 @@ class AdvanceInvoiceController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (IssueAdvanceInvoiceRequest, optional): TODO: type
-                description here.
+            body (IssueAdvanceInvoiceRequest, optional): The request body
+                parameter.
 
         Returns:
             Invoice: Response from the API. Created
@@ -149,7 +149,7 @@ class AdvanceInvoiceController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (VoidInvoiceRequest, optional): TODO: type description here.
+            body (VoidInvoiceRequest, optional): The request body parameter.
 
         Returns:
             Invoice: Response from the API. Created

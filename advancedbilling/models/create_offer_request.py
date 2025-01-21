@@ -13,10 +13,8 @@ class CreateOfferRequest(object):
 
     """Implementation of the 'Create Offer Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        offer (CreateOffer): TODO: type description here.
+        offer (CreateOffer): The model property of type CreateOffer.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +63,13 @@ class CreateOfferRequest(object):
         # Return an object of this model
         return cls(offer,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'offer={self.offer!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'offer={self.offer!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,14 +13,12 @@ class BatchJob(object):
 
     """Implementation of the 'Batch-Job' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        finished_at (datetime): TODO: type description here.
-        row_count (int): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        completed (str): TODO: type description here.
+        id (int): The model property of type int.
+        finished_at (datetime): The model property of type datetime.
+        row_count (int): The model property of type int.
+        created_at (datetime): The model property of type datetime.
+        completed (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -114,3 +112,21 @@ class BatchJob(object):
                    created_at,
                    completed,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'finished_at={self.finished_at!r}, '
+                f'row_count={self.row_count!r}, '
+                f'created_at={self.created_at!r}, '
+                f'completed={self.completed!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'finished_at={self.finished_at!s}, '
+                f'row_count={self.row_count!s}, '
+                f'created_at={self.created_at!s}, '
+                f'completed={self.completed!s}, '
+                f'additional_properties={self.additional_properties!s})')

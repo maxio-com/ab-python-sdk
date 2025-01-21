@@ -861,8 +861,8 @@ class SubscriptionsController(BaseController):
         ```
 
         Args:
-            body (CreateSubscriptionRequest, optional): TODO: type description
-                here.
+            body (CreateSubscriptionRequest, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionResponse: Response from the API. Created
@@ -1130,8 +1130,8 @@ class SubscriptionsController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (UpdateSubscriptionRequest, optional): TODO: type description
-                here.
+            body (UpdateSubscriptionRequest, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -1407,8 +1407,8 @@ class SubscriptionsController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (UpsertPrepaidConfigurationRequest, optional): TODO: type
-                description here.
+            body (UpsertPrepaidConfigurationRequest, optional): The request
+                body parameter.
 
         Returns:
             PrepaidConfigurationResponse: Response from the API. OK
@@ -1489,8 +1489,8 @@ class SubscriptionsController(BaseController):
         please feel free to leave off the billing information.
 
         Args:
-            body (CreateSubscriptionRequest, optional): TODO: type description
-                here.
+            body (CreateSubscriptionRequest, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionPreviewResponse: Response from the API. OK
@@ -1548,7 +1548,7 @@ class SubscriptionsController(BaseController):
             subscription_id (int): The Chargify id of the subscription
             code (str, optional): A code for the coupon that would be applied
                 to a subscription
-            body (AddCouponsRequest, optional): TODO: type description here.
+            body (AddCouponsRequest, optional): The request body parameter.
 
         Returns:
             SubscriptionResponse: Response from the API. OK
@@ -1694,8 +1694,8 @@ class SubscriptionsController(BaseController):
 
         Args:
             subscription_id (int): The Chargify id of the subscription
-            body (ActivateSubscriptionRequest, optional): TODO: type
-                description here.
+            body (ActivateSubscriptionRequest, optional): The request body
+                parameter.
 
         Returns:
             SubscriptionResponse: Response from the API. OK

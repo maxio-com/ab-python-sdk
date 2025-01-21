@@ -13,13 +13,11 @@ class Breakouts(object):
 
     """Implementation of the 'Breakouts' model.
 
-    TODO: type model description here.
-
     Attributes:
-        plan_amount_in_cents (long|int): TODO: type description here.
-        plan_amount_formatted (str): TODO: type description here.
-        usage_amount_in_cents (long|int): TODO: type description here.
-        usage_amount_formatted (str): TODO: type description here.
+        plan_amount_in_cents (int): The model property of type int.
+        plan_amount_formatted (str): The model property of type str.
+        usage_amount_in_cents (int): The model property of type int.
+        usage_amount_formatted (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -94,3 +92,19 @@ class Breakouts(object):
                    usage_amount_in_cents,
                    usage_amount_formatted,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'plan_amount_in_cents={self.plan_amount_in_cents!r}, '
+                f'plan_amount_formatted={self.plan_amount_formatted!r}, '
+                f'usage_amount_in_cents={self.usage_amount_in_cents!r}, '
+                f'usage_amount_formatted={self.usage_amount_formatted!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'plan_amount_in_cents={self.plan_amount_in_cents!s}, '
+                f'plan_amount_formatted={self.plan_amount_formatted!s}, '
+                f'usage_amount_in_cents={self.usage_amount_in_cents!s}, '
+                f'usage_amount_formatted={self.usage_amount_formatted!s}, '
+                f'additional_properties={self.additional_properties!s})')

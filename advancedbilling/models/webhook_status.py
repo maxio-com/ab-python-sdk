@@ -12,13 +12,11 @@ class WebhookStatus(object):
 
     """Implementation of the 'Webhook Status' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        SUCCESSFUL: TODO: type description here.
-        FAILED: TODO: type description here.
-        PENDING: TODO: type description here.
-        PAUSED: TODO: type description here.
+        SUCCESSFUL: The enum member of type str.
+        FAILED: The enum member of type str.
+        PENDING: The enum member of type str.
+        PAUSED: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

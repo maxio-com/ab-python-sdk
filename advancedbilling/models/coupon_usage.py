@@ -13,20 +13,18 @@ class CouponUsage(object):
 
     """Implementation of the 'Coupon Usage' model.
 
-    TODO: type model description here.
-
     Attributes:
         id (int): The Chargify id of the product
         name (str): Name of the product
         signups (int): Number of times the coupon has been applied
         savings (int): Dollar amount of customer savings as a result of the
             coupon.
-        savings_in_cents (long|int): Dollar amount of customer savings as a
-            result of the coupon.
+        savings_in_cents (int): Dollar amount of customer savings as a result
+            of the coupon.
         revenue (int): Total revenue of the all subscriptions that have
             received a discount from this coupon.
-        revenue_in_cents (long|int): Total revenue of the all subscriptions
-            that have received a discount from this coupon.
+        revenue_in_cents (int): Total revenue of the all subscriptions that
+            have received a discount from this coupon.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -128,3 +126,25 @@ class CouponUsage(object):
                    revenue,
                    revenue_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'name={self.name!r}, '
+                f'signups={self.signups!r}, '
+                f'savings={self.savings!r}, '
+                f'savings_in_cents={self.savings_in_cents!r}, '
+                f'revenue={self.revenue!r}, '
+                f'revenue_in_cents={self.revenue_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'name={self.name!s}, '
+                f'signups={self.signups!s}, '
+                f'savings={self.savings!s}, '
+                f'savings_in_cents={self.savings_in_cents!s}, '
+                f'revenue={self.revenue!s}, '
+                f'revenue_in_cents={self.revenue_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

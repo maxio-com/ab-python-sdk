@@ -13,12 +13,10 @@ class SendInvoiceRequest(object):
 
     """Implementation of the 'Send Invoice Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        recipient_emails (List[str]): TODO: type description here.
-        cc_recipient_emails (List[str]): TODO: type description here.
-        bcc_recipient_emails (List[str]): TODO: type description here.
+        recipient_emails (List[str]): The model property of type List[str].
+        cc_recipient_emails (List[str]): The model property of type List[str].
+        bcc_recipient_emails (List[str]): The model property of type List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -86,3 +84,17 @@ class SendInvoiceRequest(object):
                    cc_recipient_emails,
                    bcc_recipient_emails,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'recipient_emails={self.recipient_emails!r}, '
+                f'cc_recipient_emails={self.cc_recipient_emails!r}, '
+                f'bcc_recipient_emails={self.bcc_recipient_emails!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'recipient_emails={self.recipient_emails!s}, '
+                f'cc_recipient_emails={self.cc_recipient_emails!s}, '
+                f'bcc_recipient_emails={self.bcc_recipient_emails!s}, '
+                f'additional_properties={self.additional_properties!s})')

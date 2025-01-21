@@ -13,25 +13,23 @@ class BillingManifestItem(object):
 
     """Implementation of the 'Billing Manifest Item' model.
 
-    TODO: type model description here.
-
     Attributes:
         transaction_type (LineItemTransactionType): A handle for the line item
             transaction type
         kind (BillingManifestLineItemKind): A handle for the billing manifest
             line item kind
-        amount_in_cents (long|int): TODO: type description here.
-        memo (str): TODO: type description here.
-        discount_amount_in_cents (long|int): TODO: type description here.
-        taxable_amount_in_cents (long|int): TODO: type description here.
-        component_id (int): TODO: type description here.
-        component_handle (str): TODO: type description here.
-        component_name (str): TODO: type description here.
-        product_id (int): TODO: type description here.
-        product_handle (str): TODO: type description here.
-        product_name (str): TODO: type description here.
-        period_range_start (str): TODO: type description here.
-        period_range_end (str): TODO: type description here.
+        amount_in_cents (int): The model property of type int.
+        memo (str): The model property of type str.
+        discount_amount_in_cents (int): The model property of type int.
+        taxable_amount_in_cents (int): The model property of type int.
+        component_id (int): The model property of type int.
+        component_handle (str): The model property of type str.
+        component_name (str): The model property of type str.
+        product_id (int): The model property of type int.
+        product_handle (str): The model property of type str.
+        product_name (str): The model property of type str.
+        period_range_start (str): The model property of type str.
+        period_range_end (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -176,3 +174,39 @@ class BillingManifestItem(object):
                    period_range_start,
                    period_range_end,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'transaction_type={self.transaction_type!r}, '
+                f'kind={self.kind!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'memo={self.memo!r}, '
+                f'discount_amount_in_cents={self.discount_amount_in_cents!r}, '
+                f'taxable_amount_in_cents={self.taxable_amount_in_cents!r}, '
+                f'component_id={self.component_id!r}, '
+                f'component_handle={self.component_handle!r}, '
+                f'component_name={self.component_name!r}, '
+                f'product_id={self.product_id!r}, '
+                f'product_handle={self.product_handle!r}, '
+                f'product_name={self.product_name!r}, '
+                f'period_range_start={self.period_range_start!r}, '
+                f'period_range_end={self.period_range_end!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'transaction_type={self.transaction_type!s}, '
+                f'kind={self.kind!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'memo={self.memo!s}, '
+                f'discount_amount_in_cents={self.discount_amount_in_cents!s}, '
+                f'taxable_amount_in_cents={self.taxable_amount_in_cents!s}, '
+                f'component_id={self.component_id!s}, '
+                f'component_handle={self.component_handle!s}, '
+                f'component_name={self.component_name!s}, '
+                f'product_id={self.product_id!s}, '
+                f'product_handle={self.product_handle!s}, '
+                f'product_name={self.product_name!s}, '
+                f'period_range_start={self.period_range_start!s}, '
+                f'period_range_end={self.period_range_end!s}, '
+                f'additional_properties={self.additional_properties!s})')

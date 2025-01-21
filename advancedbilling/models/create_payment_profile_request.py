@@ -13,10 +13,9 @@ class CreatePaymentProfileRequest(object):
 
     """Implementation of the 'Create Payment Profile Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        payment_profile (CreatePaymentProfile): TODO: type description here.
+        payment_profile (CreatePaymentProfile): The model property of type
+            CreatePaymentProfile.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class CreatePaymentProfileRequest(object):
         # Return an object of this model
         return cls(payment_profile,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'payment_profile={self.payment_profile!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'payment_profile={self.payment_profile!s}, '
+                f'additional_properties={self.additional_properties!s})')

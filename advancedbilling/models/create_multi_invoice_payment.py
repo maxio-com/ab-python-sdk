@@ -14,8 +14,6 @@ class CreateMultiInvoicePayment(object):
 
     """Implementation of the 'Create Multi Invoice Payment' model.
 
-    TODO: type model description here.
-
     Attributes:
         memo (str): A description to be attached to the payment.
         details (str): Additional information related to the payment method
@@ -26,8 +24,8 @@ class CreateMultiInvoicePayment(object):
             (eg. "10.50" => $10.50).
         received_on (str): Date reflecting when the payment was received from
             a customer. Must be in the past.
-        applications (List[CreateInvoicePaymentApplication]): TODO: type
-            description here.
+        applications (List[CreateInvoicePaymentApplication]): The model
+            property of type List[CreateInvoicePaymentApplication].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -146,3 +144,23 @@ class CreateMultiInvoicePayment(object):
                                         type_callable=lambda value: CreateInvoicePaymentApplication.validate(value),
                                         is_model_dict=True,
                                         is_inner_model_dict=True)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'memo={self.memo!r}, '
+                f'details={self.details!r}, '
+                f'method={self.method!r}, '
+                f'amount={self.amount!r}, '
+                f'received_on={self.received_on!r}, '
+                f'applications={self.applications!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'memo={self.memo!s}, '
+                f'details={self.details!s}, '
+                f'method={self.method!s}, '
+                f'amount={self.amount!s}, '
+                f'received_on={self.received_on!s}, '
+                f'applications={self.applications!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -12,17 +12,15 @@ class InvoiceSortField(object):
 
     """Implementation of the 'Invoice Sort Field' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        STATUS: TODO: type description here.
-        TOTAL_AMOUNT: TODO: type description here.
-        DUE_AMOUNT: TODO: type description here.
-        CREATED_AT: TODO: type description here.
-        UPDATED_AT: TODO: type description here.
-        ISSUE_DATE: TODO: type description here.
-        DUE_DATE: TODO: type description here.
-        NUMBER: TODO: type description here.
+        STATUS: The enum member of type str.
+        TOTAL_AMOUNT: The enum member of type str.
+        DUE_AMOUNT: The enum member of type str.
+        CREATED_AT: The enum member of type str.
+        UPDATED_AT: The enum member of type str.
+        ISSUE_DATE: The enum member of type str.
+        DUE_DATE: The enum member of type str.
+        NUMBER: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

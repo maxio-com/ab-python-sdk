@@ -32,8 +32,8 @@
 | `downgrade_credit` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided.<br>Available values: `full`, `prorated`, `none`. |
 | `payment` | [`PaymentForAllocation`](../../doc/models/payment-for-allocation.md) | Optional | - |
 | `expires_at` | `datetime` | Optional | - |
-| `used_quantity` | `long\|int` | Optional | - |
-| `charge_id` | `long\|int` | Optional | - |
+| `used_quantity` | `int` | Optional | - |
+| `charge_id` | `int` | Optional | - |
 
 ## Example (as JSON)
 

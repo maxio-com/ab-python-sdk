@@ -15,12 +15,12 @@ class DunningStepReached(object):
 
     """Implementation of the 'Dunning Step Reached' model.
 
-    TODO: type model description here.
-
     Attributes:
-        dunner (DunnerData): TODO: type description here.
-        current_step (DunningStepData): TODO: type description here.
-        next_step (DunningStepData): TODO: type description here.
+        dunner (DunnerData): The model property of type DunnerData.
+        current_step (DunningStepData): The model property of type
+            DunningStepData.
+        next_step (DunningStepData): The model property of type
+            DunningStepData.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -117,3 +117,17 @@ class DunningStepReached(object):
             and APIHelper.is_valid_type(value=dictionary.get('next_step'),
                                         type_callable=lambda value: DunningStepData.validate(value),
                                         is_model_dict=True)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'dunner={self.dunner!r}, '
+                f'current_step={self.current_step!r}, '
+                f'next_step={self.next_step!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'dunner={self.dunner!s}, '
+                f'current_step={self.current_step!s}, '
+                f'next_step={self.next_step!s}, '
+                f'additional_properties={self.additional_properties!s})')

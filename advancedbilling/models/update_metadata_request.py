@@ -14,10 +14,8 @@ class UpdateMetadataRequest(object):
 
     """Implementation of the 'Update Metadata Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        metadata (UpdateMetadata): TODO: type description here.
+        metadata (UpdateMetadata): The model property of type UpdateMetadata.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +69,13 @@ class UpdateMetadataRequest(object):
         # Return an object of this model
         return cls(metadata,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'metadata={self.metadata!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'metadata={self.metadata!s}, '
+                f'additional_properties={self.additional_properties!s})')

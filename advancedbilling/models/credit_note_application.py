@@ -13,14 +13,12 @@ class CreditNoteApplication(object):
 
     """Implementation of the 'Credit Note Application' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        transaction_time (datetime): TODO: type description here.
-        invoice_uid (str): TODO: type description here.
-        memo (str): TODO: type description here.
-        applied_amount (str): TODO: type description here.
+        uid (str): The model property of type str.
+        transaction_time (datetime): The model property of type datetime.
+        invoice_uid (str): The model property of type str.
+        memo (str): The model property of type str.
+        applied_amount (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -124,3 +122,21 @@ class CreditNoteApplication(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'transaction_time={self.transaction_time!r}, '
+                f'invoice_uid={self.invoice_uid!r}, '
+                f'memo={self.memo!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'transaction_time={self.transaction_time!s}, '
+                f'invoice_uid={self.invoice_uid!s}, '
+                f'memo={self.memo!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

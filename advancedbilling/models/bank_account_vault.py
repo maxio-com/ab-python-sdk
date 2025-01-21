@@ -16,14 +16,14 @@ class BankAccountVault(object):
     Use `bogus` for testing.
 
     Attributes:
-        AUTHORIZENET: TODO: type description here.
-        BLUE_SNAP: TODO: type description here.
-        BOGUS: TODO: type description here.
-        FORTE: TODO: type description here.
-        GOCARDLESS: TODO: type description here.
-        MAXIO_PAYMENTS: TODO: type description here.
-        MAXP: TODO: type description here.
-        STRIPE_CONNECT: TODO: type description here.
+        AUTHORIZENET: The enum member of type str.
+        BLUE_SNAP: The enum member of type str.
+        BOGUS: The enum member of type str.
+        FORTE: The enum member of type str.
+        GOCARDLESS: The enum member of type str.
+        MAXIO_PAYMENTS: The enum member of type str.
+        MAXP: The enum member of type str.
+        STRIPE_CONNECT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

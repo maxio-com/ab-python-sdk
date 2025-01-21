@@ -46,8 +46,8 @@ class ProductPricePointsController(BaseController):
         Args:
             product_id (int | str): The id or handle of the product. When
                 using the handle, it must be prefixed with `handle:`
-            body (CreateProductPricePointRequest, optional): TODO: type
-                description here.
+            body (CreateProductPricePointRequest, optional): The request body
+                parameter.
 
         Returns:
             ProductPricePointResponse: Response from the API. Created
@@ -196,8 +196,8 @@ class ProductPricePointsController(BaseController):
                 Example: `123` for an integer ID, or
                 `handle:example-product-price-point-handle` for a string
                 handle.
-            body (UpdateProductPricePointRequest, optional): TODO: type
-                description here.
+            body (UpdateProductPricePointRequest, optional): The request body
+                parameter.
 
         Returns:
             ProductPricePointResponse: Response from the API. OK
@@ -477,8 +477,8 @@ class ProductPricePointsController(BaseController):
         Args:
             product_id (int): The Advanced Billing id of the product to which
                 the price points belong
-            body (BulkCreateProductPricePointsRequest, optional): TODO: type
-                description here.
+            body (BulkCreateProductPricePointsRequest, optional): The request
+                body parameter.
 
         Returns:
             BulkCreateProductPricePointsResponse: Response from the API.
@@ -535,8 +535,8 @@ class ProductPricePointsController(BaseController):
         Args:
             product_price_point_id (int): The Advanced Billing id of the
                 product price point
-            body (CreateProductCurrencyPricesRequest, optional): TODO: type
-                description here.
+            body (CreateProductCurrencyPricesRequest, optional): The request
+                body parameter.
 
         Returns:
             CurrencyPricesResponse: Response from the API. OK
@@ -591,8 +591,8 @@ class ProductPricePointsController(BaseController):
         Args:
             product_price_point_id (int): The Advanced Billing id of the
                 product price point
-            body (UpdateCurrencyPricesRequest, optional): TODO: type
-                description here.
+            body (UpdateCurrencyPricesRequest, optional): The request body
+                parameter.
 
         Returns:
             CurrencyPricesResponse: Response from the API. OK

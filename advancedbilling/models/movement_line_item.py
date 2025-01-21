@@ -14,18 +14,17 @@ class MovementLineItem(object):
 
     """Implementation of the 'Movement Line Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        product_id (int): TODO: type description here.
+        product_id (int): The model property of type int.
         component_id (int): For Product (or "baseline") line items, this field
             will have a value of `0`.
-        price_point_id (int): TODO: type description here.
-        name (str): TODO: type description here.
-        mrr (int): TODO: type description here.
-        mrr_movements (List[MRRMovement]): TODO: type description here.
-        quantity (int): TODO: type description here.
-        prev_quantity (int): TODO: type description here.
+        price_point_id (int): The model property of type int.
+        name (str): The model property of type str.
+        mrr (int): The model property of type int.
+        mrr_movements (List[MRRMovement]): The model property of type
+            List[MRRMovement].
+        quantity (int): The model property of type int.
+        prev_quantity (int): The model property of type int.
         recurring (bool): When `true`, the line item's MRR value will
             contribute to the `plan` breakout. When `false`, the line item
             contributes to the `usage` breakout.
@@ -142,3 +141,29 @@ class MovementLineItem(object):
                    prev_quantity,
                    recurring,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_id={self.product_id!r}, '
+                f'component_id={self.component_id!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'name={self.name!r}, '
+                f'mrr={self.mrr!r}, '
+                f'mrr_movements={self.mrr_movements!r}, '
+                f'quantity={self.quantity!r}, '
+                f'prev_quantity={self.prev_quantity!r}, '
+                f'recurring={self.recurring!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_id={self.product_id!s}, '
+                f'component_id={self.component_id!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'name={self.name!s}, '
+                f'mrr={self.mrr!s}, '
+                f'mrr_movements={self.mrr_movements!s}, '
+                f'quantity={self.quantity!s}, '
+                f'prev_quantity={self.prev_quantity!s}, '
+                f'recurring={self.recurring!s}, '
+                f'additional_properties={self.additional_properties!s})')

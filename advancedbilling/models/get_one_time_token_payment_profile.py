@@ -13,31 +13,29 @@ class GetOneTimeTokenPaymentProfile(object):
 
     """Implementation of the 'Get One Time Token Payment Profile' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (str): TODO: type description here.
-        first_name (str): TODO: type description here.
-        last_name (str): TODO: type description here.
-        masked_card_number (str): TODO: type description here.
+        id (str): The model property of type str.
+        first_name (str): The model property of type str.
+        last_name (str): The model property of type str.
+        masked_card_number (str): The model property of type str.
         card_type (CardType): The type of card used.
-        expiration_month (float): TODO: type description here.
-        expiration_year (float): TODO: type description here.
-        customer_id (str): TODO: type description here.
+        expiration_month (float): The model property of type float.
+        expiration_year (float): The model property of type float.
+        customer_id (str): The model property of type str.
         current_vault (CreditCardVault): The vault that stores the payment
             profile with the provided `vault_token`. Use `bogus` for testing.
-        vault_token (str): TODO: type description here.
-        billing_address (str): TODO: type description here.
-        billing_address_2 (str): TODO: type description here.
-        billing_city (str): TODO: type description here.
-        billing_country (str): TODO: type description here.
-        billing_state (str): TODO: type description here.
-        billing_zip (str): TODO: type description here.
-        payment_type (str): TODO: type description here.
-        disabled (bool): TODO: type description here.
-        site_gateway_setting_id (int): TODO: type description here.
-        customer_vault_token (str): TODO: type description here.
-        gateway_handle (str): TODO: type description here.
+        vault_token (str): The model property of type str.
+        billing_address (str): The model property of type str.
+        billing_address_2 (str): The model property of type str.
+        billing_city (str): The model property of type str.
+        billing_country (str): The model property of type str.
+        billing_state (str): The model property of type str.
+        billing_zip (str): The model property of type str.
+        payment_type (str): The model property of type str.
+        disabled (bool): The model property of type bool.
+        site_gateway_setting_id (int): The model property of type int.
+        customer_vault_token (str): The model property of type str.
+        gateway_handle (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -206,3 +204,53 @@ class GetOneTimeTokenPaymentProfile(object):
                    customer_vault_token,
                    gateway_handle,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'masked_card_number={self.masked_card_number!r}, '
+                f'card_type={self.card_type!r}, '
+                f'expiration_month={self.expiration_month!r}, '
+                f'expiration_year={self.expiration_year!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'current_vault={self.current_vault!r}, '
+                f'vault_token={self.vault_token!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'billing_address_2={self.billing_address_2!r}, '
+                f'billing_city={self.billing_city!r}, '
+                f'billing_country={self.billing_country!r}, '
+                f'billing_state={self.billing_state!r}, '
+                f'billing_zip={self.billing_zip!r}, '
+                f'payment_type={self.payment_type!r}, '
+                f'disabled={self.disabled!r}, '
+                f'site_gateway_setting_id={self.site_gateway_setting_id!r}, '
+                f'customer_vault_token={self.customer_vault_token!r}, '
+                f'gateway_handle={self.gateway_handle!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'masked_card_number={self.masked_card_number!s}, '
+                f'card_type={self.card_type!s}, '
+                f'expiration_month={self.expiration_month!s}, '
+                f'expiration_year={self.expiration_year!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'current_vault={self.current_vault!s}, '
+                f'vault_token={self.vault_token!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'billing_address_2={self.billing_address_2!s}, '
+                f'billing_city={self.billing_city!s}, '
+                f'billing_country={self.billing_country!s}, '
+                f'billing_state={self.billing_state!s}, '
+                f'billing_zip={self.billing_zip!s}, '
+                f'payment_type={self.payment_type!s}, '
+                f'disabled={self.disabled!s}, '
+                f'site_gateway_setting_id={self.site_gateway_setting_id!s}, '
+                f'customer_vault_token={self.customer_vault_token!s}, '
+                f'gateway_handle={self.gateway_handle!s}, '
+                f'additional_properties={self.additional_properties!s})')

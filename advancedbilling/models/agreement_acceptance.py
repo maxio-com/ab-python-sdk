@@ -20,10 +20,10 @@ class AgreementAcceptance(object):
         terms_url (str): Required when creating a subscription with Maxio
             Payments. Either terms_url or provacy_policy_url required when
             providing agreement_acceptance params.
-        privacy_policy_url (str): TODO: type description here.
-        return_refund_policy_url (str): TODO: type description here.
-        delivery_policy_url (str): TODO: type description here.
-        secure_checkout_policy_url (str): TODO: type description here.
+        privacy_policy_url (str): The model property of type str.
+        return_refund_policy_url (str): The model property of type str.
+        delivery_policy_url (str): The model property of type str.
+        secure_checkout_policy_url (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -134,3 +134,23 @@ class AgreementAcceptance(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'ip_address={self.ip_address!r}, '
+                f'terms_url={self.terms_url!r}, '
+                f'privacy_policy_url={self.privacy_policy_url!r}, '
+                f'return_refund_policy_url={self.return_refund_policy_url!r}, '
+                f'delivery_policy_url={self.delivery_policy_url!r}, '
+                f'secure_checkout_policy_url={self.secure_checkout_policy_url!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'ip_address={self.ip_address!s}, '
+                f'terms_url={self.terms_url!s}, '
+                f'privacy_policy_url={self.privacy_policy_url!s}, '
+                f'return_refund_policy_url={self.return_refund_policy_url!s}, '
+                f'delivery_policy_url={self.delivery_policy_url!s}, '
+                f'secure_checkout_policy_url={self.secure_checkout_policy_url!s}, '
+                f'additional_properties={self.additional_properties!s})')

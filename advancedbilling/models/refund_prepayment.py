@@ -13,14 +13,12 @@ class RefundPrepayment(object):
 
     """Implementation of the 'Refund Prepayment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        amount_in_cents (long|int): `amount` is not required if you pass
+        amount_in_cents (int): `amount` is not required if you pass
             `amount_in_cents`.
         amount (str | float): `amount_in_cents` is not required if you pass
             `amount`.
-        memo (str): TODO: type description here.
+        memo (str): The model property of type str.
         external (bool): Specify the type of refund you wish to initiate. When
             the prepayment is external, the `external` flag is optional. But
             if the prepayment was made through a payment profile, the
@@ -131,3 +129,19 @@ class RefundPrepayment(object):
             and UnionTypeLookUp.get('RefundPrepaymentAmount').validate(dictionary.get('amount')).is_valid \
             and APIHelper.is_valid_type(value=dictionary.get('memo'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'amount={self.amount!r}, '
+                f'memo={self.memo!r}, '
+                f'external={self.external!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'amount={self.amount!s}, '
+                f'memo={self.memo!s}, '
+                f'external={self.external!s}, '
+                f'additional_properties={self.additional_properties!s})')

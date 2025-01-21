@@ -14,15 +14,13 @@ class MultiInvoicePayment(object):
 
     """Implementation of the 'Multi Invoice Payment' model.
 
-    TODO: type model description here.
-
     Attributes:
         transaction_id (int): The numeric ID of the transaction.
         total_amount (str): Dollar amount of the sum of the paid invoices.
         currency_code (str): The ISO 4217 currency code (3 character string)
             representing the currency of invoice transaction.
-        applications (List[InvoicePaymentApplication]): TODO: type description
-            here.
+        applications (List[InvoicePaymentApplication]): The model property of
+            type List[InvoicePaymentApplication].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -101,3 +99,19 @@ class MultiInvoicePayment(object):
                    currency_code,
                    applications,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'transaction_id={self.transaction_id!r}, '
+                f'total_amount={self.total_amount!r}, '
+                f'currency_code={self.currency_code!r}, '
+                f'applications={self.applications!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'transaction_id={self.transaction_id!s}, '
+                f'total_amount={self.total_amount!s}, '
+                f'currency_code={self.currency_code!s}, '
+                f'applications={self.applications!s}, '
+                f'additional_properties={self.additional_properties!s})')

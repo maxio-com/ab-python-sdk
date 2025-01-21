@@ -156,3 +156,25 @@ class RemovePaymentEventData(object):
             and UnionTypeLookUp.get('Invoice-Event-Payment').validate(dictionary.get('payment_method')).is_valid \
             and APIHelper.is_valid_type(value=dictionary.get('prepayment'),
                                         type_callable=lambda value: isinstance(value, bool))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'transaction_id={self.transaction_id!r}, '
+                f'memo={self.memo!r}, '
+                f'original_amount={self.original_amount!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'transaction_time={self.transaction_time!r}, '
+                f'payment_method={self.payment_method!r}, '
+                f'prepayment={self.prepayment!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'transaction_id={self.transaction_id!s}, '
+                f'memo={self.memo!s}, '
+                f'original_amount={self.original_amount!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'transaction_time={self.transaction_time!s}, '
+                f'payment_method={self.payment_method!s}, '
+                f'prepayment={self.prepayment!s}, '
+                f'additional_properties={self.additional_properties!s})')

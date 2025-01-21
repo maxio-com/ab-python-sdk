@@ -18,16 +18,15 @@ class CreateInvoice(object):
 
     """Implementation of the 'Create Invoice' model.
 
-    TODO: type model description here.
-
     Attributes:
-        line_items (List[CreateInvoiceItem]): TODO: type description here.
-        issue_date (date): TODO: type description here.
+        line_items (List[CreateInvoiceItem]): The model property of type
+            List[CreateInvoiceItem].
+        issue_date (date): The model property of type date.
         net_terms (int): By default, invoices will be created with a due date
             matching the date of invoice creation. If a different due date is
             desired, the net_terms parameter can be sent indicating the number
             of days in advance the due date should be.
-        payment_instructions (str): TODO: type description here.
+        payment_instructions (str): The model property of type str.
         memo (str): A custom memo can be sent to override the site's default.
         seller_address (CreateInvoiceAddress): Overrides the defaults for the
             site
@@ -35,8 +34,10 @@ class CreateInvoice(object):
             customer
         shipping_address (CreateInvoiceAddress): Overrides the default for the
             customer
-        coupons (List[CreateInvoiceCoupon]): TODO: type description here.
-        status (CreateInvoiceStatus): TODO: type description here.
+        coupons (List[CreateInvoiceCoupon]): The model property of type
+            List[CreateInvoiceCoupon].
+        status (CreateInvoiceStatus): The model property of type
+            CreateInvoiceStatus.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -160,3 +161,31 @@ class CreateInvoice(object):
                    coupons,
                    status,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'line_items={self.line_items!r}, '
+                f'issue_date={self.issue_date!r}, '
+                f'net_terms={self.net_terms!r}, '
+                f'payment_instructions={self.payment_instructions!r}, '
+                f'memo={self.memo!r}, '
+                f'seller_address={self.seller_address!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'shipping_address={self.shipping_address!r}, '
+                f'coupons={self.coupons!r}, '
+                f'status={self.status!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'line_items={self.line_items!s}, '
+                f'issue_date={self.issue_date!s}, '
+                f'net_terms={self.net_terms!s}, '
+                f'payment_instructions={self.payment_instructions!s}, '
+                f'memo={self.memo!s}, '
+                f'seller_address={self.seller_address!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'shipping_address={self.shipping_address!s}, '
+                f'coupons={self.coupons!s}, '
+                f'status={self.status!s}, '
+                f'additional_properties={self.additional_properties!s})')

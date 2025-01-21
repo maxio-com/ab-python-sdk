@@ -13,8 +13,6 @@ class NestedSubscriptionGroup(object):
 
     """Implementation of the 'Nested Subscription Group' model.
 
-    TODO: type model description here.
-
     Attributes:
         uid (str): The UID for the group
         scheme (int): Whether the group is configured to rely on a primary
@@ -97,3 +95,19 @@ class NestedSubscriptionGroup(object):
                    primary_subscription_id,
                    primary,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'scheme={self.scheme!r}, '
+                f'primary_subscription_id={self.primary_subscription_id!r}, '
+                f'primary={self.primary!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'scheme={self.scheme!s}, '
+                f'primary_subscription_id={self.primary_subscription_id!s}, '
+                f'primary={self.primary!s}, '
+                f'additional_properties={self.additional_properties!s})')

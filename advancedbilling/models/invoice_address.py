@@ -13,15 +13,13 @@ class InvoiceAddress(object):
 
     """Implementation of the 'Invoice Address' model.
 
-    TODO: type model description here.
-
     Attributes:
-        street (str): TODO: type description here.
-        line_2 (str): TODO: type description here.
-        city (str): TODO: type description here.
-        state (str): TODO: type description here.
-        zip (str): TODO: type description here.
-        country (str): TODO: type description here.
+        street (str): The model property of type str.
+        line_2 (str): The model property of type str.
+        city (str): The model property of type str.
+        state (str): The model property of type str.
+        zip (str): The model property of type str.
+        country (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -141,3 +139,23 @@ class InvoiceAddress(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'street={self.street!r}, '
+                f'line_2={self.line_2!r}, '
+                f'city={self.city!r}, '
+                f'state={self.state!r}, '
+                f'zip={self.zip!r}, '
+                f'country={self.country!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'street={self.street!s}, '
+                f'line_2={self.line_2!s}, '
+                f'city={self.city!s}, '
+                f'state={self.state!s}, '
+                f'zip={self.zip!s}, '
+                f'country={self.country!s}, '
+                f'additional_properties={self.additional_properties!s})')

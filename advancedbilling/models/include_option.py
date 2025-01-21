@@ -12,11 +12,9 @@ class IncludeOption(object):
 
     """Implementation of the 'Include Option' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        EXCLUDE: TODO: type description here.
-        INCLUDE: TODO: type description here.
+        EXCLUDE: The enum member of type str.
+        INCLUDE: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

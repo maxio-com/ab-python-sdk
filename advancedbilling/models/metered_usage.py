@@ -13,15 +13,13 @@ class MeteredUsage(object):
 
     """Implementation of the 'Metered Usage' model.
 
-    TODO: type model description here.
-
     Attributes:
-        previous_unit_balance (str): TODO: type description here.
-        new_unit_balance (int): TODO: type description here.
-        usage_quantity (int): TODO: type description here.
-        component_id (int): TODO: type description here.
-        component_handle (str): TODO: type description here.
-        memo (str): TODO: type description here.
+        previous_unit_balance (str): The model property of type str.
+        new_unit_balance (int): The model property of type int.
+        usage_quantity (int): The model property of type int.
+        component_id (int): The model property of type int.
+        component_handle (str): The model property of type str.
+        memo (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -139,3 +137,23 @@ class MeteredUsage(object):
                                         type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('memo'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'previous_unit_balance={self.previous_unit_balance!r}, '
+                f'new_unit_balance={self.new_unit_balance!r}, '
+                f'usage_quantity={self.usage_quantity!r}, '
+                f'component_id={self.component_id!r}, '
+                f'component_handle={self.component_handle!r}, '
+                f'memo={self.memo!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'previous_unit_balance={self.previous_unit_balance!s}, '
+                f'new_unit_balance={self.new_unit_balance!s}, '
+                f'usage_quantity={self.usage_quantity!s}, '
+                f'component_id={self.component_id!s}, '
+                f'component_handle={self.component_handle!s}, '
+                f'memo={self.memo!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -12,12 +12,10 @@ class RecurringScheme(object):
 
     """Implementation of the 'Recurring Scheme' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        DO_NOT_RECUR: TODO: type description here.
-        RECUR_INDEFINITELY: TODO: type description here.
-        RECUR_WITH_DURATION: TODO: type description here.
+        DO_NOT_RECUR: The enum member of type str.
+        RECUR_INDEFINITELY: The enum member of type str.
+        RECUR_WITH_DURATION: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

@@ -13,17 +13,15 @@ class DunningStepData(object):
 
     """Implementation of the 'Dunning Step Data' model.
 
-    TODO: type model description here.
-
     Attributes:
-        day_threshold (int): TODO: type description here.
-        action (str): TODO: type description here.
-        email_body (str): TODO: type description here.
-        email_subject (str): TODO: type description here.
-        send_email (bool): TODO: type description here.
-        send_bcc_email (bool): TODO: type description here.
-        send_sms (bool): TODO: type description here.
-        sms_body (str): TODO: type description here.
+        day_threshold (int): The model property of type int.
+        action (str): The model property of type str.
+        email_body (str): The model property of type str.
+        email_subject (str): The model property of type str.
+        send_email (bool): The model property of type bool.
+        send_bcc_email (bool): The model property of type bool.
+        send_sms (bool): The model property of type bool.
+        sms_body (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -162,3 +160,27 @@ class DunningStepData(object):
                                         type_callable=lambda value: isinstance(value, bool)) \
             and APIHelper.is_valid_type(value=dictionary.get('send_sms'),
                                         type_callable=lambda value: isinstance(value, bool))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'day_threshold={self.day_threshold!r}, '
+                f'action={self.action!r}, '
+                f'email_body={self.email_body!r}, '
+                f'email_subject={self.email_subject!r}, '
+                f'send_email={self.send_email!r}, '
+                f'send_bcc_email={self.send_bcc_email!r}, '
+                f'send_sms={self.send_sms!r}, '
+                f'sms_body={self.sms_body!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'day_threshold={self.day_threshold!s}, '
+                f'action={self.action!s}, '
+                f'email_body={self.email_body!s}, '
+                f'email_subject={self.email_subject!s}, '
+                f'send_email={self.send_email!s}, '
+                f'send_bcc_email={self.send_bcc_email!s}, '
+                f'send_sms={self.send_sms!s}, '
+                f'sms_body={self.sms_body!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,11 +13,9 @@ class CreateQuantityBasedComponent(object):
 
     """Implementation of the 'Create Quantity Based Component' model.
 
-    TODO: type model description here.
-
     Attributes:
-        quantity_based_component (QuantityBasedComponent): TODO: type
-            description here.
+        quantity_based_component (QuantityBasedComponent): The model property
+            of type QuantityBasedComponent.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -66,3 +64,13 @@ class CreateQuantityBasedComponent(object):
         # Return an object of this model
         return cls(quantity_based_component,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'quantity_based_component={self.quantity_based_component!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'quantity_based_component={self.quantity_based_component!s}, '
+                f'additional_properties={self.additional_properties!s})')

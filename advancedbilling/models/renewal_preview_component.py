@@ -13,8 +13,6 @@ class RenewalPreviewComponent(object):
 
     """Implementation of the 'Renewal Preview Component' model.
 
-    TODO: type model description here.
-
     Attributes:
         component_id (str | int | None): Either the component's Chargify id or
             its handle prefixed with `handle:`
@@ -96,3 +94,17 @@ class RenewalPreviewComponent(object):
                    quantity,
                    price_point_id,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!r}, '
+                f'quantity={self.quantity!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!s}, '
+                f'quantity={self.quantity!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

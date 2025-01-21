@@ -13,13 +13,11 @@ class InvoiceTaxBreakout(object):
 
     """Implementation of the 'Invoice Tax Breakout' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        taxable_amount (str): TODO: type description here.
-        tax_amount (str): TODO: type description here.
-        tax_exempt_amount (str): TODO: type description here.
+        uid (str): The model property of type str.
+        taxable_amount (str): The model property of type str.
+        tax_amount (str): The model property of type str.
+        tax_exempt_amount (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -116,3 +114,19 @@ class InvoiceTaxBreakout(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'taxable_amount={self.taxable_amount!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'tax_exempt_amount={self.tax_exempt_amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'taxable_amount={self.taxable_amount!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'tax_exempt_amount={self.tax_exempt_amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

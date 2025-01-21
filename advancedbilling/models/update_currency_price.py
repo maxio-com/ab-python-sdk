@@ -12,8 +12,6 @@ class UpdateCurrencyPrice(object):
 
     """Implementation of the 'Update Currency Price' model.
 
-    TODO: type model description here.
-
     Attributes:
         id (int): ID of the currency price record being updated
         price (float): New price for the given currency
@@ -70,3 +68,15 @@ class UpdateCurrencyPrice(object):
         return cls(id,
                    price,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'price={self.price!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'price={self.price!s}, '
+                f'additional_properties={self.additional_properties!s})')

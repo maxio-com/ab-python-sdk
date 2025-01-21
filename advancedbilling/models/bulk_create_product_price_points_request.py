@@ -13,11 +13,9 @@ class BulkCreateProductPricePointsRequest(object):
 
     """Implementation of the 'Bulk Create Product Price Points Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        price_points (List[CreateProductPricePoint]): TODO: type description
-            here.
+        price_points (List[CreateProductPricePoint]): The model property of
+            type List[CreateProductPricePoint].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -68,3 +66,13 @@ class BulkCreateProductPricePointsRequest(object):
         # Return an object of this model
         return cls(price_points,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'price_points={self.price_points!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'price_points={self.price_points!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -14,19 +14,18 @@ class ProformaInvoiceDiscount(object):
 
     """Implementation of the 'Proforma Invoice Discount' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        title (str): TODO: type description here.
-        code (str): TODO: type description here.
-        source_type (ProformaInvoiceDiscountSourceType): TODO: type
-            description here.
-        discount_type (InvoiceDiscountType): TODO: type description here.
-        eligible_amount (str): TODO: type description here.
-        discount_amount (str): TODO: type description here.
-        line_item_breakouts (List[InvoiceDiscountBreakout]): TODO: type
-            description here.
+        uid (str): The model property of type str.
+        title (str): The model property of type str.
+        code (str): The model property of type str.
+        source_type (ProformaInvoiceDiscountSourceType): The model property of
+            type ProformaInvoiceDiscountSourceType.
+        discount_type (InvoiceDiscountType): The model property of type
+            InvoiceDiscountType.
+        eligible_amount (str): The model property of type str.
+        discount_amount (str): The model property of type str.
+        line_item_breakouts (List[InvoiceDiscountBreakout]): The model
+            property of type List[InvoiceDiscountBreakout].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -133,3 +132,27 @@ class ProformaInvoiceDiscount(object):
                    discount_amount,
                    line_item_breakouts,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'title={self.title!r}, '
+                f'code={self.code!r}, '
+                f'source_type={self.source_type!r}, '
+                f'discount_type={self.discount_type!r}, '
+                f'eligible_amount={self.eligible_amount!r}, '
+                f'discount_amount={self.discount_amount!r}, '
+                f'line_item_breakouts={self.line_item_breakouts!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'title={self.title!s}, '
+                f'code={self.code!s}, '
+                f'source_type={self.source_type!s}, '
+                f'discount_type={self.discount_type!s}, '
+                f'eligible_amount={self.eligible_amount!s}, '
+                f'discount_amount={self.discount_amount!s}, '
+                f'line_item_breakouts={self.line_item_breakouts!s}, '
+                f'additional_properties={self.additional_properties!s})')

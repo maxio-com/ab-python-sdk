@@ -13,13 +13,11 @@ class InvoicePayerChange(object):
 
     """Implementation of the 'Invoice Payer Change' model.
 
-    TODO: type model description here.
-
     Attributes:
-        first_name (str): TODO: type description here.
-        last_name (str): TODO: type description here.
-        organization (str): TODO: type description here.
-        email (str): TODO: type description here.
+        first_name (str): The model property of type str.
+        last_name (str): The model property of type str.
+        organization (str): The model property of type str.
+        email (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -94,3 +92,19 @@ class InvoicePayerChange(object):
                    organization,
                    email,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'organization={self.organization!r}, '
+                f'email={self.email!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'organization={self.organization!s}, '
+                f'email={self.email!s}, '
+                f'additional_properties={self.additional_properties!s})')

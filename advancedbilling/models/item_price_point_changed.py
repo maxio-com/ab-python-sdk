@@ -14,15 +14,15 @@ class ItemPricePointChanged(object):
 
     """Implementation of the 'Item Price Point Changed' model.
 
-    TODO: type model description here.
-
     Attributes:
-        item_id (int): TODO: type description here.
-        item_type (str): TODO: type description here.
-        item_handle (str): TODO: type description here.
-        item_name (str): TODO: type description here.
-        previous_price_point (ItemPricePointData): TODO: type description here.
-        current_price_point (ItemPricePointData): TODO: type description here.
+        item_id (int): The model property of type int.
+        item_type (str): The model property of type str.
+        item_handle (str): The model property of type str.
+        item_name (str): The model property of type str.
+        previous_price_point (ItemPricePointData): The model property of type
+            ItemPricePointData.
+        current_price_point (ItemPricePointData): The model property of type
+            ItemPricePointData.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -144,3 +144,23 @@ class ItemPricePointChanged(object):
             and APIHelper.is_valid_type(value=dictionary.get('current_price_point'),
                                         type_callable=lambda value: ItemPricePointData.validate(value),
                                         is_model_dict=True)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'item_id={self.item_id!r}, '
+                f'item_type={self.item_type!r}, '
+                f'item_handle={self.item_handle!r}, '
+                f'item_name={self.item_name!r}, '
+                f'previous_price_point={self.previous_price_point!r}, '
+                f'current_price_point={self.current_price_point!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'item_id={self.item_id!s}, '
+                f'item_type={self.item_type!s}, '
+                f'item_handle={self.item_handle!s}, '
+                f'item_name={self.item_name!s}, '
+                f'previous_price_point={self.previous_price_point!s}, '
+                f'current_price_point={self.current_price_point!s}, '
+                f'additional_properties={self.additional_properties!s})')

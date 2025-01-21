@@ -16,27 +16,26 @@ class UpdateSubscription(object):
 
     """Implementation of the 'Update Subscription' model.
 
-    TODO: type model description here.
-
     Attributes:
-        credit_card_attributes (CreditCardAttributes): TODO: type description
-            here.
+        credit_card_attributes (CreditCardAttributes): The model property of
+            type CreditCardAttributes.
         product_handle (str): Set to the handle of a different product to
             change the subscription's product
         product_id (int): Set to the id of a different product to change the
             subscription's product
-        product_change_delayed (bool): TODO: type description here.
+        product_change_delayed (bool): The model property of type bool.
         next_product_id (str): Set to an empty string to cancel a delayed
             product change.
-        next_product_price_point_id (str): TODO: type description here.
+        next_product_price_point_id (str): The model property of type str.
         snap_day (SnapDay | int | None): Use for subscriptions with product
             eligible for calendar billing only. Value can be 1-28 or 'end'.
-        next_billing_at (datetime): TODO: type description here.
-        payment_collection_method (str): TODO: type description here.
-        receives_invoice_emails (bool): TODO: type description here.
-        net_terms (str | int | None): TODO: type description here.
-        stored_credential_transaction_id (int): TODO: type description here.
-        reference (str): TODO: type description here.
+        next_billing_at (datetime): The model property of type datetime.
+        payment_collection_method (str): The model property of type str.
+        receives_invoice_emails (bool): The model property of type bool.
+        net_terms (str | int | None): The model property of type str | int |
+            None.
+        stored_credential_transaction_id (int): The model property of type int.
+        reference (str): The model property of type str.
         custom_price (SubscriptionCustomPrice): (Optional) Used in place of
             `product_price_point_id` to define a custom price point unique to
             the subscription
@@ -240,3 +239,49 @@ class UpdateSubscription(object):
                    product_price_point_id,
                    product_price_point_handle,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'credit_card_attributes={self.credit_card_attributes!r}, '
+                f'product_handle={self.product_handle!r}, '
+                f'product_id={self.product_id!r}, '
+                f'product_change_delayed={self.product_change_delayed!r}, '
+                f'next_product_id={self.next_product_id!r}, '
+                f'next_product_price_point_id={self.next_product_price_point_id!r}, '
+                f'snap_day={self.snap_day!r}, '
+                f'next_billing_at={self.next_billing_at!r}, '
+                f'payment_collection_method={self.payment_collection_method!r}, '
+                f'receives_invoice_emails={self.receives_invoice_emails!r}, '
+                f'net_terms={self.net_terms!r}, '
+                f'stored_credential_transaction_id={self.stored_credential_transaction_id!r}, '
+                f'reference={self.reference!r}, '
+                f'custom_price={self.custom_price!r}, '
+                f'components={self.components!r}, '
+                f'dunning_communication_delay_enabled={self.dunning_communication_delay_enabled!r}, '
+                f'dunning_communication_delay_time_zone={self.dunning_communication_delay_time_zone!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'product_price_point_handle={self.product_price_point_handle!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'credit_card_attributes={self.credit_card_attributes!s}, '
+                f'product_handle={self.product_handle!s}, '
+                f'product_id={self.product_id!s}, '
+                f'product_change_delayed={self.product_change_delayed!s}, '
+                f'next_product_id={self.next_product_id!s}, '
+                f'next_product_price_point_id={self.next_product_price_point_id!s}, '
+                f'snap_day={self.snap_day!s}, '
+                f'next_billing_at={self.next_billing_at!s}, '
+                f'payment_collection_method={self.payment_collection_method!s}, '
+                f'receives_invoice_emails={self.receives_invoice_emails!s}, '
+                f'net_terms={self.net_terms!s}, '
+                f'stored_credential_transaction_id={self.stored_credential_transaction_id!s}, '
+                f'reference={self.reference!s}, '
+                f'custom_price={self.custom_price!s}, '
+                f'components={self.components!s}, '
+                f'dunning_communication_delay_enabled={self.dunning_communication_delay_enabled!s}, '
+                f'dunning_communication_delay_time_zone={self.dunning_communication_delay_time_zone!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'product_price_point_handle={self.product_price_point_handle!s}, '
+                f'additional_properties={self.additional_properties!s})')

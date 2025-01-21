@@ -16,11 +16,11 @@ class ItemCategory(object):
     Services, Physical Goods, Other
 
     Attributes:
-        ENUM_BUSINESS SOFTWARE: TODO: type description here.
-        ENUM_CONSUMER SOFTWARE: TODO: type description here.
-        ENUM_DIGITAL SERVICES: TODO: type description here.
-        ENUM_PHYSICAL GOODS: TODO: type description here.
-        OTHER: TODO: type description here.
+        ENUM_BUSINESS SOFTWARE: The enum member of type str.
+        ENUM_CONSUMER SOFTWARE: The enum member of type str.
+        ENUM_DIGITAL SERVICES: The enum member of type str.
+        ENUM_PHYSICAL GOODS: The enum member of type str.
+        OTHER: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

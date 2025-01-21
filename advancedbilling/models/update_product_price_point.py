@@ -13,11 +13,9 @@ class UpdateProductPricePoint(object):
 
     """Implementation of the 'Update Product Price Point' model.
 
-    TODO: type model description here.
-
     Attributes:
-        handle (str): TODO: type description here.
-        price_in_cents (long|int): TODO: type description here.
+        handle (str): The model property of type str.
+        price_in_cents (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -78,3 +76,15 @@ class UpdateProductPricePoint(object):
         return cls(handle,
                    price_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'handle={self.handle!r}, '
+                f'price_in_cents={self.price_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'handle={self.handle!s}, '
+                f'price_in_cents={self.price_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

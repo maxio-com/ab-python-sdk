@@ -13,8 +13,6 @@ class Proration(object):
 
     """Implementation of the 'Proration' model.
 
-    TODO: type model description here.
-
     Attributes:
         preserve_period (bool): The alternative to sending preserve_period as
             a direct attribute to migration
@@ -71,3 +69,13 @@ class Proration(object):
         # Return an object of this model
         return cls(preserve_period,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'preserve_period={self.preserve_period!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'preserve_period={self.preserve_period!s}, '
+                f'additional_properties={self.additional_properties!s})')

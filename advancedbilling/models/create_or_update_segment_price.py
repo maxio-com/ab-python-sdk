@@ -13,11 +13,9 @@ class CreateOrUpdateSegmentPrice(object):
 
     """Implementation of the 'Create or Update Segment Price' model.
 
-    TODO: type model description here.
-
     Attributes:
-        starting_quantity (int): TODO: type description here.
-        ending_quantity (int): TODO: type description here.
+        starting_quantity (int): The model property of type int.
+        ending_quantity (int): The model property of type int.
         unit_price (str | float): The price can contain up to 8 decimal
             places. i.e. 1.00 or 0.0012 or 0.00000065
         additional_properties (Dict[str, object]): The additional properties
@@ -109,3 +107,17 @@ class CreateOrUpdateSegmentPrice(object):
             return False
 
         return UnionTypeLookUp.get('CreateOrUpdateSegmentPriceUnitPrice').validate(dictionary.get('unit_price')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'starting_quantity={self.starting_quantity!r}, '
+                f'ending_quantity={self.ending_quantity!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'starting_quantity={self.starting_quantity!s}, '
+                f'ending_quantity={self.ending_quantity!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'additional_properties={self.additional_properties!s})')

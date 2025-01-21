@@ -13,11 +13,9 @@ class Errors(object):
 
     """Implementation of the 'Errors' model.
 
-    TODO: type model description here.
-
     Attributes:
-        per_page (List[str]): TODO: type description here.
-        price_point (List[str]): TODO: type description here.
+        per_page (List[str]): The model property of type List[str].
+        price_point (List[str]): The model property of type List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -78,3 +76,15 @@ class Errors(object):
         return cls(per_page,
                    price_point,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'per_page={self.per_page!r}, '
+                f'price_point={self.price_point!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'per_page={self.per_page!s}, '
+                f'price_point={self.price_point!s}, '
+                f'additional_properties={self.additional_properties!s})')

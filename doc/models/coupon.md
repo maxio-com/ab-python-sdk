@@ -14,7 +14,7 @@
 | `code` | `str` | Optional | - |
 | `description` | `str` | Optional | - |
 | `amount` | `float` | Optional | - |
-| `amount_in_cents` | `long\|int` | Optional | - |
+| `amount_in_cents` | `int` | Optional | - |
 | `product_family_id` | `int` | Optional | - |
 | `product_family_name` | `str` | Optional | - |
 | `start_date` | `datetime` | Optional | - |

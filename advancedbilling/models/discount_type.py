@@ -12,11 +12,9 @@ class DiscountType(object):
 
     """Implementation of the 'Discount Type' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        AMOUNT: TODO: type description here.
-        PERCENT: TODO: type description here.
+        AMOUNT: The enum member of type str.
+        PERCENT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

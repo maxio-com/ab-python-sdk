@@ -14,13 +14,15 @@ class SubscriptionGroupBalances(object):
 
     """Implementation of the 'Subscription Group Balances' model.
 
-    TODO: type model description here.
-
     Attributes:
-        prepayments (AccountBalance): TODO: type description here.
-        service_credits (AccountBalance): TODO: type description here.
-        open_invoices (AccountBalance): TODO: type description here.
-        pending_discounts (AccountBalance): TODO: type description here.
+        prepayments (AccountBalance): The model property of type
+            AccountBalance.
+        service_credits (AccountBalance): The model property of type
+            AccountBalance.
+        open_invoices (AccountBalance): The model property of type
+            AccountBalance.
+        pending_discounts (AccountBalance): The model property of type
+            AccountBalance.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -95,3 +97,19 @@ class SubscriptionGroupBalances(object):
                    open_invoices,
                    pending_discounts,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'prepayments={self.prepayments!r}, '
+                f'service_credits={self.service_credits!r}, '
+                f'open_invoices={self.open_invoices!r}, '
+                f'pending_discounts={self.pending_discounts!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'prepayments={self.prepayments!s}, '
+                f'service_credits={self.service_credits!s}, '
+                f'open_invoices={self.open_invoices!s}, '
+                f'pending_discounts={self.pending_discounts!s}, '
+                f'additional_properties={self.additional_properties!s})')

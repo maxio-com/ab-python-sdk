@@ -13,16 +13,14 @@ class CustomFieldValueChange(object):
 
     """Implementation of the 'Custom Field Value Change' model.
 
-    TODO: type model description here.
-
     Attributes:
-        event_type (str): TODO: type description here.
-        metafield_name (str): TODO: type description here.
-        metafield_id (int): TODO: type description here.
-        old_value (str): TODO: type description here.
-        new_value (str): TODO: type description here.
-        resource_type (str): TODO: type description here.
-        resource_id (int): TODO: type description here.
+        event_type (str): The model property of type str.
+        metafield_name (str): The model property of type str.
+        metafield_id (int): The model property of type int.
+        old_value (str): The model property of type str.
+        new_value (str): The model property of type str.
+        resource_type (str): The model property of type str.
+        resource_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -158,3 +156,25 @@ class CustomFieldValueChange(object):
                                         type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('resource_id'),
                                         type_callable=lambda value: isinstance(value, int))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'event_type={self.event_type!r}, '
+                f'metafield_name={self.metafield_name!r}, '
+                f'metafield_id={self.metafield_id!r}, '
+                f'old_value={self.old_value!r}, '
+                f'new_value={self.new_value!r}, '
+                f'resource_type={self.resource_type!r}, '
+                f'resource_id={self.resource_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'event_type={self.event_type!s}, '
+                f'metafield_name={self.metafield_name!s}, '
+                f'metafield_id={self.metafield_id!s}, '
+                f'old_value={self.old_value!s}, '
+                f'new_value={self.new_value!s}, '
+                f'resource_type={self.resource_type!s}, '
+                f'resource_id={self.resource_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

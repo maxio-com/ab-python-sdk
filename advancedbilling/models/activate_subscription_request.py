@@ -13,8 +13,6 @@ class ActivateSubscriptionRequest(object):
 
     """Implementation of the 'Activate Subscription Request' model.
 
-    TODO: type model description here.
-
     Attributes:
         revert_on_failure (bool): You may choose how to handle the activation
             failure. `true` means do not change the subscription’s state and
@@ -79,3 +77,13 @@ class ActivateSubscriptionRequest(object):
         # Return an object of this model
         return cls(revert_on_failure,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'revert_on_failure={self.revert_on_failure!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'revert_on_failure={self.revert_on_failure!s}, '
+                f'additional_properties={self.additional_properties!s})')

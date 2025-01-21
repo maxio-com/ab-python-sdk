@@ -150,3 +150,23 @@ class ApplyDebitNoteEventData(object):
                                         type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('applied_amount'),
                                         type_callable=lambda value: isinstance(value, str))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'debit_note_number={self.debit_note_number!r}, '
+                f'debit_note_uid={self.debit_note_uid!r}, '
+                f'original_amount={self.original_amount!r}, '
+                f'applied_amount={self.applied_amount!r}, '
+                f'memo={self.memo!r}, '
+                f'transaction_time={self.transaction_time!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'debit_note_number={self.debit_note_number!s}, '
+                f'debit_note_uid={self.debit_note_uid!s}, '
+                f'original_amount={self.original_amount!s}, '
+                f'applied_amount={self.applied_amount!s}, '
+                f'memo={self.memo!s}, '
+                f'transaction_time={self.transaction_time!s}, '
+                f'additional_properties={self.additional_properties!s})')

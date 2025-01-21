@@ -15,9 +15,9 @@ class CurrencyPriceRole(object):
     Role for the price.
 
     Attributes:
-        BASELINE: TODO: type description here.
-        TRIAL: TODO: type description here.
-        INITIAL: TODO: type description here.
+        BASELINE: The enum member of type str.
+        TRIAL: The enum member of type str.
+        INITIAL: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

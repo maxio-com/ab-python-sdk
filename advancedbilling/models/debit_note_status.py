@@ -15,10 +15,10 @@ class DebitNoteStatus(object):
     Current status of the debit note.
 
     Attributes:
-        OPEN: TODO: type description here.
-        APPLIED: TODO: type description here.
-        BANISHED: TODO: type description here.
-        PAID: TODO: type description here.
+        OPEN: The enum member of type str.
+        APPLIED: The enum member of type str.
+        BANISHED: The enum member of type str.
+        PAID: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

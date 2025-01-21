@@ -13,12 +13,10 @@ class CreateProductFamily(object):
 
     """Implementation of the 'Create Product Family' model.
 
-    TODO: type model description here.
-
     Attributes:
-        name (str): TODO: type description here.
-        handle (str): TODO: type description here.
-        description (str): TODO: type description here.
+        name (str): The model property of type str.
+        handle (str): The model property of type str.
+        description (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -89,3 +87,17 @@ class CreateProductFamily(object):
                    handle,
                    description,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'description={self.description!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'description={self.description!s}, '
+                f'additional_properties={self.additional_properties!s})')

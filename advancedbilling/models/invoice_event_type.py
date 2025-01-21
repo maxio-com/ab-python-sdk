@@ -15,21 +15,21 @@ class InvoiceEventType(object):
     Invoice Event Type
 
     Attributes:
-        ISSUE_INVOICE: TODO: type description here.
-        APPLY_CREDIT_NOTE: TODO: type description here.
-        CREATE_CREDIT_NOTE: TODO: type description here.
-        APPLY_PAYMENT: TODO: type description here.
-        APPLY_DEBIT_NOTE: TODO: type description here.
-        CREATE_DEBIT_NOTE: TODO: type description here.
-        REFUND_INVOICE: TODO: type description here.
-        VOID_INVOICE: TODO: type description here.
-        VOID_REMAINDER: TODO: type description here.
-        BACKPORT_INVOICE: TODO: type description here.
-        CHANGE_INVOICE_STATUS: TODO: type description here.
-        CHANGE_INVOICE_COLLECTION_METHOD: TODO: type description here.
-        REMOVE_PAYMENT: TODO: type description here.
-        FAILED_PAYMENT: TODO: type description here.
-        CHANGE_CHARGEBACK_STATUS: TODO: type description here.
+        ISSUE_INVOICE: The enum member of type str.
+        APPLY_CREDIT_NOTE: The enum member of type str.
+        CREATE_CREDIT_NOTE: The enum member of type str.
+        APPLY_PAYMENT: The enum member of type str.
+        APPLY_DEBIT_NOTE: The enum member of type str.
+        CREATE_DEBIT_NOTE: The enum member of type str.
+        REFUND_INVOICE: The enum member of type str.
+        VOID_INVOICE: The enum member of type str.
+        VOID_REMAINDER: The enum member of type str.
+        BACKPORT_INVOICE: The enum member of type str.
+        CHANGE_INVOICE_STATUS: The enum member of type str.
+        CHANGE_INVOICE_COLLECTION_METHOD: The enum member of type str.
+        REMOVE_PAYMENT: The enum member of type str.
+        FAILED_PAYMENT: The enum member of type str.
+        CHANGE_CHARGEBACK_STATUS: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

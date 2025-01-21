@@ -13,15 +13,15 @@ class UpdatePrice(object):
 
     """Implementation of the 'Update Price' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        ending_quantity (int | str | None): TODO: type description here.
+        id (int): The model property of type int.
+        ending_quantity (int | str | None): The model property of type int |
+            str | None.
         unit_price (float | str | None): The price can contain up to 8 decimal
             places. i.e. 1.00 or 0.0012 or 0.00000065
-        destroy (bool): TODO: type description here.
-        starting_quantity (int | str | None): TODO: type description here.
+        destroy (bool): The model property of type bool.
+        starting_quantity (int | str | None): The model property of type int |
+            str | None.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -104,3 +104,21 @@ class UpdatePrice(object):
                    destroy,
                    starting_quantity,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'ending_quantity={self.ending_quantity!r}, '
+                f'unit_price={self.unit_price!r}, '
+                f'destroy={self.destroy!r}, '
+                f'starting_quantity={self.starting_quantity!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'ending_quantity={self.ending_quantity!s}, '
+                f'unit_price={self.unit_price!s}, '
+                f'destroy={self.destroy!s}, '
+                f'starting_quantity={self.starting_quantity!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -12,11 +12,9 @@ class CreateInvoiceStatus(object):
 
     """Implementation of the 'Create Invoice Status' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        DRAFT: TODO: type description here.
-        OPEN: TODO: type description here.
+        DRAFT: The enum member of type str.
+        OPEN: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

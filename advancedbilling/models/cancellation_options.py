@@ -13,8 +13,6 @@ class CancellationOptions(object):
 
     """Implementation of the 'Cancellation Options' model.
 
-    TODO: type model description here.
-
     Attributes:
         cancellation_message (str): For your internal use. An indication as to
             why the subscription is being canceled.
@@ -80,3 +78,15 @@ class CancellationOptions(object):
         return cls(cancellation_message,
                    reason_code,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'cancellation_message={self.cancellation_message!r}, '
+                f'reason_code={self.reason_code!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'cancellation_message={self.cancellation_message!s}, '
+                f'reason_code={self.reason_code!s}, '
+                f'additional_properties={self.additional_properties!s})')

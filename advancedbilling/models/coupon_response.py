@@ -14,10 +14,8 @@ class CouponResponse(object):
 
     """Implementation of the 'Coupon Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        coupon (Coupon): TODO: type description here.
+        coupon (Coupon): The model property of type Coupon.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +69,13 @@ class CouponResponse(object):
         # Return an object of this model
         return cls(coupon,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'coupon={self.coupon!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'coupon={self.coupon!s}, '
+                f'additional_properties={self.additional_properties!s})')

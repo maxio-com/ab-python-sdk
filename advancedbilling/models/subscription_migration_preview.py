@@ -13,18 +13,16 @@ class SubscriptionMigrationPreview(object):
 
     """Implementation of the 'Subscription Migration Preview' model.
 
-    TODO: type model description here.
-
     Attributes:
-        prorated_adjustment_in_cents (long|int): The amount of the prorated
+        prorated_adjustment_in_cents (int): The amount of the prorated
             adjustment that would be issued for the current subscription.
-        charge_in_cents (long|int): The amount of the charge that would be
-            created for the new product.
-        payment_due_in_cents (long|int): The amount of the payment due in the
-            case of an upgrade.
-        credit_applied_in_cents (long|int): Represents a credit in cents that
-            is applied to your subscription as part of a migration process for
-            a specific product, which reduces the amount owed for the
+        charge_in_cents (int): The amount of the charge that would be created
+            for the new product.
+        payment_due_in_cents (int): The amount of the payment due in the case
+            of an upgrade.
+        credit_applied_in_cents (int): Represents a credit in cents that is
+            applied to your subscription as part of a migration process for a
+            specific product, which reduces the amount owed for the
             subscription.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
@@ -100,3 +98,19 @@ class SubscriptionMigrationPreview(object):
                    payment_due_in_cents,
                    credit_applied_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'prorated_adjustment_in_cents={self.prorated_adjustment_in_cents!r}, '
+                f'charge_in_cents={self.charge_in_cents!r}, '
+                f'payment_due_in_cents={self.payment_due_in_cents!r}, '
+                f'credit_applied_in_cents={self.credit_applied_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'prorated_adjustment_in_cents={self.prorated_adjustment_in_cents!s}, '
+                f'charge_in_cents={self.charge_in_cents!s}, '
+                f'payment_due_in_cents={self.payment_due_in_cents!s}, '
+                f'credit_applied_in_cents={self.credit_applied_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

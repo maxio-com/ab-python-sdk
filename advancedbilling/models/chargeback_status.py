@@ -15,10 +15,10 @@ class ChargebackStatus(object):
     The current chargeback status.
 
     Attributes:
-        OPEN: TODO: type description here.
-        LOST: TODO: type description here.
-        WON: TODO: type description here.
-        CLOSED: TODO: type description here.
+        OPEN: The enum member of type str.
+        LOST: The enum member of type str.
+        WON: The enum member of type str.
+        CLOSED: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

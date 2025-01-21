@@ -142,3 +142,21 @@ class ComponentCustomPrice(object):
                                        type_callable=lambda value: Price.validate(value),
                                        is_model_dict=True,
                                        is_inner_model_dict=True)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'tax_included={self.tax_included!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'prices={self.prices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'tax_included={self.tax_included!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'prices={self.prices!s}, '
+                f'additional_properties={self.additional_properties!s})')

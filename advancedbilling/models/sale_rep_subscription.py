@@ -13,19 +13,17 @@ class SaleRepSubscription(object):
 
     """Implementation of the 'Sale Rep Subscription' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        site_name (str): TODO: type description here.
-        subscription_url (str): TODO: type description here.
-        customer_name (str): TODO: type description here.
-        created_at (str): TODO: type description here.
-        mrr (str): TODO: type description here.
-        usage (str): TODO: type description here.
-        recurring (str): TODO: type description here.
-        last_payment (str): TODO: type description here.
-        churn_date (str): TODO: type description here.
+        id (int): The model property of type int.
+        site_name (str): The model property of type str.
+        subscription_url (str): The model property of type str.
+        customer_name (str): The model property of type str.
+        created_at (str): The model property of type str.
+        mrr (str): The model property of type str.
+        usage (str): The model property of type str.
+        recurring (str): The model property of type str.
+        last_payment (str): The model property of type str.
+        churn_date (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -146,3 +144,31 @@ class SaleRepSubscription(object):
                    last_payment,
                    churn_date,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'site_name={self.site_name!r}, '
+                f'subscription_url={self.subscription_url!r}, '
+                f'customer_name={self.customer_name!r}, '
+                f'created_at={self.created_at!r}, '
+                f'mrr={self.mrr!r}, '
+                f'usage={self.usage!r}, '
+                f'recurring={self.recurring!r}, '
+                f'last_payment={self.last_payment!r}, '
+                f'churn_date={self.churn_date!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'site_name={self.site_name!s}, '
+                f'subscription_url={self.subscription_url!s}, '
+                f'customer_name={self.customer_name!s}, '
+                f'created_at={self.created_at!s}, '
+                f'mrr={self.mrr!s}, '
+                f'usage={self.usage!s}, '
+                f'recurring={self.recurring!s}, '
+                f'last_payment={self.last_payment!s}, '
+                f'churn_date={self.churn_date!s}, '
+                f'additional_properties={self.additional_properties!s})')

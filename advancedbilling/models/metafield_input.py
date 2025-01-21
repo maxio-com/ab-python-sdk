@@ -19,10 +19,10 @@ class MetafieldInput(object):
     Signup Page. Defaults to 'text'
 
     Attributes:
-        BALANCE_TRACKER: TODO: type description here.
-        TEXT: TODO: type description here.
-        RADIO: TODO: type description here.
-        DROPDOWN: TODO: type description here.
+        BALANCE_TRACKER: The enum member of type str.
+        TEXT: The enum member of type str.
+        RADIO: The enum member of type str.
+        DROPDOWN: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

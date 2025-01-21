@@ -16,17 +16,19 @@ class SubscriptionGroupSubscriptionError(object):
     Object which contains subscription errors.
 
     Attributes:
-        product (List[str]): TODO: type description here.
-        product_price_point_id (List[str]): TODO: type description here.
-        payment_profile (List[str]): TODO: type description here.
-        payment_profile_chargify_token (List[str]): TODO: type description
-            here.
-        base (List[str]): TODO: type description here.
-        payment_profile_expiration_month (List[str]): TODO: type description
-            here.
-        payment_profile_expiration_year (List[str]): TODO: type description
-            here.
-        payment_profile_full_number (List[str]): TODO: type description here.
+        product (List[str]): The model property of type List[str].
+        product_price_point_id (List[str]): The model property of type
+            List[str].
+        payment_profile (List[str]): The model property of type List[str].
+        payment_profile_chargify_token (List[str]): The model property of type
+            List[str].
+        base (List[str]): The model property of type List[str].
+        payment_profile_expiration_month (List[str]): The model property of
+            type List[str].
+        payment_profile_expiration_year (List[str]): The model property of
+            type List[str].
+        payment_profile_full_number (List[str]): The model property of type
+            List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -129,3 +131,27 @@ class SubscriptionGroupSubscriptionError(object):
                    payment_profile_expiration_year,
                    payment_profile_full_number,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'product={self.product!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'payment_profile={self.payment_profile!r}, '
+                f'payment_profile_chargify_token={self.payment_profile_chargify_token!r}, '
+                f'base={self.base!r}, '
+                f'payment_profile_expiration_month={self.payment_profile_expiration_month!r}, '
+                f'payment_profile_expiration_year={self.payment_profile_expiration_year!r}, '
+                f'payment_profile_full_number={self.payment_profile_full_number!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'product={self.product!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'payment_profile={self.payment_profile!s}, '
+                f'payment_profile_chargify_token={self.payment_profile_chargify_token!s}, '
+                f'base={self.base!s}, '
+                f'payment_profile_expiration_month={self.payment_profile_expiration_month!s}, '
+                f'payment_profile_expiration_year={self.payment_profile_expiration_year!s}, '
+                f'payment_profile_full_number={self.payment_profile_full_number!s}, '
+                f'additional_properties={self.additional_properties!s})')

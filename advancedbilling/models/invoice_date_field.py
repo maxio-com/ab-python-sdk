@@ -12,14 +12,12 @@ class InvoiceDateField(object):
 
     """Implementation of the 'Invoice Date Field' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CREATED_AT: TODO: type description here.
-        DUE_DATE: TODO: type description here.
-        ISSUE_DATE: TODO: type description here.
-        UPDATED_AT: TODO: type description here.
-        PAID_DATE: TODO: type description here.
+        CREATED_AT: The enum member of type str.
+        DUE_DATE: The enum member of type str.
+        ISSUE_DATE: The enum member of type str.
+        UPDATED_AT: The enum member of type str.
+        PAID_DATE: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

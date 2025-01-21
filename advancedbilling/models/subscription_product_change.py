@@ -13,11 +13,9 @@ class SubscriptionProductChange(object):
 
     """Implementation of the 'Subscription Product Change' model.
 
-    TODO: type model description here.
-
     Attributes:
-        previous_product_id (int): TODO: type description here.
-        new_product_id (int): TODO: type description here.
+        previous_product_id (int): The model property of type int.
+        new_product_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -99,3 +97,15 @@ class SubscriptionProductChange(object):
                                        type_callable=lambda value: isinstance(value, int)) \
             and APIHelper.is_valid_type(value=dictionary.get('new_product_id'),
                                         type_callable=lambda value: isinstance(value, int))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'previous_product_id={self.previous_product_id!r}, '
+                f'new_product_id={self.new_product_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'previous_product_id={self.previous_product_id!s}, '
+                f'new_product_id={self.new_product_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

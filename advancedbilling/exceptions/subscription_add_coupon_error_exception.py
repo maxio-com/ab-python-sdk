@@ -8,10 +8,10 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 from advancedbilling.api_helper import APIHelper
-import advancedbilling.exceptions.api_exception
+from advancedbilling.exceptions.api_exception import APIException
 
 
-class SubscriptionAddCouponErrorException(advancedbilling.exceptions.api_exception.APIException):
+class SubscriptionAddCouponErrorException(APIException):
     def __init__(self, reason, response):
         """Constructor for the SubscriptionAddCouponErrorException class
 
@@ -39,3 +39,12 @@ class SubscriptionAddCouponErrorException(advancedbilling.exceptions.api_excepti
         self.coupon_code = dictionary.get("coupon_code") if dictionary.get("coupon_code") else None
         self.coupon_codes = dictionary.get("coupon_codes") if dictionary.get("coupon_codes") else None
         self.subscription = dictionary.get("subscription") if dictionary.get("subscription") else None
+
+    def __str__(self):
+        base_str = super().__str__()
+        return (f'{self.__class__.__name__}('
+                f'{base_str[base_str.find("(") + 1:-1]}, '
+                f'codes={self.codes!s}, '
+                f'coupon_code={self.coupon_code!s}, '
+                f'coupon_codes={self.coupon_codes!s}, '
+                f'subscription={self.subscription!s})')

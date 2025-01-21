@@ -13,8 +13,6 @@ class PublicSignupPage(object):
 
     """Implementation of the 'Public Signup Page' model.
 
-    TODO: type model description here.
-
     Attributes:
         id (int): The id of the signup page (public_signup_pages only)
         return_url (str): The url to which a customer will be returned after a
@@ -102,3 +100,19 @@ class PublicSignupPage(object):
                    return_params,
                    url,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'return_url={self.return_url!r}, '
+                f'return_params={self.return_params!r}, '
+                f'url={self.url!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'return_url={self.return_url!s}, '
+                f'return_params={self.return_params!s}, '
+                f'url={self.url!s}, '
+                f'additional_properties={self.additional_properties!s})')

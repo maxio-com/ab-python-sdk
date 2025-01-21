@@ -30,10 +30,8 @@ class Invoice(object):
 
     """Implementation of the 'Invoice' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (long|int): TODO: type description here.
+        id (int): The model property of type int.
         uid (str): Unique identifier for the invoice. It is generated
             automatically by Chargify and has the prefix "inv_" followed by
             alphanumeric characters.
@@ -48,9 +46,9 @@ class Invoice(object):
         sequence_number (int): A monotonically increasing number assigned to
             invoices as they are created.  This number is unique within a site
             and can be used to sort and order invoices.
-        transaction_time (datetime): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        updated_at (datetime): TODO: type description here.
+        transaction_time (datetime): The model property of type datetime.
+        created_at (datetime): The model property of type datetime.
+        updated_at (datetime): The model property of type datetime.
         issue_date (date): Date the invoice was issued to the customer.  This
             is the date that the invoice was made available for payment.  The
             format is `"YYYY-MM-DD"`.
@@ -63,8 +61,8 @@ class Invoice(object):
             [Invoice
             Statuses](https://maxio.zendesk.com/hc/en-us/articles/2425228782964
             5-Advanced-Billing-Invoices-Overview#invoice-statuses) for more.
-        role (InvoiceRole): TODO: type description here.
-        parent_invoice_id (int): TODO: type description here.
+        role (InvoiceRole): The model property of type InvoiceRole.
+        parent_invoice_id (int): The model property of type int.
         collection_method (CollectionMethod): The type of payment collection
             to be used in the subscription. For legacy Statements Architecture
             valid options are - `invoice`, `automatic`. For current
@@ -90,7 +88,7 @@ class Invoice(object):
         parent_invoice_uid (str): For invoices with `consolidation_level` of
             `child`, this specifies the UID of the parent (consolidated)
             invoice.
-        subscription_group_id (int): TODO: type description here.
+        subscription_group_id (int): The model property of type int.
         parent_invoice_number (int): For invoices with `consolidation_level`
             of `child`, this specifies the number of the parent (consolidated)
             invoice.
@@ -106,9 +104,9 @@ class Invoice(object):
             on the masthead of the invoice.
         customer (InvoiceCustomer): Information about the customer who is
             owner or recipient the invoiced subscription.
-        payer (InvoicePayer): TODO: type description here.
-        recipient_emails (List[str]): TODO: type description here.
-        net_terms (int): TODO: type description here.
+        payer (InvoicePayer): The model property of type InvoicePayer.
+        recipient_emails (List[str]): The model property of type List[str].
+        net_terms (int): The model property of type int.
         memo (str): The memo printed on invoices of any collection type.  This
             message is in control of the merchant.
         billing_address (InvoiceAddress): The invoice billing address.
@@ -121,24 +119,32 @@ class Invoice(object):
             discount_amount + tax_amount`.'
         credit_amount (str): The amount of credit (from credit notes) applied
             to this invoice.  Credits offset the amount due from the customer.
-        debit_amount (str): TODO: type description here.
-        refund_amount (str): TODO: type description here.
+        debit_amount (str): The model property of type str.
+        refund_amount (str): The model property of type str.
         paid_amount (str): The amount paid on the invoice by the customer.
         due_amount (str): Amount due on the invoice, which is `total_amount -
             credit_amount - paid_amount`.
         line_items (List[InvoiceLineItem]): Line items on the invoice.
-        discounts (List[InvoiceDiscount]): TODO: type description here.
-        taxes (List[InvoiceTax]): TODO: type description here.
-        credits (List[InvoiceCredit]): TODO: type description here.
-        debits (List[InvoiceDebit]): TODO: type description here.
-        refunds (List[InvoiceRefund]): TODO: type description here.
-        payments (List[InvoicePayment]): TODO: type description here.
-        custom_fields (List[InvoiceCustomField]): TODO: type description here.
-        display_settings (InvoiceDisplaySettings): TODO: type description here.
-        avatax_details (InvoiceAvataxDetails): TODO: type description here.
+        discounts (List[InvoiceDiscount]): The model property of type
+            List[InvoiceDiscount].
+        taxes (List[InvoiceTax]): The model property of type List[InvoiceTax].
+        credits (List[InvoiceCredit]): The model property of type
+            List[InvoiceCredit].
+        debits (List[InvoiceDebit]): The model property of type
+            List[InvoiceDebit].
+        refunds (List[InvoiceRefund]): The model property of type
+            List[InvoiceRefund].
+        payments (List[InvoicePayment]): The model property of type
+            List[InvoicePayment].
+        custom_fields (List[InvoiceCustomField]): The model property of type
+            List[InvoiceCustomField].
+        display_settings (InvoiceDisplaySettings): The model property of type
+            InvoiceDisplaySettings.
+        avatax_details (InvoiceAvataxDetails): The model property of type
+            InvoiceAvataxDetails.
         public_url (str): The public URL of the invoice
-        previous_balance_data (InvoicePreviousBalance): TODO: type description
-            here.
+        previous_balance_data (InvoicePreviousBalance): The model property of
+            type InvoicePreviousBalance.
         public_url_expires_on (date): The format is `"YYYY-MM-DD"`.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
@@ -644,3 +650,123 @@ class Invoice(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'uid={self.uid!r}, '
+                f'site_id={self.site_id!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'number={self.number!r}, '
+                f'sequence_number={self.sequence_number!r}, '
+                f'transaction_time={self.transaction_time!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'issue_date={self.issue_date!r}, '
+                f'due_date={self.due_date!r}, '
+                f'paid_date={self.paid_date!r}, '
+                f'status={self.status!r}, '
+                f'role={self.role!r}, '
+                f'parent_invoice_id={self.parent_invoice_id!r}, '
+                f'collection_method={self.collection_method!r}, '
+                f'payment_instructions={self.payment_instructions!r}, '
+                f'currency={self.currency!r}, '
+                f'consolidation_level={self.consolidation_level!r}, '
+                f'parent_invoice_uid={self.parent_invoice_uid!r}, '
+                f'subscription_group_id={self.subscription_group_id!r}, '
+                f'parent_invoice_number={self.parent_invoice_number!r}, '
+                f'group_primary_subscription_id={self.group_primary_subscription_id!r}, '
+                f'product_name={self.product_name!r}, '
+                f'product_family_name={self.product_family_name!r}, '
+                f'seller={self.seller!r}, '
+                f'customer={self.customer!r}, '
+                f'payer={self.payer!r}, '
+                f'recipient_emails={self.recipient_emails!r}, '
+                f'net_terms={self.net_terms!r}, '
+                f'memo={self.memo!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'shipping_address={self.shipping_address!r}, '
+                f'subtotal_amount={self.subtotal_amount!r}, '
+                f'discount_amount={self.discount_amount!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'total_amount={self.total_amount!r}, '
+                f'credit_amount={self.credit_amount!r}, '
+                f'debit_amount={self.debit_amount!r}, '
+                f'refund_amount={self.refund_amount!r}, '
+                f'paid_amount={self.paid_amount!r}, '
+                f'due_amount={self.due_amount!r}, '
+                f'line_items={self.line_items!r}, '
+                f'discounts={self.discounts!r}, '
+                f'taxes={self.taxes!r}, '
+                f'credits={self.credits!r}, '
+                f'debits={self.debits!r}, '
+                f'refunds={self.refunds!r}, '
+                f'payments={self.payments!r}, '
+                f'custom_fields={self.custom_fields!r}, '
+                f'display_settings={self.display_settings!r}, '
+                f'avatax_details={self.avatax_details!r}, '
+                f'public_url={self.public_url!r}, '
+                f'previous_balance_data={self.previous_balance_data!r}, '
+                f'public_url_expires_on={self.public_url_expires_on!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'uid={self.uid!s}, '
+                f'site_id={self.site_id!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'number={self.number!s}, '
+                f'sequence_number={self.sequence_number!s}, '
+                f'transaction_time={self.transaction_time!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'issue_date={self.issue_date!s}, '
+                f'due_date={self.due_date!s}, '
+                f'paid_date={self.paid_date!s}, '
+                f'status={self.status!s}, '
+                f'role={self.role!s}, '
+                f'parent_invoice_id={self.parent_invoice_id!s}, '
+                f'collection_method={self.collection_method!s}, '
+                f'payment_instructions={self.payment_instructions!s}, '
+                f'currency={self.currency!s}, '
+                f'consolidation_level={self.consolidation_level!s}, '
+                f'parent_invoice_uid={self.parent_invoice_uid!s}, '
+                f'subscription_group_id={self.subscription_group_id!s}, '
+                f'parent_invoice_number={self.parent_invoice_number!s}, '
+                f'group_primary_subscription_id={self.group_primary_subscription_id!s}, '
+                f'product_name={self.product_name!s}, '
+                f'product_family_name={self.product_family_name!s}, '
+                f'seller={self.seller!s}, '
+                f'customer={self.customer!s}, '
+                f'payer={self.payer!s}, '
+                f'recipient_emails={self.recipient_emails!s}, '
+                f'net_terms={self.net_terms!s}, '
+                f'memo={self.memo!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'shipping_address={self.shipping_address!s}, '
+                f'subtotal_amount={self.subtotal_amount!s}, '
+                f'discount_amount={self.discount_amount!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'total_amount={self.total_amount!s}, '
+                f'credit_amount={self.credit_amount!s}, '
+                f'debit_amount={self.debit_amount!s}, '
+                f'refund_amount={self.refund_amount!s}, '
+                f'paid_amount={self.paid_amount!s}, '
+                f'due_amount={self.due_amount!s}, '
+                f'line_items={self.line_items!s}, '
+                f'discounts={self.discounts!s}, '
+                f'taxes={self.taxes!s}, '
+                f'credits={self.credits!s}, '
+                f'debits={self.debits!s}, '
+                f'refunds={self.refunds!s}, '
+                f'payments={self.payments!s}, '
+                f'custom_fields={self.custom_fields!s}, '
+                f'display_settings={self.display_settings!s}, '
+                f'avatax_details={self.avatax_details!s}, '
+                f'public_url={self.public_url!s}, '
+                f'previous_balance_data={self.previous_balance_data!s}, '
+                f'public_url_expires_on={self.public_url_expires_on!s}, '
+                f'additional_properties={self.additional_properties!s})')

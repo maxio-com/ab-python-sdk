@@ -14,12 +14,11 @@ class PaymentMethodBankAccount(object):
 
     """Implementation of the 'Payment Method Bank Account' model.
 
-    TODO: type model description here.
-
     Attributes:
-        masked_account_number (str): TODO: type description here.
-        masked_routing_number (str): TODO: type description here.
-        mtype (InvoiceEventPaymentMethod): TODO: type description here.
+        masked_account_number (str): The model property of type str.
+        masked_routing_number (str): The model property of type str.
+        mtype (InvoiceEventPaymentMethod): The model property of type
+            InvoiceEventPaymentMethod.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -110,3 +109,17 @@ class PaymentMethodBankAccount(object):
                                         type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('type'),
                                         type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'masked_account_number={self.masked_account_number!r}, '
+                f'masked_routing_number={self.masked_routing_number!r}, '
+                f'mtype={self.mtype!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'masked_account_number={self.masked_account_number!s}, '
+                f'masked_routing_number={self.masked_routing_number!s}, '
+                f'mtype={self.mtype!s}, '
+                f'additional_properties={self.additional_properties!s})')

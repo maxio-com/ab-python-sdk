@@ -14,14 +14,13 @@ class ListMetafieldsResponse(object):
 
     """Implementation of the 'List Metafields Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        total_count (int): TODO: type description here.
-        current_page (int): TODO: type description here.
-        total_pages (int): TODO: type description here.
-        per_page (int): TODO: type description here.
-        metafields (List[Metafield]): TODO: type description here.
+        total_count (int): The model property of type int.
+        current_page (int): The model property of type int.
+        total_pages (int): The model property of type int.
+        per_page (int): The model property of type int.
+        metafields (List[Metafield]): The model property of type
+            List[Metafield].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -107,3 +106,21 @@ class ListMetafieldsResponse(object):
                    per_page,
                    metafields,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'total_count={self.total_count!r}, '
+                f'current_page={self.current_page!r}, '
+                f'total_pages={self.total_pages!r}, '
+                f'per_page={self.per_page!r}, '
+                f'metafields={self.metafields!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'total_count={self.total_count!s}, '
+                f'current_page={self.current_page!s}, '
+                f'total_pages={self.total_pages!s}, '
+                f'per_page={self.per_page!s}, '
+                f'metafields={self.metafields!s}, '
+                f'additional_properties={self.additional_properties!s})')

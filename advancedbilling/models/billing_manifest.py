@@ -14,18 +14,17 @@ class BillingManifest(object):
 
     """Implementation of the 'Billing Manifest' model.
 
-    TODO: type model description here.
-
     Attributes:
-        line_items (List[BillingManifestItem]): TODO: type description here.
-        total_in_cents (long|int): TODO: type description here.
-        total_discount_in_cents (long|int): TODO: type description here.
-        total_tax_in_cents (long|int): TODO: type description here.
-        subtotal_in_cents (long|int): TODO: type description here.
-        start_date (datetime): TODO: type description here.
-        end_date (datetime): TODO: type description here.
-        period_type (str): TODO: type description here.
-        existing_balance_in_cents (long|int): TODO: type description here.
+        line_items (List[BillingManifestItem]): The model property of type
+            List[BillingManifestItem].
+        total_in_cents (int): The model property of type int.
+        total_discount_in_cents (int): The model property of type int.
+        total_tax_in_cents (int): The model property of type int.
+        subtotal_in_cents (int): The model property of type int.
+        start_date (datetime): The model property of type datetime.
+        end_date (datetime): The model property of type datetime.
+        period_type (str): The model property of type str.
+        existing_balance_in_cents (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -151,3 +150,29 @@ class BillingManifest(object):
                    period_type,
                    existing_balance_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'line_items={self.line_items!r}, '
+                f'total_in_cents={self.total_in_cents!r}, '
+                f'total_discount_in_cents={self.total_discount_in_cents!r}, '
+                f'total_tax_in_cents={self.total_tax_in_cents!r}, '
+                f'subtotal_in_cents={self.subtotal_in_cents!r}, '
+                f'start_date={self.start_date!r}, '
+                f'end_date={self.end_date!r}, '
+                f'period_type={self.period_type!r}, '
+                f'existing_balance_in_cents={self.existing_balance_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'line_items={self.line_items!s}, '
+                f'total_in_cents={self.total_in_cents!s}, '
+                f'total_discount_in_cents={self.total_discount_in_cents!s}, '
+                f'total_tax_in_cents={self.total_tax_in_cents!s}, '
+                f'subtotal_in_cents={self.subtotal_in_cents!s}, '
+                f'start_date={self.start_date!s}, '
+                f'end_date={self.end_date!s}, '
+                f'period_type={self.period_type!s}, '
+                f'existing_balance_in_cents={self.existing_balance_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

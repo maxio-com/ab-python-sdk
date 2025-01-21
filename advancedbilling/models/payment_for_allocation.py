@@ -16,10 +16,10 @@ class PaymentForAllocation(object):
     Information for captured payment, if applicable
 
     Attributes:
-        id (int): TODO: type description here.
-        amount_in_cents (long|int): TODO: type description here.
-        success (bool): TODO: type description here.
-        memo (str): TODO: type description here.
+        id (int): The model property of type int.
+        amount_in_cents (int): The model property of type int.
+        success (bool): The model property of type bool.
+        memo (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -116,3 +116,19 @@ class PaymentForAllocation(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'success={self.success!r}, '
+                f'memo={self.memo!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'success={self.success!s}, '
+                f'memo={self.memo!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -15,32 +15,31 @@ class Coupon(object):
 
     """Implementation of the 'Coupon' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        name (str): TODO: type description here.
-        code (str): TODO: type description here.
-        description (str): TODO: type description here.
-        amount (float): TODO: type description here.
-        amount_in_cents (long|int): TODO: type description here.
-        product_family_id (int): TODO: type description here.
-        product_family_name (str): TODO: type description here.
-        start_date (datetime): TODO: type description here.
+        id (int): The model property of type int.
+        name (str): The model property of type str.
+        code (str): The model property of type str.
+        description (str): The model property of type str.
+        amount (float): The model property of type float.
+        amount_in_cents (int): The model property of type int.
+        product_family_id (int): The model property of type int.
+        product_family_name (str): The model property of type str.
+        start_date (datetime): The model property of type datetime.
         end_date (datetime): After the given time, this coupon code will be
             invalid for new signups. Recurring discounts started before this
             date will continue to recur even after this date.
-        percentage (str): TODO: type description here.
-        recurring (bool): TODO: type description here.
-        recurring_scheme (RecurringScheme): TODO: type description here.
-        duration_period_count (int): TODO: type description here.
-        duration_interval (int): TODO: type description here.
-        duration_interval_unit (str): TODO: type description here.
-        duration_interval_span (str): TODO: type description here.
+        percentage (str): The model property of type str.
+        recurring (bool): The model property of type bool.
+        recurring_scheme (RecurringScheme): The model property of type
+            RecurringScheme.
+        duration_period_count (int): The model property of type int.
+        duration_interval (int): The model property of type int.
+        duration_interval_unit (str): The model property of type str.
+        duration_interval_span (str): The model property of type str.
         allow_negative_balance (bool): If set to true, discount is not limited
             (credits will carry forward to next billing).
-        archived_at (datetime): TODO: type description here.
-        conversion_limit (str): TODO: type description here.
+        archived_at (datetime): The model property of type datetime.
+        conversion_limit (str): The model property of type str.
         stackable (bool): A stackable coupon can be combined with other
             coupons on a Subscription.
         compounding_strategy (CompoundingStrategy): Applicable only to
@@ -49,15 +48,17 @@ class Coupon(object):
             have been calculated. For `full-price`, Percentage-based discounts
             will always be calculated against the original item price, before
             other discounts are applied.
-        use_site_exchange_rate (bool): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        updated_at (datetime): TODO: type description here.
-        discount_type (DiscountType): TODO: type description here.
-        exclude_mid_period_allocations (bool): TODO: type description here.
-        apply_on_cancel_at_end_of_period (bool): TODO: type description here.
-        apply_on_subscription_expiration (bool): TODO: type description here.
-        coupon_restrictions (List[CouponRestriction]): TODO: type description
-            here.
+        use_site_exchange_rate (bool): The model property of type bool.
+        created_at (datetime): The model property of type datetime.
+        updated_at (datetime): The model property of type datetime.
+        discount_type (DiscountType): The model property of type DiscountType.
+        exclude_mid_period_allocations (bool): The model property of type bool.
+        apply_on_cancel_at_end_of_period (bool): The model property of type
+            bool.
+        apply_on_subscription_expiration (bool): The model property of type
+            bool.
+        coupon_restrictions (List[CouponRestriction]): The model property of
+            type List[CouponRestriction].
         currency_prices (List[CouponCurrency]): Returned in read, find, and
             list endpoints if the query parameter is provided.
         additional_properties (Dict[str, object]): The additional properties
@@ -352,3 +353,73 @@ class Coupon(object):
                    coupon_restrictions,
                    currency_prices,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'name={self.name!r}, '
+                f'code={self.code!r}, '
+                f'description={self.description!r}, '
+                f'amount={self.amount!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'product_family_id={self.product_family_id!r}, '
+                f'product_family_name={self.product_family_name!r}, '
+                f'start_date={self.start_date!r}, '
+                f'end_date={self.end_date!r}, '
+                f'percentage={self.percentage!r}, '
+                f'recurring={self.recurring!r}, '
+                f'recurring_scheme={self.recurring_scheme!r}, '
+                f'duration_period_count={self.duration_period_count!r}, '
+                f'duration_interval={self.duration_interval!r}, '
+                f'duration_interval_unit={self.duration_interval_unit!r}, '
+                f'duration_interval_span={self.duration_interval_span!r}, '
+                f'allow_negative_balance={self.allow_negative_balance!r}, '
+                f'archived_at={self.archived_at!r}, '
+                f'conversion_limit={self.conversion_limit!r}, '
+                f'stackable={self.stackable!r}, '
+                f'compounding_strategy={self.compounding_strategy!r}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'discount_type={self.discount_type!r}, '
+                f'exclude_mid_period_allocations={self.exclude_mid_period_allocations!r}, '
+                f'apply_on_cancel_at_end_of_period={self.apply_on_cancel_at_end_of_period!r}, '
+                f'apply_on_subscription_expiration={self.apply_on_subscription_expiration!r}, '
+                f'coupon_restrictions={self.coupon_restrictions!r}, '
+                f'currency_prices={self.currency_prices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'name={self.name!s}, '
+                f'code={self.code!s}, '
+                f'description={self.description!s}, '
+                f'amount={self.amount!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'product_family_id={self.product_family_id!s}, '
+                f'product_family_name={self.product_family_name!s}, '
+                f'start_date={self.start_date!s}, '
+                f'end_date={self.end_date!s}, '
+                f'percentage={self.percentage!s}, '
+                f'recurring={self.recurring!s}, '
+                f'recurring_scheme={self.recurring_scheme!s}, '
+                f'duration_period_count={self.duration_period_count!s}, '
+                f'duration_interval={self.duration_interval!s}, '
+                f'duration_interval_unit={self.duration_interval_unit!s}, '
+                f'duration_interval_span={self.duration_interval_span!s}, '
+                f'allow_negative_balance={self.allow_negative_balance!s}, '
+                f'archived_at={self.archived_at!s}, '
+                f'conversion_limit={self.conversion_limit!s}, '
+                f'stackable={self.stackable!s}, '
+                f'compounding_strategy={self.compounding_strategy!s}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'discount_type={self.discount_type!s}, '
+                f'exclude_mid_period_allocations={self.exclude_mid_period_allocations!s}, '
+                f'apply_on_cancel_at_end_of_period={self.apply_on_cancel_at_end_of_period!s}, '
+                f'apply_on_subscription_expiration={self.apply_on_subscription_expiration!s}, '
+                f'coupon_restrictions={self.coupon_restrictions!s}, '
+                f'currency_prices={self.currency_prices!s}, '
+                f'additional_properties={self.additional_properties!s})')

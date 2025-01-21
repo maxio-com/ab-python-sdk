@@ -23,9 +23,9 @@ class SubscriptionGroupComponentCustomPrice(object):
             See [Product
             Components](https://help.chargify.com/products/product-components.h
             tml) for an overview of pricing schemes.
-        prices (List[Price]): TODO: type description here.
-        overage_pricing (List[ComponentCustomPrice]): TODO: type description
-            here.
+        prices (List[Price]): The model property of type List[Price].
+        overage_pricing (List[ComponentCustomPrice]): The model property of
+            type List[ComponentCustomPrice].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -123,3 +123,17 @@ class SubscriptionGroupComponentCustomPrice(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'prices={self.prices!r}, '
+                f'overage_pricing={self.overage_pricing!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'prices={self.prices!s}, '
+                f'overage_pricing={self.overage_pricing!s}, '
+                f'additional_properties={self.additional_properties!s})')

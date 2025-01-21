@@ -13,13 +13,11 @@ class ComponentAllocationErrorItem(object):
 
     """Implementation of the 'Component Allocation Error Item' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component_id (int): TODO: type description here.
-        message (str): TODO: type description here.
-        kind (str): TODO: type description here.
-        on (str): TODO: type description here.
+        component_id (int): The model property of type int.
+        message (str): The model property of type str.
+        kind (str): The model property of type str.
+        on (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -94,3 +92,19 @@ class ComponentAllocationErrorItem(object):
                    kind,
                    on,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!r}, '
+                f'message={self.message!r}, '
+                f'kind={self.kind!r}, '
+                f'on={self.on!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!s}, '
+                f'message={self.message!s}, '
+                f'kind={self.kind!s}, '
+                f'on={self.on!s}, '
+                f'additional_properties={self.additional_properties!s})')

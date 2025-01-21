@@ -15,10 +15,8 @@ class Product(object):
 
     """Implementation of the 'Product' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
+        id (int): The model property of type int.
         name (str): The product name
         handle (str): The product API handle
         description (str): The product description
@@ -37,15 +35,14 @@ class Product(object):
             created
         updated_at (datetime): Timestamp indicating when this product was last
             updated
-        price_in_cents (long|int): The product price, in integer cents
+        price_in_cents (int): The product price, in integer cents
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this product would
             renew every 30 days
         interval_unit (IntervalUnit): A string representing the interval unit
             for this product, either month or day
-        initial_charge_in_cents (long|int): The up front charge you have
-            specified.
-        trial_price_in_cents (long|int): The price of the trial period for a
+        initial_charge_in_cents (int): The up front charge you have specified.
+        trial_price_in_cents (int): The price of the trial period for a
             subscription to this product, in integer cents.
         trial_interval (int): A numerical interval for the length of the trial
             period of a subscription to this product. See the description of
@@ -58,20 +55,21 @@ class Product(object):
         require_credit_card (bool): Boolean that controls whether a payment
             profile is required to be entered for customers wishing to sign up
             on this product.
-        return_params (str): TODO: type description here.
-        taxable (bool): TODO: type description here.
+        return_params (str): The model property of type str.
+        taxable (bool): The model property of type bool.
         update_return_url (str): The url to which a customer will be returned
             after a successful account update
-        initial_charge_after_trial (bool): TODO: type description here.
+        initial_charge_after_trial (bool): The model property of type bool.
         version_number (int): The version of the product
         update_return_params (str): The parameters will append to the url
             after a successful account update. See [help
             documentation](https://help.chargify.com/products/product-editing.h
             tml#return-parameters-after-account-update)
-        product_family (ProductFamily): TODO: type description here.
-        public_signup_pages (List[PublicSignupPage]): TODO: type description
-            here.
-        product_price_point_name (str): TODO: type description here.
+        product_family (ProductFamily): The model property of type
+            ProductFamily.
+        public_signup_pages (List[PublicSignupPage]): The model property of
+            type List[PublicSignupPage].
+        product_price_point_name (str): The model property of type str.
         request_billing_address (bool): A boolean indicating whether to
             request a billing address on any Self-Service Pages that are used
             by subscribers of this product.
@@ -84,12 +82,12 @@ class Product(object):
             product type. This is especially important when using the Avalara
             service to tax based on locale. This attribute has a max length of
             10 characters.
-        default_product_price_point_id (int): TODO: type description here.
-        use_site_exchange_rate (bool): TODO: type description here.
+        default_product_price_point_id (int): The model property of type int.
+        use_site_exchange_rate (bool): The model property of type bool.
         item_category (str): One of the following: Business Software, Consumer
             Software, Digital Services, Physical Goods, Other
-        product_price_point_id (int): TODO: type description here.
-        product_price_point_handle (str): TODO: type description here.
+        product_price_point_id (int): The model property of type int.
+        product_price_point_handle (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -423,3 +421,85 @@ class Product(object):
                    product_price_point_id,
                    product_price_point_handle,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'description={self.description!r}, '
+                f'accounting_code={self.accounting_code!r}, '
+                f'request_credit_card={self.request_credit_card!r}, '
+                f'expiration_interval={self.expiration_interval!r}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'price_in_cents={self.price_in_cents!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'initial_charge_in_cents={self.initial_charge_in_cents!r}, '
+                f'trial_price_in_cents={self.trial_price_in_cents!r}, '
+                f'trial_interval={self.trial_interval!r}, '
+                f'trial_interval_unit={self.trial_interval_unit!r}, '
+                f'archived_at={self.archived_at!r}, '
+                f'require_credit_card={self.require_credit_card!r}, '
+                f'return_params={self.return_params!r}, '
+                f'taxable={self.taxable!r}, '
+                f'update_return_url={self.update_return_url!r}, '
+                f'initial_charge_after_trial={self.initial_charge_after_trial!r}, '
+                f'version_number={self.version_number!r}, '
+                f'update_return_params={self.update_return_params!r}, '
+                f'product_family={self.product_family!r}, '
+                f'public_signup_pages={self.public_signup_pages!r}, '
+                f'product_price_point_name={self.product_price_point_name!r}, '
+                f'request_billing_address={self.request_billing_address!r}, '
+                f'require_billing_address={self.require_billing_address!r}, '
+                f'require_shipping_address={self.require_shipping_address!r}, '
+                f'tax_code={self.tax_code!r}, '
+                f'default_product_price_point_id={self.default_product_price_point_id!r}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'item_category={self.item_category!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'product_price_point_handle={self.product_price_point_handle!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'description={self.description!s}, '
+                f'accounting_code={self.accounting_code!s}, '
+                f'request_credit_card={self.request_credit_card!s}, '
+                f'expiration_interval={self.expiration_interval!s}, '
+                f'expiration_interval_unit={self.expiration_interval_unit!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'price_in_cents={self.price_in_cents!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'initial_charge_in_cents={self.initial_charge_in_cents!s}, '
+                f'trial_price_in_cents={self.trial_price_in_cents!s}, '
+                f'trial_interval={self.trial_interval!s}, '
+                f'trial_interval_unit={self.trial_interval_unit!s}, '
+                f'archived_at={self.archived_at!s}, '
+                f'require_credit_card={self.require_credit_card!s}, '
+                f'return_params={self.return_params!s}, '
+                f'taxable={self.taxable!s}, '
+                f'update_return_url={self.update_return_url!s}, '
+                f'initial_charge_after_trial={self.initial_charge_after_trial!s}, '
+                f'version_number={self.version_number!s}, '
+                f'update_return_params={self.update_return_params!s}, '
+                f'product_family={self.product_family!s}, '
+                f'public_signup_pages={self.public_signup_pages!s}, '
+                f'product_price_point_name={self.product_price_point_name!s}, '
+                f'request_billing_address={self.request_billing_address!s}, '
+                f'require_billing_address={self.require_billing_address!s}, '
+                f'require_shipping_address={self.require_shipping_address!s}, '
+                f'tax_code={self.tax_code!s}, '
+                f'default_product_price_point_id={self.default_product_price_point_id!s}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'item_category={self.item_category!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'product_price_point_handle={self.product_price_point_handle!s}, '
+                f'additional_properties={self.additional_properties!s})')

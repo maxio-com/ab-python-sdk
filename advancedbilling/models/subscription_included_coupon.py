@@ -13,16 +13,14 @@ class SubscriptionIncludedCoupon(object):
 
     """Implementation of the 'Subscription Included Coupon' model.
 
-    TODO: type model description here.
-
     Attributes:
-        code (str): TODO: type description here.
-        use_count (int): TODO: type description here.
-        uses_allowed (int): TODO: type description here.
-        expires_at (str): TODO: type description here.
-        recurring (bool): TODO: type description here.
-        amount_in_cents (long|int): TODO: type description here.
-        percentage (str): TODO: type description here.
+        code (str): The model property of type str.
+        use_count (int): The model property of type int.
+        uses_allowed (int): The model property of type int.
+        expires_at (str): The model property of type str.
+        recurring (bool): The model property of type bool.
+        amount_in_cents (int): The model property of type int.
+        percentage (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -124,3 +122,25 @@ class SubscriptionIncludedCoupon(object):
                    amount_in_cents,
                    percentage,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'code={self.code!r}, '
+                f'use_count={self.use_count!r}, '
+                f'uses_allowed={self.uses_allowed!r}, '
+                f'expires_at={self.expires_at!r}, '
+                f'recurring={self.recurring!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'percentage={self.percentage!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'code={self.code!s}, '
+                f'use_count={self.use_count!s}, '
+                f'uses_allowed={self.uses_allowed!s}, '
+                f'expires_at={self.expires_at!s}, '
+                f'recurring={self.recurring!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'percentage={self.percentage!s}, '
+                f'additional_properties={self.additional_properties!s})')

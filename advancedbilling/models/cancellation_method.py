@@ -16,12 +16,12 @@ class CancellationMethod(object):
     canceled. It is nil if the subscription's state is not canceled.
 
     Attributes:
-        MERCHANT_UI: TODO: type description here.
-        MERCHANT_API: TODO: type description here.
-        DUNNING: TODO: type description here.
-        BILLING_PORTAL: TODO: type description here.
-        UNKNOWN: TODO: type description here.
-        IMPORTED: TODO: type description here.
+        MERCHANT_UI: The enum member of type str.
+        MERCHANT_API: The enum member of type str.
+        DUNNING: The enum member of type str.
+        BILLING_PORTAL: The enum member of type str.
+        UNKNOWN: The enum member of type str.
+        IMPORTED: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

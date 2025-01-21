@@ -14,10 +14,8 @@ class ConsolidatedInvoice(object):
 
     """Implementation of the 'Consolidated Invoice' model.
 
-    TODO: type model description here.
-
     Attributes:
-        invoices (List[Invoice]): TODO: type description here.
+        invoices (List[Invoice]): The model property of type List[Invoice].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -75,3 +73,13 @@ class ConsolidatedInvoice(object):
         # Return an object of this model
         return cls(invoices,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'invoices={self.invoices!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'invoices={self.invoices!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -24,25 +24,24 @@ class ProformaInvoice(object):
 
     """Implementation of the 'Proforma Invoice' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        site_id (int): TODO: type description here.
-        customer_id (int): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        number (int): TODO: type description here.
-        sequence_number (int): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        delivery_date (date): TODO: type description here.
-        status (ProformaInvoiceStatus): TODO: type description here.
+        uid (str): The model property of type str.
+        site_id (int): The model property of type int.
+        customer_id (int): The model property of type int.
+        subscription_id (int): The model property of type int.
+        number (int): The model property of type int.
+        sequence_number (int): The model property of type int.
+        created_at (datetime): The model property of type datetime.
+        delivery_date (date): The model property of type date.
+        status (ProformaInvoiceStatus): The model property of type
+            ProformaInvoiceStatus.
         collection_method (CollectionMethod): The type of payment collection
             to be used in the subscription. For legacy Statements Architecture
             valid options are - `invoice`, `automatic`. For current
             Relationship Invoicing Architecture valid options are -
             `remittance`, `automatic`, `prepaid`.
-        payment_instructions (str): TODO: type description here.
-        currency (str): TODO: type description here.
+        payment_instructions (str): The model property of type str.
+        currency (str): The model property of type str.
         consolidation_level (InvoiceConsolidationLevel): Consolidation level
             of the invoice, which is applicable to invoice consolidation.  It
             will hold one of the following values:  * "none": A normal invoice
@@ -54,32 +53,40 @@ class ProformaInvoice(object):
             segments.  See also the [invoice consolidation
             documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269
             909389-Invoice-Consolidation).
-        product_name (str): TODO: type description here.
-        product_family_name (str): TODO: type description here.
+        product_name (str): The model property of type str.
+        product_family_name (str): The model property of type str.
         role (ProformaInvoiceRole): 'proforma' value is deprecated in favor of
             proforma_adhoc and proforma_automatic
         seller (InvoiceSeller): Information about the seller (merchant) listed
             on the masthead of the invoice.
         customer (InvoiceCustomer): Information about the customer who is
             owner or recipient the invoiced subscription.
-        memo (str): TODO: type description here.
-        billing_address (InvoiceAddress): TODO: type description here.
-        shipping_address (InvoiceAddress): TODO: type description here.
-        subtotal_amount (str): TODO: type description here.
-        discount_amount (str): TODO: type description here.
-        tax_amount (str): TODO: type description here.
-        total_amount (str): TODO: type description here.
-        credit_amount (str): TODO: type description here.
-        paid_amount (str): TODO: type description here.
-        refund_amount (str): TODO: type description here.
-        due_amount (str): TODO: type description here.
-        line_items (List[InvoiceLineItem]): TODO: type description here.
-        discounts (List[ProformaInvoiceDiscount]): TODO: type description here.
-        taxes (List[ProformaInvoiceTax]): TODO: type description here.
-        credits (List[ProformaInvoiceCredit]): TODO: type description here.
-        payments (List[ProformaInvoicePayment]): TODO: type description here.
-        custom_fields (List[InvoiceCustomField]): TODO: type description here.
-        public_url (str): TODO: type description here.
+        memo (str): The model property of type str.
+        billing_address (InvoiceAddress): The model property of type
+            InvoiceAddress.
+        shipping_address (InvoiceAddress): The model property of type
+            InvoiceAddress.
+        subtotal_amount (str): The model property of type str.
+        discount_amount (str): The model property of type str.
+        tax_amount (str): The model property of type str.
+        total_amount (str): The model property of type str.
+        credit_amount (str): The model property of type str.
+        paid_amount (str): The model property of type str.
+        refund_amount (str): The model property of type str.
+        due_amount (str): The model property of type str.
+        line_items (List[InvoiceLineItem]): The model property of type
+            List[InvoiceLineItem].
+        discounts (List[ProformaInvoiceDiscount]): The model property of type
+            List[ProformaInvoiceDiscount].
+        taxes (List[ProformaInvoiceTax]): The model property of type
+            List[ProformaInvoiceTax].
+        credits (List[ProformaInvoiceCredit]): The model property of type
+            List[ProformaInvoiceCredit].
+        payments (List[ProformaInvoicePayment]): The model property of type
+            List[ProformaInvoicePayment].
+        custom_fields (List[InvoiceCustomField]): The model property of type
+            List[InvoiceCustomField].
+        public_url (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -410,3 +417,83 @@ class ProformaInvoice(object):
                    custom_fields,
                    public_url,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'site_id={self.site_id!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'number={self.number!r}, '
+                f'sequence_number={self.sequence_number!r}, '
+                f'created_at={self.created_at!r}, '
+                f'delivery_date={self.delivery_date!r}, '
+                f'status={self.status!r}, '
+                f'collection_method={self.collection_method!r}, '
+                f'payment_instructions={self.payment_instructions!r}, '
+                f'currency={self.currency!r}, '
+                f'consolidation_level={self.consolidation_level!r}, '
+                f'product_name={self.product_name!r}, '
+                f'product_family_name={self.product_family_name!r}, '
+                f'role={self.role!r}, '
+                f'seller={self.seller!r}, '
+                f'customer={self.customer!r}, '
+                f'memo={self.memo!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'shipping_address={self.shipping_address!r}, '
+                f'subtotal_amount={self.subtotal_amount!r}, '
+                f'discount_amount={self.discount_amount!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'total_amount={self.total_amount!r}, '
+                f'credit_amount={self.credit_amount!r}, '
+                f'paid_amount={self.paid_amount!r}, '
+                f'refund_amount={self.refund_amount!r}, '
+                f'due_amount={self.due_amount!r}, '
+                f'line_items={self.line_items!r}, '
+                f'discounts={self.discounts!r}, '
+                f'taxes={self.taxes!r}, '
+                f'credits={self.credits!r}, '
+                f'payments={self.payments!r}, '
+                f'custom_fields={self.custom_fields!r}, '
+                f'public_url={self.public_url!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'site_id={self.site_id!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'number={self.number!s}, '
+                f'sequence_number={self.sequence_number!s}, '
+                f'created_at={self.created_at!s}, '
+                f'delivery_date={self.delivery_date!s}, '
+                f'status={self.status!s}, '
+                f'collection_method={self.collection_method!s}, '
+                f'payment_instructions={self.payment_instructions!s}, '
+                f'currency={self.currency!s}, '
+                f'consolidation_level={self.consolidation_level!s}, '
+                f'product_name={self.product_name!s}, '
+                f'product_family_name={self.product_family_name!s}, '
+                f'role={self.role!s}, '
+                f'seller={self.seller!s}, '
+                f'customer={self.customer!s}, '
+                f'memo={self.memo!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'shipping_address={self.shipping_address!s}, '
+                f'subtotal_amount={self.subtotal_amount!s}, '
+                f'discount_amount={self.discount_amount!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'total_amount={self.total_amount!s}, '
+                f'credit_amount={self.credit_amount!s}, '
+                f'paid_amount={self.paid_amount!s}, '
+                f'refund_amount={self.refund_amount!s}, '
+                f'due_amount={self.due_amount!s}, '
+                f'line_items={self.line_items!s}, '
+                f'discounts={self.discounts!s}, '
+                f'taxes={self.taxes!s}, '
+                f'credits={self.credits!s}, '
+                f'payments={self.payments!s}, '
+                f'custom_fields={self.custom_fields!s}, '
+                f'public_url={self.public_url!s}, '
+                f'additional_properties={self.additional_properties!s})')

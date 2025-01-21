@@ -12,11 +12,9 @@ class CustomFieldOwner(object):
 
     """Implementation of the 'Custom Field Owner' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CUSTOMER: TODO: type description here.
-        SUBSCRIPTION: TODO: type description here.
+        CUSTOMER: The enum member of type str.
+        SUBSCRIPTION: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

@@ -42,8 +42,8 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
 
         Args:
             uid (str): The uid of the subscription group
-            body (SubscriptionGroupPrepaymentRequest, optional): TODO: type
-                description here.
+            body (SubscriptionGroupPrepaymentRequest, optional): The request
+                body parameter.
 
         Returns:
             SubscriptionGroupPrepaymentResponse: Response from the API. OK
@@ -166,8 +166,8 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
 
         Args:
             uid (str): The uid of the subscription group
-            body (IssueServiceCreditRequest, optional): TODO: type description
-                here.
+            body (IssueServiceCreditRequest, optional): The request body
+                parameter.
 
         Returns:
             ServiceCreditResponse: Response from the API. OK
@@ -217,8 +217,8 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
 
         Args:
             uid (str): The uid of the subscription group
-            body (DeductServiceCreditRequest, optional): TODO: type
-                description here.
+            body (DeductServiceCreditRequest, optional): The request body
+                parameter.
 
         Returns:
             ServiceCredit: Response from the API. Created

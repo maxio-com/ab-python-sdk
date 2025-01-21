@@ -16,14 +16,15 @@ class CustomerChange(object):
 
     """Implementation of the 'Customer Change' model.
 
-    TODO: type model description here.
-
     Attributes:
-        payer (CustomerPayerChange): TODO: type description here.
-        shipping_address (AddressChange): TODO: type description here.
-        billing_address (AddressChange): TODO: type description here.
-        custom_fields (CustomerCustomFieldsChange): TODO: type description
-            here.
+        payer (CustomerPayerChange): The model property of type
+            CustomerPayerChange.
+        shipping_address (AddressChange): The model property of type
+            AddressChange.
+        billing_address (AddressChange): The model property of type
+            AddressChange.
+        custom_fields (CustomerCustomFieldsChange): The model property of type
+            CustomerCustomFieldsChange.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -117,3 +118,19 @@ class CustomerChange(object):
                    billing_address,
                    custom_fields,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'payer={self.payer!r}, '
+                f'shipping_address={self.shipping_address!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'custom_fields={self.custom_fields!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'payer={self.payer!s}, '
+                f'shipping_address={self.shipping_address!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'custom_fields={self.custom_fields!s}, '
+                f'additional_properties={self.additional_properties!s})')

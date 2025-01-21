@@ -12,13 +12,11 @@ class PaymentType(object):
 
     """Implementation of the 'Payment Type' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CREDIT_CARD: TODO: type description here.
-        BANK_ACCOUNT: TODO: type description here.
-        PAYPAL_ACCOUNT: TODO: type description here.
-        APPLE_PAY: TODO: type description here.
+        CREDIT_CARD: The enum member of type str.
+        BANK_ACCOUNT: The enum member of type str.
+        PAYPAL_ACCOUNT: The enum member of type str.
+        APPLE_PAY: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

@@ -14,13 +14,12 @@ class AllocateComponents(object):
 
     """Implementation of the 'Allocate Components' model.
 
-    TODO: type model description here.
-
     Attributes:
-        proration_upgrade_scheme (str): TODO: type description here.
-        proration_downgrade_scheme (str): TODO: type description here.
-        allocations (List[CreateAllocation]): TODO: type description here.
-        accrue_charge (bool): TODO: type description here.
+        proration_upgrade_scheme (str): The model property of type str.
+        proration_downgrade_scheme (str): The model property of type str.
+        allocations (List[CreateAllocation]): The model property of type
+            List[CreateAllocation].
+        accrue_charge (bool): The model property of type bool.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
@@ -146,3 +145,27 @@ class AllocateComponents(object):
                    payment_collection_method,
                    initiate_dunning,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'proration_upgrade_scheme={self.proration_upgrade_scheme!r}, '
+                f'proration_downgrade_scheme={self.proration_downgrade_scheme!r}, '
+                f'allocations={self.allocations!r}, '
+                f'accrue_charge={self.accrue_charge!r}, '
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'payment_collection_method={self.payment_collection_method!r}, '
+                f'initiate_dunning={self.initiate_dunning!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'proration_upgrade_scheme={self.proration_upgrade_scheme!s}, '
+                f'proration_downgrade_scheme={self.proration_downgrade_scheme!s}, '
+                f'allocations={self.allocations!s}, '
+                f'accrue_charge={self.accrue_charge!s}, '
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'payment_collection_method={self.payment_collection_method!s}, '
+                f'initiate_dunning={self.initiate_dunning!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -14,14 +14,12 @@ class MRR(object):
 
     """Implementation of the 'MRR' model.
 
-    TODO: type model description here.
-
     Attributes:
-        amount_in_cents (long|int): TODO: type description here.
-        amount_formatted (str): TODO: type description here.
-        currency (str): TODO: type description here.
-        currency_symbol (str): TODO: type description here.
-        breakouts (Breakouts): TODO: type description here.
+        amount_in_cents (int): The model property of type int.
+        amount_formatted (str): The model property of type str.
+        currency (str): The model property of type str.
+        currency_symbol (str): The model property of type str.
+        breakouts (Breakouts): The model property of type Breakouts.
         at_time (datetime): ISO8601 timestamp
         additional_properties (Dict[str, object]): The additional properties
             for the model.
@@ -111,3 +109,23 @@ class MRR(object):
                    breakouts,
                    at_time,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'amount_formatted={self.amount_formatted!r}, '
+                f'currency={self.currency!r}, '
+                f'currency_symbol={self.currency_symbol!r}, '
+                f'breakouts={self.breakouts!r}, '
+                f'at_time={self.at_time!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'amount_formatted={self.amount_formatted!s}, '
+                f'currency={self.currency!s}, '
+                f'currency_symbol={self.currency_symbol!s}, '
+                f'breakouts={self.breakouts!s}, '
+                f'at_time={self.at_time!s}, '
+                f'additional_properties={self.additional_properties!s})')

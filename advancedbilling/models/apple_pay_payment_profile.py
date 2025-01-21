@@ -14,8 +14,6 @@ class ApplePayPaymentProfile(object):
 
     """Implementation of the 'ApplePay Payment Profile' model.
 
-    TODO: type model description here.
-
     Attributes:
         id (int): The Chargify-assigned ID of the Apple Pay payment profile.
         first_name (str): The first name of the Apple Pay account holder
@@ -36,12 +34,12 @@ class ApplePayPaymentProfile(object):
             Pay account
         billing_country (str): The current billing address country for the
             Apple Pay account
-        customer_vault_token (str): TODO: type description here.
+        customer_vault_token (str): The model property of type str.
         billing_address_2 (str): The current billing street address, second
             line, for the Apple Pay account
-        payment_type (PaymentType): TODO: type description here.
-        site_gateway_setting_id (int): TODO: type description here.
-        gateway_handle (str): TODO: type description here.
+        payment_type (PaymentType): The model property of type PaymentType.
+        site_gateway_setting_id (int): The model property of type int.
+        gateway_handle (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -234,3 +232,43 @@ class ApplePayPaymentProfile(object):
 
         return APIHelper.is_valid_type(value=dictionary.get('payment_type'),
                                        type_callable=lambda value: PaymentType.validate(value))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'first_name={self.first_name!r}, '
+                f'last_name={self.last_name!r}, '
+                f'customer_id={self.customer_id!r}, '
+                f'current_vault={self.current_vault!r}, '
+                f'vault_token={self.vault_token!r}, '
+                f'billing_address={self.billing_address!r}, '
+                f'billing_city={self.billing_city!r}, '
+                f'billing_state={self.billing_state!r}, '
+                f'billing_zip={self.billing_zip!r}, '
+                f'billing_country={self.billing_country!r}, '
+                f'customer_vault_token={self.customer_vault_token!r}, '
+                f'billing_address_2={self.billing_address_2!r}, '
+                f'payment_type={self.payment_type!r}, '
+                f'site_gateway_setting_id={self.site_gateway_setting_id!r}, '
+                f'gateway_handle={self.gateway_handle!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'first_name={self.first_name!s}, '
+                f'last_name={self.last_name!s}, '
+                f'customer_id={self.customer_id!s}, '
+                f'current_vault={self.current_vault!s}, '
+                f'vault_token={self.vault_token!s}, '
+                f'billing_address={self.billing_address!s}, '
+                f'billing_city={self.billing_city!s}, '
+                f'billing_state={self.billing_state!s}, '
+                f'billing_zip={self.billing_zip!s}, '
+                f'billing_country={self.billing_country!s}, '
+                f'customer_vault_token={self.customer_vault_token!s}, '
+                f'billing_address_2={self.billing_address_2!s}, '
+                f'payment_type={self.payment_type!s}, '
+                f'site_gateway_setting_id={self.site_gateway_setting_id!s}, '
+                f'gateway_handle={self.gateway_handle!s}, '
+                f'additional_properties={self.additional_properties!s})')

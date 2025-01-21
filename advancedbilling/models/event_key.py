@@ -12,94 +12,92 @@ class EventKey(object):
 
     """Implementation of the 'Event Key' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        PAYMENT_SUCCESS: TODO: type description here.
-        PAYMENT_FAILURE: TODO: type description here.
-        SIGNUP_SUCCESS: TODO: type description here.
-        SIGNUP_FAILURE: TODO: type description here.
-        DELAYED_SIGNUP_CREATION_SUCCESS: TODO: type description here.
-        DELAYED_SIGNUP_CREATION_FAILURE: TODO: type description here.
-        BILLING_DATE_CHANGE: TODO: type description here.
-        EXPIRATION_DATE_CHANGE: TODO: type description here.
-        RENEWAL_SUCCESS: TODO: type description here.
-        RENEWAL_FAILURE: TODO: type description here.
-        SUBSCRIPTION_STATE_CHANGE: TODO: type description here.
-        SUBSCRIPTION_PRODUCT_CHANGE: TODO: type description here.
-        PENDING_CANCELLATION_CHANGE: TODO: type description here.
-        EXPIRING_CARD: TODO: type description here.
-        CUSTOMER_UPDATE: TODO: type description here.
-        CUSTOMER_CREATE: TODO: type description here.
-        CUSTOMER_DELETE: TODO: type description here.
-        COMPONENT_ALLOCATION_CHANGE: TODO: type description here.
-        METERED_USAGE: TODO: type description here.
-        PREPAID_USAGE: TODO: type description here.
-        UPGRADE_DOWNGRADE_SUCCESS: TODO: type description here.
-        UPGRADE_DOWNGRADE_FAILURE: TODO: type description here.
-        STATEMENT_CLOSED: TODO: type description here.
-        STATEMENT_SETTLED: TODO: type description here.
-        SUBSCRIPTION_CARD_UPDATE: TODO: type description here.
-        SUBSCRIPTION_GROUP_CARD_UPDATE: TODO: type description here.
-        SUBSCRIPTION_BANK_ACCOUNT_UPDATE: TODO: type description here.
-        REFUND_SUCCESS: TODO: type description here.
-        REFUND_FAILURE: TODO: type description here.
-        UPCOMING_RENEWAL_NOTICE: TODO: type description here.
-        TRIAL_END_NOTICE: TODO: type description here.
-        DUNNING_STEP_REACHED: TODO: type description here.
-        INVOICE_ISSUED: TODO: type description here.
-        PREPAID_SUBSCRIPTION_BALANCE_CHANGED: TODO: type description here.
-        SUBSCRIPTION_GROUP_SIGNUP_SUCCESS: TODO: type description here.
-        SUBSCRIPTION_GROUP_SIGNUP_FAILURE: TODO: type description here.
-        DIRECT_DEBIT_PAYMENT_PAID_OUT: TODO: type description here.
-        DIRECT_DEBIT_PAYMENT_REJECTED: TODO: type description here.
-        DIRECT_DEBIT_PAYMENT_PENDING: TODO: type description here.
-        PENDING_PAYMENT_CREATED: TODO: type description here.
-        PENDING_PAYMENT_FAILED: TODO: type description here.
-        PENDING_PAYMENT_COMPLETED: TODO: type description here.
-        PROFORMA_INVOICE_ISSUED: TODO: type description here.
-        SUBSCRIPTION_PREPAYMENT_ACCOUNT_BALANCE_CHANGED: TODO: type
-            description here.
-        SUBSCRIPTION_SERVICE_CREDIT_ACCOUNT_BALANCE_CHANGED: TODO: type
-            description here.
-        CUSTOM_FIELD_VALUE_CHANGE: TODO: type description here.
-        ITEM_PRICE_POINT_CHANGED: TODO: type description here.
-        RENEWAL_SUCCESS_RECREATED: TODO: type description here.
-        RENEWAL_FAILURE_RECREATED: TODO: type description here.
-        PAYMENT_SUCCESS_RECREATED: TODO: type description here.
-        PAYMENT_FAILURE_RECREATED: TODO: type description here.
-        SUBSCRIPTION_DELETION: TODO: type description here.
-        SUBSCRIPTION_GROUP_BANK_ACCOUNT_UPDATE: TODO: type description here.
-        SUBSCRIPTION_PAYPAL_ACCOUNT_UPDATE: TODO: type description here.
-        SUBSCRIPTION_GROUP_PAYPAL_ACCOUNT_UPDATE: TODO: type description here.
-        SUBSCRIPTION_CUSTOMER_CHANGE: TODO: type description here.
-        ACCOUNT_TRANSACTION_CHANGED: TODO: type description here.
-        GO_CARDLESS_PAYMENT_PAID_OUT: TODO: type description here.
-        GO_CARDLESS_PAYMENT_REJECTED: TODO: type description here.
-        GO_CARDLESS_PAYMENT_PENDING: TODO: type description here.
-        STRIPE_DIRECT_DEBIT_PAYMENT_PAID_OUT: TODO: type description here.
-        STRIPE_DIRECT_DEBIT_PAYMENT_REJECTED: TODO: type description here.
-        STRIPE_DIRECT_DEBIT_PAYMENT_PENDING: TODO: type description here.
-        MAXIO_PAYMENTS_DIRECT_DEBIT_PAYMENT_PAID_OUT: TODO: type description
-            here.
-        MAXIO_PAYMENTS_DIRECT_DEBIT_PAYMENT_REJECTED: TODO: type description
-            here.
-        MAXIO_PAYMENTS_DIRECT_DEBIT_PAYMENT_PENDING: TODO: type description
-            here.
-        INVOICE_IN_COLLECTIONS_CANCELED: TODO: type description here.
-        SUBSCRIPTION_ADDED_TO_GROUP: TODO: type description here.
-        SUBSCRIPTION_REMOVED_FROM_GROUP: TODO: type description here.
-        CHARGEBACK_OPENED: TODO: type description here.
-        CHARGEBACK_LOST: TODO: type description here.
-        CHARGEBACK_ACCEPTED: TODO: type description here.
-        CHARGEBACK_CLOSED: TODO: type description here.
-        CHARGEBACK_WON: TODO: type description here.
-        PAYMENT_COLLECTION_METHOD_CHANGED: TODO: type description here.
-        COMPONENT_BILLING_DATE_CHANGED: TODO: type description here.
-        SUBSCRIPTION_TERM_RENEWAL_SCHEDULED: TODO: type description here.
-        SUBSCRIPTION_TERM_RENEWAL_PENDING: TODO: type description here.
-        SUBSCRIPTION_TERM_RENEWAL_ACTIVATED: TODO: type description here.
-        SUBSCRIPTION_TERM_RENEWAL_REMOVED: TODO: type description here.
+        PAYMENT_SUCCESS: The enum member of type str.
+        PAYMENT_FAILURE: The enum member of type str.
+        SIGNUP_SUCCESS: The enum member of type str.
+        SIGNUP_FAILURE: The enum member of type str.
+        DELAYED_SIGNUP_CREATION_SUCCESS: The enum member of type str.
+        DELAYED_SIGNUP_CREATION_FAILURE: The enum member of type str.
+        BILLING_DATE_CHANGE: The enum member of type str.
+        EXPIRATION_DATE_CHANGE: The enum member of type str.
+        RENEWAL_SUCCESS: The enum member of type str.
+        RENEWAL_FAILURE: The enum member of type str.
+        SUBSCRIPTION_STATE_CHANGE: The enum member of type str.
+        SUBSCRIPTION_PRODUCT_CHANGE: The enum member of type str.
+        PENDING_CANCELLATION_CHANGE: The enum member of type str.
+        EXPIRING_CARD: The enum member of type str.
+        CUSTOMER_UPDATE: The enum member of type str.
+        CUSTOMER_CREATE: The enum member of type str.
+        CUSTOMER_DELETE: The enum member of type str.
+        COMPONENT_ALLOCATION_CHANGE: The enum member of type str.
+        METERED_USAGE: The enum member of type str.
+        PREPAID_USAGE: The enum member of type str.
+        UPGRADE_DOWNGRADE_SUCCESS: The enum member of type str.
+        UPGRADE_DOWNGRADE_FAILURE: The enum member of type str.
+        STATEMENT_CLOSED: The enum member of type str.
+        STATEMENT_SETTLED: The enum member of type str.
+        SUBSCRIPTION_CARD_UPDATE: The enum member of type str.
+        SUBSCRIPTION_GROUP_CARD_UPDATE: The enum member of type str.
+        SUBSCRIPTION_BANK_ACCOUNT_UPDATE: The enum member of type str.
+        REFUND_SUCCESS: The enum member of type str.
+        REFUND_FAILURE: The enum member of type str.
+        UPCOMING_RENEWAL_NOTICE: The enum member of type str.
+        TRIAL_END_NOTICE: The enum member of type str.
+        DUNNING_STEP_REACHED: The enum member of type str.
+        INVOICE_ISSUED: The enum member of type str.
+        PREPAID_SUBSCRIPTION_BALANCE_CHANGED: The enum member of type str.
+        SUBSCRIPTION_GROUP_SIGNUP_SUCCESS: The enum member of type str.
+        SUBSCRIPTION_GROUP_SIGNUP_FAILURE: The enum member of type str.
+        DIRECT_DEBIT_PAYMENT_PAID_OUT: The enum member of type str.
+        DIRECT_DEBIT_PAYMENT_REJECTED: The enum member of type str.
+        DIRECT_DEBIT_PAYMENT_PENDING: The enum member of type str.
+        PENDING_PAYMENT_CREATED: The enum member of type str.
+        PENDING_PAYMENT_FAILED: The enum member of type str.
+        PENDING_PAYMENT_COMPLETED: The enum member of type str.
+        PROFORMA_INVOICE_ISSUED: The enum member of type str.
+        SUBSCRIPTION_PREPAYMENT_ACCOUNT_BALANCE_CHANGED: The enum member of
+            type str.
+        SUBSCRIPTION_SERVICE_CREDIT_ACCOUNT_BALANCE_CHANGED: The enum member
+            of type str.
+        CUSTOM_FIELD_VALUE_CHANGE: The enum member of type str.
+        ITEM_PRICE_POINT_CHANGED: The enum member of type str.
+        RENEWAL_SUCCESS_RECREATED: The enum member of type str.
+        RENEWAL_FAILURE_RECREATED: The enum member of type str.
+        PAYMENT_SUCCESS_RECREATED: The enum member of type str.
+        PAYMENT_FAILURE_RECREATED: The enum member of type str.
+        SUBSCRIPTION_DELETION: The enum member of type str.
+        SUBSCRIPTION_GROUP_BANK_ACCOUNT_UPDATE: The enum member of type str.
+        SUBSCRIPTION_PAYPAL_ACCOUNT_UPDATE: The enum member of type str.
+        SUBSCRIPTION_GROUP_PAYPAL_ACCOUNT_UPDATE: The enum member of type str.
+        SUBSCRIPTION_CUSTOMER_CHANGE: The enum member of type str.
+        ACCOUNT_TRANSACTION_CHANGED: The enum member of type str.
+        GO_CARDLESS_PAYMENT_PAID_OUT: The enum member of type str.
+        GO_CARDLESS_PAYMENT_REJECTED: The enum member of type str.
+        GO_CARDLESS_PAYMENT_PENDING: The enum member of type str.
+        STRIPE_DIRECT_DEBIT_PAYMENT_PAID_OUT: The enum member of type str.
+        STRIPE_DIRECT_DEBIT_PAYMENT_REJECTED: The enum member of type str.
+        STRIPE_DIRECT_DEBIT_PAYMENT_PENDING: The enum member of type str.
+        MAXIO_PAYMENTS_DIRECT_DEBIT_PAYMENT_PAID_OUT: The enum member of type
+            str.
+        MAXIO_PAYMENTS_DIRECT_DEBIT_PAYMENT_REJECTED: The enum member of type
+            str.
+        MAXIO_PAYMENTS_DIRECT_DEBIT_PAYMENT_PENDING: The enum member of type
+            str.
+        INVOICE_IN_COLLECTIONS_CANCELED: The enum member of type str.
+        SUBSCRIPTION_ADDED_TO_GROUP: The enum member of type str.
+        SUBSCRIPTION_REMOVED_FROM_GROUP: The enum member of type str.
+        CHARGEBACK_OPENED: The enum member of type str.
+        CHARGEBACK_LOST: The enum member of type str.
+        CHARGEBACK_ACCEPTED: The enum member of type str.
+        CHARGEBACK_CLOSED: The enum member of type str.
+        CHARGEBACK_WON: The enum member of type str.
+        PAYMENT_COLLECTION_METHOD_CHANGED: The enum member of type str.
+        COMPONENT_BILLING_DATE_CHANGED: The enum member of type str.
+        SUBSCRIPTION_TERM_RENEWAL_SCHEDULED: The enum member of type str.
+        SUBSCRIPTION_TERM_RENEWAL_PENDING: The enum member of type str.
+        SUBSCRIPTION_TERM_RENEWAL_ACTIVATED: The enum member of type str.
+        SUBSCRIPTION_TERM_RENEWAL_REMOVED: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

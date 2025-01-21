@@ -15,24 +15,24 @@ class AllocationPreview(object):
 
     """Implementation of the 'Allocation Preview' model.
 
-    TODO: type model description here.
-
     Attributes:
-        start_date (datetime): TODO: type description here.
-        end_date (datetime): TODO: type description here.
-        subtotal_in_cents (long|int): TODO: type description here.
-        total_tax_in_cents (long|int): TODO: type description here.
-        total_discount_in_cents (long|int): TODO: type description here.
-        total_in_cents (long|int): TODO: type description here.
-        direction (AllocationPreviewDirection): TODO: type description here.
-        proration_scheme (str): TODO: type description here.
-        line_items (List[AllocationPreviewLineItem]): TODO: type description
-            here.
-        accrue_charge (bool): TODO: type description here.
-        allocations (List[AllocationPreviewItem]): TODO: type description here.
-        period_type (str): TODO: type description here.
-        existing_balance_in_cents (long|int): An integer representing the
-            amount of the subscription's current balance
+        start_date (datetime): The model property of type datetime.
+        end_date (datetime): The model property of type datetime.
+        subtotal_in_cents (int): The model property of type int.
+        total_tax_in_cents (int): The model property of type int.
+        total_discount_in_cents (int): The model property of type int.
+        total_in_cents (int): The model property of type int.
+        direction (AllocationPreviewDirection): The model property of type
+            AllocationPreviewDirection.
+        proration_scheme (str): The model property of type str.
+        line_items (List[AllocationPreviewLineItem]): The model property of
+            type List[AllocationPreviewLineItem].
+        accrue_charge (bool): The model property of type bool.
+        allocations (List[AllocationPreviewItem]): The model property of type
+            List[AllocationPreviewItem].
+        period_type (str): The model property of type str.
+        existing_balance_in_cents (int): An integer representing the amount of
+            the subscription's current balance
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -178,3 +178,37 @@ class AllocationPreview(object):
                    period_type,
                    existing_balance_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'start_date={self.start_date!r}, '
+                f'end_date={self.end_date!r}, '
+                f'subtotal_in_cents={self.subtotal_in_cents!r}, '
+                f'total_tax_in_cents={self.total_tax_in_cents!r}, '
+                f'total_discount_in_cents={self.total_discount_in_cents!r}, '
+                f'total_in_cents={self.total_in_cents!r}, '
+                f'direction={self.direction!r}, '
+                f'proration_scheme={self.proration_scheme!r}, '
+                f'line_items={self.line_items!r}, '
+                f'accrue_charge={self.accrue_charge!r}, '
+                f'allocations={self.allocations!r}, '
+                f'period_type={self.period_type!r}, '
+                f'existing_balance_in_cents={self.existing_balance_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'start_date={self.start_date!s}, '
+                f'end_date={self.end_date!s}, '
+                f'subtotal_in_cents={self.subtotal_in_cents!s}, '
+                f'total_tax_in_cents={self.total_tax_in_cents!s}, '
+                f'total_discount_in_cents={self.total_discount_in_cents!s}, '
+                f'total_in_cents={self.total_in_cents!s}, '
+                f'direction={self.direction!s}, '
+                f'proration_scheme={self.proration_scheme!s}, '
+                f'line_items={self.line_items!s}, '
+                f'accrue_charge={self.accrue_charge!s}, '
+                f'allocations={self.allocations!s}, '
+                f'period_type={self.period_type!s}, '
+                f'existing_balance_in_cents={self.existing_balance_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

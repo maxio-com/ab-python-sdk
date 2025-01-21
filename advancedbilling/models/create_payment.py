@@ -12,12 +12,10 @@ class CreatePayment(object):
 
     """Implementation of the 'Create Payment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        amount (str): TODO: type description here.
-        memo (str): TODO: type description here.
-        payment_details (str): TODO: type description here.
+        amount (str): The model property of type str.
+        memo (str): The model property of type str.
+        payment_details (str): The model property of type str.
         payment_method (InvoicePaymentMethodType): The type of payment method
             used. Defaults to other.
         additional_properties (Dict[str, object]): The additional properties
@@ -83,3 +81,19 @@ class CreatePayment(object):
                    payment_details,
                    payment_method,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!r}, '
+                f'memo={self.memo!r}, '
+                f'payment_details={self.payment_details!r}, '
+                f'payment_method={self.payment_method!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!s}, '
+                f'memo={self.memo!s}, '
+                f'payment_details={self.payment_details!s}, '
+                f'payment_method={self.payment_method!s}, '
+                f'additional_properties={self.additional_properties!s})')

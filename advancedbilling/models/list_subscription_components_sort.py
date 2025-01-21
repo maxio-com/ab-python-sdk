@@ -12,11 +12,9 @@ class ListSubscriptionComponentsSort(object):
 
     """Implementation of the 'List Subscription Components Sort' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        ID: TODO: type description here.
-        UPDATED_AT: TODO: type description here.
+        ID: The enum member of type str.
+        UPDATED_AT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

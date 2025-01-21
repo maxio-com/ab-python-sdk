@@ -16,13 +16,12 @@ class ApplyDebitNoteEvent(object):
 
     """Implementation of the 'Apply Debit Note Event' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (long|int): TODO: type description here.
-        timestamp (datetime): TODO: type description here.
-        invoice (Invoice): TODO: type description here.
-        event_type (InvoiceEventType): TODO: type description here.
+        id (int): The model property of type int.
+        timestamp (datetime): The model property of type datetime.
+        invoice (Invoice): The model property of type Invoice.
+        event_type (InvoiceEventType): The model property of type
+            InvoiceEventType.
         event_data (ApplyDebitNoteEventData): Example schema for an
             `apply_debit_note` event
         additional_properties (Dict[str, object]): The additional properties
@@ -137,3 +136,21 @@ class ApplyDebitNoteEvent(object):
             and APIHelper.is_valid_type(value=dictionary.get('event_data'),
                                         type_callable=lambda value: ApplyDebitNoteEventData.validate(value),
                                         is_model_dict=True)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'timestamp={self.timestamp!r}, '
+                f'invoice={self.invoice!r}, '
+                f'event_type={self.event_type!r}, '
+                f'event_data={self.event_data!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'timestamp={self.timestamp!s}, '
+                f'invoice={self.invoice!s}, '
+                f'event_type={self.event_type!s}, '
+                f'event_data={self.event_data!s}, '
+                f'additional_properties={self.additional_properties!s})')

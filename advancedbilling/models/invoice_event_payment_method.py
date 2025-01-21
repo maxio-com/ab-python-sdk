@@ -12,14 +12,12 @@ class InvoiceEventPaymentMethod(object):
 
     """Implementation of the 'Invoice Event Payment Method' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        APPLE_PAY: TODO: type description here.
-        BANK_ACCOUNT: TODO: type description here.
-        CREDIT_CARD: TODO: type description here.
-        EXTERNAL: TODO: type description here.
-        PAYPAL_ACCOUNT: TODO: type description here.
+        APPLE_PAY: The enum member of type str.
+        BANK_ACCOUNT: The enum member of type str.
+        CREDIT_CARD: The enum member of type str.
+        EXTERNAL: The enum member of type str.
+        PAYPAL_ACCOUNT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

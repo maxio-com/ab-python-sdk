@@ -13,11 +13,10 @@ class ComponentPricePointAssignment(object):
 
     """Implementation of the 'Component Price Point Assignment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        component_id (int): TODO: type description here.
-        price_point (str | int | None): TODO: type description here.
+        component_id (int): The model property of type int.
+        price_point (str | int | None): The model property of type str | int |
+            None.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -79,3 +78,15 @@ class ComponentPricePointAssignment(object):
         return cls(component_id,
                    price_point,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!r}, '
+                f'price_point={self.price_point!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'component_id={self.component_id!s}, '
+                f'price_point={self.price_point!s}, '
+                f'additional_properties={self.additional_properties!s})')

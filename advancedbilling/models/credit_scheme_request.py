@@ -12,10 +12,8 @@ class CreditSchemeRequest(object):
 
     """Implementation of the 'Credit Scheme Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        credit_scheme (CreditScheme): TODO: type description here.
+        credit_scheme (CreditScheme): The model property of type CreditScheme.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -64,3 +62,13 @@ class CreditSchemeRequest(object):
         # Return an object of this model
         return cls(credit_scheme,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'credit_scheme={self.credit_scheme!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'credit_scheme={self.credit_scheme!s}, '
+                f'additional_properties={self.additional_properties!s})')

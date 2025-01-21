@@ -13,11 +13,9 @@ class TooManyManagementLinkRequests(object):
 
     """Implementation of the 'Too Many Management Link Requests' model.
 
-    TODO: type model description here.
-
     Attributes:
-        error (str): TODO: type description here.
-        new_link_available_at (datetime): TODO: type description here.
+        error (str): The model property of type str.
+        new_link_available_at (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +69,15 @@ class TooManyManagementLinkRequests(object):
         return cls(error,
                    new_link_available_at,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'error={self.error!r}, '
+                f'new_link_available_at={self.new_link_available_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'error={self.error!s}, '
+                f'new_link_available_at={self.new_link_available_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

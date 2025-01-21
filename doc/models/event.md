@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `long\|int` | Required | - |
+| `id` | `int` | Required | - |
 | `key` | [`EventKey`](../../doc/models/event-key.md) | Required | - |
 | `message` | `str` | Required | **Constraints**: *Minimum Length*: `1` |
 | `subscription_id` | `int` | Required | - |

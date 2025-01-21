@@ -15,26 +15,24 @@ class InvoiceTax(object):
 
     """Implementation of the 'Invoice Tax' model.
 
-    TODO: type model description here.
-
     Attributes:
-        uid (str): TODO: type description here.
-        title (str): TODO: type description here.
-        description (str): TODO: type description here.
-        source_type (ProformaInvoiceTaxSourceType): TODO: type description
-            here.
-        source_id (int): TODO: type description here.
-        percentage (str): TODO: type description here.
-        taxable_amount (str): TODO: type description here.
-        tax_amount (str): TODO: type description here.
-        transaction_id (int): TODO: type description here.
-        line_item_breakouts (List[InvoiceTaxBreakout]): TODO: type description
-            here.
-        tax_component_breakouts (List[InvoiceTaxComponentBreakout]): TODO:
-            type description here.
-        eu_vat (bool): TODO: type description here.
-        mtype (str): TODO: type description here.
-        tax_exempt_amount (str): TODO: type description here.
+        uid (str): The model property of type str.
+        title (str): The model property of type str.
+        description (str): The model property of type str.
+        source_type (ProformaInvoiceTaxSourceType): The model property of type
+            ProformaInvoiceTaxSourceType.
+        source_id (int): The model property of type int.
+        percentage (str): The model property of type str.
+        taxable_amount (str): The model property of type str.
+        tax_amount (str): The model property of type str.
+        transaction_id (int): The model property of type int.
+        line_item_breakouts (List[InvoiceTaxBreakout]): The model property of
+            type List[InvoiceTaxBreakout].
+        tax_component_breakouts (List[InvoiceTaxComponentBreakout]): The model
+            property of type List[InvoiceTaxComponentBreakout].
+        eu_vat (bool): The model property of type bool.
+        mtype (str): The model property of type str.
+        tax_exempt_amount (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -213,3 +211,39 @@ class InvoiceTax(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!r}, '
+                f'title={self.title!r}, '
+                f'description={self.description!r}, '
+                f'source_type={self.source_type!r}, '
+                f'source_id={self.source_id!r}, '
+                f'percentage={self.percentage!r}, '
+                f'taxable_amount={self.taxable_amount!r}, '
+                f'tax_amount={self.tax_amount!r}, '
+                f'transaction_id={self.transaction_id!r}, '
+                f'line_item_breakouts={self.line_item_breakouts!r}, '
+                f'tax_component_breakouts={self.tax_component_breakouts!r}, '
+                f'eu_vat={self.eu_vat!r}, '
+                f'mtype={self.mtype!r}, '
+                f'tax_exempt_amount={self.tax_exempt_amount!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'uid={self.uid!s}, '
+                f'title={self.title!s}, '
+                f'description={self.description!s}, '
+                f'source_type={self.source_type!s}, '
+                f'source_id={self.source_id!s}, '
+                f'percentage={self.percentage!s}, '
+                f'taxable_amount={self.taxable_amount!s}, '
+                f'tax_amount={self.tax_amount!s}, '
+                f'transaction_id={self.transaction_id!s}, '
+                f'line_item_breakouts={self.line_item_breakouts!s}, '
+                f'tax_component_breakouts={self.tax_component_breakouts!s}, '
+                f'eu_vat={self.eu_vat!s}, '
+                f'mtype={self.mtype!s}, '
+                f'tax_exempt_amount={self.tax_exempt_amount!s}, '
+                f'additional_properties={self.additional_properties!s})')

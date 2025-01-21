@@ -14,12 +14,11 @@ class SignupProformaPreview(object):
 
     """Implementation of the 'Signup Proforma Preview' model.
 
-    TODO: type model description here.
-
     Attributes:
-        current_proforma_invoice (ProformaInvoice): TODO: type description
-            here.
-        next_proforma_invoice (ProformaInvoice): TODO: type description here.
+        current_proforma_invoice (ProformaInvoice): The model property of type
+            ProformaInvoice.
+        next_proforma_invoice (ProformaInvoice): The model property of type
+            ProformaInvoice.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -80,3 +79,15 @@ class SignupProformaPreview(object):
         return cls(current_proforma_invoice,
                    next_proforma_invoice,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'current_proforma_invoice={self.current_proforma_invoice!r}, '
+                f'next_proforma_invoice={self.next_proforma_invoice!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'current_proforma_invoice={self.current_proforma_invoice!s}, '
+                f'next_proforma_invoice={self.next_proforma_invoice!s}, '
+                f'additional_properties={self.additional_properties!s})')

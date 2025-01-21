@@ -13,15 +13,12 @@ class InvoicePrePayment(object):
 
     """Implementation of the 'Invoice PrePayment' model.
 
-    TODO: type model description here.
-
     Attributes:
         subscription_id (int): The subscription id for the prepayment account
-        amount_in_cents (long|int): The amount in cents of the prepayment that
-            was created as a result of this payment.
-        ending_balance_in_cents (long|int): The total balance of the
-            prepayment account for this subscription including any prior
-            prepayments
+        amount_in_cents (int): The amount in cents of the prepayment that was
+            created as a result of this payment.
+        ending_balance_in_cents (int): The total balance of the prepayment
+            account for this subscription including any prior prepayments
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -89,3 +86,17 @@ class InvoicePrePayment(object):
                    amount_in_cents,
                    ending_balance_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_id={self.subscription_id!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'ending_balance_in_cents={self.ending_balance_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'subscription_id={self.subscription_id!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'ending_balance_in_cents={self.ending_balance_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

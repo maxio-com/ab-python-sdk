@@ -14,10 +14,9 @@ class InvoiceLineItemComponentCostData(object):
 
     """Implementation of the 'Invoice Line Item Component Cost Data' model.
 
-    TODO: type model description here.
-
     Attributes:
-        rates (List[ComponentCostData]): TODO: type description here.
+        rates (List[ComponentCostData]): The model property of type
+            List[ComponentCostData].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -97,3 +96,13 @@ class InvoiceLineItemComponentCostData(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'rates={self.rates!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'rates={self.rates!s}, '
+                f'additional_properties={self.additional_properties!s})')

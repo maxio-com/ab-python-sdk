@@ -13,11 +13,9 @@ class BankAccountVerification(object):
 
     """Implementation of the 'Bank Account Verification' model.
 
-    TODO: type model description here.
-
     Attributes:
-        deposit_1_in_cents (long|int): TODO: type description here.
-        deposit_2_in_cents (long|int): TODO: type description here.
+        deposit_1_in_cents (int): The model property of type int.
+        deposit_2_in_cents (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -78,3 +76,15 @@ class BankAccountVerification(object):
         return cls(deposit_1_in_cents,
                    deposit_2_in_cents,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'deposit_1_in_cents={self.deposit_1_in_cents!r}, '
+                f'deposit_2_in_cents={self.deposit_2_in_cents!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'deposit_1_in_cents={self.deposit_1_in_cents!s}, '
+                f'deposit_2_in_cents={self.deposit_2_in_cents!s}, '
+                f'additional_properties={self.additional_properties!s})')

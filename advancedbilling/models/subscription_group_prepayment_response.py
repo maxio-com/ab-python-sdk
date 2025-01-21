@@ -13,12 +13,10 @@ class SubscriptionGroupPrepaymentResponse(object):
 
     """Implementation of the 'Subscription Group Prepayment Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        amount_in_cents (long|int): The amount in cents of the entry.
-        ending_balance_in_cents (long|int): The ending balance in cents of the
+        id (int): The model property of type int.
+        amount_in_cents (int): The amount in cents of the entry.
+        ending_balance_in_cents (int): The ending balance in cents of the
             account.
         entry_type (ServiceCreditType): The type of entry
         memo (str): A memo attached to the entry.
@@ -107,3 +105,21 @@ class SubscriptionGroupPrepaymentResponse(object):
                    entry_type,
                    memo,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'amount_in_cents={self.amount_in_cents!r}, '
+                f'ending_balance_in_cents={self.ending_balance_in_cents!r}, '
+                f'entry_type={self.entry_type!r}, '
+                f'memo={self.memo!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'amount_in_cents={self.amount_in_cents!s}, '
+                f'ending_balance_in_cents={self.ending_balance_in_cents!s}, '
+                f'entry_type={self.entry_type!s}, '
+                f'memo={self.memo!s}, '
+                f'additional_properties={self.additional_properties!s})')

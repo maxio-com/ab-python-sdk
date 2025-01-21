@@ -121,3 +121,19 @@ class ACHAgreement(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'agreement_terms={self.agreement_terms!r}, '
+                f'authorizer_first_name={self.authorizer_first_name!r}, '
+                f'authorizer_last_name={self.authorizer_last_name!r}, '
+                f'ip_address={self.ip_address!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'agreement_terms={self.agreement_terms!s}, '
+                f'authorizer_first_name={self.authorizer_first_name!s}, '
+                f'authorizer_last_name={self.authorizer_last_name!s}, '
+                f'ip_address={self.ip_address!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -12,11 +12,9 @@ class ListSubscriptionComponentsInclude(object):
 
     """Implementation of the 'List Subscription Components Include' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        SUBSCRIPTION: TODO: type description here.
-        HISTORIC_USAGES: TODO: type description here.
+        SUBSCRIPTION: The enum member of type str.
+        HISTORIC_USAGES: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

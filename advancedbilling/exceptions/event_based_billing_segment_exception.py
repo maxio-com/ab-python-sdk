@@ -8,11 +8,11 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 from advancedbilling.api_helper import APIHelper
-import advancedbilling.exceptions.api_exception
+from advancedbilling.exceptions.api_exception import APIException
 from advancedbilling.models.event_based_billing_segment_error import EventBasedBillingSegmentError
 
 
-class EventBasedBillingSegmentException(advancedbilling.exceptions.api_exception.APIException):
+class EventBasedBillingSegmentException(APIException):
     def __init__(self, reason, response):
         """Constructor for the EventBasedBillingSegmentException class
 
@@ -37,3 +37,9 @@ class EventBasedBillingSegmentException(advancedbilling.exceptions.api_exception
 
         """
         self.errors = EventBasedBillingSegmentError.from_dictionary(dictionary.get('errors')) if dictionary.get('errors') else None
+
+    def __str__(self):
+        base_str = super().__str__()
+        return (f'{self.__class__.__name__}('
+                f'{base_str[base_str.find("(") + 1:-1]}, '
+                f'errors={self.errors!s})')

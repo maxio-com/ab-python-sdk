@@ -48,8 +48,8 @@ class ReasonCodesController(BaseController):
         given Site.
 
         Args:
-            body (CreateReasonCodeRequest, optional): TODO: type description
-                here.
+            body (CreateReasonCodeRequest, optional): The request body
+                parameter.
 
         Returns:
             ReasonCodeResponse: Response from the API. OK
@@ -196,8 +196,8 @@ class ReasonCodesController(BaseController):
 
         Args:
             reason_code_id (int): The Advanced Billing id of the reason code
-            body (UpdateReasonCodeRequest, optional): TODO: type description
-                here.
+            body (UpdateReasonCodeRequest, optional): The request body
+                parameter.
 
         Returns:
             ReasonCodeResponse: Response from the API. OK

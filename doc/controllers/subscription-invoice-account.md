@@ -303,7 +303,7 @@ def refund_prepayment(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `prepayment_id` | `long\|int` | Template, Required | id of prepayment |
+| `prepayment_id` | `int` | Template, Required | id of prepayment |
 | `body` | [`RefundPrepaymentRequest`](../../doc/models/refund-prepayment-request.md) | Body, Optional | - |
 
 ## Response Type

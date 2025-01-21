@@ -13,11 +13,9 @@ class BankAccountVerificationRequest(object):
 
     """Implementation of the 'Bank Account Verification Request' model.
 
-    TODO: type model description here.
-
     Attributes:
-        bank_account_verification (BankAccountVerification): TODO: type
-            description here.
+        bank_account_verification (BankAccountVerification): The model
+            property of type BankAccountVerification.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -66,3 +64,13 @@ class BankAccountVerificationRequest(object):
         # Return an object of this model
         return cls(bank_account_verification,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'bank_account_verification={self.bank_account_verification!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'bank_account_verification={self.bank_account_verification!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,12 +13,10 @@ class PayerError(object):
 
     """Implementation of the 'Payer Error' model.
 
-    TODO: type model description here.
-
     Attributes:
-        last_name (List[str]): TODO: type description here.
-        first_name (List[str]): TODO: type description here.
-        email (List[str]): TODO: type description here.
+        last_name (List[str]): The model property of type List[str].
+        first_name (List[str]): The model property of type List[str].
+        email (List[str]): The model property of type List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -86,3 +84,17 @@ class PayerError(object):
                    first_name,
                    email,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'last_name={self.last_name!r}, '
+                f'first_name={self.first_name!r}, '
+                f'email={self.email!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'last_name={self.last_name!s}, '
+                f'first_name={self.first_name!s}, '
+                f'email={self.email!s}, '
+                f'additional_properties={self.additional_properties!s})')

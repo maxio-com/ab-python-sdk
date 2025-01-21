@@ -14,8 +14,6 @@ class SubscriptionMigrationPreviewOptions(object):
 
     """Implementation of the 'Subscription Migration Preview Options' model.
 
-    TODO: type model description here.
-
     Attributes:
         product_id (int): The ID of the target Product. Either a product_id or
             product_handle must be present. A Subscription can be migrated to
@@ -47,7 +45,7 @@ class SubscriptionMigrationPreviewOptions(object):
         product_price_point_handle (str): The ID or handle of the specified
             product's price point. This can be passed to migrate to a
             non-default price point.
-        proration (Proration): TODO: type description here.
+        proration (Proration): The model property of type Proration.
         proration_date (datetime): The date that the proration is calculated
             from for the preview
         additional_properties (Dict[str, object]): The additional properties
@@ -162,3 +160,31 @@ class SubscriptionMigrationPreviewOptions(object):
                    proration,
                    proration_date,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_id={self.product_id!r}, '
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'include_trial={self.include_trial!r}, '
+                f'include_initial_charge={self.include_initial_charge!r}, '
+                f'include_coupons={self.include_coupons!r}, '
+                f'preserve_period={self.preserve_period!r}, '
+                f'product_handle={self.product_handle!r}, '
+                f'product_price_point_handle={self.product_price_point_handle!r}, '
+                f'proration={self.proration!r}, '
+                f'proration_date={self.proration_date!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_id={self.product_id!s}, '
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'include_trial={self.include_trial!s}, '
+                f'include_initial_charge={self.include_initial_charge!s}, '
+                f'include_coupons={self.include_coupons!s}, '
+                f'preserve_period={self.preserve_period!s}, '
+                f'product_handle={self.product_handle!s}, '
+                f'product_price_point_handle={self.product_price_point_handle!s}, '
+                f'proration={self.proration!s}, '
+                f'proration_date={self.proration_date!s}, '
+                f'additional_properties={self.additional_properties!s})')

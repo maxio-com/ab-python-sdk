@@ -13,16 +13,15 @@ class ComponentAllocationChange(object):
 
     """Implementation of the 'Component Allocation Change' model.
 
-    TODO: type model description here.
-
     Attributes:
-        previous_allocation (int): TODO: type description here.
-        new_allocation (int): TODO: type description here.
-        component_id (int): TODO: type description here.
-        component_handle (str): TODO: type description here.
-        memo (str): TODO: type description here.
-        allocation_id (int): TODO: type description here.
-        allocated_quantity (int | str | None): TODO: type description here.
+        previous_allocation (int): The model property of type int.
+        new_allocation (int): The model property of type int.
+        component_id (int): The model property of type int.
+        component_handle (str): The model property of type str.
+        memo (str): The model property of type str.
+        allocation_id (int): The model property of type int.
+        allocated_quantity (int | str | None): The model property of type int
+            | str | None.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -151,3 +150,25 @@ class ComponentAllocationChange(object):
                                         type_callable=lambda value: isinstance(value, str)) \
             and APIHelper.is_valid_type(value=dictionary.get('allocation_id'),
                                         type_callable=lambda value: isinstance(value, int))
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'previous_allocation={self.previous_allocation!r}, '
+                f'new_allocation={self.new_allocation!r}, '
+                f'component_id={self.component_id!r}, '
+                f'component_handle={self.component_handle!r}, '
+                f'memo={self.memo!r}, '
+                f'allocation_id={self.allocation_id!r}, '
+                f'allocated_quantity={self.allocated_quantity!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'previous_allocation={self.previous_allocation!s}, '
+                f'new_allocation={self.new_allocation!s}, '
+                f'component_id={self.component_id!s}, '
+                f'component_handle={self.component_handle!s}, '
+                f'memo={self.memo!s}, '
+                f'allocation_id={self.allocation_id!s}, '
+                f'allocated_quantity={self.allocated_quantity!s}, '
+                f'additional_properties={self.additional_properties!s})')

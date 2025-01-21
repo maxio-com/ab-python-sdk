@@ -13,11 +13,9 @@ class ListSubscriptionGroupPrepayment(object):
 
     """Implementation of the 'List Subscription Group Prepayment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        prepayment (ListSubcriptionGroupPrepaymentItem): TODO: type
-            description here.
+        prepayment (ListSubcriptionGroupPrepaymentItem): The model property of
+            type ListSubcriptionGroupPrepaymentItem.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -66,3 +64,13 @@ class ListSubscriptionGroupPrepayment(object):
         # Return an object of this model
         return cls(prepayment,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'prepayment={self.prepayment!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'prepayment={self.prepayment!s}, '
+                f'additional_properties={self.additional_properties!s})')

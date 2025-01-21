@@ -12,15 +12,13 @@ class SubscriptionSort(object):
 
     """Implementation of the 'Subscription Sort' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        SIGNUP_DATE: TODO: type description here.
-        PERIOD_START: TODO: type description here.
-        PERIOD_END: TODO: type description here.
-        NEXT_ASSESSMENT: TODO: type description here.
-        UPDATED_AT: TODO: type description here.
-        CREATED_AT: TODO: type description here.
+        SIGNUP_DATE: The enum member of type str.
+        PERIOD_START: The enum member of type str.
+        PERIOD_END: The enum member of type str.
+        NEXT_ASSESSMENT: The enum member of type str.
+        UPDATED_AT: The enum member of type str.
+        CREATED_AT: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

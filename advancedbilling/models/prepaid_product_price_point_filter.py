@@ -12,8 +12,6 @@ class PrepaidProductPricePointFilter(object):
 
     """Implementation of the 'Prepaid Product Price Point Filter' model.
 
-    TODO: type model description here.
-
     Attributes:
         product_price_point_id (str): Passed as a parameter to list methods to
             return only non null values.
@@ -63,3 +61,13 @@ class PrepaidProductPricePointFilter(object):
         additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_price_point_id={self.product_price_point_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'product_price_point_id={self.product_price_point_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

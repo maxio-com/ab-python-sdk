@@ -13,18 +13,16 @@ class CreatePrepayment(object):
 
     """Implementation of the 'Create Prepayment' model.
 
-    TODO: type model description here.
-
     Attributes:
-        amount (float): TODO: type description here.
-        details (str): TODO: type description here.
-        memo (str): TODO: type description here.
+        amount (float): The model property of type float.
+        details (str): The model property of type str.
+        memo (str): The model property of type str.
         method (CreatePrepaymentMethod): :- When the `method` specified is
             `"credit_card_on_file"`, the prepayment amount will be collected
             using the default credit card payment profile and applied to the
             prepayment account balance. This is especially useful for manual
             replenishment of prepaid subscriptions.
-        payment_profile_id (int): TODO: type description here.
+        payment_profile_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -98,3 +96,21 @@ class CreatePrepayment(object):
                    method,
                    payment_profile_id,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!r}, '
+                f'details={self.details!r}, '
+                f'memo={self.memo!r}, '
+                f'method={self.method!r}, '
+                f'payment_profile_id={self.payment_profile_id!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!s}, '
+                f'details={self.details!s}, '
+                f'memo={self.memo!s}, '
+                f'method={self.method!s}, '
+                f'payment_profile_id={self.payment_profile_id!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -15,25 +15,24 @@ class SubscriptionComponent(object):
 
     """Implementation of the 'Subscription Component' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        name (str): TODO: type description here.
+        id (int): The model property of type int.
+        name (str): The model property of type str.
         kind (ComponentKind): A handle for the component type
-        unit_name (str): TODO: type description here.
+        unit_name (str): The model property of type str.
         enabled (bool): (for on/off components) indicates if the component is
             enabled for the subscription
-        unit_balance (int): TODO: type description here.
-        currency (str): TODO: type description here.
+        unit_balance (int): The model property of type int.
+        currency (str): The model property of type str.
         allocated_quantity (int | str | None): For Quantity-based components:
             The current allocation for the component on the given
             subscription. For On/Off components: Use 1 for on. Use 0 for off.
-        pricing_scheme (PricingScheme): TODO: type description here.
-        component_id (int): TODO: type description here.
-        component_handle (str): TODO: type description here.
-        subscription_id (int): TODO: type description here.
-        recurring (bool): TODO: type description here.
+        pricing_scheme (PricingScheme): The model property of type
+            PricingScheme.
+        component_id (int): The model property of type int.
+        component_handle (str): The model property of type str.
+        subscription_id (int): The model property of type int.
+        recurring (bool): The model property of type bool.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
@@ -42,22 +41,24 @@ class SubscriptionComponent(object):
             upgrading/downgrading. Defaults to the component and then site
             setting if one is not provided. Available values: `full`,
             `prorated`, `none`.
-        archived_at (datetime): TODO: type description here.
-        price_point_id (int): TODO: type description here.
-        price_point_handle (str): TODO: type description here.
-        price_point_type (PricePointType): TODO: type description here.
-        price_point_name (str): TODO: type description here.
-        product_family_id (int): TODO: type description here.
-        product_family_handle (str): TODO: type description here.
-        created_at (datetime): TODO: type description here.
-        updated_at (datetime): TODO: type description here.
-        use_site_exchange_rate (bool): TODO: type description here.
-        description (str): TODO: type description here.
-        allow_fractional_quantities (bool): TODO: type description here.
+        archived_at (datetime): The model property of type datetime.
+        price_point_id (int): The model property of type int.
+        price_point_handle (str): The model property of type str.
+        price_point_type (PricePointType): The model property of type
+            PricePointType.
+        price_point_name (str): The model property of type str.
+        product_family_id (int): The model property of type int.
+        product_family_handle (str): The model property of type str.
+        created_at (datetime): The model property of type datetime.
+        updated_at (datetime): The model property of type datetime.
+        use_site_exchange_rate (bool): The model property of type bool.
+        description (str): The model property of type str.
+        allow_fractional_quantities (bool): The model property of type bool.
         subscription (SubscriptionComponentSubscription): An optional object,
             will be returned if provided `include=subscription` query param.
-        historic_usages (List[HistoricUsage]): TODO: type description here.
-        display_on_hosted_page (bool): TODO: type description here.
+        historic_usages (List[HistoricUsage]): The model property of type
+            List[HistoricUsage].
+        display_on_hosted_page (bool): The model property of type bool.
         interval (int): The numerical interval. i.e. an interval of '30'
             coupled with an interval_unit of day would mean this component
             price point would renew every 30 days. This property is only
@@ -358,3 +359,75 @@ class SubscriptionComponent(object):
                    interval,
                    interval_unit,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'name={self.name!r}, '
+                f'kind={self.kind!r}, '
+                f'unit_name={self.unit_name!r}, '
+                f'enabled={self.enabled!r}, '
+                f'unit_balance={self.unit_balance!r}, '
+                f'currency={self.currency!r}, '
+                f'allocated_quantity={self.allocated_quantity!r}, '
+                f'pricing_scheme={self.pricing_scheme!r}, '
+                f'component_id={self.component_id!r}, '
+                f'component_handle={self.component_handle!r}, '
+                f'subscription_id={self.subscription_id!r}, '
+                f'recurring={self.recurring!r}, '
+                f'upgrade_charge={self.upgrade_charge!r}, '
+                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'archived_at={self.archived_at!r}, '
+                f'price_point_id={self.price_point_id!r}, '
+                f'price_point_handle={self.price_point_handle!r}, '
+                f'price_point_type={self.price_point_type!r}, '
+                f'price_point_name={self.price_point_name!r}, '
+                f'product_family_id={self.product_family_id!r}, '
+                f'product_family_handle={self.product_family_handle!r}, '
+                f'created_at={self.created_at!r}, '
+                f'updated_at={self.updated_at!r}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'description={self.description!r}, '
+                f'allow_fractional_quantities={self.allow_fractional_quantities!r}, '
+                f'subscription={self.subscription!r}, '
+                f'historic_usages={self.historic_usages!r}, '
+                f'display_on_hosted_page={self.display_on_hosted_page!r}, '
+                f'interval={self.interval!r}, '
+                f'interval_unit={self.interval_unit!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'name={self.name!s}, '
+                f'kind={self.kind!s}, '
+                f'unit_name={self.unit_name!s}, '
+                f'enabled={self.enabled!s}, '
+                f'unit_balance={self.unit_balance!s}, '
+                f'currency={self.currency!s}, '
+                f'allocated_quantity={self.allocated_quantity!s}, '
+                f'pricing_scheme={self.pricing_scheme!s}, '
+                f'component_id={self.component_id!s}, '
+                f'component_handle={self.component_handle!s}, '
+                f'subscription_id={self.subscription_id!s}, '
+                f'recurring={self.recurring!s}, '
+                f'upgrade_charge={self.upgrade_charge!s}, '
+                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'archived_at={self.archived_at!s}, '
+                f'price_point_id={self.price_point_id!s}, '
+                f'price_point_handle={self.price_point_handle!s}, '
+                f'price_point_type={self.price_point_type!s}, '
+                f'price_point_name={self.price_point_name!s}, '
+                f'product_family_id={self.product_family_id!s}, '
+                f'product_family_handle={self.product_family_handle!s}, '
+                f'created_at={self.created_at!s}, '
+                f'updated_at={self.updated_at!s}, '
+                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'description={self.description!s}, '
+                f'allow_fractional_quantities={self.allow_fractional_quantities!s}, '
+                f'subscription={self.subscription!s}, '
+                f'historic_usages={self.historic_usages!s}, '
+                f'display_on_hosted_page={self.display_on_hosted_page!s}, '
+                f'interval={self.interval!s}, '
+                f'interval_unit={self.interval_unit!s}, '
+                f'additional_properties={self.additional_properties!s})')

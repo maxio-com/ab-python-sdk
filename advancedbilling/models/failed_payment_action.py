@@ -27,9 +27,9 @@ class FailedPaymentAction(object):
     state (depending upon net terms and dunning settings).
 
     Attributes:
-        LEAVE_OPEN_INVOICE: TODO: type description here.
-        ROLLBACK_TO_PENDING: TODO: type description here.
-        INITIATE_DUNNING: TODO: type description here.
+        LEAVE_OPEN_INVOICE: The enum member of type str.
+        ROLLBACK_TO_PENDING: The enum member of type str.
+        INITIATE_DUNNING: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

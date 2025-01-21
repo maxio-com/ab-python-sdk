@@ -13,10 +13,8 @@ class CustomerResponse(object):
 
     """Implementation of the 'Customer Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        customer (Customer): TODO: type description here.
+        customer (Customer): The model property of type Customer.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +63,13 @@ class CustomerResponse(object):
         # Return an object of this model
         return cls(customer,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer={self.customer!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'customer={self.customer!s}, '
+                f'additional_properties={self.additional_properties!s})')

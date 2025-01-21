@@ -13,10 +13,8 @@ class AllocationExpirationDate(object):
 
     """Implementation of the 'Allocation Expiration Date' model.
 
-    TODO: type model description here.
-
     Attributes:
-        expires_at (datetime): TODO: type description here.
+        expires_at (datetime): The model property of type datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -70,3 +68,13 @@ class AllocationExpirationDate(object):
         # Return an object of this model
         return cls(expires_at,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'expires_at={self.expires_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'expires_at={self.expires_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

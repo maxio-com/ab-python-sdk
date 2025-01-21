@@ -74,8 +74,8 @@ class CustomFieldsController(BaseController):
         Args:
             resource_type (ResourceType): the resource type to which the
                 metafields belong
-            body (CreateMetafieldsRequest, optional): TODO: type description
-                here.
+            body (CreateMetafieldsRequest, optional): The request body
+                parameter.
 
         Returns:
             List[Metafield]: Response from the API. OK
@@ -202,8 +202,8 @@ class CustomFieldsController(BaseController):
         Args:
             resource_type (ResourceType): the resource type to which the
                 metafields belong
-            body (UpdateMetafieldsRequest, optional): TODO: type description
-                here.
+            body (UpdateMetafieldsRequest, optional): The request body
+                parameter.
 
         Returns:
             List[Metafield]: Response from the API. OK
@@ -323,8 +323,7 @@ class CustomFieldsController(BaseController):
                 metafields belong
             resource_id (int): The Advanced Billing id of the customer or the
                 subscription for which the metadata applies
-            body (CreateMetadataRequest, optional): TODO: type description
-                here.
+            body (CreateMetadataRequest, optional): The request body parameter.
 
         Returns:
             List[Metadata]: Response from the API. OK
@@ -460,8 +459,7 @@ class CustomFieldsController(BaseController):
                 metafields belong
             resource_id (int): The Advanced Billing id of the customer or the
                 subscription for which the metadata applies
-            body (UpdateMetadataRequest, optional): TODO: type description
-                here.
+            body (UpdateMetadataRequest, optional): The request body parameter.
 
         Returns:
             List[Metadata]: Response from the API. OK

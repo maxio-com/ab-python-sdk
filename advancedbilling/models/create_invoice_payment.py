@@ -15,8 +15,6 @@ class CreateInvoicePayment(object):
 
     """Implementation of the 'Create Invoice Payment' model.
 
-    TODO: type model description here.
-
     Attributes:
         amount (str | float | None): A string of the dollar amount to be
             refunded (eg. "10.50" => $10.50)
@@ -120,3 +118,23 @@ class CreateInvoicePayment(object):
                    payment_profile_id,
                    received_on,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!r}, '
+                f'memo={self.memo!r}, '
+                f'method={self.method!r}, '
+                f'details={self.details!r}, '
+                f'payment_profile_id={self.payment_profile_id!r}, '
+                f'received_on={self.received_on!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'amount={self.amount!s}, '
+                f'memo={self.memo!s}, '
+                f'method={self.method!s}, '
+                f'details={self.details!s}, '
+                f'payment_profile_id={self.payment_profile_id!s}, '
+                f'received_on={self.received_on!s}, '
+                f'additional_properties={self.additional_properties!s})')

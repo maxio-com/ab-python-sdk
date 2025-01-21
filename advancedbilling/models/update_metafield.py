@@ -14,11 +14,9 @@ class UpdateMetafield(object):
 
     """Implementation of the 'Update Metafield' model.
 
-    TODO: type model description here.
-
     Attributes:
-        current_name (str): TODO: type description here.
-        name (str): TODO: type description here.
+        current_name (str): The model property of type str.
+        name (str): The model property of type str.
         scope (MetafieldScope): Warning: When updating a metafield's scope
             attribute, all scope attributes must be passed. Partially complete
             scope attributes will override the existing settings.
@@ -132,3 +130,21 @@ class UpdateMetafield(object):
             return False
 
         return True
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'current_name={self.current_name!r}, '
+                f'name={self.name!r}, '
+                f'scope={self.scope!r}, '
+                f'input_type={self.input_type!r}, '
+                f'enum={self.enum!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'current_name={self.current_name!s}, '
+                f'name={self.name!s}, '
+                f'scope={self.scope!s}, '
+                f'input_type={self.input_type!s}, '
+                f'enum={self.enum!s}, '
+                f'additional_properties={self.additional_properties!s})')

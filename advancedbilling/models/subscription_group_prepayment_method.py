@@ -12,15 +12,13 @@ class SubscriptionGroupPrepaymentMethod(object):
 
     """Implementation of the 'Subscription Group Prepayment Method' enum.
 
-    TODO: type enum description here.
-
     Attributes:
-        CHECK: TODO: type description here.
-        CASH: TODO: type description here.
-        MONEY_ORDER: TODO: type description here.
-        ACH: TODO: type description here.
-        PAYPAL_ACCOUNT: TODO: type description here.
-        OTHER: TODO: type description here.
+        CHECK: The enum member of type str.
+        CASH: The enum member of type str.
+        MONEY_ORDER: The enum member of type str.
+        ACH: The enum member of type str.
+        PAYPAL_ACCOUNT: The enum member of type str.
+        OTHER: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

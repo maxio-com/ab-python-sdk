@@ -17,7 +17,7 @@ class PauseRequest(object):
     Allows to pause a Subscription
 
     Attributes:
-        hold (AutoResume): TODO: type description here.
+        hold (AutoResume): The model property of type AutoResume.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,3 +71,13 @@ class PauseRequest(object):
         # Return an object of this model
         return cls(hold,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'hold={self.hold!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'hold={self.hold!s}, '
+                f'additional_properties={self.additional_properties!s})')

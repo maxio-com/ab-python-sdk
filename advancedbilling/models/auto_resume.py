@@ -13,10 +13,9 @@ class AutoResume(object):
 
     """Implementation of the 'Auto Resume' model.
 
-    TODO: type model description here.
-
     Attributes:
-        automatically_resume_at (datetime): TODO: type description here.
+        automatically_resume_at (datetime): The model property of type
+            datetime.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -77,3 +76,13 @@ class AutoResume(object):
         # Return an object of this model
         return cls(automatically_resume_at,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'automatically_resume_at={self.automatically_resume_at!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'automatically_resume_at={self.automatically_resume_at!s}, '
+                f'additional_properties={self.additional_properties!s})')

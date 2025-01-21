@@ -13,10 +13,9 @@ class CreatePrepaymentResponse(object):
 
     """Implementation of the 'Create Prepayment Response' model.
 
-    TODO: type model description here.
-
     Attributes:
-        prepayment (CreatedPrepayment): TODO: type description here.
+        prepayment (CreatedPrepayment): The model property of type
+            CreatedPrepayment.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -65,3 +64,13 @@ class CreatePrepaymentResponse(object):
         # Return an object of this model
         return cls(prepayment,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'prepayment={self.prepayment!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'prepayment={self.prepayment!s}, '
+                f'additional_properties={self.additional_properties!s})')

@@ -13,12 +13,11 @@ class CreateComponentPricePointsRequest(object):
 
     """Implementation of the 'Create Component Price Points Request' model.
 
-    TODO: type model description here.
-
     Attributes:
         price_points (List[CreateComponentPricePoint |
-            CreatePrepaidUsageComponentPricePoint]): TODO: type description
-            here.
+            CreatePrepaidUsageComponentPricePoint]): The model property of
+            type List[CreateComponentPricePoint |
+            CreatePrepaidUsageComponentPricePoint].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -91,3 +90,13 @@ class CreateComponentPricePointsRequest(object):
             return False
 
         return UnionTypeLookUp.get('CreateComponentPricePointsRequestPricePoints').validate(dictionary.get('price_points')).is_valid
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'price_points={self.price_points!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'price_points={self.price_points!s}, '
+                f'additional_properties={self.additional_properties!s})')

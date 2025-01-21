@@ -15,8 +15,8 @@ class BankAccountType(object):
     Defaults to checking
 
     Attributes:
-        CHECKING: TODO: type description here.
-        SAVINGS: TODO: type description here.
+        CHECKING: The enum member of type str.
+        SAVINGS: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

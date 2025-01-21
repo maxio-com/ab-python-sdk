@@ -13,14 +13,13 @@ class CouponRestriction(object):
 
     """Implementation of the 'Coupon Restriction' model.
 
-    TODO: type model description here.
-
     Attributes:
-        id (int): TODO: type description here.
-        item_type (RestrictionType): TODO: type description here.
-        item_id (int): TODO: type description here.
-        name (str): TODO: type description here.
-        handle (str): TODO: type description here.
+        id (int): The model property of type int.
+        item_type (RestrictionType): The model property of type
+            RestrictionType.
+        item_id (int): The model property of type int.
+        name (str): The model property of type str.
+        handle (str): The model property of type str.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -106,3 +105,21 @@ class CouponRestriction(object):
                    name,
                    handle,
                    additional_properties)
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!r}, '
+                f'item_type={self.item_type!r}, '
+                f'item_id={self.item_id!r}, '
+                f'name={self.name!r}, '
+                f'handle={self.handle!r}, '
+                f'additional_properties={self.additional_properties!r})')
+
+    def __str__(self):
+        return (f'{self.__class__.__name__}('
+                f'id={self.id!s}, '
+                f'item_type={self.item_type!s}, '
+                f'item_id={self.item_id!s}, '
+                f'name={self.name!s}, '
+                f'handle={self.handle!s}, '
+                f'additional_properties={self.additional_properties!s})')
