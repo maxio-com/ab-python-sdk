@@ -112,20 +112,20 @@ class MRR(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'amount_in_cents={self.amount_in_cents!r}, '
-                f'amount_formatted={self.amount_formatted!r}, '
-                f'currency={self.currency!r}, '
-                f'currency_symbol={self.currency_symbol!r}, '
-                f'breakouts={self.breakouts!r}, '
-                f'at_time={self.at_time!r}, '
+                f'amount_in_cents={(self.amount_in_cents if hasattr(self, "amount_in_cents") else None)!r}, '
+                f'amount_formatted={(self.amount_formatted if hasattr(self, "amount_formatted") else None)!r}, '
+                f'currency={(self.currency if hasattr(self, "currency") else None)!r}, '
+                f'currency_symbol={(self.currency_symbol if hasattr(self, "currency_symbol") else None)!r}, '
+                f'breakouts={(self.breakouts if hasattr(self, "breakouts") else None)!r}, '
+                f'at_time={(self.at_time if hasattr(self, "at_time") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'amount_in_cents={self.amount_in_cents!s}, '
-                f'amount_formatted={self.amount_formatted!s}, '
-                f'currency={self.currency!s}, '
-                f'currency_symbol={self.currency_symbol!s}, '
-                f'breakouts={self.breakouts!s}, '
-                f'at_time={self.at_time!s}, '
+                f'amount_in_cents={(self.amount_in_cents if hasattr(self, "amount_in_cents") else None)!s}, '
+                f'amount_formatted={(self.amount_formatted if hasattr(self, "amount_formatted") else None)!s}, '
+                f'currency={(self.currency if hasattr(self, "currency") else None)!s}, '
+                f'currency_symbol={(self.currency_symbol if hasattr(self, "currency_symbol") else None)!s}, '
+                f'breakouts={(self.breakouts if hasattr(self, "breakouts") else None)!s}, '
+                f'at_time={(self.at_time if hasattr(self, "at_time") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

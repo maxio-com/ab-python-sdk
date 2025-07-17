@@ -91,14 +91,14 @@ class TaxConfiguration(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'kind={self.kind!r}, '
-                f'destination_address={self.destination_address!r}, '
-                f'fully_configured={self.fully_configured!r}, '
+                f'kind={(self.kind if hasattr(self, "kind") else None)!r}, '
+                f'destination_address={(self.destination_address if hasattr(self, "destination_address") else None)!r}, '
+                f'fully_configured={(self.fully_configured if hasattr(self, "fully_configured") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'kind={self.kind!s}, '
-                f'destination_address={self.destination_address!s}, '
-                f'fully_configured={self.fully_configured!s}, '
+                f'kind={(self.kind if hasattr(self, "kind") else None)!s}, '
+                f'destination_address={(self.destination_address if hasattr(self, "destination_address") else None)!s}, '
+                f'fully_configured={(self.fully_configured if hasattr(self, "fully_configured") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

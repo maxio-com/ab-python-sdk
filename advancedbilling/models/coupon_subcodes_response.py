@@ -87,14 +87,14 @@ class CouponSubcodesResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'created_codes={self.created_codes!r}, '
-                f'duplicate_codes={self.duplicate_codes!r}, '
-                f'invalid_codes={self.invalid_codes!r}, '
+                f'created_codes={(self.created_codes if hasattr(self, "created_codes") else None)!r}, '
+                f'duplicate_codes={(self.duplicate_codes if hasattr(self, "duplicate_codes") else None)!r}, '
+                f'invalid_codes={(self.invalid_codes if hasattr(self, "invalid_codes") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'created_codes={self.created_codes!s}, '
-                f'duplicate_codes={self.duplicate_codes!s}, '
-                f'invalid_codes={self.invalid_codes!s}, '
+                f'created_codes={(self.created_codes if hasattr(self, "created_codes") else None)!s}, '
+                f'duplicate_codes={(self.duplicate_codes if hasattr(self, "duplicate_codes") else None)!s}, '
+                f'invalid_codes={(self.invalid_codes if hasattr(self, "invalid_codes") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

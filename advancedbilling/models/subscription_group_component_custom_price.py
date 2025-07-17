@@ -126,14 +126,14 @@ class SubscriptionGroupComponentCustomPrice(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'pricing_scheme={self.pricing_scheme!r}, '
-                f'prices={self.prices!r}, '
-                f'overage_pricing={self.overage_pricing!r}, '
+                f'pricing_scheme={(self.pricing_scheme if hasattr(self, "pricing_scheme") else None)!r}, '
+                f'prices={(self.prices if hasattr(self, "prices") else None)!r}, '
+                f'overage_pricing={(self.overage_pricing if hasattr(self, "overage_pricing") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'pricing_scheme={self.pricing_scheme!s}, '
-                f'prices={self.prices!s}, '
-                f'overage_pricing={self.overage_pricing!s}, '
+                f'pricing_scheme={(self.pricing_scheme if hasattr(self, "pricing_scheme") else None)!s}, '
+                f'prices={(self.prices if hasattr(self, "prices") else None)!s}, '
+                f'overage_pricing={(self.overage_pricing if hasattr(self, "overage_pricing") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

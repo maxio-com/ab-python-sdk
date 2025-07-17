@@ -95,16 +95,16 @@ class InvoicePayerChange(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'first_name={self.first_name!r}, '
-                f'last_name={self.last_name!r}, '
-                f'organization={self.organization!r}, '
-                f'email={self.email!r}, '
+                f'first_name={(self.first_name if hasattr(self, "first_name") else None)!r}, '
+                f'last_name={(self.last_name if hasattr(self, "last_name") else None)!r}, '
+                f'organization={(self.organization if hasattr(self, "organization") else None)!r}, '
+                f'email={(self.email if hasattr(self, "email") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'first_name={self.first_name!s}, '
-                f'last_name={self.last_name!s}, '
-                f'organization={self.organization!s}, '
-                f'email={self.email!s}, '
+                f'first_name={(self.first_name if hasattr(self, "first_name") else None)!s}, '
+                f'last_name={(self.last_name if hasattr(self, "last_name") else None)!s}, '
+                f'organization={(self.organization if hasattr(self, "organization") else None)!s}, '
+                f'email={(self.email if hasattr(self, "email") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

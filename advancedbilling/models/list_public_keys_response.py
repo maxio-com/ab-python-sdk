@@ -87,12 +87,12 @@ class ListPublicKeysResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'chargify_js_keys={self.chargify_js_keys!r}, '
-                f'meta={self.meta!r}, '
+                f'chargify_js_keys={(self.chargify_js_keys if hasattr(self, "chargify_js_keys") else None)!r}, '
+                f'meta={(self.meta if hasattr(self, "meta") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'chargify_js_keys={self.chargify_js_keys!s}, '
-                f'meta={self.meta!s}, '
+                f'chargify_js_keys={(self.chargify_js_keys if hasattr(self, "chargify_js_keys") else None)!s}, '
+                f'meta={(self.meta if hasattr(self, "meta") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -42,4 +42,4 @@ class SubscriptionGroupUpdateErrorResponseException(APIException):
         base_str = super().__str__()
         return (f'{self.__class__.__name__}('
                 f'{base_str[base_str.find("(") + 1:-1]}, '
-                f'errors={self.errors!s})')
+                f'errors={(self.errors if hasattr(self, "errors") else None)!s})')

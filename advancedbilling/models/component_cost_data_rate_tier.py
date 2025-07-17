@@ -129,18 +129,18 @@ class ComponentCostDataRateTier(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'starting_quantity={self.starting_quantity!r}, '
-                f'ending_quantity={self.ending_quantity!r}, '
-                f'quantity={self.quantity!r}, '
-                f'unit_price={self.unit_price!r}, '
-                f'amount={self.amount!r}, '
+                f'starting_quantity={(self.starting_quantity if hasattr(self, "starting_quantity") else None)!r}, '
+                f'ending_quantity={(self.ending_quantity if hasattr(self, "ending_quantity") else None)!r}, '
+                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!r}, '
+                f'unit_price={(self.unit_price if hasattr(self, "unit_price") else None)!r}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'starting_quantity={self.starting_quantity!s}, '
-                f'ending_quantity={self.ending_quantity!s}, '
-                f'quantity={self.quantity!s}, '
-                f'unit_price={self.unit_price!s}, '
-                f'amount={self.amount!s}, '
+                f'starting_quantity={(self.starting_quantity if hasattr(self, "starting_quantity") else None)!s}, '
+                f'ending_quantity={(self.ending_quantity if hasattr(self, "ending_quantity") else None)!s}, '
+                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!s}, '
+                f'unit_price={(self.unit_price if hasattr(self, "unit_price") else None)!s}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

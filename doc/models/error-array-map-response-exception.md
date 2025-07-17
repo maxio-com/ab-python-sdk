@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `errors` | `Dict[str, object]` | Optional | - |
+| `errors` | `Dict[str, Any]` | Optional | - |
 
 ## Example (as JSON)
 

@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `base` | `List[object]` | Optional | - |
+| `base` | `List[Any]` | Optional | - |
 
 ## Example (as JSON)
 

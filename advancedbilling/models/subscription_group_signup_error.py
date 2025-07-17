@@ -115,20 +115,20 @@ class SubscriptionGroupSignupError(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'subscriptions={self.subscriptions!r}, '
-                f'payer_reference={self.payer_reference!r}, '
-                f'payer={self.payer!r}, '
-                f'subscription_group={self.subscription_group!r}, '
-                f'payment_profile_id={self.payment_profile_id!r}, '
-                f'payer_id={self.payer_id!r}, '
+                f'subscriptions={(self.subscriptions if hasattr(self, "subscriptions") else None)!r}, '
+                f'payer_reference={(self.payer_reference if hasattr(self, "payer_reference") else None)!r}, '
+                f'payer={(self.payer if hasattr(self, "payer") else None)!r}, '
+                f'subscription_group={(self.subscription_group if hasattr(self, "subscription_group") else None)!r}, '
+                f'payment_profile_id={(self.payment_profile_id if hasattr(self, "payment_profile_id") else None)!r}, '
+                f'payer_id={(self.payer_id if hasattr(self, "payer_id") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'subscriptions={self.subscriptions!s}, '
-                f'payer_reference={self.payer_reference!s}, '
-                f'payer={self.payer!s}, '
-                f'subscription_group={self.subscription_group!s}, '
-                f'payment_profile_id={self.payment_profile_id!s}, '
-                f'payer_id={self.payer_id!s}, '
+                f'subscriptions={(self.subscriptions if hasattr(self, "subscriptions") else None)!s}, '
+                f'payer_reference={(self.payer_reference if hasattr(self, "payer_reference") else None)!s}, '
+                f'payer={(self.payer if hasattr(self, "payer") else None)!s}, '
+                f'subscription_group={(self.subscription_group if hasattr(self, "subscription_group") else None)!s}, '
+                f'payment_profile_id={(self.payment_profile_id if hasattr(self, "payment_profile_id") else None)!s}, '
+                f'payer_id={(self.payer_id if hasattr(self, "payer_id") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

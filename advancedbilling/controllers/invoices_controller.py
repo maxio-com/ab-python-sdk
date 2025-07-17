@@ -125,6 +125,9 @@ class InvoicesController(BaseController):
                         subscription group you want to fetch consolidated
                         invoices for. This will return a paginated list of
                         consolidated invoices for the specified group.
+                    consolidation_level -- str -- The consolidation level of
+                        the invoice. Allowed Values: none, parent, child or
+                        comma-separated lists of thereof, e.g. none,parent.
                     page -- int -- Result records are organized in pages. By
                         default, the first page of results is displayed. The
                         page parameter specifies a page number of results to
@@ -210,6 +213,9 @@ class InvoicesController(BaseController):
             .query_param(Parameter()
                          .key('subscription_group_uid')
                          .value(options.get('subscription_group_uid', None)))
+            .query_param(Parameter()
+                         .key('consolidation_level')
+                         .value(options.get('consolidation_level', None)))
             .query_param(Parameter()
                          .key('page')
                          .value(options.get('page', None)))
@@ -446,54 +452,9 @@ class InvoicesController(BaseController):
                                    body=None):
         """Does a POST request to /invoices/{uid}/payments.json.
 
-        This API call should be used when you want to record a payment of a
-        given type against a specific invoice. If you would like to apply a
-        payment across multiple invoices, you can use the Bulk Payment
-        endpoint.
-        ## Create a Payment from the existing payment profile
-        In order to apply a payment to an invoice using an existing payment
-        profile, specify `type` as `payment`, the amount less than the invoice
-        total, and the customer's `payment_profile_id`. The ID of a payment
-        profile might be retrieved via the Payment Profiles API endpoint.
-        ```
-        {
-          "type": "payment",
-          "payment": {
-            "amount": 10.00,
-            "payment_profile_id": 123
-          }
-        }
-        ```
-        ## Create a Payment from the Subscription's Prepayment Account
-        In order apply a prepayment to an invoice, specify the `type` as
-        `prepayment`, and also the `amount`.
-        ```
-        {
-          "type": "prepayment",
-          "payment": {
-            "amount": 10.00
-          }
-        }
-        ```
-        Note that the `amount` must be less than or equal to the
-        Subscription's Prepayment account balance.
-        ## Create a Payment from the Subscription's Service Credit Account
-        In order to apply a service credit to an invoice, specify the `type`
-        as `service_credit`, and also the `amount`:
-        ```
-        {
-          "type": "service_credit",
-          "payment": {
-            "amount": 10.00
-          }
-        }
-        ```
-        Note that Advanced Billing will attempt to fully pay the invoice's
-        `due_amount` from the Subscription's Service Credit account. At this
-        time, partial payments from a Service Credit Account are only allowed
-        for consolidated invoices (subscription groups). Therefore, for normal
-        invoices the Service Credit account balance must be greater than or
-        equal to the invoice's `due_amount`.
+        Applies a payment of a given type against a specific invoice. If you
+        would like to apply a payment across multiple invoices, you can use
+        the Bulk Payment endpoint.
 
         Args:
             uid (str): The unique identifier for the invoice, this does not

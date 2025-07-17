@@ -159,7 +159,7 @@ class ComponentAllocationChange(object):
                 f'component_handle={self.component_handle!r}, '
                 f'memo={self.memo!r}, '
                 f'allocation_id={self.allocation_id!r}, '
-                f'allocated_quantity={self.allocated_quantity!r}, '
+                f'allocated_quantity={(self.allocated_quantity if hasattr(self, "allocated_quantity") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
@@ -170,5 +170,5 @@ class ComponentAllocationChange(object):
                 f'component_handle={self.component_handle!s}, '
                 f'memo={self.memo!s}, '
                 f'allocation_id={self.allocation_id!s}, '
-                f'allocated_quantity={self.allocated_quantity!s}, '
+                f'allocated_quantity={(self.allocated_quantity if hasattr(self, "allocated_quantity") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

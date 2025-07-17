@@ -71,10 +71,10 @@ class UpdateSubscriptionGroup(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'member_ids={self.member_ids!r}, '
+                f'member_ids={(self.member_ids if hasattr(self, "member_ids") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'member_ids={self.member_ids!s}, '
+                f'member_ids={(self.member_ids if hasattr(self, "member_ids") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

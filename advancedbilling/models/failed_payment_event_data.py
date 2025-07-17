@@ -143,7 +143,7 @@ class FailedPaymentEventData(object):
         return (f'{self.__class__.__name__}('
                 f'amount_in_cents={self.amount_in_cents!r}, '
                 f'applied_amount={self.applied_amount!r}, '
-                f'memo={self.memo!r}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!r}, '
                 f'payment_method={self.payment_method!r}, '
                 f'transaction_id={self.transaction_id!r}, '
                 f'additional_properties={self.additional_properties!r})')
@@ -152,7 +152,7 @@ class FailedPaymentEventData(object):
         return (f'{self.__class__.__name__}('
                 f'amount_in_cents={self.amount_in_cents!s}, '
                 f'applied_amount={self.applied_amount!s}, '
-                f'memo={self.memo!s}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!s}, '
                 f'payment_method={self.payment_method!s}, '
                 f'transaction_id={self.transaction_id!s}, '
                 f'additional_properties={self.additional_properties!s})')

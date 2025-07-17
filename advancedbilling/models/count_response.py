@@ -71,10 +71,10 @@ class CountResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'count={self.count!r}, '
+                f'count={(self.count if hasattr(self, "count") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'count={self.count!s}, '
+                f'count={(self.count if hasattr(self, "count") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

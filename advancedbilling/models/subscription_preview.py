@@ -82,12 +82,12 @@ class SubscriptionPreview(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'current_billing_manifest={self.current_billing_manifest!r}, '
-                f'next_billing_manifest={self.next_billing_manifest!r}, '
+                f'current_billing_manifest={(self.current_billing_manifest if hasattr(self, "current_billing_manifest") else None)!r}, '
+                f'next_billing_manifest={(self.next_billing_manifest if hasattr(self, "next_billing_manifest") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'current_billing_manifest={self.current_billing_manifest!s}, '
-                f'next_billing_manifest={self.next_billing_manifest!s}, '
+                f'current_billing_manifest={(self.current_billing_manifest if hasattr(self, "current_billing_manifest") else None)!s}, '
+                f'next_billing_manifest={(self.next_billing_manifest if hasattr(self, "next_billing_manifest") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

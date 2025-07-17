@@ -141,22 +141,22 @@ class InvoiceCredit(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!r}, '
-                f'credit_note_number={self.credit_note_number!r}, '
-                f'credit_note_uid={self.credit_note_uid!r}, '
-                f'transaction_time={self.transaction_time!r}, '
-                f'memo={self.memo!r}, '
-                f'original_amount={self.original_amount!r}, '
-                f'applied_amount={self.applied_amount!r}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!r}, '
+                f'credit_note_number={(self.credit_note_number if hasattr(self, "credit_note_number") else None)!r}, '
+                f'credit_note_uid={(self.credit_note_uid if hasattr(self, "credit_note_uid") else None)!r}, '
+                f'transaction_time={(self.transaction_time if hasattr(self, "transaction_time") else None)!r}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!r}, '
+                f'original_amount={(self.original_amount if hasattr(self, "original_amount") else None)!r}, '
+                f'applied_amount={(self.applied_amount if hasattr(self, "applied_amount") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!s}, '
-                f'credit_note_number={self.credit_note_number!s}, '
-                f'credit_note_uid={self.credit_note_uid!s}, '
-                f'transaction_time={self.transaction_time!s}, '
-                f'memo={self.memo!s}, '
-                f'original_amount={self.original_amount!s}, '
-                f'applied_amount={self.applied_amount!s}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!s}, '
+                f'credit_note_number={(self.credit_note_number if hasattr(self, "credit_note_number") else None)!s}, '
+                f'credit_note_uid={(self.credit_note_uid if hasattr(self, "credit_note_uid") else None)!s}, '
+                f'transaction_time={(self.transaction_time if hasattr(self, "transaction_time") else None)!s}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!s}, '
+                f'original_amount={(self.original_amount if hasattr(self, "original_amount") else None)!s}, '
+                f'applied_amount={(self.applied_amount if hasattr(self, "applied_amount") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

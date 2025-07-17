@@ -59,6 +59,7 @@ result = component_price_points_controller.promote_component_price_point_to_defa
     component_id,
     price_point_id
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -133,7 +134,8 @@ body = CreateComponentPricePointRequest(
             ),
             Price(
                 starting_quantity='101',
-                unit_price='4.00'
+                unit_price='4.00',
+                ending_quantity=None
             )
         ],
         handle='wholesale-handle',
@@ -145,6 +147,7 @@ result = component_price_points_controller.create_component_price_point(
     component_id,
     body=body
 )
+print(result)
 ```
 
 ## Errors
@@ -175,8 +178,8 @@ def list_component_price_points(self,
 |  --- | --- | --- | --- |
 | `component_id` | `int` | Template, Required | The Advanced Billing id of the component |
 | `currency_prices` | `bool` | Query, Optional | Include an array of currency price data |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `filter_type` | [`List[PricePointType]`](../../doc/models/price-point-type.md) | Query, Optional | Use in query: `filter[type]=catalog,default`. |
 
 ## Response Type
@@ -192,6 +195,7 @@ collect = {Liquid error: Value cannot be null. (Parameter 'key')
     'per_page': 50
 }
 result = component_price_points_controller.list_component_price_points(collect)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -312,6 +316,7 @@ result = component_price_points_controller.bulk_create_component_price_points(
     component_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -432,6 +437,7 @@ result = component_price_points_controller.update_component_price_point(
     price_point_id,
     body=body
 )
+print(result)
 ```
 
 ## Errors
@@ -475,6 +481,7 @@ result = component_price_points_controller.read_component_price_point(
     component_id,
     price_point_id
 )
+print(result)
 ```
 
 
@@ -510,6 +517,7 @@ result = component_price_points_controller.archive_component_price_point(
     component_id,
     price_point_id
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -585,6 +593,7 @@ result = component_price_points_controller.unarchive_component_price_point(
     component_id,
     price_point_id
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -671,6 +680,7 @@ result = component_price_points_controller.create_currency_prices(
     price_point_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -742,6 +752,7 @@ result = component_price_points_controller.update_currency_prices(
     price_point_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -782,8 +793,8 @@ def list_all_component_price_points(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `include` | [`ListComponentsPricePointsInclude`](../../doc/models/list-components-price-points-include.md) | Query, Optional | Allows including additional data in the response. Use in query: `include=currency_prices`. |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 | `filter` | [`ListPricePointsFilter`](../../doc/models/list-price-points-filter.md) | Query, Optional | Filter to use for List PricePoints operations |
 
@@ -816,6 +827,7 @@ collect = {
     )
 }
 result = component_price_points_controller.list_all_component_price_points(collect)
+print(result)
 ```
 
 ## Example Response *(as JSON)*

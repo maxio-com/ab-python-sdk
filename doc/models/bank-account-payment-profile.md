@@ -28,9 +28,11 @@
 | `bank_account_type` | [`BankAccountType`](../../doc/models/bank-account-type.md) | Optional | Defaults to checking |
 | `bank_account_holder_type` | [`BankAccountHolderType`](../../doc/models/bank-account-holder-type.md) | Optional | Defaults to personal |
 | `payment_type` | [`PaymentType`](../../doc/models/payment-type.md) | Required | **Default**: `'bank_account'` |
-| `verified` | `bool` | Optional | denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account<br>**Default**: `False` |
+| `verified` | `bool` | Optional | denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account<br><br>**Default**: `False` |
 | `site_gateway_setting_id` | `int` | Optional | - |
 | `gateway_handle` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | A timestamp indicating when this payment profile was created |
+| `updated_at` | `datetime` | Optional | A timestamp indicating when this payment profile was last updated |
 
 ## Example (as JSON)
 

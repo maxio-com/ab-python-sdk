@@ -136,8 +136,8 @@ class PaymentMethodCreditCard(object):
     def __repr__(self):
         return (f'{self.__class__.__name__}('
                 f'card_brand={self.card_brand!r}, '
-                f'card_expiration={self.card_expiration!r}, '
-                f'last_four={self.last_four!r}, '
+                f'card_expiration={(self.card_expiration if hasattr(self, "card_expiration") else None)!r}, '
+                f'last_four={(self.last_four if hasattr(self, "last_four") else None)!r}, '
                 f'masked_card_number={self.masked_card_number!r}, '
                 f'mtype={self.mtype!r}, '
                 f'additional_properties={self.additional_properties!r})')
@@ -145,8 +145,8 @@ class PaymentMethodCreditCard(object):
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'card_brand={self.card_brand!s}, '
-                f'card_expiration={self.card_expiration!s}, '
-                f'last_four={self.last_four!s}, '
+                f'card_expiration={(self.card_expiration if hasattr(self, "card_expiration") else None)!s}, '
+                f'last_four={(self.last_four if hasattr(self, "last_four") else None)!s}, '
                 f'masked_card_number={self.masked_card_number!s}, '
                 f'mtype={self.mtype!s}, '
                 f'additional_properties={self.additional_properties!s})')

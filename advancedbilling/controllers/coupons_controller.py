@@ -608,7 +608,7 @@ class CouponsController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(CouponResponse.from_dictionary)
-            .local_error('404', 'Not Found', SingleStringErrorResponseException)
+            .local_error_template('404', 'Not Found: \'{$response.body}\'', SingleStringErrorResponseException)
         ).execute()
 
     def create_or_update_coupon_currency_prices(self,

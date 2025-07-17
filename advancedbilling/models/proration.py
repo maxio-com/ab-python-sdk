@@ -72,10 +72,10 @@ class Proration(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'preserve_period={self.preserve_period!r}, '
+                f'preserve_period={(self.preserve_period if hasattr(self, "preserve_period") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'preserve_period={self.preserve_period!s}, '
+                f'preserve_period={(self.preserve_period if hasattr(self, "preserve_period") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

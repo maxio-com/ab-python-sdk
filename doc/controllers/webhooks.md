@@ -47,8 +47,8 @@ def list_webhooks(self,
 | `status` | [`WebhookStatus`](../../doc/models/webhook-status.md) | Query, Optional | Webhooks with matching status would be returned. |
 | `since_date` | `str` | Query, Optional | Format YYYY-MM-DD. Returns Webhooks with the created_at date greater than or equal to the one specified. |
 | `until_date` | `str` | Query, Optional | Format YYYY-MM-DD. Returns Webhooks with the created_at date less than or equal to the one specified. |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `order` | [`WebhookOrder`](../../doc/models/webhook-order.md) | Query, Optional | The order in which the Webhooks are returned. |
 | `subscription` | `int` | Query, Optional | The Advanced Billing id of a subscription you'd like to filter for |
 
@@ -64,6 +64,7 @@ collect = {
     'per_page': 50
 }
 result = webhooks_controller.list_webhooks(collect)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -135,6 +136,7 @@ body = EnableWebhooksRequest(
 result = webhooks_controller.enable_webhooks(
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -180,6 +182,7 @@ body = ReplayWebhooksRequest(
 result = webhooks_controller.replay_webhooks(
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -229,6 +232,7 @@ body = CreateOrUpdateEndpointRequest(
 result = webhooks_controller.create_endpoint(
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -271,6 +275,7 @@ def list_endpoints(self)
 
 ```python
 result = webhooks_controller.list_endpoints()
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -351,6 +356,7 @@ result = webhooks_controller.update_endpoint(
     endpoint_id,
     body=body
 )
+print(result)
 ```
 
 ## Errors

@@ -83,12 +83,12 @@ class ListComponentsFilter(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'ids={self.ids!r}, '
-                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
+                f'ids={(self.ids if hasattr(self, "ids") else None)!r}, '
+                f'use_site_exchange_rate={(self.use_site_exchange_rate if hasattr(self, "use_site_exchange_rate") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'ids={self.ids!s}, '
-                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
+                f'ids={(self.ids if hasattr(self, "ids") else None)!s}, '
+                f'use_site_exchange_rate={(self.use_site_exchange_rate if hasattr(self, "use_site_exchange_rate") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

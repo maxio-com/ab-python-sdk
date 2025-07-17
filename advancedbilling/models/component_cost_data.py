@@ -154,22 +154,22 @@ class ComponentCostData(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'component_code_id={self.component_code_id!r}, '
-                f'price_point_id={self.price_point_id!r}, '
-                f'product_id={self.product_id!r}, '
-                f'quantity={self.quantity!r}, '
-                f'amount={self.amount!r}, '
-                f'pricing_scheme={self.pricing_scheme!r}, '
-                f'tiers={self.tiers!r}, '
+                f'component_code_id={(self.component_code_id if hasattr(self, "component_code_id") else None)!r}, '
+                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!r}, '
+                f'product_id={(self.product_id if hasattr(self, "product_id") else None)!r}, '
+                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!r}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!r}, '
+                f'pricing_scheme={(self.pricing_scheme if hasattr(self, "pricing_scheme") else None)!r}, '
+                f'tiers={(self.tiers if hasattr(self, "tiers") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'component_code_id={self.component_code_id!s}, '
-                f'price_point_id={self.price_point_id!s}, '
-                f'product_id={self.product_id!s}, '
-                f'quantity={self.quantity!s}, '
-                f'amount={self.amount!s}, '
-                f'pricing_scheme={self.pricing_scheme!s}, '
-                f'tiers={self.tiers!s}, '
+                f'component_code_id={(self.component_code_id if hasattr(self, "component_code_id") else None)!s}, '
+                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!s}, '
+                f'product_id={(self.product_id if hasattr(self, "product_id") else None)!s}, '
+                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!s}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!s}, '
+                f'pricing_scheme={(self.pricing_scheme if hasattr(self, "pricing_scheme") else None)!s}, '
+                f'tiers={(self.tiers if hasattr(self, "tiers") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

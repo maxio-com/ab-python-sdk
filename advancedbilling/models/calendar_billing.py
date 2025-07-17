@@ -106,12 +106,12 @@ class CalendarBilling(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'snap_day={self.snap_day!r}, '
-                f'calendar_billing_first_charge={self.calendar_billing_first_charge!r}, '
+                f'snap_day={(self.snap_day if hasattr(self, "snap_day") else None)!r}, '
+                f'calendar_billing_first_charge={(self.calendar_billing_first_charge if hasattr(self, "calendar_billing_first_charge") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'snap_day={self.snap_day!s}, '
-                f'calendar_billing_first_charge={self.calendar_billing_first_charge!s}, '
+                f'snap_day={(self.snap_day if hasattr(self, "snap_day") else None)!s}, '
+                f'calendar_billing_first_charge={(self.calendar_billing_first_charge if hasattr(self, "calendar_billing_first_charge") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

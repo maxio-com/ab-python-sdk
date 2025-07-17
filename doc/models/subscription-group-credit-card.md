@@ -9,9 +9,6 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `full_number` | str \| int \| None | Optional | This is a container for one-of cases. |
-| `expiration_month` | str \| int \| None | Optional | This is a container for one-of cases. |
-| `expiration_year` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `chargify_token` | `str` | Optional | - |
 | `vault_token` | `str` | Optional | - |
 | `current_vault` | [`CreditCardVault`](../../doc/models/credit-card-vault.md) | Optional | The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. |
@@ -24,6 +21,9 @@
 | `billing_state` | `str` | Optional | - |
 | `billing_zip` | `str` | Optional | - |
 | `billing_country` | `str` | Optional | - |
+| `full_number` | str \| int \| None | Optional | This is a container for one-of cases. |
+| `expiration_month` | str \| int \| None | Optional | This is a container for one-of cases. |
+| `expiration_year` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `last_four` | `str` | Optional | - |
 | `card_type` | [`CardType`](../../doc/models/card-type.md) | Optional | The type of card used. |
 | `customer_vault_token` | `str` | Optional | - |
@@ -34,11 +34,12 @@
 
 ```json
 {
-  "full_number": 4111111111111111,
   "chargify_token": "tok_592nf92ng0sjd4300p",
-  "expiration_month": "String1",
-  "expiration_year": "String5",
-  "vault_token": "vault_token6"
+  "full_number": 4111111111111111,
+  "vault_token": "vault_token6",
+  "current_vault": "braintree_blue",
+  "gateway_handle": "gateway_handle6",
+  "first_name": "first_name4"
 }
 ```
 

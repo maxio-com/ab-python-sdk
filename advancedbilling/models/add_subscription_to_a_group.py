@@ -72,10 +72,10 @@ class AddSubscriptionToAGroup(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'group={self.group!r}, '
+                f'group={(self.group if hasattr(self, "group") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'group={self.group!s}, '
+                f'group={(self.group if hasattr(self, "group") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

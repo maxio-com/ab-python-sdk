@@ -101,16 +101,16 @@ class SubscriptionMigrationPreview(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'prorated_adjustment_in_cents={self.prorated_adjustment_in_cents!r}, '
-                f'charge_in_cents={self.charge_in_cents!r}, '
-                f'payment_due_in_cents={self.payment_due_in_cents!r}, '
-                f'credit_applied_in_cents={self.credit_applied_in_cents!r}, '
+                f'prorated_adjustment_in_cents={(self.prorated_adjustment_in_cents if hasattr(self, "prorated_adjustment_in_cents") else None)!r}, '
+                f'charge_in_cents={(self.charge_in_cents if hasattr(self, "charge_in_cents") else None)!r}, '
+                f'payment_due_in_cents={(self.payment_due_in_cents if hasattr(self, "payment_due_in_cents") else None)!r}, '
+                f'credit_applied_in_cents={(self.credit_applied_in_cents if hasattr(self, "credit_applied_in_cents") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'prorated_adjustment_in_cents={self.prorated_adjustment_in_cents!s}, '
-                f'charge_in_cents={self.charge_in_cents!s}, '
-                f'payment_due_in_cents={self.payment_due_in_cents!s}, '
-                f'credit_applied_in_cents={self.credit_applied_in_cents!s}, '
+                f'prorated_adjustment_in_cents={(self.prorated_adjustment_in_cents if hasattr(self, "prorated_adjustment_in_cents") else None)!s}, '
+                f'charge_in_cents={(self.charge_in_cents if hasattr(self, "charge_in_cents") else None)!s}, '
+                f'payment_due_in_cents={(self.payment_due_in_cents if hasattr(self, "payment_due_in_cents") else None)!s}, '
+                f'credit_applied_in_cents={(self.credit_applied_in_cents if hasattr(self, "credit_applied_in_cents") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

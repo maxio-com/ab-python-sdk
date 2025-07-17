@@ -109,14 +109,14 @@ class InvoiceBalanceItem(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!r}, '
-                f'number={self.number!r}, '
-                f'outstanding_amount={self.outstanding_amount!r}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!r}, '
+                f'number={(self.number if hasattr(self, "number") else None)!r}, '
+                f'outstanding_amount={(self.outstanding_amount if hasattr(self, "outstanding_amount") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!s}, '
-                f'number={self.number!s}, '
-                f'outstanding_amount={self.outstanding_amount!s}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!s}, '
+                f'number={(self.number if hasattr(self, "number") else None)!s}, '
+                f'outstanding_amount={(self.outstanding_amount if hasattr(self, "outstanding_amount") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

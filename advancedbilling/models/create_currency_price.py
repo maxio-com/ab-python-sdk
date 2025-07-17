@@ -87,14 +87,14 @@ class CreateCurrencyPrice(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'currency={self.currency!r}, '
-                f'price={self.price!r}, '
-                f'price_id={self.price_id!r}, '
+                f'currency={(self.currency if hasattr(self, "currency") else None)!r}, '
+                f'price={(self.price if hasattr(self, "price") else None)!r}, '
+                f'price_id={(self.price_id if hasattr(self, "price_id") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'currency={self.currency!s}, '
-                f'price={self.price!s}, '
-                f'price_id={self.price_id!s}, '
+                f'currency={(self.currency if hasattr(self, "currency") else None)!s}, '
+                f'price={(self.price if hasattr(self, "price") else None)!s}, '
+                f'price_id={(self.price_id if hasattr(self, "price_id") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

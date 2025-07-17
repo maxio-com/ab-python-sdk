@@ -118,16 +118,16 @@ class UpsertPrepaidConfiguration(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'initial_funding_amount_in_cents={self.initial_funding_amount_in_cents!r}, '
-                f'replenish_to_amount_in_cents={self.replenish_to_amount_in_cents!r}, '
-                f'auto_replenish={self.auto_replenish!r}, '
-                f'replenish_threshold_amount_in_cents={self.replenish_threshold_amount_in_cents!r}, '
+                f'initial_funding_amount_in_cents={(self.initial_funding_amount_in_cents if hasattr(self, "initial_funding_amount_in_cents") else None)!r}, '
+                f'replenish_to_amount_in_cents={(self.replenish_to_amount_in_cents if hasattr(self, "replenish_to_amount_in_cents") else None)!r}, '
+                f'auto_replenish={(self.auto_replenish if hasattr(self, "auto_replenish") else None)!r}, '
+                f'replenish_threshold_amount_in_cents={(self.replenish_threshold_amount_in_cents if hasattr(self, "replenish_threshold_amount_in_cents") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'initial_funding_amount_in_cents={self.initial_funding_amount_in_cents!s}, '
-                f'replenish_to_amount_in_cents={self.replenish_to_amount_in_cents!s}, '
-                f'auto_replenish={self.auto_replenish!s}, '
-                f'replenish_threshold_amount_in_cents={self.replenish_threshold_amount_in_cents!s}, '
+                f'initial_funding_amount_in_cents={(self.initial_funding_amount_in_cents if hasattr(self, "initial_funding_amount_in_cents") else None)!s}, '
+                f'replenish_to_amount_in_cents={(self.replenish_to_amount_in_cents if hasattr(self, "replenish_to_amount_in_cents") else None)!s}, '
+                f'auto_replenish={(self.auto_replenish if hasattr(self, "auto_replenish") else None)!s}, '
+                f'replenish_threshold_amount_in_cents={(self.replenish_threshold_amount_in_cents if hasattr(self, "replenish_threshold_amount_in_cents") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -109,14 +109,14 @@ class InvoiceDiscountBreakout(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!r}, '
-                f'eligible_amount={self.eligible_amount!r}, '
-                f'discount_amount={self.discount_amount!r}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!r}, '
+                f'eligible_amount={(self.eligible_amount if hasattr(self, "eligible_amount") else None)!r}, '
+                f'discount_amount={(self.discount_amount if hasattr(self, "discount_amount") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!s}, '
-                f'eligible_amount={self.eligible_amount!s}, '
-                f'discount_amount={self.discount_amount!s}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!s}, '
+                f'eligible_amount={(self.eligible_amount if hasattr(self, "eligible_amount") else None)!s}, '
+                f'discount_amount={(self.discount_amount if hasattr(self, "discount_amount") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

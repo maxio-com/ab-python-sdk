@@ -83,10 +83,10 @@ class IssueInvoiceRequest(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'on_failed_payment={self.on_failed_payment!r}, '
+                f'on_failed_payment={(self.on_failed_payment if hasattr(self, "on_failed_payment") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'on_failed_payment={self.on_failed_payment!s}, '
+                f'on_failed_payment={(self.on_failed_payment if hasattr(self, "on_failed_payment") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

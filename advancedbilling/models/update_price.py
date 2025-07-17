@@ -107,18 +107,18 @@ class UpdatePrice(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'ending_quantity={self.ending_quantity!r}, '
-                f'unit_price={self.unit_price!r}, '
-                f'destroy={self.destroy!r}, '
-                f'starting_quantity={self.starting_quantity!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'ending_quantity={(self.ending_quantity if hasattr(self, "ending_quantity") else None)!r}, '
+                f'unit_price={(self.unit_price if hasattr(self, "unit_price") else None)!r}, '
+                f'destroy={(self.destroy if hasattr(self, "destroy") else None)!r}, '
+                f'starting_quantity={(self.starting_quantity if hasattr(self, "starting_quantity") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'ending_quantity={self.ending_quantity!s}, '
-                f'unit_price={self.unit_price!s}, '
-                f'destroy={self.destroy!s}, '
-                f'starting_quantity={self.starting_quantity!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'ending_quantity={(self.ending_quantity if hasattr(self, "ending_quantity") else None)!s}, '
+                f'unit_price={(self.unit_price if hasattr(self, "unit_price") else None)!s}, '
+                f'destroy={(self.destroy if hasattr(self, "destroy") else None)!s}, '
+                f'starting_quantity={(self.starting_quantity if hasattr(self, "starting_quantity") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

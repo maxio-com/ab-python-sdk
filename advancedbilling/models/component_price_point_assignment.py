@@ -81,12 +81,12 @@ class ComponentPricePointAssignment(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'component_id={self.component_id!r}, '
-                f'price_point={self.price_point!r}, '
+                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!r}, '
+                f'price_point={(self.price_point if hasattr(self, "price_point") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'component_id={self.component_id!s}, '
-                f'price_point={self.price_point!s}, '
+                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!s}, '
+                f'price_point={(self.price_point if hasattr(self, "price_point") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

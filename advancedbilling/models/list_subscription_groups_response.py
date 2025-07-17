@@ -87,12 +87,12 @@ class ListSubscriptionGroupsResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'subscription_groups={self.subscription_groups!r}, '
-                f'meta={self.meta!r}, '
+                f'subscription_groups={(self.subscription_groups if hasattr(self, "subscription_groups") else None)!r}, '
+                f'meta={(self.meta if hasattr(self, "meta") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'subscription_groups={self.subscription_groups!s}, '
-                f'meta={self.meta!s}, '
+                f'subscription_groups={(self.subscription_groups if hasattr(self, "subscription_groups") else None)!s}, '
+                f'meta={(self.meta if hasattr(self, "meta") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

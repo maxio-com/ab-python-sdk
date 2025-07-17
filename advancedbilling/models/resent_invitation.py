@@ -112,20 +112,20 @@ class ResentInvitation(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'last_sent_at={self.last_sent_at!r}, '
-                f'last_accepted_at={self.last_accepted_at!r}, '
-                f'send_invite_link_text={self.send_invite_link_text!r}, '
-                f'uninvited_count={self.uninvited_count!r}, '
-                f'last_invite_sent_at={self.last_invite_sent_at!r}, '
-                f'last_invite_accepted_at={self.last_invite_accepted_at!r}, '
+                f'last_sent_at={(self.last_sent_at if hasattr(self, "last_sent_at") else None)!r}, '
+                f'last_accepted_at={(self.last_accepted_at if hasattr(self, "last_accepted_at") else None)!r}, '
+                f'send_invite_link_text={(self.send_invite_link_text if hasattr(self, "send_invite_link_text") else None)!r}, '
+                f'uninvited_count={(self.uninvited_count if hasattr(self, "uninvited_count") else None)!r}, '
+                f'last_invite_sent_at={(self.last_invite_sent_at if hasattr(self, "last_invite_sent_at") else None)!r}, '
+                f'last_invite_accepted_at={(self.last_invite_accepted_at if hasattr(self, "last_invite_accepted_at") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'last_sent_at={self.last_sent_at!s}, '
-                f'last_accepted_at={self.last_accepted_at!s}, '
-                f'send_invite_link_text={self.send_invite_link_text!s}, '
-                f'uninvited_count={self.uninvited_count!s}, '
-                f'last_invite_sent_at={self.last_invite_sent_at!s}, '
-                f'last_invite_accepted_at={self.last_invite_accepted_at!s}, '
+                f'last_sent_at={(self.last_sent_at if hasattr(self, "last_sent_at") else None)!s}, '
+                f'last_accepted_at={(self.last_accepted_at if hasattr(self, "last_accepted_at") else None)!s}, '
+                f'send_invite_link_text={(self.send_invite_link_text if hasattr(self, "send_invite_link_text") else None)!s}, '
+                f'uninvited_count={(self.uninvited_count if hasattr(self, "uninvited_count") else None)!s}, '
+                f'last_invite_sent_at={(self.last_invite_sent_at if hasattr(self, "last_invite_sent_at") else None)!s}, '
+                f'last_invite_accepted_at={(self.last_invite_accepted_at if hasattr(self, "last_invite_accepted_at") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

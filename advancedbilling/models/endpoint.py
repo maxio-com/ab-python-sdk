@@ -104,18 +104,18 @@ class Endpoint(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'url={self.url!r}, '
-                f'site_id={self.site_id!r}, '
-                f'status={self.status!r}, '
-                f'webhook_subscriptions={self.webhook_subscriptions!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'url={(self.url if hasattr(self, "url") else None)!r}, '
+                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!r}, '
+                f'status={(self.status if hasattr(self, "status") else None)!r}, '
+                f'webhook_subscriptions={(self.webhook_subscriptions if hasattr(self, "webhook_subscriptions") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'url={self.url!s}, '
-                f'site_id={self.site_id!s}, '
-                f'status={self.status!s}, '
-                f'webhook_subscriptions={self.webhook_subscriptions!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'url={(self.url if hasattr(self, "url") else None)!s}, '
+                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!s}, '
+                f'status={(self.status if hasattr(self, "status") else None)!s}, '
+                f'webhook_subscriptions={(self.webhook_subscriptions if hasattr(self, "webhook_subscriptions") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

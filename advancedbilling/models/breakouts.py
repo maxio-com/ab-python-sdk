@@ -95,16 +95,16 @@ class Breakouts(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'plan_amount_in_cents={self.plan_amount_in_cents!r}, '
-                f'plan_amount_formatted={self.plan_amount_formatted!r}, '
-                f'usage_amount_in_cents={self.usage_amount_in_cents!r}, '
-                f'usage_amount_formatted={self.usage_amount_formatted!r}, '
+                f'plan_amount_in_cents={(self.plan_amount_in_cents if hasattr(self, "plan_amount_in_cents") else None)!r}, '
+                f'plan_amount_formatted={(self.plan_amount_formatted if hasattr(self, "plan_amount_formatted") else None)!r}, '
+                f'usage_amount_in_cents={(self.usage_amount_in_cents if hasattr(self, "usage_amount_in_cents") else None)!r}, '
+                f'usage_amount_formatted={(self.usage_amount_formatted if hasattr(self, "usage_amount_formatted") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'plan_amount_in_cents={self.plan_amount_in_cents!s}, '
-                f'plan_amount_formatted={self.plan_amount_formatted!s}, '
-                f'usage_amount_in_cents={self.usage_amount_in_cents!s}, '
-                f'usage_amount_formatted={self.usage_amount_formatted!s}, '
+                f'plan_amount_in_cents={(self.plan_amount_in_cents if hasattr(self, "plan_amount_in_cents") else None)!s}, '
+                f'plan_amount_formatted={(self.plan_amount_formatted if hasattr(self, "plan_amount_formatted") else None)!s}, '
+                f'usage_amount_in_cents={(self.usage_amount_in_cents if hasattr(self, "usage_amount_in_cents") else None)!s}, '
+                f'usage_amount_formatted={(self.usage_amount_formatted if hasattr(self, "usage_amount_formatted") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

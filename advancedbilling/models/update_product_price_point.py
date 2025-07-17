@@ -79,12 +79,12 @@ class UpdateProductPricePoint(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'handle={self.handle!r}, '
-                f'price_in_cents={self.price_in_cents!r}, '
+                f'handle={(self.handle if hasattr(self, "handle") else None)!r}, '
+                f'price_in_cents={(self.price_in_cents if hasattr(self, "price_in_cents") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'handle={self.handle!s}, '
-                f'price_in_cents={self.price_in_cents!s}, '
+                f'handle={(self.handle if hasattr(self, "handle") else None)!s}, '
+                f'price_in_cents={(self.price_in_cents if hasattr(self, "price_in_cents") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -73,21 +73,31 @@ class CreateSubscription(object):
             subscription will not be created. See further notes in the section
             on Importing Subscriptions.
         initial_billing_at (datetime): (Optional) Set this attribute to a
-            future date/time to create a subscription in the "Awaiting Signup"
-            state, rather than "Active" or "Trialing". See the notes on
-            “Date/Time Format” in our [subscription import
-            documentation](https://maxio.zendesk.com/hc/en-us/articles/24251489
-            107213-Advanced-Billing-Subscription-Imports#date-format). In the
-            "Awaiting Signup" state, a subscription behaves like any other. It
-            can be canceled, allocated to, had its billing date changed. etc.
-            When the initial_billing_at date hits, the subscription will
-            transition to the expected state. If the product has a trial, the
-            subscription will enter a trial, otherwise it will go active.
-            Setup fees will be respected either before or after the trial, as
-            configured on the price point. If the payment is due at the
-            initial_billing_at and it fails the subscription will be
-            immediately canceled. See further notes in the section on Delayed
-            Signups.
+            future date/time to create a subscription in the Awaiting Signup
+            state, rather than Active or Trialing. You can omit the
+            initial_billing_at date to activate the subscription immediately.
+            In the Awaiting Signup state, a subscription behaves like any
+            other. It can be canceled, allocated to, or have its billing date
+            changed. etc. When the initial_billing_at date hits, the
+            subscription will transition to the expected state. If the product
+            has a trial, the subscription will enter a trial, otherwise it
+            will go active. Setup fees will be respected either before or
+            after the trial, as configured on the price point. If the payment
+            is due at the initial_billing_at and it fails the subscription
+            will be immediately canceled. See the [subscription
+            import](https://maxio.zendesk.com/hc/en-us/articles/24251489107213-
+            Advanced-Billing-Subscription-Imports#date-format) documentation
+            for more information about Date/Time Formats.
+        defer_signup (bool): (Optional) Set this attribute to true to create
+            the subscription in the Awaiting Signup Date state. Use this when
+            you want to create a subscription that has an unknown first 
+            billing date. When the first billing date is known, update a
+            subscription and set the `initial_billing_at` date. The
+            subscription moves to the Awaiting Signup state with a scheduled
+            initial billing date. You can omit the initial_billing_at date to
+            activate the subscription immediately. See [Subscription
+            States](https://maxio-chargify.zendesk.com/hc/en-us/articles/540422
+            2005773-Subscription-States) for more information.
         stored_credential_transaction_id (int): For European sites subject to
             PSD2 and using 3D Secure, this can be used to reference a previous
             transaction for the customer. This will ensure the card will be
@@ -103,7 +113,7 @@ class CreateSubscription(object):
             an existing subscription via the API as `credit_card` > id or
             `bank_account` > id)
         reference (str): The reference value (provided by your app) for the
-            subscription itelf.
+            subscription itself.
         customer_attributes (CustomerAttributes): The model property of type
             CustomerAttributes.
         payment_profile_attributes (PaymentProfileAttributes): alias to
@@ -165,7 +175,7 @@ class CreateSubscription(object):
         reason_code (str): (Optional) Can be used when canceling a
             subscription (via the HTTP DELETE method) to indicate why a
             subscription was canceled.
-        product_change_delayed (bool): (Optional, used only for Delayed
+        product_change_delayed (bool): (Optional) used only for Delayed
             Product Change When set to true, indicates that a changed value
             for product_handle should schedule the product change to the next
             subscription renewal.
@@ -222,6 +232,7 @@ class CreateSubscription(object):
         "customer_id": 'customer_id',
         "next_billing_at": 'next_billing_at',
         "initial_billing_at": 'initial_billing_at',
+        "defer_signup": 'defer_signup',
         "stored_credential_transaction_id": 'stored_credential_transaction_id',
         "sales_rep_id": 'sales_rep_id',
         "payment_profile_id": 'payment_profile_id',
@@ -274,6 +285,7 @@ class CreateSubscription(object):
         'customer_id',
         'next_billing_at',
         'initial_billing_at',
+        'defer_signup',
         'stored_credential_transaction_id',
         'sales_rep_id',
         'payment_profile_id',
@@ -330,6 +342,7 @@ class CreateSubscription(object):
                  customer_id=APIHelper.SKIP,
                  next_billing_at=APIHelper.SKIP,
                  initial_billing_at=APIHelper.SKIP,
+                 defer_signup=False,
                  stored_credential_transaction_id=APIHelper.SKIP,
                  sales_rep_id=APIHelper.SKIP,
                  payment_profile_id=APIHelper.SKIP,
@@ -396,6 +409,7 @@ class CreateSubscription(object):
             self.next_billing_at = APIHelper.apply_datetime_converter(next_billing_at, APIHelper.RFC3339DateTime) if next_billing_at else None 
         if initial_billing_at is not APIHelper.SKIP:
             self.initial_billing_at = APIHelper.apply_datetime_converter(initial_billing_at, APIHelper.RFC3339DateTime) if initial_billing_at else None 
+        self.defer_signup = defer_signup 
         if stored_credential_transaction_id is not APIHelper.SKIP:
             self.stored_credential_transaction_id = stored_credential_transaction_id 
         if sales_rep_id is not APIHelper.SKIP:
@@ -505,6 +519,7 @@ class CreateSubscription(object):
         customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
         next_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_billing_at")).datetime if dictionary.get("next_billing_at") else APIHelper.SKIP
         initial_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("initial_billing_at")).datetime if dictionary.get("initial_billing_at") else APIHelper.SKIP
+        defer_signup = dictionary.get("defer_signup") if dictionary.get("defer_signup") else False
         stored_credential_transaction_id = dictionary.get("stored_credential_transaction_id") if dictionary.get("stored_credential_transaction_id") else APIHelper.SKIP
         sales_rep_id = dictionary.get("sales_rep_id") if dictionary.get("sales_rep_id") else APIHelper.SKIP
         payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP
@@ -561,6 +576,7 @@ class CreateSubscription(object):
                    customer_id,
                    next_billing_at,
                    initial_billing_at,
+                   defer_signup,
                    stored_credential_transaction_id,
                    sales_rep_id,
                    payment_profile_id,
@@ -601,106 +617,108 @@ class CreateSubscription(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'product_handle={self.product_handle!r}, '
-                f'product_id={self.product_id!r}, '
-                f'product_price_point_handle={self.product_price_point_handle!r}, '
-                f'product_price_point_id={self.product_price_point_id!r}, '
-                f'custom_price={self.custom_price!r}, '
-                f'coupon_code={self.coupon_code!r}, '
-                f'coupon_codes={self.coupon_codes!r}, '
-                f'payment_collection_method={self.payment_collection_method!r}, '
-                f'receives_invoice_emails={self.receives_invoice_emails!r}, '
-                f'net_terms={self.net_terms!r}, '
-                f'customer_id={self.customer_id!r}, '
-                f'next_billing_at={self.next_billing_at!r}, '
-                f'initial_billing_at={self.initial_billing_at!r}, '
-                f'stored_credential_transaction_id={self.stored_credential_transaction_id!r}, '
-                f'sales_rep_id={self.sales_rep_id!r}, '
-                f'payment_profile_id={self.payment_profile_id!r}, '
-                f'reference={self.reference!r}, '
-                f'customer_attributes={self.customer_attributes!r}, '
-                f'payment_profile_attributes={self.payment_profile_attributes!r}, '
-                f'credit_card_attributes={self.credit_card_attributes!r}, '
-                f'bank_account_attributes={self.bank_account_attributes!r}, '
-                f'components={self.components!r}, '
-                f'calendar_billing={self.calendar_billing!r}, '
-                f'metafields={self.metafields!r}, '
-                f'customer_reference={self.customer_reference!r}, '
-                f'group={self.group!r}, '
-                f'ref={self.ref!r}, '
-                f'cancellation_message={self.cancellation_message!r}, '
-                f'cancellation_method={self.cancellation_method!r}, '
-                f'currency={self.currency!r}, '
-                f'expires_at={self.expires_at!r}, '
-                f'expiration_tracks_next_billing_change={self.expiration_tracks_next_billing_change!r}, '
-                f'agreement_terms={self.agreement_terms!r}, '
-                f'authorizer_first_name={self.authorizer_first_name!r}, '
-                f'authorizer_last_name={self.authorizer_last_name!r}, '
-                f'calendar_billing_first_charge={self.calendar_billing_first_charge!r}, '
-                f'reason_code={self.reason_code!r}, '
-                f'product_change_delayed={self.product_change_delayed!r}, '
-                f'offer_id={self.offer_id!r}, '
-                f'prepaid_configuration={self.prepaid_configuration!r}, '
-                f'previous_billing_at={self.previous_billing_at!r}, '
-                f'import_mrr={self.import_mrr!r}, '
-                f'canceled_at={self.canceled_at!r}, '
-                f'activated_at={self.activated_at!r}, '
-                f'agreement_acceptance={self.agreement_acceptance!r}, '
-                f'ach_agreement={self.ach_agreement!r}, '
-                f'dunning_communication_delay_enabled={self.dunning_communication_delay_enabled!r}, '
-                f'dunning_communication_delay_time_zone={self.dunning_communication_delay_time_zone!r}, '
-                f'skip_billing_manifest_taxes={self.skip_billing_manifest_taxes!r}, '
+                f'product_handle={(self.product_handle if hasattr(self, "product_handle") else None)!r}, '
+                f'product_id={(self.product_id if hasattr(self, "product_id") else None)!r}, '
+                f'product_price_point_handle={(self.product_price_point_handle if hasattr(self, "product_price_point_handle") else None)!r}, '
+                f'product_price_point_id={(self.product_price_point_id if hasattr(self, "product_price_point_id") else None)!r}, '
+                f'custom_price={(self.custom_price if hasattr(self, "custom_price") else None)!r}, '
+                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!r}, '
+                f'coupon_codes={(self.coupon_codes if hasattr(self, "coupon_codes") else None)!r}, '
+                f'payment_collection_method={(self.payment_collection_method if hasattr(self, "payment_collection_method") else None)!r}, '
+                f'receives_invoice_emails={(self.receives_invoice_emails if hasattr(self, "receives_invoice_emails") else None)!r}, '
+                f'net_terms={(self.net_terms if hasattr(self, "net_terms") else None)!r}, '
+                f'customer_id={(self.customer_id if hasattr(self, "customer_id") else None)!r}, '
+                f'next_billing_at={(self.next_billing_at if hasattr(self, "next_billing_at") else None)!r}, '
+                f'initial_billing_at={(self.initial_billing_at if hasattr(self, "initial_billing_at") else None)!r}, '
+                f'defer_signup={(self.defer_signup if hasattr(self, "defer_signup") else None)!r}, '
+                f'stored_credential_transaction_id={(self.stored_credential_transaction_id if hasattr(self, "stored_credential_transaction_id") else None)!r}, '
+                f'sales_rep_id={(self.sales_rep_id if hasattr(self, "sales_rep_id") else None)!r}, '
+                f'payment_profile_id={(self.payment_profile_id if hasattr(self, "payment_profile_id") else None)!r}, '
+                f'reference={(self.reference if hasattr(self, "reference") else None)!r}, '
+                f'customer_attributes={(self.customer_attributes if hasattr(self, "customer_attributes") else None)!r}, '
+                f'payment_profile_attributes={(self.payment_profile_attributes if hasattr(self, "payment_profile_attributes") else None)!r}, '
+                f'credit_card_attributes={(self.credit_card_attributes if hasattr(self, "credit_card_attributes") else None)!r}, '
+                f'bank_account_attributes={(self.bank_account_attributes if hasattr(self, "bank_account_attributes") else None)!r}, '
+                f'components={(self.components if hasattr(self, "components") else None)!r}, '
+                f'calendar_billing={(self.calendar_billing if hasattr(self, "calendar_billing") else None)!r}, '
+                f'metafields={(self.metafields if hasattr(self, "metafields") else None)!r}, '
+                f'customer_reference={(self.customer_reference if hasattr(self, "customer_reference") else None)!r}, '
+                f'group={(self.group if hasattr(self, "group") else None)!r}, '
+                f'ref={(self.ref if hasattr(self, "ref") else None)!r}, '
+                f'cancellation_message={(self.cancellation_message if hasattr(self, "cancellation_message") else None)!r}, '
+                f'cancellation_method={(self.cancellation_method if hasattr(self, "cancellation_method") else None)!r}, '
+                f'currency={(self.currency if hasattr(self, "currency") else None)!r}, '
+                f'expires_at={(self.expires_at if hasattr(self, "expires_at") else None)!r}, '
+                f'expiration_tracks_next_billing_change={(self.expiration_tracks_next_billing_change if hasattr(self, "expiration_tracks_next_billing_change") else None)!r}, '
+                f'agreement_terms={(self.agreement_terms if hasattr(self, "agreement_terms") else None)!r}, '
+                f'authorizer_first_name={(self.authorizer_first_name if hasattr(self, "authorizer_first_name") else None)!r}, '
+                f'authorizer_last_name={(self.authorizer_last_name if hasattr(self, "authorizer_last_name") else None)!r}, '
+                f'calendar_billing_first_charge={(self.calendar_billing_first_charge if hasattr(self, "calendar_billing_first_charge") else None)!r}, '
+                f'reason_code={(self.reason_code if hasattr(self, "reason_code") else None)!r}, '
+                f'product_change_delayed={(self.product_change_delayed if hasattr(self, "product_change_delayed") else None)!r}, '
+                f'offer_id={(self.offer_id if hasattr(self, "offer_id") else None)!r}, '
+                f'prepaid_configuration={(self.prepaid_configuration if hasattr(self, "prepaid_configuration") else None)!r}, '
+                f'previous_billing_at={(self.previous_billing_at if hasattr(self, "previous_billing_at") else None)!r}, '
+                f'import_mrr={(self.import_mrr if hasattr(self, "import_mrr") else None)!r}, '
+                f'canceled_at={(self.canceled_at if hasattr(self, "canceled_at") else None)!r}, '
+                f'activated_at={(self.activated_at if hasattr(self, "activated_at") else None)!r}, '
+                f'agreement_acceptance={(self.agreement_acceptance if hasattr(self, "agreement_acceptance") else None)!r}, '
+                f'ach_agreement={(self.ach_agreement if hasattr(self, "ach_agreement") else None)!r}, '
+                f'dunning_communication_delay_enabled={(self.dunning_communication_delay_enabled if hasattr(self, "dunning_communication_delay_enabled") else None)!r}, '
+                f'dunning_communication_delay_time_zone={(self.dunning_communication_delay_time_zone if hasattr(self, "dunning_communication_delay_time_zone") else None)!r}, '
+                f'skip_billing_manifest_taxes={(self.skip_billing_manifest_taxes if hasattr(self, "skip_billing_manifest_taxes") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'product_handle={self.product_handle!s}, '
-                f'product_id={self.product_id!s}, '
-                f'product_price_point_handle={self.product_price_point_handle!s}, '
-                f'product_price_point_id={self.product_price_point_id!s}, '
-                f'custom_price={self.custom_price!s}, '
-                f'coupon_code={self.coupon_code!s}, '
-                f'coupon_codes={self.coupon_codes!s}, '
-                f'payment_collection_method={self.payment_collection_method!s}, '
-                f'receives_invoice_emails={self.receives_invoice_emails!s}, '
-                f'net_terms={self.net_terms!s}, '
-                f'customer_id={self.customer_id!s}, '
-                f'next_billing_at={self.next_billing_at!s}, '
-                f'initial_billing_at={self.initial_billing_at!s}, '
-                f'stored_credential_transaction_id={self.stored_credential_transaction_id!s}, '
-                f'sales_rep_id={self.sales_rep_id!s}, '
-                f'payment_profile_id={self.payment_profile_id!s}, '
-                f'reference={self.reference!s}, '
-                f'customer_attributes={self.customer_attributes!s}, '
-                f'payment_profile_attributes={self.payment_profile_attributes!s}, '
-                f'credit_card_attributes={self.credit_card_attributes!s}, '
-                f'bank_account_attributes={self.bank_account_attributes!s}, '
-                f'components={self.components!s}, '
-                f'calendar_billing={self.calendar_billing!s}, '
-                f'metafields={self.metafields!s}, '
-                f'customer_reference={self.customer_reference!s}, '
-                f'group={self.group!s}, '
-                f'ref={self.ref!s}, '
-                f'cancellation_message={self.cancellation_message!s}, '
-                f'cancellation_method={self.cancellation_method!s}, '
-                f'currency={self.currency!s}, '
-                f'expires_at={self.expires_at!s}, '
-                f'expiration_tracks_next_billing_change={self.expiration_tracks_next_billing_change!s}, '
-                f'agreement_terms={self.agreement_terms!s}, '
-                f'authorizer_first_name={self.authorizer_first_name!s}, '
-                f'authorizer_last_name={self.authorizer_last_name!s}, '
-                f'calendar_billing_first_charge={self.calendar_billing_first_charge!s}, '
-                f'reason_code={self.reason_code!s}, '
-                f'product_change_delayed={self.product_change_delayed!s}, '
-                f'offer_id={self.offer_id!s}, '
-                f'prepaid_configuration={self.prepaid_configuration!s}, '
-                f'previous_billing_at={self.previous_billing_at!s}, '
-                f'import_mrr={self.import_mrr!s}, '
-                f'canceled_at={self.canceled_at!s}, '
-                f'activated_at={self.activated_at!s}, '
-                f'agreement_acceptance={self.agreement_acceptance!s}, '
-                f'ach_agreement={self.ach_agreement!s}, '
-                f'dunning_communication_delay_enabled={self.dunning_communication_delay_enabled!s}, '
-                f'dunning_communication_delay_time_zone={self.dunning_communication_delay_time_zone!s}, '
-                f'skip_billing_manifest_taxes={self.skip_billing_manifest_taxes!s}, '
+                f'product_handle={(self.product_handle if hasattr(self, "product_handle") else None)!s}, '
+                f'product_id={(self.product_id if hasattr(self, "product_id") else None)!s}, '
+                f'product_price_point_handle={(self.product_price_point_handle if hasattr(self, "product_price_point_handle") else None)!s}, '
+                f'product_price_point_id={(self.product_price_point_id if hasattr(self, "product_price_point_id") else None)!s}, '
+                f'custom_price={(self.custom_price if hasattr(self, "custom_price") else None)!s}, '
+                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!s}, '
+                f'coupon_codes={(self.coupon_codes if hasattr(self, "coupon_codes") else None)!s}, '
+                f'payment_collection_method={(self.payment_collection_method if hasattr(self, "payment_collection_method") else None)!s}, '
+                f'receives_invoice_emails={(self.receives_invoice_emails if hasattr(self, "receives_invoice_emails") else None)!s}, '
+                f'net_terms={(self.net_terms if hasattr(self, "net_terms") else None)!s}, '
+                f'customer_id={(self.customer_id if hasattr(self, "customer_id") else None)!s}, '
+                f'next_billing_at={(self.next_billing_at if hasattr(self, "next_billing_at") else None)!s}, '
+                f'initial_billing_at={(self.initial_billing_at if hasattr(self, "initial_billing_at") else None)!s}, '
+                f'defer_signup={(self.defer_signup if hasattr(self, "defer_signup") else None)!s}, '
+                f'stored_credential_transaction_id={(self.stored_credential_transaction_id if hasattr(self, "stored_credential_transaction_id") else None)!s}, '
+                f'sales_rep_id={(self.sales_rep_id if hasattr(self, "sales_rep_id") else None)!s}, '
+                f'payment_profile_id={(self.payment_profile_id if hasattr(self, "payment_profile_id") else None)!s}, '
+                f'reference={(self.reference if hasattr(self, "reference") else None)!s}, '
+                f'customer_attributes={(self.customer_attributes if hasattr(self, "customer_attributes") else None)!s}, '
+                f'payment_profile_attributes={(self.payment_profile_attributes if hasattr(self, "payment_profile_attributes") else None)!s}, '
+                f'credit_card_attributes={(self.credit_card_attributes if hasattr(self, "credit_card_attributes") else None)!s}, '
+                f'bank_account_attributes={(self.bank_account_attributes if hasattr(self, "bank_account_attributes") else None)!s}, '
+                f'components={(self.components if hasattr(self, "components") else None)!s}, '
+                f'calendar_billing={(self.calendar_billing if hasattr(self, "calendar_billing") else None)!s}, '
+                f'metafields={(self.metafields if hasattr(self, "metafields") else None)!s}, '
+                f'customer_reference={(self.customer_reference if hasattr(self, "customer_reference") else None)!s}, '
+                f'group={(self.group if hasattr(self, "group") else None)!s}, '
+                f'ref={(self.ref if hasattr(self, "ref") else None)!s}, '
+                f'cancellation_message={(self.cancellation_message if hasattr(self, "cancellation_message") else None)!s}, '
+                f'cancellation_method={(self.cancellation_method if hasattr(self, "cancellation_method") else None)!s}, '
+                f'currency={(self.currency if hasattr(self, "currency") else None)!s}, '
+                f'expires_at={(self.expires_at if hasattr(self, "expires_at") else None)!s}, '
+                f'expiration_tracks_next_billing_change={(self.expiration_tracks_next_billing_change if hasattr(self, "expiration_tracks_next_billing_change") else None)!s}, '
+                f'agreement_terms={(self.agreement_terms if hasattr(self, "agreement_terms") else None)!s}, '
+                f'authorizer_first_name={(self.authorizer_first_name if hasattr(self, "authorizer_first_name") else None)!s}, '
+                f'authorizer_last_name={(self.authorizer_last_name if hasattr(self, "authorizer_last_name") else None)!s}, '
+                f'calendar_billing_first_charge={(self.calendar_billing_first_charge if hasattr(self, "calendar_billing_first_charge") else None)!s}, '
+                f'reason_code={(self.reason_code if hasattr(self, "reason_code") else None)!s}, '
+                f'product_change_delayed={(self.product_change_delayed if hasattr(self, "product_change_delayed") else None)!s}, '
+                f'offer_id={(self.offer_id if hasattr(self, "offer_id") else None)!s}, '
+                f'prepaid_configuration={(self.prepaid_configuration if hasattr(self, "prepaid_configuration") else None)!s}, '
+                f'previous_billing_at={(self.previous_billing_at if hasattr(self, "previous_billing_at") else None)!s}, '
+                f'import_mrr={(self.import_mrr if hasattr(self, "import_mrr") else None)!s}, '
+                f'canceled_at={(self.canceled_at if hasattr(self, "canceled_at") else None)!s}, '
+                f'activated_at={(self.activated_at if hasattr(self, "activated_at") else None)!s}, '
+                f'agreement_acceptance={(self.agreement_acceptance if hasattr(self, "agreement_acceptance") else None)!s}, '
+                f'ach_agreement={(self.ach_agreement if hasattr(self, "ach_agreement") else None)!s}, '
+                f'dunning_communication_delay_enabled={(self.dunning_communication_delay_enabled if hasattr(self, "dunning_communication_delay_enabled") else None)!s}, '
+                f'dunning_communication_delay_time_zone={(self.dunning_communication_delay_time_zone if hasattr(self, "dunning_communication_delay_time_zone") else None)!s}, '
+                f'skip_billing_manifest_taxes={(self.skip_billing_manifest_taxes if hasattr(self, "skip_billing_manifest_taxes") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -76,10 +76,10 @@ class ConsolidatedInvoice(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'invoices={self.invoices!r}, '
+                f'invoices={(self.invoices if hasattr(self, "invoices") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'invoices={self.invoices!s}, '
+                f'invoices={(self.invoices if hasattr(self, "invoices") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

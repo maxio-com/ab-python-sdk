@@ -95,16 +95,16 @@ class MRRMovement(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'amount={self.amount!r}, '
-                f'category={self.category!r}, '
-                f'subscriber_delta={self.subscriber_delta!r}, '
-                f'lead_delta={self.lead_delta!r}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!r}, '
+                f'category={(self.category if hasattr(self, "category") else None)!r}, '
+                f'subscriber_delta={(self.subscriber_delta if hasattr(self, "subscriber_delta") else None)!r}, '
+                f'lead_delta={(self.lead_delta if hasattr(self, "lead_delta") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'amount={self.amount!s}, '
-                f'category={self.category!s}, '
-                f'subscriber_delta={self.subscriber_delta!s}, '
-                f'lead_delta={self.lead_delta!s}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!s}, '
+                f'category={(self.category if hasattr(self, "category") else None)!s}, '
+                f'subscriber_delta={(self.subscriber_delta if hasattr(self, "subscriber_delta") else None)!s}, '
+                f'lead_delta={(self.lead_delta if hasattr(self, "lead_delta") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

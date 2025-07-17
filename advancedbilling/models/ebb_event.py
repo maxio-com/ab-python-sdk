@@ -72,10 +72,10 @@ class EBBEvent(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'chargify={self.chargify!r}, '
+                f'chargify={(self.chargify if hasattr(self, "chargify") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'chargify={self.chargify!s}, '
+                f'chargify={(self.chargify if hasattr(self, "chargify") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -107,16 +107,16 @@ class ListSegmentsFilter(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'segment_property_1_value={self.segment_property_1_value!r}, '
-                f'segment_property_2_value={self.segment_property_2_value!r}, '
-                f'segment_property_3_value={self.segment_property_3_value!r}, '
-                f'segment_property_4_value={self.segment_property_4_value!r}, '
+                f'segment_property_1_value={(self.segment_property_1_value if hasattr(self, "segment_property_1_value") else None)!r}, '
+                f'segment_property_2_value={(self.segment_property_2_value if hasattr(self, "segment_property_2_value") else None)!r}, '
+                f'segment_property_3_value={(self.segment_property_3_value if hasattr(self, "segment_property_3_value") else None)!r}, '
+                f'segment_property_4_value={(self.segment_property_4_value if hasattr(self, "segment_property_4_value") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'segment_property_1_value={self.segment_property_1_value!s}, '
-                f'segment_property_2_value={self.segment_property_2_value!s}, '
-                f'segment_property_3_value={self.segment_property_3_value!s}, '
-                f'segment_property_4_value={self.segment_property_4_value!s}, '
+                f'segment_property_1_value={(self.segment_property_1_value if hasattr(self, "segment_property_1_value") else None)!s}, '
+                f'segment_property_2_value={(self.segment_property_2_value if hasattr(self, "segment_property_2_value") else None)!s}, '
+                f'segment_property_3_value={(self.segment_property_3_value if hasattr(self, "segment_property_3_value") else None)!s}, '
+                f'segment_property_4_value={(self.segment_property_4_value if hasattr(self, "segment_property_4_value") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

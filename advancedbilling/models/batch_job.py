@@ -115,18 +115,18 @@ class BatchJob(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'finished_at={self.finished_at!r}, '
-                f'row_count={self.row_count!r}, '
-                f'created_at={self.created_at!r}, '
-                f'completed={self.completed!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'finished_at={(self.finished_at if hasattr(self, "finished_at") else None)!r}, '
+                f'row_count={(self.row_count if hasattr(self, "row_count") else None)!r}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
+                f'completed={(self.completed if hasattr(self, "completed") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'finished_at={self.finished_at!s}, '
-                f'row_count={self.row_count!s}, '
-                f'created_at={self.created_at!s}, '
-                f'completed={self.completed!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'finished_at={(self.finished_at if hasattr(self, "finished_at") else None)!s}, '
+                f'row_count={(self.row_count if hasattr(self, "row_count") else None)!s}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
+                f'completed={(self.completed if hasattr(self, "completed") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

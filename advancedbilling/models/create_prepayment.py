@@ -103,7 +103,7 @@ class CreatePrepayment(object):
                 f'details={self.details!r}, '
                 f'memo={self.memo!r}, '
                 f'method={self.method!r}, '
-                f'payment_profile_id={self.payment_profile_id!r}, '
+                f'payment_profile_id={(self.payment_profile_id if hasattr(self, "payment_profile_id") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
@@ -112,5 +112,5 @@ class CreatePrepayment(object):
                 f'details={self.details!s}, '
                 f'memo={self.memo!s}, '
                 f'method={self.method!s}, '
-                f'payment_profile_id={self.payment_profile_id!s}, '
+                f'payment_profile_id={(self.payment_profile_id if hasattr(self, "payment_profile_id") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

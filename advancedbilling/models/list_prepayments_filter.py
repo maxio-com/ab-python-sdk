@@ -98,14 +98,14 @@ class ListPrepaymentsFilter(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'date_field={self.date_field!r}, '
-                f'start_date={self.start_date!r}, '
-                f'end_date={self.end_date!r}, '
+                f'date_field={(self.date_field if hasattr(self, "date_field") else None)!r}, '
+                f'start_date={(self.start_date if hasattr(self, "start_date") else None)!r}, '
+                f'end_date={(self.end_date if hasattr(self, "end_date") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'date_field={self.date_field!s}, '
-                f'start_date={self.start_date!s}, '
-                f'end_date={self.end_date!s}, '
+                f'date_field={(self.date_field if hasattr(self, "date_field") else None)!s}, '
+                f'start_date={(self.start_date if hasattr(self, "start_date") else None)!s}, '
+                f'end_date={(self.end_date if hasattr(self, "end_date") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

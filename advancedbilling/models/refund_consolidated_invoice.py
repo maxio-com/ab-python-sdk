@@ -147,9 +147,9 @@ class RefundConsolidatedInvoice(object):
                 f'memo={self.memo!r}, '
                 f'payment_id={self.payment_id!r}, '
                 f'segment_uids={self.segment_uids!r}, '
-                f'external={self.external!r}, '
-                f'apply_credit={self.apply_credit!r}, '
-                f'amount={self.amount!r}, '
+                f'external={(self.external if hasattr(self, "external") else None)!r}, '
+                f'apply_credit={(self.apply_credit if hasattr(self, "apply_credit") else None)!r}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
@@ -157,7 +157,7 @@ class RefundConsolidatedInvoice(object):
                 f'memo={self.memo!s}, '
                 f'payment_id={self.payment_id!s}, '
                 f'segment_uids={self.segment_uids!s}, '
-                f'external={self.external!s}, '
-                f'apply_credit={self.apply_credit!s}, '
-                f'amount={self.amount!s}, '
+                f'external={(self.external if hasattr(self, "external") else None)!s}, '
+                f'apply_credit={(self.apply_credit if hasattr(self, "apply_credit") else None)!s}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

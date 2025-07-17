@@ -147,22 +147,22 @@ class CreateSubscriptionComponent(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'component_id={self.component_id!r}, '
-                f'enabled={self.enabled!r}, '
-                f'unit_balance={self.unit_balance!r}, '
-                f'allocated_quantity={self.allocated_quantity!r}, '
-                f'quantity={self.quantity!r}, '
-                f'price_point_id={self.price_point_id!r}, '
-                f'custom_price={self.custom_price!r}, '
+                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!r}, '
+                f'enabled={(self.enabled if hasattr(self, "enabled") else None)!r}, '
+                f'unit_balance={(self.unit_balance if hasattr(self, "unit_balance") else None)!r}, '
+                f'allocated_quantity={(self.allocated_quantity if hasattr(self, "allocated_quantity") else None)!r}, '
+                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!r}, '
+                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!r}, '
+                f'custom_price={(self.custom_price if hasattr(self, "custom_price") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'component_id={self.component_id!s}, '
-                f'enabled={self.enabled!s}, '
-                f'unit_balance={self.unit_balance!s}, '
-                f'allocated_quantity={self.allocated_quantity!s}, '
-                f'quantity={self.quantity!s}, '
-                f'price_point_id={self.price_point_id!s}, '
-                f'custom_price={self.custom_price!s}, '
+                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!s}, '
+                f'enabled={(self.enabled if hasattr(self, "enabled") else None)!s}, '
+                f'unit_balance={(self.unit_balance if hasattr(self, "unit_balance") else None)!s}, '
+                f'allocated_quantity={(self.allocated_quantity if hasattr(self, "allocated_quantity") else None)!s}, '
+                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!s}, '
+                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!s}, '
+                f'custom_price={(self.custom_price if hasattr(self, "custom_price") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -111,20 +111,20 @@ class OfferSignupPage(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'nickname={self.nickname!r}, '
-                f'enabled={self.enabled!r}, '
-                f'return_url={self.return_url!r}, '
-                f'return_params={self.return_params!r}, '
-                f'url={self.url!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'nickname={(self.nickname if hasattr(self, "nickname") else None)!r}, '
+                f'enabled={(self.enabled if hasattr(self, "enabled") else None)!r}, '
+                f'return_url={(self.return_url if hasattr(self, "return_url") else None)!r}, '
+                f'return_params={(self.return_params if hasattr(self, "return_params") else None)!r}, '
+                f'url={(self.url if hasattr(self, "url") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'nickname={self.nickname!s}, '
-                f'enabled={self.enabled!s}, '
-                f'return_url={self.return_url!s}, '
-                f'return_params={self.return_params!s}, '
-                f'url={self.url!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'nickname={(self.nickname if hasattr(self, "nickname") else None)!s}, '
+                f'enabled={(self.enabled if hasattr(self, "enabled") else None)!s}, '
+                f'return_url={(self.return_url if hasattr(self, "return_url") else None)!s}, '
+                f'return_params={(self.return_params if hasattr(self, "return_params") else None)!s}, '
+                f'url={(self.url if hasattr(self, "url") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

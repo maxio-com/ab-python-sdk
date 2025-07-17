@@ -113,15 +113,15 @@ class PreviewAllocationsRequest(object):
     def __repr__(self):
         return (f'{self.__class__.__name__}('
                 f'allocations={self.allocations!r}, '
-                f'effective_proration_date={self.effective_proration_date!r}, '
-                f'upgrade_charge={self.upgrade_charge!r}, '
-                f'downgrade_credit={self.downgrade_credit!r}, '
+                f'effective_proration_date={(self.effective_proration_date if hasattr(self, "effective_proration_date") else None)!r}, '
+                f'upgrade_charge={(self.upgrade_charge if hasattr(self, "upgrade_charge") else None)!r}, '
+                f'downgrade_credit={(self.downgrade_credit if hasattr(self, "downgrade_credit") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'allocations={self.allocations!s}, '
-                f'effective_proration_date={self.effective_proration_date!s}, '
-                f'upgrade_charge={self.upgrade_charge!s}, '
-                f'downgrade_credit={self.downgrade_credit!s}, '
+                f'effective_proration_date={(self.effective_proration_date if hasattr(self, "effective_proration_date") else None)!s}, '
+                f'upgrade_charge={(self.upgrade_charge if hasattr(self, "upgrade_charge") else None)!s}, '
+                f'downgrade_credit={(self.downgrade_credit if hasattr(self, "downgrade_credit") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

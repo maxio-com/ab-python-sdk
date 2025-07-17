@@ -151,22 +151,22 @@ class MetafieldScope(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'csv={self.csv!r}, '
-                f'invoices={self.invoices!r}, '
-                f'statements={self.statements!r}, '
-                f'portal={self.portal!r}, '
-                f'public_show={self.public_show!r}, '
-                f'public_edit={self.public_edit!r}, '
-                f'hosted={self.hosted!r}, '
+                f'csv={(self.csv if hasattr(self, "csv") else None)!r}, '
+                f'invoices={(self.invoices if hasattr(self, "invoices") else None)!r}, '
+                f'statements={(self.statements if hasattr(self, "statements") else None)!r}, '
+                f'portal={(self.portal if hasattr(self, "portal") else None)!r}, '
+                f'public_show={(self.public_show if hasattr(self, "public_show") else None)!r}, '
+                f'public_edit={(self.public_edit if hasattr(self, "public_edit") else None)!r}, '
+                f'hosted={(self.hosted if hasattr(self, "hosted") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'csv={self.csv!s}, '
-                f'invoices={self.invoices!s}, '
-                f'statements={self.statements!s}, '
-                f'portal={self.portal!s}, '
-                f'public_show={self.public_show!s}, '
-                f'public_edit={self.public_edit!s}, '
-                f'hosted={self.hosted!s}, '
+                f'csv={(self.csv if hasattr(self, "csv") else None)!s}, '
+                f'invoices={(self.invoices if hasattr(self, "invoices") else None)!s}, '
+                f'statements={(self.statements if hasattr(self, "statements") else None)!s}, '
+                f'portal={(self.portal if hasattr(self, "portal") else None)!s}, '
+                f'public_show={(self.public_show if hasattr(self, "public_show") else None)!s}, '
+                f'public_edit={(self.public_edit if hasattr(self, "public_edit") else None)!s}, '
+                f'hosted={(self.hosted if hasattr(self, "hosted") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

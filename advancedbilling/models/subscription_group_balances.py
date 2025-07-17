@@ -100,16 +100,16 @@ class SubscriptionGroupBalances(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'prepayments={self.prepayments!r}, '
-                f'service_credits={self.service_credits!r}, '
-                f'open_invoices={self.open_invoices!r}, '
-                f'pending_discounts={self.pending_discounts!r}, '
+                f'prepayments={(self.prepayments if hasattr(self, "prepayments") else None)!r}, '
+                f'service_credits={(self.service_credits if hasattr(self, "service_credits") else None)!r}, '
+                f'open_invoices={(self.open_invoices if hasattr(self, "open_invoices") else None)!r}, '
+                f'pending_discounts={(self.pending_discounts if hasattr(self, "pending_discounts") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'prepayments={self.prepayments!s}, '
-                f'service_credits={self.service_credits!s}, '
-                f'open_invoices={self.open_invoices!s}, '
-                f'pending_discounts={self.pending_discounts!s}, '
+                f'prepayments={(self.prepayments if hasattr(self, "prepayments") else None)!s}, '
+                f'service_credits={(self.service_credits if hasattr(self, "service_credits") else None)!s}, '
+                f'open_invoices={(self.open_invoices if hasattr(self, "open_invoices") else None)!s}, '
+                f'pending_discounts={(self.pending_discounts if hasattr(self, "pending_discounts") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

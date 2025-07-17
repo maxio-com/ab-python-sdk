@@ -42,4 +42,4 @@ class SubscriptionResponseErrorException(APIException):
         base_str = super().__str__()
         return (f'{self.__class__.__name__}('
                 f'{base_str[base_str.find("(") + 1:-1]}, '
-                f'subscription={self.subscription!s})')
+                f'subscription={(self.subscription if hasattr(self, "subscription") else None)!s})')

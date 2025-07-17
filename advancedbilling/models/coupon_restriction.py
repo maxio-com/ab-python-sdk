@@ -108,18 +108,18 @@ class CouponRestriction(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'item_type={self.item_type!r}, '
-                f'item_id={self.item_id!r}, '
-                f'name={self.name!r}, '
-                f'handle={self.handle!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'item_type={(self.item_type if hasattr(self, "item_type") else None)!r}, '
+                f'item_id={(self.item_id if hasattr(self, "item_id") else None)!r}, '
+                f'name={(self.name if hasattr(self, "name") else None)!r}, '
+                f'handle={(self.handle if hasattr(self, "handle") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'item_type={self.item_type!s}, '
-                f'item_id={self.item_id!s}, '
-                f'name={self.name!s}, '
-                f'handle={self.handle!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'item_type={(self.item_type if hasattr(self, "item_type") else None)!s}, '
+                f'item_id={(self.item_id if hasattr(self, "item_id") else None)!s}, '
+                f'name={(self.name if hasattr(self, "name") else None)!s}, '
+                f'handle={(self.handle if hasattr(self, "handle") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

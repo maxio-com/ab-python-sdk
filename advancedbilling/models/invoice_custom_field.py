@@ -126,18 +126,18 @@ class InvoiceCustomField(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'owner_id={self.owner_id!r}, '
-                f'owner_type={self.owner_type!r}, '
-                f'name={self.name!r}, '
-                f'value={self.value!r}, '
-                f'metadatum_id={self.metadatum_id!r}, '
+                f'owner_id={(self.owner_id if hasattr(self, "owner_id") else None)!r}, '
+                f'owner_type={(self.owner_type if hasattr(self, "owner_type") else None)!r}, '
+                f'name={(self.name if hasattr(self, "name") else None)!r}, '
+                f'value={(self.value if hasattr(self, "value") else None)!r}, '
+                f'metadatum_id={(self.metadatum_id if hasattr(self, "metadatum_id") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'owner_id={self.owner_id!s}, '
-                f'owner_type={self.owner_type!s}, '
-                f'name={self.name!s}, '
-                f'value={self.value!s}, '
-                f'metadatum_id={self.metadatum_id!s}, '
+                f'owner_id={(self.owner_id if hasattr(self, "owner_id") else None)!s}, '
+                f'owner_type={(self.owner_type if hasattr(self, "owner_type") else None)!s}, '
+                f'name={(self.name if hasattr(self, "name") else None)!s}, '
+                f'value={(self.value if hasattr(self, "value") else None)!s}, '
+                f'metadatum_id={(self.metadatum_id if hasattr(self, "metadatum_id") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

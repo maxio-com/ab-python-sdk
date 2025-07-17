@@ -99,18 +99,18 @@ class NetTerms(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'default_net_terms={self.default_net_terms!r}, '
-                f'automatic_net_terms={self.automatic_net_terms!r}, '
-                f'remittance_net_terms={self.remittance_net_terms!r}, '
-                f'net_terms_on_remittance_signups_enabled={self.net_terms_on_remittance_signups_enabled!r}, '
-                f'custom_net_terms_enabled={self.custom_net_terms_enabled!r}, '
+                f'default_net_terms={(self.default_net_terms if hasattr(self, "default_net_terms") else None)!r}, '
+                f'automatic_net_terms={(self.automatic_net_terms if hasattr(self, "automatic_net_terms") else None)!r}, '
+                f'remittance_net_terms={(self.remittance_net_terms if hasattr(self, "remittance_net_terms") else None)!r}, '
+                f'net_terms_on_remittance_signups_enabled={(self.net_terms_on_remittance_signups_enabled if hasattr(self, "net_terms_on_remittance_signups_enabled") else None)!r}, '
+                f'custom_net_terms_enabled={(self.custom_net_terms_enabled if hasattr(self, "custom_net_terms_enabled") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'default_net_terms={self.default_net_terms!s}, '
-                f'automatic_net_terms={self.automatic_net_terms!s}, '
-                f'remittance_net_terms={self.remittance_net_terms!s}, '
-                f'net_terms_on_remittance_signups_enabled={self.net_terms_on_remittance_signups_enabled!s}, '
-                f'custom_net_terms_enabled={self.custom_net_terms_enabled!s}, '
+                f'default_net_terms={(self.default_net_terms if hasattr(self, "default_net_terms") else None)!s}, '
+                f'automatic_net_terms={(self.automatic_net_terms if hasattr(self, "automatic_net_terms") else None)!s}, '
+                f'remittance_net_terms={(self.remittance_net_terms if hasattr(self, "remittance_net_terms") else None)!s}, '
+                f'net_terms_on_remittance_signups_enabled={(self.net_terms_on_remittance_signups_enabled if hasattr(self, "net_terms_on_remittance_signups_enabled") else None)!s}, '
+                f'custom_net_terms_enabled={(self.custom_net_terms_enabled if hasattr(self, "custom_net_terms_enabled") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

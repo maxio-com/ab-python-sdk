@@ -95,16 +95,16 @@ class ComponentAllocationErrorItem(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'component_id={self.component_id!r}, '
-                f'message={self.message!r}, '
-                f'kind={self.kind!r}, '
-                f'on={self.on!r}, '
+                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!r}, '
+                f'message={(self.message if hasattr(self, "message") else None)!r}, '
+                f'kind={(self.kind if hasattr(self, "kind") else None)!r}, '
+                f'on={(self.on if hasattr(self, "on") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'component_id={self.component_id!s}, '
-                f'message={self.message!s}, '
-                f'kind={self.kind!s}, '
-                f'on={self.on!s}, '
+                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!s}, '
+                f'message={(self.message if hasattr(self, "message") else None)!s}, '
+                f'kind={(self.kind if hasattr(self, "kind") else None)!s}, '
+                f'on={(self.on if hasattr(self, "on") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

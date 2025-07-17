@@ -125,16 +125,16 @@ class InvoiceSeller(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'name={self.name!r}, '
-                f'address={self.address!r}, '
-                f'phone={self.phone!r}, '
-                f'logo_url={self.logo_url!r}, '
+                f'name={(self.name if hasattr(self, "name") else None)!r}, '
+                f'address={(self.address if hasattr(self, "address") else None)!r}, '
+                f'phone={(self.phone if hasattr(self, "phone") else None)!r}, '
+                f'logo_url={(self.logo_url if hasattr(self, "logo_url") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'name={self.name!s}, '
-                f'address={self.address!s}, '
-                f'phone={self.phone!s}, '
-                f'logo_url={self.logo_url!s}, '
+                f'name={(self.name if hasattr(self, "name") else None)!s}, '
+                f'address={(self.address if hasattr(self, "address") else None)!s}, '
+                f'phone={(self.phone if hasattr(self, "phone") else None)!s}, '
+                f'logo_url={(self.logo_url if hasattr(self, "logo_url") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

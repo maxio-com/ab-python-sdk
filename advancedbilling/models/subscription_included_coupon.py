@@ -125,22 +125,22 @@ class SubscriptionIncludedCoupon(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'code={self.code!r}, '
-                f'use_count={self.use_count!r}, '
-                f'uses_allowed={self.uses_allowed!r}, '
-                f'expires_at={self.expires_at!r}, '
-                f'recurring={self.recurring!r}, '
-                f'amount_in_cents={self.amount_in_cents!r}, '
-                f'percentage={self.percentage!r}, '
+                f'code={(self.code if hasattr(self, "code") else None)!r}, '
+                f'use_count={(self.use_count if hasattr(self, "use_count") else None)!r}, '
+                f'uses_allowed={(self.uses_allowed if hasattr(self, "uses_allowed") else None)!r}, '
+                f'expires_at={(self.expires_at if hasattr(self, "expires_at") else None)!r}, '
+                f'recurring={(self.recurring if hasattr(self, "recurring") else None)!r}, '
+                f'amount_in_cents={(self.amount_in_cents if hasattr(self, "amount_in_cents") else None)!r}, '
+                f'percentage={(self.percentage if hasattr(self, "percentage") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'code={self.code!s}, '
-                f'use_count={self.use_count!s}, '
-                f'uses_allowed={self.uses_allowed!s}, '
-                f'expires_at={self.expires_at!s}, '
-                f'recurring={self.recurring!s}, '
-                f'amount_in_cents={self.amount_in_cents!s}, '
-                f'percentage={self.percentage!s}, '
+                f'code={(self.code if hasattr(self, "code") else None)!s}, '
+                f'use_count={(self.use_count if hasattr(self, "use_count") else None)!s}, '
+                f'uses_allowed={(self.uses_allowed if hasattr(self, "uses_allowed") else None)!s}, '
+                f'expires_at={(self.expires_at if hasattr(self, "expires_at") else None)!s}, '
+                f'recurring={(self.recurring if hasattr(self, "recurring") else None)!s}, '
+                f'amount_in_cents={(self.amount_in_cents if hasattr(self, "amount_in_cents") else None)!s}, '
+                f'percentage={(self.percentage if hasattr(self, "percentage") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

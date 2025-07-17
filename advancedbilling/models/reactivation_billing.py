@@ -100,10 +100,10 @@ class ReactivationBilling(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'reactivation_charge={self.reactivation_charge!r}, '
+                f'reactivation_charge={(self.reactivation_charge if hasattr(self, "reactivation_charge") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'reactivation_charge={self.reactivation_charge!s}, '
+                f'reactivation_charge={(self.reactivation_charge if hasattr(self, "reactivation_charge") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

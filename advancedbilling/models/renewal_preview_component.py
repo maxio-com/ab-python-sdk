@@ -97,14 +97,14 @@ class RenewalPreviewComponent(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'component_id={self.component_id!r}, '
-                f'quantity={self.quantity!r}, '
-                f'price_point_id={self.price_point_id!r}, '
+                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!r}, '
+                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!r}, '
+                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'component_id={self.component_id!s}, '
-                f'quantity={self.quantity!s}, '
-                f'price_point_id={self.price_point_id!s}, '
+                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!s}, '
+                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!s}, '
+                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

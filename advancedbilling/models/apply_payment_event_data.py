@@ -212,11 +212,11 @@ class ApplyPaymentEventData(object):
                 f'applied_amount={self.applied_amount!r}, '
                 f'transaction_time={self.transaction_time!r}, '
                 f'payment_method={self.payment_method!r}, '
-                f'transaction_id={self.transaction_id!r}, '
-                f'parent_invoice_number={self.parent_invoice_number!r}, '
-                f'remaining_prepayment_amount={self.remaining_prepayment_amount!r}, '
-                f'prepayment={self.prepayment!r}, '
-                f'external={self.external!r}, '
+                f'transaction_id={(self.transaction_id if hasattr(self, "transaction_id") else None)!r}, '
+                f'parent_invoice_number={(self.parent_invoice_number if hasattr(self, "parent_invoice_number") else None)!r}, '
+                f'remaining_prepayment_amount={(self.remaining_prepayment_amount if hasattr(self, "remaining_prepayment_amount") else None)!r}, '
+                f'prepayment={(self.prepayment if hasattr(self, "prepayment") else None)!r}, '
+                f'external={(self.external if hasattr(self, "external") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
@@ -227,9 +227,9 @@ class ApplyPaymentEventData(object):
                 f'applied_amount={self.applied_amount!s}, '
                 f'transaction_time={self.transaction_time!s}, '
                 f'payment_method={self.payment_method!s}, '
-                f'transaction_id={self.transaction_id!s}, '
-                f'parent_invoice_number={self.parent_invoice_number!s}, '
-                f'remaining_prepayment_amount={self.remaining_prepayment_amount!s}, '
-                f'prepayment={self.prepayment!s}, '
-                f'external={self.external!s}, '
+                f'transaction_id={(self.transaction_id if hasattr(self, "transaction_id") else None)!s}, '
+                f'parent_invoice_number={(self.parent_invoice_number if hasattr(self, "parent_invoice_number") else None)!s}, '
+                f'remaining_prepayment_amount={(self.remaining_prepayment_amount if hasattr(self, "remaining_prepayment_amount") else None)!s}, '
+                f'prepayment={(self.prepayment if hasattr(self, "prepayment") else None)!s}, '
+                f'external={(self.external if hasattr(self, "external") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

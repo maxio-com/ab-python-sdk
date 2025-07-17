@@ -147,20 +147,20 @@ class SubscriptionFilter(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'states={self.states!r}, '
-                f'date_field={self.date_field!r}, '
-                f'start_date={self.start_date!r}, '
-                f'end_date={self.end_date!r}, '
-                f'start_datetime={self.start_datetime!r}, '
-                f'end_datetime={self.end_datetime!r}, '
+                f'states={(self.states if hasattr(self, "states") else None)!r}, '
+                f'date_field={(self.date_field if hasattr(self, "date_field") else None)!r}, '
+                f'start_date={(self.start_date if hasattr(self, "start_date") else None)!r}, '
+                f'end_date={(self.end_date if hasattr(self, "end_date") else None)!r}, '
+                f'start_datetime={(self.start_datetime if hasattr(self, "start_datetime") else None)!r}, '
+                f'end_datetime={(self.end_datetime if hasattr(self, "end_datetime") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'states={self.states!s}, '
-                f'date_field={self.date_field!s}, '
-                f'start_date={self.start_date!s}, '
-                f'end_date={self.end_date!s}, '
-                f'start_datetime={self.start_datetime!s}, '
-                f'end_datetime={self.end_datetime!s}, '
+                f'states={(self.states if hasattr(self, "states") else None)!s}, '
+                f'date_field={(self.date_field if hasattr(self, "date_field") else None)!s}, '
+                f'start_date={(self.start_date if hasattr(self, "start_date") else None)!s}, '
+                f'end_date={(self.end_date if hasattr(self, "end_date") else None)!s}, '
+                f'start_datetime={(self.start_datetime if hasattr(self, "start_datetime") else None)!s}, '
+                f'end_datetime={(self.end_datetime if hasattr(self, "end_datetime") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

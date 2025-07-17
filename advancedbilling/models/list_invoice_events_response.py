@@ -109,16 +109,16 @@ class ListInvoiceEventsResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'events={self.events!r}, '
-                f'page={self.page!r}, '
-                f'per_page={self.per_page!r}, '
-                f'total_pages={self.total_pages!r}, '
+                f'events={(self.events if hasattr(self, "events") else None)!r}, '
+                f'page={(self.page if hasattr(self, "page") else None)!r}, '
+                f'per_page={(self.per_page if hasattr(self, "per_page") else None)!r}, '
+                f'total_pages={(self.total_pages if hasattr(self, "total_pages") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'events={self.events!s}, '
-                f'page={self.page!s}, '
-                f'per_page={self.per_page!s}, '
-                f'total_pages={self.total_pages!s}, '
+                f'events={(self.events if hasattr(self, "events") else None)!s}, '
+                f'page={(self.page if hasattr(self, "page") else None)!s}, '
+                f'per_page={(self.per_page if hasattr(self, "per_page") else None)!s}, '
+                f'total_pages={(self.total_pages if hasattr(self, "total_pages") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

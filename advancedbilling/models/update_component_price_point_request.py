@@ -73,10 +73,10 @@ class UpdateComponentPricePointRequest(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'price_point={self.price_point!r}, '
+                f'price_point={(self.price_point if hasattr(self, "price_point") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'price_point={self.price_point!s}, '
+                f'price_point={(self.price_point if hasattr(self, "price_point") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

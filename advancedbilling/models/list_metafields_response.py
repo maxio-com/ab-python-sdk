@@ -109,18 +109,18 @@ class ListMetafieldsResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'total_count={self.total_count!r}, '
-                f'current_page={self.current_page!r}, '
-                f'total_pages={self.total_pages!r}, '
-                f'per_page={self.per_page!r}, '
-                f'metafields={self.metafields!r}, '
+                f'total_count={(self.total_count if hasattr(self, "total_count") else None)!r}, '
+                f'current_page={(self.current_page if hasattr(self, "current_page") else None)!r}, '
+                f'total_pages={(self.total_pages if hasattr(self, "total_pages") else None)!r}, '
+                f'per_page={(self.per_page if hasattr(self, "per_page") else None)!r}, '
+                f'metafields={(self.metafields if hasattr(self, "metafields") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'total_count={self.total_count!s}, '
-                f'current_page={self.current_page!s}, '
-                f'total_pages={self.total_pages!s}, '
-                f'per_page={self.per_page!s}, '
-                f'metafields={self.metafields!s}, '
+                f'total_count={(self.total_count if hasattr(self, "total_count") else None)!s}, '
+                f'current_page={(self.current_page if hasattr(self, "current_page") else None)!s}, '
+                f'total_pages={(self.total_pages if hasattr(self, "total_pages") else None)!s}, '
+                f'per_page={(self.per_page if hasattr(self, "per_page") else None)!s}, '
+                f'metafields={(self.metafields if hasattr(self, "metafields") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -63,7 +63,7 @@ class CustomFieldsController(BaseController):
         and another 100 for Customer.
         ### Metafields "On-the-Fly"
         It is possible to create Metafields “on the fly” when you create your
-        Metadata – if a non-existant name is passed when creating Metadata, a
+        Metadata – if a non-existent name is passed when creating Metadata, a
         Metafield for that key will be automatically created. The Metafield
         API, however, gives you more control over your “keys”.
         ### Metafield Scope Warning

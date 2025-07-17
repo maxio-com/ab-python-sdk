@@ -118,20 +118,20 @@ class PortalManagementLink(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'url={self.url!r}, '
-                f'fetch_count={self.fetch_count!r}, '
-                f'created_at={self.created_at!r}, '
-                f'new_link_available_at={self.new_link_available_at!r}, '
-                f'expires_at={self.expires_at!r}, '
-                f'last_invite_sent_at={self.last_invite_sent_at!r}, '
+                f'url={(self.url if hasattr(self, "url") else None)!r}, '
+                f'fetch_count={(self.fetch_count if hasattr(self, "fetch_count") else None)!r}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
+                f'new_link_available_at={(self.new_link_available_at if hasattr(self, "new_link_available_at") else None)!r}, '
+                f'expires_at={(self.expires_at if hasattr(self, "expires_at") else None)!r}, '
+                f'last_invite_sent_at={(self.last_invite_sent_at if hasattr(self, "last_invite_sent_at") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'url={self.url!s}, '
-                f'fetch_count={self.fetch_count!s}, '
-                f'created_at={self.created_at!s}, '
-                f'new_link_available_at={self.new_link_available_at!s}, '
-                f'expires_at={self.expires_at!s}, '
-                f'last_invite_sent_at={self.last_invite_sent_at!s}, '
+                f'url={(self.url if hasattr(self, "url") else None)!s}, '
+                f'fetch_count={(self.fetch_count if hasattr(self, "fetch_count") else None)!s}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
+                f'new_link_available_at={(self.new_link_available_at if hasattr(self, "new_link_available_at") else None)!s}, '
+                f'expires_at={(self.expires_at if hasattr(self, "expires_at") else None)!s}, '
+                f'last_invite_sent_at={(self.last_invite_sent_at if hasattr(self, "last_invite_sent_at") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

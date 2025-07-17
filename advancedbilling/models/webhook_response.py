@@ -72,10 +72,10 @@ class WebhookResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'webhook={self.webhook!r}, '
+                f'webhook={(self.webhook if hasattr(self, "webhook") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'webhook={self.webhook!s}, '
+                f'webhook={(self.webhook if hasattr(self, "webhook") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -79,12 +79,12 @@ class DeleteSubscriptionGroupResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!r}, '
-                f'deleted={self.deleted!r}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!r}, '
+                f'deleted={(self.deleted if hasattr(self, "deleted") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!s}, '
-                f'deleted={self.deleted!s}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!s}, '
+                f'deleted={(self.deleted if hasattr(self, "deleted") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

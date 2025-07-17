@@ -123,20 +123,20 @@ class ReactivateSubscriptionRequest(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'calendar_billing={self.calendar_billing!r}, '
-                f'include_trial={self.include_trial!r}, '
-                f'preserve_balance={self.preserve_balance!r}, '
-                f'coupon_code={self.coupon_code!r}, '
-                f'use_credits_and_prepayments={self.use_credits_and_prepayments!r}, '
-                f'resume={self.resume!r}, '
+                f'calendar_billing={(self.calendar_billing if hasattr(self, "calendar_billing") else None)!r}, '
+                f'include_trial={(self.include_trial if hasattr(self, "include_trial") else None)!r}, '
+                f'preserve_balance={(self.preserve_balance if hasattr(self, "preserve_balance") else None)!r}, '
+                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!r}, '
+                f'use_credits_and_prepayments={(self.use_credits_and_prepayments if hasattr(self, "use_credits_and_prepayments") else None)!r}, '
+                f'resume={(self.resume if hasattr(self, "resume") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'calendar_billing={self.calendar_billing!s}, '
-                f'include_trial={self.include_trial!s}, '
-                f'preserve_balance={self.preserve_balance!s}, '
-                f'coupon_code={self.coupon_code!s}, '
-                f'use_credits_and_prepayments={self.use_credits_and_prepayments!s}, '
-                f'resume={self.resume!s}, '
+                f'calendar_billing={(self.calendar_billing if hasattr(self, "calendar_billing") else None)!s}, '
+                f'include_trial={(self.include_trial if hasattr(self, "include_trial") else None)!s}, '
+                f'preserve_balance={(self.preserve_balance if hasattr(self, "preserve_balance") else None)!s}, '
+                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!s}, '
+                f'use_credits_and_prepayments={(self.use_credits_and_prepayments if hasattr(self, "use_credits_and_prepayments") else None)!s}, '
+                f'resume={(self.resume if hasattr(self, "resume") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -332,6 +332,7 @@ body = CreatePaymentProfileRequest(
 result = payment_profiles_controller.create_payment_profile(
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -384,8 +385,8 @@ def list_payment_profiles(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `customer_id` | `int` | Query, Optional | The ID of the customer for which you wish to list payment profiles |
 
 ## Response Type
@@ -400,6 +401,7 @@ collect = {
     'per_page': 50
 }
 result = payment_profiles_controller.list_payment_profiles(collect)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -411,6 +413,8 @@ result = payment_profiles_controller.list_payment_profiles(collect)
       "id": 10089892,
       "first_name": "Chester",
       "last_name": "Tester",
+      "created_at": "2025-01-01T00:00:00-05:00",
+      "updated_at": "2025-01-01T00:00:00-05:00",
       "customer_id": 14543792,
       "current_vault": "bogus",
       "vault_token": "0011223344",
@@ -437,6 +441,8 @@ result = payment_profiles_controller.list_payment_profiles(collect)
       "id": 10188522,
       "first_name": "Frankie",
       "last_name": "Tester",
+      "created_at": "2025-01-01T00:00:00-05:00",
+      "updated_at": "2025-01-01T00:00:00-05:00",
       "customer_id": 14543712,
       "current_vault": "bogus",
       "vault_token": "123456789",
@@ -478,6 +484,8 @@ Example response for Bank Account:
     "id": 10089892,
     "first_name": "Chester",
     "last_name": "Tester",
+    "created_at": "2025-01-01T00:00:00-05:00",
+    "updated_at": "2025-01-01T00:00:00-05:00",
     "customer_id": 14543792,
     "current_vault": "bogus",
     "vault_token": "0011223344",
@@ -521,6 +529,7 @@ def read_payment_profile(self,
 payment_profile_id = 198
 
 result = payment_profiles_controller.read_payment_profile(payment_profile_id)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -535,6 +544,8 @@ result = payment_profiles_controller.read_payment_profile(payment_profile_id)
     "card_type": "bogus",
     "expiration_month": 1,
     "expiration_year": 2022,
+    "created_at": "2025-01-01T00:00:00-05:00",
+    "updated_at": "2025-01-01T00:00:00-05:00",
     "customer_id": 14543792,
     "current_vault": "bogus",
     "vault_token": "1",
@@ -640,6 +651,7 @@ result = payment_profiles_controller.update_payment_profile(
     payment_profile_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -792,6 +804,7 @@ result = payment_profiles_controller.verify_bank_account(
     bank_account_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -901,6 +914,7 @@ result = payment_profiles_controller.change_subscription_default_payment_profile
     subscription_id,
     payment_profile_id
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -976,6 +990,7 @@ result = payment_profiles_controller.change_subscription_group_default_payment_p
     uid,
     payment_profile_id
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1043,6 +1058,7 @@ def read_one_time_token(self,
 chargify_token = 'chargify_token8'
 
 result = payment_profiles_controller.read_one_time_token(chargify_token)
+print(result)
 ```
 
 ## Errors

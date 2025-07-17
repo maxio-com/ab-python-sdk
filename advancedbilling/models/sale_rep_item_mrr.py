@@ -87,14 +87,14 @@ class SaleRepItemMrr(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'mrr={self.mrr!r}, '
-                f'usage={self.usage!r}, '
-                f'recurring={self.recurring!r}, '
+                f'mrr={(self.mrr if hasattr(self, "mrr") else None)!r}, '
+                f'usage={(self.usage if hasattr(self, "usage") else None)!r}, '
+                f'recurring={(self.recurring if hasattr(self, "recurring") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'mrr={self.mrr!s}, '
-                f'usage={self.usage!s}, '
-                f'recurring={self.recurring!s}, '
+                f'mrr={(self.mrr if hasattr(self, "mrr") else None)!s}, '
+                f'usage={(self.usage if hasattr(self, "usage") else None)!s}, '
+                f'recurring={(self.recurring if hasattr(self, "recurring") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -72,10 +72,10 @@ class AllocationResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'allocation={self.allocation!r}, '
+                f'allocation={(self.allocation if hasattr(self, "allocation") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'allocation={self.allocation!s}, '
+                f'allocation={(self.allocation if hasattr(self, "allocation") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

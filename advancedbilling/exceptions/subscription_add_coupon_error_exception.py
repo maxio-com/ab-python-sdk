@@ -44,7 +44,7 @@ class SubscriptionAddCouponErrorException(APIException):
         base_str = super().__str__()
         return (f'{self.__class__.__name__}('
                 f'{base_str[base_str.find("(") + 1:-1]}, '
-                f'codes={self.codes!s}, '
-                f'coupon_code={self.coupon_code!s}, '
-                f'coupon_codes={self.coupon_codes!s}, '
-                f'subscription={self.subscription!s})')
+                f'codes={(self.codes if hasattr(self, "codes") else None)!s}, '
+                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!s}, '
+                f'coupon_codes={(self.coupon_codes if hasattr(self, "coupon_codes") else None)!s}, '
+                f'subscription={(self.subscription if hasattr(self, "subscription") else None)!s})')

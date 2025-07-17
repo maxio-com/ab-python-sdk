@@ -98,16 +98,16 @@ class NestedSubscriptionGroup(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!r}, '
-                f'scheme={self.scheme!r}, '
-                f'primary_subscription_id={self.primary_subscription_id!r}, '
-                f'primary={self.primary!r}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!r}, '
+                f'scheme={(self.scheme if hasattr(self, "scheme") else None)!r}, '
+                f'primary_subscription_id={(self.primary_subscription_id if hasattr(self, "primary_subscription_id") else None)!r}, '
+                f'primary={(self.primary if hasattr(self, "primary") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!s}, '
-                f'scheme={self.scheme!s}, '
-                f'primary_subscription_id={self.primary_subscription_id!s}, '
-                f'primary={self.primary!s}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!s}, '
+                f'scheme={(self.scheme if hasattr(self, "scheme") else None)!s}, '
+                f'primary_subscription_id={(self.primary_subscription_id if hasattr(self, "primary_subscription_id") else None)!s}, '
+                f'primary={(self.primary if hasattr(self, "primary") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

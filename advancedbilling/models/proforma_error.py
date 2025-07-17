@@ -73,10 +73,10 @@ class ProformaError(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'subscription={self.subscription!r}, '
+                f'subscription={(self.subscription if hasattr(self, "subscription") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'subscription={self.subscription!s}, '
+                f'subscription={(self.subscription if hasattr(self, "subscription") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

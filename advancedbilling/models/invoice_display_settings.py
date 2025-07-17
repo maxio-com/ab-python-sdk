@@ -101,12 +101,12 @@ class InvoiceDisplaySettings(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'hide_zero_subtotal_lines={self.hide_zero_subtotal_lines!r}, '
-                f'include_discounts_on_lines={self.include_discounts_on_lines!r}, '
+                f'hide_zero_subtotal_lines={(self.hide_zero_subtotal_lines if hasattr(self, "hide_zero_subtotal_lines") else None)!r}, '
+                f'include_discounts_on_lines={(self.include_discounts_on_lines if hasattr(self, "include_discounts_on_lines") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'hide_zero_subtotal_lines={self.hide_zero_subtotal_lines!s}, '
-                f'include_discounts_on_lines={self.include_discounts_on_lines!s}, '
+                f'hide_zero_subtotal_lines={(self.hide_zero_subtotal_lines if hasattr(self, "hide_zero_subtotal_lines") else None)!s}, '
+                f'include_discounts_on_lines={(self.include_discounts_on_lines if hasattr(self, "include_discounts_on_lines") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

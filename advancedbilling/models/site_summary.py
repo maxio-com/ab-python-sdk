@@ -104,18 +104,18 @@ class SiteSummary(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'seller_name={self.seller_name!r}, '
-                f'site_name={self.site_name!r}, '
-                f'site_id={self.site_id!r}, '
-                f'site_currency={self.site_currency!r}, '
-                f'stats={self.stats!r}, '
+                f'seller_name={(self.seller_name if hasattr(self, "seller_name") else None)!r}, '
+                f'site_name={(self.site_name if hasattr(self, "site_name") else None)!r}, '
+                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!r}, '
+                f'site_currency={(self.site_currency if hasattr(self, "site_currency") else None)!r}, '
+                f'stats={(self.stats if hasattr(self, "stats") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'seller_name={self.seller_name!s}, '
-                f'site_name={self.site_name!s}, '
-                f'site_id={self.site_id!s}, '
-                f'site_currency={self.site_currency!s}, '
-                f'stats={self.stats!s}, '
+                f'seller_name={(self.seller_name if hasattr(self, "seller_name") else None)!s}, '
+                f'site_name={(self.site_name if hasattr(self, "site_name") else None)!s}, '
+                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!s}, '
+                f'site_currency={(self.site_currency if hasattr(self, "site_currency") else None)!s}, '
+                f'stats={(self.stats if hasattr(self, "stats") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

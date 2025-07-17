@@ -100,16 +100,16 @@ class CouponCurrency(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'currency={self.currency!r}, '
-                f'price={self.price!r}, '
-                f'coupon_id={self.coupon_id!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'currency={(self.currency if hasattr(self, "currency") else None)!r}, '
+                f'price={(self.price if hasattr(self, "price") else None)!r}, '
+                f'coupon_id={(self.coupon_id if hasattr(self, "coupon_id") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'currency={self.currency!s}, '
-                f'price={self.price!s}, '
-                f'coupon_id={self.coupon_id!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'currency={(self.currency if hasattr(self, "currency") else None)!s}, '
+                f'price={(self.price if hasattr(self, "price") else None)!s}, '
+                f'coupon_id={(self.coupon_id if hasattr(self, "coupon_id") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

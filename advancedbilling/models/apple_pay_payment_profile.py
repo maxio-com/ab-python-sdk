@@ -40,6 +40,10 @@ class ApplePayPaymentProfile(object):
         payment_type (PaymentType): The model property of type PaymentType.
         site_gateway_setting_id (int): The model property of type int.
         gateway_handle (str): The model property of type str.
+        created_at (datetime): A timestamp indicating when this payment
+            profile was created
+        updated_at (datetime): A timestamp indicating when this payment
+            profile was last updated
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -62,7 +66,9 @@ class ApplePayPaymentProfile(object):
         "customer_vault_token": 'customer_vault_token',
         "billing_address_2": 'billing_address_2',
         "site_gateway_setting_id": 'site_gateway_setting_id',
-        "gateway_handle": 'gateway_handle'
+        "gateway_handle": 'gateway_handle',
+        "created_at": 'created_at',
+        "updated_at": 'updated_at'
     }
 
     _optionals = [
@@ -81,6 +87,8 @@ class ApplePayPaymentProfile(object):
         'billing_address_2',
         'site_gateway_setting_id',
         'gateway_handle',
+        'created_at',
+        'updated_at',
     ]
 
     _nullables = [
@@ -112,6 +120,8 @@ class ApplePayPaymentProfile(object):
                  billing_address_2=APIHelper.SKIP,
                  site_gateway_setting_id=APIHelper.SKIP,
                  gateway_handle=APIHelper.SKIP,
+                 created_at=APIHelper.SKIP,
+                 updated_at=APIHelper.SKIP,
                  additional_properties=None):
         """Constructor for the ApplePayPaymentProfile class"""
 
@@ -147,6 +157,10 @@ class ApplePayPaymentProfile(object):
             self.site_gateway_setting_id = site_gateway_setting_id 
         if gateway_handle is not APIHelper.SKIP:
             self.gateway_handle = gateway_handle 
+        if created_at is not APIHelper.SKIP:
+            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
+        if updated_at is not APIHelper.SKIP:
+            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -188,6 +202,8 @@ class ApplePayPaymentProfile(object):
         billing_address_2 = dictionary.get("billing_address_2") if "billing_address_2" in dictionary.keys() else APIHelper.SKIP
         site_gateway_setting_id = dictionary.get("site_gateway_setting_id") if "site_gateway_setting_id" in dictionary.keys() else APIHelper.SKIP
         gateway_handle = dictionary.get("gateway_handle") if "gateway_handle" in dictionary.keys() else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
         # Clean out expected properties from dictionary
         additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
@@ -207,6 +223,8 @@ class ApplePayPaymentProfile(object):
                    billing_address_2,
                    site_gateway_setting_id,
                    gateway_handle,
+                   created_at,
+                   updated_at,
                    additional_properties)
 
     @classmethod
@@ -235,40 +253,44 @@ class ApplePayPaymentProfile(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'first_name={self.first_name!r}, '
-                f'last_name={self.last_name!r}, '
-                f'customer_id={self.customer_id!r}, '
-                f'current_vault={self.current_vault!r}, '
-                f'vault_token={self.vault_token!r}, '
-                f'billing_address={self.billing_address!r}, '
-                f'billing_city={self.billing_city!r}, '
-                f'billing_state={self.billing_state!r}, '
-                f'billing_zip={self.billing_zip!r}, '
-                f'billing_country={self.billing_country!r}, '
-                f'customer_vault_token={self.customer_vault_token!r}, '
-                f'billing_address_2={self.billing_address_2!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'first_name={(self.first_name if hasattr(self, "first_name") else None)!r}, '
+                f'last_name={(self.last_name if hasattr(self, "last_name") else None)!r}, '
+                f'customer_id={(self.customer_id if hasattr(self, "customer_id") else None)!r}, '
+                f'current_vault={(self.current_vault if hasattr(self, "current_vault") else None)!r}, '
+                f'vault_token={(self.vault_token if hasattr(self, "vault_token") else None)!r}, '
+                f'billing_address={(self.billing_address if hasattr(self, "billing_address") else None)!r}, '
+                f'billing_city={(self.billing_city if hasattr(self, "billing_city") else None)!r}, '
+                f'billing_state={(self.billing_state if hasattr(self, "billing_state") else None)!r}, '
+                f'billing_zip={(self.billing_zip if hasattr(self, "billing_zip") else None)!r}, '
+                f'billing_country={(self.billing_country if hasattr(self, "billing_country") else None)!r}, '
+                f'customer_vault_token={(self.customer_vault_token if hasattr(self, "customer_vault_token") else None)!r}, '
+                f'billing_address_2={(self.billing_address_2 if hasattr(self, "billing_address_2") else None)!r}, '
                 f'payment_type={self.payment_type!r}, '
-                f'site_gateway_setting_id={self.site_gateway_setting_id!r}, '
-                f'gateway_handle={self.gateway_handle!r}, '
+                f'site_gateway_setting_id={(self.site_gateway_setting_id if hasattr(self, "site_gateway_setting_id") else None)!r}, '
+                f'gateway_handle={(self.gateway_handle if hasattr(self, "gateway_handle") else None)!r}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
+                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'first_name={self.first_name!s}, '
-                f'last_name={self.last_name!s}, '
-                f'customer_id={self.customer_id!s}, '
-                f'current_vault={self.current_vault!s}, '
-                f'vault_token={self.vault_token!s}, '
-                f'billing_address={self.billing_address!s}, '
-                f'billing_city={self.billing_city!s}, '
-                f'billing_state={self.billing_state!s}, '
-                f'billing_zip={self.billing_zip!s}, '
-                f'billing_country={self.billing_country!s}, '
-                f'customer_vault_token={self.customer_vault_token!s}, '
-                f'billing_address_2={self.billing_address_2!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'first_name={(self.first_name if hasattr(self, "first_name") else None)!s}, '
+                f'last_name={(self.last_name if hasattr(self, "last_name") else None)!s}, '
+                f'customer_id={(self.customer_id if hasattr(self, "customer_id") else None)!s}, '
+                f'current_vault={(self.current_vault if hasattr(self, "current_vault") else None)!s}, '
+                f'vault_token={(self.vault_token if hasattr(self, "vault_token") else None)!s}, '
+                f'billing_address={(self.billing_address if hasattr(self, "billing_address") else None)!s}, '
+                f'billing_city={(self.billing_city if hasattr(self, "billing_city") else None)!s}, '
+                f'billing_state={(self.billing_state if hasattr(self, "billing_state") else None)!s}, '
+                f'billing_zip={(self.billing_zip if hasattr(self, "billing_zip") else None)!s}, '
+                f'billing_country={(self.billing_country if hasattr(self, "billing_country") else None)!s}, '
+                f'customer_vault_token={(self.customer_vault_token if hasattr(self, "customer_vault_token") else None)!s}, '
+                f'billing_address_2={(self.billing_address_2 if hasattr(self, "billing_address_2") else None)!s}, '
                 f'payment_type={self.payment_type!s}, '
-                f'site_gateway_setting_id={self.site_gateway_setting_id!s}, '
-                f'gateway_handle={self.gateway_handle!s}, '
+                f'site_gateway_setting_id={(self.site_gateway_setting_id if hasattr(self, "site_gateway_setting_id") else None)!s}, '
+                f'gateway_handle={(self.gateway_handle if hasattr(self, "gateway_handle") else None)!s}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
+                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

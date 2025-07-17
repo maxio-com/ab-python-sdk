@@ -71,10 +71,10 @@ class AddCouponsRequest(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'codes={self.codes!r}, '
+                f'codes={(self.codes if hasattr(self, "codes") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'codes={self.codes!s}, '
+                f'codes={(self.codes if hasattr(self, "codes") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

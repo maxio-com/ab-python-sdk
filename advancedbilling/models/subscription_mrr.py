@@ -87,12 +87,12 @@ class SubscriptionMRR(object):
         return (f'{self.__class__.__name__}('
                 f'subscription_id={self.subscription_id!r}, '
                 f'mrr_amount_in_cents={self.mrr_amount_in_cents!r}, '
-                f'breakouts={self.breakouts!r}, '
+                f'breakouts={(self.breakouts if hasattr(self, "breakouts") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'subscription_id={self.subscription_id!s}, '
                 f'mrr_amount_in_cents={self.mrr_amount_in_cents!s}, '
-                f'breakouts={self.breakouts!s}, '
+                f'breakouts={(self.breakouts if hasattr(self, "breakouts") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

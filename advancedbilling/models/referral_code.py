@@ -95,16 +95,16 @@ class ReferralCode(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'site_id={self.site_id!r}, '
-                f'subscription_id={self.subscription_id!r}, '
-                f'code={self.code!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!r}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!r}, '
+                f'code={(self.code if hasattr(self, "code") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'site_id={self.site_id!s}, '
-                f'subscription_id={self.subscription_id!s}, '
-                f'code={self.code!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!s}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!s}, '
+                f'code={(self.code if hasattr(self, "code") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

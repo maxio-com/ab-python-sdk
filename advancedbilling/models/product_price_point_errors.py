@@ -111,20 +111,20 @@ class ProductPricePointErrors(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'price_point={self.price_point!r}, '
-                f'interval={self.interval!r}, '
-                f'interval_unit={self.interval_unit!r}, '
-                f'name={self.name!r}, '
-                f'price={self.price!r}, '
-                f'price_in_cents={self.price_in_cents!r}, '
+                f'price_point={(self.price_point if hasattr(self, "price_point") else None)!r}, '
+                f'interval={(self.interval if hasattr(self, "interval") else None)!r}, '
+                f'interval_unit={(self.interval_unit if hasattr(self, "interval_unit") else None)!r}, '
+                f'name={(self.name if hasattr(self, "name") else None)!r}, '
+                f'price={(self.price if hasattr(self, "price") else None)!r}, '
+                f'price_in_cents={(self.price_in_cents if hasattr(self, "price_in_cents") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'price_point={self.price_point!s}, '
-                f'interval={self.interval!s}, '
-                f'interval_unit={self.interval_unit!s}, '
-                f'name={self.name!s}, '
-                f'price={self.price!s}, '
-                f'price_in_cents={self.price_in_cents!s}, '
+                f'price_point={(self.price_point if hasattr(self, "price_point") else None)!s}, '
+                f'interval={(self.interval if hasattr(self, "interval") else None)!s}, '
+                f'interval_unit={(self.interval_unit if hasattr(self, "interval_unit") else None)!s}, '
+                f'name={(self.name if hasattr(self, "name") else None)!s}, '
+                f'price={(self.price if hasattr(self, "price") else None)!s}, '
+                f'price_in_cents={(self.price_in_cents if hasattr(self, "price_in_cents") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

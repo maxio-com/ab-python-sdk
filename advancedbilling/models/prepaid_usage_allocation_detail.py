@@ -109,14 +109,14 @@ class PrepaidUsageAllocationDetail(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'allocation_id={self.allocation_id!r}, '
-                f'charge_id={self.charge_id!r}, '
-                f'usage_quantity={self.usage_quantity!r}, '
+                f'allocation_id={(self.allocation_id if hasattr(self, "allocation_id") else None)!r}, '
+                f'charge_id={(self.charge_id if hasattr(self, "charge_id") else None)!r}, '
+                f'usage_quantity={(self.usage_quantity if hasattr(self, "usage_quantity") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'allocation_id={self.allocation_id!s}, '
-                f'charge_id={self.charge_id!s}, '
-                f'usage_quantity={self.usage_quantity!s}, '
+                f'allocation_id={(self.allocation_id if hasattr(self, "allocation_id") else None)!s}, '
+                f'charge_id={(self.charge_id if hasattr(self, "charge_id") else None)!s}, '
+                f'usage_quantity={(self.usage_quantity if hasattr(self, "usage_quantity") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -165,22 +165,22 @@ class DunningStepData(object):
         return (f'{self.__class__.__name__}('
                 f'day_threshold={self.day_threshold!r}, '
                 f'action={self.action!r}, '
-                f'email_body={self.email_body!r}, '
-                f'email_subject={self.email_subject!r}, '
+                f'email_body={(self.email_body if hasattr(self, "email_body") else None)!r}, '
+                f'email_subject={(self.email_subject if hasattr(self, "email_subject") else None)!r}, '
                 f'send_email={self.send_email!r}, '
                 f'send_bcc_email={self.send_bcc_email!r}, '
                 f'send_sms={self.send_sms!r}, '
-                f'sms_body={self.sms_body!r}, '
+                f'sms_body={(self.sms_body if hasattr(self, "sms_body") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'day_threshold={self.day_threshold!s}, '
                 f'action={self.action!s}, '
-                f'email_body={self.email_body!s}, '
-                f'email_subject={self.email_subject!s}, '
+                f'email_body={(self.email_body if hasattr(self, "email_body") else None)!s}, '
+                f'email_subject={(self.email_subject if hasattr(self, "email_subject") else None)!s}, '
                 f'send_email={self.send_email!s}, '
                 f'send_bcc_email={self.send_bcc_email!s}, '
                 f'send_sms={self.send_sms!s}, '
-                f'sms_body={self.sms_body!s}, '
+                f'sms_body={(self.sms_body if hasattr(self, "sms_body") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

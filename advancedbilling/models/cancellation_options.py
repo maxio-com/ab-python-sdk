@@ -81,12 +81,12 @@ class CancellationOptions(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'cancellation_message={self.cancellation_message!r}, '
-                f'reason_code={self.reason_code!r}, '
+                f'cancellation_message={(self.cancellation_message if hasattr(self, "cancellation_message") else None)!r}, '
+                f'reason_code={(self.reason_code if hasattr(self, "reason_code") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'cancellation_message={self.cancellation_message!s}, '
-                f'reason_code={self.reason_code!s}, '
+                f'cancellation_message={(self.cancellation_message if hasattr(self, "cancellation_message") else None)!s}, '
+                f'reason_code={(self.reason_code if hasattr(self, "reason_code") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

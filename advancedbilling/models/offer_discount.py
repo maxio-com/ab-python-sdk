@@ -87,14 +87,14 @@ class OfferDiscount(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'coupon_code={self.coupon_code!r}, '
-                f'coupon_id={self.coupon_id!r}, '
-                f'coupon_name={self.coupon_name!r}, '
+                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!r}, '
+                f'coupon_id={(self.coupon_id if hasattr(self, "coupon_id") else None)!r}, '
+                f'coupon_name={(self.coupon_name if hasattr(self, "coupon_name") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'coupon_code={self.coupon_code!s}, '
-                f'coupon_id={self.coupon_id!s}, '
-                f'coupon_name={self.coupon_name!s}, '
+                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!s}, '
+                f'coupon_id={(self.coupon_id if hasattr(self, "coupon_id") else None)!s}, '
+                f'coupon_name={(self.coupon_name if hasattr(self, "coupon_name") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

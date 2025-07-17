@@ -72,10 +72,10 @@ class ListMrrFilter(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'subscription_ids={self.subscription_ids!r}, '
+                f'subscription_ids={(self.subscription_ids if hasattr(self, "subscription_ids") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'subscription_ids={self.subscription_ids!s}, '
+                f'subscription_ids={(self.subscription_ids if hasattr(self, "subscription_ids") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

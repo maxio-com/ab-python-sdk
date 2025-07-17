@@ -55,6 +55,7 @@ def retry_subscription(self,
 subscription_id = 222
 
 result = subscription_status_controller.retry_subscription(subscription_id)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -227,6 +228,7 @@ def cancel_subscription(self,
 subscription_id = 222
 
 result = subscription_status_controller.cancel_subscription(subscription_id)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -388,7 +390,7 @@ def resume_subscription(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `calendar_billing_resumption_charge` | [`ResumptionCharge`](../../doc/models/resumption-charge.md) | Query, Optional | (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled<br>**Default**: `'prorated'` |
+| `calendar_billing_resumption_charge` | [`ResumptionCharge`](../../doc/models/resumption-charge.md) | Query, Optional | (For calendar billing subscriptions only) The way that the resumed subscription's charge should be handled<br><br>**Default**: `'prorated'` |
 
 ## Response Type
 
@@ -399,7 +401,8 @@ def resume_subscription(self,
 ```python
 subscription_id = 222
 
-Liquid error: Value cannot be null. (Parameter 'key')result = subscription_status_controller.resume_subscription(Liquid error: Value cannot be null. (Parameter 'key')subscription_id)
+result = subscription_status_controller.resume_subscription(subscription_id)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -558,6 +561,7 @@ result = subscription_status_controller.pause_subscription(
     subscription_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -718,6 +722,7 @@ result = subscription_status_controller.update_automatic_subscription_resumption
     subscription_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1046,6 +1051,7 @@ result = subscription_status_controller.reactivate_subscription(
     subscription_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1196,6 +1202,7 @@ def initiate_delayed_cancellation(self,
 subscription_id = 222
 
 result = subscription_status_controller.initiate_delayed_cancellation(subscription_id)
+print(result)
 ```
 
 ## Errors
@@ -1233,6 +1240,7 @@ def cancel_delayed_cancellation(self,
 subscription_id = 222
 
 result = subscription_status_controller.cancel_delayed_cancellation(subscription_id)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -1275,6 +1283,7 @@ def cancel_dunning(self,
 subscription_id = 222
 
 result = subscription_status_controller.cancel_dunning(subscription_id)
+print(result)
 ```
 
 ## Errors
@@ -1354,6 +1363,7 @@ result = subscription_status_controller.preview_renewal(
     subscription_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*

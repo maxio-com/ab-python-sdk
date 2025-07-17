@@ -72,10 +72,10 @@ class UpdateMetadataRequest(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'metadata={self.metadata!r}, '
+                f'metadata={(self.metadata if hasattr(self, "metadata") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'metadata={self.metadata!s}, '
+                f'metadata={(self.metadata if hasattr(self, "metadata") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')
