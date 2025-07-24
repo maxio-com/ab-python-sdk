@@ -71,10 +71,10 @@ class AllocationExpirationDate(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'expires_at={self.expires_at!r}, '
+                f'expires_at={(self.expires_at if hasattr(self, "expires_at") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'expires_at={self.expires_at!s}, '
+                f'expires_at={(self.expires_at if hasattr(self, "expires_at") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -31,6 +31,8 @@ class Component(object):
             Component belongs
         product_family_name (str): The name of the Product Family to which the
             Component belongs
+        product_family_handle (str): The handle of the Product Family to which
+            the Component belongs
         price_per_unit_in_cents (int): deprecated - use unit_price instead
         kind (ComponentKind): A handle for the component type
         archived (bool): Boolean flag describing whether a component is
@@ -102,6 +104,7 @@ class Component(object):
         "unit_price": 'unit_price',
         "product_family_id": 'product_family_id',
         "product_family_name": 'product_family_name',
+        "product_family_handle": 'product_family_handle',
         "price_per_unit_in_cents": 'price_per_unit_in_cents',
         "kind": 'kind',
         "archived": 'archived',
@@ -139,6 +142,7 @@ class Component(object):
         'unit_price',
         'product_family_id',
         'product_family_name',
+        'product_family_handle',
         'price_per_unit_in_cents',
         'kind',
         'archived',
@@ -196,6 +200,7 @@ class Component(object):
                  unit_price=APIHelper.SKIP,
                  product_family_id=APIHelper.SKIP,
                  product_family_name=APIHelper.SKIP,
+                 product_family_handle=APIHelper.SKIP,
                  price_per_unit_in_cents=APIHelper.SKIP,
                  kind=APIHelper.SKIP,
                  archived=APIHelper.SKIP,
@@ -242,6 +247,8 @@ class Component(object):
             self.product_family_id = product_family_id 
         if product_family_name is not APIHelper.SKIP:
             self.product_family_name = product_family_name 
+        if product_family_handle is not APIHelper.SKIP:
+            self.product_family_handle = product_family_handle 
         if price_per_unit_in_cents is not APIHelper.SKIP:
             self.price_per_unit_in_cents = price_per_unit_in_cents 
         if kind is not APIHelper.SKIP:
@@ -327,6 +334,7 @@ class Component(object):
         unit_price = dictionary.get("unit_price") if "unit_price" in dictionary.keys() else APIHelper.SKIP
         product_family_id = dictionary.get("product_family_id") if dictionary.get("product_family_id") else APIHelper.SKIP
         product_family_name = dictionary.get("product_family_name") if dictionary.get("product_family_name") else APIHelper.SKIP
+        product_family_handle = dictionary.get("product_family_handle") if dictionary.get("product_family_handle") else APIHelper.SKIP
         price_per_unit_in_cents = dictionary.get("price_per_unit_in_cents") if "price_per_unit_in_cents" in dictionary.keys() else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
         archived = dictionary.get("archived") if "archived" in dictionary.keys() else APIHelper.SKIP
@@ -373,6 +381,7 @@ class Component(object):
                    unit_price,
                    product_family_id,
                    product_family_name,
+                   product_family_handle,
                    price_per_unit_in_cents,
                    kind,
                    archived,
@@ -403,76 +412,78 @@ class Component(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'name={self.name!r}, '
-                f'handle={self.handle!r}, '
-                f'pricing_scheme={self.pricing_scheme!r}, '
-                f'unit_name={self.unit_name!r}, '
-                f'unit_price={self.unit_price!r}, '
-                f'product_family_id={self.product_family_id!r}, '
-                f'product_family_name={self.product_family_name!r}, '
-                f'price_per_unit_in_cents={self.price_per_unit_in_cents!r}, '
-                f'kind={self.kind!r}, '
-                f'archived={self.archived!r}, '
-                f'taxable={self.taxable!r}, '
-                f'description={self.description!r}, '
-                f'default_price_point_id={self.default_price_point_id!r}, '
-                f'overage_prices={self.overage_prices!r}, '
-                f'prices={self.prices!r}, '
-                f'price_point_count={self.price_point_count!r}, '
-                f'price_points_url={self.price_points_url!r}, '
-                f'default_price_point_name={self.default_price_point_name!r}, '
-                f'tax_code={self.tax_code!r}, '
-                f'recurring={self.recurring!r}, '
-                f'upgrade_charge={self.upgrade_charge!r}, '
-                f'downgrade_credit={self.downgrade_credit!r}, '
-                f'created_at={self.created_at!r}, '
-                f'updated_at={self.updated_at!r}, '
-                f'archived_at={self.archived_at!r}, '
-                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!r}, '
-                f'allow_fractional_quantities={self.allow_fractional_quantities!r}, '
-                f'item_category={self.item_category!r}, '
-                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
-                f'accounting_code={self.accounting_code!r}, '
-                f'event_based_billing_metric_id={self.event_based_billing_metric_id!r}, '
-                f'interval={self.interval!r}, '
-                f'interval_unit={self.interval_unit!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'name={(self.name if hasattr(self, "name") else None)!r}, '
+                f'handle={(self.handle if hasattr(self, "handle") else None)!r}, '
+                f'pricing_scheme={(self.pricing_scheme if hasattr(self, "pricing_scheme") else None)!r}, '
+                f'unit_name={(self.unit_name if hasattr(self, "unit_name") else None)!r}, '
+                f'unit_price={(self.unit_price if hasattr(self, "unit_price") else None)!r}, '
+                f'product_family_id={(self.product_family_id if hasattr(self, "product_family_id") else None)!r}, '
+                f'product_family_name={(self.product_family_name if hasattr(self, "product_family_name") else None)!r}, '
+                f'product_family_handle={(self.product_family_handle if hasattr(self, "product_family_handle") else None)!r}, '
+                f'price_per_unit_in_cents={(self.price_per_unit_in_cents if hasattr(self, "price_per_unit_in_cents") else None)!r}, '
+                f'kind={(self.kind if hasattr(self, "kind") else None)!r}, '
+                f'archived={(self.archived if hasattr(self, "archived") else None)!r}, '
+                f'taxable={(self.taxable if hasattr(self, "taxable") else None)!r}, '
+                f'description={(self.description if hasattr(self, "description") else None)!r}, '
+                f'default_price_point_id={(self.default_price_point_id if hasattr(self, "default_price_point_id") else None)!r}, '
+                f'overage_prices={(self.overage_prices if hasattr(self, "overage_prices") else None)!r}, '
+                f'prices={(self.prices if hasattr(self, "prices") else None)!r}, '
+                f'price_point_count={(self.price_point_count if hasattr(self, "price_point_count") else None)!r}, '
+                f'price_points_url={(self.price_points_url if hasattr(self, "price_points_url") else None)!r}, '
+                f'default_price_point_name={(self.default_price_point_name if hasattr(self, "default_price_point_name") else None)!r}, '
+                f'tax_code={(self.tax_code if hasattr(self, "tax_code") else None)!r}, '
+                f'recurring={(self.recurring if hasattr(self, "recurring") else None)!r}, '
+                f'upgrade_charge={(self.upgrade_charge if hasattr(self, "upgrade_charge") else None)!r}, '
+                f'downgrade_credit={(self.downgrade_credit if hasattr(self, "downgrade_credit") else None)!r}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
+                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!r}, '
+                f'archived_at={(self.archived_at if hasattr(self, "archived_at") else None)!r}, '
+                f'hide_date_range_on_invoice={(self.hide_date_range_on_invoice if hasattr(self, "hide_date_range_on_invoice") else None)!r}, '
+                f'allow_fractional_quantities={(self.allow_fractional_quantities if hasattr(self, "allow_fractional_quantities") else None)!r}, '
+                f'item_category={(self.item_category if hasattr(self, "item_category") else None)!r}, '
+                f'use_site_exchange_rate={(self.use_site_exchange_rate if hasattr(self, "use_site_exchange_rate") else None)!r}, '
+                f'accounting_code={(self.accounting_code if hasattr(self, "accounting_code") else None)!r}, '
+                f'event_based_billing_metric_id={(self.event_based_billing_metric_id if hasattr(self, "event_based_billing_metric_id") else None)!r}, '
+                f'interval={(self.interval if hasattr(self, "interval") else None)!r}, '
+                f'interval_unit={(self.interval_unit if hasattr(self, "interval_unit") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'name={self.name!s}, '
-                f'handle={self.handle!s}, '
-                f'pricing_scheme={self.pricing_scheme!s}, '
-                f'unit_name={self.unit_name!s}, '
-                f'unit_price={self.unit_price!s}, '
-                f'product_family_id={self.product_family_id!s}, '
-                f'product_family_name={self.product_family_name!s}, '
-                f'price_per_unit_in_cents={self.price_per_unit_in_cents!s}, '
-                f'kind={self.kind!s}, '
-                f'archived={self.archived!s}, '
-                f'taxable={self.taxable!s}, '
-                f'description={self.description!s}, '
-                f'default_price_point_id={self.default_price_point_id!s}, '
-                f'overage_prices={self.overage_prices!s}, '
-                f'prices={self.prices!s}, '
-                f'price_point_count={self.price_point_count!s}, '
-                f'price_points_url={self.price_points_url!s}, '
-                f'default_price_point_name={self.default_price_point_name!s}, '
-                f'tax_code={self.tax_code!s}, '
-                f'recurring={self.recurring!s}, '
-                f'upgrade_charge={self.upgrade_charge!s}, '
-                f'downgrade_credit={self.downgrade_credit!s}, '
-                f'created_at={self.created_at!s}, '
-                f'updated_at={self.updated_at!s}, '
-                f'archived_at={self.archived_at!s}, '
-                f'hide_date_range_on_invoice={self.hide_date_range_on_invoice!s}, '
-                f'allow_fractional_quantities={self.allow_fractional_quantities!s}, '
-                f'item_category={self.item_category!s}, '
-                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
-                f'accounting_code={self.accounting_code!s}, '
-                f'event_based_billing_metric_id={self.event_based_billing_metric_id!s}, '
-                f'interval={self.interval!s}, '
-                f'interval_unit={self.interval_unit!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'name={(self.name if hasattr(self, "name") else None)!s}, '
+                f'handle={(self.handle if hasattr(self, "handle") else None)!s}, '
+                f'pricing_scheme={(self.pricing_scheme if hasattr(self, "pricing_scheme") else None)!s}, '
+                f'unit_name={(self.unit_name if hasattr(self, "unit_name") else None)!s}, '
+                f'unit_price={(self.unit_price if hasattr(self, "unit_price") else None)!s}, '
+                f'product_family_id={(self.product_family_id if hasattr(self, "product_family_id") else None)!s}, '
+                f'product_family_name={(self.product_family_name if hasattr(self, "product_family_name") else None)!s}, '
+                f'product_family_handle={(self.product_family_handle if hasattr(self, "product_family_handle") else None)!s}, '
+                f'price_per_unit_in_cents={(self.price_per_unit_in_cents if hasattr(self, "price_per_unit_in_cents") else None)!s}, '
+                f'kind={(self.kind if hasattr(self, "kind") else None)!s}, '
+                f'archived={(self.archived if hasattr(self, "archived") else None)!s}, '
+                f'taxable={(self.taxable if hasattr(self, "taxable") else None)!s}, '
+                f'description={(self.description if hasattr(self, "description") else None)!s}, '
+                f'default_price_point_id={(self.default_price_point_id if hasattr(self, "default_price_point_id") else None)!s}, '
+                f'overage_prices={(self.overage_prices if hasattr(self, "overage_prices") else None)!s}, '
+                f'prices={(self.prices if hasattr(self, "prices") else None)!s}, '
+                f'price_point_count={(self.price_point_count if hasattr(self, "price_point_count") else None)!s}, '
+                f'price_points_url={(self.price_points_url if hasattr(self, "price_points_url") else None)!s}, '
+                f'default_price_point_name={(self.default_price_point_name if hasattr(self, "default_price_point_name") else None)!s}, '
+                f'tax_code={(self.tax_code if hasattr(self, "tax_code") else None)!s}, '
+                f'recurring={(self.recurring if hasattr(self, "recurring") else None)!s}, '
+                f'upgrade_charge={(self.upgrade_charge if hasattr(self, "upgrade_charge") else None)!s}, '
+                f'downgrade_credit={(self.downgrade_credit if hasattr(self, "downgrade_credit") else None)!s}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
+                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!s}, '
+                f'archived_at={(self.archived_at if hasattr(self, "archived_at") else None)!s}, '
+                f'hide_date_range_on_invoice={(self.hide_date_range_on_invoice if hasattr(self, "hide_date_range_on_invoice") else None)!s}, '
+                f'allow_fractional_quantities={(self.allow_fractional_quantities if hasattr(self, "allow_fractional_quantities") else None)!s}, '
+                f'item_category={(self.item_category if hasattr(self, "item_category") else None)!s}, '
+                f'use_site_exchange_rate={(self.use_site_exchange_rate if hasattr(self, "use_site_exchange_rate") else None)!s}, '
+                f'accounting_code={(self.accounting_code if hasattr(self, "accounting_code") else None)!s}, '
+                f'event_based_billing_metric_id={(self.event_based_billing_metric_id if hasattr(self, "event_based_billing_metric_id") else None)!s}, '
+                f'interval={(self.interval if hasattr(self, "interval") else None)!s}, '
+                f'interval_unit={(self.interval_unit if hasattr(self, "interval_unit") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

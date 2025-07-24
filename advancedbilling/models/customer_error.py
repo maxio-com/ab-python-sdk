@@ -93,10 +93,10 @@ class CustomerError(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'customer={self.customer!r}, '
+                f'customer={(self.customer if hasattr(self, "customer") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'customer={self.customer!s}, '
+                f'customer={(self.customer if hasattr(self, "customer") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

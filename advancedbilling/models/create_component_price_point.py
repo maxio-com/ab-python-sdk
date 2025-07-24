@@ -177,23 +177,23 @@ class CreateComponentPricePoint(object):
     def __repr__(self):
         return (f'{self.__class__.__name__}('
                 f'name={self.name!r}, '
-                f'handle={self.handle!r}, '
+                f'handle={(self.handle if hasattr(self, "handle") else None)!r}, '
                 f'pricing_scheme={self.pricing_scheme!r}, '
                 f'prices={self.prices!r}, '
-                f'use_site_exchange_rate={self.use_site_exchange_rate!r}, '
-                f'tax_included={self.tax_included!r}, '
-                f'interval={self.interval!r}, '
-                f'interval_unit={self.interval_unit!r}, '
+                f'use_site_exchange_rate={(self.use_site_exchange_rate if hasattr(self, "use_site_exchange_rate") else None)!r}, '
+                f'tax_included={(self.tax_included if hasattr(self, "tax_included") else None)!r}, '
+                f'interval={(self.interval if hasattr(self, "interval") else None)!r}, '
+                f'interval_unit={(self.interval_unit if hasattr(self, "interval_unit") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'name={self.name!s}, '
-                f'handle={self.handle!s}, '
+                f'handle={(self.handle if hasattr(self, "handle") else None)!s}, '
                 f'pricing_scheme={self.pricing_scheme!s}, '
                 f'prices={self.prices!s}, '
-                f'use_site_exchange_rate={self.use_site_exchange_rate!s}, '
-                f'tax_included={self.tax_included!s}, '
-                f'interval={self.interval!s}, '
-                f'interval_unit={self.interval_unit!s}, '
+                f'use_site_exchange_rate={(self.use_site_exchange_rate if hasattr(self, "use_site_exchange_rate") else None)!s}, '
+                f'tax_included={(self.tax_included if hasattr(self, "tax_included") else None)!s}, '
+                f'interval={(self.interval if hasattr(self, "interval") else None)!s}, '
+                f'interval_unit={(self.interval_unit if hasattr(self, "interval_unit") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -148,9 +148,9 @@ class RefundInvoice(object):
                 f'amount={self.amount!r}, '
                 f'memo={self.memo!r}, '
                 f'payment_id={self.payment_id!r}, '
-                f'external={self.external!r}, '
-                f'apply_credit={self.apply_credit!r}, '
-                f'void_invoice={self.void_invoice!r}, '
+                f'external={(self.external if hasattr(self, "external") else None)!r}, '
+                f'apply_credit={(self.apply_credit if hasattr(self, "apply_credit") else None)!r}, '
+                f'void_invoice={(self.void_invoice if hasattr(self, "void_invoice") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
@@ -158,7 +158,7 @@ class RefundInvoice(object):
                 f'amount={self.amount!s}, '
                 f'memo={self.memo!s}, '
                 f'payment_id={self.payment_id!s}, '
-                f'external={self.external!s}, '
-                f'apply_credit={self.apply_credit!s}, '
-                f'void_invoice={self.void_invoice!s}, '
+                f'external={(self.external if hasattr(self, "external") else None)!s}, '
+                f'apply_credit={(self.apply_credit if hasattr(self, "apply_credit") else None)!s}, '
+                f'void_invoice={(self.void_invoice if hasattr(self, "void_invoice") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

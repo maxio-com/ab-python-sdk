@@ -72,10 +72,10 @@ class CouponResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'coupon={self.coupon!r}, '
+                f'coupon={(self.coupon if hasattr(self, "coupon") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'coupon={self.coupon!s}, '
+                f'coupon={(self.coupon if hasattr(self, "coupon") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

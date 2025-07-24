@@ -87,12 +87,12 @@ class ListProformaInvoicesResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'proforma_invoices={self.proforma_invoices!r}, '
-                f'meta={self.meta!r}, '
+                f'proforma_invoices={(self.proforma_invoices if hasattr(self, "proforma_invoices") else None)!r}, '
+                f'meta={(self.meta if hasattr(self, "meta") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'proforma_invoices={self.proforma_invoices!s}, '
-                f'meta={self.meta!s}, '
+                f'proforma_invoices={(self.proforma_invoices if hasattr(self, "proforma_invoices") else None)!s}, '
+                f'meta={(self.meta if hasattr(self, "meta") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -124,16 +124,16 @@ class ACHAgreement(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'agreement_terms={self.agreement_terms!r}, '
-                f'authorizer_first_name={self.authorizer_first_name!r}, '
-                f'authorizer_last_name={self.authorizer_last_name!r}, '
-                f'ip_address={self.ip_address!r}, '
+                f'agreement_terms={(self.agreement_terms if hasattr(self, "agreement_terms") else None)!r}, '
+                f'authorizer_first_name={(self.authorizer_first_name if hasattr(self, "authorizer_first_name") else None)!r}, '
+                f'authorizer_last_name={(self.authorizer_last_name if hasattr(self, "authorizer_last_name") else None)!r}, '
+                f'ip_address={(self.ip_address if hasattr(self, "ip_address") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'agreement_terms={self.agreement_terms!s}, '
-                f'authorizer_first_name={self.authorizer_first_name!s}, '
-                f'authorizer_last_name={self.authorizer_last_name!s}, '
-                f'ip_address={self.ip_address!s}, '
+                f'agreement_terms={(self.agreement_terms if hasattr(self, "agreement_terms") else None)!s}, '
+                f'authorizer_first_name={(self.authorizer_first_name if hasattr(self, "authorizer_first_name") else None)!s}, '
+                f'authorizer_last_name={(self.authorizer_last_name if hasattr(self, "authorizer_last_name") else None)!s}, '
+                f'ip_address={(self.ip_address if hasattr(self, "ip_address") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

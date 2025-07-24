@@ -72,10 +72,10 @@ class SegmentResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'segment={self.segment!r}, '
+                f'segment={(self.segment if hasattr(self, "segment") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'segment={self.segment!s}, '
+                f'segment={(self.segment if hasattr(self, "segment") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

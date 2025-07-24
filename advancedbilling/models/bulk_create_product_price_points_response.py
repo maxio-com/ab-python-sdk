@@ -77,10 +77,10 @@ class BulkCreateProductPricePointsResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'price_points={self.price_points!r}, '
+                f'price_points={(self.price_points if hasattr(self, "price_points") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'price_points={self.price_points!s}, '
+                f'price_points={(self.price_points if hasattr(self, "price_points") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

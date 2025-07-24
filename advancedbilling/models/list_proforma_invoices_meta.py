@@ -95,16 +95,16 @@ class ListProformaInvoicesMeta(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'total_count={self.total_count!r}, '
-                f'current_page={self.current_page!r}, '
-                f'total_pages={self.total_pages!r}, '
-                f'status_code={self.status_code!r}, '
+                f'total_count={(self.total_count if hasattr(self, "total_count") else None)!r}, '
+                f'current_page={(self.current_page if hasattr(self, "current_page") else None)!r}, '
+                f'total_pages={(self.total_pages if hasattr(self, "total_pages") else None)!r}, '
+                f'status_code={(self.status_code if hasattr(self, "status_code") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'total_count={self.total_count!s}, '
-                f'current_page={self.current_page!s}, '
-                f'total_pages={self.total_pages!s}, '
-                f'status_code={self.status_code!s}, '
+                f'total_count={(self.total_count if hasattr(self, "total_count") else None)!s}, '
+                f'current_page={(self.current_page if hasattr(self, "current_page") else None)!s}, '
+                f'total_pages={(self.total_pages if hasattr(self, "total_pages") else None)!s}, '
+                f'status_code={(self.status_code if hasattr(self, "status_code") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

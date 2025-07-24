@@ -128,20 +128,20 @@ class ChargifyEBB(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'timestamp={self.timestamp!r}, '
-                f'id={self.id!r}, '
-                f'created_at={self.created_at!r}, '
-                f'uniqueness_token={self.uniqueness_token!r}, '
-                f'subscription_id={self.subscription_id!r}, '
-                f'subscription_reference={self.subscription_reference!r}, '
+                f'timestamp={(self.timestamp if hasattr(self, "timestamp") else None)!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
+                f'uniqueness_token={(self.uniqueness_token if hasattr(self, "uniqueness_token") else None)!r}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!r}, '
+                f'subscription_reference={(self.subscription_reference if hasattr(self, "subscription_reference") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'timestamp={self.timestamp!s}, '
-                f'id={self.id!s}, '
-                f'created_at={self.created_at!s}, '
-                f'uniqueness_token={self.uniqueness_token!s}, '
-                f'subscription_id={self.subscription_id!s}, '
-                f'subscription_reference={self.subscription_reference!s}, '
+                f'timestamp={(self.timestamp if hasattr(self, "timestamp") else None)!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
+                f'uniqueness_token={(self.uniqueness_token if hasattr(self, "uniqueness_token") else None)!s}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!s}, '
+                f'subscription_reference={(self.subscription_reference if hasattr(self, "subscription_reference") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

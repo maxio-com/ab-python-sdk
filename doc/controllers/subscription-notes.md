@@ -62,6 +62,7 @@ result = subscription_notes_controller.create_subscription_note(
     subscription_id,
     body=body
 )
+print(result)
 ```
 
 ## Errors
@@ -85,8 +86,8 @@ def list_subscription_notes(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 
 ## Response Type
 
@@ -101,6 +102,7 @@ collect = {
     'per_page': 50
 }
 result = subscription_notes_controller.list_subscription_notes(collect)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -169,6 +171,7 @@ result = subscription_notes_controller.read_subscription_note(
     subscription_id,
     note_id
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -229,6 +232,7 @@ result = subscription_notes_controller.update_subscription_note(
     note_id,
     body=body
 )
+print(result)
 ```
 
 ## Errors

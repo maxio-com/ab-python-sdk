@@ -26,6 +26,8 @@
 | `site_gateway_setting_id` | `int` | Optional | - |
 | `gateway_handle` | `str` | Optional | - |
 | `paypal_email` | `str` | Optional | - |
+| `created_at` | `datetime` | Optional | A timestamp indicating when this payment profile was created |
+| `updated_at` | `datetime` | Optional | A timestamp indicating when this payment profile was last updated |
 
 ## Example (as JSON)
 

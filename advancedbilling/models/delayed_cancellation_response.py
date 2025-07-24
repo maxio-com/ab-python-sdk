@@ -71,10 +71,10 @@ class DelayedCancellationResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'message={self.message!r}, '
+                f'message={(self.message if hasattr(self, "message") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'message={self.message!s}, '
+                f'message={(self.message if hasattr(self, "message") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

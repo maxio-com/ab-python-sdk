@@ -151,22 +151,22 @@ class InvoiceCustomer(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'chargify_id={self.chargify_id!r}, '
-                f'first_name={self.first_name!r}, '
-                f'last_name={self.last_name!r}, '
-                f'organization={self.organization!r}, '
-                f'email={self.email!r}, '
-                f'vat_number={self.vat_number!r}, '
-                f'reference={self.reference!r}, '
+                f'chargify_id={(self.chargify_id if hasattr(self, "chargify_id") else None)!r}, '
+                f'first_name={(self.first_name if hasattr(self, "first_name") else None)!r}, '
+                f'last_name={(self.last_name if hasattr(self, "last_name") else None)!r}, '
+                f'organization={(self.organization if hasattr(self, "organization") else None)!r}, '
+                f'email={(self.email if hasattr(self, "email") else None)!r}, '
+                f'vat_number={(self.vat_number if hasattr(self, "vat_number") else None)!r}, '
+                f'reference={(self.reference if hasattr(self, "reference") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'chargify_id={self.chargify_id!s}, '
-                f'first_name={self.first_name!s}, '
-                f'last_name={self.last_name!s}, '
-                f'organization={self.organization!s}, '
-                f'email={self.email!s}, '
-                f'vat_number={self.vat_number!s}, '
-                f'reference={self.reference!s}, '
+                f'chargify_id={(self.chargify_id if hasattr(self, "chargify_id") else None)!s}, '
+                f'first_name={(self.first_name if hasattr(self, "first_name") else None)!s}, '
+                f'last_name={(self.last_name if hasattr(self, "last_name") else None)!s}, '
+                f'organization={(self.organization if hasattr(self, "organization") else None)!s}, '
+                f'email={(self.email if hasattr(self, "email") else None)!s}, '
+                f'vat_number={(self.vat_number if hasattr(self, "vat_number") else None)!s}, '
+                f'reference={(self.reference if hasattr(self, "reference") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

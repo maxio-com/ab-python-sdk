@@ -91,13 +91,13 @@ class CreateProductFamily(object):
     def __repr__(self):
         return (f'{self.__class__.__name__}('
                 f'name={self.name!r}, '
-                f'handle={self.handle!r}, '
-                f'description={self.description!r}, '
+                f'handle={(self.handle if hasattr(self, "handle") else None)!r}, '
+                f'description={(self.description if hasattr(self, "description") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'name={self.name!s}, '
-                f'handle={self.handle!s}, '
-                f'description={self.description!s}, '
+                f'handle={(self.handle if hasattr(self, "handle") else None)!s}, '
+                f'description={(self.description if hasattr(self, "description") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

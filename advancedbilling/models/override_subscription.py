@@ -27,7 +27,9 @@ class OverrideSubscription(object):
         expires_at (datetime): Can be used to record an external expiration
             date. Chargify sets this field automatically when a subscription
             expires (ceases billing) after a prescribed amount of time. Only
-            ISO8601 format is supported.
+            ISO8601 format is supported. This field is not supported when
+            Multi-frequency is enabled for the Site. To change the Term End of
+            a Subscription, use the Update Subscription endpoint.
         current_period_starts_at (datetime): Can only be used when a
             subscription is unbilled, which happens when a future initial
             billing date is passed at subscription creation. The value passed
@@ -118,18 +120,18 @@ class OverrideSubscription(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'activated_at={self.activated_at!r}, '
-                f'canceled_at={self.canceled_at!r}, '
-                f'cancellation_message={self.cancellation_message!r}, '
-                f'expires_at={self.expires_at!r}, '
-                f'current_period_starts_at={self.current_period_starts_at!r}, '
+                f'activated_at={(self.activated_at if hasattr(self, "activated_at") else None)!r}, '
+                f'canceled_at={(self.canceled_at if hasattr(self, "canceled_at") else None)!r}, '
+                f'cancellation_message={(self.cancellation_message if hasattr(self, "cancellation_message") else None)!r}, '
+                f'expires_at={(self.expires_at if hasattr(self, "expires_at") else None)!r}, '
+                f'current_period_starts_at={(self.current_period_starts_at if hasattr(self, "current_period_starts_at") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'activated_at={self.activated_at!s}, '
-                f'canceled_at={self.canceled_at!s}, '
-                f'cancellation_message={self.cancellation_message!s}, '
-                f'expires_at={self.expires_at!s}, '
-                f'current_period_starts_at={self.current_period_starts_at!s}, '
+                f'activated_at={(self.activated_at if hasattr(self, "activated_at") else None)!s}, '
+                f'canceled_at={(self.canceled_at if hasattr(self, "canceled_at") else None)!s}, '
+                f'cancellation_message={(self.cancellation_message if hasattr(self, "cancellation_message") else None)!s}, '
+                f'expires_at={(self.expires_at if hasattr(self, "expires_at") else None)!s}, '
+                f'current_period_starts_at={(self.current_period_starts_at if hasattr(self, "current_period_starts_at") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

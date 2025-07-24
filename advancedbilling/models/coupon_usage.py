@@ -129,22 +129,22 @@ class CouponUsage(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'name={self.name!r}, '
-                f'signups={self.signups!r}, '
-                f'savings={self.savings!r}, '
-                f'savings_in_cents={self.savings_in_cents!r}, '
-                f'revenue={self.revenue!r}, '
-                f'revenue_in_cents={self.revenue_in_cents!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'name={(self.name if hasattr(self, "name") else None)!r}, '
+                f'signups={(self.signups if hasattr(self, "signups") else None)!r}, '
+                f'savings={(self.savings if hasattr(self, "savings") else None)!r}, '
+                f'savings_in_cents={(self.savings_in_cents if hasattr(self, "savings_in_cents") else None)!r}, '
+                f'revenue={(self.revenue if hasattr(self, "revenue") else None)!r}, '
+                f'revenue_in_cents={(self.revenue_in_cents if hasattr(self, "revenue_in_cents") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'name={self.name!s}, '
-                f'signups={self.signups!s}, '
-                f'savings={self.savings!s}, '
-                f'savings_in_cents={self.savings_in_cents!s}, '
-                f'revenue={self.revenue!s}, '
-                f'revenue_in_cents={self.revenue_in_cents!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'name={(self.name if hasattr(self, "name") else None)!s}, '
+                f'signups={(self.signups if hasattr(self, "signups") else None)!s}, '
+                f'savings={(self.savings if hasattr(self, "savings") else None)!s}, '
+                f'savings_in_cents={(self.savings_in_cents if hasattr(self, "savings_in_cents") else None)!s}, '
+                f'revenue={(self.revenue if hasattr(self, "revenue") else None)!s}, '
+                f'revenue_in_cents={(self.revenue_in_cents if hasattr(self, "revenue_in_cents") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

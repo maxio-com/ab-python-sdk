@@ -72,10 +72,10 @@ class ReferralValidationResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'referral_code={self.referral_code!r}, '
+                f'referral_code={(self.referral_code if hasattr(self, "referral_code") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'referral_code={self.referral_code!s}, '
+                f'referral_code={(self.referral_code if hasattr(self, "referral_code") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

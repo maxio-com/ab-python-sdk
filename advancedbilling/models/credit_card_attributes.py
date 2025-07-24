@@ -109,14 +109,14 @@ class CreditCardAttributes(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'full_number={self.full_number!r}, '
-                f'expiration_month={self.expiration_month!r}, '
-                f'expiration_year={self.expiration_year!r}, '
+                f'full_number={(self.full_number if hasattr(self, "full_number") else None)!r}, '
+                f'expiration_month={(self.expiration_month if hasattr(self, "expiration_month") else None)!r}, '
+                f'expiration_year={(self.expiration_year if hasattr(self, "expiration_year") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'full_number={self.full_number!s}, '
-                f'expiration_month={self.expiration_month!s}, '
-                f'expiration_year={self.expiration_year!s}, '
+                f'full_number={(self.full_number if hasattr(self, "full_number") else None)!s}, '
+                f'expiration_month={(self.expiration_month if hasattr(self, "expiration_month") else None)!s}, '
+                f'expiration_year={(self.expiration_year if hasattr(self, "expiration_year") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

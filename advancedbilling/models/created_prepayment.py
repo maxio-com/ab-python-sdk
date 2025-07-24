@@ -119,22 +119,22 @@ class CreatedPrepayment(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'subscription_id={self.subscription_id!r}, '
-                f'amount_in_cents={self.amount_in_cents!r}, '
-                f'memo={self.memo!r}, '
-                f'created_at={self.created_at!r}, '
-                f'starting_balance_in_cents={self.starting_balance_in_cents!r}, '
-                f'ending_balance_in_cents={self.ending_balance_in_cents!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!r}, '
+                f'amount_in_cents={(self.amount_in_cents if hasattr(self, "amount_in_cents") else None)!r}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!r}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
+                f'starting_balance_in_cents={(self.starting_balance_in_cents if hasattr(self, "starting_balance_in_cents") else None)!r}, '
+                f'ending_balance_in_cents={(self.ending_balance_in_cents if hasattr(self, "ending_balance_in_cents") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'subscription_id={self.subscription_id!s}, '
-                f'amount_in_cents={self.amount_in_cents!s}, '
-                f'memo={self.memo!s}, '
-                f'created_at={self.created_at!s}, '
-                f'starting_balance_in_cents={self.starting_balance_in_cents!s}, '
-                f'ending_balance_in_cents={self.ending_balance_in_cents!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!s}, '
+                f'amount_in_cents={(self.amount_in_cents if hasattr(self, "amount_in_cents") else None)!s}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!s}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
+                f'starting_balance_in_cents={(self.starting_balance_in_cents if hasattr(self, "starting_balance_in_cents") else None)!s}, '
+                f'ending_balance_in_cents={(self.ending_balance_in_cents if hasattr(self, "ending_balance_in_cents") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

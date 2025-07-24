@@ -79,12 +79,12 @@ class BankAccountVerification(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'deposit_1_in_cents={self.deposit_1_in_cents!r}, '
-                f'deposit_2_in_cents={self.deposit_2_in_cents!r}, '
+                f'deposit_1_in_cents={(self.deposit_1_in_cents if hasattr(self, "deposit_1_in_cents") else None)!r}, '
+                f'deposit_2_in_cents={(self.deposit_2_in_cents if hasattr(self, "deposit_2_in_cents") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'deposit_1_in_cents={self.deposit_1_in_cents!s}, '
-                f'deposit_2_in_cents={self.deposit_2_in_cents!s}, '
+                f'deposit_1_in_cents={(self.deposit_1_in_cents if hasattr(self, "deposit_1_in_cents") else None)!s}, '
+                f'deposit_2_in_cents={(self.deposit_2_in_cents if hasattr(self, "deposit_2_in_cents") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

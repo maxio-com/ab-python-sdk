@@ -72,10 +72,10 @@ class OfferResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'offer={self.offer!r}, '
+                f'offer={(self.offer if hasattr(self, "offer") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'offer={self.offer!s}, '
+                f'offer={(self.offer if hasattr(self, "offer") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

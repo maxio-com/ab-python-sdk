@@ -89,14 +89,14 @@ class InvoicePrePayment(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'subscription_id={self.subscription_id!r}, '
-                f'amount_in_cents={self.amount_in_cents!r}, '
-                f'ending_balance_in_cents={self.ending_balance_in_cents!r}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!r}, '
+                f'amount_in_cents={(self.amount_in_cents if hasattr(self, "amount_in_cents") else None)!r}, '
+                f'ending_balance_in_cents={(self.ending_balance_in_cents if hasattr(self, "ending_balance_in_cents") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'subscription_id={self.subscription_id!s}, '
-                f'amount_in_cents={self.amount_in_cents!s}, '
-                f'ending_balance_in_cents={self.ending_balance_in_cents!s}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!s}, '
+                f'amount_in_cents={(self.amount_in_cents if hasattr(self, "amount_in_cents") else None)!s}, '
+                f'ending_balance_in_cents={(self.ending_balance_in_cents if hasattr(self, "ending_balance_in_cents") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

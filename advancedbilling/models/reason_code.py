@@ -119,22 +119,22 @@ class ReasonCode(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'site_id={self.site_id!r}, '
-                f'code={self.code!r}, '
-                f'description={self.description!r}, '
-                f'position={self.position!r}, '
-                f'created_at={self.created_at!r}, '
-                f'updated_at={self.updated_at!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!r}, '
+                f'code={(self.code if hasattr(self, "code") else None)!r}, '
+                f'description={(self.description if hasattr(self, "description") else None)!r}, '
+                f'position={(self.position if hasattr(self, "position") else None)!r}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
+                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'site_id={self.site_id!s}, '
-                f'code={self.code!s}, '
-                f'description={self.description!s}, '
-                f'position={self.position!s}, '
-                f'created_at={self.created_at!s}, '
-                f'updated_at={self.updated_at!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!s}, '
+                f'code={(self.code if hasattr(self, "code") else None)!s}, '
+                f'description={(self.description if hasattr(self, "description") else None)!s}, '
+                f'position={(self.position if hasattr(self, "position") else None)!s}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
+                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

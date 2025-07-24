@@ -119,22 +119,22 @@ class SaleRepSettings(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'customer_name={self.customer_name!r}, '
-                f'subscription_id={self.subscription_id!r}, '
-                f'site_link={self.site_link!r}, '
-                f'site_name={self.site_name!r}, '
-                f'subscription_mrr={self.subscription_mrr!r}, '
-                f'sales_rep_id={self.sales_rep_id!r}, '
-                f'sales_rep_name={self.sales_rep_name!r}, '
+                f'customer_name={(self.customer_name if hasattr(self, "customer_name") else None)!r}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!r}, '
+                f'site_link={(self.site_link if hasattr(self, "site_link") else None)!r}, '
+                f'site_name={(self.site_name if hasattr(self, "site_name") else None)!r}, '
+                f'subscription_mrr={(self.subscription_mrr if hasattr(self, "subscription_mrr") else None)!r}, '
+                f'sales_rep_id={(self.sales_rep_id if hasattr(self, "sales_rep_id") else None)!r}, '
+                f'sales_rep_name={(self.sales_rep_name if hasattr(self, "sales_rep_name") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'customer_name={self.customer_name!s}, '
-                f'subscription_id={self.subscription_id!s}, '
-                f'site_link={self.site_link!s}, '
-                f'site_name={self.site_name!s}, '
-                f'subscription_mrr={self.subscription_mrr!s}, '
-                f'sales_rep_id={self.sales_rep_id!s}, '
-                f'sales_rep_name={self.sales_rep_name!s}, '
+                f'customer_name={(self.customer_name if hasattr(self, "customer_name") else None)!s}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!s}, '
+                f'site_link={(self.site_link if hasattr(self, "site_link") else None)!s}, '
+                f'site_name={(self.site_name if hasattr(self, "site_name") else None)!s}, '
+                f'subscription_mrr={(self.subscription_mrr if hasattr(self, "subscription_mrr") else None)!s}, '
+                f'sales_rep_id={(self.sales_rep_id if hasattr(self, "sales_rep_id") else None)!s}, '
+                f'sales_rep_name={(self.sales_rep_name if hasattr(self, "sales_rep_name") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

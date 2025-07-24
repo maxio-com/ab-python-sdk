@@ -126,22 +126,22 @@ class ProformaInvoiceTax(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!r}, '
-                f'title={self.title!r}, '
-                f'source_type={self.source_type!r}, '
-                f'percentage={self.percentage!r}, '
-                f'taxable_amount={self.taxable_amount!r}, '
-                f'tax_amount={self.tax_amount!r}, '
-                f'line_item_breakouts={self.line_item_breakouts!r}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!r}, '
+                f'title={(self.title if hasattr(self, "title") else None)!r}, '
+                f'source_type={(self.source_type if hasattr(self, "source_type") else None)!r}, '
+                f'percentage={(self.percentage if hasattr(self, "percentage") else None)!r}, '
+                f'taxable_amount={(self.taxable_amount if hasattr(self, "taxable_amount") else None)!r}, '
+                f'tax_amount={(self.tax_amount if hasattr(self, "tax_amount") else None)!r}, '
+                f'line_item_breakouts={(self.line_item_breakouts if hasattr(self, "line_item_breakouts") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!s}, '
-                f'title={self.title!s}, '
-                f'source_type={self.source_type!s}, '
-                f'percentage={self.percentage!s}, '
-                f'taxable_amount={self.taxable_amount!s}, '
-                f'tax_amount={self.tax_amount!s}, '
-                f'line_item_breakouts={self.line_item_breakouts!s}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!s}, '
+                f'title={(self.title if hasattr(self, "title") else None)!s}, '
+                f'source_type={(self.source_type if hasattr(self, "source_type") else None)!s}, '
+                f'percentage={(self.percentage if hasattr(self, "percentage") else None)!s}, '
+                f'taxable_amount={(self.taxable_amount if hasattr(self, "taxable_amount") else None)!s}, '
+                f'tax_amount={(self.tax_amount if hasattr(self, "tax_amount") else None)!s}, '
+                f'line_item_breakouts={(self.line_item_breakouts if hasattr(self, "line_item_breakouts") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -147,20 +147,20 @@ class CreateMultiInvoicePayment(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'memo={self.memo!r}, '
-                f'details={self.details!r}, '
-                f'method={self.method!r}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!r}, '
+                f'details={(self.details if hasattr(self, "details") else None)!r}, '
+                f'method={(self.method if hasattr(self, "method") else None)!r}, '
                 f'amount={self.amount!r}, '
-                f'received_on={self.received_on!r}, '
+                f'received_on={(self.received_on if hasattr(self, "received_on") else None)!r}, '
                 f'applications={self.applications!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'memo={self.memo!s}, '
-                f'details={self.details!s}, '
-                f'method={self.method!s}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!s}, '
+                f'details={(self.details if hasattr(self, "details") else None)!s}, '
+                f'method={(self.method if hasattr(self, "method") else None)!s}, '
                 f'amount={self.amount!s}, '
-                f'received_on={self.received_on!s}, '
+                f'received_on={(self.received_on if hasattr(self, "received_on") else None)!s}, '
                 f'applications={self.applications!s}, '
                 f'additional_properties={self.additional_properties!s})')

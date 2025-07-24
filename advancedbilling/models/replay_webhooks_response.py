@@ -71,10 +71,10 @@ class ReplayWebhooksResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'status={self.status!r}, '
+                f'status={(self.status if hasattr(self, "status") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'status={self.status!s}, '
+                f'status={(self.status if hasattr(self, "status") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

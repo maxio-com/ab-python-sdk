@@ -117,16 +117,16 @@ class InvoiceTaxBreakout(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!r}, '
-                f'taxable_amount={self.taxable_amount!r}, '
-                f'tax_amount={self.tax_amount!r}, '
-                f'tax_exempt_amount={self.tax_exempt_amount!r}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!r}, '
+                f'taxable_amount={(self.taxable_amount if hasattr(self, "taxable_amount") else None)!r}, '
+                f'tax_amount={(self.tax_amount if hasattr(self, "tax_amount") else None)!r}, '
+                f'tax_exempt_amount={(self.tax_exempt_amount if hasattr(self, "tax_exempt_amount") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!s}, '
-                f'taxable_amount={self.taxable_amount!s}, '
-                f'tax_amount={self.tax_amount!s}, '
-                f'tax_exempt_amount={self.tax_exempt_amount!s}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!s}, '
+                f'taxable_amount={(self.taxable_amount if hasattr(self, "taxable_amount") else None)!s}, '
+                f'tax_amount={(self.tax_amount if hasattr(self, "tax_amount") else None)!s}, '
+                f'tax_exempt_amount={(self.tax_exempt_amount if hasattr(self, "tax_exempt_amount") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

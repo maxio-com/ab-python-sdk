@@ -109,18 +109,18 @@ class SubscriptionGroup(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'customer_id={self.customer_id!r}, '
-                f'payment_profile={self.payment_profile!r}, '
-                f'payment_collection_method={self.payment_collection_method!r}, '
-                f'subscription_ids={self.subscription_ids!r}, '
-                f'created_at={self.created_at!r}, '
+                f'customer_id={(self.customer_id if hasattr(self, "customer_id") else None)!r}, '
+                f'payment_profile={(self.payment_profile if hasattr(self, "payment_profile") else None)!r}, '
+                f'payment_collection_method={(self.payment_collection_method if hasattr(self, "payment_collection_method") else None)!r}, '
+                f'subscription_ids={(self.subscription_ids if hasattr(self, "subscription_ids") else None)!r}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'customer_id={self.customer_id!s}, '
-                f'payment_profile={self.payment_profile!s}, '
-                f'payment_collection_method={self.payment_collection_method!s}, '
-                f'subscription_ids={self.subscription_ids!s}, '
-                f'created_at={self.created_at!s}, '
+                f'customer_id={(self.customer_id if hasattr(self, "customer_id") else None)!s}, '
+                f'payment_profile={(self.payment_profile if hasattr(self, "payment_profile") else None)!s}, '
+                f'payment_collection_method={(self.payment_collection_method if hasattr(self, "payment_collection_method") else None)!s}, '
+                f'subscription_ids={(self.subscription_ids if hasattr(self, "subscription_ids") else None)!s}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

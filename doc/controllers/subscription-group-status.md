@@ -183,6 +183,7 @@ result = subscription_group_status_controller.reactivate_subscription_group(
     uid,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*

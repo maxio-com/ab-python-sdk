@@ -121,20 +121,20 @@ class CreateInvoicePayment(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'amount={self.amount!r}, '
-                f'memo={self.memo!r}, '
-                f'method={self.method!r}, '
-                f'details={self.details!r}, '
-                f'payment_profile_id={self.payment_profile_id!r}, '
-                f'received_on={self.received_on!r}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!r}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!r}, '
+                f'method={(self.method if hasattr(self, "method") else None)!r}, '
+                f'details={(self.details if hasattr(self, "details") else None)!r}, '
+                f'payment_profile_id={(self.payment_profile_id if hasattr(self, "payment_profile_id") else None)!r}, '
+                f'received_on={(self.received_on if hasattr(self, "received_on") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'amount={self.amount!s}, '
-                f'memo={self.memo!s}, '
-                f'method={self.method!s}, '
-                f'details={self.details!s}, '
-                f'payment_profile_id={self.payment_profile_id!s}, '
-                f'received_on={self.received_on!s}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!s}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!s}, '
+                f'method={(self.method if hasattr(self, "method") else None)!s}, '
+                f'details={(self.details if hasattr(self, "details") else None)!s}, '
+                f'payment_profile_id={(self.payment_profile_id if hasattr(self, "payment_profile_id") else None)!s}, '
+                f'received_on={(self.received_on if hasattr(self, "received_on") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -157,8 +157,8 @@ class ApplyDebitNoteEventData(object):
                 f'debit_note_uid={self.debit_note_uid!r}, '
                 f'original_amount={self.original_amount!r}, '
                 f'applied_amount={self.applied_amount!r}, '
-                f'memo={self.memo!r}, '
-                f'transaction_time={self.transaction_time!r}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!r}, '
+                f'transaction_time={(self.transaction_time if hasattr(self, "transaction_time") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
@@ -167,6 +167,6 @@ class ApplyDebitNoteEventData(object):
                 f'debit_note_uid={self.debit_note_uid!s}, '
                 f'original_amount={self.original_amount!s}, '
                 f'applied_amount={self.applied_amount!s}, '
-                f'memo={self.memo!s}, '
-                f'transaction_time={self.transaction_time!s}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!s}, '
+                f'transaction_time={(self.transaction_time if hasattr(self, "transaction_time") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

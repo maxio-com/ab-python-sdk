@@ -21,7 +21,7 @@ reason_codes_controller = client.reason_codes
 
 # Reason Codes Intro
 
-ReasonCodes are a way to gain a high level view of why your customers are cancelling the subcription to your product or service.
+ReasonCodes are a way to gain a high level view of why your customers are cancelling the subscription to your product or service.
 
 Add a set of churn reason codes to be displayed in-app and/or the Maxio Billing Portal. As your subscribers decide to cancel their subscription, learn why they decided to cancel.
 
@@ -64,6 +64,7 @@ body = CreateReasonCodeRequest(
 result = reason_codes_controller.create_reason_code(
     body=body
 )
+print(result)
 ```
 
 ## Errors
@@ -86,8 +87,8 @@ def list_reason_codes(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 
 ## Response Type
 
@@ -101,6 +102,7 @@ collect = {
     'per_page': 50
 }
 result = reason_codes_controller.list_reason_codes(collect)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -123,7 +125,7 @@ result = reason_codes_controller.list_reason_codes(collect)
       "id": 1,
       "site_id": 2,
       "code": "CH1",
-      "description": "This doesnt meet my needs",
+      "description": "This does not meet my needs",
       "position": 2,
       "created_at": "2017-02-16T16:48:45-05:00",
       "updated_at": "2017-02-17T16:29:59-05:00"
@@ -175,6 +177,7 @@ def read_reason_code(self,
 reason_code_id = 32
 
 result = reason_codes_controller.read_reason_code(reason_code_id)
+print(result)
 ```
 
 ## Errors
@@ -211,6 +214,7 @@ def update_reason_code(self,
 reason_code_id = 32
 
 result = reason_codes_controller.update_reason_code(reason_code_id)
+print(result)
 ```
 
 ## Errors
@@ -223,7 +227,7 @@ result = reason_codes_controller.update_reason_code(reason_code_id)
 
 # Delete Reason Code
 
-This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversable.
+This method gives a merchant the option to delete one reason code from the Churn Reason Codes. This code will be immediately removed. This action is not reversible.
 
 ```python
 def delete_reason_code(self,
@@ -246,6 +250,7 @@ def delete_reason_code(self,
 reason_code_id = 32
 
 result = reason_codes_controller.delete_reason_code(reason_code_id)
+print(result)
 ```
 
 ## Example Response *(as JSON)*

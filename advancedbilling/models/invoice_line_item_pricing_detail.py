@@ -101,12 +101,12 @@ class InvoiceLineItemPricingDetail(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'label={self.label!r}, '
-                f'amount={self.amount!r}, '
+                f'label={(self.label if hasattr(self, "label") else None)!r}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'label={self.label!s}, '
-                f'amount={self.amount!s}, '
+                f'label={(self.label if hasattr(self, "label") else None)!s}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

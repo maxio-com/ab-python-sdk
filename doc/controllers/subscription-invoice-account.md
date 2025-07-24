@@ -15,6 +15,7 @@ subscription_invoice_account_controller = client.subscription_invoice_account
 * [List Prepayments](../../doc/controllers/subscription-invoice-account.md#list-prepayments)
 * [Issue Service Credit](../../doc/controllers/subscription-invoice-account.md#issue-service-credit)
 * [Deduct Service Credit](../../doc/controllers/subscription-invoice-account.md#deduct-service-credit)
+* [List Service Credits](../../doc/controllers/subscription-invoice-account.md#list-service-credits)
 * [Refund Prepayment](../../doc/controllers/subscription-invoice-account.md#refund-prepayment)
 
 
@@ -43,6 +44,7 @@ def read_account_balances(self,
 subscription_id = 222
 
 result = subscription_invoice_account_controller.read_account_balances(subscription_id)
+print(result)
 ```
 
 
@@ -91,6 +93,7 @@ result = subscription_invoice_account_controller.create_prepayment(
     subscription_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -130,8 +133,8 @@ def list_prepayments(self,
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
-| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
-| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br>**Default**: `20`<br>**Constraints**: `<= 200` |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `filter` | [`ListPrepaymentsFilter`](../../doc/models/list-prepayments-filter.md) | Query, Optional | Filter to use for List Prepayments operations |
 
 ## Response Type
@@ -152,6 +155,7 @@ collect = {
     )
 }
 result = subscription_invoice_account_controller.list_prepayments(collect)
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -218,6 +222,7 @@ result = subscription_invoice_account_controller.issue_service_credit(
     subscription_id,
     body=body
 )
+print(result)
 ```
 
 ## Example Response *(as JSON)*
@@ -285,6 +290,85 @@ subscription_invoice_account_controller.deduct_service_credit(
 | 422 | Unprocessable Entity (WebDAV) | `APIException` |
 
 
+# List Service Credits
+
+This request will list a subscription's service credits.
+
+```python
+def list_service_credits(self,
+                        subscription_id,
+                        page=1,
+                        per_page=20,
+                        direction=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
+| `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
+| `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
+
+## Response Type
+
+[`ListServiceCreditsResponse`](../../doc/models/list-service-credits-response.md)
+
+## Example Usage
+
+```python
+subscription_id = 222
+
+page = 2
+
+per_page = 50
+
+result = subscription_invoice_account_controller.list_service_credits(
+    subscription_id,
+    page=page,
+    per_page=per_page
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "service_credits": [
+    {
+      "id": 68,
+      "amount_in_cents": 2200,
+      "ending_balance_in_cents": 1100,
+      "entry_type": "Debit",
+      "memo": "Service credit memo",
+      "invoice_uid": "inv_brntdvmmqxc3j",
+      "remaining_balance_in_cents": 1100,
+      "created_at": "2025-04-01T09:54:49-04:00"
+    },
+    {
+      "id": 67,
+      "amount_in_cents": 3300,
+      "ending_balance_in_cents": 3300,
+      "entry_type": "Credit",
+      "memo": "Service credit memo",
+      "invoice_uid": null,
+      "remaining_balance_in_cents": 1100,
+      "created_at": "2025-03-05T16:06:08-05:00"
+    }
+  ]
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
 # Refund Prepayment
 
 This endpoint will refund, completely or partially, a particular prepayment applied to a subscription. The `prepayment_id` will be the account transaction ID of the original payment. The prepayment must have some amount remaining in order to be refunded.
@@ -321,6 +405,7 @@ result = subscription_invoice_account_controller.refund_prepayment(
     subscription_id,
     prepayment_id
 )
+print(result)
 ```
 
 ## Errors

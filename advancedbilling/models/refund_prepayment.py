@@ -135,7 +135,7 @@ class RefundPrepayment(object):
                 f'amount_in_cents={self.amount_in_cents!r}, '
                 f'amount={self.amount!r}, '
                 f'memo={self.memo!r}, '
-                f'external={self.external!r}, '
+                f'external={(self.external if hasattr(self, "external") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
@@ -143,5 +143,5 @@ class RefundPrepayment(object):
                 f'amount_in_cents={self.amount_in_cents!s}, '
                 f'amount={self.amount!s}, '
                 f'memo={self.memo!s}, '
-                f'external={self.external!s}, '
+                f'external={(self.external if hasattr(self, "external") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

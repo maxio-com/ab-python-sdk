@@ -106,12 +106,12 @@ class ResumeOptions(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'require_resume={self.require_resume!r}, '
-                f'forgive_balance={self.forgive_balance!r}, '
+                f'require_resume={(self.require_resume if hasattr(self, "require_resume") else None)!r}, '
+                f'forgive_balance={(self.forgive_balance if hasattr(self, "forgive_balance") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'require_resume={self.require_resume!s}, '
-                f'forgive_balance={self.forgive_balance!s}, '
+                f'require_resume={(self.require_resume if hasattr(self, "require_resume") else None)!s}, '
+                f'forgive_balance={(self.forgive_balance if hasattr(self, "forgive_balance") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

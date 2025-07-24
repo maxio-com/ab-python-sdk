@@ -108,11 +108,11 @@ class GroupSettings(object):
     def __repr__(self):
         return (f'{self.__class__.__name__}('
                 f'target={self.target!r}, '
-                f'billing={self.billing!r}, '
+                f'billing={(self.billing if hasattr(self, "billing") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'target={self.target!s}, '
-                f'billing={self.billing!s}, '
+                f'billing={(self.billing if hasattr(self, "billing") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

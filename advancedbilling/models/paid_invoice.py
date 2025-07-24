@@ -99,16 +99,16 @@ class PaidInvoice(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'invoice_id={self.invoice_id!r}, '
-                f'status={self.status!r}, '
-                f'due_amount={self.due_amount!r}, '
-                f'paid_amount={self.paid_amount!r}, '
+                f'invoice_id={(self.invoice_id if hasattr(self, "invoice_id") else None)!r}, '
+                f'status={(self.status if hasattr(self, "status") else None)!r}, '
+                f'due_amount={(self.due_amount if hasattr(self, "due_amount") else None)!r}, '
+                f'paid_amount={(self.paid_amount if hasattr(self, "paid_amount") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'invoice_id={self.invoice_id!s}, '
-                f'status={self.status!s}, '
-                f'due_amount={self.due_amount!s}, '
-                f'paid_amount={self.paid_amount!s}, '
+                f'invoice_id={(self.invoice_id if hasattr(self, "invoice_id") else None)!s}, '
+                f'status={(self.status if hasattr(self, "status") else None)!s}, '
+                f'due_amount={(self.due_amount if hasattr(self, "due_amount") else None)!s}, '
+                f'paid_amount={(self.paid_amount if hasattr(self, "paid_amount") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

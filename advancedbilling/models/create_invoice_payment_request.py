@@ -81,11 +81,11 @@ class CreateInvoicePaymentRequest(object):
     def __repr__(self):
         return (f'{self.__class__.__name__}('
                 f'payment={self.payment!r}, '
-                f'mtype={self.mtype!r}, '
+                f'mtype={(self.mtype if hasattr(self, "mtype") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'payment={self.payment!s}, '
-                f'mtype={self.mtype!s}, '
+                f'mtype={(self.mtype if hasattr(self, "mtype") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

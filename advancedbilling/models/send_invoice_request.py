@@ -87,14 +87,14 @@ class SendInvoiceRequest(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'recipient_emails={self.recipient_emails!r}, '
-                f'cc_recipient_emails={self.cc_recipient_emails!r}, '
-                f'bcc_recipient_emails={self.bcc_recipient_emails!r}, '
+                f'recipient_emails={(self.recipient_emails if hasattr(self, "recipient_emails") else None)!r}, '
+                f'cc_recipient_emails={(self.cc_recipient_emails if hasattr(self, "cc_recipient_emails") else None)!r}, '
+                f'bcc_recipient_emails={(self.bcc_recipient_emails if hasattr(self, "bcc_recipient_emails") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'recipient_emails={self.recipient_emails!s}, '
-                f'cc_recipient_emails={self.cc_recipient_emails!s}, '
-                f'bcc_recipient_emails={self.bcc_recipient_emails!s}, '
+                f'recipient_emails={(self.recipient_emails if hasattr(self, "recipient_emails") else None)!s}, '
+                f'cc_recipient_emails={(self.cc_recipient_emails if hasattr(self, "cc_recipient_emails") else None)!s}, '
+                f'bcc_recipient_emails={(self.bcc_recipient_emails if hasattr(self, "bcc_recipient_emails") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

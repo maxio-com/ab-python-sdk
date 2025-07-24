@@ -142,20 +142,20 @@ class InvoiceAddress(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'street={self.street!r}, '
-                f'line_2={self.line_2!r}, '
-                f'city={self.city!r}, '
-                f'state={self.state!r}, '
-                f'zip={self.zip!r}, '
-                f'country={self.country!r}, '
+                f'street={(self.street if hasattr(self, "street") else None)!r}, '
+                f'line_2={(self.line_2 if hasattr(self, "line_2") else None)!r}, '
+                f'city={(self.city if hasattr(self, "city") else None)!r}, '
+                f'state={(self.state if hasattr(self, "state") else None)!r}, '
+                f'zip={(self.zip if hasattr(self, "zip") else None)!r}, '
+                f'country={(self.country if hasattr(self, "country") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'street={self.street!s}, '
-                f'line_2={self.line_2!s}, '
-                f'city={self.city!s}, '
-                f'state={self.state!s}, '
-                f'zip={self.zip!s}, '
-                f'country={self.country!s}, '
+                f'street={(self.street if hasattr(self, "street") else None)!s}, '
+                f'line_2={(self.line_2 if hasattr(self, "line_2") else None)!s}, '
+                f'city={(self.city if hasattr(self, "city") else None)!s}, '
+                f'state={(self.state if hasattr(self, "state") else None)!s}, '
+                f'zip={(self.zip if hasattr(self, "zip") else None)!s}, '
+                f'country={(self.country if hasattr(self, "country") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

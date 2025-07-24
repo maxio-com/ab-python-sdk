@@ -87,14 +87,14 @@ class PublicKey(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'public_key={self.public_key!r}, '
-                f'requires_security_token={self.requires_security_token!r}, '
-                f'created_at={self.created_at!r}, '
+                f'public_key={(self.public_key if hasattr(self, "public_key") else None)!r}, '
+                f'requires_security_token={(self.requires_security_token if hasattr(self, "requires_security_token") else None)!r}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'public_key={self.public_key!s}, '
-                f'requires_security_token={self.requires_security_token!s}, '
-                f'created_at={self.created_at!s}, '
+                f'public_key={(self.public_key if hasattr(self, "public_key") else None)!s}, '
+                f'requires_security_token={(self.requires_security_token if hasattr(self, "requires_security_token") else None)!s}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

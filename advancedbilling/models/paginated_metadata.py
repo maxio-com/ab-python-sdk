@@ -108,18 +108,18 @@ class PaginatedMetadata(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'total_count={self.total_count!r}, '
-                f'current_page={self.current_page!r}, '
-                f'total_pages={self.total_pages!r}, '
-                f'per_page={self.per_page!r}, '
-                f'metadata={self.metadata!r}, '
+                f'total_count={(self.total_count if hasattr(self, "total_count") else None)!r}, '
+                f'current_page={(self.current_page if hasattr(self, "current_page") else None)!r}, '
+                f'total_pages={(self.total_pages if hasattr(self, "total_pages") else None)!r}, '
+                f'per_page={(self.per_page if hasattr(self, "per_page") else None)!r}, '
+                f'metadata={(self.metadata if hasattr(self, "metadata") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'total_count={self.total_count!s}, '
-                f'current_page={self.current_page!s}, '
-                f'total_pages={self.total_pages!s}, '
-                f'per_page={self.per_page!s}, '
-                f'metadata={self.metadata!s}, '
+                f'total_count={(self.total_count if hasattr(self, "total_count") else None)!s}, '
+                f'current_page={(self.current_page if hasattr(self, "current_page") else None)!s}, '
+                f'total_pages={(self.total_pages if hasattr(self, "total_pages") else None)!s}, '
+                f'per_page={(self.per_page if hasattr(self, "per_page") else None)!s}, '
+                f'metadata={(self.metadata if hasattr(self, "metadata") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

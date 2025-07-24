@@ -80,10 +80,10 @@ class ActivateSubscriptionRequest(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'revert_on_failure={self.revert_on_failure!r}, '
+                f'revert_on_failure={(self.revert_on_failure if hasattr(self, "revert_on_failure") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'revert_on_failure={self.revert_on_failure!s}, '
+                f'revert_on_failure={(self.revert_on_failure if hasattr(self, "revert_on_failure") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

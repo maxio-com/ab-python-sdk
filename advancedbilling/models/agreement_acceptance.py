@@ -137,20 +137,20 @@ class AgreementAcceptance(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'ip_address={self.ip_address!r}, '
-                f'terms_url={self.terms_url!r}, '
-                f'privacy_policy_url={self.privacy_policy_url!r}, '
-                f'return_refund_policy_url={self.return_refund_policy_url!r}, '
-                f'delivery_policy_url={self.delivery_policy_url!r}, '
-                f'secure_checkout_policy_url={self.secure_checkout_policy_url!r}, '
+                f'ip_address={(self.ip_address if hasattr(self, "ip_address") else None)!r}, '
+                f'terms_url={(self.terms_url if hasattr(self, "terms_url") else None)!r}, '
+                f'privacy_policy_url={(self.privacy_policy_url if hasattr(self, "privacy_policy_url") else None)!r}, '
+                f'return_refund_policy_url={(self.return_refund_policy_url if hasattr(self, "return_refund_policy_url") else None)!r}, '
+                f'delivery_policy_url={(self.delivery_policy_url if hasattr(self, "delivery_policy_url") else None)!r}, '
+                f'secure_checkout_policy_url={(self.secure_checkout_policy_url if hasattr(self, "secure_checkout_policy_url") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'ip_address={self.ip_address!s}, '
-                f'terms_url={self.terms_url!s}, '
-                f'privacy_policy_url={self.privacy_policy_url!s}, '
-                f'return_refund_policy_url={self.return_refund_policy_url!s}, '
-                f'delivery_policy_url={self.delivery_policy_url!s}, '
-                f'secure_checkout_policy_url={self.secure_checkout_policy_url!s}, '
+                f'ip_address={(self.ip_address if hasattr(self, "ip_address") else None)!s}, '
+                f'terms_url={(self.terms_url if hasattr(self, "terms_url") else None)!s}, '
+                f'privacy_policy_url={(self.privacy_policy_url if hasattr(self, "privacy_policy_url") else None)!s}, '
+                f'return_refund_policy_url={(self.return_refund_policy_url if hasattr(self, "return_refund_policy_url") else None)!s}, '
+                f'delivery_policy_url={(self.delivery_policy_url if hasattr(self, "delivery_policy_url") else None)!s}, '
+                f'secure_checkout_policy_url={(self.secure_checkout_policy_url if hasattr(self, "secure_checkout_policy_url") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

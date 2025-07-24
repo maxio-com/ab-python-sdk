@@ -121,16 +121,16 @@ class CustomerChange(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'payer={self.payer!r}, '
-                f'shipping_address={self.shipping_address!r}, '
-                f'billing_address={self.billing_address!r}, '
-                f'custom_fields={self.custom_fields!r}, '
+                f'payer={(self.payer if hasattr(self, "payer") else None)!r}, '
+                f'shipping_address={(self.shipping_address if hasattr(self, "shipping_address") else None)!r}, '
+                f'billing_address={(self.billing_address if hasattr(self, "billing_address") else None)!r}, '
+                f'custom_fields={(self.custom_fields if hasattr(self, "custom_fields") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'payer={self.payer!s}, '
-                f'shipping_address={self.shipping_address!s}, '
-                f'billing_address={self.billing_address!s}, '
-                f'custom_fields={self.custom_fields!s}, '
+                f'payer={(self.payer if hasattr(self, "payer") else None)!s}, '
+                f'shipping_address={(self.shipping_address if hasattr(self, "shipping_address") else None)!s}, '
+                f'billing_address={(self.billing_address if hasattr(self, "billing_address") else None)!s}, '
+                f'custom_fields={(self.custom_fields if hasattr(self, "custom_fields") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

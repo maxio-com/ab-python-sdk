@@ -120,20 +120,20 @@ class CreateInvoiceCoupon(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'code={self.code!r}, '
-                f'percentage={self.percentage!r}, '
-                f'amount={self.amount!r}, '
-                f'description={self.description!r}, '
-                f'product_family_id={self.product_family_id!r}, '
-                f'compounding_strategy={self.compounding_strategy!r}, '
+                f'code={(self.code if hasattr(self, "code") else None)!r}, '
+                f'percentage={(self.percentage if hasattr(self, "percentage") else None)!r}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!r}, '
+                f'description={(self.description if hasattr(self, "description") else None)!r}, '
+                f'product_family_id={(self.product_family_id if hasattr(self, "product_family_id") else None)!r}, '
+                f'compounding_strategy={(self.compounding_strategy if hasattr(self, "compounding_strategy") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'code={self.code!s}, '
-                f'percentage={self.percentage!s}, '
-                f'amount={self.amount!s}, '
-                f'description={self.description!s}, '
-                f'product_family_id={self.product_family_id!s}, '
-                f'compounding_strategy={self.compounding_strategy!s}, '
+                f'code={(self.code if hasattr(self, "code") else None)!s}, '
+                f'percentage={(self.percentage if hasattr(self, "percentage") else None)!s}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!s}, '
+                f'description={(self.description if hasattr(self, "description") else None)!s}, '
+                f'product_family_id={(self.product_family_id if hasattr(self, "product_family_id") else None)!s}, '
+                f'compounding_strategy={(self.compounding_strategy if hasattr(self, "compounding_strategy") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

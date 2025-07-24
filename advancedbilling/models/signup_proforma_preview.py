@@ -82,12 +82,12 @@ class SignupProformaPreview(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'current_proforma_invoice={self.current_proforma_invoice!r}, '
-                f'next_proforma_invoice={self.next_proforma_invoice!r}, '
+                f'current_proforma_invoice={(self.current_proforma_invoice if hasattr(self, "current_proforma_invoice") else None)!r}, '
+                f'next_proforma_invoice={(self.next_proforma_invoice if hasattr(self, "next_proforma_invoice") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'current_proforma_invoice={self.current_proforma_invoice!s}, '
-                f'next_proforma_invoice={self.next_proforma_invoice!s}, '
+                f'current_proforma_invoice={(self.current_proforma_invoice if hasattr(self, "current_proforma_invoice") else None)!s}, '
+                f'next_proforma_invoice={(self.next_proforma_invoice if hasattr(self, "next_proforma_invoice") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

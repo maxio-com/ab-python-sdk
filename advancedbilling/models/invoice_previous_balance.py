@@ -107,12 +107,12 @@ class InvoicePreviousBalance(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'captured_at={self.captured_at!r}, '
-                f'invoices={self.invoices!r}, '
+                f'captured_at={(self.captured_at if hasattr(self, "captured_at") else None)!r}, '
+                f'invoices={(self.invoices if hasattr(self, "invoices") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'captured_at={self.captured_at!s}, '
-                f'invoices={self.invoices!s}, '
+                f'captured_at={(self.captured_at if hasattr(self, "captured_at") else None)!s}, '
+                f'invoices={(self.invoices if hasattr(self, "invoices") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

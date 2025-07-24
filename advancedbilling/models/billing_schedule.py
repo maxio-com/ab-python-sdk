@@ -103,10 +103,10 @@ class BillingSchedule(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'initial_billing_at={self.initial_billing_at!r}, '
+                f'initial_billing_at={(self.initial_billing_at if hasattr(self, "initial_billing_at") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'initial_billing_at={self.initial_billing_at!s}, '
+                f'initial_billing_at={(self.initial_billing_at if hasattr(self, "initial_billing_at") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

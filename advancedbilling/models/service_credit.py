@@ -103,18 +103,18 @@ class ServiceCredit(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'amount_in_cents={self.amount_in_cents!r}, '
-                f'ending_balance_in_cents={self.ending_balance_in_cents!r}, '
-                f'entry_type={self.entry_type!r}, '
-                f'memo={self.memo!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'amount_in_cents={(self.amount_in_cents if hasattr(self, "amount_in_cents") else None)!r}, '
+                f'ending_balance_in_cents={(self.ending_balance_in_cents if hasattr(self, "ending_balance_in_cents") else None)!r}, '
+                f'entry_type={(self.entry_type if hasattr(self, "entry_type") else None)!r}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'amount_in_cents={self.amount_in_cents!s}, '
-                f'ending_balance_in_cents={self.ending_balance_in_cents!s}, '
-                f'entry_type={self.entry_type!s}, '
-                f'memo={self.memo!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'amount_in_cents={(self.amount_in_cents if hasattr(self, "amount_in_cents") else None)!s}, '
+                f'ending_balance_in_cents={(self.ending_balance_in_cents if hasattr(self, "ending_balance_in_cents") else None)!s}, '
+                f'entry_type={(self.entry_type if hasattr(self, "entry_type") else None)!s}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

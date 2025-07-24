@@ -13,11 +13,11 @@ class EventBasedBillingSegmentError(object):
     """Implementation of the 'Event Based Billing Segment Error' model.
 
     Attributes:
-        segments (Dict[str, object]): The key of the object would be a number
-            (an index in the request array) where the error occurred. In the
-            value object, the key represents the field and the value is an
-            array with error messages. In most cases, this object would
-            contain just one key.
+        segments (Dict[str, Any]): The key of the object would be a number (an
+            index in the request array) where the error occurred. In the value
+            object, the key represents the field and the value is an array
+            with error messages. In most cases, this object would contain just
+            one key.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

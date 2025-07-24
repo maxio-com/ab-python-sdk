@@ -77,10 +77,10 @@ class BulkComponentsPricePointAssignment(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'components={self.components!r}, '
+                f'components={(self.components if hasattr(self, "components") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'components={self.components!s}, '
+                f'components={(self.components if hasattr(self, "components") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

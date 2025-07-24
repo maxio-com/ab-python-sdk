@@ -168,12 +168,12 @@ class SubscriptionComponentSubscription(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'state={self.state!r}, '
-                f'updated_at={self.updated_at!r}, '
+                f'state={(self.state if hasattr(self, "state") else None)!r}, '
+                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'state={self.state!s}, '
-                f'updated_at={self.updated_at!s}, '
+                f'state={(self.state if hasattr(self, "state") else None)!s}, '
+                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -101,12 +101,12 @@ class AppliedCreditNoteData(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!r}, '
-                f'number={self.number!r}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!r}, '
+                f'number={(self.number if hasattr(self, "number") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'uid={self.uid!s}, '
-                f'number={self.number!s}, '
+                f'uid={(self.uid if hasattr(self, "uid") else None)!s}, '
+                f'number={(self.number if hasattr(self, "number") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

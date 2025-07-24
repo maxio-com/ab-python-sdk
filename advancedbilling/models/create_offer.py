@@ -121,20 +121,20 @@ class CreateOffer(object):
         return (f'{self.__class__.__name__}('
                 f'name={self.name!r}, '
                 f'handle={self.handle!r}, '
-                f'description={self.description!r}, '
+                f'description={(self.description if hasattr(self, "description") else None)!r}, '
                 f'product_id={self.product_id!r}, '
-                f'product_price_point_id={self.product_price_point_id!r}, '
-                f'components={self.components!r}, '
-                f'coupons={self.coupons!r}, '
+                f'product_price_point_id={(self.product_price_point_id if hasattr(self, "product_price_point_id") else None)!r}, '
+                f'components={(self.components if hasattr(self, "components") else None)!r}, '
+                f'coupons={(self.coupons if hasattr(self, "coupons") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'name={self.name!s}, '
                 f'handle={self.handle!s}, '
-                f'description={self.description!s}, '
+                f'description={(self.description if hasattr(self, "description") else None)!s}, '
                 f'product_id={self.product_id!s}, '
-                f'product_price_point_id={self.product_price_point_id!s}, '
-                f'components={self.components!s}, '
-                f'coupons={self.coupons!s}, '
+                f'product_price_point_id={(self.product_price_point_id if hasattr(self, "product_price_point_id") else None)!s}, '
+                f'components={(self.components if hasattr(self, "components") else None)!s}, '
+                f'coupons={(self.coupons if hasattr(self, "coupons") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -139,18 +139,18 @@ class InvoiceAvataxDetails(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'status={self.status!r}, '
-                f'document_code={self.document_code!r}, '
-                f'commit_date={self.commit_date!r}, '
-                f'modify_date={self.modify_date!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'status={(self.status if hasattr(self, "status") else None)!r}, '
+                f'document_code={(self.document_code if hasattr(self, "document_code") else None)!r}, '
+                f'commit_date={(self.commit_date if hasattr(self, "commit_date") else None)!r}, '
+                f'modify_date={(self.modify_date if hasattr(self, "modify_date") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'status={self.status!s}, '
-                f'document_code={self.document_code!s}, '
-                f'commit_date={self.commit_date!s}, '
-                f'modify_date={self.modify_date!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'status={(self.status if hasattr(self, "status") else None)!s}, '
+                f'document_code={(self.document_code if hasattr(self, "document_code") else None)!s}, '
+                f'commit_date={(self.commit_date if hasattr(self, "commit_date") else None)!s}, '
+                f'modify_date={(self.modify_date if hasattr(self, "modify_date") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

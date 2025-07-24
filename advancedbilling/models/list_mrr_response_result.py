@@ -124,22 +124,22 @@ class ListMRRResponseResult(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'page={self.page!r}, '
-                f'per_page={self.per_page!r}, '
-                f'total_pages={self.total_pages!r}, '
-                f'total_entries={self.total_entries!r}, '
-                f'currency={self.currency!r}, '
-                f'currency_symbol={self.currency_symbol!r}, '
-                f'movements={self.movements!r}, '
+                f'page={(self.page if hasattr(self, "page") else None)!r}, '
+                f'per_page={(self.per_page if hasattr(self, "per_page") else None)!r}, '
+                f'total_pages={(self.total_pages if hasattr(self, "total_pages") else None)!r}, '
+                f'total_entries={(self.total_entries if hasattr(self, "total_entries") else None)!r}, '
+                f'currency={(self.currency if hasattr(self, "currency") else None)!r}, '
+                f'currency_symbol={(self.currency_symbol if hasattr(self, "currency_symbol") else None)!r}, '
+                f'movements={(self.movements if hasattr(self, "movements") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'page={self.page!s}, '
-                f'per_page={self.per_page!s}, '
-                f'total_pages={self.total_pages!s}, '
-                f'total_entries={self.total_entries!s}, '
-                f'currency={self.currency!s}, '
-                f'currency_symbol={self.currency_symbol!s}, '
-                f'movements={self.movements!s}, '
+                f'page={(self.page if hasattr(self, "page") else None)!s}, '
+                f'per_page={(self.per_page if hasattr(self, "per_page") else None)!s}, '
+                f'total_pages={(self.total_pages if hasattr(self, "total_pages") else None)!s}, '
+                f'total_entries={(self.total_entries if hasattr(self, "total_entries") else None)!s}, '
+                f'currency={(self.currency if hasattr(self, "currency") else None)!s}, '
+                f'currency_symbol={(self.currency_symbol if hasattr(self, "currency_symbol") else None)!s}, '
+                f'movements={(self.movements if hasattr(self, "movements") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

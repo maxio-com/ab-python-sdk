@@ -100,16 +100,16 @@ class CreateUsage(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'quantity={self.quantity!r}, '
-                f'price_point_id={self.price_point_id!r}, '
-                f'memo={self.memo!r}, '
-                f'billing_schedule={self.billing_schedule!r}, '
+                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!r}, '
+                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!r}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!r}, '
+                f'billing_schedule={(self.billing_schedule if hasattr(self, "billing_schedule") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'quantity={self.quantity!s}, '
-                f'price_point_id={self.price_point_id!s}, '
-                f'memo={self.memo!s}, '
-                f'billing_schedule={self.billing_schedule!s}, '
+                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!s}, '
+                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!s}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!s}, '
+                f'billing_schedule={(self.billing_schedule if hasattr(self, "billing_schedule") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

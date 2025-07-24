@@ -102,16 +102,16 @@ class MultiInvoicePayment(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'transaction_id={self.transaction_id!r}, '
-                f'total_amount={self.total_amount!r}, '
-                f'currency_code={self.currency_code!r}, '
-                f'applications={self.applications!r}, '
+                f'transaction_id={(self.transaction_id if hasattr(self, "transaction_id") else None)!r}, '
+                f'total_amount={(self.total_amount if hasattr(self, "total_amount") else None)!r}, '
+                f'currency_code={(self.currency_code if hasattr(self, "currency_code") else None)!r}, '
+                f'applications={(self.applications if hasattr(self, "applications") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'transaction_id={self.transaction_id!s}, '
-                f'total_amount={self.total_amount!s}, '
-                f'currency_code={self.currency_code!s}, '
-                f'applications={self.applications!s}, '
+                f'transaction_id={(self.transaction_id if hasattr(self, "transaction_id") else None)!s}, '
+                f'total_amount={(self.total_amount if hasattr(self, "total_amount") else None)!s}, '
+                f'currency_code={(self.currency_code if hasattr(self, "currency_code") else None)!s}, '
+                f'applications={(self.applications if hasattr(self, "applications") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

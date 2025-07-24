@@ -119,13 +119,13 @@ class Price(object):
     def __repr__(self):
         return (f'{self.__class__.__name__}('
                 f'starting_quantity={self.starting_quantity!r}, '
-                f'ending_quantity={self.ending_quantity!r}, '
+                f'ending_quantity={(self.ending_quantity if hasattr(self, "ending_quantity") else None)!r}, '
                 f'unit_price={self.unit_price!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'starting_quantity={self.starting_quantity!s}, '
-                f'ending_quantity={self.ending_quantity!s}, '
+                f'ending_quantity={(self.ending_quantity if hasattr(self, "ending_quantity") else None)!s}, '
                 f'unit_price={self.unit_price!s}, '
                 f'additional_properties={self.additional_properties!s})')

@@ -133,18 +133,18 @@ class UpdateMetafield(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'current_name={self.current_name!r}, '
-                f'name={self.name!r}, '
-                f'scope={self.scope!r}, '
-                f'input_type={self.input_type!r}, '
-                f'enum={self.enum!r}, '
+                f'current_name={(self.current_name if hasattr(self, "current_name") else None)!r}, '
+                f'name={(self.name if hasattr(self, "name") else None)!r}, '
+                f'scope={(self.scope if hasattr(self, "scope") else None)!r}, '
+                f'input_type={(self.input_type if hasattr(self, "input_type") else None)!r}, '
+                f'enum={(self.enum if hasattr(self, "enum") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'current_name={self.current_name!s}, '
-                f'name={self.name!s}, '
-                f'scope={self.scope!s}, '
-                f'input_type={self.input_type!s}, '
-                f'enum={self.enum!s}, '
+                f'current_name={(self.current_name if hasattr(self, "current_name") else None)!s}, '
+                f'name={(self.name if hasattr(self, "name") else None)!s}, '
+                f'scope={(self.scope if hasattr(self, "scope") else None)!s}, '
+                f'input_type={(self.input_type if hasattr(self, "input_type") else None)!s}, '
+                f'enum={(self.enum if hasattr(self, "enum") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

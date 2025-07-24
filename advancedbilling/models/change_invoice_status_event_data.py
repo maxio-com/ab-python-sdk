@@ -139,18 +139,18 @@ class ChangeInvoiceStatusEventData(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'gateway_trans_id={self.gateway_trans_id!r}, '
-                f'amount={self.amount!r}, '
+                f'gateway_trans_id={(self.gateway_trans_id if hasattr(self, "gateway_trans_id") else None)!r}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!r}, '
                 f'from_status={self.from_status!r}, '
                 f'to_status={self.to_status!r}, '
-                f'consolidation_level={self.consolidation_level!r}, '
+                f'consolidation_level={(self.consolidation_level if hasattr(self, "consolidation_level") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'gateway_trans_id={self.gateway_trans_id!s}, '
-                f'amount={self.amount!s}, '
+                f'gateway_trans_id={(self.gateway_trans_id if hasattr(self, "gateway_trans_id") else None)!s}, '
+                f'amount={(self.amount if hasattr(self, "amount") else None)!s}, '
                 f'from_status={self.from_status!s}, '
                 f'to_status={self.to_status!s}, '
-                f'consolidation_level={self.consolidation_level!s}, '
+                f'consolidation_level={(self.consolidation_level if hasattr(self, "consolidation_level") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

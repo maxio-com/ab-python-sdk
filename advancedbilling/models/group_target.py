@@ -109,11 +109,11 @@ class GroupTarget(object):
     def __repr__(self):
         return (f'{self.__class__.__name__}('
                 f'mtype={self.mtype!r}, '
-                f'id={self.id!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'mtype={self.mtype!s}, '
-                f'id={self.id!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

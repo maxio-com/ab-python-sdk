@@ -98,14 +98,14 @@ class AllocationSettings(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'upgrade_charge={self.upgrade_charge!r}, '
-                f'downgrade_credit={self.downgrade_credit!r}, '
-                f'accrue_charge={self.accrue_charge!r}, '
+                f'upgrade_charge={(self.upgrade_charge if hasattr(self, "upgrade_charge") else None)!r}, '
+                f'downgrade_credit={(self.downgrade_credit if hasattr(self, "downgrade_credit") else None)!r}, '
+                f'accrue_charge={(self.accrue_charge if hasattr(self, "accrue_charge") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'upgrade_charge={self.upgrade_charge!s}, '
-                f'downgrade_credit={self.downgrade_credit!s}, '
-                f'accrue_charge={self.accrue_charge!s}, '
+                f'upgrade_charge={(self.upgrade_charge if hasattr(self, "upgrade_charge") else None)!s}, '
+                f'downgrade_credit={(self.downgrade_credit if hasattr(self, "downgrade_credit") else None)!s}, '
+                f'accrue_charge={(self.accrue_charge if hasattr(self, "accrue_charge") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

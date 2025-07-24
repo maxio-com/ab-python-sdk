@@ -71,10 +71,10 @@ class CancelGroupedSubscriptionsRequest(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'charge_unbilled_usage={self.charge_unbilled_usage!r}, '
+                f'charge_unbilled_usage={(self.charge_unbilled_usage if hasattr(self, "charge_unbilled_usage") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'charge_unbilled_usage={self.charge_unbilled_usage!s}, '
+                f'charge_unbilled_usage={(self.charge_unbilled_usage if hasattr(self, "charge_unbilled_usage") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

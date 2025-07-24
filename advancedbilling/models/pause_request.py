@@ -74,10 +74,10 @@ class PauseRequest(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'hold={self.hold!r}, '
+                f'hold={(self.hold if hasattr(self, "hold") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'hold={self.hold!s}, '
+                f'hold={(self.hold if hasattr(self, "hold") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

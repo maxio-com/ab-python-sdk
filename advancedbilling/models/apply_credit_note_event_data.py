@@ -197,11 +197,11 @@ class ApplyCreditNoteEventData(object):
                 f'credit_note_uid={self.credit_note_uid!r}, '
                 f'original_amount={self.original_amount!r}, '
                 f'applied_amount={self.applied_amount!r}, '
-                f'transaction_time={self.transaction_time!r}, '
-                f'memo={self.memo!r}, '
-                f'role={self.role!r}, '
-                f'consolidated_invoice={self.consolidated_invoice!r}, '
-                f'applied_credit_notes={self.applied_credit_notes!r}, '
+                f'transaction_time={(self.transaction_time if hasattr(self, "transaction_time") else None)!r}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!r}, '
+                f'role={(self.role if hasattr(self, "role") else None)!r}, '
+                f'consolidated_invoice={(self.consolidated_invoice if hasattr(self, "consolidated_invoice") else None)!r}, '
+                f'applied_credit_notes={(self.applied_credit_notes if hasattr(self, "applied_credit_notes") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
@@ -211,9 +211,9 @@ class ApplyCreditNoteEventData(object):
                 f'credit_note_uid={self.credit_note_uid!s}, '
                 f'original_amount={self.original_amount!s}, '
                 f'applied_amount={self.applied_amount!s}, '
-                f'transaction_time={self.transaction_time!s}, '
-                f'memo={self.memo!s}, '
-                f'role={self.role!s}, '
-                f'consolidated_invoice={self.consolidated_invoice!s}, '
-                f'applied_credit_notes={self.applied_credit_notes!s}, '
+                f'transaction_time={(self.transaction_time if hasattr(self, "transaction_time") else None)!s}, '
+                f'memo={(self.memo if hasattr(self, "memo") else None)!s}, '
+                f'role={(self.role if hasattr(self, "role") else None)!s}, '
+                f'consolidated_invoice={(self.consolidated_invoice if hasattr(self, "consolidated_invoice") else None)!s}, '
+                f'applied_credit_notes={(self.applied_credit_notes if hasattr(self, "applied_credit_notes") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

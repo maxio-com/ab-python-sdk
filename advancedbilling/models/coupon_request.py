@@ -17,11 +17,13 @@ class CouponRequest(object):
     Attributes:
         coupon (CouponPayload): The model property of type CouponPayload.
         restricted_products (Dict[str, bool]): An object where the keys are
-            product_ids and the values are booleans indicating if the coupon
-            should be applicable to the product
+            product IDs or handles (prefixed with 'handle:'), and the values
+            are booleans indicating if the coupon should be applicable to the
+            product
         restricted_components (Dict[str, bool]): An object where the keys are
-            component_ids and the values are booleans indicating if the coupon
-            should be applicable to the component
+            component IDs or handles (prefixed with 'handle:'), and the values
+            are booleans indicating if the coupon should be applicable to the
+            component
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -92,14 +94,14 @@ class CouponRequest(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'coupon={self.coupon!r}, '
-                f'restricted_products={self.restricted_products!r}, '
-                f'restricted_components={self.restricted_components!r}, '
+                f'coupon={(self.coupon if hasattr(self, "coupon") else None)!r}, '
+                f'restricted_products={(self.restricted_products if hasattr(self, "restricted_products") else None)!r}, '
+                f'restricted_components={(self.restricted_components if hasattr(self, "restricted_components") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'coupon={self.coupon!s}, '
-                f'restricted_products={self.restricted_products!s}, '
-                f'restricted_components={self.restricted_components!s}, '
+                f'coupon={(self.coupon if hasattr(self, "coupon") else None)!s}, '
+                f'restricted_products={(self.restricted_products if hasattr(self, "restricted_products") else None)!s}, '
+                f'restricted_components={(self.restricted_components if hasattr(self, "restricted_components") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

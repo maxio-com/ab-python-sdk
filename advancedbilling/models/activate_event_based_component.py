@@ -93,14 +93,14 @@ class ActivateEventBasedComponent(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'price_point_id={self.price_point_id!r}, '
-                f'billing_schedule={self.billing_schedule!r}, '
-                f'custom_price={self.custom_price!r}, '
+                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!r}, '
+                f'billing_schedule={(self.billing_schedule if hasattr(self, "billing_schedule") else None)!r}, '
+                f'custom_price={(self.custom_price if hasattr(self, "custom_price") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'price_point_id={self.price_point_id!s}, '
-                f'billing_schedule={self.billing_schedule!s}, '
-                f'custom_price={self.custom_price!s}, '
+                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!s}, '
+                f'billing_schedule={(self.billing_schedule if hasattr(self, "billing_schedule") else None)!s}, '
+                f'custom_price={(self.custom_price if hasattr(self, "custom_price") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

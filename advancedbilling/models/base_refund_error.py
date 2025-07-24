@@ -14,7 +14,7 @@ class BaseRefundError(object):
     """Implementation of the 'Base Refund Error' model.
 
     Attributes:
-        base (List[object]): The model property of type List[object].
+        base (List[Any]): The model property of type List[Any].
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -71,10 +71,10 @@ class BaseRefundError(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'base={self.base!r}, '
+                f'base={(self.base if hasattr(self, "base") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'base={self.base!s}, '
+                f'base={(self.base if hasattr(self, "base") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

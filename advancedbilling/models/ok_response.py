@@ -71,10 +71,10 @@ class OkResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'ok={self.ok!r}, '
+                f'ok={(self.ok if hasattr(self, "ok") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'ok={self.ok!s}, '
+                f'ok={(self.ok if hasattr(self, "ok") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

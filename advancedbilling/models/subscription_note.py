@@ -111,20 +111,20 @@ class SubscriptionNote(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!r}, '
-                f'body={self.body!r}, '
-                f'subscription_id={self.subscription_id!r}, '
-                f'created_at={self.created_at!r}, '
-                f'updated_at={self.updated_at!r}, '
-                f'sticky={self.sticky!r}, '
+                f'id={(self.id if hasattr(self, "id") else None)!r}, '
+                f'body={(self.body if hasattr(self, "body") else None)!r}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!r}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
+                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!r}, '
+                f'sticky={(self.sticky if hasattr(self, "sticky") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'id={self.id!s}, '
-                f'body={self.body!s}, '
-                f'subscription_id={self.subscription_id!s}, '
-                f'created_at={self.created_at!s}, '
-                f'updated_at={self.updated_at!s}, '
-                f'sticky={self.sticky!s}, '
+                f'id={(self.id if hasattr(self, "id") else None)!s}, '
+                f'body={(self.body if hasattr(self, "body") else None)!s}, '
+                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!s}, '
+                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
+                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!s}, '
+                f'sticky={(self.sticky if hasattr(self, "sticky") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

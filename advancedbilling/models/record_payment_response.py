@@ -94,12 +94,12 @@ class RecordPaymentResponse(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'paid_invoices={self.paid_invoices!r}, '
-                f'prepayment={self.prepayment!r}, '
+                f'paid_invoices={(self.paid_invoices if hasattr(self, "paid_invoices") else None)!r}, '
+                f'prepayment={(self.prepayment if hasattr(self, "prepayment") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'paid_invoices={self.paid_invoices!s}, '
-                f'prepayment={self.prepayment!s}, '
+                f'paid_invoices={(self.paid_invoices if hasattr(self, "paid_invoices") else None)!s}, '
+                f'prepayment={(self.prepayment if hasattr(self, "prepayment") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

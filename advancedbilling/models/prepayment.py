@@ -133,11 +133,11 @@ class Prepayment(object):
                 f'subscription_id={self.subscription_id!r}, '
                 f'amount_in_cents={self.amount_in_cents!r}, '
                 f'remaining_amount_in_cents={self.remaining_amount_in_cents!r}, '
-                f'refunded_amount_in_cents={self.refunded_amount_in_cents!r}, '
-                f'details={self.details!r}, '
+                f'refunded_amount_in_cents={(self.refunded_amount_in_cents if hasattr(self, "refunded_amount_in_cents") else None)!r}, '
+                f'details={(self.details if hasattr(self, "details") else None)!r}, '
                 f'external={self.external!r}, '
                 f'memo={self.memo!r}, '
-                f'payment_type={self.payment_type!r}, '
+                f'payment_type={(self.payment_type if hasattr(self, "payment_type") else None)!r}, '
                 f'created_at={self.created_at!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
@@ -147,10 +147,10 @@ class Prepayment(object):
                 f'subscription_id={self.subscription_id!s}, '
                 f'amount_in_cents={self.amount_in_cents!s}, '
                 f'remaining_amount_in_cents={self.remaining_amount_in_cents!s}, '
-                f'refunded_amount_in_cents={self.refunded_amount_in_cents!s}, '
-                f'details={self.details!s}, '
+                f'refunded_amount_in_cents={(self.refunded_amount_in_cents if hasattr(self, "refunded_amount_in_cents") else None)!s}, '
+                f'details={(self.details if hasattr(self, "details") else None)!s}, '
                 f'external={self.external!s}, '
                 f'memo={self.memo!s}, '
-                f'payment_type={self.payment_type!s}, '
+                f'payment_type={(self.payment_type if hasattr(self, "payment_type") else None)!s}, '
                 f'created_at={self.created_at!s}, '
                 f'additional_properties={self.additional_properties!s})')

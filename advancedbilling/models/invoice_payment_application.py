@@ -89,14 +89,14 @@ class InvoicePaymentApplication(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'invoice_uid={self.invoice_uid!r}, '
-                f'application_uid={self.application_uid!r}, '
-                f'applied_amount={self.applied_amount!r}, '
+                f'invoice_uid={(self.invoice_uid if hasattr(self, "invoice_uid") else None)!r}, '
+                f'application_uid={(self.application_uid if hasattr(self, "application_uid") else None)!r}, '
+                f'applied_amount={(self.applied_amount if hasattr(self, "applied_amount") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'invoice_uid={self.invoice_uid!s}, '
-                f'application_uid={self.application_uid!s}, '
-                f'applied_amount={self.applied_amount!s}, '
+                f'invoice_uid={(self.invoice_uid if hasattr(self, "invoice_uid") else None)!s}, '
+                f'application_uid={(self.application_uid if hasattr(self, "application_uid") else None)!s}, '
+                f'applied_amount={(self.applied_amount if hasattr(self, "applied_amount") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

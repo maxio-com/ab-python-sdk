@@ -71,10 +71,10 @@ class SubscriptionGroupUpdateError(object):
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('
-                f'members={self.members!r}, '
+                f'members={(self.members if hasattr(self, "members") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
         return (f'{self.__class__.__name__}('
-                f'members={self.members!s}, '
+                f'members={(self.members if hasattr(self, "members") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')
