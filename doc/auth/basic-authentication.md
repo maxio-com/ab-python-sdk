@@ -23,6 +23,9 @@ Documentation for accessing and setting credentials for BasicAuth.
 You must provide credentials in the client as shown in the following code snippet.
 
 ```python
+from advancedbilling.advanced_billing_client import AdvancedBillingClient
+from advancedbilling.http.auth.basic_auth import BasicAuthCredentials
+
 client = AdvancedBillingClient(
     basic_auth_credentials=BasicAuthCredentials(
         username='BasicAuthUserName',
