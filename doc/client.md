@@ -20,6 +20,10 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```python
+from advancedbilling.advanced_billing_client import AdvancedBillingClient
+from advancedbilling.configuration import Environment
+from advancedbilling.http.auth.basic_auth import BasicAuthCredentials
+
 client = AdvancedBillingClient(
     basic_auth_credentials=BasicAuthCredentials(
         username='BasicAuthUserName',
