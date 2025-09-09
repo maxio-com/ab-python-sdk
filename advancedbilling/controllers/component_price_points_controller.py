@@ -92,8 +92,7 @@ class ComponentPricePointsController(BaseController):
                                      body=None):
         """Does a POST request to /components/{component_id}/price_points.json.
 
-        This endpoint can be used to create a new price point for an existing
-        component.
+        Creates a price point for an existing component.
 
         Args:
             component_id (int): The Advanced Billing id of the component
