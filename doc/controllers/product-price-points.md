@@ -135,10 +135,11 @@ def list_product_price_points(self,
 ## Example Usage
 
 ```python
-collect = {Liquid error: Value cannot be null. (Parameter 'key')
+collect = {
     'product_id': 124,
     'page': 2,
-    'per_page': 10
+    'per_page': 10,
+    'filter_type': Liquid error: Value cannot be null. (Parameter 'key')
 }
 result = product_price_points_controller.list_product_price_points(collect)
 print(result)

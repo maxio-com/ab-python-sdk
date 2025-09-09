@@ -776,10 +776,10 @@ class SubscriptionComponentsController(BaseController):
         ).execute()
 
     def create_usage(self,
-                     subscription_id,
+                     subscription_id_or_reference,
                      component_id,
                      body=None):
-        """Does a POST request to /subscriptions/{subscription_id}/components/{component_id}/usages.json.
+        """Does a POST request to /subscriptions/{subscription_id_or_reference}/components/{component_id}/usages.json.
 
         ## Documentation
         Full documentation on how to create Components in the Advanced Billing
@@ -853,7 +853,14 @@ class SubscriptionComponentsController(BaseController):
         both an SMS Message and an Email, send an API call for each.
 
         Args:
-            subscription_id (int): The Chargify id of the subscription
+            subscription_id_or_reference (int | str): Either the Advanced
+                Billing subscription ID (integer) or the subscription
+                reference (string). Important: In cases where a numeric string
+                value matches both an existing subscription ID and an existing
+                subscription reference, the system will prioritize the
+                subscription ID lookup. For example, if both subscription ID
+                123 and subscription reference "123" exist, passing "123" will
+                return the subscription with ID 123.
             component_id (int | str): Either the Advanced Billing id for the
                 component or the component's handle prefixed by `handle:`
             body (CreateUsageRequest, optional): The request body parameter.
@@ -871,13 +878,14 @@ class SubscriptionComponentsController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/subscriptions/{subscription_id}/components/{component_id}/usages.json')
+            .path('/subscriptions/{subscription_id_or_reference}/components/{component_id}/usages.json')
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
+                            .key('subscription_id_or_reference')
+                            .value(subscription_id_or_reference)
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('CreateUsageSubscriptionIdOrReference').validate(value)))
             .template_param(Parameter()
                             .key('component_id')
                             .value(component_id)
@@ -903,7 +911,7 @@ class SubscriptionComponentsController(BaseController):
 
     def list_usages(self,
                     options=dict()):
-        """Does a GET request to /subscriptions/{subscription_id}/components/{component_id}/usages.json.
+        """Does a GET request to /subscriptions/{subscription_id_or_reference}/components/{component_id}/usages.json.
 
         This request will return a list of the usages associated with a
         subscription for a particular metered component. This will display the
@@ -929,8 +937,15 @@ class SubscriptionComponentsController(BaseController):
                 being the key and their desired values being the value. A list
                 of parameters that can be used are::
 
-                    subscription_id -- int -- The Chargify id of the
-                        subscription
+                    subscription_id_or_reference -- int | str -- Either the
+                        Advanced Billing subscription ID (integer) or the
+                        subscription reference (string). Important: In cases
+                        where a numeric string value matches both an existing
+                        subscription ID and an existing subscription
+                        reference, the system will prioritize the subscription
+                        ID lookup. For example, if both subscription ID 123
+                        and subscription reference "123" exist, passing "123"
+                        will return the subscription with ID 123.
                     component_id -- int | str -- Either the Advanced Billing
                         id for the component or the component's handle
                         prefixed by `handle:`
@@ -972,13 +987,14 @@ class SubscriptionComponentsController(BaseController):
 
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/subscriptions/{subscription_id}/components/{component_id}/usages.json')
+            .path('/subscriptions/{subscription_id_or_reference}/components/{component_id}/usages.json')
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(options.get('subscription_id', None))
+                            .key('subscription_id_or_reference')
+                            .value(options.get('subscription_id_or_reference', None))
                             .is_required(True)
-                            .should_encode(True))
+                            .should_encode(True)
+                            .validator(lambda value: UnionTypeLookUp.get('ListUsagesInputSubscriptionIdOrReference').validate(value)))
             .template_param(Parameter()
                             .key('component_id')
                             .value(options.get('component_id', None))

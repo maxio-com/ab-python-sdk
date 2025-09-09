@@ -391,9 +391,9 @@ class ComponentsController(BaseController):
                        component_id):
         """Does a GET request to /product_families/{product_family_id}/components/{component_id}.json.
 
-        This request will return information regarding a component from a
-        specific product family.
-        You may read the component by either the component's id or handle.
+        Returns information regarding a component from a specific product
+        family.
+        You can read the component by either the component's id or handle.
         When using the handle, it must be prefixed with `handle:`.
 
         Args:

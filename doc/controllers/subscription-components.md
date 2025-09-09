@@ -1092,7 +1092,7 @@ A. No. Usage should be reported as one API call per component on a single subscr
 
 ```python
 def create_usage(self,
-                subscription_id,
+                subscription_id_or_reference,
                 component_id,
                 body=None)
 ```
@@ -1101,7 +1101,7 @@ def create_usage(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id_or_reference` | int \| str | Template, Required | This is a container for one-of cases. |
 | `component_id` | int \| str | Template, Required | This is a container for one-of cases. |
 | `body` | [`CreateUsageRequest`](../../doc/models/create-usage-request.md) | Body, Optional | - |
 
@@ -1112,7 +1112,7 @@ def create_usage(self,
 ## Example Usage
 
 ```python
-subscription_id = 222
+subscription_id_or_reference = 234
 
 component_id = 144
 
@@ -1125,7 +1125,7 @@ body = CreateUsageRequest(
 )
 
 result = subscription_components_controller.create_usage(
-    subscription_id,
+    subscription_id_or_reference,
     component_id,
     body=body
 )
@@ -1183,7 +1183,7 @@ def list_usages(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id_or_reference` | int \| str | Template, Required | This is a container for one-of cases. |
 | `component_id` | int \| str | Template, Required | This is a container for one-of cases. |
 | `since_id` | `int` | Query, Optional | Returns usages with an id greater than or equal to the one specified |
 | `max_id` | `int` | Query, Optional | Returns usages with an id less than or equal to the one specified |
@@ -1200,7 +1200,7 @@ def list_usages(self,
 
 ```python
 collect = {
-    'subscription_id': 222,
+    'subscription_id_or_reference': 234,
     'component_id': 144,
     'page': 2,
     'per_page': 50

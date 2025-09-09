@@ -189,10 +189,11 @@ def list_component_price_points(self,
 ## Example Usage
 
 ```python
-collect = {Liquid error: Value cannot be null. (Parameter 'key')
+collect = {
     'component_id': 222,
     'page': 2,
-    'per_page': 50
+    'per_page': 50,
+    'filter_type': Liquid error: Value cannot be null. (Parameter 'key')
 }
 result = component_price_points_controller.list_component_price_points(collect)
 print(result)
