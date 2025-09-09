@@ -230,8 +230,8 @@ class CustomersController(BaseController):
                       id):
         """Does a GET request to /customers/{id}.json.
 
-        This method allows to retrieve the Customer properties by Advanced
-        Billing-generated Customer ID.
+        Retrieves the Customer properties by Advanced Billing-generated
+        Customer ID.
 
         Args:
             id (int): The Advanced Billing id of the customer

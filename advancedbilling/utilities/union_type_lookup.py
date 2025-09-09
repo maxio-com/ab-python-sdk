@@ -158,7 +158,19 @@ class UnionTypeLookUp:
                 LeafType(str)
             ]
         ),
+        'CreateUsageSubscriptionIdOrReference': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
         'CreateUsageComponentId': OneOf(
+            [
+                LeafType(int),
+                LeafType(str)
+            ]
+        ),
+        'ListUsagesInputSubscriptionIdOrReference': OneOf(
             [
                 LeafType(int),
                 LeafType(str)

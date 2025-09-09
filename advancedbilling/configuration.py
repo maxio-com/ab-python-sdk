@@ -46,7 +46,7 @@ class Configuration(HttpClientConfiguration):
     def __init__(self, http_client_instance=None,
                  override_http_client_configuration=False, http_call_back=None,
                  timeout=120, max_retries=0, backoff_factor=2,
-                 retry_statuses=None, retry_methods=None,
+                 retry_statuses=None, retry_methods=None, proxy_settings=None,
                  environment=Environment.US, site='subdomain',
                  basic_auth_credentials=None):
         if retry_methods is None:
@@ -55,10 +55,14 @@ class Configuration(HttpClientConfiguration):
         if retry_statuses is None:
             retry_statuses = [408, 413, 429, 500, 502, 503, 504, 521, 522, 524]
 
-        super().__init__(http_client_instance,
-                         override_http_client_configuration, http_call_back,
-                         timeout, max_retries, backoff_factor, retry_statuses,
-                         retry_methods)
+        super().__init__(
+            http_client_instance=http_client_instance,
+            override_http_client_configuration=override_http_client_configuration,
+            http_call_back=http_call_back, timeout=timeout,
+            max_retries=max_retries, backoff_factor=backoff_factor,
+            retry_statuses=retry_statuses, retry_methods=retry_methods,
+            proxy_settings=proxy_settings
+        )
 
         # Current API environment
         self._environment = environment
@@ -74,8 +78,8 @@ class Configuration(HttpClientConfiguration):
     def clone_with(self, http_client_instance=None,
                    override_http_client_configuration=None, http_call_back=None,
                    timeout=None, max_retries=None, backoff_factor=None,
-                   retry_statuses=None, retry_methods=None, environment=None,
-                   site=None, basic_auth_credentials=None):
+                   retry_statuses=None, retry_methods=None, proxy_settings=None,
+                   environment=None, site=None, basic_auth_credentials=None):
         http_client_instance = http_client_instance or self.http_client_instance
         override_http_client_configuration = override_http_client_configuration or self.override_http_client_configuration
         http_call_back = http_call_back or self.http_callback
@@ -84,6 +88,7 @@ class Configuration(HttpClientConfiguration):
         backoff_factor = backoff_factor or self.backoff_factor
         retry_statuses = retry_statuses or self.retry_statuses
         retry_methods = retry_methods or self.retry_methods
+        proxy_settings = proxy_settings or self.proxy_settings
         environment = environment or self.environment
         site = site or self.site
         basic_auth_credentials = basic_auth_credentials or self.basic_auth_credentials
@@ -93,7 +98,7 @@ class Configuration(HttpClientConfiguration):
             http_call_back=http_call_back, timeout=timeout,
             max_retries=max_retries, backoff_factor=backoff_factor,
             retry_statuses=retry_statuses, retry_methods=retry_methods,
-            environment=environment, site=site,
+            proxy_settings=proxy_settings, environment=environment, site=site,
             basic_auth_credentials=basic_auth_credentials
         )
 
@@ -104,7 +109,8 @@ class Configuration(HttpClientConfiguration):
             retry_methods=self.retry_methods,
             http_client_instance=self.http_client_instance,
             override_http_client_configuration=self.override_http_client_configuration,
-            response_factory=self.http_response_factory
+            response_factory=self.http_response_factory,
+            proxies=self.proxy_settings.to_proxies() if self.proxy_settings else None
         )
 
     # All the environments the SDK can run in
