@@ -203,7 +203,7 @@ class AdvancedBillingClient(object):
     def __init__(self, http_client_instance=None,
                  override_http_client_configuration=False, http_call_back=None,
                  timeout=120, max_retries=0, backoff_factor=2,
-                 retry_statuses=None, retry_methods=None,
+                 retry_statuses=None, retry_methods=None, proxy_settings=None,
                  environment=Environment.US, site='subdomain',
                  basic_auth_credentials=None, config=None):
         self.config = config or Configuration(
@@ -212,7 +212,7 @@ class AdvancedBillingClient(object):
             http_call_back=http_call_back, timeout=timeout,
             max_retries=max_retries, backoff_factor=backoff_factor,
             retry_statuses=retry_statuses, retry_methods=retry_methods,
-            environment=environment, site=site,
+            proxy_settings=proxy_settings, environment=environment, site=site,
             basic_auth_credentials=basic_auth_credentials)
 
         self.global_configuration = GlobalConfiguration(self.config)\

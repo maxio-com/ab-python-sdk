@@ -34,31 +34,10 @@ class WebhooksController(BaseController):
                       options=dict()):
         """Does a GET request to /webhooks.json.
 
-        ## Webhooks Intro
-        The Webhooks API allows you to view a list of all webhooks and to
-        selectively resend individual or groups of webhooks. Webhooks will be
-        sent on endpoints specified by you. Endpoints can be added via API or
-        Web UI. There is also an option to enable / disable webhooks via API
-        request.
-        We recommend that you review Advanced Billing's webhook documentation
-        located in our help site. The following resources will help guide you
-        on how to use webhooks in Advanced Billing, in addition to these
-        webhook endpoints:
-        + [Adding/editing new
-        webhooks](https://maxio.zendesk.com/hc/en-us/articles/24286723085197-We
-        bhooks#configure-webhook-url)
-        + [Webhooks introduction and delivery
-        information](https://maxio.zendesk.com/hc/en-us/articles/24266143173901
-        -Webhooks-Overview)
-        + [Main webhook
-        reference](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-W
-        ebhooks-Reference)
-        + [Available webhooks and
-        payloads](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-We
-        bhooks-Reference#events)
-        ## List Webhooks for a Site
-        This method allows you to fetch data about webhooks. You can pass
-        query parameters if you want to filter webhooks.
+        Allows you to view a list of webhooks.  You can pass query parameters
+        if you want to filter webhooks. See the
+        [Webhooks](page:introduction/webhooks/webhooks) documentation for more
+        information.
 
         Args:
             options (dict, optional): Key-value pairs for any of the
@@ -144,7 +123,7 @@ class WebhooksController(BaseController):
                         body=None):
         """Does a PUT request to /webhooks/settings.json.
 
-        This method allows you to enable webhooks via API for your site
+        Allows you to enable webhooks for your site
 
         Args:
             body (EnableWebhooksRequest, optional): The request body parameter.
@@ -184,11 +163,10 @@ class WebhooksController(BaseController):
                         body=None):
         """Does a POST request to /webhooks/replay.json.
 
-        Posting to the replay endpoint does not immediately resend the
-        webhooks. They are added to a queue and will be sent as soon as
-        possible, depending on available system resources.
-        You may submit an array of up to 1000 webhook IDs to replay in the
-        request.
+        Replays webhooks. Posting to this endpoint does not immediately resend
+        the webhooks. They are added to a queue and sent as soon as possible,
+        depending on available system resources. You can submit an array of up
+        to 1000 webhook IDs in the replay request.
 
         Args:
             body (ReplayWebhooksRequest, optional): The request body parameter.
@@ -228,12 +206,11 @@ class WebhooksController(BaseController):
                         body=None):
         """Does a POST request to /endpoints.json.
 
-        The Chargify API allows you to create an endpoint and assign a list of
-        webhooks subscriptions (events) to it.
-        You can check available events here.
-        [Event
-        keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhoo
-        ks-Reference#events)
+        Creates an endpoint and assigns a list of webhooks subscriptions
+        (events) to it.
+        See the [Webhooks
+        Reference](page:introduction/webhooks/webhooks-reference#events) page
+        for available events.
 
         Args:
             body (CreateOrUpdateEndpointRequest, optional): The request body
@@ -274,7 +251,7 @@ class WebhooksController(BaseController):
     def list_endpoints(self):
         """Does a GET request to /endpoints.json.
 
-        This method returns created endpoints for site.
+        Returns created endpoints for a site.
 
         Returns:
             List[Endpoint]: Response from the API. OK
@@ -306,17 +283,15 @@ class WebhooksController(BaseController):
                         body=None):
         """Does a PUT request to /endpoints/{endpoint_id}.json.
 
-        You can update an Endpoint via the API with a PUT request to the
-        resource endpoint.
-        You can change the `url` of your endpoint which consumes webhooks or
-        list of `webhook_subscriptions`.
-        Check available [Event
-        keys](https://maxio.zendesk.com/hc/en-us/articles/24266136649869-Webhoo
-        ks-Reference#events).
-        Always send a complete list of events which you want subscribe/watch.
-        Sending an PUT request for existing endpoint with empty list of
-        `webhook_subscriptions` will end with unsubscribe from all events.
-        If you want unsubscribe from specific event, just send a list of
+        Updates an Endpoint. You can change the `url` of your endpoint or the
+        list of `webhook_subscriptions` to which you are subscribed. See the
+        [Webhooks
+        Reference](page:introduction/webhooks/webhooks-reference#events) page
+        for available events.
+        Always send a complete list of events to which you want to subscribe.
+        Sending a PUT request for an existing endpoint with an empty list of
+        `webhook_subscriptions` will unsubscribe all events.
+        If you want unsubscribe from a specific event, send a list of
         `webhook_subscriptions` without the specific event key.
 
         Args:
