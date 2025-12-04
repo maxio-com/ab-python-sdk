@@ -21,7 +21,7 @@ jobs:
     - name: Install deps
       run: |
         pip install -r requirements.txt
-        pip install -r test-requirements.txt
+        pip install "pytest>=7.2.2,<8.0.0"
 
     - name: Run tests
       run: pytest tests/
