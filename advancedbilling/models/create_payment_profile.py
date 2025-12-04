@@ -14,8 +14,8 @@ class CreatePaymentProfile(object):
     """Implementation of the 'Create Payment Profile' model.
 
     Attributes:
-        chargify_token (str): Token received after sending billing
-            informations using chargify.js.
+        chargify_token (str): Token received after sending billing information
+            using chargify.js.
         id (int): The model property of type int.
         payment_type (PaymentType): The model property of type PaymentType.
         first_name (str): First name on card or bank account. If omitted, the
@@ -49,7 +49,7 @@ class CreatePaymentProfile(object):
             alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format
             (i.e. “US”). This value is merely passed through to the payment
             gateway. Some gateways require country codes in a specific format.
-            Please check your gateway’s documentation. If creating an ACH
+            Check your gateway’s documentation. If creating an ACH
             subscription, only US is supported at this time.
         billing_zip (str): The credit card or bank account billing address zip
             code (i.e. 12345). This value is merely passed through to the

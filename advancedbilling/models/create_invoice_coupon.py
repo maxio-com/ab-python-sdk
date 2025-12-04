@@ -15,6 +15,7 @@ class CreateInvoiceCoupon(object):
 
     Attributes:
         code (str): The model property of type str.
+        subcode (str): The model property of type str.
         percentage (str | float | None): The model property of type str |
             float | None.
         amount (str | float | None): The model property of type str | float |
@@ -36,6 +37,7 @@ class CreateInvoiceCoupon(object):
     # Create a mapping from Model property names to API property names
     _names = {
         "code": 'code',
+        "subcode": 'subcode',
         "percentage": 'percentage',
         "amount": 'amount',
         "description": 'description',
@@ -45,6 +47,7 @@ class CreateInvoiceCoupon(object):
 
     _optionals = [
         'code',
+        'subcode',
         'percentage',
         'amount',
         'description',
@@ -54,6 +57,7 @@ class CreateInvoiceCoupon(object):
 
     def __init__(self,
                  code=APIHelper.SKIP,
+                 subcode=APIHelper.SKIP,
                  percentage=APIHelper.SKIP,
                  amount=APIHelper.SKIP,
                  description=APIHelper.SKIP,
@@ -65,6 +69,8 @@ class CreateInvoiceCoupon(object):
         # Initialize members of the class
         if code is not APIHelper.SKIP:
             self.code = code 
+        if subcode is not APIHelper.SKIP:
+            self.subcode = subcode 
         if percentage is not APIHelper.SKIP:
             self.percentage = percentage 
         if amount is not APIHelper.SKIP:
@@ -102,6 +108,7 @@ class CreateInvoiceCoupon(object):
 
         # Extract variables from the dictionary
         code = dictionary.get("code") if dictionary.get("code") else APIHelper.SKIP
+        subcode = dictionary.get("subcode") if dictionary.get("subcode") else APIHelper.SKIP
         percentage = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceCouponPercentage'), dictionary.get('percentage'), False) if dictionary.get('percentage') is not None else APIHelper.SKIP
         amount = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceCouponAmount'), dictionary.get('amount'), False) if dictionary.get('amount') is not None else APIHelper.SKIP
         description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
@@ -111,6 +118,7 @@ class CreateInvoiceCoupon(object):
         additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
         return cls(code,
+                   subcode,
                    percentage,
                    amount,
                    description,
@@ -121,6 +129,7 @@ class CreateInvoiceCoupon(object):
     def __repr__(self):
         return (f'{self.__class__.__name__}('
                 f'code={(self.code if hasattr(self, "code") else None)!r}, '
+                f'subcode={(self.subcode if hasattr(self, "subcode") else None)!r}, '
                 f'percentage={(self.percentage if hasattr(self, "percentage") else None)!r}, '
                 f'amount={(self.amount if hasattr(self, "amount") else None)!r}, '
                 f'description={(self.description if hasattr(self, "description") else None)!r}, '
@@ -131,6 +140,7 @@ class CreateInvoiceCoupon(object):
     def __str__(self):
         return (f'{self.__class__.__name__}('
                 f'code={(self.code if hasattr(self, "code") else None)!s}, '
+                f'subcode={(self.subcode if hasattr(self, "subcode") else None)!s}, '
                 f'percentage={(self.percentage if hasattr(self, "percentage") else None)!s}, '
                 f'amount={(self.amount if hasattr(self, "amount") else None)!s}, '
                 f'description={(self.description if hasattr(self, "description") else None)!s}, '

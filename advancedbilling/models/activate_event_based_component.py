@@ -19,8 +19,8 @@ class ActivateEventBasedComponent(object):
         price_point_id (int): The Chargify id of the price point
         billing_schedule (BillingSchedule): This attribute is particularly
             useful when you need to align billing events for different
-            components on distinct schedules within a subscription. Please
-            note this only works for site with Multifrequency enabled
+            components on distinct schedules within a subscription. This only
+            works for site with Multifrequency enabled.
         custom_price (ComponentCustomPrice): Create or update custom pricing
             unique to the subscription. Used in place of `price_point_id`.
         additional_properties (Dict[str, object]): The additional properties

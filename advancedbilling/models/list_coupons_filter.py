@@ -44,9 +44,15 @@ class ListCouponsFilter(object):
             provided values. Use in query `filter[ids]=1,2,3`.
         codes (List[str]): Allows fetching coupons with matching codes based
             on provided values. Use in query `filter[codes]=free,free_trial`.
-        use_site_exchange_rate (bool): Allows fetching coupons with matching
-            use_site_exchange_rate based on provided value. Use in query
+        use_site_exchange_rate (bool): If true, restricts the list to coupons
+            whose pricing is recalculated from the site’s current exchange
+            rates, so their currency_prices array contains on-the-fly
+            conversions rather than stored price records. If false, restricts
+            the list to coupons that have manually defined amounts for each
+            currency, ensuring the response includes the saved currency_prices
+            entries instead of exchange-rate-derived values. Use in query
             `filter[use_site_exchange_rate]=true`.
+        include_archived (bool): Controls returning archived coupons.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -61,7 +67,8 @@ class ListCouponsFilter(object):
         "end_datetime": 'end_datetime',
         "ids": 'ids',
         "codes": 'codes',
-        "use_site_exchange_rate": 'use_site_exchange_rate'
+        "use_site_exchange_rate": 'use_site_exchange_rate',
+        "include_archived": 'include_archived'
     }
 
     _optionals = [
@@ -73,6 +80,7 @@ class ListCouponsFilter(object):
         'ids',
         'codes',
         'use_site_exchange_rate',
+        'include_archived',
     ]
 
     def __init__(self,
@@ -84,6 +92,7 @@ class ListCouponsFilter(object):
                  ids=APIHelper.SKIP,
                  codes=APIHelper.SKIP,
                  use_site_exchange_rate=APIHelper.SKIP,
+                 include_archived=APIHelper.SKIP,
                  additional_properties=None):
         """Constructor for the ListCouponsFilter class"""
 
@@ -104,6 +113,8 @@ class ListCouponsFilter(object):
             self.codes = codes 
         if use_site_exchange_rate is not APIHelper.SKIP:
             self.use_site_exchange_rate = use_site_exchange_rate 
+        if include_archived is not APIHelper.SKIP:
+            self.include_archived = include_archived 
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -137,6 +148,7 @@ class ListCouponsFilter(object):
         ids = dictionary.get("ids") if dictionary.get("ids") else APIHelper.SKIP
         codes = dictionary.get("codes") if dictionary.get("codes") else APIHelper.SKIP
         use_site_exchange_rate = dictionary.get("use_site_exchange_rate") if "use_site_exchange_rate" in dictionary.keys() else APIHelper.SKIP
+        include_archived = dictionary.get("include_archived") if "include_archived" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
@@ -148,6 +160,7 @@ class ListCouponsFilter(object):
                    ids,
                    codes,
                    use_site_exchange_rate,
+                   include_archived,
                    additional_properties)
 
     def __repr__(self):
@@ -160,6 +173,7 @@ class ListCouponsFilter(object):
                 f'ids={(self.ids if hasattr(self, "ids") else None)!r}, '
                 f'codes={(self.codes if hasattr(self, "codes") else None)!r}, '
                 f'use_site_exchange_rate={(self.use_site_exchange_rate if hasattr(self, "use_site_exchange_rate") else None)!r}, '
+                f'include_archived={(self.include_archived if hasattr(self, "include_archived") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
@@ -172,4 +186,5 @@ class ListCouponsFilter(object):
                 f'ids={(self.ids if hasattr(self, "ids") else None)!s}, '
                 f'codes={(self.codes if hasattr(self, "codes") else None)!s}, '
                 f'use_site_exchange_rate={(self.use_site_exchange_rate if hasattr(self, "use_site_exchange_rate") else None)!s}, '
+                f'include_archived={(self.include_archived if hasattr(self, "include_archived") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

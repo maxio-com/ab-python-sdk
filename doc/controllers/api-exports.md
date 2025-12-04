@@ -50,7 +50,7 @@ def list_exported_proforma_invoices(self,
 collect = {
     'batch_id': 'batch_id8',
     'per_page': 100,
-    'page': 2
+    'page': 1
 }
 result = api_exports_controller.list_exported_proforma_invoices(collect)
 print(result)
@@ -92,7 +92,7 @@ def list_exported_invoices(self,
 collect = {
     'batch_id': 'batch_id8',
     'per_page': 100,
-    'page': 2
+    'page': 1
 }
 result = api_exports_controller.list_exported_invoices(collect)
 print(result)
@@ -134,7 +134,7 @@ def list_exported_subscriptions(self,
 collect = {
     'batch_id': 'batch_id8',
     'per_page': 100,
-    'page': 2
+    'page': 1
 }
 result = api_exports_controller.list_exported_subscriptions(collect)
 print(result)

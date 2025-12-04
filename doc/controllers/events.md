@@ -115,7 +115,7 @@ def list_events(self,
 
 ```python
 collect = {
-    'page': 2,
+    'page': 1,
     'per_page': 50,
     'direction': Direction.DESC,
     'filter': [
@@ -231,7 +231,7 @@ def list_subscription_events(self,
 ```python
 collect = {
     'subscription_id': 222,
-    'page': 2,
+    'page': 1,
     'per_page': 50,
     'direction': Direction.DESC,
     'filter': [
@@ -315,7 +315,7 @@ def read_events_count(self,
 
 ```python
 collect = {
-    'page': 2,
+    'page': 1,
     'per_page': 50,
     'direction': Direction.DESC,
     'filter': [

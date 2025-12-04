@@ -32,8 +32,7 @@ class ProductFamiliesController(BaseController):
                                          options=dict()):
         """Does a GET request to /product_families/{product_family_id}/products.json.
 
-        This method allows to retrieve a list of Products belonging to a
-        Product Family.
+        Retrieves a list of Products belonging to a Product Family.
 
         Args:
             options (dict, optional): Key-value pairs for any of the
@@ -156,9 +155,9 @@ class ProductFamiliesController(BaseController):
                               body=None):
         """Does a POST request to /product_families.json.
 
-        This method will create a Product Family within your Advanced Billing
-        site. Create a Product Family to act as a container for your products,
-        components and coupons.
+        Creates a Product Family within your Advanced Billing site. Create a
+        Product Family to act as a container for your products, components and
+        coupons.
         Full documentation on how Product Families operate within the Advanced
         Billing UI can be located
         [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Produ
@@ -204,7 +203,7 @@ class ProductFamiliesController(BaseController):
                               options=dict()):
         """Does a GET request to /product_families.json.
 
-        This method allows to retrieve a list of Product Families for a site.
+        Retrieve a list of Product Families for a site.
 
         Args:
             options (dict, optional): Key-value pairs for any of the
@@ -283,8 +282,8 @@ class ProductFamiliesController(BaseController):
                             id):
         """Does a GET request to /product_families/{id}.json.
 
-        This method allows to retrieve a Product Family via the
-        `product_family_id`. The response will contain a Product Family object.
+        Retrieves a Product Family via the `product_family_id`. The response
+        will contain a Product Family object.
         The product family can be specified either with the id number, or with
         the `handle:my-family` format.
 

@@ -12,11 +12,9 @@ class MetafieldInput(object):
 
     """Implementation of the 'Metafield Input' enum.
 
-    Indicates how data should be added to the metafield. For example, a text
-    type is just a string, so a given metafield of this type can have any
-    value attached. On the other hand, dropdown and radio have a set of
-    allowed values that can be input, and appear differently on a Public
-    Signup Page. Defaults to 'text'
+    Indicates the type of metafield. A text metafield allows any string value.
+    Dropdown and radio metafields have a set of values that can be selected. 
+    Defaults to 'text'.
 
     Attributes:
         BALANCE_TRACKER: The enum member of type str.
@@ -49,3 +47,25 @@ class MetafieldInput(object):
         """
         return value in cls._all_values
    
+    @classmethod
+    def from_value(cls, value, default=None):
+        if value is None:
+            return default
+
+        # If numeric and matches directly
+        if isinstance(value, int):
+            for name, val in cls.__dict__.items():
+                if not name.startswith("_") and val == value:
+                    return val
+
+        # If string, perform case-insensitive match
+        if isinstance(value, str):
+            value_lower = value.lower()
+            for name, val in cls.__dict__.items():
+                if not name.startswith("_") and (
+                    name.lower() == value_lower or str(val).lower() == value_lower
+                ):
+                    return val
+
+        # Fallback to default
+        return default

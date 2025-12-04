@@ -150,7 +150,7 @@ def list_offers(self,
 
 ```python
 collect = {
-    'page': 2,
+    'page': 1,
     'per_page': 50,
     'include_archived': True
 }

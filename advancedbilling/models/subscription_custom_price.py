@@ -27,6 +27,13 @@ class SubscriptionCustomPrice(object):
         trial_price_in_cents (str | int | None): (Optional)
         trial_interval (str | int | None): (Optional)
         trial_interval_unit (IntervalUnit): (Optional)
+        trial_type (TrialType): Indicates how a trial is handled when the
+            trail period ends and there is no credit card on file. For
+            `no_obligation`, the subscription transitions to a Trial Ended
+            state. Maxio will not send any emails or statements. For
+            `payment_expected`, the subscription transitions to a Past Due
+            state. Maxio will send normal dunning emails and statements
+            according to your other settings.
         initial_charge_in_cents (str | int | None): (Optional)
         initial_charge_after_trial (bool): (Optional)
         expiration_interval (str | int | None): (Optional)
@@ -47,6 +54,7 @@ class SubscriptionCustomPrice(object):
         "trial_price_in_cents": 'trial_price_in_cents',
         "trial_interval": 'trial_interval',
         "trial_interval_unit": 'trial_interval_unit',
+        "trial_type": 'trial_type',
         "initial_charge_in_cents": 'initial_charge_in_cents',
         "initial_charge_after_trial": 'initial_charge_after_trial',
         "expiration_interval": 'expiration_interval',
@@ -60,6 +68,7 @@ class SubscriptionCustomPrice(object):
         'trial_price_in_cents',
         'trial_interval',
         'trial_interval_unit',
+        'trial_type',
         'initial_charge_in_cents',
         'initial_charge_after_trial',
         'expiration_interval',
@@ -69,6 +78,7 @@ class SubscriptionCustomPrice(object):
 
     _nullables = [
         'interval_unit',
+        'trial_type',
         'expiration_interval_unit',
     ]
 
@@ -81,6 +91,7 @@ class SubscriptionCustomPrice(object):
                  trial_price_in_cents=APIHelper.SKIP,
                  trial_interval=APIHelper.SKIP,
                  trial_interval_unit=APIHelper.SKIP,
+                 trial_type=APIHelper.SKIP,
                  initial_charge_in_cents=APIHelper.SKIP,
                  initial_charge_after_trial=APIHelper.SKIP,
                  expiration_interval=APIHelper.SKIP,
@@ -103,6 +114,8 @@ class SubscriptionCustomPrice(object):
             self.trial_interval = trial_interval 
         if trial_interval_unit is not APIHelper.SKIP:
             self.trial_interval_unit = trial_interval_unit 
+        if trial_type is not APIHelper.SKIP:
+            self.trial_type = trial_type 
         if initial_charge_in_cents is not APIHelper.SKIP:
             self.initial_charge_in_cents = initial_charge_in_cents 
         if initial_charge_after_trial is not APIHelper.SKIP:
@@ -147,6 +160,7 @@ class SubscriptionCustomPrice(object):
         trial_price_in_cents = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCustomPriceTrialPriceInCents'), dictionary.get('trial_price_in_cents'), False) if dictionary.get('trial_price_in_cents') is not None else APIHelper.SKIP
         trial_interval = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCustomPriceTrialInterval'), dictionary.get('trial_interval'), False) if dictionary.get('trial_interval') is not None else APIHelper.SKIP
         trial_interval_unit = dictionary.get("trial_interval_unit") if dictionary.get("trial_interval_unit") else APIHelper.SKIP
+        trial_type = dictionary.get("trial_type") if "trial_type" in dictionary.keys() else APIHelper.SKIP
         initial_charge_in_cents = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCustomPriceInitialChargeInCents'), dictionary.get('initial_charge_in_cents'), False) if dictionary.get('initial_charge_in_cents') is not None else APIHelper.SKIP
         initial_charge_after_trial = dictionary.get("initial_charge_after_trial") if "initial_charge_after_trial" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionCustomPriceExpirationInterval'), dictionary.get('expiration_interval'), False) if dictionary.get('expiration_interval') is not None else APIHelper.SKIP
@@ -163,6 +177,7 @@ class SubscriptionCustomPrice(object):
                    trial_price_in_cents,
                    trial_interval,
                    trial_interval_unit,
+                   trial_type,
                    initial_charge_in_cents,
                    initial_charge_after_trial,
                    expiration_interval,
@@ -211,6 +226,7 @@ class SubscriptionCustomPrice(object):
                 f'trial_price_in_cents={(self.trial_price_in_cents if hasattr(self, "trial_price_in_cents") else None)!r}, '
                 f'trial_interval={(self.trial_interval if hasattr(self, "trial_interval") else None)!r}, '
                 f'trial_interval_unit={(self.trial_interval_unit if hasattr(self, "trial_interval_unit") else None)!r}, '
+                f'trial_type={(self.trial_type if hasattr(self, "trial_type") else None)!r}, '
                 f'initial_charge_in_cents={(self.initial_charge_in_cents if hasattr(self, "initial_charge_in_cents") else None)!r}, '
                 f'initial_charge_after_trial={(self.initial_charge_after_trial if hasattr(self, "initial_charge_after_trial") else None)!r}, '
                 f'expiration_interval={(self.expiration_interval if hasattr(self, "expiration_interval") else None)!r}, '
@@ -228,6 +244,7 @@ class SubscriptionCustomPrice(object):
                 f'trial_price_in_cents={(self.trial_price_in_cents if hasattr(self, "trial_price_in_cents") else None)!s}, '
                 f'trial_interval={(self.trial_interval if hasattr(self, "trial_interval") else None)!s}, '
                 f'trial_interval_unit={(self.trial_interval_unit if hasattr(self, "trial_interval_unit") else None)!s}, '
+                f'trial_type={(self.trial_type if hasattr(self, "trial_type") else None)!s}, '
                 f'initial_charge_in_cents={(self.initial_charge_in_cents if hasattr(self, "initial_charge_in_cents") else None)!s}, '
                 f'initial_charge_after_trial={(self.initial_charge_after_trial if hasattr(self, "initial_charge_after_trial") else None)!s}, '
                 f'expiration_interval={(self.expiration_interval if hasattr(self, "expiration_interval") else None)!s}, '

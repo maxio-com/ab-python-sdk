@@ -191,7 +191,7 @@ def list_component_price_points(self,
 ```python
 collect = {
     'component_id': 222,
-    'page': 2,
+    'page': 1,
     'per_page': 50,
     'filter_type': Liquid error: Value cannot be null. (Parameter 'key')
 }
@@ -378,7 +378,7 @@ print(result)
 
 # Update Component Price Point
 
-When updating a price point, it's prices can be updated as well by creating new prices or editing / removing existing ones.
+When updating a price point, prices can be updated as well by creating new prices or editing / removing existing ones.
 
 Passing in a price bracket without an `id` will attempt to create a new price.
 
@@ -808,7 +808,7 @@ def list_all_component_price_points(self,
 ```python
 collect = {
     'include': ListComponentsPricePointsInclude.CURRENCY_PRICES,
-    'page': 2,
+    'page': 1,
     'per_page': 50,
     'filter': ListPricePointsFilter(
         start_date=dateutil.parser.parse('2011-12-17').date(),

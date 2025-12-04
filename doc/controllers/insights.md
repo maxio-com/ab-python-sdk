@@ -165,7 +165,7 @@ def list_mrr_movements(self,
 
 ```python
 collect = {
-    'page': 2,
+    'page': 1,
     'per_page': 20
 }
 result = insights_controller.list_mrr_movements(collect)
@@ -262,7 +262,7 @@ collect = {
         ]
     ),
     'at_time': 'at_time=2022-01-10T10:00:00-05:00',
-    'page': 2,
+    'page': 1,
     'per_page': 50,
     'direction': Direction.DESC
 }

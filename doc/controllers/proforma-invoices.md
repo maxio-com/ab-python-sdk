@@ -154,7 +154,7 @@ print(result)
 
 This endpoint will create a proforma invoice and return it as a response. If the information becomes outdated, simply void the old proforma invoice and generate a new one.
 
-If you would like to preview the next billing amounts without generating a full proforma invoice, please use the renewal preview endpoint.
+If you would like to preview the next billing amounts without generating a full proforma invoice, use the renewal preview endpoint.
 
 ## Restrictions
 
@@ -227,7 +227,7 @@ def list_proforma_invoices(self,
 ```python
 collect = {
     'subscription_id': 222,
-    'page': 2,
+    'page': 1,
     'per_page': 50,
     'direction': Direction.DESC,
     'line_items': False,

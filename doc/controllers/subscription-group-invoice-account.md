@@ -92,7 +92,7 @@ def list_prepayments_for_subscription_group(self,
 ```python
 collect = {
     'uid': 'uid0',
-    'page': 2,
+    'page': 1,
     'per_page': 50,
     'filter': ListPrepaymentsFilter(
         date_field=ListPrepaymentDateField.CREATED_AT,

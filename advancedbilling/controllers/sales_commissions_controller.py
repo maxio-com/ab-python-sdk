@@ -44,7 +44,7 @@ class SalesCommissionsController(BaseController):
         Access to the Sales Commission API endpoints is available to users
         with financial access, where the seller has the Advanced Analytics
         component enabled. For further information on getting access to
-        Advanced Analytics please contact Maxio support.
+        Advanced Analytics contact Maxio support.
         > Note: The request is at seller level, it means `<<subdomain>>`
         variable will be replaced by `app`
 
@@ -136,7 +136,7 @@ class SalesCommissionsController(BaseController):
         Access to the Sales Commission API endpoints is available to users
         with financial access, where the seller has the Advanced Analytics
         component enabled. For further information on getting access to
-        Advanced Analytics please contact Maxio support.
+        Advanced Analytics contact Maxio support.
         > Note: The request is at seller level, it means `<<subdomain>>`
         variable will be replaced by `app`
 
@@ -233,7 +233,7 @@ class SalesCommissionsController(BaseController):
         Access to the Sales Commission API endpoints is available to users
         with financial access, where the seller has the Advanced Analytics
         component enabled. For further information on getting access to
-        Advanced Analytics please contact Maxio support.
+        Advanced Analytics contact Maxio support.
         > Note: The request is at seller level, it means `<<subdomain>>`
         variable will be replaced by `app`
 

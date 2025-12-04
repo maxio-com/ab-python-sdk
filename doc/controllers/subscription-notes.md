@@ -98,7 +98,7 @@ def list_subscription_notes(self,
 ```python
 collect = {
     'subscription_id': 222,
-    'page': 2,
+    'page': 1,
     'per_page': 50
 }
 result = subscription_notes_controller.list_subscription_notes(collect)

@@ -145,8 +145,9 @@ class Subscription(object):
         coupon_code (str): (deprecated) The coupon code of the single coupon
             currently applied to the subscription. See coupon_codes instead as
             subscriptions can now have more than one coupon.
-        snap_day (str): The day of the month that the subscription will charge
-            according to calendar billing rules, if used.
+        snap_day (int | SnapDay | None): The day of the month that the
+            subscription will charge according to calendar billing rules, if
+            used.
         payment_collection_method (CollectionMethod): The type of payment
             collection to be used in the subscription. For legacy Statements
             Architecture valid options are - `invoice`, `automatic`. For
@@ -187,8 +188,8 @@ class Subscription(object):
             paying for the subscription. Defaults to the Customer ID unless
             the 'Customer Hierarchies & WhoPays' feature is enabled.
         current_billing_amount_in_cents (int): The balance in cents plus the
-            estimated renewal amount in cents. Returned ONLY for
-            readSubscription operation as it's compute intensive operation.
+            estimated renewal amount in cents. Returned ONLY for the
+            readSubscription operation as it's a compute intensive operation.
         product_price_point_id (int): The product price point currently
             subscribed to.
         product_price_point_type (PricePointType): Price point type. We expose
@@ -618,6 +619,7 @@ class Subscription(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
 
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
@@ -674,7 +676,10 @@ class Subscription(object):
         else:
             delayed_cancel_at = APIHelper.SKIP
         coupon_code = dictionary.get("coupon_code") if "coupon_code" in dictionary.keys() else APIHelper.SKIP
-        snap_day = dictionary.get("snap_day") if "snap_day" in dictionary.keys() else APIHelper.SKIP
+        if 'snap_day' in dictionary.keys():
+            snap_day = APIHelper.deserialize_union_type(UnionTypeLookUp.get('SubscriptionSnapDay'), dictionary.get('snap_day'), False) if dictionary.get('snap_day') is not None else None
+        else:
+            snap_day = APIHelper.SKIP
         payment_collection_method = dictionary.get("payment_collection_method") if dictionary.get("payment_collection_method") else APIHelper.SKIP
         customer = Customer.from_dictionary(dictionary.get('customer')) if 'customer' in dictionary.keys() else APIHelper.SKIP
         product = Product.from_dictionary(dictionary.get('product')) if 'product' in dictionary.keys() else APIHelper.SKIP

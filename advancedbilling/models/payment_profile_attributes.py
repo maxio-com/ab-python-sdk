@@ -62,7 +62,7 @@ class PaymentProfileAttributes(object):
             alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format
             (i.e. “US”). This value is merely passed through to the payment
             gateway. Some gateways require country codes in a specific format.
-            Please check your gateway’s documentation. If creating an ACH
+            Check your gateway’s documentation. If creating an ACH
             subscription, only US is supported at this time.
         billing_zip (str): (Optional, may be required by your product
             configuration or gateway settings) The credit card or bank account

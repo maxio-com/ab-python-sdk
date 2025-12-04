@@ -7,7 +7,7 @@ The following parameters are configurable for the API Client:
 |  --- | --- | --- |
 | site | `str` | The subdomain for your Advanced Billing site.<br>*Default*: `'subdomain'` |
 | environment | `Environment` | The API environment. <br> **Default: `Environment.US`** |
-| http_client_instance | `HttpClient` | The Http Client passed from the sdk user for making requests |
+| http_client_instance | `Union[Session, HttpClientProvider]` | The Http Client passed from the sdk user for making requests |
 | override_http_client_configuration | `bool` | The value which determines to override properties of the passed Http Client from the sdk user |
 | http_call_back | `HttpCallBack` | The callback value that is invoked before and after an HTTP call is made to an endpoint |
 | timeout | `float` | The value to use for connection timeout. <br> **Default: 120** |
@@ -19,6 +19,8 @@ The following parameters are configurable for the API Client:
 | basic_auth_credentials | [`BasicAuthCredentials`](auth/basic-authentication.md) | The credential object for Basic Authentication |
 
 The API client can be initialized as follows:
+
+## Code-Based Client Initialization
 
 ```python
 from advancedbilling.advanced_billing_client import AdvancedBillingClient
@@ -34,6 +36,17 @@ client = AdvancedBillingClient(
     site='subdomain'
 )
 ```
+
+## Environment-Based Client Initialization
+
+```python
+from advancedbilling.advanced_billing_client import AdvancedBillingClient
+
+# Specify the path to your .env file if it’s located outside the project’s root directory.
+client = AdvancedBillingClient.from_environment(dotenv_path='/path/to/.env')
+```
+
+See the [Environment-Based Client Initialization](../doc/environment-based-client-initialization.md) section for details.
 
 ## Maxio Advanced Billing Client
 

@@ -182,8 +182,8 @@ class SubscriptionStatusController(BaseController):
         This will place the subscription in the on_hold state and it will not
         renew.
         ## Limitations
-        You may not place a subscription on hold if the `next_billing` date is
-        within 24 hours.
+        You may not place a subscription on hold if the `next_billing_at` date
+        is within 24 hours.
 
         Args:
             subscription_id (int): The Chargify id of the subscription
@@ -290,10 +290,9 @@ class SubscriptionStatusController(BaseController):
         how to reactivate subscriptions through the application, see
         [reactivation](https://maxio.zendesk.com/hc/en-us/articles/242521095036
         29-Reactivating-and-Resuming).
-        **Please note: The term
-        "resume" is used also during another process in Advanced Billing. This
-        occurs when an on-hold subscription is "resumed". This returns the
-        subscription to an active state.**
+        **Note: The term "resume" is used also during another process in
+        Advanced Billing. This occurs when an on-hold subscription is
+        "resumed". This returns the subscription to an active state.**
         + The response returns the subscription object in the `active` or
         `trialing` state.
         + The `canceled_at` and `cancellation_message` fields do not have
@@ -620,7 +619,7 @@ class SubscriptionStatusController(BaseController):
         of how much your customer will be charged on their next renewal.
         The "Next Billing" amount and "Next Billing" date are already
         represented in the UI on each Subscriber's Summary. For more
-        information, please see our documentation
+        information, see our documentation
         [here](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subsc
         riber-Interface-Overview).
         ## Optional Component Fields

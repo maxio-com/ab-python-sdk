@@ -29,7 +29,13 @@ class CreateProductPricePoint(object):
             product price point trial would last 30 days.
         trial_interval_unit (IntervalUnit): A string representing the trial
             interval unit for this product price point, either month or day
-        trial_type (str): The model property of type str.
+        trial_type (TrialType): Indicates how a trial is handled when the
+            trail period ends and there is no credit card on file. For
+            `no_obligation`, the subscription transitions to a Trial Ended
+            state. Maxio will not send any emails or statements. For
+            `payment_expected`, the subscription transitions to a Past Due
+            state. Maxio will send normal dunning emails and statements
+            according to your other settings.
         initial_charge_in_cents (int): The product price point initial charge,
             in integer cents
         initial_charge_after_trial (bool): The model property of type bool.
@@ -80,6 +86,7 @@ class CreateProductPricePoint(object):
     ]
 
     _nullables = [
+        'trial_type',
         'expiration_interval_unit',
     ]
 
@@ -158,7 +165,7 @@ class CreateProductPricePoint(object):
         trial_price_in_cents = dictionary.get("trial_price_in_cents") if dictionary.get("trial_price_in_cents") else APIHelper.SKIP
         trial_interval = dictionary.get("trial_interval") if dictionary.get("trial_interval") else APIHelper.SKIP
         trial_interval_unit = dictionary.get("trial_interval_unit") if dictionary.get("trial_interval_unit") else APIHelper.SKIP
-        trial_type = dictionary.get("trial_type") if dictionary.get("trial_type") else APIHelper.SKIP
+        trial_type = dictionary.get("trial_type") if "trial_type" in dictionary.keys() else APIHelper.SKIP
         initial_charge_in_cents = dictionary.get("initial_charge_in_cents") if dictionary.get("initial_charge_in_cents") else APIHelper.SKIP
         initial_charge_after_trial = dictionary.get("initial_charge_after_trial") if "initial_charge_after_trial" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP

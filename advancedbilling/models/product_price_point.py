@@ -31,7 +31,13 @@ class ProductPricePoint(object):
             product price point trial would last 30 days
         trial_interval_unit (IntervalUnit): A string representing the trial
             interval unit for this product price point, either month or day
-        trial_type (str): The model property of type str.
+        trial_type (TrialType): Indicates how a trial is handled when the
+            trail period ends and there is no credit card on file. For
+            `no_obligation`, the subscription transitions to a Trial Ended
+            state. Maxio will not send any emails or statements. For
+            `payment_expected`, the subscription transitions to a Past Due
+            state. Maxio will send normal dunning emails and statements
+            according to your other settings.
         introductory_offer (bool): reserved for future use
         initial_charge_in_cents (int): The product price point initial charge,
             in integer cents
@@ -126,6 +132,7 @@ class ProductPricePoint(object):
         'trial_price_in_cents',
         'trial_interval',
         'trial_interval_unit',
+        'trial_type',
         'introductory_offer',
         'initial_charge_in_cents',
         'initial_charge_after_trial',
@@ -246,7 +253,7 @@ class ProductPricePoint(object):
         trial_price_in_cents = dictionary.get("trial_price_in_cents") if "trial_price_in_cents" in dictionary.keys() else APIHelper.SKIP
         trial_interval = dictionary.get("trial_interval") if "trial_interval" in dictionary.keys() else APIHelper.SKIP
         trial_interval_unit = dictionary.get("trial_interval_unit") if "trial_interval_unit" in dictionary.keys() else APIHelper.SKIP
-        trial_type = dictionary.get("trial_type") if dictionary.get("trial_type") else APIHelper.SKIP
+        trial_type = dictionary.get("trial_type") if "trial_type" in dictionary.keys() else APIHelper.SKIP
         introductory_offer = dictionary.get("introductory_offer") if "introductory_offer" in dictionary.keys() else APIHelper.SKIP
         initial_charge_in_cents = dictionary.get("initial_charge_in_cents") if "initial_charge_in_cents" in dictionary.keys() else APIHelper.SKIP
         initial_charge_after_trial = dictionary.get("initial_charge_after_trial") if "initial_charge_after_trial" in dictionary.keys() else APIHelper.SKIP
