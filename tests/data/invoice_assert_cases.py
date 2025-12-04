@@ -46,11 +46,11 @@ class InvoiceAssertCases:
                     "total_amount": "1530.0",
                 }
             ],
-            "memo": "Thanks for your business! If you have any questions, contact your account manager.",
+            "memo": "Thanks for your business! If you have any questions, please contact your account manager.",
             "paid_amount": "0.0",
             "parent_invoice_uid": None,
             "parent_invoice_number": None,
-            "payment_instructions": 'Make checks payable to "Acme, Inc."',
+            "payment_instructions": 'Please make checks payable to "Acme, Inc."',
             "product_family_name": product_family.name,
             "product_name": product.name,
             "refund_amount": "0.0",
