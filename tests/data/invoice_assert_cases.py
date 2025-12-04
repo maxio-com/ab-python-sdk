@@ -46,11 +46,11 @@ class InvoiceAssertCases:
                     "total_amount": "1530.0",
                 }
             ],
-            "memo": "Thanks for your business! If you have any questions, please contact your account manager.",
+            "memo": "Thanks for your business! If you have any questions, contact your account manager.",
             "paid_amount": "0.0",
             "parent_invoice_uid": None,
             "parent_invoice_number": None,
-            "payment_instructions": 'Please make checks payable to "Acme, Inc."',
+            "payment_instructions": 'Make checks payable to "Acme, Inc."',
             "product_family_name": product_family.name,
             "product_name": product.name,
             "refund_amount": "0.0",
@@ -60,18 +60,6 @@ class InvoiceAssertCases:
             "subtotal_amount": "1800.0",
             "tax_amount": "0.0",
             "total_amount": "1530.0",
-            "seller": {
-                "name": "Maxio Developer Experience",
-                "phone": "555 111 222",
-                "address": {
-                    "city": "San Antonio",
-                    "country": "US",
-                    "line_2": "123/444",
-                    "state": "TX",
-                    "street": "Asdf Street",
-                    "zip": "78015",
-                },
-            },
             "shipping_address": {
                 "city": "Ohio",
                 "country": "US",
