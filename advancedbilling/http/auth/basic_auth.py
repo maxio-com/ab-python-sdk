@@ -7,6 +7,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+import os
 from apimatic_core.authentication.header_auth import HeaderAuth
 from apimatic_core.utilities.auth_helper import AuthHelper
 
@@ -51,3 +52,16 @@ class BasicAuthCredentials:
     def clone_with(self, username=None, password=None):
         return BasicAuthCredentials(username or self.username,
                                     password or self.password)
+
+    @classmethod
+    def from_environment(cls):
+        username = os.getenv('USERNAME', None)
+        password = os.getenv('PASSWORD', None)
+
+        if username is None or password is None:
+            return None
+
+        return cls(
+            username=username,
+            password=password
+        )

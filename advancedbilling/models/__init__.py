@@ -571,6 +571,7 @@ __all__ = [
     'subscription_state_filter',
     'tax_configuration_kind',
     'tax_destination_address',
+    'trial_type',
     'webhook_order',
     'webhook_status',
     'webhook_subscription',

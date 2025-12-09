@@ -19,6 +19,7 @@
 | `trial_price_in_cents` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `trial_interval` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `trial_interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | (Optional) |
+| `trial_type` | [`TrialType`](../../doc/models/trial-type.md) | Optional | Indicates how a trial is handled when the trail period ends and there is no credit card on file. For `no_obligation`, the subscription transitions to a Trial Ended state. Maxio will not send any emails or statements. For `payment_expected`, the subscription transitions to a Past Due state. Maxio will send normal dunning emails and statements according to your other settings. |
 | `initial_charge_in_cents` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `initial_charge_after_trial` | `bool` | Optional | (Optional) |
 | `expiration_interval` | str \| int \| None | Optional | This is a container for one-of cases. |

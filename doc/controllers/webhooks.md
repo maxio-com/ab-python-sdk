@@ -47,7 +47,7 @@ def list_webhooks(self,
 
 ```python
 collect = {
-    'page': 2,
+    'page': 1,
     'per_page': 50
 }
 result = webhooks_controller.list_webhooks(collect)

@@ -27,7 +27,7 @@ class UpdateSubscription(object):
         next_product_id (str): Set to an empty string to cancel a delayed
             product change.
         next_product_price_point_id (str): The model property of type str.
-        snap_day (SnapDay | int | None): Use for subscriptions with product
+        snap_day (int | SnapDay | None): Use for subscriptions with product
             eligible for calendar billing only. Value can be 1-28 or 'end'.
         initial_billing_at (datetime): (Optional) Set this attribute to a
             future date/time to update a subscription in the Awaiting Signup
@@ -137,6 +137,7 @@ class UpdateSubscription(object):
     ]
 
     _nullables = [
+        'snap_day',
         'dunning_communication_delay_time_zone',
     ]
 
@@ -242,7 +243,10 @@ class UpdateSubscription(object):
         product_change_delayed = dictionary.get("product_change_delayed") if "product_change_delayed" in dictionary.keys() else APIHelper.SKIP
         next_product_id = dictionary.get("next_product_id") if dictionary.get("next_product_id") else APIHelper.SKIP
         next_product_price_point_id = dictionary.get("next_product_price_point_id") if dictionary.get("next_product_price_point_id") else APIHelper.SKIP
-        snap_day = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdateSubscriptionSnapDay'), dictionary.get('snap_day'), False) if dictionary.get('snap_day') is not None else APIHelper.SKIP
+        if 'snap_day' in dictionary.keys():
+            snap_day = APIHelper.deserialize_union_type(UnionTypeLookUp.get('UpdateSubscriptionSnapDay'), dictionary.get('snap_day'), False) if dictionary.get('snap_day') is not None else None
+        else:
+            snap_day = APIHelper.SKIP
         initial_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("initial_billing_at")).datetime if dictionary.get("initial_billing_at") else APIHelper.SKIP
         defer_signup = dictionary.get("defer_signup") if dictionary.get("defer_signup") else False
         next_billing_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_billing_at")).datetime if dictionary.get("next_billing_at") else APIHelper.SKIP

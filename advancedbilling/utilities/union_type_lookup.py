@@ -74,115 +74,115 @@ class UnionTypeLookUp:
 
     """
     _templates = {
-        'UpdateComponentPricePointComponentId': OneOf(
+        'UpdateComponentPricePointComponentId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'UpdateComponentPricePointPricePointId': OneOf(
+        'UpdateComponentPricePointPricePointId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ReadComponentPricePointComponentId': OneOf(
+        'ReadComponentPricePointComponentId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ReadComponentPricePointPricePointId': OneOf(
+        'ReadComponentPricePointPricePointId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ArchiveComponentPricePointComponentId': OneOf(
+        'ArchiveComponentPricePointComponentId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ArchiveComponentPricePointPricePointId': OneOf(
+        'ArchiveComponentPricePointPricePointId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'CreateProductPricePointProductId': OneOf(
+        'CreateProductPricePointProductId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ListProductPricePointsInputProductId': OneOf(
+        'ListProductPricePointsInputProductId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'UpdateProductPricePointProductId': OneOf(
+        'UpdateProductPricePointProductId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'UpdateProductPricePointPricePointId': OneOf(
+        'UpdateProductPricePointPricePointId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ReadProductPricePointProductId': OneOf(
+        'ReadProductPricePointProductId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ReadProductPricePointPricePointId': OneOf(
+        'ReadProductPricePointPricePointId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ArchiveProductPricePointProductId': OneOf(
+        'ArchiveProductPricePointProductId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ArchiveProductPricePointPricePointId': OneOf(
+        'ArchiveProductPricePointPricePointId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'CreateUsageSubscriptionIdOrReference': OneOf(
+        'CreateUsageSubscriptionIdOrReference': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'CreateUsageComponentId': OneOf(
+        'CreateUsageComponentId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ListUsagesInputSubscriptionIdOrReference': OneOf(
+        'ListUsagesInputSubscriptionIdOrReference': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'ListUsagesInputComponentId': OneOf(
+        'ListUsagesInputComponentId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'Invoice-Event': AnyOf(
+        'Invoice-Event': lambda: AnyOf(
             [
                 LeafType(ApplyCreditNoteEvent,
                          Context.create(
@@ -265,7 +265,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'AllocationQuantity': OneOf(
+        'AllocationQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -274,7 +274,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'AllocationPreviousQuantity': OneOf(
+        'AllocationPreviousQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -283,7 +283,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'AllocationPreviewItemQuantity': OneOf(
+        'AllocationPreviewItemQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -292,7 +292,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'AllocationPreviewItemPreviousQuantity': OneOf(
+        'AllocationPreviewItemPreviousQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -301,7 +301,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'Invoice-Event-Payment': AnyOf(
+        'Invoice-Event-Payment': lambda: AnyOf(
             [
                 LeafType(PaymentMethodApplePay,
                          Context.create(
@@ -330,7 +330,17 @@ class UnionTypeLookUp:
                          ))
             ]
         ),
-        'CalendarBillingSnapDay': OneOf(
+        'CalendarBillingSnapDay': lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(SnapDay)
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
+            )
+        ),
+        'ComponentAllocationChangeAllocatedQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -339,16 +349,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ComponentAllocationChangeAllocatedQuantity': OneOf(
-            [
-                LeafType(int),
-                LeafType(str)
-            ],
-            Context.create(
-               is_optional=True
-            )
-        ),
-        'ComponentPricePointAssignmentPricePoint': OneOf(
+        'ComponentPricePointAssignmentPricePoint': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -357,7 +358,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CouponPayloadPercentage': OneOf(
+        'CouponPayloadPercentage': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
@@ -366,7 +367,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateAllocationPricePointId': OneOf(
+        'CreateAllocationPricePointId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -376,13 +377,13 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
-        'CreateComponentPricePointRequestPricePoint': AnyOf(
+        'CreateComponentPricePointRequestPricePoint': lambda: AnyOf(
             [
                 LeafType(CreateComponentPricePoint),
                 LeafType(CreatePrepaidUsageComponentPricePoint)
             ]
         ),
-        'CreateComponentPricePointsRequestPricePoints': AnyOf(
+        'CreateComponentPricePointsRequestPricePoints': lambda: AnyOf(
             [
                 LeafType(CreateComponentPricePoint),
                 LeafType(CreatePrepaidUsageComponentPricePoint)
@@ -391,7 +392,7 @@ class UnionTypeLookUp:
                is_array=True
             )
         ),
-        'CreateInvoiceCouponPercentage': OneOf(
+        'CreateInvoiceCouponPercentage': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
@@ -400,7 +401,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateInvoiceCouponAmount': OneOf(
+        'CreateInvoiceCouponAmount': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
@@ -409,7 +410,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateInvoiceCouponProductFamilyId': OneOf(
+        'CreateInvoiceCouponProductFamilyId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -418,7 +419,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateInvoiceItemQuantity': OneOf(
+        'CreateInvoiceItemQuantity': lambda: OneOf(
             [
                 LeafType(float),
                 LeafType(str)
@@ -427,7 +428,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateInvoiceItemUnitPrice': OneOf(
+        'CreateInvoiceItemUnitPrice': lambda: OneOf(
             [
                 LeafType(float),
                 LeafType(str)
@@ -436,7 +437,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateInvoiceItemProductId': OneOf(
+        'CreateInvoiceItemProductId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -445,7 +446,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateInvoiceItemComponentId': OneOf(
+        'CreateInvoiceItemComponentId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -454,7 +455,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateInvoiceItemPricePointId': OneOf(
+        'CreateInvoiceItemPricePointId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -463,7 +464,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateInvoiceItemProductPricePointId': OneOf(
+        'CreateInvoiceItemProductPricePointId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -472,7 +473,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateInvoicePaymentAmount': OneOf(
+        'CreateInvoicePaymentAmount': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
@@ -481,7 +482,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateMetafieldsRequestMetafields': OneOf(
+        'CreateMetafieldsRequestMetafields': lambda: OneOf(
             [
                 LeafType(CreateMetafield),
                 LeafType(CreateMetafield,
@@ -490,19 +491,19 @@ class UnionTypeLookUp:
                          ))
             ]
         ),
-        'CreateMultiInvoicePaymentAmount': OneOf(
+        'CreateMultiInvoicePaymentAmount': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
             ]
         ),
-        'CreateOrUpdateSegmentPriceUnitPrice': OneOf(
+        'CreateOrUpdateSegmentPriceUnitPrice': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
             ]
         ),
-        'CreatePaymentProfileExpirationMonth': OneOf(
+        'CreatePaymentProfileExpirationMonth': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -511,7 +512,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreatePaymentProfileExpirationYear': OneOf(
+        'CreatePaymentProfileExpirationYear': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -520,7 +521,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSegmentSegmentProperty1Value': OneOf(
+        'CreateSegmentSegmentProperty1Value': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float),
@@ -531,7 +532,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSegmentSegmentProperty2Value': OneOf(
+        'CreateSegmentSegmentProperty2Value': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float),
@@ -542,7 +543,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSegmentSegmentProperty3Value': OneOf(
+        'CreateSegmentSegmentProperty3Value': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float),
@@ -553,7 +554,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSegmentSegmentProperty4Value': OneOf(
+        'CreateSegmentSegmentProperty4Value': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float),
@@ -564,7 +565,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSubscriptionOfferId': OneOf(
+        'CreateSubscriptionOfferId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -573,7 +574,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSubscriptionComponentComponentId': OneOf(
+        'CreateSubscriptionComponentComponentId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -582,7 +583,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSubscriptionComponentAllocatedQuantity': OneOf(
+        'CreateSubscriptionComponentAllocatedQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -591,7 +592,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CreateSubscriptionComponentPricePointId': OneOf(
+        'CreateSubscriptionComponentPricePointId': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -600,7 +601,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'CustomerErrorResponseErrors': OneOf(
+        'CustomerErrorResponseErrors': lambda: OneOf(
             [
                 LeafType(CustomerError),
                 LeafType(str,
@@ -612,13 +613,13 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'DeductServiceCreditAmount': OneOf(
+        'DeductServiceCreditAmount': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
             ]
         ),
-        'EBBComponentUnitPrice': OneOf(
+        'EBBComponentUnitPrice': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
@@ -627,7 +628,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'EventEventSpecificData': OneOf(
+        'EventEventSpecificData': lambda: OneOf(
             [
                 LeafType(SubscriptionProductChange),
                 LeafType(SubscriptionStateChange),
@@ -652,13 +653,13 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
-        'IssueServiceCreditAmount': OneOf(
+        'IssueServiceCreditAmount': lambda: OneOf(
             [
                 LeafType(float),
                 LeafType(str)
             ]
         ),
-        'MetafieldEnum': OneOf(
+        'MetafieldEnum': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(str,
@@ -671,7 +672,7 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
-        'MeteredComponentUnitPrice': OneOf(
+        'MeteredComponentUnitPrice': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
@@ -680,13 +681,13 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'OnOffComponentUnitPrice': OneOf(
+        'OnOffComponentUnitPrice': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
             ]
         ),
-        'PaymentProfileAttributesExpirationMonth': OneOf(
+        'PaymentProfileAttributesExpirationMonth': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -695,7 +696,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'PaymentProfileAttributesExpirationYear': OneOf(
+        'PaymentProfileAttributesExpirationYear': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -704,7 +705,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'Payment-Profile': AnyOf(
+        'Payment-Profile': lambda: AnyOf(
             [
                 LeafType(ApplePayPaymentProfile,
                          Context.create(
@@ -728,7 +729,7 @@ class UnionTypeLookUp:
                          ))
             ]
         ),
-        'PrepaidUsageComponentUnitPrice': OneOf(
+        'PrepaidUsageComponentUnitPrice': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
@@ -737,13 +738,13 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'PriceStartingQuantity': OneOf(
+        'PriceStartingQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
             ]
         ),
-        'PriceEndingQuantity': OneOf(
+        'PriceEndingQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -753,13 +754,13 @@ class UnionTypeLookUp:
                is_nullable=True
             )
         ),
-        'PriceUnitPrice': OneOf(
+        'PriceUnitPrice': lambda: OneOf(
             [
                 LeafType(float),
                 LeafType(str)
             ]
         ),
-        'QuantityBasedComponentUnitPrice': OneOf(
+        'QuantityBasedComponentUnitPrice': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
@@ -768,7 +769,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'ReactivateSubscriptionRequestResume': OneOf(
+        'ReactivateSubscriptionRequestResume': lambda: OneOf(
             [
                 LeafType(bool),
                 LeafType(ResumeOptions)
@@ -777,7 +778,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'RefundConsolidatedInvoiceSegmentUids': OneOf(
+        'RefundConsolidatedInvoiceSegmentUids': lambda: OneOf(
             [
                 LeafType(str,
                          Context.create(
@@ -786,19 +787,19 @@ class UnionTypeLookUp:
                 LeafType(str)
             ]
         ),
-        'RefundInvoiceRequestRefund': AnyOf(
+        'RefundInvoiceRequestRefund': lambda: AnyOf(
             [
                 LeafType(RefundInvoice),
                 LeafType(RefundConsolidatedInvoice)
             ]
         ),
-        'RefundPrepaymentAmount': OneOf(
+        'RefundPrepaymentAmount': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float)
             ]
         ),
-        'RenewalPreviewComponentComponentId': OneOf(
+        'RenewalPreviewComponentComponentId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -807,7 +808,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'RenewalPreviewComponentPricePointId': OneOf(
+        'RenewalPreviewComponentPricePointId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -816,7 +817,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SegmentSegmentProperty1Value': OneOf(
+        'SegmentSegmentProperty1Value': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float),
@@ -827,7 +828,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SegmentSegmentProperty2Value': OneOf(
+        'SegmentSegmentProperty2Value': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float),
@@ -838,7 +839,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SegmentSegmentProperty3Value': OneOf(
+        'SegmentSegmentProperty3Value': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float),
@@ -849,7 +850,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SegmentSegmentProperty4Value': OneOf(
+        'SegmentSegmentProperty4Value': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float),
@@ -860,7 +861,17 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionComponentAllocatedQuantity': OneOf(
+        'SubscriptionSnapDay': lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(SnapDay)
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True
+            )
+        ),
+        'SubscriptionComponentAllocatedQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -869,19 +880,19 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionCustomPricePriceInCents': OneOf(
+        'SubscriptionCustomPricePriceInCents': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
             ]
         ),
-        'SubscriptionCustomPriceInterval': OneOf(
+        'SubscriptionCustomPriceInterval': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
             ]
         ),
-        'SubscriptionCustomPriceTrialPriceInCents': OneOf(
+        'SubscriptionCustomPriceTrialPriceInCents': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -890,7 +901,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionCustomPriceTrialInterval': OneOf(
+        'SubscriptionCustomPriceTrialInterval': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -899,7 +910,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionCustomPriceInitialChargeInCents': OneOf(
+        'SubscriptionCustomPriceInitialChargeInCents': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -908,7 +919,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionCustomPriceExpirationInterval': OneOf(
+        'SubscriptionCustomPriceExpirationInterval': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -917,14 +928,14 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionGroupCreateErrorResponseErrors': OneOf(
+        'SubscriptionGroupCreateErrorResponseErrors': lambda: OneOf(
             [
                 LeafType(SubscriptionGroupMembersArrayError),
                 LeafType(SubscriptionGroupSingleError),
                 LeafType(str)
             ]
         ),
-        'SubscriptionGroupCreditCardFullNumber': OneOf(
+        'SubscriptionGroupCreditCardFullNumber': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -933,7 +944,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionGroupCreditCardExpirationMonth': OneOf(
+        'SubscriptionGroupCreditCardExpirationMonth': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -942,7 +953,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionGroupCreditCardExpirationYear': OneOf(
+        'SubscriptionGroupCreditCardExpirationYear': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -951,7 +962,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionGroupSignupComponentComponentId': OneOf(
+        'SubscriptionGroupSignupComponentComponentId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -960,7 +971,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionGroupSignupComponentAllocatedQuantity': OneOf(
+        'SubscriptionGroupSignupComponentAllocatedQuantity': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -969,7 +980,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionGroupSignupComponentUnitBalance': OneOf(
+        'SubscriptionGroupSignupComponentUnitBalance': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -978,7 +989,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'SubscriptionGroupSignupComponentPricePointId': OneOf(
+        'SubscriptionGroupSignupComponentPricePointId': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -987,7 +998,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'UpdateMetafieldsRequestMetafields': OneOf(
+        'UpdateMetafieldsRequestMetafields': lambda: OneOf(
             [
                 LeafType(UpdateMetafield),
                 LeafType(UpdateMetafield,
@@ -999,7 +1010,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'UpdatePriceEndingQuantity': OneOf(
+        'UpdatePriceEndingQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -1008,7 +1019,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'UpdatePriceUnitPrice': OneOf(
+        'UpdatePriceUnitPrice': lambda: OneOf(
             [
                 LeafType(float),
                 LeafType(str)
@@ -1017,7 +1028,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'UpdatePriceStartingQuantity': OneOf(
+        'UpdatePriceStartingQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -1026,16 +1037,17 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'UpdateSubscriptionSnapDay': OneOf(
+        'UpdateSubscriptionSnapDay': lambda: OneOf(
             [
-                LeafType(SnapDay),
-                LeafType(int)
+                LeafType(int),
+                LeafType(SnapDay)
             ],
             Context.create(
-               is_optional=True
+               is_optional=True,
+               is_nullable=True
             )
         ),
-        'UpdateSubscriptionNetTerms': OneOf(
+        'UpdateSubscriptionNetTerms': lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int)
@@ -1044,7 +1056,7 @@ class UnionTypeLookUp:
                is_optional=True
             )
         ),
-        'UsageQuantity': OneOf(
+        'UsageQuantity': lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str)
@@ -1057,5 +1069,5 @@ class UnionTypeLookUp:
 
     @staticmethod
     def get(name):
-        return UnionTypeLookUp._templates[name]
+        return UnionTypeLookUp._templates[name]()
 

@@ -29,6 +29,18 @@ class ComponentCustomPrice(object):
             is only available for sites with Multifrequency enabled.
         prices (List[Price]): On/off components only need one price bracket
             starting at 1
+        renew_prepaid_allocation (bool): Applicable only to prepaid usage
+            components. Controls whether the allocated quantity renews each
+            period.
+        rollover_prepaid_remainder (bool): Applicable only to prepaid usage
+            components. Controls whether remaining units roll over to the next
+            period.
+        expiration_interval (int): Applicable only when rollover is enabled.
+            Number of `expiration_interval_unit`s after which rollover amounts
+            expire.
+        expiration_interval_unit (ExpirationIntervalUnit): Applicable only
+            when rollover is enabled. Interval unit for rollover expiration
+            (month or day).
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -40,7 +52,11 @@ class ComponentCustomPrice(object):
         "tax_included": 'tax_included',
         "pricing_scheme": 'pricing_scheme',
         "interval": 'interval',
-        "interval_unit": 'interval_unit'
+        "interval_unit": 'interval_unit',
+        "renew_prepaid_allocation": 'renew_prepaid_allocation',
+        "rollover_prepaid_remainder": 'rollover_prepaid_remainder',
+        "expiration_interval": 'expiration_interval',
+        "expiration_interval_unit": 'expiration_interval_unit'
     }
 
     _optionals = [
@@ -48,10 +64,16 @@ class ComponentCustomPrice(object):
         'pricing_scheme',
         'interval',
         'interval_unit',
+        'renew_prepaid_allocation',
+        'rollover_prepaid_remainder',
+        'expiration_interval',
+        'expiration_interval_unit',
     ]
 
     _nullables = [
         'interval_unit',
+        'expiration_interval',
+        'expiration_interval_unit',
     ]
 
     def __init__(self,
@@ -60,6 +82,10 @@ class ComponentCustomPrice(object):
                  pricing_scheme=APIHelper.SKIP,
                  interval=APIHelper.SKIP,
                  interval_unit=APIHelper.SKIP,
+                 renew_prepaid_allocation=APIHelper.SKIP,
+                 rollover_prepaid_remainder=APIHelper.SKIP,
+                 expiration_interval=APIHelper.SKIP,
+                 expiration_interval_unit=APIHelper.SKIP,
                  additional_properties=None):
         """Constructor for the ComponentCustomPrice class"""
 
@@ -73,6 +99,14 @@ class ComponentCustomPrice(object):
         if interval_unit is not APIHelper.SKIP:
             self.interval_unit = interval_unit 
         self.prices = prices 
+        if renew_prepaid_allocation is not APIHelper.SKIP:
+            self.renew_prepaid_allocation = renew_prepaid_allocation 
+        if rollover_prepaid_remainder is not APIHelper.SKIP:
+            self.rollover_prepaid_remainder = rollover_prepaid_remainder 
+        if expiration_interval is not APIHelper.SKIP:
+            self.expiration_interval = expiration_interval 
+        if expiration_interval_unit is not APIHelper.SKIP:
+            self.expiration_interval_unit = expiration_interval_unit 
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -105,6 +139,10 @@ class ComponentCustomPrice(object):
         pricing_scheme = dictionary.get("pricing_scheme") if dictionary.get("pricing_scheme") else APIHelper.SKIP
         interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
         interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
+        renew_prepaid_allocation = dictionary.get("renew_prepaid_allocation") if "renew_prepaid_allocation" in dictionary.keys() else APIHelper.SKIP
+        rollover_prepaid_remainder = dictionary.get("rollover_prepaid_remainder") if "rollover_prepaid_remainder" in dictionary.keys() else APIHelper.SKIP
+        expiration_interval = dictionary.get("expiration_interval") if "expiration_interval" in dictionary.keys() else APIHelper.SKIP
+        expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         # Clean out expected properties from dictionary
         additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
         # Return an object of this model
@@ -113,6 +151,10 @@ class ComponentCustomPrice(object):
                    pricing_scheme,
                    interval,
                    interval_unit,
+                   renew_prepaid_allocation,
+                   rollover_prepaid_remainder,
+                   expiration_interval,
+                   expiration_interval_unit,
                    additional_properties)
 
     @classmethod
@@ -150,6 +192,10 @@ class ComponentCustomPrice(object):
                 f'interval={(self.interval if hasattr(self, "interval") else None)!r}, '
                 f'interval_unit={(self.interval_unit if hasattr(self, "interval_unit") else None)!r}, '
                 f'prices={self.prices!r}, '
+                f'renew_prepaid_allocation={(self.renew_prepaid_allocation if hasattr(self, "renew_prepaid_allocation") else None)!r}, '
+                f'rollover_prepaid_remainder={(self.rollover_prepaid_remainder if hasattr(self, "rollover_prepaid_remainder") else None)!r}, '
+                f'expiration_interval={(self.expiration_interval if hasattr(self, "expiration_interval") else None)!r}, '
+                f'expiration_interval_unit={(self.expiration_interval_unit if hasattr(self, "expiration_interval_unit") else None)!r}, '
                 f'additional_properties={self.additional_properties!r})')
 
     def __str__(self):
@@ -159,4 +205,8 @@ class ComponentCustomPrice(object):
                 f'interval={(self.interval if hasattr(self, "interval") else None)!s}, '
                 f'interval_unit={(self.interval_unit if hasattr(self, "interval_unit") else None)!s}, '
                 f'prices={self.prices!s}, '
+                f'renew_prepaid_allocation={(self.renew_prepaid_allocation if hasattr(self, "renew_prepaid_allocation") else None)!s}, '
+                f'rollover_prepaid_remainder={(self.rollover_prepaid_remainder if hasattr(self, "rollover_prepaid_remainder") else None)!s}, '
+                f'expiration_interval={(self.expiration_interval if hasattr(self, "expiration_interval") else None)!s}, '
+                f'expiration_interval_unit={(self.expiration_interval_unit if hasattr(self, "expiration_interval_unit") else None)!s}, '
                 f'additional_properties={self.additional_properties!s})')

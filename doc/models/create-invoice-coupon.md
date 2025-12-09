@@ -10,6 +10,7 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `code` | `str` | Optional | - |
+| `subcode` | `str` | Optional | - |
 | `percentage` | str \| float \| None | Optional | This is a container for one-of cases. |
 | `amount` | str \| float \| None | Optional | This is a container for one-of cases. |
 | `description` | `str` | Optional | **Constraints**: *Maximum Length*: `255` |
@@ -22,9 +23,9 @@
 {
   "percentage": 50.0,
   "code": "code4",
+  "subcode": "subcode8",
   "amount": "String9",
-  "description": "description4",
-  "product_family_id": "String3"
+  "description": "description4"
 }
 ```
 

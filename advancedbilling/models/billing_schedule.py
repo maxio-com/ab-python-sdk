@@ -17,8 +17,7 @@ class BillingSchedule(object):
 
     This attribute is particularly useful when you need to align billing
     events for different components on distinct schedules within a
-    subscription. Please note this only works for site with Multifrequency
-    enabled
+    subscription. This only works for site with Multifrequency enabled.
 
     Attributes:
         initial_billing_at (date): The initial_billing_at attribute in Maxio

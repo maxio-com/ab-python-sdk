@@ -61,7 +61,7 @@ class BillingPortalController(BaseController):
         only when absolutely necessary. Management URLs are good for 65 days,
         so you should re-use a previously generated one as much as possible.
         If you use the URL frequently (such as to display on your website),
-        please **do not** make an API request to Advanced Billing every time.
+        **do not** make an API request to Advanced Billing every time.
 
         Args:
             customer_id (int): The Chargify id of the customer

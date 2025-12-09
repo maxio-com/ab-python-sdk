@@ -37,8 +37,6 @@ class Component(object):
         kind (ComponentKind): A handle for the component type
         archived (bool): Boolean flag describing whether a component is
             archived or not.
-        taxable (bool): Boolean flag describing whether a component is taxable
-            or not.
         description (str): The description of the component.
         default_price_point_id (int): The model property of type int.
         overage_prices (List[ComponentPrice]): Applicable only to prepaid
@@ -51,10 +49,12 @@ class Component(object):
         price_points_url (str): URL that points to the location to read the
             existing price points via GET request
         default_price_point_name (str): The model property of type str.
+        taxable (bool): Boolean flag describing whether a component is taxable
+            or not.
         tax_code (str): A string representing the tax code related to the
-            component type. This is especially important when using the
-            Avalara service to tax based on locale. This attribute has a max
-            length of 10 characters.
+            component type. This is especially important when using AvaTax to
+            tax based on locale. This attribute has a max length of 25
+            characters.
         recurring (bool): The model property of type bool.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site
@@ -108,7 +108,6 @@ class Component(object):
         "price_per_unit_in_cents": 'price_per_unit_in_cents',
         "kind": 'kind',
         "archived": 'archived',
-        "taxable": 'taxable',
         "description": 'description',
         "default_price_point_id": 'default_price_point_id',
         "overage_prices": 'overage_prices',
@@ -116,6 +115,7 @@ class Component(object):
         "price_point_count": 'price_point_count',
         "price_points_url": 'price_points_url',
         "default_price_point_name": 'default_price_point_name',
+        "taxable": 'taxable',
         "tax_code": 'tax_code',
         "recurring": 'recurring',
         "upgrade_charge": 'upgrade_charge',
@@ -146,7 +146,6 @@ class Component(object):
         'price_per_unit_in_cents',
         'kind',
         'archived',
-        'taxable',
         'description',
         'default_price_point_id',
         'overage_prices',
@@ -154,6 +153,7 @@ class Component(object):
         'price_point_count',
         'price_points_url',
         'default_price_point_name',
+        'taxable',
         'tax_code',
         'recurring',
         'upgrade_charge',
@@ -204,7 +204,6 @@ class Component(object):
                  price_per_unit_in_cents=APIHelper.SKIP,
                  kind=APIHelper.SKIP,
                  archived=APIHelper.SKIP,
-                 taxable=APIHelper.SKIP,
                  description=APIHelper.SKIP,
                  default_price_point_id=APIHelper.SKIP,
                  overage_prices=APIHelper.SKIP,
@@ -212,6 +211,7 @@ class Component(object):
                  price_point_count=APIHelper.SKIP,
                  price_points_url=APIHelper.SKIP,
                  default_price_point_name=APIHelper.SKIP,
+                 taxable=APIHelper.SKIP,
                  tax_code=APIHelper.SKIP,
                  recurring=APIHelper.SKIP,
                  upgrade_charge=APIHelper.SKIP,
@@ -255,8 +255,6 @@ class Component(object):
             self.kind = kind 
         if archived is not APIHelper.SKIP:
             self.archived = archived 
-        if taxable is not APIHelper.SKIP:
-            self.taxable = taxable 
         if description is not APIHelper.SKIP:
             self.description = description 
         if default_price_point_id is not APIHelper.SKIP:
@@ -271,6 +269,8 @@ class Component(object):
             self.price_points_url = price_points_url 
         if default_price_point_name is not APIHelper.SKIP:
             self.default_price_point_name = default_price_point_name 
+        if taxable is not APIHelper.SKIP:
+            self.taxable = taxable 
         if tax_code is not APIHelper.SKIP:
             self.tax_code = tax_code 
         if recurring is not APIHelper.SKIP:
@@ -338,7 +338,6 @@ class Component(object):
         price_per_unit_in_cents = dictionary.get("price_per_unit_in_cents") if "price_per_unit_in_cents" in dictionary.keys() else APIHelper.SKIP
         kind = dictionary.get("kind") if dictionary.get("kind") else APIHelper.SKIP
         archived = dictionary.get("archived") if "archived" in dictionary.keys() else APIHelper.SKIP
-        taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
         description = dictionary.get("description") if "description" in dictionary.keys() else APIHelper.SKIP
         default_price_point_id = dictionary.get("default_price_point_id") if "default_price_point_id" in dictionary.keys() else APIHelper.SKIP
         if 'overage_prices' in dictionary.keys():
@@ -352,6 +351,7 @@ class Component(object):
         price_point_count = dictionary.get("price_point_count") if dictionary.get("price_point_count") else APIHelper.SKIP
         price_points_url = dictionary.get("price_points_url") if "price_points_url" in dictionary.keys() else APIHelper.SKIP
         default_price_point_name = dictionary.get("default_price_point_name") if dictionary.get("default_price_point_name") else APIHelper.SKIP
+        taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
         tax_code = dictionary.get("tax_code") if "tax_code" in dictionary.keys() else APIHelper.SKIP
         recurring = dictionary.get("recurring") if "recurring" in dictionary.keys() else APIHelper.SKIP
         upgrade_charge = dictionary.get("upgrade_charge") if "upgrade_charge" in dictionary.keys() else APIHelper.SKIP
@@ -385,7 +385,6 @@ class Component(object):
                    price_per_unit_in_cents,
                    kind,
                    archived,
-                   taxable,
                    description,
                    default_price_point_id,
                    overage_prices,
@@ -393,6 +392,7 @@ class Component(object):
                    price_point_count,
                    price_points_url,
                    default_price_point_name,
+                   taxable,
                    tax_code,
                    recurring,
                    upgrade_charge,
@@ -424,7 +424,6 @@ class Component(object):
                 f'price_per_unit_in_cents={(self.price_per_unit_in_cents if hasattr(self, "price_per_unit_in_cents") else None)!r}, '
                 f'kind={(self.kind if hasattr(self, "kind") else None)!r}, '
                 f'archived={(self.archived if hasattr(self, "archived") else None)!r}, '
-                f'taxable={(self.taxable if hasattr(self, "taxable") else None)!r}, '
                 f'description={(self.description if hasattr(self, "description") else None)!r}, '
                 f'default_price_point_id={(self.default_price_point_id if hasattr(self, "default_price_point_id") else None)!r}, '
                 f'overage_prices={(self.overage_prices if hasattr(self, "overage_prices") else None)!r}, '
@@ -432,6 +431,7 @@ class Component(object):
                 f'price_point_count={(self.price_point_count if hasattr(self, "price_point_count") else None)!r}, '
                 f'price_points_url={(self.price_points_url if hasattr(self, "price_points_url") else None)!r}, '
                 f'default_price_point_name={(self.default_price_point_name if hasattr(self, "default_price_point_name") else None)!r}, '
+                f'taxable={(self.taxable if hasattr(self, "taxable") else None)!r}, '
                 f'tax_code={(self.tax_code if hasattr(self, "tax_code") else None)!r}, '
                 f'recurring={(self.recurring if hasattr(self, "recurring") else None)!r}, '
                 f'upgrade_charge={(self.upgrade_charge if hasattr(self, "upgrade_charge") else None)!r}, '
@@ -463,7 +463,6 @@ class Component(object):
                 f'price_per_unit_in_cents={(self.price_per_unit_in_cents if hasattr(self, "price_per_unit_in_cents") else None)!s}, '
                 f'kind={(self.kind if hasattr(self, "kind") else None)!s}, '
                 f'archived={(self.archived if hasattr(self, "archived") else None)!s}, '
-                f'taxable={(self.taxable if hasattr(self, "taxable") else None)!s}, '
                 f'description={(self.description if hasattr(self, "description") else None)!s}, '
                 f'default_price_point_id={(self.default_price_point_id if hasattr(self, "default_price_point_id") else None)!s}, '
                 f'overage_prices={(self.overage_prices if hasattr(self, "overage_prices") else None)!s}, '
@@ -471,6 +470,7 @@ class Component(object):
                 f'price_point_count={(self.price_point_count if hasattr(self, "price_point_count") else None)!s}, '
                 f'price_points_url={(self.price_points_url if hasattr(self, "price_points_url") else None)!s}, '
                 f'default_price_point_name={(self.default_price_point_name if hasattr(self, "default_price_point_name") else None)!s}, '
+                f'taxable={(self.taxable if hasattr(self, "taxable") else None)!s}, '
                 f'tax_code={(self.tax_code if hasattr(self, "tax_code") else None)!s}, '
                 f'recurring={(self.recurring if hasattr(self, "recurring") else None)!s}, '
                 f'upgrade_charge={(self.upgrade_charge if hasattr(self, "upgrade_charge") else None)!s}, '

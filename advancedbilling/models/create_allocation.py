@@ -49,8 +49,8 @@ class CreateAllocation(object):
             price point will be used.
         billing_schedule (BillingSchedule): This attribute is particularly
             useful when you need to align billing events for different
-            components on distinct schedules within a subscription. Please
-            note this only works for site with Multifrequency enabled
+            components on distinct schedules within a subscription. This only
+            works for site with Multifrequency enabled.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 

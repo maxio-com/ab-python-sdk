@@ -1030,6 +1030,38 @@ class InvoicesController(BaseController):
           ]
         ...
         ```
+        #### Using Coupon Subcodes
+        You can also use coupon subcodes to apply existing coupons with
+        specific subcodes:
+        ```json
+        ...
+         "coupons": [
+              {
+                "subcode": "SUB1",
+                "product_family_id": 1
+              }
+          ]
+        ...
+        ```
+        **Important:** You cannot specify both `code` and `subcode` for the
+        same coupon. Use either:
+        - `code` to apply a main coupon
+        - `subcode` to apply a specific coupon subcode
+        The API response will include both the main coupon code and the
+        subcode used:
+        ```json
+        ...
+         "coupons": [
+              {
+                "code": "MAIN123",
+                "subcode": "SUB1",
+                "product_family_id": 1,
+                "percentage": 10,
+                "description": "Special discount"
+              }
+          ]
+        ...
+        ```
         ### Coupon options
         #### Code
         Coupon `code` will be displayed on invoice discount section.
@@ -1038,6 +1070,12 @@ class InvoicesController(BaseController):
         Lowercase letters will be converted to uppercase. It can be used to
         select an existing coupon from the catalog, or as an ad hoc coupon
         when passed with `percentage` or `amount`.
+        #### Subcode
+        Coupon `subcode` allows you to apply existing coupons using their
+        subcodes. When a subcode is used, the API response will include both
+        the main coupon code and the specific subcode that was applied.
+        Subcodes are case-insensitive and will be converted to uppercase
+        automatically.
         #### Percentage
         Coupon `percentage` can take values from 0 to 100 and up to 4 decimal
         places. It cannot be used with `amount`. Only for ad hoc coupons, will
@@ -1100,7 +1138,7 @@ class InvoicesController(BaseController):
         #### Addresses
         The seller, shipping and billing addresses can be sent to override the
         site's defaults. Each address requires to send a `first_name` at a
-        minimum in order to work. Please see below for the details on which
+        minimum in order to work. See below for the details on which
         parameters can be sent for each address object.
         #### Memo and Payment Instructions
         A custom memo can be sent with the `memo` parameter to override the
@@ -1161,16 +1199,16 @@ class InvoicesController(BaseController):
         automatically generated invoices. Additionally, this endpoint supports
         email delivery to direct recipients, carbon-copy (cc) recipients, and
         blind carbon-copy (bcc) recipients.
-        Please note that if no recipient email addresses are specified in the
-        request, then the subscription's default email configuration will be
-        used. For example, if `recipient_emails` is left blank, then the
-        invoice will be delivered to the subscription's customer email address.
-        On success, a 204 no-content response will be returned. Please note
-        that this does not indicate that email(s) have been delivered, but
-        instead indicates that emails have been successfully queued for
-        delivery. If _any_ invalid or malformed email address is found in the
-        request body, the entire request will be rejected and a 422 response
-        will be returned.
+        If no recipient email addresses are specified in the request, then the
+        subscription's default email configuration will be used. For example,
+        if `recipient_emails` is left blank, then the invoice will be
+        delivered to the subscription's customer email address.
+        On success, a 204 no-content response will be returned. The response
+        does not indicate that email(s) have been delivered, but instead
+        indicates that emails have been successfully queued for delivery. If
+        _any_ invalid or malformed email address is found in the request body,
+        the entire request will be rejected and a 422 response will be
+        returned.
 
         Args:
             uid (str): The unique identifier for the invoice, this does not

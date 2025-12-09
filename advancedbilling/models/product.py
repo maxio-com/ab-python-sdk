@@ -23,7 +23,7 @@ class Product(object):
         accounting_code (str): E.g. Internal ID or SKU Number
         request_credit_card (bool): Deprecated value that can be ignored
             unless you have legacy hosted pages. For Public Signup Page users,
-            please read this attribute from under the signup page.
+            read this attribute from under the signup page.
         expiration_interval (int): A numerical interval for the length a
             subscription to this product will run before it expires. See the
             description of interval for a description of how this value is
@@ -79,9 +79,9 @@ class Product(object):
             shipping address is required for the customer, especially at
             signup.
         tax_code (str): A string representing the tax code related to the
-            product type. This is especially important when using the Avalara
-            service to tax based on locale. This attribute has a max length of
-            10 characters.
+            product type. This is especially important when using AvaTax to
+            tax based on locale. This attribute has a max length of 25
+            characters.
         default_product_price_point_id (int): The model property of type int.
         use_site_exchange_rate (bool): The model property of type bool.
         item_category (str): One of the following: Business Software, Consumer
@@ -421,6 +421,28 @@ class Product(object):
                    product_price_point_id,
                    product_price_point_handle,
                    additional_properties)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validates dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+
+        if isinstance(dictionary, cls):
+            return True
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return True
 
     def __repr__(self):
         return (f'{self.__class__.__name__}('

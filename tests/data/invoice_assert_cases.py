@@ -60,18 +60,6 @@ class InvoiceAssertCases:
             "subtotal_amount": "1800.0",
             "tax_amount": "0.0",
             "total_amount": "1530.0",
-            "seller": {
-                "name": "Maxio Developer Experience",
-                "phone": "555 111 222",
-                "address": {
-                    "city": "San Antonio",
-                    "country": "US",
-                    "line_2": "123/444",
-                    "state": "TX",
-                    "street": "Asdf Street",
-                    "zip": "78015",
-                },
-            },
             "shipping_address": {
                 "city": "Ohio",
                 "country": "US",

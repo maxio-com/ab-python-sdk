@@ -39,9 +39,9 @@ class ProductPricePointsController(BaseController):
                                    body=None):
         """Does a POST request to /products/{product_id}/price_points.json.
 
-        [Product Price Point
-        Documentation](https://maxio.zendesk.com/hc/en-us/articles/242611119477
-        89-Product-Price-Points)
+        Creates a Product Price Point. See the [Product Price
+        Point](https://maxio.zendesk.com/hc/en-us/articles/24261111947789-Produ
+        ct-Price-Points) documentation for details.
 
         Args:
             product_id (int | str): The id or handle of the product. When
@@ -91,7 +91,7 @@ class ProductPricePointsController(BaseController):
                                   options=dict()):
         """Does a GET request to /products/{product_id}/price_points.json.
 
-        Use this endpoint to retrieve a list of product price points.
+        Retrieves a list of product price points.
 
         Args:
             options (dict, optional): Key-value pairs for any of the
@@ -183,8 +183,8 @@ class ProductPricePointsController(BaseController):
                                    body=None):
         """Does a PUT request to /products/{product_id}/price_points/{price_point_id}.json.
 
-        Use this endpoint to update a product price point.
-        Note: Custom product price points are not able to be updated.
+        Updates a product price point.
+        Note: Custom product price points cannot be updated.
 
         Args:
             product_id (int | str): The id or handle of the product. When
@@ -316,7 +316,7 @@ class ProductPricePointsController(BaseController):
                                     price_point_id):
         """Does a DELETE request to /products/{product_id}/price_points/{price_point_id}.json.
 
-        Use this endpoint to archive a product price point.
+        Archives a product price point.
 
         Args:
             product_id (int | str): The id or handle of the product. When
@@ -420,10 +420,9 @@ class ProductPricePointsController(BaseController):
                                                price_point_id):
         """Does a PATCH request to /products/{product_id}/price_points/{price_point_id}/default.json.
 
-        Use this endpoint to make a product price point the default for the
+        Sets a product price point as the default for the product.
+        Note: Custom product price points cannot be set as the default for a
         product.
-        Note: Custom product price points are not able to be set as the
-        default for a product.
 
         Args:
             product_id (int): The Advanced Billing id of the product to which
@@ -471,8 +470,7 @@ class ProductPricePointsController(BaseController):
                                          body=None):
         """Does a POST request to /products/{product_id}/price_points/bulk.json.
 
-        Use this endpoint to create multiple product price points in one
-        request.
+        Creates multiple product price points in one request.
 
         Args:
             product_id (int): The Advanced Billing id of the product to which
@@ -523,8 +521,8 @@ class ProductPricePointsController(BaseController):
                                        body=None):
         """Does a POST request to /product_price_points/{product_price_point_id}/currency_prices.json.
 
-        This endpoint allows you to create currency prices for a given
-        currency that has been defined on the site level in your settings.
+        Creates currency prices for a given currency that has been defined on
+        the site level in your settings.
         When creating currency prices, they need to mirror the structure of
         your primary pricing. If the product price point defines a trial
         and/or setup fee, each currency must also define a trial and/or setup
@@ -580,13 +578,13 @@ class ProductPricePointsController(BaseController):
                                        body=None):
         """Does a PUT request to /product_price_points/{product_price_point_id}/currency_prices.json.
 
-        This endpoint allows you to update the `price`s of currency prices for
-        a given currency that exists on the product price point.
+        Updates the `price`s of currency prices for a given currency that
+        exists on the product price point.
         When updating the pricing, it needs to mirror the structure of your
         primary pricing. If the product price point defines a trial and/or
         setup fee, each currency must also define a trial and/or setup fee.
-        Note: Currency Prices are not able to be updated for custom product
-        price points.
+        Note: Currency Prices cannot be updated for custom product price
+        points.
 
         Args:
             product_price_point_id (int): The Advanced Billing id of the

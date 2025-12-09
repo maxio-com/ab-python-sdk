@@ -6,4 +6,5 @@ __all__ = [
     'exceptions',
     'http',
     'models',
+    'utilities',
 ]

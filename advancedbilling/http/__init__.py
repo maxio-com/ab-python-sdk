@@ -5,4 +5,5 @@ __all__ = [
     'http_response',
     'http_call_back',
     'proxy_settings',
+    'http_client_provider',
 ]

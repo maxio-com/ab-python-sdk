@@ -32,7 +32,7 @@ class AdvanceInvoiceController(BaseController):
         """Does a POST request to /subscriptions/{subscription_id}/advance_invoice/issue.json.
 
         Generate an invoice in advance for a subscription's next renewal date.
-        [Please see our
+        [See our
         docs](https://maxio.zendesk.com/hc/en-us/articles/24252026404749-Issue-
         Invoice-In-Advance) for more information on advance invoices,
         including eligibility on generating one; for the most part, they
@@ -144,8 +144,7 @@ class AdvanceInvoiceController(BaseController):
         A `reason` is required in order to void, and the invoice must have an
         open status. Voiding will cause any prepayments and credits that were
         applied to the invoice to be returned to the subscription. For a full
-        overview of the impact of voiding, please [see our help
-        docs]($m/Invoice).
+        overview of the impact of voiding, [see our help docs]($m/Invoice).
 
         Args:
             subscription_id (int): The Chargify id of the subscription

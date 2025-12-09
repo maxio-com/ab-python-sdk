@@ -98,7 +98,7 @@ def list_reason_codes(self,
 
 ```python
 collect = {
-    'page': 2,
+    'page': 1,
     'per_page': 50
 }
 result = reason_codes_controller.list_reason_codes(collect)

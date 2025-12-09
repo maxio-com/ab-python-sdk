@@ -12,8 +12,8 @@
 | `title` | `str` | Optional | - |
 | `quantity` | float \| str \| None | Optional | This is a container for one-of cases. |
 | `unit_price` | float \| str \| None | Optional | This is a container for one-of cases. |
-| `taxable` | `bool` | Optional | Set to true to automatically calculate taxes. Site must be configured to use and calculate taxes.<br><br>If using Avalara, a tax_code parameter must also be sent. |
-| `tax_code` | `str` | Optional | - |
+| `taxable` | `bool` | Optional | Set to true to automatically calculate taxes. Site must be configured to use and calculate taxes. If using AvaTax, a tax_code parameter must also be sent. |
+| `tax_code` | `str` | Optional | A string representing the tax code related to the product type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. |
 | `period_range_start` | `str` | Optional | YYYY-MM-DD |
 | `period_range_end` | `str` | Optional | YYYY-MM-DD |
 | `product_id` | str \| int \| None | Optional | This is a container for one-of cases. |

@@ -31,7 +31,8 @@ class ProductsController(BaseController):
                        body=None):
         """Does a POST request to /product_families/{product_family_id}/products.json.
 
-        Use this method to create a product within your Advanced Billing site.
+        Creates a product in your Advanced Billing site.
+        See the following product docuemation for more information:
         + [Products
         Documentation](https://maxio.zendesk.com/hc/en-us/articles/242610901176
         45-Products-Overview)
@@ -86,8 +87,7 @@ class ProductsController(BaseController):
                      product_id):
         """Does a GET request to /products/{product_id}.json.
 
-        This endpoint allows you to read the current details of a product that
-        you've created in Advanced Billing.
+        Reads the current details of a product.
 
         Args:
             product_id (int): The Advanced Billing id of the product
@@ -127,7 +127,7 @@ class ProductsController(BaseController):
                        body=None):
         """Does a PUT request to /products/{product_id}.json.
 
-        Use this method to change aspects of an existing product.
+        Updates aspects of an existing product.
         ### Input Attributes Update Notes
         + `update_return_params` The parameters we will append to your
         `update_return_url`. See Return URLs and Parameters
@@ -183,9 +183,8 @@ class ProductsController(BaseController):
                         product_id):
         """Does a DELETE request to /products/{product_id}.json.
 
-        Sending a DELETE request to this endpoint will archive the product.
-        All current subscribers will be unffected; their subscription/purchase
-        will continue to be charged monthly.
+        Archives the product. All current subscribers will be unffected; their
+        subscription/purchase will continue to be charged monthly.
         This will restrict the option to chose the product for purchase via
         the Billing Portal, as well as disable Public Signup Pages for the
         product.
@@ -228,7 +227,7 @@ class ProductsController(BaseController):
                                api_handle):
         """Does a GET request to /products/handle/{api_handle}.json.
 
-        This method allows to retrieve a Product object by its `api_handle`.
+        Retrieves a Product object by its `api_handle`.
 
         Args:
             api_handle (str): The handle of the product

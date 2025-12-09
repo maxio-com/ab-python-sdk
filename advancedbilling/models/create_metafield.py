@@ -19,12 +19,9 @@ class CreateMetafield(object):
         scope (MetafieldScope): Warning: When updating a metafield's scope
             attribute, all scope attributes must be passed. Partially complete
             scope attributes will override the existing settings.
-        input_type (MetafieldInput): Indicates how data should be added to the
-            metafield. For example, a text type is just a string, so a given
-            metafield of this type can have any value attached. On the other
-            hand, dropdown and radio have a set of allowed values that can be
-            input, and appear differently on a Public Signup Page. Defaults to
-            'text'
+        input_type (MetafieldInput): Indicates the type of metafield. A text
+            metafield allows any string value. Dropdown and radio metafields
+            have a set of values that can be selected.  Defaults to 'text'.
         enum (List[str]): Only applicable when input_type is radio or
             dropdown. Empty strings will not be submitted.
         additional_properties (Dict[str, object]): The additional properties

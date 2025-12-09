@@ -24,9 +24,12 @@ class CreateInvoiceItem(object):
             value with more than 8 decimal places, we will round it down to
             the 8th decimal place.
         taxable (bool): Set to true to automatically calculate taxes. Site
-            must be configured to use and calculate taxes.  If using Avalara,
-            a tax_code parameter must also be sent.
-        tax_code (str): The model property of type str.
+            must be configured to use and calculate taxes. If using AvaTax, a
+            tax_code parameter must also be sent.
+        tax_code (str): A string representing the tax code related to the
+            product type. This is especially important when using AvaTax to
+            tax based on locale. This attribute has a max length of 25
+            characters.
         period_range_start (str): YYYY-MM-DD
         period_range_end (str): YYYY-MM-DD
         product_id (str | int | None): Product handle or product id.

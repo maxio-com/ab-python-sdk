@@ -7,6 +7,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+import os
+from dotenv import load_dotenv
+from advancedbilling.http.proxy_settings import ProxySettings
 from enum import Enum
 from advancedbilling.api_helper import APIHelper
 from apimatic_core.http.configurations.http_client_configuration import HttpClientConfiguration
@@ -20,11 +23,65 @@ class Environment(Enum):
     # Advanced Billing environment hosted in EU. Use only when you requested EU hosting for your AB account.
     EU = 1
 
+    @classmethod
+    def from_value(cls, value, default=None):
+        """
+        Convert a value (string or int) to an Environment enum member.
+
+        Args:
+            value (Union[str, int]): The value to convert.
+            default (Environment): The fallback enum member if conversion fails.
+
+        Returns:
+            Environment: Matching enum member or fallback if invalid.
+        """
+        if value is None:
+            return default
+
+        # Try to match directly by enum member
+        if isinstance(value, cls):
+            return value
+
+        # Handle integer or string conversion
+        for member in cls:
+            if str(member.value).lower() == str(value).lower() or member.name.lower() == str(value).lower():
+                return member
+
+        # Fallback to provided default
+        return default
+
 
 class Server(Enum):
     """An enum for API servers"""
     PRODUCTION = 0
     EBB = 1
+
+    @classmethod
+    def from_value(cls, value, default=None):
+        """
+        Convert a value (string or int) to an Server enum member.
+
+        Args:
+            value (Union[str, int]): The value to convert.
+            default (Server): The fallback enum member if conversion fails.
+
+        Returns:
+            Server: Matching enum member or fallback if invalid.
+        """
+        if value is None:
+            return default
+
+        # Try to match directly by enum member
+        if isinstance(value, cls):
+            return value
+
+        # Handle integer or string conversion
+        for member in cls:
+            if str(member.value).lower() == str(value).lower() or member.name.lower() == str(value).lower():
+                return member
+
+        # Fallback to provided default
+        return default
 
 
 class Configuration(HttpClientConfiguration):
@@ -144,3 +201,47 @@ class Configuration(HttpClientConfiguration):
         return APIHelper.append_url_with_template_parameters(
             self.environments[self.environment][server], parameters
         )
+
+    @classmethod
+    def from_environment(cls, dotenv_path=None, **overrides):
+        """
+        Creates a Configuration object using values from a .env file, environment variables, and optional overrides.
+
+        Args:
+            dotenv_path (str, optional): Path to the .env file to load. If None, the default .env file is used.
+            **overrides: Additional configuration values to override those loaded from the .env file and environment variables.
+
+        Returns:
+            Configuration: A configuration object populated with the resolved values.
+        """
+
+        # load .env automatically
+        load_dotenv(dotenv_path or None, override=True)
+
+        override_http_client_configuration = os.getenv('OVERRIDE_HTTP_CLIENT_CONFIGURATION', 'false').lower() == 'true'
+        timeout = int(os.getenv('TIMEOUT', '120'))
+        max_retries = int(os.getenv('MAX_RETRIES', '0'))
+        backoff_factor = float(os.getenv('BACKOFF_FACTOR', '2'))
+        statuses = os.getenv('RETRY_STATUSES', None)
+        retry_statuses = [int(v.strip()) for v in statuses.split(',') if v.strip().isdigit()] if statuses else None
+        methods = os.getenv('RETRY_METHODS', None)
+        retry_methods = [v.strip() for v in methods.split(',') if v.strip()] if methods else None
+        environment = Environment.from_value(os.getenv('ENVIRONMENT'), Environment.US)
+        site = os.getenv('SITE', 'subdomain')
+
+        from advancedbilling.http.auth.basic_auth import BasicAuthCredentials
+        # Preparing default configuration
+        default_config = cls(
+            override_http_client_configuration=override_http_client_configuration,
+            timeout=timeout,
+            max_retries=max_retries,
+            backoff_factor=backoff_factor,
+            retry_statuses=retry_statuses,
+            retry_methods=retry_methods,
+            environment=environment,
+            site=site,
+            proxy_settings=ProxySettings.from_environment(),
+            basic_auth_credentials=BasicAuthCredentials.from_environment()
+        )
+
+        return default_config.clone_with(**overrides)

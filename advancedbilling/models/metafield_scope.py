@@ -27,9 +27,13 @@ class MetafieldScope(object):
         portal (IncludeOption): Include (1) or exclude (0) metafields from the
             portal.
         public_show (IncludeOption): Include (1) or exclude (0) metafields
+            used in [Embeddable
+            Components](page:development-tools/embeddable-components/overview)
             from being viewable by your ecosystem.
         public_edit (IncludeOption): Include (1) or exclude (0) metafields
-            from being edited by your ecosystem.
+            used in [Embeddable
+            Components](page:development-tools/embeddable-components/overview)
+            from being editable by your ecosystem.
         hosted (List[str]): The model property of type List[str].
         additional_properties (Dict[str, object]): The additional properties
             for the model.

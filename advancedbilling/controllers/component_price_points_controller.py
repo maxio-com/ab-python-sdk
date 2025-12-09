@@ -280,8 +280,8 @@ class ComponentPricePointsController(BaseController):
                                      body=None):
         """Does a PUT request to /components/{component_id}/price_points/{price_point_id}.json.
 
-        When updating a price point, it's prices can be updated as well by
-        creating new prices or editing / removing existing ones.
+        When updating a price point, prices can be updated as well by creating
+        new prices or editing / removing existing ones.
         Passing in a price bracket without an `id` will attempt to create a
         new price.
         Including an `id` will update the corresponding price, and including

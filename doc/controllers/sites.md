@@ -157,7 +157,7 @@ def list_chargify_js_public_keys(self,
 
 ```python
 collect = {
-    'page': 2,
+    'page': 1,
     'per_page': 50
 }
 result = sites_controller.list_chargify_js_public_keys(collect)

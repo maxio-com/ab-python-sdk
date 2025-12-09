@@ -33,7 +33,7 @@
 | `signup_revenue` | `str` | Optional | The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00) |
 | `delayed_cancel_at` | `datetime` | Optional | Timestamp for when the subscription is currently set to cancel. |
 | `coupon_code` | `str` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
-| `snap_day` | `str` | Optional | The day of the month that the subscription will charge according to calendar billing rules, if used. |
+| `snap_day` | int \| [SnapDay](../../doc/models/snap-day.md) \| None | Optional | This is a container for one-of cases. |
 | `payment_collection_method` | [`CollectionMethod`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 | `customer` | [`Customer`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product`](../../doc/models/product.md) | Optional | - |
@@ -51,7 +51,7 @@
 | `coupon_codes` | `List[str]` | Optional | An array for all the coupons attached to the subscription. |
 | `offer_id` | `int` | Optional | The ID of the offer associated with the subscription. |
 | `payer_id` | `int` | Optional | On Relationship Invoicing, the ID of the individual paying for the subscription. Defaults to the Customer ID unless the 'Customer Hierarchies & WhoPays' feature is enabled. |
-| `current_billing_amount_in_cents` | `int` | Optional | The balance in cents plus the estimated renewal amount in cents. Returned ONLY for readSubscription operation as it's compute intensive operation. |
+| `current_billing_amount_in_cents` | `int` | Optional | The balance in cents plus the estimated renewal amount in cents. Returned ONLY for the readSubscription operation as it's a compute intensive operation. |
 | `product_price_point_id` | `int` | Optional | The product price point currently subscribed to. |
 | `product_price_point_type` | [`PricePointType`](../../doc/models/price-point-type.md) | Optional | Price point type. We expose the following types:<br><br>1. **default**: a price point that is marked as a default price for a certain product.<br>2. **custom**: a custom price point.<br>3. **catalog**: a price point that is **not** marked as a default price for a certain product and is **not** a custom one. |
 | `next_product_price_point_id` | `int` | Optional | If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal. |

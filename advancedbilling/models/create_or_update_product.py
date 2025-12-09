@@ -20,7 +20,7 @@ class CreateOrUpdateProduct(object):
         accounting_code (str): E.g. Internal ID or SKU Number
         require_credit_card (bool): Deprecated value that can be ignored
             unless you have legacy hosted pages. For Public Signup Page users,
-            please read this attribute from under the signup page.
+            read this attribute from under the signup page.
         price_in_cents (int): The product price, in integer cents
         interval (int): The numerical interval. i.e. an interval of ‘30’
             coupled with an interval_unit of day would mean this product would
@@ -33,7 +33,13 @@ class CreateOrUpdateProduct(object):
             product trial would last 30 days.
         trial_interval_unit (IntervalUnit): A string representing the trial
             interval unit for this product, either month or day
-        trial_type (str): The model property of type str.
+        trial_type (TrialType): Indicates how a trial is handled when the
+            trail period ends and there is no credit card on file. For
+            `no_obligation`, the subscription transitions to a Trial Ended
+            state. Maxio will not send any emails or statements. For
+            `payment_expected`, the subscription transitions to a Past Due
+            state. Maxio will send normal dunning emails and statements
+            according to your other settings.
         expiration_interval (int): The numerical expiration interval. i.e. an
             expiration_interval of ‘30’ coupled with an
             expiration_interval_unit of day would mean this product would
@@ -43,9 +49,9 @@ class CreateOrUpdateProduct(object):
             month, day or never
         auto_create_signup_page (bool): The model property of type bool.
         tax_code (str): A string representing the tax code related to the
-            product type. This is especially important when using the Avalara
-            service to tax based on locale. This attribute has a max length of
-            10 characters.
+            product type. This is especially important when using AvaTax to
+            tax based on locale. This attribute has a max length of 25
+            characters.
         additional_properties (Dict[str, object]): The additional properties
             for the model.
 
@@ -87,6 +93,7 @@ class CreateOrUpdateProduct(object):
 
     _nullables = [
         'trial_interval_unit',
+        'trial_type',
         'expiration_interval_unit',
     ]
 
@@ -174,7 +181,7 @@ class CreateOrUpdateProduct(object):
         trial_price_in_cents = dictionary.get("trial_price_in_cents") if dictionary.get("trial_price_in_cents") else APIHelper.SKIP
         trial_interval = dictionary.get("trial_interval") if dictionary.get("trial_interval") else APIHelper.SKIP
         trial_interval_unit = dictionary.get("trial_interval_unit") if "trial_interval_unit" in dictionary.keys() else APIHelper.SKIP
-        trial_type = dictionary.get("trial_type") if dictionary.get("trial_type") else APIHelper.SKIP
+        trial_type = dictionary.get("trial_type") if "trial_type" in dictionary.keys() else APIHelper.SKIP
         expiration_interval = dictionary.get("expiration_interval") if dictionary.get("expiration_interval") else APIHelper.SKIP
         expiration_interval_unit = dictionary.get("expiration_interval_unit") if "expiration_interval_unit" in dictionary.keys() else APIHelper.SKIP
         auto_create_signup_page = dictionary.get("auto_create_signup_page") if "auto_create_signup_page" in dictionary.keys() else APIHelper.SKIP
