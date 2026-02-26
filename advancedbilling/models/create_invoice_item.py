@@ -1,121 +1,117 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class CreateInvoiceItem(object):
-
     """Implementation of the 'Create Invoice Item' model.
 
     Attributes:
         title (str): The model property of type str.
-        quantity (float | str | None): The quantity can contain up to 8
-            decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a
-            value with more than 8 decimal places, we will round it down to
-            the 8th decimal place.
-        unit_price (float | str | None): The unit_price can contain up to 8
-            decimal places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a
-            value with more than 8 decimal places, we will round it down to
-            the 8th decimal place.
-        taxable (bool): Set to true to automatically calculate taxes. Site
-            must be configured to use and calculate taxes. If using AvaTax, a
-            tax_code parameter must also be sent.
-        tax_code (str): A string representing the tax code related to the
-            product type. This is especially important when using AvaTax to
-            tax based on locale. This attribute has a max length of 25
-            characters.
+        quantity (float | str | None): The quantity can contain up to 8 decimal
+            places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with
+            more than 8 decimal places, we will round it down to the 8th decimal
+            place.
+        unit_price (float | str | None): The unit_price can contain up to 8 decimal
+            places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with
+            more than 8 decimal places, we will round it down to the 8th decimal
+            place.
+        taxable (bool): Set to true to automatically calculate taxes. Site must be
+            configured to use and calculate taxes. If using AvaTax, a tax_code
+            parameter must also be sent.
+        tax_code (str): A string representing the tax code related to the product
+            type. This is especially important when using AvaTax to tax based on
+            locale. This attribute has a max length of 25 characters.
         period_range_start (str): YYYY-MM-DD
         period_range_end (str): YYYY-MM-DD
         product_id (str | int | None): Product handle or product id.
         component_id (str | int | None): Component handle or component id.
-        price_point_id (str | int | None): Price point handle or id. For
-            component.
-        product_price_point_id (str | int | None): The model property of type
-            str | int | None.
+        price_point_id (str | int | None): Price point handle or id. For component.
+        product_price_point_id (str | int | None): The model property of type str |
+            int | None.
         description (str): The model property of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "title": 'title',
-        "quantity": 'quantity',
-        "unit_price": 'unit_price',
-        "taxable": 'taxable',
-        "tax_code": 'tax_code',
-        "period_range_start": 'period_range_start',
-        "period_range_end": 'period_range_end',
-        "product_id": 'product_id',
-        "component_id": 'component_id',
-        "price_point_id": 'price_point_id',
-        "product_price_point_id": 'product_price_point_id',
-        "description": 'description'
+        "title": "title",
+        "quantity": "quantity",
+        "unit_price": "unit_price",
+        "taxable": "taxable",
+        "tax_code": "tax_code",
+        "period_range_start": "period_range_start",
+        "period_range_end": "period_range_end",
+        "product_id": "product_id",
+        "component_id": "component_id",
+        "price_point_id": "price_point_id",
+        "product_price_point_id": "product_price_point_id",
+        "description": "description",
     }
 
     _optionals = [
-        'title',
-        'quantity',
-        'unit_price',
-        'taxable',
-        'tax_code',
-        'period_range_start',
-        'period_range_end',
-        'product_id',
-        'component_id',
-        'price_point_id',
-        'product_price_point_id',
-        'description',
+        "title",
+        "quantity",
+        "unit_price",
+        "taxable",
+        "tax_code",
+        "period_range_start",
+        "period_range_end",
+        "product_id",
+        "component_id",
+        "price_point_id",
+        "product_price_point_id",
+        "description",
     ]
 
-    def __init__(self,
-                 title=APIHelper.SKIP,
-                 quantity=APIHelper.SKIP,
-                 unit_price=APIHelper.SKIP,
-                 taxable=APIHelper.SKIP,
-                 tax_code=APIHelper.SKIP,
-                 period_range_start=APIHelper.SKIP,
-                 period_range_end=APIHelper.SKIP,
-                 product_id=APIHelper.SKIP,
-                 component_id=APIHelper.SKIP,
-                 price_point_id=APIHelper.SKIP,
-                 product_price_point_id=APIHelper.SKIP,
-                 description=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the CreateInvoiceItem class"""
-
+    def __init__(
+        self,
+        title=APIHelper.SKIP,
+        quantity=APIHelper.SKIP,
+        unit_price=APIHelper.SKIP,
+        taxable=APIHelper.SKIP,
+        tax_code=APIHelper.SKIP,
+        period_range_start=APIHelper.SKIP,
+        period_range_end=APIHelper.SKIP,
+        product_id=APIHelper.SKIP,
+        component_id=APIHelper.SKIP,
+        price_point_id=APIHelper.SKIP,
+        product_price_point_id=APIHelper.SKIP,
+        description=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a CreateInvoiceItem instance."""
         # Initialize members of the class
         if title is not APIHelper.SKIP:
-            self.title = title 
+            self.title = title
         if quantity is not APIHelper.SKIP:
-            self.quantity = quantity 
+            self.quantity = quantity
         if unit_price is not APIHelper.SKIP:
-            self.unit_price = unit_price 
+            self.unit_price = unit_price
         if taxable is not APIHelper.SKIP:
-            self.taxable = taxable 
+            self.taxable = taxable
         if tax_code is not APIHelper.SKIP:
-            self.tax_code = tax_code 
+            self.tax_code = tax_code
         if period_range_start is not APIHelper.SKIP:
-            self.period_range_start = period_range_start 
+            self.period_range_start = period_range_start
         if period_range_end is not APIHelper.SKIP:
-            self.period_range_end = period_range_end 
+            self.period_range_end = period_range_end
         if product_id is not APIHelper.SKIP:
-            self.product_id = product_id 
+            self.product_id = product_id
         if component_id is not APIHelper.SKIP:
-            self.component_id = component_id 
+            self.component_id = component_id
         if price_point_id is not APIHelper.SKIP:
-            self.price_point_id = price_point_id 
+            self.price_point_id = price_point_id
         if product_price_point_id is not APIHelper.SKIP:
-            self.product_price_point_id = product_price_point_id 
+            self.product_price_point_id = product_price_point_id
         if description is not APIHelper.SKIP:
-            self.description = description 
+            self.description = description
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -125,7 +121,7 @@ class CreateInvoiceItem(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -136,26 +132,79 @@ class CreateInvoiceItem(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
 
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        title = dictionary.get("title") if dictionary.get("title") else APIHelper.SKIP
-        quantity = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceItemQuantity'), dictionary.get('quantity'), False) if dictionary.get('quantity') is not None else APIHelper.SKIP
-        unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceItemUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else APIHelper.SKIP
-        taxable = dictionary.get("taxable") if "taxable" in dictionary.keys() else APIHelper.SKIP
-        tax_code = dictionary.get("tax_code") if dictionary.get("tax_code") else APIHelper.SKIP
-        period_range_start = dictionary.get("period_range_start") if dictionary.get("period_range_start") else APIHelper.SKIP
-        period_range_end = dictionary.get("period_range_end") if dictionary.get("period_range_end") else APIHelper.SKIP
-        product_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceItemProductId'), dictionary.get('product_id'), False) if dictionary.get('product_id') is not None else APIHelper.SKIP
-        component_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceItemComponentId'), dictionary.get('component_id'), False) if dictionary.get('component_id') is not None else APIHelper.SKIP
-        price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceItemPricePointId'), dictionary.get('price_point_id'), False) if dictionary.get('price_point_id') is not None else APIHelper.SKIP
-        product_price_point_id = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateInvoiceItemProductPricePointId'), dictionary.get('product_price_point_id'), False) if dictionary.get('product_price_point_id') is not None else APIHelper.SKIP
-        description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
+        title =\
+            dictionary.get("title")\
+            if dictionary.get("title")\
+                else APIHelper.SKIP
+        quantity = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("CreateInvoiceItemQuantity"),
+            dictionary.get("quantity"),
+            False)\
+            if dictionary.get("quantity") is not None\
+            else APIHelper.SKIP
+        unit_price = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("CreateInvoiceItemUnitPrice"),
+            dictionary.get("unit_price"),
+            False)\
+            if dictionary.get("unit_price") is not None\
+            else APIHelper.SKIP
+        taxable =\
+            dictionary.get("taxable")\
+            if "taxable" in dictionary.keys()\
+                else APIHelper.SKIP
+        tax_code =\
+            dictionary.get("tax_code")\
+            if dictionary.get("tax_code")\
+                else APIHelper.SKIP
+        period_range_start =\
+            dictionary.get("period_range_start")\
+            if dictionary.get("period_range_start")\
+                else APIHelper.SKIP
+        period_range_end =\
+            dictionary.get("period_range_end")\
+            if dictionary.get("period_range_end")\
+                else APIHelper.SKIP
+        product_id = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("CreateInvoiceItemProductId"),
+            dictionary.get("product_id"),
+            False)\
+            if dictionary.get("product_id") is not None\
+            else APIHelper.SKIP
+        component_id = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("CreateInvoiceItemComponentId"),
+            dictionary.get("component_id"),
+            False)\
+            if dictionary.get("component_id") is not None\
+            else APIHelper.SKIP
+        price_point_id = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("CreateInvoiceItemPricePointId"),
+            dictionary.get("price_point_id"),
+            False)\
+            if dictionary.get("price_point_id") is not None\
+            else APIHelper.SKIP
+        product_price_point_id = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("CreateInvoiceItemProductPricePointId"),
+            dictionary.get("product_price_point_id"),
+            False)\
+            if dictionary.get("product_price_point_id") is not None\
+            else APIHelper.SKIP
+        description =\
+            dictionary.get("description")\
+            if dictionary.get("description")\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(title,
                    quantity,
@@ -172,33 +221,163 @@ class CreateInvoiceItem(object):
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'title={(self.title if hasattr(self, "title") else None)!r}, '
-                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!r}, '
-                f'unit_price={(self.unit_price if hasattr(self, "unit_price") else None)!r}, '
-                f'taxable={(self.taxable if hasattr(self, "taxable") else None)!r}, '
-                f'tax_code={(self.tax_code if hasattr(self, "tax_code") else None)!r}, '
-                f'period_range_start={(self.period_range_start if hasattr(self, "period_range_start") else None)!r}, '
-                f'period_range_end={(self.period_range_end if hasattr(self, "period_range_end") else None)!r}, '
-                f'product_id={(self.product_id if hasattr(self, "product_id") else None)!r}, '
-                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!r}, '
-                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!r}, '
-                f'product_price_point_id={(self.product_price_point_id if hasattr(self, "product_price_point_id") else None)!r}, '
-                f'description={(self.description if hasattr(self, "description") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _title=(
+            self.title
+            if hasattr(self, "title")
+            else None
+        )
+        _quantity=(
+            self.quantity
+            if hasattr(self, "quantity")
+            else None
+        )
+        _unit_price=(
+            self.unit_price
+            if hasattr(self, "unit_price")
+            else None
+        )
+        _taxable=(
+            self.taxable
+            if hasattr(self, "taxable")
+            else None
+        )
+        _tax_code=(
+            self.tax_code
+            if hasattr(self, "tax_code")
+            else None
+        )
+        _period_range_start=(
+            self.period_range_start
+            if hasattr(self, "period_range_start")
+            else None
+        )
+        _period_range_end=(
+            self.period_range_end
+            if hasattr(self, "period_range_end")
+            else None
+        )
+        _product_id=(
+            self.product_id
+            if hasattr(self, "product_id")
+            else None
+        )
+        _component_id=(
+            self.component_id
+            if hasattr(self, "component_id")
+            else None
+        )
+        _price_point_id=(
+            self.price_point_id
+            if hasattr(self, "price_point_id")
+            else None
+        )
+        _product_price_point_id=(
+            self.product_price_point_id
+            if hasattr(self, "product_price_point_id")
+            else None
+        )
+        _description=(
+            self.description
+            if hasattr(self, "description")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"title={_title!r}, "
+            f"quantity={_quantity!r}, "
+            f"unit_price={_unit_price!r}, "
+            f"taxable={_taxable!r}, "
+            f"tax_code={_tax_code!r}, "
+            f"period_range_start={_period_range_start!r}, "
+            f"period_range_end={_period_range_end!r}, "
+            f"product_id={_product_id!r}, "
+            f"component_id={_component_id!r}, "
+            f"price_point_id={_price_point_id!r}, "
+            f"product_price_point_id={_product_price_point_id!r}, "
+            f"description={_description!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'title={(self.title if hasattr(self, "title") else None)!s}, '
-                f'quantity={(self.quantity if hasattr(self, "quantity") else None)!s}, '
-                f'unit_price={(self.unit_price if hasattr(self, "unit_price") else None)!s}, '
-                f'taxable={(self.taxable if hasattr(self, "taxable") else None)!s}, '
-                f'tax_code={(self.tax_code if hasattr(self, "tax_code") else None)!s}, '
-                f'period_range_start={(self.period_range_start if hasattr(self, "period_range_start") else None)!s}, '
-                f'period_range_end={(self.period_range_end if hasattr(self, "period_range_end") else None)!s}, '
-                f'product_id={(self.product_id if hasattr(self, "product_id") else None)!s}, '
-                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!s}, '
-                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!s}, '
-                f'product_price_point_id={(self.product_price_point_id if hasattr(self, "product_price_point_id") else None)!s}, '
-                f'description={(self.description if hasattr(self, "description") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _title=(
+            self.title
+            if hasattr(self, "title")
+            else None
+        )
+        _quantity=(
+            self.quantity
+            if hasattr(self, "quantity")
+            else None
+        )
+        _unit_price=(
+            self.unit_price
+            if hasattr(self, "unit_price")
+            else None
+        )
+        _taxable=(
+            self.taxable
+            if hasattr(self, "taxable")
+            else None
+        )
+        _tax_code=(
+            self.tax_code
+            if hasattr(self, "tax_code")
+            else None
+        )
+        _period_range_start=(
+            self.period_range_start
+            if hasattr(self, "period_range_start")
+            else None
+        )
+        _period_range_end=(
+            self.period_range_end
+            if hasattr(self, "period_range_end")
+            else None
+        )
+        _product_id=(
+            self.product_id
+            if hasattr(self, "product_id")
+            else None
+        )
+        _component_id=(
+            self.component_id
+            if hasattr(self, "component_id")
+            else None
+        )
+        _price_point_id=(
+            self.price_point_id
+            if hasattr(self, "price_point_id")
+            else None
+        )
+        _product_price_point_id=(
+            self.product_price_point_id
+            if hasattr(self, "product_price_point_id")
+            else None
+        )
+        _description=(
+            self.description
+            if hasattr(self, "description")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"title={_title!s}, "
+            f"quantity={_quantity!s}, "
+            f"unit_price={_unit_price!s}, "
+            f"taxable={_taxable!s}, "
+            f"tax_code={_tax_code!s}, "
+            f"period_range_start={_period_range_start!s}, "
+            f"period_range_end={_period_range_end!s}, "
+            f"product_id={_product_id!s}, "
+            f"component_id={_component_id!s}, "
+            f"price_point_id={_price_point_id!s}, "
+            f"product_price_point_id={_product_price_point_id!s}, "
+            f"description={_description!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

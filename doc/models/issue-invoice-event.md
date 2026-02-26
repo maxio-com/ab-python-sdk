@@ -12,7 +12,7 @@
 | `id` | `int` | Required | - |
 | `timestamp` | `datetime` | Required | - |
 | `invoice` | [`Invoice`](../../doc/models/invoice.md) | Required | - |
-| `event_type` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `'issue_invoice'` |
+| `event_type` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `"issue_invoice"` |
 | `event_data` | [`IssueInvoiceEventData`](../../doc/models/issue-invoice-event-data.md) | Required | Example schema for an `issue_invoice` event |
 
 ## Example (as JSON)

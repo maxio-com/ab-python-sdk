@@ -22,7 +22,7 @@
 | `billing_country` | `str` | Optional | The current billing address country for the PayPal account |
 | `customer_vault_token` | `str` | Optional | - |
 | `billing_address_2` | `str` | Optional | The current billing street address, second line, for the PayPal account |
-| `payment_type` | [`PaymentType`](../../doc/models/payment-type.md) | Required | **Default**: `'paypal_account'` |
+| `payment_type` | [`PaymentType`](../../doc/models/payment-type.md) | Required | **Default**: `"paypal_account"` |
 | `site_gateway_setting_id` | `int` | Optional | - |
 | `gateway_handle` | `str` | Optional | - |
 | `paypal_email` | `str` | Optional | - |

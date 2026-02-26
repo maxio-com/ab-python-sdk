@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class PayPalVault(object):
-
     """Implementation of the 'PayPal Vault' enum.
 
     The vault that stores the payment profile with the provided vault_token.
@@ -19,22 +16,23 @@ class PayPalVault(object):
         PAYPAL: The enum member of type str.
         MODUSLINK: The enum member of type str.
         PAYPAL_COMPLETE: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    _all_values = ['braintree_blue', 'paypal', 'moduslink', 'paypal_complete']
-    BRAINTREE_BLUE = 'braintree_blue'
 
-    PAYPAL = 'paypal'
+    _all_values = ["braintree_blue", "paypal", "moduslink", "paypal_complete"]
+    BRAINTREE_BLUE = "braintree_blue"
 
-    MODUSLINK = 'moduslink'
+    PAYPAL = "paypal"
 
-    PAYPAL_COMPLETE = 'paypal_complete'
+    MODUSLINK = "moduslink"
+
+    PAYPAL_COMPLETE = "paypal_complete"
 
     @classmethod
     def validate(cls, value):
-        """Validates value contains in enum
+        """Validate value contains in enum
 
         Args:
             value: the value to be validated
@@ -44,9 +42,10 @@ class PayPalVault(object):
 
         """
         return value in cls._all_values
-   
+
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

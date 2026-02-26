@@ -1,38 +1,38 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.models.list_subcription_group_prepayment_item import ListSubcriptionGroupPrepaymentItem
+
+# ruff: noqa: E501
+from advancedbilling.models.list_subcription_group_prepayment_item import (
+    ListSubcriptionGroupPrepaymentItem,
+)
 
 
 class ListSubscriptionGroupPrepayment(object):
-
     """Implementation of the 'List Subscription Group Prepayment' model.
 
     Attributes:
-        prepayment (ListSubcriptionGroupPrepaymentItem): The model property of
-            type ListSubcriptionGroupPrepaymentItem.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        prepayment (ListSubcriptionGroupPrepaymentItem): The model property of type
+            ListSubcriptionGroupPrepaymentItem.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "prepayment": 'prepayment'
+        "prepayment": "prepayment",
     }
 
-    def __init__(self,
-                 prepayment=None,
-                 additional_properties=None):
-        """Constructor for the ListSubscriptionGroupPrepayment class"""
-
+    def __init__(
+        self,
+        prepayment=None,
+        additional_properties=None):
+        """Initialize a ListSubscriptionGroupPrepayment instance."""
         # Initialize members of the class
-        self.prepayment = prepayment 
+        self.prepayment = prepayment
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -42,7 +42,7 @@ class ListSubscriptionGroupPrepayment(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -53,24 +53,41 @@ class ListSubscriptionGroupPrepayment(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        prepayment = ListSubcriptionGroupPrepaymentItem.from_dictionary(dictionary.get('prepayment')) if dictionary.get('prepayment') else None
+        prepayment =\
+            ListSubcriptionGroupPrepaymentItem.from_dictionary(
+                dictionary.get("prepayment"))\
+                if dictionary.get("prepayment") else None
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(prepayment,
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'prepayment={self.prepayment!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _prepayment=self.prepayment
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"prepayment={_prepayment!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'prepayment={self.prepayment!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _prepayment=self.prepayment
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"prepayment={_prepayment!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

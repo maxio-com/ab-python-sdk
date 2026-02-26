@@ -1,19 +1,16 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class CreditCardVault(object):
-
     """Implementation of the 'Credit Card Vault' enum.
 
-    The vault that stores the payment profile with the provided `vault_token`.
-    Use `bogus` for testing.
+    The vault that stores the payment profile with the provided `vault_token`. Use
+    `bogus` for testing.
 
     Attributes:
         ADYEN: The enum member of type str.
@@ -49,80 +46,86 @@ class CreditCardVault(object):
         TRUST_COMMERCE: The enum member of type str.
         UNIPAAS: The enum member of type str.
         WIRECARD: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    _all_values = ['adyen', 'authorizenet', 'beanstream', 'blue_snap', 'bogus', 'braintree1', 'braintree_blue', 'checkout', 'cybersource', 'elavon', 'eway', 'eway_rapid', 'eway_rapid_std', 'firstdata', 'forte', 'litle', 'maxio_payments', 'maxp', 'moduslink', 'moneris', 'nmi', 'orbital', 'payment_express', 'paymill', 'paypal', 'paypal_complete', 'pin', 'square', 'stripe', 'stripe_connect', 'trust_commerce', 'unipaas', 'wirecard']
-    ADYEN = 'adyen'
 
-    AUTHORIZENET = 'authorizenet'
+    _all_values = ["adyen", "authorizenet", "beanstream", "blue_snap",
+        "bogus", "braintree1", "braintree_blue", "checkout", "cybersource", "elavon",
+        "eway", "eway_rapid", "eway_rapid_std", "firstdata", "forte", "litle",
+        "maxio_payments", "maxp", "moduslink", "moneris", "nmi", "orbital",
+        "payment_express", "paymill", "paypal", "paypal_complete", "pin", "square",
+        "stripe", "stripe_connect", "trust_commerce", "unipaas", "wirecard"]
+    ADYEN = "adyen"
 
-    BEANSTREAM = 'beanstream'
+    AUTHORIZENET = "authorizenet"
 
-    BLUE_SNAP = 'blue_snap'
+    BEANSTREAM = "beanstream"
 
-    BOGUS = 'bogus'
+    BLUE_SNAP = "blue_snap"
 
-    BRAINTREE1 = 'braintree1'
+    BOGUS = "bogus"
 
-    BRAINTREE_BLUE = 'braintree_blue'
+    BRAINTREE1 = "braintree1"
 
-    CHECKOUT = 'checkout'
+    BRAINTREE_BLUE = "braintree_blue"
 
-    CYBERSOURCE = 'cybersource'
+    CHECKOUT = "checkout"
 
-    ELAVON = 'elavon'
+    CYBERSOURCE = "cybersource"
 
-    EWAY = 'eway'
+    ELAVON = "elavon"
 
-    EWAY_RAPID = 'eway_rapid'
+    EWAY = "eway"
 
-    EWAY_RAPID_STD = 'eway_rapid_std'
+    EWAY_RAPID = "eway_rapid"
 
-    FIRSTDATA = 'firstdata'
+    EWAY_RAPID_STD = "eway_rapid_std"
 
-    FORTE = 'forte'
+    FIRSTDATA = "firstdata"
 
-    LITLE = 'litle'
+    FORTE = "forte"
 
-    MAXIO_PAYMENTS = 'maxio_payments'
+    LITLE = "litle"
 
-    MAXP = 'maxp'
+    MAXIO_PAYMENTS = "maxio_payments"
 
-    MODUSLINK = 'moduslink'
+    MAXP = "maxp"
 
-    MONERIS = 'moneris'
+    MODUSLINK = "moduslink"
 
-    NMI = 'nmi'
+    MONERIS = "moneris"
 
-    ORBITAL = 'orbital'
+    NMI = "nmi"
 
-    PAYMENT_EXPRESS = 'payment_express'
+    ORBITAL = "orbital"
 
-    PAYMILL = 'paymill'
+    PAYMENT_EXPRESS = "payment_express"
 
-    PAYPAL = 'paypal'
+    PAYMILL = "paymill"
 
-    PAYPAL_COMPLETE = 'paypal_complete'
+    PAYPAL = "paypal"
 
-    PIN = 'pin'
+    PAYPAL_COMPLETE = "paypal_complete"
 
-    SQUARE = 'square'
+    PIN = "pin"
 
-    STRIPE = 'stripe'
+    SQUARE = "square"
 
-    STRIPE_CONNECT = 'stripe_connect'
+    STRIPE = "stripe"
 
-    TRUST_COMMERCE = 'trust_commerce'
+    STRIPE_CONNECT = "stripe_connect"
 
-    UNIPAAS = 'unipaas'
+    TRUST_COMMERCE = "trust_commerce"
 
-    WIRECARD = 'wirecard'
+    UNIPAAS = "unipaas"
+
+    WIRECARD = "wirecard"
 
     @classmethod
     def validate(cls, value):
-        """Validates value contains in enum
+        """Validate value contains in enum
 
         Args:
             value: the value to be validated
@@ -132,9 +135,10 @@ class CreditCardVault(object):
 
         """
         return value in cls._all_values
-   
+
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

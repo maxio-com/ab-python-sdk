@@ -1,54 +1,56 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.credit_note import CreditNote
+from advancedbilling.models.credit_note import (
+    CreditNote,
+)
 
 
 class VoidRemainderEventData(object):
-
     """Implementation of the 'Void Remainder Event Data' model.
 
     Example schema for an `void_remainder` event
 
     Attributes:
-        credit_note_attributes (CreditNote): The model property of type
-            CreditNote.
+        credit_note_attributes (CreditNote): The model property of type CreditNote.
         memo (str): The memo provided during invoice remainder voiding.
         applied_amount (str): The amount of the void.
-        transaction_time (datetime): The time the refund was applied, in ISO
-            8601 format, i.e. "2019-06-07T17:20:06Z"
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        transaction_time (datetime): The time the refund was applied, in ISO 8601
+            format, i.e. "2019-06-07T17:20:06Z"
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "credit_note_attributes": 'credit_note_attributes',
-        "memo": 'memo',
-        "applied_amount": 'applied_amount',
-        "transaction_time": 'transaction_time'
+        "credit_note_attributes": "credit_note_attributes",
+        "memo": "memo",
+        "applied_amount": "applied_amount",
+        "transaction_time": "transaction_time",
     }
 
-    def __init__(self,
-                 credit_note_attributes=None,
-                 memo=None,
-                 applied_amount=None,
-                 transaction_time=None,
-                 additional_properties=None):
-        """Constructor for the VoidRemainderEventData class"""
-
+    def __init__(
+        self,
+        credit_note_attributes=None,
+        memo=None,
+        applied_amount=None,
+        transaction_time=None,
+        additional_properties=None):
+        """Initialize a VoidRemainderEventData instance."""
         # Initialize members of the class
-        self.credit_note_attributes = credit_note_attributes 
-        self.memo = memo 
-        self.applied_amount = applied_amount 
-        self.transaction_time = APIHelper.apply_datetime_converter(transaction_time, APIHelper.RFC3339DateTime) if transaction_time else None 
+        self.credit_note_attributes = credit_note_attributes
+        self.memo = memo
+        self.applied_amount = applied_amount
+        self.transaction_time =\
+             APIHelper.apply_datetime_converter(
+            transaction_time, APIHelper.RFC3339DateTime)\
+             if transaction_time else None
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -58,7 +60,7 @@ class VoidRemainderEventData(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -69,17 +71,30 @@ class VoidRemainderEventData(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        credit_note_attributes = CreditNote.from_dictionary(dictionary.get('credit_note_attributes')) if dictionary.get('credit_note_attributes') else None
-        memo = dictionary.get("memo") if dictionary.get("memo") else None
-        applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else None
-        transaction_time = APIHelper.RFC3339DateTime.from_value(dictionary.get("transaction_time")).datetime if dictionary.get("transaction_time") else None
+        credit_note_attributes =\
+            CreditNote.from_dictionary(
+                dictionary.get("credit_note_attributes"))\
+                if dictionary.get("credit_note_attributes") else None
+        memo =\
+            dictionary.get("memo")\
+            if dictionary.get("memo")\
+                else None
+        applied_amount =\
+            dictionary.get("applied_amount")\
+            if dictionary.get("applied_amount")\
+                else None
+        transaction_time = APIHelper.RFC3339DateTime.from_value(
+            dictionary.get("transaction_time")).datetime\
+            if dictionary.get("transaction_time") else None
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(credit_note_attributes,
                    memo,
@@ -89,7 +104,7 @@ class VoidRemainderEventData(object):
 
     @classmethod
     def validate(cls, dictionary):
-        """Validates dictionary against class required properties
+        """Validate dictionary against class required properties
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -100,43 +115,94 @@ class VoidRemainderEventData(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.credit_note_attributes,
-                                           type_callable=lambda value: CreditNote.validate(value),
-                                           is_model_dict=True) \
-                and APIHelper.is_valid_type(value=dictionary.memo,
-                                            type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.applied_amount,
-                                            type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.transaction_time,
-                                            type_callable=lambda value: isinstance(value, APIHelper.RFC3339DateTime))
+            return APIHelper.is_valid_type(
+                    value=dictionary.credit_note_attributes,
+                    type_callable=lambda value:
+                        CreditNote.validate(value),
+                    is_model_dict=True) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.memo,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.applied_amount,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.transaction_time,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        APIHelper.RFC3339DateTime,
+                ))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('credit_note_attributes'),
-                                       type_callable=lambda value: CreditNote.validate(value),
-                                       is_model_dict=True) \
-            and APIHelper.is_valid_type(value=dictionary.get('memo'),
-                                        type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('applied_amount'),
-                                        type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('transaction_time'),
-                                        type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(
+                value=dictionary.get("credit_note_attributes"),
+                type_callable=lambda value:
+                    CreditNote.validate(value),
+                is_model_dict=True) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("memo"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("applied_amount"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("transaction_time"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            ))
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'credit_note_attributes={self.credit_note_attributes!r}, '
-                f'memo={self.memo!r}, '
-                f'applied_amount={self.applied_amount!r}, '
-                f'transaction_time={self.transaction_time!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _credit_note_attributes=self.credit_note_attributes
+        _memo=self.memo
+        _applied_amount=self.applied_amount
+        _transaction_time=self.transaction_time
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"credit_note_attributes={_credit_note_attributes!r}, "
+            f"memo={_memo!r}, "
+            f"applied_amount={_applied_amount!r}, "
+            f"transaction_time={_transaction_time!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'credit_note_attributes={self.credit_note_attributes!s}, '
-                f'memo={self.memo!s}, '
-                f'applied_amount={self.applied_amount!s}, '
-                f'transaction_time={self.transaction_time!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _credit_note_attributes=self.credit_note_attributes
+        _memo=self.memo
+        _applied_amount=self.applied_amount
+        _transaction_time=self.transaction_time
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"credit_note_attributes={_credit_note_attributes!s}, "
+            f"memo={_memo!s}, "
+            f"applied_amount={_applied_amount!s}, "
+            f"transaction_time={_transaction_time!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

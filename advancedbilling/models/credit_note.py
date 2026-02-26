@@ -1,27 +1,43 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 import dateutil.parser
 
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.credit_note_application import CreditNoteApplication
-from advancedbilling.models.credit_note_line_item import CreditNoteLineItem
-from advancedbilling.models.invoice_address import InvoiceAddress
-from advancedbilling.models.invoice_customer import InvoiceCustomer
-from advancedbilling.models.invoice_discount import InvoiceDiscount
-from advancedbilling.models.invoice_refund import InvoiceRefund
-from advancedbilling.models.invoice_seller import InvoiceSeller
-from advancedbilling.models.invoice_tax import InvoiceTax
-from advancedbilling.models.origin_invoice import OriginInvoice
+from advancedbilling.models.credit_note_application import (
+    CreditNoteApplication,
+)
+from advancedbilling.models.credit_note_line_item import (
+    CreditNoteLineItem,
+)
+from advancedbilling.models.invoice_address import (
+    InvoiceAddress,
+)
+from advancedbilling.models.invoice_customer import (
+    InvoiceCustomer,
+)
+from advancedbilling.models.invoice_discount import (
+    InvoiceDiscount,
+)
+from advancedbilling.models.invoice_refund import (
+    InvoiceRefund,
+)
+from advancedbilling.models.invoice_seller import (
+    InvoiceSeller,
+)
+from advancedbilling.models.invoice_tax import (
+    InvoiceTax,
+)
+from advancedbilling.models.origin_invoice import (
+    OriginInvoice,
+)
 
 
 class CreditNote(object):
-
     """Implementation of the 'Credit Note' model.
 
     Attributes:
@@ -30,223 +46,219 @@ class CreditNote(object):
             alphanumeric characters.
         site_id (int): ID of the site to which the credit note belongs.
         customer_id (int): ID of the customer to which the credit note belongs.
-        subscription_id (int): ID of the subscription that generated the
-            credit note.
-        number (str): A unique, identifying string that appears on the credit
-            note and in places it is referenced.  While the UID is long and
-            not appropriate to show to customers, the number is usually
-            shorter and consumable by the customer and the merchant alike.
-        sequence_number (int): A monotonically increasing number assigned to
-            credit notes as they are created.  This number is unique within a
-            site and can be used to sort and order credit notes.
-        issue_date (date): Date the credit note was issued to the customer. 
-            This is the date that the credit was made available for
-            application, and may come before it is fully applied.  The format
-            is `"YYYY-MM-DD"`.
-        applied_date (date): Credit notes are applied to invoices to offset
-            invoiced amounts - they reduce the amount due. This field is the
-            date the credit note became fully applied to invoices.  If the
-            credit note has been partially applied, this field will not have a
-            value until it has been fully applied.  The format is
-            `"YYYY-MM-DD"`.
+        subscription_id (int): ID of the subscription that generated the credit note.
+        number (str): A unique, identifying string that appears on the credit note
+            and in places it is referenced.  While the UID is long and not
+            appropriate to show to customers, the number is usually shorter and
+            consumable by the customer and the merchant alike.
+        sequence_number (int): A monotonically increasing number assigned to credit
+            notes as they are created.  This number is unique within a site and can
+            be used to sort and order credit notes.
+        issue_date (date): Date the credit note was issued to the customer.  This is
+            the date that the credit was made available for application, and may come
+            before it is fully applied.  The format is `"YYYY-MM-DD"`.
+        applied_date (date): Credit notes are applied to invoices to offset invoiced
+            amounts - they reduce the amount due. This field is the date the credit
+            note became fully applied to invoices.  If the credit note has been
+            partially applied, this field will not have a value until it has been
+            fully applied.  The format is `"YYYY-MM-DD"`.
         status (CreditNoteStatus): Current status of the credit note.
-        currency (str): The ISO 4217 currency code (3 character string)
-            representing the currency of the credit note amount fields.
-        memo (str): The memo printed on credit note, which is a description of
-            the reason for the credit.
-        seller (InvoiceSeller): Information about the seller (merchant) listed
-            on the masthead of the credit note.
-        customer (InvoiceCustomer): Information about the customer who is
-            owner or recipient the credited subscription.
+        currency (str): The ISO 4217 currency code (3 character string) representing
+            the currency of the credit note amount fields.
+        memo (str): The memo printed on credit note, which is a description of the
+            reason for the credit.
+        seller (InvoiceSeller): Information about the seller (merchant) listed on the
+            masthead of the credit note.
+        customer (InvoiceCustomer): Information about the customer who is owner or
+            recipient the credited subscription.
         billing_address (InvoiceAddress): The billing address of the credit
             subscription.
-        shipping_address (InvoiceAddress): The shipping address of the
-            credited subscription.
-        subtotal_amount (str): Subtotal of the credit note, which is the sum
-            of all line items before discounts or taxes. Note that this is a
-            positive amount representing the credit back to the customer.
-        discount_amount (str): Total discount applied to the credit note. Note
-            that this is a positive amount representing the discount amount
-            being credited back to the customer (i.e. a credit on an earlier
-            discount). For example, if the original purchase was $1.00 and the
-            original discount was $0.10, a credit of $0.50 of the original
-            purchase (half) would have a discount credit of $0.05 (also half).
-        tax_amount (str): Total tax of the credit note. Note that this is a
-            positive amount representing a previously taxex amount being
-            credited back to the customer (i.e. a credit of an earlier tax).
-            For example, if the original purchase was $1.00 and the original
-            tax was $0.10, a credit of $0.50 of the original purchase (half)
-            would also have a tax credit of $0.05 (also half).
+        shipping_address (InvoiceAddress): The shipping address of the credited
+            subscription.
+        subtotal_amount (str): Subtotal of the credit note, which is the sum of all
+            line items before discounts or taxes. Note that this is a positive amount
+            representing the credit back to the customer.
+        discount_amount (str): Total discount applied to the credit note. Note that
+            this is a positive amount representing the discount amount being credited
+            back to the customer (i.e. a credit on an earlier discount). For example,
+            if the original purchase was $1.00 and the original discount was $0.10, a
+            credit of $0.50 of the original purchase (half) would have a discount
+            credit of $0.05 (also half).
+        tax_amount (str): Total tax of the credit note. Note that this is a positive
+            amount representing a previously taxex amount being credited back to the
+            customer (i.e. a credit of an earlier tax). For example, if the original
+            purchase was $1.00 and the original tax was $0.10, a credit of $0.50 of
+            the original purchase (half) would also have a tax credit of $0.05 (also
+            half).
         total_amount (str): The credit note total, which is `subtotal_amount -
             discount_amount + tax_amount`.'
-        applied_amount (str): The amount of the credit note that has already
-            been applied to invoices.
-        remaining_amount (str): The amount of the credit note remaining to be
-            applied to invoices, which is `total_amount - applied_amount`.
+        applied_amount (str): The amount of the credit note that has already been
+            applied to invoices.
+        remaining_amount (str): The amount of the credit note remaining to be applied
+            to invoices, which is `total_amount - applied_amount`.
         line_items (List[CreditNoteLineItem]): Line items on the credit note.
         discounts (List[InvoiceDiscount]): The model property of type
             List[InvoiceDiscount].
         taxes (List[InvoiceTax]): The model property of type List[InvoiceTax].
         applications (List[CreditNoteApplication]): The model property of type
             List[CreditNoteApplication].
-        refunds (List[InvoiceRefund]): The model property of type
-            List[InvoiceRefund].
-        origin_invoices (List[OriginInvoice]): An array of origin invoices for
-            the credit note. Learn more about [Origin Invoice from our
-            docs](https://maxio.zendesk.com/hc/en-us/articles/24252261284749-Cr
-            edit-Notes-Proration#origin-invoices)
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        refunds (List[InvoiceRefund]): The model property of type List[InvoiceRefund].
+        origin_invoices (List[OriginInvoice]): An array of origin invoices for the
+            credit note. Learn more about [Origin Invoice from our
+            docs](https://maxio.zendesk.com/hc/en-us/articles/24252261284749-Credit-No
+            tes-Proration#origin-invoices)
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "uid": 'uid',
-        "site_id": 'site_id',
-        "customer_id": 'customer_id',
-        "subscription_id": 'subscription_id',
-        "number": 'number',
-        "sequence_number": 'sequence_number',
-        "issue_date": 'issue_date',
-        "applied_date": 'applied_date',
-        "status": 'status',
-        "currency": 'currency',
-        "memo": 'memo',
-        "seller": 'seller',
-        "customer": 'customer',
-        "billing_address": 'billing_address',
-        "shipping_address": 'shipping_address',
-        "subtotal_amount": 'subtotal_amount',
-        "discount_amount": 'discount_amount',
-        "tax_amount": 'tax_amount',
-        "total_amount": 'total_amount',
-        "applied_amount": 'applied_amount',
-        "remaining_amount": 'remaining_amount',
-        "line_items": 'line_items',
-        "discounts": 'discounts',
-        "taxes": 'taxes',
-        "applications": 'applications',
-        "refunds": 'refunds',
-        "origin_invoices": 'origin_invoices'
+        "uid": "uid",
+        "site_id": "site_id",
+        "customer_id": "customer_id",
+        "subscription_id": "subscription_id",
+        "number": "number",
+        "sequence_number": "sequence_number",
+        "issue_date": "issue_date",
+        "applied_date": "applied_date",
+        "status": "status",
+        "currency": "currency",
+        "memo": "memo",
+        "seller": "seller",
+        "customer": "customer",
+        "billing_address": "billing_address",
+        "shipping_address": "shipping_address",
+        "subtotal_amount": "subtotal_amount",
+        "discount_amount": "discount_amount",
+        "tax_amount": "tax_amount",
+        "total_amount": "total_amount",
+        "applied_amount": "applied_amount",
+        "remaining_amount": "remaining_amount",
+        "line_items": "line_items",
+        "discounts": "discounts",
+        "taxes": "taxes",
+        "applications": "applications",
+        "refunds": "refunds",
+        "origin_invoices": "origin_invoices",
     }
 
     _optionals = [
-        'uid',
-        'site_id',
-        'customer_id',
-        'subscription_id',
-        'number',
-        'sequence_number',
-        'issue_date',
-        'applied_date',
-        'status',
-        'currency',
-        'memo',
-        'seller',
-        'customer',
-        'billing_address',
-        'shipping_address',
-        'subtotal_amount',
-        'discount_amount',
-        'tax_amount',
-        'total_amount',
-        'applied_amount',
-        'remaining_amount',
-        'line_items',
-        'discounts',
-        'taxes',
-        'applications',
-        'refunds',
-        'origin_invoices',
+        "uid",
+        "site_id",
+        "customer_id",
+        "subscription_id",
+        "number",
+        "sequence_number",
+        "issue_date",
+        "applied_date",
+        "status",
+        "currency",
+        "memo",
+        "seller",
+        "customer",
+        "billing_address",
+        "shipping_address",
+        "subtotal_amount",
+        "discount_amount",
+        "tax_amount",
+        "total_amount",
+        "applied_amount",
+        "remaining_amount",
+        "line_items",
+        "discounts",
+        "taxes",
+        "applications",
+        "refunds",
+        "origin_invoices",
     ]
 
-    def __init__(self,
-                 uid=APIHelper.SKIP,
-                 site_id=APIHelper.SKIP,
-                 customer_id=APIHelper.SKIP,
-                 subscription_id=APIHelper.SKIP,
-                 number=APIHelper.SKIP,
-                 sequence_number=APIHelper.SKIP,
-                 issue_date=APIHelper.SKIP,
-                 applied_date=APIHelper.SKIP,
-                 status=APIHelper.SKIP,
-                 currency=APIHelper.SKIP,
-                 memo=APIHelper.SKIP,
-                 seller=APIHelper.SKIP,
-                 customer=APIHelper.SKIP,
-                 billing_address=APIHelper.SKIP,
-                 shipping_address=APIHelper.SKIP,
-                 subtotal_amount=APIHelper.SKIP,
-                 discount_amount=APIHelper.SKIP,
-                 tax_amount=APIHelper.SKIP,
-                 total_amount=APIHelper.SKIP,
-                 applied_amount=APIHelper.SKIP,
-                 remaining_amount=APIHelper.SKIP,
-                 line_items=APIHelper.SKIP,
-                 discounts=APIHelper.SKIP,
-                 taxes=APIHelper.SKIP,
-                 applications=APIHelper.SKIP,
-                 refunds=APIHelper.SKIP,
-                 origin_invoices=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the CreditNote class"""
-
+    def __init__(
+        self,
+        uid=APIHelper.SKIP,
+        site_id=APIHelper.SKIP,
+        customer_id=APIHelper.SKIP,
+        subscription_id=APIHelper.SKIP,
+        number=APIHelper.SKIP,
+        sequence_number=APIHelper.SKIP,
+        issue_date=APIHelper.SKIP,
+        applied_date=APIHelper.SKIP,
+        status=APIHelper.SKIP,
+        currency=APIHelper.SKIP,
+        memo=APIHelper.SKIP,
+        seller=APIHelper.SKIP,
+        customer=APIHelper.SKIP,
+        billing_address=APIHelper.SKIP,
+        shipping_address=APIHelper.SKIP,
+        subtotal_amount=APIHelper.SKIP,
+        discount_amount=APIHelper.SKIP,
+        tax_amount=APIHelper.SKIP,
+        total_amount=APIHelper.SKIP,
+        applied_amount=APIHelper.SKIP,
+        remaining_amount=APIHelper.SKIP,
+        line_items=APIHelper.SKIP,
+        discounts=APIHelper.SKIP,
+        taxes=APIHelper.SKIP,
+        applications=APIHelper.SKIP,
+        refunds=APIHelper.SKIP,
+        origin_invoices=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a CreditNote instance."""
         # Initialize members of the class
         if uid is not APIHelper.SKIP:
-            self.uid = uid 
+            self.uid = uid
         if site_id is not APIHelper.SKIP:
-            self.site_id = site_id 
+            self.site_id = site_id
         if customer_id is not APIHelper.SKIP:
-            self.customer_id = customer_id 
+            self.customer_id = customer_id
         if subscription_id is not APIHelper.SKIP:
-            self.subscription_id = subscription_id 
+            self.subscription_id = subscription_id
         if number is not APIHelper.SKIP:
-            self.number = number 
+            self.number = number
         if sequence_number is not APIHelper.SKIP:
-            self.sequence_number = sequence_number 
+            self.sequence_number = sequence_number
         if issue_date is not APIHelper.SKIP:
-            self.issue_date = issue_date 
+            self.issue_date = issue_date
         if applied_date is not APIHelper.SKIP:
-            self.applied_date = applied_date 
+            self.applied_date = applied_date
         if status is not APIHelper.SKIP:
-            self.status = status 
+            self.status = status
         if currency is not APIHelper.SKIP:
-            self.currency = currency 
+            self.currency = currency
         if memo is not APIHelper.SKIP:
-            self.memo = memo 
+            self.memo = memo
         if seller is not APIHelper.SKIP:
-            self.seller = seller 
+            self.seller = seller
         if customer is not APIHelper.SKIP:
-            self.customer = customer 
+            self.customer = customer
         if billing_address is not APIHelper.SKIP:
-            self.billing_address = billing_address 
+            self.billing_address = billing_address
         if shipping_address is not APIHelper.SKIP:
-            self.shipping_address = shipping_address 
+            self.shipping_address = shipping_address
         if subtotal_amount is not APIHelper.SKIP:
-            self.subtotal_amount = subtotal_amount 
+            self.subtotal_amount = subtotal_amount
         if discount_amount is not APIHelper.SKIP:
-            self.discount_amount = discount_amount 
+            self.discount_amount = discount_amount
         if tax_amount is not APIHelper.SKIP:
-            self.tax_amount = tax_amount 
+            self.tax_amount = tax_amount
         if total_amount is not APIHelper.SKIP:
-            self.total_amount = total_amount 
+            self.total_amount = total_amount
         if applied_amount is not APIHelper.SKIP:
-            self.applied_amount = applied_amount 
+            self.applied_amount = applied_amount
         if remaining_amount is not APIHelper.SKIP:
-            self.remaining_amount = remaining_amount 
+            self.remaining_amount = remaining_amount
         if line_items is not APIHelper.SKIP:
-            self.line_items = line_items 
+            self.line_items = line_items
         if discounts is not APIHelper.SKIP:
-            self.discounts = discounts 
+            self.discounts = discounts
         if taxes is not APIHelper.SKIP:
-            self.taxes = taxes 
+            self.taxes = taxes
         if applications is not APIHelper.SKIP:
-            self.applications = applications 
+            self.applications = applications
         if refunds is not APIHelper.SKIP:
-            self.refunds = refunds 
+            self.refunds = refunds
         if origin_invoices is not APIHelper.SKIP:
-            self.origin_invoices = origin_invoices 
+            self.origin_invoices = origin_invoices
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -256,7 +268,7 @@ class CreditNote(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -267,64 +279,149 @@ class CreditNote(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
-        site_id = dictionary.get("site_id") if dictionary.get("site_id") else APIHelper.SKIP
-        customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
-        subscription_id = dictionary.get("subscription_id") if dictionary.get("subscription_id") else APIHelper.SKIP
-        number = dictionary.get("number") if dictionary.get("number") else APIHelper.SKIP
-        sequence_number = dictionary.get("sequence_number") if dictionary.get("sequence_number") else APIHelper.SKIP
-        issue_date = dateutil.parser.parse(dictionary.get('issue_date')).date() if dictionary.get('issue_date') else APIHelper.SKIP
-        applied_date = dateutil.parser.parse(dictionary.get('applied_date')).date() if dictionary.get('applied_date') else APIHelper.SKIP
-        status = dictionary.get("status") if dictionary.get("status") else APIHelper.SKIP
-        currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
-        memo = dictionary.get("memo") if dictionary.get("memo") else APIHelper.SKIP
-        seller = InvoiceSeller.from_dictionary(dictionary.get('seller')) if 'seller' in dictionary.keys() else APIHelper.SKIP
-        customer = InvoiceCustomer.from_dictionary(dictionary.get('customer')) if 'customer' in dictionary.keys() else APIHelper.SKIP
-        billing_address = InvoiceAddress.from_dictionary(dictionary.get('billing_address')) if 'billing_address' in dictionary.keys() else APIHelper.SKIP
-        shipping_address = InvoiceAddress.from_dictionary(dictionary.get('shipping_address')) if 'shipping_address' in dictionary.keys() else APIHelper.SKIP
-        subtotal_amount = dictionary.get("subtotal_amount") if dictionary.get("subtotal_amount") else APIHelper.SKIP
-        discount_amount = dictionary.get("discount_amount") if dictionary.get("discount_amount") else APIHelper.SKIP
-        tax_amount = dictionary.get("tax_amount") if dictionary.get("tax_amount") else APIHelper.SKIP
-        total_amount = dictionary.get("total_amount") if dictionary.get("total_amount") else APIHelper.SKIP
-        applied_amount = dictionary.get("applied_amount") if dictionary.get("applied_amount") else APIHelper.SKIP
-        remaining_amount = dictionary.get("remaining_amount") if dictionary.get("remaining_amount") else APIHelper.SKIP
+        uid =\
+            dictionary.get("uid")\
+            if dictionary.get("uid")\
+                else APIHelper.SKIP
+        site_id =\
+            dictionary.get("site_id")\
+            if dictionary.get("site_id")\
+                else APIHelper.SKIP
+        customer_id =\
+            dictionary.get("customer_id")\
+            if dictionary.get("customer_id")\
+                else APIHelper.SKIP
+        subscription_id =\
+            dictionary.get("subscription_id")\
+            if dictionary.get("subscription_id")\
+                else APIHelper.SKIP
+        number =\
+            dictionary.get("number")\
+            if dictionary.get("number")\
+                else APIHelper.SKIP
+        sequence_number =\
+            dictionary.get("sequence_number")\
+            if dictionary.get("sequence_number")\
+                else APIHelper.SKIP
+        issue_date = dateutil.parser.parse(
+            dictionary.get("issue_date")).date()\
+            if dictionary.get("issue_date") else APIHelper.SKIP
+        applied_date = dateutil.parser.parse(
+            dictionary.get("applied_date")).date()\
+            if dictionary.get("applied_date") else APIHelper.SKIP
+        status =\
+            dictionary.get("status")\
+            if dictionary.get("status")\
+                else APIHelper.SKIP
+        currency =\
+            dictionary.get("currency")\
+            if dictionary.get("currency")\
+                else APIHelper.SKIP
+        memo =\
+            dictionary.get("memo")\
+            if dictionary.get("memo")\
+                else APIHelper.SKIP
+        seller =\
+            InvoiceSeller.from_dictionary(
+                dictionary.get("seller"))\
+                if "seller" in dictionary.keys()\
+                else APIHelper.SKIP
+        customer =\
+            InvoiceCustomer.from_dictionary(
+                dictionary.get("customer"))\
+                if "customer" in dictionary.keys()\
+                else APIHelper.SKIP
+        billing_address =\
+            InvoiceAddress.from_dictionary(
+                dictionary.get("billing_address"))\
+                if "billing_address" in dictionary.keys()\
+                else APIHelper.SKIP
+        shipping_address =\
+            InvoiceAddress.from_dictionary(
+                dictionary.get("shipping_address"))\
+                if "shipping_address" in dictionary.keys()\
+                else APIHelper.SKIP
+        subtotal_amount =\
+            dictionary.get("subtotal_amount")\
+            if dictionary.get("subtotal_amount")\
+                else APIHelper.SKIP
+        discount_amount =\
+            dictionary.get("discount_amount")\
+            if dictionary.get("discount_amount")\
+                else APIHelper.SKIP
+        tax_amount =\
+            dictionary.get("tax_amount")\
+            if dictionary.get("tax_amount")\
+                else APIHelper.SKIP
+        total_amount =\
+            dictionary.get("total_amount")\
+            if dictionary.get("total_amount")\
+                else APIHelper.SKIP
+        applied_amount =\
+            dictionary.get("applied_amount")\
+            if dictionary.get("applied_amount")\
+                else APIHelper.SKIP
+        remaining_amount =\
+            dictionary.get("remaining_amount")\
+            if dictionary.get("remaining_amount")\
+                else APIHelper.SKIP
         line_items = None
-        if dictionary.get('line_items') is not None:
-            line_items = [CreditNoteLineItem.from_dictionary(x) for x in dictionary.get('line_items')]
+        if dictionary.get("line_items") is not None:
+            line_items = [
+                CreditNoteLineItem.from_dictionary(x)
+                    for x in dictionary.get("line_items")
+            ]
         else:
             line_items = APIHelper.SKIP
         discounts = None
-        if dictionary.get('discounts') is not None:
-            discounts = [InvoiceDiscount.from_dictionary(x) for x in dictionary.get('discounts')]
+        if dictionary.get("discounts") is not None:
+            discounts = [
+                InvoiceDiscount.from_dictionary(x)
+                    for x in dictionary.get("discounts")
+            ]
         else:
             discounts = APIHelper.SKIP
         taxes = None
-        if dictionary.get('taxes') is not None:
-            taxes = [InvoiceTax.from_dictionary(x) for x in dictionary.get('taxes')]
+        if dictionary.get("taxes") is not None:
+            taxes = [
+                InvoiceTax.from_dictionary(x)
+                    for x in dictionary.get("taxes")
+            ]
         else:
             taxes = APIHelper.SKIP
         applications = None
-        if dictionary.get('applications') is not None:
-            applications = [CreditNoteApplication.from_dictionary(x) for x in dictionary.get('applications')]
+        if dictionary.get("applications") is not None:
+            applications = [
+                CreditNoteApplication.from_dictionary(x)
+                    for x in dictionary.get("applications")
+            ]
         else:
             applications = APIHelper.SKIP
         refunds = None
-        if dictionary.get('refunds') is not None:
-            refunds = [InvoiceRefund.from_dictionary(x) for x in dictionary.get('refunds')]
+        if dictionary.get("refunds") is not None:
+            refunds = [
+                InvoiceRefund.from_dictionary(x)
+                    for x in dictionary.get("refunds")
+            ]
         else:
             refunds = APIHelper.SKIP
         origin_invoices = None
-        if dictionary.get('origin_invoices') is not None:
-            origin_invoices = [OriginInvoice.from_dictionary(x) for x in dictionary.get('origin_invoices')]
+        if dictionary.get("origin_invoices") is not None:
+            origin_invoices = [
+                OriginInvoice.from_dictionary(x)
+                    for x in dictionary.get("origin_invoices")
+            ]
         else:
             origin_invoices = APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(uid,
                    site_id,
@@ -357,7 +454,7 @@ class CreditNote(object):
 
     @classmethod
     def validate(cls, dictionary):
-        """Validates dictionary against class required properties
+        """Validate dictionary against class required properties
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -368,7 +465,6 @@ class CreditNote(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-
         if isinstance(dictionary, cls):
             return True
 
@@ -378,63 +474,343 @@ class CreditNote(object):
         return True
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'uid={(self.uid if hasattr(self, "uid") else None)!r}, '
-                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!r}, '
-                f'customer_id={(self.customer_id if hasattr(self, "customer_id") else None)!r}, '
-                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!r}, '
-                f'number={(self.number if hasattr(self, "number") else None)!r}, '
-                f'sequence_number={(self.sequence_number if hasattr(self, "sequence_number") else None)!r}, '
-                f'issue_date={(self.issue_date if hasattr(self, "issue_date") else None)!r}, '
-                f'applied_date={(self.applied_date if hasattr(self, "applied_date") else None)!r}, '
-                f'status={(self.status if hasattr(self, "status") else None)!r}, '
-                f'currency={(self.currency if hasattr(self, "currency") else None)!r}, '
-                f'memo={(self.memo if hasattr(self, "memo") else None)!r}, '
-                f'seller={(self.seller if hasattr(self, "seller") else None)!r}, '
-                f'customer={(self.customer if hasattr(self, "customer") else None)!r}, '
-                f'billing_address={(self.billing_address if hasattr(self, "billing_address") else None)!r}, '
-                f'shipping_address={(self.shipping_address if hasattr(self, "shipping_address") else None)!r}, '
-                f'subtotal_amount={(self.subtotal_amount if hasattr(self, "subtotal_amount") else None)!r}, '
-                f'discount_amount={(self.discount_amount if hasattr(self, "discount_amount") else None)!r}, '
-                f'tax_amount={(self.tax_amount if hasattr(self, "tax_amount") else None)!r}, '
-                f'total_amount={(self.total_amount if hasattr(self, "total_amount") else None)!r}, '
-                f'applied_amount={(self.applied_amount if hasattr(self, "applied_amount") else None)!r}, '
-                f'remaining_amount={(self.remaining_amount if hasattr(self, "remaining_amount") else None)!r}, '
-                f'line_items={(self.line_items if hasattr(self, "line_items") else None)!r}, '
-                f'discounts={(self.discounts if hasattr(self, "discounts") else None)!r}, '
-                f'taxes={(self.taxes if hasattr(self, "taxes") else None)!r}, '
-                f'applications={(self.applications if hasattr(self, "applications") else None)!r}, '
-                f'refunds={(self.refunds if hasattr(self, "refunds") else None)!r}, '
-                f'origin_invoices={(self.origin_invoices if hasattr(self, "origin_invoices") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _uid=(
+            self.uid
+            if hasattr(self, "uid")
+            else None
+        )
+        _site_id=(
+            self.site_id
+            if hasattr(self, "site_id")
+            else None
+        )
+        _customer_id=(
+            self.customer_id
+            if hasattr(self, "customer_id")
+            else None
+        )
+        _subscription_id=(
+            self.subscription_id
+            if hasattr(self, "subscription_id")
+            else None
+        )
+        _number=(
+            self.number
+            if hasattr(self, "number")
+            else None
+        )
+        _sequence_number=(
+            self.sequence_number
+            if hasattr(self, "sequence_number")
+            else None
+        )
+        _issue_date=(
+            self.issue_date
+            if hasattr(self, "issue_date")
+            else None
+        )
+        _applied_date=(
+            self.applied_date
+            if hasattr(self, "applied_date")
+            else None
+        )
+        _status=(
+            self.status
+            if hasattr(self, "status")
+            else None
+        )
+        _currency=(
+            self.currency
+            if hasattr(self, "currency")
+            else None
+        )
+        _memo=(
+            self.memo
+            if hasattr(self, "memo")
+            else None
+        )
+        _seller=(
+            self.seller
+            if hasattr(self, "seller")
+            else None
+        )
+        _customer=(
+            self.customer
+            if hasattr(self, "customer")
+            else None
+        )
+        _billing_address=(
+            self.billing_address
+            if hasattr(self, "billing_address")
+            else None
+        )
+        _shipping_address=(
+            self.shipping_address
+            if hasattr(self, "shipping_address")
+            else None
+        )
+        _subtotal_amount=(
+            self.subtotal_amount
+            if hasattr(self, "subtotal_amount")
+            else None
+        )
+        _discount_amount=(
+            self.discount_amount
+            if hasattr(self, "discount_amount")
+            else None
+        )
+        _tax_amount=(
+            self.tax_amount
+            if hasattr(self, "tax_amount")
+            else None
+        )
+        _total_amount=(
+            self.total_amount
+            if hasattr(self, "total_amount")
+            else None
+        )
+        _applied_amount=(
+            self.applied_amount
+            if hasattr(self, "applied_amount")
+            else None
+        )
+        _remaining_amount=(
+            self.remaining_amount
+            if hasattr(self, "remaining_amount")
+            else None
+        )
+        _line_items=(
+            self.line_items
+            if hasattr(self, "line_items")
+            else None
+        )
+        _discounts=(
+            self.discounts
+            if hasattr(self, "discounts")
+            else None
+        )
+        _taxes=(
+            self.taxes
+            if hasattr(self, "taxes")
+            else None
+        )
+        _applications=(
+            self.applications
+            if hasattr(self, "applications")
+            else None
+        )
+        _refunds=(
+            self.refunds
+            if hasattr(self, "refunds")
+            else None
+        )
+        _origin_invoices=(
+            self.origin_invoices
+            if hasattr(self, "origin_invoices")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"uid={_uid!r}, "
+            f"site_id={_site_id!r}, "
+            f"customer_id={_customer_id!r}, "
+            f"subscription_id={_subscription_id!r}, "
+            f"number={_number!r}, "
+            f"sequence_number={_sequence_number!r}, "
+            f"issue_date={_issue_date!r}, "
+            f"applied_date={_applied_date!r}, "
+            f"status={_status!r}, "
+            f"currency={_currency!r}, "
+            f"memo={_memo!r}, "
+            f"seller={_seller!r}, "
+            f"customer={_customer!r}, "
+            f"billing_address={_billing_address!r}, "
+            f"shipping_address={_shipping_address!r}, "
+            f"subtotal_amount={_subtotal_amount!r}, "
+            f"discount_amount={_discount_amount!r}, "
+            f"tax_amount={_tax_amount!r}, "
+            f"total_amount={_total_amount!r}, "
+            f"applied_amount={_applied_amount!r}, "
+            f"remaining_amount={_remaining_amount!r}, "
+            f"line_items={_line_items!r}, "
+            f"discounts={_discounts!r}, "
+            f"taxes={_taxes!r}, "
+            f"applications={_applications!r}, "
+            f"refunds={_refunds!r}, "
+            f"origin_invoices={_origin_invoices!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'uid={(self.uid if hasattr(self, "uid") else None)!s}, '
-                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!s}, '
-                f'customer_id={(self.customer_id if hasattr(self, "customer_id") else None)!s}, '
-                f'subscription_id={(self.subscription_id if hasattr(self, "subscription_id") else None)!s}, '
-                f'number={(self.number if hasattr(self, "number") else None)!s}, '
-                f'sequence_number={(self.sequence_number if hasattr(self, "sequence_number") else None)!s}, '
-                f'issue_date={(self.issue_date if hasattr(self, "issue_date") else None)!s}, '
-                f'applied_date={(self.applied_date if hasattr(self, "applied_date") else None)!s}, '
-                f'status={(self.status if hasattr(self, "status") else None)!s}, '
-                f'currency={(self.currency if hasattr(self, "currency") else None)!s}, '
-                f'memo={(self.memo if hasattr(self, "memo") else None)!s}, '
-                f'seller={(self.seller if hasattr(self, "seller") else None)!s}, '
-                f'customer={(self.customer if hasattr(self, "customer") else None)!s}, '
-                f'billing_address={(self.billing_address if hasattr(self, "billing_address") else None)!s}, '
-                f'shipping_address={(self.shipping_address if hasattr(self, "shipping_address") else None)!s}, '
-                f'subtotal_amount={(self.subtotal_amount if hasattr(self, "subtotal_amount") else None)!s}, '
-                f'discount_amount={(self.discount_amount if hasattr(self, "discount_amount") else None)!s}, '
-                f'tax_amount={(self.tax_amount if hasattr(self, "tax_amount") else None)!s}, '
-                f'total_amount={(self.total_amount if hasattr(self, "total_amount") else None)!s}, '
-                f'applied_amount={(self.applied_amount if hasattr(self, "applied_amount") else None)!s}, '
-                f'remaining_amount={(self.remaining_amount if hasattr(self, "remaining_amount") else None)!s}, '
-                f'line_items={(self.line_items if hasattr(self, "line_items") else None)!s}, '
-                f'discounts={(self.discounts if hasattr(self, "discounts") else None)!s}, '
-                f'taxes={(self.taxes if hasattr(self, "taxes") else None)!s}, '
-                f'applications={(self.applications if hasattr(self, "applications") else None)!s}, '
-                f'refunds={(self.refunds if hasattr(self, "refunds") else None)!s}, '
-                f'origin_invoices={(self.origin_invoices if hasattr(self, "origin_invoices") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _uid=(
+            self.uid
+            if hasattr(self, "uid")
+            else None
+        )
+        _site_id=(
+            self.site_id
+            if hasattr(self, "site_id")
+            else None
+        )
+        _customer_id=(
+            self.customer_id
+            if hasattr(self, "customer_id")
+            else None
+        )
+        _subscription_id=(
+            self.subscription_id
+            if hasattr(self, "subscription_id")
+            else None
+        )
+        _number=(
+            self.number
+            if hasattr(self, "number")
+            else None
+        )
+        _sequence_number=(
+            self.sequence_number
+            if hasattr(self, "sequence_number")
+            else None
+        )
+        _issue_date=(
+            self.issue_date
+            if hasattr(self, "issue_date")
+            else None
+        )
+        _applied_date=(
+            self.applied_date
+            if hasattr(self, "applied_date")
+            else None
+        )
+        _status=(
+            self.status
+            if hasattr(self, "status")
+            else None
+        )
+        _currency=(
+            self.currency
+            if hasattr(self, "currency")
+            else None
+        )
+        _memo=(
+            self.memo
+            if hasattr(self, "memo")
+            else None
+        )
+        _seller=(
+            self.seller
+            if hasattr(self, "seller")
+            else None
+        )
+        _customer=(
+            self.customer
+            if hasattr(self, "customer")
+            else None
+        )
+        _billing_address=(
+            self.billing_address
+            if hasattr(self, "billing_address")
+            else None
+        )
+        _shipping_address=(
+            self.shipping_address
+            if hasattr(self, "shipping_address")
+            else None
+        )
+        _subtotal_amount=(
+            self.subtotal_amount
+            if hasattr(self, "subtotal_amount")
+            else None
+        )
+        _discount_amount=(
+            self.discount_amount
+            if hasattr(self, "discount_amount")
+            else None
+        )
+        _tax_amount=(
+            self.tax_amount
+            if hasattr(self, "tax_amount")
+            else None
+        )
+        _total_amount=(
+            self.total_amount
+            if hasattr(self, "total_amount")
+            else None
+        )
+        _applied_amount=(
+            self.applied_amount
+            if hasattr(self, "applied_amount")
+            else None
+        )
+        _remaining_amount=(
+            self.remaining_amount
+            if hasattr(self, "remaining_amount")
+            else None
+        )
+        _line_items=(
+            self.line_items
+            if hasattr(self, "line_items")
+            else None
+        )
+        _discounts=(
+            self.discounts
+            if hasattr(self, "discounts")
+            else None
+        )
+        _taxes=(
+            self.taxes
+            if hasattr(self, "taxes")
+            else None
+        )
+        _applications=(
+            self.applications
+            if hasattr(self, "applications")
+            else None
+        )
+        _refunds=(
+            self.refunds
+            if hasattr(self, "refunds")
+            else None
+        )
+        _origin_invoices=(
+            self.origin_invoices
+            if hasattr(self, "origin_invoices")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"uid={_uid!s}, "
+            f"site_id={_site_id!s}, "
+            f"customer_id={_customer_id!s}, "
+            f"subscription_id={_subscription_id!s}, "
+            f"number={_number!s}, "
+            f"sequence_number={_sequence_number!s}, "
+            f"issue_date={_issue_date!s}, "
+            f"applied_date={_applied_date!s}, "
+            f"status={_status!s}, "
+            f"currency={_currency!s}, "
+            f"memo={_memo!s}, "
+            f"seller={_seller!s}, "
+            f"customer={_customer!s}, "
+            f"billing_address={_billing_address!s}, "
+            f"shipping_address={_shipping_address!s}, "
+            f"subtotal_amount={_subtotal_amount!s}, "
+            f"discount_amount={_discount_amount!s}, "
+            f"tax_amount={_tax_amount!s}, "
+            f"total_amount={_total_amount!s}, "
+            f"applied_amount={_applied_amount!s}, "
+            f"remaining_amount={_remaining_amount!s}, "
+            f"line_items={_line_items!s}, "
+            f"discounts={_discounts!s}, "
+            f"taxes={_taxes!s}, "
+            f"applications={_applications!s}, "
+            f"refunds={_refunds!s}, "
+            f"origin_invoices={_origin_invoices!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

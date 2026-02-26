@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class InvoiceAvataxDetails(object):
-
     """Implementation of the 'Invoice Avatax Details' model.
 
     Attributes:
@@ -19,56 +17,62 @@ class InvoiceAvataxDetails(object):
         document_code (str): The model property of type str.
         commit_date (datetime): The model property of type datetime.
         modify_date (datetime): The model property of type datetime.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "id": 'id',
-        "status": 'status',
-        "document_code": 'document_code',
-        "commit_date": 'commit_date',
-        "modify_date": 'modify_date'
+        "id": "id",
+        "status": "status",
+        "document_code": "document_code",
+        "commit_date": "commit_date",
+        "modify_date": "modify_date",
     }
 
     _optionals = [
-        'id',
-        'status',
-        'document_code',
-        'commit_date',
-        'modify_date',
+        "id",
+        "status",
+        "document_code",
+        "commit_date",
+        "modify_date",
     ]
 
     _nullables = [
-        'id',
-        'status',
-        'document_code',
-        'commit_date',
-        'modify_date',
+        "id",
+        "status",
+        "document_code",
+        "commit_date",
+        "modify_date",
     ]
 
-    def __init__(self,
-                 id=APIHelper.SKIP,
-                 status=APIHelper.SKIP,
-                 document_code=APIHelper.SKIP,
-                 commit_date=APIHelper.SKIP,
-                 modify_date=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the InvoiceAvataxDetails class"""
-
+    def __init__(
+        self,
+        id=APIHelper.SKIP,
+        status=APIHelper.SKIP,
+        document_code=APIHelper.SKIP,
+        commit_date=APIHelper.SKIP,
+        modify_date=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a InvoiceAvataxDetails instance."""
         # Initialize members of the class
         if id is not APIHelper.SKIP:
-            self.id = id 
+            self.id = id
         if status is not APIHelper.SKIP:
-            self.status = status 
+            self.status = status
         if document_code is not APIHelper.SKIP:
-            self.document_code = document_code 
+            self.document_code = document_code
         if commit_date is not APIHelper.SKIP:
-            self.commit_date = APIHelper.apply_datetime_converter(commit_date, APIHelper.RFC3339DateTime) if commit_date else None 
+            self.commit_date =\
+                 APIHelper.apply_datetime_converter(
+                commit_date, APIHelper.RFC3339DateTime)\
+                 if commit_date else None
         if modify_date is not APIHelper.SKIP:
-            self.modify_date = APIHelper.apply_datetime_converter(modify_date, APIHelper.RFC3339DateTime) if modify_date else None 
+            self.modify_date =\
+                 APIHelper.apply_datetime_converter(
+                modify_date, APIHelper.RFC3339DateTime)\
+                 if modify_date else None
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -78,7 +82,7 @@ class InvoiceAvataxDetails(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -89,24 +93,41 @@ class InvoiceAvataxDetails(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        id = dictionary.get("id") if "id" in dictionary.keys() else APIHelper.SKIP
-        status = dictionary.get("status") if "status" in dictionary.keys() else APIHelper.SKIP
-        document_code = dictionary.get("document_code") if "document_code" in dictionary.keys() else APIHelper.SKIP
-        if 'commit_date' in dictionary.keys():
-            commit_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("commit_date")).datetime if dictionary.get("commit_date") else None
+        id =\
+            dictionary.get("id")\
+            if "id" in dictionary.keys()\
+                else APIHelper.SKIP
+        status =\
+            dictionary.get("status")\
+            if "status" in dictionary.keys()\
+                else APIHelper.SKIP
+        document_code =\
+            dictionary.get("document_code")\
+            if "document_code" in dictionary.keys()\
+                else APIHelper.SKIP
+        if "commit_date" in dictionary.keys():
+            commit_date = APIHelper.RFC3339DateTime.from_value(
+                dictionary.get("commit_date")).datetime\
+                if dictionary.get("commit_date") else None
+
         else:
             commit_date = APIHelper.SKIP
-        if 'modify_date' in dictionary.keys():
-            modify_date = APIHelper.RFC3339DateTime.from_value(dictionary.get("modify_date")).datetime if dictionary.get("modify_date") else None
+        if "modify_date" in dictionary.keys():
+            modify_date = APIHelper.RFC3339DateTime.from_value(
+                dictionary.get("modify_date")).datetime\
+                if dictionary.get("modify_date") else None
+
         else:
             modify_date = APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(id,
                    status,
@@ -117,7 +138,7 @@ class InvoiceAvataxDetails(object):
 
     @classmethod
     def validate(cls, dictionary):
-        """Validates dictionary against class required properties
+        """Validate dictionary against class required properties
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -128,7 +149,6 @@ class InvoiceAvataxDetails(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-
         if isinstance(dictionary, cls):
             return True
 
@@ -138,19 +158,79 @@ class InvoiceAvataxDetails(object):
         return True
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'id={(self.id if hasattr(self, "id") else None)!r}, '
-                f'status={(self.status if hasattr(self, "status") else None)!r}, '
-                f'document_code={(self.document_code if hasattr(self, "document_code") else None)!r}, '
-                f'commit_date={(self.commit_date if hasattr(self, "commit_date") else None)!r}, '
-                f'modify_date={(self.modify_date if hasattr(self, "modify_date") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _status=(
+            self.status
+            if hasattr(self, "status")
+            else None
+        )
+        _document_code=(
+            self.document_code
+            if hasattr(self, "document_code")
+            else None
+        )
+        _commit_date=(
+            self.commit_date
+            if hasattr(self, "commit_date")
+            else None
+        )
+        _modify_date=(
+            self.modify_date
+            if hasattr(self, "modify_date")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!r}, "
+            f"status={_status!r}, "
+            f"document_code={_document_code!r}, "
+            f"commit_date={_commit_date!r}, "
+            f"modify_date={_modify_date!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'id={(self.id if hasattr(self, "id") else None)!s}, '
-                f'status={(self.status if hasattr(self, "status") else None)!s}, '
-                f'document_code={(self.document_code if hasattr(self, "document_code") else None)!s}, '
-                f'commit_date={(self.commit_date if hasattr(self, "commit_date") else None)!s}, '
-                f'modify_date={(self.modify_date if hasattr(self, "modify_date") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _status=(
+            self.status
+            if hasattr(self, "status")
+            else None
+        )
+        _document_code=(
+            self.document_code
+            if hasattr(self, "document_code")
+            else None
+        )
+        _commit_date=(
+            self.commit_date
+            if hasattr(self, "commit_date")
+            else None
+        )
+        _modify_date=(
+            self.modify_date
+            if hasattr(self, "modify_date")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!s}, "
+            f"status={_status!s}, "
+            f"document_code={_document_code!s}, "
+            f"commit_date={_commit_date!s}, "
+            f"modify_date={_modify_date!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

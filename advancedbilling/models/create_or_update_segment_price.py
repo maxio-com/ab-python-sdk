@@ -1,53 +1,51 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class CreateOrUpdateSegmentPrice(object):
-
     """Implementation of the 'Create or Update Segment Price' model.
 
     Attributes:
         starting_quantity (int): The model property of type int.
         ending_quantity (int): The model property of type int.
-        unit_price (str | float): The price can contain up to 8 decimal
-            places. i.e. 1.00 or 0.0012 or 0.00000065
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        unit_price (str | float): The price can contain up to 8 decimal places. i.e.
+            1.00 or 0.0012 or 0.00000065
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "unit_price": 'unit_price',
-        "starting_quantity": 'starting_quantity',
-        "ending_quantity": 'ending_quantity'
+        "unit_price": "unit_price",
+        "starting_quantity": "starting_quantity",
+        "ending_quantity": "ending_quantity",
     }
 
     _optionals = [
-        'starting_quantity',
-        'ending_quantity',
+        "starting_quantity",
+        "ending_quantity",
     ]
 
-    def __init__(self,
-                 unit_price=None,
-                 starting_quantity=APIHelper.SKIP,
-                 ending_quantity=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the CreateOrUpdateSegmentPrice class"""
-
+    def __init__(
+        self,
+        unit_price=None,
+        starting_quantity=APIHelper.SKIP,
+        ending_quantity=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a CreateOrUpdateSegmentPrice instance."""
         # Initialize members of the class
         if starting_quantity is not APIHelper.SKIP:
-            self.starting_quantity = starting_quantity 
+            self.starting_quantity = starting_quantity
         if ending_quantity is not APIHelper.SKIP:
-            self.ending_quantity = ending_quantity 
-        self.unit_price = unit_price 
+            self.ending_quantity = ending_quantity
+        self.unit_price = unit_price
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -57,7 +55,7 @@ class CreateOrUpdateSegmentPrice(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -68,17 +66,33 @@ class CreateOrUpdateSegmentPrice(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
 
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        unit_price = APIHelper.deserialize_union_type(UnionTypeLookUp.get('CreateOrUpdateSegmentPriceUnitPrice'), dictionary.get('unit_price'), False) if dictionary.get('unit_price') is not None else None
-        starting_quantity = dictionary.get("starting_quantity") if dictionary.get("starting_quantity") else APIHelper.SKIP
-        ending_quantity = dictionary.get("ending_quantity") if dictionary.get("ending_quantity") else APIHelper.SKIP
+        unit_price = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("CreateOrUpdateSegmentPriceUnitPrice"),
+            dictionary.get("unit_price"),
+            False)\
+            if dictionary.get("unit_price") is not None\
+            else None
+        starting_quantity =\
+            dictionary.get("starting_quantity")\
+            if dictionary.get("starting_quantity")\
+                else APIHelper.SKIP
+        ending_quantity =\
+            dictionary.get("ending_quantity")\
+            if dictionary.get("ending_quantity")\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(unit_price,
                    starting_quantity,
@@ -87,7 +101,7 @@ class CreateOrUpdateSegmentPrice(object):
 
     @classmethod
     def validate(cls, dictionary):
-        """Validates dictionary against class required properties
+        """Validate dictionary against class required properties
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -98,26 +112,62 @@ class CreateOrUpdateSegmentPrice(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
 
         if isinstance(dictionary, cls):
-            return UnionTypeLookUp.get('CreateOrUpdateSegmentPriceUnitPrice').validate(dictionary.unit_price).is_valid
+            return (UnionTypeLookUp.get("CreateOrUpdateSegmentPriceUnitPrice")
+                .validate(dictionary.unit_price).is_valid)
 
         if not isinstance(dictionary, dict):
             return False
 
-        return UnionTypeLookUp.get('CreateOrUpdateSegmentPriceUnitPrice').validate(dictionary.get('unit_price')).is_valid
+        return (UnionTypeLookUp.get("CreateOrUpdateSegmentPriceUnitPrice")
+            .validate(dictionary.get("unit_price")).is_valid)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'starting_quantity={(self.starting_quantity if hasattr(self, "starting_quantity") else None)!r}, '
-                f'ending_quantity={(self.ending_quantity if hasattr(self, "ending_quantity") else None)!r}, '
-                f'unit_price={self.unit_price!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _starting_quantity=(
+            self.starting_quantity
+            if hasattr(self, "starting_quantity")
+            else None
+        )
+        _ending_quantity=(
+            self.ending_quantity
+            if hasattr(self, "ending_quantity")
+            else None
+        )
+        _unit_price=self.unit_price
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"starting_quantity={_starting_quantity!r}, "
+            f"ending_quantity={_ending_quantity!r}, "
+            f"unit_price={_unit_price!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'starting_quantity={(self.starting_quantity if hasattr(self, "starting_quantity") else None)!s}, '
-                f'ending_quantity={(self.ending_quantity if hasattr(self, "ending_quantity") else None)!s}, '
-                f'unit_price={self.unit_price!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _starting_quantity=(
+            self.starting_quantity
+            if hasattr(self, "starting_quantity")
+            else None
+        )
+        _ending_quantity=(
+            self.ending_quantity
+            if hasattr(self, "ending_quantity")
+            else None
+        )
+        _unit_price=self.unit_price
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"starting_quantity={_starting_quantity!s}, "
+            f"ending_quantity={_ending_quantity!s}, "
+            f"unit_price={_unit_price!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

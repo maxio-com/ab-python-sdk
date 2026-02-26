@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class PaymentType(object):
-
     """Implementation of the 'Payment Type' enum.
 
     Attributes:
@@ -17,22 +14,24 @@ class PaymentType(object):
         BANK_ACCOUNT: The enum member of type str.
         PAYPAL_ACCOUNT: The enum member of type str.
         APPLE_PAY: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    _all_values = ['credit_card', 'bank_account', 'paypal_account', 'apple_pay']
-    CREDIT_CARD = 'credit_card'
 
-    BANK_ACCOUNT = 'bank_account'
+    _all_values = ["credit_card", "bank_account", "paypal_account",
+        "apple_pay"]
+    CREDIT_CARD = "credit_card"
 
-    PAYPAL_ACCOUNT = 'paypal_account'
+    BANK_ACCOUNT = "bank_account"
 
-    APPLE_PAY = 'apple_pay'
+    PAYPAL_ACCOUNT = "paypal_account"
+
+    APPLE_PAY = "apple_pay"
 
     @classmethod
     def validate(cls, value):
-        """Validates value contains in enum
+        """Validate value contains in enum
 
         Args:
             value: the value to be validated
@@ -42,9 +41,10 @@ class PaymentType(object):
 
         """
         return value in cls._all_values
-   
+
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

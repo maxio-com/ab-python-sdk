@@ -27,7 +27,7 @@
 | `masked_bank_account_number` | `str` | Required | A string representation of the stored bank account number with all but the last 4 digits marked with X’s (i.e. ‘XXXXXXX1111’) |
 | `bank_account_type` | [`BankAccountType`](../../doc/models/bank-account-type.md) | Optional | Defaults to checking |
 | `bank_account_holder_type` | [`BankAccountHolderType`](../../doc/models/bank-account-holder-type.md) | Optional | Defaults to personal |
-| `payment_type` | [`PaymentType`](../../doc/models/payment-type.md) | Required | **Default**: `'bank_account'` |
+| `payment_type` | [`PaymentType`](../../doc/models/payment-type.md) | Required | **Default**: `"bank_account"` |
 | `verified` | `bool` | Optional | denotes whether a bank account has been verified by providing the amounts of two small deposits made into the account<br><br>**Default**: `False` |
 | `site_gateway_setting_id` | `int` | Optional | - |
 | `gateway_handle` | `str` | Optional | - |

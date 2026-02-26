@@ -1,27 +1,26 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class SubscriptionGroupsListInclude(object):
-
     """Implementation of the 'Subscription Groups List Include' enum.
 
     Attributes:
         ACCOUNT_BALANCES: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    ACCOUNT_BALANCES = 'account_balances'
+
+    ACCOUNT_BALANCES = "account_balances"
 
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

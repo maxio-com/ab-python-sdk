@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class DebitNoteRole(object):
-
     """Implementation of the 'Debit Note Role' enum.
 
     The role of the debit note.
@@ -17,18 +14,19 @@ class DebitNoteRole(object):
     Attributes:
         CHARGEBACK: The enum member of type str.
         REFUND: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    _all_values = ['chargeback', 'refund']
-    CHARGEBACK = 'chargeback'
 
-    REFUND = 'refund'
+    _all_values = ["chargeback", "refund"]
+    CHARGEBACK = "chargeback"
+
+    REFUND = "refund"
 
     @classmethod
     def validate(cls, value):
-        """Validates value contains in enum
+        """Validate value contains in enum
 
         Args:
             value: the value to be validated
@@ -38,9 +36,10 @@ class DebitNoteRole(object):
 
         """
         return value in cls._all_values
-   
+
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class ReactivateSubscriptionGroupResponse(object):
-
     """Implementation of the 'Reactivate Subscription Group Response' model.
 
     Attributes:
@@ -23,68 +21,71 @@ class ReactivateSubscriptionGroupResponse(object):
         next_assessment_at (datetime): The model property of type datetime.
         state (str): The model property of type str.
         cancel_at_end_of_period (bool): The model property of type bool.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "uid": 'uid',
-        "scheme": 'scheme',
-        "customer_id": 'customer_id',
-        "payment_profile_id": 'payment_profile_id',
-        "subscription_ids": 'subscription_ids',
-        "primary_subscription_id": 'primary_subscription_id',
-        "next_assessment_at": 'next_assessment_at',
-        "state": 'state',
-        "cancel_at_end_of_period": 'cancel_at_end_of_period'
+        "uid": "uid",
+        "scheme": "scheme",
+        "customer_id": "customer_id",
+        "payment_profile_id": "payment_profile_id",
+        "subscription_ids": "subscription_ids",
+        "primary_subscription_id": "primary_subscription_id",
+        "next_assessment_at": "next_assessment_at",
+        "state": "state",
+        "cancel_at_end_of_period": "cancel_at_end_of_period",
     }
 
     _optionals = [
-        'uid',
-        'scheme',
-        'customer_id',
-        'payment_profile_id',
-        'subscription_ids',
-        'primary_subscription_id',
-        'next_assessment_at',
-        'state',
-        'cancel_at_end_of_period',
+        "uid",
+        "scheme",
+        "customer_id",
+        "payment_profile_id",
+        "subscription_ids",
+        "primary_subscription_id",
+        "next_assessment_at",
+        "state",
+        "cancel_at_end_of_period",
     ]
 
-    def __init__(self,
-                 uid=APIHelper.SKIP,
-                 scheme=APIHelper.SKIP,
-                 customer_id=APIHelper.SKIP,
-                 payment_profile_id=APIHelper.SKIP,
-                 subscription_ids=APIHelper.SKIP,
-                 primary_subscription_id=APIHelper.SKIP,
-                 next_assessment_at=APIHelper.SKIP,
-                 state=APIHelper.SKIP,
-                 cancel_at_end_of_period=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the ReactivateSubscriptionGroupResponse class"""
-
+    def __init__(
+        self,
+        uid=APIHelper.SKIP,
+        scheme=APIHelper.SKIP,
+        customer_id=APIHelper.SKIP,
+        payment_profile_id=APIHelper.SKIP,
+        subscription_ids=APIHelper.SKIP,
+        primary_subscription_id=APIHelper.SKIP,
+        next_assessment_at=APIHelper.SKIP,
+        state=APIHelper.SKIP,
+        cancel_at_end_of_period=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a ReactivateSubscriptionGroupResponse instance."""
         # Initialize members of the class
         if uid is not APIHelper.SKIP:
-            self.uid = uid 
+            self.uid = uid
         if scheme is not APIHelper.SKIP:
-            self.scheme = scheme 
+            self.scheme = scheme
         if customer_id is not APIHelper.SKIP:
-            self.customer_id = customer_id 
+            self.customer_id = customer_id
         if payment_profile_id is not APIHelper.SKIP:
-            self.payment_profile_id = payment_profile_id 
+            self.payment_profile_id = payment_profile_id
         if subscription_ids is not APIHelper.SKIP:
-            self.subscription_ids = subscription_ids 
+            self.subscription_ids = subscription_ids
         if primary_subscription_id is not APIHelper.SKIP:
-            self.primary_subscription_id = primary_subscription_id 
+            self.primary_subscription_id = primary_subscription_id
         if next_assessment_at is not APIHelper.SKIP:
-            self.next_assessment_at = APIHelper.apply_datetime_converter(next_assessment_at, APIHelper.RFC3339DateTime) if next_assessment_at else None 
+            self.next_assessment_at =\
+                 APIHelper.apply_datetime_converter(
+                next_assessment_at, APIHelper.RFC3339DateTime)\
+                 if next_assessment_at else None
         if state is not APIHelper.SKIP:
-            self.state = state 
+            self.state = state
         if cancel_at_end_of_period is not APIHelper.SKIP:
-            self.cancel_at_end_of_period = cancel_at_end_of_period 
+            self.cancel_at_end_of_period = cancel_at_end_of_period
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -94,7 +95,7 @@ class ReactivateSubscriptionGroupResponse(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -105,22 +106,50 @@ class ReactivateSubscriptionGroupResponse(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        uid = dictionary.get("uid") if dictionary.get("uid") else APIHelper.SKIP
-        scheme = dictionary.get("scheme") if dictionary.get("scheme") else APIHelper.SKIP
-        customer_id = dictionary.get("customer_id") if dictionary.get("customer_id") else APIHelper.SKIP
-        payment_profile_id = dictionary.get("payment_profile_id") if dictionary.get("payment_profile_id") else APIHelper.SKIP
-        subscription_ids = dictionary.get("subscription_ids") if dictionary.get("subscription_ids") else APIHelper.SKIP
-        primary_subscription_id = dictionary.get("primary_subscription_id") if dictionary.get("primary_subscription_id") else APIHelper.SKIP
-        next_assessment_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("next_assessment_at")).datetime if dictionary.get("next_assessment_at") else APIHelper.SKIP
-        state = dictionary.get("state") if dictionary.get("state") else APIHelper.SKIP
-        cancel_at_end_of_period = dictionary.get("cancel_at_end_of_period") if "cancel_at_end_of_period" in dictionary.keys() else APIHelper.SKIP
+        uid =\
+            dictionary.get("uid")\
+            if dictionary.get("uid")\
+                else APIHelper.SKIP
+        scheme =\
+            dictionary.get("scheme")\
+            if dictionary.get("scheme")\
+                else APIHelper.SKIP
+        customer_id =\
+            dictionary.get("customer_id")\
+            if dictionary.get("customer_id")\
+                else APIHelper.SKIP
+        payment_profile_id =\
+            dictionary.get("payment_profile_id")\
+            if dictionary.get("payment_profile_id")\
+                else APIHelper.SKIP
+        subscription_ids =\
+            dictionary.get("subscription_ids")\
+            if dictionary.get("subscription_ids")\
+                else APIHelper.SKIP
+        primary_subscription_id =\
+            dictionary.get("primary_subscription_id")\
+            if dictionary.get("primary_subscription_id")\
+                else APIHelper.SKIP
+        next_assessment_at = APIHelper.RFC3339DateTime.from_value(
+            dictionary.get("next_assessment_at")).datetime\
+            if dictionary.get("next_assessment_at") else APIHelper.SKIP
+        state =\
+            dictionary.get("state")\
+            if dictionary.get("state")\
+                else APIHelper.SKIP
+        cancel_at_end_of_period =\
+            dictionary.get("cancel_at_end_of_period")\
+            if "cancel_at_end_of_period" in dictionary.keys()\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(uid,
                    scheme,
@@ -134,27 +163,127 @@ class ReactivateSubscriptionGroupResponse(object):
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'uid={(self.uid if hasattr(self, "uid") else None)!r}, '
-                f'scheme={(self.scheme if hasattr(self, "scheme") else None)!r}, '
-                f'customer_id={(self.customer_id if hasattr(self, "customer_id") else None)!r}, '
-                f'payment_profile_id={(self.payment_profile_id if hasattr(self, "payment_profile_id") else None)!r}, '
-                f'subscription_ids={(self.subscription_ids if hasattr(self, "subscription_ids") else None)!r}, '
-                f'primary_subscription_id={(self.primary_subscription_id if hasattr(self, "primary_subscription_id") else None)!r}, '
-                f'next_assessment_at={(self.next_assessment_at if hasattr(self, "next_assessment_at") else None)!r}, '
-                f'state={(self.state if hasattr(self, "state") else None)!r}, '
-                f'cancel_at_end_of_period={(self.cancel_at_end_of_period if hasattr(self, "cancel_at_end_of_period") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _uid=(
+            self.uid
+            if hasattr(self, "uid")
+            else None
+        )
+        _scheme=(
+            self.scheme
+            if hasattr(self, "scheme")
+            else None
+        )
+        _customer_id=(
+            self.customer_id
+            if hasattr(self, "customer_id")
+            else None
+        )
+        _payment_profile_id=(
+            self.payment_profile_id
+            if hasattr(self, "payment_profile_id")
+            else None
+        )
+        _subscription_ids=(
+            self.subscription_ids
+            if hasattr(self, "subscription_ids")
+            else None
+        )
+        _primary_subscription_id=(
+            self.primary_subscription_id
+            if hasattr(self, "primary_subscription_id")
+            else None
+        )
+        _next_assessment_at=(
+            self.next_assessment_at
+            if hasattr(self, "next_assessment_at")
+            else None
+        )
+        _state=(
+            self.state
+            if hasattr(self, "state")
+            else None
+        )
+        _cancel_at_end_of_period=(
+            self.cancel_at_end_of_period
+            if hasattr(self, "cancel_at_end_of_period")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"uid={_uid!r}, "
+            f"scheme={_scheme!r}, "
+            f"customer_id={_customer_id!r}, "
+            f"payment_profile_id={_payment_profile_id!r}, "
+            f"subscription_ids={_subscription_ids!r}, "
+            f"primary_subscription_id={_primary_subscription_id!r}, "
+            f"next_assessment_at={_next_assessment_at!r}, "
+            f"state={_state!r}, "
+            f"cancel_at_end_of_period={_cancel_at_end_of_period!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'uid={(self.uid if hasattr(self, "uid") else None)!s}, '
-                f'scheme={(self.scheme if hasattr(self, "scheme") else None)!s}, '
-                f'customer_id={(self.customer_id if hasattr(self, "customer_id") else None)!s}, '
-                f'payment_profile_id={(self.payment_profile_id if hasattr(self, "payment_profile_id") else None)!s}, '
-                f'subscription_ids={(self.subscription_ids if hasattr(self, "subscription_ids") else None)!s}, '
-                f'primary_subscription_id={(self.primary_subscription_id if hasattr(self, "primary_subscription_id") else None)!s}, '
-                f'next_assessment_at={(self.next_assessment_at if hasattr(self, "next_assessment_at") else None)!s}, '
-                f'state={(self.state if hasattr(self, "state") else None)!s}, '
-                f'cancel_at_end_of_period={(self.cancel_at_end_of_period if hasattr(self, "cancel_at_end_of_period") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _uid=(
+            self.uid
+            if hasattr(self, "uid")
+            else None
+        )
+        _scheme=(
+            self.scheme
+            if hasattr(self, "scheme")
+            else None
+        )
+        _customer_id=(
+            self.customer_id
+            if hasattr(self, "customer_id")
+            else None
+        )
+        _payment_profile_id=(
+            self.payment_profile_id
+            if hasattr(self, "payment_profile_id")
+            else None
+        )
+        _subscription_ids=(
+            self.subscription_ids
+            if hasattr(self, "subscription_ids")
+            else None
+        )
+        _primary_subscription_id=(
+            self.primary_subscription_id
+            if hasattr(self, "primary_subscription_id")
+            else None
+        )
+        _next_assessment_at=(
+            self.next_assessment_at
+            if hasattr(self, "next_assessment_at")
+            else None
+        )
+        _state=(
+            self.state
+            if hasattr(self, "state")
+            else None
+        )
+        _cancel_at_end_of_period=(
+            self.cancel_at_end_of_period
+            if hasattr(self, "cancel_at_end_of_period")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"uid={_uid!s}, "
+            f"scheme={_scheme!s}, "
+            f"customer_id={_customer_id!s}, "
+            f"payment_profile_id={_payment_profile_id!s}, "
+            f"subscription_ids={_subscription_ids!s}, "
+            f"primary_subscription_id={_primary_subscription_id!s}, "
+            f"next_assessment_at={_next_assessment_at!s}, "
+            f"state={_state!s}, "
+            f"cancel_at_end_of_period={_cancel_at_end_of_period!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class CancellationMethod(object):
-
     """Implementation of the 'Cancellation Method' enum.
 
     The process used to cancel the subscription, if the subscription has been
@@ -22,26 +19,28 @@ class CancellationMethod(object):
         BILLING_PORTAL: The enum member of type str.
         UNKNOWN: The enum member of type str.
         IMPORTED: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    _all_values = ['merchant_ui', 'merchant_api', 'dunning', 'billing_portal', 'unknown', 'imported']
-    MERCHANT_UI = 'merchant_ui'
 
-    MERCHANT_API = 'merchant_api'
+    _all_values = ["merchant_ui", "merchant_api", "dunning", "billing_portal",
+        "unknown", "imported"]
+    MERCHANT_UI = "merchant_ui"
 
-    DUNNING = 'dunning'
+    MERCHANT_API = "merchant_api"
 
-    BILLING_PORTAL = 'billing_portal'
+    DUNNING = "dunning"
 
-    UNKNOWN = 'unknown'
+    BILLING_PORTAL = "billing_portal"
 
-    IMPORTED = 'imported'
+    UNKNOWN = "unknown"
+
+    IMPORTED = "imported"
 
     @classmethod
     def validate(cls, value):
-        """Validates value contains in enum
+        """Validate value contains in enum
 
         Args:
             value: the value to be validated
@@ -51,9 +50,10 @@ class CancellationMethod(object):
 
         """
         return value in cls._all_values
-   
+
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

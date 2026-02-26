@@ -99,7 +99,7 @@ def list_events(self,
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `since_id` | `int` | Query, Optional | Returns events with an id greater than or equal to the one specified |
 | `max_id` | `int` | Query, Optional | Returns events with an id less than or equal to the one specified |
-| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br><br>**Default**: `'desc'` |
+| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br><br>**Default**: `"desc"` |
 | `filter` | [`List[EventKey]`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 | `date_field` | [`ListEventsDateField`](../../doc/models/list-events-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns components with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
@@ -214,12 +214,12 @@ def list_subscription_events(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `since_id` | `int` | Query, Optional | Returns events with an id greater than or equal to the one specified |
 | `max_id` | `int` | Query, Optional | Returns events with an id less than or equal to the one specified |
-| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br><br>**Default**: `'desc'` |
+| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br><br>**Default**: `"desc"` |
 | `filter` | [`List[EventKey]`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 
 ## Response Type
@@ -304,7 +304,7 @@ def read_events_count(self,
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `since_id` | `int` | Query, Optional | Returns events with an id greater than or equal to the one specified |
 | `max_id` | `int` | Query, Optional | Returns events with an id less than or equal to the one specified |
-| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br><br>**Default**: `'desc'` |
+| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned events.<br><br>**Default**: `"desc"` |
 | `filter` | [`List[EventKey]`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 
 ## Response Type

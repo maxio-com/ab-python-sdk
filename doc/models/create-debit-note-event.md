@@ -12,7 +12,7 @@
 | `id` | `int` | Required | - |
 | `timestamp` | `datetime` | Required | - |
 | `invoice` | [`Invoice`](../../doc/models/invoice.md) | Required | - |
-| `event_type` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `'create_debit_note'` |
+| `event_type` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `"create_debit_note"` |
 | `event_data` | [`DebitNote`](../../doc/models/debit-note.md) | Required | Example schema for an `create_debit_note` event |
 
 ## Example (as JSON)

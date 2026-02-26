@@ -1,88 +1,85 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class CouponUsage(object):
-
     """Implementation of the 'Coupon Usage' model.
 
     Attributes:
         id (int): The Chargify id of the product
         name (str): Name of the product
         signups (int): Number of times the coupon has been applied
-        savings (int): Dollar amount of customer savings as a result of the
+        savings (int): Dollar amount of customer savings as a result of the coupon.
+        savings_in_cents (int): Dollar amount of customer savings as a result of the
             coupon.
-        savings_in_cents (int): Dollar amount of customer savings as a result
-            of the coupon.
-        revenue (int): Total revenue of the all subscriptions that have
+        revenue (int): Total revenue of the all subscriptions that have received a
+            discount from this coupon.
+        revenue_in_cents (int): Total revenue of the all subscriptions that have
             received a discount from this coupon.
-        revenue_in_cents (int): Total revenue of the all subscriptions that
-            have received a discount from this coupon.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "id": 'id',
-        "name": 'name',
-        "signups": 'signups',
-        "savings": 'savings',
-        "savings_in_cents": 'savings_in_cents',
-        "revenue": 'revenue',
-        "revenue_in_cents": 'revenue_in_cents'
+        "id": "id",
+        "name": "name",
+        "signups": "signups",
+        "savings": "savings",
+        "savings_in_cents": "savings_in_cents",
+        "revenue": "revenue",
+        "revenue_in_cents": "revenue_in_cents",
     }
 
     _optionals = [
-        'id',
-        'name',
-        'signups',
-        'savings',
-        'savings_in_cents',
-        'revenue',
-        'revenue_in_cents',
+        "id",
+        "name",
+        "signups",
+        "savings",
+        "savings_in_cents",
+        "revenue",
+        "revenue_in_cents",
     ]
 
     _nullables = [
-        'savings',
-        'savings_in_cents',
-        'revenue',
+        "savings",
+        "savings_in_cents",
+        "revenue",
     ]
 
-    def __init__(self,
-                 id=APIHelper.SKIP,
-                 name=APIHelper.SKIP,
-                 signups=APIHelper.SKIP,
-                 savings=APIHelper.SKIP,
-                 savings_in_cents=APIHelper.SKIP,
-                 revenue=APIHelper.SKIP,
-                 revenue_in_cents=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the CouponUsage class"""
-
+    def __init__(
+        self,
+        id=APIHelper.SKIP,
+        name=APIHelper.SKIP,
+        signups=APIHelper.SKIP,
+        savings=APIHelper.SKIP,
+        savings_in_cents=APIHelper.SKIP,
+        revenue=APIHelper.SKIP,
+        revenue_in_cents=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a CouponUsage instance."""
         # Initialize members of the class
         if id is not APIHelper.SKIP:
-            self.id = id 
+            self.id = id
         if name is not APIHelper.SKIP:
-            self.name = name 
+            self.name = name
         if signups is not APIHelper.SKIP:
-            self.signups = signups 
+            self.signups = signups
         if savings is not APIHelper.SKIP:
-            self.savings = savings 
+            self.savings = savings
         if savings_in_cents is not APIHelper.SKIP:
-            self.savings_in_cents = savings_in_cents 
+            self.savings_in_cents = savings_in_cents
         if revenue is not APIHelper.SKIP:
-            self.revenue = revenue 
+            self.revenue = revenue
         if revenue_in_cents is not APIHelper.SKIP:
-            self.revenue_in_cents = revenue_in_cents 
+            self.revenue_in_cents = revenue_in_cents
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -92,7 +89,7 @@ class CouponUsage(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -103,20 +100,43 @@ class CouponUsage(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        name = dictionary.get("name") if dictionary.get("name") else APIHelper.SKIP
-        signups = dictionary.get("signups") if dictionary.get("signups") else APIHelper.SKIP
-        savings = dictionary.get("savings") if "savings" in dictionary.keys() else APIHelper.SKIP
-        savings_in_cents = dictionary.get("savings_in_cents") if "savings_in_cents" in dictionary.keys() else APIHelper.SKIP
-        revenue = dictionary.get("revenue") if "revenue" in dictionary.keys() else APIHelper.SKIP
-        revenue_in_cents = dictionary.get("revenue_in_cents") if dictionary.get("revenue_in_cents") else APIHelper.SKIP
+        id =\
+            dictionary.get("id")\
+            if dictionary.get("id")\
+                else APIHelper.SKIP
+        name =\
+            dictionary.get("name")\
+            if dictionary.get("name")\
+                else APIHelper.SKIP
+        signups =\
+            dictionary.get("signups")\
+            if dictionary.get("signups")\
+                else APIHelper.SKIP
+        savings =\
+            dictionary.get("savings")\
+            if "savings" in dictionary.keys()\
+                else APIHelper.SKIP
+        savings_in_cents =\
+            dictionary.get("savings_in_cents")\
+            if "savings_in_cents" in dictionary.keys()\
+                else APIHelper.SKIP
+        revenue =\
+            dictionary.get("revenue")\
+            if "revenue" in dictionary.keys()\
+                else APIHelper.SKIP
+        revenue_in_cents =\
+            dictionary.get("revenue_in_cents")\
+            if dictionary.get("revenue_in_cents")\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(id,
                    name,
@@ -128,23 +148,103 @@ class CouponUsage(object):
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'id={(self.id if hasattr(self, "id") else None)!r}, '
-                f'name={(self.name if hasattr(self, "name") else None)!r}, '
-                f'signups={(self.signups if hasattr(self, "signups") else None)!r}, '
-                f'savings={(self.savings if hasattr(self, "savings") else None)!r}, '
-                f'savings_in_cents={(self.savings_in_cents if hasattr(self, "savings_in_cents") else None)!r}, '
-                f'revenue={(self.revenue if hasattr(self, "revenue") else None)!r}, '
-                f'revenue_in_cents={(self.revenue_in_cents if hasattr(self, "revenue_in_cents") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _name=(
+            self.name
+            if hasattr(self, "name")
+            else None
+        )
+        _signups=(
+            self.signups
+            if hasattr(self, "signups")
+            else None
+        )
+        _savings=(
+            self.savings
+            if hasattr(self, "savings")
+            else None
+        )
+        _savings_in_cents=(
+            self.savings_in_cents
+            if hasattr(self, "savings_in_cents")
+            else None
+        )
+        _revenue=(
+            self.revenue
+            if hasattr(self, "revenue")
+            else None
+        )
+        _revenue_in_cents=(
+            self.revenue_in_cents
+            if hasattr(self, "revenue_in_cents")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!r}, "
+            f"name={_name!r}, "
+            f"signups={_signups!r}, "
+            f"savings={_savings!r}, "
+            f"savings_in_cents={_savings_in_cents!r}, "
+            f"revenue={_revenue!r}, "
+            f"revenue_in_cents={_revenue_in_cents!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'id={(self.id if hasattr(self, "id") else None)!s}, '
-                f'name={(self.name if hasattr(self, "name") else None)!s}, '
-                f'signups={(self.signups if hasattr(self, "signups") else None)!s}, '
-                f'savings={(self.savings if hasattr(self, "savings") else None)!s}, '
-                f'savings_in_cents={(self.savings_in_cents if hasattr(self, "savings_in_cents") else None)!s}, '
-                f'revenue={(self.revenue if hasattr(self, "revenue") else None)!s}, '
-                f'revenue_in_cents={(self.revenue_in_cents if hasattr(self, "revenue_in_cents") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _name=(
+            self.name
+            if hasattr(self, "name")
+            else None
+        )
+        _signups=(
+            self.signups
+            if hasattr(self, "signups")
+            else None
+        )
+        _savings=(
+            self.savings
+            if hasattr(self, "savings")
+            else None
+        )
+        _savings_in_cents=(
+            self.savings_in_cents
+            if hasattr(self, "savings_in_cents")
+            else None
+        )
+        _revenue=(
+            self.revenue
+            if hasattr(self, "revenue")
+            else None
+        )
+        _revenue_in_cents=(
+            self.revenue_in_cents
+            if hasattr(self, "revenue_in_cents")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!s}, "
+            f"name={_name!s}, "
+            f"signups={_signups!s}, "
+            f"savings={_savings!s}, "
+            f"savings_in_cents={_savings_in_cents!s}, "
+            f"revenue={_revenue!s}, "
+            f"revenue_in_cents={_revenue_in_cents!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

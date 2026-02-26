@@ -1,83 +1,85 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.reactivation_billing import ReactivationBilling
+from advancedbilling.models.reactivation_billing import (
+    ReactivationBilling,
+)
 
 
 class ReactivateSubscriptionRequest(object):
-
     """Implementation of the 'Reactivate Subscription Request' model.
 
     Attributes:
-        calendar_billing (ReactivationBilling): These values are only
-            applicable to subscriptions using calendar billing
-        include_trial (bool): If `true` is sent, the reactivated Subscription
-            will include a trial if one is available. If `false` is sent, the
-            trial period will be ignored.
-        preserve_balance (bool): If `true` is passed, the existing
-            subscription balance will NOT be cleared/reset before adding the
-            additional reactivation charges.
+        calendar_billing (ReactivationBilling): These values are only applicable to
+            subscriptions using calendar billing
+        include_trial (bool): If `true` is sent, the reactivated Subscription will
+            include a trial if one is available. If `false` is sent, the trial period
+            will be ignored.
+        preserve_balance (bool): If `true` is passed, the existing subscription
+            balance will NOT be cleared/reset before adding the additional
+            reactivation charges.
         coupon_code (str): The coupon code to be applied during reactivation.
-        use_credits_and_prepayments (bool): If true is sent, Chargify will use
-            service credits and prepayments upon reactivation. If false is
-            sent, the service credits and prepayments will be ignored.
-        resume (bool | ResumeOptions | None): If `true`, Chargify will attempt
-            to resume the subscription's billing period. if not resumable, the
-            subscription will be reactivated with a new billing period. If
-            `false`: Chargify will only attempt to reactivate the subscription.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        use_credits_and_prepayments (bool): If true is sent, Advanced Billing will
+            use service credits and prepayments upon reactivation. If false is sent,
+            the service credits and prepayments will be ignored.
+        resume (bool | ResumeOptions | None): If `true`, Advanced Billing will
+            attempt to resume the subscription's billing period. If not resumable,
+            the subscription will be reactivated with a new billing period. If
+            `false` or omitted, Advanced Billing will only attempt to reactivate the
+            subscription with a new billing period, regardless of whether or not the
+            subscription is resumable.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "calendar_billing": 'calendar_billing',
-        "include_trial": 'include_trial',
-        "preserve_balance": 'preserve_balance',
-        "coupon_code": 'coupon_code',
-        "use_credits_and_prepayments": 'use_credits_and_prepayments',
-        "resume": 'resume'
+        "calendar_billing": "calendar_billing",
+        "include_trial": "include_trial",
+        "preserve_balance": "preserve_balance",
+        "coupon_code": "coupon_code",
+        "use_credits_and_prepayments": "use_credits_and_prepayments",
+        "resume": "resume",
     }
 
     _optionals = [
-        'calendar_billing',
-        'include_trial',
-        'preserve_balance',
-        'coupon_code',
-        'use_credits_and_prepayments',
-        'resume',
+        "calendar_billing",
+        "include_trial",
+        "preserve_balance",
+        "coupon_code",
+        "use_credits_and_prepayments",
+        "resume",
     ]
 
-    def __init__(self,
-                 calendar_billing=APIHelper.SKIP,
-                 include_trial=APIHelper.SKIP,
-                 preserve_balance=APIHelper.SKIP,
-                 coupon_code=APIHelper.SKIP,
-                 use_credits_and_prepayments=APIHelper.SKIP,
-                 resume=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the ReactivateSubscriptionRequest class"""
-
+    def __init__(
+        self,
+        calendar_billing=APIHelper.SKIP,
+        include_trial=APIHelper.SKIP,
+        preserve_balance=APIHelper.SKIP,
+        coupon_code=APIHelper.SKIP,
+        use_credits_and_prepayments=APIHelper.SKIP,
+        resume=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a ReactivateSubscriptionRequest instance."""
         # Initialize members of the class
         if calendar_billing is not APIHelper.SKIP:
-            self.calendar_billing = calendar_billing 
+            self.calendar_billing = calendar_billing
         if include_trial is not APIHelper.SKIP:
-            self.include_trial = include_trial 
+            self.include_trial = include_trial
         if preserve_balance is not APIHelper.SKIP:
-            self.preserve_balance = preserve_balance 
+            self.preserve_balance = preserve_balance
         if coupon_code is not APIHelper.SKIP:
-            self.coupon_code = coupon_code 
+            self.coupon_code = coupon_code
         if use_credits_and_prepayments is not APIHelper.SKIP:
-            self.use_credits_and_prepayments = use_credits_and_prepayments 
+            self.use_credits_and_prepayments = use_credits_and_prepayments
         if resume is not APIHelper.SKIP:
-            self.resume = resume 
+            self.resume = resume
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -87,7 +89,7 @@ class ReactivateSubscriptionRequest(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -98,20 +100,46 @@ class ReactivateSubscriptionRequest(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
 
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        calendar_billing = ReactivationBilling.from_dictionary(dictionary.get('calendar_billing')) if 'calendar_billing' in dictionary.keys() else APIHelper.SKIP
-        include_trial = dictionary.get("include_trial") if "include_trial" in dictionary.keys() else APIHelper.SKIP
-        preserve_balance = dictionary.get("preserve_balance") if "preserve_balance" in dictionary.keys() else APIHelper.SKIP
-        coupon_code = dictionary.get("coupon_code") if dictionary.get("coupon_code") else APIHelper.SKIP
-        use_credits_and_prepayments = dictionary.get("use_credits_and_prepayments") if "use_credits_and_prepayments" in dictionary.keys() else APIHelper.SKIP
-        resume = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ReactivateSubscriptionRequestResume'), dictionary.get('resume'), False) if dictionary.get('resume') is not None else APIHelper.SKIP
+        calendar_billing =\
+            ReactivationBilling.from_dictionary(
+                dictionary.get("calendar_billing"))\
+                if "calendar_billing" in dictionary.keys()\
+                else APIHelper.SKIP
+        include_trial =\
+            dictionary.get("include_trial")\
+            if "include_trial" in dictionary.keys()\
+                else APIHelper.SKIP
+        preserve_balance =\
+            dictionary.get("preserve_balance")\
+            if "preserve_balance" in dictionary.keys()\
+                else APIHelper.SKIP
+        coupon_code =\
+            dictionary.get("coupon_code")\
+            if dictionary.get("coupon_code")\
+                else APIHelper.SKIP
+        use_credits_and_prepayments =\
+            dictionary.get("use_credits_and_prepayments")\
+            if "use_credits_and_prepayments" in dictionary.keys()\
+                else APIHelper.SKIP
+        resume = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("ReactivateSubscriptionRequestResume"),
+            dictionary.get("resume"),
+            False)\
+            if dictionary.get("resume") is not None\
+            else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(calendar_billing,
                    include_trial,
@@ -122,21 +150,91 @@ class ReactivateSubscriptionRequest(object):
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'calendar_billing={(self.calendar_billing if hasattr(self, "calendar_billing") else None)!r}, '
-                f'include_trial={(self.include_trial if hasattr(self, "include_trial") else None)!r}, '
-                f'preserve_balance={(self.preserve_balance if hasattr(self, "preserve_balance") else None)!r}, '
-                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!r}, '
-                f'use_credits_and_prepayments={(self.use_credits_and_prepayments if hasattr(self, "use_credits_and_prepayments") else None)!r}, '
-                f'resume={(self.resume if hasattr(self, "resume") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _calendar_billing=(
+            self.calendar_billing
+            if hasattr(self, "calendar_billing")
+            else None
+        )
+        _include_trial=(
+            self.include_trial
+            if hasattr(self, "include_trial")
+            else None
+        )
+        _preserve_balance=(
+            self.preserve_balance
+            if hasattr(self, "preserve_balance")
+            else None
+        )
+        _coupon_code=(
+            self.coupon_code
+            if hasattr(self, "coupon_code")
+            else None
+        )
+        _use_credits_and_prepayments=(
+            self.use_credits_and_prepayments
+            if hasattr(self, "use_credits_and_prepayments")
+            else None
+        )
+        _resume=(
+            self.resume
+            if hasattr(self, "resume")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"calendar_billing={_calendar_billing!r}, "
+            f"include_trial={_include_trial!r}, "
+            f"preserve_balance={_preserve_balance!r}, "
+            f"coupon_code={_coupon_code!r}, "
+            f"use_credits_and_prepayments={_use_credits_and_prepayments!r}, "
+            f"resume={_resume!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'calendar_billing={(self.calendar_billing if hasattr(self, "calendar_billing") else None)!s}, '
-                f'include_trial={(self.include_trial if hasattr(self, "include_trial") else None)!s}, '
-                f'preserve_balance={(self.preserve_balance if hasattr(self, "preserve_balance") else None)!s}, '
-                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!s}, '
-                f'use_credits_and_prepayments={(self.use_credits_and_prepayments if hasattr(self, "use_credits_and_prepayments") else None)!s}, '
-                f'resume={(self.resume if hasattr(self, "resume") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _calendar_billing=(
+            self.calendar_billing
+            if hasattr(self, "calendar_billing")
+            else None
+        )
+        _include_trial=(
+            self.include_trial
+            if hasattr(self, "include_trial")
+            else None
+        )
+        _preserve_balance=(
+            self.preserve_balance
+            if hasattr(self, "preserve_balance")
+            else None
+        )
+        _coupon_code=(
+            self.coupon_code
+            if hasattr(self, "coupon_code")
+            else None
+        )
+        _use_credits_and_prepayments=(
+            self.use_credits_and_prepayments
+            if hasattr(self, "use_credits_and_prepayments")
+            else None
+        )
+        _resume=(
+            self.resume
+            if hasattr(self, "resume")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"calendar_billing={_calendar_billing!s}, "
+            f"include_trial={_include_trial!s}, "
+            f"preserve_balance={_preserve_balance!s}, "
+            f"coupon_code={_coupon_code!s}, "
+            f"use_credits_and_prepayments={_use_credits_and_prepayments!s}, "
+            f"resume={_resume!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

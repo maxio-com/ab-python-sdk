@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class SegmentPrice(object):
-
     """Implementation of the 'Segment Price' model.
 
     Attributes:
@@ -22,67 +20,67 @@ class SegmentPrice(object):
         price_point_id (int): The model property of type int.
         formatted_unit_price (str): The model property of type str.
         segment_id (int): The model property of type int.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "id": 'id',
-        "component_id": 'component_id',
-        "starting_quantity": 'starting_quantity',
-        "ending_quantity": 'ending_quantity',
-        "unit_price": 'unit_price',
-        "price_point_id": 'price_point_id',
-        "formatted_unit_price": 'formatted_unit_price',
-        "segment_id": 'segment_id'
+        "id": "id",
+        "component_id": "component_id",
+        "starting_quantity": "starting_quantity",
+        "ending_quantity": "ending_quantity",
+        "unit_price": "unit_price",
+        "price_point_id": "price_point_id",
+        "formatted_unit_price": "formatted_unit_price",
+        "segment_id": "segment_id",
     }
 
     _optionals = [
-        'id',
-        'component_id',
-        'starting_quantity',
-        'ending_quantity',
-        'unit_price',
-        'price_point_id',
-        'formatted_unit_price',
-        'segment_id',
+        "id",
+        "component_id",
+        "starting_quantity",
+        "ending_quantity",
+        "unit_price",
+        "price_point_id",
+        "formatted_unit_price",
+        "segment_id",
     ]
 
     _nullables = [
-        'ending_quantity',
+        "ending_quantity",
     ]
 
-    def __init__(self,
-                 id=APIHelper.SKIP,
-                 component_id=APIHelper.SKIP,
-                 starting_quantity=APIHelper.SKIP,
-                 ending_quantity=APIHelper.SKIP,
-                 unit_price=APIHelper.SKIP,
-                 price_point_id=APIHelper.SKIP,
-                 formatted_unit_price=APIHelper.SKIP,
-                 segment_id=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the SegmentPrice class"""
-
+    def __init__(
+        self,
+        id=APIHelper.SKIP,
+        component_id=APIHelper.SKIP,
+        starting_quantity=APIHelper.SKIP,
+        ending_quantity=APIHelper.SKIP,
+        unit_price=APIHelper.SKIP,
+        price_point_id=APIHelper.SKIP,
+        formatted_unit_price=APIHelper.SKIP,
+        segment_id=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a SegmentPrice instance."""
         # Initialize members of the class
         if id is not APIHelper.SKIP:
-            self.id = id 
+            self.id = id
         if component_id is not APIHelper.SKIP:
-            self.component_id = component_id 
+            self.component_id = component_id
         if starting_quantity is not APIHelper.SKIP:
-            self.starting_quantity = starting_quantity 
+            self.starting_quantity = starting_quantity
         if ending_quantity is not APIHelper.SKIP:
-            self.ending_quantity = ending_quantity 
+            self.ending_quantity = ending_quantity
         if unit_price is not APIHelper.SKIP:
-            self.unit_price = unit_price 
+            self.unit_price = unit_price
         if price_point_id is not APIHelper.SKIP:
-            self.price_point_id = price_point_id 
+            self.price_point_id = price_point_id
         if formatted_unit_price is not APIHelper.SKIP:
-            self.formatted_unit_price = formatted_unit_price 
+            self.formatted_unit_price = formatted_unit_price
         if segment_id is not APIHelper.SKIP:
-            self.segment_id = segment_id 
+            self.segment_id = segment_id
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -92,7 +90,7 @@ class SegmentPrice(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -103,21 +101,47 @@ class SegmentPrice(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
-        starting_quantity = dictionary.get("starting_quantity") if dictionary.get("starting_quantity") else APIHelper.SKIP
-        ending_quantity = dictionary.get("ending_quantity") if "ending_quantity" in dictionary.keys() else APIHelper.SKIP
-        unit_price = dictionary.get("unit_price") if dictionary.get("unit_price") else APIHelper.SKIP
-        price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
-        formatted_unit_price = dictionary.get("formatted_unit_price") if dictionary.get("formatted_unit_price") else APIHelper.SKIP
-        segment_id = dictionary.get("segment_id") if dictionary.get("segment_id") else APIHelper.SKIP
+        id =\
+            dictionary.get("id")\
+            if dictionary.get("id")\
+                else APIHelper.SKIP
+        component_id =\
+            dictionary.get("component_id")\
+            if dictionary.get("component_id")\
+                else APIHelper.SKIP
+        starting_quantity =\
+            dictionary.get("starting_quantity")\
+            if dictionary.get("starting_quantity")\
+                else APIHelper.SKIP
+        ending_quantity =\
+            dictionary.get("ending_quantity")\
+            if "ending_quantity" in dictionary.keys()\
+                else APIHelper.SKIP
+        unit_price =\
+            dictionary.get("unit_price")\
+            if dictionary.get("unit_price")\
+                else APIHelper.SKIP
+        price_point_id =\
+            dictionary.get("price_point_id")\
+            if dictionary.get("price_point_id")\
+                else APIHelper.SKIP
+        formatted_unit_price =\
+            dictionary.get("formatted_unit_price")\
+            if dictionary.get("formatted_unit_price")\
+                else APIHelper.SKIP
+        segment_id =\
+            dictionary.get("segment_id")\
+            if dictionary.get("segment_id")\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(id,
                    component_id,
@@ -131,7 +155,7 @@ class SegmentPrice(object):
 
     @classmethod
     def validate(cls, dictionary):
-        """Validates dictionary against class required properties
+        """Validate dictionary against class required properties
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -142,7 +166,6 @@ class SegmentPrice(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-
         if isinstance(dictionary, cls):
             return True
 
@@ -152,25 +175,115 @@ class SegmentPrice(object):
         return True
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'id={(self.id if hasattr(self, "id") else None)!r}, '
-                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!r}, '
-                f'starting_quantity={(self.starting_quantity if hasattr(self, "starting_quantity") else None)!r}, '
-                f'ending_quantity={(self.ending_quantity if hasattr(self, "ending_quantity") else None)!r}, '
-                f'unit_price={(self.unit_price if hasattr(self, "unit_price") else None)!r}, '
-                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!r}, '
-                f'formatted_unit_price={(self.formatted_unit_price if hasattr(self, "formatted_unit_price") else None)!r}, '
-                f'segment_id={(self.segment_id if hasattr(self, "segment_id") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _component_id=(
+            self.component_id
+            if hasattr(self, "component_id")
+            else None
+        )
+        _starting_quantity=(
+            self.starting_quantity
+            if hasattr(self, "starting_quantity")
+            else None
+        )
+        _ending_quantity=(
+            self.ending_quantity
+            if hasattr(self, "ending_quantity")
+            else None
+        )
+        _unit_price=(
+            self.unit_price
+            if hasattr(self, "unit_price")
+            else None
+        )
+        _price_point_id=(
+            self.price_point_id
+            if hasattr(self, "price_point_id")
+            else None
+        )
+        _formatted_unit_price=(
+            self.formatted_unit_price
+            if hasattr(self, "formatted_unit_price")
+            else None
+        )
+        _segment_id=(
+            self.segment_id
+            if hasattr(self, "segment_id")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!r}, "
+            f"component_id={_component_id!r}, "
+            f"starting_quantity={_starting_quantity!r}, "
+            f"ending_quantity={_ending_quantity!r}, "
+            f"unit_price={_unit_price!r}, "
+            f"price_point_id={_price_point_id!r}, "
+            f"formatted_unit_price={_formatted_unit_price!r}, "
+            f"segment_id={_segment_id!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'id={(self.id if hasattr(self, "id") else None)!s}, '
-                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!s}, '
-                f'starting_quantity={(self.starting_quantity if hasattr(self, "starting_quantity") else None)!s}, '
-                f'ending_quantity={(self.ending_quantity if hasattr(self, "ending_quantity") else None)!s}, '
-                f'unit_price={(self.unit_price if hasattr(self, "unit_price") else None)!s}, '
-                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!s}, '
-                f'formatted_unit_price={(self.formatted_unit_price if hasattr(self, "formatted_unit_price") else None)!s}, '
-                f'segment_id={(self.segment_id if hasattr(self, "segment_id") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _component_id=(
+            self.component_id
+            if hasattr(self, "component_id")
+            else None
+        )
+        _starting_quantity=(
+            self.starting_quantity
+            if hasattr(self, "starting_quantity")
+            else None
+        )
+        _ending_quantity=(
+            self.ending_quantity
+            if hasattr(self, "ending_quantity")
+            else None
+        )
+        _unit_price=(
+            self.unit_price
+            if hasattr(self, "unit_price")
+            else None
+        )
+        _price_point_id=(
+            self.price_point_id
+            if hasattr(self, "price_point_id")
+            else None
+        )
+        _formatted_unit_price=(
+            self.formatted_unit_price
+            if hasattr(self, "formatted_unit_price")
+            else None
+        )
+        _segment_id=(
+            self.segment_id
+            if hasattr(self, "segment_id")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!s}, "
+            f"component_id={_component_id!s}, "
+            f"starting_quantity={_starting_quantity!s}, "
+            f"ending_quantity={_ending_quantity!s}, "
+            f"unit_price={_unit_price!s}, "
+            f"price_point_id={_price_point_id!s}, "
+            f"formatted_unit_price={_formatted_unit_price!s}, "
+            f"segment_id={_segment_id!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

@@ -12,7 +12,7 @@
 | `id` | `int` | Required | - |
 | `timestamp` | `datetime` | Required | - |
 | `invoice` | [`Invoice`](../../doc/models/invoice.md) | Required | - |
-| `event_type` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `'remove_payment'` |
+| `event_type` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `"remove_payment"` |
 | `event_data` | [`RemovePaymentEventData`](../../doc/models/remove-payment-event-data.md) | Required | Example schema for an `remove_payment` event |
 
 ## Example (as JSON)

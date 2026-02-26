@@ -1,42 +1,40 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class CountResponse(object):
-
     """Implementation of the 'Count Response' model.
 
     Attributes:
         count (int): The model property of type int.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "count": 'count'
+        "count": "count",
     }
 
     _optionals = [
-        'count',
+        "count",
     ]
 
-    def __init__(self,
-                 count=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the CountResponse class"""
-
+    def __init__(
+        self,
+        count=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a CountResponse instance."""
         # Initialize members of the class
         if count is not APIHelper.SKIP:
-            self.count = count 
+            self.count = count
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -46,7 +44,7 @@ class CountResponse(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -57,24 +55,49 @@ class CountResponse(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        count = dictionary.get("count") if dictionary.get("count") else APIHelper.SKIP
+        count =\
+            dictionary.get("count")\
+            if dictionary.get("count")\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(count,
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'count={(self.count if hasattr(self, "count") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _count=(
+            self.count
+            if hasattr(self, "count")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"count={_count!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'count={(self.count if hasattr(self, "count") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _count=(
+            self.count
+            if hasattr(self, "count")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"count={_count!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

@@ -1,20 +1,22 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.exceptions.api_exception import APIException
-from advancedbilling.models.subscription_group_update_error import SubscriptionGroupUpdateError
+from advancedbilling.exceptions.api_exception import (
+    APIException,
+)
+from advancedbilling.models.subscription_group_update_error import (
+    SubscriptionGroupUpdateError,
+)
 
 
 class SubscriptionGroupUpdateErrorResponseException(APIException):
     def __init__(self, reason, response):
-        """Constructor for the SubscriptionGroupUpdateErrorResponseException class
+        """Initialize SubscriptionGroupUpdateErrorResponseException object.
 
         Args:
             reason (string): The reason (or error message) for the Exception
@@ -22,13 +24,14 @@ class SubscriptionGroupUpdateErrorResponseException(APIException):
             response (HttpResponse): The HttpResponse of the API call.
 
         """
-        super(SubscriptionGroupUpdateErrorResponseException, self).__init__(reason, response)
+        super(SubscriptionGroupUpdateErrorResponseException,
+              self).__init__(reason, response)
         dictionary = APIHelper.json_deserialize(self.response.text)
         if isinstance(dictionary, dict):
             self.unbox(dictionary)
 
     def unbox(self, dictionary):
-        """Populates the properties of this object by extracting them from a dictionary.
+        """Populate the properties of this object by extracting them from a dictionary.
 
         Args:
             dictionary (dictionary): A dictionary representation of the object as
@@ -36,10 +39,25 @@ class SubscriptionGroupUpdateErrorResponseException(APIException):
             MUST match property names in the API description.
 
         """
-        self.errors = SubscriptionGroupUpdateError.from_dictionary(dictionary.get('errors')) if 'errors' in dictionary.keys() else None
+        self.errors =\
+            SubscriptionGroupUpdateError.from_dictionary(
+                dictionary.get("errors"))\
+                if "errors" in dictionary.keys()\
+                else None
+
 
     def __str__(self):
-        base_str = super().__str__()
-        return (f'{self.__class__.__name__}('
-                f'{base_str[base_str.find("(") + 1:-1]}, '
-                f'errors={(self.errors if hasattr(self, "errors") else None)!s})')
+        """Return a human-readable string representation."""
+        _errors=(
+            self.errors
+            if hasattr(self, "errors")
+            else None
+        )
+        _base_str = super().__str__()
+        _base_str = _base_str[_base_str.find("(") + 1:-1]
+        return (
+            f"{self.__class__.__name__}("
+            f"base_str={_base_str!s}, "
+            f"errors={_errors!s}, "
+            f")"
+        )

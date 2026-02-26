@@ -109,14 +109,14 @@ This call is asynchronous and there may be a delay before the site data is fully
 
 ```python
 def clear_site(self,
-              cleanup_scope='all')
+              cleanup_scope="all")
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cleanup_scope` | [`CleanupScope`](../../doc/models/cleanup-scope.md) | Query, Optional | `all`: Will clear all products, customers, and related subscriptions from the site.<br>`customers`: Will clear only customers and related subscriptions (leaving the products untouched) for the site.<br>Revenue will also be reset to 0.<br>Use in query `cleanup_scope=all`.<br><br>**Default**: `'all'` |
+| `cleanup_scope` | [`CleanupScope`](../../doc/models/cleanup-scope.md) | Query, Optional | `all`: Will clear all products, customers, and related subscriptions from the site.<br>`customers`: Will clear only customers and related subscriptions (leaving the products untouched) for the site.<br>Revenue will also be reset to 0.<br>Use in query `cleanup_scope=all`.<br><br>**Default**: `"all"` |
 
 ## Response Type
 

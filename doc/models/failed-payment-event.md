@@ -12,7 +12,7 @@
 | `id` | `int` | Required | - |
 | `timestamp` | `datetime` | Required | - |
 | `invoice` | [`Invoice`](../../doc/models/invoice.md) | Required | - |
-| `event_type` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `'failed_payment'` |
+| `event_type` | [`InvoiceEventType`](../../doc/models/invoice-event-type.md) | Required | **Default**: `"failed_payment"` |
 | `event_data` | [`FailedPaymentEventData`](../../doc/models/failed-payment-event-data.md) | Required | Example schema for an `failed_payment` event |
 
 ## Example (as JSON)

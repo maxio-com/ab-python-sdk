@@ -1,74 +1,74 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.invoice_status import InvoiceStatus
+from advancedbilling.models.invoice_status import (
+    InvoiceStatus,
+)
 
 
 class ChangeInvoiceStatusEventData(object):
-
     """Implementation of the 'Change Invoice Status Event Data' model.
 
     Example schema for an `change_invoice_status` event
 
     Attributes:
-        gateway_trans_id (str): Identifier for the transaction within the
-            payment gateway.
+        gateway_trans_id (str): Identifier for the transaction within the payment
+            gateway.
         amount (str): The monetary value associated with the linked payment,
             expressed in dollars.
-        from_status (InvoiceStatus): The status of the invoice before any
-            changes occurred. See [Invoice
-            Statuses](https://maxio.zendesk.com/hc/en-us/articles/2425228782964
-            5-Advanced-Billing-Invoices-Overview#invoice-statuses) for more.
-        to_status (InvoiceStatus): The updated status of the invoice after
-            changes have been made. See [Invoice
-            Statuses](https://maxio.zendesk.com/hc/en-us/articles/2425228782964
-            5-Advanced-Billing-Invoices-Overview#invoice-statuses) for more.
-        consolidation_level (InvoiceConsolidationLevel): The model property of
-            type InvoiceConsolidationLevel.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        from_status (InvoiceStatus): The status of the invoice before any changes
+            occurred. See [Invoice
+            Statuses](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advan
+            ced-Billing-Invoices-Overview#invoice-statuses) for more.
+        to_status (InvoiceStatus): The updated status of the invoice after changes
+            have been made. See [Invoice
+            Statuses](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advan
+            ced-Billing-Invoices-Overview#invoice-statuses) for more.
+        consolidation_level (InvoiceConsolidationLevel): The model property of type
+            InvoiceConsolidationLevel.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "from_status": 'from_status',
-        "to_status": 'to_status',
-        "gateway_trans_id": 'gateway_trans_id',
-        "amount": 'amount',
-        "consolidation_level": 'consolidation_level'
+        "from_status": "from_status",
+        "to_status": "to_status",
+        "gateway_trans_id": "gateway_trans_id",
+        "amount": "amount",
+        "consolidation_level": "consolidation_level",
     }
 
     _optionals = [
-        'gateway_trans_id',
-        'amount',
-        'consolidation_level',
+        "gateway_trans_id",
+        "amount",
+        "consolidation_level",
     ]
 
-    def __init__(self,
-                 from_status=None,
-                 to_status=None,
-                 gateway_trans_id=APIHelper.SKIP,
-                 amount=APIHelper.SKIP,
-                 consolidation_level=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the ChangeInvoiceStatusEventData class"""
-
+    def __init__(
+        self,
+        from_status=None,
+        to_status=None,
+        gateway_trans_id=APIHelper.SKIP,
+        amount=APIHelper.SKIP,
+        consolidation_level=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a ChangeInvoiceStatusEventData instance."""
         # Initialize members of the class
         if gateway_trans_id is not APIHelper.SKIP:
-            self.gateway_trans_id = gateway_trans_id 
+            self.gateway_trans_id = gateway_trans_id
         if amount is not APIHelper.SKIP:
-            self.amount = amount 
-        self.from_status = from_status 
-        self.to_status = to_status 
+            self.amount = amount
+        self.from_status = from_status
+        self.to_status = to_status
         if consolidation_level is not APIHelper.SKIP:
-            self.consolidation_level = consolidation_level 
+            self.consolidation_level = consolidation_level
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -78,7 +78,7 @@ class ChangeInvoiceStatusEventData(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -89,18 +89,35 @@ class ChangeInvoiceStatusEventData(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        from_status = dictionary.get("from_status") if dictionary.get("from_status") else None
-        to_status = dictionary.get("to_status") if dictionary.get("to_status") else None
-        gateway_trans_id = dictionary.get("gateway_trans_id") if dictionary.get("gateway_trans_id") else APIHelper.SKIP
-        amount = dictionary.get("amount") if dictionary.get("amount") else APIHelper.SKIP
-        consolidation_level = dictionary.get("consolidation_level") if dictionary.get("consolidation_level") else APIHelper.SKIP
+        from_status =\
+            dictionary.get("from_status")\
+            if dictionary.get("from_status")\
+                else None
+        to_status =\
+            dictionary.get("to_status")\
+            if dictionary.get("to_status")\
+                else None
+        gateway_trans_id =\
+            dictionary.get("gateway_trans_id")\
+            if dictionary.get("gateway_trans_id")\
+                else APIHelper.SKIP
+        amount =\
+            dictionary.get("amount")\
+            if dictionary.get("amount")\
+                else APIHelper.SKIP
+        consolidation_level =\
+            dictionary.get("consolidation_level")\
+            if dictionary.get("consolidation_level")\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(from_status,
                    to_status,
@@ -111,7 +128,7 @@ class ChangeInvoiceStatusEventData(object):
 
     @classmethod
     def validate(cls, dictionary):
-        """Validates dictionary against class required properties
+        """Validate dictionary against class required properties
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -122,35 +139,86 @@ class ChangeInvoiceStatusEventData(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.from_status,
-                                           type_callable=lambda value: InvoiceStatus.validate(value)) \
-                and APIHelper.is_valid_type(value=dictionary.to_status,
-                                            type_callable=lambda value: InvoiceStatus.validate(value))
+            return APIHelper.is_valid_type(
+                    value=dictionary.from_status,
+                    type_callable=lambda value:
+                        InvoiceStatus.validate(value)) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.to_status,
+                    type_callable=lambda value:
+                        InvoiceStatus.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('from_status'),
-                                       type_callable=lambda value: InvoiceStatus.validate(value)) \
-            and APIHelper.is_valid_type(value=dictionary.get('to_status'),
-                                        type_callable=lambda value: InvoiceStatus.validate(value))
+        return APIHelper.is_valid_type(
+                value=dictionary.get("from_status"),
+                type_callable=lambda value:
+                    InvoiceStatus.validate(value)) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("to_status"),
+                type_callable=lambda value:
+                    InvoiceStatus.validate(value))
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'gateway_trans_id={(self.gateway_trans_id if hasattr(self, "gateway_trans_id") else None)!r}, '
-                f'amount={(self.amount if hasattr(self, "amount") else None)!r}, '
-                f'from_status={self.from_status!r}, '
-                f'to_status={self.to_status!r}, '
-                f'consolidation_level={(self.consolidation_level if hasattr(self, "consolidation_level") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _gateway_trans_id=(
+            self.gateway_trans_id
+            if hasattr(self, "gateway_trans_id")
+            else None
+        )
+        _amount=(
+            self.amount
+            if hasattr(self, "amount")
+            else None
+        )
+        _from_status=self.from_status
+        _to_status=self.to_status
+        _consolidation_level=(
+            self.consolidation_level
+            if hasattr(self, "consolidation_level")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"gateway_trans_id={_gateway_trans_id!r}, "
+            f"amount={_amount!r}, "
+            f"from_status={_from_status!r}, "
+            f"to_status={_to_status!r}, "
+            f"consolidation_level={_consolidation_level!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'gateway_trans_id={(self.gateway_trans_id if hasattr(self, "gateway_trans_id") else None)!s}, '
-                f'amount={(self.amount if hasattr(self, "amount") else None)!s}, '
-                f'from_status={self.from_status!s}, '
-                f'to_status={self.to_status!s}, '
-                f'consolidation_level={(self.consolidation_level if hasattr(self, "consolidation_level") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _gateway_trans_id=(
+            self.gateway_trans_id
+            if hasattr(self, "gateway_trans_id")
+            else None
+        )
+        _amount=(
+            self.amount
+            if hasattr(self, "amount")
+            else None
+        )
+        _from_status=self.from_status
+        _to_status=self.to_status
+        _consolidation_level=(
+            self.consolidation_level
+            if hasattr(self, "consolidation_level")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"gateway_trans_id={_gateway_trans_id!s}, "
+            f"amount={_amount!s}, "
+            f"from_status={_from_status!s}, "
+            f"to_status={_to_status!s}, "
+            f"consolidation_level={_consolidation_level!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

@@ -1,39 +1,39 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.invoice_event_payment_method import InvoiceEventPaymentMethod
+from advancedbilling.models.invoice_event_payment_method import (
+    InvoiceEventPaymentMethod,
+)
 
 
 class PaymentMethodApplePay(object):
-
     """Implementation of the 'Payment Method Apple Pay' model.
 
     Attributes:
         mtype (InvoiceEventPaymentMethod): The model property of type
             InvoiceEventPaymentMethod.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "mtype": 'type'
+        "mtype": "type",
     }
 
-    def __init__(self,
-                 mtype=None,
-                 additional_properties=None):
-        """Constructor for the PaymentMethodApplePay class"""
-
+    def __init__(
+        self,
+        mtype=None,
+        additional_properties=None):
+        """Initialize a PaymentMethodApplePay instance."""
         # Initialize members of the class
-        self.mtype = mtype 
+        self.mtype = mtype
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -43,7 +43,7 @@ class PaymentMethodApplePay(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -54,21 +54,26 @@ class PaymentMethodApplePay(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        mtype = dictionary.get("type") if dictionary.get("type") else None
+        mtype =\
+            dictionary.get("type")\
+            if dictionary.get("type")\
+                else None
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(mtype,
                    additional_properties)
 
     @classmethod
     def validate(cls, dictionary):
-        """Validates dictionary against class required properties
+        """Validate dictionary against class required properties
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -79,23 +84,38 @@ class PaymentMethodApplePay(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.mtype,
-                                           type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
+            return APIHelper.is_valid_type(
+                    value=dictionary.mtype,
+                    type_callable=lambda value:
+                        InvoiceEventPaymentMethod.validate(value))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('type'),
-                                       type_callable=lambda value: InvoiceEventPaymentMethod.validate(value))
+        return APIHelper.is_valid_type(
+                value=dictionary.get("type"),
+                type_callable=lambda value:
+                    InvoiceEventPaymentMethod.validate(value))
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'mtype={self.mtype!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _mtype=self.mtype
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"mtype={_mtype!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'mtype={self.mtype!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _mtype=self.mtype
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"mtype={_mtype!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

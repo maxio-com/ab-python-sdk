@@ -1,40 +1,35 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class Customer(object):
-
     """Implementation of the 'Customer' model.
 
     Attributes:
         first_name (str): The first name of the customer
         last_name (str): The last name of the customer
         email (str): The email address of the customer
-        cc_emails (str): A comma-separated list of emails that should be cc’d
-            on all customer communications (i.e. “joe@example.com,
-            sue@example.com”)
-        organization (str): The organization of the customer. If no value,
-            `null` or empty string is provided, `organization` will be
-            populated with the customer's first and last name, separated with
-            a space.
-        reference (str): The unique identifier used within your own
-            application for this customer
+        cc_emails (str): A comma-separated list of emails that should be cc’d on all
+            customer communications (i.e. “joe@example.com, sue@example.com”)
+        organization (str): The organization of the customer. If no value, `null` or
+            empty string is provided, `organization` will be populated with the
+            customer's first and last name, separated with a space.
+        reference (str): The unique identifier used within your own application for
+            this customer
         id (int): The customer ID in Chargify
-        created_at (datetime): The timestamp in which the customer object was
-            created in Chargify
-        updated_at (datetime): The timestamp in which the customer object was
-            last edited
-        address (str): The customer’s shipping street address (i.e. “123 Main
-            St.”)
-        address_2 (str): Second line of the customer’s shipping address i.e.
-            “Apt. 100”
+        created_at (datetime): The timestamp in which the customer object was created
+            in Chargify
+        updated_at (datetime): The timestamp in which the customer object was last
+            edited
+        address (str): The customer’s shipping street address (i.e. “123 Main St.”)
+        address_2 (str): Second line of the customer’s shipping address i.e. “Apt.
+            100”
         city (str): The customer’s shipping address city (i.e. “Boston”)
         state (str): The customer’s shipping address state (i.e. “MA”)
         state_name (str): The customer's full name of state
@@ -42,222 +37,236 @@ class Customer(object):
         country (str): The customer shipping address country
         country_name (str): The customer's full name of country
         phone (str): The phone number of the customer
-        verified (bool): Is the customer verified to use ACH as a payment
-            method.
-        portal_customer_created_at (datetime): The timestamp of when the
-            Billing Portal entry was created at for the customer
-        portal_invite_last_sent_at (datetime): The timestamp of when the
-            Billing Portal invite was last sent at
-        portal_invite_last_accepted_at (datetime): The timestamp of when the
-            Billing Portal invite was last accepted
-        tax_exempt (bool): The tax exempt status for the customer. Acceptable
-            values are true or 1 for true and false or 0 for false.
-        vat_number (str): The VAT business identification number for the
-            customer. This number is used to determine VAT tax opt out rules.
-            It is not validated when added or updated on a customer record.
-            Instead, it is validated via VIES before calculating taxes. Only
-            valid business identification numbers will allow for VAT opt out.
-        parent_id (int): The parent ID in Chargify if applicable. Parent is
-            another Customer object.
+        verified (bool): Is the customer verified to use ACH as a payment method.
+        portal_customer_created_at (datetime): The timestamp of when the Billing
+            Portal entry was created at for the customer
+        portal_invite_last_sent_at (datetime): The timestamp of when the Billing
+            Portal invite was last sent at
+        portal_invite_last_accepted_at (datetime): The timestamp of when the Billing
+            Portal invite was last accepted
+        tax_exempt (bool): The tax exempt status for the customer. Acceptable values
+            are true or 1 for true and false or 0 for false.
+        vat_number (str): The VAT business identification number for the customer.
+            This number is used to determine VAT tax opt out rules. It is not
+            validated when added or updated on a customer record. Instead, it is
+            validated via VIES before calculating taxes. Only valid business
+            identification numbers will allow for VAT opt out.
+        parent_id (int): The parent ID in Chargify if applicable. Parent is another
+            Customer object.
         locale (str): The locale for the customer to identify language-region
         default_subscription_group_uid (str): The model property of type str.
         salesforce_id (str): The Salesforce ID for the customer
         tax_exempt_reason (str): The Tax Exemption Reason Code for the customer
-        default_auto_renewal_profile_id (int): The default auto-renewal
-            profile ID for the customer
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        default_auto_renewal_profile_id (int): The default auto-renewal profile ID
+            for the customer
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "first_name": 'first_name',
-        "last_name": 'last_name',
-        "email": 'email',
-        "cc_emails": 'cc_emails',
-        "organization": 'organization',
-        "reference": 'reference',
-        "id": 'id',
-        "created_at": 'created_at',
-        "updated_at": 'updated_at',
-        "address": 'address',
-        "address_2": 'address_2',
-        "city": 'city',
-        "state": 'state',
-        "state_name": 'state_name',
-        "zip": 'zip',
-        "country": 'country',
-        "country_name": 'country_name',
-        "phone": 'phone',
-        "verified": 'verified',
-        "portal_customer_created_at": 'portal_customer_created_at',
-        "portal_invite_last_sent_at": 'portal_invite_last_sent_at',
-        "portal_invite_last_accepted_at": 'portal_invite_last_accepted_at',
-        "tax_exempt": 'tax_exempt',
-        "vat_number": 'vat_number',
-        "parent_id": 'parent_id',
-        "locale": 'locale',
-        "default_subscription_group_uid": 'default_subscription_group_uid',
-        "salesforce_id": 'salesforce_id',
-        "tax_exempt_reason": 'tax_exempt_reason',
-        "default_auto_renewal_profile_id": 'default_auto_renewal_profile_id'
+        "first_name": "first_name",
+        "last_name": "last_name",
+        "email": "email",
+        "cc_emails": "cc_emails",
+        "organization": "organization",
+        "reference": "reference",
+        "id": "id",
+        "created_at": "created_at",
+        "updated_at": "updated_at",
+        "address": "address",
+        "address_2": "address_2",
+        "city": "city",
+        "state": "state",
+        "state_name": "state_name",
+        "zip": "zip",
+        "country": "country",
+        "country_name": "country_name",
+        "phone": "phone",
+        "verified": "verified",
+        "portal_customer_created_at": "portal_customer_created_at",
+        "portal_invite_last_sent_at": "portal_invite_last_sent_at",
+        "portal_invite_last_accepted_at": "portal_invite_last_accepted_at",
+        "tax_exempt": "tax_exempt",
+        "vat_number": "vat_number",
+        "parent_id": "parent_id",
+        "locale": "locale",
+        "default_subscription_group_uid": "default_subscription_group_uid",
+        "salesforce_id": "salesforce_id",
+        "tax_exempt_reason": "tax_exempt_reason",
+        "default_auto_renewal_profile_id": "default_auto_renewal_profile_id",
     }
 
     _optionals = [
-        'first_name',
-        'last_name',
-        'email',
-        'cc_emails',
-        'organization',
-        'reference',
-        'id',
-        'created_at',
-        'updated_at',
-        'address',
-        'address_2',
-        'city',
-        'state',
-        'state_name',
-        'zip',
-        'country',
-        'country_name',
-        'phone',
-        'verified',
-        'portal_customer_created_at',
-        'portal_invite_last_sent_at',
-        'portal_invite_last_accepted_at',
-        'tax_exempt',
-        'vat_number',
-        'parent_id',
-        'locale',
-        'default_subscription_group_uid',
-        'salesforce_id',
-        'tax_exempt_reason',
-        'default_auto_renewal_profile_id',
+        "first_name",
+        "last_name",
+        "email",
+        "cc_emails",
+        "organization",
+        "reference",
+        "id",
+        "created_at",
+        "updated_at",
+        "address",
+        "address_2",
+        "city",
+        "state",
+        "state_name",
+        "zip",
+        "country",
+        "country_name",
+        "phone",
+        "verified",
+        "portal_customer_created_at",
+        "portal_invite_last_sent_at",
+        "portal_invite_last_accepted_at",
+        "tax_exempt",
+        "vat_number",
+        "parent_id",
+        "locale",
+        "default_subscription_group_uid",
+        "salesforce_id",
+        "tax_exempt_reason",
+        "default_auto_renewal_profile_id",
     ]
 
     _nullables = [
-        'cc_emails',
-        'organization',
-        'reference',
-        'address',
-        'address_2',
-        'city',
-        'state',
-        'state_name',
-        'zip',
-        'country',
-        'country_name',
-        'phone',
-        'verified',
-        'portal_customer_created_at',
-        'portal_invite_last_sent_at',
-        'portal_invite_last_accepted_at',
-        'vat_number',
-        'parent_id',
-        'locale',
-        'default_subscription_group_uid',
-        'salesforce_id',
-        'tax_exempt_reason',
-        'default_auto_renewal_profile_id',
+        "cc_emails",
+        "organization",
+        "reference",
+        "address",
+        "address_2",
+        "city",
+        "state",
+        "state_name",
+        "zip",
+        "country",
+        "country_name",
+        "phone",
+        "verified",
+        "portal_customer_created_at",
+        "portal_invite_last_sent_at",
+        "portal_invite_last_accepted_at",
+        "vat_number",
+        "parent_id",
+        "locale",
+        "default_subscription_group_uid",
+        "salesforce_id",
+        "tax_exempt_reason",
+        "default_auto_renewal_profile_id",
     ]
 
-    def __init__(self,
-                 first_name=APIHelper.SKIP,
-                 last_name=APIHelper.SKIP,
-                 email=APIHelper.SKIP,
-                 cc_emails=APIHelper.SKIP,
-                 organization=APIHelper.SKIP,
-                 reference=APIHelper.SKIP,
-                 id=APIHelper.SKIP,
-                 created_at=APIHelper.SKIP,
-                 updated_at=APIHelper.SKIP,
-                 address=APIHelper.SKIP,
-                 address_2=APIHelper.SKIP,
-                 city=APIHelper.SKIP,
-                 state=APIHelper.SKIP,
-                 state_name=APIHelper.SKIP,
-                 zip=APIHelper.SKIP,
-                 country=APIHelper.SKIP,
-                 country_name=APIHelper.SKIP,
-                 phone=APIHelper.SKIP,
-                 verified=APIHelper.SKIP,
-                 portal_customer_created_at=APIHelper.SKIP,
-                 portal_invite_last_sent_at=APIHelper.SKIP,
-                 portal_invite_last_accepted_at=APIHelper.SKIP,
-                 tax_exempt=APIHelper.SKIP,
-                 vat_number=APIHelper.SKIP,
-                 parent_id=APIHelper.SKIP,
-                 locale=APIHelper.SKIP,
-                 default_subscription_group_uid=APIHelper.SKIP,
-                 salesforce_id=APIHelper.SKIP,
-                 tax_exempt_reason=APIHelper.SKIP,
-                 default_auto_renewal_profile_id=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the Customer class"""
-
+    def __init__(
+        self,
+        first_name=APIHelper.SKIP,
+        last_name=APIHelper.SKIP,
+        email=APIHelper.SKIP,
+        cc_emails=APIHelper.SKIP,
+        organization=APIHelper.SKIP,
+        reference=APIHelper.SKIP,
+        id=APIHelper.SKIP,
+        created_at=APIHelper.SKIP,
+        updated_at=APIHelper.SKIP,
+        address=APIHelper.SKIP,
+        address_2=APIHelper.SKIP,
+        city=APIHelper.SKIP,
+        state=APIHelper.SKIP,
+        state_name=APIHelper.SKIP,
+        zip=APIHelper.SKIP,
+        country=APIHelper.SKIP,
+        country_name=APIHelper.SKIP,
+        phone=APIHelper.SKIP,
+        verified=APIHelper.SKIP,
+        portal_customer_created_at=APIHelper.SKIP,
+        portal_invite_last_sent_at=APIHelper.SKIP,
+        portal_invite_last_accepted_at=APIHelper.SKIP,
+        tax_exempt=APIHelper.SKIP,
+        vat_number=APIHelper.SKIP,
+        parent_id=APIHelper.SKIP,
+        locale=APIHelper.SKIP,
+        default_subscription_group_uid=APIHelper.SKIP,
+        salesforce_id=APIHelper.SKIP,
+        tax_exempt_reason=APIHelper.SKIP,
+        default_auto_renewal_profile_id=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a Customer instance."""
         # Initialize members of the class
         if first_name is not APIHelper.SKIP:
-            self.first_name = first_name 
+            self.first_name = first_name
         if last_name is not APIHelper.SKIP:
-            self.last_name = last_name 
+            self.last_name = last_name
         if email is not APIHelper.SKIP:
-            self.email = email 
+            self.email = email
         if cc_emails is not APIHelper.SKIP:
-            self.cc_emails = cc_emails 
+            self.cc_emails = cc_emails
         if organization is not APIHelper.SKIP:
-            self.organization = organization 
+            self.organization = organization
         if reference is not APIHelper.SKIP:
-            self.reference = reference 
+            self.reference = reference
         if id is not APIHelper.SKIP:
-            self.id = id 
+            self.id = id
         if created_at is not APIHelper.SKIP:
-            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
+            self.created_at =\
+                 APIHelper.apply_datetime_converter(
+                created_at, APIHelper.RFC3339DateTime)\
+                 if created_at else None
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
+            self.updated_at =\
+                 APIHelper.apply_datetime_converter(
+                updated_at, APIHelper.RFC3339DateTime)\
+                 if updated_at else None
         if address is not APIHelper.SKIP:
-            self.address = address 
+            self.address = address
         if address_2 is not APIHelper.SKIP:
-            self.address_2 = address_2 
+            self.address_2 = address_2
         if city is not APIHelper.SKIP:
-            self.city = city 
+            self.city = city
         if state is not APIHelper.SKIP:
-            self.state = state 
+            self.state = state
         if state_name is not APIHelper.SKIP:
-            self.state_name = state_name 
+            self.state_name = state_name
         if zip is not APIHelper.SKIP:
-            self.zip = zip 
+            self.zip = zip
         if country is not APIHelper.SKIP:
-            self.country = country 
+            self.country = country
         if country_name is not APIHelper.SKIP:
-            self.country_name = country_name 
+            self.country_name = country_name
         if phone is not APIHelper.SKIP:
-            self.phone = phone 
+            self.phone = phone
         if verified is not APIHelper.SKIP:
-            self.verified = verified 
+            self.verified = verified
         if portal_customer_created_at is not APIHelper.SKIP:
-            self.portal_customer_created_at = APIHelper.apply_datetime_converter(portal_customer_created_at, APIHelper.RFC3339DateTime) if portal_customer_created_at else None 
+            self.portal_customer_created_at =\
+                 APIHelper.apply_datetime_converter(
+                portal_customer_created_at, APIHelper.RFC3339DateTime)\
+                 if portal_customer_created_at else None
         if portal_invite_last_sent_at is not APIHelper.SKIP:
-            self.portal_invite_last_sent_at = APIHelper.apply_datetime_converter(portal_invite_last_sent_at, APIHelper.RFC3339DateTime) if portal_invite_last_sent_at else None 
+            self.portal_invite_last_sent_at =\
+                 APIHelper.apply_datetime_converter(
+                portal_invite_last_sent_at, APIHelper.RFC3339DateTime)\
+                 if portal_invite_last_sent_at else None
         if portal_invite_last_accepted_at is not APIHelper.SKIP:
-            self.portal_invite_last_accepted_at = APIHelper.apply_datetime_converter(portal_invite_last_accepted_at, APIHelper.RFC3339DateTime) if portal_invite_last_accepted_at else None 
+            self.portal_invite_last_accepted_at =\
+                 APIHelper.apply_datetime_converter(
+                portal_invite_last_accepted_at, APIHelper.RFC3339DateTime)\
+                 if portal_invite_last_accepted_at else None
         if tax_exempt is not APIHelper.SKIP:
-            self.tax_exempt = tax_exempt 
+            self.tax_exempt = tax_exempt
         if vat_number is not APIHelper.SKIP:
-            self.vat_number = vat_number 
+            self.vat_number = vat_number
         if parent_id is not APIHelper.SKIP:
-            self.parent_id = parent_id 
+            self.parent_id = parent_id
         if locale is not APIHelper.SKIP:
-            self.locale = locale 
+            self.locale = locale
         if default_subscription_group_uid is not APIHelper.SKIP:
-            self.default_subscription_group_uid = default_subscription_group_uid 
+            self.default_subscription_group_uid = default_subscription_group_uid
         if salesforce_id is not APIHelper.SKIP:
-            self.salesforce_id = salesforce_id 
+            self.salesforce_id = salesforce_id
         if tax_exempt_reason is not APIHelper.SKIP:
-            self.tax_exempt_reason = tax_exempt_reason 
+            self.tax_exempt_reason = tax_exempt_reason
         if default_auto_renewal_profile_id is not APIHelper.SKIP:
-            self.default_auto_renewal_profile_id = default_auto_renewal_profile_id 
+            self.default_auto_renewal_profile_id = default_auto_renewal_profile_id
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -267,7 +276,7 @@ class Customer(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -278,52 +287,142 @@ class Customer(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        first_name = dictionary.get("first_name") if dictionary.get("first_name") else APIHelper.SKIP
-        last_name = dictionary.get("last_name") if dictionary.get("last_name") else APIHelper.SKIP
-        email = dictionary.get("email") if dictionary.get("email") else APIHelper.SKIP
-        cc_emails = dictionary.get("cc_emails") if "cc_emails" in dictionary.keys() else APIHelper.SKIP
-        organization = dictionary.get("organization") if "organization" in dictionary.keys() else APIHelper.SKIP
-        reference = dictionary.get("reference") if "reference" in dictionary.keys() else APIHelper.SKIP
-        id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
-        address = dictionary.get("address") if "address" in dictionary.keys() else APIHelper.SKIP
-        address_2 = dictionary.get("address_2") if "address_2" in dictionary.keys() else APIHelper.SKIP
-        city = dictionary.get("city") if "city" in dictionary.keys() else APIHelper.SKIP
-        state = dictionary.get("state") if "state" in dictionary.keys() else APIHelper.SKIP
-        state_name = dictionary.get("state_name") if "state_name" in dictionary.keys() else APIHelper.SKIP
-        zip = dictionary.get("zip") if "zip" in dictionary.keys() else APIHelper.SKIP
-        country = dictionary.get("country") if "country" in dictionary.keys() else APIHelper.SKIP
-        country_name = dictionary.get("country_name") if "country_name" in dictionary.keys() else APIHelper.SKIP
-        phone = dictionary.get("phone") if "phone" in dictionary.keys() else APIHelper.SKIP
-        verified = dictionary.get("verified") if "verified" in dictionary.keys() else APIHelper.SKIP
-        if 'portal_customer_created_at' in dictionary.keys():
-            portal_customer_created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("portal_customer_created_at")).datetime if dictionary.get("portal_customer_created_at") else None
+        first_name =\
+            dictionary.get("first_name")\
+            if dictionary.get("first_name")\
+                else APIHelper.SKIP
+        last_name =\
+            dictionary.get("last_name")\
+            if dictionary.get("last_name")\
+                else APIHelper.SKIP
+        email =\
+            dictionary.get("email")\
+            if dictionary.get("email")\
+                else APIHelper.SKIP
+        cc_emails =\
+            dictionary.get("cc_emails")\
+            if "cc_emails" in dictionary.keys()\
+                else APIHelper.SKIP
+        organization =\
+            dictionary.get("organization")\
+            if "organization" in dictionary.keys()\
+                else APIHelper.SKIP
+        reference =\
+            dictionary.get("reference")\
+            if "reference" in dictionary.keys()\
+                else APIHelper.SKIP
+        id =\
+            dictionary.get("id")\
+            if dictionary.get("id")\
+                else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(
+            dictionary.get("created_at")).datetime\
+            if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(
+            dictionary.get("updated_at")).datetime\
+            if dictionary.get("updated_at") else APIHelper.SKIP
+        address =\
+            dictionary.get("address")\
+            if "address" in dictionary.keys()\
+                else APIHelper.SKIP
+        address_2 =\
+            dictionary.get("address_2")\
+            if "address_2" in dictionary.keys()\
+                else APIHelper.SKIP
+        city =\
+            dictionary.get("city")\
+            if "city" in dictionary.keys()\
+                else APIHelper.SKIP
+        state =\
+            dictionary.get("state")\
+            if "state" in dictionary.keys()\
+                else APIHelper.SKIP
+        state_name =\
+            dictionary.get("state_name")\
+            if "state_name" in dictionary.keys()\
+                else APIHelper.SKIP
+        zip =\
+            dictionary.get("zip")\
+            if "zip" in dictionary.keys()\
+                else APIHelper.SKIP
+        country =\
+            dictionary.get("country")\
+            if "country" in dictionary.keys()\
+                else APIHelper.SKIP
+        country_name =\
+            dictionary.get("country_name")\
+            if "country_name" in dictionary.keys()\
+                else APIHelper.SKIP
+        phone =\
+            dictionary.get("phone")\
+            if "phone" in dictionary.keys()\
+                else APIHelper.SKIP
+        verified =\
+            dictionary.get("verified")\
+            if "verified" in dictionary.keys()\
+                else APIHelper.SKIP
+        if "portal_customer_created_at" in dictionary.keys():
+            portal_customer_created_at = APIHelper.RFC3339DateTime.from_value(
+                dictionary.get("portal_customer_created_at")).datetime\
+                if dictionary.get("portal_customer_created_at") else None
+
         else:
             portal_customer_created_at = APIHelper.SKIP
-        if 'portal_invite_last_sent_at' in dictionary.keys():
-            portal_invite_last_sent_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("portal_invite_last_sent_at")).datetime if dictionary.get("portal_invite_last_sent_at") else None
+        if "portal_invite_last_sent_at" in dictionary.keys():
+            portal_invite_last_sent_at = APIHelper.RFC3339DateTime.from_value(
+                dictionary.get("portal_invite_last_sent_at")).datetime\
+                if dictionary.get("portal_invite_last_sent_at") else None
+
         else:
             portal_invite_last_sent_at = APIHelper.SKIP
-        if 'portal_invite_last_accepted_at' in dictionary.keys():
-            portal_invite_last_accepted_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("portal_invite_last_accepted_at")).datetime if dictionary.get("portal_invite_last_accepted_at") else None
+        if "portal_invite_last_accepted_at" in dictionary.keys():
+            portal_invite_last_accepted_at = APIHelper.RFC3339DateTime.from_value(
+                dictionary.get("portal_invite_last_accepted_at")).datetime\
+                if dictionary.get("portal_invite_last_accepted_at") else None
+
         else:
             portal_invite_last_accepted_at = APIHelper.SKIP
-        tax_exempt = dictionary.get("tax_exempt") if "tax_exempt" in dictionary.keys() else APIHelper.SKIP
-        vat_number = dictionary.get("vat_number") if "vat_number" in dictionary.keys() else APIHelper.SKIP
-        parent_id = dictionary.get("parent_id") if "parent_id" in dictionary.keys() else APIHelper.SKIP
-        locale = dictionary.get("locale") if "locale" in dictionary.keys() else APIHelper.SKIP
-        default_subscription_group_uid = dictionary.get("default_subscription_group_uid") if "default_subscription_group_uid" in dictionary.keys() else APIHelper.SKIP
-        salesforce_id = dictionary.get("salesforce_id") if "salesforce_id" in dictionary.keys() else APIHelper.SKIP
-        tax_exempt_reason = dictionary.get("tax_exempt_reason") if "tax_exempt_reason" in dictionary.keys() else APIHelper.SKIP
-        default_auto_renewal_profile_id = dictionary.get("default_auto_renewal_profile_id") if "default_auto_renewal_profile_id" in dictionary.keys() else APIHelper.SKIP
+        tax_exempt =\
+            dictionary.get("tax_exempt")\
+            if "tax_exempt" in dictionary.keys()\
+                else APIHelper.SKIP
+        vat_number =\
+            dictionary.get("vat_number")\
+            if "vat_number" in dictionary.keys()\
+                else APIHelper.SKIP
+        parent_id =\
+            dictionary.get("parent_id")\
+            if "parent_id" in dictionary.keys()\
+                else APIHelper.SKIP
+        locale =\
+            dictionary.get("locale")\
+            if "locale" in dictionary.keys()\
+                else APIHelper.SKIP
+        default_subscription_group_uid =\
+            dictionary.get("default_subscription_group_uid")\
+            if "default_subscription_group_uid" in dictionary.keys()\
+                else APIHelper.SKIP
+        salesforce_id =\
+            dictionary.get("salesforce_id")\
+            if "salesforce_id" in dictionary.keys()\
+                else APIHelper.SKIP
+        tax_exempt_reason =\
+            dictionary.get("tax_exempt_reason")\
+            if "tax_exempt_reason" in dictionary.keys()\
+                else APIHelper.SKIP
+        default_auto_renewal_profile_id =\
+            dictionary.get("default_auto_renewal_profile_id")\
+            if "default_auto_renewal_profile_id" in dictionary.keys()\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -359,7 +458,7 @@ class Customer(object):
 
     @classmethod
     def validate(cls, dictionary):
-        """Validates dictionary against class required properties
+        """Validate dictionary against class required properties
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -370,7 +469,6 @@ class Customer(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-
         if isinstance(dictionary, cls):
             return True
 
@@ -380,69 +478,379 @@ class Customer(object):
         return True
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'first_name={(self.first_name if hasattr(self, "first_name") else None)!r}, '
-                f'last_name={(self.last_name if hasattr(self, "last_name") else None)!r}, '
-                f'email={(self.email if hasattr(self, "email") else None)!r}, '
-                f'cc_emails={(self.cc_emails if hasattr(self, "cc_emails") else None)!r}, '
-                f'organization={(self.organization if hasattr(self, "organization") else None)!r}, '
-                f'reference={(self.reference if hasattr(self, "reference") else None)!r}, '
-                f'id={(self.id if hasattr(self, "id") else None)!r}, '
-                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
-                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!r}, '
-                f'address={(self.address if hasattr(self, "address") else None)!r}, '
-                f'address_2={(self.address_2 if hasattr(self, "address_2") else None)!r}, '
-                f'city={(self.city if hasattr(self, "city") else None)!r}, '
-                f'state={(self.state if hasattr(self, "state") else None)!r}, '
-                f'state_name={(self.state_name if hasattr(self, "state_name") else None)!r}, '
-                f'zip={(self.zip if hasattr(self, "zip") else None)!r}, '
-                f'country={(self.country if hasattr(self, "country") else None)!r}, '
-                f'country_name={(self.country_name if hasattr(self, "country_name") else None)!r}, '
-                f'phone={(self.phone if hasattr(self, "phone") else None)!r}, '
-                f'verified={(self.verified if hasattr(self, "verified") else None)!r}, '
-                f'portal_customer_created_at={(self.portal_customer_created_at if hasattr(self, "portal_customer_created_at") else None)!r}, '
-                f'portal_invite_last_sent_at={(self.portal_invite_last_sent_at if hasattr(self, "portal_invite_last_sent_at") else None)!r}, '
-                f'portal_invite_last_accepted_at={(self.portal_invite_last_accepted_at if hasattr(self, "portal_invite_last_accepted_at") else None)!r}, '
-                f'tax_exempt={(self.tax_exempt if hasattr(self, "tax_exempt") else None)!r}, '
-                f'vat_number={(self.vat_number if hasattr(self, "vat_number") else None)!r}, '
-                f'parent_id={(self.parent_id if hasattr(self, "parent_id") else None)!r}, '
-                f'locale={(self.locale if hasattr(self, "locale") else None)!r}, '
-                f'default_subscription_group_uid={(self.default_subscription_group_uid if hasattr(self, "default_subscription_group_uid") else None)!r}, '
-                f'salesforce_id={(self.salesforce_id if hasattr(self, "salesforce_id") else None)!r}, '
-                f'tax_exempt_reason={(self.tax_exempt_reason if hasattr(self, "tax_exempt_reason") else None)!r}, '
-                f'default_auto_renewal_profile_id={(self.default_auto_renewal_profile_id if hasattr(self, "default_auto_renewal_profile_id") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _first_name=(
+            self.first_name
+            if hasattr(self, "first_name")
+            else None
+        )
+        _last_name=(
+            self.last_name
+            if hasattr(self, "last_name")
+            else None
+        )
+        _email=(
+            self.email
+            if hasattr(self, "email")
+            else None
+        )
+        _cc_emails=(
+            self.cc_emails
+            if hasattr(self, "cc_emails")
+            else None
+        )
+        _organization=(
+            self.organization
+            if hasattr(self, "organization")
+            else None
+        )
+        _reference=(
+            self.reference
+            if hasattr(self, "reference")
+            else None
+        )
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _created_at=(
+            self.created_at
+            if hasattr(self, "created_at")
+            else None
+        )
+        _updated_at=(
+            self.updated_at
+            if hasattr(self, "updated_at")
+            else None
+        )
+        _address=(
+            self.address
+            if hasattr(self, "address")
+            else None
+        )
+        _address_2=(
+            self.address_2
+            if hasattr(self, "address_2")
+            else None
+        )
+        _city=(
+            self.city
+            if hasattr(self, "city")
+            else None
+        )
+        _state=(
+            self.state
+            if hasattr(self, "state")
+            else None
+        )
+        _state_name=(
+            self.state_name
+            if hasattr(self, "state_name")
+            else None
+        )
+        _zip=(
+            self.zip
+            if hasattr(self, "zip")
+            else None
+        )
+        _country=(
+            self.country
+            if hasattr(self, "country")
+            else None
+        )
+        _country_name=(
+            self.country_name
+            if hasattr(self, "country_name")
+            else None
+        )
+        _phone=(
+            self.phone
+            if hasattr(self, "phone")
+            else None
+        )
+        _verified=(
+            self.verified
+            if hasattr(self, "verified")
+            else None
+        )
+        _portal_customer_created_at=(
+            self.portal_customer_created_at
+            if hasattr(self, "portal_customer_created_at")
+            else None
+        )
+        _portal_invite_last_sent_at=(
+            self.portal_invite_last_sent_at
+            if hasattr(self, "portal_invite_last_sent_at")
+            else None
+        )
+        _portal_invite_last_accepted_at=(
+            self.portal_invite_last_accepted_at
+            if hasattr(self, "portal_invite_last_accepted_at")
+            else None
+        )
+        _tax_exempt=(
+            self.tax_exempt
+            if hasattr(self, "tax_exempt")
+            else None
+        )
+        _vat_number=(
+            self.vat_number
+            if hasattr(self, "vat_number")
+            else None
+        )
+        _parent_id=(
+            self.parent_id
+            if hasattr(self, "parent_id")
+            else None
+        )
+        _locale=(
+            self.locale
+            if hasattr(self, "locale")
+            else None
+        )
+        _default_subscription_group_uid=(
+            self.default_subscription_group_uid
+            if hasattr(self, "default_subscription_group_uid")
+            else None
+        )
+        _salesforce_id=(
+            self.salesforce_id
+            if hasattr(self, "salesforce_id")
+            else None
+        )
+        _tax_exempt_reason=(
+            self.tax_exempt_reason
+            if hasattr(self, "tax_exempt_reason")
+            else None
+        )
+        _default_auto_renewal_profile_id=(
+            self.default_auto_renewal_profile_id
+            if hasattr(self, "default_auto_renewal_profile_id")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"first_name={_first_name!r}, "
+            f"last_name={_last_name!r}, "
+            f"email={_email!r}, "
+            f"cc_emails={_cc_emails!r}, "
+            f"organization={_organization!r}, "
+            f"reference={_reference!r}, "
+            f"id={_id!r}, "
+            f"created_at={_created_at!r}, "
+            f"updated_at={_updated_at!r}, "
+            f"address={_address!r}, "
+            f"address_2={_address_2!r}, "
+            f"city={_city!r}, "
+            f"state={_state!r}, "
+            f"state_name={_state_name!r}, "
+            f"zip={_zip!r}, "
+            f"country={_country!r}, "
+            f"country_name={_country_name!r}, "
+            f"phone={_phone!r}, "
+            f"verified={_verified!r}, "
+            f"portal_customer_created_at={_portal_customer_created_at!r}, "
+            f"portal_invite_last_sent_at={_portal_invite_last_sent_at!r}, "
+            f"portal_invite_last_accepted_at={_portal_invite_last_accepted_at!r}, "
+            f"tax_exempt={_tax_exempt!r}, "
+            f"vat_number={_vat_number!r}, "
+            f"parent_id={_parent_id!r}, "
+            f"locale={_locale!r}, "
+            f"default_subscription_group_uid={_default_subscription_group_uid!r}, "
+            f"salesforce_id={_salesforce_id!r}, "
+            f"tax_exempt_reason={_tax_exempt_reason!r}, "
+            f"default_auto_renewal_profile_id={_default_auto_renewal_profile_id!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'first_name={(self.first_name if hasattr(self, "first_name") else None)!s}, '
-                f'last_name={(self.last_name if hasattr(self, "last_name") else None)!s}, '
-                f'email={(self.email if hasattr(self, "email") else None)!s}, '
-                f'cc_emails={(self.cc_emails if hasattr(self, "cc_emails") else None)!s}, '
-                f'organization={(self.organization if hasattr(self, "organization") else None)!s}, '
-                f'reference={(self.reference if hasattr(self, "reference") else None)!s}, '
-                f'id={(self.id if hasattr(self, "id") else None)!s}, '
-                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
-                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!s}, '
-                f'address={(self.address if hasattr(self, "address") else None)!s}, '
-                f'address_2={(self.address_2 if hasattr(self, "address_2") else None)!s}, '
-                f'city={(self.city if hasattr(self, "city") else None)!s}, '
-                f'state={(self.state if hasattr(self, "state") else None)!s}, '
-                f'state_name={(self.state_name if hasattr(self, "state_name") else None)!s}, '
-                f'zip={(self.zip if hasattr(self, "zip") else None)!s}, '
-                f'country={(self.country if hasattr(self, "country") else None)!s}, '
-                f'country_name={(self.country_name if hasattr(self, "country_name") else None)!s}, '
-                f'phone={(self.phone if hasattr(self, "phone") else None)!s}, '
-                f'verified={(self.verified if hasattr(self, "verified") else None)!s}, '
-                f'portal_customer_created_at={(self.portal_customer_created_at if hasattr(self, "portal_customer_created_at") else None)!s}, '
-                f'portal_invite_last_sent_at={(self.portal_invite_last_sent_at if hasattr(self, "portal_invite_last_sent_at") else None)!s}, '
-                f'portal_invite_last_accepted_at={(self.portal_invite_last_accepted_at if hasattr(self, "portal_invite_last_accepted_at") else None)!s}, '
-                f'tax_exempt={(self.tax_exempt if hasattr(self, "tax_exempt") else None)!s}, '
-                f'vat_number={(self.vat_number if hasattr(self, "vat_number") else None)!s}, '
-                f'parent_id={(self.parent_id if hasattr(self, "parent_id") else None)!s}, '
-                f'locale={(self.locale if hasattr(self, "locale") else None)!s}, '
-                f'default_subscription_group_uid={(self.default_subscription_group_uid if hasattr(self, "default_subscription_group_uid") else None)!s}, '
-                f'salesforce_id={(self.salesforce_id if hasattr(self, "salesforce_id") else None)!s}, '
-                f'tax_exempt_reason={(self.tax_exempt_reason if hasattr(self, "tax_exempt_reason") else None)!s}, '
-                f'default_auto_renewal_profile_id={(self.default_auto_renewal_profile_id if hasattr(self, "default_auto_renewal_profile_id") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _first_name=(
+            self.first_name
+            if hasattr(self, "first_name")
+            else None
+        )
+        _last_name=(
+            self.last_name
+            if hasattr(self, "last_name")
+            else None
+        )
+        _email=(
+            self.email
+            if hasattr(self, "email")
+            else None
+        )
+        _cc_emails=(
+            self.cc_emails
+            if hasattr(self, "cc_emails")
+            else None
+        )
+        _organization=(
+            self.organization
+            if hasattr(self, "organization")
+            else None
+        )
+        _reference=(
+            self.reference
+            if hasattr(self, "reference")
+            else None
+        )
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _created_at=(
+            self.created_at
+            if hasattr(self, "created_at")
+            else None
+        )
+        _updated_at=(
+            self.updated_at
+            if hasattr(self, "updated_at")
+            else None
+        )
+        _address=(
+            self.address
+            if hasattr(self, "address")
+            else None
+        )
+        _address_2=(
+            self.address_2
+            if hasattr(self, "address_2")
+            else None
+        )
+        _city=(
+            self.city
+            if hasattr(self, "city")
+            else None
+        )
+        _state=(
+            self.state
+            if hasattr(self, "state")
+            else None
+        )
+        _state_name=(
+            self.state_name
+            if hasattr(self, "state_name")
+            else None
+        )
+        _zip=(
+            self.zip
+            if hasattr(self, "zip")
+            else None
+        )
+        _country=(
+            self.country
+            if hasattr(self, "country")
+            else None
+        )
+        _country_name=(
+            self.country_name
+            if hasattr(self, "country_name")
+            else None
+        )
+        _phone=(
+            self.phone
+            if hasattr(self, "phone")
+            else None
+        )
+        _verified=(
+            self.verified
+            if hasattr(self, "verified")
+            else None
+        )
+        _portal_customer_created_at=(
+            self.portal_customer_created_at
+            if hasattr(self, "portal_customer_created_at")
+            else None
+        )
+        _portal_invite_last_sent_at=(
+            self.portal_invite_last_sent_at
+            if hasattr(self, "portal_invite_last_sent_at")
+            else None
+        )
+        _portal_invite_last_accepted_at=(
+            self.portal_invite_last_accepted_at
+            if hasattr(self, "portal_invite_last_accepted_at")
+            else None
+        )
+        _tax_exempt=(
+            self.tax_exempt
+            if hasattr(self, "tax_exempt")
+            else None
+        )
+        _vat_number=(
+            self.vat_number
+            if hasattr(self, "vat_number")
+            else None
+        )
+        _parent_id=(
+            self.parent_id
+            if hasattr(self, "parent_id")
+            else None
+        )
+        _locale=(
+            self.locale
+            if hasattr(self, "locale")
+            else None
+        )
+        _default_subscription_group_uid=(
+            self.default_subscription_group_uid
+            if hasattr(self, "default_subscription_group_uid")
+            else None
+        )
+        _salesforce_id=(
+            self.salesforce_id
+            if hasattr(self, "salesforce_id")
+            else None
+        )
+        _tax_exempt_reason=(
+            self.tax_exempt_reason
+            if hasattr(self, "tax_exempt_reason")
+            else None
+        )
+        _default_auto_renewal_profile_id=(
+            self.default_auto_renewal_profile_id
+            if hasattr(self, "default_auto_renewal_profile_id")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"first_name={_first_name!s}, "
+            f"last_name={_last_name!s}, "
+            f"email={_email!s}, "
+            f"cc_emails={_cc_emails!s}, "
+            f"organization={_organization!s}, "
+            f"reference={_reference!s}, "
+            f"id={_id!s}, "
+            f"created_at={_created_at!s}, "
+            f"updated_at={_updated_at!s}, "
+            f"address={_address!s}, "
+            f"address_2={_address_2!s}, "
+            f"city={_city!s}, "
+            f"state={_state!s}, "
+            f"state_name={_state_name!s}, "
+            f"zip={_zip!s}, "
+            f"country={_country!s}, "
+            f"country_name={_country_name!s}, "
+            f"phone={_phone!s}, "
+            f"verified={_verified!s}, "
+            f"portal_customer_created_at={_portal_customer_created_at!s}, "
+            f"portal_invite_last_sent_at={_portal_invite_last_sent_at!s}, "
+            f"portal_invite_last_accepted_at={_portal_invite_last_accepted_at!s}, "
+            f"tax_exempt={_tax_exempt!s}, "
+            f"vat_number={_vat_number!s}, "
+            f"parent_id={_parent_id!s}, "
+            f"locale={_locale!s}, "
+            f"default_subscription_group_uid={_default_subscription_group_uid!s}, "
+            f"salesforce_id={_salesforce_id!s}, "
+            f"tax_exempt_reason={_tax_exempt_reason!s}, "
+            f"default_auto_renewal_profile_id={_default_auto_renewal_profile_id!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

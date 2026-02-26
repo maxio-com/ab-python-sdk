@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class WebhookSubscription(object):
-
     """Implementation of the 'Webhook Subscription' enum.
 
     Attributes:
@@ -46,86 +43,87 @@ class WebhookSubscription(object):
         UPGRADE_DOWNGRADE_FAILURE: The enum member of type str.
         UPGRADE_DOWNGRADE_SUCCESS: The enum member of type str.
         PENDING_CANCELLATION_CHANGE: The enum member of type str.
-        SUBSCRIPTION_PREPAYMENT_ACCOUNT_BALANCE_CHANGED: The enum member of
-            type str.
-        SUBSCRIPTION_SERVICE_CREDIT_ACCOUNT_BALANCE_CHANGED: The enum member
-            of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        SUBSCRIPTION_PREPAYMENT_ACCOUNT_BALANCE_CHANGED: The enum member of type str.
+        SUBSCRIPTION_SERVICE_CREDIT_ACCOUNT_BALANCE_CHANGED: The enum member of type
+            str.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    BILLING_DATE_CHANGE = 'billing_date_change'
 
-    COMPONENT_ALLOCATION_CHANGE = 'component_allocation_change'
+    BILLING_DATE_CHANGE = "billing_date_change"
 
-    CUSTOMER_CREATE = 'customer_create'
+    COMPONENT_ALLOCATION_CHANGE = "component_allocation_change"
 
-    CUSTOMER_UPDATE = 'customer_update'
+    CUSTOMER_CREATE = "customer_create"
 
-    DUNNING_STEP_REACHED = 'dunning_step_reached'
+    CUSTOMER_UPDATE = "customer_update"
 
-    EXPIRING_CARD = 'expiring_card'
+    DUNNING_STEP_REACHED = "dunning_step_reached"
 
-    EXPIRATION_DATE_CHANGE = 'expiration_date_change'
+    EXPIRING_CARD = "expiring_card"
 
-    INVOICE_ISSUED = 'invoice_issued'
+    EXPIRATION_DATE_CHANGE = "expiration_date_change"
 
-    METERED_USAGE = 'metered_usage'
+    INVOICE_ISSUED = "invoice_issued"
 
-    PAYMENT_FAILURE = 'payment_failure'
+    METERED_USAGE = "metered_usage"
 
-    PAYMENT_SUCCESS = 'payment_success'
+    PAYMENT_FAILURE = "payment_failure"
 
-    DIRECT_DEBIT_PAYMENT_PENDING = 'direct_debit_payment_pending'
+    PAYMENT_SUCCESS = "payment_success"
 
-    DIRECT_DEBIT_PAYMENT_PAID_OUT = 'direct_debit_payment_paid_out'
+    DIRECT_DEBIT_PAYMENT_PENDING = "direct_debit_payment_pending"
 
-    DIRECT_DEBIT_PAYMENT_REJECTED = 'direct_debit_payment_rejected'
+    DIRECT_DEBIT_PAYMENT_PAID_OUT = "direct_debit_payment_paid_out"
 
-    PREPAID_SUBSCRIPTION_BALANCE_CHANGED = 'prepaid_subscription_balance_changed'
+    DIRECT_DEBIT_PAYMENT_REJECTED = "direct_debit_payment_rejected"
 
-    PREPAID_USAGE = 'prepaid_usage'
+    PREPAID_SUBSCRIPTION_BALANCE_CHANGED = "prepaid_subscription_balance_changed"
 
-    REFUND_FAILURE = 'refund_failure'
+    PREPAID_USAGE = "prepaid_usage"
 
-    REFUND_SUCCESS = 'refund_success'
+    REFUND_FAILURE = "refund_failure"
 
-    RENEWAL_FAILURE = 'renewal_failure'
+    REFUND_SUCCESS = "refund_success"
 
-    RENEWAL_SUCCESS = 'renewal_success'
+    RENEWAL_FAILURE = "renewal_failure"
 
-    SIGNUP_FAILURE = 'signup_failure'
+    RENEWAL_SUCCESS = "renewal_success"
 
-    SIGNUP_SUCCESS = 'signup_success'
+    SIGNUP_FAILURE = "signup_failure"
 
-    STATEMENT_CLOSED = 'statement_closed'
+    SIGNUP_SUCCESS = "signup_success"
 
-    STATEMENT_SETTLED = 'statement_settled'
+    STATEMENT_CLOSED = "statement_closed"
 
-    SUBSCRIPTION_CARD_UPDATE = 'subscription_card_update'
+    STATEMENT_SETTLED = "statement_settled"
 
-    SUBSCRIPTION_GROUP_CARD_UPDATE = 'subscription_group_card_update'
+    SUBSCRIPTION_CARD_UPDATE = "subscription_card_update"
 
-    SUBSCRIPTION_PRODUCT_CHANGE = 'subscription_product_change'
+    SUBSCRIPTION_GROUP_CARD_UPDATE = "subscription_group_card_update"
 
-    SUBSCRIPTION_STATE_CHANGE = 'subscription_state_change'
+    SUBSCRIPTION_PRODUCT_CHANGE = "subscription_product_change"
 
-    TRIAL_END_NOTICE = 'trial_end_notice'
+    SUBSCRIPTION_STATE_CHANGE = "subscription_state_change"
 
-    UPCOMING_RENEWAL_NOTICE = 'upcoming_renewal_notice'
+    TRIAL_END_NOTICE = "trial_end_notice"
 
-    UPGRADE_DOWNGRADE_FAILURE = 'upgrade_downgrade_failure'
+    UPCOMING_RENEWAL_NOTICE = "upcoming_renewal_notice"
 
-    UPGRADE_DOWNGRADE_SUCCESS = 'upgrade_downgrade_success'
+    UPGRADE_DOWNGRADE_FAILURE = "upgrade_downgrade_failure"
 
-    PENDING_CANCELLATION_CHANGE = 'pending_cancellation_change'
+    UPGRADE_DOWNGRADE_SUCCESS = "upgrade_downgrade_success"
 
-    SUBSCRIPTION_PREPAYMENT_ACCOUNT_BALANCE_CHANGED = 'subscription_prepayment_account_balance_changed'
+    PENDING_CANCELLATION_CHANGE = "pending_cancellation_change"
 
-    SUBSCRIPTION_SERVICE_CREDIT_ACCOUNT_BALANCE_CHANGED = 'subscription_service_credit_account_balance_changed'
+    SUBSCRIPTION_PREPAYMENT_ACCOUNT_BALANCE_CHANGED = "subscription_prepayment_account_balance_changed" # noqa: E501
+
+    SUBSCRIPTION_SERVICE_CREDIT_ACCOUNT_BALANCE_CHANGED = "subscription_service_credit_account_balance_changed" # noqa: E501
 
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

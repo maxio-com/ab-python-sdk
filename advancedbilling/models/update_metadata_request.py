@@ -1,43 +1,43 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.update_metadata import UpdateMetadata
+from advancedbilling.models.update_metadata import (
+    UpdateMetadata,
+)
 
 
 class UpdateMetadataRequest(object):
-
     """Implementation of the 'Update Metadata Request' model.
 
     Attributes:
         metadata (UpdateMetadata): The model property of type UpdateMetadata.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "metadata": 'metadata'
+        "metadata": "metadata",
     }
 
     _optionals = [
-        'metadata',
+        "metadata",
     ]
 
-    def __init__(self,
-                 metadata=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the UpdateMetadataRequest class"""
-
+    def __init__(
+        self,
+        metadata=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a UpdateMetadataRequest instance."""
         # Initialize members of the class
         if metadata is not APIHelper.SKIP:
-            self.metadata = metadata 
+            self.metadata = metadata
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -47,7 +47,7 @@ class UpdateMetadataRequest(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -58,24 +58,50 @@ class UpdateMetadataRequest(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        metadata = UpdateMetadata.from_dictionary(dictionary.get('metadata')) if 'metadata' in dictionary.keys() else APIHelper.SKIP
+        metadata =\
+            UpdateMetadata.from_dictionary(
+                dictionary.get("metadata"))\
+                if "metadata" in dictionary.keys()\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(metadata,
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'metadata={(self.metadata if hasattr(self, "metadata") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _metadata=(
+            self.metadata
+            if hasattr(self, "metadata")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"metadata={_metadata!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'metadata={(self.metadata if hasattr(self, "metadata") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _metadata=(
+            self.metadata
+            if hasattr(self, "metadata")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"metadata={_metadata!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

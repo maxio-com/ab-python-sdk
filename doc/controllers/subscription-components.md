@@ -43,7 +43,7 @@ def read_subscription_component(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `component_id` | `int` | Template, Required | The Advanced Billing id of the component. Alternatively, the component's handle prefixed by `handle:` |
 
 ## Response Type
@@ -107,7 +107,7 @@ def list_subscription_components(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `date_field` | [`SubscriptionListDateField`](../../doc/models/subscription-list-date-field.md) | Query, Optional | The type of filter you'd like to apply to your search. Use in query `date_field=updated_at`. |
 | `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 | `filter` | [`ListSubscriptionComponentsFilter`](../../doc/models/list-subscription-components-filter.md) | Query, Optional | Filter to use for List Subscription Components operation |
@@ -204,7 +204,7 @@ def bulk_update_subscription_components_price_points(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`BulkComponentsPricePointAssignment`](../../doc/models/bulk-components-price-point-assignment.md) | Body, Optional | - |
 
 ## Response Type
@@ -279,7 +279,7 @@ def bulk_reset_subscription_components_price_points(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 
 ## Response Type
 
@@ -397,41 +397,13 @@ print(result)
 
 # Allocate Component
 
-This endpoint creates a new allocation, setting the current allocated quantity for the Component and recording a memo.
+Creates an allocation, sets the current allocated quantity for the component, and records a memo. Allocations can only be updated for Quantity, On/Off, and Prepaid Components.
 
-**Notice**: Allocations can only be updated for Quantity, On/Off, and Prepaid Components.
+When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.
 
-## Allocations Documentation
+> **Note:** These proration and accural fields are ignored for Prepaid Components since this component type always generate charges immediately without proration.
 
-Full documentation on how to record Allocations in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24251883961485-Component-Allocations-Overview). It is focused on how allocations operate within the Advanced Billing UI.It goes into greater detail on how the user interface will react when recording allocations.
-
-This documentation also goes into greater detail on how proration is taken into consideration when applying component allocations.
-
-## Proration Schemes
-
-Changing the allocated quantity of a component mid-period can result in either a Charge or Credit being applied to the subscription. When creating an allocation via the API, you can pass the `upgrade_charge`, `downgrade_credit`, and `accrue_charge` to be applied.
-
-**Notice:** These proration and accural fields will be ignored for Prepaid Components since this component type always generate charges immediately without proration.
-
-For background information on prorated components and upgrade/downgrade schemes, see [Setting Component Allocations.](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-Proration).
-See the tables below for valid values.
-
-| upgrade_charge | Definition                                                        |
-|----------------|-------------------------------------------------------------------|
-| `full`         | A charge is added for the full price of the component.            |
-| `prorated`     | A charge is added for the prorated price of the component change. |
-| `none`         | No charge is added.                                               |
-
-| downgrade_credit | Definition                                        |
-|------------------|---------------------------------------------------|
-| `full`           | A full price credit is added for the amount owed. |
-| `prorated`       | A prorated credit is added for the amount owed.   |
-| `none`           | No charge is added.                               |
-
-| accrue_charge | Definition                                                                                                 |
-|---------------|------------------------------------------------------------------------------------------------------------|
-| `true`        | Attempt to charge the customer at next renewal.                                                            |
-| `false`       | Attempt to charge the customer right away. If it fails, the charge will be accrued until the next renewal. |
+For information on prorated components and upgrade/downgrade schemes, see [Setting Component Allocations.](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-Proration)
 
 ### Order of Resolution for upgrade_charge and downgrade_credit
 
@@ -445,7 +417,9 @@ See the tables below for valid values.
 1. Allocation API call top level (outside of the `allocations` array)
 2. [Site-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-Proration#proration-schemes)
 
-**NOTE: Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.**
+> **Note:** Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.
+
+For more informaiton see the [Component Allocations](https://maxio.zendesk.com/hc/en-us/articles/24251883961485-Component-Allocations-Overview) product Documentation.
 
 ```python
 def allocate_component(self,
@@ -458,7 +432,7 @@ def allocate_component(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `component_id` | `int` | Template, Required | The Advanced Billing id of the component |
 | `body` | [`CreateAllocationRequest`](../../doc/models/create-allocation-request.md) | Body, Optional | - |
 
@@ -475,8 +449,44 @@ component_id = 222
 
 body = CreateAllocationRequest(
     allocation=CreateAllocation(
-        quantity=5,
-        memo='Recoding component purchase of Acme Support'
+        quantity=10,
+        decimal_quantity='10.0',
+        previous_quantity=5,
+        decimal_previous_quantity='5.0',
+        memo='Increase seats to 10',
+        proration_downgrade_scheme='prorate',
+        proration_upgrade_scheme='full-price-attempt-capture',
+        downgrade_credit=DowngradeCreditCreditType.PRORATED,
+        upgrade_charge=UpgradeChargeCreditType.FULL,
+        accrue_charge=False,
+        price_point_id=789,
+        billing_schedule=BillingSchedule(
+            initial_billing_at=dateutil.parser.parse('2025-02-28').date()
+        ),
+        custom_price=ComponentCustomPrice(
+            prices=[
+                Price(
+                    starting_quantity=1,
+                    unit_price='49.00',
+                    ending_quantity=25
+                ),
+                Price(
+                    starting_quantity=26,
+                    unit_price='39.00',
+                    ending_quantity=None
+                )
+            ],
+            tax_included=False,
+            pricing_scheme=PricingScheme.PER_UNIT,
+            interval=1,
+            interval_unit=IntervalUnit.MONTH,
+            list_price_point_id=4321,
+            use_default_list_price=False,
+            renew_prepaid_allocation=False,
+            rollover_prepaid_remainder=False,
+            expiration_interval=150,
+            expiration_interval_unit=ExpirationIntervalUnit.NEVER
+        )
     )
 )
 
@@ -531,21 +541,6 @@ This endpoint returns the 50 most recent Allocations, ordered by most recent fir
 
 When a subscription's on/off component has been toggled to on (`1`) or off (`0`), usage will be logged in this response.
 
-## Querying data via Advanced Billing gem
-
-You can also query the current quantity via the [official Advanced Billing Gem.](http://github.com/chargify/chargify_api_ares)
-
-```# First way
-component = Chargify::Subscription::Component.find(1, :params => {:subscription_id => 7})
-puts component.allocated_quantity
-# => 23
-
-# Second way
-component = Chargify::Subscription.find(7).component(1)
-puts component.allocated_quantity
-# => 23
-```
-
 ```python
 def list_allocations(self,
                     subscription_id,
@@ -557,7 +552,7 @@ def list_allocations(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `component_id` | `int` | Template, Required | The Advanced Billing id of the component |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 
@@ -637,11 +632,25 @@ print(result)
 
 # Allocate Components
 
-Creates multiple allocations, setting the current allocated quantity for each of the components and recording a memo. The charges and/or credits that are created will be rolled up into a single total which is used to determine whether this is an upgrade or a downgrade. Be aware of the Order of Resolutions explained below in determining the proration scheme.
+Creates multiple allocations, sets the current allocated quantity for each of the components, and recording a memo.   A `component_id` is required for each allocation.
 
-A `component_id` is required for each allocation.
+The charges and/or credits that are created will be rolled up into a single total which is used to determine whether this is an upgrade or a downgrade.
 
-This endpoint only responds to JSON. It is not available for XML.
+### Order of Resolution for upgrade_charge and downgrade_credit
+
+1. Per allocation in API call (within a single allocation of the `allocations` array)
+2. [Component-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251883961485-Component-Allocations-Overview)
+3. Allocation API call top level (outside of the `allocations` array)
+4. [Site-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-Proration#proration-schemes)
+
+### Order of Resolution for accrue charge
+
+1. Allocation API call top level (outside of the `allocations` array)
+2. [Site-level default value](https://maxio.zendesk.com/hc/en-us/articles/24251906165133-Component-Allocations-Proration#proration-schemes)
+
+> **Note:** Proration uses the current price of the component as well as the current tax rates. Changes to either may cause the prorated charge/credit to be wrong.
+
+For more informaiton see the [Component Allocations](https://maxio.zendesk.com/hc/en-us/articles/24251883961485-Component-Allocations-Overview) product Documentation.
 
 ```python
 def allocate_components(self,
@@ -653,7 +662,7 @@ def allocate_components(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`AllocateComponents`](../../doc/models/allocate-components.md) | Body, Optional | - |
 
 ## Response Type
@@ -760,7 +769,7 @@ def preview_allocations(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`PreviewAllocationsRequest`](../../doc/models/preview-allocations-request.md) | Body, Optional | - |
 
 ## Response Type
@@ -929,7 +938,7 @@ def update_prepaid_usage_allocation_expiration_date(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `component_id` | `int` | Template, Required | The Advanced Billing id of the component |
 | `allocation_id` | `int` | Template, Required | The Advanced Billing id of the allocation |
 | `body` | [`UpdateAllocationExpirationDate`](../../doc/models/update-allocation-expiration-date.md) | Body, Optional | - |
@@ -993,7 +1002,7 @@ def delete_prepaid_usage_allocation(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `component_id` | `int` | Template, Required | The Advanced Billing id of the component |
 | `allocation_id` | `int` | Template, Required | The Advanced Billing id of the allocation |
 | `body` | [`CreditSchemeRequest`](../../doc/models/credit-scheme-request.md) | Body, Optional | - |

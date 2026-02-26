@@ -13,6 +13,7 @@ proforma_invoices_controller = client.proforma_invoices
 * [Create Consolidated Proforma Invoice](../../doc/controllers/proforma-invoices.md#create-consolidated-proforma-invoice)
 * [List Subscription Group Proforma Invoices](../../doc/controllers/proforma-invoices.md#list-subscription-group-proforma-invoices)
 * [Read Proforma Invoice](../../doc/controllers/proforma-invoices.md#read-proforma-invoice)
+* [Deliver Proforma Invoice](../../doc/controllers/proforma-invoices.md#deliver-proforma-invoice)
 * [Create Proforma Invoice](../../doc/controllers/proforma-invoices.md#create-proforma-invoice)
 * [List Proforma Invoices](../../doc/controllers/proforma-invoices.md#list-proforma-invoices)
 * [Void Proforma Invoice](../../doc/controllers/proforma-invoices.md#void-proforma-invoice)
@@ -150,6 +151,64 @@ print(result)
 | 404 | Not Found | `APIException` |
 
 
+# Deliver Proforma Invoice
+
+Allows for proforma invoices to be programmatically delivered via email. Supports email
+delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
+
+If `recipient_emails` is omitted, the system will fall back to the primary recipient derived from the invoice or
+subscription. At least one recipient must be present, either via the request body or via this default behavior, so an
+empty body may still succeed when defaults are available.
+
+```python
+def deliver_proforma_invoice(self,
+                            proforma_invoice_uid,
+                            body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `proforma_invoice_uid` | `str` | Template, Required | The uid of the proforma invoice |
+| `body` | [`DeliverProformaInvoiceRequest`](../../doc/models/deliver-proforma-invoice-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`ProformaInvoice`](../../doc/models/proforma-invoice.md)
+
+## Example Usage
+
+```python
+proforma_invoice_uid = 'proforma_invoice_uid4'
+
+body = DeliverProformaInvoiceRequest(
+    recipient_emails=[
+        'user0@example.com'
+    ],
+    cc_recipient_emails=[
+        'user1@example.com'
+    ],
+    bcc_recipient_emails=[
+        'user2@example.com'
+    ]
+)
+
+result = proforma_invoices_controller.deliver_proforma_invoice(
+    proforma_invoice_uid,
+    body=body
+)
+print(result)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
 # Create Proforma Invoice
 
 This endpoint will create a proforma invoice and return it as a response. If the information becomes outdated, simply void the old proforma invoice and generate a new one.
@@ -169,7 +228,7 @@ def create_proforma_invoice(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 
 ## Response Type
 
@@ -204,13 +263,13 @@ def list_proforma_invoices(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `start_date` | `str` | Query, Optional | The beginning date range for the invoice's Due Date, in the YYYY-MM-DD format. |
 | `end_date` | `str` | Query, Optional | The ending date range for the invoice's Due Date, in the YYYY-MM-DD format. |
 | `status` | [`ProformaInvoiceStatus`](../../doc/models/proforma-invoice-status.md) | Query, Optional | The current status of the invoice.  Allowed Values: draft, open, paid, pending, voided |
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
-| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned invoices.<br><br>**Default**: `'desc'` |
+| `direction` | [`Direction`](../../doc/models/direction.md) | Query, Optional | The sort direction of the returned invoices.<br><br>**Default**: `"desc"` |
 | `line_items` | `bool` | Query, Optional | Include line items data<br><br>**Default**: `False` |
 | `discounts` | `bool` | Query, Optional | Include discounts data<br><br>**Default**: `False` |
 | `taxes` | `bool` | Query, Optional | Include taxes data<br><br>**Default**: `False` |
@@ -307,7 +366,7 @@ def preview_proforma_invoice(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 
 ## Response Type
 
