@@ -33,7 +33,7 @@
 | `signup_revenue` | `str` | Optional | The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00) |
 | `delayed_cancel_at` | `datetime` | Optional | Timestamp for when the subscription is currently set to cancel. |
 | `coupon_code` | `str` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
-| `snap_day` | int \| [SnapDay](../../doc/models/snap-day.md) \| None | Optional | This is a container for one-of cases. |
+| `snap_day` | `str` | Optional | A day of month that subscription will be processed on. Can be 1 up to 28 or 'end'. |
 | `payment_collection_method` | [`CollectionMethod`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 | `customer` | [`Customer`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product`](../../doc/models/product.md) | Optional | - |

@@ -145,8 +145,8 @@ class Subscription(object):
         coupon_code (str): (deprecated) The coupon code of the single coupon
             currently applied to the subscription. See coupon_codes instead as
             subscriptions can now have more than one coupon.
-        snap_day (int | SnapDay | None): The day of the month that the subscription
-            will charge according to calendar billing rules, if used.
+        snap_day (str): A day of month that subscription will be processed on. Can be
+            1 up to 28 or 'end'.
         payment_collection_method (CollectionMethod): The type of payment collection
             to be used in the subscription. For legacy Statements Architecture valid
             options are - `invoice`, `automatic`. For current Relationship Invoicing
@@ -655,10 +655,6 @@ class Subscription(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import (
-            UnionTypeLookUp,
-        )
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
@@ -784,15 +780,10 @@ class Subscription(object):
             dictionary.get("coupon_code")\
             if "coupon_code" in dictionary.keys()\
                 else APIHelper.SKIP
-        if "snap_day" in dictionary.keys():
-            snap_day = APIHelper.deserialize_union_type(
-            UnionTypeLookUp.get("SubscriptionSnapDay"),
-            dictionary.get("snap_day"),
-            False)\
-            if dictionary.get("snap_day") is not None\
-            else None
-        else:
-            snap_day = APIHelper.SKIP
+        snap_day =\
+            dictionary.get("snap_day")\
+            if "snap_day" in dictionary.keys()\
+                else APIHelper.SKIP
         payment_collection_method =\
             dictionary.get("payment_collection_method")\
             if dictionary.get("payment_collection_method")\

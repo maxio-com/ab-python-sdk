@@ -24,8 +24,6 @@ class CancellationMethod(object):
 
     """
 
-    _all_values = ["merchant_ui", "merchant_api", "dunning", "billing_portal",
-        "unknown", "imported"]
     MERCHANT_UI = "merchant_ui"
 
     MERCHANT_API = "merchant_api"
@@ -37,19 +35,6 @@ class CancellationMethod(object):
     UNKNOWN = "unknown"
 
     IMPORTED = "imported"
-
-    @classmethod
-    def validate(cls, value):
-        """Validate value contains in enum
-
-        Args:
-            value: the value to be validated
-
-        Returns:
-            boolean : if value is valid enum values.
-
-        """
-        return value in cls._all_values
 
     @classmethod
     def from_value(cls, value, default=None):

@@ -14,7 +14,7 @@ class CalendarBilling(object):
     (Optional). Cannot be used when also specifying next_billing_at
 
     Attributes:
-        snap_day (int | SnapDay | None): A day of month that subscription will be
+        snap_day (int | str | None): A day of month that subscription will be
             processed on. Can be 1 up to 28 or 'end'.
         calendar_billing_first_charge (FirstChargeType): The model property of type
             FirstChargeType.
@@ -32,10 +32,6 @@ class CalendarBilling(object):
     _optionals = [
         "snap_day",
         "calendar_billing_first_charge",
-    ]
-
-    _nullables = [
-        "snap_day",
     ]
 
     def __init__(
@@ -77,15 +73,12 @@ class CalendarBilling(object):
             return None
 
         # Extract variables from the dictionary
-        if "snap_day" in dictionary.keys():
-            snap_day = APIHelper.deserialize_union_type(
+        snap_day = APIHelper.deserialize_union_type(
             UnionTypeLookUp.get("CalendarBillingSnapDay"),
             dictionary.get("snap_day"),
             False)\
             if dictionary.get("snap_day") is not None\
-            else None
-        else:
-            snap_day = APIHelper.SKIP
+            else APIHelper.SKIP
         calendar_billing_first_charge =\
             dictionary.get("calendar_billing_first_charge")\
             if dictionary.get("calendar_billing_first_charge")\

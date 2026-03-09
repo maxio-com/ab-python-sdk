@@ -490,7 +490,6 @@ __all__ = [
     "site_response",
     "site_statistics",
     "site_summary",
-    "snap_day",
     "sorting_direction",
     "status",
     "subscription",

@@ -165,9 +165,6 @@ from advancedbilling.models.scheduled_renewal_item_request_body_component import
 from advancedbilling.models.scheduled_renewal_item_request_body_product import (
     ScheduledRenewalItemRequestBodyProduct,
 )
-from advancedbilling.models.snap_day import (
-    SnapDay,
-)
 from advancedbilling.models.subscription_group_members_array_error import (
     SubscriptionGroupMembersArrayError,
 )
@@ -480,11 +477,10 @@ class UnionTypeLookUp:
         "CalendarBillingSnapDay": lambda: OneOf(
             [
                 LeafType(int),
-                LeafType(SnapDay),
+                LeafType(str),
             ],
             Context.create(
                is_optional=True,
-               is_nullable=True,
             ),
         ),
         "ComponentAllocationChangeAllocatedQuantity": lambda: OneOf(
@@ -1032,16 +1028,6 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "SubscriptionSnapDay": lambda: OneOf(
-            [
-                LeafType(int),
-                LeafType(SnapDay),
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True,
-            ),
-        ),
         "SubscriptionComponentAllocatedQuantity": lambda: OneOf(
             [
                 LeafType(int),
@@ -1210,12 +1196,11 @@ class UnionTypeLookUp:
         ),
         "UpdateSubscriptionSnapDay": lambda: OneOf(
             [
+                LeafType(str),
                 LeafType(int),
-                LeafType(SnapDay),
             ],
             Context.create(
                is_optional=True,
-               is_nullable=True,
             ),
         ),
         "UpdateSubscriptionNetTerms": lambda: OneOf(
