@@ -13,9 +13,9 @@ proforma_invoices_controller = client.proforma_invoices
 * [Create Consolidated Proforma Invoice](../../doc/controllers/proforma-invoices.md#create-consolidated-proforma-invoice)
 * [List Subscription Group Proforma Invoices](../../doc/controllers/proforma-invoices.md#list-subscription-group-proforma-invoices)
 * [Read Proforma Invoice](../../doc/controllers/proforma-invoices.md#read-proforma-invoice)
-* [Deliver Proforma Invoice](../../doc/controllers/proforma-invoices.md#deliver-proforma-invoice)
 * [Create Proforma Invoice](../../doc/controllers/proforma-invoices.md#create-proforma-invoice)
 * [List Proforma Invoices](../../doc/controllers/proforma-invoices.md#list-proforma-invoices)
+* [Deliver Proforma Invoice](../../doc/controllers/proforma-invoices.md#deliver-proforma-invoice)
 * [Void Proforma Invoice](../../doc/controllers/proforma-invoices.md#void-proforma-invoice)
 * [Preview Proforma Invoice](../../doc/controllers/proforma-invoices.md#preview-proforma-invoice)
 * [Create Signup Proforma Invoice](../../doc/controllers/proforma-invoices.md#create-signup-proforma-invoice)
@@ -151,64 +151,6 @@ print(result)
 | 404 | Not Found | `APIException` |
 
 
-# Deliver Proforma Invoice
-
-Allows for proforma invoices to be programmatically delivered via email. Supports email
-delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
-
-If `recipient_emails` is omitted, the system will fall back to the primary recipient derived from the invoice or
-subscription. At least one recipient must be present, either via the request body or via this default behavior, so an
-empty body may still succeed when defaults are available.
-
-```python
-def deliver_proforma_invoice(self,
-                            proforma_invoice_uid,
-                            body=None)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `proforma_invoice_uid` | `str` | Template, Required | The uid of the proforma invoice |
-| `body` | [`DeliverProformaInvoiceRequest`](../../doc/models/deliver-proforma-invoice-request.md) | Body, Optional | - |
-
-## Response Type
-
-[`ProformaInvoice`](../../doc/models/proforma-invoice.md)
-
-## Example Usage
-
-```python
-proforma_invoice_uid = 'proforma_invoice_uid4'
-
-body = DeliverProformaInvoiceRequest(
-    recipient_emails=[
-        'user0@example.com'
-    ],
-    cc_recipient_emails=[
-        'user1@example.com'
-    ],
-    bcc_recipient_emails=[
-        'user2@example.com'
-    ]
-)
-
-result = proforma_invoices_controller.deliver_proforma_invoice(
-    proforma_invoice_uid,
-    body=body
-)
-print(result)
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 404 | Not Found | `APIException` |
-| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
-
-
 # Create Proforma Invoice
 
 This endpoint will create a proforma invoice and return it as a response. If the information becomes outdated, simply void the old proforma invoice and generate a new one.
@@ -299,6 +241,64 @@ collect = {
 result = proforma_invoices_controller.list_proforma_invoices(collect)
 print(result)
 ```
+
+
+# Deliver Proforma Invoice
+
+Allows for proforma invoices to be programmatically delivered via email. Supports email
+delivery to direct recipients, carbon-copy (cc) recipients, and blind carbon-copy (bcc) recipients.
+
+If `recipient_emails` is omitted, the system will fall back to the primary recipient derived from the invoice or
+subscription. At least one recipient must be present, either via the request body or via this default behavior, so an
+empty body may still succeed when defaults are available.
+
+```python
+def deliver_proforma_invoice(self,
+                            proforma_invoice_uid,
+                            body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `proforma_invoice_uid` | `str` | Template, Required | The uid of the proforma invoice |
+| `body` | [`DeliverProformaInvoiceRequest`](../../doc/models/deliver-proforma-invoice-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`ProformaInvoice`](../../doc/models/proforma-invoice.md)
+
+## Example Usage
+
+```python
+proforma_invoice_uid = 'proforma_invoice_uid4'
+
+body = DeliverProformaInvoiceRequest(
+    recipient_emails=[
+        'user0@example.com'
+    ],
+    cc_recipient_emails=[
+        'user1@example.com'
+    ],
+    bcc_recipient_emails=[
+        'user2@example.com'
+    ]
+)
+
+result = proforma_invoices_controller.deliver_proforma_invoice(
+    proforma_invoice_uid,
+    body=body
+)
+print(result)
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
 # Void Proforma Invoice

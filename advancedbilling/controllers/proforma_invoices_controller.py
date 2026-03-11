@@ -204,66 +204,6 @@ class ProformaInvoicesController(BaseController):
             .local_error_template("404", "Not Found:'{$response.body}'", APIException),
         ).execute()
 
-    def deliver_proforma_invoice(self,
-                                 proforma_invoice_uid,
-                                 body=None):
-        """Perform a POST request to
-        /proforma_invoices/{proforma_invoice_uid}.json.
-
-        Allows for proforma invoices to be programmatically delivered via email.
-        Supports email
-        delivery to direct recipients, carbon-copy (cc) recipients, and blind
-        carbon-copy (bcc) recipients.
-        If `recipient_emails` is omitted, the system will fall back to the primary
-        recipient derived from the invoice or
-        subscription. At least one recipient must be present, either via the request
-        body or via this default behavior, so an
-        empty body may still succeed when defaults are available.
-
-        Args:
-            proforma_invoice_uid (str): The uid of the proforma invoice
-            body (DeliverProformaInvoiceRequest, optional): The request body
-                parameter.
-
-        Returns:
-            ProformaInvoice: Response from the API. Created
-
-        Raises:
-            APIException: When an error occurs while fetching the data from the
-                remote API. This exception includes the HTTP Response code, an error
-                message, and the HTTP body that was received in the request.
-
-        """
-        return super().new_api_call_builder.request(
-            RequestBuilder().server(Server.PRODUCTION)
-            .path("/proforma_invoices/{proforma_invoice_uid}.json")
-            .http_method(HttpMethodEnum.POST)
-            .template_param(Parameter()
-                .key("proforma_invoice_uid")
-                .value(proforma_invoice_uid)
-                .is_required(True)
-                .should_encode(True))
-            .header_param(Parameter()
-                .key("Content-Type")
-                .value("application/json"))
-            .body_param(Parameter()
-                .value(body))
-            .header_param(Parameter()
-                .key("accept")
-                .value("application/json"))
-            .body_serializer(APIHelper.json_serialize)
-            .auth(Single("BasicAuth")),
-        ).response(
-            ResponseHandler()
-            .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProformaInvoice.from_dictionary)
-            .local_error_template("404", "Not Found:'{$response.body}'", APIException)
-            .local_error_template("422",
-                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
-                "nse.body}'.",
-                ErrorListResponseException),
-        ).execute()
-
     def create_proforma_invoice(self,
                                 subscription_id):
         """Perform a POST request to
@@ -420,6 +360,66 @@ class ProformaInvoicesController(BaseController):
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ListProformaInvoicesResponse.from_dictionary),
+        ).execute()
+
+    def deliver_proforma_invoice(self,
+                                 proforma_invoice_uid,
+                                 body=None):
+        """Perform a POST request to
+        /proforma_invoices/{proforma_invoice_uid}/deliveries.json.
+
+        Allows for proforma invoices to be programmatically delivered via email.
+        Supports email
+        delivery to direct recipients, carbon-copy (cc) recipients, and blind
+        carbon-copy (bcc) recipients.
+        If `recipient_emails` is omitted, the system will fall back to the primary
+        recipient derived from the invoice or
+        subscription. At least one recipient must be present, either via the request
+        body or via this default behavior, so an
+        empty body may still succeed when defaults are available.
+
+        Args:
+            proforma_invoice_uid (str): The uid of the proforma invoice
+            body (DeliverProformaInvoiceRequest, optional): The request body
+                parameter.
+
+        Returns:
+            ProformaInvoice: Response from the API. Created
+
+        Raises:
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
+
+        """
+        return super().new_api_call_builder.request(
+            RequestBuilder().server(Server.PRODUCTION)
+            .path("/proforma_invoices/{proforma_invoice_uid}/deliveries.json")
+            .http_method(HttpMethodEnum.POST)
+            .template_param(Parameter()
+                .key("proforma_invoice_uid")
+                .value(proforma_invoice_uid)
+                .is_required(True)
+                .should_encode(True))
+            .header_param(Parameter()
+                .key("Content-Type")
+                .value("application/json"))
+            .body_param(Parameter()
+                .value(body))
+            .header_param(Parameter()
+                .key("accept")
+                .value("application/json"))
+            .body_serializer(APIHelper.json_serialize)
+            .auth(Single("BasicAuth")),
+        ).response(
+            ResponseHandler()
+            .deserializer(APIHelper.json_deserialize)
+            .deserialize_into(ProformaInvoice.from_dictionary)
+            .local_error_template("404", "Not Found:'{$response.body}'", APIException)
+            .local_error_template("422",
+                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
+                "nse.body}'.",
+                ErrorListResponseException),
         ).execute()
 
     def void_proforma_invoice(self,
