@@ -409,6 +409,24 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
+        "AllocationPreviewItemQuantity": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "AllocationPreviewItemPreviousQuantity": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
         "AllocationQuantity": lambda: OneOf(
             [
                 LeafType(int),
@@ -427,16 +445,7 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "AllocationPreviewItemQuantity": lambda: OneOf(
-            [
-                LeafType(int),
-                LeafType(str),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "AllocationPreviewItemPreviousQuantity": lambda: OneOf(
+        "ComponentAllocationChangeAllocatedQuantity": lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str),
@@ -483,19 +492,38 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "ComponentAllocationChangeAllocatedQuantity": lambda: OneOf(
+        "CreateAllocationPricePointId": lambda: OneOf(
             [
-                LeafType(int),
                 LeafType(str),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True,
+            ),
+        ),
+        "CreateMultiInvoicePaymentAmount": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+            ],
+        ),
+        "CustomerErrorResponseErrors": lambda: OneOf(
+            [
+                LeafType(CustomerError),
+                LeafType(str,
+                         Context.create(
+                             is_array=True,
+                         )),
             ],
             Context.create(
                is_optional=True,
             ),
         ),
-        "ComponentPricePointAssignmentPricePoint": lambda: OneOf(
+        "EBBComponentUnitPrice": lambda: OneOf(
             [
                 LeafType(str),
-                LeafType(int),
+                LeafType(float),
             ],
             Context.create(
                is_optional=True,
@@ -510,30 +538,11 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "CreateAllocationPricePointId": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(int),
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True,
-            ),
-        ),
         "CreateComponentPricePointRequestPricePoint": lambda: AnyOf(
             [
                 LeafType(CreateComponentPricePoint),
                 LeafType(CreatePrepaidUsageComponentPricePoint),
             ],
-        ),
-        "CreateComponentPricePointsRequestPricePoints": lambda: AnyOf(
-            [
-                LeafType(CreateComponentPricePoint),
-                LeafType(CreatePrepaidUsageComponentPricePoint),
-            ],
-            Context.create(
-               is_array=True,
-            ),
         ),
         "CreateInvoiceCouponPercentage": lambda: OneOf(
             [
@@ -560,6 +569,92 @@ class UnionTypeLookUp:
             ],
             Context.create(
                is_optional=True,
+            ),
+        ),
+        "CreateInvoicePaymentAmount": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "CreateMetafieldsRequestMetafields": lambda: OneOf(
+            [
+                LeafType(CreateMetafield),
+                LeafType(CreateMetafield,
+                         Context.create(
+                             is_array=True,
+                         )),
+            ],
+        ),
+        "CreateOrUpdateSegmentPriceUnitPrice": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+            ],
+        ),
+        "CreateSegmentSegmentProperty1Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+                LeafType(bool),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "CreateSegmentSegmentProperty2Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+                LeafType(bool),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "CreateSegmentSegmentProperty3Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+                LeafType(bool),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "CreateSegmentSegmentProperty4Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+                LeafType(bool),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "ComponentPricePointAssignmentPricePoint": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "CreateComponentPricePointsRequestPricePoints": lambda: AnyOf(
+            [
+                LeafType(CreateComponentPricePoint),
+                LeafType(CreatePrepaidUsageComponentPricePoint),
+            ],
+            Context.create(
+               is_array=True,
             ),
         ),
         "CreateInvoiceItemQuantity": lambda: OneOf(
@@ -616,36 +711,6 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "CreateInvoicePaymentAmount": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "CreateMetafieldsRequestMetafields": lambda: OneOf(
-            [
-                LeafType(CreateMetafield),
-                LeafType(CreateMetafield,
-                         Context.create(
-                             is_array=True,
-                         )),
-            ],
-        ),
-        "CreateMultiInvoicePaymentAmount": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-            ],
-        ),
-        "CreateOrUpdateSegmentPriceUnitPrice": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-            ],
-        ),
         "CreatePaymentProfileExpirationMonth": lambda: OneOf(
             [
                 LeafType(int),
@@ -659,50 +724,6 @@ class UnionTypeLookUp:
             [
                 LeafType(int),
                 LeafType(str),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "CreateSegmentSegmentProperty1Value": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-                LeafType(int),
-                LeafType(bool),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "CreateSegmentSegmentProperty2Value": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-                LeafType(int),
-                LeafType(bool),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "CreateSegmentSegmentProperty3Value": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-                LeafType(int),
-                LeafType(bool),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "CreateSegmentSegmentProperty4Value": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-                LeafType(int),
-                LeafType(bool),
             ],
             Context.create(
                is_optional=True,
@@ -744,32 +765,11 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "CustomerErrorResponseErrors": lambda: OneOf(
-            [
-                LeafType(CustomerError),
-                LeafType(str,
-                         Context.create(
-                             is_array=True,
-                         )),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
         "DeductServiceCreditAmount": lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(float),
             ],
-        ),
-        "EBBComponentUnitPrice": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
         ),
         "EventEventSpecificData": lambda: OneOf(
             [
@@ -824,12 +824,6 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "OnOffComponentUnitPrice": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-            ],
-        ),
         "PaymentProfileAttributesExpirationMonth": lambda: OneOf(
             [
                 LeafType(int),
@@ -848,190 +842,10 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "Payment-Profile": lambda: AnyOf(
-            [
-                LeafType(ApplePayPaymentProfile,
-                         Context.create(
-                             discriminator_value="apple_pay",
-                             discriminator="payment_type",
-                         )),
-                LeafType(BankAccountPaymentProfile,
-                         Context.create(
-                             discriminator_value="bank_account",
-                             discriminator="payment_type",
-                         )),
-                LeafType(CreditCardPaymentProfile,
-                         Context.create(
-                             discriminator_value="credit_card",
-                             discriminator="payment_type",
-                         )),
-                LeafType(PaypalPaymentProfile,
-                         Context.create(
-                             discriminator_value="paypal_account",
-                             discriminator="payment_type",
-                         )),
-            ],
-        ),
-        "PrepaidUsageComponentUnitPrice": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "PriceStartingQuantity": lambda: OneOf(
-            [
-                LeafType(int),
-                LeafType(str),
-            ],
-        ),
-        "PriceEndingQuantity": lambda: OneOf(
-            [
-                LeafType(int),
-                LeafType(str),
-            ],
-            Context.create(
-               is_optional=True,
-               is_nullable=True,
-            ),
-        ),
-        "PriceUnitPrice": lambda: OneOf(
-            [
-                LeafType(float),
-                LeafType(str),
-            ],
-        ),
-        "QuantityBasedComponentUnitPrice": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
         "ReactivateSubscriptionRequestResume": lambda: OneOf(
             [
                 LeafType(bool),
                 LeafType(ResumeOptions),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "RefundConsolidatedInvoiceSegmentUids": lambda: OneOf(
-            [
-                LeafType(str,
-                         Context.create(
-                             is_array=True,
-                         )),
-                LeafType(str),
-            ],
-        ),
-        "RefundInvoiceRequestRefund": lambda: AnyOf(
-            [
-                LeafType(RefundInvoice),
-                LeafType(RefundConsolidatedInvoice),
-            ],
-        ),
-        "RefundPrepaymentAmount": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-            ],
-        ),
-        "RenewalPreviewComponentComponentId": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(int),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "RenewalPreviewComponentPricePointId": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(int),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "ScheduledRenewalConfigurationItemRequestRenewalConfigurationItem": lambda: OneOf(
-            [
-                LeafType(ScheduledRenewalItemRequestBodyComponent),
-                LeafType(ScheduledRenewalItemRequestBodyProduct),
-            ],
-        ),
-        "ScheduledRenewalProductPricePointPriceInCents": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(int),
-            ],
-        ),
-        "ScheduledRenewalProductPricePointInterval": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(int),
-            ],
-        ),
-        "ScheduledRenewalUpdateRequestRenewalConfigurationItem": lambda: OneOf(
-            [
-                LeafType(ScheduledRenewalItemRequestBodyComponent),
-                LeafType(ScheduledRenewalItemRequestBodyProduct),
-            ],
-        ),
-        "SegmentSegmentProperty1Value": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-                LeafType(int),
-                LeafType(bool),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "SegmentSegmentProperty2Value": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-                LeafType(int),
-                LeafType(bool),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "SegmentSegmentProperty3Value": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-                LeafType(int),
-                LeafType(bool),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "SegmentSegmentProperty4Value": lambda: OneOf(
-            [
-                LeafType(str),
-                LeafType(float),
-                LeafType(int),
-                LeafType(bool),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
-        "SubscriptionComponentAllocatedQuantity": lambda: OneOf(
-            [
-                LeafType(int),
-                LeafType(str),
             ],
             Context.create(
                is_optional=True,
@@ -1085,13 +899,6 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "SubscriptionGroupCreateErrorResponseErrors": lambda: OneOf(
-            [
-                LeafType(SubscriptionGroupMembersArrayError),
-                LeafType(SubscriptionGroupSingleError),
-                LeafType(str),
-            ],
-        ),
         "SubscriptionGroupCreditCardFullNumber": lambda: OneOf(
             [
                 LeafType(str),
@@ -1118,6 +925,199 @@ class UnionTypeLookUp:
             Context.create(
                is_optional=True,
             ),
+        ),
+        "RefundConsolidatedInvoiceSegmentUids": lambda: OneOf(
+            [
+                LeafType(str,
+                         Context.create(
+                             is_array=True,
+                         )),
+                LeafType(str),
+            ],
+        ),
+        "SegmentSegmentProperty1Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+                LeafType(bool),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SegmentSegmentProperty2Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+                LeafType(bool),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SegmentSegmentProperty3Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+                LeafType(bool),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SegmentSegmentProperty4Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+                LeafType(bool),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "Payment-Profile": lambda: AnyOf(
+            [
+                LeafType(ApplePayPaymentProfile,
+                         Context.create(
+                             discriminator_value="apple_pay",
+                             discriminator="payment_type",
+                         )),
+                LeafType(BankAccountPaymentProfile,
+                         Context.create(
+                             discriminator_value="bank_account",
+                             discriminator="payment_type",
+                         )),
+                LeafType(CreditCardPaymentProfile,
+                         Context.create(
+                             discriminator_value="credit_card",
+                             discriminator="payment_type",
+                         )),
+                LeafType(PaypalPaymentProfile,
+                         Context.create(
+                             discriminator_value="paypal_account",
+                             discriminator="payment_type",
+                         )),
+            ],
+        ),
+        "RefundPrepaymentAmount": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+            ],
+        ),
+        "ScheduledRenewalConfigurationItemRequestRenewalConfigurationItem": lambda: OneOf(
+            [
+                LeafType(ScheduledRenewalItemRequestBodyComponent),
+                LeafType(ScheduledRenewalItemRequestBodyProduct),
+            ],
+        ),
+        "ScheduledRenewalProductPricePointPriceInCents": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+        ),
+        "ScheduledRenewalProductPricePointInterval": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+        ),
+        "SubscriptionComponentAllocatedQuantity": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionGroupCreateErrorResponseErrors": lambda: OneOf(
+            [
+                LeafType(SubscriptionGroupMembersArrayError),
+                LeafType(SubscriptionGroupSingleError),
+                LeafType(str),
+            ],
+        ),
+        "OnOffComponentUnitPrice": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+            ],
+        ),
+        "PrepaidUsageComponentUnitPrice": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "PriceStartingQuantity": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+        ),
+        "PriceEndingQuantity": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+               is_nullable=True,
+            ),
+        ),
+        "PriceUnitPrice": lambda: OneOf(
+            [
+                LeafType(float),
+                LeafType(str),
+            ],
+        ),
+        "QuantityBasedComponentUnitPrice": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "RefundInvoiceRequestRefund": lambda: AnyOf(
+            [
+                LeafType(RefundInvoice),
+                LeafType(RefundConsolidatedInvoice),
+            ],
+        ),
+        "RenewalPreviewComponentComponentId": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "RenewalPreviewComponentPricePointId": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "ScheduledRenewalUpdateRequestRenewalConfigurationItem": lambda: OneOf(
+            [
+                LeafType(ScheduledRenewalItemRequestBodyComponent),
+                LeafType(ScheduledRenewalItemRequestBodyProduct),
+            ],
         ),
         "SubscriptionGroupSignupComponentComponentId": lambda: OneOf(
             [
@@ -1155,18 +1155,6 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "UpdateMetafieldsRequestMetafields": lambda: OneOf(
-            [
-                LeafType(UpdateMetafield),
-                LeafType(UpdateMetafield,
-                         Context.create(
-                             is_array=True,
-                         )),
-            ],
-            Context.create(
-               is_optional=True,
-            ),
-        ),
         "UpdatePriceEndingQuantity": lambda: OneOf(
             [
                 LeafType(int),
@@ -1189,6 +1177,18 @@ class UnionTypeLookUp:
             [
                 LeafType(int),
                 LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "UpdateMetafieldsRequestMetafields": lambda: OneOf(
+            [
+                LeafType(UpdateMetafield),
+                LeafType(UpdateMetafield,
+                         Context.create(
+                             is_array=True,
+                         )),
             ],
             Context.create(
                is_optional=True,
