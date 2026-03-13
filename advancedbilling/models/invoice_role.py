@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class InvoiceRole(object):
-
     """Implementation of the 'Invoice Role' enum.
 
     Attributes:
@@ -23,34 +20,37 @@ class InvoiceRole(object):
         ADHOC: The enum member of type str.
         BACKPORT: The enum member of type str.
         BACKPORTBALANCERECONCILIATION: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    _all_values = ['unset', 'signup', 'renewal', 'usage', 'reactivation', 'proration', 'migration', 'adhoc', 'backport', 'backport-balance-reconciliation']
-    UNSET = 'unset'
 
-    SIGNUP = 'signup'
+    _all_values = ["unset", "signup", "renewal", "usage", "reactivation",
+        "proration", "migration", "adhoc", "backport",
+        "backport-balance-reconciliation"]
+    UNSET = "unset"
 
-    RENEWAL = 'renewal'
+    SIGNUP = "signup"
 
-    USAGE = 'usage'
+    RENEWAL = "renewal"
 
-    REACTIVATION = 'reactivation'
+    USAGE = "usage"
 
-    PRORATION = 'proration'
+    REACTIVATION = "reactivation"
 
-    MIGRATION = 'migration'
+    PRORATION = "proration"
 
-    ADHOC = 'adhoc'
+    MIGRATION = "migration"
 
-    BACKPORT = 'backport'
+    ADHOC = "adhoc"
 
-    BACKPORTBALANCERECONCILIATION = 'backport-balance-reconciliation'
+    BACKPORT = "backport"
+
+    BACKPORTBALANCERECONCILIATION = "backport-balance-reconciliation"
 
     @classmethod
     def validate(cls, value):
-        """Validates value contains in enum
+        """Validate value contains in enum
 
         Args:
             value: the value to be validated
@@ -60,9 +60,10 @@ class InvoiceRole(object):
 
         """
         return value in cls._all_values
-   
+
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

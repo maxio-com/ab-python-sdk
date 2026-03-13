@@ -1,27 +1,26 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class SubscriptionGroupInclude(object):
-
     """Implementation of the 'Subscription Group Include' enum.
 
     Attributes:
         CURRENT_BILLING_AMOUNT_IN_CENTS: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    CURRENT_BILLING_AMOUNT_IN_CENTS = 'current_billing_amount_in_cents'
+
+    CURRENT_BILLING_AMOUNT_IN_CENTS = "current_billing_amount_in_cents"
 
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

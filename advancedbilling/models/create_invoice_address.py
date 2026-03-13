@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class CreateInvoiceAddress(object):
-
     """Implementation of the 'Create Invoice Address' model.
 
     Overrides the default address.
@@ -25,68 +23,68 @@ class CreateInvoiceAddress(object):
         state (str): The model property of type str.
         zip (str): The model property of type str.
         country (str): The model property of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "first_name": 'first_name',
-        "last_name": 'last_name',
-        "phone": 'phone',
-        "address": 'address',
-        "address_2": 'address_2',
-        "city": 'city',
-        "state": 'state',
-        "zip": 'zip',
-        "country": 'country'
+        "first_name": "first_name",
+        "last_name": "last_name",
+        "phone": "phone",
+        "address": "address",
+        "address_2": "address_2",
+        "city": "city",
+        "state": "state",
+        "zip": "zip",
+        "country": "country",
     }
 
     _optionals = [
-        'first_name',
-        'last_name',
-        'phone',
-        'address',
-        'address_2',
-        'city',
-        'state',
-        'zip',
-        'country',
+        "first_name",
+        "last_name",
+        "phone",
+        "address",
+        "address_2",
+        "city",
+        "state",
+        "zip",
+        "country",
     ]
 
-    def __init__(self,
-                 first_name=APIHelper.SKIP,
-                 last_name=APIHelper.SKIP,
-                 phone=APIHelper.SKIP,
-                 address=APIHelper.SKIP,
-                 address_2=APIHelper.SKIP,
-                 city=APIHelper.SKIP,
-                 state=APIHelper.SKIP,
-                 zip=APIHelper.SKIP,
-                 country=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the CreateInvoiceAddress class"""
-
+    def __init__(
+        self,
+        first_name=APIHelper.SKIP,
+        last_name=APIHelper.SKIP,
+        phone=APIHelper.SKIP,
+        address=APIHelper.SKIP,
+        address_2=APIHelper.SKIP,
+        city=APIHelper.SKIP,
+        state=APIHelper.SKIP,
+        zip=APIHelper.SKIP,
+        country=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a CreateInvoiceAddress instance."""
         # Initialize members of the class
         if first_name is not APIHelper.SKIP:
-            self.first_name = first_name 
+            self.first_name = first_name
         if last_name is not APIHelper.SKIP:
-            self.last_name = last_name 
+            self.last_name = last_name
         if phone is not APIHelper.SKIP:
-            self.phone = phone 
+            self.phone = phone
         if address is not APIHelper.SKIP:
-            self.address = address 
+            self.address = address
         if address_2 is not APIHelper.SKIP:
-            self.address_2 = address_2 
+            self.address_2 = address_2
         if city is not APIHelper.SKIP:
-            self.city = city 
+            self.city = city
         if state is not APIHelper.SKIP:
-            self.state = state 
+            self.state = state
         if zip is not APIHelper.SKIP:
-            self.zip = zip 
+            self.zip = zip
         if country is not APIHelper.SKIP:
-            self.country = country 
+            self.country = country
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -96,7 +94,7 @@ class CreateInvoiceAddress(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -107,22 +105,51 @@ class CreateInvoiceAddress(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        first_name = dictionary.get("first_name") if dictionary.get("first_name") else APIHelper.SKIP
-        last_name = dictionary.get("last_name") if dictionary.get("last_name") else APIHelper.SKIP
-        phone = dictionary.get("phone") if dictionary.get("phone") else APIHelper.SKIP
-        address = dictionary.get("address") if dictionary.get("address") else APIHelper.SKIP
-        address_2 = dictionary.get("address_2") if dictionary.get("address_2") else APIHelper.SKIP
-        city = dictionary.get("city") if dictionary.get("city") else APIHelper.SKIP
-        state = dictionary.get("state") if dictionary.get("state") else APIHelper.SKIP
-        zip = dictionary.get("zip") if dictionary.get("zip") else APIHelper.SKIP
-        country = dictionary.get("country") if dictionary.get("country") else APIHelper.SKIP
+        first_name =\
+            dictionary.get("first_name")\
+            if dictionary.get("first_name")\
+                else APIHelper.SKIP
+        last_name =\
+            dictionary.get("last_name")\
+            if dictionary.get("last_name")\
+                else APIHelper.SKIP
+        phone =\
+            dictionary.get("phone")\
+            if dictionary.get("phone")\
+                else APIHelper.SKIP
+        address =\
+            dictionary.get("address")\
+            if dictionary.get("address")\
+                else APIHelper.SKIP
+        address_2 =\
+            dictionary.get("address_2")\
+            if dictionary.get("address_2")\
+                else APIHelper.SKIP
+        city =\
+            dictionary.get("city")\
+            if dictionary.get("city")\
+                else APIHelper.SKIP
+        state =\
+            dictionary.get("state")\
+            if dictionary.get("state")\
+                else APIHelper.SKIP
+        zip =\
+            dictionary.get("zip")\
+            if dictionary.get("zip")\
+                else APIHelper.SKIP
+        country =\
+            dictionary.get("country")\
+            if dictionary.get("country")\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(first_name,
                    last_name,
@@ -136,27 +163,127 @@ class CreateInvoiceAddress(object):
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'first_name={(self.first_name if hasattr(self, "first_name") else None)!r}, '
-                f'last_name={(self.last_name if hasattr(self, "last_name") else None)!r}, '
-                f'phone={(self.phone if hasattr(self, "phone") else None)!r}, '
-                f'address={(self.address if hasattr(self, "address") else None)!r}, '
-                f'address_2={(self.address_2 if hasattr(self, "address_2") else None)!r}, '
-                f'city={(self.city if hasattr(self, "city") else None)!r}, '
-                f'state={(self.state if hasattr(self, "state") else None)!r}, '
-                f'zip={(self.zip if hasattr(self, "zip") else None)!r}, '
-                f'country={(self.country if hasattr(self, "country") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _first_name=(
+            self.first_name
+            if hasattr(self, "first_name")
+            else None
+        )
+        _last_name=(
+            self.last_name
+            if hasattr(self, "last_name")
+            else None
+        )
+        _phone=(
+            self.phone
+            if hasattr(self, "phone")
+            else None
+        )
+        _address=(
+            self.address
+            if hasattr(self, "address")
+            else None
+        )
+        _address_2=(
+            self.address_2
+            if hasattr(self, "address_2")
+            else None
+        )
+        _city=(
+            self.city
+            if hasattr(self, "city")
+            else None
+        )
+        _state=(
+            self.state
+            if hasattr(self, "state")
+            else None
+        )
+        _zip=(
+            self.zip
+            if hasattr(self, "zip")
+            else None
+        )
+        _country=(
+            self.country
+            if hasattr(self, "country")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"first_name={_first_name!r}, "
+            f"last_name={_last_name!r}, "
+            f"phone={_phone!r}, "
+            f"address={_address!r}, "
+            f"address_2={_address_2!r}, "
+            f"city={_city!r}, "
+            f"state={_state!r}, "
+            f"zip={_zip!r}, "
+            f"country={_country!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'first_name={(self.first_name if hasattr(self, "first_name") else None)!s}, '
-                f'last_name={(self.last_name if hasattr(self, "last_name") else None)!s}, '
-                f'phone={(self.phone if hasattr(self, "phone") else None)!s}, '
-                f'address={(self.address if hasattr(self, "address") else None)!s}, '
-                f'address_2={(self.address_2 if hasattr(self, "address_2") else None)!s}, '
-                f'city={(self.city if hasattr(self, "city") else None)!s}, '
-                f'state={(self.state if hasattr(self, "state") else None)!s}, '
-                f'zip={(self.zip if hasattr(self, "zip") else None)!s}, '
-                f'country={(self.country if hasattr(self, "country") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _first_name=(
+            self.first_name
+            if hasattr(self, "first_name")
+            else None
+        )
+        _last_name=(
+            self.last_name
+            if hasattr(self, "last_name")
+            else None
+        )
+        _phone=(
+            self.phone
+            if hasattr(self, "phone")
+            else None
+        )
+        _address=(
+            self.address
+            if hasattr(self, "address")
+            else None
+        )
+        _address_2=(
+            self.address_2
+            if hasattr(self, "address_2")
+            else None
+        )
+        _city=(
+            self.city
+            if hasattr(self, "city")
+            else None
+        )
+        _state=(
+            self.state
+            if hasattr(self, "state")
+            else None
+        )
+        _zip=(
+            self.zip
+            if hasattr(self, "zip")
+            else None
+        )
+        _country=(
+            self.country
+            if hasattr(self, "country")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"first_name={_first_name!s}, "
+            f"last_name={_last_name!s}, "
+            f"phone={_phone!s}, "
+            f"address={_address!s}, "
+            f"address_2={_address_2!s}, "
+            f"city={_city!s}, "
+            f"state={_state!s}, "
+            f"zip={_zip!s}, "
+            f"country={_country!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

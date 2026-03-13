@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class CardType(object):
-
     """Implementation of the 'Card Type' enum.
 
     The type of card used.
@@ -51,86 +48,92 @@ class CardType(object):
         SWITCH: The enum member of type str.
         SOLO: The enum member of type str.
         LASER: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    _all_values = ['visa', 'master', 'elo', 'cabal', 'alelo', 'discover', 'american_express', 'naranja', 'diners_club', 'jcb', 'dankort', 'maestro', 'maestro_no_luhn', 'forbrugsforeningen', 'sodexo', 'alia', 'vr', 'unionpay', 'carnet', 'cartes_bancaires', 'olimpica', 'creditel', 'confiable', 'synchrony', 'routex', 'mada', 'bp_plus', 'passcard', 'edenred', 'anda', 'tarjeta-d', 'hipercard', 'bogus', 'switch', 'solo', 'laser']
-    VISA = 'visa'
 
-    MASTER = 'master'
+    _all_values = ["visa", "master", "elo", "cabal", "alelo", "discover",
+        "american_express", "naranja", "diners_club", "jcb", "dankort", "maestro",
+        "maestro_no_luhn", "forbrugsforeningen", "sodexo", "alia", "vr", "unionpay",
+        "carnet", "cartes_bancaires", "olimpica", "creditel", "confiable",
+        "synchrony", "routex", "mada", "bp_plus", "passcard", "edenred", "anda",
+        "tarjeta-d", "hipercard", "bogus", "switch", "solo", "laser"]
+    VISA = "visa"
 
-    ELO = 'elo'
+    MASTER = "master"
 
-    CABAL = 'cabal'
+    ELO = "elo"
 
-    ALELO = 'alelo'
+    CABAL = "cabal"
 
-    DISCOVER = 'discover'
+    ALELO = "alelo"
 
-    AMERICAN_EXPRESS = 'american_express'
+    DISCOVER = "discover"
 
-    NARANJA = 'naranja'
+    AMERICAN_EXPRESS = "american_express"
 
-    DINERS_CLUB = 'diners_club'
+    NARANJA = "naranja"
 
-    JCB = 'jcb'
+    DINERS_CLUB = "diners_club"
 
-    DANKORT = 'dankort'
+    JCB = "jcb"
 
-    MAESTRO = 'maestro'
+    DANKORT = "dankort"
 
-    MAESTRO_NO_LUHN = 'maestro_no_luhn'
+    MAESTRO = "maestro"
 
-    FORBRUGSFORENINGEN = 'forbrugsforeningen'
+    MAESTRO_NO_LUHN = "maestro_no_luhn"
 
-    SODEXO = 'sodexo'
+    FORBRUGSFORENINGEN = "forbrugsforeningen"
 
-    ALIA = 'alia'
+    SODEXO = "sodexo"
 
-    VR = 'vr'
+    ALIA = "alia"
 
-    UNIONPAY = 'unionpay'
+    VR = "vr"
 
-    CARNET = 'carnet'
+    UNIONPAY = "unionpay"
 
-    CARTES_BANCAIRES = 'cartes_bancaires'
+    CARNET = "carnet"
 
-    OLIMPICA = 'olimpica'
+    CARTES_BANCAIRES = "cartes_bancaires"
 
-    CREDITEL = 'creditel'
+    OLIMPICA = "olimpica"
 
-    CONFIABLE = 'confiable'
+    CREDITEL = "creditel"
 
-    SYNCHRONY = 'synchrony'
+    CONFIABLE = "confiable"
 
-    ROUTEX = 'routex'
+    SYNCHRONY = "synchrony"
 
-    MADA = 'mada'
+    ROUTEX = "routex"
 
-    BP_PLUS = 'bp_plus'
+    MADA = "mada"
 
-    PASSCARD = 'passcard'
+    BP_PLUS = "bp_plus"
 
-    EDENRED = 'edenred'
+    PASSCARD = "passcard"
 
-    ANDA = 'anda'
+    EDENRED = "edenred"
 
-    TARJETAD = 'tarjeta-d'
+    ANDA = "anda"
 
-    HIPERCARD = 'hipercard'
+    TARJETAD = "tarjeta-d"
 
-    BOGUS = 'bogus'
+    HIPERCARD = "hipercard"
 
-    SWITCH = 'switch'
+    BOGUS = "bogus"
 
-    SOLO = 'solo'
+    SWITCH = "switch"
 
-    LASER = 'laser'
+    SOLO = "solo"
+
+    LASER = "laser"
 
     @classmethod
     def validate(cls, value):
-        """Validates value contains in enum
+        """Validate value contains in enum
 
         Args:
             value: the value to be validated
@@ -140,9 +143,10 @@ class CardType(object):
 
         """
         return value in cls._all_values
-   
+
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

@@ -1,61 +1,59 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.coupon_payload import CouponPayload
+from advancedbilling.models.coupon_payload import (
+    CouponPayload,
+)
 
 
 class CouponRequest(object):
-
     """Implementation of the 'Coupon Request' model.
 
     Attributes:
         coupon (CouponPayload): The model property of type CouponPayload.
-        restricted_products (Dict[str, bool]): An object where the keys are
-            product IDs or handles (prefixed with 'handle:'), and the values
-            are booleans indicating if the coupon should be applicable to the
-            product
+        restricted_products (Dict[str, bool]): An object where the keys are product
+            IDs or handles (prefixed with 'handle:'), and the values are booleans
+            indicating if the coupon should be applicable to the product
         restricted_components (Dict[str, bool]): An object where the keys are
-            component IDs or handles (prefixed with 'handle:'), and the values
-            are booleans indicating if the coupon should be applicable to the
-            component
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+            component IDs or handles (prefixed with 'handle:'), and the values are
+            booleans indicating if the coupon should be applicable to the component
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "coupon": 'coupon',
-        "restricted_products": 'restricted_products',
-        "restricted_components": 'restricted_components'
+        "coupon": "coupon",
+        "restricted_products": "restricted_products",
+        "restricted_components": "restricted_components",
     }
 
     _optionals = [
-        'coupon',
-        'restricted_products',
-        'restricted_components',
+        "coupon",
+        "restricted_products",
+        "restricted_components",
     ]
 
-    def __init__(self,
-                 coupon=APIHelper.SKIP,
-                 restricted_products=APIHelper.SKIP,
-                 restricted_components=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the CouponRequest class"""
-
+    def __init__(
+        self,
+        coupon=APIHelper.SKIP,
+        restricted_products=APIHelper.SKIP,
+        restricted_components=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a CouponRequest instance."""
         # Initialize members of the class
         if coupon is not APIHelper.SKIP:
-            self.coupon = coupon 
+            self.coupon = coupon
         if restricted_products is not APIHelper.SKIP:
-            self.restricted_products = restricted_products 
+            self.restricted_products = restricted_products
         if restricted_components is not APIHelper.SKIP:
-            self.restricted_components = restricted_components 
+            self.restricted_components = restricted_components
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -65,7 +63,7 @@ class CouponRequest(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -76,16 +74,28 @@ class CouponRequest(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        coupon = CouponPayload.from_dictionary(dictionary.get('coupon')) if 'coupon' in dictionary.keys() else APIHelper.SKIP
-        restricted_products = dictionary.get("restricted_products") if "restricted_products" in dictionary.keys() else APIHelper.SKIP
-        restricted_components = dictionary.get("restricted_components") if "restricted_components" in dictionary.keys() else APIHelper.SKIP
+        coupon =\
+            CouponPayload.from_dictionary(
+                dictionary.get("coupon"))\
+                if "coupon" in dictionary.keys()\
+                else APIHelper.SKIP
+        restricted_products =\
+            dictionary.get("restricted_products")\
+            if "restricted_products" in dictionary.keys()\
+                else APIHelper.SKIP
+        restricted_components =\
+            dictionary.get("restricted_components")\
+            if "restricted_components" in dictionary.keys()\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(coupon,
                    restricted_products,
@@ -93,15 +103,55 @@ class CouponRequest(object):
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'coupon={(self.coupon if hasattr(self, "coupon") else None)!r}, '
-                f'restricted_products={(self.restricted_products if hasattr(self, "restricted_products") else None)!r}, '
-                f'restricted_components={(self.restricted_components if hasattr(self, "restricted_components") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _coupon=(
+            self.coupon
+            if hasattr(self, "coupon")
+            else None
+        )
+        _restricted_products=(
+            self.restricted_products
+            if hasattr(self, "restricted_products")
+            else None
+        )
+        _restricted_components=(
+            self.restricted_components
+            if hasattr(self, "restricted_components")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"coupon={_coupon!r}, "
+            f"restricted_products={_restricted_products!r}, "
+            f"restricted_components={_restricted_components!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'coupon={(self.coupon if hasattr(self, "coupon") else None)!s}, '
-                f'restricted_products={(self.restricted_products if hasattr(self, "restricted_products") else None)!s}, '
-                f'restricted_components={(self.restricted_components if hasattr(self, "restricted_components") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _coupon=(
+            self.coupon
+            if hasattr(self, "coupon")
+            else None
+        )
+        _restricted_products=(
+            self.restricted_products
+            if hasattr(self, "restricted_products")
+            else None
+        )
+        _restricted_components=(
+            self.restricted_components
+            if hasattr(self, "restricted_components")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"coupon={_coupon!s}, "
+            f"restricted_products={_restricted_products!s}, "
+            f"restricted_components={_restricted_components!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

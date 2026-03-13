@@ -1,115 +1,128 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
-from advancedbilling.api_helper import APIHelper
-from advancedbilling.configuration import Server
-from advancedbilling.controllers.base_controller import BaseController
+# ruff: noqa: D410, E501, E101, D206
+from apimatic_core.authentication.multiple.single_auth import (
+    Single,
+)
 from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
 from apimatic_core.types.parameter import Parameter
-from advancedbilling.http.http_method_enum import HttpMethodEnum
-from apimatic_core.authentication.multiple.single_auth import Single
-from advancedbilling.models.payment_profile_response import PaymentProfileResponse
-from advancedbilling.models.bank_account_response import BankAccountResponse
-from advancedbilling.models.get_one_time_token_request import GetOneTimeTokenRequest
-from advancedbilling.exceptions.api_exception import APIException
-from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
-from advancedbilling.exceptions.error_string_map_response_exception import ErrorStringMapResponseException
+
+from advancedbilling.api_helper import APIHelper
+from advancedbilling.configuration import Server
+from advancedbilling.controllers.base_controller import (
+    BaseController,
+)
+from advancedbilling.exceptions.api_exception import (
+    APIException,
+)
+from advancedbilling.exceptions.error_list_response_exception import (
+    ErrorListResponseException,
+)
+from advancedbilling.exceptions.error_string_map_response_exception import (
+    ErrorStringMapResponseException,
+)
+from advancedbilling.http.http_method_enum import (
+    HttpMethodEnum,
+)
+from advancedbilling.models.bank_account_response import (
+    BankAccountResponse,
+)
+from advancedbilling.models.get_one_time_token_request import (
+    GetOneTimeTokenRequest,
+)
+from advancedbilling.models.payment_profile_response import (
+    PaymentProfileResponse,
+)
 
 
 class PaymentProfilesController(BaseController):
-
     """A Controller to access Endpoints in the advancedbilling API."""
+
     def __init__(self, config):
+        """Initialize PaymentProfilesController object."""
         super(PaymentProfilesController, self).__init__(config)
 
     def create_payment_profile(self,
                                body=None):
-        """Does a POST request to /payment_profiles.json.
+        """Perform a POST request to /payment_profiles.json.
 
         Creates a payment profile for a customer.
-        When you create a new payment profile for a customer via the API, it
-        does not automatically make the profile current for any of the
-        customer’s subscriptions. To use the payment profile as the default,
-        you must set it explicitly for the subscription or subscription group.
-        Select an option from the **Request Examples** drop-down on the right
-        side of the portal to see examples of common scenarios for creating
-        payment profiles. 
-        Do not use real card information for testing. See the Sites articles
-        that cover [testing your site
-        setup](https://docs.maxio.com/hc/en-us/articles/24250712113165-Testing-
-        Overview#testing-overview-0-0) for more details on testing in your
-        sandbox.
-        Note that collecting and sending raw card details in production
-        requires [PCI
-        compliance](https://docs.maxio.com/hc/en-us/articles/24183956938381-PCI
-        -Compliance#pci-compliance-0-0) on your end. If your business is not
-        PCI compliant, use
-        [Chargify.js](https://docs.maxio.com/hc/en-us/articles/38163190843789-C
-        hargify-js-Overview#chargify-js-overview-0-0) to collect credit card
-        or bank account information.
-        See the following articles to learn more about subscriptions and
-        payments:
+        When you create a new payment profile for a customer via the API, it does not
+        automatically make the profile current for any of the customer’s
+        subscriptions. To use the payment profile as the default, you must set it
+        explicitly for the subscription or subscription group.
+        Select an option from the **Request Examples** drop-down on the right side of
+        the portal to see examples of common scenarios for creating payment profiles.
+        Do not use real card information for testing. See the Sites articles that
+        cover [testing your site
+        setup](https://docs.maxio.com/hc/en-us/articles/24250712113165-Testing-Overvie
+        w#testing-overview-0-0) for more details on testing in your sandbox.
+        Note that collecting and sending raw card details in production requires [PCI
+        compliance](https://docs.maxio.com/hc/en-us/articles/24183956938381-PCI-Compli
+        ance#pci-compliance-0-0) on your end. If your business is not PCI compliant,
+        use
+        [Chargify.js](https://docs.maxio.com/hc/en-us/articles/38163190843789-Chargify
+        -js-Overview#chargify-js-overview-0-0) to collect credit card or bank account
+        information.
+        See the following articles to learn more about subscriptions and payments:
         + [Subscriber Payment
-        Details](https://maxio.zendesk.com/hc/en-us/articles/24251599929613-Sub
-        scription-Summary-Payment-Details-Tab)
+        Details](https://maxio.zendesk.com/hc/en-us/articles/24251599929613-Subscripti
+        on-Summary-Payment-Details-Tab)
         + [Self Service
-        Pages](https://maxio.zendesk.com/hc/en-us/articles/24261425318541-Self-
-        Service-Pages) (Allows credit card updates by Subscriber)
+        Pages](https://maxio.zendesk.com/hc/en-us/articles/24261425318541-Self-Service
+        -Pages) (Allows credit card updates by Subscriber)
         + [Public Signup Pages payment
-        settings](https://maxio.zendesk.com/hc/en-us/articles/24261368332557-In
-        dividual-Page-Settings)
+        settings](https://maxio.zendesk.com/hc/en-us/articles/24261368332557-Individua
+        l-Page-Settings)
         +
-        [Taxes](https://developers.chargify.com/docs/developer-docs/d2e9e34db74
-        0e-signups#taxes)
+        [Taxes](https://developers.chargify.com/docs/developer-docs/d2e9e34db740e-sign
+        ups#taxes)
         +
-        [Chargify.js](https://docs.maxio.com/hc/en-us/articles/38163190843789-C
-        hargify-js-Overview)
+        [Chargify.js](https://docs.maxio.com/hc/en-us/articles/38163190843789-Chargify
+        -js-Overview)
             + [Chargify.js with GoCardless - minimal
-        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Exampl
-        es#h_01K0PJ15QQZKCER8CFK40MR6XJ)
+        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01
+        K0PJ15QQZKCER8CFK40MR6XJ)
             + [Chargify.js with GoCardless - full
-        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Exampl
-        es#h_01K0PJ15QR09JVHWW0MCA7HVJV)
+        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01
+        K0PJ15QR09JVHWW0MCA7HVJV)
             + [Chargify.js with Stripe Direct Debit - minimal
-        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Exampl
-        es#h_01K0PJ15QQFKKN8Z7B7DZ9AJS5)
+        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01
+        K0PJ15QQFKKN8Z7B7DZ9AJS5)
             + [Chargify.js with Stripe Direct Debit - full
-        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Exampl
-        es#h_01K0PJ15QRECQQ4ECS3ZA55GY7)
+        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01
+        K0PJ15QRECQQ4ECS3ZA55GY7)
             + [Chargify.js with Stripe BECS Direct Debit - minimal
-        example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0Nj
-        AzNDIy-examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-g
-        ateway)
+        example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-
+        examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
             + [Chargify.js with Stripe BECS Direct Debit - full
-        example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0Nj
-        AzNDIy-examples#full-example-with-sepa-direct-debit-stripe-gateway)
+        example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-
+        examples#full-example-with-sepa-direct-debit-stripe-gateway)
         + [Full documentation on
-        GoCardless](https://maxio.zendesk.com/hc/en-us/articles/24176159136909-
-        GoCardless)
+        GoCardless](https://maxio.zendesk.com/hc/en-us/articles/24176159136909-GoCardl
+        ess)
         + [Full documentation on Stripe SEPA Direct
-        Debit](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Strip
-        e-SEPA-and-BECS-Direct-Debit)
+        Debit](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Stripe-SEPA-
+        and-BECS-Direct-Debit)
         + [Full documentation on Stripe BECS Direct
-        Debit](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Strip
-        e-SEPA-and-BECS-Direct-Debit)
+        Debit](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Stripe-SEPA-
+        and-BECS-Direct-Debit)
         + [Full documentation on Stripe BACS Direct
-        Debit](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Strip
-        e-SEPA-and-BECS-Direct-Debit)
+        Debit](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Stripe-SEPA-
+        and-BECS-Direct-Debit)
         ## 3D Secure Authentication during payment profile creation.
-        When a payment requires 3D Secure Authentication to adhear to Strong
-        Customer Authentication (SCA) during payment profile creation, the
-        request enters a [post-authentication
-        flow](https://maxio.zendesk.com/hc/en-us/articles/24176278996493-Testin
-        g-Implementing-3D-Secure#psd2-flows-pre-authentication-and-post-authent
-        ication). In this case, a 422 Unprocessable Entity status is returned
-        with the following response:
+        When a payment requires 3D Secure Authentication to adhear to Strong Customer
+        Authentication (SCA) during payment profile creation, the request enters a
+        [post-authentication
+        flow](https://maxio.zendesk.com/hc/en-us/articles/24176278996493-Testing-Imple
+        menting-3D-Secure#psd2-flows-pre-authentication-and-post-authentication). In
+        this case, a 422 Unprocessable Entity status is returned with the following
+        response:
         ```json
         {
             "jsonapi": {
@@ -118,48 +131,47 @@ class PaymentProfilesController(BaseController):
             "errors": [
                 {
                     "title": "This card requires 3DSecure verification.",
-                    "detail": "This card requires 3D secure authentication.
-        Redirect the customer to the URL from the action_link attribute to
-        authenticate. Attach callback_url param to this URL if you want to be
-        notified about the result of 3D Secure authentication. Attach
-        redirect_url param to this URL if you want to redirect a customer back
-        to your page after 3D Secure authentication. Example:
-        https://checkout-test.chargifypay.test/3d-secure/checkout/pay_uerzhsxd5
-        uhkbodx5jhvkg6yeu?one_time_token_id=93&callback_url=http://localhost:40
-        00&redirect_url=https://yourpage.com will do a POST request to
-        https://localhost:4000 after credit card is authenticated and will
-        redirect a customer to https://yourpage.com after 3DS authentication.",
+                    "detail": "This card requires 3D secure authentication. Redirect
+        the customer to the URL from the action_link attribute to authenticate.
+        Attach callback_url param to this URL if you want to be notified about the
+        result of 3D Secure authentication. Attach redirect_url param to this URL if
+        you want to redirect a customer back to your page after 3D Secure
+        authentication. Example:
+        https://checkout-test.chargifypay.test/3d-secure/checkout/pay_uerzhsxd5uhkbodx
+        5jhvkg6yeu?one_time_token_id=93&callback_url=http://localhost:4000&redirect_ur
+        l=https://yourpage.com will do a POST request to https://localhost:4000 after
+        credit card is authenticated and will redirect a customer to
+        https://yourpage.com after 3DS authentication.",
                     "links": {
                         "action_link":
-        "https://checkout-test.chargifypay.test/3d-secure/checkout/pay_uerzhsxd
-        5uhkbodx5jhvkg6yeu?one_time_token_id=93"
+        "https://checkout-test.chargifypay.test/3d-secure/checkout/pay_uerzhsxd5uhkbod
+        x5jhvkg6yeu?one_time_token_id=93"
                     }
                 }
             ]
         }
         ```
-        To let the customer go through 3D Secure Authentication, they need to
-        be redirected to the URL specified in `action_link`.
-        Optionally, you can specify the `callback_url` parameter in the
-        `action_link` URL to receive notification about the result of 3D
-        Secure Authentication.
+        To let the customer go through 3D Secure Authentication, they need to be
+        redirected to the URL specified in `action_link`.
+        Optionally, you can specify the `callback_url` parameter in the `action_link`
+        URL to receive notification about the result of 3D Secure Authentication.
         The `callback_url` will return the following information:
         - whether the authentication was successful (`success`)
         - the payment profile ID (`payment_profile_id`)
-        You can also specify a `redirect_url` parameter in the `action_link`
-        URL to redirect the customer back to your site.
-        You cannot use action_link in an iframe inside a custom application.
-        You must redirect the customer directly to the `action_link` and use
-        the `redirect_url` or `callback_url` to be notified of the result.
-        The final URL that you send a customer to complete 3D Secure may
-        resemble the following, where the first half is the `action_link` and
-        the second half contains a `redirect_url` and `callback_url`:
-         `https://checkout-test.chargifypay.test/3d-secure/checkout/pay_uerzhsx
-        d5uhkbodx5jhvkg6yeu?one_time_token_id=93&callback_url=http://localhost:
-        4000&redirect_url=https://yourpage.com`
+        You can also specify a `redirect_url` parameter in the `action_link` URL to
+        redirect the customer back to your site.
+        You cannot use action_link in an iframe inside a custom application. You must
+        redirect the customer directly to the `action_link` and use the
+        `redirect_url` or `callback_url` to be notified of the result.
+        The final URL that you send a customer to complete 3D Secure may resemble the
+        following, where the first half is the `action_link` and the second half
+        contains a `redirect_url` and `callback_url`:
+         `https://checkout-test.chargifypay.test/3d-secure/checkout/pay_uerzhsxd5uhkbo
+        dx5jhvkg6yeu?one_time_token_id=93&callback_url=http://localhost:4000&redirect_
+        url=https://yourpage.com`
         ### Example Redirect Flow
-        Here's an example flow to redirect customers to different pages
-        depending on whether SCA was performed successfully:
+        Here's an example flow to redirect customers to different pages depending on
+        whether SCA was performed successfully:
         1. Create a payment profile via the API; it requires 3DS.
         2. You receive an `action_link` in the response.
         3. Use this `action_link` to, for example, connect with your internal
@@ -168,128 +180,124 @@ class PaymentProfilesController(BaseController):
         `redirect_url` to be aware which “session” this applies to.
         5. Redirect the customer to the `action_link` with `callback_url` and
         `redirect_url` applied
-        6. After the customer completes 3DS authentication, we notify you of
-        the result via the applied `callback_url`.
-        7. After that, we redirect the customer to the `redirect_url`; at this
-        point the result of authentication is known.
-        8. Optionally, you can use the applied "msg" param in the
-        `redirect_url` to determine if the redirect was successful.
+        6. After the customer completes 3DS authentication, we notify you of the
+        result via the applied `callback_url`.
+        7. After that, we redirect the customer to the `redirect_url`; at this point
+        the result of authentication is known.
+        8. Optionally, you can use the applied "msg" param in the `redirect_url` to
+        determine if the redirect was successful.
 
         Args:
-            body (CreatePaymentProfileRequest, optional): When following the
-                IBAN or the Local Bank details examples, a customer, bank
-                account and mandate will be created in your current vault. If
-                the customer, bank account, and mandate already exist in your
-                vault, follow the Import example to link the payment profile
-                into Advanced Billing.
+            body (CreatePaymentProfileRequest, optional): When following the IBAN or
+                the Local Bank details examples, a customer, bank account and mandate
+                will be created in your current vault. If the customer, bank account,
+                and mandate already exist in your vault, follow the Import example to
+                link the payment profile into Advanced Billing.
 
         Returns:
             PaymentProfileResponse: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/payment_profiles.json')
+            .path("/payment_profiles.json")
             .http_method(HttpMethodEnum.POST)
             .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
+                .key("Content-Type")
+                .value("application/json"))
             .body_param(Parameter()
-                        .value(body))
+                .value(body))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
+                .key("accept")
+                .value("application/json"))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaymentProfileResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+            .local_error_template("404", "Not Found:'{$response.body}'", APIException)
+            .local_error_template("422",
+                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
+                "nse.body}'.",
+                ErrorListResponseException),
         ).execute()
 
     def list_payment_profiles(self,
                               options=dict()):
-        """Does a GET request to /payment_profiles.json.
+        """Perform a GET request to /payment_profiles.json.
 
-        This method will return all of the active `payment_profiles` for a
-        Site, or for one Customer within a site.  If no payment profiles are
-        found, this endpoint will return an empty array, not a 404.
+        This method will return all of the active `payment_profiles` for a Site, or
+        for one Customer within a site.  If no payment profiles are found, this
+        endpoint will return an empty array, not a 404.
 
         Args:
-            options (dict, optional): Key-value pairs for any of the
-                parameters to this API Endpoint. All parameters to the
-                endpoint are supplied through the dictionary with their names
-                being the key and their desired values being the value. A list
-                of parameters that can be used are::
-
-                    page -- int -- Result records are organized in pages. By
-                        default, the first page of results is displayed. The
-                        page parameter specifies a page number of results to
-                        fetch. You can start navigating through the pages to
-                        consume the results. You do this by passing in a page
-                        parameter. Retrieve the next page by adding ?page=2 to
-                        the query string. If there are no results to return,
-                        then an empty result set will be returned. Use in
-                        query `page=1`.
-                    per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is 20.
-                        The maximum allowed values is 200; any per_page value
-                        over 200 will be changed to 200. Use in query
-                        `per_page=200`.
-                    customer_id -- int -- The ID of the customer for which you
-                        wish to list payment profiles
+            options (dict, optional): Key-value pairs for any of the parameters to
+                this API Endpoint. All parameters to the endpoint are supplied
+                through the dictionary with their names being the key and their
+                desired values being the value. A list of parameters that can be used
+                are::
+                    page -- int -- Result records are organized in pages. By default,
+                        the first page of results is displayed. The page parameter
+                        specifies a page number of results to fetch. You can start
+                        navigating through the pages to consume the results. You do
+                        this by passing in a page parameter. Retrieve the next page
+                        by adding ?page=2 to the query string. If there are no
+                        results to return, then an empty result set will be returned.
+                        Use in query `page=1`.
+                    per_page -- int -- This parameter indicates how many records to
+                        fetch in each request. Default value is 20. The maximum
+                        allowed values is 200; any per_page value over 200 will be
+                        changed to 200. Use in query `per_page=200`.
+                    customer_id -- int -- The ID of the customer for which you wish
+                        to list payment profiles
 
         Returns:
             List[PaymentProfileResponse]: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/payment_profiles.json')
+            .path("/payment_profiles.json")
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
-                         .key('page')
-                         .value(options.get('page', None)))
+                .key("page")
+                .value(options.get("page", None)))
             .query_param(Parameter()
-                         .key('per_page')
-                         .value(options.get('per_page', None)))
+                .key("per_page")
+                .value(options.get("per_page", None)))
             .query_param(Parameter()
-                         .key('customer_id')
-                         .value(options.get('customer_id', None)))
+                .key("customer_id")
+                .value(options.get("customer_id", None)))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
+                .key("accept")
+                .value("application/json"))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(PaymentProfileResponse.from_dictionary)
+            .deserialize_into(PaymentProfileResponse.from_dictionary),
         ).execute()
 
     def read_payment_profile(self,
                              payment_profile_id):
-        """Does a GET request to /payment_profiles/{payment_profile_id}.json.
+        """Perform a GET request to
+        /payment_profiles/{payment_profile_id}.json.
 
-        Using the GET method you can retrieve a Payment Profile identified by
-        its unique ID.
-        Note that a different JSON object will be returned if the card method
-        on file is a bank account.
+        Using the GET method you can retrieve a Payment Profile identified by its
+        unique ID.
+        Note that a different JSON object will be returned if the card method on file
+        is a bank account.
         ### Response for Bank Account
         Example response for Bank Account:
         ```
@@ -329,43 +337,42 @@ class PaymentProfilesController(BaseController):
             PaymentProfileResponse: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/payment_profiles/{payment_profile_id}.json')
+            .path("/payment_profiles/{payment_profile_id}.json")
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("payment_profile_id")
+                .value(payment_profile_id)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
+                .key("accept")
+                .value("application/json"))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaymentProfileResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
+            .local_error("404", "Not Found", APIException),
         ).execute()
 
     def update_payment_profile(self,
                                payment_profile_id,
                                body=None):
-        """Does a PUT request to /payment_profiles/{payment_profile_id}.json.
+        """Perform a PUT request to
+        /payment_profiles/{payment_profile_id}.json.
 
         ## Partial Card Updates
-        In the event that you are using the Authorize.net, Stripe,
-        Cybersource, Forte or Braintree Blue payment gateways, you can update
-        just the billing and contact information for a payment method. Note
-        the lack of credit-card related data contained in the JSON payload.
+        In the event that you are using the Authorize.net, Stripe, Cybersource, Forte
+        or Braintree Blue payment gateways, you can update just the billing and
+        contact information for a payment method. Note the lack of credit-card
+        related data contained in the JSON payload.
         In this case, the following JSON is acceptable:
         ```
         {
@@ -381,79 +388,78 @@ class PaymentProfilesController(BaseController):
           }
         }
         ```
-        The result will be that you have updated the billing information for
-        the card, yet retained the original card number data.
+        The result will be that you have updated the billing information for the
+        card, yet retained the original card number data.
         ## Specific notes on updating payment profiles
-        - Merchants with **Authorize.net**, **Cybersource**, **Forte**,
-        **Braintree Blue** or **Stripe** as their payment gateway can update
-        their Customer’s credit cards without passing in the full credit card
-        number and CVV.
-        - If you are using **Authorize.net**, **Cybersource**, **Forte**,
-        **Braintree Blue** or **Stripe**, Advanced Billing will ignore the
-        credit card number and CVV when processing an update via the API, and
-        attempt a partial update instead. If you wish to change the card
-        number on a payment profile, you will need to create a new payment
-        profile for the given customer.
-        - A Payment Profile cannot be updated with the attributes of another
-        type of Payment Profile. For example, if the payment profile you are
-        attempting to update is a credit card, you cannot pass in bank account
-        attributes (like `bank_account_number`), and vice versa.
-        - Updating a payment profile directly will not trigger an attempt to
-        capture a past-due balance. If this is the intent, update the card
-        details via the Subscription instead.
-        - If you are using Authorize.net or Stripe, you may elect to manually
-        trigger a retry for a past due subscription after a partial update.
+        - Merchants with **Authorize.net**, **Cybersource**, **Forte**, **Braintree
+        Blue** or **Stripe** as their payment gateway can update their Customer’s
+        credit cards without passing in the full credit card number and CVV.
+        - If you are using **Authorize.net**, **Cybersource**, **Forte**, **Braintree
+        Blue** or **Stripe**, Advanced Billing will ignore the credit card number and
+        CVV when processing an update via the API, and attempt a partial update
+        instead. If you wish to change the card number on a payment profile, you will
+        need to create a new payment profile for the given customer.
+        - A Payment Profile cannot be updated with the attributes of another type of
+        Payment Profile. For example, if the payment profile you are attempting to
+        update is a credit card, you cannot pass in bank account attributes (like
+        `bank_account_number`), and vice versa.
+        - Updating a payment profile directly will not trigger an attempt to capture
+        a past-due balance. If this is the intent, update the card details via the
+        Subscription instead.
+        - If you are using Authorize.net or Stripe, you may elect to manually trigger
+        a retry for a past due subscription after a partial update.
 
         Args:
             payment_profile_id (int): The Chargify id of the payment profile
-            body (UpdatePaymentProfileRequest, optional): The request body
-                parameter.
+            body (UpdatePaymentProfileRequest, optional): The request body parameter.
 
         Returns:
             PaymentProfileResponse: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/payment_profiles/{payment_profile_id}.json')
+            .path("/payment_profiles/{payment_profile_id}.json")
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("payment_profile_id")
+                .value(payment_profile_id)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
+                .key("Content-Type")
+                .value("application/json"))
             .body_param(Parameter()
-                        .value(body))
+                .value(body))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
+                .key("accept")
+                .value("application/json"))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaymentProfileResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorStringMapResponseException)
+            .local_error("404", "Not Found", APIException)
+            .local_error_template("422",
+                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
+                "nse.body}'.",
+                ErrorStringMapResponseException),
         ).execute()
 
     def delete_unused_payment_profile(self,
                                       payment_profile_id):
-        """Does a DELETE request to /payment_profiles/{payment_profile_id}.json.
+        """Perform a DELETE request to
+        /payment_profiles/{payment_profile_id}.json.
 
         Deletes an unused payment profile.
-        If the payment profile is in use by one or more subscriptions or
-        groups, a 422 and error message will be returned.
+        If the payment profile is in use by one or more subscriptions or groups, a
+        422 and error message will be returned.
 
         Args:
             payment_profile_id (int): The Chargify id of the payment profile
@@ -462,85 +468,80 @@ class PaymentProfilesController(BaseController):
             void: Response from the API. No Content
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/payment_profiles/{payment_profile_id}.json')
+            .path("/payment_profiles/{payment_profile_id}.json")
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('BasicAuth'))
+                .key("payment_profile_id")
+                .value(payment_profile_id)
+                .is_required(True)
+                .should_encode(True))
+            .auth(Single("BasicAuth")),
         ).execute()
 
     def delete_subscriptions_payment_profile(self,
                                              subscription_id,
                                              payment_profile_id):
-        """Does a DELETE request to /subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}.json.
+        """Perform a DELETE request to
+        /subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}.json.
 
-        This will delete a payment profile belonging to the customer on the
-        subscription.
-        + If the customer has multiple subscriptions, the payment profile will
-        be removed from all of them.
-        + If you delete the default payment profile for a subscription, you
-        will need to specify another payment profile to be the default through
-        the api, or either prompt the user to enter a card in the billing
-        portal or on the self-service page, or visit the Payment Details tab
-        on the subscription in the Admin UI and use the “Add New Credit Card”
-        or “Make Active Payment Method” link, (depending on whether there are
-        other cards present).
+        Deletes a payment profile belonging to the customer on the subscription.
+        + If the customer has multiple subscriptions, the payment profile will be
+        removed from all of them.
+        + If you delete the default payment profile for a subscription, you will need
+        to specify another payment profile to be the default through the api, or
+        either prompt the user to enter a card in the billing portal or on the
+        self-service page, or visit the Payment Details tab on the subscription in
+        the Admin UI and use the “Add New Credit Card” or “Make Active Payment
+        Method” link, (depending on whether there are other cards present).
 
         Args:
-            subscription_id (int): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription.
             payment_profile_id (int): The Chargify id of the payment profile
 
         Returns:
             void: Response from the API. No Content
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}.json')
+            .path("/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}.json")
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("subscription_id")
+                .value(subscription_id)
+                .is_required(True)
+                .should_encode(True))
             .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('BasicAuth'))
+                .key("payment_profile_id")
+                .value(payment_profile_id)
+                .is_required(True)
+                .should_encode(True))
+            .auth(Single("BasicAuth")),
         ).execute()
 
     def verify_bank_account(self,
                             bank_account_id,
                             body=None):
-        """Does a PUT request to /bank_accounts/{bank_account_id}/verification.json.
+        """Perform a PUT request to
+        /bank_accounts/{bank_account_id}/verification.json.
 
-        Submit the two small deposit amounts the customer received in their
-        bank account in order to verify the bank account. (Stripe only)
+        Submit the two small deposit amounts the customer received in their bank
+        account in order to verify the bank account. (Stripe only)
 
         Args:
-            bank_account_id (int): Identifier of the bank account in the
-                system.
+            bank_account_id (int): Identifier of the bank account in the system.
             body (BankAccountVerificationRequest, optional): The request body
                 parameter.
 
@@ -548,48 +549,50 @@ class PaymentProfilesController(BaseController):
             BankAccountResponse: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/bank_accounts/{bank_account_id}/verification.json')
+            .path("/bank_accounts/{bank_account_id}/verification.json")
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
-                            .key('bank_account_id')
-                            .value(bank_account_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("bank_account_id")
+                .value(bank_account_id)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
+                .key("Content-Type")
+                .value("application/json"))
             .body_param(Parameter()
-                        .value(body))
+                .value(body))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
+                .key("accept")
+                .value("application/json"))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(BankAccountResponse.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+            .local_error_template("404", "Not Found:'{$response.body}'", APIException)
+            .local_error_template("422",
+                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
+                "nse.body}'.",
+                ErrorListResponseException),
         ).execute()
 
     def delete_subscription_group_payment_profile(self,
                                                   uid,
                                                   payment_profile_id):
-        """Does a DELETE request to /subscription_groups/{uid}/payment_profiles/{payment_profile_id}.json.
+        """Perform a DELETE request to
+        /subscription_groups/{uid}/payment_profiles/{payment_profile_id}.json.
 
-        This will delete a Payment Profile belonging to a Subscription Group.
-        **Note**: If the Payment Profile belongs to multiple Subscription
-        Groups and/or Subscriptions, it will be removed from all of them.
+        Deletes a Payment Profile belonging to a Subscription Group.
+        **Note**: If the Payment Profile belongs to multiple Subscription Groups
+        and/or Subscriptions, it will be removed from all of them.
 
         Args:
             uid (str): The uid of the subscription group
@@ -599,94 +602,95 @@ class PaymentProfilesController(BaseController):
             void: Response from the API. No Content
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/subscription_groups/{uid}/payment_profiles/{payment_profile_id}.json')
+            .path("/subscription_groups/{uid}/payment_profiles/{payment_profile_id}.json")
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("uid")
+                .value(uid)
+                .is_required(True)
+                .should_encode(True))
             .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('BasicAuth'))
+                .key("payment_profile_id")
+                .value(payment_profile_id)
+                .is_required(True)
+                .should_encode(True))
+            .auth(Single("BasicAuth")),
         ).execute()
 
     def change_subscription_default_payment_profile(self,
                                                     subscription_id,
                                                     payment_profile_id):
-        """Does a POST request to /subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json.
+        """Perform a POST request to
+        /subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_p
+        ayment_profile.json.
 
-        This will change the default payment profile on the subscription to
-        the existing payment profile with the id specified.
+        This will change the default payment profile on the subscription to the
+        existing payment profile with the id specified.
         You must elect to change the existing payment profile to a new payment
-        profile ID in order to receive a satisfactory response from this
-        endpoint.
+        profile ID in order to receive a satisfactory response from this endpoint.
 
         Args:
-            subscription_id (int): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription.
             payment_profile_id (int): The Chargify id of the payment profile
 
         Returns:
             PaymentProfileResponse: Response from the API. Created
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json')
+            .path("/subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_payment_profile.json")
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("subscription_id")
+                .value(subscription_id)
+                .is_required(True)
+                .should_encode(True))
             .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("payment_profile_id")
+                .value(payment_profile_id)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
+                .key("accept")
+                .value("application/json"))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaymentProfileResponse.from_dictionary)
-            .local_error('404', 'Not Found', APIException)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+            .local_error("404", "Not Found", APIException)
+            .local_error_template("422",
+                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
+                "nse.body}'.",
+                ErrorListResponseException),
         ).execute()
 
     def change_subscription_group_default_payment_profile(self,
                                                           uid,
                                                           payment_profile_id):
-        """Does a POST request to /subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json.
+        """Perform a POST request to
+        /subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment
+        _profile.json.
 
-        This will change the default payment profile on the subscription group
-        to the existing payment profile with the id specified.
+        This will change the default payment profile on the subscription group to the
+        existing payment profile with the id specified.
         You must elect to change the existing payment profile to a new payment
-        profile ID in order to receive a satisfactory response from this
-        endpoint.
-        The new payment profile must belong to the subscription group's
-        customer, otherwise you will receive an error.
+        profile ID in order to receive a satisfactory response from this endpoint.
+        The new payment profile must belong to the subscription group's customer,
+        otherwise you will receive an error.
 
         Args:
             uid (str): The uid of the subscription group
@@ -696,50 +700,51 @@ class PaymentProfilesController(BaseController):
             PaymentProfileResponse: Response from the API. Created
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json')
+            .path("/subscription_groups/{uid}/payment_profiles/{payment_profile_id}/change_payment_profile.json")
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
-                            .key('uid')
-                            .value(uid)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("uid")
+                .value(uid)
+                .is_required(True)
+                .should_encode(True))
             .template_param(Parameter()
-                            .key('payment_profile_id')
-                            .value(payment_profile_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("payment_profile_id")
+                .value(payment_profile_id)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
+                .key("accept")
+                .value("application/json"))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(PaymentProfileResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+            .local_error_template("422",
+                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
+                "nse.body}'.",
+                ErrorListResponseException),
         ).execute()
 
     def read_one_time_token(self,
                             chargify_token):
-        """Does a GET request to /one_time_tokens/{chargify_token}.json.
+        """Perform a GET request to /one_time_tokens/{chargify_token}.json.
 
-        One Time Tokens aka Advanced Billing Tokens house the credit card or
-        ACH (Authorize.Net or Stripe only) data for a customer.
-        You can use One Time Tokens while creating a subscription or payment
-        profile instead of passing all bank account or credit card data
-        directly to a given API endpoint.
+        One Time Tokens aka Advanced Billing Tokens house the credit card or ACH
+        (Authorize.Net or Stripe only) data for a customer.
+        You can use One Time Tokens while creating a subscription or payment profile
+        instead of passing all bank account or credit card data directly to a given
+        API endpoint.
         To obtain a One Time Token you have to use
-        [Chargify.js](https://docs.maxio.com/hc/en-us/articles/38163190843789-C
-        hargify-js-Overview#chargify-js-overview-0-0).
+        [Chargify.js](https://docs.maxio.com/hc/en-us/articles/38163190843789-Chargify
+        -js-Overview#chargify-js-overview-0-0).
 
         Args:
             chargify_token (str): Advanced Billing Token
@@ -748,75 +753,74 @@ class PaymentProfilesController(BaseController):
             GetOneTimeTokenRequest: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/one_time_tokens/{chargify_token}.json')
+            .path("/one_time_tokens/{chargify_token}.json")
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('chargify_token')
-                            .value(chargify_token)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("chargify_token")
+                .value(chargify_token)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
+                .key("accept")
+                .value("application/json"))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(GetOneTimeTokenRequest.from_dictionary)
-            .local_error_template('404', 'Not Found:\'{$response.body}\'', ErrorListResponseException)
+            .local_error_template("404",
+                "Not Found:'{$response.body}'",
+                ErrorListResponseException),
         ).execute()
 
     def send_request_update_payment_email(self,
                                           subscription_id):
-        """Does a POST request to /subscriptions/{subscription_id}/request_payment_profiles_update.json.
+        """Perform a POST request to
+        /subscriptions/{subscription_id}/request_payment_profiles_update.json.
 
-        You can send a "request payment update" email to the customer
-        associated with the subscription.
-        If you attempt to send a "request payment update" email more than five
-        times within a 30-minute period, you will receive a `422` response
-        with an error message in the body. This error message will indicate
-        that the request has been rejected due to excessive attempts, and will
-        provide instructions on how to resubmit the request.
-        Additionally, if you attempt to send a "request payment update" email
-        for a subscription that does not exist, you will receive a `404` error
-        response. This error message will indicate that the subscription could
-        not be found, and will provide instructions on how to correct the
-        error and resubmit the request.
-        These error responses are designed to prevent excessive or invalid
-        requests, and to provide clear and helpful information to users who
-        encounter errors during the request process.
+        You can send a "request payment update" email to the customer associated with
+        the subscription.
+        If you attempt to send a "request payment update" email more than five times
+        within a 30-minute period, you will receive a `422` response with an error
+        message in the body. This error message will indicate that the request has
+        been rejected due to excessive attempts, and will provide instructions on how
+        to resubmit the request.
+        Additionally, if you attempt to send a "request payment update" email for a
+        subscription that does not exist, you will receive a `404` error response.
+        This error message will indicate that the subscription could not be found,
+        and will provide instructions on how to correct the error and resubmit the
+        request.
+        These error responses are designed to prevent excessive or invalid requests,
+        and to provide clear and helpful information to users who encounter errors
+        during the request process.
 
         Args:
-            subscription_id (int): The Chargify id of the subscription
+            subscription_id (int): The Chargify id of the subscription.
 
         Returns:
             void: Response from the API. Created
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/subscriptions/{subscription_id}/request_payment_profiles_update.json')
+            .path("/subscriptions/{subscription_id}/request_payment_profiles_update.json")
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
-                            .key('subscription_id')
-                            .value(subscription_id)
-                            .is_required(True)
-                            .should_encode(True))
-            .auth(Single('BasicAuth'))
+                .key("subscription_id")
+                .value(subscription_id)
+                .is_required(True)
+                .should_encode(True))
+            .auth(Single("BasicAuth")),
         ).execute()

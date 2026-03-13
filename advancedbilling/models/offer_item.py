@@ -1,17 +1,17 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.currency_price import CurrencyPrice
+from advancedbilling.models.currency_price import (
+    CurrencyPrice,
+)
 
 
 class OfferItem(object):
-
     """Implementation of the 'Offer Item' model.
 
     Attributes:
@@ -24,84 +24,84 @@ class OfferItem(object):
         price_point_name (str): The model property of type str.
         currency_prices (List[CurrencyPrice]): The model property of type
             List[CurrencyPrice].
-        interval (int): The numerical interval. i.e. an interval of '30'
-            coupled with an interval_unit of day would mean this component
-            price point would renew every 30 days. This property is only
+        interval (int): The numerical interval. i.e. an interval of '30' coupled with
+            an interval_unit of day would mean this component price point would renew
+            every 30 days. This property is only available for sites with
+            Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit for
+            this component price point, either month or day. This property is only
             available for sites with Multifrequency enabled.
-        interval_unit (IntervalUnit): A string representing the interval unit
-            for this component price point, either month or day. This property
-            is only available for sites with Multifrequency enabled.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "component_id": 'component_id',
-        "price_point_id": 'price_point_id',
-        "starting_quantity": 'starting_quantity',
-        "editable": 'editable',
-        "component_unit_price": 'component_unit_price',
-        "component_name": 'component_name',
-        "price_point_name": 'price_point_name',
-        "currency_prices": 'currency_prices',
-        "interval": 'interval',
-        "interval_unit": 'interval_unit'
+        "component_id": "component_id",
+        "price_point_id": "price_point_id",
+        "starting_quantity": "starting_quantity",
+        "editable": "editable",
+        "component_unit_price": "component_unit_price",
+        "component_name": "component_name",
+        "price_point_name": "price_point_name",
+        "currency_prices": "currency_prices",
+        "interval": "interval",
+        "interval_unit": "interval_unit",
     }
 
     _optionals = [
-        'component_id',
-        'price_point_id',
-        'starting_quantity',
-        'editable',
-        'component_unit_price',
-        'component_name',
-        'price_point_name',
-        'currency_prices',
-        'interval',
-        'interval_unit',
+        "component_id",
+        "price_point_id",
+        "starting_quantity",
+        "editable",
+        "component_unit_price",
+        "component_name",
+        "price_point_name",
+        "currency_prices",
+        "interval",
+        "interval_unit",
     ]
 
     _nullables = [
-        'interval_unit',
+        "interval_unit",
     ]
 
-    def __init__(self,
-                 component_id=APIHelper.SKIP,
-                 price_point_id=APIHelper.SKIP,
-                 starting_quantity=APIHelper.SKIP,
-                 editable=APIHelper.SKIP,
-                 component_unit_price=APIHelper.SKIP,
-                 component_name=APIHelper.SKIP,
-                 price_point_name=APIHelper.SKIP,
-                 currency_prices=APIHelper.SKIP,
-                 interval=APIHelper.SKIP,
-                 interval_unit=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the OfferItem class"""
-
+    def __init__(
+        self,
+        component_id=APIHelper.SKIP,
+        price_point_id=APIHelper.SKIP,
+        starting_quantity=APIHelper.SKIP,
+        editable=APIHelper.SKIP,
+        component_unit_price=APIHelper.SKIP,
+        component_name=APIHelper.SKIP,
+        price_point_name=APIHelper.SKIP,
+        currency_prices=APIHelper.SKIP,
+        interval=APIHelper.SKIP,
+        interval_unit=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a OfferItem instance."""
         # Initialize members of the class
         if component_id is not APIHelper.SKIP:
-            self.component_id = component_id 
+            self.component_id = component_id
         if price_point_id is not APIHelper.SKIP:
-            self.price_point_id = price_point_id 
+            self.price_point_id = price_point_id
         if starting_quantity is not APIHelper.SKIP:
-            self.starting_quantity = starting_quantity 
+            self.starting_quantity = starting_quantity
         if editable is not APIHelper.SKIP:
-            self.editable = editable 
+            self.editable = editable
         if component_unit_price is not APIHelper.SKIP:
-            self.component_unit_price = component_unit_price 
+            self.component_unit_price = component_unit_price
         if component_name is not APIHelper.SKIP:
-            self.component_name = component_name 
+            self.component_name = component_name
         if price_point_name is not APIHelper.SKIP:
-            self.price_point_name = price_point_name 
+            self.price_point_name = price_point_name
         if currency_prices is not APIHelper.SKIP:
-            self.currency_prices = currency_prices 
+            self.currency_prices = currency_prices
         if interval is not APIHelper.SKIP:
-            self.interval = interval 
+            self.interval = interval
         if interval_unit is not APIHelper.SKIP:
-            self.interval_unit = interval_unit 
+            self.interval_unit = interval_unit
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -111,7 +111,7 @@ class OfferItem(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -122,27 +122,59 @@ class OfferItem(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
-        price_point_id = dictionary.get("price_point_id") if dictionary.get("price_point_id") else APIHelper.SKIP
-        starting_quantity = dictionary.get("starting_quantity") if dictionary.get("starting_quantity") else APIHelper.SKIP
-        editable = dictionary.get("editable") if "editable" in dictionary.keys() else APIHelper.SKIP
-        component_unit_price = dictionary.get("component_unit_price") if dictionary.get("component_unit_price") else APIHelper.SKIP
-        component_name = dictionary.get("component_name") if dictionary.get("component_name") else APIHelper.SKIP
-        price_point_name = dictionary.get("price_point_name") if dictionary.get("price_point_name") else APIHelper.SKIP
+        component_id =\
+            dictionary.get("component_id")\
+            if dictionary.get("component_id")\
+                else APIHelper.SKIP
+        price_point_id =\
+            dictionary.get("price_point_id")\
+            if dictionary.get("price_point_id")\
+                else APIHelper.SKIP
+        starting_quantity =\
+            dictionary.get("starting_quantity")\
+            if dictionary.get("starting_quantity")\
+                else APIHelper.SKIP
+        editable =\
+            dictionary.get("editable")\
+            if "editable" in dictionary.keys()\
+                else APIHelper.SKIP
+        component_unit_price =\
+            dictionary.get("component_unit_price")\
+            if dictionary.get("component_unit_price")\
+                else APIHelper.SKIP
+        component_name =\
+            dictionary.get("component_name")\
+            if dictionary.get("component_name")\
+                else APIHelper.SKIP
+        price_point_name =\
+            dictionary.get("price_point_name")\
+            if dictionary.get("price_point_name")\
+                else APIHelper.SKIP
         currency_prices = None
-        if dictionary.get('currency_prices') is not None:
-            currency_prices = [CurrencyPrice.from_dictionary(x) for x in dictionary.get('currency_prices')]
+        if dictionary.get("currency_prices") is not None:
+            currency_prices = [
+                CurrencyPrice.from_dictionary(x)
+                    for x in dictionary.get("currency_prices")
+            ]
         else:
             currency_prices = APIHelper.SKIP
-        interval = dictionary.get("interval") if dictionary.get("interval") else APIHelper.SKIP
-        interval_unit = dictionary.get("interval_unit") if "interval_unit" in dictionary.keys() else APIHelper.SKIP
+        interval =\
+            dictionary.get("interval")\
+            if dictionary.get("interval")\
+                else APIHelper.SKIP
+        interval_unit =\
+            dictionary.get("interval_unit")\
+            if "interval_unit" in dictionary.keys()\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(component_id,
                    price_point_id,
@@ -157,29 +189,139 @@ class OfferItem(object):
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!r}, '
-                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!r}, '
-                f'starting_quantity={(self.starting_quantity if hasattr(self, "starting_quantity") else None)!r}, '
-                f'editable={(self.editable if hasattr(self, "editable") else None)!r}, '
-                f'component_unit_price={(self.component_unit_price if hasattr(self, "component_unit_price") else None)!r}, '
-                f'component_name={(self.component_name if hasattr(self, "component_name") else None)!r}, '
-                f'price_point_name={(self.price_point_name if hasattr(self, "price_point_name") else None)!r}, '
-                f'currency_prices={(self.currency_prices if hasattr(self, "currency_prices") else None)!r}, '
-                f'interval={(self.interval if hasattr(self, "interval") else None)!r}, '
-                f'interval_unit={(self.interval_unit if hasattr(self, "interval_unit") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _component_id=(
+            self.component_id
+            if hasattr(self, "component_id")
+            else None
+        )
+        _price_point_id=(
+            self.price_point_id
+            if hasattr(self, "price_point_id")
+            else None
+        )
+        _starting_quantity=(
+            self.starting_quantity
+            if hasattr(self, "starting_quantity")
+            else None
+        )
+        _editable=(
+            self.editable
+            if hasattr(self, "editable")
+            else None
+        )
+        _component_unit_price=(
+            self.component_unit_price
+            if hasattr(self, "component_unit_price")
+            else None
+        )
+        _component_name=(
+            self.component_name
+            if hasattr(self, "component_name")
+            else None
+        )
+        _price_point_name=(
+            self.price_point_name
+            if hasattr(self, "price_point_name")
+            else None
+        )
+        _currency_prices=(
+            self.currency_prices
+            if hasattr(self, "currency_prices")
+            else None
+        )
+        _interval=(
+            self.interval
+            if hasattr(self, "interval")
+            else None
+        )
+        _interval_unit=(
+            self.interval_unit
+            if hasattr(self, "interval_unit")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"component_id={_component_id!r}, "
+            f"price_point_id={_price_point_id!r}, "
+            f"starting_quantity={_starting_quantity!r}, "
+            f"editable={_editable!r}, "
+            f"component_unit_price={_component_unit_price!r}, "
+            f"component_name={_component_name!r}, "
+            f"price_point_name={_price_point_name!r}, "
+            f"currency_prices={_currency_prices!r}, "
+            f"interval={_interval!r}, "
+            f"interval_unit={_interval_unit!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!s}, '
-                f'price_point_id={(self.price_point_id if hasattr(self, "price_point_id") else None)!s}, '
-                f'starting_quantity={(self.starting_quantity if hasattr(self, "starting_quantity") else None)!s}, '
-                f'editable={(self.editable if hasattr(self, "editable") else None)!s}, '
-                f'component_unit_price={(self.component_unit_price if hasattr(self, "component_unit_price") else None)!s}, '
-                f'component_name={(self.component_name if hasattr(self, "component_name") else None)!s}, '
-                f'price_point_name={(self.price_point_name if hasattr(self, "price_point_name") else None)!s}, '
-                f'currency_prices={(self.currency_prices if hasattr(self, "currency_prices") else None)!s}, '
-                f'interval={(self.interval if hasattr(self, "interval") else None)!s}, '
-                f'interval_unit={(self.interval_unit if hasattr(self, "interval_unit") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _component_id=(
+            self.component_id
+            if hasattr(self, "component_id")
+            else None
+        )
+        _price_point_id=(
+            self.price_point_id
+            if hasattr(self, "price_point_id")
+            else None
+        )
+        _starting_quantity=(
+            self.starting_quantity
+            if hasattr(self, "starting_quantity")
+            else None
+        )
+        _editable=(
+            self.editable
+            if hasattr(self, "editable")
+            else None
+        )
+        _component_unit_price=(
+            self.component_unit_price
+            if hasattr(self, "component_unit_price")
+            else None
+        )
+        _component_name=(
+            self.component_name
+            if hasattr(self, "component_name")
+            else None
+        )
+        _price_point_name=(
+            self.price_point_name
+            if hasattr(self, "price_point_name")
+            else None
+        )
+        _currency_prices=(
+            self.currency_prices
+            if hasattr(self, "currency_prices")
+            else None
+        )
+        _interval=(
+            self.interval
+            if hasattr(self, "interval")
+            else None
+        )
+        _interval_unit=(
+            self.interval_unit
+            if hasattr(self, "interval_unit")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"component_id={_component_id!s}, "
+            f"price_point_id={_price_point_id!s}, "
+            f"starting_quantity={_starting_quantity!s}, "
+            f"editable={_editable!s}, "
+            f"component_unit_price={_component_unit_price!s}, "
+            f"component_name={_component_name!s}, "
+            f"price_point_name={_price_point_name!s}, "
+            f"currency_prices={_currency_prices!s}, "
+            f"interval={_interval!s}, "
+            f"interval_unit={_interval_unit!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

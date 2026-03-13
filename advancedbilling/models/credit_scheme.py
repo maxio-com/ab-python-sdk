@@ -1,33 +1,32 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class CreditScheme(object):
-
     """Implementation of the 'Credit Scheme' enum.
 
     Attributes:
         NONE: The enum member of type str.
         CREDIT: The enum member of type str.
         REFUND: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    NONE = 'none'
 
-    CREDIT = 'credit'
+    NONE = "none"
 
-    REFUND = 'refund'
+    CREDIT = "credit"
+
+    REFUND = "refund"
 
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

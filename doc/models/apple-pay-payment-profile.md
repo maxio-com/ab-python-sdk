@@ -22,7 +22,7 @@
 | `billing_country` | `str` | Optional | The current billing address country for the Apple Pay account |
 | `customer_vault_token` | `str` | Optional | - |
 | `billing_address_2` | `str` | Optional | The current billing street address, second line, for the Apple Pay account |
-| `payment_type` | [`PaymentType`](../../doc/models/payment-type.md) | Required | **Default**: `'apple_pay'` |
+| `payment_type` | [`PaymentType`](../../doc/models/payment-type.md) | Required | **Default**: `"apple_pay"` |
 | `site_gateway_setting_id` | `int` | Optional | - |
 | `gateway_handle` | `str` | Optional | - |
 | `created_at` | `datetime` | Optional | A timestamp indicating when this payment profile was created |

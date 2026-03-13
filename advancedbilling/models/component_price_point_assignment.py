@@ -1,49 +1,46 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class ComponentPricePointAssignment(object):
-
     """Implementation of the 'Component Price Point Assignment' model.
 
     Attributes:
         component_id (int): The model property of type int.
-        price_point (str | int | None): The model property of type str | int |
-            None.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        price_point (str | int | None): The model property of type str | int | None.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "component_id": 'component_id',
-        "price_point": 'price_point'
+        "component_id": "component_id",
+        "price_point": "price_point",
     }
 
     _optionals = [
-        'component_id',
-        'price_point',
+        "component_id",
+        "price_point",
     ]
 
-    def __init__(self,
-                 component_id=APIHelper.SKIP,
-                 price_point=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the ComponentPricePointAssignment class"""
-
+    def __init__(
+        self,
+        component_id=APIHelper.SKIP,
+        price_point=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a ComponentPricePointAssignment instance."""
         # Initialize members of the class
         if component_id is not APIHelper.SKIP:
-            self.component_id = component_id 
+            self.component_id = component_id
         if price_point is not APIHelper.SKIP:
-            self.price_point = price_point 
+            self.price_point = price_point
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -53,7 +50,7 @@ class ComponentPricePointAssignment(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -64,29 +61,72 @@ class ComponentPricePointAssignment(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import UnionTypeLookUp
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
 
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        component_id = dictionary.get("component_id") if dictionary.get("component_id") else APIHelper.SKIP
-        price_point = APIHelper.deserialize_union_type(UnionTypeLookUp.get('ComponentPricePointAssignmentPricePoint'), dictionary.get('price_point'), False) if dictionary.get('price_point') is not None else APIHelper.SKIP
+        component_id =\
+            dictionary.get("component_id")\
+            if dictionary.get("component_id")\
+                else APIHelper.SKIP
+        price_point = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("ComponentPricePointAssignmentPricePoint"),
+            dictionary.get("price_point"),
+            False)\
+            if dictionary.get("price_point") is not None\
+            else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(component_id,
                    price_point,
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!r}, '
-                f'price_point={(self.price_point if hasattr(self, "price_point") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _component_id=(
+            self.component_id
+            if hasattr(self, "component_id")
+            else None
+        )
+        _price_point=(
+            self.price_point
+            if hasattr(self, "price_point")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"component_id={_component_id!r}, "
+            f"price_point={_price_point!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'component_id={(self.component_id if hasattr(self, "component_id") else None)!s}, '
-                f'price_point={(self.price_point if hasattr(self, "price_point") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _component_id=(
+            self.component_id
+            if hasattr(self, "component_id")
+            else None
+        )
+        _price_point=(
+            self.price_point
+            if hasattr(self, "price_point")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"component_id={_component_id!s}, "
+            f"price_point={_price_point!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

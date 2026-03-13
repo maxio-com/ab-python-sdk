@@ -275,7 +275,8 @@ print(result)
       "handle": "acme-projects",
       "accounting_code": null,
       "created_at": "2013-02-20T15:05:51-07:00",
-      "updated_at": "2013-02-20T15:05:51-07:00"
+      "updated_at": "2013-02-20T15:05:51-07:00",
+      "archived_at": null
     }
   },
   {
@@ -286,7 +287,8 @@ print(result)
       "handle": "bat-family",
       "accounting_code": null,
       "created_at": "2014-04-16T12:41:13-06:00",
-      "updated_at": "2014-04-16T12:41:13-06:00"
+      "updated_at": "2014-04-16T12:41:13-06:00",
+      "archived_at": "2024-11-05T09:30:00-07:00"
     }
   }
 ]
@@ -332,7 +334,8 @@ print(result)
     "name": "Acme Projects",
     "description": "",
     "handle": "billing-plans",
-    "accounting_code": null
+    "accounting_code": null,
+    "archived_at": null
   }
 }
 ```

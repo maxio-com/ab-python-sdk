@@ -1,42 +1,40 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class UpdateSubscriptionGroup(object):
-
     """Implementation of the 'Update Subscription Group' model.
 
     Attributes:
         member_ids (List[int]): The model property of type List[int].
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "member_ids": 'member_ids'
+        "member_ids": "member_ids",
     }
 
     _optionals = [
-        'member_ids',
+        "member_ids",
     ]
 
-    def __init__(self,
-                 member_ids=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the UpdateSubscriptionGroup class"""
-
+    def __init__(
+        self,
+        member_ids=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a UpdateSubscriptionGroup instance."""
         # Initialize members of the class
         if member_ids is not APIHelper.SKIP:
-            self.member_ids = member_ids 
+            self.member_ids = member_ids
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -46,7 +44,7 @@ class UpdateSubscriptionGroup(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -57,24 +55,49 @@ class UpdateSubscriptionGroup(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        member_ids = dictionary.get("member_ids") if dictionary.get("member_ids") else APIHelper.SKIP
+        member_ids =\
+            dictionary.get("member_ids")\
+            if dictionary.get("member_ids")\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(member_ids,
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'member_ids={(self.member_ids if hasattr(self, "member_ids") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _member_ids=(
+            self.member_ids
+            if hasattr(self, "member_ids")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"member_ids={_member_ids!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'member_ids={(self.member_ids if hasattr(self, "member_ids") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _member_ids=(
+            self.member_ids
+            if hasattr(self, "member_ids")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"member_ids={_member_ids!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

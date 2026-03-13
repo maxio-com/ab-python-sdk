@@ -33,7 +33,7 @@
 | `signup_revenue` | `str` | Optional | The revenue, formatted as a string of decimal separated dollars and,cents, from the subscription signup ($50.00 would be formatted as,50.00) |
 | `delayed_cancel_at` | `datetime` | Optional | Timestamp for when the subscription is currently set to cancel. |
 | `coupon_code` | `str` | Optional | (deprecated) The coupon code of the single coupon currently applied to the subscription. See coupon_codes instead as subscriptions can now have more than one coupon. |
-| `snap_day` | int \| [SnapDay](../../doc/models/snap-day.md) \| None | Optional | This is a container for one-of cases. |
+| `snap_day` | `str` | Optional | A day of month that subscription will be processed on. Can be 1 up to 28 or 'end'. |
 | `payment_collection_method` | [`CollectionMethod`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 | `customer` | [`Customer`](../../doc/models/customer.md) | Optional | - |
 | `product` | [`Product`](../../doc/models/product.md) | Optional | - |
@@ -46,7 +46,7 @@
 | `next_product_handle` | `str` | Optional | If a delayed product change is scheduled, the handle of the product that the subscription will be changed to at the next renewal. |
 | `coupon_use_count` | `int` | Optional | (deprecated) How many times the subscription's single coupon has been used. This field has no replacement for multiple coupons. |
 | `coupon_uses_allowed` | `int` | Optional | (deprecated) How many times the subscription's single coupon may be used. This field has no replacement for multiple coupons. |
-| `reason_code` | `str` | Optional | If the subscription is canceled, this is their churn code. |
+| `reason_code` | `str` | Optional | The churn reason code associated to a cancelled subscription. |
 | `automatically_resume_at` | `datetime` | Optional | The date the subscription is scheduled to automatically resume from the on_hold state. |
 | `coupon_codes` | `List[str]` | Optional | An array for all the coupons attached to the subscription. |
 | `offer_id` | `int` | Optional | The ID of the offer associated with the subscription. |
@@ -57,7 +57,7 @@
 | `next_product_price_point_id` | `int` | Optional | If a delayed product change is scheduled, the ID of the product price point that the subscription will be changed to at the next renewal. |
 | `net_terms` | `int` | Optional | On Relationship Invoicing, the number of days before a renewal invoice is due. |
 | `stored_credential_transaction_id` | `int` | Optional | For European sites subject to PSD2 and using 3D Secure, this can be used to reference a previous transaction for the customer. This will ensure the card will be charged successfully at renewal. |
-| `reference` | `str` | Optional | The reference value (provided by your app) for the subscription itelf. |
+| `reference` | `str` | Optional | The reference value (provided by your app) for the subscription istelf. |
 | `on_hold_at` | `datetime` | Optional | The timestamp of the most recent on hold action. |
 | `prepaid_dunning` | `bool` | Optional | Boolean representing whether the subscription is prepaid and currently in dunning. Only returned for Relationship Invoicing sites with the feature enabled |
 | `coupons` | [`List[SubscriptionIncludedCoupon]`](../../doc/models/subscription-included-coupon.md) | Optional | Additional coupon data. To use this data you also have to include the following param in the request`include[]=coupons`.<br>Only in Read Subscription Endpoint. |

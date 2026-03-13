@@ -14,6 +14,7 @@ component_price_points_controller = client.component_price_points
 * [Create Component Price Point](../../doc/controllers/component-price-points.md#create-component-price-point)
 * [List Component Price Points](../../doc/controllers/component-price-points.md#list-component-price-points)
 * [Bulk Create Component Price Points](../../doc/controllers/component-price-points.md#bulk-create-component-price-points)
+* [Clone Component Price Point](../../doc/controllers/component-price-points.md#clone-component-price-point)
 * [Update Component Price Point](../../doc/controllers/component-price-points.md#update-component-price-point)
 * [Read Component Price Point](../../doc/controllers/component-price-points.md#read-component-price-point)
 * [Archive Component Price Point](../../doc/controllers/component-price-points.md#archive-component-price-point)
@@ -376,6 +377,138 @@ print(result)
 | 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
 
 
+# Clone Component Price Point
+
+Clones a component price point. Custom price points (tied to a specific subscription) cannot be cloned. The following attributes are copied from the source price point:
+
+- Pricing scheme
+- All price tiers (with starting/ending quantities and unit prices)
+- Tax included setting
+- Currency prices (if definitive pricing is set)
+- Overage pricing (for prepaid usage components)
+- Interval settings (if multi-frequency is enabled)
+- Event-based billing segments (if applicable)
+
+```python
+def clone_component_price_point(self,
+                               component_id,
+                               price_point_id,
+                               body=None)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `component_id` | int \| str | Template, Required | This is a container for one-of cases. |
+| `price_point_id` | int \| str | Template, Required | This is a container for one-of cases. |
+| `body` | [`CloneComponentPricePointRequest`](../../doc/models/clone-component-price-point-request.md) | Body, Optional | - |
+
+## Response Type
+
+[`ComponentPricePointCurrencyOverageResponse`](../../doc/models/component-price-point-currency-overage-response.md)
+
+## Example Usage
+
+```python
+component_id = 144
+
+price_point_id = 188
+
+body = CloneComponentPricePointRequest(
+    price_point=CloneComponentPricePoint(
+        name='Pro Usage Tiered Clone'
+    )
+)
+
+result = component_price_points_controller.clone_component_price_point(
+    component_id,
+    price_point_id,
+    body=body
+)
+print(result)
+```
+
+## Example Response *(as JSON)*
+
+```json
+{
+  "price_point": {
+    "id": 9012,
+    "name": "Pro Usage Tiered Clone",
+    "type": "catalog",
+    "pricing_scheme": "tiered",
+    "component_id": 1234,
+    "handle": "pro-usage-tiered-clone",
+    "archived_at": null,
+    "created_at": "2024-05-01T12:34:56-04:00",
+    "updated_at": "2024-05-01T12:34:56-04:00",
+    "use_site_exchange_rate": false,
+    "currency_prices": [
+      {
+        "id": 3001,
+        "currency": "EUR",
+        "price": "9.99",
+        "formatted_price": "€9.99",
+        "price_id": 4001,
+        "price_point_id": 9012
+      }
+    ],
+    "currency_overage_prices": [
+      {
+        "id": 3002,
+        "currency": "EUR",
+        "price": "2.50",
+        "formatted_price": "€2.50",
+        "price_id": 4002,
+        "price_point_id": 9012
+      }
+    ],
+    "renew_prepaid_allocation": true,
+    "rollover_prepaid_remainder": false,
+    "expiration_interval": 1,
+    "expiration_interval_unit": "month",
+    "overage_pricing_scheme": "tiered",
+    "subscription_id": 4321,
+    "prices": [
+      {
+        "id": 4001,
+        "component_id": 1234,
+        "starting_quantity": 1,
+        "ending_quantity": 100,
+        "unit_price": "9.99",
+        "price_point_id": 9012,
+        "formatted_unit_price": "$9.99",
+        "segment_id": null
+      }
+    ],
+    "overage_prices": [
+      {
+        "id": 4002,
+        "component_id": 1234,
+        "starting_quantity": 101,
+        "ending_quantity": null,
+        "unit_price": "2.50",
+        "price_point_id": 9012,
+        "formatted_unit_price": "$2.50",
+        "segment_id": null
+      }
+    ],
+    "tax_included": false,
+    "interval": 1,
+    "interval_unit": "month"
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 404 | Not Found | `APIException` |
+| 422 | Unprocessable Entity (WebDAV) | [`ErrorListResponseException`](../../doc/models/error-list-response-exception.md) |
+
+
 # Update Component Price Point
 
 When updating a price point, prices can be updated as well by creating new prices or editing / removing existing ones.
@@ -469,7 +602,7 @@ def read_component_price_point(self,
 
 ## Response Type
 
-[`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md)
+[`ComponentPricePointCurrencyOverageResponse`](../../doc/models/component-price-point-currency-overage-response.md)
 
 ## Example Usage
 

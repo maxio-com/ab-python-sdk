@@ -1,39 +1,36 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class TrialType(object):
-
     """Implementation of the 'Trial Type' enum.
 
-    Indicates how a trial is handled when the trail period ends and there is
-    no credit card on file. For `no_obligation`, the subscription transitions
-    to a Trial Ended state. Maxio will not send any emails or statements. For
-    `payment_expected`, the subscription transitions to a Past Due state.
-    Maxio will send normal dunning emails and statements according to your
-    other settings.
+    Indicates how a trial is handled when the trail period ends and there is no
+    credit card on file. For `no_obligation`, the subscription transitions to a Trial
+    Ended state. Maxio will not send any emails or statements. For
+    `payment_expected`, the subscription transitions to a Past Due state. Maxio will
+    send normal dunning emails and statements according to your other settings.
 
     Attributes:
         NO_OBLIGATION: The enum member of type str.
         PAYMENT_EXPECTED: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    _all_values = ['no_obligation', 'payment_expected']
-    NO_OBLIGATION = 'no_obligation'
 
-    PAYMENT_EXPECTED = 'payment_expected'
+    _all_values = ["no_obligation", "payment_expected"]
+    NO_OBLIGATION = "no_obligation"
+
+    PAYMENT_EXPECTED = "payment_expected"
 
     @classmethod
     def validate(cls, value):
-        """Validates value contains in enum
+        """Validate value contains in enum
 
         Args:
             value: the value to be validated
@@ -43,9 +40,10 @@ class TrialType(object):
 
         """
         return value in cls._all_values
-   
+
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

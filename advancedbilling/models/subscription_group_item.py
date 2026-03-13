@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class SubscriptionGroupItem(object):
-
     """Implementation of the 'Subscription Group Item' model.
 
     Attributes:
@@ -24,79 +22,79 @@ class SubscriptionGroupItem(object):
         coupon_code (str): The model property of type str.
         total_revenue_in_cents (int): The model property of type int.
         balance_in_cents (int): The model property of type int.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "id": 'id',
-        "reference": 'reference',
-        "product_id": 'product_id',
-        "product_handle": 'product_handle',
-        "product_price_point_id": 'product_price_point_id',
-        "product_price_point_handle": 'product_price_point_handle',
-        "currency": 'currency',
-        "coupon_code": 'coupon_code',
-        "total_revenue_in_cents": 'total_revenue_in_cents',
-        "balance_in_cents": 'balance_in_cents'
+        "id": "id",
+        "reference": "reference",
+        "product_id": "product_id",
+        "product_handle": "product_handle",
+        "product_price_point_id": "product_price_point_id",
+        "product_price_point_handle": "product_price_point_handle",
+        "currency": "currency",
+        "coupon_code": "coupon_code",
+        "total_revenue_in_cents": "total_revenue_in_cents",
+        "balance_in_cents": "balance_in_cents",
     }
 
     _optionals = [
-        'id',
-        'reference',
-        'product_id',
-        'product_handle',
-        'product_price_point_id',
-        'product_price_point_handle',
-        'currency',
-        'coupon_code',
-        'total_revenue_in_cents',
-        'balance_in_cents',
+        "id",
+        "reference",
+        "product_id",
+        "product_handle",
+        "product_price_point_id",
+        "product_price_point_handle",
+        "currency",
+        "coupon_code",
+        "total_revenue_in_cents",
+        "balance_in_cents",
     ]
 
     _nullables = [
-        'reference',
-        'product_handle',
-        'coupon_code',
+        "reference",
+        "product_handle",
+        "coupon_code",
     ]
 
-    def __init__(self,
-                 id=APIHelper.SKIP,
-                 reference=APIHelper.SKIP,
-                 product_id=APIHelper.SKIP,
-                 product_handle=APIHelper.SKIP,
-                 product_price_point_id=APIHelper.SKIP,
-                 product_price_point_handle=APIHelper.SKIP,
-                 currency=APIHelper.SKIP,
-                 coupon_code=APIHelper.SKIP,
-                 total_revenue_in_cents=APIHelper.SKIP,
-                 balance_in_cents=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the SubscriptionGroupItem class"""
-
+    def __init__(
+        self,
+        id=APIHelper.SKIP,
+        reference=APIHelper.SKIP,
+        product_id=APIHelper.SKIP,
+        product_handle=APIHelper.SKIP,
+        product_price_point_id=APIHelper.SKIP,
+        product_price_point_handle=APIHelper.SKIP,
+        currency=APIHelper.SKIP,
+        coupon_code=APIHelper.SKIP,
+        total_revenue_in_cents=APIHelper.SKIP,
+        balance_in_cents=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a SubscriptionGroupItem instance."""
         # Initialize members of the class
         if id is not APIHelper.SKIP:
-            self.id = id 
+            self.id = id
         if reference is not APIHelper.SKIP:
-            self.reference = reference 
+            self.reference = reference
         if product_id is not APIHelper.SKIP:
-            self.product_id = product_id 
+            self.product_id = product_id
         if product_handle is not APIHelper.SKIP:
-            self.product_handle = product_handle 
+            self.product_handle = product_handle
         if product_price_point_id is not APIHelper.SKIP:
-            self.product_price_point_id = product_price_point_id 
+            self.product_price_point_id = product_price_point_id
         if product_price_point_handle is not APIHelper.SKIP:
-            self.product_price_point_handle = product_price_point_handle 
+            self.product_price_point_handle = product_price_point_handle
         if currency is not APIHelper.SKIP:
-            self.currency = currency 
+            self.currency = currency
         if coupon_code is not APIHelper.SKIP:
-            self.coupon_code = coupon_code 
+            self.coupon_code = coupon_code
         if total_revenue_in_cents is not APIHelper.SKIP:
-            self.total_revenue_in_cents = total_revenue_in_cents 
+            self.total_revenue_in_cents = total_revenue_in_cents
         if balance_in_cents is not APIHelper.SKIP:
-            self.balance_in_cents = balance_in_cents 
+            self.balance_in_cents = balance_in_cents
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -106,7 +104,7 @@ class SubscriptionGroupItem(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -117,23 +115,55 @@ class SubscriptionGroupItem(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        reference = dictionary.get("reference") if "reference" in dictionary.keys() else APIHelper.SKIP
-        product_id = dictionary.get("product_id") if dictionary.get("product_id") else APIHelper.SKIP
-        product_handle = dictionary.get("product_handle") if "product_handle" in dictionary.keys() else APIHelper.SKIP
-        product_price_point_id = dictionary.get("product_price_point_id") if dictionary.get("product_price_point_id") else APIHelper.SKIP
-        product_price_point_handle = dictionary.get("product_price_point_handle") if dictionary.get("product_price_point_handle") else APIHelper.SKIP
-        currency = dictionary.get("currency") if dictionary.get("currency") else APIHelper.SKIP
-        coupon_code = dictionary.get("coupon_code") if "coupon_code" in dictionary.keys() else APIHelper.SKIP
-        total_revenue_in_cents = dictionary.get("total_revenue_in_cents") if dictionary.get("total_revenue_in_cents") else APIHelper.SKIP
-        balance_in_cents = dictionary.get("balance_in_cents") if dictionary.get("balance_in_cents") else APIHelper.SKIP
+        id =\
+            dictionary.get("id")\
+            if dictionary.get("id")\
+                else APIHelper.SKIP
+        reference =\
+            dictionary.get("reference")\
+            if "reference" in dictionary.keys()\
+                else APIHelper.SKIP
+        product_id =\
+            dictionary.get("product_id")\
+            if dictionary.get("product_id")\
+                else APIHelper.SKIP
+        product_handle =\
+            dictionary.get("product_handle")\
+            if "product_handle" in dictionary.keys()\
+                else APIHelper.SKIP
+        product_price_point_id =\
+            dictionary.get("product_price_point_id")\
+            if dictionary.get("product_price_point_id")\
+                else APIHelper.SKIP
+        product_price_point_handle =\
+            dictionary.get("product_price_point_handle")\
+            if dictionary.get("product_price_point_handle")\
+                else APIHelper.SKIP
+        currency =\
+            dictionary.get("currency")\
+            if dictionary.get("currency")\
+                else APIHelper.SKIP
+        coupon_code =\
+            dictionary.get("coupon_code")\
+            if "coupon_code" in dictionary.keys()\
+                else APIHelper.SKIP
+        total_revenue_in_cents =\
+            dictionary.get("total_revenue_in_cents")\
+            if dictionary.get("total_revenue_in_cents")\
+                else APIHelper.SKIP
+        balance_in_cents =\
+            dictionary.get("balance_in_cents")\
+            if dictionary.get("balance_in_cents")\
+                else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(id,
                    reference,
@@ -148,29 +178,139 @@ class SubscriptionGroupItem(object):
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'id={(self.id if hasattr(self, "id") else None)!r}, '
-                f'reference={(self.reference if hasattr(self, "reference") else None)!r}, '
-                f'product_id={(self.product_id if hasattr(self, "product_id") else None)!r}, '
-                f'product_handle={(self.product_handle if hasattr(self, "product_handle") else None)!r}, '
-                f'product_price_point_id={(self.product_price_point_id if hasattr(self, "product_price_point_id") else None)!r}, '
-                f'product_price_point_handle={(self.product_price_point_handle if hasattr(self, "product_price_point_handle") else None)!r}, '
-                f'currency={(self.currency if hasattr(self, "currency") else None)!r}, '
-                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!r}, '
-                f'total_revenue_in_cents={(self.total_revenue_in_cents if hasattr(self, "total_revenue_in_cents") else None)!r}, '
-                f'balance_in_cents={(self.balance_in_cents if hasattr(self, "balance_in_cents") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _reference=(
+            self.reference
+            if hasattr(self, "reference")
+            else None
+        )
+        _product_id=(
+            self.product_id
+            if hasattr(self, "product_id")
+            else None
+        )
+        _product_handle=(
+            self.product_handle
+            if hasattr(self, "product_handle")
+            else None
+        )
+        _product_price_point_id=(
+            self.product_price_point_id
+            if hasattr(self, "product_price_point_id")
+            else None
+        )
+        _product_price_point_handle=(
+            self.product_price_point_handle
+            if hasattr(self, "product_price_point_handle")
+            else None
+        )
+        _currency=(
+            self.currency
+            if hasattr(self, "currency")
+            else None
+        )
+        _coupon_code=(
+            self.coupon_code
+            if hasattr(self, "coupon_code")
+            else None
+        )
+        _total_revenue_in_cents=(
+            self.total_revenue_in_cents
+            if hasattr(self, "total_revenue_in_cents")
+            else None
+        )
+        _balance_in_cents=(
+            self.balance_in_cents
+            if hasattr(self, "balance_in_cents")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!r}, "
+            f"reference={_reference!r}, "
+            f"product_id={_product_id!r}, "
+            f"product_handle={_product_handle!r}, "
+            f"product_price_point_id={_product_price_point_id!r}, "
+            f"product_price_point_handle={_product_price_point_handle!r}, "
+            f"currency={_currency!r}, "
+            f"coupon_code={_coupon_code!r}, "
+            f"total_revenue_in_cents={_total_revenue_in_cents!r}, "
+            f"balance_in_cents={_balance_in_cents!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'id={(self.id if hasattr(self, "id") else None)!s}, '
-                f'reference={(self.reference if hasattr(self, "reference") else None)!s}, '
-                f'product_id={(self.product_id if hasattr(self, "product_id") else None)!s}, '
-                f'product_handle={(self.product_handle if hasattr(self, "product_handle") else None)!s}, '
-                f'product_price_point_id={(self.product_price_point_id if hasattr(self, "product_price_point_id") else None)!s}, '
-                f'product_price_point_handle={(self.product_price_point_handle if hasattr(self, "product_price_point_handle") else None)!s}, '
-                f'currency={(self.currency if hasattr(self, "currency") else None)!s}, '
-                f'coupon_code={(self.coupon_code if hasattr(self, "coupon_code") else None)!s}, '
-                f'total_revenue_in_cents={(self.total_revenue_in_cents if hasattr(self, "total_revenue_in_cents") else None)!s}, '
-                f'balance_in_cents={(self.balance_in_cents if hasattr(self, "balance_in_cents") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _reference=(
+            self.reference
+            if hasattr(self, "reference")
+            else None
+        )
+        _product_id=(
+            self.product_id
+            if hasattr(self, "product_id")
+            else None
+        )
+        _product_handle=(
+            self.product_handle
+            if hasattr(self, "product_handle")
+            else None
+        )
+        _product_price_point_id=(
+            self.product_price_point_id
+            if hasattr(self, "product_price_point_id")
+            else None
+        )
+        _product_price_point_handle=(
+            self.product_price_point_handle
+            if hasattr(self, "product_price_point_handle")
+            else None
+        )
+        _currency=(
+            self.currency
+            if hasattr(self, "currency")
+            else None
+        )
+        _coupon_code=(
+            self.coupon_code
+            if hasattr(self, "coupon_code")
+            else None
+        )
+        _total_revenue_in_cents=(
+            self.total_revenue_in_cents
+            if hasattr(self, "total_revenue_in_cents")
+            else None
+        )
+        _balance_in_cents=(
+            self.balance_in_cents
+            if hasattr(self, "balance_in_cents")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!s}, "
+            f"reference={_reference!s}, "
+            f"product_id={_product_id!s}, "
+            f"product_handle={_product_handle!s}, "
+            f"product_price_point_id={_product_price_point_id!s}, "
+            f"product_price_point_handle={_product_price_point_handle!s}, "
+            f"currency={_currency!s}, "
+            f"coupon_code={_coupon_code!s}, "
+            f"total_revenue_in_cents={_total_revenue_in_cents!s}, "
+            f"balance_in_cents={_balance_in_cents!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

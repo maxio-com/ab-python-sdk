@@ -1,41 +1,41 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
-class SnapDay(object):
-
-    """Implementation of the 'SnapDay' enum.
+class Status(object):
+    """Implementation of the 'status' enum.
 
     Attributes:
-        END: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        DRAFT: The enum member of type str.
+        SCHEDULED: The enum member of type str.
+        PENDING: The enum member of type str.
+        CANCELED: The enum member of type str.
+        ACTIVE: The enum member of type str.
+        FULFILLED: The enum member of type str.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    _all_values = ['end']
-    END = 'end'
 
-    @classmethod
-    def validate(cls, value):
-        """Validates value contains in enum
+    DRAFT = "draft"
 
-        Args:
-            value: the value to be validated
+    SCHEDULED = "scheduled"
 
-        Returns:
-            boolean : if value is valid enum values.
+    PENDING = "pending"
 
-        """
-        return value in cls._all_values
-   
+    CANCELED = "canceled"
+
+    ACTIVE = "active"
+
+    FULFILLED = "fulfilled"
+
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

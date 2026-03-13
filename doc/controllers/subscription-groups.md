@@ -129,6 +129,7 @@ print(result)
 ```json
 {
   "subscription_group": {
+    "uid": "grp_952mvqcnk53wq",
     "customer_id": 1,
     "payment_profile": {
       "id": 1,
@@ -389,8 +390,8 @@ print(result)
 
 # Delete Subscription Group
 
-Use this endpoint to delete subscription group.
-Only groups without members can be deleted
+Deletes a subscription group.
+Only groups without members can be deleted.
 
 ```python
 def delete_subscription_group(self,
@@ -537,7 +538,7 @@ def add_subscription_to_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 | `body` | [`AddSubscriptionToAGroup`](../../doc/models/add-subscription-to-a-group.md) | Body, Optional | - |
 
 ## Response Type
@@ -606,7 +607,7 @@ def remove_subscription_from_group(self,
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription |
+| `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 
 ## Response Type
 

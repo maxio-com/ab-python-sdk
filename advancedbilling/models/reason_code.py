@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class ReasonCode(object):
-
     """Implementation of the 'Reason Code' model.
 
     Attributes:
@@ -21,58 +19,64 @@ class ReasonCode(object):
         position (int): The model property of type int.
         created_at (datetime): The model property of type datetime.
         updated_at (datetime): The model property of type datetime.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "id": 'id',
-        "site_id": 'site_id',
-        "code": 'code',
-        "description": 'description',
-        "position": 'position',
-        "created_at": 'created_at',
-        "updated_at": 'updated_at'
+        "id": "id",
+        "site_id": "site_id",
+        "code": "code",
+        "description": "description",
+        "position": "position",
+        "created_at": "created_at",
+        "updated_at": "updated_at",
     }
 
     _optionals = [
-        'id',
-        'site_id',
-        'code',
-        'description',
-        'position',
-        'created_at',
-        'updated_at',
+        "id",
+        "site_id",
+        "code",
+        "description",
+        "position",
+        "created_at",
+        "updated_at",
     ]
 
-    def __init__(self,
-                 id=APIHelper.SKIP,
-                 site_id=APIHelper.SKIP,
-                 code=APIHelper.SKIP,
-                 description=APIHelper.SKIP,
-                 position=APIHelper.SKIP,
-                 created_at=APIHelper.SKIP,
-                 updated_at=APIHelper.SKIP,
-                 additional_properties=None):
-        """Constructor for the ReasonCode class"""
-
+    def __init__(
+        self,
+        id=APIHelper.SKIP,
+        site_id=APIHelper.SKIP,
+        code=APIHelper.SKIP,
+        description=APIHelper.SKIP,
+        position=APIHelper.SKIP,
+        created_at=APIHelper.SKIP,
+        updated_at=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a ReasonCode instance."""
         # Initialize members of the class
         if id is not APIHelper.SKIP:
-            self.id = id 
+            self.id = id
         if site_id is not APIHelper.SKIP:
-            self.site_id = site_id 
+            self.site_id = site_id
         if code is not APIHelper.SKIP:
-            self.code = code 
+            self.code = code
         if description is not APIHelper.SKIP:
-            self.description = description 
+            self.description = description
         if position is not APIHelper.SKIP:
-            self.position = position 
+            self.position = position
         if created_at is not APIHelper.SKIP:
-            self.created_at = APIHelper.apply_datetime_converter(created_at, APIHelper.RFC3339DateTime) if created_at else None 
+            self.created_at =\
+                 APIHelper.apply_datetime_converter(
+                created_at, APIHelper.RFC3339DateTime)\
+                 if created_at else None
         if updated_at is not APIHelper.SKIP:
-            self.updated_at = APIHelper.apply_datetime_converter(updated_at, APIHelper.RFC3339DateTime) if updated_at else None 
+            self.updated_at =\
+                 APIHelper.apply_datetime_converter(
+                updated_at, APIHelper.RFC3339DateTime)\
+                 if updated_at else None
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -82,7 +86,7 @@ class ReasonCode(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -93,20 +97,41 @@ class ReasonCode(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        id = dictionary.get("id") if dictionary.get("id") else APIHelper.SKIP
-        site_id = dictionary.get("site_id") if dictionary.get("site_id") else APIHelper.SKIP
-        code = dictionary.get("code") if dictionary.get("code") else APIHelper.SKIP
-        description = dictionary.get("description") if dictionary.get("description") else APIHelper.SKIP
-        position = dictionary.get("position") if dictionary.get("position") else APIHelper.SKIP
-        created_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("created_at")).datetime if dictionary.get("created_at") else APIHelper.SKIP
-        updated_at = APIHelper.RFC3339DateTime.from_value(dictionary.get("updated_at")).datetime if dictionary.get("updated_at") else APIHelper.SKIP
+        id =\
+            dictionary.get("id")\
+            if dictionary.get("id")\
+                else APIHelper.SKIP
+        site_id =\
+            dictionary.get("site_id")\
+            if dictionary.get("site_id")\
+                else APIHelper.SKIP
+        code =\
+            dictionary.get("code")\
+            if dictionary.get("code")\
+                else APIHelper.SKIP
+        description =\
+            dictionary.get("description")\
+            if dictionary.get("description")\
+                else APIHelper.SKIP
+        position =\
+            dictionary.get("position")\
+            if dictionary.get("position")\
+                else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(
+            dictionary.get("created_at")).datetime\
+            if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(
+            dictionary.get("updated_at")).datetime\
+            if dictionary.get("updated_at") else APIHelper.SKIP
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(id,
                    site_id,
@@ -118,23 +143,103 @@ class ReasonCode(object):
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'id={(self.id if hasattr(self, "id") else None)!r}, '
-                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!r}, '
-                f'code={(self.code if hasattr(self, "code") else None)!r}, '
-                f'description={(self.description if hasattr(self, "description") else None)!r}, '
-                f'position={(self.position if hasattr(self, "position") else None)!r}, '
-                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!r}, '
-                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _site_id=(
+            self.site_id
+            if hasattr(self, "site_id")
+            else None
+        )
+        _code=(
+            self.code
+            if hasattr(self, "code")
+            else None
+        )
+        _description=(
+            self.description
+            if hasattr(self, "description")
+            else None
+        )
+        _position=(
+            self.position
+            if hasattr(self, "position")
+            else None
+        )
+        _created_at=(
+            self.created_at
+            if hasattr(self, "created_at")
+            else None
+        )
+        _updated_at=(
+            self.updated_at
+            if hasattr(self, "updated_at")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!r}, "
+            f"site_id={_site_id!r}, "
+            f"code={_code!r}, "
+            f"description={_description!r}, "
+            f"position={_position!r}, "
+            f"created_at={_created_at!r}, "
+            f"updated_at={_updated_at!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'id={(self.id if hasattr(self, "id") else None)!s}, '
-                f'site_id={(self.site_id if hasattr(self, "site_id") else None)!s}, '
-                f'code={(self.code if hasattr(self, "code") else None)!s}, '
-                f'description={(self.description if hasattr(self, "description") else None)!s}, '
-                f'position={(self.position if hasattr(self, "position") else None)!s}, '
-                f'created_at={(self.created_at if hasattr(self, "created_at") else None)!s}, '
-                f'updated_at={(self.updated_at if hasattr(self, "updated_at") else None)!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _site_id=(
+            self.site_id
+            if hasattr(self, "site_id")
+            else None
+        )
+        _code=(
+            self.code
+            if hasattr(self, "code")
+            else None
+        )
+        _description=(
+            self.description
+            if hasattr(self, "description")
+            else None
+        )
+        _position=(
+            self.position
+            if hasattr(self, "position")
+            else None
+        )
+        _created_at=(
+            self.created_at
+            if hasattr(self, "created_at")
+            else None
+        )
+        _updated_at=(
+            self.updated_at
+            if hasattr(self, "updated_at")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!s}, "
+            f"site_id={_site_id!s}, "
+            f"code={_code!s}, "
+            f"description={_description!s}, "
+            f"position={_position!s}, "
+            f"created_at={_created_at!s}, "
+            f"updated_at={_updated_at!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

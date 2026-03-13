@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class InvoicePaymentType(object):
-
     """Implementation of the 'Invoice Payment Type' enum.
 
     The type of payment to be applied to an Invoice. Defaults to external.
@@ -19,20 +16,22 @@ class InvoicePaymentType(object):
         PREPAYMENT: The enum member of type str.
         SERVICE_CREDIT: The enum member of type str.
         PAYMENT: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    EXTERNAL = 'external'
 
-    PREPAYMENT = 'prepayment'
+    EXTERNAL = "external"
 
-    SERVICE_CREDIT = 'service_credit'
+    PREPAYMENT = "prepayment"
 
-    PAYMENT = 'payment'
+    SERVICE_CREDIT = "service_credit"
+
+    PAYMENT = "payment"
 
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

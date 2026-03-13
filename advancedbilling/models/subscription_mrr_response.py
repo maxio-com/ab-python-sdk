@@ -1,38 +1,38 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.models.subscription_mrr import SubscriptionMRR
+
+# ruff: noqa: E501
+from advancedbilling.models.subscription_mrr import (
+    SubscriptionMRR,
+)
 
 
 class SubscriptionMRRResponse(object):
-
     """Implementation of the 'Subscription MRR Response' model.
 
     Attributes:
         subscriptions_mrr (List[SubscriptionMRR]): The model property of type
             List[SubscriptionMRR].
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "subscriptions_mrr": 'subscriptions_mrr'
+        "subscriptions_mrr": "subscriptions_mrr",
     }
 
-    def __init__(self,
-                 subscriptions_mrr=None,
-                 additional_properties=None):
-        """Constructor for the SubscriptionMRRResponse class"""
-
+    def __init__(
+        self,
+        subscriptions_mrr=None,
+        additional_properties=None):
+        """Initialize a SubscriptionMRRResponse instance."""
         # Initialize members of the class
-        self.subscriptions_mrr = subscriptions_mrr 
+        self.subscriptions_mrr = subscriptions_mrr
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -42,7 +42,7 @@ class SubscriptionMRRResponse(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -53,26 +53,43 @@ class SubscriptionMRRResponse(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
         subscriptions_mrr = None
-        if dictionary.get('subscriptions_mrr') is not None:
-            subscriptions_mrr = [SubscriptionMRR.from_dictionary(x) for x in dictionary.get('subscriptions_mrr')]
+        if dictionary.get("subscriptions_mrr") is not None:
+            subscriptions_mrr = [
+                SubscriptionMRR.from_dictionary(x)
+                    for x in dictionary.get("subscriptions_mrr")
+            ]
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(subscriptions_mrr,
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'subscriptions_mrr={self.subscriptions_mrr!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _subscriptions_mrr=self.subscriptions_mrr
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"subscriptions_mrr={_subscriptions_mrr!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'subscriptions_mrr={self.subscriptions_mrr!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _subscriptions_mrr=self.subscriptions_mrr
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"subscriptions_mrr={_subscriptions_mrr!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

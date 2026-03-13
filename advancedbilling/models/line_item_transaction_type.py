@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class LineItemTransactionType(object):
-
     """Implementation of the 'Line Item Transaction Type' enum.
 
     A handle for the line item transaction type
@@ -22,26 +19,28 @@ class LineItemTransactionType(object):
         REFUND: The enum member of type str.
         INFO_TRANSACTION: The enum member of type str.
         PAYMENT_AUTHORIZATION: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    CHARGE = 'charge'
 
-    CREDIT = 'credit'
+    CHARGE = "charge"
 
-    ADJUSTMENT = 'adjustment'
+    CREDIT = "credit"
 
-    PAYMENT = 'payment'
+    ADJUSTMENT = "adjustment"
 
-    REFUND = 'refund'
+    PAYMENT = "payment"
 
-    INFO_TRANSACTION = 'info_transaction'
+    REFUND = "refund"
 
-    PAYMENT_AUTHORIZATION = 'payment_authorization'
+    INFO_TRANSACTION = "info_transaction"
+
+    PAYMENT_AUTHORIZATION = "payment_authorization"
 
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

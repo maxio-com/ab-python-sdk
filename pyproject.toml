@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "maxio-advanced-billing-sdk"
 description = "Ultimate billing and pricing flexibility for B2B SaaS.\nMaxio integrates directly into your product, so you can seamlessly manage your product catalog, bill customers, and collect payments."
-version = "8.0.0"
+version = "9.0.0"
 readme = "README.md"
 keywords = ["Maxio", "Advaced Billing", "Payments", "Subscription"]
 dependencies = ["apimatic-core~=0.2.0, >= 0.2.24", "apimatic-core-interfaces~=0.1.0, >= 0.1.8", "apimatic-requests-client-adapter~=0.1.0, >= 0.1.10", "python-dotenv>=0.21, <2.0", "deprecation~=2.1"]

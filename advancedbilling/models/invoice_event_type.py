@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class InvoiceEventType(object):
-
     """Implementation of the 'Invoice Event Type' enum.
 
     Invoice Event Type
@@ -30,44 +27,49 @@ class InvoiceEventType(object):
         REMOVE_PAYMENT: The enum member of type str.
         FAILED_PAYMENT: The enum member of type str.
         CHANGE_CHARGEBACK_STATUS: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    _all_values = ['issue_invoice', 'apply_credit_note', 'create_credit_note', 'apply_payment', 'apply_debit_note', 'create_debit_note', 'refund_invoice', 'void_invoice', 'void_remainder', 'backport_invoice', 'change_invoice_status', 'change_invoice_collection_method', 'remove_payment', 'failed_payment', 'change_chargeback_status']
-    ISSUE_INVOICE = 'issue_invoice'
 
-    APPLY_CREDIT_NOTE = 'apply_credit_note'
+    _all_values = ["issue_invoice", "apply_credit_note", "create_credit_note",
+        "apply_payment", "apply_debit_note", "create_debit_note", "refund_invoice",
+        "void_invoice", "void_remainder", "backport_invoice", "change_invoice_status",
+        "change_invoice_collection_method", "remove_payment", "failed_payment",
+        "change_chargeback_status"]
+    ISSUE_INVOICE = "issue_invoice"
 
-    CREATE_CREDIT_NOTE = 'create_credit_note'
+    APPLY_CREDIT_NOTE = "apply_credit_note"
 
-    APPLY_PAYMENT = 'apply_payment'
+    CREATE_CREDIT_NOTE = "create_credit_note"
 
-    APPLY_DEBIT_NOTE = 'apply_debit_note'
+    APPLY_PAYMENT = "apply_payment"
 
-    CREATE_DEBIT_NOTE = 'create_debit_note'
+    APPLY_DEBIT_NOTE = "apply_debit_note"
 
-    REFUND_INVOICE = 'refund_invoice'
+    CREATE_DEBIT_NOTE = "create_debit_note"
 
-    VOID_INVOICE = 'void_invoice'
+    REFUND_INVOICE = "refund_invoice"
 
-    VOID_REMAINDER = 'void_remainder'
+    VOID_INVOICE = "void_invoice"
 
-    BACKPORT_INVOICE = 'backport_invoice'
+    VOID_REMAINDER = "void_remainder"
 
-    CHANGE_INVOICE_STATUS = 'change_invoice_status'
+    BACKPORT_INVOICE = "backport_invoice"
 
-    CHANGE_INVOICE_COLLECTION_METHOD = 'change_invoice_collection_method'
+    CHANGE_INVOICE_STATUS = "change_invoice_status"
 
-    REMOVE_PAYMENT = 'remove_payment'
+    CHANGE_INVOICE_COLLECTION_METHOD = "change_invoice_collection_method"
 
-    FAILED_PAYMENT = 'failed_payment'
+    REMOVE_PAYMENT = "remove_payment"
 
-    CHANGE_CHARGEBACK_STATUS = 'change_chargeback_status'
+    FAILED_PAYMENT = "failed_payment"
+
+    CHANGE_CHARGEBACK_STATUS = "change_chargeback_status"
 
     @classmethod
     def validate(cls, value):
-        """Validates value contains in enum
+        """Validate value contains in enum
 
         Args:
             value: the value to be validated
@@ -77,9 +79,10 @@ class InvoiceEventType(object):
 
         """
         return value in cls._all_values
-   
+
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 

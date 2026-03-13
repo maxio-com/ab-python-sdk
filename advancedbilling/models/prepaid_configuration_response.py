@@ -1,38 +1,38 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
-from advancedbilling.models.prepaid_configuration import PrepaidConfiguration
+
+# ruff: noqa: E501
+from advancedbilling.models.prepaid_configuration import (
+    PrepaidConfiguration,
+)
 
 
 class PrepaidConfigurationResponse(object):
-
     """Implementation of the 'Prepaid Configuration Response' model.
 
     Attributes:
-        prepaid_configuration (PrepaidConfiguration): The model property of
-            type PrepaidConfiguration.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        prepaid_configuration (PrepaidConfiguration): The model property of type
+            PrepaidConfiguration.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "prepaid_configuration": 'prepaid_configuration'
+        "prepaid_configuration": "prepaid_configuration",
     }
 
-    def __init__(self,
-                 prepaid_configuration=None,
-                 additional_properties=None):
-        """Constructor for the PrepaidConfigurationResponse class"""
-
+    def __init__(
+        self,
+        prepaid_configuration=None,
+        additional_properties=None):
+        """Initialize a PrepaidConfigurationResponse instance."""
         # Initialize members of the class
-        self.prepaid_configuration = prepaid_configuration 
+        self.prepaid_configuration = prepaid_configuration
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -42,7 +42,7 @@ class PrepaidConfigurationResponse(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -53,24 +53,41 @@ class PrepaidConfigurationResponse(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        prepaid_configuration = PrepaidConfiguration.from_dictionary(dictionary.get('prepaid_configuration')) if dictionary.get('prepaid_configuration') else None
+        prepaid_configuration =\
+            PrepaidConfiguration.from_dictionary(
+                dictionary.get("prepaid_configuration"))\
+                if dictionary.get("prepaid_configuration") else None
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(prepaid_configuration,
                    additional_properties)
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'prepaid_configuration={self.prepaid_configuration!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _prepaid_configuration=self.prepaid_configuration
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"prepaid_configuration={_prepaid_configuration!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'prepaid_configuration={self.prepaid_configuration!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _prepaid_configuration=self.prepaid_configuration
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"prepaid_configuration={_prepaid_configuration!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

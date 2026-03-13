@@ -1,20 +1,20 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
 import platform
+
 from apimatic_core.api_call import ApiCall
 from apimatic_core.types.error_case import ErrorCase
-from advancedbilling.exceptions.api_exception import APIException
+
+from advancedbilling.exceptions.api_exception import (
+    APIException,
+)
 
 
 class BaseController(object):
-
     """All controllers inherit from this base class.
 
     Attributes:
@@ -30,34 +30,46 @@ class BaseController(object):
 
     @staticmethod
     def user_agent():
-        return 'AB SDK Python:8.0.0 on OS {os-info}'
+        """Return UserAgent value."""
+        return "AB SDK Python:9.0.0 on OS {os-info}"
 
     @staticmethod
     def user_agent_parameters():
+        """Return UserAgentParameters value."""
         return {
-            'os-info': {'value': platform.system(), 'encode': False},
+            "os-info": {"value": platform.system(), "encode": False},
         }
 
     @staticmethod
     def global_errors():
+        """Return GlobalErrors value."""
         return {
-            'default': ErrorCase().error_message_template('HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.').exception_type(APIException),
-            '404': ErrorCase().error_message_template('Not Found:\'{$response.body}\'').exception_type(APIException),
+            "default": ErrorCase().error_message_template(
+                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
+                "nse.body}'.")
+                .exception_type(APIException),
+            "404": ErrorCase().error_message_template(
+                "Not Found:'{$response.body}'")
+                .exception_type(APIException),
         }
 
     def __init__(self, config):
+        """Initialize BaseController object."""
         self._config = config.get_http_client_configuration()
         self._http_call_back = self.config.http_callback
         self.api_call = ApiCall(config)
 
     @property
     def config(self):
+        """Return Configuration object."""
         return self._config
 
     @property
     def http_call_back(self):
+        """Return HttpCallBack object."""
         return self._http_call_back
 
     @property
     def new_api_call_builder(self):
+        """Return New ApiCallBuilder object."""
         return self.api_call.new_builder

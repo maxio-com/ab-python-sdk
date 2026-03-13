@@ -1,91 +1,104 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
-from advancedbilling.api_helper import APIHelper
-from advancedbilling.configuration import Server
-from advancedbilling.controllers.base_controller import BaseController
+# ruff: noqa: D410, E501, E101, D206
+from apimatic_core.authentication.multiple.single_auth import (
+    Single,
+)
 from apimatic_core.request_builder import RequestBuilder
 from apimatic_core.response_handler import ResponseHandler
+from apimatic_core.types.array_serialization_format import (
+    SerializationFormats,
+)
 from apimatic_core.types.parameter import Parameter
-from advancedbilling.http.http_method_enum import HttpMethodEnum
-from apimatic_core.types.array_serialization_format import SerializationFormats
-from apimatic_core.authentication.multiple.single_auth import Single
-from advancedbilling.models.product_response import ProductResponse
-from advancedbilling.exceptions.error_list_response_exception import ErrorListResponseException
+
+from advancedbilling.api_helper import APIHelper
+from advancedbilling.configuration import Server
+from advancedbilling.controllers.base_controller import (
+    BaseController,
+)
+from advancedbilling.exceptions.error_list_response_exception import (
+    ErrorListResponseException,
+)
+from advancedbilling.http.http_method_enum import (
+    HttpMethodEnum,
+)
+from advancedbilling.models.product_response import (
+    ProductResponse,
+)
 
 
 class ProductsController(BaseController):
-
     """A Controller to access Endpoints in the advancedbilling API."""
+
     def __init__(self, config):
+        """Initialize ProductsController object."""
         super(ProductsController, self).__init__(config)
 
     def create_product(self,
                        product_family_id,
                        body=None):
-        """Does a POST request to /product_families/{product_family_id}/products.json.
+        """Perform a POST request to
+        /product_families/{product_family_id}/products.json.
 
         Creates a product in your Advanced Billing site.
         See the following product docuemation for more information:
         + [Products
-        Documentation](https://maxio.zendesk.com/hc/en-us/articles/242610901176
-        45-Products-Overview)
+        Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Prod
+        ucts-Overview)
         + [Changing a Subscription's
-        Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-Pro
-        duct-Changes-and-Migrations)
+        Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-Product-Ch
+        anges-and-Migrations)
 
         Args:
-            product_family_id (str): Either the product family's id or its
-                handle prefixed with `handle:`
-            body (CreateOrUpdateProductRequest, optional): The request body
-                parameter.
+            product_family_id (str): Either the product family's id or its handle
+                prefixed with `handle:`
+            body (CreateOrUpdateProductRequest, optional): The request body parameter.
 
         Returns:
             ProductResponse: Response from the API. Created
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/product_families/{product_family_id}/products.json')
+            .path("/product_families/{product_family_id}/products.json")
             .http_method(HttpMethodEnum.POST)
             .template_param(Parameter()
-                            .key('product_family_id')
-                            .value(product_family_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("product_family_id")
+                .value(product_family_id)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
+                .key("Content-Type")
+                .value("application/json"))
             .body_param(Parameter()
-                        .value(body))
+                .value(body))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
+                .key("accept")
+                .value("application/json"))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+            .local_error_template("422",
+                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
+                "nse.body}'.",
+                ErrorListResponseException),
         ).execute()
 
     def read_product(self,
                      product_id):
-        """Does a GET request to /products/{product_id}.json.
+        """Perform a GET request to /products/{product_id}.json.
 
         Reads the current details of a product.
 
@@ -96,98 +109,94 @@ class ProductsController(BaseController):
             ProductResponse: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/products/{product_id}.json')
+            .path("/products/{product_id}.json")
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('product_id')
-                            .value(product_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("product_id")
+                .value(product_id)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
+                .key("accept")
+                .value("application/json"))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProductResponse.from_dictionary)
+            .deserialize_into(ProductResponse.from_dictionary),
         ).execute()
 
     def update_product(self,
                        product_id,
                        body=None):
-        """Does a PUT request to /products/{product_id}.json.
+        """Perform a PUT request to /products/{product_id}.json.
 
         Updates aspects of an existing product.
         ### Input Attributes Update Notes
         + `update_return_params` The parameters we will append to your
         `update_return_url`. See Return URLs and Parameters
         ### Product Price Point
-        Updating a product using this endpoint will create a new price point
-        and set it as the default price point for this product. If you should
-        like to update an existing product price point, that must be done
-        separately.
+        Updating a product using this endpoint will create a new price point and set
+        it as the default price point for this product. If you should like to update
+        an existing product price point, that must be done separately.
 
         Args:
             product_id (int): The Advanced Billing id of the product
-            body (CreateOrUpdateProductRequest, optional): The request body
-                parameter.
+            body (CreateOrUpdateProductRequest, optional): The request body parameter.
 
         Returns:
             ProductResponse: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/products/{product_id}.json')
+            .path("/products/{product_id}.json")
             .http_method(HttpMethodEnum.PUT)
             .template_param(Parameter()
-                            .key('product_id')
-                            .value(product_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("product_id")
+                .value(product_id)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('Content-Type')
-                          .value('application/json'))
+                .key("Content-Type")
+                .value("application/json"))
             .body_param(Parameter()
-                        .value(body))
+                .value(body))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
+                .key("accept")
+                .value("application/json"))
             .body_serializer(APIHelper.json_serialize)
-            .auth(Single('BasicAuth'))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+            .local_error_template("422",
+                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
+                "nse.body}'.",
+                ErrorListResponseException),
         ).execute()
 
     def archive_product(self,
                         product_id):
-        """Does a DELETE request to /products/{product_id}.json.
+        """Perform a DELETE request to /products/{product_id}.json.
 
         Archives the product. All current subscribers will be unffected; their
         subscription/purchase will continue to be charged monthly.
-        This will restrict the option to chose the product for purchase via
-        the Billing Portal, as well as disable Public Signup Pages for the
-        product.
+        This will restrict the option to chose the product for purchase via the
+        Billing Portal, as well as disable Public Signup Pages for the product.
 
         Args:
             product_id (int): The Advanced Billing id of the product
@@ -196,36 +205,37 @@ class ProductsController(BaseController):
             ProductResponse: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/products/{product_id}.json')
+            .path("/products/{product_id}.json")
             .http_method(HttpMethodEnum.DELETE)
             .template_param(Parameter()
-                            .key('product_id')
-                            .value(product_id)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("product_id")
+                .value(product_id)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
+                .key("accept")
+                .value("application/json"))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
             .deserialize_into(ProductResponse.from_dictionary)
-            .local_error_template('422', 'HTTP Response Not OK. Status code: {$statusCode}. Response: \'{$response.body}\'.', ErrorListResponseException)
+            .local_error_template("422",
+                "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
+                "nse.body}'.",
+                ErrorListResponseException),
         ).execute()
 
     def read_product_by_handle(self,
                                api_handle):
-        """Does a GET request to /products/handle/{api_handle}.json.
+        """Perform a GET request to /products/handle/{api_handle}.json.
 
         Retrieves a Product object by its `api_handle`.
 
@@ -236,144 +246,137 @@ class ProductsController(BaseController):
             ProductResponse: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/products/handle/{api_handle}.json')
+            .path("/products/handle/{api_handle}.json")
             .http_method(HttpMethodEnum.GET)
             .template_param(Parameter()
-                            .key('api_handle')
-                            .value(api_handle)
-                            .is_required(True)
-                            .should_encode(True))
+                .key("api_handle")
+                .value(api_handle)
+                .is_required(True)
+                .should_encode(True))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
-            .auth(Single('BasicAuth'))
+                .key("accept")
+                .value("application/json"))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProductResponse.from_dictionary)
+            .deserialize_into(ProductResponse.from_dictionary),
         ).execute()
 
     def list_products(self,
                       options=dict()):
-        """Does a GET request to /products.json.
+        """Perform a GET request to /products.json.
 
         This method allows to retrieve a list of Products belonging to a Site.
 
         Args:
-            options (dict, optional): Key-value pairs for any of the
-                parameters to this API Endpoint. All parameters to the
-                endpoint are supplied through the dictionary with their names
-                being the key and their desired values being the value. A list
-                of parameters that can be used are::
-
-                    date_field -- BasicDateField -- The type of filter you
-                        would like to apply to your search. Use in query:
+            options (dict, optional): Key-value pairs for any of the parameters to
+                this API Endpoint. All parameters to the endpoint are supplied
+                through the dictionary with their names being the key and their
+                desired values being the value. A list of parameters that can be used
+                are::
+                    date_field -- BasicDateField -- The type of filter you would like
+                        to apply to your search. Use in query:
                         `date_field=created_at`.
-                    filter -- ListProductsFilter -- Filter to use for List
-                        Products operations
-                    end_date -- date -- The end date (format YYYY-MM-DD) with
-                        which to filter the date_field. Returns products with
-                        a timestamp up to and including 11:59:59PM in your
-                        site’s time zone on the date specified.
+                    filter -- ListProductsFilter -- Filter to use for List Products
+                        operations
+                    end_date -- date -- The end date (format YYYY-MM-DD) with which
+                        to filter the date_field. Returns products with a timestamp
+                        up to and including 11:59:59PM in your site’s time zone on
+                        the date specified.
                     end_datetime -- datetime -- The end date and time (format
-                        YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns products with a timestamp at or
-                        before exact time provided in query. You can specify
-                        timezone in query - otherwise your site''s time zone
-                        will be used. If provided, this parameter will be used
-                        instead of end_date.
-                    start_date -- date -- The start date (format YYYY-MM-DD)
-                        with which to filter the date_field. Returns products
-                        with a timestamp at or after midnight (12:00:00 AM) in
-                        your site’s time zone on the date specified.
-                    start_datetime -- datetime -- The start date and time
-                        (format YYYY-MM-DD HH:MM:SS) with which to filter the
-                        date_field. Returns products with a timestamp at or
-                        after exact time provided in query. You can specify
-                        timezone in query - otherwise your site''s time zone
-                        will be used. If provided, this parameter will be used
-                        instead of start_date.
-                    page -- int -- Result records are organized in pages. By
-                        default, the first page of results is displayed. The
-                        page parameter specifies a page number of results to
-                        fetch. You can start navigating through the pages to
-                        consume the results. You do this by passing in a page
-                        parameter. Retrieve the next page by adding ?page=2 to
-                        the query string. If there are no results to return,
-                        then an empty result set will be returned. Use in
-                        query `page=1`.
-                    per_page -- int -- This parameter indicates how many
-                        records to fetch in each request. Default value is 20.
-                        The maximum allowed values is 200; any per_page value
-                        over 200 will be changed to 200. Use in query
-                        `per_page=200`.
-                    include_archived -- bool -- Include archived products. Use
-                        in query: `include_archived=true`.
-                    include -- ListProductsInclude -- Allows including
-                        additional data in the response. Use in query
+                        YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
+                        Returns products with a timestamp at or before exact time
+                        provided in query. You can specify timezone in query -
+                        otherwise your site''s time zone will be used. If provided,
+                        this parameter will be used instead of end_date.
+                    start_date -- date -- The start date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns products with a
+                        timestamp at or after midnight (12:00:00 AM) in your site’s
+                        time zone on the date specified.
+                    start_datetime -- datetime -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
+                        Returns products with a timestamp at or after exact time
+                        provided in query. You can specify timezone in query -
+                        otherwise your site''s time zone will be used. If provided,
+                        this parameter will be used instead of start_date.
+                    page -- int -- Result records are organized in pages. By default,
+                        the first page of results is displayed. The page parameter
+                        specifies a page number of results to fetch. You can start
+                        navigating through the pages to consume the results. You do
+                        this by passing in a page parameter. Retrieve the next page
+                        by adding ?page=2 to the query string. If there are no
+                        results to return, then an empty result set will be returned.
+                        Use in query `page=1`.
+                    per_page -- int -- This parameter indicates how many records to
+                        fetch in each request. Default value is 20. The maximum
+                        allowed values is 200; any per_page value over 200 will be
+                        changed to 200. Use in query `per_page=200`.
+                    include_archived -- bool -- Include archived products. Use in
+                        query: `include_archived=true`.
+                    include -- ListProductsInclude -- Allows including additional
+                        data in the response. Use in query
                         `include=prepaid_product_price_point`.
 
         Returns:
             List[ProductResponse]: Response from the API. OK
 
         Raises:
-            APIException: When an error occurs while fetching the data from
-                the remote API. This exception includes the HTTP Response
-                code, an error message, and the HTTP body that was received in
-                the request.
+            APIException: When an error occurs while fetching the data from the
+                remote API. This exception includes the HTTP Response code, an error
+                message, and the HTTP body that was received in the request.
 
         """
-
         return super().new_api_call_builder.request(
             RequestBuilder().server(Server.PRODUCTION)
-            .path('/products.json')
+            .path("/products.json")
             .http_method(HttpMethodEnum.GET)
             .query_param(Parameter()
-                         .key('date_field')
-                         .value(options.get('date_field', None)))
+                .key("date_field")
+                .value(options.get("date_field", None)))
             .query_param(Parameter()
-                         .key('filter')
-                         .value(options.get('filter', None)))
+                .key("filter")
+                .value(options.get("filter", None)))
             .query_param(Parameter()
-                         .key('end_date')
-                         .value(options.get('end_date', None)))
+                .key("end_date")
+                .value(options.get("end_date", None)))
             .query_param(Parameter()
-                         .key('end_datetime')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('end_datetime', None))))
+                .key("end_datetime")
+                .value(APIHelper.when_defined(APIHelper.RFC3339DateTime,
+                    options.get("end_datetime", None))))
             .query_param(Parameter()
-                         .key('start_date')
-                         .value(options.get('start_date', None)))
+                .key("start_date")
+                .value(options.get("start_date", None)))
             .query_param(Parameter()
-                         .key('start_datetime')
-                         .value(APIHelper.when_defined(APIHelper.RFC3339DateTime, options.get('start_datetime', None))))
+                .key("start_datetime")
+                .value(APIHelper.when_defined(APIHelper.RFC3339DateTime,
+                    options.get("start_datetime", None))))
             .query_param(Parameter()
-                         .key('page')
-                         .value(options.get('page', None)))
+                .key("page")
+                .value(options.get("page", None)))
             .query_param(Parameter()
-                         .key('per_page')
-                         .value(options.get('per_page', None)))
+                .key("per_page")
+                .value(options.get("per_page", None)))
             .query_param(Parameter()
-                         .key('include_archived')
-                         .value(options.get('include_archived', None)))
+                .key("include_archived")
+                .value(options.get("include_archived", None)))
             .query_param(Parameter()
-                         .key('include')
-                         .value(options.get('include', None)))
+                .key("include")
+                .value(options.get("include", None)))
             .header_param(Parameter()
-                          .key('accept')
-                          .value('application/json'))
+                .key("accept")
+                .value("application/json"))
             .array_serialization_format(SerializationFormats.CSV)
-            .auth(Single('BasicAuth'))
+            .auth(Single("BasicAuth")),
         ).response(
             ResponseHandler()
             .deserializer(APIHelper.json_deserialize)
-            .deserialize_into(ProductResponse.from_dictionary)
+            .deserialize_into(ProductResponse.from_dictionary),
         ).execute()

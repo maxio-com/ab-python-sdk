@@ -1,44 +1,41 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
+
+# ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 
 
 class ChangeInvoiceCollectionMethodEventData(object):
-
     """Implementation of the 'Change Invoice Collection Method Event Data' model.
 
     Example schema for an `change_invoice_collection_method` event
 
     Attributes:
-        from_collection_method (str): The previous collection method of the
-            invoice.
+        from_collection_method (str): The previous collection method of the invoice.
         to_collection_method (str): The new collection method of the invoice.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "from_collection_method": 'from_collection_method',
-        "to_collection_method": 'to_collection_method'
+        "from_collection_method": "from_collection_method",
+        "to_collection_method": "to_collection_method",
     }
 
-    def __init__(self,
-                 from_collection_method=None,
-                 to_collection_method=None,
-                 additional_properties=None):
-        """Constructor for the ChangeInvoiceCollectionMethodEventData class"""
-
+    def __init__(
+        self,
+        from_collection_method=None,
+        to_collection_method=None,
+        additional_properties=None):
+        """Initialize a ChangeInvoiceCollectionMethodEventData instance."""
         # Initialize members of the class
-        self.from_collection_method = from_collection_method 
-        self.to_collection_method = to_collection_method 
+        self.from_collection_method = from_collection_method
+        self.to_collection_method = to_collection_method
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -48,7 +45,7 @@ class ChangeInvoiceCollectionMethodEventData(object):
     @classmethod
     def from_dictionary(cls,
                         dictionary):
-        """Creates an instance of this model from a dictionary
+        """Create an instance of this model from a dictionary
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -59,15 +56,23 @@ class ChangeInvoiceCollectionMethodEventData(object):
             object: An instance of this structure class.
 
         """
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        from_collection_method = dictionary.get("from_collection_method") if dictionary.get("from_collection_method") else None
-        to_collection_method = dictionary.get("to_collection_method") if dictionary.get("to_collection_method") else None
+        from_collection_method =\
+            dictionary.get("from_collection_method")\
+            if dictionary.get("from_collection_method")\
+                else None
+        to_collection_method =\
+            dictionary.get("to_collection_method")\
+            if dictionary.get("to_collection_method")\
+                else None
+
         # Clean out expected properties from dictionary
-        additional_properties = {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
         # Return an object of this model
         return cls(from_collection_method,
                    to_collection_method,
@@ -75,7 +80,7 @@ class ChangeInvoiceCollectionMethodEventData(object):
 
     @classmethod
     def validate(cls, dictionary):
-        """Validates dictionary against class required properties
+        """Validate dictionary against class required properties
 
         Args:
             dictionary (dictionary): A dictionary representation of the object
@@ -86,29 +91,62 @@ class ChangeInvoiceCollectionMethodEventData(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-
         if isinstance(dictionary, cls):
-            return APIHelper.is_valid_type(value=dictionary.from_collection_method,
-                                           type_callable=lambda value: isinstance(value, str)) \
-                and APIHelper.is_valid_type(value=dictionary.to_collection_method,
-                                            type_callable=lambda value: isinstance(value, str))
+            return APIHelper.is_valid_type(
+                    value=dictionary.from_collection_method,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.to_collection_method,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                ))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return APIHelper.is_valid_type(value=dictionary.get('from_collection_method'),
-                                       type_callable=lambda value: isinstance(value, str)) \
-            and APIHelper.is_valid_type(value=dictionary.get('to_collection_method'),
-                                        type_callable=lambda value: isinstance(value, str))
+        return APIHelper.is_valid_type(
+                value=dictionary.get("from_collection_method"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("to_collection_method"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            ))
 
     def __repr__(self):
-        return (f'{self.__class__.__name__}('
-                f'from_collection_method={self.from_collection_method!r}, '
-                f'to_collection_method={self.to_collection_method!r}, '
-                f'additional_properties={self.additional_properties!r})')
+        """Return a unambiguous string representation."""
+        _from_collection_method=self.from_collection_method
+        _to_collection_method=self.to_collection_method
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"from_collection_method={_from_collection_method!r}, "
+            f"to_collection_method={_to_collection_method!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
 
     def __str__(self):
-        return (f'{self.__class__.__name__}('
-                f'from_collection_method={self.from_collection_method!s}, '
-                f'to_collection_method={self.to_collection_method!s}, '
-                f'additional_properties={self.additional_properties!s})')
+        """Return a human-readable string representation."""
+        _from_collection_method=self.from_collection_method
+        _to_collection_method=self.to_collection_method
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"from_collection_method={_from_collection_method!s}, "
+            f"to_collection_method={_to_collection_method!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

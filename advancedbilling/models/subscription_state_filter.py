@@ -1,15 +1,12 @@
-# -*- coding: utf-8 -*-
-
-"""
-advanced_billing
+"""advanced_billing.
 
 This file was automatically generated for Maxio by APIMATIC v3.0 (
  https://www.apimatic.io ).
 """
 
+# ruff: noqa: E501
 
 class SubscriptionStateFilter(object):
-
     """Implementation of the 'Subscription State Filter' enum.
 
     Allowed values for filtering by the current state of the subscription.
@@ -27,36 +24,38 @@ class SubscriptionStateFilter(object):
         TRIAL_ENDED: The enum member of type str.
         TRIALING: The enum member of type str.
         UNPAID: The enum member of type str.
-        additional_properties (Dict[str, object]): The additional properties
-            for the model.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
 
     """
-    ACTIVE = 'active'
 
-    CANCELED = 'canceled'
+    ACTIVE = "active"
 
-    EXPIRED = 'expired'
+    CANCELED = "canceled"
 
-    EXPIRED_CARDS = 'expired_cards'
+    EXPIRED = "expired"
 
-    ON_HOLD = 'on_hold'
+    EXPIRED_CARDS = "expired_cards"
 
-    PAST_DUE = 'past_due'
+    ON_HOLD = "on_hold"
 
-    PENDING_CANCELLATION = 'pending_cancellation'
+    PAST_DUE = "past_due"
 
-    PENDING_RENEWAL = 'pending_renewal'
+    PENDING_CANCELLATION = "pending_cancellation"
 
-    SUSPENDED = 'suspended'
+    PENDING_RENEWAL = "pending_renewal"
 
-    TRIAL_ENDED = 'trial_ended'
+    SUSPENDED = "suspended"
 
-    TRIALING = 'trialing'
+    TRIAL_ENDED = "trial_ended"
 
-    UNPAID = 'unpaid'
+    TRIALING = "trialing"
+
+    UNPAID = "unpaid"
 
     @classmethod
     def from_value(cls, value, default=None):
+        """Return the matching enum value for the given input."""
         if value is None:
             return default
 
