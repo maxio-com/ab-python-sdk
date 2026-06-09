@@ -38,6 +38,10 @@ def promote_component_price_point_to_default(self,
                                             price_point_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -46,6 +50,8 @@ def promote_component_price_point_to_default(self,
 | `price_point_id` | `int` | Template, Required | The Advanced Billing id of the price point |
 
 ## Response Type
+
+**200**: OK
 
 [`ComponentResponse`](../../doc/models/component-response.md)
 
@@ -107,6 +113,10 @@ def create_component_price_point(self,
                                 body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -115,6 +125,8 @@ def create_component_price_point(self,
 | `body` | [`CreateComponentPricePointRequest`](../../doc/models/create-component-price-point-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md)
 
@@ -173,6 +185,10 @@ def list_component_price_points(self,
                                options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -184,6 +200,8 @@ def list_component_price_points(self,
 | `filter_type` | [`List[PricePointType]`](../../doc/models/price-point-type.md) | Query, Optional | Use in query: `filter[type]=catalog,default`. |
 
 ## Response Type
+
+**201**: Created
 
 [`ComponentPricePointsResponse`](../../doc/models/component-price-points-response.md)
 
@@ -260,6 +278,10 @@ def bulk_create_component_price_points(self,
                                       body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -268,6 +290,8 @@ def bulk_create_component_price_points(self,
 | `body` | [`CreateComponentPricePointsRequest`](../../doc/models/create-component-price-points-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ComponentPricePointsResponse`](../../doc/models/component-price-points-response.md)
 
@@ -396,6 +420,10 @@ def clone_component_price_point(self,
                                body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -405,6 +433,8 @@ def clone_component_price_point(self,
 | `body` | [`CloneComponentPricePointRequest`](../../doc/models/clone-component-price-point-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`ComponentPricePointCurrencyOverageResponse`](../../doc/models/component-price-point-currency-overage-response.md)
 
@@ -526,6 +556,10 @@ def update_component_price_point(self,
                                 body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -535,6 +569,8 @@ def update_component_price_point(self,
 | `body` | [`UpdateComponentPricePointRequest`](../../doc/models/update-component-price-point-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md)
 
@@ -592,6 +628,10 @@ def read_component_price_point(self,
                               currency_prices=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -601,6 +641,8 @@ def read_component_price_point(self,
 | `currency_prices` | `bool` | Query, Optional | Include an array of currency price data |
 
 ## Response Type
+
+**200**: OK
 
 [`ComponentPricePointCurrencyOverageResponse`](../../doc/models/component-price-point-currency-overage-response.md)
 
@@ -629,6 +671,10 @@ def archive_component_price_point(self,
                                  price_point_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -637,6 +683,8 @@ def archive_component_price_point(self,
 | `price_point_id` | int \| str | Template, Required | This is a container for one-of cases. |
 
 ## Response Type
+
+**200**: OK
 
 [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md)
 
@@ -705,6 +753,10 @@ def unarchive_component_price_point(self,
                                    price_point_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -713,6 +765,8 @@ def unarchive_component_price_point(self,
 | `price_point_id` | `int` | Template, Required | The Advanced Billing id of the price point |
 
 ## Response Type
+
+**200**: OK
 
 [`ComponentPricePointResponse`](../../doc/models/component-price-point-response.md)
 
@@ -779,6 +833,10 @@ def create_currency_prices(self,
                           body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -787,6 +845,8 @@ def create_currency_prices(self,
 | `body` | [`CreateCurrencyPricesRequest`](../../doc/models/create-currency-prices-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ComponentCurrencyPricesResponse`](../../doc/models/component-currency-prices-response.md)
 
@@ -853,6 +913,10 @@ def update_currency_prices(self,
                           body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -861,6 +925,8 @@ def update_currency_prices(self,
 | `body` | [`UpdateCurrencyPricesRequest`](../../doc/models/update-currency-prices-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ComponentCurrencyPricesResponse`](../../doc/models/component-currency-prices-response.md)
 
@@ -922,6 +988,10 @@ def list_all_component_price_points(self,
                                    options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -933,6 +1003,8 @@ def list_all_component_price_points(self,
 | `filter` | [`ListPricePointsFilter`](../../doc/models/list-price-points-filter.md) | Query, Optional | Filter to use for List PricePoints operations |
 
 ## Response Type
+
+**200**: OK
 
 [`ListComponentsPricePointsResponse`](../../doc/models/list-components-price-points-response.md)
 

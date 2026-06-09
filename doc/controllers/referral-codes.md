@@ -26,6 +26,10 @@ def validate_referral_code(self,
                           code)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -33,6 +37,8 @@ def validate_referral_code(self,
 | `code` | `str` | Query, Required | The referral code you are trying to validate |
 
 ## Response Type
+
+**200**: OK
 
 [`ReferralValidationResponse`](../../doc/models/referral-validation-response.md)
 

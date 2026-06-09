@@ -43,6 +43,7 @@ class EventKey(object):
         TRIAL_END_NOTICE: The enum member of type str.
         DUNNING_STEP_REACHED: The enum member of type str.
         INVOICE_ISSUED: The enum member of type str.
+        INVOICE_PENDING: The enum member of type str.
         PREPAID_SUBSCRIPTION_BALANCE_CHANGED: The enum member of type str.
         SUBSCRIPTION_GROUP_SIGNUP_SUCCESS: The enum member of type str.
         SUBSCRIPTION_GROUP_SIGNUP_FAILURE: The enum member of type str.
@@ -108,7 +109,7 @@ class EventKey(object):
         "subscription_card_update", "subscription_group_card_update",
         "subscription_bank_account_update", "refund_success", "refund_failure",
         "upcoming_renewal_notice", "trial_end_notice", "dunning_step_reached",
-        "invoice_issued", "prepaid_subscription_balance_changed",
+        "invoice_issued", "invoice_pending", "prepaid_subscription_balance_changed",
         "subscription_group_signup_success", "subscription_group_signup_failure",
         "direct_debit_payment_paid_out", "direct_debit_payment_rejected",
         "direct_debit_payment_pending", "pending_payment_created",
@@ -199,6 +200,8 @@ class EventKey(object):
     DUNNING_STEP_REACHED = "dunning_step_reached"
 
     INVOICE_ISSUED = "invoice_issued"
+
+    INVOICE_PENDING = "invoice_pending"
 
     PREPAID_SUBSCRIPTION_BALANCE_CHANGED = "prepaid_subscription_balance_changed"
 

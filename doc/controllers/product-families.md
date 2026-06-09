@@ -25,6 +25,10 @@ def list_products_for_product_family(self,
                                     options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -42,6 +46,8 @@ def list_products_for_product_family(self,
 | `include` | [`ListProductsInclude`](../../doc/models/list-products-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=prepaid_product_price_point`. |
 
 ## Response Type
+
+**200**: OK
 
 [`List[ProductResponse]`](../../doc/models/product-response.md)
 
@@ -183,6 +189,10 @@ def create_product_family(self,
                          body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -190,6 +200,8 @@ def create_product_family(self,
 | `body` | [`CreateProductFamilyRequest`](../../doc/models/create-product-family-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`ProductFamilyResponse`](../../doc/models/product-family-response.md)
 
@@ -239,6 +251,10 @@ def list_product_families(self,
                          options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -250,6 +266,8 @@ def list_product_families(self,
 | `end_datetime` | `datetime` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
 
 ## Response Type
+
+**200**: OK
 
 [`List[ProductFamilyResponse]`](../../doc/models/product-family-response.md)
 
@@ -306,6 +324,10 @@ def read_product_family(self,
                        id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -313,6 +335,8 @@ def read_product_family(self,
 | `id` | `int` | Template, Required | The Advanced Billing id of the product family |
 
 ## Response Type
+
+**200**: OK
 
 [`ProductFamilyResponse`](../../doc/models/product-family-response.md)
 

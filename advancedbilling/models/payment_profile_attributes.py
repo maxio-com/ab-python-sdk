@@ -15,8 +15,8 @@ class PaymentProfileAttributes(object):
 
     Attributes:
         chargify_token (str): (Optional) Token received after sending billing
-            information using chargify.js. This token must be passed as a sole
-            attribute of `payment_profile_attributes` (i.e.
+            information using Maxio.js (formerly Chargify.js). This token must be
+            passed as a sole attribute of `payment_profile_attributes` (i.e.
             tok_9g6hw85pnpt6knmskpwp4ttt)
         id (int): The model property of type int.
         payment_type (PaymentType): The model property of type PaymentType.

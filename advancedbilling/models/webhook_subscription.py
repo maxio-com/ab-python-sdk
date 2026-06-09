@@ -18,6 +18,7 @@ class WebhookSubscription(object):
         EXPIRING_CARD: The enum member of type str.
         EXPIRATION_DATE_CHANGE: The enum member of type str.
         INVOICE_ISSUED: The enum member of type str.
+        INVOICE_PENDING: The enum member of type str.
         METERED_USAGE: The enum member of type str.
         PAYMENT_FAILURE: The enum member of type str.
         PAYMENT_SUCCESS: The enum member of type str.
@@ -66,6 +67,8 @@ class WebhookSubscription(object):
     EXPIRATION_DATE_CHANGE = "expiration_date_change"
 
     INVOICE_ISSUED = "invoice_issued"
+
+    INVOICE_PENDING = "invoice_pending"
 
     METERED_USAGE = "metered_usage"
 

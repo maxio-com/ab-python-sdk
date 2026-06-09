@@ -31,6 +31,10 @@ def create_segment(self,
                   body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -40,6 +44,8 @@ def create_segment(self,
 | `body` | [`CreateSegmentRequest`](../../doc/models/create-segment-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`SegmentResponse`](../../doc/models/segment-response.md)
 
@@ -98,6 +104,10 @@ def list_segments_for_price_point(self,
                                  options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -109,6 +119,8 @@ def list_segments_for_price_point(self,
 | `filter` | [`ListSegmentsFilter`](../../doc/models/list-segments-filter.md) | Query, Optional | Filter to use for List Segments for a Price Point operation |
 
 ## Response Type
+
+**200**: OK
 
 [`ListSegmentsResponse`](../../doc/models/list-segments-response.md)
 
@@ -150,6 +162,10 @@ def update_segment(self,
                   body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -160,6 +176,8 @@ def update_segment(self,
 | `body` | [`UpdateSegmentRequest`](../../doc/models/update-segment-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`SegmentResponse`](../../doc/models/segment-response.md)
 
@@ -201,6 +219,10 @@ def delete_segment(self,
                   id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -210,6 +232,8 @@ def delete_segment(self,
 | `id` | `float` | Template, Required | The ID of the Segment |
 
 ## Response Type
+
+**204**: No Content
 
 `void`
 
@@ -252,6 +276,10 @@ def bulk_create_segments(self,
                         body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -261,6 +289,8 @@ def bulk_create_segments(self,
 | `body` | [`BulkCreateSegments`](../../doc/models/bulk-create-segments.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`ListSegmentsResponse`](../../doc/models/list-segments-response.md)
 
@@ -301,6 +331,10 @@ def bulk_update_segments(self,
                         body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -310,6 +344,8 @@ def bulk_update_segments(self,
 | `body` | [`BulkUpdateSegments`](../../doc/models/bulk-update-segments.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ListSegmentsResponse`](../../doc/models/list-segments-response.md)
 

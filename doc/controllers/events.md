@@ -91,6 +91,10 @@ def list_events(self,
                options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -108,6 +112,8 @@ def list_events(self,
 | `end_datetime` | `str` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns components with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
 
 ## Response Type
+
+**200**: OK
 
 [`List[EventResponse]`](../../doc/models/event-response.md)
 
@@ -210,6 +216,10 @@ def list_subscription_events(self,
                             options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -223,6 +233,8 @@ def list_subscription_events(self,
 | `filter` | [`List[EventKey]`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 
 ## Response Type
+
+**200**: OK
 
 [`List[EventResponse]`](../../doc/models/event-response.md)
 
@@ -296,6 +308,10 @@ def read_events_count(self,
                      options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -308,6 +324,8 @@ def read_events_count(self,
 | `filter` | [`List[EventKey]`](../../doc/models/event-key.md) | Query, Optional | You can pass multiple event keys after comma.<br>Use in query `filter=signup_success,payment_success`. |
 
 ## Response Type
+
+**200**: OK
 
 [`CountResponse`](../../doc/models/count-response.md)
 

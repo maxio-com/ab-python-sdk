@@ -13,7 +13,7 @@ class CreatePaymentProfile(object):
 
     Attributes:
         chargify_token (str): Token received after sending billing information using
-            chargify.js.
+            Maxio.js (formerly Chargify.js).
         id (int): The model property of type int.
         payment_type (PaymentType): The model property of type PaymentType.
         first_name (str): First name on card or bank account. If omitted, the
@@ -61,9 +61,11 @@ class CreatePaymentProfile(object):
         customer_id (int): (Required when creating a new payment profile) The
             Chargify customer id.
         paypal_email (str): used by merchants that implemented BraintreeBlue
-            javaScript libraries on their own. We recommend using Chargify.js instead.
+            javaScript libraries on their own. We recommend using Maxio.js (formerly
+            Chargify.js) instead.
         payment_method_nonce (str): used by merchants that implemented BraintreeBlue
-            javaScript libraries on their own. We recommend using Chargify.js instead.
+            javaScript libraries on their own. We recommend using Maxio.js (formerly
+            Chargify.js) instead.
         gateway_handle (str): This attribute is only available if MultiGateway
             feature is enabled for your Site. This feature is in the Private Beta
             currently. gateway_handle is used to directly select a gateway where a

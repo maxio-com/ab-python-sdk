@@ -41,7 +41,7 @@ class SubscriptionNotesController(BaseController):
         """Perform a POST request to
         /subscriptions/{subscription_id}/notes.json.
 
-        Use the following method to create a note for a subscription.
+        Creates a note for a subscription.
         ## How to Use Subscription Notes
         Notes allow you to record information about a particular Subscription in a
         free text format.
@@ -100,8 +100,8 @@ class SubscriptionNotesController(BaseController):
         """Perform a GET request to
         /subscriptions/{subscription_id}/notes.json.
 
-        Use this method to retrieve a list of Notes associated with a Subscription.
-        The response will be an array of Notes.
+        Retrieves a list of notes associated with a subscription. The response will
+        be an array of Notes.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -167,8 +167,7 @@ class SubscriptionNotesController(BaseController):
         """Perform a GET request to
         /subscriptions/{subscription_id}/notes/{note_id}.json.
 
-        Once you have obtained the ID of the note you wish to read, use this method
-        to show a particular note attached to a subscription.
+        Retrieves a specific note attached to a subscription.
 
         Args:
             subscription_id (int): The Chargify id of the subscription.
@@ -214,7 +213,7 @@ class SubscriptionNotesController(BaseController):
         """Perform a PUT request to
         /subscriptions/{subscription_id}/notes/{note_id}.json.
 
-        Use the following method to update a note for a Subscription.
+        Updates a note for a subscription.
 
         Args:
             subscription_id (int): The Chargify id of the subscription.

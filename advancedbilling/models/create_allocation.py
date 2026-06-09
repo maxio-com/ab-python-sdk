@@ -59,10 +59,10 @@ class CreateAllocation(object):
         price_point_id (str | int | None): Price point that the allocation should be
             charged at. Accepts either the price point's id (integer) or handle
             (string). When not specified, the default price point will be used.
-        billing_schedule (BillingSchedule): This attribute is particularly useful
-            when you need to align billing events for different components on
-            distinct schedules within a subscription. This only works for site with
-            Multifrequency enabled.
+        billing_schedule (BillingSchedule): Billing schedule settings for component
+            allocations or usages on multi-frequency subscriptions. Use this to start
+            a component's billing period on a custom date instead of aligning with
+            the product charge schedule.
         custom_price (ComponentCustomPrice): Create or update custom pricing unique
             to the subscription. Used in place of `price_point_id`.
         additional_properties (Dict[str, object]): The additional properties for the

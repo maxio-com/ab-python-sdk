@@ -51,6 +51,10 @@ def create_customer(self,
                    body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -58,6 +62,8 @@ def create_customer(self,
 | `body` | [`CreateCustomerRequest`](../../doc/models/create-customer-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`CustomerResponse`](../../doc/models/customer-response.md)
 
@@ -154,6 +160,10 @@ def list_customers(self,
                   options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -169,6 +179,8 @@ def list_customers(self,
 | `q` | `str` | Query, Optional | A search query by which to filter customers (can be an email, an ID, a reference, organization) |
 
 ## Response Type
+
+**200**: OK
 
 [`List[CustomerResponse]`](../../doc/models/customer-response.md)
 
@@ -278,6 +290,10 @@ def read_customer(self,
                  id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -285,6 +301,8 @@ def read_customer(self,
 | `id` | `int` | Template, Required | The Advanced Billing id of the customer |
 
 ## Response Type
+
+**200**: OK
 
 [`CustomerResponse`](../../doc/models/customer-response.md)
 
@@ -345,6 +363,10 @@ def update_customer(self,
                    body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -353,6 +375,8 @@ def update_customer(self,
 | `body` | [`UpdateCustomerRequest`](../../doc/models/update-customer-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`CustomerResponse`](../../doc/models/customer-response.md)
 
@@ -424,6 +448,10 @@ def delete_customer(self,
                    id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -431,6 +459,8 @@ def delete_customer(self,
 | `id` | `int` | Template, Required | The Advanced Billing id of the customer |
 
 ## Response Type
+
+**204**: No Content
 
 `void`
 
@@ -452,6 +482,10 @@ def read_customer_by_reference(self,
                               reference)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -459,6 +493,8 @@ def read_customer_by_reference(self,
 | `reference` | `str` | Query, Required | Customer reference |
 
 ## Response Type
+
+**200**: OK
 
 [`CustomerResponse`](../../doc/models/customer-response.md)
 
@@ -481,6 +517,10 @@ def list_customer_subscriptions(self,
                                customer_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -488,6 +528,8 @@ def list_customer_subscriptions(self,
 | `customer_id` | `int` | Template, Required | The Chargify id of the customer |
 
 ## Response Type
+
+**200**: OK
 
 [`List[SubscriptionResponse]`](../../doc/models/subscription-response.md)
 

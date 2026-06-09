@@ -12,3 +12,25 @@
 | `List[str]` |
 | `str` |
 
+## List[str]
+
+### Initialization Code
+
+#### Example
+
+```python
+value = [
+    'String1'
+]
+```
+
+## str
+
+### Initialization Code
+
+#### Example
+
+```python
+value = 'String0'
+```
+

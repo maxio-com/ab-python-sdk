@@ -40,6 +40,10 @@ def create_reason_code(self,
                       body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -47,6 +51,8 @@ def create_reason_code(self,
 | `body` | [`CreateReasonCodeRequest`](../../doc/models/create-reason-code-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ReasonCodeResponse`](../../doc/models/reason-code-response.md)
 
@@ -83,6 +89,10 @@ def list_reason_codes(self,
                      options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -91,6 +101,8 @@ def list_reason_codes(self,
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 
 ## Response Type
+
+**200**: OK
 
 [`List[ReasonCodeResponse]`](../../doc/models/reason-code-response.md)
 
@@ -161,6 +173,10 @@ def read_reason_code(self,
                     reason_code_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -168,6 +184,8 @@ def read_reason_code(self,
 | `reason_code_id` | `int` | Template, Required | The Advanced Billing id of the reason code |
 
 ## Response Type
+
+**200**: OK
 
 [`ReasonCodeResponse`](../../doc/models/reason-code-response.md)
 
@@ -197,6 +215,10 @@ def update_reason_code(self,
                       body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -205,6 +227,8 @@ def update_reason_code(self,
 | `body` | [`UpdateReasonCodeRequest`](../../doc/models/update-reason-code-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ReasonCodeResponse`](../../doc/models/reason-code-response.md)
 
@@ -234,6 +258,10 @@ def delete_reason_code(self,
                       reason_code_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -241,6 +269,8 @@ def delete_reason_code(self,
 | `reason_code_id` | `int` | Template, Required | The Advanced Billing id of the reason code |
 
 ## Response Type
+
+**200**: OK
 
 [`OkResponse`](../../doc/models/ok-response.md)
 

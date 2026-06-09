@@ -38,14 +38,14 @@ class SitesController(BaseController):
     def read_site(self):
         """Perform a GET request to /site.json.
 
-        This endpoint allows you to fetch some site data.
+        Retrieves site data.
         Full documentation on Sites in the Advanced Billing UI can be located
         [here](https://maxio.zendesk.com/hc/en-us/sections/24250550707085-Sites).
         Specifically, the [Clearing Site
         Data](https://maxio.zendesk.com/hc/en-us/articles/24250617028365-Clearing-Site
-        -Data) section is extremely relevant to this endpoint documentation.
+        -Data) section is relevant to this endpoint documentation.
         #### Relationship invoicing enabled
-        If site has RI enabled then you will see more settings like:
+        If the site has RI enabled then you will see more settings like:
             "customer_hierarchy_enabled": true,
             "whopays_enabled": true,
             "whopays_default_payer": "self"
@@ -81,10 +81,10 @@ class SitesController(BaseController):
                    cleanup_scope="all"):
         """Perform a POST request to /sites/clear_data.json.
 
-        This call is asynchronous and there may be a delay before the site data is
-        fully deleted. If you are clearing site data for an automated test, you will
-        need to build in a delay and/or check that there are no products, etc., in
-        the site before proceeding.
+        Clears all data from a test site asynchronously. This call is asynchronous
+        and there may be a delay before the site data is fully deleted. If you are
+        clearing site data for an automated test, you will need to build in a delay
+        and/or check that there are no products, etc., in the site before proceeding.
         **This functionality will only work on sites in TEST mode. Attempts to
         perform this on sites in “live” mode will result in a response of 403
         FORBIDDEN.**
@@ -119,7 +119,7 @@ class SitesController(BaseController):
                                      options=dict()):
         """Perform a GET request to /chargify_js_keys.json.
 
-        This endpoint returns public keys used for Chargify.js.
+        Returns public keys used for Maxio.js (formerly Chargify.js).
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to

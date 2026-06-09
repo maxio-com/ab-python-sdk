@@ -37,6 +37,10 @@ def create_consolidated_proforma_invoice(self,
                                         uid)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -44,6 +48,8 @@ def create_consolidated_proforma_invoice(self,
 | `uid` | `str` | Template, Required | The uid of the subscription group |
 
 ## Response Type
+
+**201**: Created
 
 `void`
 
@@ -73,6 +79,10 @@ def list_subscription_group_proforma_invoices(self,
                                              options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -86,6 +96,8 @@ def list_subscription_group_proforma_invoices(self,
 | `custom_fields` | `bool` | Query, Optional | Include custom fields data<br><br>**Default**: `False` |
 
 ## Response Type
+
+**200**: OK
 
 [`ListProformaInvoicesResponse`](../../doc/models/list-proforma-invoices-response.md)
 
@@ -125,6 +137,10 @@ def read_proforma_invoice(self,
                          proforma_invoice_uid)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -132,6 +148,8 @@ def read_proforma_invoice(self,
 | `proforma_invoice_uid` | `str` | Template, Required | The uid of the proforma invoice |
 
 ## Response Type
+
+**200**: OK
 
 [`ProformaInvoice`](../../doc/models/proforma-invoice.md)
 
@@ -166,6 +184,10 @@ def create_proforma_invoice(self,
                            subscription_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -173,6 +195,8 @@ def create_proforma_invoice(self,
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 
 ## Response Type
+
+**200**: OK
 
 [`ProformaInvoice`](../../doc/models/proforma-invoice.md)
 
@@ -201,6 +225,10 @@ def list_proforma_invoices(self,
                           options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -220,6 +248,8 @@ def list_proforma_invoices(self,
 | `custom_fields` | `bool` | Query, Optional | Include custom fields data<br><br>**Default**: `False` |
 
 ## Response Type
+
+**200**: OK
 
 [`ListProformaInvoicesResponse`](../../doc/models/list-proforma-invoices-response.md)
 
@@ -258,6 +288,10 @@ def deliver_proforma_invoice(self,
                             body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -266,6 +300,8 @@ def deliver_proforma_invoice(self,
 | `body` | [`DeliverProformaInvoiceRequest`](../../doc/models/deliver-proforma-invoice-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`ProformaInvoice`](../../doc/models/proforma-invoice.md)
 
@@ -319,6 +355,10 @@ def void_proforma_invoice(self,
                          body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -327,6 +367,8 @@ def void_proforma_invoice(self,
 | `body` | [`VoidInvoiceRequest`](../../doc/models/void-invoice-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ProformaInvoice`](../../doc/models/proforma-invoice.md)
 
@@ -362,6 +404,10 @@ def preview_proforma_invoice(self,
                             subscription_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -369,6 +415,8 @@ def preview_proforma_invoice(self,
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 
 ## Response Type
+
+**200**: OK
 
 [`ProformaInvoice`](../../doc/models/proforma-invoice.md)
 
@@ -404,6 +452,10 @@ def create_signup_proforma_invoice(self,
                                   body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -411,6 +463,8 @@ def create_signup_proforma_invoice(self,
 | `body` | [`CreateSubscriptionRequest`](../../doc/models/create-subscription-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`ProformaInvoice`](../../doc/models/proforma-invoice.md)
 
@@ -458,6 +512,10 @@ def preview_signup_proforma_invoice(self,
                                    body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -466,6 +524,8 @@ def preview_signup_proforma_invoice(self,
 | `body` | [`CreateSubscriptionRequest`](../../doc/models/create-subscription-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`SignupProformaPreviewResponse`](../../doc/models/signup-proforma-preview-response.md)
 

@@ -54,9 +54,9 @@ class ComponentsController(BaseController):
         under the specified product family. Metered component can then be added and
         “allocated” for a subscription.
         Metered components are used to bill for any type of unit that resets to 0 at
-        the end of the billing period (think daily Google Adwords clicks or monthly
-        cell phone minutes). This is most commonly associated with usage-based
-        billing and many other pricing schemes.
+        the end of the billing period (think daily Google Ads clicks or monthly cell
+        phone minutes). This is most commonly associated with usage-based billing and
+        many other pricing schemes.
         Note that this is different from recurring quantity-based components, which
         DO NOT reset to zero at the start of every billing period. If you want to
         bill for a quantity of something that does not change unless you change it,
