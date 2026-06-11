@@ -77,7 +77,7 @@ class InitCases:
             "country": "US",
             "phone": "+00 123 456 789",
             "tax_exempt": False,
-            "vat_number": "test vat number",
+            "vat_number": "TEST VAT NUMBER",
             "parent_id": None,
             "locale": None,
         }
