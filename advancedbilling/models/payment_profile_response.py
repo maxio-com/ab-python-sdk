@@ -62,7 +62,7 @@ class PaymentProfileResponse(object):
 
         # Extract variables from the dictionary
         payment_profile = APIHelper.deserialize_union_type(
-            UnionTypeLookUp.get("Payment-Profile2"),
+            UnionTypeLookUp.get("Payment-Profile"),
             dictionary.get("payment_profile"),
             False)\
             if dictionary.get("payment_profile") is not None\
@@ -94,13 +94,13 @@ class PaymentProfileResponse(object):
         )
 
         if isinstance(dictionary, cls):
-            return (UnionTypeLookUp.get("Payment-Profile2")
+            return (UnionTypeLookUp.get("Payment-Profile")
                 .validate(dictionary.payment_profile).is_valid)
 
         if not isinstance(dictionary, dict):
             return False
 
-        return (UnionTypeLookUp.get("Payment-Profile2")
+        return (UnionTypeLookUp.get("Payment-Profile")
             .validate(dictionary.get("payment_profile")).is_valid)
 
     def __repr__(self):

@@ -856,7 +856,7 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "Payment-Profile2": lambda: AnyOf(
+        "Payment-Profile": lambda: AnyOf(
             [
                 LeafType(ApplePayPaymentProfile,
                          Context.create(

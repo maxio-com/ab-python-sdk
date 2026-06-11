@@ -6,8 +6,8 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 
 # ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
-from advancedbilling.models.payment_profile import (
-    PaymentProfile,
+from advancedbilling.models.tokenized_payment_profile import (
+    TokenizedPaymentProfile,
 )
 
 
@@ -15,7 +15,8 @@ class ChjsTokenizationSuccess(object):
     """Implementation of the 'Chjs Tokenization Success' model.
 
     Attributes:
-        payment_profile (PaymentProfile): The model property of type PaymentProfile.
+        payment_profile (TokenizedPaymentProfile): The model property of type
+            TokenizedPaymentProfile.
         gateway_customer_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
@@ -71,7 +72,7 @@ class ChjsTokenizationSuccess(object):
 
         # Extract variables from the dictionary
         payment_profile =\
-            PaymentProfile.from_dictionary(
+            TokenizedPaymentProfile.from_dictionary(
                 dictionary.get("payment_profile"))\
                 if dictionary.get("payment_profile") else None
         gateway_customer_id =\
@@ -105,7 +106,7 @@ class ChjsTokenizationSuccess(object):
             return APIHelper.is_valid_type(
                     value=dictionary.payment_profile,
                     type_callable=lambda value:
-                        PaymentProfile.validate(value),
+                        TokenizedPaymentProfile.validate(value),
                     is_model_dict=True)
 
         if not isinstance(dictionary, dict):
@@ -114,7 +115,7 @@ class ChjsTokenizationSuccess(object):
         return APIHelper.is_valid_type(
                 value=dictionary.get("payment_profile"),
                 type_callable=lambda value:
-                    PaymentProfile.validate(value),
+                    TokenizedPaymentProfile.validate(value),
                 is_model_dict=True)
 
     def __repr__(self):

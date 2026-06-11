@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `payment_profile` | [`PaymentProfile`](../../doc/models/payment-profile.md) | Required | - |
+| `payment_profile` | [`TokenizedPaymentProfile`](../../doc/models/tokenized-payment-profile.md) | Required | - |
 | `gateway_customer_id` | `int` | Optional | - |
 
 ## Example (as JSON)

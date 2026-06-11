@@ -353,7 +353,7 @@ value = CustomFieldValueChange(
 
 ```python
 value = ChjsTokenizationSuccess(
-    payment_profile=PaymentProfile(
+    payment_profile=TokenizedPaymentProfile(
         id=44
     )
 )

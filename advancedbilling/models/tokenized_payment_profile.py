@@ -8,8 +8,8 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class PaymentProfile(object):
-    """Implementation of the 'PaymentProfile' model.
+class TokenizedPaymentProfile(object):
+    """Implementation of the 'Tokenized Payment Profile' model.
 
     Attributes:
         id (int): The model property of type int.
@@ -47,7 +47,7 @@ class PaymentProfile(object):
         gateway_handle=APIHelper.SKIP,
         customer_vault_token=APIHelper.SKIP,
         additional_properties=None):
-        """Initialize a PaymentProfile instance."""
+        """Initialize a TokenizedPaymentProfile instance."""
         # Initialize members of the class
         self.id = id
         if vault_token is not APIHelper.SKIP:
