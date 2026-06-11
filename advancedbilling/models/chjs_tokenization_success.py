@@ -6,16 +6,17 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 
 # ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.payment_profile import (
+    PaymentProfile,
+)
 
 
-class PaymentProfileResponse(object):
-    """Implementation of the 'Payment Profile Response' model.
+class ChjsTokenizationSuccess(object):
+    """Implementation of the 'Chjs Tokenization Success' model.
 
     Attributes:
-        payment_profile (ApplePayPaymentProfile | BankAccountPaymentProfile |
-            CreditCardPaymentProfile | PaypalPaymentProfile): The model property of
-            type ApplePayPaymentProfile | BankAccountPaymentProfile |
-            CreditCardPaymentProfile | PaypalPaymentProfile.
+        payment_profile (PaymentProfile): The model property of type PaymentProfile.
+        gateway_customer_id (int): The model property of type int.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -24,15 +25,27 @@ class PaymentProfileResponse(object):
     # Create a mapping from Model property names to API property names
     _names = {
         "payment_profile": "payment_profile",
+        "gateway_customer_id": "gateway_customer_id",
     }
+
+    _optionals = [
+        "gateway_customer_id",
+    ]
+
+    _nullables = [
+        "gateway_customer_id",
+    ]
 
     def __init__(
         self,
         payment_profile=None,
+        gateway_customer_id=APIHelper.SKIP,
         additional_properties=None):
-        """Initialize a PaymentProfileResponse instance."""
+        """Initialize a ChjsTokenizationSuccess instance."""
         # Initialize members of the class
         self.payment_profile = payment_profile
+        if gateway_customer_id is not APIHelper.SKIP:
+            self.gateway_customer_id = gateway_customer_id
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -53,20 +66,18 @@ class PaymentProfileResponse(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import (
-            UnionTypeLookUp,
-        )
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        payment_profile = APIHelper.deserialize_union_type(
-            UnionTypeLookUp.get("Payment-Profile2"),
-            dictionary.get("payment_profile"),
-            False)\
-            if dictionary.get("payment_profile") is not None\
-            else None
+        payment_profile =\
+            PaymentProfile.from_dictionary(
+                dictionary.get("payment_profile"))\
+                if dictionary.get("payment_profile") else None
+        gateway_customer_id =\
+            dictionary.get("gateway_customer_id")\
+            if "gateway_customer_id" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -74,6 +85,7 @@ class PaymentProfileResponse(object):
 
         # Return an object of this model
         return cls(payment_profile,
+                   gateway_customer_id,
                    additional_properties)
 
     @classmethod
@@ -89,27 +101,35 @@ class PaymentProfileResponse(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-        from advancedbilling.utilities.union_type_lookup import (
-            UnionTypeLookUp,
-        )
-
         if isinstance(dictionary, cls):
-            return (UnionTypeLookUp.get("Payment-Profile2")
-                .validate(dictionary.payment_profile).is_valid)
+            return APIHelper.is_valid_type(
+                    value=dictionary.payment_profile,
+                    type_callable=lambda value:
+                        PaymentProfile.validate(value),
+                    is_model_dict=True)
 
         if not isinstance(dictionary, dict):
             return False
 
-        return (UnionTypeLookUp.get("Payment-Profile2")
-            .validate(dictionary.get("payment_profile")).is_valid)
+        return APIHelper.is_valid_type(
+                value=dictionary.get("payment_profile"),
+                type_callable=lambda value:
+                    PaymentProfile.validate(value),
+                is_model_dict=True)
 
     def __repr__(self):
         """Return a unambiguous string representation."""
         _payment_profile=self.payment_profile
+        _gateway_customer_id=(
+            self.gateway_customer_id
+            if hasattr(self, "gateway_customer_id")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
             f"payment_profile={_payment_profile!r}, "
+            f"gateway_customer_id={_gateway_customer_id!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -117,10 +137,16 @@ class PaymentProfileResponse(object):
     def __str__(self):
         """Return a human-readable string representation."""
         _payment_profile=self.payment_profile
+        _gateway_customer_id=(
+            self.gateway_customer_id
+            if hasattr(self, "gateway_customer_id")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
             f"payment_profile={_payment_profile!s}, "
+            f"gateway_customer_id={_gateway_customer_id!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

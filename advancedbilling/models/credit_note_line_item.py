@@ -76,6 +76,9 @@ class CreditNoteLineItem(object):
             Will be `nil` for non-component credits.
         billing_schedule_item_id (int): The model property of type int.
         custom_item (bool): The model property of type bool.
+        prepaid_allocation_expires_at (date): The date a prepaid allocation is set to
+            expire. Only present on line items representing prepaid component
+            allocations. The format is `"YYYY-MM-DD"`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -102,6 +105,7 @@ class CreditNoteLineItem(object):
         "price_point_id": "price_point_id",
         "billing_schedule_item_id": "billing_schedule_item_id",
         "custom_item": "custom_item",
+        "prepaid_allocation_expires_at": "prepaid_allocation_expires_at",
     }
 
     _optionals = [
@@ -124,12 +128,14 @@ class CreditNoteLineItem(object):
         "price_point_id",
         "billing_schedule_item_id",
         "custom_item",
+        "prepaid_allocation_expires_at",
     ]
 
     _nullables = [
         "component_id",
         "price_point_id",
         "billing_schedule_item_id",
+        "prepaid_allocation_expires_at",
     ]
 
     def __init__(
@@ -153,6 +159,7 @@ class CreditNoteLineItem(object):
         price_point_id=APIHelper.SKIP,
         billing_schedule_item_id=APIHelper.SKIP,
         custom_item=APIHelper.SKIP,
+        prepaid_allocation_expires_at=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a CreditNoteLineItem instance."""
         # Initialize members of the class
@@ -194,6 +201,8 @@ class CreditNoteLineItem(object):
             self.billing_schedule_item_id = billing_schedule_item_id
         if custom_item is not APIHelper.SKIP:
             self.custom_item = custom_item
+        if prepaid_allocation_expires_at is not APIHelper.SKIP:
+            self.prepaid_allocation_expires_at = prepaid_allocation_expires_at
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -292,6 +301,13 @@ class CreditNoteLineItem(object):
             dictionary.get("custom_item")\
             if "custom_item" in dictionary.keys()\
                 else APIHelper.SKIP
+        if "prepaid_allocation_expires_at" in dictionary.keys():
+            prepaid_allocation_expires_at = dateutil.parser.parse(
+                dictionary.get("prepaid_allocation_expires_at")).date()\
+                if dictionary.get("prepaid_allocation_expires_at") else None
+
+        else:
+            prepaid_allocation_expires_at = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -317,6 +333,7 @@ class CreditNoteLineItem(object):
                    price_point_id,
                    billing_schedule_item_id,
                    custom_item,
+                   prepaid_allocation_expires_at,
                    additional_properties)
 
     @classmethod
@@ -437,6 +454,11 @@ class CreditNoteLineItem(object):
             if hasattr(self, "custom_item")
             else None
         )
+        _prepaid_allocation_expires_at=(
+            self.prepaid_allocation_expires_at
+            if hasattr(self, "prepaid_allocation_expires_at")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -459,6 +481,7 @@ class CreditNoteLineItem(object):
             f"price_point_id={_price_point_id!r}, "
             f"billing_schedule_item_id={_billing_schedule_item_id!r}, "
             f"custom_item={_custom_item!r}, "
+            f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -560,6 +583,11 @@ class CreditNoteLineItem(object):
             if hasattr(self, "custom_item")
             else None
         )
+        _prepaid_allocation_expires_at=(
+            self.prepaid_allocation_expires_at
+            if hasattr(self, "prepaid_allocation_expires_at")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -582,6 +610,7 @@ class CreditNoteLineItem(object):
             f"price_point_id={_price_point_id!s}, "
             f"billing_schedule_item_id={_billing_schedule_item_id!s}, "
             f"custom_item={_custom_item!s}, "
+            f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

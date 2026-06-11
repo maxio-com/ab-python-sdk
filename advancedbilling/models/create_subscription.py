@@ -217,7 +217,7 @@ class CreateSubscription(object):
             Communication Delay feature.
         skip_billing_manifest_taxes (bool): Valid only for the Subscription Preview
             endpoint. When set to `true` it skips calculating taxes for the current
-            and next billing manifests.
+            and next billing manifests. Defaults to `false` when not provided.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -387,7 +387,7 @@ class CreateSubscription(object):
         ach_agreement=APIHelper.SKIP,
         dunning_communication_delay_enabled=False,
         dunning_communication_delay_time_zone=APIHelper.SKIP,
-        skip_billing_manifest_taxes=False,
+        skip_billing_manifest_taxes=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a CreateSubscription instance."""
         # Initialize members of the class
@@ -508,7 +508,8 @@ class CreateSubscription(object):
         if dunning_communication_delay_time_zone is not APIHelper.SKIP:
             self.dunning_communication_delay_time_zone =\
                  dunning_communication_delay_time_zone
-        self.skip_billing_manifest_taxes = skip_billing_manifest_taxes
+        if skip_billing_manifest_taxes is not APIHelper.SKIP:
+            self.skip_billing_manifest_taxes = skip_billing_manifest_taxes
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -745,8 +746,8 @@ class CreateSubscription(object):
                 else APIHelper.SKIP
         skip_billing_manifest_taxes =\
             dictionary.get("skip_billing_manifest_taxes")\
-            if dictionary.get("skip_billing_manifest_taxes")\
-                else False
+            if "skip_billing_manifest_taxes" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\

@@ -273,8 +273,8 @@ class ProductPricePointsController(BaseController):
         """Perform a GET request to
         /products/{product_id}/price_points/{price_point_id}.json.
 
-        Use this endpoint to retrieve details for a specific product price point. You
-        can achieve this by using either the product price point ID or handle.
+        Returns details for a specific product price point. You can achieve this by
+        using either the product price point ID or handle.
 
         Args:
             product_id (int | str): The id or handle of the product. When using the
@@ -396,7 +396,7 @@ class ProductPricePointsController(BaseController):
         """Perform a PATCH request to
         /products/{product_id}/price_points/{price_point_id}/unarchive.json.
 
-        Use this endpoint to unarchive an archived product price point.
+        Unarchives an archived product price point.
 
         Args:
             product_id (int): The Advanced Billing id of the product to which the
@@ -653,8 +653,7 @@ class ProductPricePointsController(BaseController):
                                       options=dict()):
         """Perform a GET request to /products_price_points.json.
 
-        This method allows retrieval of a list of Products Price Points belonging to
-        a Site.
+        Lists Product Price Points belonging to a site.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to

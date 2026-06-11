@@ -44,6 +44,12 @@ class Site(object):
         tax_configuration (TaxConfiguration): The model property of type
             TaxConfiguration.
         net_terms (NetTerms): The model property of type NetTerms.
+        multi_frequency_enabled (bool): Whether the site has the multi-frequency
+            billing feature enabled. Only present when relationship invoicing is
+            active.
+        auto_renewals_enabled (bool): Whether the auto-renewals feature is enabled
+            for this site.
+        portal_enabled (bool): Whether the Billing Portal is enabled for this site.
         test (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
@@ -69,6 +75,9 @@ class Site(object):
         "organization_address": "organization_address",
         "tax_configuration": "tax_configuration",
         "net_terms": "net_terms",
+        "multi_frequency_enabled": "multi_frequency_enabled",
+        "auto_renewals_enabled": "auto_renewals_enabled",
+        "portal_enabled": "portal_enabled",
         "test": "test",
     }
 
@@ -89,6 +98,9 @@ class Site(object):
         "organization_address",
         "tax_configuration",
         "net_terms",
+        "multi_frequency_enabled",
+        "auto_renewals_enabled",
+        "portal_enabled",
         "test",
     ]
 
@@ -110,6 +122,9 @@ class Site(object):
         organization_address=APIHelper.SKIP,
         tax_configuration=APIHelper.SKIP,
         net_terms=APIHelper.SKIP,
+        multi_frequency_enabled=APIHelper.SKIP,
+        auto_renewals_enabled=APIHelper.SKIP,
+        portal_enabled=APIHelper.SKIP,
         test=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a Site instance."""
@@ -148,6 +163,12 @@ class Site(object):
             self.tax_configuration = tax_configuration
         if net_terms is not APIHelper.SKIP:
             self.net_terms = net_terms
+        if multi_frequency_enabled is not APIHelper.SKIP:
+            self.multi_frequency_enabled = multi_frequency_enabled
+        if auto_renewals_enabled is not APIHelper.SKIP:
+            self.auto_renewals_enabled = auto_renewals_enabled
+        if portal_enabled is not APIHelper.SKIP:
+            self.portal_enabled = portal_enabled
         if test is not APIHelper.SKIP:
             self.test = test
 
@@ -242,6 +263,18 @@ class Site(object):
                 dictionary.get("net_terms"))\
                 if "net_terms" in dictionary.keys()\
                 else APIHelper.SKIP
+        multi_frequency_enabled =\
+            dictionary.get("multi_frequency_enabled")\
+            if "multi_frequency_enabled" in dictionary.keys()\
+                else APIHelper.SKIP
+        auto_renewals_enabled =\
+            dictionary.get("auto_renewals_enabled")\
+            if "auto_renewals_enabled" in dictionary.keys()\
+                else APIHelper.SKIP
+        portal_enabled =\
+            dictionary.get("portal_enabled")\
+            if "portal_enabled" in dictionary.keys()\
+                else APIHelper.SKIP
         test =\
             dictionary.get("test")\
             if "test" in dictionary.keys()\
@@ -268,6 +301,9 @@ class Site(object):
                    organization_address,
                    tax_configuration,
                    net_terms,
+                   multi_frequency_enabled,
+                   auto_renewals_enabled,
+                   portal_enabled,
                    test,
                    additional_properties)
 
@@ -353,6 +389,21 @@ class Site(object):
             if hasattr(self, "net_terms")
             else None
         )
+        _multi_frequency_enabled=(
+            self.multi_frequency_enabled
+            if hasattr(self, "multi_frequency_enabled")
+            else None
+        )
+        _auto_renewals_enabled=(
+            self.auto_renewals_enabled
+            if hasattr(self, "auto_renewals_enabled")
+            else None
+        )
+        _portal_enabled=(
+            self.portal_enabled
+            if hasattr(self, "portal_enabled")
+            else None
+        )
         _test=(
             self.test
             if hasattr(self, "test")
@@ -377,6 +428,9 @@ class Site(object):
             f"organization_address={_organization_address!r}, "
             f"tax_configuration={_tax_configuration!r}, "
             f"net_terms={_net_terms!r}, "
+            f"multi_frequency_enabled={_multi_frequency_enabled!r}, "
+            f"auto_renewals_enabled={_auto_renewals_enabled!r}, "
+            f"portal_enabled={_portal_enabled!r}, "
             f"test={_test!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
@@ -464,6 +518,21 @@ class Site(object):
             if hasattr(self, "net_terms")
             else None
         )
+        _multi_frequency_enabled=(
+            self.multi_frequency_enabled
+            if hasattr(self, "multi_frequency_enabled")
+            else None
+        )
+        _auto_renewals_enabled=(
+            self.auto_renewals_enabled
+            if hasattr(self, "auto_renewals_enabled")
+            else None
+        )
+        _portal_enabled=(
+            self.portal_enabled
+            if hasattr(self, "portal_enabled")
+            else None
+        )
         _test=(
             self.test
             if hasattr(self, "test")
@@ -488,6 +557,9 @@ class Site(object):
             f"organization_address={_organization_address!s}, "
             f"tax_configuration={_tax_configuration!s}, "
             f"net_terms={_net_terms!s}, "
+            f"multi_frequency_enabled={_multi_frequency_enabled!s}, "
+            f"auto_renewals_enabled={_auto_renewals_enabled!s}, "
+            f"portal_enabled={_portal_enabled!s}, "
             f"test={_test!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"

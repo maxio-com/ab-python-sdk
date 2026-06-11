@@ -12,6 +12,8 @@ class WebhookSubscription(object):
     Attributes:
         BILLING_DATE_CHANGE: The enum member of type str.
         COMPONENT_ALLOCATION_CHANGE: The enum member of type str.
+        CHJS_TOKENIZATION_FAILURE: The enum member of type str.
+        CHJS_TOKENIZATION_SUCCESS: The enum member of type str.
         CUSTOMER_CREATE: The enum member of type str.
         CUSTOMER_UPDATE: The enum member of type str.
         DUNNING_STEP_REACHED: The enum member of type str.
@@ -55,6 +57,10 @@ class WebhookSubscription(object):
     BILLING_DATE_CHANGE = "billing_date_change"
 
     COMPONENT_ALLOCATION_CHANGE = "component_allocation_change"
+
+    CHJS_TOKENIZATION_FAILURE = "chjs_tokenization_failure"
+
+    CHJS_TOKENIZATION_SUCCESS = "chjs_tokenization_success"
 
     CUSTOMER_CREATE = "customer_create"
 

@@ -25,6 +25,9 @@
 | `organization_address` | [`OrganizationAddress`](../../doc/models/organization-address.md) | Optional | - |
 | `tax_configuration` | [`TaxConfiguration`](../../doc/models/tax-configuration.md) | Optional | - |
 | `net_terms` | [`NetTerms`](../../doc/models/net-terms.md) | Optional | - |
+| `multi_frequency_enabled` | `bool` | Optional | Whether the site has the multi-frequency billing feature enabled. Only present when relationship invoicing is active. |
+| `auto_renewals_enabled` | `bool` | Optional | Whether the auto-renewals feature is enabled for this site. |
+| `portal_enabled` | `bool` | Optional | Whether the Billing Portal is enabled for this site. |
 | `test` | `bool` | Optional | - |
 
 ## Example (as JSON)

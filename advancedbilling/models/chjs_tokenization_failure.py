@@ -6,16 +6,18 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 
 # ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.payment_profile_params import (
+    PaymentProfileParams,
+)
 
 
-class PaymentProfileResponse(object):
-    """Implementation of the 'Payment Profile Response' model.
+class ChjsTokenizationFailure(object):
+    """Implementation of the 'Chjs Tokenization Failure' model.
 
     Attributes:
-        payment_profile (ApplePayPaymentProfile | BankAccountPaymentProfile |
-            CreditCardPaymentProfile | PaypalPaymentProfile): The model property of
-            type ApplePayPaymentProfile | BankAccountPaymentProfile |
-            CreditCardPaymentProfile | PaypalPaymentProfile.
+        errors (str): The model property of type str.
+        payment_profile_params (PaymentProfileParams): PCI-safe cardholder fields
+            only. Full card numbers, CVV, and billing address are never included.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -23,16 +25,24 @@ class PaymentProfileResponse(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "payment_profile": "payment_profile",
+        "errors": "errors",
+        "payment_profile_params": "payment_profile_params",
     }
+
+    _optionals = [
+        "payment_profile_params",
+    ]
 
     def __init__(
         self,
-        payment_profile=None,
+        errors=None,
+        payment_profile_params=APIHelper.SKIP,
         additional_properties=None):
-        """Initialize a PaymentProfileResponse instance."""
+        """Initialize a ChjsTokenizationFailure instance."""
         # Initialize members of the class
-        self.payment_profile = payment_profile
+        self.errors = errors
+        if payment_profile_params is not APIHelper.SKIP:
+            self.payment_profile_params = payment_profile_params
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -53,27 +63,27 @@ class PaymentProfileResponse(object):
             object: An instance of this structure class.
 
         """
-        from advancedbilling.utilities.union_type_lookup import (
-            UnionTypeLookUp,
-        )
-
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        payment_profile = APIHelper.deserialize_union_type(
-            UnionTypeLookUp.get("Payment-Profile2"),
-            dictionary.get("payment_profile"),
-            False)\
-            if dictionary.get("payment_profile") is not None\
-            else None
+        errors =\
+            dictionary.get("errors")\
+            if dictionary.get("errors")\
+                else None
+        payment_profile_params =\
+            PaymentProfileParams.from_dictionary(
+                dictionary.get("payment_profile_params"))\
+                if "payment_profile_params" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
             {k: v for k, v in dictionary.items() if k not in cls._names.values()}
 
         # Return an object of this model
-        return cls(payment_profile,
+        return cls(errors,
+                   payment_profile_params,
                    additional_properties)
 
     @classmethod
@@ -89,38 +99,56 @@ class PaymentProfileResponse(object):
             boolean : if dictionary is valid contains required properties.
 
         """
-        from advancedbilling.utilities.union_type_lookup import (
-            UnionTypeLookUp,
-        )
-
         if isinstance(dictionary, cls):
-            return (UnionTypeLookUp.get("Payment-Profile2")
-                .validate(dictionary.payment_profile).is_valid)
+            return APIHelper.is_valid_type(
+                    value=dictionary.errors,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                ))
 
         if not isinstance(dictionary, dict):
             return False
 
-        return (UnionTypeLookUp.get("Payment-Profile2")
-            .validate(dictionary.get("payment_profile")).is_valid)
+        return APIHelper.is_valid_type(
+                value=dictionary.get("errors"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            ))
 
     def __repr__(self):
         """Return a unambiguous string representation."""
-        _payment_profile=self.payment_profile
+        _errors=self.errors
+        _payment_profile_params=(
+            self.payment_profile_params
+            if hasattr(self, "payment_profile_params")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
-            f"payment_profile={_payment_profile!r}, "
+            f"errors={_errors!r}, "
+            f"payment_profile_params={_payment_profile_params!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
 
     def __str__(self):
         """Return a human-readable string representation."""
-        _payment_profile=self.payment_profile
+        _errors=self.errors
+        _payment_profile_params=(
+            self.payment_profile_params
+            if hasattr(self, "payment_profile_params")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
-            f"payment_profile={_payment_profile!s}, "
+            f"errors={_errors!s}, "
+            f"payment_profile_params={_payment_profile_params!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

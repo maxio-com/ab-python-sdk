@@ -50,9 +50,8 @@ class APIExportsController(BaseController):
         """Perform a GET request to
         /api_exports/proforma_invoices/{batch_id}/rows.json.
 
-        This API returns an array of exported proforma invoices for a provided
-        `batch_id`. Pay close attention to pagination in order to control responses
-        from the server.
+        Lists exported proforma invoices for a provided `batch_id`. Use pagination to
+        control responses returned from the server.
         Example: `GET
         https://{subdomain}.chargify.com/api_exports/proforma_invoices/123/rows?per_pa
         ge=10000&page=1`.
@@ -116,8 +115,8 @@ class APIExportsController(BaseController):
                                options=dict()):
         """Perform a GET request to /api_exports/invoices/{batch_id}/rows.json.
 
-        This API returns an array of exported invoices for a provided `batch_id`. Pay
-        close attention to pagination in order to control responses from the server.
+        Lists exported invoices for a provided `batch_id`. Use pagination to control
+        responses returned from the server.
         Example: `GET
         https://{subdomain}.chargify.com/api_exports/invoices/123/rows?per_page=10000&
         page=1`.
@@ -182,9 +181,8 @@ class APIExportsController(BaseController):
         """Perform a GET request to
         /api_exports/subscriptions/{batch_id}/rows.json.
 
-        This API returns an array of exported subscriptions for a provided
-        `batch_id`. Pay close attention to pagination in order to control responses
-        from the server.
+        Lists exported subscriptions for a provided `batch_id`. Use pagination to
+        control responses returned from the server.
         Example: `GET
         https://{subdomain}.chargify.com/api_exports/subscriptions/123/rows?per_page=2
         00&page=1`.
@@ -247,7 +245,7 @@ class APIExportsController(BaseController):
     def export_proforma_invoices(self):
         """Perform a POST request to /api_exports/proforma_invoices.json.
 
-        This API creates a proforma invoices export and returns a batchjob object.
+        Creates a proforma invoices export and returns a batch job object.
         It is only available for Relationship Invoicing architecture.
 
         Returns:
@@ -281,7 +279,7 @@ class APIExportsController(BaseController):
     def export_invoices(self):
         """Perform a POST request to /api_exports/invoices.json.
 
-        This API creates an invoices export and returns a batchjob object.
+        Creates an invoices export and returns a batch job object.
 
         Returns:
             BatchJobResponse: Response from the API. Created
@@ -314,7 +312,7 @@ class APIExportsController(BaseController):
     def export_subscriptions(self):
         """Perform a POST request to /api_exports/subscriptions.json.
 
-        This API creates a subscriptions export and returns a batchjob object.
+        Creates a subscriptions export and returns a batch job object.
 
         Returns:
             BatchJobResponse: Response from the API. Created
@@ -348,7 +346,7 @@ class APIExportsController(BaseController):
         """Perform a GET request to
         /api_exports/proforma_invoices/{batch_id}.json.
 
-        This API returns a batchjob object for proforma invoices export.
+        Returns a batch job object for a proforma invoices export.
 
         Args:
             batch_id (str): Id of a Batch Job.
@@ -386,7 +384,7 @@ class APIExportsController(BaseController):
                              batch_id):
         """Perform a GET request to /api_exports/invoices/{batch_id}.json.
 
-        This API returns a batchjob object for invoices export.
+        Returns a batch job object for an invoices export.
 
         Args:
             batch_id (str): Id of a Batch Job.
@@ -424,7 +422,7 @@ class APIExportsController(BaseController):
                                   batch_id):
         """Perform a GET request to /api_exports/subscriptions/{batch_id}.json.
 
-        This API returns a batchjob object for subscriptions export.
+        Returns a batch job object for a subscriptions export.
 
         Args:
             batch_id (str): Id of a Batch Job.

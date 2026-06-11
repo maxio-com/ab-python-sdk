@@ -219,7 +219,7 @@ class CustomFieldsController(BaseController):
         specify all metadata values including the new value you want to add.
         - Add new metadata to a dropdown or radio for a metafield that was created
         without metadata.
-        - Remove  metadata for a dropdown or radio for a metafield.
+        - Remove metadata for a dropdown or radio for a metafield.
           >Note: Updates to metadata overwrite existing values. To remove one or more
         values, specify all metadata values except those you want to remove.
         - Add or update scope settings for a metafield.
@@ -458,7 +458,8 @@ class CustomFieldsController(BaseController):
         subscription or customer you specify. You can update the input_type for the
         metafield with the Update Metafield endpoint.
         Each site is limited to 100 unique metafields per resource. This means you
-        can have 100 metafields for Subscription and another 100 for Customer.
+        can have 100 metafields for the Subscription resource and another 100 for the
+        Customer resource.
 
         Args:
             resource_type (ResourceType): The resource type to which the metafields
@@ -567,7 +568,7 @@ class CustomFieldsController(BaseController):
                                         options=dict()):
         """Perform a GET request to /{resource_type}/metadata.json.
 
-        Lists  metadata for a specified array of subscriptions or customers.
+        Lists metadata for a specified array of subscriptions or customers.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to

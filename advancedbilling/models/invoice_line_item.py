@@ -96,6 +96,9 @@ class InvoiceLineItem(object):
         product_price_point_id (int): The price point ID of the line item's product
         custom_item (bool): The model property of type bool.
         kind (str): The model property of type str.
+        prepaid_allocation_expires_at (date): The date a prepaid allocation is set to
+            expire. Only present on line items representing prepaid component
+            allocations. The format is `"YYYY-MM-DD"`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -127,6 +130,7 @@ class InvoiceLineItem(object):
         "product_price_point_id": "product_price_point_id",
         "custom_item": "custom_item",
         "kind": "kind",
+        "prepaid_allocation_expires_at": "prepaid_allocation_expires_at",
     }
 
     _optionals = [
@@ -154,6 +158,7 @@ class InvoiceLineItem(object):
         "product_price_point_id",
         "custom_item",
         "kind",
+        "prepaid_allocation_expires_at",
     ]
 
     _nullables = [
@@ -164,6 +169,7 @@ class InvoiceLineItem(object):
         "billing_schedule_item_id",
         "component_cost_data",
         "product_price_point_id",
+        "prepaid_allocation_expires_at",
     ]
 
     def __init__(
@@ -192,6 +198,7 @@ class InvoiceLineItem(object):
         product_price_point_id=APIHelper.SKIP,
         custom_item=APIHelper.SKIP,
         kind=APIHelper.SKIP,
+        prepaid_allocation_expires_at=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a InvoiceLineItem instance."""
         # Initialize members of the class
@@ -243,6 +250,8 @@ class InvoiceLineItem(object):
             self.custom_item = custom_item
         if kind is not APIHelper.SKIP:
             self.kind = kind
+        if prepaid_allocation_expires_at is not APIHelper.SKIP:
+            self.prepaid_allocation_expires_at = prepaid_allocation_expires_at
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -364,6 +373,13 @@ class InvoiceLineItem(object):
             dictionary.get("kind")\
             if dictionary.get("kind")\
                 else APIHelper.SKIP
+        if "prepaid_allocation_expires_at" in dictionary.keys():
+            prepaid_allocation_expires_at = dateutil.parser.parse(
+                dictionary.get("prepaid_allocation_expires_at")).date()\
+                if dictionary.get("prepaid_allocation_expires_at") else None
+
+        else:
+            prepaid_allocation_expires_at = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -394,6 +410,7 @@ class InvoiceLineItem(object):
                    product_price_point_id,
                    custom_item,
                    kind,
+                   prepaid_allocation_expires_at,
                    additional_properties)
 
     @classmethod
@@ -539,6 +556,11 @@ class InvoiceLineItem(object):
             if hasattr(self, "kind")
             else None
         )
+        _prepaid_allocation_expires_at=(
+            self.prepaid_allocation_expires_at
+            if hasattr(self, "prepaid_allocation_expires_at")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -566,6 +588,7 @@ class InvoiceLineItem(object):
             f"product_price_point_id={_product_price_point_id!r}, "
             f"custom_item={_custom_item!r}, "
             f"kind={_kind!r}, "
+            f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -692,6 +715,11 @@ class InvoiceLineItem(object):
             if hasattr(self, "kind")
             else None
         )
+        _prepaid_allocation_expires_at=(
+            self.prepaid_allocation_expires_at
+            if hasattr(self, "prepaid_allocation_expires_at")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -719,6 +747,7 @@ class InvoiceLineItem(object):
             f"product_price_point_id={_product_price_point_id!s}, "
             f"custom_item={_custom_item!s}, "
             f"kind={_kind!s}, "
+            f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

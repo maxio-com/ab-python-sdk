@@ -270,7 +270,7 @@ print(result)
 
 # Read Product Price Point
 
-Use this endpoint to retrieve details for a specific product price point. You can achieve this by using either the product price point ID or handle.
+Returns details for a specific product price point. You can achieve this by using either the product price point ID or handle.
 
 ```python
 def read_product_price_point(self,
@@ -416,7 +416,7 @@ print(result)
 
 # Unarchive Product Price Point
 
-Use this endpoint to unarchive an archived product price point.
+Unarchives an archived product price point.
 
 ```python
 def unarchive_product_price_point(self,
@@ -859,7 +859,7 @@ print(result)
 
 # List All Product Price Points
 
-This method allows retrieval of a list of Products Price Points belonging to a Site.
+Lists Product Price Points belonging to a site.
 
 ```python
 def list_all_product_price_points(self,

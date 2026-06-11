@@ -51,8 +51,8 @@ class InsightsController(BaseController):
     def read_site_stats(self):
         """Perform a GET request to /stats.json.
 
-        The Stats API is a very basic view of some Site-level stats. This API call
-        only answers with JSON responses. An XML version is not provided.
+        Returns basic site-level stats. This API call only answers with JSON
+        responses. An XML version is not provided.
         ## Stats Documentation
         There currently is not a complimentary matching set of documentation that
         compliments this endpoint. However, each Site's dashboard will reflect the
@@ -90,8 +90,7 @@ class InsightsController(BaseController):
                  subscription_id=None):
         """Perform a GET request to /mrr.json.
 
-        This endpoint returns your site's current MRR, including plan and usage
-        breakouts.
+        Returns your site's current MRR, including plan and usage breakouts.
 
         Args:
             at_time (datetime, optional): submit a timestamp in ISO8601 format to
@@ -134,7 +133,7 @@ class InsightsController(BaseController):
                            options=dict()):
         """Perform a GET request to /mrr_movements.json.
 
-        This endpoint returns your site's MRR movements.
+        Lists your site's MRR movements.
         ## Understanding MRR movements
         This endpoint will aid in accessing your site's [MRR
         Report](https://maxio.zendesk.com/hc/en-us/articles/24285894587021-MRR-Analyti

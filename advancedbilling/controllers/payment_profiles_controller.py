@@ -97,7 +97,7 @@ class PaymentProfilesController(BaseController):
             + [Maxio.js with Stripe Direct Debit - full
         example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01
         K0PJ15QRECQQ4ECS3ZA55GY7)
-            + [CMaxio.js with Stripe BECS Direct Debit - minimal
+            + [Maxio.js with Stripe BECS Direct Debit - minimal
         example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-
         examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
             + [Maxio.js with Stripe BECS Direct Debit - full
@@ -170,9 +170,9 @@ class PaymentProfilesController(BaseController):
                               options=dict()):
         """Perform a GET request to /payment_profiles.json.
 
-        This method will return all of the active `payment_profiles` for a Site, or
-        for one Customer within a site.  If no payment profiles are found, this
-        endpoint will return an empty array, not a 404.
+        Returns all active payment profiles for a site, or for one customer within a
+        site. If no payment profiles are found, this endpoint will return an empty
+        array, not a 404.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -232,8 +232,7 @@ class PaymentProfilesController(BaseController):
         """Perform a GET request to
         /payment_profiles/{payment_profile_id}.json.
 
-        Using the GET method you can retrieve a Payment Profile identified by its
-        unique ID.
+        Returns a payment profile identified by its unique ID.
         Note that a different JSON object will be returned if the card method on file
         is a bank account.
         ### Response for Bank Account
@@ -306,6 +305,7 @@ class PaymentProfilesController(BaseController):
         """Perform a PUT request to
         /payment_profiles/{payment_profile_id}.json.
 
+        Updates a payment profile.
         ## Partial Card Updates
         In the event that you are using the Authorize.net, Stripe, Cybersource, Forte
         or Braintree Blue payment gateways, you can update just the billing and
@@ -475,8 +475,8 @@ class PaymentProfilesController(BaseController):
         """Perform a PUT request to
         /bank_accounts/{bank_account_id}/verification.json.
 
-        Submit the two small deposit amounts the customer received in their bank
-        account in order to verify the bank account. (Stripe only)
+        Verifies a bank account. Submit the two small deposit amounts the customer
+        received in their bank account to verify the bank account. (Stripe only)
 
         Args:
             bank_account_id (int): Identifier of the bank account in the system.
@@ -569,8 +569,8 @@ class PaymentProfilesController(BaseController):
         /subscriptions/{subscription_id}/payment_profiles/{payment_profile_id}/change_p
         ayment_profile.json.
 
-        This will change the default payment profile on the subscription to the
-        existing payment profile with the id specified.
+        Changes the default payment profile on the subscription to the existing
+        payment profile with the specified ID.
         You must elect to change the existing payment profile to a new payment
         profile ID in order to receive a satisfactory response from this endpoint.
 

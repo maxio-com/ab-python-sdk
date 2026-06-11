@@ -3,7 +3,7 @@
 
 ## Data Type
 
-`SubscriptionProductChange | SubscriptionStateChange | PaymentRelatedEvents | RefundSuccess | ComponentAllocationChange | MeteredUsage | PrepaidUsage | DunningStepReached | InvoiceIssued | PendingCancellationChange | PrepaidSubscriptionBalanceChanged | ProformaInvoiceIssued | SubscriptionGroupSignupEventData | CreditAccountBalanceChanged | PrepaymentAccountBalanceChanged | PaymentCollectionMethodChanged | ItemPricePointChanged | CustomFieldValueChange`
+`SubscriptionProductChange | SubscriptionStateChange | PaymentRelatedEvents | RefundSuccess | ComponentAllocationChange | MeteredUsage | PrepaidUsage | DunningStepReached | InvoiceIssued | PendingCancellationChange | PrepaidSubscriptionBalanceChanged | ProformaInvoiceIssued | SubscriptionGroupSignupEventData | CreditAccountBalanceChanged | PrepaymentAccountBalanceChanged | PaymentCollectionMethodChanged | ItemPricePointChanged | CustomFieldValueChange | ChjsTokenizationSuccess | ChjsTokenizationFailure`
 
 ## Cases
 
@@ -27,6 +27,8 @@
 | [`PaymentCollectionMethodChanged`](../../../doc/models/payment-collection-method-changed.md) |
 | [`ItemPricePointChanged`](../../../doc/models/item-price-point-changed.md) |
 | [`CustomFieldValueChange`](../../../doc/models/custom-field-value-change.md) |
+| [`ChjsTokenizationSuccess`](../../../doc/models/chjs-tokenization-success.md) |
+| [`ChjsTokenizationFailure`](../../../doc/models/chjs-tokenization-failure.md) |
 
 ## SubscriptionProductChange
 
@@ -340,6 +342,32 @@ value = CustomFieldValueChange(
     new_value='new_value8',
     resource_type='resource_type2',
     resource_id=74
+)
+```
+
+## ChjsTokenizationSuccess
+
+### Initialization Code
+
+#### Example
+
+```python
+value = ChjsTokenizationSuccess(
+    payment_profile=PaymentProfile(
+        id=44
+    )
+)
+```
+
+## ChjsTokenizationFailure
+
+### Initialization Code
+
+#### Example
+
+```python
+value = ChjsTokenizationFailure(
+    errors='errors2'
 )
 ```
 

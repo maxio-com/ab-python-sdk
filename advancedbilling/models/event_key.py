@@ -88,6 +88,8 @@ class EventKey(object):
         CHARGEBACK_WON: The enum member of type str.
         PAYMENT_COLLECTION_METHOD_CHANGED: The enum member of type str.
         COMPONENT_BILLING_DATE_CHANGED: The enum member of type str.
+        CHJS_TOKENIZATION_FAILURE: The enum member of type str.
+        CHJS_TOKENIZATION_SUCCESS: The enum member of type str.
         SUBSCRIPTION_TERM_RENEWAL_SCHEDULED: The enum member of type str.
         SUBSCRIPTION_TERM_RENEWAL_PENDING: The enum member of type str.
         SUBSCRIPTION_TERM_RENEWAL_ACTIVATED: The enum member of type str.
@@ -133,6 +135,7 @@ class EventKey(object):
         "subscription_removed_from_group", "chargeback_opened", "chargeback_lost",
         "chargeback_accepted", "chargeback_closed", "chargeback_won",
         "payment_collection_method_changed", "component_billing_date_changed",
+        "chjs_tokenization_failure", "chjs_tokenization_success",
         "subscription_term_renewal_scheduled", "subscription_term_renewal_pending",
         "subscription_term_renewal_activated", "subscription_term_renewal_removed"]
     PAYMENT_SUCCESS = "payment_success"
@@ -288,6 +291,10 @@ class EventKey(object):
     PAYMENT_COLLECTION_METHOD_CHANGED = "payment_collection_method_changed"
 
     COMPONENT_BILLING_DATE_CHANGED = "component_billing_date_changed"
+
+    CHJS_TOKENIZATION_FAILURE = "chjs_tokenization_failure"
+
+    CHJS_TOKENIZATION_SUCCESS = "chjs_tokenization_success"
 
     SUBSCRIPTION_TERM_RENEWAL_SCHEDULED = "subscription_term_renewal_scheduled"
 

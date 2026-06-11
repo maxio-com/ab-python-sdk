@@ -54,6 +54,12 @@ from advancedbilling.models.change_invoice_collection_method_event import (
 from advancedbilling.models.change_invoice_status_event import (
     ChangeInvoiceStatusEvent,
 )
+from advancedbilling.models.chjs_tokenization_failure import (
+    ChjsTokenizationFailure,
+)
+from advancedbilling.models.chjs_tokenization_success import (
+    ChjsTokenizationSuccess,
+)
 from advancedbilling.models.component_allocation_change import (
     ComponentAllocationChange,
 )
@@ -791,6 +797,8 @@ class UnionTypeLookUp:
                 LeafType(PaymentCollectionMethodChanged),
                 LeafType(ItemPricePointChanged),
                 LeafType(CustomFieldValueChange),
+                LeafType(ChjsTokenizationSuccess),
+                LeafType(ChjsTokenizationFailure),
             ],
             Context.create(
                is_nullable=True,
@@ -848,7 +856,7 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
-        "Payment-Profile": lambda: AnyOf(
+        "Payment-Profile2": lambda: AnyOf(
             [
                 LeafType(ApplePayPaymentProfile,
                          Context.create(

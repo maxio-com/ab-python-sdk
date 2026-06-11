@@ -39,9 +39,9 @@ class ReferralCodesController(BaseController):
                                code):
         """Perform a GET request to /referral_codes/validate.json.
 
-        Use this method to determine if the referral code is valid and applicable
-        within your Site. This method is useful for validating referral codes that
-        are entered by a customer.
+        Validates whether a referral code is valid and applicable within your site.
+        This method is useful for validating referral codes that are entered by a
+        customer.
         ## Referrals Documentation
         Full documentation on how to use the referrals feature in the Advanced
         Billing UI can be located

@@ -59,6 +59,7 @@ class Customer(object):
         tax_exempt_reason (str): The Tax Exemption Reason Code for the customer
         default_auto_renewal_profile_id (int): The default auto-renewal profile ID
             for the customer
+        maxioid (str): The Maxio-generated unique identifier for the customer.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -96,6 +97,7 @@ class Customer(object):
         "salesforce_id": "salesforce_id",
         "tax_exempt_reason": "tax_exempt_reason",
         "default_auto_renewal_profile_id": "default_auto_renewal_profile_id",
+        "maxioid": "maxioid",
     }
 
     _optionals = [
@@ -129,6 +131,7 @@ class Customer(object):
         "salesforce_id",
         "tax_exempt_reason",
         "default_auto_renewal_profile_id",
+        "maxioid",
     ]
 
     _nullables = [
@@ -155,6 +158,7 @@ class Customer(object):
         "salesforce_id",
         "tax_exempt_reason",
         "default_auto_renewal_profile_id",
+        "maxioid",
     ]
 
     def __init__(
@@ -189,6 +193,7 @@ class Customer(object):
         salesforce_id=APIHelper.SKIP,
         tax_exempt_reason=APIHelper.SKIP,
         default_auto_renewal_profile_id=APIHelper.SKIP,
+        maxioid=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a Customer instance."""
         # Initialize members of the class
@@ -267,6 +272,8 @@ class Customer(object):
             self.tax_exempt_reason = tax_exempt_reason
         if default_auto_renewal_profile_id is not APIHelper.SKIP:
             self.default_auto_renewal_profile_id = default_auto_renewal_profile_id
+        if maxioid is not APIHelper.SKIP:
+            self.maxioid = maxioid
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -418,6 +425,10 @@ class Customer(object):
             dictionary.get("default_auto_renewal_profile_id")\
             if "default_auto_renewal_profile_id" in dictionary.keys()\
                 else APIHelper.SKIP
+        maxioid =\
+            dictionary.get("maxioid")\
+            if "maxioid" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -454,6 +465,7 @@ class Customer(object):
                    salesforce_id,
                    tax_exempt_reason,
                    default_auto_renewal_profile_id,
+                   maxioid,
                    additional_properties)
 
     @classmethod
@@ -629,6 +641,11 @@ class Customer(object):
             if hasattr(self, "default_auto_renewal_profile_id")
             else None
         )
+        _maxioid=(
+            self.maxioid
+            if hasattr(self, "maxioid")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -662,6 +679,7 @@ class Customer(object):
             f"salesforce_id={_salesforce_id!r}, "
             f"tax_exempt_reason={_tax_exempt_reason!r}, "
             f"default_auto_renewal_profile_id={_default_auto_renewal_profile_id!r}, "
+            f"maxioid={_maxioid!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -818,6 +836,11 @@ class Customer(object):
             if hasattr(self, "default_auto_renewal_profile_id")
             else None
         )
+        _maxioid=(
+            self.maxioid
+            if hasattr(self, "maxioid")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -851,6 +874,7 @@ class Customer(object):
             f"salesforce_id={_salesforce_id!s}, "
             f"tax_exempt_reason={_tax_exempt_reason!s}, "
             f"default_auto_renewal_profile_id={_default_auto_renewal_profile_id!s}, "
+            f"maxioid={_maxioid!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )
