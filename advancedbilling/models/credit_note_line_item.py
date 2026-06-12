@@ -46,6 +46,13 @@ class CreditNoteLineItem(object):
             been summed prior to applying the tax rate to arrive at `tax_amount` for
             the invoice - backing that out to the tax on a single line may introduce
             rounding or precision errors.
+        tax_included (bool): Whether the unit price for this line item is
+            tax-inclusive.  When `true`, `unit_price` already includes tax and
+            `tax_amount` represents the portion of the price attributable to tax.
+            When `false`, any applicable tax is added on top of the price.  The value
+            is inherited from the source price point's `tax_included` setting. Custom
+            or ad-hoc line items (which have no associated price point) always return
+            `false`.
         total_amount (str): The non-canonical total amount for the line.
             `subtotal_amount` is the canonical amount for a line. The invoice
             `total_amount` is derived from the sum of the line `subtotal_amount`s and
@@ -69,6 +76,9 @@ class CreditNoteLineItem(object):
             Will be `nil` for non-component credits.
         billing_schedule_item_id (int): The model property of type int.
         custom_item (bool): The model property of type bool.
+        prepaid_allocation_expires_at (date): The date a prepaid allocation is set to
+            expire. Only present on line items representing prepaid component
+            allocations. The format is `"YYYY-MM-DD"`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -84,6 +94,7 @@ class CreditNoteLineItem(object):
         "subtotal_amount": "subtotal_amount",
         "discount_amount": "discount_amount",
         "tax_amount": "tax_amount",
+        "tax_included": "tax_included",
         "total_amount": "total_amount",
         "tiered_unit_price": "tiered_unit_price",
         "period_range_start": "period_range_start",
@@ -94,6 +105,7 @@ class CreditNoteLineItem(object):
         "price_point_id": "price_point_id",
         "billing_schedule_item_id": "billing_schedule_item_id",
         "custom_item": "custom_item",
+        "prepaid_allocation_expires_at": "prepaid_allocation_expires_at",
     }
 
     _optionals = [
@@ -105,6 +117,7 @@ class CreditNoteLineItem(object):
         "subtotal_amount",
         "discount_amount",
         "tax_amount",
+        "tax_included",
         "total_amount",
         "tiered_unit_price",
         "period_range_start",
@@ -115,12 +128,14 @@ class CreditNoteLineItem(object):
         "price_point_id",
         "billing_schedule_item_id",
         "custom_item",
+        "prepaid_allocation_expires_at",
     ]
 
     _nullables = [
         "component_id",
         "price_point_id",
         "billing_schedule_item_id",
+        "prepaid_allocation_expires_at",
     ]
 
     def __init__(
@@ -133,6 +148,7 @@ class CreditNoteLineItem(object):
         subtotal_amount=APIHelper.SKIP,
         discount_amount=APIHelper.SKIP,
         tax_amount=APIHelper.SKIP,
+        tax_included=APIHelper.SKIP,
         total_amount=APIHelper.SKIP,
         tiered_unit_price=APIHelper.SKIP,
         period_range_start=APIHelper.SKIP,
@@ -143,6 +159,7 @@ class CreditNoteLineItem(object):
         price_point_id=APIHelper.SKIP,
         billing_schedule_item_id=APIHelper.SKIP,
         custom_item=APIHelper.SKIP,
+        prepaid_allocation_expires_at=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a CreditNoteLineItem instance."""
         # Initialize members of the class
@@ -162,6 +179,8 @@ class CreditNoteLineItem(object):
             self.discount_amount = discount_amount
         if tax_amount is not APIHelper.SKIP:
             self.tax_amount = tax_amount
+        if tax_included is not APIHelper.SKIP:
+            self.tax_included = tax_included
         if total_amount is not APIHelper.SKIP:
             self.total_amount = total_amount
         if tiered_unit_price is not APIHelper.SKIP:
@@ -182,6 +201,8 @@ class CreditNoteLineItem(object):
             self.billing_schedule_item_id = billing_schedule_item_id
         if custom_item is not APIHelper.SKIP:
             self.custom_item = custom_item
+        if prepaid_allocation_expires_at is not APIHelper.SKIP:
+            self.prepaid_allocation_expires_at = prepaid_allocation_expires_at
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -238,6 +259,10 @@ class CreditNoteLineItem(object):
             dictionary.get("tax_amount")\
             if dictionary.get("tax_amount")\
                 else APIHelper.SKIP
+        tax_included =\
+            dictionary.get("tax_included")\
+            if "tax_included" in dictionary.keys()\
+                else APIHelper.SKIP
         total_amount =\
             dictionary.get("total_amount")\
             if dictionary.get("total_amount")\
@@ -276,6 +301,13 @@ class CreditNoteLineItem(object):
             dictionary.get("custom_item")\
             if "custom_item" in dictionary.keys()\
                 else APIHelper.SKIP
+        if "prepaid_allocation_expires_at" in dictionary.keys():
+            prepaid_allocation_expires_at = dateutil.parser.parse(
+                dictionary.get("prepaid_allocation_expires_at")).date()\
+                if dictionary.get("prepaid_allocation_expires_at") else None
+
+        else:
+            prepaid_allocation_expires_at = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -290,6 +322,7 @@ class CreditNoteLineItem(object):
                    subtotal_amount,
                    discount_amount,
                    tax_amount,
+                   tax_included,
                    total_amount,
                    tiered_unit_price,
                    period_range_start,
@@ -300,6 +333,7 @@ class CreditNoteLineItem(object):
                    price_point_id,
                    billing_schedule_item_id,
                    custom_item,
+                   prepaid_allocation_expires_at,
                    additional_properties)
 
     @classmethod
@@ -365,6 +399,11 @@ class CreditNoteLineItem(object):
             if hasattr(self, "tax_amount")
             else None
         )
+        _tax_included=(
+            self.tax_included
+            if hasattr(self, "tax_included")
+            else None
+        )
         _total_amount=(
             self.total_amount
             if hasattr(self, "total_amount")
@@ -415,6 +454,11 @@ class CreditNoteLineItem(object):
             if hasattr(self, "custom_item")
             else None
         )
+        _prepaid_allocation_expires_at=(
+            self.prepaid_allocation_expires_at
+            if hasattr(self, "prepaid_allocation_expires_at")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -426,6 +470,7 @@ class CreditNoteLineItem(object):
             f"subtotal_amount={_subtotal_amount!r}, "
             f"discount_amount={_discount_amount!r}, "
             f"tax_amount={_tax_amount!r}, "
+            f"tax_included={_tax_included!r}, "
             f"total_amount={_total_amount!r}, "
             f"tiered_unit_price={_tiered_unit_price!r}, "
             f"period_range_start={_period_range_start!r}, "
@@ -436,6 +481,7 @@ class CreditNoteLineItem(object):
             f"price_point_id={_price_point_id!r}, "
             f"billing_schedule_item_id={_billing_schedule_item_id!r}, "
             f"custom_item={_custom_item!r}, "
+            f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -482,6 +528,11 @@ class CreditNoteLineItem(object):
             if hasattr(self, "tax_amount")
             else None
         )
+        _tax_included=(
+            self.tax_included
+            if hasattr(self, "tax_included")
+            else None
+        )
         _total_amount=(
             self.total_amount
             if hasattr(self, "total_amount")
@@ -532,6 +583,11 @@ class CreditNoteLineItem(object):
             if hasattr(self, "custom_item")
             else None
         )
+        _prepaid_allocation_expires_at=(
+            self.prepaid_allocation_expires_at
+            if hasattr(self, "prepaid_allocation_expires_at")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -543,6 +599,7 @@ class CreditNoteLineItem(object):
             f"subtotal_amount={_subtotal_amount!s}, "
             f"discount_amount={_discount_amount!s}, "
             f"tax_amount={_tax_amount!s}, "
+            f"tax_included={_tax_included!s}, "
             f"total_amount={_total_amount!s}, "
             f"tiered_unit_price={_tiered_unit_price!s}, "
             f"period_range_start={_period_range_start!s}, "
@@ -553,6 +610,7 @@ class CreditNoteLineItem(object):
             f"price_point_id={_price_point_id!s}, "
             f"billing_schedule_item_id={_billing_schedule_item_id!s}, "
             f"custom_item={_custom_item!s}, "
+            f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

@@ -11,7 +11,7 @@ referral_codes_controller = client.referral_codes
 
 # Validate Referral Code
 
-Use this method to determine if the referral code is valid and applicable within your Site. This method is useful for validating referral codes that are entered by a customer.
+Validates whether a referral code is valid and applicable within your site. This method is useful for validating referral codes that are entered by a customer.
 
 ## Referrals Documentation
 
@@ -26,6 +26,10 @@ def validate_referral_code(self,
                           code)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -33,6 +37,8 @@ def validate_referral_code(self,
 | `code` | `str` | Query, Required | The referral code you are trying to validate |
 
 ## Response Type
+
+**200**: OK
 
 [`ReferralValidationResponse`](../../doc/models/referral-validation-response.md)
 

@@ -172,8 +172,7 @@ class ComponentPricePointsController(BaseController):
         """Perform a GET request to
         /components/{component_id}/price_points.json.
 
-        Use this endpoint to read current price points that are associated with a
-        component.
+        Lists the price points associated with a component.
         You may specify the component by using either the numeric id or the
         `handle:gold` syntax.
         When fetching a component's price points, if you have defined multiple
@@ -254,7 +253,7 @@ class ComponentPricePointsController(BaseController):
         """Perform a POST request to
         /components/{component_id}/price_points/bulk.json.
 
-        Use this endpoint to create multiple component price points in one request.
+        Creates multiple component price points in one request.
 
         Args:
             component_id (str): The Advanced Billing id of the component for which
@@ -384,8 +383,7 @@ class ComponentPricePointsController(BaseController):
         """Perform a PUT request to
         /components/{component_id}/price_points/{price_point_id}.json.
 
-        When updating a price point, prices can be updated as well by creating new
-        prices or editing / removing existing ones.
+        Updates a component price point and its associated prices.
         Passing in a price bracket without an `id` will attempt to create a new price.
         Including an `id` will update the corresponding price, and including the
         `_destroy` flag set to true along with the `id` will remove that price.
@@ -457,8 +455,8 @@ class ComponentPricePointsController(BaseController):
         """Perform a GET request to
         /components/{component_id}/price_points/{price_point_id}.json.
 
-        Use this endpoint to retrieve details for a specific component price point.
-        You can achieve this by using either the component price point ID or handle.
+        Returns details for a specific component price point. You can achieve this by
+        using either the component price point ID or handle.
 
         Args:
             component_id (int | str): The id or handle of the component. When using
@@ -516,9 +514,9 @@ class ComponentPricePointsController(BaseController):
         """Perform a DELETE request to
         /components/{component_id}/price_points/{price_point_id}.json.
 
-        A price point can be archived at any time. Subscriptions using a price point
-        that has been archived will continue using it until they're moved to another
-        price point.
+        Archives a component price point. Subscriptions using a price point that has
+        been archived will continue using it until they're moved to another price
+        point.
 
         Args:
             component_id (int | str): The id or handle of the component. When using
@@ -576,7 +574,7 @@ class ComponentPricePointsController(BaseController):
         """Perform a PUT request to
         /components/{component_id}/price_points/{price_point_id}/unarchive.json.
 
-        Use this endpoint to unarchive a component price point.
+        Unarchives a component price point.
 
         Args:
             component_id (int): The Advanced Billing id of the component to which the
@@ -622,8 +620,7 @@ class ComponentPricePointsController(BaseController):
         """Perform a POST request to
         /price_points/{price_point_id}/currency_prices.json.
 
-        This endpoint allows you to create currency prices for a given currency that
-        has been defined on the site level in your settings.
+        Creates currency prices for a given currency defined at the site level.
         When creating currency prices, they need to mirror the structure of your
         primary pricing. For each price level defined on the component price point,
         there should be a matching price level created in the given currency.
@@ -677,8 +674,7 @@ class ComponentPricePointsController(BaseController):
         """Perform a PUT request to
         /price_points/{price_point_id}/currency_prices.json.
 
-        This endpoint allows you to update currency prices for a given currency that
-        has been defined on the site level in your settings.
+        Updates currency prices for a given currency defined at the site level.
         Note: Currency Prices are not able to be updated for custom price points.
 
         Args:
@@ -727,8 +723,7 @@ class ComponentPricePointsController(BaseController):
                                         options=dict()):
         """Perform a GET request to /components_price_points.json.
 
-        This method allows to retrieve a list of Components Price Points belonging to
-        a Site.
+        Lists all component price points belonging to a site.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to

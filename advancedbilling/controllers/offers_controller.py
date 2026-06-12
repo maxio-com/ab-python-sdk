@@ -45,7 +45,7 @@ class OffersController(BaseController):
                      body=None):
         """Perform a POST request to /offers.json.
 
-        Create an offer within your Advanced Billing site by sending a POST request.
+        Creates an offer within your Advanced Billing site.
         ## Documentation
         Offers allow you to package complicated combinations of products, components
         and coupons into a convenient package which can then be subscribed to just
@@ -102,7 +102,7 @@ class OffersController(BaseController):
                     options=dict()):
         """Perform a GET request to /offers.json.
 
-        This endpoint will list offers for a site.
+        Lists offers for a site.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -165,8 +165,8 @@ class OffersController(BaseController):
                    offer_id):
         """Perform a GET request to /offers/{offer_id}.json.
 
-        This method allows you to list a specific offer's attributes. This is
-        different than list all offers for a site, as it requires an `offer_id`.
+        Returns a specific offer's attributes. This is different from listing all
+        offers for a site, as it requires an `offer_id`.
 
         Args:
             offer_id (int): The Chargify id of the offer
@@ -203,7 +203,7 @@ class OffersController(BaseController):
                       offer_id):
         """Perform a PUT request to /offers/{offer_id}/archive.json.
 
-        Archive an existing offer. Please provide an `offer_id` in order to archive
+        Archives an existing offer. Please provide an `offer_id` in order to archive
         the correct item.
 
         Args:
@@ -234,8 +234,8 @@ class OffersController(BaseController):
                         offer_id):
         """Perform a PUT request to /offers/{offer_id}/unarchive.json.
 
-        Unarchive a previously archived offer. Please provide an `offer_id` in order
-        to un-archive the correct item.
+        Unarchives a previously archived offer. Please provide an `offer_id` in order
+        to unarchive the correct item.
 
         Args:
             offer_id (int): The Chargify id of the offer

@@ -50,6 +50,13 @@ class InvoiceLineItem(object):
             been summed prior to applying the tax rate to arrive at `tax_amount` for
             the invoice - backing that out to the tax on a single line may introduce
             rounding or precision errors.
+        tax_included (bool): Whether the unit price for this line item is
+            tax-inclusive.  When `true`, `unit_price` already includes tax and
+            `tax_amount` represents the portion of the price attributable to tax.
+            When `false`, any applicable tax is added on top of the price.  The value
+            is inherited from the source price point's `tax_included` setting. Custom
+            or ad-hoc line items (which have no associated price point) always return
+            `false`.
         total_amount (str): The non-canonical total amount for the line.
             `subtotal_amount` is the canonical amount for a line. The invoice
             `total_amount` is derived from the sum of the line `subtotal_amount`s and
@@ -89,6 +96,9 @@ class InvoiceLineItem(object):
         product_price_point_id (int): The price point ID of the line item's product
         custom_item (bool): The model property of type bool.
         kind (str): The model property of type str.
+        prepaid_allocation_expires_at (date): The date a prepaid allocation is set to
+            expire. Only present on line items representing prepaid component
+            allocations. The format is `"YYYY-MM-DD"`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -104,6 +114,7 @@ class InvoiceLineItem(object):
         "subtotal_amount": "subtotal_amount",
         "discount_amount": "discount_amount",
         "tax_amount": "tax_amount",
+        "tax_included": "tax_included",
         "total_amount": "total_amount",
         "tiered_unit_price": "tiered_unit_price",
         "period_range_start": "period_range_start",
@@ -119,6 +130,7 @@ class InvoiceLineItem(object):
         "product_price_point_id": "product_price_point_id",
         "custom_item": "custom_item",
         "kind": "kind",
+        "prepaid_allocation_expires_at": "prepaid_allocation_expires_at",
     }
 
     _optionals = [
@@ -130,6 +142,7 @@ class InvoiceLineItem(object):
         "subtotal_amount",
         "discount_amount",
         "tax_amount",
+        "tax_included",
         "total_amount",
         "tiered_unit_price",
         "period_range_start",
@@ -145,6 +158,7 @@ class InvoiceLineItem(object):
         "product_price_point_id",
         "custom_item",
         "kind",
+        "prepaid_allocation_expires_at",
     ]
 
     _nullables = [
@@ -155,6 +169,7 @@ class InvoiceLineItem(object):
         "billing_schedule_item_id",
         "component_cost_data",
         "product_price_point_id",
+        "prepaid_allocation_expires_at",
     ]
 
     def __init__(
@@ -167,6 +182,7 @@ class InvoiceLineItem(object):
         subtotal_amount=APIHelper.SKIP,
         discount_amount=APIHelper.SKIP,
         tax_amount=APIHelper.SKIP,
+        tax_included=APIHelper.SKIP,
         total_amount=APIHelper.SKIP,
         tiered_unit_price=APIHelper.SKIP,
         period_range_start=APIHelper.SKIP,
@@ -182,6 +198,7 @@ class InvoiceLineItem(object):
         product_price_point_id=APIHelper.SKIP,
         custom_item=APIHelper.SKIP,
         kind=APIHelper.SKIP,
+        prepaid_allocation_expires_at=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a InvoiceLineItem instance."""
         # Initialize members of the class
@@ -201,6 +218,8 @@ class InvoiceLineItem(object):
             self.discount_amount = discount_amount
         if tax_amount is not APIHelper.SKIP:
             self.tax_amount = tax_amount
+        if tax_included is not APIHelper.SKIP:
+            self.tax_included = tax_included
         if total_amount is not APIHelper.SKIP:
             self.total_amount = total_amount
         if tiered_unit_price is not APIHelper.SKIP:
@@ -231,6 +250,8 @@ class InvoiceLineItem(object):
             self.custom_item = custom_item
         if kind is not APIHelper.SKIP:
             self.kind = kind
+        if prepaid_allocation_expires_at is not APIHelper.SKIP:
+            self.prepaid_allocation_expires_at = prepaid_allocation_expires_at
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -286,6 +307,10 @@ class InvoiceLineItem(object):
         tax_amount =\
             dictionary.get("tax_amount")\
             if dictionary.get("tax_amount")\
+                else APIHelper.SKIP
+        tax_included =\
+            dictionary.get("tax_included")\
+            if "tax_included" in dictionary.keys()\
                 else APIHelper.SKIP
         total_amount =\
             dictionary.get("total_amount")\
@@ -348,6 +373,13 @@ class InvoiceLineItem(object):
             dictionary.get("kind")\
             if dictionary.get("kind")\
                 else APIHelper.SKIP
+        if "prepaid_allocation_expires_at" in dictionary.keys():
+            prepaid_allocation_expires_at = dateutil.parser.parse(
+                dictionary.get("prepaid_allocation_expires_at")).date()\
+                if dictionary.get("prepaid_allocation_expires_at") else None
+
+        else:
+            prepaid_allocation_expires_at = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -362,6 +394,7 @@ class InvoiceLineItem(object):
                    subtotal_amount,
                    discount_amount,
                    tax_amount,
+                   tax_included,
                    total_amount,
                    tiered_unit_price,
                    period_range_start,
@@ -377,6 +410,7 @@ class InvoiceLineItem(object):
                    product_price_point_id,
                    custom_item,
                    kind,
+                   prepaid_allocation_expires_at,
                    additional_properties)
 
     @classmethod
@@ -442,6 +476,11 @@ class InvoiceLineItem(object):
             if hasattr(self, "tax_amount")
             else None
         )
+        _tax_included=(
+            self.tax_included
+            if hasattr(self, "tax_included")
+            else None
+        )
         _total_amount=(
             self.total_amount
             if hasattr(self, "total_amount")
@@ -517,6 +556,11 @@ class InvoiceLineItem(object):
             if hasattr(self, "kind")
             else None
         )
+        _prepaid_allocation_expires_at=(
+            self.prepaid_allocation_expires_at
+            if hasattr(self, "prepaid_allocation_expires_at")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -528,6 +572,7 @@ class InvoiceLineItem(object):
             f"subtotal_amount={_subtotal_amount!r}, "
             f"discount_amount={_discount_amount!r}, "
             f"tax_amount={_tax_amount!r}, "
+            f"tax_included={_tax_included!r}, "
             f"total_amount={_total_amount!r}, "
             f"tiered_unit_price={_tiered_unit_price!r}, "
             f"period_range_start={_period_range_start!r}, "
@@ -543,6 +588,7 @@ class InvoiceLineItem(object):
             f"product_price_point_id={_product_price_point_id!r}, "
             f"custom_item={_custom_item!r}, "
             f"kind={_kind!r}, "
+            f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -589,6 +635,11 @@ class InvoiceLineItem(object):
             if hasattr(self, "tax_amount")
             else None
         )
+        _tax_included=(
+            self.tax_included
+            if hasattr(self, "tax_included")
+            else None
+        )
         _total_amount=(
             self.total_amount
             if hasattr(self, "total_amount")
@@ -664,6 +715,11 @@ class InvoiceLineItem(object):
             if hasattr(self, "kind")
             else None
         )
+        _prepaid_allocation_expires_at=(
+            self.prepaid_allocation_expires_at
+            if hasattr(self, "prepaid_allocation_expires_at")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -675,6 +731,7 @@ class InvoiceLineItem(object):
             f"subtotal_amount={_subtotal_amount!s}, "
             f"discount_amount={_discount_amount!s}, "
             f"tax_amount={_tax_amount!s}, "
+            f"tax_included={_tax_included!s}, "
             f"total_amount={_total_amount!s}, "
             f"tiered_unit_price={_tiered_unit_price!s}, "
             f"period_range_start={_period_range_start!s}, "
@@ -690,6 +747,7 @@ class InvoiceLineItem(object):
             f"product_price_point_id={_product_price_point_id!s}, "
             f"custom_item={_custom_item!s}, "
             f"kind={_kind!s}, "
+            f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

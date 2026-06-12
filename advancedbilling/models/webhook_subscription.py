@@ -12,12 +12,15 @@ class WebhookSubscription(object):
     Attributes:
         BILLING_DATE_CHANGE: The enum member of type str.
         COMPONENT_ALLOCATION_CHANGE: The enum member of type str.
+        CHJS_TOKENIZATION_FAILURE: The enum member of type str.
+        CHJS_TOKENIZATION_SUCCESS: The enum member of type str.
         CUSTOMER_CREATE: The enum member of type str.
         CUSTOMER_UPDATE: The enum member of type str.
         DUNNING_STEP_REACHED: The enum member of type str.
         EXPIRING_CARD: The enum member of type str.
         EXPIRATION_DATE_CHANGE: The enum member of type str.
         INVOICE_ISSUED: The enum member of type str.
+        INVOICE_PENDING: The enum member of type str.
         METERED_USAGE: The enum member of type str.
         PAYMENT_FAILURE: The enum member of type str.
         PAYMENT_SUCCESS: The enum member of type str.
@@ -55,6 +58,10 @@ class WebhookSubscription(object):
 
     COMPONENT_ALLOCATION_CHANGE = "component_allocation_change"
 
+    CHJS_TOKENIZATION_FAILURE = "chjs_tokenization_failure"
+
+    CHJS_TOKENIZATION_SUCCESS = "chjs_tokenization_success"
+
     CUSTOMER_CREATE = "customer_create"
 
     CUSTOMER_UPDATE = "customer_update"
@@ -66,6 +73,8 @@ class WebhookSubscription(object):
     EXPIRATION_DATE_CHANGE = "expiration_date_change"
 
     INVOICE_ISSUED = "invoice_issued"
+
+    INVOICE_PENDING = "invoice_pending"
 
     METERED_USAGE = "metered_usage"
 

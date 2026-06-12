@@ -25,7 +25,10 @@ class CreateInvoice(object):
     Attributes:
         line_items (List[CreateInvoiceItem]): The model property of type
             List[CreateInvoiceItem].
-        issue_date (date): The model property of type date.
+        issue_date (date): Date on which the invoice will be issued (format
+            YYYY-MM-DD). This date is interpreted and validated in your site's time
+            zone. It must be today or a date in the past — future dates are not
+            accepted. If omitted, defaults to today in your site's time zone.
         net_terms (int): By default, invoices will be created with a due date
             matching the date of invoice creation. If a different due date is
             desired, the net_terms parameter can be sent indicating the number of

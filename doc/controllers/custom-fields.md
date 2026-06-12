@@ -44,6 +44,10 @@ def create_metafields(self,
                      body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -52,6 +56,8 @@ def create_metafields(self,
 | `body` | [`CreateMetafieldsRequest`](../../doc/models/create-metafields-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`List[Metafield]`](../../doc/models/metafield.md)
 
@@ -131,6 +137,10 @@ def list_metafields(self,
                    options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -142,6 +152,8 @@ def list_metafields(self,
 | `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 
 ## Response Type
+
+**200**: OK
 
 [`ListMetafieldsResponse`](../../doc/models/list-metafields-response.md)
 
@@ -208,7 +220,7 @@ With this endpoint, you can:
 
 - Add new metadata to a dropdown or radio for a metafield that was created without metadata.
 
-- Remove  metadata for a dropdown or radio for a metafield.
+- Remove metadata for a dropdown or radio for a metafield.
   
   > Note: Updates to metadata overwrite existing values. To remove one or more values, specify all metadata values except those you want to remove.
 
@@ -222,6 +234,10 @@ def update_metafield(self,
                     body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -230,6 +246,8 @@ def update_metafield(self,
 | `body` | [`UpdateMetafieldsRequest`](../../doc/models/update-metafields-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`List[Metafield]`](../../doc/models/metafield.md)
 
@@ -259,6 +277,10 @@ def delete_metafield(self,
                     name=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -267,6 +289,8 @@ def delete_metafield(self,
 | `name` | `str` | Query, Optional | The name of the metafield to be deleted |
 
 ## Response Type
+
+**200**: OK
 
 `void`
 
@@ -300,6 +324,10 @@ def create_metadata(self,
                    body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -309,6 +337,8 @@ def create_metadata(self,
 | `body` | [`CreateMetadataRequest`](../../doc/models/create-metadata-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`List[Metadata]`](../../doc/models/metadata.md)
 
@@ -356,6 +386,10 @@ def list_metadata(self,
                  options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -366,6 +400,8 @@ def list_metadata(self,
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 
 ## Response Type
+
+**200**: OK
 
 [`PaginatedMetadata`](../../doc/models/paginated-metadata.md)
 
@@ -410,7 +446,7 @@ Updates metadata and metafields on the Site and the customer or subscription spe
 
 If you update metadata on a subscription or customer with a metafield that does not already exist, the metafield is created with the metadata you specify and it is always added as a text field to the Site and to the subscription or customer you specify. You can update the input_type for the metafield with the Update Metafield endpoint.
 
-Each site is limited to 100 unique metafields per resource. This means you can have 100 metafields for Subscription and another 100 for Customer.
+Each site is limited to 100 unique metafields per resource. This means you can have 100 metafields for the Subscription resource and another 100 for the Customer resource.
 
 ```python
 def update_metadata(self,
@@ -418,6 +454,10 @@ def update_metadata(self,
                    resource_id,
                    body=None)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -428,6 +468,8 @@ def update_metadata(self,
 | `body` | [`UpdateMetadataRequest`](../../doc/models/update-metadata-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`List[Metadata]`](../../doc/models/metadata.md)
 
@@ -464,6 +506,10 @@ def delete_metadata(self,
                    names=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -474,6 +520,8 @@ def delete_metadata(self,
 | `names` | `List[str]` | Query, Optional | Names of fields to be removed. Use in query: `names[]=field1&names[]=my-field&names[]=another-field`. |
 
 ## Response Type
+
+**200**: OK
 
 `void`
 
@@ -499,12 +547,16 @@ custom_fields_controller.delete_metadata(
 
 # List Metadata for Resource Type
 
-Lists  metadata for a specified array of subscriptions or customers.
+Lists metadata for a specified array of subscriptions or customers.
 
 ```python
 def list_metadata_for_resource_type(self,
                                    options=dict())
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -523,6 +575,8 @@ def list_metadata_for_resource_type(self,
 | `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 
 ## Response Type
+
+**200**: OK
 
 [`PaginatedMetadata`](../../doc/models/paginated-metadata.md)
 

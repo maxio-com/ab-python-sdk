@@ -24,7 +24,7 @@ class BankAccountPaymentProfile(object):
             the bank account belongs
         current_vault (BankAccountVault): The vault that stores the payment profile
             with the provided vault_token. Use `bogus` for testing.
-        vault_token (str): The “token” provided by your vault storage for an already
+        vault_token (str): The "token" provided by your vault storage for an already
             stored payment profile
         billing_address (str): The current billing street address for the bank account
         billing_city (str): The current billing address city for the bank account
@@ -39,11 +39,11 @@ class BankAccountPaymentProfile(object):
             the bank account
         bank_name (str): The bank where the account resides
         masked_bank_routing_number (str): A string representation of the stored bank
-            routing number with all but the last 4 digits marked with X’s (i.e.
-            ‘XXXXXXX1111’). payment_type will be bank_account
+            routing number with all but the last 4 digits marked with X's (i.e.
+            'XXXXXXX1111'). payment_type will be bank_account
         masked_bank_account_number (str): A string representation of the stored bank
-            account number with all but the last 4 digits marked with X’s (i.e.
-            ‘XXXXXXX1111’)
+            account number with all but the last 4 digits marked with X's (i.e.
+            'XXXXXXX1111')
         bank_account_type (BankAccountType): Defaults to checking
         bank_account_holder_type (BankAccountHolderType): Defaults to personal
         payment_type (PaymentType): The model property of type PaymentType.
@@ -62,7 +62,6 @@ class BankAccountPaymentProfile(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
-        "masked_bank_account_number": "masked_bank_account_number",
         "payment_type": "payment_type",
         "id": "id",
         "first_name": "first_name",
@@ -79,6 +78,7 @@ class BankAccountPaymentProfile(object):
         "billing_address_2": "billing_address_2",
         "bank_name": "bank_name",
         "masked_bank_routing_number": "masked_bank_routing_number",
+        "masked_bank_account_number": "masked_bank_account_number",
         "bank_account_type": "bank_account_type",
         "bank_account_holder_type": "bank_account_holder_type",
         "verified": "verified",
@@ -104,6 +104,7 @@ class BankAccountPaymentProfile(object):
         "billing_address_2",
         "bank_name",
         "masked_bank_routing_number",
+        "masked_bank_account_number",
         "bank_account_type",
         "bank_account_holder_type",
         "verified",
@@ -121,13 +122,14 @@ class BankAccountPaymentProfile(object):
         "billing_country",
         "customer_vault_token",
         "billing_address_2",
+        "masked_bank_routing_number",
+        "masked_bank_account_number",
         "site_gateway_setting_id",
         "gateway_handle",
     ]
 
     def __init__(
         self,
-        masked_bank_account_number=None,
         payment_type="bank_account",
         id=APIHelper.SKIP,
         first_name=APIHelper.SKIP,
@@ -144,6 +146,7 @@ class BankAccountPaymentProfile(object):
         billing_address_2=APIHelper.SKIP,
         bank_name=APIHelper.SKIP,
         masked_bank_routing_number=APIHelper.SKIP,
+        masked_bank_account_number=APIHelper.SKIP,
         bank_account_type=APIHelper.SKIP,
         bank_account_holder_type=APIHelper.SKIP,
         verified=False,
@@ -184,7 +187,8 @@ class BankAccountPaymentProfile(object):
             self.bank_name = bank_name
         if masked_bank_routing_number is not APIHelper.SKIP:
             self.masked_bank_routing_number = masked_bank_routing_number
-        self.masked_bank_account_number = masked_bank_account_number
+        if masked_bank_account_number is not APIHelper.SKIP:
+            self.masked_bank_account_number = masked_bank_account_number
         if bank_account_type is not APIHelper.SKIP:
             self.bank_account_type = bank_account_type
         if bank_account_holder_type is not APIHelper.SKIP:
@@ -229,10 +233,6 @@ class BankAccountPaymentProfile(object):
             return None
 
         # Extract variables from the dictionary
-        masked_bank_account_number =\
-            dictionary.get("masked_bank_account_number")\
-            if dictionary.get("masked_bank_account_number")\
-                else None
         payment_type =\
             dictionary.get("payment_type")\
             if dictionary.get("payment_type")\
@@ -295,7 +295,11 @@ class BankAccountPaymentProfile(object):
                 else APIHelper.SKIP
         masked_bank_routing_number =\
             dictionary.get("masked_bank_routing_number")\
-            if dictionary.get("masked_bank_routing_number")\
+            if "masked_bank_routing_number" in dictionary.keys()\
+                else APIHelper.SKIP
+        masked_bank_account_number =\
+            dictionary.get("masked_bank_account_number")\
+            if "masked_bank_account_number" in dictionary.keys()\
                 else APIHelper.SKIP
         bank_account_type =\
             dictionary.get("bank_account_type")\
@@ -329,8 +333,7 @@ class BankAccountPaymentProfile(object):
             {k: v for k, v in dictionary.items() if k not in cls._names.values()}
 
         # Return an object of this model
-        return cls(masked_bank_account_number,
-                   payment_type,
+        return cls(payment_type,
                    id,
                    first_name,
                    last_name,
@@ -346,6 +349,7 @@ class BankAccountPaymentProfile(object):
                    billing_address_2,
                    bank_name,
                    masked_bank_routing_number,
+                   masked_bank_account_number,
                    bank_account_type,
                    bank_account_holder_type,
                    verified,
@@ -370,13 +374,6 @@ class BankAccountPaymentProfile(object):
         """
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(
-                    value=dictionary.masked_bank_account_number,
-                    type_callable=lambda value:
-                        isinstance(
-                        value,
-                        str,
-                )) \
-                and APIHelper.is_valid_type(
                     value=dictionary.payment_type,
                     type_callable=lambda value:
                         PaymentType.validate(value))
@@ -385,13 +382,6 @@ class BankAccountPaymentProfile(object):
             return False
 
         return APIHelper.is_valid_type(
-                value=dictionary.get("masked_bank_account_number"),
-                type_callable=lambda value:
-                    isinstance(
-                    value,
-                    str,
-            )) \
-            and APIHelper.is_valid_type(
                 value=dictionary.get("payment_type"),
                 type_callable=lambda value:
                     PaymentType.validate(value))
@@ -473,7 +463,11 @@ class BankAccountPaymentProfile(object):
             if hasattr(self, "masked_bank_routing_number")
             else None
         )
-        _masked_bank_account_number=self.masked_bank_account_number
+        _masked_bank_account_number=(
+            self.masked_bank_account_number
+            if hasattr(self, "masked_bank_account_number")
+            else None
+        )
         _bank_account_type=(
             self.bank_account_type
             if hasattr(self, "bank_account_type")
@@ -618,7 +612,11 @@ class BankAccountPaymentProfile(object):
             if hasattr(self, "masked_bank_routing_number")
             else None
         )
-        _masked_bank_account_number=self.masked_bank_account_number
+        _masked_bank_account_number=(
+            self.masked_bank_account_number
+            if hasattr(self, "masked_bank_account_number")
+            else None
+        )
         _bank_account_type=(
             self.bank_account_type
             if hasattr(self, "bank_account_type")

@@ -62,23 +62,21 @@ class CouponsController(BaseController):
         """Perform a POST request to
         /product_families/{product_family_id}/coupons.json.
 
-        ## Coupons Documentation
-        Coupons can be administered in the Advanced Billing application or created
-        via API. View our section on [creating
-        coupons](https://maxio.zendesk.com/hc/en-us/articles/24261212433165-Creating-E
-        diting-Deleting-Coupons) for more information.
-        Additionally, for documentation on how to apply a coupon to a subscription
-        within the Advanced Billing UI, see our documentation
-        [here](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and-
-        Subscriptions).
-        ## Create Coupon
-        This request will create a coupon, based on the provided information.
-        You can create either a flat amount coupon, by specyfing `amount_in_cents`,
-        or percentage coupon by specyfing `percentage`.
+        Creates a coupon under the specified product family.
+        You can create either a flat amount coupon by specifying amount_in_cents, or
+        a percentage coupon by specifying percentage
         You can restrict a coupon to only apply to specific products / components by
         optionally passing in `restricted_products` and/or `restricted_components`
         objects in the format:
         `{ "<product_id/component_id>": boolean_value }`
+        Coupons can be administered in the Advanced Billing application or created
+        via API. See [creating
+        coupons](https://maxio.zendesk.com/hc/en-us/articles/24261212433165-Creating-E
+        diting-Deleting-Coupons) for more information.
+        See [Apply Coupons to
+        Subscriptions](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coup
+        ons-and-Subscriptions) for information on applying a coupon to a subscription
+        in the Advanced Billing UI.
 
         Args:
             product_family_id (int): The Advanced Billing id of the product family to
@@ -128,7 +126,7 @@ class CouponsController(BaseController):
         """Perform a GET request to
         /product_families/{product_family_id}/coupons.json.
 
-        List coupons for a specific Product Family in a Site.
+        Lists coupons for a specific product family in a site.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -205,9 +203,9 @@ class CouponsController(BaseController):
                     currency_prices=None):
         """Perform a GET request to /coupons/find.json.
 
-        You can search for a coupon via the API with the find method. By passing a
-        code parameter, the find will attempt to locate a coupon that matches that
-        code. If no coupon is found, a 404 is returned.
+        Searches for a coupon by code, returning a 404 if no coupon is found. By
+        passing a code parameter, the find will attempt to locate a coupon that
+        matches that code.
         If you have more than one product family and if the coupon you are trying to
         find does not belong to the default product family in your site, then you
         will need to specify (either in the url or as a query string param) the
@@ -261,9 +259,8 @@ class CouponsController(BaseController):
         """Perform a GET request to
         /product_families/{product_family_id}/coupons/{coupon_id}.json.
 
-        You can retrieve the Coupon via the API with the Show method. You must
-        identify the Coupon in this call by the ID parameter that Advanced Billing
-        assigns.
+        Returns a coupon by its Advanced Billing-assigned ID. You must identify the
+        Coupon in this call by the ID parameter that Advanced Billing assigns.
         If instead you would like to find a Coupon using a Coupon code, see the
         Coupon Find method.
         When fetching a coupon, if you have defined multiple currencies at the site
@@ -325,9 +322,7 @@ class CouponsController(BaseController):
         """Perform a PUT request to
         /product_families/{product_family_id}/coupons/{coupon_id}.json.
 
-        ## Update Coupon
-        You can update a Coupon via the API with a PUT request to the resource
-        endpoint.
+        Updates a coupon.
         You can restrict a coupon to only apply to specific products / components by
         optionally passing in hashes of `restricted_products` and/or
         `restricted_components` in the format:
@@ -388,7 +383,8 @@ class CouponsController(BaseController):
         """Perform a DELETE request to
         /product_families/{product_family_id}/coupons/{coupon_id}.json.
 
-        You can archive a Coupon via the API with the archive method.
+        Archives a coupon, making it unavailable for future use while remaining
+        active on existing subscriptions.
         Archiving makes that Coupon unavailable for future use, but allows it to
         remain attached and functional on existing Subscriptions that are using it.
         The `archived_at` date and time will be assigned.
@@ -435,7 +431,7 @@ class CouponsController(BaseController):
                      options=dict()):
         """Perform a GET request to /coupons.json.
 
-        You can retrieve a list of coupons.
+        Lists coupons for a site.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -505,8 +501,7 @@ class CouponsController(BaseController):
         """Perform a GET request to
         /product_families/{product_family_id}/coupons/{coupon_id}/usage.json.
 
-        This request will provide details about the coupon usage as an array of data
-        hashes, one per product.
+        Lists coupon usage details, one entry per product.
 
         Args:
             product_family_id (int): The Advanced Billing id of the product family to
@@ -551,10 +546,9 @@ class CouponsController(BaseController):
                         product_family_id=None):
         """Perform a GET request to /coupons/validate.json.
 
-        You can verify if a specific coupon code is valid using the `validate`
-        method. This method is useful for validating coupon codes that are entered by
-        a customer. If the coupon is found and is valid, the coupon will be returned
-        with a 200 status code.
+        Verifies whether a specific coupon code is valid. This method is useful for
+        validating coupon codes that are entered by a customer. If the coupon is
+        found and is valid, the coupon will be returned with a 200 status code.
         If the coupon is invalid, the status code will be 404 and the response will
         say why it is invalid. If the coupon is valid, the status code will be 200
         and the coupon will be returned. The following reasons for invalidity are
@@ -621,10 +615,10 @@ class CouponsController(BaseController):
                                                 body=None):
         """Perform a PUT request to /coupons/{coupon_id}/currency_prices.json.
 
-        This endpoint allows you to create and/or update currency prices for an
-        existing coupon. Multiple prices can be created or updated in a single
-        request but each of the currencies must be defined on the site level already
-        and the coupon must be an amount-based coupon, not percentage.
+        Creates and/or updates currency prices for an existing coupon. Multiple
+        prices can be created or updated in a single request but each of the
+        currencies must be defined on the site level already and the coupon must be
+        an amount-based coupon, not percentage.
         Currency pricing for coupons must mirror the setup of the primary coupon
         pricing - if the primary coupon is percentage based, you will not be able to
         define pricing in non-primary currencies.
@@ -676,6 +670,7 @@ class CouponsController(BaseController):
                                body=None):
         """Perform a POST request to /coupons/{coupon_id}/codes.json.
 
+        Creates subcodes for an existing coupon.
         ## Coupon Subcodes Intro
         Coupon Subcodes allow you to create a set of unique codes that allow you to
         expand the use of one coupon.
@@ -757,7 +752,7 @@ class CouponsController(BaseController):
                              options=dict()):
         """Perform a GET request to /coupons/{coupon_id}/codes.json.
 
-        This request allows you to request the subcodes that are attached to a coupon.
+        Lists the subcodes attached to a coupon.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -818,8 +813,8 @@ class CouponsController(BaseController):
                                body=None):
         """Perform a PUT request to /coupons/{coupon_id}/codes.json.
 
-        You can update the subcodes for the given Coupon via the API with a PUT
-        request to the resource endpoint.
+        Updates the subcodes for a coupon, replacing all existing subcodes with the
+        new list.
         Send an array of new coupon subcodes.
         **Note**: All current subcodes for that Coupon will be deleted first, and
         replaced with the list of subcodes sent to this endpoint.
@@ -872,6 +867,7 @@ class CouponsController(BaseController):
         """Perform a DELETE request to
         /coupons/{coupon_id}/codes/{subcode}.json.
 
+        Deletes a specific subcode from a coupon.
         ## Example
         Given a coupon with an ID of 567, and a coupon subcode of 20OFF, the URL to
         `DELETE` this coupon subcode would be:

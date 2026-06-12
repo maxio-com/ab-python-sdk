@@ -12,3 +12,23 @@
 | `str` |
 | `int` |
 
+## str
+
+### Initialization Code
+
+#### Example
+
+```python
+value = 'String0'
+```
+
+## int
+
+### Initialization Code
+
+#### Example
+
+```python
+value = 0
+```
+

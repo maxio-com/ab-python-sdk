@@ -28,6 +28,10 @@ def read_account_balances(self,
                          subscription_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -35,6 +39,8 @@ def read_account_balances(self,
 | `subscription_id` | `int` | Template, Required | The Chargify id of the subscription. |
 
 ## Response Type
+
+**200**: OK
 
 [`AccountBalances`](../../doc/models/account-balances.md)
 
@@ -50,7 +56,7 @@ print(result)
 
 # Create Prepayment
 
-## Create Prepayment
+Creates a prepayment for a subscription.
 
 In order to specify a prepayment made against a subscription, specify the `amount, memo, details, method`.
 
@@ -58,11 +64,21 @@ When the `method` specified is `"credit_card_on_file"`, the prepayment amount wi
 
 Note that passing `amount_in_cents` is now allowed.
 
+## 3D Secure (3DS) Authentication post-authentication flow
+
+When a payment requires 3DS Authentication to adhere to Strong Customer Authentication (SCA), the request enters a post-authentication flow where a 422 Unprocessable Entity status is returned with an action_link that will direct the customer through 3DS Authentication.
+
+See the [3D Secure Post-Authentication Flow](https://docs.maxio.com/hc/en-us/articles/44277749524365-3D-Secure-Post-Authentication-Flow) article in the product documentation to learn how to manage the redirect flow.
+
 ```python
 def create_prepayment(self,
                      subscription_id,
                      body=None)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -72,6 +88,8 @@ def create_prepayment(self,
 | `body` | [`CreatePrepaymentRequest`](../../doc/models/create-prepayment-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`CreatePrepaymentResponse`](../../doc/models/create-prepayment-response.md)
 
@@ -121,12 +139,16 @@ print(result)
 
 # List Prepayments
 
-This request will list a subscription's prepayments.
+Lists a subscription's prepayments.
 
 ```python
 def list_prepayments(self,
                     options=dict())
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -138,6 +160,8 @@ def list_prepayments(self,
 | `filter` | [`ListPrepaymentsFilter`](../../doc/models/list-prepayments-filter.md) | Query, Optional | Filter to use for List Prepayments operations |
 
 ## Response Type
+
+**200**: OK
 
 [`PrepaymentsResponse`](../../doc/models/prepayments-response.md)
 
@@ -188,13 +212,17 @@ print(result)
 
 # Issue Service Credit
 
-Credit will be added to the subscription in the amount specified in the request body. The credit is subsequently applied to the next generated invoice.
+Adds a service credit to the subscription in the specified amount. The credit is subsequently applied to the next generated invoice.
 
 ```python
 def issue_service_credit(self,
                         subscription_id,
                         body=None)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -204,6 +232,8 @@ def issue_service_credit(self,
 | `body` | [`IssueServiceCreditRequest`](../../doc/models/issue-service-credit-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`ServiceCredit`](../../doc/models/service-credit.md)
 
@@ -246,13 +276,17 @@ print(result)
 
 # Deduct Service Credit
 
-Credit will be removed from the subscription in the amount specified in the request body. The credit amount being deducted must be equal to or less than the current credit balance.
+Deducts a service credit from the subscription in the specified amount. The credit amount being deducted must be equal to or less than the current credit balance.
 
 ```python
 def deduct_service_credit(self,
                          subscription_id,
                          body=None)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -262,6 +296,8 @@ def deduct_service_credit(self,
 | `body` | [`DeductServiceCreditRequest`](../../doc/models/deduct-service-credit-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: OK
 
 `void`
 
@@ -292,7 +328,7 @@ subscription_invoice_account_controller.deduct_service_credit(
 
 # List Service Credits
 
-This request will list a subscription's service credits.
+Lists a subscription's service credits.
 
 ```python
 def list_service_credits(self,
@@ -301,6 +337,10 @@ def list_service_credits(self,
                         per_page=20,
                         direction=None)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -312,6 +352,8 @@ def list_service_credits(self,
 | `direction` | [`SortingDirection`](../../doc/models/sorting-direction.md) | Query, Optional | Controls the order in which results are returned.<br>Use in query `direction=asc`. |
 
 ## Response Type
+
+**200**: OK
 
 [`ListServiceCreditsResponse`](../../doc/models/list-service-credits-response.md)
 
@@ -371,7 +413,7 @@ print(result)
 
 # Refund Prepayment
 
-This endpoint will refund, completely or partially, a particular prepayment applied to a subscription. The `prepayment_id` will be the account transaction ID of the original payment. The prepayment must have some amount remaining in order to be refunded.
+Refunds a prepayment applied to a subscription, either fully or partially. The `prepayment_id` will be the account transaction ID of the original payment. The prepayment must have some amount remaining in order to be refunded.
 
 The amount may be passed either as a decimal, with `amount`, or an integer in cents, with `amount_in_cents`.
 
@@ -382,6 +424,10 @@ def refund_prepayment(self,
                      body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -391,6 +437,8 @@ def refund_prepayment(self,
 | `body` | [`RefundPrepaymentRequest`](../../doc/models/refund-prepayment-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`PrepaymentResponse`](../../doc/models/prepayment-response.md)
 

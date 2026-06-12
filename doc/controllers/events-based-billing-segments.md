@@ -20,7 +20,7 @@ events_based_billing_segments_controller = client.events_based_billing_segments
 
 # Create Segment
 
-This endpoint creates a new Segment for a Component with segmented Metric. It allows you to specify properties to bill upon and prices for each Segment. You can only pass as many "property_values" as the related Metric has segmenting properties defined.
+Creates a new segment for a component with a segmented metric. It allows you to specify properties to bill upon and prices for each Segment. You can only pass as many "property_values" as the related Metric has segmenting properties defined.
 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
@@ -31,6 +31,10 @@ def create_segment(self,
                   body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -40,6 +44,8 @@ def create_segment(self,
 | `body` | [`CreateSegmentRequest`](../../doc/models/create-segment-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`SegmentResponse`](../../doc/models/segment-response.md)
 
@@ -87,7 +93,7 @@ print(result)
 
 # List Segments for Price Point
 
-This endpoint allows you to fetch Segments created for a given Price Point. They will be returned in the order of creation.
+Lists segments created for a given price point, in order of creation.
 
 You can pass `page` and `per_page` parameters in order to access all of the segments. By default it will return `30` records. You can set `per_page` to `200` at most.
 
@@ -97,6 +103,10 @@ You may specify component and/or price point by using either the numeric ID or t
 def list_segments_for_price_point(self,
                                  options=dict())
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -109,6 +119,8 @@ def list_segments_for_price_point(self,
 | `filter` | [`ListSegmentsFilter`](../../doc/models/list-segments-filter.md) | Query, Optional | Filter to use for List Segments for a Price Point operation |
 
 ## Response Type
+
+**200**: OK
 
 [`ListSegmentsResponse`](../../doc/models/list-segments-response.md)
 
@@ -138,7 +150,7 @@ print(result)
 
 # Update Segment
 
-This endpoint updates a single Segment for a Component with a segmented Metric. It allows you to update the pricing for the segment.
+Updates a single segment for a component with a segmented metric. It allows you to update the pricing for the segment.
 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
@@ -150,6 +162,10 @@ def update_segment(self,
                   body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -160,6 +176,8 @@ def update_segment(self,
 | `body` | [`UpdateSegmentRequest`](../../doc/models/update-segment-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`SegmentResponse`](../../doc/models/segment-response.md)
 
@@ -190,7 +208,7 @@ print(result)
 
 # Delete Segment
 
-This endpoint allows you to delete a Segment with specified ID.
+Deletes a segment with the specified ID.
 
 You may specify component and/or price point by using either the numeric ID or the `handle:gold` syntax.
 
@@ -201,6 +219,10 @@ def delete_segment(self,
                   id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -210,6 +232,8 @@ def delete_segment(self,
 | `id` | `float` | Template, Required | The ID of the Segment |
 
 ## Response Type
+
+**204**: No Content
 
 `void`
 
@@ -239,7 +263,7 @@ events_based_billing_segments_controller.delete_segment(
 
 # Bulk Create Segments
 
-This endpoint allows you to create multiple segments in one request. The array of segments can contain up to `2000` records.
+Creates multiple segments in one request. The array of segments can contain up to `2000` records.
 
 If any of the records contain an error the whole request would fail and none of the requested segments get created. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
 
@@ -252,6 +276,10 @@ def bulk_create_segments(self,
                         body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -261,6 +289,8 @@ def bulk_create_segments(self,
 | `body` | [`BulkCreateSegments`](../../doc/models/bulk-create-segments.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`ListSegmentsResponse`](../../doc/models/list-segments-response.md)
 
@@ -288,7 +318,7 @@ print(result)
 
 # Bulk Update Segments
 
-This endpoint allows you to update multiple segments in one request. The array of segments can contain up to `1000` records.
+Updates multiple segments in one request. The array of segments can contain up to `1000` records.
 
 If any of the records contain an error the whole request would fail and none of the requested segments get updated. The error response contains a message for only the one segment that failed validation, with the corresponding index in the array.
 
@@ -301,6 +331,10 @@ def bulk_update_segments(self,
                         body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -310,6 +344,8 @@ def bulk_update_segments(self,
 | `body` | [`BulkUpdateSegments`](../../doc/models/bulk-update-segments.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ListSegmentsResponse`](../../doc/models/list-segments-response.md)
 

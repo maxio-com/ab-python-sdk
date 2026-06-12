@@ -14,3 +14,43 @@
 | `int` |
 | `bool` |
 
+## str
+
+### Initialization Code
+
+#### Example
+
+```python
+value = 'String0'
+```
+
+## float
+
+### Initialization Code
+
+#### Example
+
+```python
+value = 0
+```
+
+## int
+
+### Initialization Code
+
+#### Example
+
+```python
+value = 0
+```
+
+## bool
+
+### Initialization Code
+
+#### Example
+
+```python
+value = False
+```
+

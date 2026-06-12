@@ -55,11 +55,11 @@ class ProformaInvoicesController(BaseController):
         """Perform a POST request to
         /subscription_groups/{uid}/proforma_invoices.json.
 
-        This endpoint will trigger the creation of a consolidated proforma invoice
-        asynchronously. It will return a 201 with no message, or a 422 with any
-        errors. To find and view the new consolidated proforma invoice, you may poll
-        the subscription group listing for proforma invoices; only one consolidated
-        proforma invoice may be created per group at a time.
+        Creates a consolidated proforma invoice asynchronously. It will return a 201
+        with no message, or a 422 with any errors. To find and view the new
+        consolidated proforma invoice, you may poll the subscription group listing
+        for proforma invoices; only one consolidated proforma invoice may be created
+        per group at a time.
         If the information becomes outdated, simply void the old consolidated
         proforma invoice and generate a new one.
         ## Restrictions
@@ -96,7 +96,8 @@ class ProformaInvoicesController(BaseController):
         """Perform a GET request to
         /subscription_groups/{uid}/proforma_invoices.json.
 
-        Only proforma invoices with a `consolidation_level` of parent are returned.
+        Lists proforma invoices with a `consolidation_level` of parent for the
+        subscription group.
         By default, proforma invoices returned on the index will only include totals,
         not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`,
         `payments`, `custom_fields`. To include breakdowns, pass the specific field
@@ -168,7 +169,7 @@ class ProformaInvoicesController(BaseController):
         """Perform a GET request to
         /proforma_invoices/{proforma_invoice_uid}.json.
 
-        Use this endpoint to read the details of an existing proforma invoice.
+        Returns the details of an existing proforma invoice.
         ## Restrictions
         Proforma invoices are only available on Relationship Invoicing sites.
 
@@ -209,9 +210,8 @@ class ProformaInvoicesController(BaseController):
         """Perform a POST request to
         /subscriptions/{subscription_id}/proforma_invoices.json.
 
-        This endpoint will create a proforma invoice and return it as a response. If
-        the information becomes outdated, simply void the old proforma invoice and
-        generate a new one.
+        Creates a proforma invoice and returns it as a response. If the information
+        becomes outdated, simply void the old proforma invoice and generate a new one.
         If you would like to preview the next billing amounts without generating a
         full proforma invoice, use the renewal preview endpoint.
         ## Restrictions
@@ -259,10 +259,10 @@ class ProformaInvoicesController(BaseController):
         """Perform a GET request to
         /subscriptions/{subscription_id}/proforma_invoices.json.
 
-        By default, proforma invoices returned on the index will only include totals,
-        not detailed breakdowns for `line_items`, `discounts`, `taxes`, `credits`,
-        `payments`, or `custom_fields`. To include breakdowns, pass the specific
-        field as a key in the query with a value set to `true`.
+        Lists proforma invoices for a subscription. By default, results only include
+        totals, not detailed breakdowns for `line_items`, `discounts`, `taxes`,
+        `credits`, `payments`, or `custom_fields`. To include breakdowns, pass the
+        specific field as a key in the query with a value set to `true`.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -368,8 +368,7 @@ class ProformaInvoicesController(BaseController):
         """Perform a POST request to
         /proforma_invoices/{proforma_invoice_uid}/deliveries.json.
 
-        Allows for proforma invoices to be programmatically delivered via email.
-        Supports email
+        Delivers a proforma invoice programmatically via email. Supports email
         delivery to direct recipients, carbon-copy (cc) recipients, and blind
         carbon-copy (bcc) recipients.
         If `recipient_emails` is omitted, the system will fall back to the primary
@@ -428,7 +427,7 @@ class ProformaInvoicesController(BaseController):
         """Perform a POST request to
         /proforma_invoices/{proforma_invoice_uid}/void.json.
 
-        This endpoint will void a proforma invoice that has the status "draft".
+        Voids a proforma invoice that has the status "draft".
         ## Restrictions
         Proforma invoices are only available on Relationship Invoicing sites.
         Only proforma invoices that have the appropriate status may be reopened. If
@@ -486,7 +485,7 @@ class ProformaInvoicesController(BaseController):
         """Perform a POST request to
         /subscriptions/{subscription_id}/proforma_invoices/preview.json.
 
-        Return a preview of the data that will be included on a given subscription's
+        Returns a preview of the data that will be included on a given subscription's
         proforma invoice if one were to be generated. It will have similar line items
         and totals as a renewal preview, but the response will be presented in the
         format of a proforma invoice. Consequently it will include additional
@@ -543,12 +542,11 @@ class ProformaInvoicesController(BaseController):
                                        body=None):
         """Perform a POST request to /subscriptions/proforma_invoices.json.
 
-        This endpoint is only available for Relationship Invoicing sites. It cannot
+        Creates a proforma invoice to preview costs before a subscription's signup.
+        This endpoint is only available for Relationship Invoicing sites and cannot
         be used to create consolidated proforma invoices or preview prepaid
-        subscriptions.
-        Create a proforma invoice to preview costs before a subscription's signup.
-        Like other proforma invoices, it can be emailed to the customer, voided, and
-        publicly viewed on the chargifypay domain.
+        subscriptions. Like other proforma invoices, it can be emailed to the
+        customer, voided, and publicly viewed on the chargifypay domain.
         Pass a payload that resembles a subscription create or signup preview
         request. For example, you can specify components, coupons/a referral, offers,
         custom pricing, and an existing customer or payment profile to populate a
@@ -604,13 +602,12 @@ class ProformaInvoicesController(BaseController):
         """Perform a POST request to
         /subscriptions/proforma_invoices/preview.json.
 
-        This endpoint is only available for Relationship Invoicing sites. It cannot
-        be used to create consolidated proforma invoice previews or preview prepaid
-        subscriptions.
-        Create a signup preview in the format of a proforma invoice to preview costs
-        before a subscription's signup. You have the option of optionally previewing
-        the first renewal's costs as well. The proforma invoice preview will not be
-        persisted.
+        Creates a signup preview in the format of a proforma invoice to preview costs
+        before a subscription's signup. This endpoint is only available for
+        Relationship Invoicing sites and cannot be used to create consolidated
+        proforma invoice previews or preview prepaid subscriptions. You have the
+        option of previewing the first renewal's costs as well. The proforma invoice
+        preview will not be persisted.
         Pass a payload that resembles a subscription create or signup preview
         request. For example, you can specify components, coupons/a referral, offers,
         custom pricing, and an existing customer or payment profile to populate a

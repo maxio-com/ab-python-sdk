@@ -63,15 +63,19 @@ class SubscriptionsController(BaseController):
                             body=None):
         """Perform a POST request to /subscriptions.json.
 
-        Creates a Subscription for a customer and product
+        Creates a Subscription for a customer and product.
         Specify the product with `product_id` or `product_handle`. To set a specific
-        product pricepPoint, use `product_price_point_handle` or
+        product price point, use `product_price_point_handle` or
         `product_price_point_id`.
         Identify an existing customer with `customer_id` or `customer_reference`.
         Optionally, include an existing payment profile using `payment_profile_id`.
         To create a new customer, pass customer_attributes.
         Select an option from the **Request Examples** drop-down on the right side of
         the portal to see examples of common scenarios for creating subscriptions.
+        See the [Subscription
+        Signups](page:introduction/basic-concepts/subscription-signup) article for
+        more information on working with subscriptions in Advanced Billing.
+        ## Payment information
         Payment information may be required to create a subscription, depending on
         the options for the Product being subscribed. See [product
         options](https://docs.maxio.com/hc/en-us/articles/24261076617869-Edit-Products
@@ -85,13 +89,19 @@ class SubscriptionsController(BaseController):
         Note that collecting and sending raw card details in production requires [PCI
         compliance](https://docs.maxio.com/hc/en-us/articles/24183956938381-PCI-Compli
         ance#pci-compliance-0-0) on your end. If your business is not PCI compliant,
-        use
-        [Chargify.js](https://docs.maxio.com/hc/en-us/articles/38163190843789-Chargify
+        use [Maxio.js (formerly
+        Chargify.js)](https://docs.maxio.com/hc/en-us/articles/38163190843789-Chargify
         -js-Overview#chargify-js-overview-0-0) to collect credit card or bank account
         information.
-        See the [Subscription
-        Signups](page:introduction/basic-concepts/subscription-signup) article for
-        more information on working with subscriptions in Advanced Billing.
+        ## 3D Secure (3DS) Authentication post-authentication flow
+        When a payment requires 3DS Authentication to adhere to Strong Customer
+        Authentication (SCA), the request enters a post-authentication flow where a
+        422 Unprocessable Entity status is returned with an action_link that will
+        direct the customer through 3DS Authentication.
+        See the [3D Secure Post-Authentication
+        Flow](https://docs.maxio.com/hc/en-us/articles/44277749524365-3D-Secure-Post-A
+        uthentication-Flow) article in the product documentation to learn how to
+        manage the redirect flow.
 
         Args:
             body (CreateSubscriptionRequest, optional): The request body parameter.
@@ -133,7 +143,7 @@ class SubscriptionsController(BaseController):
                            options=dict()):
         """Perform a GET request to /subscriptions.json.
 
-        returns an array of subscriptions from a Site. Pay close attention to query
+        Returns an array of subscriptions from a Site. Pay close attention to query
         string filters and pagination in order to control responses from the server.
         ## Search for a subscription
         Use the query strings below to search for a subscription using the criteria
@@ -338,26 +348,26 @@ class SubscriptionsController(BaseController):
         > **Note:** To cancel a delayed product change, set `next_product_id` to an
         empty string.
         ## Billing Date Changes
-        You can update dates for a subscrption.
+        You can update dates for a subscription.
         ### Regular Billing Date Changes
         Send the `next_billing_at` to set the next billing date for the subscription.
         After that date passes and the subscription is processed, the following
         billing date will be set according to the subscription's product period.
         > Note: If you pass an invalid date, the correct date is automatically set to
-        he correct date. For example, if February 30 is passed, the next billing
+        the correct date. For example, if February 30 is passed, the next billing
         would be set to March 2nd in a non-leap year.
         The server response will not return data under the key/value pair of
         `next_billing_at`. View the key/value pair of `current_period_ends_at` to
         verify that the `next_billing_at` date has been changed successfully.
-        ### Calendar Billing  and Snap Day Changes
+        ### Calendar Billing and Snap Day Changes
         For a subscription using Calendar Billing, setting the next billing date is a
         bit different. Send the `snap_day` attribute to change the calendar billing
         date for **a subscription using a product eligible for calendar billing**.
         > Note: If you change the product associated with a subscription that
         contains a `snap_day` and immediately `READ/GET` the subscription data, it
-        will still contain original `snap_day`. The `snap_day`will will reset to
-        'null on the next billing cycle. This is because  a product change is
-        instantanous and only affects the product associated with a subscription.
+        will still contain original `snap_day`. The `snap_day` will reset to null on
+        the next billing cycle. This is because a product change is instantaneous and
+        only affects the product associated with a subscription.
 
         Args:
             subscription_id (int): The Chargify id of the subscription.
@@ -456,10 +466,9 @@ class SubscriptionsController(BaseController):
         """Perform a PUT request to
         /subscriptions/{subscription_id}/override.json.
 
-        This API endpoint allows you to set certain subscription fields that are
-        usually managed for you automatically. Some of the fields can be set via the
-        normal Subscriptions Update API, but others can only be set using this
-        endpoint.
+        Sets certain subscription fields that are usually managed automatically. Some
+        of the fields can be set via the normal Subscriptions Update API, but others
+        can only be set using this endpoint.
         This endpoint is provided for cases where you need to “align” Advanced
         Billing data with data that happened in your system, perhaps before you
         started using Advanced Billing. For example, you may choose to import your
@@ -525,7 +534,7 @@ class SubscriptionsController(BaseController):
                           reference=None):
         """Perform a GET request to /subscriptions/lookup.json.
 
-        Use this endpoint to find a subscription by its reference.
+        Finds a subscription by its reference.
 
         Args:
             reference (str, optional): Subscription reference
@@ -564,7 +573,7 @@ class SubscriptionsController(BaseController):
         """Perform a POST request to
         /subscriptions/{subscription_id}/purge.json.
 
-        For sites in test mode, you may purge individual subscriptions.
+        Purges an individual subscription for sites in test mode.
         Provide the subscription ID in the url.  To confirm, supply the customer ID
         in the query string `ack` parameter. You may also delete the customer record
         and/or payment profiles by passing `cascade` parameters. For example, to
@@ -629,7 +638,7 @@ class SubscriptionsController(BaseController):
         """Perform a POST request to
         /subscriptions/{subscription_id}/prepaid_configurations.json.
 
-        Use this endpoint to update a subscription's prepaid configuration.
+        Updates a subscription's prepaid configuration.
 
         Args:
             subscription_id (int): The Chargify id of the subscription.
@@ -678,8 +687,8 @@ class SubscriptionsController(BaseController):
                              body=None):
         """Perform a POST request to /subscriptions/preview.json.
 
-        The Chargify API allows you to preview a subscription by POSTing the same
-        JSON or XML as for a subscription creation.
+        Previews a subscription by POSTing the same JSON or XML as for a subscription
+        creation.
         The "Next Billing" amount and "Next Billing" date are represented in each
         Subscriber's Summary.
         A subscription will not be created by utilizing this endpoint; it is meant to
@@ -751,6 +760,7 @@ class SubscriptionsController(BaseController):
         """Perform a POST request to
         /subscriptions/{subscription_id}/add_coupon.json.
 
+        Applies one or more coupon codes to an existing subscription.
         An existing subscription can accommodate multiple discounts/coupon codes.
         This is only applicable if each coupon is stackable. For more information on
         stackable coupons, we recommend reviewing our [coupon
@@ -818,9 +828,9 @@ class SubscriptionsController(BaseController):
         """Perform a DELETE request to
         /subscriptions/{subscription_id}/remove_coupon.json.
 
-        Use this endpoint to remove a coupon from an existing subscription.
-        For more information on the expected behaviour of removing a coupon from a
-        subscription, See our documentation
+        Removes a coupon from an existing subscription.
+        For more information on the expected behavior of removing a coupon from a
+        subscription, see our documentation
         [here.](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and
         -Subscriptions#removing-a-coupon)
 
@@ -865,9 +875,9 @@ class SubscriptionsController(BaseController):
         """Perform a PUT request to
         /subscriptions/{subscription_id}/activate.json.
 
-        Advanced Billing offers the ability to activate awaiting signup and trialing
-        subscriptions. This feature is only available on the Relationship Invoicing
-        architecture. Subscriptions in a group may not be activated immediately.
+        Activates awaiting signup and trialing subscriptions. This feature is only
+        available on the Relationship Invoicing architecture. Subscriptions in a
+        group may not be activated immediately.
         For details on how the activation works, and how to activate subscriptions
         through the application, see [activation](#).
         The `revert_on_failure` parameter controls the behavior upon activation

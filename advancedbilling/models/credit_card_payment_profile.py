@@ -47,8 +47,9 @@ class CreditCardPaymentProfile(object):
         payment_type (PaymentType): The model property of type PaymentType.
         disabled (bool): The model property of type bool.
         chargify_token (str): Token received after sending billing information using
-            chargify.js. This token will only be received if passed as a sole
-            attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt)
+            Maxio.js (formerly Chargify.js). This token will only be received if
+            passed as a sole attribute of credit_card_attributes (i.e.
+            tok_9g6hw85pnpt6knmskpwp4ttt)
         site_gateway_setting_id (int): The model property of type int.
         gateway_handle (str): An identifier of connected gateway.
         created_at (datetime): A timestamp indicating when this payment profile was

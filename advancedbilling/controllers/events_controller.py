@@ -42,13 +42,14 @@ class EventsController(BaseController):
                     options=dict()):
         """Perform a GET request to /events.json.
 
+        Lists events for a site.
         ## Events Intro
         Advanced Billing Events include various activity that happens around a Site.
         This information is **especially** useful to track down issues that arise
         when subscriptions are not created due to errors.
         Within the Advanced Billing UI, "Events" are referred to as "Site Activity".
-        Full documentation on how to record view Events / Site Activty in the
-        Advanced Billing UI can be located
+        Full documentation on how to view Events / Site Activity in the Advanced
+        Billing UI can be located
         [here](https://maxio.zendesk.com/hc/en-us/articles/24250671733517-Site-Activit
         y).
         ## List Events for a Site
@@ -223,7 +224,7 @@ class EventsController(BaseController):
         """Perform a GET request to
         /subscriptions/{subscription_id}/events.json.
 
-        The following request will return a list of events for a subscription.
+        Lists events for a subscription.
         ## Event Key
         The event type is identified by the key property. You can check supported
         keys [here]($m/Event%20Key).
@@ -315,7 +316,7 @@ class EventsController(BaseController):
                           options=dict()):
         """Perform a GET request to /events/count.json.
 
-        Get a count of all the events for a given site by using this method.
+        Returns the total count of events for a given site.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to

@@ -56,12 +56,14 @@ class BillingPortalController(BaseController):
         """Perform a POST request to
         /portal/customers/{customer_id}/enable.json.
 
+        Enables Billing Portal access for a customer, with an option to send an
+        invitation email at the same time.
         ## Billing Portal Documentation
         Full documentation on how the Billing Portal operates within the Advanced
         Billing UI can be located
         [here](https://maxio.zendesk.com/hc/en-us/articles/24252412965133-Billing-Port
         al-Overview).
-        This documentation is focused on how the to configure the Billing Portal
+        This documentation is focused on how to configure the Billing Portal
         Settings, as well as Subscriber Interaction and Merchant Management of the
         Billing Portal.
         You can use this endpoint to enable Billing Portal access for a Customer,
@@ -127,8 +129,7 @@ class BillingPortalController(BaseController):
         """Perform a GET request to
         /portal/customers/{customer_id}/management_link.json.
 
-        This method will provide to the API user the exact URL required for a
-        subscriber to access the Billing Portal.
+        Returns the exact URL required for a subscriber to access the Billing Portal.
         ## Rules for Management Link API
         + When retrieving a management URL, multiple requests for the same customer
         in a short period will return the **same** URL
@@ -184,15 +185,13 @@ class BillingPortalController(BaseController):
         """Perform a POST request to
         /portal/customers/{customer_id}/invitations/invite.json.
 
-        You can resend a customer's Billing Portal invitation.
+        Resends a customer's Billing Portal invitation.
         If you attempt to resend an invitation 5 times within 30 minutes, you will
-        receive a `422` response with `error` message in the body.
+        receive a `422` response with an `error` message in the body.
         If you attempt to resend an invitation when the Billing Portal is already
         disabled for a Customer, you will receive a `422` error response.
-        If you attempt to resend an invitation when the Billing Portal is already
-        disabled for a Customer, you will receive a `422` error response.
-        If you attempt to resend an invitation when the Customer does not exist a
-        Customer, you will receive a `404` error response.
+        If you attempt to resend an invitation when the Customer does not exist, you
+        will receive a `404` error response.
         ## Limitations
         This endpoint will only return a JSON response.
 
@@ -237,7 +236,7 @@ class BillingPortalController(BaseController):
         """Perform a DELETE request to
         /portal/customers/{customer_id}/invitations/revoke.json.
 
-        You can revoke a customer's Billing Portal invitation.
+        Revokes a customer's Billing Portal invitation.
         If you attempt to revoke an invitation when the Billing Portal is already
         disabled for a Customer, you will receive a 422 error response.
         ## Limitations

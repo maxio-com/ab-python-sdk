@@ -19,7 +19,7 @@ offers_controller = client.offers
 
 # Create Offer
 
-Create an offer within your Advanced Billing site by sending a POST request.
+Creates an offer within your Advanced Billing site.
 
 ## Documentation
 
@@ -38,6 +38,10 @@ def create_offer(self,
                 body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -45,6 +49,8 @@ def create_offer(self,
 | `body` | [`CreateOfferRequest`](../../doc/models/create-offer-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`OfferResponse`](../../doc/models/offer-response.md)
 
@@ -127,12 +133,16 @@ print(result)
 
 # List Offers
 
-This endpoint will list offers for a site.
+Lists offers for a site.
 
 ```python
 def list_offers(self,
                options=dict())
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -143,6 +153,8 @@ def list_offers(self,
 | `include_archived` | `bool` | Query, Optional | Include archived products. Use in query: `include_archived=true`. |
 
 ## Response Type
+
+**200**: OK
 
 [`ListOffersResponse`](../../doc/models/list-offers-response.md)
 
@@ -222,12 +234,16 @@ print(result)
 
 # Read Offer
 
-This method allows you to list a specific offer's attributes. This is different than list all offers for a site, as it requires an `offer_id`.
+Returns a specific offer's attributes. This is different from listing all offers for a site, as it requires an `offer_id`.
 
 ```python
 def read_offer(self,
               offer_id)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -236,6 +252,8 @@ def read_offer(self,
 | `offer_id` | `int` | Template, Required | The Chargify id of the offer |
 
 ## Response Type
+
+**200**: OK
 
 [`OfferResponse`](../../doc/models/offer-response.md)
 
@@ -251,12 +269,16 @@ print(result)
 
 # Archive Offer
 
-Archive an existing offer. Please provide an `offer_id` in order to archive the correct item.
+Archives an existing offer. Please provide an `offer_id` in order to archive the correct item.
 
 ```python
 def archive_offer(self,
                  offer_id)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -265,6 +287,8 @@ def archive_offer(self,
 | `offer_id` | `int` | Template, Required | The Chargify id of the offer |
 
 ## Response Type
+
+**200**: OK
 
 `void`
 
@@ -279,12 +303,16 @@ offers_controller.archive_offer(offer_id)
 
 # Unarchive Offer
 
-Unarchive a previously archived offer. Please provide an `offer_id` in order to un-archive the correct item.
+Unarchives a previously archived offer. Please provide an `offer_id` in order to unarchive the correct item.
 
 ```python
 def unarchive_offer(self,
                    offer_id)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -293,6 +321,8 @@ def unarchive_offer(self,
 | `offer_id` | `int` | Template, Required | The Chargify id of the offer |
 
 ## Response Type
+
+**200**: OK
 
 `void`
 

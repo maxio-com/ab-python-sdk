@@ -21,7 +21,7 @@ customers_controller = client.customers
 
 # Create Customer
 
-You may create a new Customer at any time, or you may create a Customer at the same time you create a Subscription. The only validation restriction is that you may only create one customer for a given reference value.
+Creates a new customer; can also be created alongside a new subscription. The only validation restriction is that you may only create one customer for a given reference value.
 
 If provided, the `reference` value must be unique. It represents a unique identifier for the customer from your own app, i.e. the customer’s ID. This allows you to retrieve a given customer via a piece of shared information. Alternatively, you may choose to leave `reference` blank, and store Advanced Billing’s unique ID for the customer, which is in the `id` attribute.
 
@@ -51,6 +51,10 @@ def create_customer(self,
                    body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -58,6 +62,8 @@ def create_customer(self,
 | `body` | [`CreateCustomerRequest`](../../doc/models/create-customer-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`CustomerResponse`](../../doc/models/customer-response.md)
 
@@ -133,7 +139,7 @@ print(result)
 
 # List Customers
 
-This request will by default list all customers associated with your Site.
+Lists all customers associated with your site, or filters results using the search parameter.
 
 ## Find Customer
 
@@ -154,6 +160,10 @@ def list_customers(self,
                   options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -169,6 +179,8 @@ def list_customers(self,
 | `q` | `str` | Query, Optional | A search query by which to filter customers (can be an email, an ID, a reference, organization) |
 
 ## Response Type
+
+**200**: OK
 
 [`List[CustomerResponse]`](../../doc/models/customer-response.md)
 
@@ -278,6 +290,10 @@ def read_customer(self,
                  id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -285,6 +301,8 @@ def read_customer(self,
 | `id` | `int` | Template, Required | The Advanced Billing id of the customer |
 
 ## Response Type
+
+**200**: OK
 
 [`CustomerResponse`](../../doc/models/customer-response.md)
 
@@ -337,13 +355,17 @@ print(result)
 
 # Update Customer
 
-This method allows to update the Customer.
+Updates the customer.
 
 ```python
 def update_customer(self,
                    id,
                    body=None)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -353,6 +375,8 @@ def update_customer(self,
 | `body` | [`UpdateCustomerRequest`](../../doc/models/update-customer-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`CustomerResponse`](../../doc/models/customer-response.md)
 
@@ -417,12 +441,16 @@ print(result)
 
 # Delete Customer
 
-This method allows you to delete the Customer.
+Deletes the customer.
 
 ```python
 def delete_customer(self,
                    id)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -431,6 +459,8 @@ def delete_customer(self,
 | `id` | `int` | Template, Required | The Advanced Billing id of the customer |
 
 ## Response Type
+
+**204**: No Content
 
 `void`
 
@@ -445,12 +475,16 @@ customers_controller.delete_customer(id)
 
 # Read Customer by Reference
 
-Use this method to return the customer object if you have the unique **Reference ID (Your App)** value handy. It will return a single match.
+Returns a customer by their unique reference ID. It will return a single match.
 
 ```python
 def read_customer_by_reference(self,
                               reference)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -459,6 +493,8 @@ def read_customer_by_reference(self,
 | `reference` | `str` | Query, Required | Customer reference |
 
 ## Response Type
+
+**200**: OK
 
 [`CustomerResponse`](../../doc/models/customer-response.md)
 
@@ -474,12 +510,16 @@ print(result)
 
 # List Customer Subscriptions
 
-This method lists all subscriptions that belong to a customer.
+Lists all subscriptions that belong to a customer.
 
 ```python
 def list_customer_subscriptions(self,
                                customer_id)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -488,6 +528,8 @@ def list_customer_subscriptions(self,
 | `customer_id` | `int` | Template, Required | The Chargify id of the customer |
 
 ## Response Type
+
+**200**: OK
 
 [`List[SubscriptionResponse]`](../../doc/models/subscription-response.md)
 

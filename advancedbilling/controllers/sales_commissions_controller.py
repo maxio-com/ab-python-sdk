@@ -43,7 +43,7 @@ class SalesCommissionsController(BaseController):
         """Perform a GET request to
         /sellers/{seller_id}/sales_commission_settings.json.
 
-        Endpoint returns subscriptions with associated sales reps
+        Lists subscriptions with associated sales reps.
         ## Modified Authentication Process
         The Sales Commission API differs from other Chargify API endpoints. This
         resource is associated with the seller itself. Up to now all available
@@ -129,7 +129,7 @@ class SalesCommissionsController(BaseController):
                         options=dict()):
         """Perform a GET request to /sellers/{seller_id}/sales_reps.json.
 
-        Endpoint returns sales rep list with details
+        Returns a sales rep list with details.
         ## Modified Authentication Process
         The Sales Commission API differs from other Chargify API endpoints. This
         resource is associated with the seller itself. Up to now all available
@@ -221,7 +221,7 @@ class SalesCommissionsController(BaseController):
         """Perform a GET request to
         /sellers/{seller_id}/sales_reps/{sales_rep_id}.json.
 
-        Endpoint returns sales rep and attached subscriptions details.
+        Returns a sales rep and attached subscription details.
         ## Modified Authentication Process
         The Sales Commission API differs from other Chargify API endpoints. This
         resource is associated with the seller itself. Up to now all available

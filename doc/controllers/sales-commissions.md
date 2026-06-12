@@ -17,7 +17,7 @@ sales_commissions_controller = client.sales_commissions
 
 # List Sales Commission Settings
 
-Endpoint returns subscriptions with associated sales reps
+Lists subscriptions with associated sales reps.
 
 ## Modified Authentication Process
 
@@ -32,6 +32,10 @@ def list_sales_commission_settings(self,
                                   options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -43,6 +47,8 @@ def list_sales_commission_settings(self,
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 100.<br><br>**Default**: `100` |
 
 ## Response Type
+
+**200**: OK
 
 [`List[SaleRepSettings]`](../../doc/models/sale-rep-settings.md)
 
@@ -96,7 +102,7 @@ print(result)
 
 # List Sales Reps
 
-Endpoint returns sales rep list with details
+Returns a sales rep list with details.
 
 ## Modified Authentication Process
 
@@ -111,6 +117,10 @@ def list_sales_reps(self,
                    options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -122,6 +132,8 @@ def list_sales_reps(self,
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 100.<br><br>**Default**: `100` |
 
 ## Response Type
+
+**200**: OK
 
 [`List[ListSaleRepItem]`](../../doc/models/list-sale-rep-item.md)
 
@@ -224,7 +236,7 @@ print(result)
 
 # Read Sales Rep
 
-Endpoint returns sales rep and attached subscriptions details.
+Returns a sales rep and attached subscription details.
 
 ## Modified Authentication Process
 
@@ -244,6 +256,10 @@ def read_sales_rep(self,
                   per_page=100)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -256,6 +272,8 @@ def read_sales_rep(self,
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 100.<br><br>**Default**: `100` |
 
 ## Response Type
+
+**200**: OK
 
 [`SaleRep`](../../doc/models/sale-rep.md)
 

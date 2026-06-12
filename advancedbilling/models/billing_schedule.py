@@ -13,15 +13,15 @@ from advancedbilling.api_helper import APIHelper
 class BillingSchedule(object):
     """Implementation of the 'Billing Schedule' model.
 
-    This attribute is particularly useful when you need to align billing events for
-    different components on distinct schedules within a subscription. This only works
-    for site with Multifrequency enabled.
+    Billing schedule settings for component allocations or usages on multi-frequency
+    subscriptions. Use this to start a component's billing period on a custom date
+    instead of aligning with the product charge schedule.
 
     Attributes:
-        initial_billing_at (date): The initial_billing_at attribute in Maxio allows
-            you to specify a custom starting date for billing cycles associated with
-            components that have their own billing frequency set. Only ISO8601 format
-            is supported.
+        initial_billing_at (date): Custom start date (ISO 8601 date, YYYY-MM-DD) for
+            the component's first billing period. If omitted or null, billing aligns
+            with the product schedule. If provided, date must be on or after the
+            minimum allowed date for the subscription or component.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -33,6 +33,10 @@ class BillingSchedule(object):
     }
 
     _optionals = [
+        "initial_billing_at",
+    ]
+
+    _nullables = [
         "initial_billing_at",
     ]
 
@@ -68,9 +72,13 @@ class BillingSchedule(object):
             return None
 
         # Extract variables from the dictionary
-        initial_billing_at = dateutil.parser.parse(
-            dictionary.get("initial_billing_at")).date()\
-            if dictionary.get("initial_billing_at") else APIHelper.SKIP
+        if "initial_billing_at" in dictionary.keys():
+            initial_billing_at = dateutil.parser.parse(
+                dictionary.get("initial_billing_at")).date()\
+                if dictionary.get("initial_billing_at") else None
+
+        else:
+            initial_billing_at = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\

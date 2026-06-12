@@ -56,9 +56,9 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
         """Perform a POST request to
         /subscription_groups/{uid}/prepayments.json.
 
-        A prepayment can be added for a subscription group identified by the group's
-        `uid`. This endpoint requires a `amount`, `details`, `method`, and `memo`. On
-        success, the prepayment will be added to the group's prepayment balance.
+        Adds a prepayment for a subscription group. This endpoint requires an
+        `amount`, `details`, `method`, and `memo`. On success, the prepayment will be
+        added to the group's prepayment balance.
 
         Args:
             uid (str): The uid of the subscription group
@@ -108,7 +108,7 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
         """Perform a GET request to
         /subscription_groups/{uid}/prepayments.json.
 
-        This request will list a subscription group's prepayments.
+        Lists a subscription group's prepayments.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -177,10 +177,9 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
         """Perform a POST request to
         /subscription_groups/{uid}/service_credits.json.
 
-        Credit can be issued for a subscription group identified by the group's
-        `uid`. Credit will be added to the group in the amount specified in the
-        request body. The credit will be applied to group member invoices as they are
-        generated.
+        Issues service credit for a subscription group. Credit will be added to the
+        group in the amount specified in the request body. The credit will be applied
+        to group member invoices as they are generated.
 
         Args:
             uid (str): The uid of the subscription group
@@ -230,9 +229,8 @@ class SubscriptionGroupInvoiceAccountController(BaseController):
         """Perform a POST request to
         /subscription_groups/{uid}/service_credit_deductions.json.
 
-        Credit can be deducted for a subscription group identified by the group's
-        `uid`. Credit will be deducted from the group in the amount specified in the
-        request body.
+        Deducts service credit for a subscription group. Credit will be deducted from
+        the group in the amount specified in the request body.
 
         Args:
             uid (str): The uid of the subscription group

@@ -28,8 +28,9 @@ class Event(object):
             ProformaInvoiceIssued | SubscriptionGroupSignupEventData |
             CreditAccountBalanceChanged | PrepaymentAccountBalanceChanged |
             PaymentCollectionMethodChanged | ItemPricePointChanged |
-            CustomFieldValueChange | None): The schema varies based on the event key.
-            The key-to-event data mapping is as follows:  *
+            CustomFieldValueChange | ChjsTokenizationSuccess |
+            ChjsTokenizationFailure | None): The schema varies based on the event
+            key. The key-to-event data mapping is as follows:  *
             `subscription_product_change` - SubscriptionProductChange *
             `subscription_state_change` - SubscriptionStateChange * `signup_success`,
             `delayed_signup_creation_success`, `payment_success`, `payment_failure`,
@@ -50,7 +51,9 @@ class Event(object):
             `subscription_service_credit_account_balance_changed` -
             CreditAccountBalanceChanged * `item_price_point_changed` -
             ItemPricePointChanged * `custom_field_value_change` -
-            CustomFieldValueChange * The rest, that is
+            CustomFieldValueChange * `chjs_tokenization_success` -
+            ChjsTokenizationSuccess * `chjs_tokenization_failure` -
+            ChjsTokenizationFailure * The rest, that is
             `delayed_signup_creation_failure`, `billing_date_change`,
             `expiration_date_change`, `expiring_card`,  `customer_update`,
             `customer_create`, `customer_delete`, `upgrade_downgrade_success`,

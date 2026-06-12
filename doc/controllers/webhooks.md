@@ -20,12 +20,16 @@ webhooks_controller = client.webhooks
 
 # List Webhooks
 
-Allows you to view a list of webhooks.  You can pass query parameters if you want to filter webhooks. See the [Webhooks](page:introduction/webhooks/webhooks) documentation for more information.
+Retrieves a list of webhooks.  You can pass query parameters if you want to filter webhooks. See the [Webhooks](page:introduction/webhooks/webhooks) documentation for more information.
 
 ```python
 def list_webhooks(self,
                  options=dict())
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -40,6 +44,8 @@ def list_webhooks(self,
 | `subscription` | `int` | Query, Optional | The Advanced Billing id of a subscription you'd like to filter for |
 
 ## Response Type
+
+**201**: OK
 
 [`List[WebhookResponse]`](../../doc/models/webhook-response.md)
 
@@ -96,12 +102,16 @@ print(result)
 
 # Enable Webhooks
 
-Allows you to enable webhooks for your site
+Enables webhooks for your site.
 
 ```python
 def enable_webhooks(self,
                    body=None)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -110,6 +120,8 @@ def enable_webhooks(self,
 | `body` | [`EnableWebhooksRequest`](../../doc/models/enable-webhooks-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`EnableWebhooksResponse`](../../doc/models/enable-webhooks-response.md)
 
@@ -144,6 +156,10 @@ def replay_webhooks(self,
                    body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -151,6 +167,8 @@ def replay_webhooks(self,
 | `body` | [`ReplayWebhooksRequest`](../../doc/models/replay-webhooks-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ReplayWebhooksResponse`](../../doc/models/replay-webhooks-response.md)
 
@@ -181,13 +199,17 @@ print(result)
 
 # Create Endpoint
 
-Creates an endpoint and assigns a list of webhooks subscriptions (events) to it.
+Creates an endpoint and assigns a list of webhook subscriptions (events) to it.
 See the [Webhooks Reference](page:introduction/webhooks/webhooks-reference#events) page for available events.
 
 ```python
 def create_endpoint(self,
                    body=None)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -196,6 +218,8 @@ def create_endpoint(self,
 | `body` | [`CreateOrUpdateEndpointRequest`](../../doc/models/create-or-update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
 
 ## Response Type
+
+**200**: OK
 
 [`EndpointResponse`](../../doc/models/endpoint-response.md)
 
@@ -207,7 +231,8 @@ body = CreateOrUpdateEndpointRequest(
         url='https://your.site/webhooks',
         webhook_subscriptions=[
             WebhookSubscription.PAYMENT_SUCCESS,
-            WebhookSubscription.PAYMENT_FAILURE
+            WebhookSubscription.PAYMENT_FAILURE,
+            WebhookSubscription.INVOICE_PENDING
         ]
     )
 )
@@ -229,7 +254,8 @@ print(result)
     "status": "enabled",
     "webhook_subscriptions": [
       "payment_success",
-      "payment_failure"
+      "payment_failure",
+      "invoice_pending"
     ]
   }
 }
@@ -250,7 +276,13 @@ Returns created endpoints for a site.
 def list_endpoints(self)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Response Type
+
+**200**: OK
 
 [`List[Endpoint]`](../../doc/models/endpoint.md)
 
@@ -272,7 +304,8 @@ print(result)
     "status": "enabled",
     "webhook_subscriptions": [
       "payment_success",
-      "payment_failure"
+      "payment_failure",
+      "invoice_pending"
     ]
   },
   {
@@ -296,13 +329,17 @@ Updates an Endpoint. You can change the `url` of your endpoint or the list of `w
 
 Always send a complete list of events to which you want to subscribe. Sending a PUT request for an existing endpoint with an empty list of `webhook_subscriptions` will unsubscribe all events.
 
-If you want unsubscribe from a specific event, send a list of `webhook_subscriptions` without the specific event key.
+If you want to unsubscribe from a specific event, send a list of `webhook_subscriptions` without the specific event key.
 
 ```python
 def update_endpoint(self,
                    endpoint_id,
                    body=None)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -312,6 +349,8 @@ def update_endpoint(self,
 | `body` | [`CreateOrUpdateEndpointRequest`](../../doc/models/create-or-update-endpoint-request.md) | Body, Optional | Used to Create or Update Endpoint |
 
 ## Response Type
+
+**200**: OK
 
 [`EndpointResponse`](../../doc/models/endpoint-response.md)
 
@@ -326,7 +365,8 @@ body = CreateOrUpdateEndpointRequest(
         webhook_subscriptions=[
             WebhookSubscription.PAYMENT_FAILURE,
             WebhookSubscription.PAYMENT_SUCCESS,
-            WebhookSubscription.REFUND_FAILURE
+            WebhookSubscription.REFUND_FAILURE,
+            WebhookSubscription.INVOICE_PENDING
         ]
     )
 )

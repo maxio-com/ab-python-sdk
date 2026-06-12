@@ -33,6 +33,10 @@ def create_product_price_point(self,
                               body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -41,6 +45,8 @@ def create_product_price_point(self,
 | `body` | [`CreateProductPricePointRequest`](../../doc/models/create-product-price-point-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md)
 
@@ -117,6 +123,10 @@ def list_product_price_points(self,
                              options=dict())
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -129,6 +139,8 @@ def list_product_price_points(self,
 | `archived` | `bool` | Query, Optional | Set to include archived price points in the response. |
 
 ## Response Type
+
+**200**: OK
 
 [`ListProductPricePointsResponse`](../../doc/models/list-product-price-points-response.md)
 
@@ -188,6 +200,10 @@ def update_product_price_point(self,
                               body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -197,6 +213,8 @@ def update_product_price_point(self,
 | `body` | [`UpdateProductPricePointRequest`](../../doc/models/update-product-price-point-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md)
 
@@ -252,7 +270,7 @@ print(result)
 
 # Read Product Price Point
 
-Use this endpoint to retrieve details for a specific product price point. You can achieve this by using either the product price point ID or handle.
+Returns details for a specific product price point. You can achieve this by using either the product price point ID or handle.
 
 ```python
 def read_product_price_point(self,
@@ -260,6 +278,10 @@ def read_product_price_point(self,
                             price_point_id,
                             currency_prices=None)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -270,6 +292,8 @@ def read_product_price_point(self,
 | `currency_prices` | `bool` | Query, Optional | When fetching a product's price points, if you have defined multiple currencies at the site level, you can optionally pass the ?currency_prices=true query param to include an array of currency price data in the response. If the product price point is set to use_site_exchange_rate: true, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency. |
 
 ## Response Type
+
+**200**: OK
 
 [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md)
 
@@ -325,6 +349,10 @@ def archive_product_price_point(self,
                                price_point_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -333,6 +361,8 @@ def archive_product_price_point(self,
 | `price_point_id` | int \| str | Template, Required | This is a container for one-of cases. |
 
 ## Response Type
+
+**200**: OK
 
 [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md)
 
@@ -386,13 +416,17 @@ print(result)
 
 # Unarchive Product Price Point
 
-Use this endpoint to unarchive an archived product price point.
+Unarchives an archived product price point.
 
 ```python
 def unarchive_product_price_point(self,
                                  product_id,
                                  price_point_id)
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -402,6 +436,8 @@ def unarchive_product_price_point(self,
 | `price_point_id` | `int` | Template, Required | The Advanced Billing id of the product price point |
 
 ## Response Type
+
+**200**: OK
 
 [`ProductPricePointResponse`](../../doc/models/product-price-point-response.md)
 
@@ -459,6 +495,10 @@ def promote_product_price_point_to_default(self,
                                           price_point_id)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -467,6 +507,8 @@ def promote_product_price_point_to_default(self,
 | `price_point_id` | `int` | Template, Required | The Advanced Billing id of the product price point |
 
 ## Response Type
+
+**200**: OK
 
 [`ProductResponse`](../../doc/models/product-response.md)
 
@@ -548,6 +590,10 @@ def bulk_create_product_price_points(self,
                                     body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -556,6 +602,8 @@ def bulk_create_product_price_points(self,
 | `body` | [`BulkCreateProductPricePointsRequest`](../../doc/models/bulk-create-product-price-points-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**201**: Created
 
 [`BulkCreateProductPricePointsResponse`](../../doc/models/bulk-create-product-price-points-response.md)
 
@@ -656,6 +704,10 @@ def create_product_currency_prices(self,
                                   body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -664,6 +716,8 @@ def create_product_currency_prices(self,
 | `body` | [`CreateProductCurrencyPricesRequest`](../../doc/models/create-product-currency-prices-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`CurrencyPricesResponse`](../../doc/models/currency-prices-response.md)
 
@@ -737,6 +791,10 @@ def update_product_currency_prices(self,
                                   body=None)
 ```
 
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -745,6 +803,8 @@ def update_product_currency_prices(self,
 | `body` | [`UpdateCurrencyPricesRequest`](../../doc/models/update-currency-prices-request.md) | Body, Optional | - |
 
 ## Response Type
+
+**200**: OK
 
 [`CurrencyPricesResponse`](../../doc/models/currency-prices-response.md)
 
@@ -799,12 +859,16 @@ print(result)
 
 # List All Product Price Points
 
-This method allows retrieval of a list of Products Price Points belonging to a Site.
+Lists Product Price Points belonging to a site.
 
 ```python
 def list_all_product_price_points(self,
                                  options=dict())
 ```
+
+## Authentication
+
+This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Parameters
 
@@ -817,6 +881,8 @@ def list_all_product_price_points(self,
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 
 ## Response Type
+
+**200**: OK
 
 [`ListProductPricePointsResponse`](../../doc/models/list-product-price-points-response.md)
 

@@ -43,6 +43,7 @@ class EventKey(object):
         TRIAL_END_NOTICE: The enum member of type str.
         DUNNING_STEP_REACHED: The enum member of type str.
         INVOICE_ISSUED: The enum member of type str.
+        INVOICE_PENDING: The enum member of type str.
         PREPAID_SUBSCRIPTION_BALANCE_CHANGED: The enum member of type str.
         SUBSCRIPTION_GROUP_SIGNUP_SUCCESS: The enum member of type str.
         SUBSCRIPTION_GROUP_SIGNUP_FAILURE: The enum member of type str.
@@ -87,6 +88,8 @@ class EventKey(object):
         CHARGEBACK_WON: The enum member of type str.
         PAYMENT_COLLECTION_METHOD_CHANGED: The enum member of type str.
         COMPONENT_BILLING_DATE_CHANGED: The enum member of type str.
+        CHJS_TOKENIZATION_FAILURE: The enum member of type str.
+        CHJS_TOKENIZATION_SUCCESS: The enum member of type str.
         SUBSCRIPTION_TERM_RENEWAL_SCHEDULED: The enum member of type str.
         SUBSCRIPTION_TERM_RENEWAL_PENDING: The enum member of type str.
         SUBSCRIPTION_TERM_RENEWAL_ACTIVATED: The enum member of type str.
@@ -108,7 +111,7 @@ class EventKey(object):
         "subscription_card_update", "subscription_group_card_update",
         "subscription_bank_account_update", "refund_success", "refund_failure",
         "upcoming_renewal_notice", "trial_end_notice", "dunning_step_reached",
-        "invoice_issued", "prepaid_subscription_balance_changed",
+        "invoice_issued", "invoice_pending", "prepaid_subscription_balance_changed",
         "subscription_group_signup_success", "subscription_group_signup_failure",
         "direct_debit_payment_paid_out", "direct_debit_payment_rejected",
         "direct_debit_payment_pending", "pending_payment_created",
@@ -132,6 +135,7 @@ class EventKey(object):
         "subscription_removed_from_group", "chargeback_opened", "chargeback_lost",
         "chargeback_accepted", "chargeback_closed", "chargeback_won",
         "payment_collection_method_changed", "component_billing_date_changed",
+        "chjs_tokenization_failure", "chjs_tokenization_success",
         "subscription_term_renewal_scheduled", "subscription_term_renewal_pending",
         "subscription_term_renewal_activated", "subscription_term_renewal_removed"]
     PAYMENT_SUCCESS = "payment_success"
@@ -199,6 +203,8 @@ class EventKey(object):
     DUNNING_STEP_REACHED = "dunning_step_reached"
 
     INVOICE_ISSUED = "invoice_issued"
+
+    INVOICE_PENDING = "invoice_pending"
 
     PREPAID_SUBSCRIPTION_BALANCE_CHANGED = "prepaid_subscription_balance_changed"
 
@@ -285,6 +291,10 @@ class EventKey(object):
     PAYMENT_COLLECTION_METHOD_CHANGED = "payment_collection_method_changed"
 
     COMPONENT_BILLING_DATE_CHANGED = "component_billing_date_changed"
+
+    CHJS_TOKENIZATION_FAILURE = "chjs_tokenization_failure"
+
+    CHJS_TOKENIZATION_SUCCESS = "chjs_tokenization_success"
 
     SUBSCRIPTION_TERM_RENEWAL_SCHEDULED = "subscription_term_renewal_scheduled"
 

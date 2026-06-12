@@ -57,10 +57,10 @@ class EventsBasedBillingSegmentsController(BaseController):
         """Perform a POST request to
         /components/{component_id}/price_points/{price_point_id}/segments.json.
 
-        This endpoint creates a new Segment for a Component with segmented Metric. It
-        allows you to specify properties to bill upon and prices for each Segment.
-        You can only pass as many "property_values" as the related Metric has
-        segmenting properties defined.
+        Creates a new segment for a component with a segmented metric. It allows you
+        to specify properties to bill upon and prices for each Segment. You can only
+        pass as many "property_values" as the related Metric has segmenting
+        properties defined.
         You may specify component and/or price point by using either the numeric ID
         or the `handle:gold` syntax.
 
@@ -119,8 +119,7 @@ class EventsBasedBillingSegmentsController(BaseController):
         """Perform a GET request to
         /components/{component_id}/price_points/{price_point_id}/segments.json.
 
-        This endpoint allows you to fetch Segments created for a given Price Point.
-        They will be returned in the order of creation.
+        Lists segments created for a given price point, in order of creation.
         You can pass `page` and `per_page` parameters in order to access all of the
         segments. By default it will return `30` records. You can set `per_page` to
         `200` at most.
@@ -207,8 +206,8 @@ class EventsBasedBillingSegmentsController(BaseController):
         """Perform a PUT request to
         /components/{component_id}/price_points/{price_point_id}/segments/{id}.json.
 
-        This endpoint updates a single Segment for a Component with a segmented
-        Metric. It allows you to update the pricing for the segment.
+        Updates a single segment for a component with a segmented metric. It allows
+        you to update the pricing for the segment.
         You may specify component and/or price point by using either the numeric ID
         or the `handle:gold` syntax.
 
@@ -275,7 +274,7 @@ class EventsBasedBillingSegmentsController(BaseController):
         """Perform a DELETE request to
         /components/{component_id}/price_points/{price_point_id}/segments/{id}.json.
 
-        This endpoint allows you to delete a Segment with specified ID.
+        Deletes a segment with the specified ID.
         You may specify component and/or price point by using either the numeric ID
         or the `handle:gold` syntax.
 
@@ -323,8 +322,8 @@ class EventsBasedBillingSegmentsController(BaseController):
         """Perform a POST request to
         /components/{component_id}/price_points/{price_point_id}/segments/bulk.json.
 
-        This endpoint allows you to create multiple segments in one request. The
-        array of segments can contain up to `2000` records.
+        Creates multiple segments in one request. The array of segments can contain
+        up to `2000` records.
         If any of the records contain an error the whole request would fail and none
         of the requested segments get created. The error response contains a message
         for only the one segment that failed validation, with the corresponding index
@@ -389,8 +388,8 @@ class EventsBasedBillingSegmentsController(BaseController):
         """Perform a PUT request to
         /components/{component_id}/price_points/{price_point_id}/segments/bulk.json.
 
-        This endpoint allows you to update multiple segments in one request. The
-        array of segments can contain up to `1000` records.
+        Updates multiple segments in one request. The array of segments can contain
+        up to `1000` records.
         If any of the records contain an error the whole request would fail and none
         of the requested segments get updated. The error response contains a message
         for only the one segment that failed validation, with the corresponding index

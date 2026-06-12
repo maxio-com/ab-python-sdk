@@ -54,10 +54,9 @@ class WebhooksController(BaseController):
                       options=dict()):
         """Perform a GET request to /webhooks.json.
 
-        Allows you to view a list of webhooks.  You can pass query parameters if you
-        want to filter webhooks. See the
-        [Webhooks](page:introduction/webhooks/webhooks) documentation for more
-        information.
+        Retrieves a list of webhooks.  You can pass query parameters if you want to
+        filter webhooks. See the [Webhooks](page:introduction/webhooks/webhooks)
+        documentation for more information.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -136,7 +135,7 @@ class WebhooksController(BaseController):
                         body=None):
         """Perform a PUT request to /webhooks/settings.json.
 
-        Allows you to enable webhooks for your site
+        Enables webhooks for your site.
 
         Args:
             body (EnableWebhooksRequest, optional): The request body parameter.
@@ -215,7 +214,7 @@ class WebhooksController(BaseController):
                         body=None):
         """Perform a POST request to /endpoints.json.
 
-        Creates an endpoint and assigns a list of webhooks subscriptions (events) to
+        Creates an endpoint and assigns a list of webhook subscriptions (events) to
         it.
         See the [Webhooks
         Reference](page:introduction/webhooks/webhooks-reference#events) page for
@@ -298,7 +297,7 @@ class WebhooksController(BaseController):
         Always send a complete list of events to which you want to subscribe. Sending
         a PUT request for an existing endpoint with an empty list of
         `webhook_subscriptions` will unsubscribe all events.
-        If you want unsubscribe from a specific event, send a list of
+        If you want to unsubscribe from a specific event, send a list of
         `webhook_subscriptions` without the specific event key.
 
         Args:
