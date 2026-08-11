@@ -12,12 +12,14 @@
 | `uid` | `str` | Optional | The UID of the credit note |
 | `number` | `str` | Optional | The number of the credit note |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid2",
-  "number": "number0"
-}
+```python
+from advancedbilling.models.applied_credit_note_data import AppliedCreditNoteData
+
+applied_credit_note_data = AppliedCreditNoteData(
+    uid='uid2',
+    number='number0'
+)
 ```
 

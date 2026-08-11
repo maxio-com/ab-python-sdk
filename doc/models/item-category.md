@@ -19,7 +19,9 @@ One of the following: Business Software, Consumer Software, Digital Services, Ph
 
 ## Example
 
-```
-Business Software
+```python
+from advancedbilling.models.item_category import ItemCategory
+
+item_category = ItemCategory.ENUM_CONSUMER_SOFTWARE
 ```
 

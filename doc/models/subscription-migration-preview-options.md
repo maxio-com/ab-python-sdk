@@ -20,16 +20,18 @@
 | `proration` | [`Proration`](../../doc/models/proration.md) | Optional | - |
 | `proration_date` | `datetime` | Optional | The date that the proration is calculated from for the preview |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "include_trial": false,
-  "include_initial_charge": false,
-  "include_coupons": true,
-  "preserve_period": false,
-  "product_id": 242,
-  "product_price_point_id": 166
-}
+```python
+from advancedbilling.models.subscription_migration_preview_options import SubscriptionMigrationPreviewOptions
+
+subscription_migration_preview_options = SubscriptionMigrationPreviewOptions(
+    product_id=8,
+    product_price_point_id=188,
+    include_trial=False,
+    include_initial_charge=False,
+    include_coupons=True,
+    preserve_period=False
+)
 ```
 

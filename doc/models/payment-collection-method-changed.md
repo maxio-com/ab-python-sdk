@@ -12,12 +12,14 @@
 | `previous_value` | `str` | Required | - |
 | `current_value` | `str` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "previous_value": "previous_value4",
-  "current_value": "current_value2"
-}
+```python
+from advancedbilling.models.payment_collection_method_changed import PaymentCollectionMethodChanged
+
+payment_collection_method_changed = PaymentCollectionMethodChanged(
+    previous_value='previous_value2',
+    current_value='current_value0'
+)
 ```
 

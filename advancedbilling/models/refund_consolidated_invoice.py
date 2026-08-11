@@ -11,7 +11,7 @@ from advancedbilling.api_helper import APIHelper
 class RefundConsolidatedInvoice(object):
     """Implementation of the 'Refund Consolidated Invoice' model.
 
-    Refund consolidated invoice
+    Refund consolidated invoice.
 
     Attributes:
         memo (str): A description for the refund

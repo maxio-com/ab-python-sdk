@@ -12,12 +12,14 @@
 | `currency` | `str` | Required | ISO code for the site defined currency. |
 | `price` | `int` | Required | Price for the given currency. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency": "currency4",
-  "price": 146
-}
+```python
+from advancedbilling.models.update_coupon_currency import UpdateCouponCurrency
+
+update_coupon_currency = UpdateCouponCurrency(
+    currency='currency6',
+    price=14
+)
 ```
 

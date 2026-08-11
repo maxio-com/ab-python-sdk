@@ -11,18 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [`ProformaError`](../../doc/models/proforma-error.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "subscription": {
-      "base": [
-        "base3",
-        "base4"
-      ]
-    }
-  }
-}
+```python
+try:
+    # make the API call
+except ProformaBadRequestErrorResponseException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

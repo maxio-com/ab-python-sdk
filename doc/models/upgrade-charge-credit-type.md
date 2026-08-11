@@ -21,3 +21,11 @@ The type of credit to be created when upgrading/downgrading. Defaults to the com
 | `PRORATED` |
 | `NONE` |
 
+## Example
+
+```python
+from advancedbilling.models.upgrade_charge_credit_type import UpgradeChargeCreditType
+
+upgrade_charge_credit_type = UpgradeChargeCreditType.PRORATED
+```
+

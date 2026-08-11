@@ -12,12 +12,14 @@
 | `label` | `str` | Optional | - |
 | `amount` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "label": "label0",
-  "amount": "amount2"
-}
+```python
+from advancedbilling.models.invoice_line_item_pricing_detail import InvoiceLineItemPricingDetail
+
+invoice_line_item_pricing_detail = InvoiceLineItemPricingDetail(
+    label='label0',
+    amount='amount2'
+)
 ```
 

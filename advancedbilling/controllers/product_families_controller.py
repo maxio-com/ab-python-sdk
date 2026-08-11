@@ -96,7 +96,7 @@ class ProductFamiliesController(BaseController):
                         provided in query. You can specify timezone in query -
                         otherwise your site's time zone will be used. If provided,
                         this parameter will be used instead of end_date.
-                    include_archived -- bool -- Include archived products
+                    include_archived -- bool -- Include archived products.
                     include -- ListProductsInclude -- Allows including additional
                         data in the response. Use in query
                         `include=prepaid_product_price_point`.
@@ -214,7 +214,7 @@ class ProductFamiliesController(BaseController):
                               options=dict()):
         """Perform a GET request to /product_families.json.
 
-        Returns a list of Product Families for a site.
+        Lists Product Families for a site.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to

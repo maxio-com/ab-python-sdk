@@ -23,8 +23,8 @@ class SubscriptionComponent(object):
         kind (ComponentKind): A handle for the component type
         unit_name (str): The model property of type str.
         enabled (bool): (for on/off components) indicates if the component is enabled
-            for the subscription
-        unit_balance (int): The model property of type int.
+            for the subscription.
+        unit_balance (int | str | None): The model property of type int | str | None.
         currency (str): The model property of type str.
         allocated_quantity (int | str | None): For Quantity-based components: The
             current allocation for the component on the given subscription. For
@@ -52,14 +52,14 @@ class SubscriptionComponent(object):
         use_site_exchange_rate (bool): The model property of type bool.
         description (str): The model property of type str.
         allow_fractional_quantities (bool): The model property of type bool.
-        subscription (SubscriptionComponentSubscription): An optional object, will be
-            returned if provided `include=subscription` query param.
+        subscription (SubscriptionComponentSubscription): (Optional) Object that will
+            be returned if the `include=subscription` query param is provided.
         historic_usages (List[HistoricUsage]): The model property of type
             List[HistoricUsage].
         display_on_hosted_page (bool): The model property of type bool.
-        interval (int): The numerical interval. i.e. an interval of '30' coupled with
-            an interval_unit of day would mean this component price point would renew
-            every 30 days. This property is only available for sites with
+        interval (int): The numerical interval. e.g., an interval of '30' coupled
+            with an interval_unit of day would mean this component price point would
+            renew every 30 days. This property is only available for sites with
             Multifrequency enabled.
         interval_unit (IntervalUnit): A string representing the interval unit for
             this component price point, either month or day. This property is only
@@ -313,10 +313,12 @@ class SubscriptionComponent(object):
             dictionary.get("enabled")\
             if "enabled" in dictionary.keys()\
                 else APIHelper.SKIP
-        unit_balance =\
-            dictionary.get("unit_balance")\
-            if dictionary.get("unit_balance")\
-                else APIHelper.SKIP
+        unit_balance = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("SubscriptionComponentUnitBalance"),
+            dictionary.get("unit_balance"),
+            False)\
+            if dictionary.get("unit_balance") is not None\
+            else APIHelper.SKIP
         currency =\
             dictionary.get("currency")\
             if dictionary.get("currency")\

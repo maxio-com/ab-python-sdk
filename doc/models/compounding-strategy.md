@@ -14,3 +14,11 @@ Applicable only to stackable coupons. For `compound`, Percentage-based discounts
 | `COMPOUND` |
 | `FULLPRICE` |
 
+## Example
+
+```python
+from advancedbilling.models.compounding_strategy import CompoundingStrategy
+
+compounding_strategy = CompoundingStrategy.COMPOUND
+```
+

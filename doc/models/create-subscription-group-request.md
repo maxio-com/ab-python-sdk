@@ -11,17 +11,20 @@
 |  --- | --- | --- | --- |
 | `subscription_group` | [`CreateSubscriptionGroup`](../../doc/models/create-subscription-group.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription_group": {
-    "subscription_id": 36,
-    "member_ids": [
-      164,
-      165
-    ]
-  }
-}
+```python
+from advancedbilling.models.create_subscription_group import CreateSubscriptionGroup
+from advancedbilling.models.create_subscription_group_request import CreateSubscriptionGroupRequest
+
+create_subscription_group_request = CreateSubscriptionGroupRequest(
+    subscription_group=CreateSubscriptionGroup(
+        subscription_id=36,
+        member_ids=[
+            164,
+            165
+        ]
+    )
+)
 ```
 

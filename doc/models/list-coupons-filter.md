@@ -19,24 +19,29 @@
 | `use_site_exchange_rate` | `bool` | Optional | If true, restricts the list to coupons whose pricing is recalculated from the site’s current exchange rates, so their currency_prices array contains on-the-fly conversions rather than stored price records. If false, restricts the list to coupons that have manually defined amounts for each currency, ensuring the response includes the saved currency_prices entries instead of exchange-rate-derived values. Use in query `filter[use_site_exchange_rate]=true`. |
 | `include_archived` | `bool` | Optional | Controls returning archived coupons. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "start_date": "2011-12-17",
-  "end_date": "2011-12-15",
-  "start_datetime": "12/19/2011 09:15:30",
-  "end_datetime": "06/07/2019 17:20:06",
-  "ids": [
-    1,
-    2,
-    3
-  ],
-  "codes": [
-    "free",
-    "free_trial"
-  ],
-  "date_field": "updated_at"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.basic_date_field import BasicDateField
+from advancedbilling.models.list_coupons_filter import ListCouponsFilter
+
+list_coupons_filter = ListCouponsFilter(
+    date_field=BasicDateField.UPDATED_AT,
+    start_date=dateutil.parser.parse('2011-12-17').date(),
+    end_date=dateutil.parser.parse('2011-12-15').date(),
+    start_datetime=dateutil.parser.parse('2011-12-19T09:15:30+00:00'),
+    end_datetime=dateutil.parser.parse('2019-06-07T17:20:06Z'),
+    ids=[
+        1,
+        2,
+        3
+    ],
+    codes=[
+        'free',
+        'free_trial'
+    ]
+)
 ```
 

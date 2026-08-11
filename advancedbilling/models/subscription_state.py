@@ -95,9 +95,9 @@ class SubscriptionState(object):
 
     """
 
-    _all_values = ["pending", "failed_to_create", "trialing", "assessing",
-        "active", "soft_failure", "past_due", "suspended", "canceled", "expired",
-        "paused", "unpaid", "trial_ended", "on_hold", "awaiting_signup"]
+    _all_values = ["pending", "failed_to_create", "trialing", "assessing", "active",
+        "soft_failure", "past_due", "suspended", "canceled", "expired", "paused",
+        "unpaid", "trial_ended", "on_hold", "awaiting_signup"]
     PENDING = "pending"
 
     FAILED_TO_CREATE = "failed_to_create"

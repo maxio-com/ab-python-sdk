@@ -17,15 +17,19 @@
 | `starting_balance_in_cents` | `int` | Optional | **Constraints**: `>= 0` |
 | `ending_balance_in_cents` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 110,
-  "subscription_id": 220,
-  "amount_in_cents": 196,
-  "memo": "memo6",
-  "created_at": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.created_prepayment import CreatedPrepayment
+
+created_prepayment = CreatedPrepayment(
+    id=228,
+    subscription_id=82,
+    amount_in_cents=198,
+    memo='memo6',
+    created_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

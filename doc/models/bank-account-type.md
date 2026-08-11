@@ -14,3 +14,11 @@ Defaults to checking
 | `CHECKING` |
 | `SAVINGS` |
 
+## Example
+
+```python
+from advancedbilling.models.bank_account_type import BankAccountType
+
+bank_account_type = BankAccountType.CHECKING
+```
+

@@ -25,20 +25,24 @@
 | `locale` | `str` | Optional | Set a specific language on a customer record. |
 | `vat_number` | `str` | Optional | - |
 | `tax_exempt` | `bool` | Optional | - |
+| `surcharging` | `bool` | Optional | Whether surcharging is enabled for the customer. Only applied on sites where surcharging control is enabled. |
 | `tax_exempt_reason` | `str` | Optional | - |
 | `parent_id` | `int` | Optional | - |
-| `verified` | `bool` | Optional | Is the customer verified to use ACH as a payment method. Available only on Authorize.Net gateway |
+| `verified` | `bool` | Optional | Is the customer verified to use ACH as a payment method. Available only on the Authorize.Net gateway. |
 | `salesforce_id` | `str` | Optional | The Salesforce ID of the customer |
+| `branding_theme_id` | `int` | Optional | The ID of the Branding Theme assigned to this customer as the customer's default Branding Theme. This customer-level Branding Theme is used when a subscription does not have its own subscription-level Branding Theme. Available only when Branding Themes are enabled for the site. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "first_name": "first_name2",
-  "last_name": "last_name0",
-  "email": "email4",
-  "cc_emails": "cc_emails8",
-  "organization": "organization6"
-}
+```python
+from advancedbilling.models.update_customer import UpdateCustomer
+
+update_customer = UpdateCustomer(
+    first_name='first_name4',
+    last_name='last_name2',
+    email='email2',
+    cc_emails='cc_emails6',
+    organization='organization8'
+)
 ```
 

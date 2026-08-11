@@ -10,18 +10,20 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `int` | Optional | The id of the signup page (public_signup_pages only) |
-| `return_url` | `str` | Optional | The url to which a customer will be returned after a successful signup (public_signup_pages only) |
+| `return_url` | `str` | Optional | The url to which a customer will be returned after a successful signup (public_signup_pages only). |
 | `return_params` | `str` | Optional | The params to be appended to the return_url (public_signup_pages only) |
-| `url` | `str` | Optional | The url where the signup page can be viewed (public_signup_pages only) |
+| `url` | `str` | Optional | The url where the signup page can be viewed (public_signup_pages only). |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 6,
-  "return_url": "return_url0",
-  "return_params": "return_params2",
-  "url": "url8"
-}
+```python
+from advancedbilling.models.public_signup_page import PublicSignupPage
+
+public_signup_page = PublicSignupPage(
+    id=196,
+    return_url='return_url2',
+    return_params='return_params4',
+    url='url0'
+)
 ```
 

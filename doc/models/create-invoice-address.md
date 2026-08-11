@@ -21,15 +21,17 @@ Overrides the default address.
 | `zip` | `str` | Optional | - |
 | `country` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "first_name": "first_name4",
-  "last_name": "last_name2",
-  "phone": "phone6",
-  "address": "address0",
-  "address_2": "address_28"
-}
+```python
+from advancedbilling.models.create_invoice_address import CreateInvoiceAddress
+
+create_invoice_address = CreateInvoiceAddress(
+    first_name='first_name8',
+    last_name='last_name6',
+    phone='phone2',
+    address='address4',
+    address_2='address_22'
+)
 ```
 

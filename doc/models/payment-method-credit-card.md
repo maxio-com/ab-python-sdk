@@ -15,15 +15,18 @@
 | `masked_card_number` | `str` | Required | - |
 | `mtype` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "card_brand": "card_brand4",
-  "masked_card_number": "masked_card_number0",
-  "type": "credit_card",
-  "card_expiration": "card_expiration2",
-  "last_four": "last_four4"
-}
+```python
+from advancedbilling.models.invoice_event_payment_method import InvoiceEventPaymentMethod
+from advancedbilling.models.payment_method_credit_card import PaymentMethodCreditCard
+
+payment_method_credit_card = PaymentMethodCreditCard(
+    card_brand='card_brand2',
+    masked_card_number='masked_card_number2',
+    mtype=InvoiceEventPaymentMethod.CREDIT_CARD,
+    card_expiration='card_expiration0',
+    last_four='last_four8'
+)
 ```
 

@@ -24,7 +24,7 @@ class ComponentPricePoint(object):
             certain product. 2. **custom**: a custom price point. 3. **catalog**: a
             price point that is **not** marked as a default price for a certain
             product and is **not** a custom one.
-        default (bool): Note: Refer to type attribute instead
+        default (bool): Note: Refer to type attribute instead.
         name (str): The model property of type str.
         pricing_scheme (PricingScheme): The identifier for the pricing scheme. See
             [Product
@@ -44,9 +44,9 @@ class ComponentPricePoint(object):
             point's type is `custom`) The id of the subscription that the custom
             price point is for.
         tax_included (bool): The model property of type bool.
-        interval (int): The numerical interval. i.e. an interval of ‘30’ coupled with
-            an interval_unit of day would mean this component price point would renew
-            every 30 days. This property is only available for sites with
+        interval (int): The numerical interval. e.g., an interval of ‘30’ coupled
+            with an interval_unit of day would mean this component price point would
+            renew every 30 days. This property is only available for sites with
             Multifrequency enabled.
         interval_unit (IntervalUnit): A string representing the interval unit for
             this component price point, either month or day. This property is only

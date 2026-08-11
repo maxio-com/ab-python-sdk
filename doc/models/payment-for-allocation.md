@@ -16,14 +16,16 @@ Information for captured payment, if applicable
 | `success` | `bool` | Optional | - |
 | `memo` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 72,
-  "amount_in_cents": 158,
-  "success": false,
-  "memo": "memo6"
-}
+```python
+from advancedbilling.models.payment_for_allocation import PaymentForAllocation
+
+payment_for_allocation = PaymentForAllocation(
+    id=232,
+    amount_in_cents=194,
+    success=False,
+    memo='memo6'
+)
 ```
 

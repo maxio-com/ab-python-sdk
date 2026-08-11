@@ -15,15 +15,19 @@
 | `contract_id` | `int` | Optional | (Optional) Existing contract to associate with the scheduled renewal. Contracts must be enabled for your site. |
 | `create_new_contract` | `bool` | Optional | (Optional) Set to true to create a new contract when contracts are enabled. Contracts must be enabled for your site. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "starts_at": "2016-03-13T12:52:32.123Z",
-  "ends_at": "2016-03-13T12:52:32.123Z",
-  "lock_in_at": "2016-03-13T12:52:32.123Z",
-  "contract_id": 110,
-  "create_new_contract": false
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.scheduled_renewal_configuration_request_body import ScheduledRenewalConfigurationRequestBody
+
+scheduled_renewal_configuration_request_body = ScheduledRenewalConfigurationRequestBody(
+    starts_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    ends_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    lock_in_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    contract_id=88,
+    create_new_contract=False
+)
 ```
 

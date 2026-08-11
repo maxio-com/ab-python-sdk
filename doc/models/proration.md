@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `preserve_period` | `bool` | Optional | The alternative to sending preserve_period as a direct attribute to migration |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "preserve_period": false
-}
+```python
+from advancedbilling.models.proration import Proration
+
+proration = Proration(
+    preserve_period=False
+)
 ```
 

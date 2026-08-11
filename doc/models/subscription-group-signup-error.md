@@ -16,67 +16,71 @@
 | `payment_profile_id` | `str` | Optional | - |
 | `payer_id` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscriptions": {
-    "key0": {
-      "product": [
-        "product9"
-      ],
-      "product_price_point_id": [
-        "product_price_point_id7"
-      ],
-      "payment_profile": [
-        "payment_profile2"
-      ],
-      "payment_profile.chargify_token": [
-        "payment_profile.chargify_token6"
-      ],
-      "base": [
-        "base5",
-        "base6"
-      ]
+```python
+from advancedbilling.models.payer_error import PayerError
+from advancedbilling.models.subscription_group_signup_error import SubscriptionGroupSignupError
+from advancedbilling.models.subscription_group_subscription_error import SubscriptionGroupSubscriptionError
+
+subscription_group_signup_error = SubscriptionGroupSignupError(
+    subscriptions={
+        'key0': SubscriptionGroupSubscriptionError(
+            product=[
+                'product9'
+            ],
+            product_price_point_id=[
+                'product_price_point_id7'
+            ],
+            payment_profile=[
+                'payment_profile2'
+            ],
+            payment_profile_chargify_token=[
+                'payment_profile.chargify_token6'
+            ],
+            base=[
+                'base5',
+                'base6'
+            ]
+        ),
+        'key1': SubscriptionGroupSubscriptionError(
+            product=[
+                'product9'
+            ],
+            product_price_point_id=[
+                'product_price_point_id7'
+            ],
+            payment_profile=[
+                'payment_profile2'
+            ],
+            payment_profile_chargify_token=[
+                'payment_profile.chargify_token6'
+            ],
+            base=[
+                'base5',
+                'base6'
+            ]
+        )
     },
-    "key1": {
-      "product": [
-        "product9"
-      ],
-      "product_price_point_id": [
-        "product_price_point_id7"
-      ],
-      "payment_profile": [
-        "payment_profile2"
-      ],
-      "payment_profile.chargify_token": [
-        "payment_profile.chargify_token6"
-      ],
-      "base": [
-        "base5",
-        "base6"
-      ]
-    }
-  },
-  "payer_reference": "payer_reference0",
-  "payer": {
-    "last_name": [
-      "last_name5",
-      "last_name6"
+    payer_reference='payer_reference6',
+    payer=PayerError(
+        last_name=[
+            'last_name5',
+            'last_name6'
+        ],
+        first_name=[
+            'first_name8'
+        ],
+        email=[
+            'email0',
+            'email9'
+        ]
+    ),
+    subscription_group=[
+        'subscription_group7',
+        'subscription_group8'
     ],
-    "first_name": [
-      "first_name8"
-    ],
-    "email": [
-      "email0",
-      "email9"
-    ]
-  },
-  "subscription_group": [
-    "subscription_group1",
-    "subscription_group2"
-  ],
-  "payment_profile_id": "payment_profile_id2"
-}
+    payment_profile_id='payment_profile_id8'
+)
 ```
 

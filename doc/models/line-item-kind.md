@@ -22,3 +22,11 @@ A handle for the line item kind
 | `COUPON` |
 | `TAX` |
 
+## Example
+
+```python
+from advancedbilling.models.line_item_kind import LineItemKind
+
+line_item_kind = LineItemKind.COUPON
+```
+

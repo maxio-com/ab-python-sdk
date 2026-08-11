@@ -14,11 +14,11 @@ class CreateInvoiceItem(object):
     Attributes:
         title (str): The model property of type str.
         quantity (float | str | None): The quantity can contain up to 8 decimal
-            places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with
+            places. e.g., 1.00 or 0.0012 or 0.00000065. If you submit a value with
             more than 8 decimal places, we will round it down to the 8th decimal
             place.
         unit_price (float | str | None): The unit_price can contain up to 8 decimal
-            places. i.e. 1.00 or 0.0012 or 0.00000065. If you submit a value with
+            places. e.g., 1.00 or 0.0012 or 0.00000065. If you submit a value with
             more than 8 decimal places, we will round it down to the 8th decimal
             place.
         taxable (bool): Set to true to automatically calculate taxes. Site must be

@@ -11,19 +11,22 @@
 |  --- | --- | --- | --- |
 | `price_points` | [`List[ProductPricePoint]`](../../doc/models/product-price-point.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "price_points": [
-    {
-      "id": 40,
-      "name": "name2",
-      "handle": "handle8",
-      "price_in_cents": 108,
-      "interval": 92
-    }
-  ]
-}
+```python
+from advancedbilling.models.list_product_price_points_response import ListProductPricePointsResponse
+from advancedbilling.models.product_price_point import ProductPricePoint
+
+list_product_price_points_response = ListProductPricePointsResponse(
+    price_points=[
+        ProductPricePoint(
+            id=40,
+            name='name2',
+            handle='handle8',
+            price_in_cents=108,
+            interval=92
+        )
+    ]
+)
 ```
 

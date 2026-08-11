@@ -15,11 +15,11 @@
 | `customer_id` | `int` | Optional | ID of the customer to which the invoice belongs. |
 | `subscription_id` | `int` | Optional | ID of the subscription that generated the invoice. |
 | `number` | `str` | Optional | A unique, identifying string that appears on the invoice and in places the invoice is referenced.<br><br>While the UID is long and not appropriate to show to customers, the number is usually shorter and consumable by the customer and the merchant alike. |
-| `sequence_number` | `int` | Optional | A monotonically increasing number assigned to invoices as they are created.  This number is unique within a site and can be used to sort and order invoices. |
+| `sequence_number` | `int` | Optional | A monotonically increasing number assigned to invoices as they are created. This number is unique within a site and can be used to sort and order invoices. |
 | `transaction_time` | `datetime` | Optional | - |
 | `created_at` | `datetime` | Optional | - |
 | `updated_at` | `datetime` | Optional | - |
-| `issue_date` | `date` | Optional | Date the invoice was issued to the customer.  This is the date that the invoice was made available for payment.<br><br>The format is `"YYYY-MM-DD"`. |
+| `issue_date` | `date` | Optional | Date the invoice was issued to the customer. This is the date that the invoice was made available for payment.<br><br>The format is `"YYYY-MM-DD"`. |
 | `due_date` | `date` | Optional | Date the invoice is due.<br><br>The format is `"YYYY-MM-DD"`. |
 | `paid_date` | `date` | Optional | Date the invoice became fully paid.<br><br>If partial payments are applied to the invoice, this date will not be present until payment has been made in full.<br><br>The format is `"YYYY-MM-DD"`. |
 | `status` | [`InvoiceStatus`](../../doc/models/invoice-status.md) | Optional | The current status of the invoice. See [Invoice Statuses](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview#invoice-statuses) for more. |
@@ -28,7 +28,7 @@
 | `collection_method` | [`CollectionMethod`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 | `payment_instructions` | `str` | Optional | A message that is printed on the invoice when it is marked for remittance collection. It is intended to describe to the customer how they may make payment, and is configured by the merchant. |
 | `currency` | `str` | Optional | The ISO 4217 currency code (3 character string) representing the currency of invoice transaction. |
-| `consolidation_level` | [`InvoiceConsolidationLevel`](../../doc/models/invoice-consolidation-level.md) | Optional | Consolidation level of the invoice, which is applicable to invoice consolidation.  It will hold one of the following values:<br><br>* "none": A normal invoice with no consolidation.<br>* "child": An invoice segment which has been combined into a consolidated invoice.<br>* "parent": A consolidated invoice, whose contents are composed of invoice segments.<br><br>"Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.<br><br>See also the [invoice consolidation documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269909389-Invoice-Consolidation). |
+| `consolidation_level` | [`InvoiceConsolidationLevel`](../../doc/models/invoice-consolidation-level.md) | Optional | Consolidation level of the invoice, which is applicable to invoice consolidation. It will hold one of the following values:<br><br>* "none": A normal invoice with no consolidation.<br>* "child": An invoice segment which has been combined into a consolidated invoice.<br>* "parent": A consolidated invoice, whose contents are composed of invoice segments.<br><br>"Parent" invoices do not have lines of their own, but they have subtotals and totals which aggregate the member invoice segments.<br><br>See also the [invoice consolidation documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269909389-Invoice-Consolidation). |
 | `parent_invoice_uid` | `str` | Optional | For invoices with `consolidation_level` of `child`, this specifies the UID of the parent (consolidated) invoice. |
 | `subscription_group_id` | `int` | Optional | - |
 | `parent_invoice_number` | `int` | Optional | For invoices with `consolidation_level` of `child`, this specifies the number of the parent (consolidated) invoice. |
@@ -36,17 +36,17 @@
 | `product_name` | `str` | Optional | The name of the product subscribed when the invoice was generated. |
 | `product_family_name` | `str` | Optional | The name of the product family subscribed when the invoice was generated. |
 | `seller` | [`InvoiceSeller`](../../doc/models/invoice-seller.md) | Optional | Information about the seller (merchant) listed on the masthead of the invoice. |
-| `customer` | [`InvoiceCustomer`](../../doc/models/invoice-customer.md) | Optional | Information about the customer who is owner or recipient the invoiced subscription. |
+| `customer` | [`InvoiceCustomer`](../../doc/models/invoice-customer.md) | Optional | Information about the customer who is owner or recipient of the invoiced subscription. |
 | `payer` | [`InvoicePayer`](../../doc/models/invoice-payer.md) | Optional | - |
 | `recipient_emails` | `List[str]` | Optional | **Constraints**: *Maximum Items*: `5` |
 | `net_terms` | `int` | Optional | - |
-| `memo` | `str` | Optional | The memo printed on invoices of any collection type.  This message is in control of the merchant. |
+| `memo` | `str` | Optional | The memo printed on invoices of any collection type. This message is in control of the merchant. |
 | `billing_address` | [`InvoiceAddress`](../../doc/models/invoice-address.md) | Optional | The invoice billing address. |
 | `shipping_address` | [`InvoiceAddress`](../../doc/models/invoice-address.md) | Optional | The invoice shipping address. |
 | `subtotal_amount` | `str` | Optional | Subtotal of the invoice, which is the sum of all line items before discounts or taxes. |
 | `discount_amount` | `str` | Optional | Total discount applied to the invoice. |
 | `tax_amount` | `str` | Optional | Total tax on the invoice. |
-| `total_amount` | `str` | Optional | The invoice total, which is `subtotal_amount - discount_amount + tax_amount`.' |
+| `total_amount` | `str` | Optional | The invoice total, which is `subtotal_amount - discount_amount + tax_amount`. |
 | `credit_amount` | `str` | Optional | The amount of credit (from credit notes) applied to this invoice.<br><br>Credits offset the amount due from the customer. |
 | `debit_amount` | `str` | Optional | - |
 | `refund_amount` | `str` | Optional | - |
@@ -65,20 +65,25 @@
 | `public_url` | `str` | Optional | The public URL of the invoice |
 | `previous_balance_data` | [`InvoicePreviousBalance`](../../doc/models/invoice-previous-balance.md) | Optional | - |
 | `public_url_expires_on` | `date` | Optional | The format is `"YYYY-MM-DD"`. |
+| `branding_theme_id` | `int` | Optional | The ID of the Branding Theme associated with this invoice. This value represents the Branding Theme used for invoice theming, such as themed invoice rendering. Available only when Branding Themes are enabled for the site. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "issue_date": "2024-01-01",
-  "due_date": "2024-01-01",
-  "paid_date": "2024-01-01",
-  "public_url_expires_on": "2024-01-21",
-  "id": 252,
-  "uid": "uid0",
-  "site_id": 178,
-  "customer_id": 34,
-  "subscription_id": 106
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.invoice import Invoice
+
+invoice = Invoice(
+    id=166,
+    uid='uid6',
+    site_id=92,
+    customer_id=204,
+    subscription_id=20,
+    issue_date=dateutil.parser.parse('2024-01-01').date(),
+    due_date=dateutil.parser.parse('2024-01-01').date(),
+    paid_date=dateutil.parser.parse('2024-01-01').date(),
+    public_url_expires_on=dateutil.parser.parse('2024-01-21').date()
+)
 ```
 

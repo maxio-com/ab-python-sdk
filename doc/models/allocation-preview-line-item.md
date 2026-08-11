@@ -17,17 +17,21 @@
 | `taxable_amount_in_cents` | `int` | Optional | - |
 | `component_id` | `int` | Optional | - |
 | `component_handle` | `str` | Optional | - |
-| `direction` | [`AllocationPreviewDirection`](../../doc/models/allocation-preview-direction.md) | Optional | Visible when using Fine-grained Component Control |
+| `direction` | [`AllocationPreviewDirection`](../../doc/models/allocation-preview-direction.md) | Optional | Visible when using Fine-grained Component Control. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transaction_type": "credit",
-  "kind": "quantity_based_component",
-  "amount_in_cents": 24,
-  "memo": "memo6",
-  "discount_amount_in_cents": 172
-}
+```python
+from advancedbilling.models.allocation_preview_line_item import AllocationPreviewLineItem
+from advancedbilling.models.allocation_preview_line_item_kind import AllocationPreviewLineItemKind
+from advancedbilling.models.line_item_transaction_type import LineItemTransactionType
+
+allocation_preview_line_item = AllocationPreviewLineItem(
+    transaction_type=LineItemTransactionType.CHARGE,
+    kind=AllocationPreviewLineItemKind.COUPON,
+    amount_in_cents=58,
+    memo='memo8',
+    discount_amount_in_cents=138
+)
 ```
 

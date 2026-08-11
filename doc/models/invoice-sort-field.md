@@ -20,7 +20,9 @@
 
 ## Example
 
-```
-total_amount
+```python
+from advancedbilling.models.invoice_sort_field import InvoiceSortField
+
+invoice_sort_field = InvoiceSortField.DUE_AMOUNT
 ```
 

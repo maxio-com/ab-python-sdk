@@ -24,15 +24,17 @@
 | `state_assigned_no` | `str` | Optional | - |
 | `tax_sub_type` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "tax_rule_id": 226,
-  "percentage": "percentage0",
-  "country_code": "country_code8",
-  "subdivision_code": "subdivision_code6",
-  "tax_amount": "tax_amount4"
-}
+```python
+from advancedbilling.models.invoice_tax_component_breakout import InvoiceTaxComponentBreakout
+
+invoice_tax_component_breakout = InvoiceTaxComponentBreakout(
+    tax_rule_id=4,
+    percentage='percentage0',
+    country_code='country_code2',
+    subdivision_code='subdivision_code4',
+    tax_amount='tax_amount6'
+)
 ```
 

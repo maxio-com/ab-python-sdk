@@ -13,19 +13,23 @@
 | `pricing_scheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `prices` | [`List[CreateOrUpdateSegmentPrice]`](../../doc/models/create-or-update-segment-price.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 180,
-  "pricing_scheme": "per_unit",
-  "prices": [
-    {
-      "starting_quantity": 64,
-      "ending_quantity": 38,
-      "unit_price": "String3"
-    }
-  ]
-}
+```python
+from advancedbilling.models.bulk_update_segments_item import BulkUpdateSegmentsItem
+from advancedbilling.models.create_or_update_segment_price import CreateOrUpdateSegmentPrice
+from advancedbilling.models.pricing_scheme import PricingScheme
+
+bulk_update_segments_item = BulkUpdateSegmentsItem(
+    id=156,
+    pricing_scheme=PricingScheme.PER_UNIT,
+    prices=[
+        CreateOrUpdateSegmentPrice(
+            unit_price='String3',
+            starting_quantity=64,
+            ending_quantity=38
+        )
+    ]
+)
 ```
 

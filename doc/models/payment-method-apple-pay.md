@@ -11,11 +11,14 @@
 |  --- | --- | --- | --- |
 | `mtype` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "type": "apple_pay"
-}
+```python
+from advancedbilling.models.invoice_event_payment_method import InvoiceEventPaymentMethod
+from advancedbilling.models.payment_method_apple_pay import PaymentMethodApplePay
+
+payment_method_apple_pay = PaymentMethodApplePay(
+    mtype=InvoiceEventPaymentMethod.APPLE_PAY
+)
 ```
 

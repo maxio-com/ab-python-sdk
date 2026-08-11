@@ -19,15 +19,17 @@
 | `gateway_handle` | `str` | Optional | - |
 | `ach_late_reject` | `bool` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transaction_id": 172,
-  "payment_id": 42,
-  "memo": "memo6",
-  "original_amount": "original_amount6",
-  "applied_amount": "applied_amount6"
-}
+```python
+from advancedbilling.models.invoice_refund import InvoiceRefund
+
+invoice_refund = InvoiceRefund(
+    transaction_id=0,
+    payment_id=126,
+    memo='memo0',
+    original_amount='original_amount0',
+    applied_amount='applied_amount2'
+)
 ```
 

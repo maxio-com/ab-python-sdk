@@ -11,22 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [`List[ComponentPricePointErrorItem]`](../../doc/models/component-price-point-error-item.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": [
-    {
-      "component_id": 236,
-      "message": "message0",
-      "price_point": 122
-    },
-    {
-      "component_id": 236,
-      "message": "message0",
-      "price_point": 122
-    }
-  ]
-}
+```python
+try:
+    # make the API call
+except ComponentPricePointErrorException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

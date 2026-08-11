@@ -19,15 +19,18 @@ Warning: When updating a metafield's scope attribute, all scope attributes must 
 | `public_edit` | [`IncludeOption`](../../doc/models/include-option.md) | Optional | Include (1) or exclude (0) metafields used in [Embeddable Components](page:development-tools/embeddable-components/overview) from being editable by your ecosystem. |
 | `hosted` | `List[str]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "csv": "0",
-  "invoices": "0",
-  "statements": "0",
-  "portal": "0",
-  "public_show": "0"
-}
+```python
+from advancedbilling.models.include_option import IncludeOption
+from advancedbilling.models.metafield_scope import MetafieldScope
+
+metafield_scope = MetafieldScope(
+    csv=IncludeOption.EXCLUDE,
+    invoices=IncludeOption.EXCLUDE,
+    statements=IncludeOption.EXCLUDE,
+    portal=IncludeOption.EXCLUDE,
+    public_show=IncludeOption.EXCLUDE
+)
 ```
 

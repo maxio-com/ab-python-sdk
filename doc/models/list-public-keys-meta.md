@@ -14,14 +14,16 @@
 | `total_pages` | `int` | Optional | - |
 | `per_page` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "total_count": 22,
-  "current_page": 254,
-  "total_pages": 10,
-  "per_page": 24
-}
+```python
+from advancedbilling.models.list_public_keys_meta import ListPublicKeysMeta
+
+list_public_keys_meta = ListPublicKeysMeta(
+    total_count=240,
+    current_page=216,
+    total_pages=228,
+    per_page=62
+)
 ```
 

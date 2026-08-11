@@ -21,13 +21,13 @@ class CreditCardPaymentProfile(object):
         first_name (str): The first name of the card holder.
         last_name (str): The last name of the card holder.
         masked_card_number (str): A string representation of the credit card number
-            with all but the last 4 digits masked with X’s (i.e.
+            with all but the last 4 digits masked with X’s (e.g.,
             ‘XXXX-XXXX-XXXX-1234’).
         card_type (CardType): The type of card used.
         expiration_month (int): An integer representing the expiration month of the
             card(1 – 12).
         expiration_year (int): An integer representing the 4-digit expiration year of
-            the card(i.e. ‘2012’).
+            the card(e.g., ‘2012’).
         customer_id (int): The Chargify-assigned id for the customer record to which
             the card belongs.
         current_vault (CreditCardVault): The vault that stores the payment profile
@@ -48,8 +48,8 @@ class CreditCardPaymentProfile(object):
         disabled (bool): The model property of type bool.
         chargify_token (str): Token received after sending billing information using
             Maxio.js (formerly Chargify.js). This token will only be received if
-            passed as a sole attribute of credit_card_attributes (i.e.
-            tok_9g6hw85pnpt6knmskpwp4ttt)
+            passed as a sole attribute of credit_card_attributes (e.g.,
+            tok_9g6hw85pnpt6knmskpwp4ttt).
         site_gateway_setting_id (int): The model property of type int.
         gateway_handle (str): An identifier of connected gateway.
         created_at (datetime): A timestamp indicating when this payment profile was
@@ -116,6 +116,7 @@ class CreditCardPaymentProfile(object):
     ]
 
     _nullables = [
+        "card_type",
         "vault_token",
         "billing_address",
         "billing_city",
@@ -256,7 +257,7 @@ class CreditCardPaymentProfile(object):
                 else APIHelper.SKIP
         card_type =\
             dictionary.get("card_type")\
-            if dictionary.get("card_type")\
+            if "card_type" in dictionary.keys()\
                 else APIHelper.SKIP
         expiration_month =\
             dictionary.get("expiration_month")\

@@ -14,3 +14,11 @@ The role of the debit note.
 | `CHARGEBACK` |
 | `REFUND` |
 
+## Example
+
+```python
+from advancedbilling.models.debit_note_role import DebitNoteRole
+
+debit_note_role = DebitNoteRole.CHARGEBACK
+```
+

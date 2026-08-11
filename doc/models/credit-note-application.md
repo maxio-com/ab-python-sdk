@@ -15,15 +15,19 @@
 | `memo` | `str` | Optional | - |
 | `applied_amount` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid0",
-  "transaction_time": "2016-03-13T12:52:32.123Z",
-  "invoice_uid": "invoice_uid0",
-  "memo": "memo4",
-  "applied_amount": "applied_amount8"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.credit_note_application import CreditNoteApplication
+
+credit_note_application = CreditNoteApplication(
+    uid='uid0',
+    transaction_time=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    invoice_uid='invoice_uid0',
+    memo='memo4',
+    applied_amount='applied_amount2'
+)
 ```
 

@@ -45,3 +45,11 @@ The vault that stores the payment profile with the provided `vault_token`. Use `
 | `UNIPAAS` |
 | `WIRECARD` |
 
+## Example
+
+```python
+from advancedbilling.models.credit_card_vault import CreditCardVault
+
+credit_card_vault = CreditCardVault.BRAINTREE1
+```
+

@@ -13,7 +13,9 @@
 
 ## Example
 
-```
-created_at
+```python
+from advancedbilling.models.list_events_date_field import ListEventsDateField
+
+list_events_date_field = ListEventsDateField.CREATED_AT
 ```
 

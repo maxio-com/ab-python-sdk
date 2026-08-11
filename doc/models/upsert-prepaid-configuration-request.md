@@ -11,16 +11,19 @@
 |  --- | --- | --- | --- |
 | `prepaid_configuration` | [`UpsertPrepaidConfiguration`](../../doc/models/upsert-prepaid-configuration.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prepaid_configuration": {
-    "initial_funding_amount_in_cents": 74,
-    "replenish_to_amount_in_cents": 76,
-    "auto_replenish": false,
-    "replenish_threshold_amount_in_cents": 20
-  }
-}
+```python
+from advancedbilling.models.upsert_prepaid_configuration import UpsertPrepaidConfiguration
+from advancedbilling.models.upsert_prepaid_configuration_request import UpsertPrepaidConfigurationRequest
+
+upsert_prepaid_configuration_request = UpsertPrepaidConfigurationRequest(
+    prepaid_configuration=UpsertPrepaidConfiguration(
+        initial_funding_amount_in_cents=74,
+        replenish_to_amount_in_cents=76,
+        auto_replenish=False,
+        replenish_threshold_amount_in_cents=20
+    )
+)
 ```
 

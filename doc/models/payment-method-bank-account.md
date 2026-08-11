@@ -13,13 +13,16 @@
 | `masked_routing_number` | `str` | Required | - |
 | `mtype` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "masked_account_number": "masked_account_number2",
-  "masked_routing_number": "masked_routing_number2",
-  "type": "bank_account"
-}
+```python
+from advancedbilling.models.invoice_event_payment_method import InvoiceEventPaymentMethod
+from advancedbilling.models.payment_method_bank_account import PaymentMethodBankAccount
+
+payment_method_bank_account = PaymentMethodBankAccount(
+    masked_account_number='masked_account_number6',
+    masked_routing_number='masked_routing_number6',
+    mtype=InvoiceEventPaymentMethod.BANK_ACCOUNT
+)
 ```
 

@@ -17,17 +17,19 @@
 | `amount_in_cents` | `int` | Optional | **Constraints**: `>= 0` |
 | `percentage` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "code": "\"ABCD_10\"",
-  "use_count": 2,
-  "uses_allowed": 10,
-  "expires_at": "\"2023-07-13T05:18:58-04:00\"",
-  "amount_in_cents": 1000,
-  "percentage": "\"15.0\"",
-  "recurring": false
-}
+```python
+from advancedbilling.models.subscription_included_coupon import SubscriptionIncludedCoupon
+
+subscription_included_coupon = SubscriptionIncludedCoupon(
+    code='"ABCD_10"',
+    use_count=2,
+    uses_allowed=10,
+    expires_at='"2023-07-13T05:18:58-04:00"',
+    recurring=False,
+    amount_in_cents=1000,
+    percentage='"15.0"'
+)
 ```
 

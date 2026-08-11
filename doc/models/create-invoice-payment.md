@@ -16,15 +16,18 @@
 | `payment_profile_id` | `int` | Optional | The ID of the payment profile to be used for the payment. |
 | `received_on` | `date` | Optional | Date reflecting when the payment was received from a customer. Must be in the past. Applicable only to<br>`external` payments. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount": "String9",
-  "memo": "memo0",
-  "method": "cash",
-  "details": "details6",
-  "payment_profile_id": 122
-}
+```python
+from advancedbilling.models.create_invoice_payment import CreateInvoicePayment
+from advancedbilling.models.invoice_payment_method_type import InvoicePaymentMethodType
+
+create_invoice_payment = CreateInvoicePayment(
+    amount='String7',
+    memo='memo8',
+    method=InvoicePaymentMethodType.CREDIT_CARD,
+    details='details4',
+    payment_profile_id=210
+)
 ```
 

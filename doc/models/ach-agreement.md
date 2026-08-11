@@ -16,14 +16,16 @@
 | `authorizer_last_name` | `str` | Optional | (Required when providing ACH agreement params) The last name of the person authorizing the ACH agreement. |
 | `ip_address` | `str` | Optional | (Required when providing ACH agreement params) The IP address of the person authorizing the ACH agreement. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "agreement_terms": "agreement_terms4",
-  "authorizer_first_name": "authorizer_first_name2",
-  "authorizer_last_name": "authorizer_last_name2",
-  "ip_address": "ip_address2"
-}
+```python
+from advancedbilling.models.ach_agreement import ACHAgreement
+
+ach_agreement = ACHAgreement(
+    agreement_terms='agreement_terms0',
+    authorizer_first_name='authorizer_first_name6',
+    authorizer_last_name='authorizer_last_name8',
+    ip_address='ip_address8'
+)
 ```
 

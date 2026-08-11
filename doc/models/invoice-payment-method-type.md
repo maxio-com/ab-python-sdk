@@ -18,3 +18,11 @@ The type of payment method used. Defaults to other.
 | `ACH` |
 | `OTHER` |
 
+## Example
+
+```python
+from advancedbilling.models.invoice_payment_method_type import InvoicePaymentMethodType
+
+invoice_payment_method_type = InvoicePaymentMethodType.CREDIT_CARD
+```
+

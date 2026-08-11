@@ -32,9 +32,9 @@ class InvoiceEventType(object):
 
     """
 
-    _all_values = ["issue_invoice", "apply_credit_note", "create_credit_note",
-        "apply_payment", "apply_debit_note", "create_debit_note", "refund_invoice",
-        "void_invoice", "void_remainder", "backport_invoice", "change_invoice_status",
+    _all_values = ["issue_invoice", "apply_credit_note", "create_credit_note", "apply_payment",
+        "apply_debit_note", "create_debit_note", "refund_invoice", "void_invoice",
+        "void_remainder", "backport_invoice", "change_invoice_status",
         "change_invoice_collection_method", "remove_payment", "failed_payment",
         "change_chargeback_status"]
     ISSUE_INVOICE = "issue_invoice"

@@ -22,19 +22,21 @@
 | `customer` | [`SubscriptionGroupCustomer`](../../doc/models/subscription-group-customer.md) | Optional | - |
 | `account_balances` | [`SubscriptionGroupBalances`](../../doc/models/subscription-group-balances.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "scheme": 90,
-  "customer_id": 110,
-  "payment_profile_id": 18,
-  "subscription_ids": [
-    220,
-    221,
-    222
-  ]
-}
+```python
+from advancedbilling.models.full_subscription_group_response import FullSubscriptionGroupResponse
+
+full_subscription_group_response = FullSubscriptionGroupResponse(
+    uid='uid8',
+    scheme=72,
+    customer_id=92,
+    payment_profile_id=0,
+    subscription_ids=[
+        202,
+        203,
+        204
+    ]
+)
 ```
 

@@ -21,7 +21,7 @@ class CreateAllocation(object):
         quantity (float): The allocated quantity to which to set the line-items
             allocated quantity. By default, this is an integer. If decimal
             allocations are enabled for the component, it will be a decimal number.
-            For On/Off components, use 1for on and 0 for off.
+            For On/Off components, use 1 for on and 0 for off.
         decimal_quantity (str): Decimal representation of the allocated quantity.
             Only valid when decimal allocations are enabled for the component.
         previous_quantity (float): The quantity that was in effect before this

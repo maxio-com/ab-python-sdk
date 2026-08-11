@@ -433,7 +433,7 @@ class SubscriptionComponentsController(BaseController):
         """Perform a GET request to
         /subscriptions/{subscription_id}/components/{component_id}/allocations.json.
 
-        Returns the 50 most recent Allocations, ordered by most recent first.
+        Lists the 50 most recent Allocations, ordered by most recent first.
         ## On/Off Components
         When a subscription's on/off component has been toggled to on (`1`) or off
         (`0`), usage will be logged in this response.
@@ -895,8 +895,8 @@ class SubscriptionComponentsController(BaseController):
         /subscriptions/{subscription_id_or_reference}/components/{component_id}/usages.
         json.
 
-        Returns a list of usages associated with a subscription for a particular
-        metered component. This will display the previously recorded components for a
+        Lists usages associated with a subscription for a particular metered
+        component. This will display the previously recorded components for a
         subscription.
         This endpoint is not compatible with quantity-based components.
         ## Since Date and Until Date Usage
@@ -929,9 +929,9 @@ class SubscriptionComponentsController(BaseController):
                     component_id -- int | str -- Either the Advanced Billing id for
                         the component or the component's handle prefixed by `handle:`
                     since_id -- int -- Returns usages with an id greater than or
-                        equal to the one specified
+                        equal to the one specified.
                     max_id -- int -- Returns usages with an id less than or equal to
-                        the one specified
+                        the one specified.
                     since_date -- date -- Returns usages with a created_at date
                         greater than or equal to midnight (12:00 AM) on the date
                         specified.
@@ -1136,7 +1136,8 @@ class SubscriptionComponentsController(BaseController):
                 published.
             store_uid (str, optional): If you've attached your own Keen project as an
                 Advanced Billing event data-store, use this parameter to indicate the
-                data-store.
+                data-store. This applies to Legacy Metering sites only — it has no
+                effect on Maxio Metering sites.
             body (EBBEvent, optional): The request body parameter.
 
         Returns:
@@ -1187,7 +1188,8 @@ class SubscriptionComponentsController(BaseController):
                 published.
             store_uid (str, optional): If you've attached your own Keen project as an
                 Advanced Billing event data-store, use this parameter to indicate the
-                data-store.
+                data-store. This applies to Legacy Metering sites only — it has no
+                effect on Maxio Metering sites.
             body (List[EBBEvent], optional): The request body parameter.
 
         Returns:

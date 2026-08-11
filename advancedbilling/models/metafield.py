@@ -24,7 +24,7 @@ class Metafield(object):
             to in Advanced Billing.
         input_type (MetafieldInput): Indicates the type of metafield. A text
             metafield allows any string value. Dropdown and radio metafields have a
-            set of values that can be selected.  Defaults to 'text'.
+            set of values that can be selected. Defaults to 'text'.
         enum (str | List[str] | None): The model property of type str | List[str] |
             None.
         additional_properties (Dict[str, object]): The additional properties for the

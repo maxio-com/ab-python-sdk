@@ -15,29 +15,61 @@
 | `per_page` | `int` | Optional | - |
 | `metafields` | [`List[Metafield]`](../../doc/models/metafield.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "total_count": 210,
-  "current_page": 186,
-  "total_pages": 198,
-  "per_page": 92,
-  "metafields": [
-    {
-      "id": 22,
-      "name": "name2",
-      "scope": {
-        "csv": "0",
-        "invoices": "0",
-        "statements": "0",
-        "portal": "0",
-        "public_show": "0"
-      },
-      "data_count": 10,
-      "input_type": "balance_tracker"
-    }
-  ]
-}
+```python
+from advancedbilling.models.include_option import IncludeOption
+from advancedbilling.models.list_metafields_response import ListMetafieldsResponse
+from advancedbilling.models.metafield import Metafield
+from advancedbilling.models.metafield_input import MetafieldInput
+from advancedbilling.models.metafield_scope import MetafieldScope
+
+list_metafields_response = ListMetafieldsResponse(
+    total_count=70,
+    current_page=46,
+    total_pages=58,
+    per_page=232,
+    metafields=[
+        Metafield(
+            id=22,
+            name='name2',
+            scope=MetafieldScope(
+                csv=IncludeOption.EXCLUDE,
+                invoices=IncludeOption.EXCLUDE,
+                statements=IncludeOption.EXCLUDE,
+                portal=IncludeOption.EXCLUDE,
+                public_show=IncludeOption.EXCLUDE
+            ),
+            data_count=10,
+            input_type=MetafieldInput.BALANCE_TRACKER
+        ),
+        Metafield(
+            id=22,
+            name='name2',
+            scope=MetafieldScope(
+                csv=IncludeOption.EXCLUDE,
+                invoices=IncludeOption.EXCLUDE,
+                statements=IncludeOption.EXCLUDE,
+                portal=IncludeOption.EXCLUDE,
+                public_show=IncludeOption.EXCLUDE
+            ),
+            data_count=10,
+            input_type=MetafieldInput.BALANCE_TRACKER
+        ),
+        Metafield(
+            id=22,
+            name='name2',
+            scope=MetafieldScope(
+                csv=IncludeOption.EXCLUDE,
+                invoices=IncludeOption.EXCLUDE,
+                statements=IncludeOption.EXCLUDE,
+                portal=IncludeOption.EXCLUDE,
+                public_show=IncludeOption.EXCLUDE
+            ),
+            data_count=10,
+            input_type=MetafieldInput.BALANCE_TRACKER
+        )
+    ]
+)
 ```
 

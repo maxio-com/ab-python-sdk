@@ -110,12 +110,12 @@ class ProformaInvoicesController(BaseController):
                 desired values being the value. A list of parameters that can be used
                 are::
                     uid -- str -- The uid of the subscription group
-                    line_items -- bool -- Include line items data
-                    discounts -- bool -- Include discounts data
-                    taxes -- bool -- Include taxes data
-                    credits -- bool -- Include credits data
-                    payments -- bool -- Include payments data
-                    custom_fields -- bool -- Include custom fields data
+                    line_items -- bool -- Include line items data.
+                    discounts -- bool -- Include discounts data.
+                    taxes -- bool -- Include taxes data.
+                    credits -- bool -- Include credits data.
+                    payments -- bool -- Include payments data.
+                    custom_fields -- bool -- Include custom fields data.
 
         Returns:
             ListProformaInvoicesResponse: Response from the API. OK
@@ -291,12 +291,12 @@ class ProformaInvoicesController(BaseController):
                         changed to 200. Use in query `per_page=200`.
                     direction -- Direction -- The sort direction of the returned
                         invoices.
-                    line_items -- bool -- Include line items data
-                    discounts -- bool -- Include discounts data
-                    taxes -- bool -- Include taxes data
-                    credits -- bool -- Include credits data
-                    payments -- bool -- Include payments data
-                    custom_fields -- bool -- Include custom fields data
+                    line_items -- bool -- Include line items data.
+                    discounts -- bool -- Include discounts data.
+                    taxes -- bool -- Include taxes data.
+                    credits -- bool -- Include credits data.
+                    payments -- bool -- Include payments data.
+                    custom_fields -- bool -- Include custom fields data.
 
         Returns:
             ListProformaInvoicesResponse: Response from the API. OK
@@ -485,12 +485,11 @@ class ProformaInvoicesController(BaseController):
         """Perform a POST request to
         /subscriptions/{subscription_id}/proforma_invoices/preview.json.
 
-        Returns a preview of the data that will be included on a given subscription's
-        proforma invoice if one were to be generated. It will have similar line items
-        and totals as a renewal preview, but the response will be presented in the
-        format of a proforma invoice. Consequently it will include additional
-        information such as the name and addresses that will appear on the proforma
-        invoice.
+        Previews the data that will be included on a given subscription's proforma
+        invoice if one were to be generated. It will have similar line items and
+        totals as a renewal preview, but the response will be presented in the format
+        of a proforma invoice. Consequently it will include additional information
+        such as the name and addresses that will appear on the proforma invoice.
         The preview endpoint is subject to all the same conditions as the proforma
         invoice endpoint. For example, previews are only available on the
         Relationship Invoicing architecture, and previews cannot be made for

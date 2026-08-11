@@ -52,7 +52,7 @@ class SitesController(BaseController):
         You can read more about these settings here:
          [Who Pays & Customer
         Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer
-        -Hierarchies-WhoPays)
+        -Hierarchies-WhoPays).
 
         Returns:
             SiteResponse: Response from the API. OK
@@ -119,7 +119,7 @@ class SitesController(BaseController):
                                      options=dict()):
         """Perform a GET request to /chargify_js_keys.json.
 
-        Returns public keys used for Maxio.js (formerly Chargify.js).
+        Lists public keys used for Maxio.js (formerly Chargify.js).
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to

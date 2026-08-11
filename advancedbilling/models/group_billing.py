@@ -8,7 +8,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 class GroupBilling(object):
     """Implementation of the 'Group Billing' model.
 
-    Optional attributes related to billing date and accrual. Note: Only applicable
+    (Optional) Attributes related to billing date and accrual. Note: Only applicable
     for new subscriptions.
 
     Attributes:

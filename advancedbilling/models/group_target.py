@@ -20,8 +20,8 @@ class GroupTarget(object):
     Attributes:
         mtype (GroupTargetType): The type of object indicated by the id attribute.
         id (int): The id of the target customer or subscription to group the existing
-            subscription with. Ignored and should not be included if type is "self" ,
-            "parent", or "eldest"
+            subscription with. Ignored and should not be included if type is "self",
+            "parent", or "eldest".
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

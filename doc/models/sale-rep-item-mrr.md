@@ -13,13 +13,15 @@
 | `usage` | `str` | Optional | - |
 | `recurring` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "mrr": "mrr2",
-  "usage": "usage0",
-  "recurring": "recurring4"
-}
+```python
+from advancedbilling.models.sale_rep_item_mrr import SaleRepItemMrr
+
+sale_rep_item_mrr = SaleRepItemMrr(
+    mrr='mrr8',
+    usage='usage4',
+    recurring='recurring0'
+)
 ```
 

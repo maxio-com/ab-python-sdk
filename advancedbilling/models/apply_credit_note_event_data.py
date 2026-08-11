@@ -32,7 +32,7 @@ class ApplyCreditNoteEventData(object):
         memo (str): The credit note memo.
         role (str): The role of the credit note (e.g. 'general')
         consolidated_invoice (bool): Shows whether it was applied to consolidated
-            invoice or not
+            invoice or not.
         applied_credit_notes (List[AppliedCreditNoteData]): List of credit notes
             applied to children invoices (if consolidated invoice)
         additional_properties (Dict[str, object]): The additional properties for the

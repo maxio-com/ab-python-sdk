@@ -12,12 +12,14 @@
 | `uid` | `str` | Optional | - |
 | `deleted` | `bool` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid4",
-  "deleted": false
-}
+```python
+from advancedbilling.models.delete_subscription_group_response import DeleteSubscriptionGroupResponse
+
+delete_subscription_group_response = DeleteSubscriptionGroupResponse(
+    uid='uid8',
+    deleted=False
+)
 ```
 

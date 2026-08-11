@@ -22,21 +22,26 @@
 | `received_on` | `date` | Optional | Date reflecting when the payment was received from a customer. Must be in the past. Applicable only to<br>`external` payments. |
 | `uid` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transaction_time": "2016-03-13T12:52:32.123Z",
-  "memo": "memo6",
-  "original_amount": "original_amount6",
-  "applied_amount": "applied_amount6",
-  "payment_method": {
-    "details": "details0",
-    "kind": "kind8",
-    "memo": "memo4",
-    "type": "type0",
-    "card_brand": "card_brand6"
-  }
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.invoice_payment import InvoicePayment
+from advancedbilling.models.invoice_payment_method import InvoicePaymentMethod
+
+invoice_payment = InvoicePayment(
+    transaction_time=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    memo='memo4',
+    original_amount='original_amount4',
+    applied_amount='applied_amount8',
+    payment_method=InvoicePaymentMethod(
+        details='details0',
+        kind='kind8',
+        memo='memo4',
+        mtype='type0',
+        card_brand='card_brand6'
+    )
+)
 ```
 

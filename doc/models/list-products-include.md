@@ -13,7 +13,9 @@
 
 ## Example
 
-```
-prepaid_product_price_point
+```python
+from advancedbilling.models.list_products_include import ListProductsInclude
+
+list_products_include = ListProductsInclude.PREPAID_PRODUCT_PRICE_POINT
 ```
 

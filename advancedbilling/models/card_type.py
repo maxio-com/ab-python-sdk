@@ -53,12 +53,12 @@ class CardType(object):
 
     """
 
-    _all_values = ["visa", "master", "elo", "cabal", "alelo", "discover",
-        "american_express", "naranja", "diners_club", "jcb", "dankort", "maestro",
-        "maestro_no_luhn", "forbrugsforeningen", "sodexo", "alia", "vr", "unionpay",
-        "carnet", "cartes_bancaires", "olimpica", "creditel", "confiable",
-        "synchrony", "routex", "mada", "bp_plus", "passcard", "edenred", "anda",
-        "tarjeta-d", "hipercard", "bogus", "switch", "solo", "laser"]
+    _all_values = ["visa", "master", "elo", "cabal", "alelo", "discover", "american_express",
+        "naranja", "diners_club", "jcb", "dankort", "maestro", "maestro_no_luhn",
+        "forbrugsforeningen", "sodexo", "alia", "vr", "unionpay", "carnet",
+        "cartes_bancaires", "olimpica", "creditel", "confiable", "synchrony", "routex",
+        "mada", "bp_plus", "passcard", "edenred", "anda", "tarjeta-d", "hipercard",
+        "bogus", "switch", "solo", "laser"]
     VISA = "visa"
 
     MASTER = "master"

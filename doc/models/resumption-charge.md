@@ -15,3 +15,11 @@
 | `IMMEDIATE` |
 | `DELAYED` |
 
+## Example
+
+```python
+from advancedbilling.models.resumption_charge import ResumptionCharge
+
+resumption_charge = ResumptionCharge.PRORATED
+```
+

@@ -13,13 +13,15 @@
 | `application_uid` | `str` | Optional | Unique identifier for the payment. It has the prefix "pmt_" followed by alphanumeric characters. |
 | `applied_amount` | `str` | Optional | Dollar amount of the paid invoice. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "invoice_uid": "invoice_uid2",
-  "application_uid": "application_uid4",
-  "applied_amount": "applied_amount6"
-}
+```python
+from advancedbilling.models.invoice_payment_application import InvoicePaymentApplication
+
+invoice_payment_application = InvoicePaymentApplication(
+    invoice_uid='invoice_uid4',
+    application_uid='application_uid8',
+    applied_amount='applied_amount4'
+)
 ```
 

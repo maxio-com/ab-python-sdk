@@ -13,20 +13,14 @@ Errors returned on creating a refund prepayment when bad request
 |  --- | --- | --- | --- |
 | `errors` | [`RefundPrepaymentBaseRefundError`](../../doc/models/refund-prepayment-base-refund-error.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "refund": {
-      "base": [
-        {
-          "key1": "val1",
-          "key2": "val2"
-        }
-      ]
-    }
-  }
-}
+```python
+try:
+    # make the API call
+except RefundPrepaymentBaseErrorsResponseException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

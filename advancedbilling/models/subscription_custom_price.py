@@ -27,7 +27,7 @@ class SubscriptionCustomPrice(object):
         trial_price_in_cents (str | int | None): (Optional)
         trial_interval (str | int | None): (Optional)
         trial_interval_unit (IntervalUnit): (Optional)
-        trial_type (TrialType): Indicates how a trial is handled when the trail
+        trial_type (TrialType): Indicates how a trial is handled when the trial
             period ends and there is no credit card on file. For `no_obligation`, the
             subscription transitions to a Trial Ended state. Maxio will not send any
             emails or statements. For `payment_expected`, the subscription

@@ -61,7 +61,7 @@ class ProformaInvoice(object):
         payment_instructions (str): The model property of type str.
         currency (str): The model property of type str.
         consolidation_level (InvoiceConsolidationLevel): Consolidation level of the
-            invoice, which is applicable to invoice consolidation.  It will hold one
+            invoice, which is applicable to invoice consolidation. It will hold one
             of the following values:  * "none": A normal invoice with no
             consolidation. * "child": An invoice segment which has been combined into
             a consolidated invoice. * "parent": A consolidated invoice, whose
@@ -73,11 +73,11 @@ class ProformaInvoice(object):
         product_name (str): The model property of type str.
         product_family_name (str): The model property of type str.
         role (ProformaInvoiceRole): 'proforma' value is deprecated in favor of
-            proforma_adhoc and proforma_automatic
+            proforma_adhoc and proforma_automatic.
         seller (InvoiceSeller): Information about the seller (merchant) listed on the
             masthead of the invoice.
         customer (InvoiceCustomer): Information about the customer who is owner or
-            recipient the invoiced subscription.
+            recipient of the invoiced subscription.
         memo (str): The model property of type str.
         billing_address (InvoiceAddress): The model property of type InvoiceAddress.
         shipping_address (InvoiceAddress): The model property of type InvoiceAddress.

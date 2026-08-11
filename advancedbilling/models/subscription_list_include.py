@@ -11,12 +11,24 @@ class SubscriptionListInclude(object):
 
     Attributes:
         SELF_SERVICE_PAGE_TOKEN: The enum member of type str.
+        CURRENT_ACCOUNT_BALANCE_IN_CENTS: The enum member of type str.
+        CURRENT_BILLING_AMOUNT: The enum member of type str.
+        THREE_DS_ACTION_LINK: The enum member of type str.
+        COUPONS: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
     """
 
     SELF_SERVICE_PAGE_TOKEN = "self_service_page_token"
+
+    CURRENT_ACCOUNT_BALANCE_IN_CENTS = "current_account_balance_in_cents"
+
+    CURRENT_BILLING_AMOUNT = "current_billing_amount"
+
+    THREE_DS_ACTION_LINK = "three_ds_action_link"
+
+    COUPONS = "coupons"
 
     @classmethod
     def from_value(cls, value, default=None):

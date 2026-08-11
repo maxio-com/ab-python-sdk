@@ -11,13 +11,16 @@
 |  --- | --- | --- | --- |
 | `void` | [`VoidInvoice`](../../doc/models/void-invoice.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "void": {
-    "reason": "reason6"
-  }
-}
+```python
+from advancedbilling.models.void_invoice import VoidInvoice
+from advancedbilling.models.void_invoice_request import VoidInvoiceRequest
+
+void_invoice_request = VoidInvoiceRequest(
+    void=VoidInvoice(
+        reason='reason6'
+    )
+)
 ```
 

@@ -16,7 +16,9 @@ Allows to filter by `created_at` or `updated_at`.
 
 ## Example
 
-```
-updated_at
+```python
+from advancedbilling.models.basic_date_field import BasicDateField
+
+basic_date_field = BasicDateField.UPDATED_AT
 ```
 

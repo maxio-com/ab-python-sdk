@@ -19,15 +19,19 @@
 | `component_handle` | `str` | Optional | - |
 | `subscription_id` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 252,
-  "memo": "memo8",
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "price_point_id": 126,
-  "quantity": 130
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.usage import Usage
+
+usage = Usage(
+    id=150,
+    memo='memo2',
+    created_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    price_point_id=28,
+    quantity=28
+)
 ```
 

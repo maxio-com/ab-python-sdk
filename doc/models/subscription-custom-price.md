@@ -19,25 +19,28 @@
 | `trial_price_in_cents` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `trial_interval` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `trial_interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | (Optional) |
-| `trial_type` | [`TrialType`](../../doc/models/trial-type.md) | Optional | Indicates how a trial is handled when the trail period ends and there is no credit card on file. For `no_obligation`, the subscription transitions to a Trial Ended state. Maxio will not send any emails or statements. For `payment_expected`, the subscription transitions to a Past Due state. Maxio will send normal dunning emails and statements according to your other settings. |
+| `trial_type` | [`TrialType`](../../doc/models/trial-type.md) | Optional | Indicates how a trial is handled when the trial period ends and there is no credit card on file. For `no_obligation`, the subscription transitions to a Trial Ended state. Maxio will not send any emails or statements. For `payment_expected`, the subscription transitions to a Past Due state. Maxio will send normal dunning emails and statements according to your other settings. |
 | `initial_charge_in_cents` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `initial_charge_after_trial` | `bool` | Optional | (Optional) |
 | `expiration_interval` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `expiration_interval_unit` | [`ExpirationIntervalUnit`](../../doc/models/expiration-interval-unit.md) | Optional | (Optional) |
 | `tax_included` | `bool` | Optional | (Optional) |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name4",
-  "handle": "handle0",
-  "price_in_cents": "String3",
-  "interval": "String3",
-  "interval_unit": "day",
-  "trial_price_in_cents": "String3",
-  "trial_interval": "String5",
-  "trial_interval_unit": "day"
-}
+```python
+from advancedbilling.models.interval_unit import IntervalUnit
+from advancedbilling.models.subscription_custom_price import SubscriptionCustomPrice
+
+subscription_custom_price = SubscriptionCustomPrice(
+    price_in_cents='String7',
+    interval='String1',
+    interval_unit=IntervalUnit.DAY,
+    name='name2',
+    handle='handle8',
+    trial_price_in_cents='String7',
+    trial_interval='String3',
+    trial_interval_unit=IntervalUnit.DAY
+)
 ```
 

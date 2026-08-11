@@ -13,13 +13,15 @@
 | `number` | `str` | Optional | - |
 | `outstanding_amount` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "number": "number6",
-  "outstanding_amount": "outstanding_amount6"
-}
+```python
+from advancedbilling.models.invoice_balance_item import InvoiceBalanceItem
+
+invoice_balance_item = InvoiceBalanceItem(
+    uid='uid4',
+    number='number2',
+    outstanding_amount='outstanding_amount0'
+)
 ```
 

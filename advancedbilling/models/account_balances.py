@@ -16,9 +16,9 @@ class AccountBalances(object):
 
     Attributes:
         open_invoices (AccountBalance): The balance, in cents, of the sum of the
-            subscription's  open, payable invoices.
+            subscription's open, payable invoices.
         pending_invoices (AccountBalance): The balance, in cents, of the sum of the
-            subscription's  pending, payable invoices.
+            subscription's pending, payable invoices.
         pending_discounts (AccountBalance): The balance, in cents, of the
             subscription's Pending Discount account.
         service_credits (AccountBalance): The balance, in cents, of the

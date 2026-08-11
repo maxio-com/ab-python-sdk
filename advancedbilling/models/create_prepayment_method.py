@@ -9,7 +9,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 class CreatePrepaymentMethod(object):
     """Implementation of the 'Create Prepayment Method' enum.
 
-    :- When the `method` specified is `"credit_card_on_file"`, the prepayment amount
+    When the `method` specified is `"credit_card_on_file"`, the prepayment amount
     will be collected using the default credit card payment profile and applied to
     the prepayment account balance. This is especially useful for manual
     replenishment of prepaid subscriptions.

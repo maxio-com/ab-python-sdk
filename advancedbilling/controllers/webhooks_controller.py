@@ -260,7 +260,7 @@ class WebhooksController(BaseController):
     def list_endpoints(self):
         """Perform a GET request to /endpoints.json.
 
-        Returns created endpoints for a site.
+        Lists endpoints configured for a site.
 
         Returns:
             List[Endpoint]: Response from the API. OK

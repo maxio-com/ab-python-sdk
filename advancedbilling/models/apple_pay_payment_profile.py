@@ -18,7 +18,7 @@ class ApplePayPaymentProfile(object):
         id (int): The Chargify-assigned ID of the Apple Pay payment profile.
         first_name (str): The first name of the Apple Pay account holder
         last_name (str): The last name of the Apple Pay account holder
-        customer_id (int): The Chargify-assigned id for the customer record to which
+        customer_id (int): The Chargify-assigned ID for the customer record to which
             the Apple Pay account belongs
         current_vault (ApplePayVault): The vault that stores the payment profile with
             the provided vault_token.

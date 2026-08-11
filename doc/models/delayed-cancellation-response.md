@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `message` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "message": "message8"
-}
+```python
+from advancedbilling.models.delayed_cancellation_response import DelayedCancellationResponse
+
+delayed_cancellation_response = DelayedCancellationResponse(
+    message='message0'
+)
 ```
 

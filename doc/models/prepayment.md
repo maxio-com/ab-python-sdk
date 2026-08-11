@@ -20,20 +20,25 @@
 | `payment_type` | [`PrepaymentMethod`](../../doc/models/prepayment-method.md) | Optional | The payment type of the prepayment. |
 | `created_at` | `datetime` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 50,
-  "subscription_id": 160,
-  "amount_in_cents": 120,
-  "remaining_amount_in_cents": 194,
-  "refunded_amount_in_cents": 144,
-  "details": "details4",
-  "external": false,
-  "memo": "memo8",
-  "payment_type": "cash",
-  "created_at": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.prepayment import Prepayment
+from advancedbilling.models.prepayment_method import PrepaymentMethod
+
+prepayment = Prepayment(
+    id=38,
+    subscription_id=148,
+    amount_in_cents=124,
+    remaining_amount_in_cents=182,
+    external=False,
+    memo='memo2',
+    created_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    refunded_amount_in_cents=132,
+    details='details8',
+    payment_type=PrepaymentMethod.CREDIT_CARD
+)
 ```
 

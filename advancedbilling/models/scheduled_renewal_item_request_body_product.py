@@ -18,7 +18,7 @@ class ScheduledRenewalItemRequestBodyProduct(object):
         item_type (str): Item type to add. Either Product or Component.
         item_id (int): Product or component identifier.
         price_point_id (int): Price point identifier.
-        quantity (int): Optional quantity for the item.
+        quantity (int): (Optional) Quantity for the item.
         custom_price (ScheduledRenewalProductPricePoint): Custom pricing for a
             product within a scheduled renewal.
         additional_properties (Dict[str, object]): The additional properties for the

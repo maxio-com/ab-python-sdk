@@ -12,12 +12,14 @@
 | `deposit_1_in_cents` | `int` | Optional | - |
 | `deposit_2_in_cents` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "deposit_1_in_cents": 142,
-  "deposit_2_in_cents": 132
-}
+```python
+from advancedbilling.models.bank_account_verification import BankAccountVerification
+
+bank_account_verification = BankAccountVerification(
+    deposit_1_in_cents=244,
+    deposit_2_in_cents=6
+)
 ```
 

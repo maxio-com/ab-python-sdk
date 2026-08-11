@@ -25,9 +25,9 @@ class UpdateComponentPricePoint(object):
             define your own prices for each currency if you have multiple currencies
             defined on the site.
         tax_included (bool): Whether or not the price point includes tax
-        interval (int): The numerical interval. i.e. an interval of ‘30’ coupled with
-            an interval_unit of day would mean this component price point would renew
-            every 30 days. This property is only available for sites with
+        interval (int): The numerical interval. e.g., an interval of ‘30’ coupled
+            with an interval_unit of day would mean this component price point would
+            renew every 30 days. This property is only available for sites with
             Multifrequency enabled.
         interval_unit (IntervalUnit): A string representing the interval unit for
             this component price point, either month or day. This property is only

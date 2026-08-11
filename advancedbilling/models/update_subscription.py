@@ -24,9 +24,9 @@ class UpdateSubscription(object):
         credit_card_attributes (CreditCardAttributes): The model property of type
             CreditCardAttributes.
         product_handle (str): Set to the handle of a different product to change the
-            subscription's product
+            subscription's product.
         product_id (int): Set to the id of a different product to change the
-            subscription's product
+            subscription's product.
         product_change_delayed (bool): The model property of type bool.
         next_product_id (str): Set to an empty string to cancel a delayed product
             change.
@@ -37,7 +37,7 @@ class UpdateSubscription(object):
             date/time to update a subscription in the Awaiting Signup Date state, to
             Awaiting Signup. In the Awaiting Signup state, a subscription behaves
             like any other. It can be canceled, allocated to, or have its billing
-            date changed. etc. When the `initial_billing_at` date hits, the
+            date changed, etc. When the `initial_billing_at` date hits, the
             subscription will transition to the expected state. If the product has a
             trial, the subscription will enter a trial, otherwise it will go active.
             Setup fees will be respected either before or after the trial, as
@@ -59,6 +59,13 @@ class UpdateSubscription(object):
             States](https://maxio-chargify.zendesk.com/hc/en-us/articles/5404222005773
             -Subscription-States) for more information.
         next_billing_at (datetime): The model property of type datetime.
+        branding_theme_id (int): The ID of the Branding Theme to assign to this
+            subscription. When set, this subscription-level Branding Theme is used
+            instead of the customer's default Branding Theme for subscription-related
+            documents and communications that use subscription theming. Pass null or
+            an empty value to clear the subscription-level Branding Theme. Available
+            only when Branding Themes are enabled for the site. Not returned in the
+            response.
         expires_at (datetime): Timestamp giving the expiration date of this
             subscription (if any). You may manually change the expiration date at any
             point during a subscription period.
@@ -99,6 +106,7 @@ class UpdateSubscription(object):
         "initial_billing_at": "initial_billing_at",
         "defer_signup": "defer_signup",
         "next_billing_at": "next_billing_at",
+        "branding_theme_id": "branding_theme_id",
         "expires_at": "expires_at",
         "payment_collection_method": "payment_collection_method",
         "receives_invoice_emails": "receives_invoice_emails",
@@ -125,6 +133,7 @@ class UpdateSubscription(object):
         "initial_billing_at",
         "defer_signup",
         "next_billing_at",
+        "branding_theme_id",
         "expires_at",
         "payment_collection_method",
         "receives_invoice_emails",
@@ -140,6 +149,7 @@ class UpdateSubscription(object):
     ]
 
     _nullables = [
+        "branding_theme_id",
         "dunning_communication_delay_time_zone",
     ]
 
@@ -155,6 +165,7 @@ class UpdateSubscription(object):
         initial_billing_at=APIHelper.SKIP,
         defer_signup=False,
         next_billing_at=APIHelper.SKIP,
+        branding_theme_id=APIHelper.SKIP,
         expires_at=APIHelper.SKIP,
         payment_collection_method=APIHelper.SKIP,
         receives_invoice_emails=APIHelper.SKIP,
@@ -195,6 +206,8 @@ class UpdateSubscription(object):
                  APIHelper.apply_datetime_converter(
                 next_billing_at, APIHelper.RFC3339DateTime)\
                  if next_billing_at else None
+        if branding_theme_id is not APIHelper.SKIP:
+            self.branding_theme_id = branding_theme_id
         if expires_at is not APIHelper.SKIP:
             self.expires_at =\
                  APIHelper.apply_datetime_converter(
@@ -293,6 +306,10 @@ class UpdateSubscription(object):
         next_billing_at = APIHelper.RFC3339DateTime.from_value(
             dictionary.get("next_billing_at")).datetime\
             if dictionary.get("next_billing_at") else APIHelper.SKIP
+        branding_theme_id =\
+            dictionary.get("branding_theme_id")\
+            if "branding_theme_id" in dictionary.keys()\
+                else APIHelper.SKIP
         expires_at = APIHelper.RFC3339DateTime.from_value(
             dictionary.get("expires_at")).datetime\
             if dictionary.get("expires_at") else APIHelper.SKIP
@@ -363,6 +380,7 @@ class UpdateSubscription(object):
                    initial_billing_at,
                    defer_signup,
                    next_billing_at,
+                   branding_theme_id,
                    expires_at,
                    payment_collection_method,
                    receives_invoice_emails,
@@ -427,6 +445,11 @@ class UpdateSubscription(object):
         _next_billing_at=(
             self.next_billing_at
             if hasattr(self, "next_billing_at")
+            else None
+        )
+        _branding_theme_id=(
+            self.branding_theme_id
+            if hasattr(self, "branding_theme_id")
             else None
         )
         _expires_at=(
@@ -502,6 +525,7 @@ class UpdateSubscription(object):
             f"initial_billing_at={_initial_billing_at!r}, "
             f"defer_signup={_defer_signup!r}, "
             f"next_billing_at={_next_billing_at!r}, "
+            f"branding_theme_id={_branding_theme_id!r}, "
             f"expires_at={_expires_at!r}, "
             f"payment_collection_method={_payment_collection_method!r}, "
             f"receives_invoice_emails={_receives_invoice_emails!r}, "
@@ -568,6 +592,11 @@ class UpdateSubscription(object):
         _next_billing_at=(
             self.next_billing_at
             if hasattr(self, "next_billing_at")
+            else None
+        )
+        _branding_theme_id=(
+            self.branding_theme_id
+            if hasattr(self, "branding_theme_id")
             else None
         )
         _expires_at=(
@@ -643,6 +672,7 @@ class UpdateSubscription(object):
             f"initial_billing_at={_initial_billing_at!s}, "
             f"defer_signup={_defer_signup!s}, "
             f"next_billing_at={_next_billing_at!s}, "
+            f"branding_theme_id={_branding_theme_id!s}, "
             f"expires_at={_expires_at!s}, "
             f"payment_collection_method={_payment_collection_method!s}, "
             f"receives_invoice_emails={_receives_invoice_emails!s}, "

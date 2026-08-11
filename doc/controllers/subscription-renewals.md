@@ -580,7 +580,7 @@ print(result)
 
 # Unpublish Scheduled Renewal Configuration
 
-Returns a scheduled renewal configuration to an editable state.
+Restores a scheduled renewal configuration to an editable state.
 
 ```python
 def unpublish_scheduled_renewal_configuration(self,
@@ -746,6 +746,8 @@ print(result)
 
 Adds product and component line items to the scheduled renewal.
 
+If your site has list vs sales pricing enabled, accepts renewal_configuration_item.custom_price.list_price_point_id, validates and persists it; omitted value follows existing/default behavior; with list vs sales pricing disabled, parameter is ignored (no validation/behavioral impact). This functionality is supported in the API, but is not currently supported in SDKs.
+
 ```python
 def create_scheduled_renewal_configuration_item(self,
                                                subscription_id,
@@ -833,6 +835,8 @@ print(result)
 # Update Scheduled Renewal Configuration Item
 
 Updates an existing configuration item’s pricing and quantity.
+
+If you site has list vs sales pricing enabled, accepts renewal_configuration_item.custom_price.list_price_point_id, validates and persists it; omitted value follows existing/default behavior; with list vs sales pricing disabled, parameter is ignored (no validation/behavioral impact). This functionality is supported in the API, but is not currently supported in SDKs.
 
 ```python
 def update_scheduled_renewal_configuration_item(self,

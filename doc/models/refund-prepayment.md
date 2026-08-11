@@ -14,14 +14,16 @@
 | `memo` | `str` | Required | **Constraints**: *Minimum Length*: `1` |
 | `external` | `bool` | Optional | Specify the type of refund you wish to initiate. When the prepayment is external, the `external` flag is optional. But if the prepayment was made through a payment profile, the `external` flag is required. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount_in_cents": 110,
-  "amount": "String3",
-  "memo": "memo4",
-  "external": false
-}
+```python
+from advancedbilling.models.refund_prepayment import RefundPrepayment
+
+refund_prepayment = RefundPrepayment(
+    amount_in_cents=188,
+    amount='String7',
+    memo='memo8',
+    external=False
+)
 ```
 

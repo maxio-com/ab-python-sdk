@@ -12,12 +12,16 @@
 | `cancellation_state` | `str` | Required | - |
 | `cancels_at` | `datetime` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "cancellation_state": "cancellation_state8",
-  "cancels_at": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.pending_cancellation_change import PendingCancellationChange
+
+pending_cancellation_change = PendingCancellationChange(
+    cancellation_state='cancellation_state2',
+    cancels_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

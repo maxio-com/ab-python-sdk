@@ -14,7 +14,9 @@
 
 ## Example
 
-```
-updated_at
+```python
+from advancedbilling.models.list_subscription_components_sort import ListSubscriptionComponentsSort
+
+list_subscription_components_sort = ListSubscriptionComponentsSort.ID
 ```
 

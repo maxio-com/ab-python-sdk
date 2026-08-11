@@ -11,17 +11,20 @@
 |  --- | --- | --- | --- |
 | `allocation` | [`Allocation`](../../doc/models/allocation.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "allocation": {
-    "allocation_id": 238,
-    "component_id": 8,
-    "component_handle": "component_handle8",
-    "subscription_id": 8,
-    "quantity": 32
-  }
-}
+```python
+from advancedbilling.models.allocation import Allocation
+from advancedbilling.models.allocation_response import AllocationResponse
+
+allocation_response = AllocationResponse(
+    allocation=Allocation(
+        allocation_id=238,
+        component_id=8,
+        component_handle='component_handle8',
+        subscription_id=8,
+        quantity=32
+    )
+)
 ```
 

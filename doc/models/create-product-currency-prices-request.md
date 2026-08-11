@@ -11,17 +11,21 @@
 |  --- | --- | --- | --- |
 | `currency_prices` | [`List[CreateProductCurrencyPrice]`](../../doc/models/create-product-currency-price.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency_prices": [
-    {
-      "currency": "currency8",
-      "price": 78,
-      "role": "initial"
-    }
-  ]
-}
+```python
+from advancedbilling.models.create_product_currency_price import CreateProductCurrencyPrice
+from advancedbilling.models.create_product_currency_prices_request import CreateProductCurrencyPricesRequest
+from advancedbilling.models.currency_price_role import CurrencyPriceRole
+
+create_product_currency_prices_request = CreateProductCurrencyPricesRequest(
+    currency_prices=[
+        CreateProductCurrencyPrice(
+            currency='currency8',
+            price=78,
+            role=CurrencyPriceRole.INITIAL
+        )
+    ]
+)
 ```
 

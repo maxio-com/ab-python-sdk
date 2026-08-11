@@ -14,14 +14,16 @@
 | `subscriber_delta` | `int` | Optional | - |
 | `lead_delta` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount": 210,
-  "category": "category0",
-  "subscriber_delta": 170,
-  "lead_delta": 198
-}
+```python
+from advancedbilling.models.mrr_movement import MRRMovement
+
+mrr_movement = MRRMovement(
+    amount=74,
+    category='category0',
+    subscriber_delta=34,
+    lead_delta=62
+)
 ```
 

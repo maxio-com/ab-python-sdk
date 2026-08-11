@@ -15,8 +15,8 @@ class Customer(object):
         first_name (str): The first name of the customer
         last_name (str): The last name of the customer
         email (str): The email address of the customer
-        cc_emails (str): A comma-separated list of emails that should be cc’d on all
-            customer communications (i.e. “joe@example.com, sue@example.com”)
+        cc_emails (str): “A comma-separated list of emails that should be cc’d on all
+            customer communications (e.g., “joe@example.com, sue@example.com”)”
         organization (str): The organization of the customer. If no value, `null` or
             empty string is provided, `organization` will be populated with the
             customer's first and last name, separated with a space.
@@ -27,13 +27,13 @@ class Customer(object):
             in Chargify
         updated_at (datetime): The timestamp in which the customer object was last
             edited
-        address (str): The customer’s shipping street address (i.e. “123 Main St.”)
-        address_2 (str): Second line of the customer’s shipping address i.e. “Apt.
+        address (str): The customer’s shipping street address (e.g., “123 Main St.”)
+        address_2 (str): Second line of the customer’s shipping address e.g., “Apt.
             100”
-        city (str): The customer’s shipping address city (i.e. “Boston”)
-        state (str): The customer’s shipping address state (i.e. “MA”)
+        city (str): The customer’s shipping address city (e.g., “Boston”)
+        state (str): The customer’s shipping address state (e.g., “MA”)
         state_name (str): The customer's full name of state
-        zip (str): The customer’s shipping address zip code (i.e. “12345”)
+        zip (str): The customer’s shipping address zip code (e.g., “12345”)
         country (str): The customer shipping address country
         country_name (str): The customer's full name of country
         phone (str): The phone number of the customer
@@ -46,6 +46,8 @@ class Customer(object):
             Portal invite was last accepted
         tax_exempt (bool): The tax exempt status for the customer. Acceptable values
             are true or 1 for true and false or 0 for false.
+        surcharging (bool): Whether surcharging is enabled for the customer. Only
+            included on sites where surcharging control is enabled.
         vat_number (str): The VAT business identification number for the customer.
             This number is used to determine VAT tax opt out rules. It is not
             validated when added or updated on a customer record. Instead, it is
@@ -60,6 +62,11 @@ class Customer(object):
         default_auto_renewal_profile_id (int): The default auto-renewal profile ID
             for the customer
         maxioid (str): The Maxio-generated unique identifier for the customer.
+        branding_theme_id (int): The ID of the Branding Theme assigned to this
+            customer as the customer's default Branding Theme. This customer-level
+            Branding Theme is used when a subscription does not have its own
+            subscription-level Branding Theme.  Available only when Branding Themes
+            are enabled for the site.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -90,6 +97,7 @@ class Customer(object):
         "portal_invite_last_sent_at": "portal_invite_last_sent_at",
         "portal_invite_last_accepted_at": "portal_invite_last_accepted_at",
         "tax_exempt": "tax_exempt",
+        "surcharging": "surcharging",
         "vat_number": "vat_number",
         "parent_id": "parent_id",
         "locale": "locale",
@@ -98,6 +106,7 @@ class Customer(object):
         "tax_exempt_reason": "tax_exempt_reason",
         "default_auto_renewal_profile_id": "default_auto_renewal_profile_id",
         "maxioid": "maxioid",
+        "branding_theme_id": "branding_theme_id",
     }
 
     _optionals = [
@@ -124,6 +133,7 @@ class Customer(object):
         "portal_invite_last_sent_at",
         "portal_invite_last_accepted_at",
         "tax_exempt",
+        "surcharging",
         "vat_number",
         "parent_id",
         "locale",
@@ -132,6 +142,7 @@ class Customer(object):
         "tax_exempt_reason",
         "default_auto_renewal_profile_id",
         "maxioid",
+        "branding_theme_id",
     ]
 
     _nullables = [
@@ -159,6 +170,7 @@ class Customer(object):
         "tax_exempt_reason",
         "default_auto_renewal_profile_id",
         "maxioid",
+        "branding_theme_id",
     ]
 
     def __init__(
@@ -186,6 +198,7 @@ class Customer(object):
         portal_invite_last_sent_at=APIHelper.SKIP,
         portal_invite_last_accepted_at=APIHelper.SKIP,
         tax_exempt=APIHelper.SKIP,
+        surcharging=APIHelper.SKIP,
         vat_number=APIHelper.SKIP,
         parent_id=APIHelper.SKIP,
         locale=APIHelper.SKIP,
@@ -194,6 +207,7 @@ class Customer(object):
         tax_exempt_reason=APIHelper.SKIP,
         default_auto_renewal_profile_id=APIHelper.SKIP,
         maxioid=APIHelper.SKIP,
+        branding_theme_id=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a Customer instance."""
         # Initialize members of the class
@@ -258,6 +272,8 @@ class Customer(object):
                  if portal_invite_last_accepted_at else None
         if tax_exempt is not APIHelper.SKIP:
             self.tax_exempt = tax_exempt
+        if surcharging is not APIHelper.SKIP:
+            self.surcharging = surcharging
         if vat_number is not APIHelper.SKIP:
             self.vat_number = vat_number
         if parent_id is not APIHelper.SKIP:
@@ -274,6 +290,8 @@ class Customer(object):
             self.default_auto_renewal_profile_id = default_auto_renewal_profile_id
         if maxioid is not APIHelper.SKIP:
             self.maxioid = maxioid
+        if branding_theme_id is not APIHelper.SKIP:
+            self.branding_theme_id = branding_theme_id
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -397,6 +415,10 @@ class Customer(object):
             dictionary.get("tax_exempt")\
             if "tax_exempt" in dictionary.keys()\
                 else APIHelper.SKIP
+        surcharging =\
+            dictionary.get("surcharging")\
+            if "surcharging" in dictionary.keys()\
+                else APIHelper.SKIP
         vat_number =\
             dictionary.get("vat_number")\
             if "vat_number" in dictionary.keys()\
@@ -429,6 +451,10 @@ class Customer(object):
             dictionary.get("maxioid")\
             if "maxioid" in dictionary.keys()\
                 else APIHelper.SKIP
+        branding_theme_id =\
+            dictionary.get("branding_theme_id")\
+            if "branding_theme_id" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -458,6 +484,7 @@ class Customer(object):
                    portal_invite_last_sent_at,
                    portal_invite_last_accepted_at,
                    tax_exempt,
+                   surcharging,
                    vat_number,
                    parent_id,
                    locale,
@@ -466,6 +493,7 @@ class Customer(object):
                    tax_exempt_reason,
                    default_auto_renewal_profile_id,
                    maxioid,
+                   branding_theme_id,
                    additional_properties)
 
     @classmethod
@@ -606,6 +634,11 @@ class Customer(object):
             if hasattr(self, "tax_exempt")
             else None
         )
+        _surcharging=(
+            self.surcharging
+            if hasattr(self, "surcharging")
+            else None
+        )
         _vat_number=(
             self.vat_number
             if hasattr(self, "vat_number")
@@ -646,6 +679,11 @@ class Customer(object):
             if hasattr(self, "maxioid")
             else None
         )
+        _branding_theme_id=(
+            self.branding_theme_id
+            if hasattr(self, "branding_theme_id")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -672,6 +710,7 @@ class Customer(object):
             f"portal_invite_last_sent_at={_portal_invite_last_sent_at!r}, "
             f"portal_invite_last_accepted_at={_portal_invite_last_accepted_at!r}, "
             f"tax_exempt={_tax_exempt!r}, "
+            f"surcharging={_surcharging!r}, "
             f"vat_number={_vat_number!r}, "
             f"parent_id={_parent_id!r}, "
             f"locale={_locale!r}, "
@@ -680,6 +719,7 @@ class Customer(object):
             f"tax_exempt_reason={_tax_exempt_reason!r}, "
             f"default_auto_renewal_profile_id={_default_auto_renewal_profile_id!r}, "
             f"maxioid={_maxioid!r}, "
+            f"branding_theme_id={_branding_theme_id!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -801,6 +841,11 @@ class Customer(object):
             if hasattr(self, "tax_exempt")
             else None
         )
+        _surcharging=(
+            self.surcharging
+            if hasattr(self, "surcharging")
+            else None
+        )
         _vat_number=(
             self.vat_number
             if hasattr(self, "vat_number")
@@ -841,6 +886,11 @@ class Customer(object):
             if hasattr(self, "maxioid")
             else None
         )
+        _branding_theme_id=(
+            self.branding_theme_id
+            if hasattr(self, "branding_theme_id")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -867,6 +917,7 @@ class Customer(object):
             f"portal_invite_last_sent_at={_portal_invite_last_sent_at!s}, "
             f"portal_invite_last_accepted_at={_portal_invite_last_accepted_at!s}, "
             f"tax_exempt={_tax_exempt!s}, "
+            f"surcharging={_surcharging!s}, "
             f"vat_number={_vat_number!s}, "
             f"parent_id={_parent_id!s}, "
             f"locale={_locale!s}, "
@@ -875,6 +926,7 @@ class Customer(object):
             f"tax_exempt_reason={_tax_exempt_reason!s}, "
             f"default_auto_renewal_profile_id={_default_auto_renewal_profile_id!s}, "
             f"maxioid={_maxioid!s}, "
+            f"branding_theme_id={_branding_theme_id!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

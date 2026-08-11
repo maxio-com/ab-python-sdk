@@ -63,16 +63,8 @@ class CouponsController(BaseController):
         /product_families/{product_family_id}/coupons.json.
 
         Creates a coupon under the specified product family.
-        You can create either a flat amount coupon by specifying amount_in_cents, or
-        a percentage coupon by specifying percentage
-        You can restrict a coupon to only apply to specific products / components by
-        optionally passing in `restricted_products` and/or `restricted_components`
-        objects in the format:
-        `{ "<product_id/component_id>": boolean_value }`
-        Coupons can be administered in the Advanced Billing application or created
-        via API. See [creating
-        coupons](https://maxio.zendesk.com/hc/en-us/articles/24261212433165-Creating-E
-        diting-Deleting-Coupons) for more information.
+        You can create either a flat amount coupon, by specifying `amount_in_cents`,
+        or percentage coupon by specifying `percentage`.
         See [Apply Coupons to
         Subscriptions](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coup
         ons-and-Subscriptions) for information on applying a coupon to a subscription
@@ -150,11 +142,10 @@ class CouponsController(BaseController):
                         changed to 200. Use in query `per_page=200`.
                     filter -- ListCouponsFilter -- Filter to use for List Coupons
                         operations
-                    currency_prices -- bool -- When fetching coupons, if you have
-                        defined multiple currencies at the site level, you can
-                        optionally pass the `?currency_prices=true` query param to
-                        include an array of currency price data in the response. Use
-                        in query `currency_prices=true`.
+                    currency_prices -- bool -- (Optional) If you have defined
+                        multiple currencies at the site level, you can pass
+                        `?currency_prices=true` to include an array of currency price
+                        data in the response. Use in query `currency_prices=true`.
 
         Returns:
             List[CouponResponse]: Response from the API. OK
@@ -215,10 +206,9 @@ class CouponsController(BaseController):
             product_family_id (int, optional): The Advanced Billing id of the product
                 family to which the coupon belongs
             code (str, optional): The code of the coupon
-            currency_prices (bool, optional): When fetching coupons, if you have
-                defined multiple currencies at the site level, you can optionally
-                pass the `?currency_prices=true` query param to include an array of
-                currency price data in the response.
+            currency_prices (bool, optional): (Optional) If you have defined multiple
+                currencies at the site level, you can pass `?currency_prices=true` to
+                include an array of currency price data in the response.
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -263,9 +253,6 @@ class CouponsController(BaseController):
         Coupon in this call by the ID parameter that Advanced Billing assigns.
         If instead you would like to find a Coupon using a Coupon code, see the
         Coupon Find method.
-        When fetching a coupon, if you have defined multiple currencies at the site
-        level, you can optionally pass the `?currency_prices=true` query param to
-        include an array of currency price data in the response.
         If the coupon is set to `use_site_exchange_rate: true`, it will return
         pricing based on the current exchange rate. If the flag is set to false, it
         will return all of the defined prices for each currency.
@@ -274,10 +261,9 @@ class CouponsController(BaseController):
             product_family_id (int): The Advanced Billing id of the product family to
                 which the coupon belongs
             coupon_id (int): The Advanced Billing id of the coupon
-            currency_prices (bool, optional): When fetching coupons, if you have
-                defined multiple currencies at the site level, you can optionally
-                pass the `?currency_prices=true` query param to include an array of
-                currency price data in the response.
+            currency_prices (bool, optional): (Optional) If you have defined multiple
+                currencies at the site level, you can pass `?currency_prices=true` to
+                include an array of currency price data in the response.
 
         Returns:
             CouponResponse: Response from the API. OK
@@ -453,11 +439,10 @@ class CouponsController(BaseController):
                         changed to 200. Use in query `per_page=200`.
                     filter -- ListCouponsFilter -- Filter to use for List Coupons
                         operations
-                    currency_prices -- bool -- When fetching coupons, if you have
-                        defined multiple currencies at the site level, you can
-                        optionally pass the `?currency_prices=true` query param to
-                        include an array of currency price data in the response. Use
-                        in query `currency_prices=true`.
+                    currency_prices -- bool -- (Optional) If you have defined
+                        multiple currencies at the site level, you can pass
+                        `?currency_prices=true` to include an array of currency price
+                        data in the response. Use in query `currency_prices=true`.
 
         Returns:
             List[CouponResponse]: Response from the API. OK
@@ -708,7 +693,7 @@ class CouponsController(BaseController):
             . to %2E
         So, if the coupon subcode is `20%OFF`, the URL to delete this coupon subcode
         would be:
-        `https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>`
+        `https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>`.
 
         Args:
             coupon_id (int): The Advanced Billing id of the coupon
@@ -887,7 +872,7 @@ class CouponsController(BaseController):
         ## Percent Encoding Example
         Or if the coupon subcode is 20%OFF, the URL to delete this coupon subcode
         would be:
-        @https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>
+        @https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>.
 
         Args:
             coupon_id (int): The Advanced Billing id of the coupon to which the

@@ -11,8 +11,8 @@ from advancedbilling.api_helper import APIHelper
 class SubscriptionComponentSubscription(object):
     """Implementation of the 'Subscription Component Subscription' model.
 
-    An optional object, will be returned if provided `include=subscription` query
-    param.
+    (Optional) Object that will be returned if the `include=subscription` query param
+    is provided.
 
     Attributes:
         state (SubscriptionState): The state of a subscription. * **Live States**

@@ -15,15 +15,19 @@
 | `created_at` | `datetime` | Optional | - |
 | `completed` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 246,
-  "finished_at": "2016-03-13T12:52:32.123Z",
-  "row_count": 254,
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "completed": "completed0"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.batch_job import BatchJob
+
+batch_job = BatchJob(
+    id=240,
+    finished_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    row_count=248,
+    created_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    completed='completed2'
+)
 ```
 

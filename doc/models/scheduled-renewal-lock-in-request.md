@@ -11,11 +11,15 @@
 |  --- | --- | --- | --- |
 | `lock_in_at` | `date` | Required | Date to lock in the renewal. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "lock_in_at": "2016-03-13"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.scheduled_renewal_lock_in_request import ScheduledRenewalLockInRequest
+
+scheduled_renewal_lock_in_request = ScheduledRenewalLockInRequest(
+    lock_in_at=dateutil.parser.parse('2016-03-13').date()
+)
 ```
 

@@ -17,3 +17,11 @@ The type of object indicated by the id attribute.
 | `PARENT` |
 | `ELDEST` |
 
+## Example
+
+```python
+from advancedbilling.models.group_target_type import GroupTargetType
+
+group_target_type = GroupTargetType.ELDEST
+```
+

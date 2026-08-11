@@ -16,20 +16,23 @@ Information about the seller (merchant) listed on the masthead of the invoice.
 | `phone` | `str` | Optional | - |
 | `logo_url` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name0",
-  "address": {
-    "street": "street6",
-    "line2": "line20",
-    "city": "city6",
-    "state": "state2",
-    "zip": "zip0"
-  },
-  "phone": "phone0",
-  "logo_url": "logo_url0"
-}
+```python
+from advancedbilling.models.invoice_address import InvoiceAddress
+from advancedbilling.models.invoice_seller import InvoiceSeller
+
+invoice_seller = InvoiceSeller(
+    name='name2',
+    address=InvoiceAddress(
+        street='street6',
+        line_2='line20',
+        city='city6',
+        state='state2',
+        zip='zip0'
+    ),
+    phone='phone2',
+    logo_url='logo_url2'
+)
 ```
 

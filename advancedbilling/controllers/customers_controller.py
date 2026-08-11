@@ -391,6 +391,12 @@ class CustomersController(BaseController):
         /customers/{customer_id}/subscriptions.json.
 
         Lists all subscriptions that belong to a customer.
+         If you have the new [Catalog
+        experience](page:help/announcements/2026-announcements#new-catalog-experience-
+        and-terminology) enabled, subscriptions no longer require an associated
+        product. For subscriptions without an associated product, 'product',
+        'product_price_point_id', and 'product_price_point_type' are returned as
+        'null'.
 
         Args:
             customer_id (int): The Chargify id of the customer

@@ -11,16 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [`SubscriptionGroupUpdateError`](../../doc/models/subscription-group-update-error.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "members": [
-      "members2",
-      "members1"
-    ]
-  }
-}
+```python
+try:
+    # make the API call
+except SubscriptionGroupUpdateErrorResponseException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

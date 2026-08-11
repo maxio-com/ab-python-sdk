@@ -15,21 +15,21 @@ class Allocation(object):
     """Implementation of the 'Allocation' model.
 
     Attributes:
-        allocation_id (int): The allocation unique id
+        allocation_id (int): The allocation unique ID
         component_id (int): The integer component ID for the allocation. This
-            references a component that you have created in your Product setup
+            references a component that you have created in your Product setup.
         component_handle (str): The handle of the component. This references a
-            component that you have created in your Product setup
+            component that you have created in your Product setup.
         subscription_id (int): The integer subscription ID for the allocation. This
-            references a unique subscription in your Site
-        quantity (int | str | None): The allocated quantity set in to effect by the
+            references a unique subscription in your Site.
+        quantity (int | str | None): The allocated quantity set into effect by the
             allocation. String for components supporting fractional quantities
         previous_quantity (int | str | None): The allocated quantity that was in
             effect before this allocation was created. String for components
             supporting fractional quantities
         memo (str): The memo passed when the allocation was created
-        timestamp (datetime): The time that the allocation was recorded, in format
-            and UTC timezone, i.e. 2012-11-20T22:00:37Z
+        timestamp (datetime): The time that the allocation was recorded, in ISO 8601
+            format and UTC timezone, e.g., 2012-11-20T22:00:37Z
         created_at (datetime): Timestamp indicating when this allocation was created
         proration_upgrade_scheme (str): The scheme used if the proration was an
             upgrade. This is only present when the allocation was created mid-period.
@@ -39,9 +39,9 @@ class Allocation(object):
         price_point_id (int): The model property of type int.
         price_point_name (str): The model property of type str.
         price_point_handle (str): The model property of type str.
-        interval (int): The numerical interval. i.e. an interval of ‘30’ coupled with
-            an interval_unit of day would mean this component price point would renew
-            every 30 days. This property is only available for sites with
+        interval (int): The numerical interval. e.g., an interval of ‘30’ coupled
+            with an interval_unit of day would mean this component price point would
+            renew every 30 days. This property is only available for sites with
             Multifrequency enabled.
         interval_unit (IntervalUnit): A string representing the interval unit for
             this component price point, either month or day. This property is only

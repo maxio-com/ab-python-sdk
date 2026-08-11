@@ -26,8 +26,7 @@ class InvoiceStatus(object):
 
     """
 
-    _all_values = ["draft", "open", "paid", "pending", "voided", "canceled",
-        "processing"]
+    _all_values = ["draft", "open", "paid", "pending", "voided", "canceled", "processing"]
     DRAFT = "draft"
 
     OPEN = "open"

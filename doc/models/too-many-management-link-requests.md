@@ -12,12 +12,16 @@
 | `error` | `str` | Required | - |
 | `new_link_available_at` | `datetime` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "error": "error2",
-  "new_link_available_at": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.too_many_management_link_requests import TooManyManagementLinkRequests
+
+too_many_management_link_requests = TooManyManagementLinkRequests(
+    error='error4',
+    new_link_available_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

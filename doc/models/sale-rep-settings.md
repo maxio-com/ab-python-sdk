@@ -17,15 +17,17 @@
 | `sales_rep_id` | `int` | Optional | - |
 | `sales_rep_name` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "customer_name": "customer_name8",
-  "subscription_id": 200,
-  "site_link": "site_link4",
-  "site_name": "site_name8",
-  "subscription_mrr": "subscription_mrr6"
-}
+```python
+from advancedbilling.models.sale_rep_settings import SaleRepSettings
+
+sale_rep_settings = SaleRepSettings(
+    customer_name='customer_name4',
+    subscription_id=168,
+    site_link='site_link0',
+    site_name='site_name6',
+    subscription_mrr='subscription_mrr2'
+)
 ```
 

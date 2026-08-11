@@ -32,7 +32,7 @@ If the site has RI enabled then you will see more settings like:
     "whopays_default_payer": "self"
 
 You can read more about these settings here:
-[Who Pays & Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays)
+[Who Pays & Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays).
 
 ```python
 def read_site(self)
@@ -147,7 +147,7 @@ sites_controller.clear_site(
 
 # List Chargify Js Public Keys
 
-Returns public keys used for Maxio.js (formerly Chargify.js).
+Lists public keys used for Maxio.js (formerly Chargify.js).
 
 ```python
 def list_chargify_js_public_keys(self,

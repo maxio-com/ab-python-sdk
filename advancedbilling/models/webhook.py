@@ -13,7 +13,7 @@ class Webhook(object):
 
     Attributes:
         event (str): A string describing which event type produced the given webhook
-        id (int): The unique identifier for the webhooks (unique across all of
+        id (int): The unique identifier for the webhook (unique across all of
             Chargify). This is not changed on a retry/replay of the same webhook, so
             it may be used to avoid duplicate action for the same event.
         created_at (datetime): Timestamp indicating when the webhook was created
@@ -29,10 +29,10 @@ class Webhook(object):
         last_sent_at (datetime): Timestamp indicating when the most recent attempt
             was made to send the webhook
         last_sent_url (str): The url that the endpoint was last sent to.
-        successful (bool): A boolean flag describing whether the webhook was accepted
-            by the webhook endpoint for the most recent attempt. (Acceptance is
-            defined by receiving a “200 OK” HTTP response within a reasonable
-            timeframe, i.e. 15 seconds)
+        successful (bool): “A boolean flag describing whether the webhook was
+            accepted by the webhook endpoint for the most recent attempt. (Acceptance
+            is defined by receiving a “200 OK” HTTP response within a reasonable
+            timeframe, e.g., 15 seconds.)”
         body (str): The data sent within the webhook post
         signature (str): The calculated webhook signature
         signature_hmac_sha_256 (str): The calculated HMAC-SHA-256 webhook signature

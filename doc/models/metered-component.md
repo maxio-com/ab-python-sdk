@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `name` | `str` | Required | A name for this component that is suitable for showing customers and displaying on billing statements, ie. "Minutes". |
-| `unit_name` | `str` | Required | The name of the unit of measurement for the component. It should be singular since it will be automatically pluralized when necessary. i.e. “message”, which may then be shown as “5 messages” on a subscription’s component line-item |
+| `name` | `str` | Required | A name for this component that is suitable for showing customers and displaying on billing statements, e.g., "Minutes". |
+| `unit_name` | `str` | Required | The name of the unit of measurement for the component. It should be singular since it will be automatically pluralized when necessary. e.g., “message”, which may then be shown as “5 messages” on a subscription’s component line-item |
 | `description` | `str` | Optional | A description for the component that will be displayed to the user on the hosted signup page. |
-| `handle` | `str` | Optional | A unique identifier for your use that can be used to retrieve this component is subsequent requests.  Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'.<br><br>**Constraints**: *Pattern*: `^[a-z0-9][a-z0-9\-_:.]*$` |
+| `handle` | `str` | Optional | A unique identifier for your use that can be used to retrieve this component in subsequent requests. Must start with a letter or number and may only contain lowercase letters, numbers, or the characters '.', ':', '-', or '_'.<br><br>**Constraints**: *Pattern*: `^[a-z0-9][a-z0-9\-_:.]*$` |
 | `taxable` | `bool` | Optional | Boolean flag describing whether a component is taxable or not. |
 | `pricing_scheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Required | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
 | `prices` | [`List[Price]`](../../doc/models/price.md) | Optional | (Not required for ‘per_unit’ pricing schemes) One or more price brackets. See [Price Bracket Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-Component-Pricing-Schemes#price-bracket-rules) for an overview of how price brackets work for different pricing schemes. |
@@ -23,35 +23,66 @@
 | `display_on_hosted_page` | `bool` | Optional | - |
 | `allow_fractional_quantities` | `bool` | Optional | - |
 | `public_signup_page_ids` | `List[int]` | Optional | - |
-| `interval` | `int` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component's default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `interval` | `int` | Optional | The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component's default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
 | `interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. |
+| `unspsc_code` | `str` | Optional | (Optional) Custom UNSPSC commodity code for Level 3/CEDP payment data. When set, this value is sent as the commodity code on invoice line items for this component instead of the default derived from item_category. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name4",
-  "unit_name": "unit_name6",
-  "description": "description6",
-  "handle": "handle0",
-  "taxable": false,
-  "pricing_scheme": "stairstep",
-  "prices": [
-    {
-      "starting_quantity": 242,
-      "ending_quantity": 40,
-      "unit_price": 23.26
-    }
-  ],
-  "price_points": [
-    {
-      "name": "name2",
-      "handle": "handle8",
-      "pricing_scheme": "per_unit",
-      "interval": 92,
-      "interval_unit": "day"
-    }
-  ]
-}
+```python
+from advancedbilling.models.component_price_point_item import ComponentPricePointItem
+from advancedbilling.models.interval_unit import IntervalUnit
+from advancedbilling.models.metered_component import MeteredComponent
+from advancedbilling.models.price import Price
+from advancedbilling.models.pricing_scheme import PricingScheme
+
+metered_component = MeteredComponent(
+    name='name0',
+    unit_name='unit_name2',
+    pricing_scheme=PricingScheme.STAIRSTEP,
+    description='description0',
+    handle='handle6',
+    taxable=False,
+    prices=[
+        Price(
+            starting_quantity=242,
+            unit_price=23.26,
+            ending_quantity=40
+        ),
+        Price(
+            starting_quantity=242,
+            unit_price=23.26,
+            ending_quantity=40
+        ),
+        Price(
+            starting_quantity=242,
+            unit_price=23.26,
+            ending_quantity=40
+        )
+    ],
+    price_points=[
+        ComponentPricePointItem(
+            name='name2',
+            handle='handle8',
+            pricing_scheme=PricingScheme.PER_UNIT,
+            interval=92,
+            interval_unit=IntervalUnit.DAY
+        ),
+        ComponentPricePointItem(
+            name='name2',
+            handle='handle8',
+            pricing_scheme=PricingScheme.PER_UNIT,
+            interval=92,
+            interval_unit=IntervalUnit.DAY
+        ),
+        ComponentPricePointItem(
+            name='name2',
+            handle='handle8',
+            pricing_scheme=PricingScheme.PER_UNIT,
+            interval=92,
+            interval_unit=IntervalUnit.DAY
+        )
+    ]
+)
 ```
 

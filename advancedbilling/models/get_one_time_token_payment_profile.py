@@ -6,6 +6,12 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 
 # ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.card_type import (
+    CardType,
+)
+from advancedbilling.models.credit_card_vault import (
+    CreditCardVault,
+)
 
 
 class GetOneTimeTokenPaymentProfile(object):
@@ -267,6 +273,237 @@ class GetOneTimeTokenPaymentProfile(object):
                    customer_vault_token,
                    gateway_handle,
                    additional_properties)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validate dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        if isinstance(dictionary, cls):
+            return APIHelper.is_valid_type(
+                    value=dictionary.first_name,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.last_name,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.masked_card_number,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.card_type,
+                    type_callable=lambda value:
+                        CardType.validate(value)) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.expiration_month,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        float,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.expiration_year,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        float,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.current_vault,
+                    type_callable=lambda value:
+                        CreditCardVault.validate(value)) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.vault_token,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.billing_address,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.billing_city,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.billing_country,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.billing_state,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.billing_zip,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.payment_type,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        str,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.disabled,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        bool,
+                )) \
+                and APIHelper.is_valid_type(
+                    value=dictionary.site_gateway_setting_id,
+                    type_callable=lambda value:
+                        isinstance(
+                        value,
+                        int,
+                ))
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return APIHelper.is_valid_type(
+                value=dictionary.get("first_name"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("last_name"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("masked_card_number"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("card_type"),
+                type_callable=lambda value:
+                    CardType.validate(value)) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("expiration_month"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    float,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("expiration_year"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    float,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("current_vault"),
+                type_callable=lambda value:
+                    CreditCardVault.validate(value)) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("vault_token"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("billing_address"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("billing_city"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("billing_country"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("billing_state"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("billing_zip"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("payment_type"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    str,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("disabled"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    bool,
+            )) \
+            and APIHelper.is_valid_type(
+                value=dictionary.get("site_gateway_setting_id"),
+                type_callable=lambda value:
+                    isinstance(
+                    value,
+                    int,
+            ))
 
     def __repr__(self):
         """Return a unambiguous string representation."""

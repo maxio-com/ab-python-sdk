@@ -19,14 +19,14 @@ class CouponPayload(object):
         code (str): Required when creating a new coupon. The code is limited to 255
             characters. May contain uppercase alphanumeric characters and these
             special characters (which allow for email addresses to be used): “%”,
-            “@”, “+”, “-”, “_”, and “.”
+            “@”, “+”, “-”, “_”, and “.”.
         description (str): Required when creating a new coupon. A description of the
             coupon that can be displayed to customers in transactions and on
             statements. The description is limited to 255 characters.
         percentage (str | float | None): Required when creating a new percentage
-            coupon. Can't be used together with amount_in_cents. Percentage discount
+            coupon. Can't be used together with amount_in_cents. Percentage discount.
         amount_in_cents (int): Required when creating a new flat amount coupon. Can't
-            be used together with percentage. Flat USD discount
+            be used together with percentage. Flat USD discount.
         allow_negative_balance (bool): If set to true, discount is not limited
             (credits will carry forward to next billing). Can't be used together with
             restrictions.

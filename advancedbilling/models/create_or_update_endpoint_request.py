@@ -13,10 +13,10 @@ from advancedbilling.models.create_or_update_endpoint import (
 class CreateOrUpdateEndpointRequest(object):
     """Implementation of the 'Create or Update Endpoint Request' model.
 
-    Used to Create or Update Endpoint
+    Used to Create or Update Endpoint.
 
     Attributes:
-        endpoint (CreateOrUpdateEndpoint): Used to Create or Update Endpoint
+        endpoint (CreateOrUpdateEndpoint): Used to Create or Update Endpoint.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

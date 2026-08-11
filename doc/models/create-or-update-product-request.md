@@ -11,22 +11,26 @@
 |  --- | --- | --- | --- |
 | `product` | [`CreateOrUpdateProduct`](../../doc/models/create-or-update-product.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "product": {
-    "name": "name0",
-    "handle": "handle6",
-    "description": "description0",
-    "accounting_code": "accounting_code6",
-    "require_credit_card": false,
-    "price_in_cents": 54,
-    "interval": 186,
-    "interval_unit": "day",
-    "trial_price_in_cents": 34,
-    "trial_interval": 88
-  }
-}
+```python
+from advancedbilling.models.create_or_update_product import CreateOrUpdateProduct
+from advancedbilling.models.create_or_update_product_request import CreateOrUpdateProductRequest
+from advancedbilling.models.interval_unit import IntervalUnit
+
+create_or_update_product_request = CreateOrUpdateProductRequest(
+    product=CreateOrUpdateProduct(
+        name='name0',
+        description='description0',
+        price_in_cents=54,
+        interval=186,
+        interval_unit=IntervalUnit.DAY,
+        handle='handle6',
+        accounting_code='accounting_code6',
+        require_credit_card=False,
+        trial_price_in_cents=34,
+        trial_interval=88
+    )
+)
 ```
 

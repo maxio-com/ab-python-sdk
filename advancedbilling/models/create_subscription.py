@@ -71,6 +71,13 @@ class CreateSubscription(object):
             immediately) and 180.
         customer_id (int): The ID of an existing customer within Chargify. Required,
             unless a `customer_reference` or a set of `customer_attributes` is given.
+        branding_theme_id (int): The ID of the Branding Theme to assign to this
+            subscription. When set, this subscription-level Branding Theme is used
+            instead of the customer's default Branding Theme for subscription-related
+            documents and communications that use subscription theming. Pass null or
+            an empty value to clear the subscription-level Branding Theme. Available
+            only when Branding Themes are enabled for the site. Not returned in the
+            response.
         next_billing_at (datetime): (Optional) Set this attribute to a future
             date/time to sync imported subscriptions to your existing renewal
             schedule. See the notes on “Date/Time Format” in our [subscription import
@@ -102,7 +109,7 @@ class CreateSubscription(object):
             information about Date/Time Formats.
         defer_signup (bool): (Optional) Set this attribute to true to create the
             subscription in the Awaiting Signup Date state. Use this when you want to
-            create a subscription that has an unknown first  billing date. When the
+            create a subscription that has an unknown first billing date. When the
             first billing date is known, update a subscription and set the
             `initial_billing_at` date. The subscription moves to the Awaiting Signup
             state with a scheduled initial billing date. You can omit the
@@ -122,7 +129,7 @@ class CreateSubscription(object):
             the subscription, use `payment_profile_attributes` instead to create a
             new payment profile along with the subscription. (This value is available
             on an existing subscription via the API as `credit_card` > id or
-            `bank_account` > id)
+            `bank_account` > id.)
         reference (str): The reference value (provided by your app) for the
             subscription itself.
         customer_attributes (CustomerAttributes): The model property of type
@@ -139,7 +146,7 @@ class CreateSubscription(object):
             [Components](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Co
             mponents-Overview) for more information.
         calendar_billing (CalendarBilling): (Optional). Cannot be used when also
-            specifying next_billing_at
+            specifying next_billing_at.
         metafields (Dict[str, str]): (Optional) A set of key/value pairs representing
             custom fields and their values. Metafields will be created “on-the-fly”
             in your site for a given key, if they have not been created yet.
@@ -187,8 +194,7 @@ class CreateSubscription(object):
             subscription renewal.
         offer_id (str | int | None): Use in place of passing product and component
             information to set up the subscription with an existing offer. May be
-            either the Chargify id of the offer or its handle prefixed with
-            `handle:`.er
+            either the Chargify id of the offer or its handle prefixed with `handle:`.
         prepaid_configuration (UpsertPrepaidConfiguration): The model property of
             type UpsertPrepaidConfiguration.
         previous_billing_at (datetime): Providing a previous_billing_at that is in
@@ -236,6 +242,7 @@ class CreateSubscription(object):
         "receives_invoice_emails": "receives_invoice_emails",
         "net_terms": "net_terms",
         "customer_id": "customer_id",
+        "branding_theme_id": "branding_theme_id",
         "next_billing_at": "next_billing_at",
         "initial_billing_at": "initial_billing_at",
         "defer_signup": "defer_signup",
@@ -291,6 +298,7 @@ class CreateSubscription(object):
         "receives_invoice_emails",
         "net_terms",
         "customer_id",
+        "branding_theme_id",
         "next_billing_at",
         "initial_billing_at",
         "defer_signup",
@@ -333,6 +341,7 @@ class CreateSubscription(object):
     ]
 
     _nullables = [
+        "branding_theme_id",
         "dunning_communication_delay_time_zone",
     ]
 
@@ -349,6 +358,7 @@ class CreateSubscription(object):
         receives_invoice_emails=APIHelper.SKIP,
         net_terms=APIHelper.SKIP,
         customer_id=APIHelper.SKIP,
+        branding_theme_id=APIHelper.SKIP,
         next_billing_at=APIHelper.SKIP,
         initial_billing_at=APIHelper.SKIP,
         defer_signup=False,
@@ -413,6 +423,8 @@ class CreateSubscription(object):
             self.net_terms = net_terms
         if customer_id is not APIHelper.SKIP:
             self.customer_id = customer_id
+        if branding_theme_id is not APIHelper.SKIP:
+            self.branding_theme_id = branding_theme_id
         if next_billing_at is not APIHelper.SKIP:
             self.next_billing_at =\
                  APIHelper.apply_datetime_converter(
@@ -582,6 +594,10 @@ class CreateSubscription(object):
         customer_id =\
             dictionary.get("customer_id")\
             if dictionary.get("customer_id")\
+                else APIHelper.SKIP
+        branding_theme_id =\
+            dictionary.get("branding_theme_id")\
+            if "branding_theme_id" in dictionary.keys()\
                 else APIHelper.SKIP
         next_billing_at = APIHelper.RFC3339DateTime.from_value(
             dictionary.get("next_billing_at")).datetime\
@@ -765,6 +781,7 @@ class CreateSubscription(object):
                    receives_invoice_emails,
                    net_terms,
                    customer_id,
+                   branding_theme_id,
                    next_billing_at,
                    initial_billing_at,
                    defer_signup,
@@ -861,6 +878,11 @@ class CreateSubscription(object):
         _customer_id=(
             self.customer_id
             if hasattr(self, "customer_id")
+            else None
+        )
+        _branding_theme_id=(
+            self.branding_theme_id
+            if hasattr(self, "branding_theme_id")
             else None
         )
         _next_billing_at=(
@@ -1072,6 +1094,7 @@ class CreateSubscription(object):
             f"receives_invoice_emails={_receives_invoice_emails!r}, "
             f"net_terms={_net_terms!r}, "
             f"customer_id={_customer_id!r}, "
+            f"branding_theme_id={_branding_theme_id!r}, "
             f"next_billing_at={_next_billing_at!r}, "
             f"initial_billing_at={_initial_billing_at!r}, "
             f"defer_signup={_defer_signup!r}, "
@@ -1170,6 +1193,11 @@ class CreateSubscription(object):
         _customer_id=(
             self.customer_id
             if hasattr(self, "customer_id")
+            else None
+        )
+        _branding_theme_id=(
+            self.branding_theme_id
+            if hasattr(self, "branding_theme_id")
             else None
         )
         _next_billing_at=(
@@ -1381,6 +1409,7 @@ class CreateSubscription(object):
             f"receives_invoice_emails={_receives_invoice_emails!s}, "
             f"net_terms={_net_terms!s}, "
             f"customer_id={_customer_id!s}, "
+            f"branding_theme_id={_branding_theme_id!s}, "
             f"next_billing_at={_next_billing_at!s}, "
             f"initial_billing_at={_initial_billing_at!s}, "
             f"defer_signup={_defer_signup!s}, "

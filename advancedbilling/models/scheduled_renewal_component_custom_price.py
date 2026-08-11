@@ -19,7 +19,7 @@ class ScheduledRenewalComponentCustomPrice(object):
 
     Attributes:
         tax_included (bool): Whether or not the price point includes tax
-        pricing_scheme (PricingScheme): Omit for On/Off components
+        pricing_scheme (PricingScheme): Omit for On/Off components.
         prices (List[Price]): On/off components only need one price bracket starting
             at 1.
         additional_properties (Dict[str, object]): The additional properties for the

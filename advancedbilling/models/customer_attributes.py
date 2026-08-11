@@ -18,31 +18,35 @@ class CustomerAttributes(object):
             customer via attributes.
         email (str): The email address of the customer. Required when creating a
             customer via attributes.
-        cc_emails (str): A list of emails that should be cc’d on all customer
-            communications. Optional.
-        organization (str): The organization/company of the customer. Optional.
-        reference (str): A customer “reference”, or unique identifier from your app,
-            stored in Chargify. Can be used so that you may reference your customer’s
-            within Chargify using the same unique value you use in your application.
-            Optional.
-        address (str): (Optional) The customer’s shipping street address (i.e. “123
+        cc_emails (str): (Optional) A list of emails that should be cc’d on all
+            customer communications.
+        organization (str): (Optional) The organization/company of the customer.
+        reference (str): (Optional) A customer “reference”, or unique identifier from
+            your app, stored in Chargify. Can be used so that you may reference your
+            customer’s within Chargify using the same unique value you use in your
+            application.
+        address (str): (Optional) The customer’s shipping street address (e.g., “123
             Main St.”).
         address_2 (str): (Optional) Second line of the customer’s shipping address
-            i.e. “Apt. 100”
-        city (str): (Optional) The customer’s shipping address city (i.e. “Boston”).
-        state (str): (Optional) The customer’s shipping address state (i.e. “MA”).
+            e.g., “Apt. 100”
+        city (str): (Optional) The customer’s shipping address city (e.g., “Boston”).
+        state (str): “(Optional) The customer’s shipping address state (e.g., “MA”).
             This must conform to the
             [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in
-            order to be valid for tax locale purposes.
-        zip (str): (Optional) The customer’s shipping address zip code (i.e. “12345”).
-        country (str): (Optional) The customer shipping address country, required in
+            order to be valid for tax locale purposes.”
+        zip (str): (Optional) The customer’s shipping address zip code (e.g.,
+            “12345”).
+        country (str): “(Optional) The customer shipping address country, required in
             [ISO_3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-            format (i.e. “US”).
+            format (e.g., “US”).”
         phone (str): (Optional) The phone number of the customer.
         verified (bool): The model property of type bool.
         tax_exempt (bool): (Optional) The tax_exempt status of the customer.
             Acceptable values are true or 1 for true and false or 0 for false.
-        vat_number (str): (Optional) Supplying the VAT number allows EU customer’s to
+        surcharging (bool): (Optional) Whether surcharging is enabled for the
+            customer. Defaults to `true` when omitted. Only applied on sites where
+            surcharging control is enabled.
+        vat_number (str): (Optional) Supplying the VAT number allows EU customers to
             opt-out of the Value Added Tax assuming the merchant address and customer
             billing address are not within the same EU country. It’s important to
             omit the country code from the VAT number upon entry. Otherwise, taxes
@@ -77,6 +81,7 @@ class CustomerAttributes(object):
         "phone": "phone",
         "verified": "verified",
         "tax_exempt": "tax_exempt",
+        "surcharging": "surcharging",
         "vat_number": "vat_number",
         "metafields": "metafields",
         "parent_id": "parent_id",
@@ -100,6 +105,7 @@ class CustomerAttributes(object):
         "phone",
         "verified",
         "tax_exempt",
+        "surcharging",
         "vat_number",
         "metafields",
         "parent_id",
@@ -131,6 +137,7 @@ class CustomerAttributes(object):
         phone=APIHelper.SKIP,
         verified=APIHelper.SKIP,
         tax_exempt=APIHelper.SKIP,
+        surcharging=APIHelper.SKIP,
         vat_number=APIHelper.SKIP,
         metafields=APIHelper.SKIP,
         parent_id=APIHelper.SKIP,
@@ -169,6 +176,8 @@ class CustomerAttributes(object):
             self.verified = verified
         if tax_exempt is not APIHelper.SKIP:
             self.tax_exempt = tax_exempt
+        if surcharging is not APIHelper.SKIP:
+            self.surcharging = surcharging
         if vat_number is not APIHelper.SKIP:
             self.vat_number = vat_number
         if metafields is not APIHelper.SKIP:
@@ -263,6 +272,10 @@ class CustomerAttributes(object):
             dictionary.get("tax_exempt")\
             if "tax_exempt" in dictionary.keys()\
                 else APIHelper.SKIP
+        surcharging =\
+            dictionary.get("surcharging")\
+            if "surcharging" in dictionary.keys()\
+                else APIHelper.SKIP
         vat_number =\
             dictionary.get("vat_number")\
             if dictionary.get("vat_number")\
@@ -304,6 +317,7 @@ class CustomerAttributes(object):
                    phone,
                    verified,
                    tax_exempt,
+                   surcharging,
                    vat_number,
                    metafields,
                    parent_id,
@@ -409,6 +423,11 @@ class CustomerAttributes(object):
             if hasattr(self, "tax_exempt")
             else None
         )
+        _surcharging=(
+            self.surcharging
+            if hasattr(self, "surcharging")
+            else None
+        )
         _vat_number=(
             self.vat_number
             if hasattr(self, "vat_number")
@@ -452,6 +471,7 @@ class CustomerAttributes(object):
             f"phone={_phone!r}, "
             f"verified={_verified!r}, "
             f"tax_exempt={_tax_exempt!r}, "
+            f"surcharging={_surcharging!r}, "
             f"vat_number={_vat_number!r}, "
             f"metafields={_metafields!r}, "
             f"parent_id={_parent_id!r}, "
@@ -538,6 +558,11 @@ class CustomerAttributes(object):
             if hasattr(self, "tax_exempt")
             else None
         )
+        _surcharging=(
+            self.surcharging
+            if hasattr(self, "surcharging")
+            else None
+        )
         _vat_number=(
             self.vat_number
             if hasattr(self, "vat_number")
@@ -581,6 +606,7 @@ class CustomerAttributes(object):
             f"phone={_phone!s}, "
             f"verified={_verified!s}, "
             f"tax_exempt={_tax_exempt!s}, "
+            f"surcharging={_surcharging!s}, "
             f"vat_number={_vat_number!s}, "
             f"metafields={_metafields!s}, "
             f"parent_id={_parent_id!s}, "

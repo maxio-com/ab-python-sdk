@@ -11,16 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | `Dict[str, Any]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "key0": {
-      "key1": "val1",
-      "key2": "val2"
-    }
-  }
-}
+```python
+try:
+    # make the API call
+except ErrorArrayMapResponseException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

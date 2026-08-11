@@ -14,14 +14,16 @@
 | `last_name` | `str` | Optional | - |
 | `masked_card_number` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 22,
-  "first_name": "first_name4",
-  "last_name": "last_name2",
-  "masked_card_number": "masked_card_number2"
-}
+```python
+from advancedbilling.models.subscription_group_payment_profile import SubscriptionGroupPaymentProfile
+
+subscription_group_payment_profile = SubscriptionGroupPaymentProfile(
+    id=112,
+    first_name='first_name8',
+    last_name='last_name6',
+    masked_card_number='masked_card_number6'
+)
 ```
 

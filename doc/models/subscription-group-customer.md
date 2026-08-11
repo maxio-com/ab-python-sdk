@@ -15,15 +15,17 @@
 | `email` | `str` | Optional | - |
 | `reference` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "first_name": "first_name4",
-  "last_name": "last_name2",
-  "organization": "organization2",
-  "email": "email2",
-  "reference": "reference0"
-}
+```python
+from advancedbilling.models.subscription_group_customer import SubscriptionGroupCustomer
+
+subscription_group_customer = SubscriptionGroupCustomer(
+    first_name='first_name2',
+    last_name='last_name0',
+    organization='organization4',
+    email='email4',
+    reference='reference2'
+)
 ```
 

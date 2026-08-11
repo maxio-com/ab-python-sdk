@@ -11,13 +11,17 @@
 |  --- | --- | --- | --- |
 | `ids` | `List[int]` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "ids": [
-    15
-  ]
-}
+```python
+from advancedbilling.models.replay_webhooks_request import ReplayWebhooksRequest
+
+replay_webhooks_request = ReplayWebhooksRequest(
+    ids=[
+        233,
+        234,
+        235
+    ]
+)
 ```
 

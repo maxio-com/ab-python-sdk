@@ -12,12 +12,14 @@
 | `invoice_uid` | `str` | Required | Unique identifier for the invoice. It has the prefix "inv_" followed by alphanumeric characters. |
 | `amount` | `str` | Required | Dollar amount of the invoice payment (eg. "10.50" => $10.50). |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "invoice_uid": "invoice_uid4",
-  "amount": "amount6"
-}
+```python
+from advancedbilling.models.create_invoice_payment_application import CreateInvoicePaymentApplication
+
+create_invoice_payment_application = CreateInvoicePaymentApplication(
+    invoice_uid='invoice_uid8',
+    amount='amount0'
+)
 ```
 

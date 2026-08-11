@@ -14,3 +14,11 @@ all: Will clear all products, customers, and related subscriptions from the site
 | `ALL` |
 | `CUSTOMERS` |
 
+## Example
+
+```python
+from advancedbilling.models.cleanup_scope import CleanupScope
+
+cleanup_scope = CleanupScope.ALL
+```
+

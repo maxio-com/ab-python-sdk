@@ -15,15 +15,17 @@
 | `auto_replenish` | `bool` | Optional | - |
 | `replenish_threshold_amount_in_cents` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 156,
-  "initial_funding_amount_in_cents": 88,
-  "replenish_to_amount_in_cents": 166,
-  "auto_replenish": false,
-  "replenish_threshold_amount_in_cents": 222
-}
+```python
+from advancedbilling.models.prepaid_configuration import PrepaidConfiguration
+
+prepaid_configuration = PrepaidConfiguration(
+    id=142,
+    initial_funding_amount_in_cents=74,
+    replenish_to_amount_in_cents=76,
+    auto_replenish=False,
+    replenish_threshold_amount_in_cents=20
+)
 ```
 

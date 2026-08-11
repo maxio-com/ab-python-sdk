@@ -15,15 +15,18 @@
 | `entry_type` | [`ServiceCreditType`](../../doc/models/service-credit-type.md) | Optional | The type of entry |
 | `memo` | `str` | Optional | A memo attached to the entry. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 110,
-  "amount_in_cents": 196,
-  "ending_balance_in_cents": 236,
-  "entry_type": "Credit",
-  "memo": "memo2"
-}
+```python
+from advancedbilling.models.service_credit_type import ServiceCreditType
+from advancedbilling.models.subscription_group_prepayment_response import SubscriptionGroupPrepaymentResponse
+
+subscription_group_prepayment_response = SubscriptionGroupPrepaymentResponse(
+    id=28,
+    amount_in_cents=114,
+    ending_balance_in_cents=154,
+    entry_type=ServiceCreditType.CREDIT,
+    memo='memo2'
+)
 ```
 

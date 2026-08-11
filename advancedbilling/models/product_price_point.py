@@ -19,19 +19,19 @@ class ProductPricePoint(object):
         name (str): The product price point name
         handle (str): The product price point API handle
         price_in_cents (int): The product price point price, in integer cents
-        interval (int): The numerical interval. i.e. an interval of ‘30’ coupled with
-            an interval_unit of day would mean this product price point would renew
-            every 30 days
+        interval (int): The numerical interval. e.g., an interval of ‘30’ coupled
+            with an interval_unit of day would mean this product price point would
+            renew every 30 days.
         interval_unit (IntervalUnit): A string representing the interval unit for
             this product price point, either month or day
         trial_price_in_cents (int): The product price point trial price, in integer
             cents
-        trial_interval (int): The numerical trial interval. i.e. an interval of ‘30’
+        trial_interval (int): The numerical trial interval. e.g., an interval of ‘30’
             coupled with a trial_interval_unit of day would mean this product price
-            point trial would last 30 days
+            point trial would last 30 days.
         trial_interval_unit (IntervalUnit): A string representing the trial interval
             unit for this product price point, either month or day
-        trial_type (TrialType): Indicates how a trial is handled when the trail
+        trial_type (TrialType): Indicates how a trial is handled when the trial
             period ends and there is no credit card on file. For `no_obligation`, the
             subscription transitions to a Trial Ended state. Maxio will not send any
             emails or statements. For `payment_expected`, the subscription
@@ -41,9 +41,9 @@ class ProductPricePoint(object):
         initial_charge_in_cents (int): The product price point initial charge, in
             integer cents
         initial_charge_after_trial (bool): The model property of type bool.
-        expiration_interval (int): The numerical expiration interval. i.e. an
+        expiration_interval (int): The numerical expiration interval. e.g., an
             expiration_interval of ‘30’ coupled with an expiration_interval_unit of
-            day would mean this product price point would expire after 30 days
+            day would mean this product price point would expire after 30 days.
         expiration_interval_unit (ExpirationIntervalUnit): A string representing the
             expiration interval unit for this product price point, either month, day
             or never

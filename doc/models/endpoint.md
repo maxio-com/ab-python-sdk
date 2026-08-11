@@ -15,18 +15,19 @@
 | `status` | `str` | Optional | - |
 | `webhook_subscriptions` | `List[str]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 196,
-  "url": "url2",
-  "site_id": 122,
-  "status": "status0",
-  "webhook_subscriptions": [
-    "webhook_subscriptions4",
-    "webhook_subscriptions3"
-  ]
-}
+```python
+from advancedbilling.models.endpoint import Endpoint
+
+endpoint = Endpoint(
+    id=202,
+    url='url2',
+    site_id=128,
+    status='status0',
+    webhook_subscriptions=[
+        'webhook_subscriptions4'
+    ]
+)
 ```
 

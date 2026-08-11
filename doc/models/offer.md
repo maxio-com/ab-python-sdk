@@ -29,15 +29,17 @@
 | `product_price_in_cents` | `int` | Optional | - |
 | `offer_signup_pages` | [`List[OfferSignupPage]`](../../doc/models/offer-signup-page.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 154,
-  "site_id": 80,
-  "product_family_id": 158,
-  "product_id": 96,
-  "product_price_point_id": 20
-}
+```python
+from advancedbilling.models.offer import Offer
+
+offer = Offer(
+    id=28,
+    site_id=210,
+    product_family_id=224,
+    product_id=30,
+    product_price_point_id=150
+)
 ```
 

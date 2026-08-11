@@ -19,32 +19,41 @@ Example schema for an `apply_credit_note` event
 | `transaction_time` | `datetime` | Optional | The time the credit note was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" |
 | `memo` | `str` | Optional | The credit note memo. |
 | `role` | `str` | Optional | The role of the credit note (e.g. 'general') |
-| `consolidated_invoice` | `bool` | Optional | Shows whether it was applied to consolidated invoice or not |
+| `consolidated_invoice` | `bool` | Optional | Shows whether it was applied to consolidated invoice or not. |
 | `applied_credit_notes` | [`List[AppliedCreditNoteData]`](../../doc/models/applied-credit-note-data.md) | Optional | List of credit notes applied to children invoices (if consolidated invoice) |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid2",
-  "credit_note_number": "credit_note_number4",
-  "credit_note_uid": "credit_note_uid4",
-  "original_amount": "original_amount6",
-  "applied_amount": "applied_amount6",
-  "transaction_time": "2016-03-13T12:52:32.123Z",
-  "memo": "memo6",
-  "role": "role4",
-  "consolidated_invoice": false,
-  "applied_credit_notes": [
-    {
-      "uid": "uid4",
-      "number": "number8"
-    },
-    {
-      "uid": "uid4",
-      "number": "number8"
-    }
-  ]
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.applied_credit_note_data import AppliedCreditNoteData
+from advancedbilling.models.apply_credit_note_event_data import ApplyCreditNoteEventData
+
+apply_credit_note_event_data = ApplyCreditNoteEventData(
+    uid='uid8',
+    credit_note_number='credit_note_number8',
+    credit_note_uid='credit_note_uid8',
+    original_amount='original_amount2',
+    applied_amount='applied_amount0',
+    transaction_time=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    memo='memo2',
+    role='role8',
+    consolidated_invoice=False,
+    applied_credit_notes=[
+        AppliedCreditNoteData(
+            uid='uid4',
+            number='number8'
+        ),
+        AppliedCreditNoteData(
+            uid='uid4',
+            number='number8'
+        ),
+        AppliedCreditNoteData(
+            uid='uid4',
+            number='number8'
+        )
+    ]
+)
 ```
 

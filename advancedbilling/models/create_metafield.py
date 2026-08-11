@@ -21,7 +21,7 @@ class CreateMetafield(object):
             will override the existing settings.
         input_type (MetafieldInput): Indicates the type of metafield. A text
             metafield allows any string value. Dropdown and radio metafields have a
-            set of values that can be selected.  Defaults to 'text'.
+            set of values that can be selected. Defaults to 'text'.
         enum (List[str]): Only applicable when input_type is radio or dropdown. Empty
             strings will not be submitted.
         additional_properties (Dict[str, object]): The additional properties for the

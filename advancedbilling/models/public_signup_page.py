@@ -14,11 +14,11 @@ class PublicSignupPage(object):
     Attributes:
         id (int): The id of the signup page (public_signup_pages only)
         return_url (str): The url to which a customer will be returned after a
-            successful signup (public_signup_pages only)
+            successful signup (public_signup_pages only).
         return_params (str): The params to be appended to the return_url
             (public_signup_pages only)
         url (str): The url where the signup page can be viewed (public_signup_pages
-            only)
+            only).
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

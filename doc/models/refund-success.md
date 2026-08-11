@@ -13,13 +13,15 @@
 | `gateway_transaction_id` | `int` | Required | - |
 | `product_id` | `int` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "refund_id": 12,
-  "gateway_transaction_id": 182,
-  "product_id": 168
-}
+```python
+from advancedbilling.models.refund_success import RefundSuccess
+
+refund_success = RefundSuccess(
+    refund_id=194,
+    gateway_transaction_id=0,
+    product_id=162
+)
 ```
 

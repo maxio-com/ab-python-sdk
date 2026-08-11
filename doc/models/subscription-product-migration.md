@@ -19,16 +19,18 @@
 | `product_price_point_handle` | `str` | Optional | The ID or handle of the specified product's price point. This can be passed to migrate to a non-default price point. |
 | `proration` | [`Proration`](../../doc/models/proration.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "include_trial": false,
-  "include_initial_charge": false,
-  "include_coupons": true,
-  "preserve_period": false,
-  "product_id": 8,
-  "product_price_point_id": 172
-}
+```python
+from advancedbilling.models.subscription_product_migration import SubscriptionProductMigration
+
+subscription_product_migration = SubscriptionProductMigration(
+    product_id=234,
+    product_price_point_id=158,
+    include_trial=False,
+    include_initial_charge=False,
+    include_coupons=True,
+    preserve_period=False
+)
 ```
 

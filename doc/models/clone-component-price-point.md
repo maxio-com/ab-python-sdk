@@ -12,12 +12,14 @@
 | `name` | `str` | Required | - |
 | `handle` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name2",
-  "handle": "handle8"
-}
+```python
+from advancedbilling.models.clone_component_price_point import CloneComponentPricePoint
+
+clone_component_price_point = CloneComponentPricePoint(
+    name='name2',
+    handle='handle8'
+)
 ```
 

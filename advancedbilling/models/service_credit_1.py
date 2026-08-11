@@ -18,7 +18,7 @@ class ServiceCredit1(object):
         entry_type (ServiceCreditType): The type of entry
         memo (str): The memo attached to the entry
         invoice_uid (str): The invoice uid associated with the entry. Only present
-            for debit entries
+            for debit entries.
         remaining_balance_in_cents (int): The remaining balance for the entry
         created_at (datetime): The date and time the entry was created
         additional_properties (Dict[str, object]): The additional properties for the

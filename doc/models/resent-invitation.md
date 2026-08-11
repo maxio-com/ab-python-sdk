@@ -16,16 +16,20 @@
 | `last_invite_sent_at` | `datetime` | Optional | - |
 | `last_invite_accepted_at` | `datetime` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "last_invite_sent_at": "01/01/2024 04:30:00",
-  "last_invite_accepted_at": "01/01/2024 04:35:00",
-  "last_sent_at": "last_sent_at8",
-  "last_accepted_at": "last_accepted_at8",
-  "send_invite_link_text": "send_invite_link_text6",
-  "uninvited_count": 6
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.resent_invitation import ResentInvitation
+
+resent_invitation = ResentInvitation(
+    last_sent_at='last_sent_at6',
+    last_accepted_at='last_accepted_at6',
+    send_invite_link_text='send_invite_link_text4',
+    uninvited_count=78,
+    last_invite_sent_at=dateutil.parser.parse('2024-01-01T04:30:00+00:00'),
+    last_invite_accepted_at=dateutil.parser.parse('2024-01-01T04:35:00+00:00')
+)
 ```
 

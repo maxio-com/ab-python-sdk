@@ -16,7 +16,7 @@ class ReactivateSubscriptionRequest(object):
 
     Attributes:
         calendar_billing (ReactivationBilling): These values are only applicable to
-            subscriptions using calendar billing
+            subscriptions using calendar billing.
         include_trial (bool): If `true` is sent, the reactivated Subscription will
             include a trial if one is available. If `false` is sent, the trial period
             will be ignored.

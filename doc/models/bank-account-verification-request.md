@@ -11,14 +11,17 @@
 |  --- | --- | --- | --- |
 | `bank_account_verification` | [`BankAccountVerification`](../../doc/models/bank-account-verification.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "bank_account_verification": {
-    "deposit_1_in_cents": 244,
-    "deposit_2_in_cents": 6
-  }
-}
+```python
+from advancedbilling.models.bank_account_verification import BankAccountVerification
+from advancedbilling.models.bank_account_verification_request import BankAccountVerificationRequest
+
+bank_account_verification_request = BankAccountVerificationRequest(
+    bank_account_verification=BankAccountVerification(
+        deposit_1_in_cents=244,
+        deposit_2_in_cents=6
+    )
+)
 ```
 

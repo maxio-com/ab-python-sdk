@@ -14,14 +14,16 @@
 | `payment_due_in_cents` | `int` | Optional | The amount of the payment due in the case of an upgrade. |
 | `credit_applied_in_cents` | `int` | Optional | Represents a credit in cents that is applied to your subscription as part of a migration process for a specific product, which reduces the amount owed for the subscription. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prorated_adjustment_in_cents": 134,
-  "charge_in_cents": 16,
-  "payment_due_in_cents": 188,
-  "credit_applied_in_cents": 148
-}
+```python
+from advancedbilling.models.subscription_migration_preview import SubscriptionMigrationPreview
+
+subscription_migration_preview = SubscriptionMigrationPreview(
+    prorated_adjustment_in_cents=176,
+    charge_in_cents=58,
+    payment_due_in_cents=230,
+    credit_applied_in_cents=190
+)
 ```
 

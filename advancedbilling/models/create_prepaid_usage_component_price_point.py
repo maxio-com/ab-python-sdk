@@ -32,17 +32,17 @@ class CreatePrepaidUsageComponentPricePoint(object):
             defined on the site.
         rollover_prepaid_remainder (bool): (only for prepaid usage components)
             Boolean which controls whether or not remaining units should be rolled
-            over to the next period
+            over to the next period.
         renew_prepaid_allocation (bool): (only for prepaid usage components) Boolean
             which controls whether or not the allocated quantity should be renewed at
-            the beginning of each period
+            the beginning of each period.
         expiration_interval (float): (only for prepaid usage components where
             rollover_prepaid_remainder is true) The number of
-            `expiration_interval_unit`s after which rollover amounts should expire
+            `expiration_interval_unit`s after which rollover amounts should expire.
         expiration_interval_unit (ExpirationIntervalUnit): (only for prepaid usage
             components where rollover_prepaid_remainder is true) A string
             representing the expiration interval unit for this component, either
-            month or day
+            month or day.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

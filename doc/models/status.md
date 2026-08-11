@@ -16,3 +16,11 @@
 | `ACTIVE` |
 | `FULFILLED` |
 
+## Example
+
+```python
+from advancedbilling.models.status import Status
+
+status = Status.PENDING
+```
+

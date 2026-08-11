@@ -11,11 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": "errors4"
-}
+```python
+try:
+    # make the API call
+except SingleStringErrorResponseException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

@@ -11,16 +11,20 @@
 |  --- | --- | --- | --- |
 | `prepayment` | [`SubscriptionGroupPrepayment`](../../doc/models/subscription-group-prepayment.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prepayment": {
-    "amount": 136,
-    "details": "details8",
-    "memo": "memo2",
-    "method": "paypal_account"
-  }
-}
+```python
+from advancedbilling.models.subscription_group_prepayment import SubscriptionGroupPrepayment
+from advancedbilling.models.subscription_group_prepayment_method import SubscriptionGroupPrepaymentMethod
+from advancedbilling.models.subscription_group_prepayment_request import SubscriptionGroupPrepaymentRequest
+
+subscription_group_prepayment_request = SubscriptionGroupPrepaymentRequest(
+    prepayment=SubscriptionGroupPrepayment(
+        amount=136,
+        details='details8',
+        memo='memo2',
+        method=SubscriptionGroupPrepaymentMethod.PAYPAL_ACCOUNT
+    )
+)
 ```
 

@@ -46,3 +46,11 @@ The vault that stores the payment profile with the provided `vault_token`. Use `
 | `UNIPAAS` |
 | `WIRECARD` |
 
+## Example
+
+```python
+from advancedbilling.models.all_vaults import AllVaults
+
+all_vaults = AllVaults.STRIPE_CONNECT
+```
+

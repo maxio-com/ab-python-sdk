@@ -16,15 +16,17 @@
 | `email` | `str` | Optional | - |
 | `vat_number` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "chargify_id": 46,
-  "first_name": "first_name4",
-  "last_name": "last_name2",
-  "organization": "organization8",
-  "email": "email2"
-}
+```python
+from advancedbilling.models.invoice_payer import InvoicePayer
+
+invoice_payer = InvoicePayer(
+    chargify_id=108,
+    first_name='first_name2',
+    last_name='last_name0',
+    organization='organization4',
+    email='email4'
+)
 ```
 

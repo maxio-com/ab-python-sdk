@@ -22,6 +22,7 @@ class EventKey(object):
         RENEWAL_FAILURE: The enum member of type str.
         SUBSCRIPTION_STATE_CHANGE: The enum member of type str.
         SUBSCRIPTION_PRODUCT_CHANGE: The enum member of type str.
+        SUBSCRIPTION_PRODUCT_CHANGE_SCHEDULED: The enum member of type str.
         PENDING_CANCELLATION_CHANGE: The enum member of type str.
         EXPIRING_CARD: The enum member of type str.
         CUSTOMER_UPDATE: The enum member of type str.
@@ -99,19 +100,19 @@ class EventKey(object):
 
     """
 
-    _all_values = ["payment_success", "payment_failure", "signup_success",
-        "signup_failure", "delayed_signup_creation_success",
-        "delayed_signup_creation_failure", "billing_date_change",
-        "expiration_date_change", "renewal_success", "renewal_failure",
-        "subscription_state_change", "subscription_product_change",
-        "pending_cancellation_change", "expiring_card", "customer_update",
-        "customer_create", "customer_delete", "component_allocation_change",
-        "metered_usage", "prepaid_usage", "upgrade_downgrade_success",
-        "upgrade_downgrade_failure", "statement_closed", "statement_settled",
-        "subscription_card_update", "subscription_group_card_update",
-        "subscription_bank_account_update", "refund_success", "refund_failure",
-        "upcoming_renewal_notice", "trial_end_notice", "dunning_step_reached",
-        "invoice_issued", "invoice_pending", "prepaid_subscription_balance_changed",
+    _all_values = ["payment_success", "payment_failure", "signup_success", "signup_failure",
+        "delayed_signup_creation_success", "delayed_signup_creation_failure",
+        "billing_date_change", "expiration_date_change", "renewal_success",
+        "renewal_failure", "subscription_state_change", "subscription_product_change",
+        "subscription_product_change_scheduled", "pending_cancellation_change",
+        "expiring_card", "customer_update", "customer_create", "customer_delete",
+        "component_allocation_change", "metered_usage", "prepaid_usage",
+        "upgrade_downgrade_success", "upgrade_downgrade_failure", "statement_closed",
+        "statement_settled", "subscription_card_update",
+        "subscription_group_card_update", "subscription_bank_account_update",
+        "refund_success", "refund_failure", "upcoming_renewal_notice",
+        "trial_end_notice", "dunning_step_reached", "invoice_issued",
+        "invoice_pending", "prepaid_subscription_balance_changed",
         "subscription_group_signup_success", "subscription_group_signup_failure",
         "direct_debit_payment_paid_out", "direct_debit_payment_rejected",
         "direct_debit_payment_pending", "pending_payment_created",
@@ -126,8 +127,8 @@ class EventKey(object):
         "subscription_group_paypal_account_update", "subscription_customer_change",
         "account_transaction_changed", "go_cardless_payment_paid_out",
         "go_cardless_payment_rejected", "go_cardless_payment_pending",
-        "stripe_direct_debit_payment_paid_out",
-        "stripe_direct_debit_payment_rejected", "stripe_direct_debit_payment_pending",
+        "stripe_direct_debit_payment_paid_out", "stripe_direct_debit_payment_rejected",
+        "stripe_direct_debit_payment_pending",
         "maxio_payments_direct_debit_payment_paid_out",
         "maxio_payments_direct_debit_payment_rejected",
         "maxio_payments_direct_debit_payment_pending",
@@ -161,6 +162,8 @@ class EventKey(object):
     SUBSCRIPTION_STATE_CHANGE = "subscription_state_change"
 
     SUBSCRIPTION_PRODUCT_CHANGE = "subscription_product_change"
+
+    SUBSCRIPTION_PRODUCT_CHANGE_SCHEDULED = "subscription_product_change_scheduled"
 
     PENDING_CANCELLATION_CHANGE = "pending_cancellation_change"
 

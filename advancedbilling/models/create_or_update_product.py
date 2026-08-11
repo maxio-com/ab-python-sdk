@@ -20,23 +20,24 @@ class CreateOrUpdateProduct(object):
             have legacy hosted pages. For Public Signup Page users, read this
             attribute from under the signup page.
         price_in_cents (int): The product price, in integer cents
-        interval (int): The numerical interval. i.e. an interval of ‘30’ coupled with
-            an interval_unit of day would mean this product would renew every 30 days
+        interval (int): The numerical interval. e.g., an interval of ‘30’ coupled
+            with an interval_unit of day would mean this product would renew every 30
+            days.
         interval_unit (IntervalUnit): A string representing the interval unit for
             this product, either month or day
         trial_price_in_cents (int): The product trial price, in integer cents
-        trial_interval (int): The numerical trial interval. i.e. an interval of ‘30’
+        trial_interval (int): The numerical trial interval. e.g., an interval of ‘30’
             coupled with a trial_interval_unit of day would mean this product trial
             would last 30 days.
         trial_interval_unit (IntervalUnit): A string representing the trial interval
             unit for this product, either month or day
-        trial_type (TrialType): Indicates how a trial is handled when the trail
+        trial_type (TrialType): Indicates how a trial is handled when the trial
             period ends and there is no credit card on file. For `no_obligation`, the
             subscription transitions to a Trial Ended state. Maxio will not send any
             emails or statements. For `payment_expected`, the subscription
             transitions to a Past Due state. Maxio will send normal dunning emails
             and statements according to your other settings.
-        expiration_interval (int): The numerical expiration interval. i.e. an
+        expiration_interval (int): The numerical expiration interval. e.g., an
             expiration_interval of ‘30’ coupled with an expiration_interval_unit of
             day would mean this product would expire after 30 days.
         expiration_interval_unit (ExpirationIntervalUnit): A string representing the
@@ -45,6 +46,10 @@ class CreateOrUpdateProduct(object):
         tax_code (str): A string representing the tax code related to the product
             type. This is especially important when using AvaTax to tax based on
             locale. This attribute has a max length of 25 characters.
+        unspsc_code (str): (Optional) Custom UNSPSC commodity code for Level 3/CEDP
+            payment data. When set, this value is sent as the commodity code on
+            invoice line items for this product instead of the default derived from
+            item_category.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -68,6 +73,7 @@ class CreateOrUpdateProduct(object):
         "expiration_interval_unit": "expiration_interval_unit",
         "auto_create_signup_page": "auto_create_signup_page",
         "tax_code": "tax_code",
+        "unspsc_code": "unspsc_code",
     }
 
     _optionals = [
@@ -82,12 +88,14 @@ class CreateOrUpdateProduct(object):
         "expiration_interval_unit",
         "auto_create_signup_page",
         "tax_code",
+        "unspsc_code",
     ]
 
     _nullables = [
         "trial_interval_unit",
         "trial_type",
         "expiration_interval_unit",
+        "unspsc_code",
     ]
 
     def __init__(
@@ -108,6 +116,7 @@ class CreateOrUpdateProduct(object):
         expiration_interval_unit=APIHelper.SKIP,
         auto_create_signup_page=APIHelper.SKIP,
         tax_code=APIHelper.SKIP,
+        unspsc_code=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a CreateOrUpdateProduct instance."""
         # Initialize members of the class
@@ -138,6 +147,8 @@ class CreateOrUpdateProduct(object):
             self.auto_create_signup_page = auto_create_signup_page
         if tax_code is not APIHelper.SKIP:
             self.tax_code = tax_code
+        if unspsc_code is not APIHelper.SKIP:
+            self.unspsc_code = unspsc_code
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -226,6 +237,10 @@ class CreateOrUpdateProduct(object):
             dictionary.get("tax_code")\
             if dictionary.get("tax_code")\
                 else APIHelper.SKIP
+        unspsc_code =\
+            dictionary.get("unspsc_code")\
+            if "unspsc_code" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -248,6 +263,7 @@ class CreateOrUpdateProduct(object):
                    expiration_interval_unit,
                    auto_create_signup_page,
                    tax_code,
+                   unspsc_code,
                    additional_properties)
 
     def __repr__(self):
@@ -312,6 +328,11 @@ class CreateOrUpdateProduct(object):
             if hasattr(self, "tax_code")
             else None
         )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -331,6 +352,7 @@ class CreateOrUpdateProduct(object):
             f"expiration_interval_unit={_expiration_interval_unit!r}, "
             f"auto_create_signup_page={_auto_create_signup_page!r}, "
             f"tax_code={_tax_code!r}, "
+            f"unspsc_code={_unspsc_code!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -397,6 +419,11 @@ class CreateOrUpdateProduct(object):
             if hasattr(self, "tax_code")
             else None
         )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -416,6 +443,7 @@ class CreateOrUpdateProduct(object):
             f"expiration_interval_unit={_expiration_interval_unit!s}, "
             f"auto_create_signup_page={_auto_create_signup_page!s}, "
             f"tax_code={_tax_code!s}, "
+            f"unspsc_code={_unspsc_code!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

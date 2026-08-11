@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `status` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "status": "status4"
-}
+```python
+from advancedbilling.models.replay_webhooks_response import ReplayWebhooksResponse
+
+replay_webhooks_response = ReplayWebhooksResponse(
+    status='status0'
+)
 ```
 

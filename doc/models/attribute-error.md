@@ -11,14 +11,17 @@
 |  --- | --- | --- | --- |
 | `attribute` | `List[str]` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "attribute": [
-    "attribute6",
-    "attribute7"
-  ]
-}
+```python
+from advancedbilling.models.attribute_error import AttributeError
+
+attribute_error = AttributeError(
+    attribute=[
+        'attribute6',
+        'attribute5',
+        'attribute4'
+    ]
+)
 ```
 

@@ -12,12 +12,14 @@
 | `previous_product_id` | `int` | Required | - |
 | `new_product_id` | `int` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "previous_product_id": 126,
-  "new_product_id": 12
-}
+```python
+from advancedbilling.models.subscription_product_change import SubscriptionProductChange
+
+subscription_product_change = SubscriptionProductChange(
+    previous_product_id=250,
+    new_product_id=120
+)
 ```
 

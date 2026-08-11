@@ -22,15 +22,18 @@
 | `transaction_id` | `int` | Optional | - |
 | `line_item_breakouts` | [`List[InvoiceDiscountBreakout]`](../../doc/models/invoice-discount-breakout.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid0",
-  "title": "title4",
-  "description": "description0",
-  "code": "code8",
-  "source_type": "Coupon"
-}
+```python
+from advancedbilling.models.invoice_discount import InvoiceDiscount
+from advancedbilling.models.invoice_discount_source_type import InvoiceDiscountSourceType
+
+invoice_discount = InvoiceDiscount(
+    uid='uid2',
+    title='title2',
+    description='description8',
+    code='code0',
+    source_type=InvoiceDiscountSourceType.REFERRAL
+)
 ```
 

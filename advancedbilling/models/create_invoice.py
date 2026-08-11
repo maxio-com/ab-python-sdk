@@ -35,10 +35,11 @@ class CreateInvoice(object):
             days in advance the due date should be.
         payment_instructions (str): The model property of type str.
         memo (str): A custom memo can be sent to override the site's default.
-        seller_address (CreateInvoiceAddress): Overrides the defaults for the site
-        billing_address (CreateInvoiceAddress): Overrides the default for the customer
+        seller_address (CreateInvoiceAddress): Overrides the defaults for the site.
+        billing_address (CreateInvoiceAddress): Overrides the default for the
+            customer.
         shipping_address (CreateInvoiceAddress): Overrides the default for the
-            customer
+            customer.
         coupons (List[CreateInvoiceCoupon]): The model property of type
             List[CreateInvoiceCoupon].
         status (CreateInvoiceStatus): The model property of type CreateInvoiceStatus.

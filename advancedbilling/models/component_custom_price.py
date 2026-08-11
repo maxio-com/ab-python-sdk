@@ -17,15 +17,15 @@ class ComponentCustomPrice(object):
 
     Attributes:
         tax_included (bool): Whether or not the price point includes tax
-        pricing_scheme (PricingScheme): Omit for On/Off components
-        interval (int): The numerical interval. i.e. an interval of ‘30’ coupled with
-            an interval_unit of day would mean this component price point would renew
-            every 30 days. This property is only available for sites with
+        pricing_scheme (PricingScheme): Omit for On/Off components.
+        interval (int): The numerical interval. e.g., an interval of ‘30’ coupled
+            with an interval_unit of day would mean this component price point would
+            renew every 30 days. This property is only available for sites with
             Multifrequency enabled.
         interval_unit (IntervalUnit): A string representing the interval unit for
             this component price point, either month or day. This property is only
             available for sites with Multifrequency enabled.
-        list_price_point_id (int): Optional id of the price point to use for list
+        list_price_point_id (int): (Optional) Id of the price point to use for list
             price calculations when overriding the customer price.
         use_default_list_price (bool): When true, list price calculations will
             continue to use the default price point even when a `custom_price` is

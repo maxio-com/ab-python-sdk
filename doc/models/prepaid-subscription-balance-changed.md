@@ -14,14 +14,16 @@
 | `prepayment_account_balance_in_cents` | `int` | Required | - |
 | `current_usage_amount_in_cents` | `int` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reason": "reason8",
-  "current_account_balance_in_cents": 250,
-  "prepayment_account_balance_in_cents": 44,
-  "current_usage_amount_in_cents": 242
-}
+```python
+from advancedbilling.models.prepaid_subscription_balance_changed import PrepaidSubscriptionBalanceChanged
+
+prepaid_subscription_balance_changed = PrepaidSubscriptionBalanceChanged(
+    reason='reason4',
+    current_account_balance_in_cents=24,
+    prepayment_account_balance_in_cents=242,
+    current_usage_amount_in_cents=16
+)
 ```
 

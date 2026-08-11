@@ -97,27 +97,27 @@ class Subscription(object):
         total_revenue_in_cents (int): Gives the total revenue from the subscription
             in the number of cents.
         product_price_in_cents (int): (Added Nov 5 2013) The recurring amount of the
-            product (and version),currently subscribed. NOTE: this may differ from
-            the current price of,the product, if you’ve changed the price of the
-            product but haven’t,moved this subscription to a newer version.
+            product (and version), currently subscribed. NOTE: this may differ from
+            the current price of the product, if you’ve changed the price of the
+            product but haven’t moved this subscription to a newer version.
         product_version_number (int): The version of the product for the
             subscription. Note that this is a deprecated field kept for
             backwards-compatibility.
         current_period_ends_at (datetime): Timestamp relating to the end of the
-            current (recurring) period (i.e.,when the next regularly scheduled
+            current (recurring) period (i.e., when the next regularly scheduled
             attempted charge will occur)
         next_assessment_at (datetime): Timestamp that indicates when capture of
-            payment will be tried or,retried. This value will usually track the
-            current_period_ends_at, but,will diverge if a renewal payment fails and
-            must be retried. In that,case, the current_period_ends_at will advance to
-            the end of the next,period (time doesn’t stop because a payment was
-            missed) but the,next_assessment_at will be scheduled for the auto-retry
-            time (i.e. 24,hours in the future, in some cases)
+            payment will be tried or retried. This value will usually track the
+            current_period_ends_at, but will diverge if a renewal payment fails and
+            must be retried. In that case, the current_period_ends_at will advance to
+            the end of the next period (time doesn’t stop because a payment was
+            missed) but the next_assessment_at will be scheduled for the auto-retry
+            time (e.g., 24 hours in the future, in some cases).
         trial_started_at (datetime): Timestamp for when the trial period (if any)
             began
         trial_ended_at (datetime): Timestamp for when the trial period (if any) ended
-        activated_at (datetime): Timestamp for when the subscription began (i.e. when
-            it came out of trial, or when it began in the case of no trial)
+        activated_at (datetime): Timestamp for when the subscription began (i.e.,
+            when it came out of trial, or when it began in the case of no trial)
         expires_at (datetime): Timestamp giving the expiration date of this
             subscription (if any)
         created_at (datetime): The creation date for this subscription
@@ -135,11 +135,11 @@ class Subscription(object):
         previous_state (SubscriptionState): Only valid for webhook payloads The
             previous state for webhooks that have indicated a change in state. For
             normal API calls, this will always be the same as the state (current
-            state)
+            state).
         signup_payment_id (int): The ID of the transaction that generated the revenue
         signup_revenue (str): The revenue, formatted as a string of decimal separated
-            dollars and,cents, from the subscription signup ($50.00 would be
-            formatted as,50.00)
+            dollars and cents, from the subscription signup ($50.00 would be
+            formatted as 50.00)
         delayed_cancel_at (datetime): Timestamp for when the subscription is
             currently set to cancel.
         coupon_code (str): (deprecated) The coupon code of the single coupon
@@ -172,7 +172,7 @@ class Subscription(object):
         coupon_uses_allowed (int): (deprecated) How many times the subscription's
             single coupon may be used. This field has no replacement for multiple
             coupons.
-        reason_code (str): The churn reason code associated to a cancelled
+        reason_code (str): The churn reason code associated to a canceled
             subscription.
         automatically_resume_at (datetime): The date the subscription is scheduled to
             automatically resume from the on_hold state.
@@ -201,14 +201,14 @@ class Subscription(object):
             for the customer. This will ensure the card will be charged successfully
             at renewal.
         reference (str): The reference value (provided by your app) for the
-            subscription istelf.
+            subscription itself.
         on_hold_at (datetime): The timestamp of the most recent on hold action.
         prepaid_dunning (bool): Boolean representing whether the subscription is
             prepaid and currently in dunning. Only returned for Relationship
-            Invoicing sites with the feature enabled
+            Invoicing sites with the feature enabled.
         coupons (List[SubscriptionIncludedCoupon]): Additional coupon data. To use
-            this data you also have to include the following param in the
-            request`include[]=coupons`. Only in Read Subscription Endpoint.
+            this data you also have to include the following param in the request:
+            `include[]=coupons`. Only in Read Subscription Endpoint.
         dunning_communication_delay_enabled (bool): Enable Communication Delay
             feature, making sure no communication (email or SMS) is sent to the
             Customer between 9PM and 8AM in time zone set by the

@@ -3,13 +3,14 @@
 
 ## Data Type
 
-`SubscriptionProductChange | SubscriptionStateChange | PaymentRelatedEvents | RefundSuccess | ComponentAllocationChange | MeteredUsage | PrepaidUsage | DunningStepReached | InvoiceIssued | PendingCancellationChange | PrepaidSubscriptionBalanceChanged | ProformaInvoiceIssued | SubscriptionGroupSignupEventData | CreditAccountBalanceChanged | PrepaymentAccountBalanceChanged | PaymentCollectionMethodChanged | ItemPricePointChanged | CustomFieldValueChange | ChjsTokenizationSuccess | ChjsTokenizationFailure`
+`SubscriptionProductChange | SubscriptionProductChangeScheduled | SubscriptionStateChange | PaymentRelatedEvents | RefundSuccess | ComponentAllocationChange | MeteredUsage | PrepaidUsage | DunningStepReached | InvoiceIssued | PendingCancellationChange | PrepaidSubscriptionBalanceChanged | ProformaInvoiceIssued | SubscriptionGroupSignupEventData | CreditAccountBalanceChanged | PrepaymentAccountBalanceChanged | PaymentCollectionMethodChanged | ItemPricePointChanged | CustomFieldValueChange | ChjsTokenizationSuccess | ChjsTokenizationFailure`
 
 ## Cases
 
 | Type |
 |  --- |
 | [`SubscriptionProductChange`](../../../doc/models/subscription-product-change.md) |
+| [`SubscriptionProductChangeScheduled`](../../../doc/models/subscription-product-change-scheduled.md) |
 | [`SubscriptionStateChange`](../../../doc/models/subscription-state-change.md) |
 | [`PaymentRelatedEvents`](../../../doc/models/payment-related-events.md) |
 | [`RefundSuccess`](../../../doc/models/refund-success.md) |
@@ -40,6 +41,19 @@
 value = SubscriptionProductChange(
     previous_product_id=126,
     new_product_id=12
+)
+```
+
+## SubscriptionProductChangeScheduled
+
+### Initialization Code
+
+#### Example
+
+```python
+value = SubscriptionProductChangeScheduled(
+    previous_product_id=62,
+    new_product_id=52
 )
 ```
 
@@ -109,7 +123,7 @@ value = ComponentAllocationChange(
 ```python
 value = MeteredUsage(
     previous_unit_balance='previous_unit_balance6',
-    new_unit_balance=80,
+    new_unit_balance=2,
     usage_quantity=42,
     component_id=4,
     component_handle='component_handle8',
@@ -127,8 +141,8 @@ value = MeteredUsage(
 value = PrepaidUsage(
     previous_unit_balance='previous_unit_balance0',
     previous_overage_unit_balance='previous_overage_unit_balance4',
-    new_unit_balance=252,
-    new_overage_unit_balance=224,
+    new_unit_balance=174,
+    new_overage_unit_balance=146,
     usage_quantity=214,
     overage_usage_quantity=106,
     component_id=176,

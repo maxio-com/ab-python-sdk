@@ -11,14 +11,17 @@
 |  --- | --- | --- | --- |
 | `service_credit` | [`IssueServiceCredit`](../../doc/models/issue-service-credit.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "service_credit": {
-    "amount": 31.42,
-    "memo": "memo0"
-  }
-}
+```python
+from advancedbilling.models.issue_service_credit import IssueServiceCredit
+from advancedbilling.models.issue_service_credit_request import IssueServiceCreditRequest
+
+issue_service_credit_request = IssueServiceCreditRequest(
+    service_credit=IssueServiceCredit(
+        amount=31.42,
+        memo='memo0'
+    )
+)
 ```
 

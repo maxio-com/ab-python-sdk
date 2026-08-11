@@ -12,12 +12,14 @@
 | `previous_subscription_state` | `str` | Required | **Constraints**: *Minimum Length*: `1` |
 | `new_subscription_state` | `str` | Required | **Constraints**: *Minimum Length*: `1` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "previous_subscription_state": "previous_subscription_state2",
-  "new_subscription_state": "new_subscription_state6"
-}
+```python
+from advancedbilling.models.subscription_state_change import SubscriptionStateChange
+
+subscription_state_change = SubscriptionStateChange(
+    previous_subscription_state='previous_subscription_state4',
+    new_subscription_state='new_subscription_state8'
+)
 ```
 

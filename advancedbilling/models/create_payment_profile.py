@@ -25,32 +25,32 @@ class CreatePaymentProfile(object):
         card_type (CardType): The type of card used.
         expiration_month (int | str | None): (Optional when performing an Import via
             vault_token, required otherwise) The 1- or 2-digit credit card expiration
-            month, as an integer or string, i.e. 5
-        expiration_year (int | str | None): (Optional when performing a Import via
+            month, as an integer or string, e.g., 5
+        expiration_year (int | str | None): (Optional when performing an Import via
             vault_token, required otherwise) The 4-digit credit card expiration year,
-            as an integer or string, i.e. 2012
+            as an integer or string, e.g., 2012
         billing_address (str): The credit card or bank account billing street address
-            (i.e. 123 Main St.). This value is merely passed through to the payment
+            (e.g., 123 Main St.). This value is merely passed through to the payment
             gateway.
-        billing_address_2 (str): Second line of the customer’s billing address i.e.
+        billing_address_2 (str): Second line of the customer’s billing address e.g.,
             Apt. 100
         billing_city (str): The credit card or bank account billing address city
-            (i.e. “Boston”). This value is merely passed through to the payment
+            (e.g., “Boston”). This value is merely passed through to the payment
             gateway.
         billing_state (str): The credit card or bank account billing address state
-            (i.e. MA). This value is merely passed through to the payment gateway.
+            (e.g., MA). This value is merely passed through to the payment gateway.
             This must conform to the
             [ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) in
             order to be valid for tax locale purposes.
-        billing_country (str): The credit card or bank account billing address
+        billing_country (str): “The credit card or bank account billing address
             country, required in [ISO_3166-1
-            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (i.e.
+            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format (e.g.,
             “US”). This value is merely passed through to the payment gateway. Some
             gateways require country codes in a specific format. Check your gateway’s
             documentation. If creating an ACH subscription, only US is supported at
-            this time.
+            this time.”
         billing_zip (str): The credit card or bank account billing address zip code
-            (i.e. 12345). This value is merely passed through to the payment gateway.
+            (e.g., 12345). This value is merely passed through to the payment gateway.
         current_vault (AllVaults): The vault that stores the payment profile with the
             provided `vault_token`. Use `bogus` for testing.
         vault_token (str): The “token” provided by your vault storage for an already
@@ -82,16 +82,16 @@ class CreatePaymentProfile(object):
             account resides
         bank_iban (str): (Optional when creating with GoCardless, required with
             Stripe Direct Debit). International Bank Account Number. Alternatively,
-            local bank details can be provided
+            local bank details can be provided.
         bank_routing_number (str): (Required when creating with ACH. Optional when
             creating a subscription with GoCardless). The routing number of the bank.
-            It becomes bank_code while passing via GoCardless API
+            It becomes bank_code while passing via GoCardless API.
         bank_account_number (str): (Required when creating with ACH, GoCardless,
             Stripe BECS or BACS Direct Debit, and bank_iban is blank) The customerʼs
             bank account number
         bank_branch_code (str): (Optional when creating with GoCardless, required
             with Stripe BECS or BACS Direct Debit) Branch/Sort code. Alternatively,
-            an IBAN can be provided
+            an IBAN can be provided.
         bank_account_type (BankAccountType): Defaults to checking
         bank_account_holder_type (BankAccountHolderType): Defaults to personal
         last_four (str): (Optional) Used for creating subscription with payment

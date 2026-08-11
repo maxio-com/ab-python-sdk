@@ -18,10 +18,10 @@ class CouponRequest(object):
         coupon (CouponPayload): The model property of type CouponPayload.
         restricted_products (Dict[str, bool]): An object where the keys are product
             IDs or handles (prefixed with 'handle:'), and the values are booleans
-            indicating if the coupon should be applicable to the product
+            indicating if the coupon should be applicable to the product.
         restricted_components (Dict[str, bool]): An object where the keys are
             component IDs or handles (prefixed with 'handle:'), and the values are
-            booleans indicating if the coupon should be applicable to the component
+            booleans indicating if the coupon should be applicable to the component.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

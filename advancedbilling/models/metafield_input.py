@@ -10,8 +10,8 @@ class MetafieldInput(object):
     """Implementation of the 'Metafield Input' enum.
 
     Indicates the type of metafield. A text metafield allows any string value.
-    Dropdown and radio metafields have a set of values that can be selected.
-    Defaults to 'text'.
+    Dropdown and radio metafields have a set of values that can be selected. Defaults
+    to 'text'.
 
     Attributes:
         BALANCE_TRACKER: The enum member of type str.

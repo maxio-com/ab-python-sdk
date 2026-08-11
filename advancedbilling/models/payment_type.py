@@ -19,8 +19,7 @@ class PaymentType(object):
 
     """
 
-    _all_values = ["credit_card", "bank_account", "paypal_account",
-        "apple_pay"]
+    _all_values = ["credit_card", "bank_account", "paypal_account", "apple_pay"]
     CREDIT_CARD = "credit_card"
 
     BANK_ACCOUNT = "bank_account"

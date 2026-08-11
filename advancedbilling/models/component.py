@@ -18,11 +18,11 @@ class Component(object):
         id (int): The unique ID assigned to the component by Chargify. This ID can be
             used to fetch the component from the API.
         name (str): The name of the Component, suitable for display on statements.
-            i.e. Text Messages.
+            e.g., Text Messages.
         handle (str): The component API handle
         pricing_scheme (PricingScheme): The model property of type PricingScheme.
         unit_name (str): The name of the unit that the component’s usage is measured
-            in. i.e. message
+            in. e.g., message
         unit_price (str): The amount the customer will be charged per unit. This
             field is only populated for ‘per_unit’ pricing schemes, otherwise it may
             be null.
@@ -32,7 +32,7 @@ class Component(object):
             Component belongs
         product_family_handle (str): The handle of the Product Family to which the
             Component belongs
-        price_per_unit_in_cents (int): deprecated - use unit_price instead
+        price_per_unit_in_cents (int): deprecated - use unit_price instead.
         kind (ComponentKind): A handle for the component type
         archived (bool): Boolean flag describing whether a component is archived or
             not.
@@ -72,13 +72,17 @@ class Component(object):
         event_based_billing_metric_id (int): (Only for Event Based Components) This
             is an ID of a metric attached to the component. This metric is used to
             bill upon collected events.
-        interval (int): The numerical interval. i.e. an interval of ‘30’ coupled with
-            an interval_unit of day would mean this component's default price point
-            would renew every 30 days. This property is only available for sites with
-            Multifrequency enabled.
+        interval (int): The numerical interval. e.g., an interval of ‘30’ coupled
+            with an interval_unit of day would mean this component’s default price
+            point would renew every 30 days. This property is only available for
+            sites with Multifrequency enabled.
         interval_unit (IntervalUnit): A string representing the interval unit for
             this component's default price point, either month or day. This property
             is only available for sites with Multifrequency enabled.
+        unspsc_code (str): (Optional) Custom UNSPSC commodity code for Level 3/CEDP
+            payment data. When set, this value is sent as the commodity code on
+            invoice line items for this component instead of the default derived from
+            item_category.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -121,6 +125,7 @@ class Component(object):
         "event_based_billing_metric_id": "event_based_billing_metric_id",
         "interval": "interval",
         "interval_unit": "interval_unit",
+        "unspsc_code": "unspsc_code",
     }
 
     _optionals = [
@@ -159,6 +164,7 @@ class Component(object):
         "event_based_billing_metric_id",
         "interval",
         "interval_unit",
+        "unspsc_code",
     ]
 
     _nullables = [
@@ -179,6 +185,7 @@ class Component(object):
         "use_site_exchange_rate",
         "accounting_code",
         "interval_unit",
+        "unspsc_code",
     ]
 
     def __init__(
@@ -218,6 +225,7 @@ class Component(object):
         event_based_billing_metric_id=APIHelper.SKIP,
         interval=APIHelper.SKIP,
         interval_unit=APIHelper.SKIP,
+        unspsc_code=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a Component instance."""
         # Initialize members of the class
@@ -300,6 +308,8 @@ class Component(object):
             self.interval = interval
         if interval_unit is not APIHelper.SKIP:
             self.interval_unit = interval_unit
+        if unspsc_code is not APIHelper.SKIP:
+            self.unspsc_code = unspsc_code
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -471,6 +481,10 @@ class Component(object):
             dictionary.get("interval_unit")\
             if "interval_unit" in dictionary.keys()\
                 else APIHelper.SKIP
+        unspsc_code =\
+            dictionary.get("unspsc_code")\
+            if "unspsc_code" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -512,6 +526,7 @@ class Component(object):
                    event_based_billing_metric_id,
                    interval,
                    interval_unit,
+                   unspsc_code,
                    additional_properties)
 
     def __repr__(self):
@@ -691,6 +706,11 @@ class Component(object):
             if hasattr(self, "interval_unit")
             else None
         )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -729,6 +749,7 @@ class Component(object):
             f"event_based_billing_metric_id={_event_based_billing_metric_id!r}, "
             f"interval={_interval!r}, "
             f"interval_unit={_interval_unit!r}, "
+            f"unspsc_code={_unspsc_code!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -910,6 +931,11 @@ class Component(object):
             if hasattr(self, "interval_unit")
             else None
         )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -948,6 +974,7 @@ class Component(object):
             f"event_based_billing_metric_id={_event_based_billing_metric_id!s}, "
             f"interval={_interval!s}, "
             f"interval_unit={_interval_unit!s}, "
+            f"unspsc_code={_unspsc_code!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

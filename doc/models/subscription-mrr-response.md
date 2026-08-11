@@ -11,20 +11,24 @@
 |  --- | --- | --- | --- |
 | `subscriptions_mrr` | [`List[SubscriptionMRR]`](../../doc/models/subscription-mrr.md) | Required | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscriptions_mrr": [
-    {
-      "subscription_id": 0,
-      "mrr_amount_in_cents": 0,
-      "breakouts": {
-        "plan_amount_in_cents": 0,
-        "usage_amount_in_cents": 0
-      }
-    }
-  ]
-}
+```python
+from advancedbilling.models.subscription_mrr import SubscriptionMRR
+from advancedbilling.models.subscription_mrr_breakout import SubscriptionMRRBreakout
+from advancedbilling.models.subscription_mrr_response import SubscriptionMRRResponse
+
+subscription_mrr_response = SubscriptionMRRResponse(
+    subscriptions_mrr=[
+        SubscriptionMRR(
+            subscription_id=0,
+            mrr_amount_in_cents=0,
+            breakouts=SubscriptionMRRBreakout(
+                plan_amount_in_cents=0,
+                usage_amount_in_cents=0
+            )
+        )
+    ]
+)
 ```
 

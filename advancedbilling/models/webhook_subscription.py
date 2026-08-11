@@ -40,6 +40,7 @@ class WebhookSubscription(object):
         SUBSCRIPTION_CARD_UPDATE: The enum member of type str.
         SUBSCRIPTION_GROUP_CARD_UPDATE: The enum member of type str.
         SUBSCRIPTION_PRODUCT_CHANGE: The enum member of type str.
+        SUBSCRIPTION_PRODUCT_CHANGE_SCHEDULED: The enum member of type str.
         SUBSCRIPTION_STATE_CHANGE: The enum member of type str.
         TRIAL_END_NOTICE: The enum member of type str.
         UPCOMING_RENEWAL_NOTICE: The enum member of type str.
@@ -113,6 +114,8 @@ class WebhookSubscription(object):
     SUBSCRIPTION_GROUP_CARD_UPDATE = "subscription_group_card_update"
 
     SUBSCRIPTION_PRODUCT_CHANGE = "subscription_product_change"
+
+    SUBSCRIPTION_PRODUCT_CHANGE_SCHEDULED = "subscription_product_change_scheduled"
 
     SUBSCRIPTION_STATE_CHANGE = "subscription_state_change"
 

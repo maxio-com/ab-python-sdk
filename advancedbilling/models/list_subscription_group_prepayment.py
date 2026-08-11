@@ -5,8 +5,8 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 # ruff: noqa: E501
-from advancedbilling.models.list_subcription_group_prepayment_item import (
-    ListSubcriptionGroupPrepaymentItem,
+from advancedbilling.models.list_subscription_group_prepayment_item import (
+    ListSubscriptionGroupPrepaymentItem,
 )
 
 
@@ -14,8 +14,8 @@ class ListSubscriptionGroupPrepayment(object):
     """Implementation of the 'List Subscription Group Prepayment' model.
 
     Attributes:
-        prepayment (ListSubcriptionGroupPrepaymentItem): The model property of type
-            ListSubcriptionGroupPrepaymentItem.
+        prepayment (ListSubscriptionGroupPrepaymentItem): The model property of type
+            ListSubscriptionGroupPrepaymentItem.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -58,7 +58,7 @@ class ListSubscriptionGroupPrepayment(object):
 
         # Extract variables from the dictionary
         prepayment =\
-            ListSubcriptionGroupPrepaymentItem.from_dictionary(
+            ListSubscriptionGroupPrepaymentItem.from_dictionary(
                 dictionary.get("prepayment"))\
                 if dictionary.get("prepayment") else None
 

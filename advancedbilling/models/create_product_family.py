@@ -15,6 +15,9 @@ class CreateProductFamily(object):
         name (str): The model property of type str.
         handle (str): The model property of type str.
         description (str): The model property of type str.
+        surcharging (bool): Whether surcharging applies to this product family.
+            Defaults to `true` when omitted. Only applied on sites where surcharging
+            is enabled.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -25,11 +28,13 @@ class CreateProductFamily(object):
         "name": "name",
         "handle": "handle",
         "description": "description",
+        "surcharging": "surcharging",
     }
 
     _optionals = [
         "handle",
         "description",
+        "surcharging",
     ]
 
     _nullables = [
@@ -42,6 +47,7 @@ class CreateProductFamily(object):
         name=None,
         handle=APIHelper.SKIP,
         description=APIHelper.SKIP,
+        surcharging=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a CreateProductFamily instance."""
         # Initialize members of the class
@@ -50,6 +56,8 @@ class CreateProductFamily(object):
             self.handle = handle
         if description is not APIHelper.SKIP:
             self.description = description
+        if surcharging is not APIHelper.SKIP:
+            self.surcharging = surcharging
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -86,6 +94,10 @@ class CreateProductFamily(object):
             dictionary.get("description")\
             if "description" in dictionary.keys()\
                 else APIHelper.SKIP
+        surcharging =\
+            dictionary.get("surcharging")\
+            if "surcharging" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -95,6 +107,7 @@ class CreateProductFamily(object):
         return cls(name,
                    handle,
                    description,
+                   surcharging,
                    additional_properties)
 
     def __repr__(self):
@@ -110,12 +123,18 @@ class CreateProductFamily(object):
             if hasattr(self, "description")
             else None
         )
+        _surcharging=(
+            self.surcharging
+            if hasattr(self, "surcharging")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
             f"name={_name!r}, "
             f"handle={_handle!r}, "
             f"description={_description!r}, "
+            f"surcharging={_surcharging!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -133,12 +152,18 @@ class CreateProductFamily(object):
             if hasattr(self, "description")
             else None
         )
+        _surcharging=(
+            self.surcharging
+            if hasattr(self, "surcharging")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
             f"name={_name!s}, "
             f"handle={_handle!s}, "
             f"description={_description!s}, "
+            f"surcharging={_surcharging!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

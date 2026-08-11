@@ -13,3 +13,11 @@
 | `FLAT_AMOUNT` |
 | `ROLLOVER` |
 
+## Example
+
+```python
+from advancedbilling.models.invoice_discount_type import InvoiceDiscountType
+
+invoice_discount_type = InvoiceDiscountType.ROLLOVER
+```
+

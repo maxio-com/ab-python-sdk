@@ -13,13 +13,15 @@
 | `name` | `str` | Optional | - |
 | `value` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "current_name": "current_name4",
-  "name": "name0",
-  "value": "value2"
-}
+```python
+from advancedbilling.models.update_metadata import UpdateMetadata
+
+update_metadata = UpdateMetadata(
+    current_name='current_name4',
+    name='name0',
+    value='value2'
+)
 ```
 

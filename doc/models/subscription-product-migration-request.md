@@ -11,18 +11,21 @@
 |  --- | --- | --- | --- |
 | `migration` | [`SubscriptionProductMigration`](../../doc/models/subscription-product-migration.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "migration": {
-    "include_trial": false,
-    "include_initial_charge": false,
-    "include_coupons": true,
-    "preserve_period": false,
-    "product_id": 158,
-    "product_price_point_id": 82
-  }
-}
+```python
+from advancedbilling.models.subscription_product_migration import SubscriptionProductMigration
+from advancedbilling.models.subscription_product_migration_request import SubscriptionProductMigrationRequest
+
+subscription_product_migration_request = SubscriptionProductMigrationRequest(
+    migration=SubscriptionProductMigration(
+        product_id=158,
+        product_price_point_id=82,
+        include_trial=False,
+        include_initial_charge=False,
+        include_coupons=True,
+        preserve_period=False
+    )
+)
 ```
 

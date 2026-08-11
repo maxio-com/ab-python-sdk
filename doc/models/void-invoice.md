@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `reason` | `str` | Required | **Constraints**: *Minimum Length*: `1` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reason": "reason2"
-}
+```python
+from advancedbilling.models.void_invoice import VoidInvoice
+
+void_invoice = VoidInvoice(
+    reason='reason6'
+)
 ```
 

@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `subscription_group` | `str` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription_group": "subscription_group2"
-}
+```python
+from advancedbilling.models.subscription_group_single_error import SubscriptionGroupSingleError
+
+subscription_group_single_error = SubscriptionGroupSingleError(
+    subscription_group='subscription_group4'
+)
 ```
 

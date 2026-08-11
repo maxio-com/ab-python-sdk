@@ -13,13 +13,15 @@
 | `automatic_balance_in_cents` | `int` | Optional | The automatic balance in cents. |
 | `remittance_balance_in_cents` | `int` | Optional | The remittance balance in cents. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "balance_in_cents": 16,
-  "automatic_balance_in_cents": 226,
-  "remittance_balance_in_cents": 62
-}
+```python
+from advancedbilling.models.account_balance import AccountBalance
+
+account_balance = AccountBalance(
+    balance_in_cents=166,
+    automatic_balance_in_cents=76,
+    remittance_balance_in_cents=212
+)
 ```
 

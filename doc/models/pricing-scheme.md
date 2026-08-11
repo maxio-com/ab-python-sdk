@@ -16,3 +16,11 @@ The identifier for the pricing scheme. See [Product Components](https://help.cha
 | `PER_UNIT` |
 | `TIERED` |
 
+## Example
+
+```python
+from advancedbilling.models.pricing_scheme import PricingScheme
+
+pricing_scheme = PricingScheme.PER_UNIT
+```
+

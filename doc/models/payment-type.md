@@ -14,3 +14,11 @@
 | `PAYPAL_ACCOUNT` |
 | `APPLE_PAY` |
 
+## Example
+
+```python
+from advancedbilling.models.payment_type import PaymentType
+
+payment_type = PaymentType.CREDIT_CARD
+```
+

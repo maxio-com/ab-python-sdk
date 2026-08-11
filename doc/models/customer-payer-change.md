@@ -12,22 +12,25 @@
 | `before` | [`InvoicePayerChange`](../../doc/models/invoice-payer-change.md) | Required | - |
 | `after` | [`InvoicePayerChange`](../../doc/models/invoice-payer-change.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "before": {
-    "first_name": "first_name0",
-    "last_name": "last_name8",
-    "organization": "organization4",
-    "email": "email6"
-  },
-  "after": {
-    "first_name": "first_name2",
-    "last_name": "last_name0",
-    "organization": "organization4",
-    "email": "email4"
-  }
-}
+```python
+from advancedbilling.models.customer_payer_change import CustomerPayerChange
+from advancedbilling.models.invoice_payer_change import InvoicePayerChange
+
+customer_payer_change = CustomerPayerChange(
+    before=InvoicePayerChange(
+        first_name='first_name0',
+        last_name='last_name8',
+        organization='organization4',
+        email='email6'
+    ),
+    after=InvoicePayerChange(
+        first_name='first_name2',
+        last_name='last_name0',
+        organization='organization4',
+        email='email4'
+    )
+)
 ```
 

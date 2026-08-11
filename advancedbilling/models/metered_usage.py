@@ -13,7 +13,7 @@ class MeteredUsage(object):
 
     Attributes:
         previous_unit_balance (str): The model property of type str.
-        new_unit_balance (int): The model property of type int.
+        new_unit_balance (int | str): The model property of type int | str.
         usage_quantity (int): The model property of type int.
         component_id (int): The model property of type int.
         component_handle (str): The model property of type str.
@@ -70,6 +70,10 @@ class MeteredUsage(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
+
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
@@ -78,10 +82,12 @@ class MeteredUsage(object):
             dictionary.get("previous_unit_balance")\
             if dictionary.get("previous_unit_balance")\
                 else None
-        new_unit_balance =\
-            dictionary.get("new_unit_balance")\
-            if dictionary.get("new_unit_balance")\
-                else None
+        new_unit_balance = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("MeteredUsageNewUnitBalance"),
+            dictionary.get("new_unit_balance"),
+            False)\
+            if dictionary.get("new_unit_balance") is not None\
+            else None
         usage_quantity =\
             dictionary.get("usage_quantity")\
             if dictionary.get("usage_quantity")\
@@ -125,6 +131,10 @@ class MeteredUsage(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(
                     value=dictionary.previous_unit_balance,
@@ -133,13 +143,8 @@ class MeteredUsage(object):
                         value,
                         str,
                 )) \
-                and APIHelper.is_valid_type(
-                    value=dictionary.new_unit_balance,
-                    type_callable=lambda value:
-                        isinstance(
-                        value,
-                        int,
-                )) \
+                and (UnionTypeLookUp.get("MeteredUsageNewUnitBalance")
+                .validate(dictionary.new_unit_balance).is_valid) \
                 and APIHelper.is_valid_type(
                     value=dictionary.usage_quantity,
                     type_callable=lambda value:
@@ -179,13 +184,8 @@ class MeteredUsage(object):
                     value,
                     str,
             )) \
-            and APIHelper.is_valid_type(
-                value=dictionary.get("new_unit_balance"),
-                type_callable=lambda value:
-                    isinstance(
-                    value,
-                    int,
-            )) \
+            and (UnionTypeLookUp.get("MeteredUsageNewUnitBalance")
+            .validate(dictionary.get("new_unit_balance")).is_valid) \
             and APIHelper.is_valid_type(
                 value=dictionary.get("usage_quantity"),
                 type_callable=lambda value:

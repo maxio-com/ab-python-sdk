@@ -13,11 +13,15 @@ Billing schedule settings for component allocations or usages on multi-frequency
 |  --- | --- | --- | --- |
 | `initial_billing_at` | `date` | Optional | Custom start date (ISO 8601 date, YYYY-MM-DD) for the component's first billing period. If omitted or null, billing aligns with the product schedule. If provided, date must be on or after the minimum allowed date for the subscription or component. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "initial_billing_at": "2026-01-01"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.billing_schedule import BillingSchedule
+
+billing_schedule = BillingSchedule(
+    initial_billing_at=dateutil.parser.parse('2026-01-01').date()
+)
 ```
 

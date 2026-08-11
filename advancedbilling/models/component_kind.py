@@ -22,8 +22,8 @@ class ComponentKind(object):
 
     """
 
-    _all_values = ["metered_component", "quantity_based_component",
-        "on_off_component", "prepaid_usage_component", "event_based_component"]
+    _all_values = ["metered_component", "quantity_based_component", "on_off_component",
+        "prepaid_usage_component", "event_based_component"]
     METERED_COMPONENT = "metered_component"
 
     QUANTITY_BASED_COMPONENT = "quantity_based_component"

@@ -22,15 +22,18 @@
 | `updated_at` | `datetime` | Optional | - |
 | `prices` | [`List[SegmentPrice]`](../../doc/models/segment-price.md) | Optional | **Constraints**: *Minimum Items*: `1` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 6,
-  "component_id": 116,
-  "price_point_id": 140,
-  "event_based_billing_metric_id": 200,
-  "pricing_scheme": "stairstep"
-}
+```python
+from advancedbilling.models.pricing_scheme import PricingScheme
+from advancedbilling.models.segment import Segment
+
+segment = Segment(
+    id=118,
+    component_id=228,
+    price_point_id=4,
+    event_based_billing_metric_id=56,
+    pricing_scheme=PricingScheme.STAIRSTEP
+)
 ```
 

@@ -14,7 +14,9 @@
 
 ## Example
 
-```
-draft
+```python
+from advancedbilling.models.create_invoice_status import CreateInvoiceStatus
+
+create_invoice_status = CreateInvoiceStatus.DRAFT
 ```
 

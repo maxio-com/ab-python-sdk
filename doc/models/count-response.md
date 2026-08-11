@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `count` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "count": 60
-}
+```python
+from advancedbilling.models.count_response import CountResponse
+
+count_response = CountResponse(
+    count=174
+)
 ```
 

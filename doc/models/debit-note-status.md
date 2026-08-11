@@ -16,3 +16,11 @@ Current status of the debit note.
 | `BANISHED` |
 | `PAID` |
 
+## Example
+
+```python
+from advancedbilling.models.debit_note_status import DebitNoteStatus
+
+debit_note_status = DebitNoteStatus.BANISHED
+```
+

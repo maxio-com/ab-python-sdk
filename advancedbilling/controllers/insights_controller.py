@@ -94,9 +94,9 @@ class InsightsController(BaseController):
 
         Args:
             at_time (datetime, optional): submit a timestamp in ISO8601 format to
-                request MRR for a historic time
+                request MRR for a historic time.
             subscription_id (int, optional): submit the id of a subscription in order
-                to limit results
+                to limit results.
 
         Returns:
             MRRResponse: Response from the API. OK
@@ -163,8 +163,8 @@ class InsightsController(BaseController):
                 through the dictionary with their names being the key and their
                 desired values being the value. A list of parameters that can be used
                 are::
-                    subscription_id -- int -- optionally filter results by
-                        subscription
+                    subscription_id -- int -- (Optional) Filter results by
+                        subscription.
                     page -- int -- Result records are organized in pages. By default,
                         the first page of results is displayed. The page parameter
                         specifies a page number of results to fetch. You can start
@@ -220,8 +220,8 @@ class InsightsController(BaseController):
                                   options=dict()):
         """Perform a GET request to /subscriptions_mrr.json.
 
-        This endpoint returns your site's current MRR, including plan and usage
-        breakouts split per subscription.
+        Lists your site's current MRR, including plan and usage breakouts split per
+        subscription.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to

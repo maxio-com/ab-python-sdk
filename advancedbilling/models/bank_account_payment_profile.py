@@ -17,10 +17,10 @@ class BankAccountPaymentProfile(object):
     Attributes:
         id (int): The Chargify-assigned ID of the stored bank account. This value can
             be used as an input to payment_profile_id when creating a subscription,
-            in order to re-use a stored payment profile for the same customer
+            in order to re-use a stored payment profile for the same customer.
         first_name (str): The first name of the bank account holder
         last_name (str): The last name of the bank account holder
-        customer_id (int): The Chargify-assigned id for the customer record to which
+        customer_id (int): The Chargify-assigned ID for the customer record to which
             the bank account belongs
         current_vault (BankAccountVault): The vault that stores the payment profile
             with the provided vault_token. Use `bogus` for testing.
@@ -40,15 +40,12 @@ class BankAccountPaymentProfile(object):
         bank_name (str): The bank where the account resides
         masked_bank_routing_number (str): A string representation of the stored bank
             routing number with all but the last 4 digits marked with X's (i.e.
-            'XXXXXXX1111'). payment_type will be bank_account
-        masked_bank_account_number (str): A string representation of the stored bank
-            account number with all but the last 4 digits marked with X's (i.e.
-            'XXXXXXX1111')
+            'XXXXXXX1111'). payment_type will be bank_account.
         bank_account_type (BankAccountType): Defaults to checking
         bank_account_holder_type (BankAccountHolderType): Defaults to personal
         payment_type (PaymentType): The model property of type PaymentType.
-        verified (bool): denotes whether a bank account has been verified by
-            providing the amounts of two small deposits made into the account
+        verified (bool): Denotes whether a bank account has been verified by
+            providing the amounts of two small deposits made into the account.
         site_gateway_setting_id (int): The model property of type int.
         gateway_handle (str): The model property of type str.
         created_at (datetime): A timestamp indicating when this payment profile was
@@ -78,7 +75,6 @@ class BankAccountPaymentProfile(object):
         "billing_address_2": "billing_address_2",
         "bank_name": "bank_name",
         "masked_bank_routing_number": "masked_bank_routing_number",
-        "masked_bank_account_number": "masked_bank_account_number",
         "bank_account_type": "bank_account_type",
         "bank_account_holder_type": "bank_account_holder_type",
         "verified": "verified",
@@ -104,7 +100,6 @@ class BankAccountPaymentProfile(object):
         "billing_address_2",
         "bank_name",
         "masked_bank_routing_number",
-        "masked_bank_account_number",
         "bank_account_type",
         "bank_account_holder_type",
         "verified",
@@ -123,7 +118,6 @@ class BankAccountPaymentProfile(object):
         "customer_vault_token",
         "billing_address_2",
         "masked_bank_routing_number",
-        "masked_bank_account_number",
         "site_gateway_setting_id",
         "gateway_handle",
     ]
@@ -146,7 +140,6 @@ class BankAccountPaymentProfile(object):
         billing_address_2=APIHelper.SKIP,
         bank_name=APIHelper.SKIP,
         masked_bank_routing_number=APIHelper.SKIP,
-        masked_bank_account_number=APIHelper.SKIP,
         bank_account_type=APIHelper.SKIP,
         bank_account_holder_type=APIHelper.SKIP,
         verified=False,
@@ -187,8 +180,6 @@ class BankAccountPaymentProfile(object):
             self.bank_name = bank_name
         if masked_bank_routing_number is not APIHelper.SKIP:
             self.masked_bank_routing_number = masked_bank_routing_number
-        if masked_bank_account_number is not APIHelper.SKIP:
-            self.masked_bank_account_number = masked_bank_account_number
         if bank_account_type is not APIHelper.SKIP:
             self.bank_account_type = bank_account_type
         if bank_account_holder_type is not APIHelper.SKIP:
@@ -297,10 +288,6 @@ class BankAccountPaymentProfile(object):
             dictionary.get("masked_bank_routing_number")\
             if "masked_bank_routing_number" in dictionary.keys()\
                 else APIHelper.SKIP
-        masked_bank_account_number =\
-            dictionary.get("masked_bank_account_number")\
-            if "masked_bank_account_number" in dictionary.keys()\
-                else APIHelper.SKIP
         bank_account_type =\
             dictionary.get("bank_account_type")\
             if dictionary.get("bank_account_type")\
@@ -349,7 +336,6 @@ class BankAccountPaymentProfile(object):
                    billing_address_2,
                    bank_name,
                    masked_bank_routing_number,
-                   masked_bank_account_number,
                    bank_account_type,
                    bank_account_holder_type,
                    verified,
@@ -463,11 +449,6 @@ class BankAccountPaymentProfile(object):
             if hasattr(self, "masked_bank_routing_number")
             else None
         )
-        _masked_bank_account_number=(
-            self.masked_bank_account_number
-            if hasattr(self, "masked_bank_account_number")
-            else None
-        )
         _bank_account_type=(
             self.bank_account_type
             if hasattr(self, "bank_account_type")
@@ -522,7 +503,6 @@ class BankAccountPaymentProfile(object):
             f"billing_address_2={_billing_address_2!r}, "
             f"bank_name={_bank_name!r}, "
             f"masked_bank_routing_number={_masked_bank_routing_number!r}, "
-            f"masked_bank_account_number={_masked_bank_account_number!r}, "
             f"bank_account_type={_bank_account_type!r}, "
             f"bank_account_holder_type={_bank_account_holder_type!r}, "
             f"payment_type={_payment_type!r}, "
@@ -612,11 +592,6 @@ class BankAccountPaymentProfile(object):
             if hasattr(self, "masked_bank_routing_number")
             else None
         )
-        _masked_bank_account_number=(
-            self.masked_bank_account_number
-            if hasattr(self, "masked_bank_account_number")
-            else None
-        )
         _bank_account_type=(
             self.bank_account_type
             if hasattr(self, "bank_account_type")
@@ -671,7 +646,6 @@ class BankAccountPaymentProfile(object):
             f"billing_address_2={_billing_address_2!s}, "
             f"bank_name={_bank_name!s}, "
             f"masked_bank_routing_number={_masked_bank_routing_number!s}, "
-            f"masked_bank_account_number={_masked_bank_account_number!s}, "
             f"bank_account_type={_bank_account_type!s}, "
             f"bank_account_holder_type={_bank_account_holder_type!s}, "
             f"payment_type={_payment_type!s}, "

@@ -15,7 +15,7 @@ class RenewalPreviewRequest(object):
     """Implementation of the 'Renewal Preview Request' model.
 
     Attributes:
-        components (List[RenewalPreviewComponent]): An optional array of component
+        components (List[RenewalPreviewComponent]): (Optional) Array of component
             definitions to preview. Providing any component definitions here will
             override the actual components on the subscription (and their
             quantities), and the billing preview will contain only these components
