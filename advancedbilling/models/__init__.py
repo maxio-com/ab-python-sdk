@@ -550,7 +550,6 @@ __all__ = [
     "subscription_preview",
     "subscription_preview_response",
     "subscription_product_change",
-    "subscription_product_change_scheduled",
     "subscription_product_migration",
     "subscription_product_migration_request",
     "subscription_purge_type",

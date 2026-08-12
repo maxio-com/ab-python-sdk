@@ -167,9 +167,7 @@ print(result)
 
 # Export Proforma Invoices
 
-Creates a proforma invoices export and returns a batch job object.
-
-It is only available for Relationship Invoicing architecture.
+Creates a proforma invoices export and returns a batch job object. Proforma invoices are only available on Relationship Invoicing sites.
 
 ```python
 def export_proforma_invoices(self)
@@ -267,7 +265,7 @@ print(result)
 
 # Read Proforma Invoices Export
 
-Returns a batch job object for a proforma invoices export.
+Returns a batch job object for a proforma invoices export. Proforma invoices are only available on Relationship Invoicing sites.
 
 ```python
 def read_proforma_invoices_export(self,

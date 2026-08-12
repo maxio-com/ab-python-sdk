@@ -245,8 +245,8 @@ class APIExportsController(BaseController):
     def export_proforma_invoices(self):
         """Perform a POST request to /api_exports/proforma_invoices.json.
 
-        Creates a proforma invoices export and returns a batch job object.
-        It is only available for Relationship Invoicing architecture.
+        Creates a proforma invoices export and returns a batch job object. Proforma
+        invoices are only available on Relationship Invoicing sites.
 
         Returns:
             BatchJobResponse: Response from the API. Created
@@ -346,7 +346,8 @@ class APIExportsController(BaseController):
         """Perform a GET request to
         /api_exports/proforma_invoices/{batch_id}.json.
 
-        Returns a batch job object for a proforma invoices export.
+        Returns a batch job object for a proforma invoices export. Proforma invoices
+        are only available on Relationship Invoicing sites.
 
         Args:
             batch_id (str): Id of a Batch Job.

@@ -55,11 +55,10 @@ class ProformaInvoicesController(BaseController):
         """Perform a POST request to
         /subscription_groups/{uid}/proforma_invoices.json.
 
-        Creates a consolidated proforma invoice asynchronously. It will return a 201
-        with no message, or a 422 with any errors. To find and view the new
-        consolidated proforma invoice, you may poll the subscription group listing
-        for proforma invoices; only one consolidated proforma invoice may be created
-        per group at a time.
+        Creates a consolidated proforma invoice asynchronously. To find and view the
+        new consolidated proforma invoice, you can poll the subscription group
+        listing for proforma invoices; only one consolidated proforma invoice can be
+        created per group at a time.
         If the information becomes outdated, simply void the old consolidated
         proforma invoice and generate a new one.
         ## Restrictions

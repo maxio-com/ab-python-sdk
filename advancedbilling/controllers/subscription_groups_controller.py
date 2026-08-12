@@ -376,7 +376,7 @@ class SubscriptionGroupsController(BaseController):
         """Perform a GET request to /subscription_groups/lookup.json.
 
         Finds the subscription group associated with a subscription.
-        If the subscription is not in a group, the endpoint will return a 404 code.
+        If the subscription is not in a group, this endpoint returns an error.
 
         Args:
             subscription_id (str): The Advanced Billing id of the subscription

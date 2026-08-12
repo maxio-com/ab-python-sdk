@@ -206,9 +206,9 @@ class EventsBasedBillingSegmentsController(BaseController):
         """Perform a PUT request to
         /components/{component_id}/price_points/{price_point_id}/segments/{id}.json.
 
-        Updates a single segment for a component with a segmented metric. It allows
-        you to update the pricing for the segment.
-        You may specify component and/or price point by using either the numeric ID
+        Updates a single segment for a component with a segmented metric. You can
+        also update the pricing for the segment.
+        You can specify component and/or price point by using either the numeric ID
         or the `handle:gold` syntax.
 
         Args:

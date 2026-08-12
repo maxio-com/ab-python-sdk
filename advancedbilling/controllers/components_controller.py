@@ -129,7 +129,7 @@ class ComponentsController(BaseController):
         Creates a Quantity Based component definition under the specified product
         family. A Quantity Based component can then be added and “allocated” for a
         subscription.
-        When defining a Quantity Based component, you can choose one of 2 types:
+        When defining a Quantity Based component, you can choose one of two types:
         #### Recurring
         Recurring quantity-based components are used to bill for the number of some
         unit (think monthly software user licenses or the number of pairs of socks in
@@ -141,6 +141,9 @@ class ComponentsController(BaseController):
         charge your customer a one-time fee for onboarding or other services.
         The allocated quantity for one-time quantity-based components immediately
         gets reset back to zero after the allocation is made.
+        For more information, see [Components
+        Overview](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Component
+        s-Overview).
         #### Hybrid Pricing
         A `volume`, `tiered`, or `stairstep` component can combine its primary
         pricing with a secondary pricing model (the `overage_pricing` parameter) so
@@ -274,15 +277,14 @@ class ComponentsController(BaseController):
         over time on their subscription. In a sense, they are the mirror image of
         metered components; while metered components charge at the end of the period
         for the amount of units used, prepaid components are charged for at the time
-        of purchase, and we subsequently keep track of the usage against the amount
-        purchased.
-        For more information on components, see our documentation
-        [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-O
-        verview).
+        of purchase, and usage is subsequently tracked against the amount purchased.
+        For more information, see [Components
+        Overview](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Component
+        s-Overview).
         If you have the new [Catalog
         experience](page:help/announcements/2026-announcements#new-catalog-experience-
         and-terminology) enabled, taxable components must include a non-blank
-        `tax_code`. Sending `"tax_code": ""` returns `422`.
+        `tax_code`; sending a blank value results in a validation error.
 
         Args:
             product_family_id (str): Either the product family's id or its handle
@@ -345,13 +347,13 @@ class ComponentsController(BaseController):
         period for each subscription.
         So, instead of reporting usage directly for each component (as you would with
         metered components), the usage is derived from analysis of your events.
-        For more information on components, see our documentation
-        [here](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Components-O
-        verview).
+        For more information, see [Components
+        Overview](https://maxio.zendesk.com/hc/en-us/articles/24261141522189-Component
+        s-Overview).
         If you have the new [Catalog
         experience](page:help/announcements/2026-announcements#new-catalog-experience-
         and-terminology) enabled, taxable components must include a non-blank
-        `tax_code`. Sending `"tax_code": ""` returns `422`.
+        `tax_code`; sending a blank value results in a validation error.
 
         Args:
             product_family_id (str): Either the product family's id or its handle

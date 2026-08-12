@@ -3,14 +3,13 @@
 
 ## Data Type
 
-`SubscriptionProductChange | SubscriptionProductChangeScheduled | SubscriptionStateChange | PaymentRelatedEvents | RefundSuccess | ComponentAllocationChange | MeteredUsage | PrepaidUsage | DunningStepReached | InvoiceIssued | PendingCancellationChange | PrepaidSubscriptionBalanceChanged | ProformaInvoiceIssued | SubscriptionGroupSignupEventData | CreditAccountBalanceChanged | PrepaymentAccountBalanceChanged | PaymentCollectionMethodChanged | ItemPricePointChanged | CustomFieldValueChange | ChjsTokenizationSuccess | ChjsTokenizationFailure`
+`SubscriptionProductChange | SubscriptionStateChange | PaymentRelatedEvents | RefundSuccess | ComponentAllocationChange | MeteredUsage | PrepaidUsage | DunningStepReached | InvoiceIssued | PendingCancellationChange | PrepaidSubscriptionBalanceChanged | ProformaInvoiceIssued | SubscriptionGroupSignupEventData | CreditAccountBalanceChanged | PrepaymentAccountBalanceChanged | PaymentCollectionMethodChanged | ItemPricePointChanged | CustomFieldValueChange | ChjsTokenizationSuccess | ChjsTokenizationFailure`
 
 ## Cases
 
 | Type |
 |  --- |
 | [`SubscriptionProductChange`](../../../doc/models/subscription-product-change.md) |
-| [`SubscriptionProductChangeScheduled`](../../../doc/models/subscription-product-change-scheduled.md) |
 | [`SubscriptionStateChange`](../../../doc/models/subscription-state-change.md) |
 | [`PaymentRelatedEvents`](../../../doc/models/payment-related-events.md) |
 | [`RefundSuccess`](../../../doc/models/refund-success.md) |
@@ -41,19 +40,6 @@
 value = SubscriptionProductChange(
     previous_product_id=126,
     new_product_id=12
-)
-```
-
-## SubscriptionProductChangeScheduled
-
-### Initialization Code
-
-#### Example
-
-```python
-value = SubscriptionProductChangeScheduled(
-    previous_product_id=62,
-    new_product_id=52
 )
 ```
 

@@ -31,7 +31,10 @@ event_response = EventResponse(
         created_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
         event_specific_data=SubscriptionProductChange(
             previous_product_id=126,
-            new_product_id=12
+            new_product_id=12,
+            previous_product_price_point_id=250,
+            new_product_price_point_id=244,
+            effective_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
         )
     )
 )

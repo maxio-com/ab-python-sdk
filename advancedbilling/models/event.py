@@ -21,8 +21,7 @@ class Event(object):
         subscription_id (int): The model property of type int.
         customer_id (int): The model property of type int.
         created_at (datetime): The model property of type datetime.
-        event_specific_data (SubscriptionProductChange |
-            SubscriptionProductChangeScheduled | SubscriptionStateChange |
+        event_specific_data (SubscriptionProductChange | SubscriptionStateChange |
             PaymentRelatedEvents | RefundSuccess | ComponentAllocationChange |
             MeteredUsage | PrepaidUsage | DunningStepReached | InvoiceIssued |
             PendingCancellationChange | PrepaidSubscriptionBalanceChanged |
@@ -32,9 +31,8 @@ class Event(object):
             CustomFieldValueChange | ChjsTokenizationSuccess |
             ChjsTokenizationFailure | None): The schema varies based on the event
             key. The key-to-event data mapping is as follows:  *
-            `subscription_product_change` - SubscriptionProductChange *
-            `subscription_product_change_scheduled` -
-            SubscriptionProductChangeScheduled * `subscription_state_change` -
+            `subscription_product_change`, `subscription_product_change_scheduled` -
+            SubscriptionProductChange * `subscription_state_change` -
             SubscriptionStateChange * `signup_success`,
             `delayed_signup_creation_success`, `payment_success`, `payment_failure`,
             `renewal_success`, `renewal_failure`, `chargeback_lost`,

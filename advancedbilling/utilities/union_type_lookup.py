@@ -189,9 +189,6 @@ from advancedbilling.models.subscription_group_single_error import (
 from advancedbilling.models.subscription_product_change import (
     SubscriptionProductChange,
 )
-from advancedbilling.models.subscription_product_change_scheduled import (
-    SubscriptionProductChangeScheduled,
-)
 from advancedbilling.models.subscription_state_change import (
     SubscriptionStateChange,
 )
@@ -807,7 +804,6 @@ class UnionTypeLookUp:
         "EventEventSpecificData": lambda: OneOf(
             [
                 LeafType(SubscriptionProductChange),
-                LeafType(SubscriptionProductChangeScheduled),
                 LeafType(SubscriptionStateChange),
                 LeafType(PaymentRelatedEvents),
                 LeafType(RefundSuccess),
