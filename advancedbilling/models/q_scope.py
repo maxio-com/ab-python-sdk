@@ -16,7 +16,6 @@ class QScope(object):
         ORGANIZATION: The enum member of type str.
         CUSTOMER_REFERENCE: The enum member of type str.
         SUBSCRIPTION_REFERENCE: The enum member of type str.
-        LAST_FOUR: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -33,8 +32,6 @@ class QScope(object):
     CUSTOMER_REFERENCE = "customer_reference"
 
     SUBSCRIPTION_REFERENCE = "subscription_reference"
-
-    LAST_FOUR = "last_four"
 
     @classmethod
     def from_value(cls, value, default=None):
