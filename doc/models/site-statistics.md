@@ -21,15 +21,17 @@
 | `total_unpaid_subscriptions` | `int` | Optional | - |
 | `total_dunning_subscriptions` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "total_subscriptions": 204,
-  "subscriptions_today": 134,
-  "total_revenue": "total_revenue6",
-  "revenue_today": "revenue_today4",
-  "revenue_this_month": "revenue_this_month4"
-}
+```python
+from advancedbilling.models.site_statistics import SiteStatistics
+
+site_statistics = SiteStatistics(
+    total_subscriptions=186,
+    subscriptions_today=152,
+    total_revenue='total_revenue6',
+    revenue_today='revenue_today4',
+    revenue_this_month='revenue_this_month4'
+)
 ```
 

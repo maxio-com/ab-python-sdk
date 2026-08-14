@@ -12,12 +12,14 @@
 | `resume` | `bool` | Optional | - |
 | `resume_members` | `bool` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "resume": false,
-  "resume_members": false
-}
+```python
+from advancedbilling.models.reactivate_subscription_group_request import ReactivateSubscriptionGroupRequest
+
+reactivate_subscription_group_request = ReactivateSubscriptionGroupRequest(
+    resume=False,
+    resume_members=False
+)
 ```
 

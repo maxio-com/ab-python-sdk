@@ -12,7 +12,7 @@ class InvoiceDiscountSourceType(object):
     Attributes:
         COUPON: The enum member of type str.
         REFERRAL: The enum member of type str.
-        ENUM_AD HOC COUPON: The enum member of type str.
+        ENUM_AD_HOC_COUPON: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

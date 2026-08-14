@@ -41,7 +41,7 @@ class DebitNote(object):
         site_id (int): ID of the site to which the debit note belongs.
         customer_id (int): ID of the customer to which the debit note belongs.
         subscription_id (int): ID of the subscription that generated the debit note.
-        number (int): A unique, identifier that appears on the debit note and in
+        number (int): A unique identifier that appears on the debit note and in
             places it is referenced.
         sequence_number (int): A monotonically increasing number assigned to debit
             notes as they are created.
@@ -50,8 +50,8 @@ class DebitNote(object):
             followed by alphanumeric characters.  While the UID is long and not
             appropriate to show to customers, the number is usually shorter and
             consumable by the customer and the merchant alike.
-        origin_credit_note_number (str): A unique, identifying string of the
-            connected credit note.
+        origin_credit_note_number (str): A unique identifying string of the connected
+            credit note.
         issue_date (date): Date the document was issued to the customer. This is the
             date that the document was made available for payment.  The format is
             "YYYY-MM-DD".
@@ -69,8 +69,8 @@ class DebitNote(object):
             the currency of the credit note amount fields.
         seller (InvoiceSeller): Information about the seller (merchant) listed on the
             masthead of the debit note.
-        customer (InvoiceCustomer): Information about the customer who is owner or
-            recipient the debited subscription.
+        customer (InvoiceCustomer): Information about the customer who is the owner
+            or recipient of the debited subscription.
         billing_address (InvoiceAddress): The billing address of the debited
             subscription.
         shipping_address (InvoiceAddress): The shipping address of the debited

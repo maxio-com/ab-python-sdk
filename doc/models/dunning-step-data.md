@@ -18,18 +18,20 @@
 | `send_sms` | `bool` | Required | - |
 | `sms_body` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "day_threshold": 88,
-  "action": "action4",
-  "email_body": "email_body4",
-  "email_subject": "email_subject4",
-  "send_email": false,
-  "send_bcc_email": false,
-  "send_sms": false,
-  "sms_body": "sms_body0"
-}
+```python
+from advancedbilling.models.dunning_step_data import DunningStepData
+
+dunning_step_data = DunningStepData(
+    day_threshold=90,
+    action='action0',
+    send_email=False,
+    send_bcc_email=False,
+    send_sms=False,
+    email_body='email_body0',
+    email_subject='email_subject0',
+    sms_body='sms_body4'
+)
 ```
 

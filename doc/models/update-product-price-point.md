@@ -12,12 +12,14 @@
 | `handle` | `str` | Optional | - |
 | `price_in_cents` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "handle": "handle6",
-  "price_in_cents": 220
-}
+```python
+from advancedbilling.models.update_product_price_point import UpdateProductPricePoint
+
+update_product_price_point = UpdateProductPricePoint(
+    handle='handle2',
+    price_in_cents=190
+)
 ```
 

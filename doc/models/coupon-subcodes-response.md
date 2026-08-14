@@ -13,23 +13,23 @@
 | `duplicate_codes` | `List[str]` | Optional | - |
 | `invalid_codes` | `List[str]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "created_codes": [
-    "created_codes1",
-    "created_codes2"
-  ],
-  "duplicate_codes": [
-    "duplicate_codes8",
-    "duplicate_codes7"
-  ],
-  "invalid_codes": [
-    "invalid_codes0",
-    "invalid_codes9",
-    "invalid_codes8"
-  ]
-}
+```python
+from advancedbilling.models.coupon_subcodes_response import CouponSubcodesResponse
+
+coupon_subcodes_response = CouponSubcodesResponse(
+    created_codes=[
+        'created_codes7',
+        'created_codes8'
+    ],
+    duplicate_codes=[
+        'duplicate_codes0',
+        'duplicate_codes1'
+    ],
+    invalid_codes=[
+        'invalid_codes4'
+    ]
+)
 ```
 

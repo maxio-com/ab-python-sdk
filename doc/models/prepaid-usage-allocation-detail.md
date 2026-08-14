@@ -13,13 +13,15 @@
 | `charge_id` | `int` | Optional | - |
 | `usage_quantity` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "allocation_id": 72,
-  "charge_id": 30,
-  "usage_quantity": 212
-}
+```python
+from advancedbilling.models.prepaid_usage_allocation_detail import PrepaidUsageAllocationDetail
+
+prepaid_usage_allocation_detail = PrepaidUsageAllocationDetail(
+    allocation_id=18,
+    charge_id=84,
+    usage_quantity=10
+)
 ```
 

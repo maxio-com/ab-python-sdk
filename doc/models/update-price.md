@@ -15,15 +15,17 @@
 | `destroy` | `bool` | Optional | - |
 | `starting_quantity` | int \| str \| None | Optional | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 18,
-  "ending_quantity": 216,
-  "unit_price": 166.62,
-  "_destroy": false,
-  "starting_quantity": 242
-}
+```python
+from advancedbilling.models.update_price import UpdatePrice
+
+update_price = UpdatePrice(
+    id=94,
+    ending_quantity=216,
+    unit_price=118.74,
+    destroy=False,
+    starting_quantity=90
+)
 ```
 

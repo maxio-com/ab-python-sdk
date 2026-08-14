@@ -19,3 +19,11 @@
 | `TRIAL_ENDED_AT` |
 | `UPDATED_AT` |
 
+## Example
+
+```python
+from advancedbilling.models.subscription_date_field import SubscriptionDateField
+
+subscription_date_field = SubscriptionDateField.CURRENT_PERIOD_STARTS_AT
+```
+

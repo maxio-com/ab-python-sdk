@@ -29,16 +29,20 @@
 | `created_at` | `datetime` | Optional | A timestamp indicating when this payment profile was created |
 | `updated_at` | `datetime` | Optional | A timestamp indicating when this payment profile was last updated |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment_type": "paypal_account",
-  "id": 10,
-  "first_name": "first_name0",
-  "last_name": "last_name8",
-  "customer_id": 48,
-  "current_vault": "moduslink"
-}
+```python
+from advancedbilling.models.pay_pal_vault import PayPalVault
+from advancedbilling.models.payment_type import PaymentType
+from advancedbilling.models.paypal_payment_profile import PaypalPaymentProfile
+
+paypal_payment_profile = PaypalPaymentProfile(
+    payment_type=PaymentType.PAYPAL_ACCOUNT,
+    id=182,
+    first_name='first_name4',
+    last_name='last_name2',
+    customer_id=220,
+    current_vault=PayPalVault.MODUSLINK
+)
 ```
 

@@ -26,9 +26,9 @@ class CreditNoteLineItem(object):
             This is a decimal number represented as a string. (See "About Decimal
             Numbers".)
         unit_price (str): The price per unit for the line item.  When tiered pricing
-            was used (i.e. not every unit was actually priced at the same price) this
-            will be the blended average cost per unit and the `tiered_unit_price`
-            field will be set to `true`.
+            was used (i.e., not every unit was actually priced at the same price)
+            this will be the blended average cost per unit and the
+            `tiered_unit_price` field will be set to `true`.
         subtotal_amount (str): The line subtotal, generally calculated as `quantity *
             unit_price`. This is the canonical amount of record for the line - when
             rounding differences are in play, `subtotal_amount` takes precedence over

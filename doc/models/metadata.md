@@ -16,15 +16,19 @@
 | `deleted_at` | `datetime` | Optional | - |
 | `metafield_id` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 12,
-  "value": "value0",
-  "resource_id": 96,
-  "name": "name8",
-  "deleted_at": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.metadata import Metadata
+
+metadata = Metadata(
+    id=50,
+    value='value8',
+    resource_id=134,
+    name='name6',
+    deleted_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

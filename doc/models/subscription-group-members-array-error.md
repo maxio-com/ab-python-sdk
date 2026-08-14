@@ -11,13 +11,15 @@
 |  --- | --- | --- | --- |
 | `members` | `List[str]` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "members": [
-    "members6"
-  ]
-}
+```python
+from advancedbilling.models.subscription_group_members_array_error import SubscriptionGroupMembersArrayError
+
+subscription_group_members_array_error = SubscriptionGroupMembersArrayError(
+    members=[
+        'members2'
+    ]
+)
 ```
 

@@ -14,7 +14,9 @@
 
 ## Example
 
-```
-created_at
+```python
+from advancedbilling.models.list_prepayment_date_field import ListPrepaymentDateField
+
+list_prepayment_date_field = ListPrepaymentDateField.CREATED_AT
 ```
 

@@ -12,10 +12,10 @@
 | `id` | `int` | Optional | The Chargify-assigned ID of the stored card. This value can be used as an input to payment_profile_id when creating a subscription, in order to re-use a stored payment profile for the same customer. |
 | `first_name` | `str` | Optional | The first name of the card holder. |
 | `last_name` | `str` | Optional | The last name of the card holder. |
-| `masked_card_number` | `str` | Optional | A string representation of the credit card number with all but the last 4 digits masked with X’s (i.e. ‘XXXX-XXXX-XXXX-1234’). |
+| `masked_card_number` | `str` | Optional | A string representation of the credit card number with all but the last 4 digits masked with X’s (e.g., ‘XXXX-XXXX-XXXX-1234’). |
 | `card_type` | [`CardType`](../../doc/models/card-type.md) | Optional | The type of card used. |
 | `expiration_month` | `int` | Optional | An integer representing the expiration month of the card(1 – 12). |
-| `expiration_year` | `int` | Optional | An integer representing the 4-digit expiration year of the card(i.e. ‘2012’). |
+| `expiration_year` | `int` | Optional | An integer representing the 4-digit expiration year of the card(e.g., ‘2012’). |
 | `customer_id` | `int` | Optional | The Chargify-assigned id for the customer record to which the card belongs. |
 | `current_vault` | [`CreditCardVault`](../../doc/models/credit-card-vault.md) | Optional | The vault that stores the payment profile with the provided `vault_token`. Use `bogus` for testing. |
 | `vault_token` | `str` | Optional | The “token” provided by your vault storage for an already stored payment profile. |
@@ -28,36 +28,41 @@
 | `billing_address_2` | `str` | Optional | The current billing street address, second line, for the card. |
 | `payment_type` | [`PaymentType`](../../doc/models/payment-type.md) | Required | **Default**: `"credit_card"` |
 | `disabled` | `bool` | Optional | - |
-| `chargify_token` | `str` | Optional | Token received after sending billing information using Maxio.js (formerly Chargify.js). This token will only be received if passed as a sole attribute of credit_card_attributes (i.e. tok_9g6hw85pnpt6knmskpwp4ttt) |
+| `chargify_token` | `str` | Optional | Token received after sending billing information using Maxio.js (formerly Chargify.js). This token will only be received if passed as a sole attribute of credit_card_attributes (e.g., tok_9g6hw85pnpt6knmskpwp4ttt). |
 | `site_gateway_setting_id` | `int` | Optional | - |
 | `gateway_handle` | `str` | Optional | An identifier of connected gateway. |
 | `created_at` | `datetime` | Optional | A timestamp indicating when this payment profile was created |
 | `updated_at` | `datetime` | Optional | A timestamp indicating when this payment profile was last updated |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 10088716,
-  "first_name": "Test",
-  "last_name": "Subscription",
-  "masked_card_number": "XXXX-XXXX-XXXX-1",
-  "card_type": "bogus",
-  "expiration_month": 1,
-  "expiration_year": 2022,
-  "customer_id": 14543792,
-  "current_vault": "bogus",
-  "vault_token": "1",
-  "billing_address": "123 Montana Way",
-  "billing_city": "Billings",
-  "billing_state": "MT",
-  "billing_zip": "59101",
-  "billing_country": "US",
-  "customer_vault_token": null,
-  "billing_address_2": "",
-  "payment_type": "credit_card",
-  "site_gateway_setting_id": 1,
-  "gateway_handle": null
-}
+```python
+from advancedbilling.models.card_type import CardType
+from advancedbilling.models.credit_card_payment_profile import CreditCardPaymentProfile
+from advancedbilling.models.credit_card_vault import CreditCardVault
+from advancedbilling.models.payment_type import PaymentType
+
+credit_card_payment_profile = CreditCardPaymentProfile(
+    payment_type=PaymentType.CREDIT_CARD,
+    id=10088716,
+    first_name='Test',
+    last_name='Subscription',
+    masked_card_number='XXXX-XXXX-XXXX-1',
+    card_type=CardType.BOGUS,
+    expiration_month=1,
+    expiration_year=2022,
+    customer_id=14543792,
+    current_vault=CreditCardVault.BOGUS,
+    vault_token='1',
+    billing_address='123 Montana Way',
+    billing_city='Billings',
+    billing_state='MT',
+    billing_zip='59101',
+    billing_country='US',
+    customer_vault_token='customer_vault_token2',
+    billing_address_2='',
+    site_gateway_setting_id=1,
+    gateway_handle='gateway_handle8'
+)
 ```
 

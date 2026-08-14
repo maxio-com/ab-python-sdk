@@ -13,8 +13,8 @@
 | `name` | `str` | Optional | - |
 | `kind` | [`ComponentKind`](../../doc/models/component-kind.md) | Optional | A handle for the component type |
 | `unit_name` | `str` | Optional | - |
-| `enabled` | `bool` | Optional | (for on/off components) indicates if the component is enabled for the subscription |
-| `unit_balance` | `int` | Optional | - |
+| `enabled` | `bool` | Optional | (for on/off components) indicates if the component is enabled for the subscription. |
+| `unit_balance` | int \| str \| None | Optional | This is a container for one-of cases. |
 | `currency` | `str` | Optional | - |
 | `allocated_quantity` | int \| str \| None | Optional | This is a container for one-of cases. |
 | `pricing_scheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Optional | - |
@@ -36,21 +36,24 @@
 | `use_site_exchange_rate` | `bool` | Optional | - |
 | `description` | `str` | Optional | - |
 | `allow_fractional_quantities` | `bool` | Optional | - |
-| `subscription` | [`SubscriptionComponentSubscription`](../../doc/models/subscription-component-subscription.md) | Optional | An optional object, will be returned if provided `include=subscription` query param. |
+| `subscription` | [`SubscriptionComponentSubscription`](../../doc/models/subscription-component-subscription.md) | Optional | (Optional) Object that will be returned if the `include=subscription` query param is provided. |
 | `historic_usages` | [`List[HistoricUsage]`](../../doc/models/historic-usage.md) | Optional | - |
 | `display_on_hosted_page` | `bool` | Optional | - |
-| `interval` | `int` | Optional | The numerical interval. i.e. an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `interval` | `int` | Optional | The numerical interval. e.g., an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
 | `interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 20,
-  "name": "name8",
-  "kind": "quantity_based_component",
-  "unit_name": "unit_name0",
-  "enabled": false
-}
+```python
+from advancedbilling.models.component_kind import ComponentKind
+from advancedbilling.models.subscription_component import SubscriptionComponent
+
+subscription_component = SubscriptionComponent(
+    id=8,
+    name='name8',
+    kind=ComponentKind.QUANTITY_BASED_COMPONENT,
+    unit_name='unit_name0',
+    enabled=False
+)
 ```
 

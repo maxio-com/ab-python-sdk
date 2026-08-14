@@ -23,8 +23,7 @@ class InvoicePaymentMethodType(object):
 
     """
 
-    _all_values = ["credit_card", "check", "cash", "money_order", "ach",
-        "other"]
+    _all_values = ["credit_card", "check", "cash", "money_order", "ach", "other"]
     CREDIT_CARD = "credit_card"
 
     CHECK = "check"

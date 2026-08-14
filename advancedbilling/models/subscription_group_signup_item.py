@@ -31,9 +31,9 @@ class SubscriptionGroupSignupItem(object):
             particular price point.
         offer_id (int): Use in place of passing product and component information to
             set up the subscription with an existing offer. May be either the
-            Chargify ID of the offer or its handle prefixed with `handle:`
+            Chargify ID of the offer or its handle prefixed with `handle:`.
         reference (str): The reference value (provided by your app) for the
-            subscription itelf.
+            subscription itself.
         primary (bool): One of the subscriptions must be marked as primary in the
             group.
         currency (str): (Optional) If Multi-Currency is enabled and the currency is
@@ -49,7 +49,7 @@ class SubscriptionGroupSignupItem(object):
             subscription. A subscription can have up to 30 custom price points.
             Exceeding this limit will result in an API error.
         calendar_billing (CalendarBilling): (Optional). Cannot be used when also
-            specifying next_billing_at
+            specifying next_billing_at.
         metafields (Dict[str, str]): (Optional) A set of key/value pairs representing
             custom fields and their values. Metafields will be created “on-the-fly”
             in your site for a given key, if they have not been created yet.

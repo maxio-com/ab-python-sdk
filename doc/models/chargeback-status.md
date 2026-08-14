@@ -16,3 +16,11 @@ The current chargeback status.
 | `WON` |
 | `CLOSED` |
 
+## Example
+
+```python
+from advancedbilling.models.chargeback_status import ChargebackStatus
+
+chargeback_status = ChargebackStatus.OPEN
+```
+

@@ -48,3 +48,11 @@ The type of card used.
 | `SOLO` |
 | `LASER` |
 
+## Example
+
+```python
+from advancedbilling.models.card_type import CardType
+
+card_type = CardType.BOGUS
+```
+

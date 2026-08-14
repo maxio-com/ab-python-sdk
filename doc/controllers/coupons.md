@@ -30,11 +30,7 @@ coupons_controller = client.coupons
 
 Creates a coupon under the specified product family.
 
-You can create either a flat amount coupon by specifying amount_in_cents, or a percentage coupon by specifying percentage
-You can restrict a coupon to only apply to specific products / components by optionally passing in `restricted_products` and/or `restricted_components` objects in the format:
-`{ "<product_id/component_id>": boolean_value }`
-
-Coupons can be administered in the Advanced Billing application or created via API. See [creating coupons](https://maxio.zendesk.com/hc/en-us/articles/24261212433165-Creating-Editing-Deleting-Coupons) for more information.
+You can create either a flat amount coupon, by specifying `amount_in_cents`, or percentage coupon by specifying `percentage`.
 
 See [Apply Coupons to Subscriptions](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and-Subscriptions) for information on applying a coupon to a subscription in the Advanced Billing UI.
 
@@ -125,7 +121,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `30`<br><br>**Constraints**: `<= 200` |
 | `filter` | [`ListCouponsFilter`](../../doc/models/list-coupons-filter.md) | Query, Optional | Filter to use for List Coupons operations |
-| `currency_prices` | `bool` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. Use in query `currency_prices=true`. |
+| `currency_prices` | `bool` | Query, Optional | (Optional) If you have defined multiple currencies at the site level, you can pass `?currency_prices=true` to include an array of currency price data in the response. Use in query `currency_prices=true`. |
 
 ## Response Type
 
@@ -255,9 +251,9 @@ print(result)
 
 # Find Coupon
 
-Searches for a coupon by code, returning a 404 if no coupon is found. By passing a code parameter, the find will attempt to locate a coupon that matches that code.
+Searches for a coupon by code.
 
-If you have more than one product family and if the coupon you are trying to find does not belong to the default product family in your site, then you will need to specify (either in the url or as a query string param) the product family id.
+If you have more than one product family and if the coupon you are trying to find does not belong to the default product family in your site, you need to specify (either in the URL or as a query string param) the `product_family_id`.
 
 ```python
 def find_coupon(self,
@@ -276,7 +272,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 |  --- | --- | --- | --- |
 | `product_family_id` | `int` | Query, Optional | The Advanced Billing id of the product family to which the coupon belongs |
 | `code` | `str` | Query, Optional | The code of the coupon |
-| `currency_prices` | `bool` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. |
+| `currency_prices` | `bool` | Query, Optional | (Optional) If you have defined multiple currencies at the site level, you can pass `?currency_prices=true` to include an array of currency price data in the response. |
 
 ## Response Type
 
@@ -298,12 +294,11 @@ print(result)
 
 # Read Coupon
 
-Returns a coupon by its Advanced Billing-assigned ID. You must identify the Coupon in this call by the ID parameter that Advanced Billing assigns.
-If instead you would like to find a Coupon using a Coupon code, see the Coupon Find method.
+Returns a coupon by its system-assigned ID. You must identify the Coupon in this call by the ID parameter assigned to it.
 
-When fetching a coupon, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response.
+If instead you would like to find a Coupon using a Coupon code, use the [Find Coupon](../../doc/controllers/coupons.md#find-coupon) endpoint.
 
-If the coupon is set to `use_site_exchange_rate: true`, it will return pricing based on the current exchange rate. If the flag is set to false, it will return all of the defined prices for each currency.
+If the coupon is set to `use_site_exchange_rate: true`, it returns pricing based on the current exchange rate. If the flag is set to false, it returns all of the defined prices for each currency.
 
 ```python
 def read_coupon(self,
@@ -322,7 +317,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 |  --- | --- | --- | --- |
 | `product_family_id` | `int` | Template, Required | The Advanced Billing id of the product family to which the coupon belongs |
 | `coupon_id` | `int` | Template, Required | The Advanced Billing id of the coupon |
-| `currency_prices` | `bool` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. |
+| `currency_prices` | `bool` | Query, Optional | (Optional) If you have defined multiple currencies at the site level, you can pass `?currency_prices=true` to include an array of currency price data in the response. |
 
 ## Response Type
 
@@ -575,7 +570,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | `page` | `int` | Query, Optional | Result records are organized in pages. By default, the first page of results is displayed. The page parameter specifies a page number of results to fetch. You can start navigating through the pages to consume the results. You do this by passing in a page parameter. Retrieve the next page by adding ?page=2 to the query string. If there are no results to return, then an empty result set will be returned.<br>Use in query `page=1`.<br><br>**Default**: `1`<br><br>**Constraints**: `>= 1` |
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 30. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `30`<br><br>**Constraints**: `<= 200` |
 | `filter` | [`ListCouponsFilter`](../../doc/models/list-coupons-filter.md) | Query, Optional | Filter to use for List Coupons operations |
-| `currency_prices` | `bool` | Query, Optional | When fetching coupons, if you have defined multiple currencies at the site level, you can optionally pass the `?currency_prices=true` query param to include an array of currency price data in the response. Use in query `currency_prices=true`. |
+| `currency_prices` | `bool` | Query, Optional | (Optional) If you have defined multiple currencies at the site level, you can pass `?currency_prices=true` to include an array of currency price data in the response. Use in query `currency_prices=true`. |
 
 ## Response Type
 
@@ -737,23 +732,17 @@ print(result)
 
 # Validate Coupon
 
-Verifies whether a specific coupon code is valid. This method is useful for validating coupon codes that are entered by a customer. If the coupon is found and is valid, the coupon will be returned with a 200 status code.
+Verifies whether a specific coupon code is valid. This method is useful for validating coupon codes that are entered by a customer.
 
-If the coupon is invalid, the status code will be 404 and the response will say why it is invalid. If the coupon is valid, the status code will be 200 and the coupon will be returned. The following reasons for invalidity are supported:
+If you have more than one product family and if the coupon you are validating does not belong to the first product family in your site, you need to specify the product family, either in the URL or as a query string param. This can be done by supplying the id or the handle in the `handle:my-family` format.
 
-+ Coupon not found
-+ Coupon is invalid
-+ Coupon expired
-
-If you have more than one product family and if the coupon you are validating does not belong to the first product family in your site, then you will need to specify the product family, either in the url or as a query string param. This can be done by supplying the id or the handle in the `handle:my-family` format.
-
-Eg.
+Supplying the `product_family_handle` in the URL:
 
 ```
 https://<subdomain>.chargify.com/product_families/handle:<product_family_handle>/coupons/validate.<format>?code=<coupon_code>
 ```
 
-Or:
+Supplying the `product_family_id` as a query parameter:
 
 ```
 https://<subdomain>.chargify.com/coupons/validate.<format>?code=<coupon_code>&product_family_id=<id>
@@ -892,8 +881,6 @@ print(result)
 
 Creates subcodes for an existing coupon.
 
-## Coupon Subcodes Intro
-
 Coupon Subcodes allow you to create a set of unique codes that allow you to expand the use of one coupon.
 
 For example:
@@ -908,21 +895,9 @@ Coupon Subcodes:
 + DP80302
 + SPRINGBALTIMORE
 
-Coupon subcodes can be administered in the Admin Interface or via the API.
+When creating a coupon subcode, you must specify a coupon to attach it to using the coupon_id. Valid coupon subcodes are all capital letters, contain only letters and numbers, and do not have any spaces. Lowercase letters are capitalized before the subcode is created.
 
-When creating a coupon subcode, you must specify a coupon to attach it to using the coupon_id. Valid coupon subcodes are all capital letters, contain only letters and numbers, and do not have any spaces. Lowercase letters will be capitalized before the subcode is created.
-
-## Coupon Subcodes Documentation
-
-Full documentation on how to create coupon subcodes in the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24261208729229-Coupon-Codes).
-
-Additionally, for documentation on how to apply a coupon to a Subscription within the Advanced Billing UI, see our documentation [here](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and-Subscriptions).
-
-## Create Coupon Subcode
-
-This request allows you to create specific subcodes underneath an existing coupon code.
-
-*Note*: If you are using any of the allowed special characters ("%", "@", "+", "-", "_", and "."), you must encode them for use in the URL.
+Note: If you are using any of the allowed special characters ("%", "@", "+", "-", "_", and "."), you must encode them for use in the URL.
 
     % to %25
     @ to %40
@@ -931,7 +906,9 @@ This request allows you to create specific subcodes underneath an existing coupo
     _ to %5F
     . to %2E
 
-So, if the coupon subcode is `20%OFF`, the URL to delete this coupon subcode would be: `https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>`
+So, if the coupon subcode is `20%OFF`, the URL to delete this coupon subcode would be: `https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>`.
+
+For more information on coupon codes and applying coupons to subscriptions, see [Coupon Codes](https://maxio.zendesk.com/hc/en-us/articles/24261208729229-Coupon-Codes) and [Coupons and Subscriptions](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coupons-and-Subscriptions).
 
 ```python
 def create_coupon_subcodes(self,
@@ -1141,7 +1118,7 @@ Note: If you are using any of the allowed special characters (“%”, “@”, 
 
 ## Percent Encoding Example
 
-Or if the coupon subcode is 20%OFF, the URL to delete this coupon subcode would be: @https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>
+Or if the coupon subcode is 20%OFF, the URL to delete this coupon subcode would be: @https://<subdomain>.chargify.com/coupons/567/codes/20%25OFF.<format>.
 
 ```python
 def delete_coupon_subcode(self,

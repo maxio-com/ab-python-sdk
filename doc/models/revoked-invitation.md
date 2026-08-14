@@ -13,13 +13,15 @@
 | `last_accepted_at` | `str` | Optional | - |
 | `uninvited_count` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "last_sent_at": "last_sent_at2",
-  "last_accepted_at": "last_accepted_at2",
-  "uninvited_count": 226
-}
+```python
+from advancedbilling.models.revoked_invitation import RevokedInvitation
+
+revoked_invitation = RevokedInvitation(
+    last_sent_at='last_sent_at4',
+    last_accepted_at='last_accepted_at4',
+    uninvited_count=58
+)
 ```
 

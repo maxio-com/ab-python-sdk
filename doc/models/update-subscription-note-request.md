@@ -13,14 +13,17 @@ Updatable fields for Subscription Note
 |  --- | --- | --- | --- |
 | `note` | [`UpdateSubscriptionNote`](../../doc/models/update-subscription-note.md) | Required | Updatable fields for Subscription Note |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "note": {
-    "body": "body0",
-    "sticky": false
-  }
-}
+```python
+from advancedbilling.models.update_subscription_note import UpdateSubscriptionNote
+from advancedbilling.models.update_subscription_note_request import UpdateSubscriptionNoteRequest
+
+update_subscription_note_request = UpdateSubscriptionNoteRequest(
+    note=UpdateSubscriptionNote(
+        body='body0',
+        sticky=False
+    )
+)
 ```
 

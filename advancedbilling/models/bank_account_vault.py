@@ -26,8 +26,8 @@ class BankAccountVault(object):
 
     """
 
-    _all_values = ["authorizenet", "blue_snap", "bogus", "forte",
-        "gocardless", "maxio_payments", "maxp", "stripe_connect"]
+    _all_values = ["authorizenet", "blue_snap", "bogus", "forte", "gocardless", "maxio_payments",
+        "maxp", "stripe_connect"]
     AUTHORIZENET = "authorizenet"
 
     BLUE_SNAP = "blue_snap"

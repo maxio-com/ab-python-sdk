@@ -16,15 +16,17 @@
 | `return_params` | `str` | Optional | - |
 | `url` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 50,
-  "nickname": "nickname8",
-  "enabled": false,
-  "return_url": "return_url2",
-  "return_params": "return_params0"
-}
+```python
+from advancedbilling.models.offer_signup_page import OfferSignupPage
+
+offer_signup_page = OfferSignupPage(
+    id=78,
+    nickname='nickname0',
+    enabled=False,
+    return_url='return_url0',
+    return_params='return_params2'
+)
 ```
 

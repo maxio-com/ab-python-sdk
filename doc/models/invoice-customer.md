@@ -1,7 +1,7 @@
 
 # Invoice Customer
 
-Information about the customer who is owner or recipient the invoiced subscription.
+Information about the customer who is owner or recipient of the invoiced subscription.
 
 ## Structure
 
@@ -19,15 +19,17 @@ Information about the customer who is owner or recipient the invoiced subscripti
 | `vat_number` | `str` | Optional | - |
 | `reference` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "chargify_id": 236,
-  "first_name": "first_name0",
-  "last_name": "last_name8",
-  "organization": "organization4",
-  "email": "email6"
-}
+```python
+from advancedbilling.models.invoice_customer import InvoiceCustomer
+
+invoice_customer = InvoiceCustomer(
+    chargify_id=52,
+    first_name='first_name0',
+    last_name='last_name8',
+    organization='organization4',
+    email='email6'
+)
 ```
 

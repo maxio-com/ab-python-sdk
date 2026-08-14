@@ -14,14 +14,16 @@
 | `applied_amount` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `prepayment` | `bool` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "memo": "memo4",
-  "original_amount": "original_amount4",
-  "applied_amount": "applied_amount8",
-  "prepayment": false
-}
+```python
+from advancedbilling.models.proforma_invoice_payment import ProformaInvoicePayment
+
+proforma_invoice_payment = ProformaInvoicePayment(
+    memo='memo2',
+    original_amount='original_amount2',
+    applied_amount='applied_amount0',
+    prepayment=False
+)
 ```
 

@@ -24,15 +24,19 @@
 | `period_range_start` | `str` | Optional | - |
 | `period_range_end` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transaction_type": "info_transaction",
-  "kind": "baseline",
-  "amount_in_cents": 216,
-  "memo": "memo4",
-  "discount_amount_in_cents": 236
-}
+```python
+from advancedbilling.models.billing_manifest_item import BillingManifestItem
+from advancedbilling.models.billing_manifest_line_item_kind import BillingManifestLineItemKind
+from advancedbilling.models.line_item_transaction_type import LineItemTransactionType
+
+billing_manifest_item = BillingManifestItem(
+    transaction_type=LineItemTransactionType.PAYMENT_AUTHORIZATION,
+    kind=BillingManifestLineItemKind.BASELINE,
+    amount_in_cents=152,
+    memo='memo0',
+    discount_amount_in_cents=92
+)
 ```
 

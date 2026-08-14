@@ -12,33 +12,37 @@
 | `item_type` | `str` | Required, Constant | Item type to add. Either Product or Component.<br><br>**Value**: `"Component"` |
 | `item_id` | `int` | Required | Product or component identifier. |
 | `price_point_id` | `int` | Optional | Price point identifier. |
-| `quantity` | `int` | Optional | Optional quantity for the item. |
+| `quantity` | `int` | Optional | (Optional) Quantity for the item. |
 | `custom_price` | [`ScheduledRenewalComponentCustomPrice`](../../doc/models/scheduled-renewal-component-custom-price.md) | Optional | Custom pricing for a component within a scheduled renewal. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "item_type": "Component",
-  "item_id": 108,
-  "price_point_id": 122,
-  "quantity": 212,
-  "custom_price": {
-    "tax_included": false,
-    "pricing_scheme": "stairstep",
-    "prices": [
-      {
-        "starting_quantity": 242,
-        "ending_quantity": 40,
-        "unit_price": 23.26
-      },
-      {
-        "starting_quantity": 242,
-        "ending_quantity": 40,
-        "unit_price": 23.26
-      }
-    ]
-  }
-}
+```python
+from advancedbilling.models.price import Price
+from advancedbilling.models.pricing_scheme import PricingScheme
+from advancedbilling.models.scheduled_renewal_component_custom_price import ScheduledRenewalComponentCustomPrice
+from advancedbilling.models.scheduled_renewal_item_request_body_component import ScheduledRenewalItemRequestBodyComponent
+
+scheduled_renewal_item_request_body_component = ScheduledRenewalItemRequestBodyComponent(
+    item_id=228,
+    price_point_id=214,
+    quantity=36,
+    custom_price=ScheduledRenewalComponentCustomPrice(
+        pricing_scheme=PricingScheme.STAIRSTEP,
+        prices=[
+            Price(
+                starting_quantity=242,
+                unit_price=23.26,
+                ending_quantity=40
+            ),
+            Price(
+                starting_quantity=242,
+                unit_price=23.26,
+                ending_quantity=40
+            )
+        ],
+        tax_included=False
+    )
+)
 ```
 

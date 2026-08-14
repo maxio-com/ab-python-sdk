@@ -24,15 +24,18 @@
 | `mtype` | `str` | Optional | - |
 | `tax_exempt_amount` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "title": "title6",
-  "description": "description2",
-  "source_type": "Tax",
-  "source_id": 164
-}
+```python
+from advancedbilling.models.invoice_tax import InvoiceTax
+from advancedbilling.models.proforma_invoice_tax_source_type import ProformaInvoiceTaxSourceType
+
+invoice_tax = InvoiceTax(
+    uid='uid0',
+    title='title4',
+    description='description0',
+    source_type=ProformaInvoiceTaxSourceType.TAX,
+    source_id=216
+)
 ```
 

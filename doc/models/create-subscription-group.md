@@ -12,14 +12,16 @@
 | `subscription_id` | `int` | Required | - |
 | `member_ids` | `List[int]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription_id": 38,
-  "member_ids": [
-    162
-  ]
-}
+```python
+from advancedbilling.models.create_subscription_group import CreateSubscriptionGroup
+
+create_subscription_group = CreateSubscriptionGroup(
+    subscription_id=130,
+    member_ids=[
+        230
+    ]
+)
 ```
 

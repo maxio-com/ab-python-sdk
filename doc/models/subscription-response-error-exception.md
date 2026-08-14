@@ -11,17 +11,14 @@
 |  --- | --- | --- | --- |
 | `subscription` | [`Subscription`](../../doc/models/subscription.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription": {
-    "id": 8,
-    "state": "paused",
-    "balance_in_cents": 124,
-    "total_revenue_in_cents": 48,
-    "product_price_in_cents": 238
-  }
-}
+```python
+try:
+    # make the API call
+except SubscriptionResponseErrorException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

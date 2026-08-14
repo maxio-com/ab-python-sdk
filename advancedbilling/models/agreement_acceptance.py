@@ -16,7 +16,7 @@ class AgreementAcceptance(object):
     Attributes:
         ip_address (str): Required when providing agreement acceptance params.
         terms_url (str): Required when creating a subscription with Maxio Payments.
-            Either terms_url or provacy_policy_url required when providing
+            Either terms_url or privacy_policy_url is required when providing
             agreement_acceptance params.
         privacy_policy_url (str): The model property of type str.
         return_refund_policy_url (str): The model property of type str.

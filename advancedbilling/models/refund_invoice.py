@@ -23,8 +23,8 @@ class RefundInvoice(object):
             the customer). Defaults to `false`.
         apply_credit (bool): If set to true, creates credit and applies it to an
             invoice. Defaults to `false`.
-        void_invoice (bool): If `apply_credit` set to false and refunding full
-            amount, if `void_invoice` set to true, invoice will be voided after
+        void_invoice (bool): If `apply_credit` is set to false and refunding full
+            amount, if `void_invoice` is set to true, invoice will be voided after
             refund. Defaults to `false`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.

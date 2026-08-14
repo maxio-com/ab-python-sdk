@@ -11,13 +11,17 @@
 |  --- | --- | --- | --- |
 | `codes` | `List[str]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "codes": [
-    "codes8"
-  ]
-}
+```python
+from advancedbilling.models.coupon_subcodes import CouponSubcodes
+
+coupon_subcodes = CouponSubcodes(
+    codes=[
+        'codes0',
+        'codes1',
+        'codes2'
+    ]
+)
 ```
 

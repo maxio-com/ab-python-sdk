@@ -14,14 +14,17 @@
 | `memo` | `str` | Required | - |
 | `mtype` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "details": "details4",
-  "kind": "kind2",
-  "memo": "memo8",
-  "type": "external"
-}
+```python
+from advancedbilling.models.invoice_event_payment_method import InvoiceEventPaymentMethod
+from advancedbilling.models.payment_method_external import PaymentMethodExternal
+
+payment_method_external = PaymentMethodExternal(
+    details='details8',
+    kind='kind6',
+    memo='memo2',
+    mtype=InvoiceEventPaymentMethod.EXTERNAL
+)
 ```
 

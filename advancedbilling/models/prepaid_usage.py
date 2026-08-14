@@ -17,8 +17,8 @@ class PrepaidUsage(object):
     Attributes:
         previous_unit_balance (str): The model property of type str.
         previous_overage_unit_balance (str): The model property of type str.
-        new_unit_balance (int): The model property of type int.
-        new_overage_unit_balance (int): The model property of type int.
+        new_unit_balance (int | str): The model property of type int | str.
+        new_overage_unit_balance (int | str): The model property of type int | str.
         usage_quantity (int): The model property of type int.
         overage_usage_quantity (int): The model property of type int.
         component_id (int): The model property of type int.
@@ -90,6 +90,10 @@ class PrepaidUsage(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
+
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
@@ -102,14 +106,18 @@ class PrepaidUsage(object):
             dictionary.get("previous_overage_unit_balance")\
             if dictionary.get("previous_overage_unit_balance")\
                 else None
-        new_unit_balance =\
-            dictionary.get("new_unit_balance")\
-            if dictionary.get("new_unit_balance")\
-                else None
-        new_overage_unit_balance =\
-            dictionary.get("new_overage_unit_balance")\
-            if dictionary.get("new_overage_unit_balance")\
-                else None
+        new_unit_balance = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("PrepaidUsageNewUnitBalance"),
+            dictionary.get("new_unit_balance"),
+            False)\
+            if dictionary.get("new_unit_balance") is not None\
+            else None
+        new_overage_unit_balance = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("PrepaidUsageNewOverageUnitBalance"),
+            dictionary.get("new_overage_unit_balance"),
+            False)\
+            if dictionary.get("new_overage_unit_balance") is not None\
+            else None
         usage_quantity =\
             dictionary.get("usage_quantity")\
             if dictionary.get("usage_quantity")\
@@ -167,6 +175,10 @@ class PrepaidUsage(object):
             boolean : if dictionary is valid contains required properties.
 
         """
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
+
         if isinstance(dictionary, cls):
             return APIHelper.is_valid_type(
                     value=dictionary.previous_unit_balance,
@@ -182,20 +194,10 @@ class PrepaidUsage(object):
                         value,
                         str,
                 )) \
-                and APIHelper.is_valid_type(
-                    value=dictionary.new_unit_balance,
-                    type_callable=lambda value:
-                        isinstance(
-                        value,
-                        int,
-                )) \
-                and APIHelper.is_valid_type(
-                    value=dictionary.new_overage_unit_balance,
-                    type_callable=lambda value:
-                        isinstance(
-                        value,
-                        int,
-                )) \
+                and (UnionTypeLookUp.get("PrepaidUsageNewUnitBalance")
+                .validate(dictionary.new_unit_balance).is_valid) \
+                and (UnionTypeLookUp.get("PrepaidUsageNewOverageUnitBalance")
+                .validate(dictionary.new_overage_unit_balance).is_valid) \
                 and APIHelper.is_valid_type(
                     value=dictionary.usage_quantity,
                     type_callable=lambda value:
@@ -255,20 +257,10 @@ class PrepaidUsage(object):
                     value,
                     str,
             )) \
-            and APIHelper.is_valid_type(
-                value=dictionary.get("new_unit_balance"),
-                type_callable=lambda value:
-                    isinstance(
-                    value,
-                    int,
-            )) \
-            and APIHelper.is_valid_type(
-                value=dictionary.get("new_overage_unit_balance"),
-                type_callable=lambda value:
-                    isinstance(
-                    value,
-                    int,
-            )) \
+            and (UnionTypeLookUp.get("PrepaidUsageNewUnitBalance")
+            .validate(dictionary.get("new_unit_balance")).is_valid) \
+            and (UnionTypeLookUp.get("PrepaidUsageNewOverageUnitBalance")
+            .validate(dictionary.get("new_overage_unit_balance")).is_valid) \
             and APIHelper.is_valid_type(
                 value=dictionary.get("usage_quantity"),
                 type_callable=lambda value:

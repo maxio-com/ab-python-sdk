@@ -18,22 +18,27 @@ Example schema for an `void_invoice` event
 | `is_advance_invoice` | `bool` | Required | If true, the invoice is an advance invoice. |
 | `reason` | `str` | Required | The reason for the void. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "credit_note_attributes": {
-    "uid": "uid2",
-    "site_id": 72,
-    "customer_id": 184,
-    "subscription_id": 0,
-    "number": "number0"
-  },
-  "memo": "memo6",
-  "applied_amount": "applied_amount6",
-  "transaction_time": "2016-03-13T12:52:32.123Z",
-  "is_advance_invoice": false,
-  "reason": "reason8"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.credit_note import CreditNote
+from advancedbilling.models.void_invoice_event_data import VoidInvoiceEventData
+
+void_invoice_event_data = VoidInvoiceEventData(
+    credit_note_attributes=CreditNote(
+        uid='uid2',
+        site_id=72,
+        customer_id=184,
+        subscription_id=0,
+        number='number0'
+    ),
+    memo='memo6',
+    applied_amount='applied_amount6',
+    transaction_time=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    is_advance_invoice=False,
+    reason='reason2'
+)
 ```
 

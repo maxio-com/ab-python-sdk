@@ -11,7 +11,7 @@ from advancedbilling.api_helper import APIHelper
 class CalendarBilling(object):
     """Implementation of the 'Calendar Billing' model.
 
-    (Optional). Cannot be used when also specifying next_billing_at
+    (Optional). Cannot be used when also specifying next_billing_at.
 
     Attributes:
         snap_day (int | str | None): A day of month that subscription will be

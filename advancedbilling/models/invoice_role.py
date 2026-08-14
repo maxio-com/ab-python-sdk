@@ -25,9 +25,8 @@ class InvoiceRole(object):
 
     """
 
-    _all_values = ["unset", "signup", "renewal", "usage", "reactivation",
-        "proration", "migration", "adhoc", "backport",
-        "backport-balance-reconciliation"]
+    _all_values = ["unset", "signup", "renewal", "usage", "reactivation", "proration",
+        "migration", "adhoc", "backport", "backport-balance-reconciliation"]
     UNSET = "unset"
 
     SIGNUP = "signup"

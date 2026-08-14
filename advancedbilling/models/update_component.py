@@ -14,7 +14,7 @@ class UpdateComponent(object):
     Attributes:
         handle (str): The model property of type str.
         name (str): The name of the Component, suitable for display on statements.
-            i.e. Text Messages.
+            e.g., Text Messages.
         description (str): The description of the component.
         accounting_code (str): The model property of type str.
         taxable (bool): Boolean flag describing whether a component is taxable or not.
@@ -27,6 +27,10 @@ class UpdateComponent(object):
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site setting if
             one is not provided.
+        unspsc_code (str): (Optional) Custom UNSPSC commodity code for Level 3/CEDP
+            payment data. When set, this value is sent as the commodity code on
+            invoice line items for this component instead of the default derived from
+            item_category.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -43,6 +47,7 @@ class UpdateComponent(object):
         "item_category": "item_category",
         "display_on_hosted_page": "display_on_hosted_page",
         "upgrade_charge": "upgrade_charge",
+        "unspsc_code": "unspsc_code",
     }
 
     _optionals = [
@@ -55,6 +60,7 @@ class UpdateComponent(object):
         "item_category",
         "display_on_hosted_page",
         "upgrade_charge",
+        "unspsc_code",
     ]
 
     _nullables = [
@@ -63,6 +69,7 @@ class UpdateComponent(object):
         "tax_code",
         "item_category",
         "upgrade_charge",
+        "unspsc_code",
     ]
 
     def __init__(
@@ -76,6 +83,7 @@ class UpdateComponent(object):
         item_category=APIHelper.SKIP,
         display_on_hosted_page=APIHelper.SKIP,
         upgrade_charge=APIHelper.SKIP,
+        unspsc_code=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a UpdateComponent instance."""
         # Initialize members of the class
@@ -97,6 +105,8 @@ class UpdateComponent(object):
             self.display_on_hosted_page = display_on_hosted_page
         if upgrade_charge is not APIHelper.SKIP:
             self.upgrade_charge = upgrade_charge
+        if unspsc_code is not APIHelper.SKIP:
+            self.unspsc_code = unspsc_code
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -157,6 +167,10 @@ class UpdateComponent(object):
             dictionary.get("upgrade_charge")\
             if "upgrade_charge" in dictionary.keys()\
                 else APIHelper.SKIP
+        unspsc_code =\
+            dictionary.get("unspsc_code")\
+            if "unspsc_code" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -172,6 +186,7 @@ class UpdateComponent(object):
                    item_category,
                    display_on_hosted_page,
                    upgrade_charge,
+                   unspsc_code,
                    additional_properties)
 
     def __repr__(self):
@@ -221,6 +236,11 @@ class UpdateComponent(object):
             if hasattr(self, "upgrade_charge")
             else None
         )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -233,6 +253,7 @@ class UpdateComponent(object):
             f"item_category={_item_category!r}, "
             f"display_on_hosted_page={_display_on_hosted_page!r}, "
             f"upgrade_charge={_upgrade_charge!r}, "
+            f"unspsc_code={_unspsc_code!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -284,6 +305,11 @@ class UpdateComponent(object):
             if hasattr(self, "upgrade_charge")
             else None
         )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -296,6 +322,7 @@ class UpdateComponent(object):
             f"item_category={_item_category!s}, "
             f"display_on_hosted_page={_display_on_hosted_page!s}, "
             f"upgrade_charge={_upgrade_charge!s}, "
+            f"unspsc_code={_unspsc_code!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

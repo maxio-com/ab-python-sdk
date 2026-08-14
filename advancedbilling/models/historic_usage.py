@@ -11,8 +11,8 @@ from advancedbilling.api_helper import APIHelper
 class HistoricUsage(object):
     """Implementation of the 'Historic Usage' model.
 
-    Optional for Event Based Components. If the `include=historic_usages` query param
-    is provided, the last ten billing periods will be returned.
+    (Optional) For Event Based Components. If the `include=historic_usages` query
+    param is provided, the last ten billing periods will be returned.
 
     Attributes:
         total_usage_quantity (float): Total usage of a component for billing period

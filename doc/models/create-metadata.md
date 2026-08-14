@@ -12,12 +12,14 @@
 | `name` | `str` | Optional | - |
 | `value` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name4",
-  "value": "value6"
-}
+```python
+from advancedbilling.models.create_metadata import CreateMetadata
+
+create_metadata = CreateMetadata(
+    name='name2',
+    value='value4'
+)
 ```
 

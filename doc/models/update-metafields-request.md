@@ -11,25 +11,31 @@
 |  --- | --- | --- | --- |
 | `metafields` | [Update Metafield](../../doc/models/update-metafield.md) \| List[[Update Metafield](../../doc/models/update-metafield.md)] \| None | Optional | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "metafields": {
-    "current_name": "current_name0",
-    "name": "name6",
-    "scope": {
-      "csv": "0",
-      "invoices": "0",
-      "statements": "0",
-      "portal": "0",
-      "public_show": "0"
-    },
-    "input_type": "balance_tracker",
-    "enum": [
-      "enum2"
-    ]
-  }
-}
+```python
+from advancedbilling.models.include_option import IncludeOption
+from advancedbilling.models.metafield_input import MetafieldInput
+from advancedbilling.models.metafield_scope import MetafieldScope
+from advancedbilling.models.update_metafield import UpdateMetafield
+from advancedbilling.models.update_metafields_request import UpdateMetafieldsRequest
+
+update_metafields_request = UpdateMetafieldsRequest(
+    metafields=UpdateMetafield(
+        current_name='current_name0',
+        name='name6',
+        scope=MetafieldScope(
+            csv=IncludeOption.EXCLUDE,
+            invoices=IncludeOption.EXCLUDE,
+            statements=IncludeOption.EXCLUDE,
+            portal=IncludeOption.EXCLUDE,
+            public_show=IncludeOption.EXCLUDE
+        ),
+        input_type=MetafieldInput.BALANCE_TRACKER,
+        enum=[
+            'enum2'
+        ]
+    )
+)
 ```
 

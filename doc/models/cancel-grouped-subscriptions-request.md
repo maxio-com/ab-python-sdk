@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `charge_unbilled_usage` | `bool` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "charge_unbilled_usage": false
-}
+```python
+from advancedbilling.models.cancel_grouped_subscriptions_request import CancelGroupedSubscriptionsRequest
+
+cancel_grouped_subscriptions_request = CancelGroupedSubscriptionsRequest(
+    charge_unbilled_usage=False
+)
 ```
 

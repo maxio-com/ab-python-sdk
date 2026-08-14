@@ -17,7 +17,7 @@ class CreateSubscriptionComponent(object):
     Attributes:
         component_id (int | str | None): The model property of type int | str | None.
         enabled (bool): Used for on/off components only.
-        unit_balance (int): Used for metered and events based components.
+        unit_balance (int | str | None): Used for metered and events based components.
         allocated_quantity (int | str | None): Used for quantity based components.
         quantity (int): Deprecated. Use `allocated_quantity` instead.
         price_point_id (int | str | None): The model property of type int | str |
@@ -114,10 +114,12 @@ class CreateSubscriptionComponent(object):
             dictionary.get("enabled")\
             if "enabled" in dictionary.keys()\
                 else APIHelper.SKIP
-        unit_balance =\
-            dictionary.get("unit_balance")\
-            if dictionary.get("unit_balance")\
-                else APIHelper.SKIP
+        unit_balance = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("CreateSubscriptionComponentUnitBalance"),
+            dictionary.get("unit_balance"),
+            False)\
+            if dictionary.get("unit_balance") is not None\
+            else APIHelper.SKIP
         allocated_quantity = APIHelper.deserialize_union_type(
             UnionTypeLookUp.get("CreateSubscriptionComponentAllocatedQuantity"),
             dictionary.get("allocated_quantity"),

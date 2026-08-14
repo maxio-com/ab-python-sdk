@@ -11,16 +11,19 @@
 |  --- | --- | --- | --- |
 | `components` | [`List[ComponentPricePointAssignment]`](../../doc/models/component-price-point-assignment.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "components": [
-    {
-      "component_id": 108,
-      "price_point": "String5"
-    }
-  ]
-}
+```python
+from advancedbilling.models.bulk_components_price_point_assignment import BulkComponentsPricePointAssignment
+from advancedbilling.models.component_price_point_assignment import ComponentPricePointAssignment
+
+bulk_components_price_point_assignment = BulkComponentsPricePointAssignment(
+    components=[
+        ComponentPricePointAssignment(
+            component_id=108,
+            price_point='String5'
+        )
+    ]
+)
 ```
 

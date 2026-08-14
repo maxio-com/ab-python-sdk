@@ -15,3 +15,11 @@ Role for the price.
 | `TRIAL` |
 | `INITIAL` |
 
+## Example
+
+```python
+from advancedbilling.models.currency_price_role import CurrencyPriceRole
+
+currency_price_role = CurrencyPriceRole.TRIAL
+```
+

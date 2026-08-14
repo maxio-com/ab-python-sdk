@@ -14,12 +14,14 @@ Updatable fields for Subscription Note
 | `body` | `str` | Required | - |
 | `sticky` | `bool` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "body": "body8",
-  "sticky": false
-}
+```python
+from advancedbilling.models.update_subscription_note import UpdateSubscriptionNote
+
+update_subscription_note = UpdateSubscriptionNote(
+    body='body8',
+    sticky=False
+)
 ```
 

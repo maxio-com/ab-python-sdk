@@ -20,7 +20,7 @@ class GroupSettings(object):
     Attributes:
         target (GroupTarget): Attributes of the target customer who will be the
             responsible payer of the created subscription. Required.
-        billing (GroupBilling): Optional attributes related to billing date and
+        billing (GroupBilling): (Optional) Attributes related to billing date and
             accrual. Note: Only applicable for new subscriptions.
         additional_properties (Dict[str, object]): The additional properties for the
             model.

@@ -9,7 +9,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 class ProformaInvoiceRole(object):
     """Implementation of the 'Proforma Invoice Role' enum.
 
-    'proforma' value is deprecated in favor of proforma_adhoc and proforma_automatic
+    'proforma' value is deprecated in favor of proforma_adhoc and proforma_automatic.
 
     Attributes:
         UNSET: The enum member of type str.

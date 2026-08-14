@@ -12,12 +12,14 @@
 | `product_id` | `int` | Required | - |
 | `account_transaction_id` | `int` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "product_id": 42,
-  "account_transaction_id": 58
-}
+```python
+from advancedbilling.models.payment_related_events import PaymentRelatedEvents
+
+payment_related_events = PaymentRelatedEvents(
+    product_id=208,
+    account_transaction_id=52
+)
 ```
 

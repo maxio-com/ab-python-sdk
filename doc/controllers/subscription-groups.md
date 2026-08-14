@@ -168,7 +168,7 @@ print(result)
 
 # List Subscription Groups
 
-Returns an array of subscription groups for the site. The response is paginated and will return a `meta` key with pagination information.
+Lists subscription groups for the site. The response is paginated and will return a `meta` key with pagination information.
 
 #### Account Balance Information
 
@@ -317,9 +317,9 @@ print(result)
   "current_billing_amount_in_cents": 11500,
   "customer": {
     "first_name": "Mark",
-    "last_name": "Wannabewahlberg",
-    "organization": "The Funky Bunch",
-    "email": "markymark@example.com",
+    "last_name": "Smith",
+    "organization": "Acme Inc.",
+    "email": "smith@example.com",
     "reference": "4c92223b-bc16-4d0d-87ff-b177a89a2655"
   },
   "account_balances": {
@@ -473,7 +473,7 @@ print(result)
 
 Finds the subscription group associated with a subscription.
 
-If the subscription is not in a group, the endpoint will return a 404 code.
+If the subscription is not in a group, this endpoint returns an error.
 
 ```python
 def find_subscription_group(self,
@@ -524,9 +524,9 @@ print(result)
   "cancel_at_end_of_period": false,
   "customer": {
     "first_name": "Mark",
-    "last_name": "Wannabewahlberg",
-    "organization": "The Funky Bunch",
-    "email": "markymark@example.com",
+    "last_name": "Smith",
+    "organization": "Acme Inc.",
+    "email": "smith@example.com",
     "reference": "4c92223b-bc16-4d0d-87ff-b177a89a2655"
   },
   "account_balances": {
@@ -555,7 +555,7 @@ print(result)
 
 # Add Subscription to Group
 
-For sites making use of the [Relationship Billing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview) and [Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-hierarchies) features, it is possible to add existing subscriptions to subscription groups.
+Adds an existing subscription to a subscription group. For sites making use of the [Relationship Billing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview) and [Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-hierarchies) features, it is possible to add existing subscriptions to subscription groups.
 
 Passing `group` parameters with a `target` containing a `type` and optional `id` is all that's needed. When the `target` parameter specifies a `"customer"` or `"subscription"` that is already part of a hierarchy, the subscription will become a member of the customer's subscription group.  If the target customer or subscription is not part of a subscription group, a new group will be created and the subscription will become part of the group with the specified target customer set as the responsible payer for the group's subscriptions.
 
@@ -644,7 +644,7 @@ print(result)
 
 # Remove Subscription from Group
 
-For sites making use of the [Relationship Billing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview) and [Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-hierarchies) features, it is possible to remove an existing subscription from a subscription group.
+Removes an existing subscription from a subscription group. For sites making use of the [Relationship Billing](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Billing-Invoices-Overview) and [Customer Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer-Hierarchies-WhoPays#customer-hierarchies) features, it is possible to remove an existing subscription from a subscription group.
 
 ```python
 def remove_subscription_from_group(self,

@@ -16,7 +16,7 @@ class Register(object):
         maxio_id (str): The model property of type str.
         name (str): The model property of type str.
         currency_code (str): The ISO 4217 currency code (3 character string)
-            representing the currency of invoice transaction.
+            representing the currency of an invoice transaction.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

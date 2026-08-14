@@ -70,12 +70,12 @@ class Invoice(object):
             appropriate to show to customers, the number is usually shorter and
             consumable by the customer and the merchant alike.
         sequence_number (int): A monotonically increasing number assigned to invoices
-            as they are created.  This number is unique within a site and can be used
+            as they are created. This number is unique within a site and can be used
             to sort and order invoices.
         transaction_time (datetime): The model property of type datetime.
         created_at (datetime): The model property of type datetime.
         updated_at (datetime): The model property of type datetime.
-        issue_date (date): Date the invoice was issued to the customer.  This is the
+        issue_date (date): Date the invoice was issued to the customer. This is the
             date that the invoice was made available for payment.  The format is
             `"YYYY-MM-DD"`.
         due_date (date): Date the invoice is due.  The format is `"YYYY-MM-DD"`.
@@ -97,7 +97,7 @@ class Invoice(object):
         currency (str): The ISO 4217 currency code (3 character string) representing
             the currency of invoice transaction.
         consolidation_level (InvoiceConsolidationLevel): Consolidation level of the
-            invoice, which is applicable to invoice consolidation.  It will hold one
+            invoice, which is applicable to invoice consolidation. It will hold one
             of the following values:  * "none": A normal invoice with no
             consolidation. * "child": An invoice segment which has been combined into
             a consolidated invoice. * "parent": A consolidated invoice, whose
@@ -121,12 +121,12 @@ class Invoice(object):
         seller (InvoiceSeller): Information about the seller (merchant) listed on the
             masthead of the invoice.
         customer (InvoiceCustomer): Information about the customer who is owner or
-            recipient the invoiced subscription.
+            recipient of the invoiced subscription.
         payer (InvoicePayer): The model property of type InvoicePayer.
         recipient_emails (List[str]): The model property of type List[str].
         net_terms (int): The model property of type int.
-        memo (str): The memo printed on invoices of any collection type.  This
-            message is in control of the merchant.
+        memo (str): The memo printed on invoices of any collection type. This message
+            is in control of the merchant.
         billing_address (InvoiceAddress): The invoice billing address.
         shipping_address (InvoiceAddress): The invoice shipping address.
         subtotal_amount (str): Subtotal of the invoice, which is the sum of all line
@@ -134,7 +134,7 @@ class Invoice(object):
         discount_amount (str): Total discount applied to the invoice.
         tax_amount (str): Total tax on the invoice.
         total_amount (str): The invoice total, which is `subtotal_amount -
-            discount_amount + tax_amount`.'
+            discount_amount + tax_amount`.
         credit_amount (str): The amount of credit (from credit notes) applied to this
             invoice.  Credits offset the amount due from the customer.
         debit_amount (str): The model property of type str.
@@ -161,6 +161,10 @@ class Invoice(object):
         previous_balance_data (InvoicePreviousBalance): The model property of type
             InvoicePreviousBalance.
         public_url_expires_on (date): The format is `"YYYY-MM-DD"`.
+        branding_theme_id (int): The ID of the Branding Theme associated with this
+            invoice. This value represents the Branding Theme used for invoice
+            theming, such as themed invoice rendering. Available only when Branding
+            Themes are enabled for the site.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -224,6 +228,7 @@ class Invoice(object):
         "public_url": "public_url",
         "previous_balance_data": "previous_balance_data",
         "public_url_expires_on": "public_url_expires_on",
+        "branding_theme_id": "branding_theme_id",
     }
 
     _optionals = [
@@ -283,6 +288,7 @@ class Invoice(object):
         "public_url",
         "previous_balance_data",
         "public_url_expires_on",
+        "branding_theme_id",
     ]
 
     _nullables = [
@@ -292,6 +298,7 @@ class Invoice(object):
         "subscription_group_id",
         "parent_invoice_number",
         "group_primary_subscription_id",
+        "branding_theme_id",
     ]
 
     def __init__(
@@ -352,6 +359,7 @@ class Invoice(object):
         public_url=APIHelper.SKIP,
         previous_balance_data=APIHelper.SKIP,
         public_url_expires_on=APIHelper.SKIP,
+        branding_theme_id=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a Invoice instance."""
         # Initialize members of the class
@@ -476,6 +484,8 @@ class Invoice(object):
             self.previous_balance_data = previous_balance_data
         if public_url_expires_on is not APIHelper.SKIP:
             self.public_url_expires_on = public_url_expires_on
+        if branding_theme_id is not APIHelper.SKIP:
+            self.branding_theme_id = branding_theme_id
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -761,6 +771,10 @@ class Invoice(object):
         public_url_expires_on = dateutil.parser.parse(
             dictionary.get("public_url_expires_on")).date()\
             if dictionary.get("public_url_expires_on") else APIHelper.SKIP
+        branding_theme_id =\
+            dictionary.get("branding_theme_id")\
+            if "branding_theme_id" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -823,6 +837,7 @@ class Invoice(object):
                    public_url,
                    previous_balance_data,
                    public_url_expires_on,
+                   branding_theme_id,
                    additional_properties)
 
     @classmethod
@@ -1128,6 +1143,11 @@ class Invoice(object):
             if hasattr(self, "public_url_expires_on")
             else None
         )
+        _branding_theme_id=(
+            self.branding_theme_id
+            if hasattr(self, "branding_theme_id")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -1187,6 +1207,7 @@ class Invoice(object):
             f"public_url={_public_url!r}, "
             f"previous_balance_data={_previous_balance_data!r}, "
             f"public_url_expires_on={_public_url_expires_on!r}, "
+            f"branding_theme_id={_branding_theme_id!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -1473,6 +1494,11 @@ class Invoice(object):
             if hasattr(self, "public_url_expires_on")
             else None
         )
+        _branding_theme_id=(
+            self.branding_theme_id
+            if hasattr(self, "branding_theme_id")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -1532,6 +1558,7 @@ class Invoice(object):
             f"public_url={_public_url!s}, "
             f"previous_balance_data={_previous_balance_data!s}, "
             f"public_url_expires_on={_public_url_expires_on!s}, "
+            f"branding_theme_id={_branding_theme_id!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `force` | `bool` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "force": false
-}
+```python
+from advancedbilling.models.issue_advance_invoice_request import IssueAdvanceInvoiceRequest
+
+issue_advance_invoice_request = IssueAdvanceInvoiceRequest(
+    force=False
+)
 ```
 

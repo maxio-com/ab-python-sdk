@@ -11,19 +11,23 @@
 |  --- | --- | --- | --- |
 | `on_off_component` | [`OnOffComponent`](../../doc/models/on-off-component.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "on_off_component": {
-    "name": "name6",
-    "description": "description6",
-    "handle": "handle2",
-    "taxable": false,
-    "upgrade_charge": "full",
-    "downgrade_credit": "full",
-    "unit_price": "String5"
-  }
-}
+```python
+from advancedbilling.models.create_on_off_component import CreateOnOffComponent
+from advancedbilling.models.credit_type import CreditType
+from advancedbilling.models.on_off_component import OnOffComponent
+
+create_on_off_component = CreateOnOffComponent(
+    on_off_component=OnOffComponent(
+        name='name6',
+        unit_price='String5',
+        description='description6',
+        handle='handle2',
+        taxable=False,
+        upgrade_charge=CreditType.FULL,
+        downgrade_credit=CreditType.FULL
+    )
+)
 ```
 

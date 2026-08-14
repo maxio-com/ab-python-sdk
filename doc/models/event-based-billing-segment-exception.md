@@ -11,18 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [`EventBasedBillingSegmentError`](../../doc/models/event-based-billing-segment-error.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "segments": {
-      "key0": {
-        "key1": "val1",
-        "key2": "val2"
-      }
-    }
-  }
-}
+```python
+try:
+    # make the API call
+except EventBasedBillingSegmentException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

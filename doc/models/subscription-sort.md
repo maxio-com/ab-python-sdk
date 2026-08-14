@@ -20,3 +20,11 @@
 | `OPEN_BALANCE` |
 | `EXPIRES_AT` |
 
+## Example
+
+```python
+from advancedbilling.models.subscription_sort import SubscriptionSort
+
+subscription_sort = SubscriptionSort.OPEN_BALANCE
+```
+

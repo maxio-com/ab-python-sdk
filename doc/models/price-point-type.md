@@ -19,3 +19,11 @@ Price point type. We expose the following types:
 | `DEFAULT` |
 | `CUSTOM` |
 
+## Example
+
+```python
+from advancedbilling.models.price_point_type import PricePointType
+
+price_point_type = PricePointType.CUSTOM
+```
+

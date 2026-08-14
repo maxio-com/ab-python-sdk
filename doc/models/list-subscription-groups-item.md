@@ -21,17 +21,21 @@
 | `account_balances` | [`SubscriptionGroupBalances`](../../doc/models/subscription-group-balances.md) | Optional | - |
 | `group_type` | [`GroupType`](../../doc/models/group-type.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid0",
-  "scheme": 124,
-  "customer_id": 144,
-  "payment_profile_id": 52,
-  "subscription_ids": [
-    254
-  ]
-}
+```python
+from advancedbilling.models.list_subscription_groups_item import ListSubscriptionGroupsItem
+
+list_subscription_groups_item = ListSubscriptionGroupsItem(
+    uid='uid0',
+    scheme=62,
+    customer_id=82,
+    payment_profile_id=246,
+    subscription_ids=[
+        192,
+        193,
+        194
+    ]
+)
 ```
 

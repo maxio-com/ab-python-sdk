@@ -143,11 +143,10 @@ class ProductPricePointsController(BaseController):
                         fetch in each request. Default value is 10. The maximum
                         allowed values is 200; any per_page value over 200 will be
                         changed to 200.
-                    currency_prices -- bool -- When fetching a product's price
-                        points, if you have defined multiple currencies at the site
-                        level, you can optionally pass the ?currency_prices=true
-                        query param to include an array of currency price data in the
-                        response. If the product price point is set to
+                    currency_prices -- bool -- (Optional) If you have defined
+                        multiple currencies at the site level, you can pass
+                        ?currency_prices=true to include an array of currency price
+                        data in the response. If the product price point is set to
                         use_site_exchange_rate: true, it will return pricing based on
                         the current exchange rate. If the flag is set to false, it
                         will return all of the defined prices for each currency.
@@ -284,13 +283,12 @@ class ProductPricePointsController(BaseController):
                 using the handle, it must be prefixed with `handle:`. Example: `123`
                 for an integer ID, or `handle:example-product-price-point-handle` for
                 a string handle.
-            currency_prices (bool, optional): When fetching a product's price points,
-                if you have defined multiple currencies at the site level, you can
-                optionally pass the ?currency_prices=true query param to include an
-                array of currency price data in the response. If the product price
-                point is set to use_site_exchange_rate: true, it will return pricing
-                based on the current exchange rate. If the flag is set to false, it
-                will return all of the defined prices for each currency.
+            currency_prices (bool, optional): (Optional) If you have defined multiple
+                currencies at the site level, you can pass ?currency_prices=true to
+                include an array of currency price data in the response. If the
+                product price point is set to use_site_exchange_rate: true, it will
+                return pricing based on the current exchange rate. If the flag is set
+                to false, it will return all of the defined prices for each currency.
 
         Returns:
             ProductPricePointResponse: Response from the API. OK

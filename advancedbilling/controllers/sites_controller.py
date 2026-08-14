@@ -39,20 +39,22 @@ class SitesController(BaseController):
         """Perform a GET request to /site.json.
 
         Retrieves site data.
-        Full documentation on Sites in the Advanced Billing UI can be located
-        [here](https://maxio.zendesk.com/hc/en-us/sections/24250550707085-Sites).
-        Specifically, the [Clearing Site
+        For more information, see
+        [Sites](https://maxio.zendesk.com/hc/en-us/sections/24250550707085-Sites) in
+        the product documentation. Specifically, the [Clearing Site
         Data](https://maxio.zendesk.com/hc/en-us/articles/24250617028365-Clearing-Site
-        -Data) section is relevant to this endpoint documentation.
+        -Data) section is relevant to this endpoint.
         #### Relationship invoicing enabled
-        If the site has RI enabled then you will see more settings like:
-            "customer_hierarchy_enabled": true,
-            "whopays_enabled": true,
-            "whopays_default_payer": "self"
-        You can read more about these settings here:
-         [Who Pays & Customer
+        If the site has Relationship invoicing enabled, additional properties are
+        returned in the response:
+        ```
+        "customer_hierarchy_enabled": true,
+        "whopays_enabled": true,
+        "whopays_default_payer": "self"
+        ```
+        For more information, see [Who Pays & Customer
         Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer
-        -Hierarchies-WhoPays)
+        -Hierarchies-WhoPays).
 
         Returns:
             SiteResponse: Response from the API. OK
@@ -119,7 +121,7 @@ class SitesController(BaseController):
                                      options=dict()):
         """Perform a GET request to /chargify_js_keys.json.
 
-        Returns public keys used for Maxio.js (formerly Chargify.js).
+        Lists public keys used for Maxio.js (formerly Chargify.js).
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to

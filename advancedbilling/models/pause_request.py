@@ -14,7 +14,7 @@ from advancedbilling.models.auto_resume import (
 class PauseRequest(object):
     """Implementation of the 'Pause Request' model.
 
-    Allows to pause a Subscription
+    Allows you to pause a Subscription.
 
     Attributes:
         hold (AutoResume): The model property of type AutoResume.

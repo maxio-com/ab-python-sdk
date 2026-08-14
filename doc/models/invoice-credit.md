@@ -17,15 +17,19 @@
 | `original_amount` | `str` | Optional | - |
 | `applied_amount` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid6",
-  "credit_note_number": "credit_note_number0",
-  "credit_note_uid": "credit_note_uid0",
-  "transaction_time": "2016-03-13T12:52:32.123Z",
-  "memo": "memo0"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.invoice_credit import InvoiceCredit
+
+invoice_credit = InvoiceCredit(
+    uid='uid8',
+    credit_note_number='credit_note_number8',
+    credit_note_uid='credit_note_uid2',
+    transaction_time=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    memo='memo2'
+)
 ```
 

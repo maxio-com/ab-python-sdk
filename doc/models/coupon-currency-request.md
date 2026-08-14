@@ -11,16 +11,19 @@
 |  --- | --- | --- | --- |
 | `currency_prices` | [`List[UpdateCouponCurrency]`](../../doc/models/update-coupon-currency.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency_prices": [
-    {
-      "currency": "currency8",
-      "price": 78
-    }
-  ]
-}
+```python
+from advancedbilling.models.coupon_currency_request import CouponCurrencyRequest
+from advancedbilling.models.update_coupon_currency import UpdateCouponCurrency
+
+coupon_currency_request = CouponCurrencyRequest(
+    currency_prices=[
+        UpdateCouponCurrency(
+            currency='currency8',
+            price=78
+        )
+    ]
+)
 ```
 

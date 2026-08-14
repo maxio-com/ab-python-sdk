@@ -16,3 +16,11 @@ The type of payment collection to be used in the subscription. For legacy Statem
 | `PREPAID` |
 | `INVOICE` |
 
+## Example
+
+```python
+from advancedbilling.models.collection_method import CollectionMethod
+
+collection_method = CollectionMethod.PREPAID
+```
+

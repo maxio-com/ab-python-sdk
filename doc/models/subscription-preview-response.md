@@ -11,56 +11,63 @@
 |  --- | --- | --- | --- |
 | `subscription_preview` | [`SubscriptionPreview`](../../doc/models/subscription-preview.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription_preview": {
-    "current_billing_manifest": {
-      "line_items": [
-        {
-          "transaction_type": "credit",
-          "kind": "component",
-          "amount_in_cents": 24,
-          "memo": "memo2",
-          "discount_amount_in_cents": 172
-        }
-      ],
-      "total_in_cents": 38,
-      "total_discount_in_cents": 24,
-      "total_tax_in_cents": 18,
-      "subtotal_in_cents": 150
-    },
-    "next_billing_manifest": {
-      "line_items": [
-        {
-          "transaction_type": "credit",
-          "kind": "component",
-          "amount_in_cents": 24,
-          "memo": "memo2",
-          "discount_amount_in_cents": 172
-        },
-        {
-          "transaction_type": "credit",
-          "kind": "component",
-          "amount_in_cents": 24,
-          "memo": "memo2",
-          "discount_amount_in_cents": 172
-        },
-        {
-          "transaction_type": "credit",
-          "kind": "component",
-          "amount_in_cents": 24,
-          "memo": "memo2",
-          "discount_amount_in_cents": 172
-        }
-      ],
-      "total_in_cents": 62,
-      "total_discount_in_cents": 208,
-      "total_tax_in_cents": 42,
-      "subtotal_in_cents": 174
-    }
-  }
-}
+```python
+from advancedbilling.models.billing_manifest import BillingManifest
+from advancedbilling.models.billing_manifest_item import BillingManifestItem
+from advancedbilling.models.billing_manifest_line_item_kind import BillingManifestLineItemKind
+from advancedbilling.models.line_item_transaction_type import LineItemTransactionType
+from advancedbilling.models.subscription_preview import SubscriptionPreview
+from advancedbilling.models.subscription_preview_response import SubscriptionPreviewResponse
+
+subscription_preview_response = SubscriptionPreviewResponse(
+    subscription_preview=SubscriptionPreview(
+        current_billing_manifest=BillingManifest(
+            line_items=[
+                BillingManifestItem(
+                    transaction_type=LineItemTransactionType.CREDIT,
+                    kind=BillingManifestLineItemKind.COMPONENT,
+                    amount_in_cents=24,
+                    memo='memo2',
+                    discount_amount_in_cents=172
+                )
+            ],
+            total_in_cents=38,
+            total_discount_in_cents=24,
+            total_tax_in_cents=18,
+            subtotal_in_cents=150
+        ),
+        next_billing_manifest=BillingManifest(
+            line_items=[
+                BillingManifestItem(
+                    transaction_type=LineItemTransactionType.CREDIT,
+                    kind=BillingManifestLineItemKind.COMPONENT,
+                    amount_in_cents=24,
+                    memo='memo2',
+                    discount_amount_in_cents=172
+                ),
+                BillingManifestItem(
+                    transaction_type=LineItemTransactionType.CREDIT,
+                    kind=BillingManifestLineItemKind.COMPONENT,
+                    amount_in_cents=24,
+                    memo='memo2',
+                    discount_amount_in_cents=172
+                ),
+                BillingManifestItem(
+                    transaction_type=LineItemTransactionType.CREDIT,
+                    kind=BillingManifestLineItemKind.COMPONENT,
+                    amount_in_cents=24,
+                    memo='memo2',
+                    discount_amount_in_cents=172
+                )
+            ],
+            total_in_cents=62,
+            total_discount_in_cents=208,
+            total_tax_in_cents=42,
+            subtotal_in_cents=174
+        )
+    )
+)
 ```
 

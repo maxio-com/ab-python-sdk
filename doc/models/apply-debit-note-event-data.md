@@ -18,16 +18,20 @@ Example schema for an `apply_debit_note` event
 | `memo` | `str` | Optional | The debit note memo. |
 | `transaction_time` | `datetime` | Optional | The time the debit note was applied, in ISO 8601 format, i.e. "2019-06-07T17:20:06Z" |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "debit_note_number": "debit_note_number0",
-  "debit_note_uid": "debit_note_uid6",
-  "original_amount": "original_amount4",
-  "applied_amount": "applied_amount8",
-  "memo": "memo4",
-  "transaction_time": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.apply_debit_note_event_data import ApplyDebitNoteEventData
+
+apply_debit_note_event_data = ApplyDebitNoteEventData(
+    debit_note_number='debit_note_number2',
+    debit_note_uid='debit_note_uid8',
+    original_amount='original_amount6',
+    applied_amount='applied_amount6',
+    memo='memo6',
+    transaction_time=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

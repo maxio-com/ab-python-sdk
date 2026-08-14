@@ -15,7 +15,7 @@ class Price(object):
         starting_quantity (int | str): The model property of type int | str.
         ending_quantity (int | str | None): The model property of type int | str |
             None.
-        unit_price (float | str): The price can contain up to 8 decimal places. i.e.
+        unit_price (float | str): The price can contain up to 8 decimal places. e.g.,
             1.00 or 0.0012 or 0.00000065
         additional_properties (Dict[str, object]): The additional properties for the
             model.

@@ -11,15 +11,16 @@
 |  --- | --- | --- | --- |
 | `member_ids` | `List[int]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "member_ids": [
-    52,
-    53,
-    54
-  ]
-}
+```python
+from advancedbilling.models.update_subscription_group import UpdateSubscriptionGroup
+
+update_subscription_group = UpdateSubscriptionGroup(
+    member_ids=[
+        54,
+        55
+    ]
+)
 ```
 

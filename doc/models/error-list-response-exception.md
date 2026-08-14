@@ -13,15 +13,14 @@ Error which contains list of messages.
 |  --- | --- | --- | --- |
 | `errors` | `List[str]` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": [
-    "errors5",
-    "errors6",
-    "errors7"
-  ]
-}
+```python
+try:
+    # make the API call
+except ErrorListResponseException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

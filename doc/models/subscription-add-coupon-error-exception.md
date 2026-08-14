@@ -14,25 +14,14 @@
 | `coupon_codes` | `List[str]` | Optional | - |
 | `subscription` | `List[str]` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "codes": [
-    "codes6",
-    "codes7",
-    "codes8"
-  ],
-  "coupon_code": [
-    "coupon_code8",
-    "coupon_code7"
-  ],
-  "coupon_codes": [
-    "coupon_codes2"
-  ],
-  "subscription": [
-    "subscription8"
-  ]
-}
+```python
+try:
+    # make the API call
+except SubscriptionAddCouponErrorException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

@@ -13,11 +13,14 @@ Example schema for an `change_chargeback_status` event
 |  --- | --- | --- | --- |
 | `chargeback_status` | [`ChargebackStatus`](../../doc/models/chargeback-status.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "chargeback_status": "open"
-}
+```python
+from advancedbilling.models.change_chargeback_status_event_data import ChangeChargebackStatusEventData
+from advancedbilling.models.chargeback_status import ChargebackStatus
+
+change_chargeback_status_event_data = ChangeChargebackStatusEventData(
+    chargeback_status=ChargebackStatus.OPEN
+)
 ```
 

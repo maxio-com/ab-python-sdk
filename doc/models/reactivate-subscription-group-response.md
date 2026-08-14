@@ -19,18 +19,21 @@
 | `state` | `str` | Optional | - |
 | `cancel_at_end_of_period` | `bool` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid4",
-  "scheme": 66,
-  "customer_id": 86,
-  "payment_profile_id": 250,
-  "subscription_ids": [
-    196,
-    197
-  ]
-}
+```python
+from advancedbilling.models.reactivate_subscription_group_response import ReactivateSubscriptionGroupResponse
+
+reactivate_subscription_group_response = ReactivateSubscriptionGroupResponse(
+    uid='uid8',
+    scheme=220,
+    customer_id=240,
+    payment_profile_id=148,
+    subscription_ids=[
+        94,
+        95,
+        96
+    ]
+)
 ```
 

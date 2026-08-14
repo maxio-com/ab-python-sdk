@@ -14,7 +14,7 @@ class GroupTargetType(object):
     Attributes:
         CUSTOMER: The enum member of type str.
         SUBSCRIPTION: The enum member of type str.
-        SELF: The enum member of type str.
+        ENUM_SELF: The enum member of type str.
         PARENT: The enum member of type str.
         ELDEST: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties for the

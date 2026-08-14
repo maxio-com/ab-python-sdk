@@ -21,19 +21,21 @@
 | `subscriptions` | [`List[SubscriptionGroupItem]`](../../doc/models/subscription-group-item.md) | Optional | - |
 | `payment_collection_method` | [`CollectionMethod`](../../doc/models/collection-method.md) | Optional | The type of payment collection to be used in the subscription. For legacy Statements Architecture valid options are - `invoice`, `automatic`. For current Relationship Invoicing Architecture valid options are - `remittance`, `automatic`, `prepaid`. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "scheme": 28,
-  "customer_id": 48,
-  "payment_profile_id": 44,
-  "subscription_ids": [
-    158,
-    159,
-    160
-  ]
-}
+```python
+from advancedbilling.models.subscription_group_signup_response import SubscriptionGroupSignupResponse
+
+subscription_group_signup_response = SubscriptionGroupSignupResponse(
+    uid='uid8',
+    scheme=62,
+    customer_id=82,
+    payment_profile_id=10,
+    subscription_ids=[
+        192,
+        193,
+        194
+    ]
+)
 ```
 

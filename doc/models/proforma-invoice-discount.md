@@ -18,15 +18,19 @@
 | `discount_amount` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `line_item_breakouts` | [`List[InvoiceDiscountBreakout]`](../../doc/models/invoice-discount-breakout.md) | Optional | **Constraints**: *Minimum Items*: `1`, *Unique Items Required* |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid2",
-  "title": "title8",
-  "code": "code0",
-  "source_type": "Coupon",
-  "discount_type": "percentage"
-}
+```python
+from advancedbilling.models.invoice_discount_type import InvoiceDiscountType
+from advancedbilling.models.proforma_invoice_discount import ProformaInvoiceDiscount
+from advancedbilling.models.proforma_invoice_discount_source_type import ProformaInvoiceDiscountSourceType
+
+proforma_invoice_discount = ProformaInvoiceDiscount(
+    uid='uid0',
+    title='title6',
+    code='code8',
+    source_type=ProformaInvoiceDiscountSourceType.COUPON,
+    discount_type=InvoiceDiscountType.ROLLOVER
+)
 ```
 

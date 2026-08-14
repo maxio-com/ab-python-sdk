@@ -17,7 +17,9 @@
 
 ## Example
 
-```
-issue_date
+```python
+from advancedbilling.models.invoice_date_field import InvoiceDateField
+
+invoice_date_field = InvoiceDateField.DUE_DATE
 ```
 

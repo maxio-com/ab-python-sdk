@@ -8,7 +8,7 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 class CreateOrUpdateEndpoint(object):
     """Implementation of the 'Create or Update Endpoint' model.
 
-    Used to Create or Update Endpoint
+    Used to Create or Update Endpoint.
 
     Attributes:
         url (str): The model property of type str.

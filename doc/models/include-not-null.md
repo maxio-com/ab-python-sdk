@@ -15,7 +15,9 @@ Passed as a parameter to list methods to return only non null values.
 
 ## Example
 
-```
-not_null
+```python
+from advancedbilling.models.include_not_null import IncludeNotNull
+
+include_not_null = IncludeNotNull.NOT_NULL
 ```
 

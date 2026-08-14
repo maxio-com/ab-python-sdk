@@ -11,11 +11,15 @@
 |  --- | --- | --- | --- |
 | `expires_at` | `datetime` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "expires_at": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.allocation_expiration_date import AllocationExpirationDate
+
+allocation_expiration_date = AllocationExpirationDate(
+    expires_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

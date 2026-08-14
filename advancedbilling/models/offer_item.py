@@ -24,9 +24,9 @@ class OfferItem(object):
         price_point_name (str): The model property of type str.
         currency_prices (List[CurrencyPrice]): The model property of type
             List[CurrencyPrice].
-        interval (int): The numerical interval. i.e. an interval of '30' coupled with
-            an interval_unit of day would mean this component price point would renew
-            every 30 days. This property is only available for sites with
+        interval (int): The numerical interval. e.g., an interval of '30' coupled
+            with an interval_unit of day would mean this component price point would
+            renew every 30 days. This property is only available for sites with
             Multifrequency enabled.
         interval_unit (IntervalUnit): A string representing the interval unit for
             this component price point, either month or day. This property is only

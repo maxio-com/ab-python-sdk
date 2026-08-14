@@ -11,16 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [`List[SubscriptionComponentAllocationErrorItem]`](../../doc/models/subscription-component-allocation-error-item.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": [
-    {
-      "kind": "kind8",
-      "message": "message0"
-    }
-  ]
-}
+```python
+try:
+    # make the API call
+except SubscriptionComponentAllocationErrorException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

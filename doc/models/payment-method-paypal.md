@@ -12,12 +12,15 @@
 | `email` | `str` | Required | - |
 | `mtype` | [`InvoiceEventPaymentMethod`](../../doc/models/invoice-event-payment-method.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "email": "email2",
-  "type": "paypal_account"
-}
+```python
+from advancedbilling.models.invoice_event_payment_method import InvoiceEventPaymentMethod
+from advancedbilling.models.payment_method_paypal import PaymentMethodPaypal
+
+payment_method_paypal = PaymentMethodPaypal(
+    email='email6',
+    mtype=InvoiceEventPaymentMethod.PAYPAL_ACCOUNT
+)
 ```
 

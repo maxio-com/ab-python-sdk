@@ -14,7 +14,7 @@ class CreateOrUpdateSegmentPrice(object):
     Attributes:
         starting_quantity (int): The model property of type int.
         ending_quantity (int): The model property of type int.
-        unit_price (str | float): The price can contain up to 8 decimal places. i.e.
+        unit_price (str | float): The price can contain up to 8 decimal places. e.g.,
             1.00 or 0.0012 or 0.00000065
         additional_properties (Dict[str, object]): The additional properties for the
             model.

@@ -18,3 +18,11 @@ A handle for the billing manifest line item kind
 | `COMPONENT` |
 | `TAX` |
 
+## Example
+
+```python
+from advancedbilling.models.billing_manifest_line_item_kind import BillingManifestLineItemKind
+
+billing_manifest_line_item_kind = BillingManifestLineItemKind.COMPONENT
+```
+

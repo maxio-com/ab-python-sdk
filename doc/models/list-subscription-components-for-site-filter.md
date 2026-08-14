@@ -13,26 +13,33 @@
 | `use_site_exchange_rate` | `bool` | Optional | Allows fetching components allocation with matching use_site_exchange_rate based on provided value. Use in query `filter[use_site_exchange_rate]=true`. |
 | `subscription` | [`SubscriptionFilter`](../../doc/models/subscription-filter.md) | Optional | Nested filter used for List Subscription Components For Site Filter |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currencies": [
-    "EUR",
-    "USD"
-  ],
-  "use_site_exchange_rate": false,
-  "subscription": {
-    "states": [
-      "active",
-      "canceled",
-      "expired"
+```python
+import dateutil.parser
+
+from advancedbilling.models.list_subscription_components_for_site_filter import ListSubscriptionComponentsForSiteFilter
+from advancedbilling.models.subscription_filter import SubscriptionFilter
+from advancedbilling.models.subscription_list_date_field import SubscriptionListDateField
+from advancedbilling.models.subscription_state_filter import SubscriptionStateFilter
+
+list_subscription_components_for_site_filter = ListSubscriptionComponentsForSiteFilter(
+    currencies=[
+        'EUR',
+        'USD'
     ],
-    "date_field": "updated_at",
-    "start_date": "2016-03-13",
-    "end_date": "2016-03-13",
-    "start_datetime": "2016-03-13T12:52:32.123Z"
-  }
-}
+    use_site_exchange_rate=False,
+    subscription=SubscriptionFilter(
+        states=[
+            SubscriptionStateFilter.TRIALING,
+            SubscriptionStateFilter.UNPAID,
+            SubscriptionStateFilter.ACTIVE
+        ],
+        date_field=SubscriptionListDateField.UPDATED_AT,
+        start_date=dateutil.parser.parse('2016-03-13').date(),
+        end_date=dateutil.parser.parse('2016-03-13').date(),
+        start_datetime=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+    )
+)
 ```
 

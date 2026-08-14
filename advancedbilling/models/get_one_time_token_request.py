@@ -5,17 +5,16 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 # ruff: noqa: E501
-from advancedbilling.models.get_one_time_token_payment_profile import (
-    GetOneTimeTokenPaymentProfile,
-)
+from advancedbilling.api_helper import APIHelper
 
 
 class GetOneTimeTokenRequest(object):
     """Implementation of the 'Get One Time Token Request' model.
 
     Attributes:
-        payment_profile (GetOneTimeTokenPaymentProfile): The model property of type
-            GetOneTimeTokenPaymentProfile.
+        payment_profile (GetOneTimeTokenPaymentProfile |
+            GetOneTimeTokenBankAccountPaymentProfile): The model property of type
+            GetOneTimeTokenPaymentProfile | GetOneTimeTokenBankAccountPaymentProfile.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -53,14 +52,20 @@ class GetOneTimeTokenRequest(object):
             object: An instance of this structure class.
 
         """
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
+
         if not isinstance(dictionary, dict) or dictionary is None:
             return None
 
         # Extract variables from the dictionary
-        payment_profile =\
-            GetOneTimeTokenPaymentProfile.from_dictionary(
-                dictionary.get("payment_profile"))\
-                if dictionary.get("payment_profile") else None
+        payment_profile = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("GetOneTimeTokenRequestPaymentProfile"),
+            dictionary.get("payment_profile"),
+            False)\
+            if dictionary.get("payment_profile") is not None\
+            else None
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -69,6 +74,33 @@ class GetOneTimeTokenRequest(object):
         # Return an object of this model
         return cls(payment_profile,
                    additional_properties)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validate dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        from advancedbilling.utilities.union_type_lookup import (
+            UnionTypeLookUp,
+        )
+
+        if isinstance(dictionary, cls):
+            return (UnionTypeLookUp.get("GetOneTimeTokenRequestPaymentProfile")
+                .validate(dictionary.payment_profile).is_valid)
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return (UnionTypeLookUp.get("GetOneTimeTokenRequestPaymentProfile")
+            .validate(dictionary.get("payment_profile")).is_valid)
 
     def __repr__(self):
         """Return a unambiguous string representation."""

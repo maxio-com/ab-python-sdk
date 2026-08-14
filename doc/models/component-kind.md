@@ -17,3 +17,11 @@ A handle for the component type
 | `PREPAID_USAGE_COMPONENT` |
 | `EVENT_BASED_COMPONENT` |
 
+## Example
+
+```python
+from advancedbilling.models.component_kind import ComponentKind
+
+component_kind = ComponentKind.ON_OFF_COMPONENT
+```
+

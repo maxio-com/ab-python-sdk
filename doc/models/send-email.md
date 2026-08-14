@@ -12,12 +12,14 @@
 | `can_execute` | `bool` | Required | - |
 | `url` | `str` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "can_execute": false,
-  "url": "url2"
-}
+```python
+from advancedbilling.models.send_email import SendEmail
+
+send_email = SendEmail(
+    can_execute=False,
+    url='url0'
+)
 ```
 

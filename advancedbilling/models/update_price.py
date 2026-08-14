@@ -16,7 +16,7 @@ class UpdatePrice(object):
         ending_quantity (int | str | None): The model property of type int | str |
             None.
         unit_price (float | str | None): The price can contain up to 8 decimal
-            places. i.e. 1.00 or 0.0012 or 0.00000065
+            places. e.g., 1.00 or 0.0012 or 0.00000065
         destroy (bool): The model property of type bool.
         starting_quantity (int | str | None): The model property of type int | str |
             None.

@@ -14,3 +14,11 @@ Used for sorting results.
 | `ASC` |
 | `DESC` |
 
+## Example
+
+```python
+from advancedbilling.models.sorting_direction import SortingDirection
+
+sorting_direction = SortingDirection.ASC
+```
+

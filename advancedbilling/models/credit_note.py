@@ -70,7 +70,7 @@ class CreditNote(object):
         seller (InvoiceSeller): Information about the seller (merchant) listed on the
             masthead of the credit note.
         customer (InvoiceCustomer): Information about the customer who is owner or
-            recipient the credited subscription.
+            recipient of the credited subscription.
         billing_address (InvoiceAddress): The billing address of the credit
             subscription.
         shipping_address (InvoiceAddress): The shipping address of the credited
@@ -80,18 +80,18 @@ class CreditNote(object):
             representing the credit back to the customer.
         discount_amount (str): Total discount applied to the credit note. Note that
             this is a positive amount representing the discount amount being credited
-            back to the customer (i.e. a credit on an earlier discount). For example,
-            if the original purchase was $1.00 and the original discount was $0.10, a
-            credit of $0.50 of the original purchase (half) would have a discount
-            credit of $0.05 (also half).
+            back to the customer (i.e., a credit on an earlier discount). For
+            example, if the original purchase was $1.00 and the original discount was
+            $0.10, a credit of $0.50 of the original purchase (half) would have a
+            discount credit of $0.05 (also half).
         tax_amount (str): Total tax of the credit note. Note that this is a positive
-            amount representing a previously taxex amount being credited back to the
-            customer (i.e. a credit of an earlier tax). For example, if the original
+            amount representing a previously taxed amount being credited back to the
+            customer (i.e., a credit of an earlier tax). For example, if the original
             purchase was $1.00 and the original tax was $0.10, a credit of $0.50 of
             the original purchase (half) would also have a tax credit of $0.05 (also
             half).
         total_amount (str): The credit note total, which is `subtotal_amount -
-            discount_amount + tax_amount`.'
+            discount_amount + tax_amount`.
         applied_amount (str): The amount of the credit note that has already been
             applied to invoices.
         remaining_amount (str): The amount of the credit note remaining to be applied
@@ -106,7 +106,7 @@ class CreditNote(object):
         origin_invoices (List[OriginInvoice]): An array of origin invoices for the
             credit note. Learn more about [Origin Invoice from our
             docs](https://maxio.zendesk.com/hc/en-us/articles/24252261284749-Credit-No
-            tes-Proration#origin-invoices)
+            tes-Proration#origin-invoices).
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

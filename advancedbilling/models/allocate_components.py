@@ -27,7 +27,7 @@ class AllocateComponents(object):
             upgrading/downgrading. Defaults to the component and then site setting if
             one is not provided.
         payment_collection_method (CollectionMethod): (Optional) If not passed, the
-            allocation(s) will use the payment collection method on the subscription
+            allocation(s) will use the payment collection method on the subscription.
         initiate_dunning (bool): If true, if the immediate component payment fails,
             initiate dunning for the subscription.  Otherwise, leave the charges on
             the subscription to pay for at renewal.

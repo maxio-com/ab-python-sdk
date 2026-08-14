@@ -11,7 +11,7 @@ from advancedbilling.api_helper import APIHelper
 class InvoiceCustomer(object):
     """Implementation of the 'Invoice Customer' model.
 
-    Information about the customer who is owner or recipient the invoiced
+    Information about the customer who is owner or recipient of the invoiced
     subscription.
 
     Attributes:

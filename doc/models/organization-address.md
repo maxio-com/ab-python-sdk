@@ -18,15 +18,17 @@
 | `name` | `str` | Optional | - |
 | `phone` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "street": "street4",
-  "line2": "line28",
-  "city": "city4",
-  "state": "state0",
-  "zip": "zip2"
-}
+```python
+from advancedbilling.models.organization_address import OrganizationAddress
+
+organization_address = OrganizationAddress(
+    street='street6',
+    line_2='line20',
+    city='city6',
+    state='state2',
+    zip='zip0'
+)
 ```
 

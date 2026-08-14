@@ -28,19 +28,21 @@
 | `tax_exempt_reason` | `str` | Optional | - |
 | `metafields` | `Dict[str, str]` | Optional | (Optional) A set of key/value pairs representing custom fields and their values. Metafields will be created “on-the-fly” in your site for a given key, if they have not been created yet. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "metafields": {
-    "custom_field_name_1": "custom_field_value_1",
-    "custom_field_name_2": "custom_field_value_2"
-  },
-  "first_name": "first_name4",
-  "last_name": "last_name2",
-  "email": "email2",
-  "cc_emails": "cc_emails4",
-  "organization": "organization8"
-}
+```python
+from advancedbilling.models.payer_attributes import PayerAttributes
+
+payer_attributes = PayerAttributes(
+    first_name='first_name2',
+    last_name='last_name0',
+    email='email4',
+    cc_emails='cc_emails2',
+    organization='organization6',
+    metafields={
+        'custom_field_name_1': 'custom_field_value_1',
+        'custom_field_name_2': 'custom_field_value_2'
+    }
+)
 ```
 

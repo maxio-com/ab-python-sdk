@@ -13,13 +13,15 @@
 | `eligible_amount` | `str` | Optional | - |
 | `discount_amount` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "eligible_amount": "eligible_amount0",
-  "discount_amount": "discount_amount8"
-}
+```python
+from advancedbilling.models.invoice_discount_breakout import InvoiceDiscountBreakout
+
+invoice_discount_breakout = InvoiceDiscountBreakout(
+    uid='uid2',
+    eligible_amount='eligible_amount4',
+    discount_amount='discount_amount6'
+)
 ```
 

@@ -16,15 +16,19 @@
 | `updated_at` | `datetime` | Optional | - |
 | `sticky` | `bool` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 36,
-  "body": "body4",
-  "subscription_id": 146,
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "updated_at": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.subscription_note import SubscriptionNote
+
+subscription_note = SubscriptionNote(
+    id=114,
+    body='body0',
+    subscription_id=224,
+    created_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    updated_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

@@ -12,12 +12,14 @@
 | `amount` | str \| float | Required | This is a container for one-of cases. |
 | `memo` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "amount": "String1",
-  "memo": "memo2"
-}
+```python
+from advancedbilling.models.deduct_service_credit import DeductServiceCredit
+
+deduct_service_credit = DeductServiceCredit(
+    amount='String3',
+    memo='memo4'
+)
 ```
 

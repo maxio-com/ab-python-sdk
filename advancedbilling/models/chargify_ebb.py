@@ -25,11 +25,11 @@ class ChargifyEBB(object):
             events within a stream will be silently ignored. Tokens expire after 31
             days.
         subscription_id (int): Id of Maxio Advanced Billing Subscription which is
-            connected to this event.  Provide `subscription_id` if you configured
+            connected to this event. Provide `subscription_id` if you configured
             `chargify.subscription_id` as Subscription Identifier in your Event
             Stream.
         subscription_reference (str): Reference of Maxio Advanced Billing
-            Subscription which is connected to this event.  Provide
+            Subscription which is connected to this event. Provide
             `subscription_reference` if you configured
             `chargify.subscription_reference` as Subscription Identifier in your
             Event Stream.

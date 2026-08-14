@@ -15,15 +15,18 @@
 | `name` | `str` | Optional | - |
 | `handle` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 180,
-  "item_type": "Component",
-  "item_id": 184,
-  "name": "name4",
-  "handle": "handle0"
-}
+```python
+from advancedbilling.models.coupon_restriction import CouponRestriction
+from advancedbilling.models.restriction_type import RestrictionType
+
+coupon_restriction = CouponRestriction(
+    id=190,
+    item_type=RestrictionType.COMPONENT,
+    item_id=82,
+    name='name2',
+    handle='handle8'
+)
 ```
 

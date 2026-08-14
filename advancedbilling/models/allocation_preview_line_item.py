@@ -23,7 +23,7 @@ class AllocationPreviewLineItem(object):
         component_id (int): The model property of type int.
         component_handle (str): The model property of type str.
         direction (AllocationPreviewDirection): Visible when using Fine-grained
-            Component Control
+            Component Control.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

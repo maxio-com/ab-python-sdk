@@ -17,6 +17,8 @@ class ProductFamily(object):
         handle (str): The model property of type str.
         accounting_code (str): The model property of type str.
         description (str): The model property of type str.
+        surcharging (bool): Whether surcharging applies to this product family. Only
+            included on sites where surcharging is enabled.
         created_at (datetime): The model property of type datetime.
         updated_at (datetime): The model property of type datetime.
         archived_at (datetime): Timestamp indicating when this product family was
@@ -33,6 +35,7 @@ class ProductFamily(object):
         "handle": "handle",
         "accounting_code": "accounting_code",
         "description": "description",
+        "surcharging": "surcharging",
         "created_at": "created_at",
         "updated_at": "updated_at",
         "archived_at": "archived_at",
@@ -44,6 +47,7 @@ class ProductFamily(object):
         "handle",
         "accounting_code",
         "description",
+        "surcharging",
         "created_at",
         "updated_at",
         "archived_at",
@@ -62,6 +66,7 @@ class ProductFamily(object):
         handle=APIHelper.SKIP,
         accounting_code=APIHelper.SKIP,
         description=APIHelper.SKIP,
+        surcharging=APIHelper.SKIP,
         created_at=APIHelper.SKIP,
         updated_at=APIHelper.SKIP,
         archived_at=APIHelper.SKIP,
@@ -78,6 +83,8 @@ class ProductFamily(object):
             self.accounting_code = accounting_code
         if description is not APIHelper.SKIP:
             self.description = description
+        if surcharging is not APIHelper.SKIP:
+            self.surcharging = surcharging
         if created_at is not APIHelper.SKIP:
             self.created_at =\
                  APIHelper.apply_datetime_converter(
@@ -137,6 +144,10 @@ class ProductFamily(object):
             dictionary.get("description")\
             if "description" in dictionary.keys()\
                 else APIHelper.SKIP
+        surcharging =\
+            dictionary.get("surcharging")\
+            if "surcharging" in dictionary.keys()\
+                else APIHelper.SKIP
         created_at = APIHelper.RFC3339DateTime.from_value(
             dictionary.get("created_at")).datetime\
             if dictionary.get("created_at") else APIHelper.SKIP
@@ -161,6 +172,7 @@ class ProductFamily(object):
                    handle,
                    accounting_code,
                    description,
+                   surcharging,
                    created_at,
                    updated_at,
                    archived_at,
@@ -193,6 +205,11 @@ class ProductFamily(object):
             if hasattr(self, "description")
             else None
         )
+        _surcharging=(
+            self.surcharging
+            if hasattr(self, "surcharging")
+            else None
+        )
         _created_at=(
             self.created_at
             if hasattr(self, "created_at")
@@ -216,6 +233,7 @@ class ProductFamily(object):
             f"handle={_handle!r}, "
             f"accounting_code={_accounting_code!r}, "
             f"description={_description!r}, "
+            f"surcharging={_surcharging!r}, "
             f"created_at={_created_at!r}, "
             f"updated_at={_updated_at!r}, "
             f"archived_at={_archived_at!r}, "
@@ -250,6 +268,11 @@ class ProductFamily(object):
             if hasattr(self, "description")
             else None
         )
+        _surcharging=(
+            self.surcharging
+            if hasattr(self, "surcharging")
+            else None
+        )
         _created_at=(
             self.created_at
             if hasattr(self, "created_at")
@@ -273,6 +296,7 @@ class ProductFamily(object):
             f"handle={_handle!s}, "
             f"accounting_code={_accounting_code!s}, "
             f"description={_description!s}, "
+            f"surcharging={_surcharging!s}, "
             f"created_at={_created_at!s}, "
             f"updated_at={_updated_at!s}, "
             f"archived_at={_archived_at!s}, "

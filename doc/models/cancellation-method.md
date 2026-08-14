@@ -18,3 +18,11 @@ The process used to cancel the subscription, if the subscription has been cancel
 | `UNKNOWN` |
 | `IMPORTED` |
 
+## Example
+
+```python
+from advancedbilling.models.cancellation_method import CancellationMethod
+
+cancellation_method = CancellationMethod.UNKNOWN
+```
+

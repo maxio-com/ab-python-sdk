@@ -11,22 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [`Errors`](../../doc/models/errors.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "per_page": [
-      "per_page1",
-      "per_page2",
-      "per_page3"
-    ],
-    "price_point": [
-      "price_point0",
-      "price_point9",
-      "price_point8"
-    ]
-  }
-}
+```python
+try:
+    # make the API call
+except EventBasedBillingListSegmentsErrorsException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

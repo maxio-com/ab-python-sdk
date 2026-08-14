@@ -11,9 +11,18 @@ from advancedbilling.api_helper import APIHelper
 class SubscriptionProductChange(object):
     """Implementation of the 'Subscription Product Change' model.
 
+    Event data for both `subscription_product_change` and
+    `subscription_product_change_scheduled`. The price point and `effective_at`
+    fields are only populated for scheduled changes.
+
     Attributes:
         previous_product_id (int): The model property of type int.
         new_product_id (int): The model property of type int.
+        previous_product_price_point_id (int): The model property of type int.
+        new_product_price_point_id (int): The model property of type int.
+        effective_at (datetime): When the scheduled product change takes effect (the
+            subscription's next renewal). Only sent for
+            `subscription_product_change_scheduled`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -23,17 +32,44 @@ class SubscriptionProductChange(object):
     _names = {
         "previous_product_id": "previous_product_id",
         "new_product_id": "new_product_id",
+        "previous_product_price_point_id": "previous_product_price_point_id",
+        "new_product_price_point_id": "new_product_price_point_id",
+        "effective_at": "effective_at",
     }
+
+    _optionals = [
+        "previous_product_price_point_id",
+        "new_product_price_point_id",
+        "effective_at",
+    ]
+
+    _nullables = [
+        "previous_product_price_point_id",
+        "new_product_price_point_id",
+        "effective_at",
+    ]
 
     def __init__(
         self,
         previous_product_id=None,
         new_product_id=None,
+        previous_product_price_point_id=APIHelper.SKIP,
+        new_product_price_point_id=APIHelper.SKIP,
+        effective_at=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a SubscriptionProductChange instance."""
         # Initialize members of the class
         self.previous_product_id = previous_product_id
         self.new_product_id = new_product_id
+        if previous_product_price_point_id is not APIHelper.SKIP:
+            self.previous_product_price_point_id = previous_product_price_point_id
+        if new_product_price_point_id is not APIHelper.SKIP:
+            self.new_product_price_point_id = new_product_price_point_id
+        if effective_at is not APIHelper.SKIP:
+            self.effective_at =\
+                 APIHelper.apply_datetime_converter(
+                effective_at, APIHelper.RFC3339DateTime)\
+                 if effective_at else None
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -66,6 +102,21 @@ class SubscriptionProductChange(object):
             dictionary.get("new_product_id")\
             if dictionary.get("new_product_id")\
                 else None
+        previous_product_price_point_id =\
+            dictionary.get("previous_product_price_point_id")\
+            if "previous_product_price_point_id" in dictionary.keys()\
+                else APIHelper.SKIP
+        new_product_price_point_id =\
+            dictionary.get("new_product_price_point_id")\
+            if "new_product_price_point_id" in dictionary.keys()\
+                else APIHelper.SKIP
+        if "effective_at" in dictionary.keys():
+            effective_at = APIHelper.RFC3339DateTime.from_value(
+                dictionary.get("effective_at")).datetime\
+                if dictionary.get("effective_at") else None
+
+        else:
+            effective_at = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -74,6 +125,9 @@ class SubscriptionProductChange(object):
         # Return an object of this model
         return cls(previous_product_id,
                    new_product_id,
+                   previous_product_price_point_id,
+                   new_product_price_point_id,
+                   effective_at,
                    additional_properties)
 
     @classmethod
@@ -127,11 +181,29 @@ class SubscriptionProductChange(object):
         """Return a unambiguous string representation."""
         _previous_product_id=self.previous_product_id
         _new_product_id=self.new_product_id
+        _previous_product_price_point_id=(
+            self.previous_product_price_point_id
+            if hasattr(self, "previous_product_price_point_id")
+            else None
+        )
+        _new_product_price_point_id=(
+            self.new_product_price_point_id
+            if hasattr(self, "new_product_price_point_id")
+            else None
+        )
+        _effective_at=(
+            self.effective_at
+            if hasattr(self, "effective_at")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
             f"previous_product_id={_previous_product_id!r}, "
             f"new_product_id={_new_product_id!r}, "
+            f"previous_product_price_point_id={_previous_product_price_point_id!r}, "
+            f"new_product_price_point_id={_new_product_price_point_id!r}, "
+            f"effective_at={_effective_at!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -140,11 +212,29 @@ class SubscriptionProductChange(object):
         """Return a human-readable string representation."""
         _previous_product_id=self.previous_product_id
         _new_product_id=self.new_product_id
+        _previous_product_price_point_id=(
+            self.previous_product_price_point_id
+            if hasattr(self, "previous_product_price_point_id")
+            else None
+        )
+        _new_product_price_point_id=(
+            self.new_product_price_point_id
+            if hasattr(self, "new_product_price_point_id")
+            else None
+        )
+        _effective_at=(
+            self.effective_at
+            if hasattr(self, "effective_at")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
             f"previous_product_id={_previous_product_id!s}, "
             f"new_product_id={_new_product_id!s}, "
+            f"previous_product_price_point_id={_previous_product_price_point_id!s}, "
+            f"new_product_price_point_id={_new_product_price_point_id!s}, "
+            f"effective_at={_effective_at!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

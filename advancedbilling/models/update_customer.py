@@ -28,11 +28,18 @@ class UpdateCustomer(object):
         locale (str): Set a specific language on a customer record.
         vat_number (str): The model property of type str.
         tax_exempt (bool): The model property of type bool.
+        surcharging (bool): Whether surcharging is enabled for the customer. Only
+            applied on sites where surcharging control is enabled.
         tax_exempt_reason (str): The model property of type str.
         parent_id (int): The model property of type int.
         verified (bool): Is the customer verified to use ACH as a payment method.
-            Available only on Authorize.Net gateway
+            Available only on the Authorize.Net gateway.
         salesforce_id (str): The Salesforce ID of the customer
+        branding_theme_id (int): The ID of the Branding Theme assigned to this
+            customer as the customer's default Branding Theme. This customer-level
+            Branding Theme is used when a subscription does not have its own
+            subscription-level Branding Theme. Available only when Branding Themes
+            are enabled for the site.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -56,10 +63,12 @@ class UpdateCustomer(object):
         "locale": "locale",
         "vat_number": "vat_number",
         "tax_exempt": "tax_exempt",
+        "surcharging": "surcharging",
         "tax_exempt_reason": "tax_exempt_reason",
         "parent_id": "parent_id",
         "verified": "verified",
         "salesforce_id": "salesforce_id",
+        "branding_theme_id": "branding_theme_id",
     }
 
     _optionals = [
@@ -79,16 +88,19 @@ class UpdateCustomer(object):
         "locale",
         "vat_number",
         "tax_exempt",
+        "surcharging",
         "tax_exempt_reason",
         "parent_id",
         "verified",
         "salesforce_id",
+        "branding_theme_id",
     ]
 
     _nullables = [
         "parent_id",
         "verified",
         "salesforce_id",
+        "branding_theme_id",
     ]
 
     def __init__(
@@ -109,10 +121,12 @@ class UpdateCustomer(object):
         locale=APIHelper.SKIP,
         vat_number=APIHelper.SKIP,
         tax_exempt=APIHelper.SKIP,
+        surcharging=APIHelper.SKIP,
         tax_exempt_reason=APIHelper.SKIP,
         parent_id=APIHelper.SKIP,
         verified=APIHelper.SKIP,
         salesforce_id=APIHelper.SKIP,
+        branding_theme_id=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a UpdateCustomer instance."""
         # Initialize members of the class
@@ -148,6 +162,8 @@ class UpdateCustomer(object):
             self.vat_number = vat_number
         if tax_exempt is not APIHelper.SKIP:
             self.tax_exempt = tax_exempt
+        if surcharging is not APIHelper.SKIP:
+            self.surcharging = surcharging
         if tax_exempt_reason is not APIHelper.SKIP:
             self.tax_exempt_reason = tax_exempt_reason
         if parent_id is not APIHelper.SKIP:
@@ -156,6 +172,8 @@ class UpdateCustomer(object):
             self.verified = verified
         if salesforce_id is not APIHelper.SKIP:
             self.salesforce_id = salesforce_id
+        if branding_theme_id is not APIHelper.SKIP:
+            self.branding_theme_id = branding_theme_id
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -244,6 +262,10 @@ class UpdateCustomer(object):
             dictionary.get("tax_exempt")\
             if "tax_exempt" in dictionary.keys()\
                 else APIHelper.SKIP
+        surcharging =\
+            dictionary.get("surcharging")\
+            if "surcharging" in dictionary.keys()\
+                else APIHelper.SKIP
         tax_exempt_reason =\
             dictionary.get("tax_exempt_reason")\
             if dictionary.get("tax_exempt_reason")\
@@ -259,6 +281,10 @@ class UpdateCustomer(object):
         salesforce_id =\
             dictionary.get("salesforce_id")\
             if "salesforce_id" in dictionary.keys()\
+                else APIHelper.SKIP
+        branding_theme_id =\
+            dictionary.get("branding_theme_id")\
+            if "branding_theme_id" in dictionary.keys()\
                 else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
@@ -282,10 +308,12 @@ class UpdateCustomer(object):
                    locale,
                    vat_number,
                    tax_exempt,
+                   surcharging,
                    tax_exempt_reason,
                    parent_id,
                    verified,
                    salesforce_id,
+                   branding_theme_id,
                    additional_properties)
 
     def __repr__(self):
@@ -370,6 +398,11 @@ class UpdateCustomer(object):
             if hasattr(self, "tax_exempt")
             else None
         )
+        _surcharging=(
+            self.surcharging
+            if hasattr(self, "surcharging")
+            else None
+        )
         _tax_exempt_reason=(
             self.tax_exempt_reason
             if hasattr(self, "tax_exempt_reason")
@@ -388,6 +421,11 @@ class UpdateCustomer(object):
         _salesforce_id=(
             self.salesforce_id
             if hasattr(self, "salesforce_id")
+            else None
+        )
+        _branding_theme_id=(
+            self.branding_theme_id
+            if hasattr(self, "branding_theme_id")
             else None
         )
         _additional_properties=self.additional_properties
@@ -409,10 +447,12 @@ class UpdateCustomer(object):
             f"locale={_locale!r}, "
             f"vat_number={_vat_number!r}, "
             f"tax_exempt={_tax_exempt!r}, "
+            f"surcharging={_surcharging!r}, "
             f"tax_exempt_reason={_tax_exempt_reason!r}, "
             f"parent_id={_parent_id!r}, "
             f"verified={_verified!r}, "
             f"salesforce_id={_salesforce_id!r}, "
+            f"branding_theme_id={_branding_theme_id!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -499,6 +539,11 @@ class UpdateCustomer(object):
             if hasattr(self, "tax_exempt")
             else None
         )
+        _surcharging=(
+            self.surcharging
+            if hasattr(self, "surcharging")
+            else None
+        )
         _tax_exempt_reason=(
             self.tax_exempt_reason
             if hasattr(self, "tax_exempt_reason")
@@ -517,6 +562,11 @@ class UpdateCustomer(object):
         _salesforce_id=(
             self.salesforce_id
             if hasattr(self, "salesforce_id")
+            else None
+        )
+        _branding_theme_id=(
+            self.branding_theme_id
+            if hasattr(self, "branding_theme_id")
             else None
         )
         _additional_properties=self.additional_properties
@@ -538,10 +588,12 @@ class UpdateCustomer(object):
             f"locale={_locale!s}, "
             f"vat_number={_vat_number!s}, "
             f"tax_exempt={_tax_exempt!s}, "
+            f"surcharging={_surcharging!s}, "
             f"tax_exempt_reason={_tax_exempt_reason!s}, "
             f"parent_id={_parent_id!s}, "
             f"verified={_verified!s}, "
             f"salesforce_id={_salesforce_id!s}, "
+            f"branding_theme_id={_branding_theme_id!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

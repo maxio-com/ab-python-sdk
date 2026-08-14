@@ -16,16 +16,20 @@
 | `attempts` | `int` | Required | - |
 | `last_attempted_at` | `datetime` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "state": "state4",
-  "subscription_id": 126,
-  "revenue_at_risk_in_cents": 30,
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "attempts": 110,
-  "last_attempted_at": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.dunner_data import DunnerData
+
+dunner_data = DunnerData(
+    state='state2',
+    subscription_id=216,
+    revenue_at_risk_in_cents=120,
+    created_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    attempts=20,
+    last_attempted_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

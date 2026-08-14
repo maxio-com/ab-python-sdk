@@ -13,13 +13,15 @@
 | `expiration_month` | `str` | Optional | - |
 | `expiration_year` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "full_number": "full_number0",
-  "expiration_month": "expiration_month6",
-  "expiration_year": "expiration_year0"
-}
+```python
+from advancedbilling.models.credit_card_attributes import CreditCardAttributes
+
+credit_card_attributes = CreditCardAttributes(
+    full_number='full_number2',
+    expiration_month='expiration_month6',
+    expiration_year='expiration_year2'
+)
 ```
 

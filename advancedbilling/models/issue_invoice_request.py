@@ -19,7 +19,7 @@ class IssueInvoiceRequest(object):
             history. - `initiate_dunning` - prepayments and credits applied to the
             invoice; invoice status set to "open"; email sent to the customer for the
             issued invoice (if setting applies); payment failure recorded in the
-            invoice history; subscription will  most likely go into "past_due" or
+            invoice history; subscription will most likely go into "past_due" or
             "canceled" state (depending upon net terms and dunning settings).
         additional_properties (Dict[str, object]): The additional properties for the
             model.

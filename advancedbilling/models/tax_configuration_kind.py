@@ -11,9 +11,9 @@ class TaxConfigurationKind(object):
 
     Attributes:
         CUSTOM: The enum member of type str.
-        ENUM_MANAGED AVALARA: The enum member of type str.
-        ENUM_LINKED AVALARA: The enum member of type str.
-        ENUM_DIGITAL RIVER: The enum member of type str.
+        ENUM_MANAGED_AVALARA: The enum member of type str.
+        ENUM_LINKED_AVALARA: The enum member of type str.
+        ENUM_DIGITAL_RIVER: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

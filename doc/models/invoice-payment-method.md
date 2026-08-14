@@ -18,15 +18,17 @@
 | `last_four` | `str` | Optional | - |
 | `masked_card_number` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "details": "details8",
-  "kind": "kind6",
-  "memo": "memo2",
-  "type": "type8",
-  "card_brand": "card_brand8"
-}
+```python
+from advancedbilling.models.invoice_payment_method import InvoicePaymentMethod
+
+invoice_payment_method = InvoicePaymentMethod(
+    details='details2',
+    kind='kind0',
+    memo='memo6',
+    mtype='type2',
+    card_brand='card_brand4'
+)
 ```
 

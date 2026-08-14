@@ -8,8 +8,8 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 from advancedbilling.api_helper import APIHelper
 
 
-class ListSubcriptionGroupPrepaymentItem(object):
-    """Implementation of the 'List Subcription Group Prepayment Item' model.
+class ListSubscriptionGroupPrepaymentItem(object):
+    """Implementation of the 'List Subscription Group Prepayment Item' model.
 
     Attributes:
         id (int): The model property of type int.
@@ -63,7 +63,7 @@ class ListSubcriptionGroupPrepaymentItem(object):
         payment_type=APIHelper.SKIP,
         created_at=APIHelper.SKIP,
         additional_properties=None):
-        """Initialize a ListSubcriptionGroupPrepaymentItem instance."""
+        """Initialize a ListSubscriptionGroupPrepaymentItem instance."""
         # Initialize members of the class
         if id is not APIHelper.SKIP:
             self.id = id

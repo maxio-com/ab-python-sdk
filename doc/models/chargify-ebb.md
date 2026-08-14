@@ -16,15 +16,19 @@
 | `subscription_id` | `int` | Optional | Id of Maxio Advanced Billing Subscription which is connected to this event.<br>Provide `subscription_id` if you configured `chargify.subscription_id` as Subscription Identifier in your Event Stream. |
 | `subscription_reference` | `str` | Optional | Reference of Maxio Advanced Billing Subscription which is connected to this event.<br>Provide `subscription_reference` if you configured `chargify.subscription_reference` as Subscription Identifier in your Event Stream. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "timestamp": "2016-03-13T12:52:32.123Z",
-  "id": "id4",
-  "created_at": "2016-03-13T12:52:32.123Z",
-  "uniqueness_token": "uniqueness_token0",
-  "subscription_id": 200
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.chargify_ebb import ChargifyEBB
+
+chargify_ebb = ChargifyEBB(
+    timestamp=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    id='id4',
+    created_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    uniqueness_token='uniqueness_token0',
+    subscription_id=30
+)
 ```
 

@@ -8,15 +8,15 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 class ReactivationBilling(object):
     """Implementation of the 'Reactivation Billing' model.
 
-    These values are only applicable to subscriptions using calendar billing
+    These values are only applicable to subscriptions using calendar billing.
 
     Attributes:
         reactivation_charge (ReactivationCharge): You may choose how to handle the
             reactivation charge for that subscription: 1) `prorated` A prorated
-            charge for the product price will be attempted for to complete the period
-            2) `immediate` A full-price charge for the product price will be
-            attempted immediately 3) `delayed` A full-price charge for the product
-            price will be attempted at the next renewal
+            charge for the product price will be attempted to complete the period 2)
+            `immediate` A full-price charge for the product price will be attempted
+            immediately 3) `delayed` A full-price charge for the product price will
+            be attempted at the next renewal.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

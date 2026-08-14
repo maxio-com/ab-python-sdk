@@ -14,20 +14,23 @@
 | `currency_code` | `str` | Optional | The ISO 4217 currency code (3 character string) representing the currency of invoice transaction. |
 | `applications` | [`List[InvoicePaymentApplication]`](../../doc/models/invoice-payment-application.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transaction_id": 144,
-  "total_amount": "total_amount2",
-  "currency_code": "currency_code2",
-  "applications": [
-    {
-      "invoice_uid": "invoice_uid8",
-      "application_uid": "application_uid8",
-      "applied_amount": "applied_amount0"
-    }
-  ]
-}
+```python
+from advancedbilling.models.invoice_payment_application import InvoicePaymentApplication
+from advancedbilling.models.multi_invoice_payment import MultiInvoicePayment
+
+multi_invoice_payment = MultiInvoicePayment(
+    transaction_id=238,
+    total_amount='total_amount0',
+    currency_code='currency_code0',
+    applications=[
+        InvoicePaymentApplication(
+            invoice_uid='invoice_uid8',
+            application_uid='application_uid8',
+            applied_amount='applied_amount0'
+        )
+    ]
+)
 ```
 

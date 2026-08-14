@@ -13,13 +13,15 @@
 | `handle` | `str` | Optional | - |
 | `name` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 192,
-  "handle": "handle6",
-  "name": "name0"
-}
+```python
+from advancedbilling.models.item_price_point_data import ItemPricePointData
+
+item_price_point_data = ItemPricePointData(
+    id=180,
+    handle='handle2',
+    name='name6'
+)
 ```
 

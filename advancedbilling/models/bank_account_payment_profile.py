@@ -17,10 +17,10 @@ class BankAccountPaymentProfile(object):
     Attributes:
         id (int): The Chargify-assigned ID of the stored bank account. This value can
             be used as an input to payment_profile_id when creating a subscription,
-            in order to re-use a stored payment profile for the same customer
+            in order to re-use a stored payment profile for the same customer.
         first_name (str): The first name of the bank account holder
         last_name (str): The last name of the bank account holder
-        customer_id (int): The Chargify-assigned id for the customer record to which
+        customer_id (int): The Chargify-assigned ID for the customer record to which
             the bank account belongs
         current_vault (BankAccountVault): The vault that stores the payment profile
             with the provided vault_token. Use `bogus` for testing.
@@ -40,15 +40,15 @@ class BankAccountPaymentProfile(object):
         bank_name (str): The bank where the account resides
         masked_bank_routing_number (str): A string representation of the stored bank
             routing number with all but the last 4 digits marked with X's (i.e.
-            'XXXXXXX1111'). payment_type will be bank_account
+            'XXXXXXX1111'). payment_type will be bank_account.
         masked_bank_account_number (str): A string representation of the stored bank
             account number with all but the last 4 digits marked with X's (i.e.
-            'XXXXXXX1111')
+            'XXXXXXX1111').
         bank_account_type (BankAccountType): Defaults to checking
         bank_account_holder_type (BankAccountHolderType): Defaults to personal
         payment_type (PaymentType): The model property of type PaymentType.
-        verified (bool): denotes whether a bank account has been verified by
-            providing the amounts of two small deposits made into the account
+        verified (bool): Denotes whether a bank account has been verified by
+            providing the amounts of two small deposits made into the account.
         site_gateway_setting_id (int): The model property of type int.
         gateway_handle (str): The model property of type str.
         created_at (datetime): A timestamp indicating when this payment profile was

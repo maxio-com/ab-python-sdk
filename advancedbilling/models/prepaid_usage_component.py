@@ -20,17 +20,17 @@ class PrepaidUsageComponent(object):
 
     Attributes:
         name (str): A name for this component that is suitable for showing customers
-            and displaying on billing statements, ie. "Minutes".
+            and displaying on billing statements, e.g., "Minutes".
         unit_name (str): The name of the unit of measurement for the component. It
             should be singular since it will be automatically pluralized when
-            necessary. i.e. “message”, which may then be shown as “5 messages” on a
+            necessary. e.g., “message”, which may then be shown as “5 messages” on a
             subscription’s component line-item
         description (str): A description for the component that will be displayed to
             the user on the hosted signup page.
         handle (str): A unique identifier for your use that can be used to retrieve
-            this component is subsequent requests.  Must start with a letter or
-            number and may only contain lowercase letters, numbers, or the characters
-            '.', ':', '-', or '_'.
+            this component in subsequent requests. Must start with a letter or number
+            and may only contain lowercase letters, numbers, or the characters '.',
+            ':', '-', or '_'.
         taxable (bool): Boolean flag describing whether a component is taxable or not.
         pricing_scheme (PricingScheme): The identifier for the pricing scheme. See
             [Product
@@ -53,7 +53,7 @@ class PrepaidUsageComponent(object):
             unit when the pricing scheme is “per_unit”. For On/Off Components, this
             is the amount that the customer will be charged when they turn the
             component on for the subscription. The price can contain up to 8 decimal
-            places. i.e. 1.00 or 0.0012 or 0.00000065
+            places. e.g., 1.00 or 0.0012 or 0.00000065
         tax_code (str): A string representing the tax code related to the component
             type. This is especially important when using AvaTax to tax based on
             locale. This attribute has a max length of 25 characters.
@@ -62,9 +62,9 @@ class PrepaidUsageComponent(object):
             the component on generated invoices.
         overage_pricing (OveragePricing): The model property of type OveragePricing.
         rollover_prepaid_remainder (bool): Boolean which controls whether or not
-            remaining units should be rolled over to the next period
+            remaining units should be rolled over to the next period.
         renew_prepaid_allocation (bool): Boolean which controls whether or not the
-            allocated quantity should be renewed at the beginning of each period
+            allocated quantity should be renewed at the beginning of each period.
         expiration_interval (float): (only for prepaid usage components where
             rollover_prepaid_remainder is true) The number of
             `expiration_interval_unit`s after which rollover amounts should expire
@@ -73,6 +73,10 @@ class PrepaidUsageComponent(object):
         display_on_hosted_page (bool): The model property of type bool.
         allow_fractional_quantities (bool): The model property of type bool.
         public_signup_page_ids (List[int]): The model property of type List[int].
+        unspsc_code (str): (Optional) Custom UNSPSC commodity code for Level 3/CEDP
+            payment data. When set, this value is sent as the commodity code on
+            invoice line items for this component instead of the default derived from
+            item_category.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -101,6 +105,7 @@ class PrepaidUsageComponent(object):
         "display_on_hosted_page": "display_on_hosted_page",
         "allow_fractional_quantities": "allow_fractional_quantities",
         "public_signup_page_ids": "public_signup_page_ids",
+        "unspsc_code": "unspsc_code",
     }
 
     _optionals = [
@@ -121,12 +126,14 @@ class PrepaidUsageComponent(object):
         "display_on_hosted_page",
         "allow_fractional_quantities",
         "public_signup_page_ids",
+        "unspsc_code",
     ]
 
     _nullables = [
         "upgrade_charge",
         "downgrade_credit",
         "expiration_interval_unit",
+        "unspsc_code",
     ]
 
     def __init__(
@@ -152,6 +159,7 @@ class PrepaidUsageComponent(object):
         display_on_hosted_page=APIHelper.SKIP,
         allow_fractional_quantities=APIHelper.SKIP,
         public_signup_page_ids=APIHelper.SKIP,
+        unspsc_code=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a PrepaidUsageComponent instance."""
         # Initialize members of the class
@@ -193,6 +201,8 @@ class PrepaidUsageComponent(object):
             self.allow_fractional_quantities = allow_fractional_quantities
         if public_signup_page_ids is not APIHelper.SKIP:
             self.public_signup_page_ids = public_signup_page_ids
+        if unspsc_code is not APIHelper.SKIP:
+            self.unspsc_code = unspsc_code
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -315,6 +325,10 @@ class PrepaidUsageComponent(object):
             dictionary.get("public_signup_page_ids")\
             if dictionary.get("public_signup_page_ids")\
                 else APIHelper.SKIP
+        unspsc_code =\
+            dictionary.get("unspsc_code")\
+            if "unspsc_code" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -342,6 +356,7 @@ class PrepaidUsageComponent(object):
                    display_on_hosted_page,
                    allow_fractional_quantities,
                    public_signup_page_ids,
+                   unspsc_code,
                    additional_properties)
 
     def __repr__(self):
@@ -435,6 +450,11 @@ class PrepaidUsageComponent(object):
             if hasattr(self, "public_signup_page_ids")
             else None
         )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -459,6 +479,7 @@ class PrepaidUsageComponent(object):
             f"display_on_hosted_page={_display_on_hosted_page!r}, "
             f"allow_fractional_quantities={_allow_fractional_quantities!r}, "
             f"public_signup_page_ids={_public_signup_page_ids!r}, "
+            f"unspsc_code={_unspsc_code!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -554,6 +575,11 @@ class PrepaidUsageComponent(object):
             if hasattr(self, "public_signup_page_ids")
             else None
         )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -578,6 +604,7 @@ class PrepaidUsageComponent(object):
             f"display_on_hosted_page={_display_on_hosted_page!s}, "
             f"allow_fractional_quantities={_allow_fractional_quantities!s}, "
             f"public_signup_page_ids={_public_signup_page_ids!s}, "
+            f"unspsc_code={_unspsc_code!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

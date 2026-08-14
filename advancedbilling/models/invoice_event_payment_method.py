@@ -20,8 +20,7 @@ class InvoiceEventPaymentMethod(object):
 
     """
 
-    _all_values = ["apple_pay", "bank_account", "credit_card", "external",
-        "paypal_account"]
+    _all_values = ["apple_pay", "bank_account", "credit_card", "external", "paypal_account"]
     APPLE_PAY = "apple_pay"
 
     BANK_ACCOUNT = "bank_account"

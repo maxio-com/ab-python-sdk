@@ -18,10 +18,10 @@ class CouponUsage(object):
         savings (int): Dollar amount of customer savings as a result of the coupon.
         savings_in_cents (int): Dollar amount of customer savings as a result of the
             coupon.
-        revenue (int): Total revenue of the all subscriptions that have received a
+        revenue (int): Total revenue of all subscriptions that have received a
             discount from this coupon.
-        revenue_in_cents (int): Total revenue of the all subscriptions that have
-            received a discount from this coupon.
+        revenue_in_cents (int): Total revenue of all subscriptions that have received
+            a discount from this coupon.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

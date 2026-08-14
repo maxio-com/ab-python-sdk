@@ -11,22 +11,26 @@
 |  --- | --- | --- | --- |
 | `mrr` | [`MRR`](../../doc/models/mrr.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "mrr": {
-    "amount_in_cents": 198,
-    "amount_formatted": "amount_formatted6",
-    "currency": "currency4",
-    "currency_symbol": "currency_symbol2",
-    "breakouts": {
-      "plan_amount_in_cents": 254,
-      "plan_amount_formatted": "plan_amount_formatted0",
-      "usage_amount_in_cents": 106,
-      "usage_amount_formatted": "usage_amount_formatted8"
-    }
-  }
-}
+```python
+from advancedbilling.models.breakouts import Breakouts
+from advancedbilling.models.mrr import MRR
+from advancedbilling.models.mrr_response import MRRResponse
+
+mrr_response = MRRResponse(
+    mrr=MRR(
+        amount_in_cents=198,
+        amount_formatted='amount_formatted6',
+        currency='currency4',
+        currency_symbol='currency_symbol2',
+        breakouts=Breakouts(
+            plan_amount_in_cents=254,
+            plan_amount_formatted='plan_amount_formatted0',
+            usage_amount_in_cents=106,
+            usage_amount_formatted='usage_amount_formatted8'
+        )
+    )
+)
 ```
 

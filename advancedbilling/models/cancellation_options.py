@@ -21,9 +21,9 @@ class CancellationOptions(object):
             the current period end instead of immediately. To use this option, the
             Schedule Subscription Cancellation feature must be enabled on your site.
         scheduled_cancellation_at (datetime): Schedules the cancellation on the
-            provided date. This is option is not applicable for prepaid
-            subscriptions. To use this option, the Schedule Subscription Cancellation
-            feature must be enabled on your site.
+            provided date. This option is not applicable for prepaid subscriptions.
+            To use this option, the Schedule Subscription Cancellation feature must
+            be enabled on your site.
         refund_prepayment_account_balance (bool): Applies to prepaid subscriptions.
             When true, which is the default, the remaining prepaid balance is
             refunded as part of cancellation processing. When false, prepaid balance

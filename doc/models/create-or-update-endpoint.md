@@ -1,7 +1,7 @@
 
 # Create or Update Endpoint
 
-Used to Create or Update Endpoint
+Used to Create or Update Endpoint.
 
 ## Structure
 
@@ -14,14 +14,17 @@ Used to Create or Update Endpoint
 | `url` | `str` | Required | - |
 | `webhook_subscriptions` | [`List[WebhookSubscription]`](../../doc/models/webhook-subscription.md) | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "url": "url8",
-  "webhook_subscriptions": [
-    "refund_success"
-  ]
-}
+```python
+from advancedbilling.models.create_or_update_endpoint import CreateOrUpdateEndpoint
+from advancedbilling.models.webhook_subscription import WebhookSubscription
+
+create_or_update_endpoint = CreateOrUpdateEndpoint(
+    url='url2',
+    webhook_subscriptions=[
+        WebhookSubscription.EXPIRATION_DATE_CHANGE
+    ]
+)
 ```
 

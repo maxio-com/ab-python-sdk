@@ -20,15 +20,19 @@
 | `scheduled_renewal_configuration_items` | [`List[ScheduledRenewalConfigurationItem]`](../../doc/models/scheduled-renewal-configuration-item.md) | Optional | - |
 | `contract` | [`Contract`](../../doc/models/contract.md) | Optional | Contract linked to the scheduled renewal configuration. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 152,
-  "site_id": 78,
-  "subscription_id": 6,
-  "starts_at": "2016-03-13T12:52:32.123Z",
-  "ends_at": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.scheduled_renewal_configuration import ScheduledRenewalConfiguration
+
+scheduled_renewal_configuration = ScheduledRenewalConfiguration(
+    id=134,
+    site_id=60,
+    subscription_id=244,
+    starts_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    ends_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

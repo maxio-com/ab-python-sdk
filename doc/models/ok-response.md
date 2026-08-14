@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `ok` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "ok": "ok4"
-}
+```python
+from advancedbilling.models.ok_response import OkResponse
+
+ok_response = OkResponse(
+    ok='ok8'
+)
 ```
 

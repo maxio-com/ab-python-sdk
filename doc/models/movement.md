@@ -19,15 +19,19 @@
 | `subscription_id` | `int` | Optional | - |
 | `subscriber_name` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "timestamp": "2016-03-13T12:52:32.123Z",
-  "amount_in_cents": 174,
-  "amount_formatted": "amount_formatted4",
-  "description": "description2",
-  "category": "category0"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.movement import Movement
+
+movement = Movement(
+    timestamp=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+    amount_in_cents=34,
+    amount_formatted='amount_formatted6',
+    description='description4',
+    category='category2'
+)
 ```
 

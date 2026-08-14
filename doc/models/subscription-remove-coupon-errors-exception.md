@@ -11,13 +11,14 @@
 |  --- | --- | --- | --- |
 | `subscription` | `List[str]` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "subscription": [
-    "subscription0"
-  ]
-}
+```python
+try:
+    # make the API call
+except SubscriptionRemoveCouponErrorsException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

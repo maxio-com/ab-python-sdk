@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `webhooks_enabled` | `bool` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "webhooks_enabled": false
-}
+```python
+from advancedbilling.models.enable_webhooks_request import EnableWebhooksRequest
+
+enable_webhooks_request = EnableWebhooksRequest(
+    webhooks_enabled=False
+)
 ```
 

@@ -96,6 +96,12 @@ from advancedbilling.models.dunning_step_reached import (
 from advancedbilling.models.failed_payment_event import (
     FailedPaymentEvent,
 )
+from advancedbilling.models.get_one_time_token_bank_account_payment_profile import (
+    GetOneTimeTokenBankAccountPaymentProfile,
+)
+from advancedbilling.models.get_one_time_token_payment_profile import (
+    GetOneTimeTokenPaymentProfile,
+)
 from advancedbilling.models.invoice_issued import (
     InvoiceIssued,
 )
@@ -307,6 +313,15 @@ class UnionTypeLookUp:
                 LeafType(int),
                 LeafType(str),
             ],
+        ),
+        "ListSubscriptionsInputProduct": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
         ),
         "CreateUsageSubscriptionIdOrReference": lambda: OneOf(
             [
@@ -732,6 +747,15 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
+        "CreateSubscriptionComponentUnitBalance": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
         "CreateSubscriptionComponentAllocatedQuantity": lambda: OneOf(
             [
                 LeafType(int),
@@ -804,6 +828,12 @@ class UnionTypeLookUp:
                is_nullable=True,
             ),
         ),
+        "GetOneTimeTokenRequestPaymentProfile": lambda: AnyOf(
+            [
+                LeafType(GetOneTimeTokenPaymentProfile),
+                LeafType(GetOneTimeTokenBankAccountPaymentProfile),
+            ],
+        ),
         "IssueServiceCreditAmount": lambda: OneOf(
             [
                 LeafType(float),
@@ -831,6 +861,12 @@ class UnionTypeLookUp:
             Context.create(
                is_optional=True,
             ),
+        ),
+        "MeteredUsageNewUnitBalance": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
         ),
         "OnOffComponentUnitPrice": lambda: OneOf(
             [
@@ -878,6 +914,18 @@ class UnionTypeLookUp:
                              discriminator_value="paypal_account",
                              discriminator="payment_type",
                          )),
+            ],
+        ),
+        "PrepaidUsageNewUnitBalance": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+        ),
+        "PrepaidUsageNewOverageUnitBalance": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
             ],
         ),
         "PrepaidUsageComponentUnitPrice": lambda: OneOf(
@@ -1036,6 +1084,15 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
+        "SubscriptionComponentUnitBalance": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
         "SubscriptionComponentAllocatedQuantity": lambda: OneOf(
             [
                 LeafType(int),
@@ -1155,6 +1212,60 @@ class UnionTypeLookUp:
             ),
         ),
         "SubscriptionGroupSignupComponentPricePointId": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "UpdateInvoiceItemQuantity": lambda: OneOf(
+            [
+                LeafType(float),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "UpdateInvoiceItemUnitPrice": lambda: OneOf(
+            [
+                LeafType(float),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "UpdateInvoiceItemProductId": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "UpdateInvoiceItemComponentId": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "UpdateInvoiceItemPricePointId": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "UpdateInvoiceItemProductPricePointId": lambda: OneOf(
             [
                 LeafType(str),
                 LeafType(int),

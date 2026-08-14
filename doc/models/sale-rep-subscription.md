@@ -20,15 +20,17 @@
 | `last_payment` | `str` | Optional | - |
 | `churn_date` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 18,
-  "site_name": "site_name2",
-  "subscription_url": "subscription_url6",
-  "customer_name": "customer_name2",
-  "created_at": "created_at8"
-}
+```python
+from advancedbilling.models.sale_rep_subscription import SaleRepSubscription
+
+sale_rep_subscription = SaleRepSubscription(
+    id=126,
+    site_name='site_name2',
+    subscription_url='subscription_url6',
+    customer_name='customer_name2',
+    created_at='created_at8'
+)
 ```
 

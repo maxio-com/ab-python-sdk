@@ -15,7 +15,7 @@ class CreatePrepayment(object):
         amount (float): The model property of type float.
         details (str): The model property of type str.
         memo (str): The model property of type str.
-        method (CreatePrepaymentMethod): :- When the `method` specified is
+        method (CreatePrepaymentMethod): When the `method` specified is
             `"credit_card_on_file"`, the prepayment amount will be collected using
             the default credit card payment profile and applied to the prepayment
             account balance. This is especially useful for manual replenishment of

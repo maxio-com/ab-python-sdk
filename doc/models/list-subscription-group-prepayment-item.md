@@ -1,9 +1,9 @@
 
-# List Subcription Group Prepayment Item
+# List Subscription Group Prepayment Item
 
 ## Structure
 
-`ListSubcriptionGroupPrepaymentItem`
+`ListSubscriptionGroupPrepaymentItem`
 
 ## Fields
 
@@ -19,15 +19,17 @@
 | `payment_type` | [`PrepaymentMethod`](../../doc/models/prepayment-method.md) | Optional | - |
 | `created_at` | `datetime` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 254,
-  "subscription_group_uid": "subscription_group_uid6",
-  "amount_in_cents": 172,
-  "remaining_amount_in_cents": 142,
-  "details": "details2"
-}
+```python
+from advancedbilling.models.list_subscription_group_prepayment_item import ListSubscriptionGroupPrepaymentItem
+
+list_subscription_group_prepayment_item = ListSubscriptionGroupPrepaymentItem(
+    id=96,
+    subscription_group_uid='subscription_group_uid6',
+    amount_in_cents=74,
+    remaining_amount_in_cents=240,
+    details='details2'
+)
 ```
 

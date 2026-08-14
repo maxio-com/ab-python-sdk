@@ -14,14 +14,16 @@
 | `subscription_id` | `int` | Optional | - |
 | `code` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 42,
-  "site_id": 224,
-  "subscription_id": 152,
-  "code": "code6"
-}
+```python
+from advancedbilling.models.referral_code import ReferralCode
+
+referral_code = ReferralCode(
+    id=46,
+    site_id=228,
+    subscription_id=156,
+    code='code0'
+)
 ```
 

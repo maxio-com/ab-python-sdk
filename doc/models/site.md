@@ -30,15 +30,17 @@
 | `portal_enabled` | `bool` | Optional | Whether the Billing Portal is enabled for this site. |
 | `test` | `bool` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 34,
-  "name": "name0",
-  "subdomain": "subdomain4",
-  "currency": "currency0",
-  "seller_id": 198
-}
+```python
+from advancedbilling.models.site import Site
+
+site = Site(
+    id=64,
+    name='name4',
+    subdomain='subdomain0',
+    currency='currency4',
+    seller_id=228
+)
 ```
 

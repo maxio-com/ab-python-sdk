@@ -59,7 +59,7 @@ class SalesCommissionsController(BaseController):
         enabled. For further information on getting access to Advanced Analytics
         contact Maxio support.
         > Note: The request is at seller level, it means `<<subdomain>>` variable
-        will be replaced by `app`
+        will be replaced by `app`.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -129,7 +129,7 @@ class SalesCommissionsController(BaseController):
                         options=dict()):
         """Perform a GET request to /sellers/{seller_id}/sales_reps.json.
 
-        Returns a sales rep list with details.
+        Lists sales reps with details.
         ## Modified Authentication Process
         The Sales Commission API differs from other Chargify API endpoints. This
         resource is associated with the seller itself. Up to now all available
@@ -145,7 +145,7 @@ class SalesCommissionsController(BaseController):
         enabled. For further information on getting access to Advanced Analytics
         contact Maxio support.
         > Note: The request is at seller level, it means `<<subdomain>>` variable
-        will be replaced by `app`
+        will be replaced by `app`.
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -237,7 +237,7 @@ class SalesCommissionsController(BaseController):
         enabled. For further information on getting access to Advanced Analytics
         contact Maxio support.
         > Note: The request is at seller level, it means `<<subdomain>>` variable
-        will be replaced by `app`
+        will be replaced by `app`.
 
         Args:
             seller_id (str): The Chargify id of your seller account

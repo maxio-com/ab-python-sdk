@@ -15,30 +15,33 @@
 | `test_mode` | `bool` | Optional | - |
 | `subscriptions` | [`List[SaleRepSubscription]`](../../doc/models/sale-rep-subscription.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 18,
-  "full_name": "full_name0",
-  "subscriptions_count": 162,
-  "test_mode": false,
-  "subscriptions": [
-    {
-      "id": 202,
-      "site_name": "site_name8",
-      "subscription_url": "subscription_url2",
-      "customer_name": "customer_name8",
-      "created_at": "created_at4"
-    },
-    {
-      "id": 202,
-      "site_name": "site_name8",
-      "subscription_url": "subscription_url2",
-      "customer_name": "customer_name8",
-      "created_at": "created_at4"
-    }
-  ]
-}
+```python
+from advancedbilling.models.sale_rep import SaleRep
+from advancedbilling.models.sale_rep_subscription import SaleRepSubscription
+
+sale_rep = SaleRep(
+    id=214,
+    full_name='full_name0',
+    subscriptions_count=34,
+    test_mode=False,
+    subscriptions=[
+        SaleRepSubscription(
+            id=202,
+            site_name='site_name8',
+            subscription_url='subscription_url2',
+            customer_name='customer_name8',
+            created_at='created_at4'
+        ),
+        SaleRepSubscription(
+            id=202,
+            site_name='site_name8',
+            subscription_url='subscription_url2',
+            customer_name='customer_name8',
+            created_at='created_at4'
+        )
+    ]
+)
 ```
 

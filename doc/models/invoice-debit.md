@@ -18,15 +18,20 @@
 | `original_amount` | `str` | Optional | - |
 | `applied_amount` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid2",
-  "debit_note_number": "debit_note_number2",
-  "debit_note_uid": "debit_note_uid8",
-  "role": "chargeback",
-  "transaction_time": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.debit_note_role import DebitNoteRole
+from advancedbilling.models.invoice_debit import InvoiceDebit
+
+invoice_debit = InvoiceDebit(
+    uid='uid2',
+    debit_note_number='debit_note_number2',
+    debit_note_uid='debit_note_uid2',
+    role=DebitNoteRole.CHARGEBACK,
+    transaction_time=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

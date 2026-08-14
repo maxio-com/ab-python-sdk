@@ -42,7 +42,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | `end_date` | `date` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns products with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `start_datetime` | `datetime` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or after exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of start_date. |
 | `end_datetime` | `datetime` | Query, Optional | The end date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns products with a timestamp at or before exact time provided in query. You can specify timezone in query - otherwise your site's time zone will be used. If provided, this parameter will be used instead of end_date. |
-| `include_archived` | `bool` | Query, Optional | Include archived products |
+| `include_archived` | `bool` | Query, Optional | Include archived products. |
 | `include` | [`ListProductsInclude`](../../doc/models/list-products-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=prepaid_product_price_point`. |
 
 ## Response Type
@@ -180,7 +180,7 @@ print(result)
 
 # Create Product Family
 
-Creates a Product Family within your Advanced Billing site. Create a Product Family to act as a container for your products, components, and coupons.
+Creates a Product Family within your site. Create a Product Family to act as a container for your products, components, and coupons.
 
 Full documentation on how Product Families operate within the Advanced Billing UI can be located [here](https://maxio.zendesk.com/hc/en-us/articles/24261098936205-Product-Families).
 
@@ -211,7 +211,8 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 body = CreateProductFamilyRequest(
     product_family=CreateProductFamily(
         name='Acme Projects',
-        description='Amazing project management tool'
+        description='Amazing project management tool',
+        surcharging=False
     )
 )
 
@@ -230,7 +231,8 @@ print(result)
     "name": "Acme Projects",
     "description": "Amazing project management tool",
     "handle": "acme-projects",
-    "accounting_code": null
+    "accounting_code": null,
+    "surcharging": false
   }
 }
 ```
@@ -244,7 +246,7 @@ print(result)
 
 # List Product Families
 
-Returns a list of Product Families for a site.
+Lists Product Families for a site.
 
 ```python
 def list_product_families(self,
@@ -292,6 +294,7 @@ print(result)
       "description": null,
       "handle": "acme-projects",
       "accounting_code": null,
+      "surcharging": false,
       "created_at": "2013-02-20T15:05:51-07:00",
       "updated_at": "2013-02-20T15:05:51-07:00",
       "archived_at": null
@@ -304,6 +307,7 @@ print(result)
       "description": "Another family.",
       "handle": "bat-family",
       "accounting_code": null,
+      "surcharging": true,
       "created_at": "2014-04-16T12:41:13-06:00",
       "updated_at": "2014-04-16T12:41:13-06:00",
       "archived_at": "2024-11-05T09:30:00-07:00"
@@ -359,6 +363,7 @@ print(result)
     "description": "",
     "handle": "billing-plans",
     "accounting_code": null,
+    "surcharging": false,
     "archived_at": null
   }
 }

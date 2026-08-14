@@ -16,7 +16,9 @@ Allows to filter by `not_null` or `null`.
 
 ## Example
 
-```
-not_null
+```python
+from advancedbilling.models.include_null_or_not_null import IncludeNullOrNotNull
+
+include_null_or_not_null = IncludeNullOrNotNull.NOT_NULL
 ```
 

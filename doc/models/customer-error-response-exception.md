@@ -11,13 +11,14 @@
 |  --- | --- | --- | --- |
 | `errors` | [Customer Error](../../doc/models/customer-error.md) \| List[str] \| None | Optional | This is a container for one-of cases. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "errors": {
-    "customer": "customer8"
-  }
-}
+```python
+try:
+    # make the API call
+except CustomerErrorResponseException as e:
+    print(e)
+except APIException as e:
+    print(e)
 ```
 

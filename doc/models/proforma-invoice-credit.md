@@ -14,14 +14,16 @@
 | `original_amount` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `applied_amount` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "uid": "uid8",
-  "memo": "memo2",
-  "original_amount": "original_amount2",
-  "applied_amount": "applied_amount0"
-}
+```python
+from advancedbilling.models.proforma_invoice_credit import ProformaInvoiceCredit
+
+proforma_invoice_credit = ProformaInvoiceCredit(
+    uid='uid0',
+    memo='memo4',
+    original_amount='original_amount4',
+    applied_amount='applied_amount8'
+)
 ```
 

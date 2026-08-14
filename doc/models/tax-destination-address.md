@@ -14,3 +14,11 @@
 | `SHIPPING_ONLY` |
 | `BILLING_ONLY` |
 
+## Example
+
+```python
+from advancedbilling.models.tax_destination_address import TaxDestinationAddress
+
+tax_destination_address = TaxDestinationAddress.SHIPPING_ONLY
+```
+

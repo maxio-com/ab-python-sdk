@@ -11,11 +11,13 @@
 |  --- | --- | --- | --- |
 | `customer` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "customer": "customer8"
-}
+```python
+from advancedbilling.models.customer_error import CustomerError
+
+customer_error = CustomerError(
+    customer='customer8'
+)
 ```
 

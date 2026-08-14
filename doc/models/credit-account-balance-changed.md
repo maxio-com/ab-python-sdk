@@ -15,15 +15,19 @@
 | `currency_code` | `str` | Required | - |
 | `at_time` | `datetime` | Required | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reason": "reason8",
-  "service_credit_account_balance_in_cents": 10,
-  "service_credit_balance_change_in_cents": 116,
-  "currency_code": "currency_code8",
-  "at_time": "2016-03-13T12:52:32.123Z"
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.credit_account_balance_changed import CreditAccountBalanceChanged
+
+credit_account_balance_changed = CreditAccountBalanceChanged(
+    reason='reason8',
+    service_credit_account_balance_in_cents=64,
+    service_credit_balance_change_in_cents=190,
+    currency_code='currency_code8',
+    at_time=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+)
 ```
 

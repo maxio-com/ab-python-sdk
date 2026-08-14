@@ -13,13 +13,15 @@
 | `price_point_id` | `int` | Optional | - |
 | `starting_quantity` | `int` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "component_id": 242,
-  "price_point_id": 10,
-  "starting_quantity": 50
-}
+```python
+from advancedbilling.models.create_offer_component import CreateOfferComponent
+
+create_offer_component = CreateOfferComponent(
+    component_id=206,
+    price_point_id=230,
+    starting_quantity=242
+)
 ```
 

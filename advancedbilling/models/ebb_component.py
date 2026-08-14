@@ -17,17 +17,17 @@ class EBBComponent(object):
 
     Attributes:
         name (str): A name for this component that is suitable for showing customers
-            and displaying on billing statements, ie. "Minutes".
-        unit_name (str): The name of the unit of measurement for the component. It
+            and displaying on billing statements, i.e., "Minutes".
+        unit_name (str): “The name of the unit of measurement for the component. It
             should be singular since it will be automatically pluralized when
-            necessary. i.e. “message”, which may then be shown as “5 messages” on a
-            subscription’s component line-item
+            necessary. i.e., “message”, which may then be shown as “5 messages” on a
+            subscription’s component line-item”
         description (str): A description for the component that will be displayed to
             the user on the hosted signup page.
         handle (str): A unique identifier for your use that can be used to retrieve
-            this component is subsequent requests.  Must start with a letter or
-            number and may only contain lowercase letters, numbers, or the characters
-            '.', ':', '-', or '_'.
+            this component in subsequent requests. Must start with a letter or number
+            and may only contain lowercase letters, numbers, or the characters '.',
+            ':', '-', or '_'.
         taxable (bool): Boolean flag describing whether a component is taxable or not.
         pricing_scheme (PricingScheme): The identifier for the pricing scheme. See
             [Product
@@ -42,7 +42,7 @@ class EBBComponent(object):
             List[ComponentPricePointItem].
         unit_price (str | float | None): The amount the customer will be charged per
             unit when the pricing scheme is “per_unit”. The price can contain up to 8
-            decimal places. i.e. 1.00 or 0.0012 or 0.00000065
+            decimal places. i.e., 1.00 or 0.0012 or 0.00000065
         tax_code (str): A string representing the tax code related to the component
             type. This is especially important when using AvaTax to tax based on
             locale. This attribute has a max length of 25 characters.
@@ -51,13 +51,17 @@ class EBBComponent(object):
             the component on generated invoices.
         event_based_billing_metric_id (int): The ID of an event based billing metric
             that will be attached to this component.
-        interval (int): The numerical interval. i.e. an interval of ‘30’ coupled with
-            an interval_unit of day would mean this component's default price point
-            would renew every 30 days. This property is only available for sites with
-            Multifrequency enabled.
+        interval (int): The numerical interval. i.e., an interval of ‘30’ coupled
+            with an interval_unit of day would mean this component's default price
+            point would renew every 30 days. This property is only available for
+            sites with Multifrequency enabled.
         interval_unit (IntervalUnit): A string representing the interval unit for
             this component's default price point, either month or day. This property
             is only available for sites with Multifrequency enabled.
+        unspsc_code (str): (Optional) Custom UNSPSC commodity code for Level 3/CEDP
+            payment data. When set, this value is sent as the commodity code on
+            invoice line items for this component instead of the default derived from
+            item_category.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -79,6 +83,7 @@ class EBBComponent(object):
         "hide_date_range_on_invoice": "hide_date_range_on_invoice",
         "interval": "interval",
         "interval_unit": "interval_unit",
+        "unspsc_code": "unspsc_code",
     }
 
     _optionals = [
@@ -92,10 +97,12 @@ class EBBComponent(object):
         "hide_date_range_on_invoice",
         "interval",
         "interval_unit",
+        "unspsc_code",
     ]
 
     _nullables = [
         "interval_unit",
+        "unspsc_code",
     ]
 
     def __init__(
@@ -114,6 +121,7 @@ class EBBComponent(object):
         hide_date_range_on_invoice=APIHelper.SKIP,
         interval=APIHelper.SKIP,
         interval_unit=APIHelper.SKIP,
+        unspsc_code=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a EBBComponent instance."""
         # Initialize members of the class
@@ -141,6 +149,8 @@ class EBBComponent(object):
             self.interval = interval
         if interval_unit is not APIHelper.SKIP:
             self.interval_unit = interval_unit
+        if unspsc_code is not APIHelper.SKIP:
+            self.unspsc_code = unspsc_code
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -235,6 +245,10 @@ class EBBComponent(object):
             dictionary.get("interval_unit")\
             if "interval_unit" in dictionary.keys()\
                 else APIHelper.SKIP
+        unspsc_code =\
+            dictionary.get("unspsc_code")\
+            if "unspsc_code" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -255,6 +269,7 @@ class EBBComponent(object):
                    hide_date_range_on_invoice,
                    interval,
                    interval_unit,
+                   unspsc_code,
                    additional_properties)
 
     def __repr__(self):
@@ -313,6 +328,11 @@ class EBBComponent(object):
             if hasattr(self, "interval_unit")
             else None
         )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -330,6 +350,7 @@ class EBBComponent(object):
             f"event_based_billing_metric_id={_event_based_billing_metric_id!r}, "
             f"interval={_interval!r}, "
             f"interval_unit={_interval_unit!r}, "
+            f"unspsc_code={_unspsc_code!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -390,6 +411,11 @@ class EBBComponent(object):
             if hasattr(self, "interval_unit")
             else None
         )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -407,6 +433,7 @@ class EBBComponent(object):
             f"event_based_billing_metric_id={_event_based_billing_metric_id!s}, "
             f"interval={_interval!s}, "
             f"interval_unit={_interval_unit!s}, "
+            f"unspsc_code={_unspsc_code!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

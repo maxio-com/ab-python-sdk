@@ -13,3 +13,11 @@
 | `RECUR_INDEFINITELY` |
 | `RECUR_WITH_DURATION` |
 
+## Example
+
+```python
+from advancedbilling.models.recurring_scheme import RecurringScheme
+
+recurring_scheme = RecurringScheme.RECUR_WITH_DURATION
+```
+

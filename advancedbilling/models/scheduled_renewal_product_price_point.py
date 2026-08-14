@@ -25,7 +25,7 @@ class ScheduledRenewalProductPricePoint(object):
         tax_included (bool): (Optional)
         initial_charge_in_cents (int): The product price point initial charge, in
             integer cents.
-        expiration_interval (int): The numerical expiration interval. i.e. an
+        expiration_interval (int): The numerical expiration interval. e.g., an
             expiration_interval of ‘30’ coupled with an expiration_interval_unit of
             day would mean this product price point would expire after 30 days.
         expiration_interval_unit (ExpirationIntervalUnit): A string representing the

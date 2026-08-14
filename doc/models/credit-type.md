@@ -15,3 +15,11 @@ The type of credit to be created when upgrading/downgrading. Defaults to the com
 | `PRORATED` |
 | `NONE` |
 
+## Example
+
+```python
+from advancedbilling.models.credit_type import CreditType
+
+credit_type = CreditType.NONE
+```
+

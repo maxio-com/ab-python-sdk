@@ -16,10 +16,15 @@ class SubscriptionStateFilter(object):
         CANCELED: The enum member of type str.
         EXPIRED: The enum member of type str.
         EXPIRED_CARDS: The enum member of type str.
+        ENUM_EXPIRED_CARDS_LIVE_SUBSCRIPTIONS: The enum member of type str.
+        ENUM_EXPIRED_CARDS_ALL_SUBSCRIPTIONS: The enum member of type str.
         ON_HOLD: The enum member of type str.
+        AWAITING_SIGNUP: The enum member of type str.
+        AWAITING_SIGNUP_DATE: The enum member of type str.
         PAST_DUE: The enum member of type str.
         PENDING_CANCELLATION: The enum member of type str.
         PENDING_RENEWAL: The enum member of type str.
+        PREPAID_DUNNING: The enum member of type str.
         SUSPENDED: The enum member of type str.
         TRIAL_ENDED: The enum member of type str.
         TRIALING: The enum member of type str.
@@ -37,13 +42,23 @@ class SubscriptionStateFilter(object):
 
     EXPIRED_CARDS = "expired_cards"
 
+    ENUM_EXPIRED_CARDS_LIVE_SUBSCRIPTIONS = "expired_cards_(live_subscriptions)"
+
+    ENUM_EXPIRED_CARDS_ALL_SUBSCRIPTIONS = "expired_cards_(all_subscriptions)"
+
     ON_HOLD = "on_hold"
+
+    AWAITING_SIGNUP = "awaiting_signup"
+
+    AWAITING_SIGNUP_DATE = "awaiting_signup_date"
 
     PAST_DUE = "past_due"
 
     PENDING_CANCELLATION = "pending_cancellation"
 
     PENDING_RENEWAL = "pending_renewal"
+
+    PREPAID_DUNNING = "prepaid_dunning"
 
     SUSPENDED = "suspended"
 

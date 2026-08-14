@@ -12,19 +12,23 @@
 | `name` | `str` | Optional | - |
 | `handle` | `str` | Optional | - |
 | `pricing_scheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Optional | The identifier for the pricing scheme. See [Product Components](https://help.chargify.com/products/product-components.html) for an overview of pricing schemes. |
-| `interval` | `int` | Optional | The numerical interval. i.e. an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `interval` | `int` | Optional | The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
 | `interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 | `prices` | [`List[Price]`](../../doc/models/price.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name6",
-  "handle": "handle2",
-  "pricing_scheme": "per_unit",
-  "interval": 196,
-  "interval_unit": "day"
-}
+```python
+from advancedbilling.models.component_price_point_item import ComponentPricePointItem
+from advancedbilling.models.interval_unit import IntervalUnit
+from advancedbilling.models.pricing_scheme import PricingScheme
+
+component_price_point_item = ComponentPricePointItem(
+    name='name6',
+    handle='handle2',
+    pricing_scheme=PricingScheme.STAIRSTEP,
+    interval=50,
+    interval_unit=IntervalUnit.DAY
+)
 ```
 

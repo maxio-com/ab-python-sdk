@@ -11,33 +11,31 @@
 |  --- | --- | --- | --- |
 | `scheduled_renewal_configurations` | [`List[ScheduledRenewalConfiguration]`](../../doc/models/scheduled-renewal-configuration.md) | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "scheduled_renewal_configurations": [
-    {
-      "id": 122,
-      "site_id": 48,
-      "subscription_id": 232,
-      "starts_at": "2016-03-13T12:52:32.123Z",
-      "ends_at": "2016-03-13T12:52:32.123Z"
-    },
-    {
-      "id": 122,
-      "site_id": 48,
-      "subscription_id": 232,
-      "starts_at": "2016-03-13T12:52:32.123Z",
-      "ends_at": "2016-03-13T12:52:32.123Z"
-    },
-    {
-      "id": 122,
-      "site_id": 48,
-      "subscription_id": 232,
-      "starts_at": "2016-03-13T12:52:32.123Z",
-      "ends_at": "2016-03-13T12:52:32.123Z"
-    }
-  ]
-}
+```python
+import dateutil.parser
+
+from advancedbilling.models.scheduled_renewal_configuration import ScheduledRenewalConfiguration
+from advancedbilling.models.scheduled_renewal_configurations_response import ScheduledRenewalConfigurationsResponse
+
+scheduled_renewal_configurations_response = ScheduledRenewalConfigurationsResponse(
+    scheduled_renewal_configurations=[
+        ScheduledRenewalConfiguration(
+            id=122,
+            site_id=48,
+            subscription_id=232,
+            starts_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+            ends_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+        ),
+        ScheduledRenewalConfiguration(
+            id=122,
+            site_id=48,
+            subscription_id=232,
+            starts_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z'),
+            ends_at=dateutil.parser.parse('2016-03-13T12:52:32.123Z')
+        )
+    ]
+)
 ```
 

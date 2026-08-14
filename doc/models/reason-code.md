@@ -17,15 +17,17 @@
 | `created_at` | `datetime` | Optional | - |
 | `updated_at` | `datetime` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": 164,
-  "site_id": 90,
-  "code": "code0",
-  "description": "description2",
-  "position": 194
-}
+```python
+from advancedbilling.models.reason_code import ReasonCode
+
+reason_code = ReasonCode(
+    id=240,
+    site_id=166,
+    code='code4',
+    description='description6',
+    position=14
+)
 ```
 

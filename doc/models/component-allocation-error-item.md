@@ -14,14 +14,16 @@
 | `kind` | `str` | Optional | - |
 | `on` | `str` | Optional | - |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "component_id": 188,
-  "message": "message0",
-  "kind": "kind8",
-  "on": "on0"
-}
+```python
+from advancedbilling.models.component_allocation_error_item import ComponentAllocationErrorItem
+
+component_allocation_error_item = ComponentAllocationErrorItem(
+    component_id=238,
+    message='message8',
+    kind='kind6',
+    on='on8'
+)
 ```
 
