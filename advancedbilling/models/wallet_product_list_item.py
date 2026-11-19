@@ -84,9 +84,15 @@ class WalletProductListItem(object):
             Consumer Software, Digital Services, Physical Goods, Other
         use_site_exchange_rate (bool): The model property of type bool.
         accounting_code (str): E.g. Internal ID or SKU Number
-        event_based_billing_metric_id (int): (Only for Event Based Components) This
-            is an ID of a metric attached to the component. This metric is used to
-            bill upon collected events.
+        event_based_billing_metric_id (int): The ID of an attached metric from legacy
+            Events Based Billing. Omitted if no metric is attached. If the metric is
+            linked to a Maxio Metering meter, the response can include both
+            event_based_billing_metric_id and metering_meter_id.
+        metering_meter_id (int): The ID of an attached single Maxio Metering meter.
+            Omitted if no single meter is attached, including when the component uses
+            only an Advanced Formula. If a legacy Events Based Billing metric is
+            linked to the meter, the response can include both metering_meter_id and
+            event_based_billing_metric_id.
         interval (int): The numerical interval. e.g., an interval of ‘30’ coupled
             with an interval_unit of day would mean this component’s default price
             point would renew every 30 days. This property is only available for
@@ -146,6 +152,7 @@ class WalletProductListItem(object):
         "use_site_exchange_rate": "use_site_exchange_rate",
         "accounting_code": "accounting_code",
         "event_based_billing_metric_id": "event_based_billing_metric_id",
+        "metering_meter_id": "metering_meter_id",
         "interval": "interval",
         "interval_unit": "interval_unit",
         "unspsc_code": "unspsc_code",
@@ -188,6 +195,7 @@ class WalletProductListItem(object):
         "use_site_exchange_rate",
         "accounting_code",
         "event_based_billing_metric_id",
+        "metering_meter_id",
         "interval",
         "interval_unit",
         "unspsc_code",
@@ -256,6 +264,7 @@ class WalletProductListItem(object):
         use_site_exchange_rate=APIHelper.SKIP,
         accounting_code=APIHelper.SKIP,
         event_based_billing_metric_id=APIHelper.SKIP,
+        metering_meter_id=APIHelper.SKIP,
         interval=APIHelper.SKIP,
         interval_unit=APIHelper.SKIP,
         unspsc_code=APIHelper.SKIP,
@@ -340,6 +349,8 @@ class WalletProductListItem(object):
             self.accounting_code = accounting_code
         if event_based_billing_metric_id is not APIHelper.SKIP:
             self.event_based_billing_metric_id = event_based_billing_metric_id
+        if metering_meter_id is not APIHelper.SKIP:
+            self.metering_meter_id = metering_meter_id
         if interval is not APIHelper.SKIP:
             self.interval = interval
         if interval_unit is not APIHelper.SKIP:
@@ -515,6 +526,10 @@ class WalletProductListItem(object):
             dictionary.get("event_based_billing_metric_id")\
             if dictionary.get("event_based_billing_metric_id")\
                 else APIHelper.SKIP
+        metering_meter_id =\
+            dictionary.get("metering_meter_id")\
+            if dictionary.get("metering_meter_id")\
+                else APIHelper.SKIP
         interval =\
             dictionary.get("interval")\
             if dictionary.get("interval")\
@@ -583,6 +598,7 @@ class WalletProductListItem(object):
                    use_site_exchange_rate,
                    accounting_code,
                    event_based_billing_metric_id,
+                   metering_meter_id,
                    interval,
                    interval_unit,
                    unspsc_code,
@@ -758,6 +774,11 @@ class WalletProductListItem(object):
             if hasattr(self, "event_based_billing_metric_id")
             else None
         )
+        _metering_meter_id=(
+            self.metering_meter_id
+            if hasattr(self, "metering_meter_id")
+            else None
+        )
         _interval=(
             self.interval
             if hasattr(self, "interval")
@@ -824,6 +845,7 @@ class WalletProductListItem(object):
             f"use_site_exchange_rate={_use_site_exchange_rate!r}, "
             f"accounting_code={_accounting_code!r}, "
             f"event_based_billing_metric_id={_event_based_billing_metric_id!r}, "
+            f"metering_meter_id={_metering_meter_id!r}, "
             f"interval={_interval!r}, "
             f"interval_unit={_interval_unit!r}, "
             f"unspsc_code={_unspsc_code!r}, "
@@ -1001,6 +1023,11 @@ class WalletProductListItem(object):
             if hasattr(self, "event_based_billing_metric_id")
             else None
         )
+        _metering_meter_id=(
+            self.metering_meter_id
+            if hasattr(self, "metering_meter_id")
+            else None
+        )
         _interval=(
             self.interval
             if hasattr(self, "interval")
@@ -1067,6 +1094,7 @@ class WalletProductListItem(object):
             f"use_site_exchange_rate={_use_site_exchange_rate!s}, "
             f"accounting_code={_accounting_code!s}, "
             f"event_based_billing_metric_id={_event_based_billing_metric_id!s}, "
+            f"metering_meter_id={_metering_meter_id!s}, "
             f"interval={_interval!s}, "
             f"interval_unit={_interval_unit!s}, "
             f"unspsc_code={_unspsc_code!s}, "

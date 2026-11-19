@@ -49,8 +49,21 @@ class EBBComponent(object):
         hide_date_range_on_invoice (bool): (Only available on Relationship Invoicing
             sites) Boolean flag describing if the service date range should show for
             the component on generated invoices.
-        event_based_billing_metric_id (int): The ID of an event based billing metric
-            that will be attached to this component.
+        event_based_billing_metric_id (int): ID of a site-owned metric. Required to
+            create a component with legacy Events Based Billing. During migration, a
+            meter linked to the metric is attached automatically when present. Sites
+            using Maxio Metering ignore this input; provide metering_meter_id or
+            metering_formula instead.
+        metering_meter_id (int): ID of a merchant-owned Maxio Metering meter. To
+            create a component with Maxio Metering, provide this ID or
+            metering_formula, but not both. Meter IDs and legacy metric IDs identify
+            different resources. Sites using Events Based Billing ignore this input
+            and require event_based_billing_metric_id instead.
+        metering_formula (str): An Advanced Formula using Maxio Metering meters
+            available to the site. To create a component with Maxio Metering, provide
+            a non-blank formula or metering_meter_id, but not both. Sites using
+            Events Based Billing ignore this input and require
+            event_based_billing_metric_id instead.
         interval (int): The numerical interval. i.e., an interval of ‘30’ coupled
             with an interval_unit of day would mean this component's default price
             point would renew every 30 days. This property is only available for
@@ -72,7 +85,6 @@ class EBBComponent(object):
         "name": "name",
         "unit_name": "unit_name",
         "pricing_scheme": "pricing_scheme",
-        "event_based_billing_metric_id": "event_based_billing_metric_id",
         "description": "description",
         "handle": "handle",
         "taxable": "taxable",
@@ -81,6 +93,9 @@ class EBBComponent(object):
         "unit_price": "unit_price",
         "tax_code": "tax_code",
         "hide_date_range_on_invoice": "hide_date_range_on_invoice",
+        "event_based_billing_metric_id": "event_based_billing_metric_id",
+        "metering_meter_id": "metering_meter_id",
+        "metering_formula": "metering_formula",
         "interval": "interval",
         "interval_unit": "interval_unit",
         "unspsc_code": "unspsc_code",
@@ -95,6 +110,9 @@ class EBBComponent(object):
         "unit_price",
         "tax_code",
         "hide_date_range_on_invoice",
+        "event_based_billing_metric_id",
+        "metering_meter_id",
+        "metering_formula",
         "interval",
         "interval_unit",
         "unspsc_code",
@@ -110,7 +128,6 @@ class EBBComponent(object):
         name=None,
         unit_name=None,
         pricing_scheme=None,
-        event_based_billing_metric_id=None,
         description=APIHelper.SKIP,
         handle=APIHelper.SKIP,
         taxable=APIHelper.SKIP,
@@ -119,6 +136,9 @@ class EBBComponent(object):
         unit_price=APIHelper.SKIP,
         tax_code=APIHelper.SKIP,
         hide_date_range_on_invoice=APIHelper.SKIP,
+        event_based_billing_metric_id=APIHelper.SKIP,
+        metering_meter_id=APIHelper.SKIP,
+        metering_formula=APIHelper.SKIP,
         interval=APIHelper.SKIP,
         interval_unit=APIHelper.SKIP,
         unspsc_code=APIHelper.SKIP,
@@ -144,7 +164,12 @@ class EBBComponent(object):
             self.tax_code = tax_code
         if hide_date_range_on_invoice is not APIHelper.SKIP:
             self.hide_date_range_on_invoice = hide_date_range_on_invoice
-        self.event_based_billing_metric_id = event_based_billing_metric_id
+        if event_based_billing_metric_id is not APIHelper.SKIP:
+            self.event_based_billing_metric_id = event_based_billing_metric_id
+        if metering_meter_id is not APIHelper.SKIP:
+            self.metering_meter_id = metering_meter_id
+        if metering_formula is not APIHelper.SKIP:
+            self.metering_formula = metering_formula
         if interval is not APIHelper.SKIP:
             self.interval = interval
         if interval_unit is not APIHelper.SKIP:
@@ -191,10 +216,6 @@ class EBBComponent(object):
             dictionary.get("pricing_scheme")\
             if dictionary.get("pricing_scheme")\
                 else None
-        event_based_billing_metric_id =\
-            dictionary.get("event_based_billing_metric_id")\
-            if dictionary.get("event_based_billing_metric_id")\
-                else None
         description =\
             dictionary.get("description")\
             if dictionary.get("description")\
@@ -237,6 +258,18 @@ class EBBComponent(object):
             dictionary.get("hide_date_range_on_invoice")\
             if "hide_date_range_on_invoice" in dictionary.keys()\
                 else APIHelper.SKIP
+        event_based_billing_metric_id =\
+            dictionary.get("event_based_billing_metric_id")\
+            if dictionary.get("event_based_billing_metric_id")\
+                else APIHelper.SKIP
+        metering_meter_id =\
+            dictionary.get("metering_meter_id")\
+            if dictionary.get("metering_meter_id")\
+                else APIHelper.SKIP
+        metering_formula =\
+            dictionary.get("metering_formula")\
+            if dictionary.get("metering_formula")\
+                else APIHelper.SKIP
         interval =\
             dictionary.get("interval")\
             if dictionary.get("interval")\
@@ -258,7 +291,6 @@ class EBBComponent(object):
         return cls(name,
                    unit_name,
                    pricing_scheme,
-                   event_based_billing_metric_id,
                    description,
                    handle,
                    taxable,
@@ -267,6 +299,9 @@ class EBBComponent(object):
                    unit_price,
                    tax_code,
                    hide_date_range_on_invoice,
+                   event_based_billing_metric_id,
+                   metering_meter_id,
+                   metering_formula,
                    interval,
                    interval_unit,
                    unspsc_code,
@@ -317,7 +352,21 @@ class EBBComponent(object):
             if hasattr(self, "hide_date_range_on_invoice")
             else None
         )
-        _event_based_billing_metric_id=self.event_based_billing_metric_id
+        _event_based_billing_metric_id=(
+            self.event_based_billing_metric_id
+            if hasattr(self, "event_based_billing_metric_id")
+            else None
+        )
+        _metering_meter_id=(
+            self.metering_meter_id
+            if hasattr(self, "metering_meter_id")
+            else None
+        )
+        _metering_formula=(
+            self.metering_formula
+            if hasattr(self, "metering_formula")
+            else None
+        )
         _interval=(
             self.interval
             if hasattr(self, "interval")
@@ -348,6 +397,8 @@ class EBBComponent(object):
             f"tax_code={_tax_code!r}, "
             f"hide_date_range_on_invoice={_hide_date_range_on_invoice!r}, "
             f"event_based_billing_metric_id={_event_based_billing_metric_id!r}, "
+            f"metering_meter_id={_metering_meter_id!r}, "
+            f"metering_formula={_metering_formula!r}, "
             f"interval={_interval!r}, "
             f"interval_unit={_interval_unit!r}, "
             f"unspsc_code={_unspsc_code!r}, "
@@ -400,7 +451,21 @@ class EBBComponent(object):
             if hasattr(self, "hide_date_range_on_invoice")
             else None
         )
-        _event_based_billing_metric_id=self.event_based_billing_metric_id
+        _event_based_billing_metric_id=(
+            self.event_based_billing_metric_id
+            if hasattr(self, "event_based_billing_metric_id")
+            else None
+        )
+        _metering_meter_id=(
+            self.metering_meter_id
+            if hasattr(self, "metering_meter_id")
+            else None
+        )
+        _metering_formula=(
+            self.metering_formula
+            if hasattr(self, "metering_formula")
+            else None
+        )
         _interval=(
             self.interval
             if hasattr(self, "interval")
@@ -431,6 +496,8 @@ class EBBComponent(object):
             f"tax_code={_tax_code!s}, "
             f"hide_date_range_on_invoice={_hide_date_range_on_invoice!s}, "
             f"event_based_billing_metric_id={_event_based_billing_metric_id!s}, "
+            f"metering_meter_id={_metering_meter_id!s}, "
+            f"metering_formula={_metering_formula!s}, "
             f"interval={_interval!s}, "
             f"interval_unit={_interval_unit!s}, "
             f"unspsc_code={_unspsc_code!s}, "

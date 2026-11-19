@@ -27,6 +27,19 @@ class UpdateComponent(object):
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site setting if
             one is not provided.
+        event_based_billing_metric_id (int): For components using legacy Events Based
+            Billing, changes the attached site-owned metric. An unchanged metric ID
+            does not change the source. Sites using Maxio Metering ignore this input.
+            This ID does not identify a Maxio Metering meter.
+        metering_meter_id (int): For components using Maxio Metering, changes the
+            attached merchant-owned meter. Do not supply together with a non-blank
+            metering_formula. Ignored for components using legacy Events Based
+            Billing; not applicable to other component kinds.
+        metering_formula (str): For components using Maxio Metering, sets an Advanced
+            Formula using meters available to the site. Supply a non-blank formula;
+            do not supply together with metering_meter_id. Ignored for components
+            using legacy Events Based Billing; not applicable to other component
+            kinds.
         unspsc_code (str): (Optional) Custom UNSPSC commodity code for Level 3/CEDP
             payment data. When set, this value is sent as the commodity code on
             invoice line items for this component instead of the default derived from
@@ -47,6 +60,9 @@ class UpdateComponent(object):
         "item_category": "item_category",
         "display_on_hosted_page": "display_on_hosted_page",
         "upgrade_charge": "upgrade_charge",
+        "event_based_billing_metric_id": "event_based_billing_metric_id",
+        "metering_meter_id": "metering_meter_id",
+        "metering_formula": "metering_formula",
         "unspsc_code": "unspsc_code",
     }
 
@@ -60,6 +76,9 @@ class UpdateComponent(object):
         "item_category",
         "display_on_hosted_page",
         "upgrade_charge",
+        "event_based_billing_metric_id",
+        "metering_meter_id",
+        "metering_formula",
         "unspsc_code",
     ]
 
@@ -83,6 +102,9 @@ class UpdateComponent(object):
         item_category=APIHelper.SKIP,
         display_on_hosted_page=APIHelper.SKIP,
         upgrade_charge=APIHelper.SKIP,
+        event_based_billing_metric_id=APIHelper.SKIP,
+        metering_meter_id=APIHelper.SKIP,
+        metering_formula=APIHelper.SKIP,
         unspsc_code=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a UpdateComponent instance."""
@@ -105,6 +127,12 @@ class UpdateComponent(object):
             self.display_on_hosted_page = display_on_hosted_page
         if upgrade_charge is not APIHelper.SKIP:
             self.upgrade_charge = upgrade_charge
+        if event_based_billing_metric_id is not APIHelper.SKIP:
+            self.event_based_billing_metric_id = event_based_billing_metric_id
+        if metering_meter_id is not APIHelper.SKIP:
+            self.metering_meter_id = metering_meter_id
+        if metering_formula is not APIHelper.SKIP:
+            self.metering_formula = metering_formula
         if unspsc_code is not APIHelper.SKIP:
             self.unspsc_code = unspsc_code
 
@@ -167,6 +195,18 @@ class UpdateComponent(object):
             dictionary.get("upgrade_charge")\
             if "upgrade_charge" in dictionary.keys()\
                 else APIHelper.SKIP
+        event_based_billing_metric_id =\
+            dictionary.get("event_based_billing_metric_id")\
+            if dictionary.get("event_based_billing_metric_id")\
+                else APIHelper.SKIP
+        metering_meter_id =\
+            dictionary.get("metering_meter_id")\
+            if dictionary.get("metering_meter_id")\
+                else APIHelper.SKIP
+        metering_formula =\
+            dictionary.get("metering_formula")\
+            if dictionary.get("metering_formula")\
+                else APIHelper.SKIP
         unspsc_code =\
             dictionary.get("unspsc_code")\
             if "unspsc_code" in dictionary.keys()\
@@ -186,6 +226,9 @@ class UpdateComponent(object):
                    item_category,
                    display_on_hosted_page,
                    upgrade_charge,
+                   event_based_billing_metric_id,
+                   metering_meter_id,
+                   metering_formula,
                    unspsc_code,
                    additional_properties)
 
@@ -236,6 +279,21 @@ class UpdateComponent(object):
             if hasattr(self, "upgrade_charge")
             else None
         )
+        _event_based_billing_metric_id=(
+            self.event_based_billing_metric_id
+            if hasattr(self, "event_based_billing_metric_id")
+            else None
+        )
+        _metering_meter_id=(
+            self.metering_meter_id
+            if hasattr(self, "metering_meter_id")
+            else None
+        )
+        _metering_formula=(
+            self.metering_formula
+            if hasattr(self, "metering_formula")
+            else None
+        )
         _unspsc_code=(
             self.unspsc_code
             if hasattr(self, "unspsc_code")
@@ -253,6 +311,9 @@ class UpdateComponent(object):
             f"item_category={_item_category!r}, "
             f"display_on_hosted_page={_display_on_hosted_page!r}, "
             f"upgrade_charge={_upgrade_charge!r}, "
+            f"event_based_billing_metric_id={_event_based_billing_metric_id!r}, "
+            f"metering_meter_id={_metering_meter_id!r}, "
+            f"metering_formula={_metering_formula!r}, "
             f"unspsc_code={_unspsc_code!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
@@ -305,6 +366,21 @@ class UpdateComponent(object):
             if hasattr(self, "upgrade_charge")
             else None
         )
+        _event_based_billing_metric_id=(
+            self.event_based_billing_metric_id
+            if hasattr(self, "event_based_billing_metric_id")
+            else None
+        )
+        _metering_meter_id=(
+            self.metering_meter_id
+            if hasattr(self, "metering_meter_id")
+            else None
+        )
+        _metering_formula=(
+            self.metering_formula
+            if hasattr(self, "metering_formula")
+            else None
+        )
         _unspsc_code=(
             self.unspsc_code
             if hasattr(self, "unspsc_code")
@@ -322,6 +398,9 @@ class UpdateComponent(object):
             f"item_category={_item_category!s}, "
             f"display_on_hosted_page={_display_on_hosted_page!s}, "
             f"upgrade_charge={_upgrade_charge!s}, "
+            f"event_based_billing_metric_id={_event_based_billing_metric_id!s}, "
+            f"metering_meter_id={_metering_meter_id!s}, "
+            f"metering_formula={_metering_formula!s}, "
             f"unspsc_code={_unspsc_code!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
