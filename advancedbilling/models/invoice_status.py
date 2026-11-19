@@ -10,8 +10,8 @@ class InvoiceStatus(object):
     """Implementation of the 'Invoice Status' enum.
 
     The current status of the invoice. See [Invoice
-    Statuses](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advanced-Bill
-    ing-Invoices-Overview#invoice-statuses) for more.
+    Statuses](https://docs.maxio.com/billing/invoicing/overview/understand-how-invoice
+    s-are-generated#invoice-statuses) for more.
 
     Attributes:
         DRAFT: The enum member of type str.

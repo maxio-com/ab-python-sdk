@@ -580,6 +580,36 @@ class InvoicesController(BaseController):
                 desired values being the value. A list of parameters that can be used
                 are::
                     subscription_id -- int -- The subscription's Advanced Billing id
+                    date_field -- CreditNoteDateField -- The type of filter you would
+                        like to apply to your search. Use in query
+                        `date_field=issue_date`. If a date range is provided without
+                        an explicit `date_field`, it defaults to `issue_date`. If
+                        only `start_datetime`/`end_datetime` are provided without an
+                        explicit `date_field`, it defaults to `created_at` instead.
+                        An unrecognized `date_field` is ignored rather than raising
+                        an error.
+                    start_date -- str -- The start date (format YYYY-MM-DD) with
+                        which to filter the date_field. Returns credit notes with a
+                        timestamp at or after midnight (12:00:00 AM) in your site’s
+                        time zone on the date specified.
+                    end_date -- str -- The end date (format YYYY-MM-DD) with which to
+                        filter the date_field. Returns credit notes with a timestamp
+                        up to and including 11:59:59PM in your site’s time zone on
+                        the date specified.
+                    start_datetime -- str -- The start date and time (format
+                        YYYY-MM-DD HH:MM:SS) with which to filter the date_field.
+                        Returns credit notes with a timestamp at or after exact time
+                        provided in query. If provided, this parameter will be used
+                        instead of start_date. If no timezone offset is included in
+                        the value, it is interpreted as UTC. Allowed to be used only
+                        along with date_field set to created_at or updated_at.
+                    end_datetime -- str -- The end date and time (format YYYY-MM-DD
+                        HH:MM:SS) with which to filter the date_field. Returns credit
+                        notes with a timestamp at or before exact time provided in
+                        query. If provided, this parameter will be used instead of
+                        end_date. If no timezone offset is included in the value, it
+                        is interpreted as UTC. Allowed to be used only along with
+                        date_field set to created_at or updated_at.
                     page -- int -- Result records are organized in pages. By default,
                         the first page of results is displayed. The page parameter
                         specifies a page number of results to fetch. You can start
@@ -592,6 +622,8 @@ class InvoicesController(BaseController):
                         fetch in each request. Default value is 20. The maximum
                         allowed values is 200; any per_page value over 200 will be
                         changed to 200. Use in query `per_page=200`.
+                    direction -- Direction -- The sort direction of the returned
+                        credit notes, sorted by sequence_number.
                     line_items -- bool -- Include line items data.
                     discounts -- bool -- Include discounts data.
                     taxes -- bool -- Include taxes data.
@@ -615,11 +647,29 @@ class InvoicesController(BaseController):
                 .key("subscription_id")
                 .value(options.get("subscription_id", None)))
             .query_param(Parameter()
+                .key("date_field")
+                .value(options.get("date_field", None)))
+            .query_param(Parameter()
+                .key("start_date")
+                .value(options.get("start_date", None)))
+            .query_param(Parameter()
+                .key("end_date")
+                .value(options.get("end_date", None)))
+            .query_param(Parameter()
+                .key("start_datetime")
+                .value(options.get("start_datetime", None)))
+            .query_param(Parameter()
+                .key("end_datetime")
+                .value(options.get("end_datetime", None)))
+            .query_param(Parameter()
                 .key("page")
                 .value(options.get("page", None)))
             .query_param(Parameter()
                 .key("per_page")
                 .value(options.get("per_page", None)))
+            .query_param(Parameter()
+                .key("direction")
+                .value(options.get("direction", None)))
             .query_param(Parameter()
                 .key("line_items")
                 .value(options.get("line_items", None)))
@@ -979,6 +1029,9 @@ class InvoicesController(BaseController):
         overwritten by passing `unit_price` or `price_point_id`. At this moment price
         points are supported only for quantity based, on/off and metered components.
         For prepaid and event based billing components `unit_price` is required.
+        A Wallet Product can't be invoiced this way: a line item for one returns
+        `422` ("Wallet Products can only be invoiced through a wallet purchase"). Use
+        [Create Wallet Purchase]($e/Wallet%20Purchases/createWalletPurchase) instead.
         ### Coupons
         When creating ad hoc invoice, new discounts can be applied in following way:
         ```json
@@ -1336,7 +1389,9 @@ class InvoicesController(BaseController):
         indicate that email(s) have been delivered, but instead indicates that emails
         have been successfully queued for delivery. If _any_ invalid or malformed
         email address is found in the request body, the entire request will be
-        rejected and a 422 response will be returned.
+        rejected and a 422 response will be returned. A 422 response will also be
+        returned if the invoice is in `draft`, `pending`, or `processing` status, or
+        if the invoice cannot be found within the site instance.
 
         Args:
             uid (str): The unique identifier for the invoice, this does not refer to

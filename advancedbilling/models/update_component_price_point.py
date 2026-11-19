@@ -9,6 +9,9 @@ from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.update_price import (
     UpdatePrice,
 )
+from advancedbilling.models.update_secondary_pricing import (
+    UpdateSecondaryPricing,
+)
 
 
 class UpdateComponentPricePoint(object):
@@ -33,6 +36,17 @@ class UpdateComponentPricePoint(object):
             this component price point, either month or day. This property is only
             available for sites with Multifrequency enabled.
         prices (List[UpdatePrice]): The model property of type List[UpdatePrice].
+        secondary_pricing (UpdateSecondaryPricing): Hybrid Pricing only. Changes the
+            secondary pricing model of an existing hybrid price point. Send
+            `pricing_scheme` (or the top-level `secondary_pricing_scheme`) every time
+            you send this block; a block without a scheme returns `422`. Brackets
+            sent without an `id` are added to the existing ones rather than replacing
+            them, so to change a bracket set, update existing brackets by `id` and
+            remove the ones you no longer want with `_destroy: true`. See [Hybrid
+            Pricing](page:introduction/basic-concepts/hybrid-pricing).
+        secondary_pricing_scheme (PricingScheme): Hybrid Pricing only. Alternative to
+            `secondary_pricing.pricing_scheme`; when both are sent,
+            `secondary_pricing.pricing_scheme` is used.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -48,6 +62,8 @@ class UpdateComponentPricePoint(object):
         "interval": "interval",
         "interval_unit": "interval_unit",
         "prices": "prices",
+        "secondary_pricing": "secondary_pricing",
+        "secondary_pricing_scheme": "secondary_pricing_scheme",
     }
 
     _optionals = [
@@ -59,6 +75,8 @@ class UpdateComponentPricePoint(object):
         "interval",
         "interval_unit",
         "prices",
+        "secondary_pricing",
+        "secondary_pricing_scheme",
     ]
 
     _nullables = [
@@ -75,6 +93,8 @@ class UpdateComponentPricePoint(object):
         interval=APIHelper.SKIP,
         interval_unit=APIHelper.SKIP,
         prices=APIHelper.SKIP,
+        secondary_pricing=APIHelper.SKIP,
+        secondary_pricing_scheme=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a UpdateComponentPricePoint instance."""
         # Initialize members of the class
@@ -94,6 +114,10 @@ class UpdateComponentPricePoint(object):
             self.interval_unit = interval_unit
         if prices is not APIHelper.SKIP:
             self.prices = prices
+        if secondary_pricing is not APIHelper.SKIP:
+            self.secondary_pricing = secondary_pricing
+        if secondary_pricing_scheme is not APIHelper.SKIP:
+            self.secondary_pricing_scheme = secondary_pricing_scheme
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -154,6 +178,15 @@ class UpdateComponentPricePoint(object):
             ]
         else:
             prices = APIHelper.SKIP
+        secondary_pricing =\
+            UpdateSecondaryPricing.from_dictionary(
+                dictionary.get("secondary_pricing"))\
+                if "secondary_pricing" in dictionary.keys()\
+                else APIHelper.SKIP
+        secondary_pricing_scheme =\
+            dictionary.get("secondary_pricing_scheme")\
+            if dictionary.get("secondary_pricing_scheme")\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -168,6 +201,8 @@ class UpdateComponentPricePoint(object):
                    interval,
                    interval_unit,
                    prices,
+                   secondary_pricing,
+                   secondary_pricing_scheme,
                    additional_properties)
 
     def __repr__(self):
@@ -212,6 +247,16 @@ class UpdateComponentPricePoint(object):
             if hasattr(self, "prices")
             else None
         )
+        _secondary_pricing=(
+            self.secondary_pricing
+            if hasattr(self, "secondary_pricing")
+            else None
+        )
+        _secondary_pricing_scheme=(
+            self.secondary_pricing_scheme
+            if hasattr(self, "secondary_pricing_scheme")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -223,6 +268,8 @@ class UpdateComponentPricePoint(object):
             f"interval={_interval!r}, "
             f"interval_unit={_interval_unit!r}, "
             f"prices={_prices!r}, "
+            f"secondary_pricing={_secondary_pricing!r}, "
+            f"secondary_pricing_scheme={_secondary_pricing_scheme!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -269,6 +316,16 @@ class UpdateComponentPricePoint(object):
             if hasattr(self, "prices")
             else None
         )
+        _secondary_pricing=(
+            self.secondary_pricing
+            if hasattr(self, "secondary_pricing")
+            else None
+        )
+        _secondary_pricing_scheme=(
+            self.secondary_pricing_scheme
+            if hasattr(self, "secondary_pricing_scheme")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -280,6 +337,8 @@ class UpdateComponentPricePoint(object):
             f"interval={_interval!s}, "
             f"interval_unit={_interval_unit!s}, "
             f"prices={_prices!s}, "
+            f"secondary_pricing={_secondary_pricing!s}, "
+            f"secondary_pricing_scheme={_secondary_pricing_scheme!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

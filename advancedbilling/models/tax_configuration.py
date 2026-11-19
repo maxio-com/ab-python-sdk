@@ -18,7 +18,7 @@ class TaxConfiguration(object):
         fully_configured (bool): Returns `true` when Chargify has been properly
             configured to charge tax using the specified tax system. More details
             about taxes:
-            https://maxio.zendesk.com/hc/en-us/articles/24287012608909-Taxes-Overview
+            https://docs.maxio.com/billing/taxes/overview/understand-tax-options
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 

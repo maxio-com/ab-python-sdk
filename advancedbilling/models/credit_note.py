@@ -50,10 +50,15 @@ class CreditNote(object):
         number (str): A unique, identifying string that appears on the credit note
             and in places it is referenced.  While the UID is long and not
             appropriate to show to customers, the number is usually shorter and
-            consumable by the customer and the merchant alike.
+            consumable by the customer and the merchant alike.  A saved credit note
+            always has a number. The value is `null` only in `refund_invoice` event
+            data when the refund did not create a credit note (`apply_credit` is
+            `false`).
         sequence_number (int): A monotonically increasing number assigned to credit
             notes as they are created.  This number is unique within a site and can
-            be used to sort and order credit notes.
+            be used to sort and order credit notes.  A saved credit note always has a
+            sequence number. The value is `null` only in `refund_invoice` event data
+            when the refund did not create a credit note (`apply_credit` is `false`).
         issue_date (date): Date the credit note was issued to the customer.  This is
             the date that the credit was made available for application, and may come
             before it is fully applied.  The format is `"YYYY-MM-DD"`.
@@ -105,8 +110,8 @@ class CreditNote(object):
         refunds (List[InvoiceRefund]): The model property of type List[InvoiceRefund].
         origin_invoices (List[OriginInvoice]): An array of origin invoices for the
             credit note. Learn more about [Origin Invoice from our
-            docs](https://maxio.zendesk.com/hc/en-us/articles/24252261284749-Credit-No
-            tes-Proration#origin-invoices).
+            docs](https://docs.maxio.com/billing/invoicing/working-with-invoices/how-c
+            redit-notes-work#how-origin-invoices-work).
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -171,6 +176,11 @@ class CreditNote(object):
         "applications",
         "refunds",
         "origin_invoices",
+    ]
+
+    _nullables = [
+        "number",
+        "sequence_number",
     ]
 
     def __init__(
@@ -301,11 +311,11 @@ class CreditNote(object):
                 else APIHelper.SKIP
         number =\
             dictionary.get("number")\
-            if dictionary.get("number")\
+            if "number" in dictionary.keys()\
                 else APIHelper.SKIP
         sequence_number =\
             dictionary.get("sequence_number")\
-            if dictionary.get("sequence_number")\
+            if "sequence_number" in dictionary.keys()\
                 else APIHelper.SKIP
         issue_date = dateutil.parser.parse(
             dictionary.get("issue_date")).date()\

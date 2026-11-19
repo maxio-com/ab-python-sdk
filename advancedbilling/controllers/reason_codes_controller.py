@@ -52,8 +52,8 @@ class ReasonCodesController(BaseController):
         Billing Portal. As your subscribers decide to cancel their subscription,
         learn why they decided to cancel.
         For more information, see [Churn Reason
-        Codes](https://maxio.zendesk.com/hc/en-us/articles/24286647554701-Churn-Reason
-        -Codes).
+        Codes](https://docs.maxio.com/configuration/advanced-billing/settings/churn-re
+        ason-codes).
 
         Args:
             body (CreateReasonCodeRequest, optional): The request body parameter.

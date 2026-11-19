@@ -9,18 +9,36 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 class ProformaInvoiceTaxSourceType(object):
     """Implementation of the 'Proforma Invoice Tax Source Type' enum.
 
+    The source of the tax. `Tax` is a tax configured in Advanced Billing. The other
+    values identify the tax service that calculated the tax.
+
     Attributes:
         TAX: The enum member of type str.
         AVALARA: The enum member of type str.
+        ANROK: The enum member of type str.
+        TAXJAR: The enum member of type str.
+        NUMERAL: The enum member of type str.
+        SPHERE: The enum member of type str.
+        TAXWIRE: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
     """
 
-    _all_values = ["Tax", "Avalara"]
+    _all_values = ["Tax", "Avalara", "Anrok", "TaxJar", "Numeral", "Sphere", "Taxwire"]
     TAX = "Tax"
 
     AVALARA = "Avalara"
+
+    ANROK = "Anrok"
+
+    TAXJAR = "TaxJar"
+
+    NUMERAL = "Numeral"
+
+    SPHERE = "Sphere"
+
+    TAXWIRE = "Taxwire"
 
     @classmethod
     def validate(cls, value):

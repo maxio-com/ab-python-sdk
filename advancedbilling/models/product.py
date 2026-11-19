@@ -6,6 +6,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 
 # ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.feature_catalog_item import (
+    FeatureCatalogItem,
+)
 from advancedbilling.models.product_family import (
     ProductFamily,
 )
@@ -83,10 +86,19 @@ class Product(object):
             Software, Digital Services, Physical Goods, Other
         product_price_point_id (int): The model property of type int.
         product_price_point_handle (str): The model property of type str.
+        product_price_point_list_price_point_id (int): The ID of the catalog price
+            point used as the list price for the subscription's custom product price.
+            Returned only when list vs sales pricing is enabled for the site.
+        product_price_point_list_price_point_handle (str): The handle of the catalog
+            price point used as the list price for the subscription's custom product
+            price. Returned only when list vs sales pricing is enabled for the site.
         unspsc_code (str): (Optional) Custom UNSPSC commodity code for Level 3/CEDP
             payment data. When set, this value is sent as the commodity code on
             invoice line items for this product instead of the default derived from
             item_category.
+        features (List[FeatureCatalogItem]): The active feature catalog items
+            attached to this product. Present only when the request includes
+            `include_features=true`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -131,7 +143,12 @@ class Product(object):
         "item_category": "item_category",
         "product_price_point_id": "product_price_point_id",
         "product_price_point_handle": "product_price_point_handle",
+        "product_price_point_list_price_point_id":
+            "product_price_point_list_price_point_id",
+        "product_price_point_list_price_point_handle":
+            "product_price_point_list_price_point_handle",
         "unspsc_code": "unspsc_code",
+        "features": "features",
     }
 
     _optionals = [
@@ -172,7 +189,10 @@ class Product(object):
         "item_category",
         "product_price_point_id",
         "product_price_point_handle",
+        "product_price_point_list_price_point_id",
+        "product_price_point_list_price_point_handle",
         "unspsc_code",
+        "features",
     ]
 
     _nullables = [
@@ -194,7 +214,10 @@ class Product(object):
         "use_site_exchange_rate",
         "item_category",
         "product_price_point_handle",
+        "product_price_point_list_price_point_id",
+        "product_price_point_list_price_point_handle",
         "unspsc_code",
+        "features",
     ]
 
     def __init__(
@@ -236,7 +259,10 @@ class Product(object):
         item_category=APIHelper.SKIP,
         product_price_point_id=APIHelper.SKIP,
         product_price_point_handle=APIHelper.SKIP,
+        product_price_point_list_price_point_id=APIHelper.SKIP,
+        product_price_point_list_price_point_handle=APIHelper.SKIP,
         unspsc_code=APIHelper.SKIP,
+        features=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a Product instance."""
         # Initialize members of the class
@@ -323,8 +349,16 @@ class Product(object):
             self.product_price_point_id = product_price_point_id
         if product_price_point_handle is not APIHelper.SKIP:
             self.product_price_point_handle = product_price_point_handle
+        if product_price_point_list_price_point_id is not APIHelper.SKIP:
+            self.product_price_point_list_price_point_id =\
+                 product_price_point_list_price_point_id
+        if product_price_point_list_price_point_handle is not APIHelper.SKIP:
+            self.product_price_point_list_price_point_handle =\
+                 product_price_point_list_price_point_handle
         if unspsc_code is not APIHelper.SKIP:
             self.unspsc_code = unspsc_code
+        if features is not APIHelper.SKIP:
+            self.features = features
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -503,10 +537,25 @@ class Product(object):
             dictionary.get("product_price_point_handle")\
             if "product_price_point_handle" in dictionary.keys()\
                 else APIHelper.SKIP
+        product_price_point_list_price_point_id =\
+            dictionary.get("product_price_point_list_price_point_id")\
+            if "product_price_point_list_price_point_id" in dictionary.keys()\
+                else APIHelper.SKIP
+        product_price_point_list_price_point_handle =\
+            dictionary.get("product_price_point_list_price_point_handle")\
+            if "product_price_point_list_price_point_handle" in dictionary.keys()\
+                else APIHelper.SKIP
         unspsc_code =\
             dictionary.get("unspsc_code")\
             if "unspsc_code" in dictionary.keys()\
                 else APIHelper.SKIP
+        if "features" in dictionary.keys():
+            features = [
+                FeatureCatalogItem.from_dictionary(x)
+                for x in dictionary.get("features")
+            ] if dictionary.get("features") else None
+        else:
+            features = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -550,7 +599,10 @@ class Product(object):
                    item_category,
                    product_price_point_id,
                    product_price_point_handle,
+                   product_price_point_list_price_point_id,
+                   product_price_point_list_price_point_handle,
                    unspsc_code,
+                   features,
                    additional_properties)
 
     def __repr__(self):
@@ -740,9 +792,24 @@ class Product(object):
             if hasattr(self, "product_price_point_handle")
             else None
         )
+        _product_price_point_list_price_point_id=(
+            self.product_price_point_list_price_point_id
+            if hasattr(self, "product_price_point_list_price_point_id")
+            else None
+        )
+        _product_price_point_list_price_point_handle=(
+            self.product_price_point_list_price_point_handle
+            if hasattr(self, "product_price_point_list_price_point_handle")
+            else None
+        )
         _unspsc_code=(
             self.unspsc_code
             if hasattr(self, "unspsc_code")
+            else None
+        )
+        _features=(
+            self.features
+            if hasattr(self, "features")
             else None
         )
         _additional_properties=self.additional_properties
@@ -785,7 +852,10 @@ class Product(object):
             f"item_category={_item_category!r}, "
             f"product_price_point_id={_product_price_point_id!r}, "
             f"product_price_point_handle={_product_price_point_handle!r}, "
+            f"product_price_point_list_price_point_id={_product_price_point_list_price_point_id!r}, "
+            f"product_price_point_list_price_point_handle={_product_price_point_list_price_point_handle!r}, "
             f"unspsc_code={_unspsc_code!r}, "
+            f"features={_features!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -977,9 +1047,24 @@ class Product(object):
             if hasattr(self, "product_price_point_handle")
             else None
         )
+        _product_price_point_list_price_point_id=(
+            self.product_price_point_list_price_point_id
+            if hasattr(self, "product_price_point_list_price_point_id")
+            else None
+        )
+        _product_price_point_list_price_point_handle=(
+            self.product_price_point_list_price_point_handle
+            if hasattr(self, "product_price_point_list_price_point_handle")
+            else None
+        )
         _unspsc_code=(
             self.unspsc_code
             if hasattr(self, "unspsc_code")
+            else None
+        )
+        _features=(
+            self.features
+            if hasattr(self, "features")
             else None
         )
         _additional_properties=self.additional_properties
@@ -1022,7 +1107,10 @@ class Product(object):
             f"item_category={_item_category!s}, "
             f"product_price_point_id={_product_price_point_id!s}, "
             f"product_price_point_handle={_product_price_point_handle!s}, "
+            f"product_price_point_list_price_point_id={_product_price_point_list_price_point_id!s}, "
+            f"product_price_point_list_price_point_handle={_product_price_point_list_price_point_handle!s}, "
             f"unspsc_code={_unspsc_code!s}, "
+            f"features={_features!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

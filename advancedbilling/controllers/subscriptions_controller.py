@@ -77,17 +77,22 @@ class SubscriptionsController(BaseController):
         the portal to see examples of common scenarios for creating subscriptions.
         ## List vs Sales Pricing
         When a subscription uses custom pricing as the sales price, you can
-        optionally provide a list price for any item. If omitted, the list price
-        defaults to the sales price. The difference between the list price and sales
-        price is used to calculate implicit discounts, which appear on Invoices and
-        in reporting. List price can also support revenue allocations in [Advanced
-        Revenue](https://docs.maxio.com/hc/en-us/articles/24177001342861-Create-and-Co
-        nfigure-RevenueBooks).
+        optionally provide a list price for any item with
+        `custom_price.list_price_point_id`. If you omit it, the custom price is
+        linked to the item's default price point as its list price. To skip that
+        link, send `custom_price.use_default_list_price: false`. The difference
+        between the list price and sales price is used to calculate implicit
+        discounts, which appear on Invoices and in reporting. List price can also
+        support revenue allocations in [Advanced
+        Revenue](https://docs.maxio.com/accounting/revenue-advanced-revenue/configurat
+        ion/create-and-configure-revenuebooks).
         If your site has list pricing enabled, the API accepts
         `custom_price.list_price_point_id` for custom pricing, validates and persists
         it, and returns list price metadata in subscription responses. If list
         pricing is disabled, this input is ignored and related response fields are
         omitted.
+        A custom price's `interval` and `interval_unit` must match those of its list
+        price point. If they don't match, the API rejects the request.
         When list pricing is enabled:
         - Subscription → Product `product_price_point_list_price_point_id` (integer)
         - `product_price_point_list_price_point_handle` (string)
@@ -123,8 +128,8 @@ class SubscriptionsController(BaseController):
         ## Payment information
         Payment information may be required to create a subscription, depending on
         the options for the Product being subscribed. See [product
-        options](https://docs.maxio.com/hc/en-us/articles/24261076617869-Edit-Products
-        ) for more information. See the [Payments
+        options](https://docs.maxio.com/billing/catalog/plans/creating-plans) for
+        more information. See the [Payments
         Profile]($e/Payment%20Profiles/createPaymentProfile) endpoint for details on
         payment parameters.
         See the [Subscription
@@ -133,20 +138,20 @@ class SubscriptionsController(BaseController):
         ## Payment information
         Payment information may be required to create a subscription, depending on
         the options for the Product being subscribed. See [product
-        options](https://docs.maxio.com/hc/en-us/articles/24261076617869-Edit-Products
-        ) for more information. See the [Payments
+        options](https://docs.maxio.com/billing/catalog/plans/creating-plans) for
+        more information. See the [Payments
         Profile]($e/Payment%20Profiles/createPaymentProfile) endpoint for details on
         payment parameters.
         Do not use real card information for testing. See the Sites articles that
         cover [testing your site
-        setup](https://docs.maxio.com/hc/en-us/articles/24250712113165-Testing-Overvie
-        w#testing-overview-0-0) for more details on testing in your sandbox.
+        setup](https://docs.maxio.com/configuration/advanced-billing/sites/testing-ove
+        rview) for more details on testing in your sandbox.
         Note that collecting and sending raw card details in production requires [PCI
-        compliance](https://docs.maxio.com/hc/en-us/articles/24183956938381-PCI-Compli
-        ance#pci-compliance-0-0) on your end. If your business is not PCI compliant,
-        use [Maxio.js (formerly
-        Chargify.js)](https://docs.maxio.com/hc/en-us/articles/38163190843789-Chargify
-        -js-Overview#chargify-js-overview-0-0) to collect credit card or bank account
+        compliance](https://docs.maxio.com/configuration/compliance/understand-pci-com
+        pliance) on your end. If your business is not PCI compliant, use [Maxio.js
+        (formerly
+        Chargify.js)](https://docs.maxio.com/configuration/advanced-billing/maxiojs-fo
+        rmerly-chargifyjs/understand-maxiojs) to collect credit card or bank account
         information.
         ## 3D Secure (3DS) Authentication post-authentication flow
         When a payment requires 3DS Authentication to adhere to Strong Customer
@@ -154,9 +159,68 @@ class SubscriptionsController(BaseController):
         422 Unprocessable Entity status is returned with an action_link that will
         direct the customer through 3DS Authentication.
         See the [3D Secure Post-Authentication
-        Flow](https://docs.maxio.com/hc/en-us/articles/44277749524365-3D-Secure-Post-A
-        uthentication-Flow) article in the product documentation to learn how to
-        manage the redirect flow.
+        Flow](https://docs.maxio.com/configuration/advanced-billing/maxiojs-formerly-c
+        hargifyjs/handle-3d-secure-post-authentication) article in the product
+        documentation to learn how to manage the redirect flow.
+        ## Segment-Level Custom Pricing
+        On sites using Maxio Metering, the `custom_price` of an event-based component
+        can include a `segments` array to give this subscription its own rates for
+        individual segments of the component's meter. Each segment is identified by
+        its `segment_property_1_value` … `segment_property_10_value` values and
+        carries its own `pricing_scheme` and `prices`. When `segments` has at least
+        one entry, segments you don't include keep their current rates: they are
+        copied from the price point the subscription's component is on (the catalog
+        price point on a first override), and later changes to the catalog don't
+        reach them. A `custom_price` sent without `segments`, or with an empty
+        `segments` array, replaces the component's price point with one that has no
+        segment rates.
+        The override takes effect as soon as the request succeeds: all of the current
+        billing period's usage for that component is priced at the new rates,
+        including usage recorded before the request. There is no option to schedule
+        the change for a later date.
+        To read the segment rates back, take the `price_point_id` of the
+        subscription's component (for example, from [Read Subscription
+        Component]($e/Subscription%20Components/readSubscriptionComponent)) and call
+        `GET /components/{component_id}/price_points/{price_point_id}/segments.json`.
+        Segment-level custom pricing is saved only by [Create
+        Subscription]($e/Subscriptions/createSubscription) and [Update
+        Subscription]($e/Subscriptions/updateSubscription). [Preview
+        Subscription]($e/Subscriptions/previewSubscription) and the signup proforma
+        invoice endpoints validate it without saving it. Every other endpoint that
+        accepts a component `custom_price` returns `422 Unprocessable Entity` when
+        `segments` is present.
+        ### Segment validation errors
+        Invalid segment pricing returns `422 Unprocessable Entity` with the standard
+        `errors` array, with each entry prefixed with the component's name. Payload
+        problems are reported as separate entries. Pricing problems are reported as
+        one entry for the first invalid segment. Some checks run only once earlier
+        ones pass, so correcting the reported errors can surface new ones. The
+        messages below are examples for a component named "API Calls": their wording
+        may change, so rely on the status code rather than on matching the exact text.
+        | Condition | Example message |
+        | --- | --- |
+        | The site is not on Maxio Metering | `Custom Price Point for API Calls --
+        Segment-level custom pricing requires Maxio Metering` |
+        | The component's meter has no segmenting properties | `Custom Price Point
+        for API Calls -- This component has no segments defined on its meter` |
+        | `segments` is not an array | `Custom Price Point for API Calls -- segments
+        must be an array of segment objects` |
+        | A segment is not an object | `Custom Price Point for API Calls -- Each
+        segment must be an object` |
+        | A segment has no `prices`, or an empty `prices` array | `Custom Price Point
+        for API Calls -- Each segment must include a non-empty prices array` |
+        | A segment price is not an object | `Custom Price Point for API Calls --
+        Each segment price must be an object` |
+        | Two segments have the same property values | `Custom Price Point for API
+        Calls -- Each segment must be uniquely identified by its property values` |
+        | A segment has no property values | `Custom Price Point for API Calls -- At
+        least one property value is required.` |
+        | A segment has more property values than the meter has segmenting properties
+        | `Custom Price Point for API Calls -- There are more property values, than
+        segment properties declared in metric.` |
+        | A segment's pricing scheme, unit prices or price brackets are not valid |
+        `Custom Price Point segments for API Calls -- …`, followed by the validation
+        problems |
 
         Args:
             body (CreateSubscriptionRequest, optional): The request body parameter.
@@ -241,7 +305,9 @@ class SubscriptionsController(BaseController):
                         Accepts product ID or exact product name. Product handle is
                         not supported.
                     q -- str -- Search string.
-                    q_scope -- QScope -- Scope of fields used by the q search.
+                    q_scope -- QScope -- Scope of fields used by the q search. Use
+                        `last_four` to search by the last four digits of the
+                        subscription's active credit card.
                     customer_id -- int -- The Advanced Billing id of the customer.
                     product_price_point_id -- int -- The ID of the product price
                         point. If supplied, product is required.
@@ -255,9 +321,8 @@ class SubscriptionsController(BaseController):
                     branding_theme_id -- int -- Filter subscriptions by the ID of an
                         assigned Branding Theme. Branding Themes is a beta feature.
                         See [Understand Branding
-                        Themes](https://docs.maxio.com/hc/en-us/articles/4379689566209
-                        3-Understand-Branding-Themes#understand-branding-themes-0-0)
-                        for more information.
+                        Themes](https://docs.maxio.com/billing/invoicing/branding-them
+                        es/understand-branding-themes) for more information.
                     date_field -- SubscriptionDateField -- The type of filter you'd
                         like to apply to your search.  Allowed Values: ,
                         current_period_ends_at, current_period_starts_at, created_at,
@@ -416,14 +481,13 @@ class SubscriptionsController(BaseController):
         gateway allows**.
         Do not use real card information for testing. See the Sites articles that
         cover [testing your site
-        setup](https://docs.maxio.com/hc/en-us/articles/24250712113165-Testing-Overvie
-        w#testing-overview-0-0) for more details on testing in your sandbox.
+        setup](https://docs.maxio.com/configuration/advanced-billing/sites/testing-ove
+        rview) for more details on testing in your sandbox.
         Note that collecting and sending raw card details in production requires [PCI
-        compliance](https://docs.maxio.com/hc/en-us/articles/24183956938381-PCI-Compli
-        ance#pci-compliance-0-0) on your end. If your business is not PCI compliant,
-        use
-        [Chargify.js](https://docs.maxio.com/hc/en-us/articles/38163190843789-Chargify
-        -js-Overview#chargify-js-overview-0-0) to collect credit card or bank account
+        compliance](https://docs.maxio.com/configuration/compliance/understand-pci-com
+        pliance) on your end. If your business is not PCI compliant, use
+        [Chargify.js](https://docs.maxio.com/configuration/advanced-billing/maxiojs-fo
+        rmerly-chargifyjs/understand-maxiojs) to collect credit card or bank account
         information.
         > Note: Partial card updates for **Authorize.Net** are not allowed via this
         endpoint. The existing Payment Profile must be directly updated instead.
@@ -436,8 +500,8 @@ class SubscriptionsController(BaseController):
         and charged at the normal start of the next period. If you require complex
         product changes or prorated upgrades and downgrades instead, please see the
         documentation on [Migrating Subscription
-        Products](https://docs.maxio.com/hc/en-us/articles/24252069837581-Product-Chan
-        ges-and-Migrations#product-changes-and-migrations-0-0).
+        Products](https://docs.maxio.com/billing/subscriptions/management/subscription
+        -actions/understand-upgrade-and-downgrade-scenarios).
         To perform a product change, set either the `product_handle` or `product_id`
         attribute to that of a different product from the same site as the
         subscription. You can also change the price point by passing in either
@@ -482,6 +546,65 @@ class SubscriptionsController(BaseController):
         product. For subscriptions without an associated product, `product`,
         `product_price_point_id`, and `product_price_point_type` are returned as
         `null`.
+        ## Segment-Level Custom Pricing
+        On sites using Maxio Metering, the `custom_price` of an event-based component
+        can include a `segments` array to give this subscription its own rates for
+        individual segments of the component's meter. Each segment is identified by
+        its `segment_property_1_value` … `segment_property_10_value` values and
+        carries its own `pricing_scheme` and `prices`. When `segments` has at least
+        one entry, segments you don't include keep their current rates: they are
+        copied from the price point the subscription's component is on (the catalog
+        price point on a first override), and later changes to the catalog don't
+        reach them. A `custom_price` sent without `segments`, or with an empty
+        `segments` array, replaces the component's price point with one that has no
+        segment rates.
+        The override takes effect as soon as the request succeeds: all of the current
+        billing period's usage for that component is priced at the new rates,
+        including usage recorded before the request. There is no option to schedule
+        the change for a later date.
+        To read the segment rates back, take the `price_point_id` of the
+        subscription's component (for example, from [Read Subscription
+        Component]($e/Subscription%20Components/readSubscriptionComponent)) and call
+        `GET /components/{component_id}/price_points/{price_point_id}/segments.json`.
+        Segment-level custom pricing is saved only by [Create
+        Subscription]($e/Subscriptions/createSubscription) and [Update
+        Subscription]($e/Subscriptions/updateSubscription). [Preview
+        Subscription]($e/Subscriptions/previewSubscription) and the signup proforma
+        invoice endpoints validate it without saving it. Every other endpoint that
+        accepts a component `custom_price` returns `422 Unprocessable Entity` when
+        `segments` is present.
+        ### Segment validation errors
+        Invalid segment pricing returns `422 Unprocessable Entity` with the standard
+        `errors` array, with each entry prefixed with the component's name. Payload
+        problems are reported as separate entries. Pricing problems are reported as
+        one entry for the first invalid segment. Some checks run only once earlier
+        ones pass, so correcting the reported errors can surface new ones. The
+        messages below are examples for a component named "API Calls": their wording
+        may change, so rely on the status code rather than on matching the exact text.
+        | Condition | Example message |
+        | --- | --- |
+        | The site is not on Maxio Metering | `Custom Price Point for API Calls --
+        Segment-level custom pricing requires Maxio Metering` |
+        | The component's meter has no segmenting properties | `Custom Price Point
+        for API Calls -- This component has no segments defined on its meter` |
+        | `segments` is not an array | `Custom Price Point for API Calls -- segments
+        must be an array of segment objects` |
+        | A segment is not an object | `Custom Price Point for API Calls -- Each
+        segment must be an object` |
+        | A segment has no `prices`, or an empty `prices` array | `Custom Price Point
+        for API Calls -- Each segment must include a non-empty prices array` |
+        | A segment price is not an object | `Custom Price Point for API Calls --
+        Each segment price must be an object` |
+        | Two segments have the same property values | `Custom Price Point for API
+        Calls -- Each segment must be uniquely identified by its property values` |
+        | A segment has no property values | `Custom Price Point for API Calls -- At
+        least one property value is required.` |
+        | A segment has more property values than the meter has segmenting properties
+        | `Custom Price Point for API Calls -- There are more property values, than
+        segment properties declared in metric.` |
+        | A segment's pricing scheme, unit prices or price brackets are not valid |
+        `Custom Price Point segments for API Calls -- …`, followed by the validation
+        problems |
 
         Args:
             subscription_id (int): The Chargify id of the subscription.
@@ -814,8 +937,8 @@ class SubscriptionsController(BaseController):
         This endpoint does not create a subscription; it is meant to serve as a
         prediction.
         For more information, see [Subscriber Interface
-        Overview](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subscribe
-        r-Interface-Overview).
+        Overview](https://docs.maxio.com/billing/billing-portal/using/see-the-billing-
+        portal-screens-subscribers-use).
         ## Subscriptions can now work independently from the catalog
          If you have the new [Catalog
         experience](page:help/announcements/2026-announcements#new-catalog-experience-
@@ -842,7 +965,7 @@ class SubscriptionsController(BaseController):
         + The subscription payload must contain a full billing or shipping address to
         calculate tax
         For more information about creating taxable previews, see
-        [Taxes](https://maxio.zendesk.com/hc/en-us/sections/24287012349325-Taxes).
+        [Taxes](https://docs.maxio.com/billing/taxes).
         You do **not** need to include a card number to generate tax information when
         you are previewing a subscription. However, when you actually want to create
         the subscription, you must include the credit card information if you want
@@ -855,6 +978,13 @@ class SubscriptionsController(BaseController):
         ## Non-taxable Subscriptions
         If you'd like to calculate subscriptions that do not include tax, you can
         leave off the billing information.
+        ## Segment-Level Custom Pricing
+        When a component's `custom_price` includes `segments`, this endpoint
+        validates them with the same rules as [Create
+        Subscription]($e/Subscriptions/createSubscription) and returns the same `422
+        Unprocessable Entity` errors. No segment rates are persisted. Valid segment
+        rates do not change the totals returned here, because no usage has been
+        recorded for a subscription that is only being signed up.
 
         Args:
             body (CreateSubscriptionRequest, optional): The request body parameter.
@@ -899,8 +1029,8 @@ class SubscriptionsController(BaseController):
         An existing subscription can accommodate multiple discounts/coupon codes.
         This is only applicable if each coupon is stackable. For more information on
         stackable coupons, we recommend reviewing our [coupon
-        documentation.](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Cou
-        pons-and-Subscriptions#stackability-rules)
+        documentation.](https://docs.maxio.com/billing/catalog/coupons/apply-coupons-t
+        o-subscriptions#stackability-rules)
         ## Query Parameters vs Request Body Parameters
         Passing in a coupon code as a query parameter will add the code to the
         subscription, completely replacing all existing coupon codes on the
@@ -966,8 +1096,8 @@ class SubscriptionsController(BaseController):
         Removes a coupon from an existing subscription.
         For more information on the expected behavior of removing a coupon from a
         subscription, see [Coupons and
-        Subscriptions](https://maxio.zendesk.com/hc/en-us/articles/24261259337101-Coup
-        ons-and-Subscriptions#removing-a-coupon).
+        Subscriptions](https://docs.maxio.com/billing/catalog/coupons/apply-coupons-to
+        -subscriptions#removing-a-coupon).
 
         Args:
             subscription_id (int): The Chargify id of the subscription.
@@ -1052,8 +1182,8 @@ class SubscriptionsController(BaseController):
         ### Activate Trialing subscription
         For more information about the behavior of trialing subscriptions, see
         [Trialing
-        Subscriptions](https://maxio.zendesk.com/hc/en-us/articles/24252155721869-Tria
-        ling-Subscriptions).
+        Subscriptions](https://docs.maxio.com/billing/subscriptions/management/subscri
+        ption-states/understand-trialing-subscriptions).
         When the `revert_on_failure` parameter is set to `true`, the subscription's
         state remains Trialing; the invoice from activation is voided, and any
         prepayments and credits applied to the invoice are returned to the

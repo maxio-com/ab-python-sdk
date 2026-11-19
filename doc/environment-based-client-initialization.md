@@ -18,23 +18,26 @@ The same method can accept keyword arguments to override any values read from th
 
 ```python
 from advancedbilling.advanced_billing_client import AdvancedBillingClient
+from advancedbilling.http.auth.basic_auth import BasicAuthCredentials
 
 client = AdvancedBillingClient.from_environment(
     dotenv_path='/path/to/.env',
-    timeout=0,  # overrides timeout from environment variable
+    basic_auth_credentials=BasicAuthCredentials(
+        username='BasicAuthUserName',
+        password='BasicAuthPassword'
+    )
 )
 ```
 
 Values provided through arguments take precedence over those defined in environment variables.
+
+Authentication credentials are left out of the example `.env` file below. Keep credentials out of `.env` and configuration files that are committed to source control or shipped with your application, and load them at runtime from a secret manager or your hosting platform's environment instead. Pass them to `from_environment()` as keyword arguments, as shown above.
 
 ## Example `.env` File
 
 ```python
 SITE=subdomain
 ENVIRONMENT=us
-
-USERNAME=ExampleUsername
-PASSWORD=ExamplePassword
 
 TIMEOUT=60
 MAX_RETRIES=3
@@ -45,8 +48,6 @@ RETRY_METHODS=GET,PUT,DELETE
 # Proxy Configuration
 PROXY_ADDRESS=http://localhost:3000
 PROXY_PORT=8080
-PROXY_USERNAME=username
-PROXY_PASSWORD=password
 ```
 
 ## Note

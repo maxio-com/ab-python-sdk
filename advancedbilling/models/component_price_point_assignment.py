@@ -12,7 +12,10 @@ class ComponentPricePointAssignment(object):
     """Implementation of the 'Component Price Point Assignment' model.
 
     Attributes:
-        component_id (int): The model property of type int.
+        component_id (int | str | None): The component to update. Pass the component
+            ID as an integer, or the component handle as a string with the `handle:`
+            prefix, for example `handle:my-component`. The response returns the value
+            in the same form that you sent.
         price_point (str | int | None): The model property of type str | int | None.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
@@ -69,10 +72,12 @@ class ComponentPricePointAssignment(object):
             return None
 
         # Extract variables from the dictionary
-        component_id =\
-            dictionary.get("component_id")\
-            if dictionary.get("component_id")\
-                else APIHelper.SKIP
+        component_id = APIHelper.deserialize_union_type(
+            UnionTypeLookUp.get("ComponentPricePointAssignmentComponentId"),
+            dictionary.get("component_id"),
+            False)\
+            if dictionary.get("component_id") is not None\
+            else APIHelper.SKIP
         price_point = APIHelper.deserialize_union_type(
             UnionTypeLookUp.get("ComponentPricePointAssignmentPricePoint"),
             dictionary.get("price_point"),

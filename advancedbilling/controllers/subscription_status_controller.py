@@ -57,9 +57,9 @@ class SubscriptionStatusController(BaseController):
         422 Unprocessable Entity status is returned with an action_link that will
         direct the customer through 3DS Authentication.
         See the [3D Secure Post-Authentication
-        Flow](https://docs.maxio.com/hc/en-us/articles/44277749524365-3D-Secure-Post-A
-        uthentication-Flow) article in the product documentation to learn how to
-        manage the redirect flow.
+        Flow](https://docs.maxio.com/configuration/advanced-billing/maxiojs-formerly-c
+        hargifyjs/handle-3d-secure-post-authentication) article in the product
+        documentation to learn how to manage the redirect flow.
 
         Args:
             subscription_id (int): The Chargify id of the subscription.
@@ -318,8 +318,8 @@ class SubscriptionStatusController(BaseController):
         Reactivates a previously canceled subscription. For details on how the
         reactivation works, and how to reactivate subscriptions through the
         application, see
-        [reactivation](https://maxio.zendesk.com/hc/en-us/articles/24252109503629-Reac
-        tivating-and-Resuming).
+        [reactivation](https://docs.maxio.com/billing/subscriptions/management/state-m
+        anagement/understand-reactivation-and-resume-scenarios).
         **Note: The term "resume" is used also during another process in Advanced
         Billing. This occurs when an on-hold subscription is "resumed". This returns
         the subscription to an active state.**
@@ -459,9 +459,9 @@ class SubscriptionStatusController(BaseController):
         422 Unprocessable Entity status is returned with an action_link that will
         direct the customer through 3DS Authentication.
         See the [3D Secure Post-Authentication
-        Flow](https://docs.maxio.com/hc/en-us/articles/44277749524365-3D-Secure-Post-A
-        uthentication-Flow) article in the product documentation to learn how to
-        manage the redirect flow.
+        Flow](https://docs.maxio.com/configuration/advanced-billing/maxiojs-formerly-c
+        hargifyjs/handle-3d-secure-post-authentication) article in the product
+        documentation to learn how to manage the redirect flow.
 
         Args:
             subscription_id (int): The Chargify id of the subscription.
@@ -658,8 +658,8 @@ class SubscriptionStatusController(BaseController):
         The "Next Billing" amount and "Next Billing" date are already represented in
         the UI on each Subscriber's Summary. For more information, see [Subscriber
         Interface
-        Overview](https://maxio.zendesk.com/hc/en-us/articles/24252493695757-Subscribe
-        r-Interface-Overview).
+        Overview](https://docs.maxio.com/billing/billing-portal/using/see-the-billing-
+        portal-screens-subscribers-use).
         ## Optional Component Fields
         This endpoint is particularly useful because it returns the computed billing
         amount for the base product and the components which are in use by a

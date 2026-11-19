@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `uid` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `title` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
-| `source_type` | [`ProformaInvoiceTaxSourceType`](../../doc/models/proforma-invoice-tax-source-type.md) | Optional | - |
+| `source_type` | [`ProformaInvoiceTaxSourceType`](../../doc/models/proforma-invoice-tax-source-type.md) | Optional | The source of the tax. `Tax` is a tax configured in Advanced Billing. The other values identify the tax service that calculated the tax. |
 | `percentage` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `taxable_amount` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
 | `tax_amount` | `str` | Optional | **Constraints**: *Minimum Length*: `1` |
@@ -26,7 +26,7 @@ from advancedbilling.models.proforma_invoice_tax_source_type import ProformaInvo
 proforma_invoice_tax = ProformaInvoiceTax(
     uid='uid4',
     title='title0',
-    source_type=ProformaInvoiceTaxSourceType.TAX,
+    source_type=ProformaInvoiceTaxSourceType.TAXWIRE,
     percentage='percentage2',
     taxable_amount='taxable_amount8'
 )

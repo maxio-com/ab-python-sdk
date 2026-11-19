@@ -93,6 +93,16 @@ class InvoiceLineItem(object):
         component_cost_data (InvoiceLineItemComponentCostData): The model property of
             type InvoiceLineItemComponentCostData.
         product_price_point_id (int): The price point ID of the line item's product
+        list_unit_price (str): The unit price from the list price point, in decimal
+            format. Returned only when list vs sales pricing is enabled for the site.
+        list_total_amount (str): The total amount for the line item at the list
+            price, in decimal format
+        list_discount_amount (str): The difference between the list total and the
+            sales total, in decimal format
+        list_discount_rate (str): The list discount as a fraction of the list total,
+            in decimal format. For example, `"0.25"` is a 25% discount.
+        list_price_point_id (int): The ID of the list price point this line item's
+            sales price is compared against
         custom_item (bool): The model property of type bool.
         kind (str): The model property of type str.
         prepaid_allocation_expires_at (date): The date a prepaid allocation is set to
@@ -127,6 +137,11 @@ class InvoiceLineItem(object):
         "hide": "hide",
         "component_cost_data": "component_cost_data",
         "product_price_point_id": "product_price_point_id",
+        "list_unit_price": "list_unit_price",
+        "list_total_amount": "list_total_amount",
+        "list_discount_amount": "list_discount_amount",
+        "list_discount_rate": "list_discount_rate",
+        "list_price_point_id": "list_price_point_id",
         "custom_item": "custom_item",
         "kind": "kind",
         "prepaid_allocation_expires_at": "prepaid_allocation_expires_at",
@@ -155,6 +170,11 @@ class InvoiceLineItem(object):
         "hide",
         "component_cost_data",
         "product_price_point_id",
+        "list_unit_price",
+        "list_total_amount",
+        "list_discount_amount",
+        "list_discount_rate",
+        "list_price_point_id",
         "custom_item",
         "kind",
         "prepaid_allocation_expires_at",
@@ -168,6 +188,11 @@ class InvoiceLineItem(object):
         "billing_schedule_item_id",
         "component_cost_data",
         "product_price_point_id",
+        "list_unit_price",
+        "list_total_amount",
+        "list_discount_amount",
+        "list_discount_rate",
+        "list_price_point_id",
         "prepaid_allocation_expires_at",
     ]
 
@@ -195,6 +220,11 @@ class InvoiceLineItem(object):
         hide=APIHelper.SKIP,
         component_cost_data=APIHelper.SKIP,
         product_price_point_id=APIHelper.SKIP,
+        list_unit_price=APIHelper.SKIP,
+        list_total_amount=APIHelper.SKIP,
+        list_discount_amount=APIHelper.SKIP,
+        list_discount_rate=APIHelper.SKIP,
+        list_price_point_id=APIHelper.SKIP,
         custom_item=APIHelper.SKIP,
         kind=APIHelper.SKIP,
         prepaid_allocation_expires_at=APIHelper.SKIP,
@@ -245,6 +275,16 @@ class InvoiceLineItem(object):
             self.component_cost_data = component_cost_data
         if product_price_point_id is not APIHelper.SKIP:
             self.product_price_point_id = product_price_point_id
+        if list_unit_price is not APIHelper.SKIP:
+            self.list_unit_price = list_unit_price
+        if list_total_amount is not APIHelper.SKIP:
+            self.list_total_amount = list_total_amount
+        if list_discount_amount is not APIHelper.SKIP:
+            self.list_discount_amount = list_discount_amount
+        if list_discount_rate is not APIHelper.SKIP:
+            self.list_discount_rate = list_discount_rate
+        if list_price_point_id is not APIHelper.SKIP:
+            self.list_price_point_id = list_price_point_id
         if custom_item is not APIHelper.SKIP:
             self.custom_item = custom_item
         if kind is not APIHelper.SKIP:
@@ -364,6 +404,26 @@ class InvoiceLineItem(object):
             dictionary.get("product_price_point_id")\
             if "product_price_point_id" in dictionary.keys()\
                 else APIHelper.SKIP
+        list_unit_price =\
+            dictionary.get("list_unit_price")\
+            if "list_unit_price" in dictionary.keys()\
+                else APIHelper.SKIP
+        list_total_amount =\
+            dictionary.get("list_total_amount")\
+            if "list_total_amount" in dictionary.keys()\
+                else APIHelper.SKIP
+        list_discount_amount =\
+            dictionary.get("list_discount_amount")\
+            if "list_discount_amount" in dictionary.keys()\
+                else APIHelper.SKIP
+        list_discount_rate =\
+            dictionary.get("list_discount_rate")\
+            if "list_discount_rate" in dictionary.keys()\
+                else APIHelper.SKIP
+        list_price_point_id =\
+            dictionary.get("list_price_point_id")\
+            if "list_price_point_id" in dictionary.keys()\
+                else APIHelper.SKIP
         custom_item =\
             dictionary.get("custom_item")\
             if "custom_item" in dictionary.keys()\
@@ -407,6 +467,11 @@ class InvoiceLineItem(object):
                    hide,
                    component_cost_data,
                    product_price_point_id,
+                   list_unit_price,
+                   list_total_amount,
+                   list_discount_amount,
+                   list_discount_rate,
+                   list_price_point_id,
                    custom_item,
                    kind,
                    prepaid_allocation_expires_at,
@@ -545,6 +610,31 @@ class InvoiceLineItem(object):
             if hasattr(self, "product_price_point_id")
             else None
         )
+        _list_unit_price=(
+            self.list_unit_price
+            if hasattr(self, "list_unit_price")
+            else None
+        )
+        _list_total_amount=(
+            self.list_total_amount
+            if hasattr(self, "list_total_amount")
+            else None
+        )
+        _list_discount_amount=(
+            self.list_discount_amount
+            if hasattr(self, "list_discount_amount")
+            else None
+        )
+        _list_discount_rate=(
+            self.list_discount_rate
+            if hasattr(self, "list_discount_rate")
+            else None
+        )
+        _list_price_point_id=(
+            self.list_price_point_id
+            if hasattr(self, "list_price_point_id")
+            else None
+        )
         _custom_item=(
             self.custom_item
             if hasattr(self, "custom_item")
@@ -585,6 +675,11 @@ class InvoiceLineItem(object):
             f"hide={_hide!r}, "
             f"component_cost_data={_component_cost_data!r}, "
             f"product_price_point_id={_product_price_point_id!r}, "
+            f"list_unit_price={_list_unit_price!r}, "
+            f"list_total_amount={_list_total_amount!r}, "
+            f"list_discount_amount={_list_discount_amount!r}, "
+            f"list_discount_rate={_list_discount_rate!r}, "
+            f"list_price_point_id={_list_price_point_id!r}, "
             f"custom_item={_custom_item!r}, "
             f"kind={_kind!r}, "
             f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!r}, "
@@ -704,6 +799,31 @@ class InvoiceLineItem(object):
             if hasattr(self, "product_price_point_id")
             else None
         )
+        _list_unit_price=(
+            self.list_unit_price
+            if hasattr(self, "list_unit_price")
+            else None
+        )
+        _list_total_amount=(
+            self.list_total_amount
+            if hasattr(self, "list_total_amount")
+            else None
+        )
+        _list_discount_amount=(
+            self.list_discount_amount
+            if hasattr(self, "list_discount_amount")
+            else None
+        )
+        _list_discount_rate=(
+            self.list_discount_rate
+            if hasattr(self, "list_discount_rate")
+            else None
+        )
+        _list_price_point_id=(
+            self.list_price_point_id
+            if hasattr(self, "list_price_point_id")
+            else None
+        )
         _custom_item=(
             self.custom_item
             if hasattr(self, "custom_item")
@@ -744,6 +864,11 @@ class InvoiceLineItem(object):
             f"hide={_hide!s}, "
             f"component_cost_data={_component_cost_data!s}, "
             f"product_price_point_id={_product_price_point_id!s}, "
+            f"list_unit_price={_list_unit_price!s}, "
+            f"list_total_amount={_list_total_amount!s}, "
+            f"list_discount_amount={_list_discount_amount!s}, "
+            f"list_discount_rate={_list_discount_rate!s}, "
+            f"list_price_point_id={_list_price_point_id!s}, "
             f"custom_item={_custom_item!s}, "
             f"kind={_kind!s}, "
             f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!s}, "

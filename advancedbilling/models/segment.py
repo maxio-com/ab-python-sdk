@@ -6,6 +6,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 
 # ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.component_currency_price import (
+    ComponentCurrencyPrice,
+)
 from advancedbilling.models.segment_price import (
     SegmentPrice,
 )
@@ -34,6 +37,11 @@ class Segment(object):
         created_at (datetime): The model property of type datetime.
         updated_at (datetime): The model property of type datetime.
         prices (List[SegmentPrice]): The model property of type List[SegmentPrice].
+        currency_prices (List[ComponentCurrencyPrice]): Prices of the segment in the
+            site's non-primary currencies, one entry for each price and currency.
+            This field is present only when the request includes
+            `currency_prices=true`. If the price point uses the site exchange rate,
+            the prices are calculated from the current rate and each `id` is `null`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -53,6 +61,7 @@ class Segment(object):
         "created_at": "created_at",
         "updated_at": "updated_at",
         "prices": "prices",
+        "currency_prices": "currency_prices",
     }
 
     _optionals = [
@@ -68,6 +77,7 @@ class Segment(object):
         "created_at",
         "updated_at",
         "prices",
+        "currency_prices",
     ]
 
     def __init__(
@@ -84,6 +94,7 @@ class Segment(object):
         created_at=APIHelper.SKIP,
         updated_at=APIHelper.SKIP,
         prices=APIHelper.SKIP,
+        currency_prices=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a Segment instance."""
         # Initialize members of the class
@@ -117,6 +128,8 @@ class Segment(object):
                  if updated_at else None
         if prices is not APIHelper.SKIP:
             self.prices = prices
+        if currency_prices is not APIHelper.SKIP:
+            self.currency_prices = currency_prices
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -203,6 +216,14 @@ class Segment(object):
             ]
         else:
             prices = APIHelper.SKIP
+        currency_prices = None
+        if dictionary.get("currency_prices") is not None:
+            currency_prices = [
+                ComponentCurrencyPrice.from_dictionary(x)
+                    for x in dictionary.get("currency_prices")
+            ]
+        else:
+            currency_prices = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -221,6 +242,7 @@ class Segment(object):
                    created_at,
                    updated_at,
                    prices,
+                   currency_prices,
                    additional_properties)
 
     def __repr__(self):
@@ -285,6 +307,11 @@ class Segment(object):
             if hasattr(self, "prices")
             else None
         )
+        _currency_prices=(
+            self.currency_prices
+            if hasattr(self, "currency_prices")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -300,6 +327,7 @@ class Segment(object):
             f"created_at={_created_at!r}, "
             f"updated_at={_updated_at!r}, "
             f"prices={_prices!r}, "
+            f"currency_prices={_currency_prices!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -366,6 +394,11 @@ class Segment(object):
             if hasattr(self, "prices")
             else None
         )
+        _currency_prices=(
+            self.currency_prices
+            if hasattr(self, "currency_prices")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -381,6 +414,7 @@ class Segment(object):
             f"created_at={_created_at!s}, "
             f"updated_at={_updated_at!s}, "
             f"prices={_prices!s}, "
+            f"currency_prices={_currency_prices!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

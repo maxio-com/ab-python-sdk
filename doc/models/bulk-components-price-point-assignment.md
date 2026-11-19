@@ -20,7 +20,7 @@ from advancedbilling.models.component_price_point_assignment import ComponentPri
 bulk_components_price_point_assignment = BulkComponentsPricePointAssignment(
     components=[
         ComponentPricePointAssignment(
-            component_id=108,
+            component_id=30,
             price_point='String5'
         )
     ]

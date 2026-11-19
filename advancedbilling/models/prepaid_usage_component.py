@@ -38,9 +38,9 @@ class PrepaidUsageComponent(object):
             for an overview of pricing schemes.
         prices (List[Price]): (Not required for ‘per_unit’ pricing schemes) One or
             more price brackets. See [Price Bracket
-            Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-Componen
-            t-Pricing-Schemes#price-bracket-rules) for an overview of how price
-            brackets work for different pricing schemes.
+            Rules](https://docs.maxio.com/billing/catalog/products/use-product-pricing
+            -schemes#price-bracket-rules) for an overview of how price brackets work
+            for different pricing schemes.
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site setting if
             one is not provided.

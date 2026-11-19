@@ -14,6 +14,11 @@ class TaxConfigurationKind(object):
         ENUM_MANAGED_AVALARA: The enum member of type str.
         ENUM_LINKED_AVALARA: The enum member of type str.
         ENUM_DIGITAL_RIVER: The enum member of type str.
+        ANROK: The enum member of type str.
+        TAXJAR: The enum member of type str.
+        NUMERAL: The enum member of type str.
+        SPHERE: The enum member of type str.
+        TAXWIRE: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -26,6 +31,16 @@ class TaxConfigurationKind(object):
     ENUM_LINKED_AVALARA = "linked avalara"
 
     ENUM_DIGITAL_RIVER = "digital river"
+
+    ANROK = "anrok"
+
+    TAXJAR = "taxjar"
+
+    NUMERAL = "numeral"
+
+    SPHERE = "sphere"
+
+    TAXWIRE = "taxwire"
 
     @classmethod
     def from_value(cls, value, default=None):

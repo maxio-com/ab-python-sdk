@@ -11,12 +11,18 @@ class ListComponentsPricePointsInclude(object):
 
     Attributes:
         CURRENCY_PRICES: The enum member of type str.
+        CURRENCY_OVERAGE_PRICES: The enum member of type str.
+        CURRENCY_SECONDARY_PRICES: The enum member of type str.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
     """
 
     CURRENCY_PRICES = "currency_prices"
+
+    CURRENCY_OVERAGE_PRICES = "currency_overage_prices"
+
+    CURRENCY_SECONDARY_PRICES = "currency_secondary_prices"
 
     @classmethod
     def from_value(cls, value, default=None):

@@ -52,7 +52,19 @@ class Customer(object):
             This number is used to determine VAT tax opt out rules. It is not
             validated when added or updated on a customer record. Instead, it is
             validated via VIES before calculating taxes. Only valid business
-            identification numbers will allow for VAT opt out.
+            identification numbers will allow for VAT opt out. When the customer
+            holds an entity identifier, this field returns that identifier's value,
+            whatever its kind.
+        vat_country (str): The two-letter ISO 3166-1 country code that qualifies the
+            customer's VAT number. Set to `null` when an identifier is stored through
+            `entity_identifier_kind` for a kind that is not tied to a VAT country,
+            meaning `company_reg`, `gln`, `duns`, or `lei`.
+        entity_identifier_kind (EntityIdentifierKind): The kind of tax or business
+            identifier held by the customer. Returned as `null` when the customer has
+            no entity identifier, including a legacy customer whose `vat_number`
+            predates entity identifiers.
+        entity_identifier_value (str): The value of the customer's tax or business
+            identifier. Returned as `null` when the customer has no entity identifier.
         parent_id (int): The parent ID in Chargify if applicable. Parent is another
             Customer object.
         locale (str): The locale for the customer to identify language-region
@@ -99,6 +111,9 @@ class Customer(object):
         "tax_exempt": "tax_exempt",
         "surcharging": "surcharging",
         "vat_number": "vat_number",
+        "vat_country": "vat_country",
+        "entity_identifier_kind": "entity_identifier_kind",
+        "entity_identifier_value": "entity_identifier_value",
         "parent_id": "parent_id",
         "locale": "locale",
         "default_subscription_group_uid": "default_subscription_group_uid",
@@ -135,6 +150,9 @@ class Customer(object):
         "tax_exempt",
         "surcharging",
         "vat_number",
+        "vat_country",
+        "entity_identifier_kind",
+        "entity_identifier_value",
         "parent_id",
         "locale",
         "default_subscription_group_uid",
@@ -163,6 +181,9 @@ class Customer(object):
         "portal_invite_last_sent_at",
         "portal_invite_last_accepted_at",
         "vat_number",
+        "vat_country",
+        "entity_identifier_kind",
+        "entity_identifier_value",
         "parent_id",
         "locale",
         "default_subscription_group_uid",
@@ -200,6 +221,9 @@ class Customer(object):
         tax_exempt=APIHelper.SKIP,
         surcharging=APIHelper.SKIP,
         vat_number=APIHelper.SKIP,
+        vat_country=APIHelper.SKIP,
+        entity_identifier_kind=APIHelper.SKIP,
+        entity_identifier_value=APIHelper.SKIP,
         parent_id=APIHelper.SKIP,
         locale=APIHelper.SKIP,
         default_subscription_group_uid=APIHelper.SKIP,
@@ -276,6 +300,12 @@ class Customer(object):
             self.surcharging = surcharging
         if vat_number is not APIHelper.SKIP:
             self.vat_number = vat_number
+        if vat_country is not APIHelper.SKIP:
+            self.vat_country = vat_country
+        if entity_identifier_kind is not APIHelper.SKIP:
+            self.entity_identifier_kind = entity_identifier_kind
+        if entity_identifier_value is not APIHelper.SKIP:
+            self.entity_identifier_value = entity_identifier_value
         if parent_id is not APIHelper.SKIP:
             self.parent_id = parent_id
         if locale is not APIHelper.SKIP:
@@ -423,6 +453,18 @@ class Customer(object):
             dictionary.get("vat_number")\
             if "vat_number" in dictionary.keys()\
                 else APIHelper.SKIP
+        vat_country =\
+            dictionary.get("vat_country")\
+            if "vat_country" in dictionary.keys()\
+                else APIHelper.SKIP
+        entity_identifier_kind =\
+            dictionary.get("entity_identifier_kind")\
+            if "entity_identifier_kind" in dictionary.keys()\
+                else APIHelper.SKIP
+        entity_identifier_value =\
+            dictionary.get("entity_identifier_value")\
+            if "entity_identifier_value" in dictionary.keys()\
+                else APIHelper.SKIP
         parent_id =\
             dictionary.get("parent_id")\
             if "parent_id" in dictionary.keys()\
@@ -486,6 +528,9 @@ class Customer(object):
                    tax_exempt,
                    surcharging,
                    vat_number,
+                   vat_country,
+                   entity_identifier_kind,
+                   entity_identifier_value,
                    parent_id,
                    locale,
                    default_subscription_group_uid,
@@ -644,6 +689,21 @@ class Customer(object):
             if hasattr(self, "vat_number")
             else None
         )
+        _vat_country=(
+            self.vat_country
+            if hasattr(self, "vat_country")
+            else None
+        )
+        _entity_identifier_kind=(
+            self.entity_identifier_kind
+            if hasattr(self, "entity_identifier_kind")
+            else None
+        )
+        _entity_identifier_value=(
+            self.entity_identifier_value
+            if hasattr(self, "entity_identifier_value")
+            else None
+        )
         _parent_id=(
             self.parent_id
             if hasattr(self, "parent_id")
@@ -712,6 +772,9 @@ class Customer(object):
             f"tax_exempt={_tax_exempt!r}, "
             f"surcharging={_surcharging!r}, "
             f"vat_number={_vat_number!r}, "
+            f"vat_country={_vat_country!r}, "
+            f"entity_identifier_kind={_entity_identifier_kind!r}, "
+            f"entity_identifier_value={_entity_identifier_value!r}, "
             f"parent_id={_parent_id!r}, "
             f"locale={_locale!r}, "
             f"default_subscription_group_uid={_default_subscription_group_uid!r}, "
@@ -851,6 +914,21 @@ class Customer(object):
             if hasattr(self, "vat_number")
             else None
         )
+        _vat_country=(
+            self.vat_country
+            if hasattr(self, "vat_country")
+            else None
+        )
+        _entity_identifier_kind=(
+            self.entity_identifier_kind
+            if hasattr(self, "entity_identifier_kind")
+            else None
+        )
+        _entity_identifier_value=(
+            self.entity_identifier_value
+            if hasattr(self, "entity_identifier_value")
+            else None
+        )
         _parent_id=(
             self.parent_id
             if hasattr(self, "parent_id")
@@ -919,6 +997,9 @@ class Customer(object):
             f"tax_exempt={_tax_exempt!s}, "
             f"surcharging={_surcharging!s}, "
             f"vat_number={_vat_number!s}, "
+            f"vat_country={_vat_country!s}, "
+            f"entity_identifier_kind={_entity_identifier_kind!s}, "
+            f"entity_identifier_value={_entity_identifier_value!s}, "
             f"parent_id={_parent_id!s}, "
             f"locale={_locale!s}, "
             f"default_subscription_group_uid={_default_subscription_group_uid!s}, "

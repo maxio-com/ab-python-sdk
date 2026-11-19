@@ -11,6 +11,7 @@ Object which contains subscription errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
+| `customer` | `List[str]` | Optional | - |
 | `product` | `List[str]` | Optional | - |
 | `product_price_point_id` | `List[str]` | Optional | - |
 | `payment_profile` | `List[str]` | Optional | - |
@@ -26,6 +27,10 @@ Object which contains subscription errors.
 from advancedbilling.models.subscription_group_subscription_error import SubscriptionGroupSubscriptionError
 
 subscription_group_subscription_error = SubscriptionGroupSubscriptionError(
+    customer=[
+        'customer1',
+        'customer2'
+    ],
     product=[
         'product1'
     ],
@@ -37,10 +42,6 @@ subscription_group_subscription_error = SubscriptionGroupSubscriptionError(
     ],
     payment_profile_chargify_token=[
         'payment_profile.chargify_token6'
-    ],
-    base=[
-        'base5',
-        'base6'
     ]
 )
 ```

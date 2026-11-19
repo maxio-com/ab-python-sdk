@@ -39,6 +39,7 @@
 | `subscription` | [`SubscriptionComponentSubscription`](../../doc/models/subscription-component-subscription.md) | Optional | (Optional) Object that will be returned if the `include=subscription` query param is provided. |
 | `historic_usages` | [`List[HistoricUsage]`](../../doc/models/historic-usage.md) | Optional | - |
 | `display_on_hosted_page` | `bool` | Optional | - |
+| `list_price_point_id` | `int` | Optional | The ID of the catalog price point used as the list price for this component's custom price. Returned only when list vs sales pricing is enabled for the site. |
 | `interval` | `int` | Optional | The numerical interval. e.g., an interval of '30' coupled with an interval_unit of day would mean this component price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
 | `interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component price point, either month or day. This property is only available for sites with Multifrequency enabled. |
 
@@ -51,7 +52,7 @@ from advancedbilling.models.subscription_component import SubscriptionComponent
 subscription_component = SubscriptionComponent(
     id=8,
     name='name8',
-    kind=ComponentKind.QUANTITY_BASED_COMPONENT,
+    kind=ComponentKind.ON_OFF_COMPONENT,
     unit_name='unit_name0',
     enabled=False
 )

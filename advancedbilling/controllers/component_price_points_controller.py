@@ -72,9 +72,9 @@ class ComponentPricePointsController(BaseController):
         to all new subscriptions going forward - existing subscriptions will remain
         on their current price point.
         See [Price Points
-        Documentation](https://maxio.zendesk.com/hc/en-us/articles/24261191737101-Pric
-        e-Points-Components) for more information on price points and moving
-        subscriptions between price points.
+        Documentation](https://docs.maxio.com/billing/catalog/products/set-product-pri
+        ce-points) for more information on price points and moving subscriptions
+        between price points.
         Note: Custom price points are not able to be set as the default for a
         component.
 

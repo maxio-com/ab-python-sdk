@@ -9,6 +9,9 @@ from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.component_price import (
     ComponentPrice,
 )
+from advancedbilling.models.feature_catalog_item import (
+    FeatureCatalogItem,
+)
 
 
 class Component(object):
@@ -27,11 +30,13 @@ class Component(object):
             field is only populated for ‘per_unit’ pricing schemes, otherwise it may
             be null.
         product_family_id (int): The id of the Product Family to which the Component
-            belongs
+            belongs. `null` for a Wallet Product, which has no Product Family.
         product_family_name (str): The name of the Product Family to which the
-            Component belongs
+            Component belongs. `null` for a Wallet Product, which has no Product
+            Family.
         product_family_handle (str): The handle of the Product Family to which the
-            Component belongs
+            Component belongs. `null` for a Wallet Product, which has no Product
+            Family.
         price_per_unit_in_cents (int): deprecated - use unit_price instead.
         kind (ComponentKind): A handle for the component type
         archived (bool): Boolean flag describing whether a component is archived or
@@ -69,9 +74,15 @@ class Component(object):
             Consumer Software, Digital Services, Physical Goods, Other
         use_site_exchange_rate (bool): The model property of type bool.
         accounting_code (str): E.g. Internal ID or SKU Number
-        event_based_billing_metric_id (int): (Only for Event Based Components) This
-            is an ID of a metric attached to the component. This metric is used to
-            bill upon collected events.
+        event_based_billing_metric_id (int): The ID of an attached metric from legacy
+            Events Based Billing. Omitted if no metric is attached. If the metric is
+            linked to a Maxio Metering meter, the response can include both
+            event_based_billing_metric_id and metering_meter_id.
+        metering_meter_id (int): The ID of an attached single Maxio Metering meter.
+            Omitted if no single meter is attached, including when the component uses
+            only an Advanced Formula. If a legacy Events Based Billing metric is
+            linked to the meter, the response can include both metering_meter_id and
+            event_based_billing_metric_id.
         interval (int): The numerical interval. e.g., an interval of ‘30’ coupled
             with an interval_unit of day would mean this component’s default price
             point would renew every 30 days. This property is only available for
@@ -83,6 +94,9 @@ class Component(object):
             payment data. When set, this value is sent as the commodity code on
             invoice line items for this component instead of the default derived from
             item_category.
+        features (List[FeatureCatalogItem]): The active feature catalog items
+            attached to this component. Present only when the request includes
+            `include_features=true`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -123,9 +137,11 @@ class Component(object):
         "use_site_exchange_rate": "use_site_exchange_rate",
         "accounting_code": "accounting_code",
         "event_based_billing_metric_id": "event_based_billing_metric_id",
+        "metering_meter_id": "metering_meter_id",
         "interval": "interval",
         "interval_unit": "interval_unit",
         "unspsc_code": "unspsc_code",
+        "features": "features",
     }
 
     _optionals = [
@@ -162,15 +178,20 @@ class Component(object):
         "use_site_exchange_rate",
         "accounting_code",
         "event_based_billing_metric_id",
+        "metering_meter_id",
         "interval",
         "interval_unit",
         "unspsc_code",
+        "features",
     ]
 
     _nullables = [
         "handle",
         "pricing_scheme",
         "unit_price",
+        "product_family_id",
+        "product_family_name",
+        "product_family_handle",
         "price_per_unit_in_cents",
         "description",
         "default_price_point_id",
@@ -186,6 +207,7 @@ class Component(object):
         "accounting_code",
         "interval_unit",
         "unspsc_code",
+        "features",
     ]
 
     def __init__(
@@ -223,9 +245,11 @@ class Component(object):
         use_site_exchange_rate=APIHelper.SKIP,
         accounting_code=APIHelper.SKIP,
         event_based_billing_metric_id=APIHelper.SKIP,
+        metering_meter_id=APIHelper.SKIP,
         interval=APIHelper.SKIP,
         interval_unit=APIHelper.SKIP,
         unspsc_code=APIHelper.SKIP,
+        features=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a Component instance."""
         # Initialize members of the class
@@ -304,12 +328,16 @@ class Component(object):
             self.accounting_code = accounting_code
         if event_based_billing_metric_id is not APIHelper.SKIP:
             self.event_based_billing_metric_id = event_based_billing_metric_id
+        if metering_meter_id is not APIHelper.SKIP:
+            self.metering_meter_id = metering_meter_id
         if interval is not APIHelper.SKIP:
             self.interval = interval
         if interval_unit is not APIHelper.SKIP:
             self.interval_unit = interval_unit
         if unspsc_code is not APIHelper.SKIP:
             self.unspsc_code = unspsc_code
+        if features is not APIHelper.SKIP:
+            self.features = features
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -360,15 +388,15 @@ class Component(object):
                 else APIHelper.SKIP
         product_family_id =\
             dictionary.get("product_family_id")\
-            if dictionary.get("product_family_id")\
+            if "product_family_id" in dictionary.keys()\
                 else APIHelper.SKIP
         product_family_name =\
             dictionary.get("product_family_name")\
-            if dictionary.get("product_family_name")\
+            if "product_family_name" in dictionary.keys()\
                 else APIHelper.SKIP
         product_family_handle =\
             dictionary.get("product_family_handle")\
-            if dictionary.get("product_family_handle")\
+            if "product_family_handle" in dictionary.keys()\
                 else APIHelper.SKIP
         price_per_unit_in_cents =\
             dictionary.get("price_per_unit_in_cents")\
@@ -473,6 +501,10 @@ class Component(object):
             dictionary.get("event_based_billing_metric_id")\
             if dictionary.get("event_based_billing_metric_id")\
                 else APIHelper.SKIP
+        metering_meter_id =\
+            dictionary.get("metering_meter_id")\
+            if dictionary.get("metering_meter_id")\
+                else APIHelper.SKIP
         interval =\
             dictionary.get("interval")\
             if dictionary.get("interval")\
@@ -485,6 +517,13 @@ class Component(object):
             dictionary.get("unspsc_code")\
             if "unspsc_code" in dictionary.keys()\
                 else APIHelper.SKIP
+        if "features" in dictionary.keys():
+            features = [
+                FeatureCatalogItem.from_dictionary(x)
+                for x in dictionary.get("features")
+            ] if dictionary.get("features") else None
+        else:
+            features = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -524,9 +563,11 @@ class Component(object):
                    use_site_exchange_rate,
                    accounting_code,
                    event_based_billing_metric_id,
+                   metering_meter_id,
                    interval,
                    interval_unit,
                    unspsc_code,
+                   features,
                    additional_properties)
 
     def __repr__(self):
@@ -696,6 +737,11 @@ class Component(object):
             if hasattr(self, "event_based_billing_metric_id")
             else None
         )
+        _metering_meter_id=(
+            self.metering_meter_id
+            if hasattr(self, "metering_meter_id")
+            else None
+        )
         _interval=(
             self.interval
             if hasattr(self, "interval")
@@ -709,6 +755,11 @@ class Component(object):
         _unspsc_code=(
             self.unspsc_code
             if hasattr(self, "unspsc_code")
+            else None
+        )
+        _features=(
+            self.features
+            if hasattr(self, "features")
             else None
         )
         _additional_properties=self.additional_properties
@@ -747,9 +798,11 @@ class Component(object):
             f"use_site_exchange_rate={_use_site_exchange_rate!r}, "
             f"accounting_code={_accounting_code!r}, "
             f"event_based_billing_metric_id={_event_based_billing_metric_id!r}, "
+            f"metering_meter_id={_metering_meter_id!r}, "
             f"interval={_interval!r}, "
             f"interval_unit={_interval_unit!r}, "
             f"unspsc_code={_unspsc_code!r}, "
+            f"features={_features!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -921,6 +974,11 @@ class Component(object):
             if hasattr(self, "event_based_billing_metric_id")
             else None
         )
+        _metering_meter_id=(
+            self.metering_meter_id
+            if hasattr(self, "metering_meter_id")
+            else None
+        )
         _interval=(
             self.interval
             if hasattr(self, "interval")
@@ -934,6 +992,11 @@ class Component(object):
         _unspsc_code=(
             self.unspsc_code
             if hasattr(self, "unspsc_code")
+            else None
+        )
+        _features=(
+            self.features
+            if hasattr(self, "features")
             else None
         )
         _additional_properties=self.additional_properties
@@ -972,9 +1035,11 @@ class Component(object):
             f"use_site_exchange_rate={_use_site_exchange_rate!s}, "
             f"accounting_code={_accounting_code!s}, "
             f"event_based_billing_metric_id={_event_based_billing_metric_id!s}, "
+            f"metering_meter_id={_metering_meter_id!s}, "
             f"interval={_interval!s}, "
             f"interval_unit={_interval_unit!s}, "
             f"unspsc_code={_unspsc_code!s}, "
+            f"features={_features!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )
