@@ -68,8 +68,8 @@ class ProformaInvoice(object):
             contents are composed of invoice segments.  "Parent" invoices do not have
             lines of their own, but they have subtotals and totals which aggregate
             the member invoice segments.  See also the [invoice consolidation
-            documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269909389-
-            Invoice-Consolidation).
+            documentation](https://docs.maxio.com/billing/invoicing/working-with-invoi
+            ces/understand-invoice-consolidation).
         product_name (str): The model property of type str.
         product_family_name (str): The model property of type str.
         role (ProformaInvoiceRole): 'proforma' value is deprecated in favor of

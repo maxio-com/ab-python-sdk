@@ -40,16 +40,17 @@ class SubscriptionState(object):
     to take manual action when needed.
         * `unpaid` - Indicates an unpaid subscription. A subscription is marked
     unpaid if the retry period expires and you have configured your
-    [Dunning](https://maxio.zendesk.com/hc/en-us/articles/24287076583565-Dunning-Overv
-    iew) settings to have a Final Action of `mark the subscription unpaid`.
+    [Dunning](https://docs.maxio.com/billing/subscriptions/dunning/overview/understand
+    ing-how-dunning-works) settings to have a Final Action of `mark the subscription
+    unpaid`.
     * **End of Life States**
         * `canceled` - Indicates a canceled subscription. This may happen at your
     request (via the API or the web interface) or due to the expiration of the
-    [Dunning](https://maxio.zendesk.com/hc/en-us/articles/24287076583565-Dunning-Overv
-    iew) process without payment. See the
-    [Reactivation](https://maxio.zendesk.com/hc/en-us/articles/24252109503629-Reactiva
-    ting-and-Resuming) documentation for info on how to restart a canceled
-    subscription.
+    [Dunning](https://docs.maxio.com/billing/subscriptions/dunning/overview/understand
+    ing-how-dunning-works) process without payment. See the
+    [Reactivation](https://docs.maxio.com/billing/subscriptions/management/state-manag
+    ement/understand-reactivation-and-resume-scenarios) documentation for info on how
+    to restart a canceled subscription.
         While a subscription is canceled, its period will not advance, it will not
     accrue any new charges, and Advanced Billing will not attempt to collect the
     overdue balance.
@@ -68,11 +69,12 @@ class SubscriptionState(object):
         * `trial_ended` - A subscription in a trial_ended state is a subscription
     that completed a no-obligation trial and did not have a card on file at the
     expiration of the trial period. See [Product Pricing – No Obligation
-    Trials](https://maxio.zendesk.com/hc/en-us/articles/24261076617869-Product-Editing
-    ) for more details.
+    Trials](https://docs.maxio.com/billing/catalog/plans/creating-plans) for more
+    details.
     See [Subscription
-    States](https://maxio.zendesk.com/hc/en-us/articles/24252119027853-Subscription-St
-    ates) for more info about subscription states and state transitions.
+    States](https://docs.maxio.com/billing/subscriptions/management/subscription-state
+    s/understand-subscription-states) for more info about subscription states and
+    state transitions.
 
     Attributes:
         PENDING: The enum member of type str.

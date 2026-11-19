@@ -12,7 +12,9 @@ class ComponentCurrencyPrice(object):
     """Implementation of the 'Component Currency Price' model.
 
     Attributes:
-        id (int): The model property of type int.
+        id (int): The ID of the stored currency price. This is `null` when the price
+            point uses the site exchange rate (`use_site_exchange_rate: true`),
+            because the price is calculated from the rate and is not stored.
         currency (str): The model property of type str.
         price (str): The model property of type str.
         formatted_price (str): The model property of type str.
@@ -40,6 +42,10 @@ class ComponentCurrencyPrice(object):
         "formatted_price",
         "price_id",
         "price_point_id",
+    ]
+
+    _nullables = [
+        "id",
     ]
 
     def __init__(
@@ -91,7 +97,7 @@ class ComponentCurrencyPrice(object):
         # Extract variables from the dictionary
         id =\
             dictionary.get("id")\
-            if dictionary.get("id")\
+            if "id" in dictionary.keys()\
                 else APIHelper.SKIP
         currency =\
             dictionary.get("currency")\
@@ -126,6 +132,27 @@ class ComponentCurrencyPrice(object):
                    price_id,
                    price_point_id,
                    additional_properties)
+
+    @classmethod
+    def validate(cls, dictionary):
+        """Validate dictionary against class required properties
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            boolean : if dictionary is valid contains required properties.
+
+        """
+        if isinstance(dictionary, cls):
+            return True
+
+        if not isinstance(dictionary, dict):
+            return False
+
+        return True
 
     def __repr__(self):
         """Return a unambiguous string representation."""

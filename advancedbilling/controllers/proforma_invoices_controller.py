@@ -553,6 +553,13 @@ class ProformaInvoicesController(BaseController):
         requirements. We recommend associating the proforma invoice with a
         customer_id to easily find their proforma invoices, since the subscription_id
         will always be blank.
+        ## Segment-Level Custom Pricing
+        When a component's `custom_price` includes `segments`, this endpoint
+        validates them with the same rules as [Create
+        Subscription]($e/Subscriptions/createSubscription) and returns the same `422
+        Unprocessable Entity` errors. No segment rates are persisted. Valid segment
+        rates do not change the totals returned here, because no usage has been
+        recorded for a subscription that is only being signed up.
 
         Args:
             body (CreateSubscriptionRequest, optional): The request body parameter.
@@ -612,6 +619,13 @@ class ProformaInvoicesController(BaseController):
         shipping or billing address.
         A product and customer first name, last name, and email are the minimum
         requirements.
+        ## Segment-Level Custom Pricing
+        When a component's `custom_price` includes `segments`, this endpoint
+        validates them with the same rules as [Create
+        Subscription]($e/Subscriptions/createSubscription) and returns the same `422
+        Unprocessable Entity` errors. No segment rates are persisted. Valid segment
+        rates do not change the totals returned here, because no usage has been
+        recorded for a subscription that is only being signed up.
 
         Args:
             include (CreateSignupProformaPreviewInclude, optional): Choose to include

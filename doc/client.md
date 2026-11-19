@@ -60,17 +60,21 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | advance_invoice | Gets AdvanceInvoiceController |
 | billing_portal | Gets BillingPortalController |
 | coupons | Gets CouponsController |
+| component_features | Gets ComponentFeaturesController |
 | components | Gets ComponentsController |
 | component_price_points | Gets ComponentPricePointsController |
 | customers | Gets CustomersController |
 | custom_fields | Gets CustomFieldsController |
+| entitlements | Gets EntitlementsController |
 | events | Gets EventsController |
 | events_based_billing_segments | Gets EventsBasedBillingSegmentsController |
+| feature_templates | Gets FeatureTemplatesController |
 | insights | Gets InsightsController |
 | invoices | Gets InvoicesController |
 | offers | Gets OffersController |
 | payment_profiles | Gets PaymentProfilesController |
 | product_families | Gets ProductFamiliesController |
+| product_features | Gets ProductFeaturesController |
 | products | Gets ProductsController |
 | product_price_points | Gets ProductPricePointsController |
 | proforma_invoices | Gets ProformaInvoicesController |
@@ -88,5 +92,10 @@ The gateway for the SDK. This class acts as a factory for the Controllers and al
 | subscription_products | Gets SubscriptionProductsController |
 | subscription_renewals | Gets SubscriptionRenewalsController |
 | subscription_status | Gets SubscriptionStatusController |
+| wallets | Gets WalletsController |
+| wallet_transactions | Gets WalletTransactionsController |
+| wallet_adjustments | Gets WalletAdjustmentsController |
+| wallet_purchases | Gets WalletPurchasesController |
+| wallet_products | Gets WalletProductsController |
 | webhooks | Gets WebhooksController |
 

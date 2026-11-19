@@ -47,9 +47,9 @@ class SubscriptionNotesController(BaseController):
         If you have structured data such as birth date, color, etc., consider using
         [Metadata]($e/Custom%20Fields/createMetadata) instead.
         For more information, see [Adding
-        Notes](https://docs.maxio.com/hc/en-us/articles/24251654953997-Understanding-t
-        he-Subscription-Summary-Page#billing-portal-status:~:text=documentation%20for%
-        20more.-,Adding%20Notes,-Notes%20are%20optional) in the product documentation.
+        Notes](https://docs.maxio.com/getting-started/maxio-platform-basics/advanced-b
+        illing-overview-and-resources/subscription-summary-tabs/understanding-the-subs
+        cription-summary-page#adding-notes) in the product documentation.
 
         Args:
             subscription_id (int): The Chargify id of the subscription.

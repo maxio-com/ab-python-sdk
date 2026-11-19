@@ -1,5 +1,9 @@
 # Products
 
+The Product object defines what you sell, including default pricing, billing interval, and trial configuration. With the new catalog experience, the UI labels products as Plans, while the API keeps the product name. See [Catalog terminology](https://docs.maxio.com/billing/catalog/overview/using-the-new-product-catalog#catalog-terminology).
+
+Products are grouped under a Product Family and are the base type a customer subscribes to. Products can also grant features to subscribers through [Create Product Feature Catalog Item](../../doc/controllers/product-features.md#create-product-feature). For more information, see [Understand Plans](https://docs.maxio.com/billing/catalog/plans/understand-plans).
+
 ```python
 products_controller = client.products
 ```
@@ -26,8 +30,8 @@ If you have the new [Catalog experience](page:help/announcements/2026-announceme
 
 For more information, see:
 
-+ [Products Overview](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-Overview)
-+ [Changing a Subscription's Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-Product-Changes-and-Migrations)
++ [Products Overview](https://docs.maxio.com/billing/catalog/plans/understand-plans)
++ [Changing a Subscription's Product](https://docs.maxio.com/billing/subscriptions/management/subscription-actions/understand-upgrade-and-downgrade-scenarios)
 
 ```python
 def create_product(self,
@@ -141,7 +145,8 @@ Reads the current details of a product.
 
 ```python
 def read_product(self,
-                product_id)
+                product_id,
+                include_features=False)
 ```
 
 ## Authentication
@@ -153,6 +158,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `product_id` | `int` | Template, Required | The Advanced Billing id of the product |
+| `include_features` | `bool` | Query, Optional | When `true`, embeds the active feature catalog items for each result in a `features` array. Default value is `false`. Ignored on sites without Entitlements enabled: no `features` key is returned and no error is raised.<br><br>**Default**: `False` |
 
 ## Response Type
 
@@ -165,7 +171,12 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 ```python
 product_id = 202
 
-result = products_controller.read_product(product_id)
+include_features = False
+
+result = products_controller.read_product(
+    product_id,
+    include_features=include_features
+)
 print(result)
 ```
 
@@ -528,6 +539,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | `per_page` | `int` | Query, Optional | This parameter indicates how many records to fetch in each request. Default value is 20. The maximum allowed values is 200; any per_page value over 200 will be changed to 200.<br>Use in query `per_page=200`.<br><br>**Default**: `20`<br><br>**Constraints**: `<= 200` |
 | `include_archived` | `bool` | Query, Optional | Include archived products. Use in query: `include_archived=true`. |
 | `include` | [`ListProductsInclude`](../../doc/models/list-products-include.md) | Query, Optional | Allows including additional data in the response. Use in query `include=prepaid_product_price_point`. |
+| `include_features` | `bool` | Query, Optional | When `true`, embeds the active feature catalog items for each result in a `features` array. Default value is `false`. Ignored on sites without Entitlements enabled: no `features` key is returned and no error is raised.<br><br>**Default**: `False` |
 
 ## Response Type
 
@@ -550,7 +562,8 @@ collect = {
     'page': 1,
     'per_page': 50,
     'include_archived': True,
-    'include': ListProductsInclude.PREPAID_PRODUCT_PRICE_POINT
+    'include': ListProductsInclude.PREPAID_PRODUCT_PRICE_POINT,
+    'include_features': False
 }
 result = products_controller.list_products(collect)
 print(result)

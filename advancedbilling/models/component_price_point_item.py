@@ -7,6 +7,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 # ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.price import Price
+from advancedbilling.models.secondary_pricing import (
+    SecondaryPricing,
+)
 
 
 class ComponentPricePointItem(object):
@@ -27,6 +30,12 @@ class ComponentPricePointItem(object):
             this component price point, either month or day. This property is only
             available for sites with Multifrequency enabled.
         prices (List[Price]): The model property of type List[Price].
+        secondary_pricing (SecondaryPricing): Hybrid Pricing only. Applies only to
+            price points of Quantity-Based and Metered Components on Sites with
+            Hybrid Pricing enabled; ignored for other component types and on Sites
+            without Hybrid Pricing. Omit it to create a normal, non-hybrid price
+            point. See [Hybrid
+            Pricing](page:introduction/basic-concepts/hybrid-pricing).
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -40,6 +49,7 @@ class ComponentPricePointItem(object):
         "interval": "interval",
         "interval_unit": "interval_unit",
         "prices": "prices",
+        "secondary_pricing": "secondary_pricing",
     }
 
     _optionals = [
@@ -49,6 +59,7 @@ class ComponentPricePointItem(object):
         "interval",
         "interval_unit",
         "prices",
+        "secondary_pricing",
     ]
 
     _nullables = [
@@ -63,6 +74,7 @@ class ComponentPricePointItem(object):
         interval=APIHelper.SKIP,
         interval_unit=APIHelper.SKIP,
         prices=APIHelper.SKIP,
+        secondary_pricing=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a ComponentPricePointItem instance."""
         # Initialize members of the class
@@ -78,6 +90,8 @@ class ComponentPricePointItem(object):
             self.interval_unit = interval_unit
         if prices is not APIHelper.SKIP:
             self.prices = prices
+        if secondary_pricing is not APIHelper.SKIP:
+            self.secondary_pricing = secondary_pricing
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -130,6 +144,11 @@ class ComponentPricePointItem(object):
             ]
         else:
             prices = APIHelper.SKIP
+        secondary_pricing =\
+            SecondaryPricing.from_dictionary(
+                dictionary.get("secondary_pricing"))\
+                if "secondary_pricing" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -142,6 +161,7 @@ class ComponentPricePointItem(object):
                    interval,
                    interval_unit,
                    prices,
+                   secondary_pricing,
                    additional_properties)
 
     @classmethod
@@ -197,6 +217,11 @@ class ComponentPricePointItem(object):
             if hasattr(self, "prices")
             else None
         )
+        _secondary_pricing=(
+            self.secondary_pricing
+            if hasattr(self, "secondary_pricing")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -206,6 +231,7 @@ class ComponentPricePointItem(object):
             f"interval={_interval!r}, "
             f"interval_unit={_interval_unit!r}, "
             f"prices={_prices!r}, "
+            f"secondary_pricing={_secondary_pricing!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -242,6 +268,11 @@ class ComponentPricePointItem(object):
             if hasattr(self, "prices")
             else None
         )
+        _secondary_pricing=(
+            self.secondary_pricing
+            if hasattr(self, "secondary_pricing")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -251,6 +282,7 @@ class ComponentPricePointItem(object):
             f"interval={_interval!s}, "
             f"interval_unit={_interval_unit!s}, "
             f"prices={_prices!s}, "
+            f"secondary_pricing={_secondary_pricing!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

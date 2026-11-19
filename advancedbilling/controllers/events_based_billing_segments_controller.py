@@ -26,11 +26,8 @@ from advancedbilling.exceptions.api_exception import (
 from advancedbilling.exceptions.event_based_billing_list_segments_errors_exception import (  # noqa: E501
     EventBasedBillingListSegmentsErrorsException,
 )
-from advancedbilling.exceptions.event_based_billing_segment_errors_exception import (
-    EventBasedBillingSegmentErrorsException,
-)
-from advancedbilling.exceptions.event_based_billing_segment_exception import (
-    EventBasedBillingSegmentException,
+from advancedbilling.exceptions.event_based_billing_segment_write_error_response_exception import (  # noqa: E501
+    EventBasedBillingSegmentWriteErrorResponseException,
 )
 from advancedbilling.http.http_method_enum import (
     HttpMethodEnum,
@@ -63,6 +60,14 @@ class EventsBasedBillingSegmentsController(BaseController):
         properties defined.
         You may specify component and/or price point by using either the numeric ID
         or the `handle:gold` syntax.
+        ## Custom Price Points
+        This endpoint changes segments on catalog price points only. If the price
+        point is a subscription's custom price point, the request returns `422
+        Unprocessable Entity` with a `price_point` error such as "Segments on a
+        subscription's custom price point can't be changed here. Set them with
+        custom_price on the subscription or component endpoints.", and nothing is
+        saved. To change a subscription's segment rates, send `custom_price.segments`
+        to [Update Subscription]($e/Subscriptions/updateSubscription).
 
         Args:
             component_id (str): ID or Handle for the Component
@@ -111,7 +116,7 @@ class EventsBasedBillingSegmentsController(BaseController):
             .local_error_template("422",
                 "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
                 "nse.body}'.",
-                EventBasedBillingSegmentErrorsException),
+                EventBasedBillingSegmentWriteErrorResponseException),
         ).execute()
 
     def list_segments_for_price_point(self,
@@ -125,6 +130,13 @@ class EventsBasedBillingSegmentsController(BaseController):
         `200` at most.
         You may specify component and/or price point by using either the numeric ID
         or the `handle:gold` syntax.
+        ## Subscription Segment Rates
+        This endpoint also returns the segments of a subscription's custom price
+        point, including segment rates set through `custom_price.segments` on [Create
+        Subscription]($e/Subscriptions/createSubscription) or [Update
+        Subscription]($e/Subscriptions/updateSubscription). Use the subscription
+        component's `price_point_id`, available from [Read Subscription
+        Component]($e/Subscription%20Components/readSubscriptionComponent).
 
         Args:
             options (dict, optional): Key-value pairs for any of the parameters to
@@ -149,6 +161,10 @@ class EventsBasedBillingSegmentsController(BaseController):
                         changed to 200. Use in query `per_page=200`.
                     filter -- ListSegmentsFilter -- Filter to use for List Segments
                         for a Price Point operation
+                    currency_prices -- bool -- (Optional) If you have defined
+                        multiple currencies at the site level, pass `true` to include
+                        each segment's `currency_prices` in the response. Use in
+                        query: `currency_prices=true`.
 
         Returns:
             ListSegmentsResponse: Response from the API. OK
@@ -182,6 +198,9 @@ class EventsBasedBillingSegmentsController(BaseController):
             .query_param(Parameter()
                 .key("filter")
                 .value(options.get("filter", None)))
+            .query_param(Parameter()
+                .key("currency_prices")
+                .value(options.get("currency_prices", None)))
             .header_param(Parameter()
                 .key("accept")
                 .value("application/json"))
@@ -210,6 +229,15 @@ class EventsBasedBillingSegmentsController(BaseController):
         also update the pricing for the segment.
         You can specify component and/or price point by using either the numeric ID
         or the `handle:gold` syntax.
+        ## Custom Price Points
+        This endpoint changes segments on catalog price points only. If the segment
+        belongs to a subscription's custom price point, or the `price_point_id` in
+        the URL names one, the request returns `422 Unprocessable Entity` with a
+        `price_point` error such as "Segments on a subscription's custom price point
+        can't be changed here. Set them with custom_price on the subscription or
+        component endpoints.", and nothing is saved. To change a subscription's
+        segment rates, send `custom_price.segments` to [Update
+        Subscription]($e/Subscriptions/updateSubscription).
 
         Args:
             component_id (str): ID or Handle of the Component
@@ -264,7 +292,7 @@ class EventsBasedBillingSegmentsController(BaseController):
             .local_error_template("422",
                 "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
                 "nse.body}'.",
-                EventBasedBillingSegmentErrorsException),
+                APIException),
         ).execute()
 
     def delete_segment(self,
@@ -277,6 +305,16 @@ class EventsBasedBillingSegmentsController(BaseController):
         Deletes a segment with the specified ID.
         You may specify component and/or price point by using either the numeric ID
         or the `handle:gold` syntax.
+        ## Custom Price Points
+        This endpoint changes segments on catalog price points only. If the segment
+        belongs to a subscription's custom price point, the request returns `422
+        Unprocessable Entity` with a `price_point` error such as "Segments on a
+        subscription's custom price point can't be changed here. Set them with
+        custom_price on the subscription or component endpoints.", and nothing is
+        saved. The check uses the segment's own price point, whichever
+        `price_point_id` the URL names. To change a subscription's segment rates,
+        send `custom_price.segments` to [Update
+        Subscription]($e/Subscriptions/updateSubscription).
 
         Args:
             component_id (str): ID or Handle of the Component
@@ -330,6 +368,14 @@ class EventsBasedBillingSegmentsController(BaseController):
         in the array.
         You may specify component and/or price point by using either the numeric ID
         or the `handle:gold` syntax.
+        ## Custom Price Points
+        This endpoint changes segments on catalog price points only. If the price
+        point is a subscription's custom price point, the request returns `422
+        Unprocessable Entity` with a `price_point` error such as "Segments on a
+        subscription's custom price point can't be changed here. Set them with
+        custom_price on the subscription or component endpoints.", and nothing is
+        saved. To change a subscription's segment rates, send `custom_price.segments`
+        to [Update Subscription]($e/Subscriptions/updateSubscription).
 
         Args:
             component_id (str): ID or Handle for the Component
@@ -378,7 +424,7 @@ class EventsBasedBillingSegmentsController(BaseController):
             .local_error_template("422",
                 "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
                 "nse.body}'.",
-                EventBasedBillingSegmentException),
+                APIException),
         ).execute()
 
     def bulk_update_segments(self,
@@ -396,6 +442,14 @@ class EventsBasedBillingSegmentsController(BaseController):
         in the array.
         You may specify component and/or price point by using either the numeric ID
         or the `handle:gold` syntax.
+        ## Custom Price Points
+        This endpoint changes segments on catalog price points only. If the price
+        point is a subscription's custom price point, the request returns `422
+        Unprocessable Entity` with a `price_point` error such as "Segments on a
+        subscription's custom price point can't be changed here. Set them with
+        custom_price on the subscription or component endpoints.", and nothing is
+        saved. To change a subscription's segment rates, send `custom_price.segments`
+        to [Update Subscription]($e/Subscriptions/updateSubscription).
 
         Args:
             component_id (str): ID or Handle for the Component
@@ -444,5 +498,5 @@ class EventsBasedBillingSegmentsController(BaseController):
             .local_error_template("422",
                 "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
                 "nse.body}'.",
-                EventBasedBillingSegmentException),
+                APIException),
         ).execute()

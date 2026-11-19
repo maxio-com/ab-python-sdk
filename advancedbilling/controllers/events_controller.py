@@ -48,8 +48,8 @@ class EventsController(BaseController):
         are not created due to errors.
         Within the UI, Events are referred to as Site Activity. For more information,
         see [Site
-        Activity](https://maxio.zendesk.com/hc/en-us/articles/24250671733517-Site-Acti
-        vity).
+        Activity](https://docs.maxio.com/configuration/advanced-billing/sites/site-act
+        ivity).
         Use query string filters to narrow down results. You can use the `filter`
         parameter to filter by event key.
         ### Legacy Filters

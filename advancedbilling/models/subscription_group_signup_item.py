@@ -34,6 +34,13 @@ class SubscriptionGroupSignupItem(object):
             Chargify ID of the offer or its handle prefixed with `handle:`.
         reference (str): The reference value (provided by your app) for the
             subscription itself.
+        customer_id (int): (Optional) The ID of the customer the subscription belongs
+            to. The customer must be the payer or a customer below the payer in the
+            customer hierarchy. If you omit both `customer_id` and
+            `customer_reference`, the subscription belongs to the payer.
+        customer_reference (str): (Optional) The reference of the customer the
+            subscription belongs to, matched case-insensitively. Use in place of
+            `customer_id`. If you pass both, `customer_id` is used.
         primary (bool): One of the subscriptions must be marked as primary in the
             group.
         currency (str): (Optional) If Multi-Currency is enabled and the currency is
@@ -66,6 +73,8 @@ class SubscriptionGroupSignupItem(object):
         "product_price_point_handle": "product_price_point_handle",
         "offer_id": "offer_id",
         "reference": "reference",
+        "customer_id": "customer_id",
+        "customer_reference": "customer_reference",
         "primary": "primary",
         "currency": "currency",
         "coupon_codes": "coupon_codes",
@@ -82,6 +91,8 @@ class SubscriptionGroupSignupItem(object):
         "product_price_point_handle",
         "offer_id",
         "reference",
+        "customer_id",
+        "customer_reference",
         "primary",
         "currency",
         "coupon_codes",
@@ -99,6 +110,8 @@ class SubscriptionGroupSignupItem(object):
         product_price_point_handle=APIHelper.SKIP,
         offer_id=APIHelper.SKIP,
         reference=APIHelper.SKIP,
+        customer_id=APIHelper.SKIP,
+        customer_reference=APIHelper.SKIP,
         primary=APIHelper.SKIP,
         currency=APIHelper.SKIP,
         coupon_codes=APIHelper.SKIP,
@@ -121,6 +134,10 @@ class SubscriptionGroupSignupItem(object):
             self.offer_id = offer_id
         if reference is not APIHelper.SKIP:
             self.reference = reference
+        if customer_id is not APIHelper.SKIP:
+            self.customer_id = customer_id
+        if customer_reference is not APIHelper.SKIP:
+            self.customer_reference = customer_reference
         if primary is not APIHelper.SKIP:
             self.primary = primary
         if currency is not APIHelper.SKIP:
@@ -183,6 +200,14 @@ class SubscriptionGroupSignupItem(object):
             dictionary.get("reference")\
             if dictionary.get("reference")\
                 else APIHelper.SKIP
+        customer_id =\
+            dictionary.get("customer_id")\
+            if dictionary.get("customer_id")\
+                else APIHelper.SKIP
+        customer_reference =\
+            dictionary.get("customer_reference")\
+            if dictionary.get("customer_reference")\
+                else APIHelper.SKIP
         primary =\
             dictionary.get("primary")\
             if "primary" in dictionary.keys()\
@@ -229,6 +254,8 @@ class SubscriptionGroupSignupItem(object):
                    product_price_point_handle,
                    offer_id,
                    reference,
+                   customer_id,
+                   customer_reference,
                    primary,
                    currency,
                    coupon_codes,
@@ -291,6 +318,16 @@ class SubscriptionGroupSignupItem(object):
             if hasattr(self, "reference")
             else None
         )
+        _customer_id=(
+            self.customer_id
+            if hasattr(self, "customer_id")
+            else None
+        )
+        _customer_reference=(
+            self.customer_reference
+            if hasattr(self, "customer_reference")
+            else None
+        )
         _primary=(
             self.primary
             if hasattr(self, "primary")
@@ -335,6 +372,8 @@ class SubscriptionGroupSignupItem(object):
             f"product_price_point_handle={_product_price_point_handle!r}, "
             f"offer_id={_offer_id!r}, "
             f"reference={_reference!r}, "
+            f"customer_id={_customer_id!r}, "
+            f"customer_reference={_customer_reference!r}, "
             f"primary={_primary!r}, "
             f"currency={_currency!r}, "
             f"coupon_codes={_coupon_codes!r}, "
@@ -376,6 +415,16 @@ class SubscriptionGroupSignupItem(object):
         _reference=(
             self.reference
             if hasattr(self, "reference")
+            else None
+        )
+        _customer_id=(
+            self.customer_id
+            if hasattr(self, "customer_id")
+            else None
+        )
+        _customer_reference=(
+            self.customer_reference
+            if hasattr(self, "customer_reference")
             else None
         )
         _primary=(
@@ -422,6 +471,8 @@ class SubscriptionGroupSignupItem(object):
             f"product_price_point_handle={_product_price_point_handle!s}, "
             f"offer_id={_offer_id!s}, "
             f"reference={_reference!s}, "
+            f"customer_id={_customer_id!s}, "
+            f"customer_reference={_customer_reference!s}, "
             f"primary={_primary!s}, "
             f"currency={_currency!s}, "
             f"coupon_codes={_coupon_codes!s}, "

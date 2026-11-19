@@ -14,8 +14,8 @@ class PaidInvoice(object):
     Attributes:
         invoice_id (str): The uid of the paid invoice
         status (InvoiceStatus): The current status of the invoice. See [Invoice
-            Statuses](https://maxio.zendesk.com/hc/en-us/articles/24252287829645-Advan
-            ced-Billing-Invoices-Overview#invoice-statuses) for more.
+            Statuses](https://docs.maxio.com/billing/invoicing/overview/understand-how
+            -invoices-are-generated#invoice-statuses) for more.
         due_amount (str): The remaining due amount on the invoice
         paid_amount (str): The total amount paid on this invoice (including any prior
             payments)

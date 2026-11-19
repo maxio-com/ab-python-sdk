@@ -70,11 +70,11 @@ class CustomFieldsController(BaseController):
         - Metafield is the custom field
         - Metadata is the data populating the custom field.
         See [Custom Fields
-        Reference](https://docs.maxio.com/hc/en-us/articles/24266140850573-Custom-Fiel
-        ds-Reference) and [Custom Fields
-        Tab](https://maxio.zendesk.com/hc/en-us/articles/24251701302925-Subscription-S
-        ummary-Custom-Fields-Tab) for information on using Custom Fields in the
-        Advanced Billing UI.
+        Reference](https://docs.maxio.com/configuration/advanced-billing/custom-fields
+        /configure-custom-fields) and [Custom Fields
+        Tab](https://docs.maxio.com/getting-started/maxio-platform-basics/advanced-bil
+        ling-overview-and-resources/subscription-summary-tabs/viewing-and-editing-cust
+        om-fields) for information on using Custom Fields in the Advanced Billing UI.
 
         Args:
             resource_type (ResourceType): The resource type to which the metafields

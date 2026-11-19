@@ -18,9 +18,10 @@ class SubscriptionGroupSignupError(object):
     """Implementation of the 'Subscription Group Signup Error' model.
 
     Attributes:
-        subscriptions (Dict[str, SubscriptionGroupSubscriptionError]): Object that as
-            key have subscription position in request subscriptions array and as
-            value subscription errors object.
+        subscriptions (Dict[str, SubscriptionGroupSubscriptionError]): Subscription
+            errors keyed by the subscription's `reference` from the request, or by
+            its zero-based position in the `subscriptions` array when it has no
+            reference.
         payer_reference (str): The model property of type str.
         payer (PayerError): The model property of type PayerError.
         subscription_group (List[str]): The model property of type List[str].

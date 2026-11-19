@@ -27,6 +27,8 @@
 | `net_terms` | [`NetTerms`](../../doc/models/net-terms.md) | Optional | - |
 | `multi_frequency_enabled` | `bool` | Optional | Whether the site has the multi-frequency billing feature enabled. Only present when relationship invoicing is active. |
 | `auto_renewals_enabled` | `bool` | Optional | Whether the auto-renewals feature is enabled for this site. |
+| `list_pricing_enabled` | `bool` | Optional | Indicates whether the site has list vs sales pricing enabled. |
+| `planless_subscriptions_enabled` | `bool` | Optional | Indicates whether the site allows subscriptions without a plan. |
 | `portal_enabled` | `bool` | Optional | Whether the Billing Portal is enabled for this site. |
 | `test` | `bool` | Optional | - |
 

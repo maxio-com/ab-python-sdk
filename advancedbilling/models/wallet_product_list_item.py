@@ -1,0 +1,1078 @@
+"""advanced_billing.
+
+This file was automatically generated for Maxio by APIMATIC v3.0 (
+ https://www.apimatic.io ).
+"""
+
+# ruff: noqa: E501
+from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.component_price import (
+    ComponentPrice,
+)
+from advancedbilling.models.feature_catalog_item import (
+    FeatureCatalogItem,
+)
+from advancedbilling.models.wallet_product_price_point_summary import (
+    WalletProductPricePointSummary,
+)
+from advancedbilling.models.wallet_product_usage_count import (
+    WalletProductUsageCount,
+)
+
+
+class WalletProductListItem(object):
+    """Implementation of the 'Wallet Product List Item' model.
+
+    A Wallet Product as it appears in [List Wallet
+    Products]($e/Wallet%20Products/listWalletProducts): the full Component field set,
+    plus a usage count and a price point summary that only the list response reports.
+
+    Attributes:
+        id (int): The unique ID assigned to the component by Chargify. This ID can be
+            used to fetch the component from the API.
+        name (str): The name of the Component, suitable for display on statements.
+            e.g., Text Messages.
+        handle (str): The component API handle
+        pricing_scheme (PricingScheme): The model property of type PricingScheme.
+        unit_name (str): The name of the unit that the component’s usage is measured
+            in. e.g., message
+        unit_price (str): The amount the customer will be charged per unit. This
+            field is only populated for ‘per_unit’ pricing schemes, otherwise it may
+            be null.
+        product_family_id (int): The id of the Product Family to which the Component
+            belongs. `null` for a Wallet Product, which has no Product Family.
+        product_family_name (str): The name of the Product Family to which the
+            Component belongs. `null` for a Wallet Product, which has no Product
+            Family.
+        product_family_handle (str): The handle of the Product Family to which the
+            Component belongs. `null` for a Wallet Product, which has no Product
+            Family.
+        price_per_unit_in_cents (int): deprecated - use unit_price instead.
+        kind (ComponentKind): A handle for the component type
+        archived (bool): Boolean flag describing whether a component is archived or
+            not.
+        description (str): The description of the component.
+        default_price_point_id (int): The model property of type int.
+        overage_prices (List[ComponentPrice]): Applicable only to prepaid usage
+            components. An array of overage price brackets.
+        prices (List[ComponentPrice]): An array of price brackets. If the component
+            uses the ‘per_unit’ pricing scheme, this array will be empty.
+        price_point_count (int): Count for the number of price points associated with
+            the component
+        price_points_url (str): URL that points to the location to read the existing
+            price points via GET request
+        default_price_point_name (str): The model property of type str.
+        taxable (bool): Boolean flag describing whether a component is taxable or not.
+        tax_code (str): A string representing the tax code related to the component
+            type. This is especially important when using AvaTax to tax based on
+            locale. This attribute has a max length of 25 characters.
+        recurring (bool): The model property of type bool.
+        upgrade_charge (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site setting if
+            one is not provided.
+        downgrade_credit (CreditType): The type of credit to be created when
+            upgrading/downgrading. Defaults to the component and then site setting if
+            one is not provided.
+        created_at (datetime): Timestamp indicating when this component was created
+        updated_at (datetime): Timestamp indicating when this component was updated
+        archived_at (datetime): Timestamp indicating when this component was archived
+        hide_date_range_on_invoice (bool): (Only available on Relationship Invoicing
+            sites) Boolean flag describing if the service date range should show for
+            the component on generated invoices.
+        allow_fractional_quantities (bool): The model property of type bool.
+        item_category (ItemCategory): One of the following: Business Software,
+            Consumer Software, Digital Services, Physical Goods, Other
+        use_site_exchange_rate (bool): The model property of type bool.
+        accounting_code (str): E.g. Internal ID or SKU Number
+        event_based_billing_metric_id (int): (Only for Event Based Components) This
+            is an ID of a metric attached to the component. This metric is used to
+            bill upon collected events.
+        interval (int): The numerical interval. e.g., an interval of ‘30’ coupled
+            with an interval_unit of day would mean this component’s default price
+            point would renew every 30 days. This property is only available for
+            sites with Multifrequency enabled.
+        interval_unit (IntervalUnit): A string representing the interval unit for
+            this component's default price point, either month or day. This property
+            is only available for sites with Multifrequency enabled.
+        unspsc_code (str): (Optional) Custom UNSPSC commodity code for Level 3/CEDP
+            payment data. When set, this value is sent as the commodity code on
+            invoice line items for this component instead of the default derived from
+            item_category.
+        features (List[FeatureCatalogItem]): The active feature catalog items
+            attached to this component. Present only when the request includes
+            `include_features=true`.
+        used_by (WalletProductUsageCount): A rollup of what's using this Wallet
+            Product, for the catalog listing.
+        price_point_summary (WalletProductPricePointSummary): A summary of the Wallet
+            Product's default price point, for rendering a catalog listing without a
+            separate price points call.
+        additional_properties (Dict[str, object]): The additional properties for the
+            model.
+
+    """
+
+    # Create a mapping from Model property names to API property names
+    _names = {
+        "id": "id",
+        "name": "name",
+        "handle": "handle",
+        "pricing_scheme": "pricing_scheme",
+        "unit_name": "unit_name",
+        "unit_price": "unit_price",
+        "product_family_id": "product_family_id",
+        "product_family_name": "product_family_name",
+        "product_family_handle": "product_family_handle",
+        "price_per_unit_in_cents": "price_per_unit_in_cents",
+        "kind": "kind",
+        "archived": "archived",
+        "description": "description",
+        "default_price_point_id": "default_price_point_id",
+        "overage_prices": "overage_prices",
+        "prices": "prices",
+        "price_point_count": "price_point_count",
+        "price_points_url": "price_points_url",
+        "default_price_point_name": "default_price_point_name",
+        "taxable": "taxable",
+        "tax_code": "tax_code",
+        "recurring": "recurring",
+        "upgrade_charge": "upgrade_charge",
+        "downgrade_credit": "downgrade_credit",
+        "created_at": "created_at",
+        "updated_at": "updated_at",
+        "archived_at": "archived_at",
+        "hide_date_range_on_invoice": "hide_date_range_on_invoice",
+        "allow_fractional_quantities": "allow_fractional_quantities",
+        "item_category": "item_category",
+        "use_site_exchange_rate": "use_site_exchange_rate",
+        "accounting_code": "accounting_code",
+        "event_based_billing_metric_id": "event_based_billing_metric_id",
+        "interval": "interval",
+        "interval_unit": "interval_unit",
+        "unspsc_code": "unspsc_code",
+        "features": "features",
+        "used_by": "used_by",
+        "price_point_summary": "price_point_summary",
+    }
+
+    _optionals = [
+        "id",
+        "name",
+        "handle",
+        "pricing_scheme",
+        "unit_name",
+        "unit_price",
+        "product_family_id",
+        "product_family_name",
+        "product_family_handle",
+        "price_per_unit_in_cents",
+        "kind",
+        "archived",
+        "description",
+        "default_price_point_id",
+        "overage_prices",
+        "prices",
+        "price_point_count",
+        "price_points_url",
+        "default_price_point_name",
+        "taxable",
+        "tax_code",
+        "recurring",
+        "upgrade_charge",
+        "downgrade_credit",
+        "created_at",
+        "updated_at",
+        "archived_at",
+        "hide_date_range_on_invoice",
+        "allow_fractional_quantities",
+        "item_category",
+        "use_site_exchange_rate",
+        "accounting_code",
+        "event_based_billing_metric_id",
+        "interval",
+        "interval_unit",
+        "unspsc_code",
+        "features",
+        "used_by",
+        "price_point_summary",
+    ]
+
+    _nullables = [
+        "handle",
+        "pricing_scheme",
+        "unit_price",
+        "product_family_id",
+        "product_family_name",
+        "product_family_handle",
+        "price_per_unit_in_cents",
+        "description",
+        "default_price_point_id",
+        "overage_prices",
+        "prices",
+        "price_points_url",
+        "tax_code",
+        "upgrade_charge",
+        "downgrade_credit",
+        "archived_at",
+        "item_category",
+        "use_site_exchange_rate",
+        "accounting_code",
+        "interval_unit",
+        "unspsc_code",
+        "features",
+    ]
+
+    def __init__(
+        self,
+        id=APIHelper.SKIP,
+        name=APIHelper.SKIP,
+        handle=APIHelper.SKIP,
+        pricing_scheme=APIHelper.SKIP,
+        unit_name=APIHelper.SKIP,
+        unit_price=APIHelper.SKIP,
+        product_family_id=APIHelper.SKIP,
+        product_family_name=APIHelper.SKIP,
+        product_family_handle=APIHelper.SKIP,
+        price_per_unit_in_cents=APIHelper.SKIP,
+        kind=APIHelper.SKIP,
+        archived=APIHelper.SKIP,
+        description=APIHelper.SKIP,
+        default_price_point_id=APIHelper.SKIP,
+        overage_prices=APIHelper.SKIP,
+        prices=APIHelper.SKIP,
+        price_point_count=APIHelper.SKIP,
+        price_points_url=APIHelper.SKIP,
+        default_price_point_name=APIHelper.SKIP,
+        taxable=APIHelper.SKIP,
+        tax_code=APIHelper.SKIP,
+        recurring=APIHelper.SKIP,
+        upgrade_charge=APIHelper.SKIP,
+        downgrade_credit=APIHelper.SKIP,
+        created_at=APIHelper.SKIP,
+        updated_at=APIHelper.SKIP,
+        archived_at=APIHelper.SKIP,
+        hide_date_range_on_invoice=APIHelper.SKIP,
+        allow_fractional_quantities=APIHelper.SKIP,
+        item_category=APIHelper.SKIP,
+        use_site_exchange_rate=APIHelper.SKIP,
+        accounting_code=APIHelper.SKIP,
+        event_based_billing_metric_id=APIHelper.SKIP,
+        interval=APIHelper.SKIP,
+        interval_unit=APIHelper.SKIP,
+        unspsc_code=APIHelper.SKIP,
+        features=APIHelper.SKIP,
+        used_by=APIHelper.SKIP,
+        price_point_summary=APIHelper.SKIP,
+        additional_properties=None):
+        """Initialize a WalletProductListItem instance."""
+        # Initialize members of the class
+        if id is not APIHelper.SKIP:
+            self.id = id
+        if name is not APIHelper.SKIP:
+            self.name = name
+        if handle is not APIHelper.SKIP:
+            self.handle = handle
+        if pricing_scheme is not APIHelper.SKIP:
+            self.pricing_scheme = pricing_scheme
+        if unit_name is not APIHelper.SKIP:
+            self.unit_name = unit_name
+        if unit_price is not APIHelper.SKIP:
+            self.unit_price = unit_price
+        if product_family_id is not APIHelper.SKIP:
+            self.product_family_id = product_family_id
+        if product_family_name is not APIHelper.SKIP:
+            self.product_family_name = product_family_name
+        if product_family_handle is not APIHelper.SKIP:
+            self.product_family_handle = product_family_handle
+        if price_per_unit_in_cents is not APIHelper.SKIP:
+            self.price_per_unit_in_cents = price_per_unit_in_cents
+        if kind is not APIHelper.SKIP:
+            self.kind = kind
+        if archived is not APIHelper.SKIP:
+            self.archived = archived
+        if description is not APIHelper.SKIP:
+            self.description = description
+        if default_price_point_id is not APIHelper.SKIP:
+            self.default_price_point_id = default_price_point_id
+        if overage_prices is not APIHelper.SKIP:
+            self.overage_prices = overage_prices
+        if prices is not APIHelper.SKIP:
+            self.prices = prices
+        if price_point_count is not APIHelper.SKIP:
+            self.price_point_count = price_point_count
+        if price_points_url is not APIHelper.SKIP:
+            self.price_points_url = price_points_url
+        if default_price_point_name is not APIHelper.SKIP:
+            self.default_price_point_name = default_price_point_name
+        if taxable is not APIHelper.SKIP:
+            self.taxable = taxable
+        if tax_code is not APIHelper.SKIP:
+            self.tax_code = tax_code
+        if recurring is not APIHelper.SKIP:
+            self.recurring = recurring
+        if upgrade_charge is not APIHelper.SKIP:
+            self.upgrade_charge = upgrade_charge
+        if downgrade_credit is not APIHelper.SKIP:
+            self.downgrade_credit = downgrade_credit
+        if created_at is not APIHelper.SKIP:
+            self.created_at =\
+                 APIHelper.apply_datetime_converter(
+                created_at, APIHelper.RFC3339DateTime)\
+                 if created_at else None
+        if updated_at is not APIHelper.SKIP:
+            self.updated_at =\
+                 APIHelper.apply_datetime_converter(
+                updated_at, APIHelper.RFC3339DateTime)\
+                 if updated_at else None
+        if archived_at is not APIHelper.SKIP:
+            self.archived_at =\
+                 APIHelper.apply_datetime_converter(
+                archived_at, APIHelper.RFC3339DateTime)\
+                 if archived_at else None
+        if hide_date_range_on_invoice is not APIHelper.SKIP:
+            self.hide_date_range_on_invoice = hide_date_range_on_invoice
+        if allow_fractional_quantities is not APIHelper.SKIP:
+            self.allow_fractional_quantities = allow_fractional_quantities
+        if item_category is not APIHelper.SKIP:
+            self.item_category = item_category
+        if use_site_exchange_rate is not APIHelper.SKIP:
+            self.use_site_exchange_rate = use_site_exchange_rate
+        if accounting_code is not APIHelper.SKIP:
+            self.accounting_code = accounting_code
+        if event_based_billing_metric_id is not APIHelper.SKIP:
+            self.event_based_billing_metric_id = event_based_billing_metric_id
+        if interval is not APIHelper.SKIP:
+            self.interval = interval
+        if interval_unit is not APIHelper.SKIP:
+            self.interval_unit = interval_unit
+        if unspsc_code is not APIHelper.SKIP:
+            self.unspsc_code = unspsc_code
+        if features is not APIHelper.SKIP:
+            self.features = features
+        if used_by is not APIHelper.SKIP:
+            self.used_by = used_by
+        if price_point_summary is not APIHelper.SKIP:
+            self.price_point_summary = price_point_summary
+
+        # Add additional model properties to the instance
+        if additional_properties is None:
+            additional_properties = {}
+        self.additional_properties = additional_properties
+
+    @classmethod
+    def from_dictionary(cls,
+                        dictionary):
+        """Create an instance of this model from a dictionary
+
+        Args:
+            dictionary (dictionary): A dictionary representation of the object
+            as obtained from the deserialization of the server's response. The
+            keys MUST match property names in the API description.
+
+        Returns:
+            object: An instance of this structure class.
+
+        """
+        if not isinstance(dictionary, dict) or dictionary is None:
+            return None
+
+        # Extract variables from the dictionary
+        id =\
+            dictionary.get("id")\
+            if dictionary.get("id")\
+                else APIHelper.SKIP
+        name =\
+            dictionary.get("name")\
+            if dictionary.get("name")\
+                else APIHelper.SKIP
+        handle =\
+            dictionary.get("handle")\
+            if "handle" in dictionary.keys()\
+                else APIHelper.SKIP
+        pricing_scheme =\
+            dictionary.get("pricing_scheme")\
+            if "pricing_scheme" in dictionary.keys()\
+                else APIHelper.SKIP
+        unit_name =\
+            dictionary.get("unit_name")\
+            if dictionary.get("unit_name")\
+                else APIHelper.SKIP
+        unit_price =\
+            dictionary.get("unit_price")\
+            if "unit_price" in dictionary.keys()\
+                else APIHelper.SKIP
+        product_family_id =\
+            dictionary.get("product_family_id")\
+            if "product_family_id" in dictionary.keys()\
+                else APIHelper.SKIP
+        product_family_name =\
+            dictionary.get("product_family_name")\
+            if "product_family_name" in dictionary.keys()\
+                else APIHelper.SKIP
+        product_family_handle =\
+            dictionary.get("product_family_handle")\
+            if "product_family_handle" in dictionary.keys()\
+                else APIHelper.SKIP
+        price_per_unit_in_cents =\
+            dictionary.get("price_per_unit_in_cents")\
+            if "price_per_unit_in_cents" in dictionary.keys()\
+                else APIHelper.SKIP
+        kind =\
+            dictionary.get("kind")\
+            if dictionary.get("kind")\
+                else APIHelper.SKIP
+        archived =\
+            dictionary.get("archived")\
+            if "archived" in dictionary.keys()\
+                else APIHelper.SKIP
+        description =\
+            dictionary.get("description")\
+            if "description" in dictionary.keys()\
+                else APIHelper.SKIP
+        default_price_point_id =\
+            dictionary.get("default_price_point_id")\
+            if "default_price_point_id" in dictionary.keys()\
+                else APIHelper.SKIP
+        if "overage_prices" in dictionary.keys():
+            overage_prices = [
+                ComponentPrice.from_dictionary(x)
+                for x in dictionary.get("overage_prices")
+            ] if dictionary.get("overage_prices") else None
+        else:
+            overage_prices = APIHelper.SKIP
+        if "prices" in dictionary.keys():
+            prices = [
+                ComponentPrice.from_dictionary(x)
+                for x in dictionary.get("prices")
+            ] if dictionary.get("prices") else None
+        else:
+            prices = APIHelper.SKIP
+        price_point_count =\
+            dictionary.get("price_point_count")\
+            if dictionary.get("price_point_count")\
+                else APIHelper.SKIP
+        price_points_url =\
+            dictionary.get("price_points_url")\
+            if "price_points_url" in dictionary.keys()\
+                else APIHelper.SKIP
+        default_price_point_name =\
+            dictionary.get("default_price_point_name")\
+            if dictionary.get("default_price_point_name")\
+                else APIHelper.SKIP
+        taxable =\
+            dictionary.get("taxable")\
+            if "taxable" in dictionary.keys()\
+                else APIHelper.SKIP
+        tax_code =\
+            dictionary.get("tax_code")\
+            if "tax_code" in dictionary.keys()\
+                else APIHelper.SKIP
+        recurring =\
+            dictionary.get("recurring")\
+            if "recurring" in dictionary.keys()\
+                else APIHelper.SKIP
+        upgrade_charge =\
+            dictionary.get("upgrade_charge")\
+            if "upgrade_charge" in dictionary.keys()\
+                else APIHelper.SKIP
+        downgrade_credit =\
+            dictionary.get("downgrade_credit")\
+            if "downgrade_credit" in dictionary.keys()\
+                else APIHelper.SKIP
+        created_at = APIHelper.RFC3339DateTime.from_value(
+            dictionary.get("created_at")).datetime\
+            if dictionary.get("created_at") else APIHelper.SKIP
+        updated_at = APIHelper.RFC3339DateTime.from_value(
+            dictionary.get("updated_at")).datetime\
+            if dictionary.get("updated_at") else APIHelper.SKIP
+        if "archived_at" in dictionary.keys():
+            archived_at = APIHelper.RFC3339DateTime.from_value(
+                dictionary.get("archived_at")).datetime\
+                if dictionary.get("archived_at") else None
+
+        else:
+            archived_at = APIHelper.SKIP
+        hide_date_range_on_invoice =\
+            dictionary.get("hide_date_range_on_invoice")\
+            if "hide_date_range_on_invoice" in dictionary.keys()\
+                else APIHelper.SKIP
+        allow_fractional_quantities =\
+            dictionary.get("allow_fractional_quantities")\
+            if "allow_fractional_quantities" in dictionary.keys()\
+                else APIHelper.SKIP
+        item_category =\
+            dictionary.get("item_category")\
+            if "item_category" in dictionary.keys()\
+                else APIHelper.SKIP
+        use_site_exchange_rate =\
+            dictionary.get("use_site_exchange_rate")\
+            if "use_site_exchange_rate" in dictionary.keys()\
+                else APIHelper.SKIP
+        accounting_code =\
+            dictionary.get("accounting_code")\
+            if "accounting_code" in dictionary.keys()\
+                else APIHelper.SKIP
+        event_based_billing_metric_id =\
+            dictionary.get("event_based_billing_metric_id")\
+            if dictionary.get("event_based_billing_metric_id")\
+                else APIHelper.SKIP
+        interval =\
+            dictionary.get("interval")\
+            if dictionary.get("interval")\
+                else APIHelper.SKIP
+        interval_unit =\
+            dictionary.get("interval_unit")\
+            if "interval_unit" in dictionary.keys()\
+                else APIHelper.SKIP
+        unspsc_code =\
+            dictionary.get("unspsc_code")\
+            if "unspsc_code" in dictionary.keys()\
+                else APIHelper.SKIP
+        if "features" in dictionary.keys():
+            features = [
+                FeatureCatalogItem.from_dictionary(x)
+                for x in dictionary.get("features")
+            ] if dictionary.get("features") else None
+        else:
+            features = APIHelper.SKIP
+        used_by =\
+            WalletProductUsageCount.from_dictionary(
+                dictionary.get("used_by"))\
+                if "used_by" in dictionary.keys()\
+                else APIHelper.SKIP
+        price_point_summary =\
+            WalletProductPricePointSummary.from_dictionary(
+                dictionary.get("price_point_summary"))\
+                if "price_point_summary" in dictionary.keys()\
+                else APIHelper.SKIP
+
+        # Clean out expected properties from dictionary
+        additional_properties =\
+            {k: v for k, v in dictionary.items() if k not in cls._names.values()}
+
+        # Return an object of this model
+        return cls(id,
+                   name,
+                   handle,
+                   pricing_scheme,
+                   unit_name,
+                   unit_price,
+                   product_family_id,
+                   product_family_name,
+                   product_family_handle,
+                   price_per_unit_in_cents,
+                   kind,
+                   archived,
+                   description,
+                   default_price_point_id,
+                   overage_prices,
+                   prices,
+                   price_point_count,
+                   price_points_url,
+                   default_price_point_name,
+                   taxable,
+                   tax_code,
+                   recurring,
+                   upgrade_charge,
+                   downgrade_credit,
+                   created_at,
+                   updated_at,
+                   archived_at,
+                   hide_date_range_on_invoice,
+                   allow_fractional_quantities,
+                   item_category,
+                   use_site_exchange_rate,
+                   accounting_code,
+                   event_based_billing_metric_id,
+                   interval,
+                   interval_unit,
+                   unspsc_code,
+                   features,
+                   used_by,
+                   price_point_summary,
+                   additional_properties)
+
+    def __repr__(self):
+        """Return a unambiguous string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _name=(
+            self.name
+            if hasattr(self, "name")
+            else None
+        )
+        _handle=(
+            self.handle
+            if hasattr(self, "handle")
+            else None
+        )
+        _pricing_scheme=(
+            self.pricing_scheme
+            if hasattr(self, "pricing_scheme")
+            else None
+        )
+        _unit_name=(
+            self.unit_name
+            if hasattr(self, "unit_name")
+            else None
+        )
+        _unit_price=(
+            self.unit_price
+            if hasattr(self, "unit_price")
+            else None
+        )
+        _product_family_id=(
+            self.product_family_id
+            if hasattr(self, "product_family_id")
+            else None
+        )
+        _product_family_name=(
+            self.product_family_name
+            if hasattr(self, "product_family_name")
+            else None
+        )
+        _product_family_handle=(
+            self.product_family_handle
+            if hasattr(self, "product_family_handle")
+            else None
+        )
+        _price_per_unit_in_cents=(
+            self.price_per_unit_in_cents
+            if hasattr(self, "price_per_unit_in_cents")
+            else None
+        )
+        _kind=(
+            self.kind
+            if hasattr(self, "kind")
+            else None
+        )
+        _archived=(
+            self.archived
+            if hasattr(self, "archived")
+            else None
+        )
+        _description=(
+            self.description
+            if hasattr(self, "description")
+            else None
+        )
+        _default_price_point_id=(
+            self.default_price_point_id
+            if hasattr(self, "default_price_point_id")
+            else None
+        )
+        _overage_prices=(
+            self.overage_prices
+            if hasattr(self, "overage_prices")
+            else None
+        )
+        _prices=(
+            self.prices
+            if hasattr(self, "prices")
+            else None
+        )
+        _price_point_count=(
+            self.price_point_count
+            if hasattr(self, "price_point_count")
+            else None
+        )
+        _price_points_url=(
+            self.price_points_url
+            if hasattr(self, "price_points_url")
+            else None
+        )
+        _default_price_point_name=(
+            self.default_price_point_name
+            if hasattr(self, "default_price_point_name")
+            else None
+        )
+        _taxable=(
+            self.taxable
+            if hasattr(self, "taxable")
+            else None
+        )
+        _tax_code=(
+            self.tax_code
+            if hasattr(self, "tax_code")
+            else None
+        )
+        _recurring=(
+            self.recurring
+            if hasattr(self, "recurring")
+            else None
+        )
+        _upgrade_charge=(
+            self.upgrade_charge
+            if hasattr(self, "upgrade_charge")
+            else None
+        )
+        _downgrade_credit=(
+            self.downgrade_credit
+            if hasattr(self, "downgrade_credit")
+            else None
+        )
+        _created_at=(
+            self.created_at
+            if hasattr(self, "created_at")
+            else None
+        )
+        _updated_at=(
+            self.updated_at
+            if hasattr(self, "updated_at")
+            else None
+        )
+        _archived_at=(
+            self.archived_at
+            if hasattr(self, "archived_at")
+            else None
+        )
+        _hide_date_range_on_invoice=(
+            self.hide_date_range_on_invoice
+            if hasattr(self, "hide_date_range_on_invoice")
+            else None
+        )
+        _allow_fractional_quantities=(
+            self.allow_fractional_quantities
+            if hasattr(self, "allow_fractional_quantities")
+            else None
+        )
+        _item_category=(
+            self.item_category
+            if hasattr(self, "item_category")
+            else None
+        )
+        _use_site_exchange_rate=(
+            self.use_site_exchange_rate
+            if hasattr(self, "use_site_exchange_rate")
+            else None
+        )
+        _accounting_code=(
+            self.accounting_code
+            if hasattr(self, "accounting_code")
+            else None
+        )
+        _event_based_billing_metric_id=(
+            self.event_based_billing_metric_id
+            if hasattr(self, "event_based_billing_metric_id")
+            else None
+        )
+        _interval=(
+            self.interval
+            if hasattr(self, "interval")
+            else None
+        )
+        _interval_unit=(
+            self.interval_unit
+            if hasattr(self, "interval_unit")
+            else None
+        )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
+        _features=(
+            self.features
+            if hasattr(self, "features")
+            else None
+        )
+        _used_by=(
+            self.used_by
+            if hasattr(self, "used_by")
+            else None
+        )
+        _price_point_summary=(
+            self.price_point_summary
+            if hasattr(self, "price_point_summary")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!r}, "
+            f"name={_name!r}, "
+            f"handle={_handle!r}, "
+            f"pricing_scheme={_pricing_scheme!r}, "
+            f"unit_name={_unit_name!r}, "
+            f"unit_price={_unit_price!r}, "
+            f"product_family_id={_product_family_id!r}, "
+            f"product_family_name={_product_family_name!r}, "
+            f"product_family_handle={_product_family_handle!r}, "
+            f"price_per_unit_in_cents={_price_per_unit_in_cents!r}, "
+            f"kind={_kind!r}, "
+            f"archived={_archived!r}, "
+            f"description={_description!r}, "
+            f"default_price_point_id={_default_price_point_id!r}, "
+            f"overage_prices={_overage_prices!r}, "
+            f"prices={_prices!r}, "
+            f"price_point_count={_price_point_count!r}, "
+            f"price_points_url={_price_points_url!r}, "
+            f"default_price_point_name={_default_price_point_name!r}, "
+            f"taxable={_taxable!r}, "
+            f"tax_code={_tax_code!r}, "
+            f"recurring={_recurring!r}, "
+            f"upgrade_charge={_upgrade_charge!r}, "
+            f"downgrade_credit={_downgrade_credit!r}, "
+            f"created_at={_created_at!r}, "
+            f"updated_at={_updated_at!r}, "
+            f"archived_at={_archived_at!r}, "
+            f"hide_date_range_on_invoice={_hide_date_range_on_invoice!r}, "
+            f"allow_fractional_quantities={_allow_fractional_quantities!r}, "
+            f"item_category={_item_category!r}, "
+            f"use_site_exchange_rate={_use_site_exchange_rate!r}, "
+            f"accounting_code={_accounting_code!r}, "
+            f"event_based_billing_metric_id={_event_based_billing_metric_id!r}, "
+            f"interval={_interval!r}, "
+            f"interval_unit={_interval_unit!r}, "
+            f"unspsc_code={_unspsc_code!r}, "
+            f"features={_features!r}, "
+            f"used_by={_used_by!r}, "
+            f"price_point_summary={_price_point_summary!r}, "
+            f"additional_properties={_additional_properties!r}, "
+            f")"
+        )
+
+    def __str__(self):
+        """Return a human-readable string representation."""
+        _id=(
+            self.id
+            if hasattr(self, "id")
+            else None
+        )
+        _name=(
+            self.name
+            if hasattr(self, "name")
+            else None
+        )
+        _handle=(
+            self.handle
+            if hasattr(self, "handle")
+            else None
+        )
+        _pricing_scheme=(
+            self.pricing_scheme
+            if hasattr(self, "pricing_scheme")
+            else None
+        )
+        _unit_name=(
+            self.unit_name
+            if hasattr(self, "unit_name")
+            else None
+        )
+        _unit_price=(
+            self.unit_price
+            if hasattr(self, "unit_price")
+            else None
+        )
+        _product_family_id=(
+            self.product_family_id
+            if hasattr(self, "product_family_id")
+            else None
+        )
+        _product_family_name=(
+            self.product_family_name
+            if hasattr(self, "product_family_name")
+            else None
+        )
+        _product_family_handle=(
+            self.product_family_handle
+            if hasattr(self, "product_family_handle")
+            else None
+        )
+        _price_per_unit_in_cents=(
+            self.price_per_unit_in_cents
+            if hasattr(self, "price_per_unit_in_cents")
+            else None
+        )
+        _kind=(
+            self.kind
+            if hasattr(self, "kind")
+            else None
+        )
+        _archived=(
+            self.archived
+            if hasattr(self, "archived")
+            else None
+        )
+        _description=(
+            self.description
+            if hasattr(self, "description")
+            else None
+        )
+        _default_price_point_id=(
+            self.default_price_point_id
+            if hasattr(self, "default_price_point_id")
+            else None
+        )
+        _overage_prices=(
+            self.overage_prices
+            if hasattr(self, "overage_prices")
+            else None
+        )
+        _prices=(
+            self.prices
+            if hasattr(self, "prices")
+            else None
+        )
+        _price_point_count=(
+            self.price_point_count
+            if hasattr(self, "price_point_count")
+            else None
+        )
+        _price_points_url=(
+            self.price_points_url
+            if hasattr(self, "price_points_url")
+            else None
+        )
+        _default_price_point_name=(
+            self.default_price_point_name
+            if hasattr(self, "default_price_point_name")
+            else None
+        )
+        _taxable=(
+            self.taxable
+            if hasattr(self, "taxable")
+            else None
+        )
+        _tax_code=(
+            self.tax_code
+            if hasattr(self, "tax_code")
+            else None
+        )
+        _recurring=(
+            self.recurring
+            if hasattr(self, "recurring")
+            else None
+        )
+        _upgrade_charge=(
+            self.upgrade_charge
+            if hasattr(self, "upgrade_charge")
+            else None
+        )
+        _downgrade_credit=(
+            self.downgrade_credit
+            if hasattr(self, "downgrade_credit")
+            else None
+        )
+        _created_at=(
+            self.created_at
+            if hasattr(self, "created_at")
+            else None
+        )
+        _updated_at=(
+            self.updated_at
+            if hasattr(self, "updated_at")
+            else None
+        )
+        _archived_at=(
+            self.archived_at
+            if hasattr(self, "archived_at")
+            else None
+        )
+        _hide_date_range_on_invoice=(
+            self.hide_date_range_on_invoice
+            if hasattr(self, "hide_date_range_on_invoice")
+            else None
+        )
+        _allow_fractional_quantities=(
+            self.allow_fractional_quantities
+            if hasattr(self, "allow_fractional_quantities")
+            else None
+        )
+        _item_category=(
+            self.item_category
+            if hasattr(self, "item_category")
+            else None
+        )
+        _use_site_exchange_rate=(
+            self.use_site_exchange_rate
+            if hasattr(self, "use_site_exchange_rate")
+            else None
+        )
+        _accounting_code=(
+            self.accounting_code
+            if hasattr(self, "accounting_code")
+            else None
+        )
+        _event_based_billing_metric_id=(
+            self.event_based_billing_metric_id
+            if hasattr(self, "event_based_billing_metric_id")
+            else None
+        )
+        _interval=(
+            self.interval
+            if hasattr(self, "interval")
+            else None
+        )
+        _interval_unit=(
+            self.interval_unit
+            if hasattr(self, "interval_unit")
+            else None
+        )
+        _unspsc_code=(
+            self.unspsc_code
+            if hasattr(self, "unspsc_code")
+            else None
+        )
+        _features=(
+            self.features
+            if hasattr(self, "features")
+            else None
+        )
+        _used_by=(
+            self.used_by
+            if hasattr(self, "used_by")
+            else None
+        )
+        _price_point_summary=(
+            self.price_point_summary
+            if hasattr(self, "price_point_summary")
+            else None
+        )
+        _additional_properties=self.additional_properties
+        return (
+            f"{self.__class__.__name__}("
+            f"id={_id!s}, "
+            f"name={_name!s}, "
+            f"handle={_handle!s}, "
+            f"pricing_scheme={_pricing_scheme!s}, "
+            f"unit_name={_unit_name!s}, "
+            f"unit_price={_unit_price!s}, "
+            f"product_family_id={_product_family_id!s}, "
+            f"product_family_name={_product_family_name!s}, "
+            f"product_family_handle={_product_family_handle!s}, "
+            f"price_per_unit_in_cents={_price_per_unit_in_cents!s}, "
+            f"kind={_kind!s}, "
+            f"archived={_archived!s}, "
+            f"description={_description!s}, "
+            f"default_price_point_id={_default_price_point_id!s}, "
+            f"overage_prices={_overage_prices!s}, "
+            f"prices={_prices!s}, "
+            f"price_point_count={_price_point_count!s}, "
+            f"price_points_url={_price_points_url!s}, "
+            f"default_price_point_name={_default_price_point_name!s}, "
+            f"taxable={_taxable!s}, "
+            f"tax_code={_tax_code!s}, "
+            f"recurring={_recurring!s}, "
+            f"upgrade_charge={_upgrade_charge!s}, "
+            f"downgrade_credit={_downgrade_credit!s}, "
+            f"created_at={_created_at!s}, "
+            f"updated_at={_updated_at!s}, "
+            f"archived_at={_archived_at!s}, "
+            f"hide_date_range_on_invoice={_hide_date_range_on_invoice!s}, "
+            f"allow_fractional_quantities={_allow_fractional_quantities!s}, "
+            f"item_category={_item_category!s}, "
+            f"use_site_exchange_rate={_use_site_exchange_rate!s}, "
+            f"accounting_code={_accounting_code!s}, "
+            f"event_based_billing_metric_id={_event_based_billing_metric_id!s}, "
+            f"interval={_interval!s}, "
+            f"interval_unit={_interval_unit!s}, "
+            f"unspsc_code={_unspsc_code!s}, "
+            f"features={_features!s}, "
+            f"used_by={_used_by!s}, "
+            f"price_point_summary={_price_point_summary!s}, "
+            f"additional_properties={_additional_properties!s}, "
+            f")"
+        )

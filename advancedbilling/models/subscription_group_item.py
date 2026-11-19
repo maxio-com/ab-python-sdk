@@ -14,6 +14,9 @@ class SubscriptionGroupItem(object):
     Attributes:
         id (int): The model property of type int.
         reference (str): The model property of type str.
+        customer_id (int): The ID of the customer the subscription belongs to. This
+            is the payer unless the signup request named another customer for the
+            subscription.
         product_id (int): The model property of type int.
         product_handle (str): The model property of type str.
         product_price_point_id (int): The model property of type int.
@@ -31,6 +34,7 @@ class SubscriptionGroupItem(object):
     _names = {
         "id": "id",
         "reference": "reference",
+        "customer_id": "customer_id",
         "product_id": "product_id",
         "product_handle": "product_handle",
         "product_price_point_id": "product_price_point_id",
@@ -44,6 +48,7 @@ class SubscriptionGroupItem(object):
     _optionals = [
         "id",
         "reference",
+        "customer_id",
         "product_id",
         "product_handle",
         "product_price_point_id",
@@ -64,6 +69,7 @@ class SubscriptionGroupItem(object):
         self,
         id=APIHelper.SKIP,
         reference=APIHelper.SKIP,
+        customer_id=APIHelper.SKIP,
         product_id=APIHelper.SKIP,
         product_handle=APIHelper.SKIP,
         product_price_point_id=APIHelper.SKIP,
@@ -79,6 +85,8 @@ class SubscriptionGroupItem(object):
             self.id = id
         if reference is not APIHelper.SKIP:
             self.reference = reference
+        if customer_id is not APIHelper.SKIP:
+            self.customer_id = customer_id
         if product_id is not APIHelper.SKIP:
             self.product_id = product_id
         if product_handle is not APIHelper.SKIP:
@@ -127,6 +135,10 @@ class SubscriptionGroupItem(object):
             dictionary.get("reference")\
             if "reference" in dictionary.keys()\
                 else APIHelper.SKIP
+        customer_id =\
+            dictionary.get("customer_id")\
+            if dictionary.get("customer_id")\
+                else APIHelper.SKIP
         product_id =\
             dictionary.get("product_id")\
             if dictionary.get("product_id")\
@@ -167,6 +179,7 @@ class SubscriptionGroupItem(object):
         # Return an object of this model
         return cls(id,
                    reference,
+                   customer_id,
                    product_id,
                    product_handle,
                    product_price_point_id,
@@ -187,6 +200,11 @@ class SubscriptionGroupItem(object):
         _reference=(
             self.reference
             if hasattr(self, "reference")
+            else None
+        )
+        _customer_id=(
+            self.customer_id
+            if hasattr(self, "customer_id")
             else None
         )
         _product_id=(
@@ -234,6 +252,7 @@ class SubscriptionGroupItem(object):
             f"{self.__class__.__name__}("
             f"id={_id!r}, "
             f"reference={_reference!r}, "
+            f"customer_id={_customer_id!r}, "
             f"product_id={_product_id!r}, "
             f"product_handle={_product_handle!r}, "
             f"product_price_point_id={_product_price_point_id!r}, "
@@ -256,6 +275,11 @@ class SubscriptionGroupItem(object):
         _reference=(
             self.reference
             if hasattr(self, "reference")
+            else None
+        )
+        _customer_id=(
+            self.customer_id
+            if hasattr(self, "customer_id")
             else None
         )
         _product_id=(
@@ -303,6 +327,7 @@ class SubscriptionGroupItem(object):
             f"{self.__class__.__name__}("
             f"id={_id!s}, "
             f"reference={_reference!s}, "
+            f"customer_id={_customer_id!s}, "
             f"product_id={_product_id!s}, "
             f"product_handle={_product_handle!s}, "
             f"product_price_point_id={_product_price_point_id!s}, "

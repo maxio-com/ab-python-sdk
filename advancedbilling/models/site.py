@@ -49,6 +49,10 @@ class Site(object):
             active.
         auto_renewals_enabled (bool): Whether the auto-renewals feature is enabled
             for this site.
+        list_pricing_enabled (bool): Indicates whether the site has list vs sales
+            pricing enabled.
+        planless_subscriptions_enabled (bool): Indicates whether the site allows
+            subscriptions without a plan.
         portal_enabled (bool): Whether the Billing Portal is enabled for this site.
         test (bool): The model property of type bool.
         additional_properties (Dict[str, object]): The additional properties for the
@@ -77,6 +81,8 @@ class Site(object):
         "net_terms": "net_terms",
         "multi_frequency_enabled": "multi_frequency_enabled",
         "auto_renewals_enabled": "auto_renewals_enabled",
+        "list_pricing_enabled": "list_pricing_enabled",
+        "planless_subscriptions_enabled": "planless_subscriptions_enabled",
         "portal_enabled": "portal_enabled",
         "test": "test",
     }
@@ -100,6 +106,8 @@ class Site(object):
         "net_terms",
         "multi_frequency_enabled",
         "auto_renewals_enabled",
+        "list_pricing_enabled",
+        "planless_subscriptions_enabled",
         "portal_enabled",
         "test",
     ]
@@ -124,6 +132,8 @@ class Site(object):
         net_terms=APIHelper.SKIP,
         multi_frequency_enabled=APIHelper.SKIP,
         auto_renewals_enabled=APIHelper.SKIP,
+        list_pricing_enabled=APIHelper.SKIP,
+        planless_subscriptions_enabled=APIHelper.SKIP,
         portal_enabled=APIHelper.SKIP,
         test=APIHelper.SKIP,
         additional_properties=None):
@@ -167,6 +177,10 @@ class Site(object):
             self.multi_frequency_enabled = multi_frequency_enabled
         if auto_renewals_enabled is not APIHelper.SKIP:
             self.auto_renewals_enabled = auto_renewals_enabled
+        if list_pricing_enabled is not APIHelper.SKIP:
+            self.list_pricing_enabled = list_pricing_enabled
+        if planless_subscriptions_enabled is not APIHelper.SKIP:
+            self.planless_subscriptions_enabled = planless_subscriptions_enabled
         if portal_enabled is not APIHelper.SKIP:
             self.portal_enabled = portal_enabled
         if test is not APIHelper.SKIP:
@@ -271,6 +285,14 @@ class Site(object):
             dictionary.get("auto_renewals_enabled")\
             if "auto_renewals_enabled" in dictionary.keys()\
                 else APIHelper.SKIP
+        list_pricing_enabled =\
+            dictionary.get("list_pricing_enabled")\
+            if "list_pricing_enabled" in dictionary.keys()\
+                else APIHelper.SKIP
+        planless_subscriptions_enabled =\
+            dictionary.get("planless_subscriptions_enabled")\
+            if "planless_subscriptions_enabled" in dictionary.keys()\
+                else APIHelper.SKIP
         portal_enabled =\
             dictionary.get("portal_enabled")\
             if "portal_enabled" in dictionary.keys()\
@@ -303,6 +325,8 @@ class Site(object):
                    net_terms,
                    multi_frequency_enabled,
                    auto_renewals_enabled,
+                   list_pricing_enabled,
+                   planless_subscriptions_enabled,
                    portal_enabled,
                    test,
                    additional_properties)
@@ -399,6 +423,16 @@ class Site(object):
             if hasattr(self, "auto_renewals_enabled")
             else None
         )
+        _list_pricing_enabled=(
+            self.list_pricing_enabled
+            if hasattr(self, "list_pricing_enabled")
+            else None
+        )
+        _planless_subscriptions_enabled=(
+            self.planless_subscriptions_enabled
+            if hasattr(self, "planless_subscriptions_enabled")
+            else None
+        )
         _portal_enabled=(
             self.portal_enabled
             if hasattr(self, "portal_enabled")
@@ -430,6 +464,8 @@ class Site(object):
             f"net_terms={_net_terms!r}, "
             f"multi_frequency_enabled={_multi_frequency_enabled!r}, "
             f"auto_renewals_enabled={_auto_renewals_enabled!r}, "
+            f"list_pricing_enabled={_list_pricing_enabled!r}, "
+            f"planless_subscriptions_enabled={_planless_subscriptions_enabled!r}, "
             f"portal_enabled={_portal_enabled!r}, "
             f"test={_test!r}, "
             f"additional_properties={_additional_properties!r}, "
@@ -528,6 +564,16 @@ class Site(object):
             if hasattr(self, "auto_renewals_enabled")
             else None
         )
+        _list_pricing_enabled=(
+            self.list_pricing_enabled
+            if hasattr(self, "list_pricing_enabled")
+            else None
+        )
+        _planless_subscriptions_enabled=(
+            self.planless_subscriptions_enabled
+            if hasattr(self, "planless_subscriptions_enabled")
+            else None
+        )
         _portal_enabled=(
             self.portal_enabled
             if hasattr(self, "portal_enabled")
@@ -559,6 +605,8 @@ class Site(object):
             f"net_terms={_net_terms!s}, "
             f"multi_frequency_enabled={_multi_frequency_enabled!s}, "
             f"auto_renewals_enabled={_auto_renewals_enabled!s}, "
+            f"list_pricing_enabled={_list_pricing_enabled!s}, "
+            f"planless_subscriptions_enabled={_planless_subscriptions_enabled!s}, "
             f"portal_enabled={_portal_enabled!s}, "
             f"test={_test!s}, "
             f"additional_properties={_additional_properties!s}, "

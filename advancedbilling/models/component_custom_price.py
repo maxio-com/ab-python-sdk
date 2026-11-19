@@ -7,6 +7,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 # ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.price import Price
+from advancedbilling.models.subscription_component_custom_price_segment import (
+    SubscriptionComponentCustomPriceSegment,
+)
 
 
 class ComponentCustomPrice(object):
@@ -27,9 +30,10 @@ class ComponentCustomPrice(object):
             available for sites with Multifrequency enabled.
         list_price_point_id (int): (Optional) Id of the price point to use for list
             price calculations when overriding the customer price.
-        use_default_list_price (bool): When true, list price calculations will
-            continue to use the default price point even when a `custom_price` is
-            supplied.
+        use_default_list_price (bool): (Optional) When list vs sales pricing is
+            enabled and `list_price_point_id` is omitted, the component's default
+            price point is used as the list price unless this is `false`. Defaults to
+            `true`.
         prices (List[Price]): On/off components only need one price bracket starting
             at 1.
         renew_prepaid_allocation (bool): Applicable only to prepaid usage components.
@@ -40,6 +44,24 @@ class ComponentCustomPrice(object):
             of `expiration_interval_unit`s after which rollover amounts expire.
         expiration_interval_unit (ExpirationIntervalUnit): Applicable only when
             rollover is enabled. Interval unit for rollover expiration (month or day).
+        segments (List[SubscriptionComponentCustomPriceSegment]): Applicable only to
+            segmented event-based components on sites using Maxio Metering.
+            Per-segment rates for the component: each entry sets the pricing scheme
+            and prices for one segment of the component's meter, identified by its
+            property values.  Accepted only by Create Subscription and Update
+            Subscription, which save the segment rates. Preview Subscription and the
+            signup proforma invoice endpoints validate segments the same way but do
+            not save them. Every other endpoint that accepts a component
+            `custom_price` returns `422 Unprocessable Entity` when the `segments` key
+            is present, even when its value is `null` or an empty array. Omit this
+            property unless you are setting segment rates.  Saved segment rates take
+            effect as soon as the request succeeds and price all of the current
+            billing period's usage at the new rates, including usage recorded before
+            the request. To read them back, take the `price_point_id` of the
+            subscription's component (for example, from [Read Subscription
+            Component]($e/Subscription%20Components/readSubscriptionComponent)) and
+            call `GET
+            /components/{component_id}/price_points/{price_point_id}/segments.json`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -58,6 +80,7 @@ class ComponentCustomPrice(object):
         "rollover_prepaid_remainder": "rollover_prepaid_remainder",
         "expiration_interval": "expiration_interval",
         "expiration_interval_unit": "expiration_interval_unit",
+        "segments": "segments",
     }
 
     _optionals = [
@@ -71,6 +94,7 @@ class ComponentCustomPrice(object):
         "rollover_prepaid_remainder",
         "expiration_interval",
         "expiration_interval_unit",
+        "segments",
     ]
 
     _nullables = [
@@ -93,6 +117,7 @@ class ComponentCustomPrice(object):
         rollover_prepaid_remainder=APIHelper.SKIP,
         expiration_interval=APIHelper.SKIP,
         expiration_interval_unit=APIHelper.SKIP,
+        segments=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a ComponentCustomPrice instance."""
         # Initialize members of the class
@@ -117,6 +142,8 @@ class ComponentCustomPrice(object):
             self.expiration_interval = expiration_interval
         if expiration_interval_unit is not APIHelper.SKIP:
             self.expiration_interval_unit = expiration_interval_unit
+        if segments is not APIHelper.SKIP:
+            self.segments = segments
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -187,6 +214,14 @@ class ComponentCustomPrice(object):
             dictionary.get("expiration_interval_unit")\
             if "expiration_interval_unit" in dictionary.keys()\
                 else APIHelper.SKIP
+        segments = None
+        if dictionary.get("segments") is not None:
+            segments = [
+                SubscriptionComponentCustomPriceSegment.from_dictionary(x)
+                    for x in dictionary.get("segments")
+            ]
+        else:
+            segments = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -204,6 +239,7 @@ class ComponentCustomPrice(object):
                    rollover_prepaid_remainder,
                    expiration_interval,
                    expiration_interval_unit,
+                   segments,
                    additional_properties)
 
     @classmethod
@@ -290,6 +326,11 @@ class ComponentCustomPrice(object):
             if hasattr(self, "expiration_interval_unit")
             else None
         )
+        _segments=(
+            self.segments
+            if hasattr(self, "segments")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -304,6 +345,7 @@ class ComponentCustomPrice(object):
             f"rollover_prepaid_remainder={_rollover_prepaid_remainder!r}, "
             f"expiration_interval={_expiration_interval!r}, "
             f"expiration_interval_unit={_expiration_interval_unit!r}, "
+            f"segments={_segments!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -361,6 +403,11 @@ class ComponentCustomPrice(object):
             if hasattr(self, "expiration_interval_unit")
             else None
         )
+        _segments=(
+            self.segments
+            if hasattr(self, "segments")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -375,6 +422,7 @@ class ComponentCustomPrice(object):
             f"rollover_prepaid_remainder={_rollover_prepaid_remainder!s}, "
             f"expiration_interval={_expiration_interval!s}, "
             f"expiration_interval_unit={_expiration_interval_unit!s}, "
+            f"segments={_segments!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

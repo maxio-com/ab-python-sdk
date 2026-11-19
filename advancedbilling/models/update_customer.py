@@ -27,6 +27,25 @@ class UpdateCustomer(object):
         phone (str): The model property of type str.
         locale (str): Set a specific language on a customer record.
         vat_number (str): The model property of type str.
+        vat_country (str): The two-letter ISO 3166-1 country code that qualifies the
+            customer's tax ID. Required when `entity_identifier_kind` is `vat_eu` or
+            `national_tax`, and used to derive the kind when only the legacy
+            `vat_number` is sent.
+        entity_identifier_kind (EntityIdentifierKind): The kind of tax or business
+            identifier held by the customer: - `vat_eu`: an EU VAT number. Requires
+            `vat_country` to be an EU member state code or `GB`. - `national_tax`: a
+            national tax ID registered outside the EU. Requires `vat_country` to be
+            one of `AL`, `AM`, `AR`, `AU`, `BR`, `CA`, `CH`, `DZ`, `IN`, `MX`, `NO`,
+            `NZ`, or `ZA`. - `company_reg`: a company registration number, such as a
+            French SIREN. No `vat_country` is required. - `gln`: a Global Location
+            Number. The value must be 13 digits. - `duns`: a D-U-N-S Number. The
+            value must be 9 digits. - `lei`: a Legal Entity Identifier. The value
+            must be 20 characters: 18 letters or digits followed by 2 digits.  A
+            customer holds one identifier at a time. Saving an identifier of a
+            different kind replaces the existing one.
+        entity_identifier_value (str): The customer's tax or business identifier,
+            sent together with `entity_identifier_kind`. Advanced Billing trims
+            surrounding whitespace and stores the value in uppercase.
         tax_exempt (bool): The model property of type bool.
         surcharging (bool): Whether surcharging is enabled for the customer. Only
             applied on sites where surcharging control is enabled.
@@ -62,6 +81,9 @@ class UpdateCustomer(object):
         "phone": "phone",
         "locale": "locale",
         "vat_number": "vat_number",
+        "vat_country": "vat_country",
+        "entity_identifier_kind": "entity_identifier_kind",
+        "entity_identifier_value": "entity_identifier_value",
         "tax_exempt": "tax_exempt",
         "surcharging": "surcharging",
         "tax_exempt_reason": "tax_exempt_reason",
@@ -87,6 +109,9 @@ class UpdateCustomer(object):
         "phone",
         "locale",
         "vat_number",
+        "vat_country",
+        "entity_identifier_kind",
+        "entity_identifier_value",
         "tax_exempt",
         "surcharging",
         "tax_exempt_reason",
@@ -120,6 +145,9 @@ class UpdateCustomer(object):
         phone=APIHelper.SKIP,
         locale=APIHelper.SKIP,
         vat_number=APIHelper.SKIP,
+        vat_country=APIHelper.SKIP,
+        entity_identifier_kind=APIHelper.SKIP,
+        entity_identifier_value=APIHelper.SKIP,
         tax_exempt=APIHelper.SKIP,
         surcharging=APIHelper.SKIP,
         tax_exempt_reason=APIHelper.SKIP,
@@ -160,6 +188,12 @@ class UpdateCustomer(object):
             self.locale = locale
         if vat_number is not APIHelper.SKIP:
             self.vat_number = vat_number
+        if vat_country is not APIHelper.SKIP:
+            self.vat_country = vat_country
+        if entity_identifier_kind is not APIHelper.SKIP:
+            self.entity_identifier_kind = entity_identifier_kind
+        if entity_identifier_value is not APIHelper.SKIP:
+            self.entity_identifier_value = entity_identifier_value
         if tax_exempt is not APIHelper.SKIP:
             self.tax_exempt = tax_exempt
         if surcharging is not APIHelper.SKIP:
@@ -258,6 +292,18 @@ class UpdateCustomer(object):
             dictionary.get("vat_number")\
             if dictionary.get("vat_number")\
                 else APIHelper.SKIP
+        vat_country =\
+            dictionary.get("vat_country")\
+            if dictionary.get("vat_country")\
+                else APIHelper.SKIP
+        entity_identifier_kind =\
+            dictionary.get("entity_identifier_kind")\
+            if dictionary.get("entity_identifier_kind")\
+                else APIHelper.SKIP
+        entity_identifier_value =\
+            dictionary.get("entity_identifier_value")\
+            if dictionary.get("entity_identifier_value")\
+                else APIHelper.SKIP
         tax_exempt =\
             dictionary.get("tax_exempt")\
             if "tax_exempt" in dictionary.keys()\
@@ -307,6 +353,9 @@ class UpdateCustomer(object):
                    phone,
                    locale,
                    vat_number,
+                   vat_country,
+                   entity_identifier_kind,
+                   entity_identifier_value,
                    tax_exempt,
                    surcharging,
                    tax_exempt_reason,
@@ -393,6 +442,21 @@ class UpdateCustomer(object):
             if hasattr(self, "vat_number")
             else None
         )
+        _vat_country=(
+            self.vat_country
+            if hasattr(self, "vat_country")
+            else None
+        )
+        _entity_identifier_kind=(
+            self.entity_identifier_kind
+            if hasattr(self, "entity_identifier_kind")
+            else None
+        )
+        _entity_identifier_value=(
+            self.entity_identifier_value
+            if hasattr(self, "entity_identifier_value")
+            else None
+        )
         _tax_exempt=(
             self.tax_exempt
             if hasattr(self, "tax_exempt")
@@ -446,6 +510,9 @@ class UpdateCustomer(object):
             f"phone={_phone!r}, "
             f"locale={_locale!r}, "
             f"vat_number={_vat_number!r}, "
+            f"vat_country={_vat_country!r}, "
+            f"entity_identifier_kind={_entity_identifier_kind!r}, "
+            f"entity_identifier_value={_entity_identifier_value!r}, "
             f"tax_exempt={_tax_exempt!r}, "
             f"surcharging={_surcharging!r}, "
             f"tax_exempt_reason={_tax_exempt_reason!r}, "
@@ -534,6 +601,21 @@ class UpdateCustomer(object):
             if hasattr(self, "vat_number")
             else None
         )
+        _vat_country=(
+            self.vat_country
+            if hasattr(self, "vat_country")
+            else None
+        )
+        _entity_identifier_kind=(
+            self.entity_identifier_kind
+            if hasattr(self, "entity_identifier_kind")
+            else None
+        )
+        _entity_identifier_value=(
+            self.entity_identifier_value
+            if hasattr(self, "entity_identifier_value")
+            else None
+        )
         _tax_exempt=(
             self.tax_exempt
             if hasattr(self, "tax_exempt")
@@ -587,6 +669,9 @@ class UpdateCustomer(object):
             f"phone={_phone!s}, "
             f"locale={_locale!s}, "
             f"vat_number={_vat_number!s}, "
+            f"vat_country={_vat_country!s}, "
+            f"entity_identifier_kind={_entity_identifier_kind!s}, "
+            f"entity_identifier_value={_entity_identifier_value!s}, "
             f"tax_exempt={_tax_exempt!s}, "
             f"surcharging={_surcharging!s}, "
             f"tax_exempt_reason={_tax_exempt_reason!s}, "

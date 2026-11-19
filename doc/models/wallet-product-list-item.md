@@ -1,0 +1,70 @@
+
+# Wallet Product List Item
+
+A Wallet Product as it appears in [List Wallet Products](../../doc/controllers/wallet-products.md#list-wallet-products): the full Component field set, plus a usage count and a price point summary that only the list response reports.
+
+## Structure
+
+`WalletProductListItem`
+
+## Fields
+
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `id` | `int` | Optional | The unique ID assigned to the component by Chargify. This ID can be used to fetch the component from the API. |
+| `name` | `str` | Optional | The name of the Component, suitable for display on statements. e.g., Text Messages. |
+| `handle` | `str` | Optional | The component API handle |
+| `pricing_scheme` | [`PricingScheme`](../../doc/models/pricing-scheme.md) | Optional | - |
+| `unit_name` | `str` | Optional | The name of the unit that the component’s usage is measured in. e.g., message |
+| `unit_price` | `str` | Optional | The amount the customer will be charged per unit. This field is only populated for ‘per_unit’ pricing schemes, otherwise it may be null. |
+| `product_family_id` | `int` | Optional | The id of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. |
+| `product_family_name` | `str` | Optional | The name of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. |
+| `product_family_handle` | `str` | Optional | The handle of the Product Family to which the Component belongs. `null` for a Wallet Product, which has no Product Family. |
+| `price_per_unit_in_cents` | `int` | Optional | deprecated - use unit_price instead. |
+| `kind` | [`ComponentKind`](../../doc/models/component-kind.md) | Optional | A handle for the component type |
+| `archived` | `bool` | Optional | Boolean flag describing whether a component is archived or not. |
+| `description` | `str` | Optional | The description of the component. |
+| `default_price_point_id` | `int` | Optional | - |
+| `overage_prices` | [`List[ComponentPrice]`](../../doc/models/component-price.md) | Optional | Applicable only to prepaid usage components. An array of overage price brackets. |
+| `prices` | [`List[ComponentPrice]`](../../doc/models/component-price.md) | Optional | An array of price brackets. If the component uses the ‘per_unit’ pricing scheme, this array will be empty. |
+| `price_point_count` | `int` | Optional | Count for the number of price points associated with the component |
+| `price_points_url` | `str` | Optional | URL that points to the location to read the existing price points via GET request |
+| `default_price_point_name` | `str` | Optional | - |
+| `taxable` | `bool` | Optional | Boolean flag describing whether a component is taxable or not. |
+| `tax_code` | `str` | Optional | A string representing the tax code related to the component type. This is especially important when using AvaTax to tax based on locale. This attribute has a max length of 25 characters. |
+| `recurring` | `bool` | Optional | - |
+| `upgrade_charge` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. |
+| `downgrade_credit` | [`CreditType`](../../doc/models/credit-type.md) | Optional | The type of credit to be created when upgrading/downgrading. Defaults to the component and then site setting if one is not provided. |
+| `created_at` | `datetime` | Optional | Timestamp indicating when this component was created |
+| `updated_at` | `datetime` | Optional | Timestamp indicating when this component was updated |
+| `archived_at` | `datetime` | Optional | Timestamp indicating when this component was archived |
+| `hide_date_range_on_invoice` | `bool` | Optional | (Only available on Relationship Invoicing sites) Boolean flag describing if the service date range should show for the component on generated invoices. |
+| `allow_fractional_quantities` | `bool` | Optional | - |
+| `item_category` | [`ItemCategory`](../../doc/models/item-category.md) | Optional | One of the following: Business Software, Consumer Software, Digital Services, Physical Goods, Other |
+| `use_site_exchange_rate` | `bool` | Optional | - |
+| `accounting_code` | `str` | Optional | E.g. Internal ID or SKU Number |
+| `event_based_billing_metric_id` | `int` | Optional | (Only for Event Based Components) This is an ID of a metric attached to the component. This metric is used to bill upon collected events. |
+| `interval` | `int` | Optional | The numerical interval. e.g., an interval of ‘30’ coupled with an interval_unit of day would mean this component’s default price point would renew every 30 days. This property is only available for sites with Multifrequency enabled. |
+| `interval_unit` | [`IntervalUnit`](../../doc/models/interval-unit.md) | Optional | A string representing the interval unit for this component's default price point, either month or day. This property is only available for sites with Multifrequency enabled. |
+| `unspsc_code` | `str` | Optional | (Optional) Custom UNSPSC commodity code for Level 3/CEDP payment data. When set, this value is sent as the commodity code on invoice line items for this component instead of the default derived from item_category. |
+| `features` | [`List[FeatureCatalogItem]`](../../doc/models/feature-catalog-item.md) | Optional | The active feature catalog items attached to this component. Present only when the request includes `include_features=true`. |
+| `used_by` | [`WalletProductUsageCount`](../../doc/models/wallet-product-usage-count.md) | Optional | A rollup of what's using this Wallet Product, for the catalog listing. |
+| `price_point_summary` | [`WalletProductPricePointSummary`](../../doc/models/wallet-product-price-point-summary.md) | Optional | A summary of the Wallet Product's default price point, for rendering a catalog listing without a separate price points call. |
+
+## Example
+
+```python
+from advancedbilling.models.item_category import ItemCategory
+from advancedbilling.models.pricing_scheme import PricingScheme
+from advancedbilling.models.wallet_product_list_item import WalletProductListItem
+
+wallet_product_list_item = WalletProductListItem(
+    id=70,
+    name='name0',
+    handle='handle6',
+    pricing_scheme=PricingScheme.STAIRSTEP,
+    unit_name='unit_name2',
+    item_category=ItemCategory.ENUM_BUSINESS_SOFTWARE
+)
+```
+

@@ -35,9 +35,9 @@ class EBBComponent(object):
             for an overview of pricing schemes.
         prices (List[Price]): (Not required for ‘per_unit’ pricing schemes) One or
             more price brackets. See [Price Bracket
-            Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-Componen
-            t-Pricing-Schemes#price-bracket-rules) for an overview of how price
-            brackets work for different pricing schemes.
+            Rules](https://docs.maxio.com/billing/catalog/products/use-product-pricing
+            -schemes#price-bracket-rules) for an overview of how price brackets work
+            for different pricing schemes.
         price_points (List[ComponentPricePointItem]): The model property of type
             List[ComponentPricePointItem].
         unit_price (str | float | None): The amount the customer will be charged per

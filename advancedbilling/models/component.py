@@ -9,6 +9,9 @@ from advancedbilling.api_helper import APIHelper
 from advancedbilling.models.component_price import (
     ComponentPrice,
 )
+from advancedbilling.models.feature_catalog_item import (
+    FeatureCatalogItem,
+)
 
 
 class Component(object):
@@ -27,11 +30,13 @@ class Component(object):
             field is only populated for ‘per_unit’ pricing schemes, otherwise it may
             be null.
         product_family_id (int): The id of the Product Family to which the Component
-            belongs
+            belongs. `null` for a Wallet Product, which has no Product Family.
         product_family_name (str): The name of the Product Family to which the
-            Component belongs
+            Component belongs. `null` for a Wallet Product, which has no Product
+            Family.
         product_family_handle (str): The handle of the Product Family to which the
-            Component belongs
+            Component belongs. `null` for a Wallet Product, which has no Product
+            Family.
         price_per_unit_in_cents (int): deprecated - use unit_price instead.
         kind (ComponentKind): A handle for the component type
         archived (bool): Boolean flag describing whether a component is archived or
@@ -83,6 +88,9 @@ class Component(object):
             payment data. When set, this value is sent as the commodity code on
             invoice line items for this component instead of the default derived from
             item_category.
+        features (List[FeatureCatalogItem]): The active feature catalog items
+            attached to this component. Present only when the request includes
+            `include_features=true`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -126,6 +134,7 @@ class Component(object):
         "interval": "interval",
         "interval_unit": "interval_unit",
         "unspsc_code": "unspsc_code",
+        "features": "features",
     }
 
     _optionals = [
@@ -165,12 +174,16 @@ class Component(object):
         "interval",
         "interval_unit",
         "unspsc_code",
+        "features",
     ]
 
     _nullables = [
         "handle",
         "pricing_scheme",
         "unit_price",
+        "product_family_id",
+        "product_family_name",
+        "product_family_handle",
         "price_per_unit_in_cents",
         "description",
         "default_price_point_id",
@@ -186,6 +199,7 @@ class Component(object):
         "accounting_code",
         "interval_unit",
         "unspsc_code",
+        "features",
     ]
 
     def __init__(
@@ -226,6 +240,7 @@ class Component(object):
         interval=APIHelper.SKIP,
         interval_unit=APIHelper.SKIP,
         unspsc_code=APIHelper.SKIP,
+        features=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a Component instance."""
         # Initialize members of the class
@@ -310,6 +325,8 @@ class Component(object):
             self.interval_unit = interval_unit
         if unspsc_code is not APIHelper.SKIP:
             self.unspsc_code = unspsc_code
+        if features is not APIHelper.SKIP:
+            self.features = features
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -360,15 +377,15 @@ class Component(object):
                 else APIHelper.SKIP
         product_family_id =\
             dictionary.get("product_family_id")\
-            if dictionary.get("product_family_id")\
+            if "product_family_id" in dictionary.keys()\
                 else APIHelper.SKIP
         product_family_name =\
             dictionary.get("product_family_name")\
-            if dictionary.get("product_family_name")\
+            if "product_family_name" in dictionary.keys()\
                 else APIHelper.SKIP
         product_family_handle =\
             dictionary.get("product_family_handle")\
-            if dictionary.get("product_family_handle")\
+            if "product_family_handle" in dictionary.keys()\
                 else APIHelper.SKIP
         price_per_unit_in_cents =\
             dictionary.get("price_per_unit_in_cents")\
@@ -485,6 +502,13 @@ class Component(object):
             dictionary.get("unspsc_code")\
             if "unspsc_code" in dictionary.keys()\
                 else APIHelper.SKIP
+        if "features" in dictionary.keys():
+            features = [
+                FeatureCatalogItem.from_dictionary(x)
+                for x in dictionary.get("features")
+            ] if dictionary.get("features") else None
+        else:
+            features = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -527,6 +551,7 @@ class Component(object):
                    interval,
                    interval_unit,
                    unspsc_code,
+                   features,
                    additional_properties)
 
     def __repr__(self):
@@ -711,6 +736,11 @@ class Component(object):
             if hasattr(self, "unspsc_code")
             else None
         )
+        _features=(
+            self.features
+            if hasattr(self, "features")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -750,6 +780,7 @@ class Component(object):
             f"interval={_interval!r}, "
             f"interval_unit={_interval_unit!r}, "
             f"unspsc_code={_unspsc_code!r}, "
+            f"features={_features!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -936,6 +967,11 @@ class Component(object):
             if hasattr(self, "unspsc_code")
             else None
         )
+        _features=(
+            self.features
+            if hasattr(self, "features")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -975,6 +1011,7 @@ class Component(object):
             f"interval={_interval!s}, "
             f"interval_unit={_interval_unit!s}, "
             f"unspsc_code={_unspsc_code!s}, "
+            f"features={_features!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

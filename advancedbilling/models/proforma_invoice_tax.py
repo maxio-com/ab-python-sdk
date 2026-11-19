@@ -17,8 +17,9 @@ class ProformaInvoiceTax(object):
     Attributes:
         uid (str): The model property of type str.
         title (str): The model property of type str.
-        source_type (ProformaInvoiceTaxSourceType): The model property of type
-            ProformaInvoiceTaxSourceType.
+        source_type (ProformaInvoiceTaxSourceType): The source of the tax. `Tax` is a
+            tax configured in Advanced Billing. The other values identify the tax
+            service that calculated the tax.
         percentage (str): The model property of type str.
         taxable_amount (str): The model property of type str.
         tax_amount (str): The model property of type str.

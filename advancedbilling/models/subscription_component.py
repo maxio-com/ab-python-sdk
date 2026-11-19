@@ -57,6 +57,9 @@ class SubscriptionComponent(object):
         historic_usages (List[HistoricUsage]): The model property of type
             List[HistoricUsage].
         display_on_hosted_page (bool): The model property of type bool.
+        list_price_point_id (int): The ID of the catalog price point used as the list
+            price for this component's custom price. Returned only when list vs sales
+            pricing is enabled for the site.
         interval (int): The numerical interval. e.g., an interval of '30' coupled
             with an interval_unit of day would mean this component price point would
             renew every 30 days. This property is only available for sites with
@@ -101,6 +104,7 @@ class SubscriptionComponent(object):
         "subscription": "subscription",
         "historic_usages": "historic_usages",
         "display_on_hosted_page": "display_on_hosted_page",
+        "list_price_point_id": "list_price_point_id",
         "interval": "interval",
         "interval_unit": "interval_unit",
     }
@@ -136,6 +140,7 @@ class SubscriptionComponent(object):
         "subscription",
         "historic_usages",
         "display_on_hosted_page",
+        "list_price_point_id",
         "interval",
         "interval_unit",
     ]
@@ -152,6 +157,7 @@ class SubscriptionComponent(object):
         "price_point_name",
         "use_site_exchange_rate",
         "description",
+        "list_price_point_id",
         "interval_unit",
     ]
 
@@ -187,6 +193,7 @@ class SubscriptionComponent(object):
         subscription=APIHelper.SKIP,
         historic_usages=APIHelper.SKIP,
         display_on_hosted_page=APIHelper.SKIP,
+        list_price_point_id=APIHelper.SKIP,
         interval=APIHelper.SKIP,
         interval_unit=APIHelper.SKIP,
         additional_properties=None):
@@ -261,6 +268,8 @@ class SubscriptionComponent(object):
             self.historic_usages = historic_usages
         if display_on_hosted_page is not APIHelper.SKIP:
             self.display_on_hosted_page = display_on_hosted_page
+        if list_price_point_id is not APIHelper.SKIP:
+            self.list_price_point_id = list_price_point_id
         if interval is not APIHelper.SKIP:
             self.interval = interval
         if interval_unit is not APIHelper.SKIP:
@@ -423,6 +432,10 @@ class SubscriptionComponent(object):
             dictionary.get("display_on_hosted_page")\
             if "display_on_hosted_page" in dictionary.keys()\
                 else APIHelper.SKIP
+        list_price_point_id =\
+            dictionary.get("list_price_point_id")\
+            if "list_price_point_id" in dictionary.keys()\
+                else APIHelper.SKIP
         interval =\
             dictionary.get("interval")\
             if dictionary.get("interval")\
@@ -467,6 +480,7 @@ class SubscriptionComponent(object):
                    subscription,
                    historic_usages,
                    display_on_hosted_page,
+                   list_price_point_id,
                    interval,
                    interval_unit,
                    additional_properties)
@@ -623,6 +637,11 @@ class SubscriptionComponent(object):
             if hasattr(self, "display_on_hosted_page")
             else None
         )
+        _list_price_point_id=(
+            self.list_price_point_id
+            if hasattr(self, "list_price_point_id")
+            else None
+        )
         _interval=(
             self.interval
             if hasattr(self, "interval")
@@ -666,6 +685,7 @@ class SubscriptionComponent(object):
             f"subscription={_subscription!r}, "
             f"historic_usages={_historic_usages!r}, "
             f"display_on_hosted_page={_display_on_hosted_page!r}, "
+            f"list_price_point_id={_list_price_point_id!r}, "
             f"interval={_interval!r}, "
             f"interval_unit={_interval_unit!r}, "
             f"additional_properties={_additional_properties!r}, "
@@ -824,6 +844,11 @@ class SubscriptionComponent(object):
             if hasattr(self, "display_on_hosted_page")
             else None
         )
+        _list_price_point_id=(
+            self.list_price_point_id
+            if hasattr(self, "list_price_point_id")
+            else None
+        )
         _interval=(
             self.interval
             if hasattr(self, "interval")
@@ -867,6 +892,7 @@ class SubscriptionComponent(object):
             f"subscription={_subscription!s}, "
             f"historic_usages={_historic_usages!s}, "
             f"display_on_hosted_page={_display_on_hosted_page!s}, "
+            f"list_price_point_id={_list_price_point_id!s}, "
             f"interval={_interval!s}, "
             f"interval_unit={_interval_unit!s}, "
             f"additional_properties={_additional_properties!s}, "

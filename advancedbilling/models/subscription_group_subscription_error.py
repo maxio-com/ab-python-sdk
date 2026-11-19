@@ -14,6 +14,7 @@ class SubscriptionGroupSubscriptionError(object):
     Object which contains subscription errors.
 
     Attributes:
+        customer (List[str]): The model property of type List[str].
         product (List[str]): The model property of type List[str].
         product_price_point_id (List[str]): The model property of type List[str].
         payment_profile (List[str]): The model property of type List[str].
@@ -32,6 +33,7 @@ class SubscriptionGroupSubscriptionError(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
+        "customer": "customer",
         "product": "product",
         "product_price_point_id": "product_price_point_id",
         "payment_profile": "payment_profile",
@@ -43,6 +45,7 @@ class SubscriptionGroupSubscriptionError(object):
     }
 
     _optionals = [
+        "customer",
         "product",
         "product_price_point_id",
         "payment_profile",
@@ -55,6 +58,7 @@ class SubscriptionGroupSubscriptionError(object):
 
     def __init__(
         self,
+        customer=APIHelper.SKIP,
         product=APIHelper.SKIP,
         product_price_point_id=APIHelper.SKIP,
         payment_profile=APIHelper.SKIP,
@@ -66,6 +70,8 @@ class SubscriptionGroupSubscriptionError(object):
         additional_properties=None):
         """Initialize a SubscriptionGroupSubscriptionError instance."""
         # Initialize members of the class
+        if customer is not APIHelper.SKIP:
+            self.customer = customer
         if product is not APIHelper.SKIP:
             self.product = product
         if product_price_point_id is not APIHelper.SKIP:
@@ -106,6 +112,10 @@ class SubscriptionGroupSubscriptionError(object):
             return None
 
         # Extract variables from the dictionary
+        customer =\
+            dictionary.get("customer")\
+            if dictionary.get("customer")\
+                else APIHelper.SKIP
         product =\
             dictionary.get("product")\
             if dictionary.get("product")\
@@ -144,7 +154,8 @@ class SubscriptionGroupSubscriptionError(object):
             {k: v for k, v in dictionary.items() if k not in cls._names.values()}
 
         # Return an object of this model
-        return cls(product,
+        return cls(customer,
+                   product,
                    product_price_point_id,
                    payment_profile,
                    payment_profile_chargify_token,
@@ -156,6 +167,11 @@ class SubscriptionGroupSubscriptionError(object):
 
     def __repr__(self):
         """Return a unambiguous string representation."""
+        _customer=(
+            self.customer
+            if hasattr(self, "customer")
+            else None
+        )
         _product=(
             self.product
             if hasattr(self, "product")
@@ -199,6 +215,7 @@ class SubscriptionGroupSubscriptionError(object):
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
+            f"customer={_customer!r}, "
             f"product={_product!r}, "
             f"product_price_point_id={_product_price_point_id!r}, "
             f"payment_profile={_payment_profile!r}, "
@@ -213,6 +230,11 @@ class SubscriptionGroupSubscriptionError(object):
 
     def __str__(self):
         """Return a human-readable string representation."""
+        _customer=(
+            self.customer
+            if hasattr(self, "customer")
+            else None
+        )
         _product=(
             self.product
             if hasattr(self, "product")
@@ -256,6 +278,7 @@ class SubscriptionGroupSubscriptionError(object):
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
+            f"customer={_customer!s}, "
             f"product={_product!s}, "
             f"product_price_point_id={_product_price_point_id!s}, "
             f"payment_profile={_payment_profile!s}, "

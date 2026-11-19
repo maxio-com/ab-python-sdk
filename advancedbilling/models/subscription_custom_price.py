@@ -38,6 +38,13 @@ class SubscriptionCustomPrice(object):
         expiration_interval (str | int | None): (Optional)
         expiration_interval_unit (ExpirationIntervalUnit): (Optional)
         tax_included (bool): (Optional)
+        list_price_point_id (int): (Optional) The ID of a catalog price point of the
+            same product to use as the list price. Ignored unless list vs sales
+            pricing is enabled for the site.
+        use_default_list_price (bool): (Optional) When list vs sales pricing is
+            enabled and `list_price_point_id` is omitted, the product's default price
+            point is used as the list price unless this is `false`. Defaults to
+            `true`.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -59,6 +66,8 @@ class SubscriptionCustomPrice(object):
         "expiration_interval": "expiration_interval",
         "expiration_interval_unit": "expiration_interval_unit",
         "tax_included": "tax_included",
+        "list_price_point_id": "list_price_point_id",
+        "use_default_list_price": "use_default_list_price",
     }
 
     _optionals = [
@@ -73,12 +82,15 @@ class SubscriptionCustomPrice(object):
         "expiration_interval",
         "expiration_interval_unit",
         "tax_included",
+        "list_price_point_id",
+        "use_default_list_price",
     ]
 
     _nullables = [
         "interval_unit",
         "trial_type",
         "expiration_interval_unit",
+        "list_price_point_id",
     ]
 
     def __init__(
@@ -97,6 +109,8 @@ class SubscriptionCustomPrice(object):
         expiration_interval=APIHelper.SKIP,
         expiration_interval_unit=APIHelper.SKIP,
         tax_included=APIHelper.SKIP,
+        list_price_point_id=APIHelper.SKIP,
+        use_default_list_price=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a SubscriptionCustomPrice instance."""
         # Initialize members of the class
@@ -125,6 +139,10 @@ class SubscriptionCustomPrice(object):
             self.expiration_interval_unit = expiration_interval_unit
         if tax_included is not APIHelper.SKIP:
             self.tax_included = tax_included
+        if list_price_point_id is not APIHelper.SKIP:
+            self.list_price_point_id = list_price_point_id
+        if use_default_list_price is not APIHelper.SKIP:
+            self.use_default_list_price = use_default_list_price
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -221,6 +239,14 @@ class SubscriptionCustomPrice(object):
             dictionary.get("tax_included")\
             if "tax_included" in dictionary.keys()\
                 else APIHelper.SKIP
+        list_price_point_id =\
+            dictionary.get("list_price_point_id")\
+            if "list_price_point_id" in dictionary.keys()\
+                else APIHelper.SKIP
+        use_default_list_price =\
+            dictionary.get("use_default_list_price")\
+            if "use_default_list_price" in dictionary.keys()\
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -241,6 +267,8 @@ class SubscriptionCustomPrice(object):
                    expiration_interval,
                    expiration_interval_unit,
                    tax_included,
+                   list_price_point_id,
+                   use_default_list_price,
                    additional_properties)
 
     @classmethod
@@ -344,6 +372,16 @@ class SubscriptionCustomPrice(object):
             if hasattr(self, "tax_included")
             else None
         )
+        _list_price_point_id=(
+            self.list_price_point_id
+            if hasattr(self, "list_price_point_id")
+            else None
+        )
+        _use_default_list_price=(
+            self.use_default_list_price
+            if hasattr(self, "use_default_list_price")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -361,6 +399,8 @@ class SubscriptionCustomPrice(object):
             f"expiration_interval={_expiration_interval!r}, "
             f"expiration_interval_unit={_expiration_interval_unit!r}, "
             f"tax_included={_tax_included!r}, "
+            f"list_price_point_id={_list_price_point_id!r}, "
+            f"use_default_list_price={_use_default_list_price!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -425,6 +465,16 @@ class SubscriptionCustomPrice(object):
             if hasattr(self, "tax_included")
             else None
         )
+        _list_price_point_id=(
+            self.list_price_point_id
+            if hasattr(self, "list_price_point_id")
+            else None
+        )
+        _use_default_list_price=(
+            self.use_default_list_price
+            if hasattr(self, "use_default_list_price")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -442,6 +492,8 @@ class SubscriptionCustomPrice(object):
             f"expiration_interval={_expiration_interval!s}, "
             f"expiration_interval_unit={_expiration_interval_unit!s}, "
             f"tax_included={_tax_included!s}, "
+            f"list_price_point_id={_list_price_point_id!s}, "
+            f"use_default_list_price={_use_default_list_price!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

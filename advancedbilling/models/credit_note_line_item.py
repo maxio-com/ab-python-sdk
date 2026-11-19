@@ -74,6 +74,12 @@ class CreditNoteLineItem(object):
             non-component credits.
         price_point_id (int): The price point ID of the component being credited.
             Will be `nil` for non-component credits.
+        list_unit_price (str): The unit price from the list price point, in decimal
+            format
+        list_total_amount (str): The total amount for the line item at the list
+            price, in decimal format
+        list_price_point_id (int): The ID of the list price point this line item's
+            sales price is compared against
         billing_schedule_item_id (int): The model property of type int.
         custom_item (bool): The model property of type bool.
         prepaid_allocation_expires_at (date): The date a prepaid allocation is set to
@@ -103,6 +109,9 @@ class CreditNoteLineItem(object):
         "product_version": "product_version",
         "component_id": "component_id",
         "price_point_id": "price_point_id",
+        "list_unit_price": "list_unit_price",
+        "list_total_amount": "list_total_amount",
+        "list_price_point_id": "list_price_point_id",
         "billing_schedule_item_id": "billing_schedule_item_id",
         "custom_item": "custom_item",
         "prepaid_allocation_expires_at": "prepaid_allocation_expires_at",
@@ -126,6 +135,9 @@ class CreditNoteLineItem(object):
         "product_version",
         "component_id",
         "price_point_id",
+        "list_unit_price",
+        "list_total_amount",
+        "list_price_point_id",
         "billing_schedule_item_id",
         "custom_item",
         "prepaid_allocation_expires_at",
@@ -134,6 +146,9 @@ class CreditNoteLineItem(object):
     _nullables = [
         "component_id",
         "price_point_id",
+        "list_unit_price",
+        "list_total_amount",
+        "list_price_point_id",
         "billing_schedule_item_id",
         "prepaid_allocation_expires_at",
     ]
@@ -157,6 +172,9 @@ class CreditNoteLineItem(object):
         product_version=APIHelper.SKIP,
         component_id=APIHelper.SKIP,
         price_point_id=APIHelper.SKIP,
+        list_unit_price=APIHelper.SKIP,
+        list_total_amount=APIHelper.SKIP,
+        list_price_point_id=APIHelper.SKIP,
         billing_schedule_item_id=APIHelper.SKIP,
         custom_item=APIHelper.SKIP,
         prepaid_allocation_expires_at=APIHelper.SKIP,
@@ -197,6 +215,12 @@ class CreditNoteLineItem(object):
             self.component_id = component_id
         if price_point_id is not APIHelper.SKIP:
             self.price_point_id = price_point_id
+        if list_unit_price is not APIHelper.SKIP:
+            self.list_unit_price = list_unit_price
+        if list_total_amount is not APIHelper.SKIP:
+            self.list_total_amount = list_total_amount
+        if list_price_point_id is not APIHelper.SKIP:
+            self.list_price_point_id = list_price_point_id
         if billing_schedule_item_id is not APIHelper.SKIP:
             self.billing_schedule_item_id = billing_schedule_item_id
         if custom_item is not APIHelper.SKIP:
@@ -293,6 +317,18 @@ class CreditNoteLineItem(object):
             dictionary.get("price_point_id")\
             if "price_point_id" in dictionary.keys()\
                 else APIHelper.SKIP
+        list_unit_price =\
+            dictionary.get("list_unit_price")\
+            if "list_unit_price" in dictionary.keys()\
+                else APIHelper.SKIP
+        list_total_amount =\
+            dictionary.get("list_total_amount")\
+            if "list_total_amount" in dictionary.keys()\
+                else APIHelper.SKIP
+        list_price_point_id =\
+            dictionary.get("list_price_point_id")\
+            if "list_price_point_id" in dictionary.keys()\
+                else APIHelper.SKIP
         billing_schedule_item_id =\
             dictionary.get("billing_schedule_item_id")\
             if "billing_schedule_item_id" in dictionary.keys()\
@@ -331,6 +367,9 @@ class CreditNoteLineItem(object):
                    product_version,
                    component_id,
                    price_point_id,
+                   list_unit_price,
+                   list_total_amount,
+                   list_price_point_id,
                    billing_schedule_item_id,
                    custom_item,
                    prepaid_allocation_expires_at,
@@ -444,6 +483,21 @@ class CreditNoteLineItem(object):
             if hasattr(self, "price_point_id")
             else None
         )
+        _list_unit_price=(
+            self.list_unit_price
+            if hasattr(self, "list_unit_price")
+            else None
+        )
+        _list_total_amount=(
+            self.list_total_amount
+            if hasattr(self, "list_total_amount")
+            else None
+        )
+        _list_price_point_id=(
+            self.list_price_point_id
+            if hasattr(self, "list_price_point_id")
+            else None
+        )
         _billing_schedule_item_id=(
             self.billing_schedule_item_id
             if hasattr(self, "billing_schedule_item_id")
@@ -479,6 +533,9 @@ class CreditNoteLineItem(object):
             f"product_version={_product_version!r}, "
             f"component_id={_component_id!r}, "
             f"price_point_id={_price_point_id!r}, "
+            f"list_unit_price={_list_unit_price!r}, "
+            f"list_total_amount={_list_total_amount!r}, "
+            f"list_price_point_id={_list_price_point_id!r}, "
             f"billing_schedule_item_id={_billing_schedule_item_id!r}, "
             f"custom_item={_custom_item!r}, "
             f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!r}, "
@@ -573,6 +630,21 @@ class CreditNoteLineItem(object):
             if hasattr(self, "price_point_id")
             else None
         )
+        _list_unit_price=(
+            self.list_unit_price
+            if hasattr(self, "list_unit_price")
+            else None
+        )
+        _list_total_amount=(
+            self.list_total_amount
+            if hasattr(self, "list_total_amount")
+            else None
+        )
+        _list_price_point_id=(
+            self.list_price_point_id
+            if hasattr(self, "list_price_point_id")
+            else None
+        )
         _billing_schedule_item_id=(
             self.billing_schedule_item_id
             if hasattr(self, "billing_schedule_item_id")
@@ -608,6 +680,9 @@ class CreditNoteLineItem(object):
             f"product_version={_product_version!s}, "
             f"component_id={_component_id!s}, "
             f"price_point_id={_price_point_id!s}, "
+            f"list_unit_price={_list_unit_price!s}, "
+            f"list_total_amount={_list_total_amount!s}, "
+            f"list_price_point_id={_list_price_point_id!s}, "
             f"billing_schedule_item_id={_billing_schedule_item_id!s}, "
             f"custom_item={_custom_item!s}, "
             f"prepaid_allocation_expires_at={_prepaid_allocation_expires_at!s}, "

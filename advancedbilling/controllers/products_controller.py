@@ -52,11 +52,10 @@ class ProductsController(BaseController):
         is returned.
         For more information, see:
         + [Products
-        Overview](https://maxio.zendesk.com/hc/en-us/articles/24261090117645-Products-
-        Overview)
+        Overview](https://docs.maxio.com/billing/catalog/plans/understand-plans)
         + [Changing a Subscription's
-        Product](https://maxio.zendesk.com/hc/en-us/articles/24252069837581-Product-Ch
-        anges-and-Migrations)
+        Product](https://docs.maxio.com/billing/subscriptions/management/subscription-
+        actions/understand-upgrade-and-downgrade-scenarios)
 
         Args:
             product_family_id (str): Either the product family's id or its handle
@@ -102,13 +101,18 @@ class ProductsController(BaseController):
         ).execute()
 
     def read_product(self,
-                     product_id):
+                     product_id,
+                     include_features=False):
         """Perform a GET request to /products/{product_id}.json.
 
         Reads the current details of a product.
 
         Args:
             product_id (int): The Advanced Billing id of the product
+            include_features (bool, optional): When `true`, embeds the active feature
+                catalog items for each result in a `features` array. Default value is
+                `false`. Ignored on sites without Entitlements enabled: no `features`
+                key is returned and no error is raised.
 
         Returns:
             ProductResponse: Response from the API. OK
@@ -128,6 +132,9 @@ class ProductsController(BaseController):
                 .value(product_id)
                 .is_required(True)
                 .should_encode(True))
+            .query_param(Parameter()
+                .key("include_features")
+                .value(include_features))
             .header_param(Parameter()
                 .key("accept")
                 .value("application/json"))
@@ -329,6 +336,11 @@ class ProductsController(BaseController):
                     include -- ListProductsInclude -- Allows including additional
                         data in the response. Use in query
                         `include=prepaid_product_price_point`.
+                    include_features -- bool -- When `true`, embeds the active
+                        feature catalog items for each result in a `features` array.
+                        Default value is `false`. Ignored on sites without
+                        Entitlements enabled: no `features` key is returned and no
+                        error is raised.
 
         Returns:
             List[ProductResponse]: Response from the API. OK
@@ -375,6 +387,9 @@ class ProductsController(BaseController):
             .query_param(Parameter()
                 .key("include")
                 .value(options.get("include", None)))
+            .query_param(Parameter()
+                .key("include_features")
+                .value(options.get("include_features", None)))
             .header_param(Parameter()
                 .key("accept")
                 .value("application/json"))
