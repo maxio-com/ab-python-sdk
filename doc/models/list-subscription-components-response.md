@@ -23,7 +23,7 @@ list_subscription_components_response = ListSubscriptionComponentsResponse(
         SubscriptionComponent(
             id=138,
             name='name2',
-            kind=ComponentKind.METERED_COMPONENT,
+            kind=ComponentKind.EVENT_BASED_COMPONENT,
             unit_name='unit_name4',
             enabled=False
         )

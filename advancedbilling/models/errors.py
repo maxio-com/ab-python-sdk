@@ -11,6 +11,8 @@ from advancedbilling.api_helper import APIHelper
 class Errors(object):
     """Implementation of the 'Errors' model.
 
+    Validation error details for listing segments.
+
     Attributes:
         per_page (List[str]): The model property of type List[str].
         price_point (List[str]): The model property of type List[str].

@@ -25,6 +25,8 @@
 | `expiration_interval` | str \| int \| None | Optional | This is a container for one-of cases. |
 | `expiration_interval_unit` | [`ExpirationIntervalUnit`](../../doc/models/expiration-interval-unit.md) | Optional | (Optional) |
 | `tax_included` | `bool` | Optional | (Optional) |
+| `list_price_point_id` | `int` | Optional | (Optional) The ID of a catalog price point of the same product to use as the list price. Ignored unless list vs sales pricing is enabled for the site. |
+| `use_default_list_price` | `bool` | Optional | (Optional) When list vs sales pricing is enabled and `list_price_point_id` is omitted, the product's default price point is used as the list price unless this is `false`. Defaults to `true`. |
 
 ## Example
 

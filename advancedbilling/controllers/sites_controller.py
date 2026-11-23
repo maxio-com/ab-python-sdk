@@ -40,10 +40,10 @@ class SitesController(BaseController):
 
         Retrieves site data.
         For more information, see
-        [Sites](https://maxio.zendesk.com/hc/en-us/sections/24250550707085-Sites) in
-        the product documentation. Specifically, the [Clearing Site
-        Data](https://maxio.zendesk.com/hc/en-us/articles/24250617028365-Clearing-Site
-        -Data) section is relevant to this endpoint.
+        [Sites](https://docs.maxio.com/configuration/advanced-billing/sites/sites-over
+        view) in the product documentation. Specifically, the [Clearing Site
+        Data](https://docs.maxio.com/configuration/advanced-billing/sites/clearing-sit
+        e-data) section is relevant to this endpoint.
         #### Relationship invoicing enabled
         If the site has Relationship invoicing enabled, additional properties are
         returned in the response:
@@ -53,8 +53,8 @@ class SitesController(BaseController):
         "whopays_default_payer": "self"
         ```
         For more information, see [Who Pays & Customer
-        Hierarchy](https://maxio.zendesk.com/hc/en-us/articles/24252185211533-Customer
-        -Hierarchies-WhoPays).
+        Hierarchy](https://docs.maxio.com/billing/subscriptions/customers/understand-c
+        ustomer-hierarchies-and-whopays).
 
         Returns:
             SiteResponse: Response from the API. OK

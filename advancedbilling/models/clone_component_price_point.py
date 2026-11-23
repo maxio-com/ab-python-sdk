@@ -6,6 +6,9 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 
 # ruff: noqa: E501
 from advancedbilling.api_helper import APIHelper
+from advancedbilling.models.clone_feature_catalog_item import (
+    CloneFeatureCatalogItem,
+)
 
 
 class CloneComponentPricePoint(object):
@@ -14,6 +17,9 @@ class CloneComponentPricePoint(object):
     Attributes:
         name (str): The model property of type str.
         handle (str): The model property of type str.
+        feature_catalog_items (List[CloneFeatureCatalogItem]): The features the clone
+            gets. The clone does not copy the source price point's features, so send
+            every feature it should have.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -23,22 +29,27 @@ class CloneComponentPricePoint(object):
     _names = {
         "name": "name",
         "handle": "handle",
+        "feature_catalog_items": "feature_catalog_items",
     }
 
     _optionals = [
         "handle",
+        "feature_catalog_items",
     ]
 
     def __init__(
         self,
         name=None,
         handle=APIHelper.SKIP,
+        feature_catalog_items=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a CloneComponentPricePoint instance."""
         # Initialize members of the class
         self.name = name
         if handle is not APIHelper.SKIP:
             self.handle = handle
+        if feature_catalog_items is not APIHelper.SKIP:
+            self.feature_catalog_items = feature_catalog_items
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -71,6 +82,14 @@ class CloneComponentPricePoint(object):
             dictionary.get("handle")\
             if dictionary.get("handle")\
                 else APIHelper.SKIP
+        feature_catalog_items = None
+        if dictionary.get("feature_catalog_items") is not None:
+            feature_catalog_items = [
+                CloneFeatureCatalogItem.from_dictionary(x)
+                    for x in dictionary.get("feature_catalog_items")
+            ]
+        else:
+            feature_catalog_items = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -79,6 +98,7 @@ class CloneComponentPricePoint(object):
         # Return an object of this model
         return cls(name,
                    handle,
+                   feature_catalog_items,
                    additional_properties)
 
     def __repr__(self):
@@ -89,11 +109,17 @@ class CloneComponentPricePoint(object):
             if hasattr(self, "handle")
             else None
         )
+        _feature_catalog_items=(
+            self.feature_catalog_items
+            if hasattr(self, "feature_catalog_items")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
             f"name={_name!r}, "
             f"handle={_handle!r}, "
+            f"feature_catalog_items={_feature_catalog_items!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -106,11 +132,17 @@ class CloneComponentPricePoint(object):
             if hasattr(self, "handle")
             else None
         )
+        _feature_catalog_items=(
+            self.feature_catalog_items
+            if hasattr(self, "feature_catalog_items")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
             f"name={_name!s}, "
             f"handle={_handle!s}, "
+            f"feature_catalog_items={_feature_catalog_items!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

@@ -16,9 +16,9 @@
 ```python
 from advancedbilling.models.create_component_price_point import CreateComponentPricePoint
 from advancedbilling.models.create_component_price_point_request import CreateComponentPricePointRequest
-from advancedbilling.models.interval_unit import IntervalUnit
 from advancedbilling.models.price import Price
 from advancedbilling.models.pricing_scheme import PricingScheme
+from advancedbilling.models.secondary_pricing import SecondaryPricing
 
 create_component_price_point_request = CreateComponentPricePointRequest(
     price_point=CreateComponentPricePoint(
@@ -32,10 +32,24 @@ create_component_price_point_request = CreateComponentPricePointRequest(
             )
         ],
         handle='handle6',
+        secondary_pricing=SecondaryPricing(
+            pricing_scheme=PricingScheme.STAIRSTEP,
+            prices=[
+                Price(
+                    starting_quantity=242,
+                    unit_price=23.26,
+                    ending_quantity=40
+                ),
+                Price(
+                    starting_quantity=242,
+                    unit_price=23.26,
+                    ending_quantity=40
+                )
+            ]
+        ),
+        secondary_pricing_scheme=PricingScheme.STAIRSTEP,
         use_site_exchange_rate=True,
-        tax_included=False,
-        interval=24,
-        interval_unit=IntervalUnit.DAY
+        tax_included=False
     )
 )
 ```

@@ -60,43 +60,48 @@ class PaymentProfilesController(BaseController):
         the portal to see examples of common scenarios for creating payment profiles.
         Do not use real card information for testing. See the Sites articles that
         cover [testing your site
-        setup](https://docs.maxio.com/hc/en-us/articles/24250712113165-Testing-Overvie
-        w#testing-overview-0-0) for more details on testing in your sandbox.
+        setup](https://docs.maxio.com/configuration/advanced-billing/sites/testing-ove
+        rview) for more details on testing in your sandbox.
         Note that collecting and sending raw card details in production requires [PCI
-        compliance](https://docs.maxio.com/hc/en-us/articles/24183956938381-PCI-Compli
-        ance#pci-compliance-0-0) on your end. If your business is not PCI compliant,
-        use [Maxio.js (formerly
-        Chargify.js)](https://docs.maxio.com/hc/en-us/articles/38163190843789-Chargify
-        -js-Overview#chargify-js-overview-0-0) to collect credit card or bank account
+        compliance](https://docs.maxio.com/configuration/compliance/understand-pci-com
+        pliance) on your end. If your business is not PCI compliant, use [Maxio.js
+        (formerly
+        Chargify.js)](https://docs.maxio.com/configuration/advanced-billing/maxiojs-fo
+        rmerly-chargifyjs/understand-maxiojs) to collect credit card or bank account
         information.
         See the following articles to learn more about subscriptions and payments:
         + [Subscriber Payment
-        Details](https://maxio.zendesk.com/hc/en-us/articles/24251599929613-Subscripti
-        on-Summary-Payment-Details-Tab)
+        Details](https://docs.maxio.com/getting-started/maxio-platform-basics/advanced
+        -billing-overview-and-resources/subscription-summary-tabs/managing-payment-met
+        hods)
         + [Self Service
-        Pages](https://maxio.zendesk.com/hc/en-us/articles/24261425318541-Self-Service
-        -Pages) (Allows credit card updates by Subscriber)
+        Pages](https://docs.maxio.com/billing/public-pages/understand-self-service-pag
+        es) (Allows credit card updates by Subscriber)
         + [Public Signup Pages payment
-        settings](https://maxio.zendesk.com/hc/en-us/articles/24261368332557-Individua
-        l-Page-Settings)
+        settings](https://docs.maxio.com/selling/public-signup-pages/individual-page-s
+        ettings)
         +
         [Taxes](https://developers.chargify.com/docs/developer-docs/d2e9e34db740e-sign
         ups#taxes)
         + [Maxio.js (formerly
-        Chargify.js)](https://docs.maxio.com/hc/en-us/articles/38163190843789-Chargify
-        -js-Overview)
+        Chargify.js)](https://docs.maxio.com/configuration/advanced-billing/maxiojs-fo
+        rmerly-chargifyjs/understand-maxiojs)
             + [Maxio.js with GoCardless - minimal
-        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01
-        K0PJ15QQZKCER8CFK40MR6XJ)
+        example](https://docs.maxio.com/configuration/advanced-billing/maxiojs-formerl
+        y-chargifyjs/review-maxiojs-form-examples#minimal-example-with-direct-debit-go
+        cardless-gateway)
             + [Maxio.js with GoCardless - full
-        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01
-        K0PJ15QR09JVHWW0MCA7HVJV)
+        example](https://docs.maxio.com/configuration/advanced-billing/maxiojs-formerl
+        y-chargifyjs/review-maxiojs-form-examples#full-example-with-direct-debit-gocar
+        dless-gateway)
             + [Maxio.js with Stripe Direct Debit - minimal
-        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01
-        K0PJ15QQFKKN8Z7B7DZ9AJS5)
+        example](https://docs.maxio.com/configuration/advanced-billing/maxiojs-formerl
+        y-chargifyjs/review-maxiojs-form-examples#minimal-example-with-sepa-becs-or-ba
+        cs-direct-debit-stripe-gateway)
             + [Maxio.js with Stripe Direct Debit - full
-        example](https://docs.maxio.com/hc/en-us/articles/38206331271693-Examples#h_01
-        K0PJ15QRECQQ4ECS3ZA55GY7)
+        example](https://docs.maxio.com/configuration/advanced-billing/maxiojs-formerl
+        y-chargifyjs/review-maxiojs-form-examples#full-example-with-sepa-direct-debit-
+        stripe-gateway)
             + [Maxio.js with Stripe BECS Direct Debit - minimal
         example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-
         examples#minimal-example-with-sepa-or-becs-direct-debit-stripe-gateway)
@@ -104,26 +109,26 @@ class PaymentProfilesController(BaseController):
         example](https://developers.chargify.com/docs/developer-docs/ZG9jOjE0NjAzNDIy-
         examples#full-example-with-sepa-direct-debit-stripe-gateway)
         + [Full documentation on
-        GoCardless](https://maxio.zendesk.com/hc/en-us/articles/24176159136909-GoCardl
-        ess)
+        GoCardless](https://docs.maxio.com/payments/additional-gateways/supported-paym
+        ent-methods/direct-debit/gocardless)
         + [Full documentation on Stripe SEPA Direct
-        Debit](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Stripe-SEPA-
-        and-BECS-Direct-Debit)
+        Debit](https://docs.maxio.com/payments/additional-gateways/supported-payment-m
+        ethods/direct-debit/stripe-sepa-and-becs-direct-debit)
         + [Full documentation on Stripe BECS Direct
-        Debit](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Stripe-SEPA-
-        and-BECS-Direct-Debit)
+        Debit](https://docs.maxio.com/payments/additional-gateways/supported-payment-m
+        ethods/direct-debit/stripe-sepa-and-becs-direct-debit)
         + [Full documentation on Stripe BACS Direct
-        Debit](https://maxio.zendesk.com/hc/en-us/articles/24176170430093-Stripe-SEPA-
-        and-BECS-Direct-Debit)
+        Debit](https://docs.maxio.com/payments/additional-gateways/supported-payment-m
+        ethods/direct-debit/stripe-sepa-and-becs-direct-debit)
         ## 3D Secure (3DS) Authentication post-authentication flow
         When a payment requires 3DS Authentication to adhere to Strong Customer
         Authentication (SCA), the request enters a post-authentication flow where a
         422 Unprocessable Entity status is returned with an action_link that will
         direct the customer through 3DS Authentication.
         See the [3D Secure Post-Authentication
-        Flow](https://docs.maxio.com/hc/en-us/articles/44277749524365-3D-Secure-Post-A
-        uthentication-Flow) article in the product documentation to learn how to
-        manage the redirect flow.
+        Flow](https://docs.maxio.com/configuration/advanced-billing/maxiojs-formerly-c
+        hargifyjs/handle-3d-secure-post-authentication) article in the product
+        documentation to learn how to manage the redirect flow.
 
         Args:
             body (CreatePaymentProfileRequest, optional): When following the IBAN or
@@ -682,8 +687,8 @@ class PaymentProfilesController(BaseController):
         instead of passing all bank account or credit card data directly to a given
         API endpoint.
         To obtain a One Time Token you have to use
-        [Chargify.js](https://docs.maxio.com/hc/en-us/articles/38163190843789-Chargify
-        -js-Overview#chargify-js-overview-0-0).
+        [Chargify.js](https://docs.maxio.com/configuration/advanced-billing/maxiojs-fo
+        rmerly-chargifyjs/understand-maxiojs).
 
         Args:
             chargify_token (str): Advanced Billing Token

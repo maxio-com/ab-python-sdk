@@ -28,6 +28,9 @@ from advancedbilling.controllers.base_controller import (
 from advancedbilling.controllers.billing_portal_controller import (
     BillingPortalController,
 )
+from advancedbilling.controllers.component_features_controller import (
+    ComponentFeaturesController,
+)
 from advancedbilling.controllers.component_price_points_controller import (
     ComponentPricePointsController,
 )
@@ -43,11 +46,17 @@ from advancedbilling.controllers.custom_fields_controller import (
 from advancedbilling.controllers.customers_controller import (
     CustomersController,
 )
+from advancedbilling.controllers.entitlements_controller import (
+    EntitlementsController,
+)
 from advancedbilling.controllers.events_based_billing_segments_controller import (
     EventsBasedBillingSegmentsController,
 )
 from advancedbilling.controllers.events_controller import (
     EventsController,
+)
+from advancedbilling.controllers.feature_templates_controller import (
+    FeatureTemplatesController,
 )
 from advancedbilling.controllers.insights_controller import (
     InsightsController,
@@ -63,6 +72,9 @@ from advancedbilling.controllers.payment_profiles_controller import (
 )
 from advancedbilling.controllers.product_families_controller import (
     ProductFamiliesController,
+)
+from advancedbilling.controllers.product_features_controller import (
+    ProductFeaturesController,
 )
 from advancedbilling.controllers.product_price_points_controller import (
     ProductPricePointsController,
@@ -115,6 +127,21 @@ from advancedbilling.controllers.subscription_status_controller import (
 from advancedbilling.controllers.subscriptions_controller import (
     SubscriptionsController,
 )
+from advancedbilling.controllers.wallet_adjustments_controller import (
+    WalletAdjustmentsController,
+)
+from advancedbilling.controllers.wallet_products_controller import (
+    WalletProductsController,
+)
+from advancedbilling.controllers.wallet_purchases_controller import (
+    WalletPurchasesController,
+)
+from advancedbilling.controllers.wallet_transactions_controller import (
+    WalletTransactionsController,
+)
+from advancedbilling.controllers.wallets_controller import (
+    WalletsController,
+)
 from advancedbilling.controllers.webhooks_controller import (
     WebhooksController,
 )
@@ -147,6 +174,11 @@ class AdvancedBillingClient(object):
         return CouponsController(self.global_configuration)
 
     @LazyProperty
+    def component_features(self):
+        """Provide access to the ComponentFeaturesController endpoints."""
+        return ComponentFeaturesController(self.global_configuration)
+
+    @LazyProperty
     def components(self):
         """Provide access to the ComponentsController endpoints."""
         return ComponentsController(self.global_configuration)
@@ -167,6 +199,11 @@ class AdvancedBillingClient(object):
         return CustomFieldsController(self.global_configuration)
 
     @LazyProperty
+    def entitlements(self):
+        """Provide access to the EntitlementsController endpoints."""
+        return EntitlementsController(self.global_configuration)
+
+    @LazyProperty
     def events(self):
         """Provide access to the EventsController endpoints."""
         return EventsController(self.global_configuration)
@@ -175,6 +212,11 @@ class AdvancedBillingClient(object):
     def events_based_billing_segments(self):
         """Provide access to the EventsBasedBillingSegmentsController endpoints."""
         return EventsBasedBillingSegmentsController(self.global_configuration)
+
+    @LazyProperty
+    def feature_templates(self):
+        """Provide access to the FeatureTemplatesController endpoints."""
+        return FeatureTemplatesController(self.global_configuration)
 
     @LazyProperty
     def insights(self):
@@ -200,6 +242,11 @@ class AdvancedBillingClient(object):
     def product_families(self):
         """Provide access to the ProductFamiliesController endpoints."""
         return ProductFamiliesController(self.global_configuration)
+
+    @LazyProperty
+    def product_features(self):
+        """Provide access to the ProductFeaturesController endpoints."""
+        return ProductFeaturesController(self.global_configuration)
 
     @LazyProperty
     def products(self):
@@ -287,6 +334,31 @@ class AdvancedBillingClient(object):
     def subscription_status(self):
         """Provide access to the SubscriptionStatusController endpoints."""
         return SubscriptionStatusController(self.global_configuration)
+
+    @LazyProperty
+    def wallets(self):
+        """Provide access to the WalletsController endpoints."""
+        return WalletsController(self.global_configuration)
+
+    @LazyProperty
+    def wallet_transactions(self):
+        """Provide access to the WalletTransactionsController endpoints."""
+        return WalletTransactionsController(self.global_configuration)
+
+    @LazyProperty
+    def wallet_adjustments(self):
+        """Provide access to the WalletAdjustmentsController endpoints."""
+        return WalletAdjustmentsController(self.global_configuration)
+
+    @LazyProperty
+    def wallet_purchases(self):
+        """Provide access to the WalletPurchasesController endpoints."""
+        return WalletPurchasesController(self.global_configuration)
+
+    @LazyProperty
+    def wallet_products(self):
+        """Provide access to the WalletProductsController endpoints."""
+        return WalletProductsController(self.global_configuration)
 
     @LazyProperty
     def webhooks(self):

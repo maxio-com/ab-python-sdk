@@ -63,6 +63,11 @@ class CurrencyOveragePrices(object):
             components. An array of overage price brackets.
         overage_pricing_scheme (PricingScheme): Applicable only to prepaid usage
             components. Pricing scheme for overage pricing.
+        secondary_prices (List[ComponentPrice]): Returned only for hybrid price
+            points. An array of secondary price brackets. Hybrid price points never
+            return `overage_prices` or `overage_pricing_scheme`.
+        secondary_pricing_scheme (PricingScheme): Returned only for hybrid price
+            points. Pricing scheme for the secondary pricing model.
         renew_prepaid_allocation (bool): Applicable only to prepaid usage components.
             Boolean which controls whether or not the allocated quantity should be
             renewed at the beginning of each period.
@@ -79,6 +84,10 @@ class CurrencyOveragePrices(object):
         currency_overage_prices (List[ComponentCurrencyPrice]): Applicable only to
             prepaid usage components. An array of currency pricing data for overage
             prices.
+        currency_secondary_prices (List[ComponentCurrencyPrice]): Returned only for
+            hybrid price points, by List All Component Price Points with
+            `include=currency_secondary_prices` or `include=currency_overage_prices`.
+            An array of currency pricing data for secondary prices.
         additional_properties (Dict[str, object]): The additional properties for the
             model.
 
@@ -105,11 +114,14 @@ class CurrencyOveragePrices(object):
         "currency_prices": "currency_prices",
         "overage_prices": "overage_prices",
         "overage_pricing_scheme": "overage_pricing_scheme",
+        "secondary_prices": "secondary_prices",
+        "secondary_pricing_scheme": "secondary_pricing_scheme",
         "renew_prepaid_allocation": "renew_prepaid_allocation",
         "rollover_prepaid_remainder": "rollover_prepaid_remainder",
         "expiration_interval": "expiration_interval",
         "expiration_interval_unit": "expiration_interval_unit",
         "currency_overage_prices": "currency_overage_prices",
+        "currency_secondary_prices": "currency_secondary_prices",
     }
 
     _optionals = [
@@ -132,11 +144,14 @@ class CurrencyOveragePrices(object):
         "currency_prices",
         "overage_prices",
         "overage_pricing_scheme",
+        "secondary_prices",
+        "secondary_pricing_scheme",
         "renew_prepaid_allocation",
         "rollover_prepaid_remainder",
         "expiration_interval",
         "expiration_interval_unit",
         "currency_overage_prices",
+        "currency_secondary_prices",
     ]
 
     _nullables = [
@@ -169,11 +184,14 @@ class CurrencyOveragePrices(object):
         currency_prices=APIHelper.SKIP,
         overage_prices=APIHelper.SKIP,
         overage_pricing_scheme=APIHelper.SKIP,
+        secondary_prices=APIHelper.SKIP,
+        secondary_pricing_scheme=APIHelper.SKIP,
         renew_prepaid_allocation=APIHelper.SKIP,
         rollover_prepaid_remainder=APIHelper.SKIP,
         expiration_interval=APIHelper.SKIP,
         expiration_interval_unit=APIHelper.SKIP,
         currency_overage_prices=APIHelper.SKIP,
+        currency_secondary_prices=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a CurrencyOveragePrices instance."""
         # Initialize members of the class
@@ -224,6 +242,10 @@ class CurrencyOveragePrices(object):
             self.overage_prices = overage_prices
         if overage_pricing_scheme is not APIHelper.SKIP:
             self.overage_pricing_scheme = overage_pricing_scheme
+        if secondary_prices is not APIHelper.SKIP:
+            self.secondary_prices = secondary_prices
+        if secondary_pricing_scheme is not APIHelper.SKIP:
+            self.secondary_pricing_scheme = secondary_pricing_scheme
         if renew_prepaid_allocation is not APIHelper.SKIP:
             self.renew_prepaid_allocation = renew_prepaid_allocation
         if rollover_prepaid_remainder is not APIHelper.SKIP:
@@ -234,6 +256,8 @@ class CurrencyOveragePrices(object):
             self.expiration_interval_unit = expiration_interval_unit
         if currency_overage_prices is not APIHelper.SKIP:
             self.currency_overage_prices = currency_overage_prices
+        if currency_secondary_prices is not APIHelper.SKIP:
+            self.currency_secondary_prices = currency_secondary_prices
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -347,6 +371,18 @@ class CurrencyOveragePrices(object):
             dictionary.get("overage_pricing_scheme")\
             if dictionary.get("overage_pricing_scheme")\
                 else APIHelper.SKIP
+        secondary_prices = None
+        if dictionary.get("secondary_prices") is not None:
+            secondary_prices = [
+                ComponentPrice.from_dictionary(x)
+                    for x in dictionary.get("secondary_prices")
+            ]
+        else:
+            secondary_prices = APIHelper.SKIP
+        secondary_pricing_scheme =\
+            dictionary.get("secondary_pricing_scheme")\
+            if dictionary.get("secondary_pricing_scheme")\
+                else APIHelper.SKIP
         renew_prepaid_allocation =\
             dictionary.get("renew_prepaid_allocation")\
             if "renew_prepaid_allocation" in dictionary.keys()\
@@ -371,6 +407,14 @@ class CurrencyOveragePrices(object):
             ]
         else:
             currency_overage_prices = APIHelper.SKIP
+        currency_secondary_prices = None
+        if dictionary.get("currency_secondary_prices") is not None:
+            currency_secondary_prices = [
+                ComponentCurrencyPrice.from_dictionary(x)
+                    for x in dictionary.get("currency_secondary_prices")
+            ]
+        else:
+            currency_secondary_prices = APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
@@ -396,11 +440,14 @@ class CurrencyOveragePrices(object):
                    currency_prices,
                    overage_prices,
                    overage_pricing_scheme,
+                   secondary_prices,
+                   secondary_pricing_scheme,
                    renew_prepaid_allocation,
                    rollover_prepaid_remainder,
                    expiration_interval,
                    expiration_interval_unit,
                    currency_overage_prices,
+                   currency_secondary_prices,
                    additional_properties)
 
     def __repr__(self):
@@ -500,6 +547,16 @@ class CurrencyOveragePrices(object):
             if hasattr(self, "overage_pricing_scheme")
             else None
         )
+        _secondary_prices=(
+            self.secondary_prices
+            if hasattr(self, "secondary_prices")
+            else None
+        )
+        _secondary_pricing_scheme=(
+            self.secondary_pricing_scheme
+            if hasattr(self, "secondary_pricing_scheme")
+            else None
+        )
         _renew_prepaid_allocation=(
             self.renew_prepaid_allocation
             if hasattr(self, "renew_prepaid_allocation")
@@ -525,6 +582,11 @@ class CurrencyOveragePrices(object):
             if hasattr(self, "currency_overage_prices")
             else None
         )
+        _currency_secondary_prices=(
+            self.currency_secondary_prices
+            if hasattr(self, "currency_secondary_prices")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -547,11 +609,14 @@ class CurrencyOveragePrices(object):
             f"currency_prices={_currency_prices!r}, "
             f"overage_prices={_overage_prices!r}, "
             f"overage_pricing_scheme={_overage_pricing_scheme!r}, "
+            f"secondary_prices={_secondary_prices!r}, "
+            f"secondary_pricing_scheme={_secondary_pricing_scheme!r}, "
             f"renew_prepaid_allocation={_renew_prepaid_allocation!r}, "
             f"rollover_prepaid_remainder={_rollover_prepaid_remainder!r}, "
             f"expiration_interval={_expiration_interval!r}, "
             f"expiration_interval_unit={_expiration_interval_unit!r}, "
             f"currency_overage_prices={_currency_overage_prices!r}, "
+            f"currency_secondary_prices={_currency_secondary_prices!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
         )
@@ -653,6 +718,16 @@ class CurrencyOveragePrices(object):
             if hasattr(self, "overage_pricing_scheme")
             else None
         )
+        _secondary_prices=(
+            self.secondary_prices
+            if hasattr(self, "secondary_prices")
+            else None
+        )
+        _secondary_pricing_scheme=(
+            self.secondary_pricing_scheme
+            if hasattr(self, "secondary_pricing_scheme")
+            else None
+        )
         _renew_prepaid_allocation=(
             self.renew_prepaid_allocation
             if hasattr(self, "renew_prepaid_allocation")
@@ -678,6 +753,11 @@ class CurrencyOveragePrices(object):
             if hasattr(self, "currency_overage_prices")
             else None
         )
+        _currency_secondary_prices=(
+            self.currency_secondary_prices
+            if hasattr(self, "currency_secondary_prices")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
@@ -700,11 +780,14 @@ class CurrencyOveragePrices(object):
             f"currency_prices={_currency_prices!s}, "
             f"overage_prices={_overage_prices!s}, "
             f"overage_pricing_scheme={_overage_pricing_scheme!s}, "
+            f"secondary_prices={_secondary_prices!s}, "
+            f"secondary_pricing_scheme={_secondary_pricing_scheme!s}, "
             f"renew_prepaid_allocation={_renew_prepaid_allocation!s}, "
             f"rollover_prepaid_remainder={_rollover_prepaid_remainder!s}, "
             f"expiration_interval={_expiration_interval!s}, "
             f"expiration_interval_unit={_expiration_interval_unit!s}, "
             f"currency_overage_prices={_currency_overage_prices!s}, "
+            f"currency_secondary_prices={_currency_secondary_prices!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
         )

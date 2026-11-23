@@ -74,8 +74,8 @@ class BillingPortalController(BaseController):
         (such as to display on your website), **do not** make an API request every
         time.
         For more information configuring the Billing Portal, see [Billing Portal
-        Overview](https://maxio.zendesk.com/hc/en-us/articles/24252412965133-Billing-P
-        ortal-Overview).
+        Overview](https://docs.maxio.com/billing/billing-portal/overview/understand-th
+        e-billing-portal).
 
         Args:
             customer_id (int): The Chargify id of the customer

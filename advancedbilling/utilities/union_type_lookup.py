@@ -430,6 +430,22 @@ class UnionTypeLookUp:
                is_optional=True,
             ),
         ),
+        "AdjustmentAmount": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+        ),
+        "AggregatedEntitlementValue": lambda: OneOf(
+            [
+                LeafType(bool),
+                LeafType(float),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
         "AllocationQuantity": lambda: OneOf(
             [
                 LeafType(int),
@@ -505,6 +521,15 @@ class UnionTypeLookUp:
             ),
         ),
         "ComponentAllocationChangeAllocatedQuantity": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "ComponentPricePointAssignmentComponentId": lambda: OneOf(
             [
                 LeafType(int),
                 LeafType(str),
@@ -959,6 +984,12 @@ class UnionTypeLookUp:
                 LeafType(str),
             ],
         ),
+        "PurchaseQuantity": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+        ),
         "QuantityBasedComponentUnitPrice": lambda: OneOf(
             [
                 LeafType(str),
@@ -1097,6 +1128,106 @@ class UnionTypeLookUp:
             [
                 LeafType(int),
                 LeafType(str),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionComponentCustomPriceSegmentSegmentProperty1Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionComponentCustomPriceSegmentSegmentProperty2Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionComponentCustomPriceSegmentSegmentProperty3Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionComponentCustomPriceSegmentSegmentProperty4Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionComponentCustomPriceSegmentSegmentProperty5Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionComponentCustomPriceSegmentSegmentProperty6Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionComponentCustomPriceSegmentSegmentProperty7Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionComponentCustomPriceSegmentSegmentProperty8Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionComponentCustomPriceSegmentSegmentProperty9Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "SubscriptionComponentCustomPriceSegmentSegmentProperty10Value": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(float),
+                LeafType(int),
             ],
             Context.create(
                is_optional=True,
@@ -1339,6 +1470,36 @@ class UnionTypeLookUp:
             Context.create(
                is_optional=True,
             ),
+        ),
+        "Wallet1WalletProductId": lambda: OneOf(
+            [
+                LeafType(int),
+                LeafType(str),
+            ],
+        ),
+        "Wallet1ConversionRate": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "Wallet1InitialBalance": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
+            Context.create(
+               is_optional=True,
+            ),
+        ),
+        "WalletTransaction1Amount": lambda: OneOf(
+            [
+                LeafType(str),
+                LeafType(int),
+            ],
         ),
     }
 

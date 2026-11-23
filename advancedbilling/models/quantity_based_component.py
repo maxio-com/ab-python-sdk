@@ -10,6 +10,9 @@ from advancedbilling.models.component_price_point_item import (
     ComponentPricePointItem,
 )
 from advancedbilling.models.price import Price
+from advancedbilling.models.secondary_pricing import (
+    SecondaryPricing,
+)
 
 
 class QuantityBasedComponent(object):
@@ -35,9 +38,16 @@ class QuantityBasedComponent(object):
             for an overview of pricing schemes.
         prices (List[Price]): (Not required for ‘per_unit’ pricing schemes) One or
             more price brackets. See [Price Bracket
-            Rules](https://maxio.zendesk.com/hc/en-us/articles/24261149166733-Componen
-            t-Pricing-Schemes#price-bracket-rules) for an overview of how price
-            brackets work for different pricing schemes.
+            Rules](https://docs.maxio.com/billing/catalog/products/use-product-pricing
+            -schemes#price-bracket-rules) for an overview of how price brackets work
+            for different pricing schemes.
+        secondary_pricing (SecondaryPricing): Hybrid Pricing only. The secondary
+            pricing model that takes over once usage passes the primary model's
+            included threshold. Applies to Quantity-Based and Metered Components on
+            Sites with Hybrid Pricing enabled; ignored otherwise. Its `prices`
+            brackets start at `1`, not at the primary model's highest
+            `ending_quantity`. See [Hybrid
+            Pricing](page:introduction/basic-concepts/hybrid-pricing).
         upgrade_charge (CreditType): The type of credit to be created when
             upgrading/downgrading. Defaults to the component and then site setting if
             one is not provided.
@@ -86,6 +96,7 @@ class QuantityBasedComponent(object):
         "handle": "handle",
         "taxable": "taxable",
         "prices": "prices",
+        "secondary_pricing": "secondary_pricing",
         "upgrade_charge": "upgrade_charge",
         "downgrade_credit": "downgrade_credit",
         "price_points": "price_points",
@@ -106,6 +117,7 @@ class QuantityBasedComponent(object):
         "handle",
         "taxable",
         "prices",
+        "secondary_pricing",
         "upgrade_charge",
         "downgrade_credit",
         "price_points",
@@ -137,6 +149,7 @@ class QuantityBasedComponent(object):
         handle=APIHelper.SKIP,
         taxable=APIHelper.SKIP,
         prices=APIHelper.SKIP,
+        secondary_pricing=APIHelper.SKIP,
         upgrade_charge=APIHelper.SKIP,
         downgrade_credit=APIHelper.SKIP,
         price_points=APIHelper.SKIP,
@@ -164,6 +177,8 @@ class QuantityBasedComponent(object):
         self.pricing_scheme = pricing_scheme
         if prices is not APIHelper.SKIP:
             self.prices = prices
+        if secondary_pricing is not APIHelper.SKIP:
+            self.secondary_pricing = secondary_pricing
         if upgrade_charge is not APIHelper.SKIP:
             self.upgrade_charge = upgrade_charge
         if downgrade_credit is not APIHelper.SKIP:
@@ -250,6 +265,11 @@ class QuantityBasedComponent(object):
             ]
         else:
             prices = APIHelper.SKIP
+        secondary_pricing =\
+            SecondaryPricing.from_dictionary(
+                dictionary.get("secondary_pricing"))\
+                if "secondary_pricing" in dictionary.keys()\
+                else APIHelper.SKIP
         upgrade_charge =\
             dictionary.get("upgrade_charge")\
             if "upgrade_charge" in dictionary.keys()\
@@ -321,6 +341,7 @@ class QuantityBasedComponent(object):
                    handle,
                    taxable,
                    prices,
+                   secondary_pricing,
                    upgrade_charge,
                    downgrade_credit,
                    price_points,
@@ -359,6 +380,11 @@ class QuantityBasedComponent(object):
         _prices=(
             self.prices
             if hasattr(self, "prices")
+            else None
+        )
+        _secondary_pricing=(
+            self.secondary_pricing
+            if hasattr(self, "secondary_pricing")
             else None
         )
         _upgrade_charge=(
@@ -436,6 +462,7 @@ class QuantityBasedComponent(object):
             f"taxable={_taxable!r}, "
             f"pricing_scheme={_pricing_scheme!r}, "
             f"prices={_prices!r}, "
+            f"secondary_pricing={_secondary_pricing!r}, "
             f"upgrade_charge={_upgrade_charge!r}, "
             f"downgrade_credit={_downgrade_credit!r}, "
             f"price_points={_price_points!r}, "
@@ -476,6 +503,11 @@ class QuantityBasedComponent(object):
         _prices=(
             self.prices
             if hasattr(self, "prices")
+            else None
+        )
+        _secondary_pricing=(
+            self.secondary_pricing
+            if hasattr(self, "secondary_pricing")
             else None
         )
         _upgrade_charge=(
@@ -553,6 +585,7 @@ class QuantityBasedComponent(object):
             f"taxable={_taxable!s}, "
             f"pricing_scheme={_pricing_scheme!s}, "
             f"prices={_prices!s}, "
+            f"secondary_pricing={_secondary_pricing!s}, "
             f"upgrade_charge={_upgrade_charge!s}, "
             f"downgrade_credit={_downgrade_credit!s}, "
             f"price_points={_price_points!s}, "

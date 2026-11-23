@@ -33,7 +33,10 @@
 | `portal_invite_last_accepted_at` | `datetime` | Optional | The timestamp of when the Billing Portal invite was last accepted |
 | `tax_exempt` | `bool` | Optional | The tax exempt status for the customer. Acceptable values are true or 1 for true and false or 0 for false. |
 | `surcharging` | `bool` | Optional | Whether surcharging is enabled for the customer. Only included on sites where surcharging control is enabled. |
-| `vat_number` | `str` | Optional | The VAT business identification number for the customer. This number is used to determine VAT tax opt out rules. It is not validated when added or updated on a customer record. Instead, it is validated via VIES before calculating taxes. Only valid business identification numbers will allow for VAT opt out. |
+| `vat_number` | `str` | Optional | The VAT business identification number for the customer. This number is used to determine VAT tax opt out rules. It is not validated when added or updated on a customer record. Instead, it is validated via VIES before calculating taxes. Only valid business identification numbers will allow for VAT opt out. When the customer holds an entity identifier, this field returns that identifier's value, whatever its kind. |
+| `vat_country` | `str` | Optional | The two-letter ISO 3166-1 country code that qualifies the customer's VAT number. Set to `null` when an identifier is stored through `entity_identifier_kind` for a kind that is not tied to a VAT country, meaning `company_reg`, `gln`, `duns`, or `lei`. |
+| `entity_identifier_kind` | [`EntityIdentifierKind`](../../doc/models/entity-identifier-kind.md) | Optional | The kind of tax or business identifier held by the customer. Returned as `null` when the customer has no entity identifier, including a legacy customer whose `vat_number` predates entity identifiers. |
+| `entity_identifier_value` | `str` | Optional | The value of the customer's tax or business identifier. Returned as `null` when the customer has no entity identifier. |
 | `parent_id` | `int` | Optional | The parent ID in Chargify if applicable. Parent is another Customer object. |
 | `locale` | `str` | Optional | The locale for the customer to identify language-region |
 | `default_subscription_group_uid` | `str` | Optional | - |

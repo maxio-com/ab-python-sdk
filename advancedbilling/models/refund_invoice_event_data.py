@@ -18,7 +18,8 @@ class RefundInvoiceEventData(object):
 
     Attributes:
         apply_credit (bool): If true, credit was created and applied it to the
-            invoice.
+            invoice.  If false, no credit note was created. `credit_note_attributes`
+            is still present, but its `number` and `sequence_number` are `null`.
         consolidation_level (InvoiceConsolidationLevel): Consolidation level of the
             invoice, which is applicable to invoice consolidation. It will hold one
             of the following values:  * "none": A normal invoice with no
@@ -27,8 +28,8 @@ class RefundInvoiceEventData(object):
             contents are composed of invoice segments.  "Parent" invoices do not have
             lines of their own, but they have subtotals and totals which aggregate
             the member invoice segments.  See also the [invoice consolidation
-            documentation](https://maxio.zendesk.com/hc/en-us/articles/24252269909389-
-            Invoice-Consolidation).
+            documentation](https://docs.maxio.com/billing/invoicing/working-with-invoi
+            ces/understand-invoice-consolidation).
         credit_note_attributes (CreditNote): The model property of type CreditNote.
         memo (str): The refund memo.
         original_amount (str): The full, original amount of the refund.

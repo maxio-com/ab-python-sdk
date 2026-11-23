@@ -12,7 +12,7 @@
 | `uid` | `str` | Optional | - |
 | `title` | `str` | Optional | - |
 | `description` | `str` | Optional | - |
-| `source_type` | [`ProformaInvoiceTaxSourceType`](../../doc/models/proforma-invoice-tax-source-type.md) | Optional | - |
+| `source_type` | [`ProformaInvoiceTaxSourceType`](../../doc/models/proforma-invoice-tax-source-type.md) | Optional | The source of the tax. `Tax` is a tax configured in Advanced Billing. The other values identify the tax service that calculated the tax. |
 | `source_id` | `int` | Optional | - |
 | `percentage` | `str` | Optional | - |
 | `taxable_amount` | `str` | Optional | - |
@@ -34,7 +34,7 @@ invoice_tax = InvoiceTax(
     uid='uid0',
     title='title4',
     description='description0',
-    source_type=ProformaInvoiceTaxSourceType.TAX,
+    source_type=ProformaInvoiceTaxSourceType.AVALARA,
     source_id=216
 )
 ```

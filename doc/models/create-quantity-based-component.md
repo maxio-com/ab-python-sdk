@@ -15,10 +15,10 @@
 
 ```python
 from advancedbilling.models.create_quantity_based_component import CreateQuantityBasedComponent
-from advancedbilling.models.credit_type import CreditType
 from advancedbilling.models.price import Price
 from advancedbilling.models.pricing_scheme import PricingScheme
 from advancedbilling.models.quantity_based_component import QuantityBasedComponent
+from advancedbilling.models.secondary_pricing import SecondaryPricing
 
 create_quantity_based_component = CreateQuantityBasedComponent(
     quantity_based_component=QuantityBasedComponent(
@@ -40,7 +40,21 @@ create_quantity_based_component = CreateQuantityBasedComponent(
                 ending_quantity=40
             )
         ],
-        upgrade_charge=CreditType.PRORATED
+        secondary_pricing=SecondaryPricing(
+            pricing_scheme=PricingScheme.STAIRSTEP,
+            prices=[
+                Price(
+                    starting_quantity=242,
+                    unit_price=23.26,
+                    ending_quantity=40
+                ),
+                Price(
+                    starting_quantity=242,
+                    unit_price=23.26,
+                    ending_quantity=40
+                )
+            ]
+        )
     )
 )
 ```

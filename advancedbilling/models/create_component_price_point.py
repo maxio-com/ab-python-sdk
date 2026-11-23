@@ -10,6 +10,9 @@ from advancedbilling.models.price import Price
 from advancedbilling.models.pricing_scheme import (
     PricingScheme,
 )
+from advancedbilling.models.secondary_pricing import (
+    SecondaryPricing,
+)
 
 
 class CreateComponentPricePoint(object):
@@ -23,6 +26,17 @@ class CreateComponentPricePoint(object):
             Components](https://help.chargify.com/products/product-components.html)
             for an overview of pricing schemes.
         prices (List[Price]): The model property of type List[Price].
+        secondary_pricing (SecondaryPricing): Hybrid Pricing only. The secondary
+            pricing model that takes over once usage passes the primary model's
+            included threshold. Applies to Quantity-Based and Metered Components on
+            Sites with Hybrid Pricing enabled; ignored otherwise. Its `prices`
+            brackets start at `1`, not at the primary model's highest
+            `ending_quantity`. See [Hybrid
+            Pricing](page:introduction/basic-concepts/hybrid-pricing).
+        secondary_pricing_scheme (PricingScheme): Hybrid Pricing only. Alternative to
+            `secondary_pricing.pricing_scheme`; when both are sent,
+            `secondary_pricing.pricing_scheme` is used. Setting not supported when
+            creating price points in bulk.
         use_site_exchange_rate (bool): Whether to use the site level exchange rate or
             define your own prices for each currency if you have multiple currencies
             defined on the site. Setting not supported when creating price points in
@@ -47,6 +61,8 @@ class CreateComponentPricePoint(object):
         "pricing_scheme": "pricing_scheme",
         "prices": "prices",
         "handle": "handle",
+        "secondary_pricing": "secondary_pricing",
+        "secondary_pricing_scheme": "secondary_pricing_scheme",
         "use_site_exchange_rate": "use_site_exchange_rate",
         "tax_included": "tax_included",
         "interval": "interval",
@@ -55,6 +71,8 @@ class CreateComponentPricePoint(object):
 
     _optionals = [
         "handle",
+        "secondary_pricing",
+        "secondary_pricing_scheme",
         "use_site_exchange_rate",
         "tax_included",
         "interval",
@@ -71,6 +89,8 @@ class CreateComponentPricePoint(object):
         pricing_scheme=None,
         prices=None,
         handle=APIHelper.SKIP,
+        secondary_pricing=APIHelper.SKIP,
+        secondary_pricing_scheme=APIHelper.SKIP,
         use_site_exchange_rate=True,
         tax_included=APIHelper.SKIP,
         interval=APIHelper.SKIP,
@@ -83,6 +103,10 @@ class CreateComponentPricePoint(object):
             self.handle = handle
         self.pricing_scheme = pricing_scheme
         self.prices = prices
+        if secondary_pricing is not APIHelper.SKIP:
+            self.secondary_pricing = secondary_pricing
+        if secondary_pricing_scheme is not APIHelper.SKIP:
+            self.secondary_pricing_scheme = secondary_pricing_scheme
         self.use_site_exchange_rate = use_site_exchange_rate
         if tax_included is not APIHelper.SKIP:
             self.tax_included = tax_included
@@ -132,6 +156,15 @@ class CreateComponentPricePoint(object):
             dictionary.get("handle")\
             if dictionary.get("handle")\
                 else APIHelper.SKIP
+        secondary_pricing =\
+            SecondaryPricing.from_dictionary(
+                dictionary.get("secondary_pricing"))\
+                if "secondary_pricing" in dictionary.keys()\
+                else APIHelper.SKIP
+        secondary_pricing_scheme =\
+            dictionary.get("secondary_pricing_scheme")\
+            if dictionary.get("secondary_pricing_scheme")\
+                else APIHelper.SKIP
         use_site_exchange_rate =\
             dictionary.get("use_site_exchange_rate")\
             if dictionary.get("use_site_exchange_rate")\
@@ -158,6 +191,8 @@ class CreateComponentPricePoint(object):
                    pricing_scheme,
                    prices,
                    handle,
+                   secondary_pricing,
+                   secondary_pricing_scheme,
                    use_site_exchange_rate,
                    tax_included,
                    interval,
@@ -227,6 +262,16 @@ class CreateComponentPricePoint(object):
         )
         _pricing_scheme=self.pricing_scheme
         _prices=self.prices
+        _secondary_pricing=(
+            self.secondary_pricing
+            if hasattr(self, "secondary_pricing")
+            else None
+        )
+        _secondary_pricing_scheme=(
+            self.secondary_pricing_scheme
+            if hasattr(self, "secondary_pricing_scheme")
+            else None
+        )
         _use_site_exchange_rate=(
             self.use_site_exchange_rate
             if hasattr(self, "use_site_exchange_rate")
@@ -254,6 +299,8 @@ class CreateComponentPricePoint(object):
             f"handle={_handle!r}, "
             f"pricing_scheme={_pricing_scheme!r}, "
             f"prices={_prices!r}, "
+            f"secondary_pricing={_secondary_pricing!r}, "
+            f"secondary_pricing_scheme={_secondary_pricing_scheme!r}, "
             f"use_site_exchange_rate={_use_site_exchange_rate!r}, "
             f"tax_included={_tax_included!r}, "
             f"interval={_interval!r}, "
@@ -272,6 +319,16 @@ class CreateComponentPricePoint(object):
         )
         _pricing_scheme=self.pricing_scheme
         _prices=self.prices
+        _secondary_pricing=(
+            self.secondary_pricing
+            if hasattr(self, "secondary_pricing")
+            else None
+        )
+        _secondary_pricing_scheme=(
+            self.secondary_pricing_scheme
+            if hasattr(self, "secondary_pricing_scheme")
+            else None
+        )
         _use_site_exchange_rate=(
             self.use_site_exchange_rate
             if hasattr(self, "use_site_exchange_rate")
@@ -299,6 +356,8 @@ class CreateComponentPricePoint(object):
             f"handle={_handle!s}, "
             f"pricing_scheme={_pricing_scheme!s}, "
             f"prices={_prices!s}, "
+            f"secondary_pricing={_secondary_pricing!s}, "
+            f"secondary_pricing_scheme={_secondary_pricing_scheme!s}, "
             f"use_site_exchange_rate={_use_site_exchange_rate!s}, "
             f"tax_included={_tax_included!s}, "
             f"interval={_interval!s}, "

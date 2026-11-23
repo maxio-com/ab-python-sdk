@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `subscriptions` | [`Dict[str, SubscriptionGroupSubscriptionError]`](../../doc/models/subscription-group-subscription-error.md) | Optional | Object that as key have subscription position in request subscriptions array and as value subscription errors object. |
+| `subscriptions` | [`Dict[str, SubscriptionGroupSubscriptionError]`](../../doc/models/subscription-group-subscription-error.md) | Optional | Subscription errors keyed by the subscription's `reference` from the request, or by its zero-based position in the `subscriptions` array when it has no reference. |
 | `payer_reference` | `str` | Optional | - |
 | `payer` | [`PayerError`](../../doc/models/payer-error.md) | Optional | - |
 | `subscription_group` | `List[str]` | Optional | - |
@@ -26,6 +26,10 @@ from advancedbilling.models.subscription_group_subscription_error import Subscri
 subscription_group_signup_error = SubscriptionGroupSignupError(
     subscriptions={
         'key0': SubscriptionGroupSubscriptionError(
+            customer=[
+                'customer1',
+                'customer2'
+            ],
             product=[
                 'product9'
             ],
@@ -37,13 +41,13 @@ subscription_group_signup_error = SubscriptionGroupSignupError(
             ],
             payment_profile_chargify_token=[
                 'payment_profile.chargify_token6'
-            ],
-            base=[
-                'base5',
-                'base6'
             ]
         ),
         'key1': SubscriptionGroupSubscriptionError(
+            customer=[
+                'customer1',
+                'customer2'
+            ],
             product=[
                 'product9'
             ],
@@ -55,10 +59,6 @@ subscription_group_signup_error = SubscriptionGroupSignupError(
             ],
             payment_profile_chargify_token=[
                 'payment_profile.chargify_token6'
-            ],
-            base=[
-                'base5',
-                'base6'
             ]
         )
     },
