@@ -292,7 +292,7 @@ class EventsBasedBillingSegmentsController(BaseController):
             .local_error_template("422",
                 "HTTP Response Not OK. Status code: {$statusCode}. Response: '{$respo"
                 "nse.body}'.",
-                APIException),
+                EventBasedBillingSegmentWriteErrorResponseException),
         ).execute()
 
     def delete_segment(self,

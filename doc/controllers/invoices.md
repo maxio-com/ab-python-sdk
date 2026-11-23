@@ -1227,7 +1227,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `subscription_id` | `int` | Query, Optional | The subscription's Advanced Billing id |
-| `date_field` | [`CreditNoteDateField`](../../doc/models/credit-note-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `date_field=issue_date`. If a date range is provided without an explicit `date_field`, it defaults to `issue_date`. If only `start_datetime`/`end_datetime` are provided without an explicit `date_field`, it defaults to `created_at` instead. An unrecognized `date_field` is ignored rather than raising an error.<br><br>**Default**: `"issue_date"` |
+| `date_field` | [`CreditNoteDateField`](../../doc/models/credit-note-date-field.md) | Query, Optional | The type of filter you would like to apply to your search. Use in query `date_field=issue_date`. If a date range is provided without an explicit `date_field`, it defaults to `issue_date`. If only `start_datetime`/`end_datetime` are provided without an explicit `date_field`, it defaults to `created_at` instead. An unrecognized `date_field` is ignored rather than raising an error. |
 | `start_date` | `str` | Query, Optional | The start date (format YYYY-MM-DD) with which to filter the date_field. Returns credit notes with a timestamp at or after midnight (12:00:00 AM) in your site’s time zone on the date specified. |
 | `end_date` | `str` | Query, Optional | The end date (format YYYY-MM-DD) with which to filter the date_field. Returns credit notes with a timestamp up to and including 11:59:59PM in your site’s time zone on the date specified. |
 | `start_datetime` | `str` | Query, Optional | The start date and time (format YYYY-MM-DD HH:MM:SS) with which to filter the date_field. Returns credit notes with a timestamp at or after exact time provided in query. If provided, this parameter will be used instead of start_date. If no timezone offset is included in the value, it is interpreted as UTC. Allowed to be used only along with date_field set to created_at or updated_at. |
@@ -2657,7 +2657,7 @@ This endpoint requires [BasicAuth](../../doc/auth/basic-authentication.md)
 
 ## Response Type
 
-**200**: OK
+**201**: Created
 
 [`InvoiceResponse`](../../doc/models/invoice-response.md)
 

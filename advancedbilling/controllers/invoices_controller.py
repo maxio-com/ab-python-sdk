@@ -1183,7 +1183,7 @@ class InvoicesController(BaseController):
             body (CreateInvoiceRequest, optional): The request body parameter.
 
         Returns:
-            InvoiceResponse: Response from the API. OK
+            InvoiceResponse: Response from the API. Created
 
         Raises:
             APIException: When an error occurs while fetching the data from the

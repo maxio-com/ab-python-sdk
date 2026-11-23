@@ -13,7 +13,7 @@ __all__ = [
     "product_price_point_error_response_exception",
     "proforma_bad_request_error_response_exception",
     "refund_prepayment_base_errors_response_exception",
-    "segment_price_point_errors_error_exception",
+    "segment_price_point_errors_exception",
     "single_error_response_exception",
     "single_string_error_response_exception",
     "subscription_add_coupon_error_exception",

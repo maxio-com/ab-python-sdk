@@ -9,12 +9,14 @@ from advancedbilling.api_helper import APIHelper
 from advancedbilling.exceptions.api_exception import (
     APIException,
 )
-from advancedbilling.models.errors import Errors
+from advancedbilling.models.segment_price_point_error_details import (
+    SegmentPricePointErrorDetails,
+)
 
 
-class SegmentPricePointErrorsErrorException(APIException):
+class SegmentPricePointErrorsException(APIException):
     def __init__(self, reason, response):
-        """Initialize SegmentPricePointErrorsErrorException object.
+        """Initialize SegmentPricePointErrorsException object.
 
         Args:
             reason (string): The reason (or error message) for the Exception
@@ -22,7 +24,7 @@ class SegmentPricePointErrorsErrorException(APIException):
             response (HttpResponse): The HttpResponse of the API call.
 
         """
-        super(SegmentPricePointErrorsErrorException, self).__init__(reason, response)
+        super(SegmentPricePointErrorsException, self).__init__(reason, response)
         dictionary = APIHelper.json_deserialize(self.response.text)
         if isinstance(dictionary, dict):
             self.unbox(dictionary)
@@ -37,7 +39,7 @@ class SegmentPricePointErrorsErrorException(APIException):
 
         """
         self.errors =\
-            Errors.from_dictionary(
+            SegmentPricePointErrorDetails.from_dictionary(
                 dictionary.get("errors"))\
                 if dictionary.get("errors") else None
 

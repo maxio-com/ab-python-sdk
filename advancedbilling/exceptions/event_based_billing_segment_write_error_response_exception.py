@@ -9,9 +9,6 @@ from advancedbilling.api_helper import APIHelper
 from advancedbilling.exceptions.api_exception import (
     APIException,
 )
-from advancedbilling.models.event_based_billing_segment_single_error import (
-    EventBasedBillingSegmentSingleError,
-)
 
 
 class EventBasedBillingSegmentWriteErrorResponseException(APIException):
@@ -40,9 +37,8 @@ class EventBasedBillingSegmentWriteErrorResponseException(APIException):
 
         """
         self.errors =\
-            EventBasedBillingSegmentSingleError.from_dictionary(
-                dictionary.get("errors"))\
-                if "errors" in dictionary.keys()\
+            dictionary.get("errors")\
+            if dictionary.get("errors")\
                 else None
 
 

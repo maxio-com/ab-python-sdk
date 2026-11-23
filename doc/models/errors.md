@@ -1,6 +1,8 @@
 
 # Errors
 
+Validation error details for listing segments.
+
 ## Structure
 
 `Errors`
@@ -9,7 +11,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `price_point` | `List[str]` | Required | - |
+| `per_page` | `List[str]` | Optional | - |
+| `price_point` | `List[str]` | Optional | - |
 
 ## Example
 
@@ -17,6 +20,11 @@
 from advancedbilling.models.errors import Errors
 
 errors = Errors(
+    per_page=[
+        'per_page1',
+        'per_page2',
+        'per_page3'
+    ],
     price_point=[
         'price_point0',
         'price_point9',

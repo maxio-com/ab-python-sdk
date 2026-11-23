@@ -5,10 +5,16 @@ This file was automatically generated for Maxio by APIMATIC v3.0 (
 """
 
 # ruff: noqa: E501
+from advancedbilling.api_helper import APIHelper
+
+
 class Errors(object):
     """Implementation of the 'Errors' model.
 
+    Validation error details for listing segments.
+
     Attributes:
+        per_page (List[str]): The model property of type List[str].
         price_point (List[str]): The model property of type List[str].
         additional_properties (Dict[str, object]): The additional properties for the
             model.
@@ -17,16 +23,26 @@ class Errors(object):
 
     # Create a mapping from Model property names to API property names
     _names = {
+        "per_page": "per_page",
         "price_point": "price_point",
     }
 
+    _optionals = [
+        "per_page",
+        "price_point",
+    ]
+
     def __init__(
         self,
-        price_point=None,
+        per_page=APIHelper.SKIP,
+        price_point=APIHelper.SKIP,
         additional_properties=None):
         """Initialize a Errors instance."""
         # Initialize members of the class
-        self.price_point = price_point
+        if per_page is not APIHelper.SKIP:
+            self.per_page = per_page
+        if price_point is not APIHelper.SKIP:
+            self.price_point = price_point
 
         # Add additional model properties to the instance
         if additional_properties is None:
@@ -51,25 +67,40 @@ class Errors(object):
             return None
 
         # Extract variables from the dictionary
+        per_page =\
+            dictionary.get("per_page")\
+            if dictionary.get("per_page")\
+                else APIHelper.SKIP
         price_point =\
             dictionary.get("price_point")\
             if dictionary.get("price_point")\
-                else None
+                else APIHelper.SKIP
 
         # Clean out expected properties from dictionary
         additional_properties =\
             {k: v for k, v in dictionary.items() if k not in cls._names.values()}
 
         # Return an object of this model
-        return cls(price_point,
+        return cls(per_page,
+                   price_point,
                    additional_properties)
 
     def __repr__(self):
         """Return a unambiguous string representation."""
-        _price_point=self.price_point
+        _per_page=(
+            self.per_page
+            if hasattr(self, "per_page")
+            else None
+        )
+        _price_point=(
+            self.price_point
+            if hasattr(self, "price_point")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
+            f"per_page={_per_page!r}, "
             f"price_point={_price_point!r}, "
             f"additional_properties={_additional_properties!r}, "
             f")"
@@ -77,10 +108,20 @@ class Errors(object):
 
     def __str__(self):
         """Return a human-readable string representation."""
-        _price_point=self.price_point
+        _per_page=(
+            self.per_page
+            if hasattr(self, "per_page")
+            else None
+        )
+        _price_point=(
+            self.price_point
+            if hasattr(self, "price_point")
+            else None
+        )
         _additional_properties=self.additional_properties
         return (
             f"{self.__class__.__name__}("
+            f"per_page={_per_page!s}, "
             f"price_point={_price_point!s}, "
             f"additional_properties={_additional_properties!s}, "
             f")"
